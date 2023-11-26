@@ -43,21 +43,31 @@ public class WasteFrog : EntityClass
     IEnumerator StaggerBack(Vector3 staggeredPosition)
     {
         Vector3 originalPosition = myTransform.position;
-        float speed = 2f; //Conrols the strength of the stagger
-        float startTime = Time.time;
+        float elapsedTime = 0f;
         
         animator.SetBool("IsStaggered", true);
         float duration = animator.GetCurrentAnimatorStateInfo(0).length;
 
-        while (Time.time < startTime + duration)
+        while (elapsedTime < duration)
         {
-            float t = (Time.time - startTime) / duration;
-            myTransform.position = Vector3.Lerp(myTransform.position, staggeredPosition, t * speed);
-            speed *= 0.9f; // This will cause the speed to decay over time
+            float t = elapsedTime / duration;
+
+            float speed = duration / AnimationCurve(elapsedTime, duration); // This will cause the speed to decay over time
+            float lerpScaler = AnimationCurve(duration, duration);
+
+            myTransform.position = Vector3.Lerp(myTransform.position, staggeredPosition, t * speed * lerpScaler);
+            
+            elapsedTime += Time.deltaTime;
             yield return null;
         }
 
         animator.SetBool("IsStaggered", false);
+    }
+
+    private float AnimationCurve(float elapsedTime, float duration)
+    {
+        float delta = 0.000001f; //To prevent divide by 0
+        return 1f / (elapsedTime / Mathf.Pow(elapsedTime + delta, (7f / 10f)));
     }
 
     // Update is called once per frame
