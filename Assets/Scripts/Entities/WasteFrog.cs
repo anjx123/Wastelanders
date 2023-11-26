@@ -26,20 +26,19 @@ public class WasteFrog : EntityClass
     {
         base.TakeDamage(damage);
 
-        
-
         StartCoroutine(StaggerBack(myTransform.position + new Vector3(1f, 0, 0)));
-
     }
 
-    /* Purpose: Plays when the enemy is staggered
-     * Pushes the enemy back by staggeredPosition
+    /* Requires: "IsStaggered" bool exists on the animator controller attatched to this
+     * 
+     * Purpose: Plays when the enemy is staggered
+     * Pushes the enemy back to staggeredPosition
      * Plays the stagger animation
      * 
      * Params:
-     * staggeredPosition is the location we want the enemy to stop, 
+     * staggeredPosition is the location we want the enemy to stop at. 
      * 
-     * Modifies: myTransform.position
+     * Modifies: this.myTransform.position
      */
     IEnumerator StaggerBack(Vector3 staggeredPosition)
     {
