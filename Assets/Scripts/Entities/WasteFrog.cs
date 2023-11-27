@@ -26,7 +26,7 @@ public class WasteFrog : EntityClass
     {
         base.TakeDamage(damage);
 
-        StartCoroutine(StaggerBack(myTransform.position + new Vector3(1f, 0, 0)));
+        StartCoroutine(StaggerBack(myTransform.position + new Vector3(1.5f, 0, 0)));
     }
 
     /* Requires: "IsStaggered" bool exists on the animator controller attatched to this
@@ -50,13 +50,7 @@ public class WasteFrog : EntityClass
 
         while (elapsedTime < duration)
         {
-            float t = elapsedTime / duration;
-
-            float speed = duration / AnimationCurve(elapsedTime, duration); // This will cause the speed to decay over time
-            float lerpScaler = AnimationCurve(duration, duration);
-
-            myTransform.position = Vector3.Lerp(myTransform.position, staggeredPosition, t * speed * lerpScaler);
-            
+            myTransform.position = Vector3.Lerp(myTransform.position, staggeredPosition, AnimationCurve(elapsedTime, duration));
             elapsedTime += Time.deltaTime;
             yield return null;
         }
@@ -66,8 +60,9 @@ public class WasteFrog : EntityClass
 
     private float AnimationCurve(float elapsedTime, float duration)
     {
-        float delta = 0.000001f; //To prevent divide by 0
-        return 1f / (elapsedTime / Mathf.Pow(elapsedTime + delta, (7f / 10f)));
+        float speed = 1f; //Lower value is faster
+        float power = 5f; //Modifies the curvature of the curve
+        return (Mathf.Pow(speed, power) / Mathf.Pow(((-elapsedTime)/ duration - speed), power) + 1);
     }
 
     // Update is called once per frame
