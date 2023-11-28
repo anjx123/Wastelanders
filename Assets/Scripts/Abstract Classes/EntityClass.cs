@@ -19,7 +19,7 @@ public class EntityClass : MonoBehaviour
         
     }
 
-    public void TakeDamage(int damage)
+    public virtual void TakeDamage(int damage)
     {
         health = Mathf.Clamp(health - damage, 0, MAX_HEALTH);
         if (health <= 0)
