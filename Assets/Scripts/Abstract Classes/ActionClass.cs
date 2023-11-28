@@ -4,8 +4,6 @@ using UnityEngine;
 
 public abstract class ActionClass : MonoBehaviour
 {
-    private EntityClass target;
-    private EntityClass origin;
     //The following are 'properties' in C# that make quick getters and setters for private fields. ac.Target for access
     public EntityClass Target { get; set; }
     public EntityClass Origin { get; set; }

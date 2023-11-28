@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class WasteFrog : EntityClass
 {
+    private string myName = "Le Frog";
     List<ActionClass> availableActions;
     public Animator animator;
     public Transform myTransform;
@@ -15,6 +16,7 @@ public class WasteFrog : EntityClass
         health = MAX_HEALTH;
         animator = GetComponent<Animator>();
         myTransform = GetComponent<Transform>();
+        Debug.Log(myName + " is ready for combat!");
     }
 
     public void OnMouseDown()

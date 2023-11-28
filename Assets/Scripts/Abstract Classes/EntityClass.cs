@@ -6,10 +6,18 @@ public class EntityClass : MonoBehaviour
 {
     protected int MAX_HEALTH;
     protected int health;
-    public int Health { get; set; }
+    public int Health
+    {
+        get { return health; }
+        set { health = value; }
+    }
 
     protected int id;
-    public int Id { get; set; }
+    public int Id 
+    { 
+        get { return id; }
+        set { id = value; }
+    }
 
 
     
