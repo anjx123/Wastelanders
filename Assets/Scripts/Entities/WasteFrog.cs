@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class WasteFrog : EntityClass
@@ -8,6 +9,9 @@ public class WasteFrog : EntityClass
     List<ActionClass> availableActions;
     public Animator animator;
     public Transform myTransform;
+    public Material outliner;
+    public Material ogMaterial;
+    private bool isOutlined;
 
     // Start is called before the first frame update
     void Start()
@@ -17,18 +21,37 @@ public class WasteFrog : EntityClass
         animator = GetComponent<Animator>();
         myTransform = GetComponent<Transform>();
         Debug.Log(myName + " is ready for combat!");
-    }
-
-    public void OnMouseDown()
-    {
-        TakeDamage(2);
+        Renderer renderer = GetComponent<Renderer>();
+        ogMaterial = renderer.material; // og sprite of frog
+        
     }
 
     public override void TakeDamage(int damage)
     {
         base.TakeDamage(damage);
 
-        StartCoroutine(StaggerBack(myTransform.position + new Vector3(1.5f, 0, 0)));
+        // StartCoroutine(StaggerBack(myTransform.position + new Vector3(1.5f, 0, 0)));
+    }
+
+        public void OnMouseDown()
+    {
+        TakeDamage(2);
+
+        isOutlined = !isOutlined;
+        ToggleOutline();
+    }
+
+    void ToggleOutline()
+    {
+        Renderer renderer = GetComponent<Renderer>();
+        Material currentMaterial = isOutlined ? outliner : ogMaterial;
+
+        if (isOutlined)
+        {
+            currentMaterial.SetColor("_OutlineColor", Color.yellow);
+        }
+
+        renderer.material = currentMaterial;
     }
 
     /* Requires: "IsStaggered" bool exists on the animator controller attatched to this
