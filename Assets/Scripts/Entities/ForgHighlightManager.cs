@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public static class FrogHighlightManager
+public static class FrogHighlightManager // later all entity highlighter
 {
     private static WasteFrog currentHighlightedFrog;
 

@@ -6,6 +6,7 @@ public class EntityClass : MonoBehaviour
 {
     protected int MAX_HEALTH;
     protected int health;
+    protected bool isOutlined = false; // deals with enemy selection
     public int Health
     {
         get { return health; }

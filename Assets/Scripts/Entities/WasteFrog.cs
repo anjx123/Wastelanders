@@ -14,7 +14,6 @@ public class WasteFrog : EntityClass
     public Transform myTransform;
     public Material outliner;
     public Material ogMaterial;
-    private bool isOutlined;
 
     // Start is called before the first frame update
     void Start()
