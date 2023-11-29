@@ -4,14 +4,14 @@ using UnityEngine;
 
 public static class FrogHighlightManager // later all entity highlighter
 {
-    private static WasteFrog currentHighlightedFrog;
+    private static EntityClass currentHighlightedFrog;
 
     static FrogHighlightManager()
     {
         currentHighlightedFrog = null; // no frog highlighted
     }
 
-    public static void OnFrogClicked(WasteFrog clickedFrog)
+    public static void OnFrogClicked(EntityClass clickedFrog)
     {
         if (currentHighlightedFrog == null)
         {

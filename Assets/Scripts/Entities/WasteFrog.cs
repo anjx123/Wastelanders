@@ -12,8 +12,6 @@ public class WasteFrog : EntityClass
     List<ActionClass> availableActions;
     public Animator animator;
     public Transform myTransform;
-    public Material outliner;
-    public Material ogMaterial;
 
     // Start is called before the first frame update
     void Start()
@@ -35,52 +33,7 @@ public class WasteFrog : EntityClass
         // StartCoroutine(StaggerBack(myTransform.position + new Vector3(1.5f, 0, 0)));
     }
 
-    public void OnMouseEnter() 
-    {
-        if (!isOutlined) {
-            Renderer renderer = GetComponent<Renderer>();
-            renderer.material = outliner;
-        }
-    }
 
-    public void OnMouseExit()
-    {
-        if (!isOutlined) {
-            Renderer renderer = GetComponent<Renderer>();
-            renderer.material = ogMaterial;
-        }
-    }
-
-    public void OnMouseDown()
-    {
-        TakeDamage(2);
-        FrogHighlightManager.OnFrogClicked(this);
-    }
-
-    public void Toggle()
-    {
-        isOutlined = !isOutlined;
-
-        if (isOutlined) {
-            Highlight();
-        } else {
-            DeHighlight();
-        }
-    }
-
-    public void Highlight()
-    {
-        Renderer renderer = GetComponent<Renderer>();
-        isOutlined = true;
-        renderer.material = outliner;
-    }
-
-    public void DeHighlight() 
-    {
-        Renderer renderer = GetComponent<Renderer>();
-        isOutlined = false;
-        renderer.material = ogMaterial;
-    }
 
     /* Requires: "IsStaggered" bool exists on the animator controller attatched to this
      * 
