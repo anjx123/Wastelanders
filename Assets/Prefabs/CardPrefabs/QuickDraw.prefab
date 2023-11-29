@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7791221827069751474}
   - component: {fileID: 8470891977871676096}
   - component: {fileID: 618295406421441435}
+  - component: {fileID: 6697047219336278003}
   m_Layer: 0
   m_Name: QuickDraw
   m_TagString: Untagged
@@ -97,3 +98,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2282345b68b6b9341b8e028ce5272e10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!65 &6697047219336278003
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7473027025033308495}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 10.06, y: 15.3, z: 0.2}
+  m_Center: {x: 0, y: 0, z: 0}

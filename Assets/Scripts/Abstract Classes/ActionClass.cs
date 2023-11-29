@@ -14,6 +14,10 @@ public abstract class ActionClass : MonoBehaviour
 
     public abstract void ExecuteActionEffect();
 
+    public virtual void OnMouseDown()
+    {
+        Debug.Log("Card has been Clicked !!");
+    }
 
 
 }
