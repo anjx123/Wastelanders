@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class WasteFrog : EntityClass
 {
     private string myName = "Le Frog";
+    
     List<ActionClass> availableActions;
     public Animator animator;
     public Transform myTransform;
@@ -52,21 +55,32 @@ public class WasteFrog : EntityClass
     public void OnMouseDown()
     {
         TakeDamage(2);
-
-        isOutlined = !isOutlined; // highlighter
-        ToggleOutline();
+        FrogHighlightManager.OnFrogClicked(this);
     }
 
-    void ToggleOutline()
+    public void Toggle()
+    {
+        isOutlined = !isOutlined;
+
+        if (isOutlined) {
+            Highlight();
+        } else {
+            DeHighlight();
+        }
+    }
+
+    public void Highlight()
     {
         Renderer renderer = GetComponent<Renderer>();
+        isOutlined = true;
+        renderer.material = outliner;
+    }
 
-        // if (isOutlined)
-        // {
-        //     currentMaterial.SetColor("_OutlineColor", Color.yellow);
-        // }
-
-        renderer.material = isOutlined ? outliner : ogMaterial;
+    public void DeHighlight() 
+    {
+        Renderer renderer = GetComponent<Renderer>();
+        isOutlined = false;
+        renderer.material = ogMaterial;
     }
 
     /* Requires: "IsStaggered" bool exists on the animator controller attatched to this
