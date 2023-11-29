@@ -44,8 +44,9 @@ Shader "Custom/OutlineShader"
 
         LOD 100
 
+        // Use the Standard surface shader model
         CGPROGRAM
-        #pragma surface surf Lambert
+        #pragma surface surf Standard
 
         OUTLINE
 

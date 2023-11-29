@@ -33,25 +33,40 @@ public class WasteFrog : EntityClass
         // StartCoroutine(StaggerBack(myTransform.position + new Vector3(1.5f, 0, 0)));
     }
 
-        public void OnMouseDown()
+    public void OnMouseEnter() 
+    {
+        if (!isOutlined) {
+            Renderer renderer = GetComponent<Renderer>();
+            renderer.material = outliner;
+        }
+    }
+
+    public void OnMouseExit()
+    {
+        if (!isOutlined) {
+            Renderer renderer = GetComponent<Renderer>();
+            renderer.material = ogMaterial;
+        }
+    }
+
+    public void OnMouseDown()
     {
         TakeDamage(2);
 
-        isOutlined = !isOutlined;
+        isOutlined = !isOutlined; // highlighter
         ToggleOutline();
     }
 
     void ToggleOutline()
     {
         Renderer renderer = GetComponent<Renderer>();
-        Material currentMaterial = isOutlined ? outliner : ogMaterial;
 
-        if (isOutlined)
-        {
-            currentMaterial.SetColor("_OutlineColor", Color.yellow);
-        }
+        // if (isOutlined)
+        // {
+        //     currentMaterial.SetColor("_OutlineColor", Color.yellow);
+        // }
 
-        renderer.material = currentMaterial;
+        renderer.material = isOutlined ? outliner : ogMaterial;
     }
 
     /* Requires: "IsStaggered" bool exists on the animator controller attatched to this
