@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EntityClass : AllClass
+public class EntityClass : SelectClass
 {
     protected int MAX_HEALTH;
     protected int health;

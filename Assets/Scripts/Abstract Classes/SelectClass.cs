@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class AllClass : MonoBehaviour
+public abstract class SelectClass : MonoBehaviour
 {
 
     protected string myName;

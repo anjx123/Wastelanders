@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class ActionClass : AllClass
+public abstract class ActionClass : SelectClass
 {
     //The following are 'properties' in C# that make quick getters and setters for private fields. ac.Target for access
     public EntityClass Target { get; set; }
