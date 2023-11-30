@@ -14,6 +14,7 @@ public class QuickDraw : ActionClass
     // Start is called before the first frame update
     void Start()
     {
+        myName = "QuickDraw";
         Renderer renderer = GetComponent<Renderer>();
         ogMaterial = renderer.material; // og sprite of card
         

@@ -7,7 +7,6 @@ using UnityEngine.UI;
 
 public class WasteFrog : EntityClass
 {
-    private string myName = "Le Frog";
     
     List<ActionClass> availableActions;
     public Animator animator;
@@ -20,6 +19,7 @@ public class WasteFrog : EntityClass
         health = MAX_HEALTH;
         animator = GetComponent<Animator>();
         myTransform = GetComponent<Transform>();
+        myName = "Le Frog";
         Debug.Log(myName + " is ready for combat!");
         Renderer renderer = GetComponent<Renderer>();
         ogMaterial = renderer.material; // og sprite of frog
@@ -32,7 +32,6 @@ public class WasteFrog : EntityClass
 
         // StartCoroutine(StaggerBack(myTransform.position + new Vector3(1.5f, 0, 0)));
     }
-
 
 
     /* Requires: "IsStaggered" bool exists on the animator controller attatched to this

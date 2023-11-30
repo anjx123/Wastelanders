@@ -5,7 +5,7 @@ using UnityEngine;
 public abstract class AllClass : MonoBehaviour
 {
 
-    
+    protected string myName;
     protected Material outliner;
     protected Material ogMaterial;
     protected bool isOutlined = false; // deals with enemy selection
@@ -20,6 +20,10 @@ public abstract class AllClass : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public string getName() {
+        return myName;
     }
 
     public void OnMouseEnter() 

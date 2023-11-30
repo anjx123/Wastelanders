@@ -7,6 +7,7 @@ public static class HighlightManager // later all entity highlighter
     private static EntityClass currentHighlightedEntity
     ;
     private static ActionClass currentHighlightedAction;
+    public static EntityClass player;
 
     static HighlightManager()
     {
@@ -16,23 +17,35 @@ public static class HighlightManager // later all entity highlighter
 
     public static void OnEntityClicked(EntityClass clicked)
     {
+        bool isOutlined = false;
+
         if (currentHighlightedAction == null) 
         {
             Debug.Log("Select card first!");
+            
         } else if (currentHighlightedEntity == null)
         {
             currentHighlightedEntity = clicked;
             currentHighlightedEntity.Highlight();
+            isOutlined = true;
         }
         else if (currentHighlightedEntity != clicked)
         {
             currentHighlightedEntity.DeHighlight();
             clicked.Highlight();
             currentHighlightedEntity = clicked;
+            isOutlined = true;
         }
         else
         {
-            currentHighlightedEntity.Toggle();
+            isOutlined = currentHighlightedEntity.Toggle();
+        }
+
+        if (currentHighlightedEntity && currentHighlightedAction && isOutlined)
+        {
+            currentHighlightedAction.Target = currentHighlightedEntity;
+            currentHighlightedAction.Origin = player;
+            Debug.Log("attack: " + currentHighlightedAction.getName() + ", target: " + currentHighlightedEntity.Id);
         }
     }
 
