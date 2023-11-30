@@ -22,7 +22,7 @@ public static class HighlightManager // later all entity highlighter
         if (currentHighlightedAction == null) 
         {
             Debug.Log("Select card first!");
-            
+
         } else if (currentHighlightedEntity == null)
         {
             currentHighlightedEntity = clicked;
@@ -45,7 +45,8 @@ public static class HighlightManager // later all entity highlighter
         {
             currentHighlightedAction.Target = currentHighlightedEntity;
             currentHighlightedAction.Origin = player;
-            Debug.Log("attack: " + currentHighlightedAction.getName() + ", target: " + currentHighlightedEntity.Id);
+            currentHighlightedEntity.TakeDamage(currentHighlightedAction.getDamage());
+            Debug.Log("attack: " + currentHighlightedAction.getName() + ", target: " + currentHighlightedEntity.Id + ", damage: " + currentHighlightedAction.getDamage());
         }
     }
 

@@ -8,9 +8,9 @@ public abstract class ActionClass : AllClass
     public EntityClass Target { get; set; }
     public EntityClass Origin { get; set; }
 
-    private int damage;
-    private int block;
-    private int speed;
+    protected int damage;
+    protected int block;
+    protected int speed;
 
     public abstract void ExecuteActionEffect();
 
@@ -18,6 +18,10 @@ public abstract class ActionClass : AllClass
     {
         Debug.Log("Card has been Clicked !!");
         HighlightManager.OnActionClicked(this);
+    }
+
+    public int getDamage() {
+        return damage;
     }
 
 
