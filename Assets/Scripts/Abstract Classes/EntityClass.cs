@@ -2,13 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EntityClass : MonoBehaviour
+public class EntityClass : AllClass
 {
     protected int MAX_HEALTH;
     protected int health;
-    protected Material outliner;
-    protected Material ogMaterial;
-    protected bool isOutlined = false; // deals with enemy selection
     public int Health
     {
         get { return health; }
@@ -22,53 +19,12 @@ public class EntityClass : MonoBehaviour
         set { id = value; }
     }
 
-    public void OnMouseEnter() 
-    {
-        if (!isOutlined) {
-            Renderer renderer = GetComponent<Renderer>();
-            renderer.material = outliner;
-        }
-    }
 
-    public void OnMouseExit()
-    {
-        if (!isOutlined) {
-            Renderer renderer = GetComponent<Renderer>();
-            renderer.material = ogMaterial;
-        }
-    }
-
-    public void OnMouseDown()
+    public override void OnMouseDown()
     {
         TakeDamage(2);
-        FrogHighlightManager.OnFrogClicked(this);
+        HighlightManager.OnEntityClicked(this);
     }
-
-    public void Toggle()
-    {
-        isOutlined = !isOutlined;
-
-        if (isOutlined) {
-            Highlight();
-        } else {
-            DeHighlight();
-        }
-    }
-
-    public void Highlight()
-    {
-        Renderer renderer = GetComponent<Renderer>();
-        isOutlined = true;
-        renderer.material = outliner;
-    }
-
-    public void DeHighlight() 
-    {
-        Renderer renderer = GetComponent<Renderer>();
-        isOutlined = false;
-        renderer.material = ogMaterial;
-    }
-
 
     
     // Start is called before the first frame update

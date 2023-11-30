@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: WasteFrogHighlighter
+  m_Name: WasteHighlighter
   m_Shader: {fileID: 4800000, guid: 340984b2f252b65438c42c9f1189ca92, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0

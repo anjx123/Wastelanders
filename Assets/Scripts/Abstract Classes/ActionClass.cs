@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class ActionClass : MonoBehaviour
+public abstract class ActionClass : AllClass
 {
     //The following are 'properties' in C# that make quick getters and setters for private fields. ac.Target for access
     public EntityClass Target { get; set; }
@@ -14,9 +14,10 @@ public abstract class ActionClass : MonoBehaviour
 
     public abstract void ExecuteActionEffect();
 
-    public virtual void OnMouseDown()
+    public override void OnMouseDown()
     {
         Debug.Log("Card has been Clicked !!");
+        HighlightManager.OnActionClicked(this);
     }
 
 
