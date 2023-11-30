@@ -20,6 +20,12 @@ public class EntityClass : SelectClass
         set { id = value; }
     }
 
+    public virtual void Start()
+    {
+        healthBar.setMaxHealth(MAX_HEALTH);
+        healthBar.setHealth(MAX_HEALTH);
+    }
+
     public virtual void TakeDamage(int damage)
     {
         health = Mathf.Clamp(health - damage, 0, MAX_HEALTH);
@@ -39,6 +45,7 @@ public class EntityClass : SelectClass
     public override void OnMouseDown()
     {
         Heal(1);
+        HighlightManager.OnEntityClicked(this);
     }
 
     public void Die()
