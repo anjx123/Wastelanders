@@ -16,25 +16,23 @@ public static class HighlightManager // later all entity highlighter
 
     public static void OnEntityClicked(EntityClass clicked)
     {
-        if (currentHighlightedEntity == null)
+        if (currentHighlightedAction == null) 
         {
-            currentHighlightedEntity
-             = clicked;
-            currentHighlightedEntity
-            .Highlight();
+            Debug.Log("Select card first!");
+        } else if (currentHighlightedEntity == null)
+        {
+            currentHighlightedEntity = clicked;
+            currentHighlightedEntity.Highlight();
         }
         else if (currentHighlightedEntity != clicked)
         {
-            currentHighlightedEntity
-            .DeHighlight();
+            currentHighlightedEntity.DeHighlight();
             clicked.Highlight();
-            currentHighlightedEntity
-             = clicked;
+            currentHighlightedEntity = clicked;
         }
         else
         {
-            currentHighlightedEntity
-            .Toggle();
+            currentHighlightedEntity.Toggle();
         }
     }
 
@@ -42,21 +40,27 @@ public static class HighlightManager // later all entity highlighter
     {
         if (currentHighlightedAction == null)
         {
-            currentHighlightedAction
-             = clicked;
-            currentHighlightedAction
-            .Highlight();
+            currentHighlightedAction = clicked;
+            currentHighlightedAction.Highlight();
         }
         else if (currentHighlightedAction != clicked)
         {
-            currentHighlightedAction
-            .DeHighlight();
+            currentHighlightedAction.DeHighlight();
             clicked.Highlight();
             currentHighlightedAction = clicked;
         }
         else
         {
-            currentHighlightedAction.Toggle();
+            if (!currentHighlightedAction.Toggle()) // if enemy chosen but no card chosen
+            {
+                currentHighlightedAction = null;
+                if (currentHighlightedEntity) 
+                {
+                    currentHighlightedEntity.DeHighlight();
+                }
+                
+                Debug.Log("Select card first!");
+            }
         }
     }
 }

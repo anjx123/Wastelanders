@@ -40,7 +40,7 @@ public abstract class AllClass : MonoBehaviour
 
     public abstract void OnMouseDown();
 
-    public void Toggle()
+    public bool Toggle()
     {
         isOutlined = !isOutlined;
 
@@ -49,6 +49,8 @@ public abstract class AllClass : MonoBehaviour
         } else {
             DeHighlight();
         }
+
+        return isOutlined;
     }
 
     public void Highlight()
