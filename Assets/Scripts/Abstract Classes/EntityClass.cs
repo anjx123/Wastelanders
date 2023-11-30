@@ -6,6 +6,7 @@ public class EntityClass : SelectClass
 {
     protected int MAX_HEALTH;
     protected int health;
+    public HealthBar healthBar;
     public int Health
     {
         get { return health; }
@@ -19,37 +20,36 @@ public class EntityClass : SelectClass
         set { id = value; }
     }
 
-
-    public override void OnMouseDown()
-    {
-        TakeDamage(2);
-        HighlightManager.OnEntityClicked(this);
-    }
-
-    
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
     public virtual void TakeDamage(int damage)
     {
         health = Mathf.Clamp(health - damage, 0, MAX_HEALTH);
+        healthBar.setHealth(health);
         if (health <= 0)
         {
-            Die();
+           // Die();
         }
+    }
+
+    public virtual void Heal(int val)
+    {
+        health = Mathf.Clamp(health + val, 0, MAX_HEALTH);
+        healthBar.setHealth(health);
+    }
+
+    public override void OnMouseDown()
+    {
+        Heal(1);
     }
 
     public void Die()
     {
         Debug.Log("Entity: " + id + " has died");
     }
-
-    // Update is called once per frame
-    void Update()
+    /*
+    // Constructor
+    public EntityClass(int health)
     {
-        
-    }
+        this.health = health;
+        this.MAX_HEALTH = health;
+    } */
 }
