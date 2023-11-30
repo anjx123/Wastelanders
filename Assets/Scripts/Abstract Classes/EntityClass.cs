@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EntityClass : MonoBehaviour
+public class EntityClass : SelectClass
 {
     protected int MAX_HEALTH;
     protected int health;
@@ -19,6 +19,12 @@ public class EntityClass : MonoBehaviour
         set { id = value; }
     }
 
+
+    public override void OnMouseDown()
+    {
+        TakeDamage(2);
+        HighlightManager.OnEntityClicked(this);
+    }
 
     
     // Start is called before the first frame update

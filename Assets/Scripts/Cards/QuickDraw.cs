@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class QuickDraw : ActionClass
 {
+
+    
     public override void ExecuteActionEffect()
     {
         Debug.Log("Executing Quick Draw");
@@ -12,6 +14,12 @@ public class QuickDraw : ActionClass
     // Start is called before the first frame update
     void Start()
     {
+        speed = 1;
+        block = 2;
+        damage = 3;
+        myName = "QuickDraw";
+        Renderer renderer = GetComponent<Renderer>();
+        ogMaterial = renderer.material; // og sprite of card
         
     }
 
@@ -20,4 +28,5 @@ public class QuickDraw : ActionClass
     {
         
     }
+
 }
