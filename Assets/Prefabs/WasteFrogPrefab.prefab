@@ -49,8 +49,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 2035366668277868062}
   myTransform: {fileID: 0}
-  outliner: {fileID: 0}
-  ogMaterial: {fileID: 0}
 --- !u!95 &2035366668277868062
 Animator:
   serializedVersion: 5
@@ -195,8 +193,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 3297183234373819581}
   myTransform: {fileID: 0}
-  outliner: {fileID: 0}
-  ogMaterial: {fileID: 0}
 --- !u!95 &3297183234373819581
 Animator:
   serializedVersion: 5

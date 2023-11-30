@@ -1,55 +1,54 @@
-Shader "Custom/OutlineShader"
+Shader "Custom/CutoutShader"
 {
     Properties
     {
-        _OutlineColor ("Outline Color", Color) = (1,1,0,1)
-        _Outline ("Outline width", Range (.002, 0.03)) = 0.005
+        _Color ("Main Color", Color) = (.5,.5,.5,1)
+        _MainTex ("Base (RGB)", 2D) = "white" { }
+        _Cutoff ("Alpha Cutoff", Range (0.0, 1.0)) = 0.5
     }
 
     CGINCLUDE
 #include "UnityCG.cginc"
     CGINCLUDE
 
-    OUTLINE
-
     SubShader
     {
         Tags
         {
             "Queue" = "Overlay"
         }
+        
+        LOD 100
 
         Pass
         {
-            Name "OUTLINE"
+            Name "Cutout"
 
             CGPROGRAM
-            #pragma exclude_renderers gles xbox360 ps3
-
             #pragma vertex vert
-            #pragma exclude_renderers flash xbox360 xbox360_ps3 gles gles xbox360 ps3
+            #pragma exclude_renderers gles xbox360 ps3
+            ENDCG
 
-            OUTLINE
+            CGPROGRAM
+            #pragma surface surf Lambert alpha
 
+            fixed4 _Color;
+            sampler2D _MainTex;
+            fixed _Cutoff;
+
+            struct Input
+            {
+                float2 uv_MainTex;
+            };
+
+            void surf(Input IN, inout SurfaceOutput o)
+            {
+                fixed4 c = tex2D(_MainTex, IN.uv_MainTex) * _Color;
+                o.Albedo = c.rgb;
+                o.Alpha = c.a;
+                clip(c.a - _Cutoff);
+            }
             ENDCG
         }
-    }
-
-    SubShader
-    {
-        Tags
-        {
-            "Queue" = "Overlay"
-        }
-
-        LOD 100
-
-        // Use the Standard surface shader model
-        CGPROGRAM
-        #pragma surface surf Standard
-
-        OUTLINE
-
-        ENDCG
     }
 }
