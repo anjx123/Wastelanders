@@ -8,8 +8,12 @@ public abstract class ActionClass : SelectClass
     public EntityClass Target { get; set; }
     public EntityClass Origin { get; set; }
 
-    protected int damage;
-    protected int block;
+    protected int damageLow;
+    protected int damageHigh;
+    protected int damageActual;
+    protected int blockLow;
+    protected int blockHigh;
+    protected int blockActual;
     protected int speed;
 
     public abstract void ExecuteActionEffect();
@@ -21,7 +25,7 @@ public abstract class ActionClass : SelectClass
     }
 
     public int getDamage() {
-        return damage;
+        return damageActual;
     }
 
 

@@ -15,8 +15,8 @@ public class QuickDraw : ActionClass
     void Start()
     {
         speed = 1;
-        block = 2;
-        damage = 3;
+        blockActual = 2;
+        damageActual = 3;
         myName = "QuickDraw";
         Renderer renderer = GetComponent<Renderer>();
         ogMaterial = renderer.material; // og sprite of card
