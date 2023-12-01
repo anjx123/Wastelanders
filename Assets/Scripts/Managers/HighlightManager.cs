@@ -47,6 +47,10 @@ public static class HighlightManager // later all entity highlighter
             currentHighlightedAction.Origin = player;
             currentHighlightedEntity.TakeDamage(currentHighlightedAction.getDamage());
             Debug.Log("attack: " + currentHighlightedAction.getName() + ", target: " + currentHighlightedEntity.Id + ", damage: " + currentHighlightedAction.getDamage());
+            currentHighlightedEntity.DeHighlight();
+            currentHighlightedAction.DeHighlight();
+            currentHighlightedEntity = null;
+            currentHighlightedAction = null;
         }
     }
 
