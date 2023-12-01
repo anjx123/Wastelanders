@@ -13,8 +13,9 @@ public class WasteFrog : EntityClass
     public Transform myTransform;
 
     // Start is called before the first frame update
-    void Start()
+    public override void Start()
     {
+        
         MAX_HEALTH = 15;
         health = MAX_HEALTH;
         animator = GetComponent<Animator>();
@@ -23,14 +24,15 @@ public class WasteFrog : EntityClass
         Debug.Log(myName + " is ready for combat!");
         Renderer renderer = GetComponent<Renderer>();
         ogMaterial = renderer.material; // og sprite of frog
-        
+        base.Start();
+
     }
 
     public override void TakeDamage(int damage)
     {
         base.TakeDamage(damage);
 
-        // StartCoroutine(StaggerBack(myTransform.position + new Vector3(1.5f, 0, 0)));
+        StartCoroutine(StaggerBack(myTransform.position + new Vector3(1.5f, 0, 0)));
     }
 
 
