@@ -98,8 +98,9 @@ public class BattleQueue : MonoBehaviour
         Vector2 directionVector = pairOfEntities.Value.myTransform.position - pairOfEntities.Key.myTransform.position;
 
         Vector2 normalizedDirection = directionVector.normalized;
+        float staggerPower = 2f; //Depending on percentage health lost
 
-        StartCoroutine(pairOfEntities.Value.StaggerBack(pairOfEntities.Value.myTransform.position + (Vector3) normalizedDirection));
+        StartCoroutine(pairOfEntities.Value.StaggerBack(pairOfEntities.Value.myTransform.position + (Vector3) normalizedDirection * staggerPower));
 
     }
 

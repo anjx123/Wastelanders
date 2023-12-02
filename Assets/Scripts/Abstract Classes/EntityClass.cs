@@ -111,7 +111,6 @@ public class EntityClass : SelectClass
 
     public override void OnMouseDown()
     {
-        Heal(1);
         HighlightManager.OnEntityClicked(this);
     }
 
