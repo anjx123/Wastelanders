@@ -7,6 +7,8 @@ public class EntityClass : SelectClass
     protected int MAX_HEALTH;
     protected int health;
     public HealthBar healthBar;
+    public Animator animator;
+    public Transform myTransform;
     public int Health
     {
         get { return health; }
@@ -33,6 +35,26 @@ public class EntityClass : SelectClass
         if (health <= 0)
         {
            // Die();
+        }
+    }
+
+    public IEnumerator MoveToPosition(Vector3 destination, float radius, float duration)
+    {
+        Vector3 originalPosition = myTransform.position;
+        float elapsedTime = 0f;
+
+        Vector3 diffInLocation = destination - originalPosition;
+
+        float distance = Mathf.Sqrt(diffInLocation.x * diffInLocation.x + diffInLocation.y * diffInLocation.y);
+        float maxProportionTravelled = (distance - radius) / distance;
+        Debug.Log("The maximum proportion these dudes can travel is" + maxProportionTravelled);
+
+
+        while (elapsedTime < duration)
+        {
+            myTransform.position = Vector3.Lerp(originalPosition, destination, elapsedTime / duration * maxProportionTravelled);
+            elapsedTime += Time.deltaTime;
+            yield return null;
         }
     }
 

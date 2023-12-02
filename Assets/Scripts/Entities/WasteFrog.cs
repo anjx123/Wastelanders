@@ -9,8 +9,7 @@ public class WasteFrog : EntityClass
 {
     
     List<ActionClass> availableActions;
-    public Animator animator;
-    public Transform myTransform;
+    
 
     // Start is called before the first frame update
     public override void Start()
@@ -32,7 +31,7 @@ public class WasteFrog : EntityClass
     {
         base.TakeDamage(damage);
 
-        StartCoroutine(StaggerBack(myTransform.position + new Vector3(1.5f, 0, 0)));
+        //StartCoroutine(StaggerBack(myTransform.position + new Vector3(1.5f, 0, 0)));
     }
 
 

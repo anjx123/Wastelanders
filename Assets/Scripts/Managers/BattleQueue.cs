@@ -9,6 +9,8 @@ public class BattleQueue : MonoBehaviour
     private List<ActionClass> playerActions; // naming convention
     private List<ActionClass> enemyActions; // naming convention
 
+    public EntityClass player;
+    
     // Awake is called before Start.
     void Awake()
     {
@@ -36,7 +38,14 @@ public class BattleQueue : MonoBehaviour
     // TO_UPDATE: for that speed thing Anrui specified.
     public void AddPlayerAction(ActionClass action)
     {
+        
         playerActions.Add(action);
+        action.Origin = player;
+        
+        Vector2 centeredDistance = (action.Origin.myTransform.position + action.Target.myTransform.position) / 2f;
+        StartCoroutine(action.Origin.MoveToPosition(centeredDistance, 0.6f, .8f));
+        StartCoroutine(action.Target.MoveToPosition(centeredDistance, 0.6f, .8f));
+        
     }
 
     // FOR TESTING PURPOSES
