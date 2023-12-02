@@ -7,7 +7,7 @@ public class EntityClass : SelectClass
     protected int MAX_HEALTH;
     protected int health;
     public HealthBar healthBar;
-    public Animator animator;
+    
     public Transform myTransform;
     public int Health
     {
@@ -38,6 +38,17 @@ public class EntityClass : SelectClass
         }
     }
 
+    /*
+     * Usage:
+    Vector3 destination: Destination Of the Moving individual
+    float radius: Radius is the radius right before the destination the entity will stop at.
+    (Can be useful to prevent two enemies from clipping together)
+    float duration: Duration of the movement
+
+    Modifies: this.myTransform
+
+    Purpose: Moves this entity to a given location
+     */
     public IEnumerator MoveToPosition(Vector3 destination, float radius, float duration)
     {
         Vector3 originalPosition = myTransform.position;
@@ -47,8 +58,6 @@ public class EntityClass : SelectClass
 
         float distance = Mathf.Sqrt(diffInLocation.x * diffInLocation.x + diffInLocation.y * diffInLocation.y);
         float maxProportionTravelled = (distance - radius) / distance;
-        Debug.Log("The maximum proportion these dudes can travel is" + maxProportionTravelled);
-
 
         while (elapsedTime < duration)
         {

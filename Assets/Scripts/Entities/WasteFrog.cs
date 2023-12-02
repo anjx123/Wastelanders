@@ -9,7 +9,8 @@ public class WasteFrog : EntityClass
 {
     
     List<ActionClass> availableActions;
-    
+    public Animator animator;
+
 
     // Start is called before the first frame update
     public override void Start()

@@ -41,11 +41,20 @@ public class BattleQueue : MonoBehaviour
         
         playerActions.Add(action);
         action.Origin = player;
+
+        ClashBothEntities(action.Origin, action.Target);
         
-        Vector2 centeredDistance = (action.Origin.myTransform.position * 0.2f + 0.8f * action.Target.myTransform.position);
-        StartCoroutine(action.Origin.MoveToPosition(centeredDistance, 0.6f, .6f));
-        StartCoroutine(action.Target.MoveToPosition(centeredDistance, 0.6f, .6f));
         
+        
+    }
+
+    private void ClashBothEntities(EntityClass origin, EntityClass target)
+    {
+        //The Distance weighting will be calculated based on speeds of the two clashing cards
+        Vector2 centeredDistance = (origin.myTransform.position * 0.2f + 0.8f * target.myTransform.position);
+        
+        StartCoroutine(origin.MoveToPosition(centeredDistance, 0.6f, .6f));
+        StartCoroutine(target.MoveToPosition(centeredDistance, 0.6f, .6f));
     }
 
     // FOR TESTING PURPOSES
