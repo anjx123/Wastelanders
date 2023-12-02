@@ -58,7 +58,7 @@ public class BattleQueue : MonoBehaviour
     private void ClashBothEntities(EntityClass origin, EntityClass target)
     {
         //The Distance weighting will be calculated based on speeds of the two clashing cards
-        Vector2 centeredDistance = (origin.myTransform.position * 0.2f + 0.8f * target.myTransform.position);
+        Vector2 centeredDistance = (origin.myTransform.position * 0.3f + 0.7f * target.myTransform.position);
         float bufferedRadius = 0.6f;
         float duration = 0.6f;
         StartCoroutine(origin.MoveToPosition(centeredDistance, bufferedRadius, duration));
