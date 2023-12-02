@@ -42,9 +42,9 @@ public class BattleQueue : MonoBehaviour
         playerActions.Add(action);
         action.Origin = player;
         
-        Vector2 centeredDistance = (action.Origin.myTransform.position + action.Target.myTransform.position) / 2f;
-        StartCoroutine(action.Origin.MoveToPosition(centeredDistance, 0.6f, .8f));
-        StartCoroutine(action.Target.MoveToPosition(centeredDistance, 0.6f, .8f));
+        Vector2 centeredDistance = (action.Origin.myTransform.position * 0.2f + 0.8f * action.Target.myTransform.position);
+        StartCoroutine(action.Origin.MoveToPosition(centeredDistance, 0.6f, .6f));
+        StartCoroutine(action.Target.MoveToPosition(centeredDistance, 0.6f, .6f));
         
     }
 
