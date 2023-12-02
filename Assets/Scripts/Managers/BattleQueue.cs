@@ -5,20 +5,22 @@ using UnityEngine;
 public class BattleQueue : MonoBehaviour
 { 
 
-    public static BattleQueue battleQueue;
-    private List<ActionClass> playerActions;
-    private List<ActionClass> enemyActions;
+    public static BattleQueue BattleQueueInstance; // naming convention without the _
+    private List<ActionClass> playerActions; // naming convention
+    private List<ActionClass> enemyActions; // naming convention
 
     // Awake is called before Start.
     void Awake()
     {
-        if (battleQueue == null)
+        if (BattleQueueInstance == null)
         {
-            battleQueue = this;
+            BattleQueueInstance = this;
+            playerActions = new List<ActionClass>();   
+            enemyActions = new List<ActionClass>(); 
         }
-        else if (battleQueue != this)
+        else if (BattleQueueInstance != this)
         {
-            Destroy(battleQueue); // this is out of circumspection; unsure it this is even needed.
+            Destroy(BattleQueueInstance); // this is out of circumspection; unsure it this is even needed.
         }
     }
 
@@ -26,16 +28,34 @@ public class BattleQueue : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        // needless
     }
 
-    // Update is called once per frame
-    void Update()
+    // to add an action to the playerActions list
+    // REQUIRES: appropriate handling in the invoking superclass; note how the entity is INFERRED to be the player.
+    // TO_UPDATE: for that speed thing Anrui specified.
+    public void AddPlayerAction(ActionClass action)
     {
-        
+        playerActions.Add(action);
     }
 
+    // FOR TESTING PURPOSES
+    void AddRandomEnemyActions ()
+    {
+        // this requires understanding of a hierarchy accomplishable in a bit. 
+    }
 
-    // Notes for future it makes sense for the ActionClass to have an instance of BattleQueue.
-    // That way they can automtically insert themselve herein and BattleQueue doesn't have to poll.
+    // Update is called once per frame; This is so that Alissa's Highlight Manager can denote a a successful addition. 
+    public void UpdateTest()
+    {
+        Debug.Log("Something has been added to PQ"); // Initial; will add details later.
+    }
 }
+
+//INVALID ASSUMPTION DO NOT OMIT:
+// Notes for future it makes sense for the ActionClass to have an instance of BattleQueue.
+// That way they can automtically insert themselve herein and BattleQueue doesn't have to poll.
+
+// DO NOT OMIT: 
+// default access specifier for methods is different... Is that contingent on the variable type? 
+
