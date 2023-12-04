@@ -59,4 +59,16 @@ public class EntityClass : SelectClass
         this.health = health;
         this.MAX_HEALTH = health;
     } */
+
+    public virtual void AttackAnimation()
+    {
+        //TODO
+        //Implement Attack Animation
+    }
+
+    public virtual void BlockAnimation()
+    {
+        //Todo
+        //Implement Block Animation
+    }
 }

@@ -9,8 +9,22 @@ public abstract class ActionClass : SelectClass
     public EntityClass Origin { get; set; }
 
     protected int damage;
+    public int Damage
+    {
+        get { return damage; }
+        set { damage = value; }
+    }
+
+    
     protected int block;
+    public int Block
+    {
+        get { return block; }
+        set { block = value; }
+    }
     protected int speed;
+
+    public CardType CardType { get; set; }
 
     public abstract void ExecuteActionEffect();
 
@@ -21,7 +35,12 @@ public abstract class ActionClass : SelectClass
     }
 
     public int getDamage() {
-        return damage;
+        return Damage;
+    }
+
+    public void setDamage(int damage)
+    {
+        Damage = damage;
     }
 
 
