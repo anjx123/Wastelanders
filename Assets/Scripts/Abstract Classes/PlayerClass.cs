@@ -8,7 +8,7 @@ public class PlayerClass : EntityClass
     public RectTransform handContainer;
     public int cardWidth;
 
-    private int maxHandSize = 2;
+    private int maxHandSize = 3;
     private int currentHandSize = 0;
     // This is the deck of the player, which does not change as the player reshuffles/draws cards.
     private List<GameObject> deck = new List<GameObject>();
@@ -25,6 +25,7 @@ public class PlayerClass : EntityClass
     // Start is called before the first frame update
     void Start()
     {
+        HighlightManager.player = this;
         // initialize deck
         for (int i = 0; i < cardPrefabs.Count; i++)
         {
@@ -70,9 +71,9 @@ public class PlayerClass : EntityClass
         pool.RemoveAt(idx);
     }
 
-    /*
-     * 
-     * 
+    /*  Renders the cards in List<GameObject> hand to the screen, as children of the handContainer.
+     *  REQUIRES: Nothing
+     *  MODIFIES: Nothing
      * 
      */
     void RenderHand()
@@ -91,6 +92,11 @@ public class PlayerClass : EntityClass
             Debug.Log(hand[i].transform.position);
 
         }
+    }
+
+    public void HandleUseCard(ActionClass a)
+    {
+        Debug.Log(a);
     }
 
     // Update is called once per frame

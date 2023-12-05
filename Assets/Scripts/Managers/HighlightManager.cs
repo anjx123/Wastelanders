@@ -8,7 +8,7 @@ public static class HighlightManager // later all entity highlighter
     private static EntityClass currentHighlightedEntity
     ;
     private static ActionClass currentHighlightedAction;
-    public static EntityClass player;
+    public static PlayerClass player = null;
 
     static HighlightManager()
     {
@@ -64,8 +64,14 @@ public static class HighlightManager // later all entity highlighter
             Debug.Log("attack: " + currentHighlightedAction.getName() + ", target: " + currentHighlightedEntity.Id + ", damage: " + currentHighlightedAction.getDamage());
             currentHighlightedEntity.DeHighlight();
             currentHighlightedAction.DeHighlight();
+            if (player != null)
+            {
+                player.HandleUseCard(currentHighlightedAction);
+            }
             currentHighlightedEntity = null;
             currentHighlightedAction = null;
+
+            
         }
     }
 
