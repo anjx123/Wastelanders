@@ -2,13 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PistolWhip : ActionClass
+public class RapidFire : ActionClass
 {
 
     
     public override void ExecuteActionEffect()
     {
-        Debug.Log("Executing Pistol Whip");
+        Debug.Log("Executing Rapid Fire");
     }
 
     // Start is called before the first frame update
@@ -16,8 +16,8 @@ public class PistolWhip : ActionClass
     {
         speed = 1;
         block = 2;
-        damage = 99;
-        myName = "PistolWhip";
+        damage = 3;
+        myName = "RapidFire";
         Renderer renderer = GetComponent<Renderer>();
         ogMaterial = renderer.material; // og sprite of card
         
