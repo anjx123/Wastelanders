@@ -23,9 +23,34 @@ public class PlayerClass : EntityClass
     // Start is called before the first frame update
     void Start()
     {
-        GameObject card1 = Instantiate(cardPrefabs[0]);
-        deck.Add(card1);
-        Debug.Log(deck[0]);
+        for (int i = 0; i < cardPrefabs.Count; i++)
+        {
+            GameObject toAdd = Instantiate(cardPrefabs[i]);
+            deck.Add(toAdd);
+        }
+        pool = deck;
+        for (int i = 0; i < maxHandSize; i++)
+        {
+            DrawCard();
+        }
+    }
+
+
+    /*  Draws a single card from the pool, removing it from the pool and refilling it if necessary.
+     *  REQUIRES: Nothing
+     *  MODIFIES: pool, hand, maxHandSize
+     *  
+     */
+    void DrawCard()
+    {
+        if (pool.Count == 0)
+        {
+            maxHandSize--;
+            pool = deck;
+        }
+        int idx = Random.Range(0, pool.Count - 1);
+        hand.Add(pool[idx]);
+        pool.RemoveAt(idx);
     }
 
     // Update is called once per frame
