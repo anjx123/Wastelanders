@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7791221827069751474}
   - component: {fileID: 8470891977871676096}
   - component: {fileID: 6697047219336278003}
+  - component: {fileID: -849146662340919008}
   m_Layer: 0
   m_Name: RapidFire
   m_TagString: Untagged
@@ -106,3 +107,15 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 10.06, y: 15.3, z: 0.2}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &-849146662340919008
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7473027025033308495}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2082053e56a8f452ea3bc067454f9498, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
