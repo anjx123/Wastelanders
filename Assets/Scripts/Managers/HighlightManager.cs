@@ -5,8 +5,7 @@ using UnityEngine;
 
 public static class HighlightManager // later all entity highlighter
 {
-    private static EntityClass currentHighlightedEntity
-    ;
+    private static EntityClass currentHighlightedEntity;
     private static ActionClass currentHighlightedAction;
     public static PlayerClass player = null;
 

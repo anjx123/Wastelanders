@@ -72,6 +72,7 @@ public class PlayerClass : EntityClass
     }
 
     /*  Renders the cards in List<GameObject> hand to the screen, as children of the handContainer.
+     *  Cards are filled in left to right.
      *  REQUIRES: Nothing
      *  MODIFIES: Nothing
      * 
@@ -80,7 +81,6 @@ public class PlayerClass : EntityClass
     {
         for (int i = 0; i < hand.Count; i++)
         {
-            Debug.Log(i);
             hand[i].transform.SetParent(handContainer.transform, false);
             hand[i].transform.position = Vector3.zero;
 
@@ -89,14 +89,39 @@ public class PlayerClass : EntityClass
             float y = handContainer.transform.position.y;
             Vector3 v = new Vector3(-distanceToLeft, y, 1);
             hand[i].transform.position = v;
-            Debug.Log(hand[i].transform.position);
-
         }
     }
 
+    /*  Called by HighlightManager whenever an action is declared. Deletes the used card.
+     *  REQUIRES: Nothing
+     *  MODIFIES: hand, discard
+     */
     public void HandleUseCard(ActionClass a)
     {
-        Debug.Log(a);
+        GameObject used = FindChildWithScript(handContainer.gameObject, a.GetType());
+        hand.Remove(used);
+        Destroy(used);
+        RenderHand();
+        
+    }
+
+    /* helper function for HandleUseCard
+     * 
+     * 
+     */
+    GameObject FindChildWithScript(GameObject parent, System.Type type)
+    {
+        for (int i = 0; i < parent.transform.childCount; i++)
+        {
+            Transform child = parent.transform.GetChild(i);
+            ActionClass[] components = child.gameObject.GetComponents<ActionClass>();
+            if (components[0].GetType() == type)
+            {
+                return child.gameObject;
+            }
+        }
+
+        return null;
     }
 
     // Update is called once per frame
