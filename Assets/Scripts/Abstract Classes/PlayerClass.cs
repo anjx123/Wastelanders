@@ -9,7 +9,6 @@ public class PlayerClass : EntityClass
     public int cardWidth;
 
     private int maxHandSize = 3;
-    private int currentHandSize = 0;
     // This is the deck of the player, which does not change as the player reshuffles/draws cards.
     private List<GameObject> deck = new List<GameObject>();
 
@@ -26,6 +25,7 @@ public class PlayerClass : EntityClass
     void Start()
     {
         HighlightManager.player = this;
+
         // initialize deck
         for (int i = 0; i < cardPrefabs.Count; i++)
         {
@@ -42,13 +42,12 @@ public class PlayerClass : EntityClass
             toAdd.transform.position = new Vector3(-1000, -1000, 1);
         }
         
-        Debug.Log(pool.Count);
+        // Draw starting hand
         for (int i = 0; i < maxHandSize; i++)
         {
             DrawCard();
         }
 
-        Debug.Log(hand.Count);
         RenderHand();
     }
 
@@ -64,11 +63,15 @@ public class PlayerClass : EntityClass
         {
             maxHandSize--;
             pool = deck;
+            Debug.Log("Reshuffling deck. New max hand size is " + maxHandSize);
         }
-        int idx = Random.Range(0, pool.Count);
-        hand.Add(pool[idx]);
-        currentHandSize++;
-        pool.RemoveAt(idx);
+
+        if (hand.Count < maxHandSize)
+        {
+            int idx = Random.Range(0, pool.Count);
+            hand.Add(pool[idx]);
+            pool.RemoveAt(idx);
+        }
     }
 
     /*  Renders the cards in List<GameObject> hand to the screen, as children of the handContainer.
@@ -98,15 +101,19 @@ public class PlayerClass : EntityClass
      */
     public void HandleUseCard(ActionClass a)
     {
+        // remove the used card
         GameObject used = FindChildWithScript(handContainer.gameObject, a.GetType());
         hand.Remove(used);
         Destroy(used);
+
+        // draw a replacement card
+        DrawCard();
         RenderHand();
         
     }
 
-    /* helper function for HandleUseCard
-     * 
+    /* helper function for HandleUseCard, it takes a gameobject and type and returns
+     * a child gameobject that has a script of that type.
      * 
      */
     GameObject FindChildWithScript(GameObject parent, System.Type type)
