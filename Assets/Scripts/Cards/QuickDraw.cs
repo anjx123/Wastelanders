@@ -20,6 +20,7 @@ public class QuickDraw : ActionClass
         myName = "QuickDraw";
         Renderer renderer = GetComponent<Renderer>();
         ogMaterial = renderer.material; // og sprite of card
+        CardType = CardType.RangedAttack;
         
     }
 

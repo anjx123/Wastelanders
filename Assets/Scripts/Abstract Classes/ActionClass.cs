@@ -28,6 +28,12 @@ public abstract class ActionClass : SelectClass
 
     public abstract void ExecuteActionEffect();
 
+    public virtual void OnHit()
+    {
+        this.Target.TakeDamage(Damage);
+    }
+
+
     public override void OnMouseDown()
     {
         Debug.Log("Card has been Clicked !!");
