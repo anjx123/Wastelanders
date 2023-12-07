@@ -22,7 +22,7 @@ public class PlayerClass : EntityClass
     private List<GameObject> discard = new List<GameObject>();
 
     // Start is called before the first frame update
-    void Start()
+    new void Start()
     {
         HighlightManager.player = this;
 
