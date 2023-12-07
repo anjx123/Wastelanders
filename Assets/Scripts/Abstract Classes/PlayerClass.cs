@@ -62,7 +62,10 @@ public class PlayerClass : EntityClass
         if (pool.Count == 0)
         {
             maxHandSize--;
-            pool = deck;
+            for (int i = 0; i < discard.Count; i++)
+            {
+                pool.Add(discard[i]);
+            }
             Debug.Log("Reshuffling deck. New max hand size is " + maxHandSize);
         }
 
@@ -104,8 +107,8 @@ public class PlayerClass : EntityClass
         // remove the used card
         GameObject used = FindChildWithScript(handContainer.gameObject, a.GetType());
         hand.Remove(used);
-        Destroy(used);
-
+        discard.Add(used);
+        used.transform.position = new Vector3(500, 500, 1);
         // draw a replacement card
         DrawCard();
         RenderHand();
