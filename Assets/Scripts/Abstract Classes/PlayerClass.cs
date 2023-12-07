@@ -66,6 +66,7 @@ public class PlayerClass : EntityClass
             {
                 pool.Add(discard[i]);
             }
+            discard.Clear();
             Debug.Log("Reshuffling deck. New max hand size is " + maxHandSize);
         }
 
