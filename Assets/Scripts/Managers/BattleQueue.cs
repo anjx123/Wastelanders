@@ -1,16 +1,20 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Runtime.CompilerServices;
 using UnityEngine;
+using UnityEngine.XR;
 using static UnityEngine.GraphicsBuffer;
 
 public class BattleQueue : MonoBehaviour
 { 
 
     public static BattleQueue BattleQueueInstance; // naming convention without the _
-    private List<ActionClass> playerActions; // naming convention
-    private List<ActionClass> enemyActions; // naming convention
+    private SortedArray actionQueue; // in the same queue
+    // private List<ActionClass> enemyActions; // naming convention
+    private static int SIZE = 20; // size of actionQueue, change if necessary
+    public RectTransform bqContainer;
 
     public EntityClass player;
     
@@ -20,8 +24,10 @@ public class BattleQueue : MonoBehaviour
         if (BattleQueueInstance == null)
         {
             BattleQueueInstance = this;
-            playerActions = new List<ActionClass>();   
-            enemyActions = new List<ActionClass>(); 
+
+            actionQueue = new SortedArray(SIZE);
+            // playerActions = new List<ActionClass>();   
+            // enemyActions = new List<ActionClass>(); 
         }
         else if (BattleQueueInstance != this)
         {
@@ -42,8 +48,7 @@ public class BattleQueue : MonoBehaviour
     public void AddPlayerAction(ActionClass action)
     {
         
-        playerActions.Add(action);
-        action.Origin = player;
+        actionQueue.Insert(action);
 
         ClashBothEntities(action.Origin, action.Target);
     }
@@ -115,6 +120,104 @@ public class BattleQueue : MonoBehaviour
     {
         Debug.Log("Something has been added to PQ"); // Initial; will add details later.
     }
+
+     /*  Renders the cards in List<GameObject> hand to the screen, as children of the handContainer.
+     *  Cards are filled in left to right.
+     *  REQUIRES: Nothing
+     *  MODIFIES: Nothing
+     * 
+     */
+    // void RenderHand()
+    // {
+    //     List<ActionClass> hand = actionQueue.getList();
+
+    //     for (int i = 0; i < hand.Count; i++)
+    //     {
+    //         hand[i].transform.SetParent(handContainer.transform, false);
+    //         hand[i].transform.position = Vector3.zero;
+
+    //         float distanceToLeft = handContainer.rect.width / 2 - (i * cardWidth);
+
+    //         float y = handContainer.transform.position.y;
+    //         Vector3 v = new Vector3(-distanceToLeft, y, 1);
+    //         hand[i].transform.position = v;
+    //         hand[i].gameObject
+    //     }
+    // }
+
+// A sorted array implementation for ActionClass (cards)
+public class SortedArray
+{
+    private List<ActionClass> array;
+    private int size;
+
+    public SortedArray(int capacity)
+    {
+        array = new List<ActionClass>(capacity);
+        size = 0;
+    }
+
+    public void Insert(ActionClass card)
+    {
+        if (size == array.Count)
+        {
+            return;
+        }
+
+        int index = BinarySearch(card.getSpeed(), 0, size - 1, card.Origin);
+
+        // Insert the new value at the correct position
+        array.Insert(index, card);
+        size++;
+    }
+
+    public void Remove(ActionClass card)
+    {
+        int index = BinarySearch(card.getSpeed(), 0, size - 1, card.Origin);
+
+        if (index < size && array[index] == card)
+        {
+            // Remove the value at the specified index
+            array.RemoveAt(index);
+            size--;
+        }
+        // else: element not found
+    }
+
+    public int BinarySearch(int speed, int left, int right, EntityClass origin)
+    {
+        while (left <= right)
+        {
+            int mid = left + (right - left) / 2;
+
+            if (array[mid].getSpeed() == speed && array[mid].Origin == origin)
+            {
+                return mid; // Element found
+            }
+            else if (array[mid].getSpeed() < speed)
+            {
+                left = mid + 1;
+            }
+            else
+            {
+                right = mid - 1;
+            }
+        }
+
+        return left; // Element not found, return the position where it should be inserted
+    }
+
+    public int getSize()
+    {
+        return size;
+    }
+
+    public List<ActionClass> getList()
+    {
+        return array;
+    }
+}
+
 }
 
 //INVALID ASSUMPTION DO NOT OMIT:
@@ -123,4 +226,3 @@ public class BattleQueue : MonoBehaviour
 
 // DO NOT OMIT: 
 // default access specifier for methods is different... Is that contingent on the variable type? 
-
