@@ -12,11 +12,11 @@ public class BattleQueue : MonoBehaviour
 
     public static BattleQueue BattleQueueInstance; // naming convention without the _
     private SortedArray actionQueue; // in the same queue
-    // private List<ActionClass> enemyActions; // naming convention
+    // private List<GameObject> enemyActions; // naming convention
     private static int SIZE = 20; // size of actionQueue, change if necessary
     public RectTransform bqContainer;
+    public int cardWidth = 1;
 
-    public EntityClass player;
     
     // Awake is called before Start.
     void Awake()
@@ -31,7 +31,7 @@ public class BattleQueue : MonoBehaviour
         }
         else if (BattleQueueInstance != this)
         {
-            Destroy(BattleQueueInstance); // this is out of circumspection; unsure it this is even needed.
+            Destroy(this); // this is out of circumspection; unsure it this is even needed.
         }
     }
 
@@ -45,12 +45,12 @@ public class BattleQueue : MonoBehaviour
     // to add an action to the playerActions list
     // REQUIRES: appropriate handling in the invoking superclass; note how the entity is INFERRED to be the player.
     // TO_UPDATE: for that speed thing Anrui specified.
-    public void AddPlayerAction(ActionClass action)
+    public void AddPlayerAction(GameObject action)
     {
-        
         actionQueue.Insert(action);
-
-        ClashBothEntities(action.Origin, action.Target);
+        UpdateTest(); // Initial; will add details later.
+        RenderBQ();
+        ClashBothEntities(action.GetComponent<ActionClass>().Origin, action.GetComponent<ActionClass>().Target);
     }
 
     /*
@@ -121,59 +121,60 @@ public class BattleQueue : MonoBehaviour
         Debug.Log("Something has been added to PQ"); // Initial; will add details later.
     }
 
-     /*  Renders the cards in List<GameObject> hand to the screen, as children of the handContainer.
+     /*  Renders the cards in List<GameObject> bq to the screen, as children of the bqContainer.
      *  Cards are filled in left to right.
      *  REQUIRES: Nothing
      *  MODIFIES: Nothing
      * 
      */
-    // void RenderHand()
-    // {
-    //     List<ActionClass> hand = actionQueue.getList();
+    void RenderBQ()
+    {
+        List<GameObject> hand = actionQueue.getList();
 
-    //     for (int i = 0; i < hand.Count; i++)
-    //     {
-    //         hand[i].transform.SetParent(handContainer.transform, false);
-    //         hand[i].transform.position = Vector3.zero;
+        for (int i = 0; i < hand.Count; i++)
+        {
+            hand[i].transform.SetParent(bqContainer.transform, false);
+            hand[i].transform.position = Vector3.zero;
 
-    //         float distanceToLeft = handContainer.rect.width / 2 - (i * cardWidth);
+            float distanceToLeft = bqContainer.rect.width / 2 - (i * cardWidth);
 
-    //         float y = handContainer.transform.position.y;
-    //         Vector3 v = new Vector3(-distanceToLeft, y, 1);
-    //         hand[i].transform.position = v;
-    //         hand[i].gameObject
-    //     }
-    // }
+            float y = bqContainer.transform.position.y;
+            Vector3 v = new Vector3(-distanceToLeft, y, 1);
+            hand[i].transform.position = v;
+        }
 
-// A sorted array implementation for ActionClass (cards)
+        Debug.Log("done");
+    }
+
+// A sorted array implementation for GameObject (cards)
 public class SortedArray
 {
-    private List<ActionClass> array;
+    private List<GameObject> array;
     private int size;
 
     public SortedArray(int capacity)
     {
-        array = new List<ActionClass>(capacity);
+        array = new List<GameObject>(capacity);
         size = 0;
     }
 
-    public void Insert(ActionClass card)
+    public void Insert(GameObject card)
     {
         if (size == array.Count)
         {
             return;
         }
 
-        int index = BinarySearch(card.getSpeed(), 0, size - 1, card.Origin);
+        int index = BinarySearch(card.GetComponent<ActionClass>().getSpeed(), 0, size - 1, card.GetComponent<ActionClass>().Origin);
 
         // Insert the new value at the correct position
         array.Insert(index, card);
         size++;
     }
 
-    public void Remove(ActionClass card)
+    public void Remove(GameObject card)
     {
-        int index = BinarySearch(card.getSpeed(), 0, size - 1, card.Origin);
+        int index = BinarySearch(card.GetComponent<ActionClass>().getSpeed(), 0, size - 1, card.GetComponent<ActionClass>().Origin);
 
         if (index < size && array[index] == card)
         {
@@ -190,11 +191,11 @@ public class SortedArray
         {
             int mid = left + (right - left) / 2;
 
-            if (array[mid].getSpeed() == speed && array[mid].Origin == origin)
+            if (array[mid].GetComponent<ActionClass>().getSpeed() == speed && array[mid].GetComponent<ActionClass>().Origin == origin)
             {
                 return mid; // Element found
             }
-            else if (array[mid].getSpeed() < speed)
+            else if (array[mid].GetComponent<ActionClass>().getSpeed() < speed)
             {
                 left = mid + 1;
             }
@@ -212,7 +213,7 @@ public class SortedArray
         return size;
     }
 
-    public List<ActionClass> getList()
+    public List<GameObject> getList()
     {
         return array;
     }
@@ -221,7 +222,7 @@ public class SortedArray
 }
 
 //INVALID ASSUMPTION DO NOT OMIT:
-// Notes for future it makes sense for the ActionClass to have an instance of BattleQueue.
+// Notes for future it makes sense for the GameObject to have an instance of BattleQueue.
 // That way they can automtically insert themselve herein and BattleQueue doesn't have to poll.
 
 // DO NOT OMIT: 

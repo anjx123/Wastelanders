@@ -96,6 +96,8 @@ public class Jackie : PlayerClass
         // remove the used card
         GameObject used = FindChildWithScript(handContainer.gameObject, a.GetType());
         hand.Remove(used);
+        BattleQueue.BattleQueueInstance.AddPlayerAction(used);
+        // later we shouldn't immediately discard
         discard.Add(used);
         used.transform.position = new Vector3(500, 500, 1);
         // draw a replacement card
