@@ -13,7 +13,7 @@ public class BattleQueue : MonoBehaviour
     public static BattleQueue BattleQueueInstance; // naming convention without the _
     private SortedArray actionQueue; // in the same queue
     // private List<GameObject> enemyActions; // naming convention
-    private static int SIZE = 20; // size of actionQueue, change if necessary
+    private static int SIZE = 100; // size of actionQueue, change if necessary
     public RectTransform bqContainer;
     public int cardWidth = 1;
 
@@ -131,56 +131,59 @@ public class BattleQueue : MonoBehaviour
     {
         List<GameObject> hand = actionQueue.getList();
 
-        for (int i = 0; i < hand.Count; i++)
+        foreach (Transform child in bqContainer.transform)
         {
-            hand[i].transform.SetParent(bqContainer.transform, false);
-            hand[i].transform.position = Vector3.zero;
-
-            float distanceToLeft = bqContainer.rect.width / 2 - (i * cardWidth);
-
-            float y = bqContainer.transform.position.y;
-            Vector3 v = new Vector3(-distanceToLeft, y, 1);
-            hand[i].transform.position = v;
+            Destroy(child.gameObject);
         }
 
-        Debug.Log("done");
+        for (int i = 0; i < hand.Count; i++)
+        {
+            GameObject renderedCopy = Instantiate(hand[i], Vector3.zero, Quaternion.identity);
+            renderedCopy.transform.SetParent(bqContainer, false);
+            float cardHeight = bqContainer.rect.height;
+            float scaleFactor = cardHeight / 9f;
+            renderedCopy.transform.localScale = new Vector3(scaleFactor, scaleFactor, 1f);
+            float distanceToLeft = bqContainer.rect.width / 2 - (i * cardWidth);
+            float y = bqContainer.transform.position.y;
+            Vector3 v = new Vector3(-distanceToLeft, y, 1);
+            renderedCopy.transform.position = v;
+            
+
+            // hand[i].transform.SetParent(bqContainer.transform, false);
+            // hand[i].transform.position = Vector3.zero;
+            // float distanceToLeft = bqContainer.rect.width / 2 - (i * cardWidth);
+            // float y = bqContainer.transform.position.y;
+            // Vector3 v = new Vector3(-distanceToLeft, y, 1);
+            // hand[i].transform.position = v;
+        }
     }
 
 // A sorted array implementation for GameObject (cards)
 public class SortedArray
 {
     private List<GameObject> array;
-    private int size;
 
     public SortedArray(int capacity)
     {
         array = new List<GameObject>(capacity);
-        size = 0;
     }
 
     public void Insert(GameObject card)
     {
-        if (size == array.Count)
-        {
-            return;
-        }
-
-        int index = BinarySearch(card.GetComponent<ActionClass>().getSpeed(), 0, size - 1, card.GetComponent<ActionClass>().Origin);
+        int index = BinarySearch(card.GetComponent<ActionClass>().getSpeed(), 0, array.Count - 1, card.GetComponent<ActionClass>().Origin);
 
         // Insert the new value at the correct position
         array.Insert(index, card);
-        size++;
     }
 
     public void Remove(GameObject card)
     {
-        int index = BinarySearch(card.GetComponent<ActionClass>().getSpeed(), 0, size - 1, card.GetComponent<ActionClass>().Origin);
+        int index = BinarySearch(card.GetComponent<ActionClass>().getSpeed(), 0, array.Count - 1, card.GetComponent<ActionClass>().Origin);
 
-        if (index < size && array[index] == card)
+        if (index < array.Count && array[index] == card)
         {
             // Remove the value at the specified index
             array.RemoveAt(index);
-            size--;
         }
         // else: element not found
     }
@@ -191,11 +194,12 @@ public class SortedArray
         {
             int mid = left + (right - left) / 2;
 
+            // comparison to sort in descending order
             if (array[mid].GetComponent<ActionClass>().getSpeed() == speed && array[mid].GetComponent<ActionClass>().Origin == origin)
             {
                 return mid; // Element found
             }
-            else if (array[mid].GetComponent<ActionClass>().getSpeed() < speed)
+            else if (array[mid].GetComponent<ActionClass>().getSpeed() > speed) // Change from < to >
             {
                 left = mid + 1;
             }
@@ -208,16 +212,12 @@ public class SortedArray
         return left; // Element not found, return the position where it should be inserted
     }
 
-    public int getSize()
-    {
-        return size;
-    }
-
     public List<GameObject> getList()
     {
         return array;
     }
 }
+
 
 }
 
