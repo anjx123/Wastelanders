@@ -15,7 +15,7 @@ public class IronSights : ActionClass
     void Start()
     {
         speed = 2;
-        block = 4;
+        // block = 4;
         damage = 1;
         myName = "IronSights";
         Renderer renderer = GetComponent<Renderer>();
@@ -27,6 +27,11 @@ public class IronSights : ActionClass
     void Update()
     {
         
+    }
+
+    public override void ApplyEffect()
+    {
+        int i = 1;
     }
 
 }

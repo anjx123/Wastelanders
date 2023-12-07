@@ -22,4 +22,9 @@ public class FocusedStrike : ActionClass
     {
         
     }
+
+    public override void ApplyEffect()
+    {
+        int i = 1;
+    }
 }

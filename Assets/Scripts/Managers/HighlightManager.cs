@@ -49,6 +49,7 @@ public static class HighlightManager // later all entity highlighter
         {
             currentHighlightedAction.Target = currentHighlightedEntity;
             currentHighlightedAction.Origin = player;
+            currentHighlightedAction.ApplyEffect();
 
             // ------------------------------------------
             // ActionClass action = new QuickDraw(); // not possible; must be added using AddComponent method. was irrelevenat in the first place 
@@ -59,8 +60,8 @@ public static class HighlightManager // later all entity highlighter
             // ------------------------------------------- 
             // this requires rectification: the logic is cogent but we want all of this AFTER confirmation.
 
-            currentHighlightedEntity.TakeDamage(currentHighlightedAction.getDamage());
-            Debug.Log("attack: " + currentHighlightedAction.getName() + ", target: " + currentHighlightedEntity.Id + ", damage: " + currentHighlightedAction.getDamage());
+            currentHighlightedEntity.TakeDamage(currentHighlightedAction.getRolledDamage());
+            Debug.Log("attack: " + currentHighlightedAction.getName() + ", target: " + currentHighlightedEntity.Id + ", damage: " + currentHighlightedAction.getRolledDamage());
             currentHighlightedEntity.DeHighlight();
             currentHighlightedAction.DeHighlight();
             if (player != null)

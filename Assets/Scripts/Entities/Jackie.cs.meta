@@ -3,7 +3,12 @@ guid: a87ba7eb40165b04db444a9367c32200
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - healthBar: {instanceID: 0}
+  - animator: {instanceID: 0}
+  - myTransform: {instanceID: 0}
+  - focus: {fileID: 11400000, guid: 893cf5ecf1db6f34690f09d7926feb6a, type: 2}
+  - accuracy: {fileID: 11400000, guid: 88789495b9597eb4f809b8672bfccbe8, type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

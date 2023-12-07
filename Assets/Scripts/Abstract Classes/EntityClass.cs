@@ -15,6 +15,21 @@ public class EntityClass : SelectClass
         set { health = value; }
     }
 
+    protected Dictionary<string, StatusEffectScriptableObject> statusEffects;
+
+    [SerializeField]
+    private StatusEffectScriptableObject focus;
+
+    [SerializeField]
+    private StatusEffectScriptableObject accuracy;
+
+    // Initializes the Dictionary of Buff
+    protected void DictInit()
+    {
+        statusEffects[FocusScriptableObject.buffName] = focus;
+        statusEffects[AccuracyScriptableObject.buffName] = accuracy;
+    }
+
     protected List<ActionClass> actionsAvailable;
 
     protected int id;
@@ -28,6 +43,9 @@ public class EntityClass : SelectClass
     {
         healthBar.setMaxHealth(MAX_HEALTH);
         healthBar.setHealth(MAX_HEALTH);
+
+        statusEffects = new Dictionary<string, StatusEffectScriptableObject>();
+        DictInit();
     }
 
     public virtual void TakeDamage(int damage)
@@ -127,4 +145,15 @@ public class EntityClass : SelectClass
         this.health = health;
         this.MAX_HEALTH = health;
     } */
+
+    public void AddBuffs(ref ActionClass.CardDup dup, string buffType)
+    {
+        if (statusEffects[buffType] == null)
+        {
+            Debug.Log("fail :(");
+        }
+
+        Debug.Log("add buffs no error initial success" + dup.rollCeiling);
+        statusEffects[buffType].GainStacks(ref dup);
+    }
 }

@@ -15,7 +15,7 @@ public class PistolWhip : ActionClass
     void Start()
     {
         speed = 1;
-        block = 2;
+        // block = 2;
         damage = 99;
         myName = "PistolWhip";
         Renderer renderer = GetComponent<Renderer>();
@@ -27,6 +27,11 @@ public class PistolWhip : ActionClass
     void Update()
     {
         
+    }
+
+    public override void ApplyEffect()
+    {
+        int i = 1;
     }
 
 }

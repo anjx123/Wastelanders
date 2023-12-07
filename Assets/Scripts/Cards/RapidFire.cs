@@ -15,7 +15,7 @@ public class RapidFire : ActionClass
     void Start()
     {
         speed = 1;
-        block = 2;
+        // block = 2;
         damage = 3;
         myName = "RapidFire";
         Renderer renderer = GetComponent<Renderer>();
@@ -27,6 +27,11 @@ public class RapidFire : ActionClass
     void Update()
     {
         
+    }
+
+    public override void ApplyEffect()
+    {
+        int i = 1;
     }
 
 }
