@@ -118,7 +118,7 @@ public class BattleQueue : MonoBehaviour
     // Update is called once per frame; This is so that Alissa's Highlight Manager can denote a a successful addition. 
     public void UpdateTest()
     {
-        Debug.Log("Something has been added to PQ"); // Initial; will add details later.
+        Debug.Log("Something has been added to BQ"); // Initial; will add details later.
     }
 
      /*  Renders the cards in List<GameObject> bq to the screen, as children of the bqContainer.
