@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 using static UnityEngine.GraphicsBuffer;
@@ -9,8 +10,9 @@ public class BattleQueue : MonoBehaviour
 { 
 
     public static BattleQueue BattleQueueInstance; // naming convention without the _
-    private List<ActionClass> playerActions; // naming convention
-    private List<ActionClass> enemyActions; // naming convention
+    private SortedArray actionQueue; // in the same queue
+    // private List<ActionClass> enemyActions; // naming convention
+    private static int SIZE = 20; // size of actionQueue, change if necessary
 
     public EntityClass player;
     
@@ -20,8 +22,10 @@ public class BattleQueue : MonoBehaviour
         if (BattleQueueInstance == null)
         {
             BattleQueueInstance = this;
-            playerActions = new List<ActionClass>();   
-            enemyActions = new List<ActionClass>(); 
+
+            actionQueue = new SortedArray(SIZE);
+            // playerActions = new List<ActionClass>();   
+            // enemyActions = new List<ActionClass>(); 
         }
         else if (BattleQueueInstance != this)
         {
@@ -42,7 +46,7 @@ public class BattleQueue : MonoBehaviour
     public void AddPlayerAction(ActionClass action)
     {
         
-        playerActions.Add(action);
+        actionQueue.Insert(action);
         action.Origin = player;
 
         ClashBothEntities(action.Origin, action.Target);
@@ -115,6 +119,82 @@ public class BattleQueue : MonoBehaviour
     {
         Debug.Log("Something has been added to PQ"); // Initial; will add details later.
     }
+
+// A sorted array implementation for ActionClass (cards)
+public class SortedArray
+{
+    private ActionClass[] array; // array
+    private int size; // size of array
+
+    public SortedArray(int capacity)
+    {
+        array = new ActionClass[capacity];
+        size = 0;
+    }
+
+    public void Insert(ActionClass card)
+    {
+        if (size == array.Length)
+        {
+            return;
+        }
+
+        int index = BinarySearch(card.getSpeed(), 0, size - 1, card.getCardWielder());
+
+        // Shift elements to make space for the new value
+        for (int i = size - 1; i >= index; i--)
+        {
+            array[i + 1] = array[i];
+        }
+
+        // Insert the new value at the correct position
+        array[index] = card;
+        size++;
+    }
+
+    public void Remove(ActionClass card)
+    {
+        int index = BinarySearch(card.getSpeed(), 0, size - 1, card.getCardWielder());
+
+        if (index < size && array[index] == card)
+        {
+            // Shift elements to remove the value
+            for (int i = index; i < size - 1; i++)
+            {
+                array[i] = array[i + 1];
+            }
+
+            size--;
+        }
+        
+        // else: element not found
+    }
+
+    // EFFECT: returns the index of the card held by cardWielder
+    public int BinarySearch(int speed, int left, int right, int cardWielder)
+    {
+        while (left <= right)
+        {
+            int mid = left + (right - left) / 2;
+
+            if (array[mid].getSpeed() == speed && array[mid].getCardWielder() == cardWielder)
+            {
+                return mid; // Element found
+            }
+            else if (array[mid].getSpeed() < speed)
+            {
+                left = mid + 1;
+            }
+            else
+            {
+                right = mid - 1;
+            }
+        }
+
+        return left; // Element not found, return the position where it should be inserted
+    }
+}
+
 }
 
 //INVALID ASSUMPTION DO NOT OMIT:

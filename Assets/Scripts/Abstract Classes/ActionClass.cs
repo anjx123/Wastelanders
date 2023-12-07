@@ -11,6 +11,7 @@ public abstract class ActionClass : SelectClass
     protected int damage;
     protected int block;
     protected int speed;
+    protected int cardWielder = 1; //1: player's card, 0: enemy's card. 1 for now.
 
     public abstract void ExecuteActionEffect();
 
@@ -22,6 +23,14 @@ public abstract class ActionClass : SelectClass
 
     public int getDamage() {
         return damage;
+    }
+
+    public int getSpeed() {
+        return speed;
+    }
+
+    public int getCardWielder() {
+        return cardWielder;
     }
 
 

@@ -18,6 +18,7 @@ public class EntityClass : SelectClass
     protected List<ActionClass> actionsAvailable;
 
     protected int id;
+    protected int ActionValue { get; set; } // 1: is player, 0: is enemy
     public int Id 
     { 
         get { return id; }

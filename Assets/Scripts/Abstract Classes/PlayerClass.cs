@@ -22,10 +22,11 @@ public class PlayerClass : EntityClass
     private List<GameObject> discard = new List<GameObject>();
 
     // Start is called before the first frame update
-    void Start()
+    public override void Start()
     {
+        // ActionValue = 1; // 1 represents player, for player actions
         HighlightManager.player = this;
-
+    
         // initialize deck
         for (int i = 0; i < cardPrefabs.Count; i++)
         {
