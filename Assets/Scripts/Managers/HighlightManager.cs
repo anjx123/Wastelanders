@@ -8,6 +8,7 @@ public static class HighlightManager // later all entity highlighter
     private static EntityClass currentHighlightedEntity;
     private static ActionClass currentHighlightedAction;
     public static PlayerClass player = null;
+    private static bool isAttackConfirmed; // true when attack confirmed, thus executes attack. (confirmed via pressing ENTER)
 
     static HighlightManager()
     {
@@ -59,16 +60,8 @@ public static class HighlightManager // later all entity highlighter
             // ------------------------------------------- 
             // this requires rectification: the logic is cogent but we want all of this AFTER confirmation.
 
-            currentHighlightedEntity.TakeDamage(currentHighlightedAction.getDamage());
-            Debug.Log("attack: " + currentHighlightedAction.getName() + ", target: " + currentHighlightedEntity.Id + ", damage: " + currentHighlightedAction.getDamage());
-            currentHighlightedEntity.DeHighlight();
-            currentHighlightedAction.DeHighlight();
-            if (player != null)
-            {
-                player.HandleUseCard(currentHighlightedAction);
-            }
-            currentHighlightedEntity = null;
-            currentHighlightedAction = null;
+            isAttackConfirmed = true;
+            // Update checks for this condition, the executes attack upon ENTER key press.
 
             
         }
@@ -99,6 +92,24 @@ public static class HighlightManager // later all entity highlighter
                 
                 Debug.Log("Select card first!");
             }
+        }
+    }
+
+    // checks if legal to execute an attack, upon ENTER key press
+    public static void Update() {
+        
+        if (isAttackConfirmed && (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter))) {
+            currentHighlightedEntity.TakeDamage(currentHighlightedAction.getDamage());
+            Debug.Log("attack: " + currentHighlightedAction.getName() + ", target: " + currentHighlightedEntity.Id + ", damage: " + currentHighlightedAction.getDamage());
+            currentHighlightedEntity.DeHighlight();
+            currentHighlightedAction.DeHighlight();
+            if (player != null)
+            {
+                player.HandleUseCard(currentHighlightedAction);
+            }
+            currentHighlightedEntity = null;
+            currentHighlightedAction = null;
+            isAttackConfirmed = false;
         }
     }
 }

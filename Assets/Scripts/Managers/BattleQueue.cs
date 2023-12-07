@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Runtime.CompilerServices;
 using UnityEngine;
+using UnityEngine.XR;
 using static UnityEngine.GraphicsBuffer;
 
 public class BattleQueue : MonoBehaviour
@@ -48,7 +49,6 @@ public class BattleQueue : MonoBehaviour
     {
         
         actionQueue.Insert(action);
-        action.Origin = player;
 
         ClashBothEntities(action.Origin, action.Target);
     }
@@ -127,20 +127,23 @@ public class BattleQueue : MonoBehaviour
      *  MODIFIES: Nothing
      * 
      */
-    void RenderHand()
-    {
-        for (int i = 0; i < hand.Count; i++)
-        {
-            hand[i].transform.SetParent(handContainer.transform, false);
-            hand[i].transform.position = Vector3.zero;
+    // void RenderHand()
+    // {
+    //     List<ActionClass> hand = actionQueue.getList();
 
-            float distanceToLeft = handContainer.rect.width / 2 - (i * cardWidth);
+    //     for (int i = 0; i < hand.Count; i++)
+    //     {
+    //         hand[i].transform.SetParent(handContainer.transform, false);
+    //         hand[i].transform.position = Vector3.zero;
 
-            float y = handContainer.transform.position.y;
-            Vector3 v = new Vector3(-distanceToLeft, y, 1);
-            hand[i].transform.position = v;
-        }
-    }
+    //         float distanceToLeft = handContainer.rect.width / 2 - (i * cardWidth);
+
+    //         float y = handContainer.transform.position.y;
+    //         Vector3 v = new Vector3(-distanceToLeft, y, 1);
+    //         hand[i].transform.position = v;
+    //         hand[i].gameObject
+    //     }
+    // }
 
 // A sorted array implementation for ActionClass (cards)
 public class SortedArray
