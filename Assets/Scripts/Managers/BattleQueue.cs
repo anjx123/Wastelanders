@@ -13,6 +13,7 @@ public class BattleQueue : MonoBehaviour
     private SortedArray actionQueue; // in the same queue
     // private List<ActionClass> enemyActions; // naming convention
     private static int SIZE = 20; // size of actionQueue, change if necessary
+    public RectTransform bqContainer;
 
     public EntityClass player;
     
@@ -120,35 +121,50 @@ public class BattleQueue : MonoBehaviour
         Debug.Log("Something has been added to PQ"); // Initial; will add details later.
     }
 
+     /*  Renders the cards in List<GameObject> hand to the screen, as children of the handContainer.
+     *  Cards are filled in left to right.
+     *  REQUIRES: Nothing
+     *  MODIFIES: Nothing
+     * 
+     */
+    void RenderHand()
+    {
+        for (int i = 0; i < hand.Count; i++)
+        {
+            hand[i].transform.SetParent(handContainer.transform, false);
+            hand[i].transform.position = Vector3.zero;
+
+            float distanceToLeft = handContainer.rect.width / 2 - (i * cardWidth);
+
+            float y = handContainer.transform.position.y;
+            Vector3 v = new Vector3(-distanceToLeft, y, 1);
+            hand[i].transform.position = v;
+        }
+    }
+
 // A sorted array implementation for ActionClass (cards)
 public class SortedArray
 {
-    private ActionClass[] array; // array
-    private int size; // size of array
+    private List<ActionClass> array;
+    private int size;
 
     public SortedArray(int capacity)
     {
-        array = new ActionClass[capacity];
+        array = new List<ActionClass>(capacity);
         size = 0;
     }
 
     public void Insert(ActionClass card)
     {
-        if (size == array.Length)
+        if (size == array.Count)
         {
             return;
         }
 
         int index = BinarySearch(card.getSpeed(), 0, size - 1, card.getCardWielder());
 
-        // Shift elements to make space for the new value
-        for (int i = size - 1; i >= index; i--)
-        {
-            array[i + 1] = array[i];
-        }
-
         // Insert the new value at the correct position
-        array[index] = card;
+        array.Insert(index, card);
         size++;
     }
 
@@ -158,19 +174,13 @@ public class SortedArray
 
         if (index < size && array[index] == card)
         {
-            // Shift elements to remove the value
-            for (int i = index; i < size - 1; i++)
-            {
-                array[i] = array[i + 1];
-            }
-
+            // Remove the value at the specified index
+            array.RemoveAt(index);
             size--;
         }
-        
         // else: element not found
     }
 
-    // EFFECT: returns the index of the card held by cardWielder
     public int BinarySearch(int speed, int left, int right, int cardWielder)
     {
         while (left <= right)
@@ -192,6 +202,16 @@ public class SortedArray
         }
 
         return left; // Element not found, return the position where it should be inserted
+    }
+
+    public int getSize()
+    {
+        return size;
+    }
+
+    public List<ActionClass> getList()
+    {
+        return array;
     }
 }
 

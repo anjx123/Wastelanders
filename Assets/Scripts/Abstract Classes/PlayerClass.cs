@@ -6,6 +6,7 @@ public class PlayerClass : EntityClass
 {
     public List<GameObject> cardPrefabs;
     public RectTransform handContainer;
+    
     public int cardWidth;
 
     private int maxHandSize = 3;
@@ -95,6 +96,7 @@ public class PlayerClass : EntityClass
             hand[i].transform.position = v;
         }
     }
+
 
     /*  Called by HighlightManager whenever an action is declared. Deletes the used card.
      *  REQUIRES: Nothing
