@@ -148,10 +148,6 @@ public class EntityClass : SelectClass
 
     public void AddBuffs(ref ActionClass.CardDup dup, string buffType)
     {
-        if (statusEffects[buffType] == null)
-        {
-            Debug.Log("fail :(");
-        }
 
         Debug.Log("add buffs no error initial success" + dup.rollCeiling);
         statusEffects[buffType].GainStacks(ref dup);
