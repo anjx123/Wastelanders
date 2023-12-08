@@ -18,13 +18,6 @@ public abstract class PlayerClass : EntityClass
     // technically not necessaary as of now, but in case we want to do stuff with used cards (or single use)
     protected List<GameObject> discard = new List<GameObject>();
 
-    // Start is called before the first frame update
-    new void Start()
-    {
-        
-    }
-
-
     /*  Draws a single card from the pool, removing it from the pool and refilling it if necessary.
      *  REQUIRES: Nothing
      *  MODIFIES: pool, hand, maxHandSize
@@ -38,9 +31,4 @@ public abstract class PlayerClass : EntityClass
      */
     abstract public void HandleUseCard(ActionClass a);
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
