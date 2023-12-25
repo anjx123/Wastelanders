@@ -8,16 +8,14 @@ public abstract class ActionClass : SelectClass
     public EntityClass Target { get; set; }
     public EntityClass Origin { get; set; }
 
-    public int Damage { get; set; }
-    public int Block { get; set; }
-    public int Speed { get; set; }
-    public CardType CardType { get; set; }
+    public int Damage { get; protected set; }
+    public int Block { get; protected set; }
+    public int Speed { get; protected set; }
 
     public abstract void ExecuteActionEffect();
 
     public override void OnMouseDown()
     {
-        Debug.Log("Card has been Clicked !!");
         HighlightManager.OnActionClicked(this);
     }
     public virtual void OnHit()
