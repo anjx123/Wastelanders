@@ -67,7 +67,6 @@ public class CombatManager : MonoBehaviour
         get => gameState;
         set
         {
-            Debug.Log("Switching to " + value + " from " + gameState);
             gameState = value;
             switch (gameState)
             {
