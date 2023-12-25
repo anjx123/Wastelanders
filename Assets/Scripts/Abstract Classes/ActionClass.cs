@@ -8,9 +8,10 @@ public abstract class ActionClass : SelectClass
     public EntityClass Target { get; set; }
     public EntityClass Origin { get; set; }
 
-    protected int damage { get; set; }
-    protected int block { get; set; }
-    protected int speed { get; set; }
+    public int Damage { get; set; }
+    public int Block { get; set; }
+    public int Speed { get; set; }
+   
 
     public abstract void ExecuteActionEffect();
 
@@ -19,18 +20,8 @@ public abstract class ActionClass : SelectClass
         Debug.Log("Card has been Clicked !!");
         HighlightManager.OnActionClicked(this);
     }
-
-    public int getDamage() {
-        return damage;
-    }
-
-    public int getBlock()
+    public virtual void OnHit()
     {
-        return block;
-    }
-
-    public int getSpeed()
-    {
-        return speed;
+        this.Target.TakeDamage(Damage);
     }
 }

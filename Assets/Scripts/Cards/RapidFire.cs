@@ -14,9 +14,9 @@ public class RapidFire : ActionClass
     // Start is called before the first frame update
     void Start()
     {
-        speed = 1;
-        block = 2;
-        damage = 3;
+        Speed = 1;
+        Block = 2;
+        Damage = 3;
         myName = "RapidFire";
         Renderer renderer = GetComponent<Renderer>();
         ogMaterial = renderer.material; // og sprite of card

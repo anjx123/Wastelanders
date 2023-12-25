@@ -14,9 +14,9 @@ public class IronSights : ActionClass
     // Start is called before the first frame update
     void Start()
     {
-        speed = 2;
-        block = 4;
-        damage = 1;
+        Speed = 2;
+        Block = 4;
+        Damage = 1;
         myName = "IronSights";
         Renderer renderer = GetComponent<Renderer>();
         ogMaterial = renderer.material; // og sprite of card
