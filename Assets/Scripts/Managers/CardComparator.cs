@@ -134,6 +134,7 @@ public class CardComparator : MonoBehaviour
     /*
  EntityClass origin: Origin of the action card played
  EntityClass target: Target of the action card played
+    bufferedRadius: The buffer circle in which the entity will stop before that circle. 
 
  Purpose: The two clashing enemies come together to clash, their positions will ideally be based off their speed
  Then, whoever wins the clash should stagger the opponent backwards. 
@@ -142,10 +143,23 @@ public class CardComparator : MonoBehaviour
     {
         //The Distance weighting will be calculated based on speeds of the two clashing cards
         Vector2 centeredDistance = (origin.myTransform.position * 0.3f + 0.7f * target.myTransform.position);
-        float bufferedRadius = 0.6f;
+        float bufferedRadius = 0f;
         float duration = 0.6f;
-        StartCoroutine(origin.MoveToPosition(centeredDistance, bufferedRadius, duration));
-        StartCoroutine(target.MoveToPosition(centeredDistance, bufferedRadius, duration));
+        float xBuffer = 0.8f;
+        StartCoroutine(origin.MoveToPosition(HorizontalProjector(centeredDistance, origin.myTransform.position, xBuffer), bufferedRadius, duration));
+        StartCoroutine(target.MoveToPosition(HorizontalProjector(centeredDistance, target.myTransform.position, xBuffer), bufferedRadius, duration));
+    }
+    /*
+     * 
+     * Projects A Character's position onto the same x-axis as centeredDistnace but is 'xBuffer' x-distance away from the 'centeredDistance'
+     */
+    private Vector2 HorizontalProjector(Vector2 centeredDistance, Vector2 currentPosition, float xBuffer)
+    {
+        Vector2 vectorToCenter = (centeredDistance - currentPosition);
+
+        return vectorToCenter.x > 0 ?
+            currentPosition + vectorToCenter - new Vector2(xBuffer, 0) :
+            currentPosition + vectorToCenter + new Vector2(xBuffer, 0);
     }
 
     // Start is called before the first frame update
