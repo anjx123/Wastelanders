@@ -25,9 +25,8 @@ public class CardComparator : MonoBehaviour
     }
     public IEnumerator ClashCards(ActionClass card1, ActionClass card2)
     {
-        int cardOneStaggered = 0;
+        int cardOneStaggered;
         yield return StartCoroutine(ClashBothEntities(card1.Origin, card1.Target));
-        Debug.Log("Enemies have gotten together");
 
         if (IsAttack(card1) && IsAttack(card2))
         {
@@ -52,18 +51,12 @@ public class CardComparator : MonoBehaviour
             }
         } else if (card1.CardType == CardType.Defense)
         {
-            //card2.Damage = card2.Damage - card1.Block; These damage modifications should not be done here as it will modify the actual value;
-            cardOneStaggered = 1;
-
             card1.Origin.BlockAnimation();
             //card2.Target.StaggerBack();
             card2.Origin.AttackAnimation();
             card2.Target.TakeDamage(card2.Damage);
         } else if (card2.CardType == CardType.Defense)
         {
-            //card1.Damage -= card2.Block;
-            cardOneStaggered = 1;
-
             card1.Origin.AttackAnimation();
             //card1.Target.StaggerBack();
             card1.Target.TakeDamage(card1.Damage);
@@ -73,7 +66,7 @@ public class CardComparator : MonoBehaviour
     //Produces a positive value if Card1 is staggered by Card2
     private int ClashCompare(ActionClass card1, ActionClass card2)
     {
-        int cardOneStaggered = 0;
+        int cardOneStaggered;
 
         if (card1.Damage > card2.Damage)
         {;
@@ -86,27 +79,6 @@ public class CardComparator : MonoBehaviour
             cardOneStaggered = 0;
         }
         return cardOneStaggered;
-    }
-
-
-    /*
-     * A Generic Timer function that performs a task when it is completed. 
-     * A delegate is defined here and is essentially a function pointer to a call back. Yippee !!
-     * 
-     * float duration: Duration until function is called
-     * TimerCompletedTask DoFinishedTask: A function pointer to a callback
-     * object parameter: generic paramter to pass in to the delegate
-     */
-    private delegate void TimerCompletedTask(object parameter);
-    private IEnumerator GeneralTimer(float duration, TimerCompletedTask DoFinishedTask, object parameter)
-    {
-        float elapsedTime = 0f;
-        while (elapsedTime < duration)
-        {
-            elapsedTime += Time.deltaTime;
-            yield return null;
-        }
-        DoFinishedTask(parameter);
     }
 
     private IEnumerator StaggerEntities(EntityClass origin, EntityClass target)
@@ -158,20 +130,8 @@ public class CardComparator : MonoBehaviour
             currentPosition + vectorToCenter + new Vector2(xBuffer, 0);
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
     private bool IsAttack(ActionClass card)
     {
         return card.CardType == CardType.MeleeAttack || card.CardType == CardType.RangedAttack;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
