@@ -12,6 +12,8 @@ public abstract class ActionClass : SelectClass
     public int Block { get; protected set; }
     public int Speed { get; protected set; }
 
+    public CardType CardType { get; protected set; }
+
     public abstract void ExecuteActionEffect();
 
     public override void OnMouseDown()
