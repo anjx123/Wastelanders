@@ -112,7 +112,6 @@ public class CardComparator : MonoBehaviour
             elapsedTime += Time.deltaTime;
             yield return null;
         }
-        Debug.Log("Timer is up, finished task is executing");
         DoFinishedTask(parameter);
     }
 
