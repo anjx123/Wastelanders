@@ -115,10 +115,12 @@ public class CardComparator : MonoBehaviour
         DoFinishedTask(parameter);
     }
 
+
     /*
      Takes in a pair of entities with Key being the origin and value being the Target
     Then it calculates a direction vector and staggers the Target bacl from the Origin.
      */
+    public delegate void AfterStagger(object parameter);
     private void StaggerEntities(object pair)
     {
         KeyValuePair<EntityClass, EntityClass> pairOfEntities = (KeyValuePair<EntityClass, EntityClass>)pair;
@@ -127,7 +129,12 @@ public class CardComparator : MonoBehaviour
         Vector2 normalizedDirection = directionVector.normalized;
         float staggerPower = 2f; //Depending on percentage health lost
 
-        StartCoroutine(pairOfEntities.Value.StaggerBack(pairOfEntities.Value.myTransform.position + (Vector3)normalizedDirection * staggerPower));
+        StartCoroutine(pairOfEntities.Value.StaggerBack(pairOfEntities.Value.myTransform.position + (Vector3)normalizedDirection * staggerPower, AfterStaggered));
+    }
+
+    private void AfterStaggered(object info)
+    {
+        CombatManager.Instance.GameState = GameState.SELECTION;
     }
 
     /*
@@ -140,6 +147,7 @@ public class CardComparator : MonoBehaviour
   */
     private void ClashBothEntities(EntityClass origin, EntityClass target)
     {
+        CombatManager.Instance.GameState = GameState.FIGHTING;
         //The Distance weighting will be calculated based on speeds of the two clashing cards
         Vector2 centeredDistance = (origin.myTransform.position * 0.3f + 0.7f * target.myTransform.position);
         float bufferedRadius = 0f;

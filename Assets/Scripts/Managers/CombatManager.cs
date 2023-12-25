@@ -1,3 +1,4 @@
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,6 +7,11 @@ public class CombatManager : MonoBehaviour
 {
     //Getter for the Singleton is found here
     public static CombatManager Instance { get; private set; }
+
+    private GameState gameState;
+
+    public CinemachineVirtualCamera baseCamera;
+    public CinemachineVirtualCamera dynamicCamera;
 
     // Priority Queue
     public List<EntityClass> players;
@@ -43,5 +49,38 @@ public class CombatManager : MonoBehaviour
     void Update()
     {
 
+    }
+    private void PerformSelection()
+    {
+        baseCamera.Priority = 1;
+        dynamicCamera.Priority = 0;
+    }
+
+    private void PerformFighting()
+    {
+        baseCamera.Priority = 0;
+        dynamicCamera.Priority = 1;
+    }
+
+    public GameState GameState
+    {
+        get => gameState;
+        set
+        {
+            Debug.Log("Switching to " + value + " from " + gameState);
+            gameState = value;
+            switch (gameState)
+            {
+                case GameState.SELECTION:
+                    PerformSelection();
+                    break;
+                case GameState.FIGHTING:
+                    PerformFighting();
+                    break;
+                default:
+                    break;
+
+            }
+        }
     }
 }
