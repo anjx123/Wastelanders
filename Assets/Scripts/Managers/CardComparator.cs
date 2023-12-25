@@ -26,7 +26,7 @@ public class CardComparator : MonoBehaviour
     {
         int cardOneStaggered = 0;
         int duration = 1;
-        ClashBothEntities(card1.Origin, card1.Target);
+        StartCoroutine(ClashBothEntities(card1.Origin, card1.Target));
 
         if (IsAttack(card1) && IsAttack(card2))
         {
@@ -35,11 +35,8 @@ public class CardComparator : MonoBehaviour
             {
                 card1.Origin.AttackAnimation();
                 card2.Origin.AttackAnimation();
-                StartCoroutine(GeneralTimer(duration + 1f, StaggerEntities, new KeyValuePair<EntityClass, EntityClass>(card2.Origin, card2.Target)));
             } else if (cardOneStaggered > 0) //Card2 wins clash
             {
-
-                
                 card2.Origin.AttackAnimation();
                 card2.OnHit();
                 
@@ -115,24 +112,18 @@ public class CardComparator : MonoBehaviour
         DoFinishedTask(parameter);
     }
 
-
-    /*
-     Takes in a pair of entities with Key being the origin and value being the Target
-    Then it calculates a direction vector and staggers the Target bacl from the Origin.
-     */
-    public delegate void AfterStagger(object parameter);
-    private void StaggerEntities(object pair)
+    private IEnumerator StaggerEntities(EntityClass origin, EntityClass target)
     {
-        KeyValuePair<EntityClass, EntityClass> pairOfEntities = (KeyValuePair<EntityClass, EntityClass>)pair;
-        Vector2 directionVector = pairOfEntities.Value.myTransform.position - pairOfEntities.Key.myTransform.position;
+        Vector2 directionVector = target.myTransform.position - origin.myTransform.position;
 
         Vector2 normalizedDirection = directionVector.normalized;
         float staggerPower = 2f; //Depending on percentage health lost
 
-        StartCoroutine(pairOfEntities.Value.StaggerBack(pairOfEntities.Value.myTransform.position + (Vector3)normalizedDirection * staggerPower, AfterStaggered));
+        yield return StartCoroutine(target.StaggerBack(target.myTransform.position + (Vector3)normalizedDirection * staggerPower));
+        AfterStaggered();
     }
 
-    private void AfterStaggered(object info)
+    private void AfterStaggered()
     {
         CombatManager.Instance.GameState = GameState.SELECTION;
     }
@@ -145,7 +136,7 @@ public class CardComparator : MonoBehaviour
  Purpose: The two clashing enemies come together to clash, their positions will ideally be based off their speed
  Then, whoever wins the clash should stagger the opponent backwards. 
   */
-    private void ClashBothEntities(EntityClass origin, EntityClass target)
+    private IEnumerator ClashBothEntities(EntityClass origin, EntityClass target)
     {
         CombatManager.Instance.GameState = GameState.FIGHTING;
         //The Distance weighting will be calculated based on speeds of the two clashing cards
@@ -154,7 +145,9 @@ public class CardComparator : MonoBehaviour
         float duration = 0.6f;
         float xBuffer = 0.8f;
         StartCoroutine(origin.MoveToPosition(HorizontalProjector(centeredDistance, origin.myTransform.position, xBuffer), bufferedRadius, duration));
-        StartCoroutine(target.MoveToPosition(HorizontalProjector(centeredDistance, target.myTransform.position, xBuffer), bufferedRadius, duration));
+        yield return StartCoroutine(target.MoveToPosition(HorizontalProjector(centeredDistance, target.myTransform.position, xBuffer), bufferedRadius, duration));
+        yield return new WaitUntil(() => Input.GetMouseButtonDown(0));
+        StartCoroutine(StaggerEntities(origin, target));
     }
     /*
      * 

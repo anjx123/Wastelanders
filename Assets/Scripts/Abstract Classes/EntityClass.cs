@@ -81,7 +81,7 @@ public class EntityClass : SelectClass
      * 
      * Modifies: this.myTransform.position
      */
-    public IEnumerator StaggerBack(Vector3 staggeredPosition, CardComparator.AfterStagger callback)
+    public IEnumerator StaggerBack(Vector3 staggeredPosition)
     {
         Vector3 originalPosition = myTransform.position;
         float elapsedTime = 0f;
@@ -97,7 +97,6 @@ public class EntityClass : SelectClass
         }
 
         animator.SetBool("IsStaggered", false);
-        callback(null);
     }
     private float AnimationCurve(float elapsedTime, float duration)
     {
