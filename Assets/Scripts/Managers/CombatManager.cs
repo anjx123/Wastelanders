@@ -38,11 +38,7 @@ public class CombatManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //for (int i = 0; i < 1; i++)
-        //{
-        //    GameObject pee = Instantiate(instance);
-        //    pee.transform.SetParent(container.transform, false);
-        //}
+        GameState = GameState.SELECTION;
     }
     
     // Update is called once per frame
