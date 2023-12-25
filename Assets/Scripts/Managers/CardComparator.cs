@@ -61,7 +61,7 @@ public class CardComparator : MonoBehaviour
             card2.Target.TakeDamage(card2.Damage);
         } else if (card2.CardType == CardType.Defense)
         {
-            card1.Damage = card1.Damage - card2.Block;
+            card1.Damage -= card2.Block;
             cardOneStaggered = 1;
 
             card1.Origin.AttackAnimation();
@@ -76,18 +76,18 @@ public class CardComparator : MonoBehaviour
     {
         int cardOneStaggered = 0;
 
-        if (card1.getDamage() > card2.getDamage())
+        if (card1.Damage > card2.Damage)
         {
-            card2.setDamage(0);
+            card2.Damage = 0;
             cardOneStaggered = -1;
-        } else if (card1.getDamage() < card2.getDamage())
+        } else if (card1.Damage < card2.Damage)
         {
-            card1.setDamage(0);
+            card1.Damage = 0;
             cardOneStaggered = 1;
         } else 
         {
-            card1.setDamage(0);
-            card2.setDamage(0);
+            card1.Damage = 0;
+            card2.Damage = 0;
             cardOneStaggered = 0;
         }
         return cardOneStaggered;
