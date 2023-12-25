@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static Cinemachine.CinemachineTargetGroup;
 using static UnityEngine.GraphicsBuffer;
 using static UnityEngine.UI.Image;
 
@@ -22,11 +23,11 @@ public class CardComparator : MonoBehaviour
 
         DontDestroyOnLoad(gameObject);
     }
-    public int CompareCards(ActionClass card1, ActionClass card2)
+    public IEnumerator ClashCards(ActionClass card1, ActionClass card2)
     {
         int cardOneStaggered = 0;
-        int duration = 1;
-        StartCoroutine(ClashBothEntities(card1.Origin, card1.Target));
+        yield return StartCoroutine(ClashBothEntities(card1.Origin, card1.Target));
+        Debug.Log("Enemies have gotten together");
 
         if (IsAttack(card1) && IsAttack(card2))
         {
@@ -35,6 +36,8 @@ public class CardComparator : MonoBehaviour
             {
                 card1.Origin.AttackAnimation();
                 card2.Origin.AttackAnimation();
+                card1.OnHit(); // For testing purposes, not supposed to be here
+                StartCoroutine(StaggerEntities(card1.Origin, card1.Target));
             } else if (cardOneStaggered > 0) //Card2 wins clash
             {
                 card2.Origin.AttackAnimation();
@@ -49,7 +52,7 @@ public class CardComparator : MonoBehaviour
             }
         } else if (card1.CardType == CardType.Defense)
         {
-            card2.Damage = card2.Damage - card1.Block;
+            //card2.Damage = card2.Damage - card1.Block; These damage modifications should not be done here as it will modify the actual value;
             cardOneStaggered = 1;
 
             card1.Origin.BlockAnimation();
@@ -58,15 +61,13 @@ public class CardComparator : MonoBehaviour
             card2.Target.TakeDamage(card2.Damage);
         } else if (card2.CardType == CardType.Defense)
         {
-            card1.Damage -= card2.Block;
+            //card1.Damage -= card2.Block;
             cardOneStaggered = 1;
 
             card1.Origin.AttackAnimation();
             //card1.Target.StaggerBack();
             card1.Target.TakeDamage(card1.Damage);
         }
-
-        return cardOneStaggered;
     }
 
     //Produces a positive value if Card1 is staggered by Card2
@@ -75,17 +76,13 @@ public class CardComparator : MonoBehaviour
         int cardOneStaggered = 0;
 
         if (card1.Damage > card2.Damage)
-        {
-            card2.Damage = 0;
+        {;
             cardOneStaggered = -1; //Card 1 staggers card 2
         } else if (card1.Damage < card2.Damage)
         {
-            card1.Damage = 0;
             cardOneStaggered = 1;
         } else 
         {
-            card1.Damage = 0;
-            card2.Damage = 0;
             cardOneStaggered = 0;
         }
         return cardOneStaggered;
@@ -147,7 +144,6 @@ public class CardComparator : MonoBehaviour
         StartCoroutine(origin.MoveToPosition(HorizontalProjector(centeredDistance, origin.myTransform.position, xBuffer), bufferedRadius, duration));
         yield return StartCoroutine(target.MoveToPosition(HorizontalProjector(centeredDistance, target.myTransform.position, xBuffer), bufferedRadius, duration));
         yield return new WaitUntil(() => Input.GetMouseButtonDown(0));
-        StartCoroutine(StaggerEntities(origin, target));
     }
     /*
      * 

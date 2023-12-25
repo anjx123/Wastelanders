@@ -46,7 +46,7 @@ public class BattleQueue : MonoBehaviour
         playerActions.Add(action);
         action.Origin = player;
 
-        CardComparator.Instance.CompareCards(action, action);
+        StartCoroutine(CardComparator.Instance.ClashCards(action, action));
     }
 
  
