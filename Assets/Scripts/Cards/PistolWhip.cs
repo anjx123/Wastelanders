@@ -17,6 +17,7 @@ public class PistolWhip : ActionClass
         Speed = 1;
         Block = 2;
         Damage = 99;
+        CardType = CardType.MeleeAttack;
         myName = "PistolWhip";
         Renderer renderer = GetComponent<Renderer>();
         ogMaterial = renderer.material; // og sprite of card

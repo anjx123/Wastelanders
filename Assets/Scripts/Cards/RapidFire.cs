@@ -17,6 +17,7 @@ public class RapidFire : ActionClass
         Speed = 1;
         Block = 2;
         Damage = 3;
+        CardType = CardType.MeleeAttack;
         myName = "RapidFire";
         Renderer renderer = GetComponent<Renderer>();
         ogMaterial = renderer.material; // og sprite of card

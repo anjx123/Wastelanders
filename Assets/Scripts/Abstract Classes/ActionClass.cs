@@ -11,7 +11,7 @@ public abstract class ActionClass : SelectClass
     public int Damage { get; set; }
     public int Block { get; set; }
     public int Speed { get; set; }
-   
+    public CardType CardType { get; set; }
 
     public abstract void ExecuteActionEffect();
 

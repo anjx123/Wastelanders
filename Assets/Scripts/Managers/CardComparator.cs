@@ -25,7 +25,7 @@ public class CardComparator : MonoBehaviour
     public int CompareCards(ActionClass card1, ActionClass card2)
     {
         int cardOneStaggered = 0;
-        int duration = 2;
+        int duration = 1;
         ClashBothEntities(card1.Origin, card1.Target);
 
         if (IsAttack(card1) && IsAttack(card2))
@@ -72,6 +72,7 @@ public class CardComparator : MonoBehaviour
         return cardOneStaggered;
     }
 
+    //Produces a positive value if Card1 is staggered by Card2
     private int ClashCompare(ActionClass card1, ActionClass card2)
     {
         int cardOneStaggered = 0;
@@ -79,7 +80,7 @@ public class CardComparator : MonoBehaviour
         if (card1.Damage > card2.Damage)
         {
             card2.Damage = 0;
-            cardOneStaggered = -1;
+            cardOneStaggered = -1; //Card 1 staggers card 2
         } else if (card1.Damage < card2.Damage)
         {
             card1.Damage = 0;

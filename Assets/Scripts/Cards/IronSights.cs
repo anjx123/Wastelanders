@@ -17,6 +17,7 @@ public class IronSights : ActionClass
         Speed = 2;
         Block = 4;
         Damage = 1;
+        CardType = CardType.RangedAttack;
         myName = "IronSights";
         Renderer renderer = GetComponent<Renderer>();
         ogMaterial = renderer.material; // og sprite of card

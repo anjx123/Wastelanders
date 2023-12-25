@@ -18,6 +18,7 @@ public class QuickDraw : ActionClass
         Block = 2;
         Damage = 3;
         myName = "QuickDraw";
+        CardType = CardType.RangedAttack;
         Renderer renderer = GetComponent<Renderer>();
         ogMaterial = renderer.material; // og sprite of card
         CardType = CardType.RangedAttack;
