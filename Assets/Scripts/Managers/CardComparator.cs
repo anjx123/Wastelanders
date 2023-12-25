@@ -35,8 +35,13 @@ public class CardComparator : MonoBehaviour
             {
                 card1.Origin.AttackAnimation();
                 card2.Origin.AttackAnimation();
+                float percentageDone = 1; //Testing different powered knockbacks
+                if (card1.Target.Health != 0)
+                {
+                    percentageDone = Mathf.Clamp(card1.Damage / (float)card1.Target.Health, 0f, 1f);
+                }
                 card1.OnHit(); // For testing purposes, not supposed to be here
-                StartCoroutine(StaggerEntities(card1.Origin, card1.Target));
+                StartCoroutine(StaggerEntities(card1.Origin, card1.Target, percentageDone));
             } else if (cardOneStaggered > 0) //Card2 wins clash
             {
                 card2.Origin.AttackAnimation();
@@ -81,12 +86,12 @@ public class CardComparator : MonoBehaviour
         return cardOneStaggered;
     }
 
-    private IEnumerator StaggerEntities(EntityClass origin, EntityClass target)
+    private IEnumerator StaggerEntities(EntityClass origin, EntityClass target, float percentageDone)
     {
         Vector2 directionVector = target.myTransform.position - origin.myTransform.position;
 
         Vector2 normalizedDirection = directionVector.normalized;
-        float staggerPower = 2f; //Depending on percentage health lost
+        float staggerPower = StaggerPowerCalculation(percentageDone);
 
         yield return StartCoroutine(target.StaggerBack(target.myTransform.position + (Vector3)normalizedDirection * staggerPower));
         AfterStaggered();
@@ -95,6 +100,14 @@ public class CardComparator : MonoBehaviour
     private void AfterStaggered()
     {
         CombatManager.Instance.GameState = GameState.SELECTION;
+    }
+
+    private float StaggerPowerCalculation(float percentageDone)
+    {
+        float minimumPush = 0.8f;
+        float pushSlope = 1.8f;
+        float percentageUntilMaxPush = 1f / 3f; //Reaches Max push at 33% hp lost
+        return minimumPush + pushSlope * Mathf.Clamp(percentageDone / percentageUntilMaxPush, 0f, 1.5f);
     }
 
     /*
