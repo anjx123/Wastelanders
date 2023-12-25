@@ -8,31 +8,11 @@ public abstract class ActionClass : SelectClass
     public EntityClass Target { get; set; }
     public EntityClass Origin { get; set; }
 
-    protected int damage;
-    public int Damage
-    {
-        get { return damage; }
-        set { damage = value; }
-    }
-
-    
-    protected int block;
-    public int Block
-    {
-        get { return block; }
-        set { block = value; }
-    }
-    protected int speed;
-
-    public CardType CardType { get; set; }
+    protected int damage { get; set; }
+    protected int block { get; set; }
+    protected int speed { get; set; }
 
     public abstract void ExecuteActionEffect();
-
-    public virtual void OnHit()
-    {
-        this.Target.TakeDamage(Damage);
-    }
-
 
     public override void OnMouseDown()
     {
@@ -41,13 +21,16 @@ public abstract class ActionClass : SelectClass
     }
 
     public int getDamage() {
-        return Damage;
+        return damage;
     }
 
-    public void setDamage(int damage)
+    public int getBlock()
     {
-        Damage = damage;
+        return block;
     }
 
-
+    public int getSpeed()
+    {
+        return speed;
+    }
 }

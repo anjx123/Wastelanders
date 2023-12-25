@@ -15,6 +15,8 @@ public class EntityClass : SelectClass
         set { health = value; }
     }
 
+    protected List<ActionClass> actionsAvailable;
+
     protected int id;
     public int Id 
     { 
