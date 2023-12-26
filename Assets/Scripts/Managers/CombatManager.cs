@@ -17,8 +17,7 @@ public class CombatManager : MonoBehaviour
     public List<EntityClass> players;
     public List<EntityClass> enemies;
 
-    public GameObject instance; // Assign your instantiated object in the Inspector
-    public GameObject container; // Assign your canvas in the Inspector
+    public GameObject handContainer;
 
     // Awake is called when the script instance is being loaded
     void Awake()
@@ -48,12 +47,14 @@ public class CombatManager : MonoBehaviour
     }
     private void PerformSelection()
     {
+        handContainer.SetActive(true);
         baseCamera.Priority = 1;
         dynamicCamera.Priority = 0;
     }
 
     private void PerformFighting()
     {
+        handContainer.SetActive(false);
         baseCamera.Priority = 0;
         dynamicCamera.Priority = 1;
     }
