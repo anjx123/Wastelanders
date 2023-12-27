@@ -1300,7 +1300,7 @@ Transform:
   m_GameObject: {fileID: 1132010468}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.1206799, y: -0.16255331, z: 2.78545}
+  m_LocalPosition: {x: -1.1193166, y: -0.16255331, z: 2.78545}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1589,7 +1589,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthBar: {fileID: 474587224}
-  animator: {fileID: 0}
+  animator: {fileID: 1447308858}
   myTransform: {fileID: 1447308852}
   cardPrefabs:
   - {fileID: 7473027025033308495, guid: 60444f1ba48334961a82f0e5daa44608, type: 3}
@@ -1598,6 +1598,11 @@ MonoBehaviour:
   - {fileID: 7473027025033308495, guid: 3c3d8ebcb37254dfb8204289a4f13955, type: 3}
   handContainer: {fileID: 552403359}
   cardWidth: 2
+--- !u!95 &1447308858 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 2764313202347658331, guid: 18ff4a241e9f877439ebd5fd1de51dd0, type: 3}
+  m_PrefabInstance: {fileID: 1118841443}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1525751818
 GameObject:
   m_ObjectHideFlags: 0
