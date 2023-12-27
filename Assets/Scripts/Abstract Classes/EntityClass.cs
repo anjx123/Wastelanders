@@ -61,12 +61,16 @@ public class EntityClass : SelectClass
         float distance = Mathf.Sqrt(diffInLocation.x * diffInLocation.x + diffInLocation.y * diffInLocation.y);
         float maxProportionTravelled = (distance - radius) / distance;
 
+        animator?.SetBool("IsMoving", true);
+
         while (elapsedTime < duration)
         {
             myTransform.position = Vector3.Lerp(originalPosition, destination, elapsedTime / duration * maxProportionTravelled);
             elapsedTime += Time.deltaTime;
             yield return null;
         }
+
+        animator?.SetBool("IsMoving", false);
     }
 
 
@@ -86,7 +90,7 @@ public class EntityClass : SelectClass
         Vector3 originalPosition = myTransform.position;
         float elapsedTime = 0f;
 
-        animator.SetBool("IsStaggered", true);
+        animator?.SetBool("IsStaggered", true);
         float duration = animator.GetCurrentAnimatorStateInfo(0).length;
 
         while (elapsedTime < duration)
@@ -96,7 +100,7 @@ public class EntityClass : SelectClass
             yield return null;
         }
 
-        animator.SetBool("IsStaggered", false);
+        animator?.SetBool("IsStaggered", false);
     }
     private float AnimationCurve(float elapsedTime, float duration)
     {
