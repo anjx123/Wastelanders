@@ -61,11 +61,21 @@ public class EntityClass : SelectClass
         float distance = Mathf.Sqrt(diffInLocation.x * diffInLocation.x + diffInLocation.y * diffInLocation.y);
         float maxProportionTravelled = (distance - radius) / distance;
 
+        if (HasParameter("IsMoving", animator))
+        {
+            animator.SetBool("IsMoving", true);
+        }
+
         while (elapsedTime < duration)
         {
             myTransform.position = Vector3.Lerp(originalPosition, destination, elapsedTime / duration * maxProportionTravelled);
             elapsedTime += Time.deltaTime;
             yield return null;
+        }
+
+        if (HasParameter("IsMoving", animator))
+        {
+            animator.SetBool("IsMoving", false);
         }
     }
 
@@ -86,7 +96,11 @@ public class EntityClass : SelectClass
         Vector3 originalPosition = myTransform.position;
         float elapsedTime = 0f;
 
-        animator.SetBool("IsStaggered", true);
+        if (HasParameter("IsStaggered", animator))
+        {
+            animator.SetBool("IsStaggered", true);
+        }
+
         float duration = animator.GetCurrentAnimatorStateInfo(0).length;
 
         while (elapsedTime < duration)
@@ -96,7 +110,10 @@ public class EntityClass : SelectClass
             yield return null;
         }
 
-        animator.SetBool("IsStaggered", false);
+        if (HasParameter("IsStaggered", animator))
+        {
+            animator.SetBool("IsStaggered", false);
+        }
     }
     private float AnimationCurve(float elapsedTime, float duration)
     {
@@ -127,4 +144,26 @@ public class EntityClass : SelectClass
         this.health = health;
         this.MAX_HEALTH = health;
     } */
+
+    public virtual void AttackAnimation()
+    {
+        //TODO
+        //Implement Attack Animation
+    }
+
+    public virtual void BlockAnimation()
+    {
+        //Todo
+        //Implement Block Animation
+    }
+
+    public static bool HasParameter(string paramName, Animator animator)
+    {
+        foreach (AnimatorControllerParameter param in animator.parameters)
+        {
+            if (param.name == paramName) return true;
+        }
+        return false;
+    }
+
 }
