@@ -13,7 +13,7 @@ public abstract class SelectClass : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -29,16 +29,18 @@ public abstract class SelectClass : MonoBehaviour
     public void OnMouseEnter() 
     {
         if (!isOutlined) {
-            Renderer renderer = GetComponent<Renderer>();
-            renderer.material = outliner;
+            //Renderer renderer = GetComponent<Renderer>();
+            //renderer.material = outliner;
+            GetComponent<SpriteRenderer>().color = new Color(0.5f, 0.5f, 0.5f, 1);
         }
     }
 
     public void OnMouseExit()
     {
         if (!isOutlined) {
-            Renderer renderer = GetComponent<Renderer>();
-            renderer.material = ogMaterial;
+            //Renderer renderer = GetComponent<Renderer>();
+            //renderer.material = ogMaterial;
+            GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 1);
         }
     }
 
@@ -59,16 +61,18 @@ public abstract class SelectClass : MonoBehaviour
 
     public void Highlight()
     {
-        Renderer renderer = GetComponent<Renderer>();
+        //Renderer renderer = GetComponent<Renderer>();
         isOutlined = true;
-        renderer.material = outliner;
+        //renderer.material = outliner;
+        GetComponent<SpriteRenderer>().color = new Color(0.5f, 0.5f, 0.5f, 1);
     }
 
     public void DeHighlight() 
     {
-        Renderer renderer = GetComponent<Renderer>();
+        //Renderer renderer = GetComponent<Renderer>();
         isOutlined = false;
-        renderer.material = ogMaterial;
+        //renderer.material = ogMaterial;
+        GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 1);
     }
 
 }
