@@ -24,4 +24,24 @@ public abstract class ActionClass : SelectClass
     {
         this.Target.TakeDamage(Damage);
     }
+
+    public override void OnMouseEnter()
+    {
+        if (!isOutlined)
+        {
+            //Renderer renderer = GetComponent<Renderer>();
+            //renderer.material = outliner;
+            GetComponent<SpriteRenderer>().color = new Color(0.5f, 0.5f, 0.5f, 1);
+        }
+    }
+
+    public override void OnMouseExit()
+    {
+        if (!isOutlined)
+        {
+            //Renderer renderer = GetComponent<Renderer>();
+            //renderer.material = ogMaterial;
+            GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 1);
+        }
+    }
 }

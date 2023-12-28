@@ -166,4 +166,24 @@ public class EntityClass : SelectClass
         return false;
     }
 
+    public override void OnMouseEnter()
+    {
+        if (!isOutlined)
+        {
+            //Renderer renderer = GetComponent<Renderer>();
+            //renderer.material = outliner;
+            myTransform.localScale += new Vector3((float)0.05, (float)0.05, 0);
+        }
+    }
+
+    public override void OnMouseExit()
+    {
+        if (!isOutlined)
+        {
+            //Renderer renderer = GetComponent<Renderer>();
+            //renderer.material = ogMaterial;
+            myTransform.localScale -= new Vector3((float)0.05, (float)0.05, 0);
+        }
+    }
+
 }
