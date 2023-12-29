@@ -9,18 +9,16 @@ public class CombatInfo : MonoBehaviour
     public GameObject diceRollSprite;
     public List<Sprite> loadedSprites = new();
 
-    public void setDice(int value)
+    public void SetDice(int value)
     {
-        animator.speed = 0;
-        combatCardSprite.GetComponent<SpriteRenderer>().sprite = loadedSprites[0];
-        animator.speed = 1;
+        animator.enabled = false;
+        diceRollSprite.GetComponent<SpriteRenderer>().sprite = loadedSprites[0];
     }
 
-    public void setCombatSprite(ActionClass card)
+    public void SetCombatSprite(ActionClass card)
     {
+        animator.enabled = true;
         SpriteRenderer spriteRenderer = combatCardSprite.GetComponent<SpriteRenderer>();
-        GameObject cardObject = card.gameObject;
-
-        spriteRenderer.sprite = cardObject.GetComponent<SpriteRenderer>().sprite;
+        spriteRenderer.sprite = card.GetIcon();
     }
 }

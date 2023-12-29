@@ -169,8 +169,12 @@ public class EntityClass : SelectClass
 
     public void ActivateCombatInfo(ActionClass actionClass)
     {
-        combatInfo.setDice(0);
-        combatInfo.setCombatSprite(actionClass);
+        combatInfo.SetCombatSprite(actionClass);
+    }
+
+    public void SetDice(int value)
+    {
+        combatInfo.SetDice(value);
     }
 
 }

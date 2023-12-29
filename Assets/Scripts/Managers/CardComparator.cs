@@ -29,6 +29,9 @@ public class CardComparator : MonoBehaviour
         ActivateInfo(card1, card2);
         yield return StartCoroutine(ClashBothEntities(card1.Origin, card1.Target));
 
+        card1.RollDice();
+        card2.RollDice();
+
         if (IsAttack(card1) && IsAttack(card2))
         {
             cardOneStaggered = ClashCompare(card1, card2);
@@ -146,7 +149,8 @@ public class CardComparator : MonoBehaviour
 
     private void ActivateInfo(ActionClass card1, ActionClass card2)
     {
-        //card1.Origin.ActivateCombatInfo(card1);
+        card1.Origin.ActivateCombatInfo(card1);
+        card2.Origin.ActivateCombatInfo(card2);
     }
 
     private bool IsAttack(ActionClass card)

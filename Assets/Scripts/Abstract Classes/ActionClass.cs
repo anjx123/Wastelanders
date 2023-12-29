@@ -12,6 +12,8 @@ public abstract class ActionClass : SelectClass
     public int Block { get; protected set; }
     public int Speed { get; protected set; }
 
+    public Sprite icon;
+
     public CardType CardType { get; protected set; }
 
     public abstract void ExecuteActionEffect();
@@ -23,5 +25,22 @@ public abstract class ActionClass : SelectClass
     public virtual void OnHit()
     {
         this.Target.TakeDamage(Damage);
+    }
+
+    public void RollDice()
+    {
+        Origin.SetDice(Damage);
+    }
+
+    public Sprite GetIcon()
+    {
+        if (icon)
+        {
+            return icon;
+        } else
+        {
+            Debug.Log("Icon is Missing");
+            return null;
+        }
     }
 }
