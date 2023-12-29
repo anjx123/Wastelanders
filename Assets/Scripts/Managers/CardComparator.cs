@@ -26,6 +26,7 @@ public class CardComparator : MonoBehaviour
     public IEnumerator ClashCards(ActionClass card1, ActionClass card2)
     {
         int cardOneStaggered;
+        ActivateInfo(card1, card2);
         yield return StartCoroutine(ClashBothEntities(card1.Origin, card1.Target));
 
         if (IsAttack(card1) && IsAttack(card2))
@@ -141,6 +142,11 @@ public class CardComparator : MonoBehaviour
         return vectorToCenter.x > 0 ?
             currentPosition + vectorToCenter - new Vector2(xBuffer, 0) :
             currentPosition + vectorToCenter + new Vector2(xBuffer, 0);
+    }
+
+    private void ActivateInfo(ActionClass card1, ActionClass card2)
+    {
+        //card1.Origin.ActivateCombatInfo(card1);
     }
 
     private bool IsAttack(ActionClass card)

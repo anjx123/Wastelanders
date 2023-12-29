@@ -9,6 +9,7 @@ public class EntityClass : SelectClass
     public HealthBar healthBar;
     public Animator animator;
     public Transform myTransform;
+    public CombatInfo combatInfo;
     public int Health
     {
         get { return health; }
@@ -164,6 +165,12 @@ public class EntityClass : SelectClass
             if (param.name == paramName) return true;
         }
         return false;
+    }
+
+    public void ActivateCombatInfo(ActionClass actionClass)
+    {
+        combatInfo.setDice(0);
+        combatInfo.setCombatSprite(actionClass);
     }
 
 }
