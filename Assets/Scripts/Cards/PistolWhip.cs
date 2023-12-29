@@ -21,7 +21,8 @@ public class PistolWhip : ActionClass
         myName = "PistolWhip";
         Renderer renderer = GetComponent<Renderer>();
         ogMaterial = renderer.material; // og sprite of card
-        
+        OriginalPosition = transform.position;
+
     }
 
     // Update is called once per frame

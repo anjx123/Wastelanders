@@ -59,6 +59,11 @@ public class CombatManager : MonoBehaviour
         dynamicCamera.Priority = 1;
     }
 
+    public bool CanHighlight()
+    {
+        return GameState == GameState.SELECTION;
+    }
+
     public GameState GameState
     {
         get => gameState;
