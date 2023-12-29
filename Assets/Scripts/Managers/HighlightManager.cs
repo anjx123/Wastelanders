@@ -76,7 +76,6 @@ public static class HighlightManager // later all entity highlighter
 
     public static void OnActionClicked(ActionClass clicked)
     {
-        Debug.Log("clicked: " + clicked.name);
         if (currentHighlightedAction == null)
         {
             currentHighlightedAction = clicked;
@@ -84,7 +83,6 @@ public static class HighlightManager // later all entity highlighter
         }
         else if (currentHighlightedAction != clicked)
         {
-            Debug.Log("current: " + currentHighlightedAction.name);
             currentHighlightedAction.DeHighlight();
             clicked.Highlight();
             currentHighlightedAction = clicked;
