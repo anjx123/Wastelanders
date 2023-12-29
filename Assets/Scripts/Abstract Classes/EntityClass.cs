@@ -171,7 +171,7 @@ public class EntityClass : SelectClass
 
     public override void OnMouseEnter()
     {
-        if (!isOutlined && CombatManager.Instance.CanHighlight())
+        if (CombatManager.Instance.CanHighlight())
         {
             myTransform.localScale += new Vector3((float)0.05, (float)0.05, 0);
             grewLarger = true;
@@ -180,7 +180,7 @@ public class EntityClass : SelectClass
 
     public override void OnMouseExit()
     {
-        if (!isOutlined && grewLarger)
+        if (grewLarger)
         {
             myTransform.localScale -= new Vector3((float)0.05, (float)0.05, 0);
             grewLarger = false;
