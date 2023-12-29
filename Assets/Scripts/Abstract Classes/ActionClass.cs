@@ -24,6 +24,10 @@ public abstract class ActionClass : SelectClass
     }
     public virtual void OnHit()
     {
+        if (EntityClass.HasParameter("IsShooting", Origin.animator))
+        {
+            this.Origin.animator.SetTrigger("IsShooting");
+        }
         this.Target.TakeDamage(Damage);
     }
 
