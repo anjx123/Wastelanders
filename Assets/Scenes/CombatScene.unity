@@ -793,6 +793,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 615fa82f8a89cb04b840209d6fb53eb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &882511678 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8487347338577429512, guid: 18ff4a241e9f877439ebd5fd1de51dd0, type: 3}
+  m_PrefabInstance: {fileID: 1118841443}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6adb464f1698da341ab4389bebbddc09, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &924634659
 GameObject:
   m_ObjectHideFlags: 0
@@ -1300,7 +1311,7 @@ Transform:
   m_GameObject: {fileID: 1132010468}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.1193166, y: -0.16255331, z: 2.78545}
+  m_LocalPosition: {x: -1.11744, y: -0.16255331, z: 2.78545}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1591,6 +1602,7 @@ MonoBehaviour:
   healthBar: {fileID: 474587224}
   animator: {fileID: 1447308858}
   myTransform: {fileID: 1447308852}
+  combatInfo: {fileID: 882511678}
   cardPrefabs:
   - {fileID: 7473027025033308495, guid: 60444f1ba48334961a82f0e5daa44608, type: 3}
   - {fileID: 7473027025033308495, guid: ac821f8cfc4d947048d187cbd454a69e, type: 3}
