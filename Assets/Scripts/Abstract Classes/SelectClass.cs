@@ -45,7 +45,7 @@ public abstract class SelectClass : MonoBehaviour
         return isOutlined;
     }
 
-    public void Highlight()
+    public virtual void Highlight()
     {
         //Renderer renderer = GetComponent<Renderer>();
         isOutlined = true;
@@ -53,7 +53,7 @@ public abstract class SelectClass : MonoBehaviour
         GetComponent<SpriteRenderer>().color = new Color(0.5f, 0.5f, 0.5f, 1);
     }
 
-    public void DeHighlight() 
+    public virtual void DeHighlight() 
     {
         //Renderer renderer = GetComponent<Renderer>();
         isOutlined = false;

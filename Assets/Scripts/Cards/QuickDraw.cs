@@ -22,7 +22,8 @@ public class QuickDraw : ActionClass
         Renderer renderer = GetComponent<Renderer>();
         ogMaterial = renderer.material; // og sprite of card
         CardType = CardType.RangedAttack;
-        
+        OriginalPosition = transform.position;
+
     }
 
     // Update is called once per frame

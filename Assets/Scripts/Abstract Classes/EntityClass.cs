@@ -170,8 +170,6 @@ public class EntityClass : SelectClass
     {
         if (!isOutlined)
         {
-            //Renderer renderer = GetComponent<Renderer>();
-            //renderer.material = outliner;
             myTransform.localScale += new Vector3((float)0.05, (float)0.05, 0);
         }
     }
@@ -180,8 +178,6 @@ public class EntityClass : SelectClass
     {
         if (!isOutlined)
         {
-            //Renderer renderer = GetComponent<Renderer>();
-            //renderer.material = ogMaterial;
             myTransform.localScale -= new Vector3((float)0.05, (float)0.05, 0);
         }
     }

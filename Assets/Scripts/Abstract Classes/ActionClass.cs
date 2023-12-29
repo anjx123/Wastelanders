@@ -14,6 +14,10 @@ public abstract class ActionClass : SelectClass
 
     public CardType CardType { get; protected set; }
 
+    protected Vector3 OriginalPosition;
+
+    protected bool EnqueueMoveDown = false;
+
     public abstract void ExecuteActionEffect();
 
     public override void OnMouseDown()
@@ -29,9 +33,12 @@ public abstract class ActionClass : SelectClass
     {
         if (!isOutlined)
         {
-            //Renderer renderer = GetComponent<Renderer>();
-            //renderer.material = outliner;
-            GetComponent<SpriteRenderer>().color = new Color(0.5f, 0.5f, 0.5f, 1);
+            GetComponent<SpriteRenderer>().color = new Color(0.6f, 0.6f, 0.6f, 1);
+            transform.position += new Vector3((float)0.04, (float)0.4, 0);
+        }
+        else
+        {
+            EnqueueMoveDown = false;
         }
     }
 
@@ -39,9 +46,31 @@ public abstract class ActionClass : SelectClass
     {
         if (!isOutlined)
         {
-            //Renderer renderer = GetComponent<Renderer>();
-            //renderer.material = ogMaterial;
             GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 1);
+            transform.position -= new Vector3((float)0.04, (float)0.4, 0);
+        }
+        else
+        {
+            EnqueueMoveDown = true;
+        }
+    }
+
+    public override void Highlight()
+    {
+        isOutlined = true;
+        GetComponent<SpriteRenderer>().color = new Color(0.6f, 0.6f, 0.6f, 1);
+        transform.rotation = Quaternion.Euler(0, 0, 0);
+    }
+
+    public override void DeHighlight()
+    {
+        isOutlined = false;
+        GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 1);
+        transform.rotation = Quaternion.Euler(0, 0, -5);
+        if (EnqueueMoveDown)
+        {
+            transform.position -= new Vector3((float)0.04, (float)0.4, 0);
+            EnqueueMoveDown = false;
         }
     }
 }
