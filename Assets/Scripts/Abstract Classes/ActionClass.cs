@@ -44,7 +44,7 @@ public abstract class ActionClass : SelectClass
             return icon;
         } else
         {
-            Debug.Log("Icon is Missing");
+            Debug.LogWarning("Icon is Missing");
             return null;
         }
     }
