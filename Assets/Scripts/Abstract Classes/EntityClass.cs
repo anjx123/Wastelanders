@@ -25,6 +25,9 @@ public class EntityClass : SelectClass
         set { id = value; }
     }
 
+
+    private bool grewLarger; //Checks if entity was highlighted first to ensure proper dehighlighting. 
+
     public virtual void Start()
     {
         healthBar.setMaxHealth(MAX_HEALTH);
@@ -175,6 +178,24 @@ public class EntityClass : SelectClass
     public void SetDice(int value)
     {
         combatInfo.SetDice(value);
+    }
+
+    public override void OnMouseEnter()
+    {
+        if (CombatManager.Instance.CanHighlight())
+        {
+            myTransform.localScale += new Vector3((float)0.05, (float)0.05, 0);
+            grewLarger = true;
+        }
+    }
+
+    public override void OnMouseExit()
+    {
+        if (grewLarger)
+        {
+            myTransform.localScale -= new Vector3((float)0.05, (float)0.05, 0);
+            grewLarger = false;
+        }
     }
 
 }
