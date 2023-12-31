@@ -10,10 +10,7 @@ public abstract class PistolCards : ActionClass
     }
     public override void OnHit()
     {
-        if (EntityClass.HasParameter("IsShooting", Origin.animator))
-        {
-            this.Origin.animator.SetTrigger("IsShooting");
-        }
-        this.Target.TakeDamage(Damage);
+        Origin.AttackAnimation("IsShooting");
+        base.OnHit();
     }
 }

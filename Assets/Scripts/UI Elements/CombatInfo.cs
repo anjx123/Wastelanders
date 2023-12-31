@@ -9,12 +9,18 @@ public class CombatInfo : MonoBehaviour
     public GameObject diceRollSprite;
     public List<Sprite> loadedSprites = new();
 
+    /* 
+     Ideally sets the rolled dice value to the sprite of the value, since thats not available it uses a default sprite.
+     */
     public void SetDice(int value)
     {
         animator.enabled = false;
         diceRollSprite.GetComponent<SpriteRenderer>().sprite = loadedSprites[0];
     }
 
+    /* 
+     Sets the CombatInfo sprite to the icon of this ActionClass
+     */
     public void SetCombatSprite(ActionClass card)
     {
         animator.enabled = true;
