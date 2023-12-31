@@ -23,6 +23,10 @@ public class CardComparator : MonoBehaviour
 
         DontDestroyOnLoad(gameObject);
     }
+
+    /*
+     * Clashes two cards together handling logic calls and activating the Combat Info
+     */
     public IEnumerator ClashCards(ActionClass card1, ActionClass card2)
     {
         int cardOneStaggered;
