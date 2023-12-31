@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.UI.Image;
 
 public class EntityClass : SelectClass
 {
@@ -149,10 +150,12 @@ public class EntityClass : SelectClass
         this.MAX_HEALTH = health;
     } */
 
-    public virtual void AttackAnimation()
+    public virtual void AttackAnimation(string animationName)
     {
-        //TODO
-        //Implement Attack Animation
+        if (HasParameter(animationName, animator))
+        {
+            animator.SetTrigger(animationName);
+        }
     }
 
     public virtual void BlockAnimation()

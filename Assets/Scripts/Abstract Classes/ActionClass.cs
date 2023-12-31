@@ -28,7 +28,13 @@ public abstract class ActionClass : SelectClass
     }
     public virtual void OnHit()
     {
+        float percentageDone = 1; //Testing different powered knockbacks
+        if (Target.Health != 0)
+        {
+            percentageDone = Mathf.Clamp(Damage / (float)Target.Health, 0f, 1f);
+        }
         this.Target.TakeDamage(Damage);
+        CardComparator.Instance.StartStagger(Origin, Target, percentageDone);
     }
 
 
