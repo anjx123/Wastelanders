@@ -12,6 +12,8 @@ public abstract class ActionClass : SelectClass
     public int Block { get; protected set; }
     public int Speed { get; protected set; }
 
+    public Sprite icon;
+
     public CardType CardType { get; protected set; }
 
     protected Vector3 OriginalPosition;
@@ -26,7 +28,31 @@ public abstract class ActionClass : SelectClass
     }
     public virtual void OnHit()
     {
+        float percentageDone = 1; //Testing different powered knockbacks
+        if (Target.Health != 0)
+        {
+            percentageDone = Mathf.Clamp(Damage / (float)Target.Health, 0f, 1f);
+        }
         this.Target.TakeDamage(Damage);
+        CardComparator.Instance.StartStagger(Origin, Target, percentageDone);
+    }
+
+
+    public void RollDice()
+    {
+        Origin.SetDice(Damage);
+    }
+
+    public Sprite GetIcon()
+    {
+        if (icon)
+        {
+            return icon;
+        } else
+        {
+            Debug.LogWarning("Icon is Missing");
+            return null;
+        }
     }
 
     public override void OnMouseEnter()

@@ -2,18 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RapidFire : ActionClass
+public class RapidFire : PistolCards
 {
 
     
     public override void ExecuteActionEffect()
     {
-        Debug.Log("Executing Rapid Fire");
+        
     }
 
     // Start is called before the first frame update
-    void Start()
+    public override void Start()
     {
+        base.Start();
         Speed = 1;
         Block = 2;
         Damage = 3;

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.UI.Image;
 
 public class EntityClass : SelectClass
 {
@@ -9,6 +10,7 @@ public class EntityClass : SelectClass
     public HealthBar healthBar;
     public Animator animator;
     public Transform myTransform;
+    public CombatInfo combatInfo;
     public int Health
     {
         get { return health; }
@@ -148,10 +150,12 @@ public class EntityClass : SelectClass
         this.MAX_HEALTH = health;
     } */
 
-    public virtual void AttackAnimation()
+    public virtual void AttackAnimation(string animationName)
     {
-        //TODO
-        //Implement Attack Animation
+        if (HasParameter(animationName, animator))
+        {
+            animator.SetTrigger(animationName);
+        }
     }
 
     public virtual void BlockAnimation()
@@ -167,6 +171,16 @@ public class EntityClass : SelectClass
             if (param.name == paramName) return true;
         }
         return false;
+    }
+
+    public void ActivateCombatInfo(ActionClass actionClass)
+    {
+        combatInfo.SetCombatSprite(actionClass);
+    }
+
+    public void SetDice(int value)
+    {
+        combatInfo.SetDice(value);
     }
 
     public override void OnMouseEnter()
