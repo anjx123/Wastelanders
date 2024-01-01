@@ -40,8 +40,6 @@ public class Jackie : PlayerClass
         }
 
         RenderHand();
-        Debug.Log(myName + " is ready for combat!");
-
         base.Start();
     }
 
@@ -55,7 +53,6 @@ public class Jackie : PlayerClass
                 pool.Add(discard[i]);
             }
             discard.Clear();
-            Debug.Log("Reshuffling deck. New max hand size is " + maxHandSize);
         }
 
         if (hand.Count < maxHandSize)
