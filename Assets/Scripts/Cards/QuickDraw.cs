@@ -2,30 +2,34 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class QuickDraw : ActionClass
+public class QuickDraw : PistolCards
 {
 
     
     public override void ExecuteActionEffect()
     {
-        Debug.Log("Executing Quick Draw");
+        
     }
 
     // Start is called before the first frame update
-    void Start()
+    public override void Start()
     {
         lowerBound = 1;
         upperBound = 4;
         cardType = true;
-        speed = 1;
-        // block = 2;
-        damage = 3;
         focus = 0;
         accuracy = 2;
+        base.Start();
+        Speed = 1;
+        Block = 2;
+        Damage = 3;
+
         myName = "QuickDraw";
+        CardType = CardType.RangedAttack;
         Renderer renderer = GetComponent<Renderer>();
         ogMaterial = renderer.material; // og sprite of card
-        
+        OriginalPosition = transform.position;
+
     }
 
     // Update is called once per frame

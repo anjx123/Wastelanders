@@ -13,7 +13,7 @@ public abstract class SelectClass : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -26,21 +26,9 @@ public abstract class SelectClass : MonoBehaviour
         return myName;
     }
 
-    public void OnMouseEnter() 
-    {
-        if (!isOutlined) {
-            Renderer renderer = GetComponent<Renderer>();
-            renderer.material = outliner;
-        }
-    }
-
-    public void OnMouseExit()
-    {
-        if (!isOutlined) {
-            Renderer renderer = GetComponent<Renderer>();
-            renderer.material = ogMaterial;
-        }
-    }
+    // abstract as actions and entities have different ways to display selection
+    public abstract void OnMouseEnter();
+    public abstract void OnMouseExit();
 
     public abstract void OnMouseDown();
 
@@ -57,18 +45,20 @@ public abstract class SelectClass : MonoBehaviour
         return isOutlined;
     }
 
-    public void Highlight()
+    public virtual void Highlight()
     {
-        Renderer renderer = GetComponent<Renderer>();
+        //Renderer renderer = GetComponent<Renderer>();
         isOutlined = true;
-        renderer.material = outliner;
+        //renderer.material = outliner;
+        GetComponent<SpriteRenderer>().color = new Color(0.5f, 0.5f, 0.5f, 1);
     }
 
-    public void DeHighlight() 
+    public virtual void DeHighlight() 
     {
-        Renderer renderer = GetComponent<Renderer>();
+        //Renderer renderer = GetComponent<Renderer>();
         isOutlined = false;
-        renderer.material = ogMaterial;
+        //renderer.material = ogMaterial;
+        GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 1);
     }
 
 }

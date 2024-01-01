@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.UI.Image;
 
 public class EntityClass : SelectClass
 {
@@ -9,6 +10,7 @@ public class EntityClass : SelectClass
     public HealthBar healthBar;
     public Animator animator;
     public Transform myTransform;
+    public CombatInfo combatInfo;
     public int Health
     {
         get { return health; }
@@ -32,6 +34,9 @@ public class EntityClass : SelectClass
         get { return id; }
         set { id = value; }
     }
+
+
+    private bool grewLarger; //Checks if entity was highlighted first to ensure proper dehighlighting. 
 
     public virtual void Start()
     {
@@ -73,11 +78,21 @@ public class EntityClass : SelectClass
         float distance = Mathf.Sqrt(diffInLocation.x * diffInLocation.x + diffInLocation.y * diffInLocation.y);
         float maxProportionTravelled = (distance - radius) / distance;
 
+        if (HasParameter("IsMoving", animator))
+        {
+            animator.SetBool("IsMoving", true);
+        }
+
         while (elapsedTime < duration)
         {
             myTransform.position = Vector3.Lerp(originalPosition, destination, elapsedTime / duration * maxProportionTravelled);
             elapsedTime += Time.deltaTime;
             yield return null;
+        }
+
+        if (HasParameter("IsMoving", animator))
+        {
+            animator.SetBool("IsMoving", false);
         }
     }
 
@@ -98,7 +113,11 @@ public class EntityClass : SelectClass
         Vector3 originalPosition = myTransform.position;
         float elapsedTime = 0f;
 
-        animator.SetBool("IsStaggered", true);
+        if (HasParameter("IsStaggered", animator))
+        {
+            animator.SetBool("IsStaggered", true);
+        }
+
         float duration = animator.GetCurrentAnimatorStateInfo(0).length;
 
         while (elapsedTime < duration)
@@ -108,7 +127,10 @@ public class EntityClass : SelectClass
             yield return null;
         }
 
-        animator.SetBool("IsStaggered", false);
+        if (HasParameter("IsStaggered", animator))
+        {
+            animator.SetBool("IsStaggered", false);
+        }
     }
     private float AnimationCurve(float elapsedTime, float duration)
     {
@@ -152,5 +174,56 @@ public class EntityClass : SelectClass
 
         Debug.Log("add buffs no error initial success" + dup.rollCeiling);
         statusEffects[buffType].ApplyStacks(ref dup);
+    }
+
+    public virtual void AttackAnimation(string animationName)
+    {
+        if (HasParameter(animationName, animator))
+        {
+            animator.SetTrigger(animationName);
+        }
+    }
+
+    public virtual void BlockAnimation()
+    {
+        //Todo
+        //Implement Block Animation
+    }
+
+    public static bool HasParameter(string paramName, Animator animator)
+    {
+        foreach (AnimatorControllerParameter param in animator.parameters)
+        {
+            if (param.name == paramName) return true;
+        }
+        return false;
+    }
+
+    public void ActivateCombatInfo(ActionClass actionClass)
+    {
+        combatInfo.SetCombatSprite(actionClass);
+    }
+
+    public void SetDice(int value)
+    {
+        combatInfo.SetDice(value);
+    }
+
+    public override void OnMouseEnter()
+    {
+        if (CombatManager.Instance.CanHighlight())
+        {
+            myTransform.localScale += new Vector3((float)0.05, (float)0.05, 0);
+            grewLarger = true;
+        }
+    }
+
+    public override void OnMouseExit()
+    {
+        if (grewLarger)
+        {
+            myTransform.localScale -= new Vector3((float)0.05, (float)0.05, 0);
+            grewLarger = false;
+        }
     }
 }

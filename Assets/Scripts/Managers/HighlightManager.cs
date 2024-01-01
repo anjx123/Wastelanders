@@ -60,8 +60,9 @@ public static class HighlightManager // later all entity highlighter
             // ------------------------------------------- 
             // this requires rectification: the logic is cogent but we want all of this AFTER confirmation.
 
-            currentHighlightedEntity.TakeDamage(currentHighlightedAction.getRolledDamage());
-            Debug.Log("attack: " + currentHighlightedAction.getName() + ", target: " + currentHighlightedEntity.Id + ", damage: " + currentHighlightedAction.getRolledDamage());
+            //currentHighlightedEntity.TakeDamage(currentHighlightedAction.getRolledDamage());
+            //Debug.Log("attack: " + currentHighlightedAction.getName() + ", target: " + currentHighlightedEntity.Id + ", damage: " + currentHighlightedAction.getRolledDamage());
+
             currentHighlightedEntity.DeHighlight();
             currentHighlightedAction.DeHighlight();
             if (player != null)
