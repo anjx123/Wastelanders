@@ -15,19 +15,13 @@ public class EntityClass : SelectClass
         set { health = value; }
     }
 
-    protected Dictionary<string, StatusEffectScriptableObject> statusEffects;
-
-    [SerializeField]
-    private StatusEffectScriptableObject focus;
-
-    [SerializeField]
-    private StatusEffectScriptableObject accuracy;
+    protected Dictionary<string, StatusEffect> statusEffects;
 
     // Initializes the Dictionary of Buff
     protected void DictInit()
     {
-        statusEffects[FocusScriptableObject.buffName] = focus;
-        statusEffects[AccuracyScriptableObject.buffName] = accuracy;
+        statusEffects[Focus.buffName] = BuffFactory.GetStatusEffect(Focus.buffName);
+        statusEffects[Accuracy.buffName] = BuffFactory.GetStatusEffect(Accuracy.buffName);
     }
 
     protected List<ActionClass> actionsAvailable;
@@ -44,7 +38,7 @@ public class EntityClass : SelectClass
         healthBar.setMaxHealth(MAX_HEALTH);
         healthBar.setHealth(MAX_HEALTH);
 
-        statusEffects = new Dictionary<string, StatusEffectScriptableObject>();
+        statusEffects = new Dictionary<string, StatusEffect>();
         DictInit();
     }
 
@@ -146,10 +140,17 @@ public class EntityClass : SelectClass
         this.MAX_HEALTH = health;
     } */
 
-    public void AddBuffs(ref ActionClass.CardDup dup, string buffType)
+    // Adds the Stacks of the Card to the Relevant Buff Stacks of the Player
+    public void AddStacks(ref ActionClass.CardDup dup, string buffType)
+    {
+        statusEffects[buffType].GainStacks(ref dup);
+    }
+
+    // Applies the Stacks of the Specified Buff to the Card Roll Limits
+    public void ApplyBuffsToCard(ref ActionClass.CardDup dup, string buffType)
     {
 
         Debug.Log("add buffs no error initial success" + dup.rollCeiling);
-        statusEffects[buffType].GainStacks(ref dup);
+        statusEffects[buffType].ApplyStacks(ref dup);
     }
 }

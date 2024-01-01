@@ -23,6 +23,7 @@ public abstract class ActionClass : SelectClass
         return duplicateCard;
     }
 
+    // Struct to Apply Buffs to so as to avoid modifying the cards
     public struct CardDup
     {
         public int rollFloor;
@@ -49,6 +50,8 @@ public abstract class ActionClass : SelectClass
         return duplicateCard.actualRoll;
     }
 
+    // Initializes a CardDup struct with the given stats of the Card to 
+    // modify further based on buffs
     protected void DupInit()
     {
         duplicateCard = new CardDup();
@@ -62,6 +65,7 @@ public abstract class ActionClass : SelectClass
 
     public abstract void ApplyEffect();
 
+    // Calculates Actual Damage/Block After Applying Buffs
     public void RollDice()
     {
         duplicateCard.actualRoll = Random.Range(duplicateCard.rollFloor, duplicateCard.rollCeiling + 1);

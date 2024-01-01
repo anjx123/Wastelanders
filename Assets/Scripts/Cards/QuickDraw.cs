@@ -38,14 +38,15 @@ public class QuickDraw : ActionClass
     {
 
         DupInit();
-        Debug.Log(AccuracyScriptableObject.buffName + Origin.getName() + duplicateCard.rollCeiling);
+        Debug.Log(Accuracy.buffName + Origin.getName() + duplicateCard.rollCeiling);
 
         if (Origin == null)
         {
             Debug.Log("failure");
         }
 
-        Origin.AddBuffs(ref duplicateCard, AccuracyScriptableObject.buffName);
+        Origin.AddStacks(ref duplicateCard, Accuracy.buffName);
+        Origin.ApplyBuffsToCard(ref duplicateCard, Accuracy.buffName);
         RollDice();
     }
 
