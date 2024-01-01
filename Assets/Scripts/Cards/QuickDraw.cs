@@ -16,7 +16,6 @@ public class QuickDraw : PistolCards
     {
         lowerBound = 1;
         upperBound = 4;
-        cardType = true;
         focus = 0;
         accuracy = 2;
         base.Start();
