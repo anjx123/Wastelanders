@@ -52,11 +52,8 @@ public class BattleQueue : MonoBehaviour
         actionQueue.Insert(action);
         UpdateTest(); // Initial; will add details later.
         RenderBQ();
-        
-        playerActions.Add(action);
-        action.Origin = player;
 
-        StartCoroutine(CardComparator.Instance.ClashCards(action, action));
+        StartCoroutine(CardComparator.Instance.ClashCards(action.GetComponent<ActionClass>(), action.GetComponent<ActionClass>()));
     }
 
  
@@ -123,7 +120,7 @@ public class SortedArray
 
     public void Insert(GameObject card)
     {
-        int index = BinarySearch(card.GetComponent<ActionClass>().getSpeed(), 0, array.Count - 1, card.GetComponent<ActionClass>().Origin);
+        int index = BinarySearch(card.GetComponent<ActionClass>().Speed, 0, array.Count - 1, card.GetComponent<ActionClass>().Origin);
 
         // Insert the new value at the correct position
         array.Insert(index, card);
@@ -131,7 +128,7 @@ public class SortedArray
 
     public void Remove(GameObject card)
     {
-        int index = BinarySearch(card.GetComponent<ActionClass>().getSpeed(), 0, array.Count - 1, card.GetComponent<ActionClass>().Origin);
+        int index = BinarySearch(card.GetComponent<ActionClass>().Speed, 0, array.Count - 1, card.GetComponent<ActionClass>().Origin);
 
         if (index < array.Count && array[index] == card)
         {
@@ -148,11 +145,11 @@ public class SortedArray
             int mid = left + (right - left) / 2;
 
             // comparison to sort in descending order
-            if (array[mid].GetComponent<ActionClass>().getSpeed() == speed && array[mid].GetComponent<ActionClass>().Origin == origin)
+            if (array[mid].GetComponent<ActionClass>().Speed == speed && array[mid].GetComponent<ActionClass>().Origin == origin)
             {
                 return mid; // Element found
             }
-            else if (array[mid].GetComponent<ActionClass>().getSpeed() > speed) // Change from < to >
+            else if (array[mid].GetComponent<ActionClass>().Speed > speed) // Change from < to >
             {
                 left = mid + 1;
             }
