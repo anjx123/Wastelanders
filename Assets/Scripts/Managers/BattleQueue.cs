@@ -119,22 +119,27 @@ public class BattleQueue : MonoBehaviour
     public void Dequeue()
     {
         List<ActionClass> array = actionQueue.GetList();
-        int count = array.Count;
-        for (int i = 0; i < count; i++) // will iterate through all 100 entries; could replace array.Count with SIZE. Nope INVALID <<<<<< the array is dynamic
-        {
-            if (array[i] != null)
-            {
+//        int count = array.Count;
+//        for (int i = 0; i < count; i++) // will iterate through all 100 entries; could replace array.Count with SIZE. Nope INVALID <<<<<< the array is dynamic
+//        {
+//            if (array[i] != null)
+//            {
                 // at present there is not an allowance for card comparison since Alissa's code assumes uniqueness; VIDE Insert method in Sorted Array. 
-                StartCoroutine(CardComparator.Instance.ClashCards(array[i].GetComponent<ActionClass>(), array[i].GetComponent<ActionClass>())); // essentially doing nothing. 
+//                StartCoroutine(CardComparator.Instance.ClashCards(array[i].GetComponent<ActionClass>(), array[i].GetComponent<ActionClass>())); // essentially doing nothing. 
                 // yield return new WaitForSeconds(1); // so that you can see the dequeuing happening; inserted in above Coroutine // might be useless because an animation exists tbh 
-                array.Remove(array[i]);
-                RenderBQ();
-                Debug.Log("An item hath been removed from the BQ");
-            }
+//                array.Remove(array[i]);
+//                RenderBQ();
+//               Debug.Log("An item hath been removed from the BQ");
+//            }
+//        }
+        while (!(array.Count == 0))
+        {
+            ActionClass e = array[0];
+            StartCoroutine(CardComparator.Instance.ClashCards(e, e)); // essentially doing nothing. 
+            array.Remove(e);
+            RenderBQ();
+            Debug.Log("An item hath been removed from the BQ");
         }
-        // while(!array.empty()) 
-        // Element e = arr[0];
-        // arr.Remove(0);
     }
 
     // A sorted array implementation for GameObject (cards)
