@@ -119,19 +119,6 @@ public class BattleQueue : MonoBehaviour
     public IEnumerator Dequeue()
     {
         List<ActionClass> array = actionQueue.GetList();
-//        int count = array.Count;
-//        for (int i = 0; i < count; i++) // will iterate through all 100 entries; could replace array.Count with SIZE. Nope INVALID <<<<<< the array is dynamic
-//        {
-//            if (array[i] != null)
-//            {
-                // at present there is not an allowance for card comparison since Alissa's code assumes uniqueness; VIDE Insert method in Sorted Array. 
-//                StartCoroutine(CardComparator.Instance.ClashCards(array[i].GetComponent<ActionClass>(), array[i].GetComponent<ActionClass>())); // essentially doing nothing. 
-                // yield return new WaitForSeconds(1); // so that you can see the dequeuing happening; inserted in above Coroutine // might be useless because an animation exists tbh 
-//                array.Remove(array[i]);
-//                RenderBQ();
-//               Debug.Log("An item hath been removed from the BQ");
-//            }
-//        }
         while (!(array.Count == 0))
         {
             ActionClass e = array[0];
@@ -146,7 +133,7 @@ public class BattleQueue : MonoBehaviour
     public class SortedArray
     {
         private List<ActionClass> array;
-        // public int entryNumber; // no of actual entries inside the array. INVALID because binary search uses all 100 slots. 
+        // public int entryNumber; // no of actual entries inside the array. INVALID because binary search uses all 100 slots. <<<<< INVALID dynamic array always I think
 
         // constructor for static array
         public SortedArray(int capacity)
