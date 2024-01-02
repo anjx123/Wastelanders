@@ -32,9 +32,6 @@ public class IronSights : PistolCards
         
     }
 
-    public override void ApplyEffect()
-    {
-        int i = 1;
-    }
+
 
 }

@@ -52,9 +52,9 @@ public abstract class ActionClass : SelectClass
         float percentageDone = 1; //Testing different powered knockbacks
         if (Target.Health != 0)
         {
-            percentageDone = Mathf.Clamp(Damage / (float)Target.Health, 0f, 1f);
+            percentageDone = Mathf.Clamp(((duplicateCard.rollCeiling > 0) ? duplicateCard.actualRoll : Damage) / (float)Target.Health, 0f, 1f);
         }
-        this.Target.TakeDamage(Damage);
+        this.Target.TakeDamage((duplicateCard.rollCeiling > 0) ? duplicateCard.actualRoll : Damage);
         CardComparator.Instance.StartStagger(Origin, Target, percentageDone);
     }
 
@@ -76,7 +76,10 @@ public abstract class ActionClass : SelectClass
         Debug.Log("Duplicate Card Initialized" + duplicateCard.rollFloor + duplicateCard.rollCeiling + duplicateCard.totalFocus + duplicateCard.totalAccuracy);
     }
 
-    public abstract void ApplyEffect();
+    public virtual void ApplyEffect()
+    {
+        DupInit();
+    }
 
     // Calculates Actual Damage/Block After Applying Buffs
     public void RollDice()

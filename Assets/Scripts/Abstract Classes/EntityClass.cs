@@ -19,12 +19,7 @@ public class EntityClass : SelectClass
 
     protected Dictionary<string, StatusEffect> statusEffects;
 
-    // Initializes the Dictionary of Buff
-    protected void DictInit()
-    {
-        statusEffects[Focus.buffName] = BuffFactory.GetStatusEffect(Focus.buffName);
-        statusEffects[Accuracy.buffName] = BuffFactory.GetStatusEffect(Accuracy.buffName);
-    }
+
 
     protected List<ActionClass> actionsAvailable;
 
@@ -44,7 +39,7 @@ public class EntityClass : SelectClass
         healthBar.setHealth(MAX_HEALTH);
 
         statusEffects = new Dictionary<string, StatusEffect>();
-        DictInit();
+       
     }
 
     public virtual void TakeDamage(int damage)
@@ -164,14 +159,21 @@ public class EntityClass : SelectClass
 
     // Adds the Stacks of the Card to the Relevant Buff Stacks of the Player
     public void AddStacks(ref ActionClass.CardDup dup, string buffType)
-    {
+    {   
+        if (!statusEffects.ContainsKey(buffType))
+        {        
+            statusEffects[buffType] = BuffFactory.GetStatusEffect(buffType);
+        }
         statusEffects[buffType].GainStacks(ref dup);
     }
 
     // Applies the Stacks of the Specified Buff to the Card Roll Limits
     public void ApplyBuffsToCard(ref ActionClass.CardDup dup, string buffType)
     {
-
+        if (!statusEffects.ContainsKey(buffType))
+        {
+            statusEffects[buffType] = BuffFactory.GetStatusEffect(buffType);
+        }
         Debug.Log("add buffs no error initial success" + dup.rollCeiling);
         statusEffects[buffType].ApplyStacks(ref dup);
     }

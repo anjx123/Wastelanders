@@ -32,9 +32,6 @@ public class PistolWhip : PistolCards
         
     }
 
-    public override void ApplyEffect()
-    {
-        int i = 1;
-    }
+
 
 }

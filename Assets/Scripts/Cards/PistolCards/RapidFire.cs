@@ -33,9 +33,6 @@ public class RapidFire : PistolCards
         
     }
 
-    public override void ApplyEffect()
-    {
-        int i = 1;
-    }
+ 
 
 }

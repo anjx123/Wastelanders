@@ -39,6 +39,7 @@ public class CardComparator : MonoBehaviour
         if (IsAttack(card1) && IsAttack(card2))
         {
             cardOneStaggered = ClashCompare(card1, card2);
+            Debug.Log(cardOneStaggered);
             if (cardOneStaggered == 0) //Clash ties
             {
                 card1.OnHit(); // For testing purposes, not supposed to be here
