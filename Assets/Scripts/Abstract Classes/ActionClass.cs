@@ -8,29 +8,95 @@ public abstract class ActionClass : SelectClass
     public EntityClass Target { get; set; }
     public EntityClass Origin { get; set; }
 
-    protected int damage { get; set; }
-    protected int block { get; set; }
-    protected int speed { get; set; }
+    public int Damage { get; protected set; }
+    public int Block { get; protected set; }
+    public int Speed { get; protected set; }
+
+    public Sprite icon;
+
+    public CardType CardType { get; protected set; }
+
+    protected Vector3 OriginalPosition;
+
+    protected bool EnqueueMoveDown = false;
 
     public abstract void ExecuteActionEffect();
 
     public override void OnMouseDown()
     {
-        Debug.Log("Card has been Clicked !!");
         HighlightManager.OnActionClicked(this);
     }
-
-    public int getDamage() {
-        return damage;
+    public virtual void OnHit()
+    {
+        float percentageDone = 1; //Testing different powered knockbacks
+        if (Target.Health != 0)
+        {
+            percentageDone = Mathf.Clamp(Damage / (float)Target.Health, 0f, 1f);
+        }
+        this.Target.TakeDamage(Damage);
+        CardComparator.Instance.StartStagger(Origin, Target, percentageDone);
     }
 
-    public int getBlock()
+
+    public void RollDice()
     {
-        return block;
+        Origin.SetDice(Damage);
     }
 
-    public int getSpeed()
+    public Sprite GetIcon()
     {
-        return speed;
+        if (icon)
+        {
+            return icon;
+        } else
+        {
+            Debug.LogWarning("Icon is Missing");
+            return null;
+        }
+    }
+
+    public override void OnMouseEnter()
+    {
+        if (!isOutlined)
+        {
+            GetComponent<SpriteRenderer>().color = new Color(0.6f, 0.6f, 0.6f, 1);
+            transform.position += new Vector3((float)0.04, (float)0.4, 0);
+        }
+        else
+        {
+            EnqueueMoveDown = false;
+        }
+    }
+
+    public override void OnMouseExit()
+    {
+        if (!isOutlined)
+        {
+            GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 1);
+            transform.position -= new Vector3((float)0.04, (float)0.4, 0);
+        }
+        else
+        {
+            EnqueueMoveDown = true;
+        }
+    }
+
+    public override void Highlight()
+    {
+        isOutlined = true;
+        GetComponent<SpriteRenderer>().color = new Color(0.6f, 0.6f, 0.6f, 1);
+        transform.rotation = Quaternion.Euler(0, 0, 0);
+    }
+
+    public override void DeHighlight()
+    {
+        isOutlined = false;
+        GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 1);
+        transform.rotation = Quaternion.Euler(0, 0, -5);
+        if (EnqueueMoveDown)
+        {
+            transform.position -= new Vector3((float)0.04, (float)0.4, 0);
+            EnqueueMoveDown = false;
+        }
     }
 }
