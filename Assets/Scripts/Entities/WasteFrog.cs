@@ -21,6 +21,7 @@ public class WasteFrog : EntityClass
         animator = GetComponent<Animator>();
         myTransform = GetComponent<Transform>();
         myName = "Le Frog";
+        Debug.Log(myName + " is ready for combat!");
         Renderer renderer = GetComponent<Renderer>();
         ogMaterial = renderer.material; // og sprite of frog
         base.Start();

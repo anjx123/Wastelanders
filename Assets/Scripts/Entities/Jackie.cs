@@ -40,6 +40,8 @@ public class Jackie : PlayerClass
         }
 
         RenderHand();
+        Debug.Log(myName + " is ready for combat!");
+
         base.Start();
     }
 
@@ -53,6 +55,7 @@ public class Jackie : PlayerClass
                 pool.Add(discard[i]);
             }
             discard.Clear();
+            Debug.Log("Reshuffling deck. New max hand size is " + maxHandSize);
         }
 
         if (hand.Count < maxHandSize)
@@ -76,12 +79,11 @@ public class Jackie : PlayerClass
             hand[i].transform.SetParent(handContainer.transform, false);
             hand[i].transform.position = Vector3.zero;
 
-            float distanceToLeft = (float)(handContainer.rect.width / 2 - (i * cardWidth * 0.9));
+            float distanceToLeft = handContainer.rect.width / 2 - (i * cardWidth);
 
             float y = handContainer.transform.position.y;
-            Vector3 v = new Vector3(-distanceToLeft, y, -i + 10);
+            Vector3 v = new Vector3(-distanceToLeft, y, 1);
             hand[i].transform.position = v;
-            hand[i].transform.rotation = Quaternion.Euler(0, 0, -5);
         }
     }
 
