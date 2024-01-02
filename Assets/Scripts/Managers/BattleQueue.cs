@@ -116,7 +116,7 @@ public class BattleQueue : MonoBehaviour
     // Begins the dequeueing process. 
     // REQUIRES: An appropriate call. Note that this can be called even if the number of elements in the actionQueue is 0. 
     // MODIFIES: the actionQueue is progressively emptied until it is empty. 
-    public void Dequeue()
+    public IEnumerator Dequeue()
     {
         List<ActionClass> array = actionQueue.GetList();
 //        int count = array.Count;
@@ -135,7 +135,7 @@ public class BattleQueue : MonoBehaviour
         while (!(array.Count == 0))
         {
             ActionClass e = array[0];
-            StartCoroutine(CardComparator.Instance.ClashCards(e, e)); // essentially doing nothing. 
+            yield return StartCoroutine(CardComparator.Instance.ClashCards(e, e)); // essentially doing nothing. 
             array.Remove(e);
             RenderBQ();
             Debug.Log("An item hath been removed from the BQ");
@@ -202,7 +202,7 @@ public class BattleQueue : MonoBehaviour
                 }
             }
 
-            return left; // Element not found, return the position where it should be inserted
+            return left; // Element not found, return the position where it should be inserted; implies ascending order. 
         }
 
         public List<ActionClass> GetList()

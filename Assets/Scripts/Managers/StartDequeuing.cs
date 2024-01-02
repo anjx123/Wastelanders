@@ -9,6 +9,6 @@ public class StartDequeuing : MonoBehaviour
     
     void OnMouseDown()
     {
-        BattleQueue.BattleQueueInstance.Dequeue();
+        StartCoroutine(BattleQueue.BattleQueueInstance.Dequeue());
     }
 }
