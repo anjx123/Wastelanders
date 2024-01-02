@@ -119,7 +119,8 @@ public class BattleQueue : MonoBehaviour
     public void Dequeue()
     {
         List<ActionClass> array = actionQueue.GetList();
-        for (int i = 0; i < array.Count; i++) // will iterate through all 100 entries; could replace array.Count with SIZE. Nope INVALID <<<<<< the array is dynamic
+        int count = array.Count;
+        for (int i = 0; i < count i++) // will iterate through all 100 entries; could replace array.Count with SIZE. Nope INVALID <<<<<< the array is dynamic
         {
             if (array[i] != null)
             {
