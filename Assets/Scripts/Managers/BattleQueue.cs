@@ -120,7 +120,7 @@ public class BattleQueue : MonoBehaviour
     {
         List<ActionClass> array = actionQueue.GetList();
         int count = array.Count;
-        for (int i = 0; i < count i++) // will iterate through all 100 entries; could replace array.Count with SIZE. Nope INVALID <<<<<< the array is dynamic
+        for (int i = 0; i < count; i++) // will iterate through all 100 entries; could replace array.Count with SIZE. Nope INVALID <<<<<< the array is dynamic
         {
             if (array[i] != null)
             {
@@ -132,6 +132,9 @@ public class BattleQueue : MonoBehaviour
                 Debug.Log("An item hath been removed from the BQ");
             }
         }
+        // while(!array.empty()) 
+        // Element e = arr[0];
+        // arr.Remove(0);
     }
 
     // A sorted array implementation for GameObject (cards)
