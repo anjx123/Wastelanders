@@ -27,7 +27,13 @@ public class BattleQueue : MonoBehaviour
         {
             BattleQueueInstance = this;
 
+            // dynamic implementation TODO
+            // actionQueue = new SortedArray();
+            
+            // should not be static
             actionQueue = new SortedArray(SIZE);
+            
+            
             // playerActions = new List<ActionClass>();   
             // enemyActions = new List<ActionClass>(); 
 
@@ -47,13 +53,14 @@ public class BattleQueue : MonoBehaviour
 
     // to add an action to the playerActions list
     // REQUIRES: appropriate handling in the invoking superclass; note how the entity is INFERRED to be the player.
+    //           the queue is sorted
     // TO_UPDATE: for that speed thing Anrui specified.
     public void AddPlayerAction(ActionClass action)
     {
         actionQueue.Insert(action);
         UpdateTest(); // Initial; will add details later.
         RenderBQ();
-        StartCoroutine(CardComparator.Instance.ClashCards(action.GetComponent<ActionClass>(), action.GetComponent<ActionClass>()));
+        // StartCoroutine(CardComparator.Instance.ClashCards(action.GetComponent<ActionClass>(), action.GetComponent<ActionClass>()));
     }
 
 
@@ -79,7 +86,7 @@ public class BattleQueue : MonoBehaviour
     */
     void RenderBQ()
     {
-        List<ActionClass> hand = actionQueue.getList();
+        List<ActionClass> hand = actionQueue.GetList();
 
         foreach (Transform child in bqContainer.transform)
         {
@@ -105,14 +112,44 @@ public class BattleQueue : MonoBehaviour
         }
     }
 
+
+    // Begins the dequeueing process. 
+    // REQUIRES: An appropriate call. Note that this can be called even if the number of elements in the actionQueue is 0. 
+    // MODIFIES: the actionQueue is progressively emptied until it is empty. 
+    public void Dequeue()
+    {
+        List<ActionClass> array = actionQueue.GetList();
+        for (int i = 0; i < array.Count; i++) // will iterate through all 100 entries; could replace array.Count with SIZE.
+        {
+            if (array[i] != null)
+            {
+                // at present there is not an allowance for card comparison since Alissa's code assumes uniqueness; VIDE Insert method in Sorted Array. 
+                StartCoroutine(CardComparator.Instance.ClashCards(array[i].GetComponent<ActionClass>(), array[i].GetComponent<ActionClass>())); // essentially doing nothing. 
+                // yield return new WaitForSeconds(1); // so that you can see the dequeuing happening; inserted in above Coroutine // might be useless because an animation exists tbh 
+                array.Remove(array[i]);
+                RenderBQ();
+                Debug.Log("An item hath been removed from the BQ");
+            }
+        }
+    }
+
     // A sorted array implementation for GameObject (cards)
     public class SortedArray
     {
         private List<ActionClass> array;
+        // public int entryNumber; // no of actual entries inside the array. INVALID because binary search uses all 100 slots. 
 
+        // constructor for static array
         public SortedArray(int capacity)
         {
             array = new List<ActionClass>(capacity);
+            // entryNumber = 0;
+        }
+
+        // constructor for dynamic array
+        public SortedArray()
+        {
+            array = new List<ActionClass>();
         }
 
         public void Insert(ActionClass card)
@@ -159,7 +196,7 @@ public class BattleQueue : MonoBehaviour
             return left; // Element not found, return the position where it should be inserted
         }
 
-        public List<ActionClass> getList()
+        public List<ActionClass> GetList()
         {
             return array;
         }
