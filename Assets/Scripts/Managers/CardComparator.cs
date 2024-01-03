@@ -52,6 +52,7 @@ public class CardComparator : MonoBehaviour
         } else if (card1.CardType == CardType.Defense)
         {
             card1.Origin.BlockAnimation(); //Blocked stuff here not implemented properly
+            Debug.Log(card2.Target);
             card2.Target.TakeDamage(card2.Damage);
         } else if (card2.CardType == CardType.Defense)
         {
@@ -126,6 +127,8 @@ public class CardComparator : MonoBehaviour
   */
     private IEnumerator ClashBothEntities(EntityClass origin, EntityClass target)
     {
+        Debug.Log(origin.myTransform.position);
+        Debug.Log(target.myTransform.position);
         CombatManager.Instance.GameState = GameState.FIGHTING;
         //The Distance weighting will be calculated based on speeds of the two clashing cards
         Vector2 centeredDistance = (origin.myTransform.position * 0.3f + 0.7f * target.myTransform.position);
@@ -151,6 +154,7 @@ public class CardComparator : MonoBehaviour
 
     private void ActivateInfo(ActionClass card1, ActionClass card2)
     {
+        Debug.Log(card1.name);
         card1.Origin.ActivateCombatInfo(card1);
         card2.Origin.ActivateCombatInfo(card2);
     }
