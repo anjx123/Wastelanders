@@ -175,6 +175,7 @@ public class BattleQueue : MonoBehaviour
             //                array.Insert(i, card);
             //            } 
             
+            /*
             // could be separate method. 
             if (i < array.Count) {
                 for (int x = 0; x < array.Count; x++) // ensuring uniqueness of speed for one character inside the array
@@ -185,6 +186,7 @@ public class BattleQueue : MonoBehaviour
                     }
                 }
             }
+            */
 
             // else insert 
             array.Insert(i, card);
@@ -264,14 +266,16 @@ public class BattleQueue : MonoBehaviour
 //                }
                 // TODO: at present manually checks for Jackie; because of hierarchal issues cannot use type comparison so what should be done is an iterative comparison of the party members' names
                 // could be remedied by an insertion of a new class in the Origin hierachy or a new variable confirming type like IsPlayer (type bool)
-                if (card.Speed == array[i].Speed && !(card.Origin.GetName() == "Jackie") && !(i > firstPosition))// == array[i].Origin.GetName()) 
+                if (card.Speed == array[i].Speed && !(card.Origin.GetName() == "Jackie"))// == array[i].Origin.GetName()) 
                 {
                     firstPosition = i; // essentially if an enemy is first then insert player here (or insert enemy here LIFO maintained)
+                    break;
 
-                } else if (card.Speed == array[i].Speed && !(i > firstPosition)) // kicks in later 
+                } else if (card.Speed == array[i].Speed) // kicks in later 
                 {
                     firstPosition = i; // if an enemy is not first then LIFO for player
-                } else if (!(i > firstPosition))
+                    break;
+                } else if (!(i >= firstPosition)) // this one is redundant but keep anyway
                 {
                     firstPosition = i; // else enemy attack is being inserted. similar to first conditional. 
                 }
