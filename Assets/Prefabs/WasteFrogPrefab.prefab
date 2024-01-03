@@ -52,7 +52,8 @@ MonoBehaviour:
   animator: {fileID: 3297183234373819581}
   myTransform: {fileID: 7946142163233550150}
   combatInfo: {fileID: 0}
-  availableActions: []
+  availableActions:
+  - {fileID: 2376898879351982445, guid: 1cacda7b5938348f68e539bcad13b1fa, type: 3}
 --- !u!95 &3297183234373819581
 Animator:
   serializedVersion: 5

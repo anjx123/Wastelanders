@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class WasteFrog : EnemyClass
 {
     
-    public List<ActionClass> availableActions;
+    public List<GameObject> availableActions;
     
 
 
@@ -39,5 +39,20 @@ public class WasteFrog : EnemyClass
     void Update()
     {
         
+    }
+
+    public override void AddAttack()
+    {
+        if (pool.Count < 1)
+        {
+            for (int i = 0; i < deck.Count; i++)
+            {
+                pool.Add(deck[i]);
+            }
+        }
+        int idx = Random.Range(0, pool.Count);
+        BattleQueue.BattleQueueInstance.AddEnemyAction(pool[idx].GetComponent<ActionClass>(), this);
+        Debug.Log("I would have played: " + pool[idx].name);
+        pool.RemoveAt(idx);
     }
 }
