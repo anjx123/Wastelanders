@@ -45,14 +45,22 @@ public class WasteFrog : EnemyClass
     {
         if (pool.Count < 1)
         {
+            List<GameObject> temp = new List<GameObject>();
             for (int i = 0; i < deck.Count; i++)
             {
-                pool.Add(deck[i]);
+                temp.Add(deck[i]);
+            }
+            while (temp.Count > 0)
+            {
+                int idx = Random.Range(0, temp.Count);
+                pool.Add(temp[idx]);
+                temp.RemoveAt(idx);
             }
         }
-        int idx = Random.Range(0, pool.Count);
-        BattleQueue.BattleQueueInstance.AddEnemyAction(pool[idx].GetComponent<ActionClass>(), this);
-        Debug.Log("I would have played: " + pool[idx].name);
-        pool.RemoveAt(idx);
+        BattleQueue.BattleQueueInstance.AddEnemyAction(pool[0].GetComponent<ActionClass>(), this);
+        Debug.Log("I would have played: " + pool[0].name);
+        pool.RemoveAt(0);
     }
+
+
 }
