@@ -275,9 +275,9 @@ public class BattleQueue : MonoBehaviour
                 {
                     firstPosition = i; // if an enemy is not first then LIFO for player
                     break;
-                } else if (!(i >= firstPosition)) // this one is redundant but keep anyway
+                } else if (i == firstPosition && i == 0 && card.Speed < array[0].Speed) // edge case for the beginning. 
                 {
-                    firstPosition = i; // else enemy attack is being inserted. similar to first conditional. 
+                    firstPosition = i + 1; // else enemy attack is being inserted. similar to first conditional. 
                 }
             }
             // place here.
