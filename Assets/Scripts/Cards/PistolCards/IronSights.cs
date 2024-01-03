@@ -41,6 +41,7 @@ public class IronSights : PistolCards
 
         Origin.AddStacks(ref duplicateCard, Accuracy.buffName);
         Origin.ApplyBuffsToCard(ref duplicateCard, Accuracy.buffName);
+        Origin.UpdateBuffs();
     }
 
 }

@@ -49,7 +49,6 @@ public static class HighlightManager // later all entity highlighter
         {
             currentHighlightedAction.Target = currentHighlightedEntity;
             currentHighlightedAction.Origin = player;
-            currentHighlightedAction.ApplyEffect();
 
             // ------------------------------------------
             // ActionClass action = new QuickDraw(); // not possible; must be added using AddComponent method. was irrelevenat in the first place 

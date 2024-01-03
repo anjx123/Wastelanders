@@ -221,6 +221,11 @@ public class EntityClass : SelectClass
         combatInfo.SetDice(value);
     }
 
+    public void UpdateBuffs()
+    {
+        combatInfo.UpdateBuffs(statusEffects);
+    }
+
     public override void OnMouseEnter()
     {
         if (CombatManager.Instance.CanHighlight())
