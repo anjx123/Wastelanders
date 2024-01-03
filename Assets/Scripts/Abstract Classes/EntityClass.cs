@@ -35,6 +35,7 @@ public class EntityClass : SelectClass
 
     public virtual void Start()
     {
+
         healthBar.setMaxHealth(MAX_HEALTH);
         healthBar.setHealth(MAX_HEALTH);
 
