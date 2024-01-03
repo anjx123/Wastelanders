@@ -49,7 +49,17 @@ public class BattleQueue : MonoBehaviour
         StartCoroutine(CardComparator.Instance.ClashCards(action, action));
     }
 
- 
+
+    public void AddEnemyAction(ActionClass action, EntityClass origin)
+    {
+
+        enemyActions.Add(action);
+        action.Origin = origin;
+
+        StartCoroutine(CardComparator.Instance.ClashCards(action, action));
+    }
+
+
 
 
     // FOR TESTING PURPOSES

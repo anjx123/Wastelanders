@@ -5,10 +5,10 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class WasteFrog : EntityClass
+public class WasteFrog : EnemyClass
 {
     
-    List<ActionClass> availableActions;
+    public List<ActionClass> availableActions;
     
 
 
@@ -23,6 +23,7 @@ public class WasteFrog : EntityClass
         myName = "Le Frog";
         Renderer renderer = GetComponent<Renderer>();
         ogMaterial = renderer.material; // og sprite of frog
+        deck = availableActions;
         base.Start();
 
     }
@@ -33,10 +34,6 @@ public class WasteFrog : EntityClass
 
         //StartCoroutine(StaggerBack(myTransform.position + new Vector3(1.5f, 0, 0)));
     }
-
-
-
-    
 
     // Update is called once per frame
     void Update()
