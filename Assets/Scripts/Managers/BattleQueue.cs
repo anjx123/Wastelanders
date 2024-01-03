@@ -176,7 +176,9 @@ public class BattleQueue : MonoBehaviour
             //                array.Insert(i, card);
             //            } 
             
-            /*
+
+            // code for uniqueness inside an array. 
+            
             // could be separate method. 
             if (i < array.Count) {
                 for (int x = 0; x < array.Count; x++) // ensuring uniqueness of speed for one character inside the array
@@ -187,7 +189,6 @@ public class BattleQueue : MonoBehaviour
                     }
                 }
             }
-            */
 
             // else insert 
             array.Insert(i, card);
@@ -260,13 +261,14 @@ public class BattleQueue : MonoBehaviour
             int firstPosition = 0;
             for (int i = 0; i < elements; i++)
             {
-//                if (card.GetName() == array[i].GetName() && card.Origin.GetName() == array[i].Origin.GetName()) // if the card is the same and the issuer is the same then found
-//                {
-//                   return i; // position of card; actually exists for redundant Remove() method 
+                //                if (card.GetName() == array[i].GetName() && card.Origin.GetName() == array[i].Origin.GetName()) // if the card is the same and the issuer is the same then found
+                //                {
+                //                   return i; // position of card; actually exists for redundant Remove() method 
                 // VVV ensures LIFO AND Player Priority
-//                }
+                //                }
                 // TODO: at present manually checks for Jackie; because of hierarchal issues cannot use type comparison so what should be done is an iterative comparison of the party members' names
                 // could be remedied by an insertion of a new class in the Origin hierachy or a new variable confirming type like IsPlayer (type bool)
+                /*
                 if (card.Speed == array[i].Speed && !(card.Origin.GetName() == "Jackie"))// == array[i].Origin.GetName()) 
                 {
                     firstPosition = i; // essentially if an enemy is first then insert player here (or insert enemy here LIFO maintained)
@@ -276,30 +278,19 @@ public class BattleQueue : MonoBehaviour
                 {
                     firstPosition = i; // if an enemy is not first then LIFO for player
                     break;
-                } else if (card.Speed < array[i].Speed)
+                }
+                else 
+                */
+                if (card.Speed < array[i].Speed)
                 {
                     firstPosition++;
                 }
             }
-            return firstPosition; // default should be the start if no cards exist of same speed or no cards at all exist.
+            return firstPosition; // default should be the start if no cards exist of same speed or no cards at all exist. <<< Incorrect;
+            // no cards at all exist.
             
         }
         // NOTE: why are the attributes not lowerCamelCase? is it because of the syntactic sugar
-
-        private int FindFirstPosition(ActionClass card)
-        {
-            int i;
-            for (i = 0; i < array.Count; i++)
-            {
-                if (card.Speed == (int)array[i].Speed)
-                {
-                    return i;
-                }
-            }
-            return array.Count - 1;
-           
-
-        }
 
         public List<ActionClass> GetList()
         {
