@@ -54,6 +54,7 @@ MonoBehaviour:
   combatInfo: {fileID: 0}
   availableActions:
   - {fileID: 2376898879351982445, guid: 1cacda7b5938348f68e539bcad13b1fa, type: 3}
+  - {fileID: 5586820537936588944, guid: d7ed528b3d5934a809e97a1ef133cdd0, type: 3}
 --- !u!95 &3297183234373819581
 Animator:
   serializedVersion: 5
