@@ -18,6 +18,8 @@ public class PistolWhip : PistolCards
         Speed = 1;
         Block = 2;
         Damage = 99;
+        lowerBound = 3;
+        upperBound = 5;
         CardType = CardType.MeleeAttack;
         myName = "PistolWhip";
         Renderer renderer = GetComponent<Renderer>();
@@ -30,6 +32,14 @@ public class PistolWhip : PistolCards
     void Update()
     {
         
+    }
+
+    public override void ApplyEffect()
+    {
+        DupInit();
+
+        Origin.AddStacks(ref duplicateCard, Accuracy.buffName);
+        Origin.ApplyBuffsToCard(ref duplicateCard, Accuracy.buffName);
     }
 
 

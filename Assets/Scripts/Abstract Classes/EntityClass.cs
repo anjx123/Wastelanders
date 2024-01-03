@@ -178,6 +178,15 @@ public class EntityClass : SelectClass
         statusEffects[buffType].ApplyStacks(ref dup);
     }
 
+    public int GetBuffStacks(string s)
+    {
+        if (statusEffects.ContainsKey(s))
+        {
+            return statusEffects[s].GetStacks();
+        }
+        throw new System.Exception("Invalid Buff Name");
+    }
+
     public virtual void AttackAnimation(string animationName)
     {
         if (HasParameter(animationName, animator))

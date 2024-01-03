@@ -15,9 +15,7 @@ public class QuickDraw : PistolCards
     public override void Start()
     {
         lowerBound = 1;
-        upperBound = 4;
-        focus = 0;
-        accuracy = 2;
+        upperBound = 5;
         base.Start();
         Speed = 1;
         Block = 2;
@@ -28,6 +26,8 @@ public class QuickDraw : PistolCards
         Renderer renderer = GetComponent<Renderer>();
         ogMaterial = renderer.material; // og sprite of card
         OriginalPosition = transform.position;
+
+        
 
     }
 

@@ -18,6 +18,9 @@ public class IronSights : PistolCards
         Speed = 2;
         Block = 4;
         Damage = 1;
+        lowerBound = 1;
+        upperBound = 5;
+        accuracy = 1;
         CardType = CardType.RangedAttack;
         myName = "IronSights";
         Renderer renderer = GetComponent<Renderer>();
@@ -32,6 +35,12 @@ public class IronSights : PistolCards
         
     }
 
+    public override void ApplyEffect()
+    {
+        DupInit();
 
+        Origin.AddStacks(ref duplicateCard, Accuracy.buffName);
+        Origin.ApplyBuffsToCard(ref duplicateCard, Accuracy.buffName);
+    }
 
 }

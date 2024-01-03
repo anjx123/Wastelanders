@@ -5,8 +5,19 @@ public abstract class StatusEffect
     public int buffStacks = 0;
     // public static string fieldName; possessed by all non-abstract children
 
+    public int GetStacks()
+    {
+        return this.buffStacks;
+    }
+
     // increments buffStacks by amount in the card
     public abstract void GainStacks(ref ActionClass.CardDup dup);
+
+    // lowers buffStacks by amount specified
+    public void LoseStacks(int amount)
+    {
+        this.buffStacks = Mathf.Clamp(this.buffStacks - amount, 0, this.buffStacks);
+    }
 
     // adds buffStacks to the struct card limits
     public abstract void ApplyStacks(ref ActionClass.CardDup dup);

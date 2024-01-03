@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,6 +9,8 @@ using static UnityEngine.UI.Image;
 public class CardComparator : MonoBehaviour
 {
     public static CardComparator Instance { get; private set; }
+
+    
 
     // Awake is called when the script instance is being loaded
     void Awake()
@@ -35,11 +38,12 @@ public class CardComparator : MonoBehaviour
 
         card1.RollDice();
         card2.RollDice();
+        
 
         if (IsAttack(card1) && IsAttack(card2))
         {
             cardOneStaggered = ClashCompare(card1, card2);
-            Debug.Log(cardOneStaggered);
+            //Debug.Log(cardOneStaggered);
             if (cardOneStaggered == 0) //Clash ties
             {
                 card1.OnHit(); // For testing purposes, not supposed to be here
@@ -64,11 +68,12 @@ public class CardComparator : MonoBehaviour
     private int ClashCompare(ActionClass card1, ActionClass card2)
     {
         int cardOneStaggered;
+        
 
-        if (card1.Damage > card2.Damage)
+        if (card1.getRolledDamage() > card2.getRolledDamage())
         {;
             cardOneStaggered = -1; //Card 1 staggers card 2
-        } else if (card1.Damage < card2.Damage)
+        } else if (card1.getRolledDamage() < card2.getRolledDamage())
         {
             cardOneStaggered = 1;
         } else 
