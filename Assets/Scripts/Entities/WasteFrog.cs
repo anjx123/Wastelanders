@@ -57,6 +57,7 @@ public class WasteFrog : EnemyClass
                 temp.RemoveAt(idx);
             }
         }
+        pool[0].GetComponent<ActionClass>().Target = this;
         BattleQueue.BattleQueueInstance.AddEnemyAction(pool[0].GetComponent<ActionClass>(), this);
         Debug.Log("I would have played: " + pool[0].name);
         pool.RemoveAt(0);
