@@ -18,5 +18,5 @@ public class BuffIcons : MonoBehaviour
     {
         buffIcon.sprite = icon;
     }
-
+     
 }

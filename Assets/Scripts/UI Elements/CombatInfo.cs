@@ -43,9 +43,10 @@ public class CombatInfo : MonoBehaviour
         foreach (string str in buffs.Keys)
         {
             GameObject instance = Instantiate(buffIconPrefab);
-            instance.transform.SetParent(buffList.transform, false);
-            instance.GetComponent<SpriteRenderer>().sprite = buffs[str].GetIcon();
-            instance.GetComponent<TextMeshProUGUI>().text = buffs[str].Stacks.ToString();
+            BuffIcons buffIcon = instance.GetComponent<BuffIcons>();
+            buffIcon.transform.SetParent(buffList.transform, false);
+            buffIcon.SetIcon(buffs[str].GetIcon());
+            buffIcon.SetText(buffs[str].Stacks.ToString());
         }
     }
 }
