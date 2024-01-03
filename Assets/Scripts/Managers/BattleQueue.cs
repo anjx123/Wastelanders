@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Reflection;
 using System.Runtime.CompilerServices;
+using System.Xml.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.TextCore.Text;
@@ -275,16 +276,30 @@ public class BattleQueue : MonoBehaviour
                 {
                     firstPosition = i; // if an enemy is not first then LIFO for player
                     break;
-                } else if (i == firstPosition && i == 0 && card.Speed < array[0].Speed) // edge case for the beginning. 
+                } else if (card.Speed < array[i].Speed)
                 {
-                    firstPosition = i + 1; // else enemy attack is being inserted. similar to first conditional. 
+                    firstPosition++;
                 }
             }
-            // place here.
             return firstPosition; // default should be the start if no cards exist of same speed or no cards at all exist.
             
         }
-        // NOTE: why are the attributes not lowerCamelCase? is it because of the syntactic sugar?
+        // NOTE: why are the attributes not lowerCamelCase? is it because of the syntactic sugar
+
+        private int FindFirstPosition(ActionClass card)
+        {
+            int i;
+            for (i = 0; i < array.Count; i++)
+            {
+                if (card.Speed == (int)array[i].Speed)
+                {
+                    return i;
+                }
+            }
+            return array.Count - 1;
+           
+
+        }
 
         public List<ActionClass> GetList()
         {
