@@ -57,7 +57,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_VertexColorAlwaysGammaSpace: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
@@ -119,14 +119,14 @@ MonoBehaviour:
     m_Right: 0
     m_Top: 0
     m_Bottom: 0
-  m_ChildAlignment: 0
+  m_ChildAlignment: 3
   m_Spacing: 0
   m_ChildForceExpandWidth: 0
   m_ChildForceExpandHeight: 0
-  m_ChildControlWidth: 1
-  m_ChildControlHeight: 1
-  m_ChildScaleWidth: 1
-  m_ChildScaleHeight: 1
+  m_ChildControlWidth: 0
+  m_ChildControlHeight: 0
+  m_ChildScaleWidth: 0
+  m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
 --- !u!1 &8036639253418242914
 GameObject:
@@ -181,7 +181,7 @@ MonoBehaviour:
   diceRollSprite: {fileID: 8283439913592688960}
   loadedSprites:
   - {fileID: 21300000, guid: 7ac00baa45a3d66439c061140df6a866, type: 3}
-  buffIconPrefab: {fileID: 4053424861878212309, guid: 7acc41a2c3a767641918d9d711ab1b51, type: 3}
+  buffIconPrefab: {fileID: 6647468808881570309, guid: 7acc41a2c3a767641918d9d711ab1b51, type: 3}
 --- !u!1 &8283439913592688960
 GameObject:
   m_ObjectHideFlags: 0

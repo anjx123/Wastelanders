@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -43,8 +44,8 @@ public class CombatInfo : MonoBehaviour
         {
             GameObject instance = Instantiate(buffIconPrefab);
             instance.transform.SetParent(buffList.transform, false);
-            instance.GetComponent<SpriteRenderer>().sprite = loadedSprites[0];
-
+            instance.GetComponent<SpriteRenderer>().sprite = buffs[str].GetIcon();
+            instance.GetComponent<TextMeshProUGUI>().text = buffs[str].Stacks.ToString();
         }
     }
 }

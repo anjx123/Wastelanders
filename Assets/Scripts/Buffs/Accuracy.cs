@@ -14,4 +14,14 @@ public class Accuracy : StatusEffect
     {
         dup.rollFloor = Mathf.Clamp(dup.rollFloor + this.buffStacks, 0, dup.rollCeiling);
     }
+
+    public override Sprite GetIcon()
+    {
+        Sprite buffSprite = Resources.Load<Sprite>("StatusIcon/" + buffName);
+        if (!buffSprite)
+        {
+            Debug.LogWarning("Buff Sprite is missing");
+        }
+        return buffSprite;
+    }
 }

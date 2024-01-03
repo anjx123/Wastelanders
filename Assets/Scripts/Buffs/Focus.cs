@@ -15,4 +15,14 @@ public class Focus : StatusEffect
         dup.rollFloor += this.buffStacks;
         dup.rollCeiling += this.buffStacks;
     }
+
+    public override Sprite GetIcon()
+    {
+        Sprite buffSprite = Resources.Load<Sprite>("StatusIcon/" + buffName);
+        if (!buffSprite)
+        {
+            Debug.LogWarning("Buff Sprite is missing");
+        }
+        return buffSprite;
+    }
 }

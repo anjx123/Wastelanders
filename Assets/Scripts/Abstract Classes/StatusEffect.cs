@@ -2,7 +2,8 @@ using UnityEngine;
 
 public abstract class StatusEffect
 {
-    public int buffStacks = 0;
+    protected int buffStacks = 0;
+    public int Stacks { get { return buffStacks; } }
     // public static string fieldName; possessed by all non-abstract children
 
     public int GetStacks()
@@ -24,6 +25,8 @@ public abstract class StatusEffect
 
     // clears buffStacks
     public void ClearBuff() { buffStacks = 0; }
+
+    public abstract Sprite GetIcon();
 
 
 }
