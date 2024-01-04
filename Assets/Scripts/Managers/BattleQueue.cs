@@ -84,6 +84,12 @@ public class BattleQueue : MonoBehaviour
         }
     }
 
+    //Gives BattleQueue ownership of the lifetime of the Dequeue coroutine.
+    public void BeginDequeue()
+    {
+        StartCoroutine(Dequeue());
+    }
+
 
     // Begins the dequeueing process. 
     // REQUIRES: An appropriate call. Note that this can be called even if the number of elements in the actionQueue is 0. Invariant array index 0 has largest speed. 
