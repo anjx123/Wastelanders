@@ -22,7 +22,7 @@ public abstract class SelectClass : MonoBehaviour
         
     }
 
-    public string getName() {
+    public string GetName() {
         return myName;
     }
 

@@ -15,7 +15,7 @@ public class PistolWhip : PistolCards
     public override void Start()
     {
         base.Start();
-        Speed = 1;
+        Speed = 3;
         Block = 2;
         Damage = 99;
         CardType = CardType.MeleeAttack;
