@@ -26,6 +26,7 @@ public abstract class StatusEffect
     // clears buffStacks
     public void ClearBuff() { buffStacks = 0; }
 
+    //Whenever a new Buff is created, make sure to add its Icon to Resources folder
     public abstract Sprite GetIcon();
 
 
