@@ -155,7 +155,7 @@ public class BattleQueue : MonoBehaviour
             if (i < array.Count) {
                 for (int x = 0; x < array.Count; x++) // ensuring uniqueness of speed for one character inside the array
                 {
-                    if (card.Origin.GetName() == "Jackie" && card.Speed == array[x].Speed)
+                    if (card.Origin.GetType().IsSubclassOf(typeof(PlayerClass)) && card.Speed == array[x].Speed)
                     {
                         return false; // don't insert. 
                     }
