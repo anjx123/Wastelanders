@@ -56,6 +56,7 @@ public static class HighlightManager // later all entity highlighter
             BattleQueue.BattleQueueInstance.AddPlayerAction(currentHighlightedAction); // action class is abstract using a derivative TODO.
             ((EnemyClass)currentHighlightedEntity).AddAttack();
             BattleQueue.BattleQueueInstance.UpdateTest();
+
             
             // ------------------------------------------- 
             // this requires rectification: the logic is cogent but we want all of this AFTER confirmation.

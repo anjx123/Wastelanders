@@ -58,6 +58,8 @@ public class CardComparator : MonoBehaviour
         {
             card1.Target.TakeDamage(card1.Damage);
         }
+
+        yield return new WaitForSeconds(1); 
     }
 
     //Produces a positive value if Card1 is staggered by Card2
