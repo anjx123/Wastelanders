@@ -223,6 +223,19 @@ public class BattleQueue : MonoBehaviour
             int firstPosition = 0;
             for (int i = 0; i < elements; i++)
             {
+                /*
+if (card.Speed == array[i].Speed && !(card.Origin.GetName() == "Jackie"))// == array[i].Origin.GetName()) 
+{
+    firstPosition = i; // essentially if an enemy is first then insert player here (or insert enemy here LIFO maintained)
+    break;
+
+} else if (card.Speed == array[i].Speed) // kicks in later 
+{
+    firstPosition = i; // if an enemy is not first then LIFO for player
+    break;
+}
+else 
+*/
                 if (card.Speed < array[i].Speed)
                 {
                     firstPosition++;
