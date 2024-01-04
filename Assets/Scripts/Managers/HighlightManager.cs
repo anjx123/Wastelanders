@@ -53,7 +53,7 @@ public static class HighlightManager // later all entity highlighter
             // ------------------------------------------
             // ActionClass action = new QuickDraw(); // not possible; must be added using AddComponent method. was irrelevenat in the first place 
             // BUT damn Alissa you circumvented the entire problem using Event Managers!
-            BattleQueue.BattleQueueInstance.AddPlayerAction(currentHighlightedAction); // action class is abstract using a derivative TODO.
+            bool wasAdded = BattleQueue.BattleQueueInstance.AddPlayerAction(currentHighlightedAction); // action class is abstract using a derivative TODO.
             // BattleQueue.BattleQueueInstance.UpdateTest(); redundant call now
             
             // ------------------------------------------- 
@@ -63,9 +63,13 @@ public static class HighlightManager // later all entity highlighter
             //Debug.Log("attack: " + currentHighlightedAction.getName() + ", target: " + currentHighlightedEntity.Id + ", damage: " + currentHighlightedAction.Damage);
             currentHighlightedEntity.DeHighlight();
             currentHighlightedAction.DeHighlight();
-            if (player != null)
+            if (player != null && wasAdded)
             {
                 player.HandleUseCard(currentHighlightedAction);
+                Debug.Log("Card used.");
+            } else
+            {
+                Debug.Log("Card not used.");
             }
             currentHighlightedEntity = null;
             currentHighlightedAction = null;

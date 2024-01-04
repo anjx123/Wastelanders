@@ -34,17 +34,21 @@ public class BattleQueue : MonoBehaviour
     // REQUIRES: appropriate handling in the invoking superclass; note how the entity is INFERRED to be the player.
     //           the queue is sorted
     // TO_UPDATE: for that speed thing Anrui specified.
-    public void AddPlayerAction(ActionClass action)
+    public bool AddPlayerAction(ActionClass action)
     {
+        bool ret;
         if (!(actionQueue.InsertLinearSearchAndEnsureSpeedInvariant(action)))
         {
             //Debug.Log("BQ not Updated.");
+            ret = false;
         }
         else
         {
             //Debug.Log("Something has been added to BQ");
+            ret = true;
         }
         RenderBQ();
+        return ret;
     }
 
 
