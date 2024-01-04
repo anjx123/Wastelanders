@@ -34,17 +34,21 @@ public class BattleQueue : MonoBehaviour
     // REQUIRES: appropriate handling in the invoking superclass; note how the entity is INFERRED to be the player.
     //           the queue is sorted
     // TO_UPDATE: for that speed thing Anrui specified.
-    public void AddPlayerAction(ActionClass action)
+    public bool AddPlayerAction(ActionClass action)
     {
+        bool ret;
         if (!(actionQueue.InsertLinearSearchAndEnsureSpeedInvariant(action)))
         {
             //Debug.Log("BQ not Updated.");
+            ret = false;
         }
         else
         {
             //Debug.Log("Something has been added to BQ");
+            ret = true;
         }
         RenderBQ();
+        return ret;
     }
 
 
@@ -78,6 +82,12 @@ public class BattleQueue : MonoBehaviour
             Vector3 v = new Vector3(-distanceToLeft, y, 1);
             renderedCopy.transform.position = v;
         }
+    }
+
+    //Gives BattleQueue ownership of the lifetime of the Dequeue coroutine.
+    public void BeginDequeue()
+    {
+        StartCoroutine(Dequeue());
     }
 
 
@@ -223,6 +233,19 @@ public class BattleQueue : MonoBehaviour
             int firstPosition = 0;
             for (int i = 0; i < elements; i++)
             {
+                /*
+if (card.Speed == array[i].Speed && !(card.Origin.GetName() == "Jackie"))// == array[i].Origin.GetName()) 
+{
+    firstPosition = i; // essentially if an enemy is first then insert player here (or insert enemy here LIFO maintained)
+    break;
+
+} else if (card.Speed == array[i].Speed) // kicks in later 
+{
+    firstPosition = i; // if an enemy is not first then LIFO for player
+    break;
+}
+else 
+*/
                 if (card.Speed < array[i].Speed)
                 {
                     firstPosition++;
