@@ -49,10 +49,9 @@ public class BattleQueue : MonoBehaviour
 
     public void AddEnemyAction(ActionClass action, EntityClass origin)
     {
-        Debug.Log("IN BQ: " + action.name);
-        actionQueue.Insert(action);
         action.Origin = origin;
-
+        actionQueue.Insert(action);
+        RenderBQ();
     }
 
 
