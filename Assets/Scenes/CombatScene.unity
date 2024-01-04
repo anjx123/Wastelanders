@@ -1420,7 +1420,7 @@ PrefabInstance:
       objectReference: {fileID: 552403359}
     - target: {fileID: 3367972655850899957, guid: 18ff4a241e9f877439ebd5fd1de51dd0, type: 3}
       propertyPath: cardPrefabs.Array.size
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3367972655850899957, guid: 18ff4a241e9f877439ebd5fd1de51dd0, type: 3}
       propertyPath: cardPrefabs.Array.data[0]
@@ -1438,6 +1438,10 @@ PrefabInstance:
       propertyPath: cardPrefabs.Array.data[3]
       value: 
       objectReference: {fileID: 7473027025033308495, guid: 3c3d8ebcb37254dfb8204289a4f13955, type: 3}
+    - target: {fileID: 3367972655850899957, guid: 18ff4a241e9f877439ebd5fd1de51dd0, type: 3}
+      propertyPath: cardPrefabs.Array.data[4]
+      value: 
+      objectReference: {fileID: 7334504972417615140, guid: 6184ac15767a832498bf0a5e6945773d, type: 3}
     - target: {fileID: 3405423859819514747, guid: 18ff4a241e9f877439ebd5fd1de51dd0, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
