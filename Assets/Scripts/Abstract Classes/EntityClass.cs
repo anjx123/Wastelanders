@@ -166,6 +166,7 @@ public class EntityClass : SelectClass
             statusEffects[buffType] = BuffFactory.GetStatusEffect(buffType);
         }
         statusEffects[buffType].GainStacks(ref dup);
+        UpdateBuffs();
     }
 
     // Applies the Stacks of the Specified Buff to the Card Roll Limits
