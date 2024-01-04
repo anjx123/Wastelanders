@@ -59,7 +59,8 @@ public class CardComparator : MonoBehaviour
             card1.Target.TakeDamage(card1.Damage);
         }
 
-        yield return new WaitForSeconds(1); 
+        yield return new WaitForSeconds(1);
+        SelectionMode();
     }
 
     //Produces a positive value if Card1 is staggered by Card2
@@ -98,9 +99,7 @@ public class CardComparator : MonoBehaviour
 
         Vector2 normalizedDirection = directionVector.normalized;
         float staggerPower = StaggerPowerCalculation(percentageDone);
-
         yield return StartCoroutine(target.StaggerBack(target.myTransform.position + (Vector3)normalizedDirection * staggerPower));
-        SelectionMode();
     }
 
     //Calculates the power of the stagger based on the percentage health done
