@@ -40,7 +40,7 @@ public class SteadiedShot : PistolCards
     public override void ApplyEffect()
     {
         DupInit();
-        Debug.Log(Accuracy.buffName + Origin.getName() + duplicateCard.rollCeiling);
+        Debug.Log(Accuracy.buffName + Origin.GetName() + duplicateCard.rollCeiling);
 
         Origin.AddStacks(ref duplicateCard, Accuracy.buffName);
         Origin.ApplyBuffsToCard(ref duplicateCard, Accuracy.buffName);
