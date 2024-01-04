@@ -55,7 +55,7 @@ public static class HighlightManager // later all entity highlighter
             // BUT damn Alissa you circumvented the entire problem using Event Managers!
             BattleQueue.BattleQueueInstance.AddPlayerAction(currentHighlightedAction); // action class is abstract using a derivative TODO.
             ((EnemyClass)currentHighlightedEntity).AddAttack();
-            BattleQueue.BattleQueueInstance.UpdateTest();
+           
 
             
             // ------------------------------------------- 
