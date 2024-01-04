@@ -47,21 +47,21 @@ public class WasteFrog : EnemyClass
 
     public override void AddAttack()
     {
-        if (pool.Count < 1)
-        {
-            Reshuffle();
-        }
-
         pool[0].GetComponent<ActionClass>().Target = this;
         BattleQueue.BattleQueueInstance.AddEnemyAction(pool[0].GetComponent<ActionClass>(), this);
         Debug.Log("I would have played: " + pool[0].name);
         pool.RemoveAt(0);
+        if (pool.Count < 1)
+        {
+            Reshuffle();
+        }
         iconSpriteRenderer.sprite = pool[0].GetComponent<ActionClass>().GetIcon();
     }
 
     /*  Reshuffles the deck. Should be called on start (so the enemy can display its first attack), and whenever the enemy runs out of
      *  attacks.
-     *  REQUIRES: 
+     *  REQUIRES: pool should be empty! But it shouldn't break anything, just mess up the enemy's order of attacks
+     *  MODIFIES: pool 
      */
     private void Reshuffle()
     {
