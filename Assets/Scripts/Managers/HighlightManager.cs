@@ -47,7 +47,8 @@ public static class HighlightManager // later all entity highlighter
 
         if (currentHighlightedEntity && currentHighlightedAction && isOutlined)
         {
-
+            currentHighlightedAction.Target = currentHighlightedEntity;
+            currentHighlightedAction.Origin = player;
             // ------------------------------------------
             // ActionClass action = new QuickDraw(); // not possible; must be added using AddComponent method. was irrelevenat in the first place 
             // BUT damn Alissa you circumvented the entire problem using Event Managers!
@@ -64,8 +65,6 @@ public static class HighlightManager // later all entity highlighter
             if (player != null && wasAdded)
             {
                 player.HandleUseCard(currentHighlightedAction);
-                currentHighlightedAction.Target = currentHighlightedEntity;
-                currentHighlightedAction.Origin = player;
                 Debug.Log("Card used.");
             } else
             {
