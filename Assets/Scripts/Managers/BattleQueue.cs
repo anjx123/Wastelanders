@@ -66,10 +66,9 @@ public class BattleQueue : MonoBehaviour
     public void AddEnemyAction(ActionClass action, EntityClass origin)
     {
         Debug.Log("IN BQ: " + action.name);
-        enemyActions.Add(action);
+        actionQueue.Insert(action);
         action.Origin = origin;
 
-        StartCoroutine(CardComparator.Instance.ClashCards(action, action));
     }
 
 
