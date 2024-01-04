@@ -1,16 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Drawing;
-using System.Reflection;
-using System.Runtime.CompilerServices;
-using System.Xml.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.TextCore.Text;
-using UnityEngine.UIElements;
-using UnityEngine.XR;
-using static UnityEngine.GraphicsBuffer;
 
 public class BattleQueue : MonoBehaviour
 {
@@ -30,17 +21,7 @@ public class BattleQueue : MonoBehaviour
         if (BattleQueueInstance == null)
         {
             BattleQueueInstance = this;
-
-            // dynamic implementation TODO
-            // actionQueue = new SortedArray();
-            
-            // should not be static
             actionQueue = new SortedArray(SIZE);
-            
-            
-            // playerActions = new List<ActionClass>();   
-            // enemyActions = new List<ActionClass>(); 
-
         }
         else if (BattleQueueInstance != this)
         {
@@ -49,39 +30,27 @@ public class BattleQueue : MonoBehaviour
     }
 
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        // needless
-    }
-
     // to add an action to the playerActions list
     // REQUIRES: appropriate handling in the invoking superclass; note how the entity is INFERRED to be the player.
     //           the queue is sorted
     // TO_UPDATE: for that speed thing Anrui specified.
     public void AddPlayerAction(ActionClass action)
     {
-        // actionQueue.Insert(action);
         if (!(actionQueue.InsertLinearSearchAndEnsureSpeedInvariant(action)))
         {
-            Debug.Log("BQ not Updated.");
+            //Debug.Log("BQ not Updated.");
         }
         else
         {
-            Debug.Log("Something has been added to BQ");
+            //Debug.Log("Something has been added to BQ");
         }
         RenderBQ();
-        // StartCoroutine(CardComparator.Instance.ClashCards(action.GetComponent<ActionClass>(), action.GetComponent<ActionClass>()));
     }
 
 
 
 
-    // FOR TESTING PURPOSES
-    void AddRandomEnemyActions()
-    {
-        // this requires understanding of a hierarchy accomplishable in a bit. 
-    }
+
 
 
     /*  Renders the cards in List<GameObject> bq to the screen, as children of the bqContainer.
@@ -108,13 +77,6 @@ public class BattleQueue : MonoBehaviour
             float y = bqContainer.transform.position.y;
             Vector3 v = new Vector3(-distanceToLeft, y, 1);
             renderedCopy.transform.position = v;
-
-            // hand[i].transform.SetParent(bqContainer.transform, false);
-            // hand[i].transform.position = Vector3.zero;
-            // float distanceToLeft = bqContainer.rect.width / 2 - (i * cardWidth);
-            // float y = bqContainer.transform.position.y;
-            // Vector3 v = new Vector3(-distanceToLeft, y, 1);
-            // hand[i].transform.position = v;
         }
     }
 
@@ -261,26 +223,6 @@ public class BattleQueue : MonoBehaviour
             int firstPosition = 0;
             for (int i = 0; i < elements; i++)
             {
-                //                if (card.GetName() == array[i].GetName() && card.Origin.GetName() == array[i].Origin.GetName()) // if the card is the same and the issuer is the same then found
-                //                {
-                //                   return i; // position of card; actually exists for redundant Remove() method 
-                // VVV ensures LIFO AND Player Priority
-                //                }
-                // TODO: at present manually checks for Jackie; because of hierarchal issues cannot use type comparison so what should be done is an iterative comparison of the party members' names
-                // could be remedied by an insertion of a new class in the Origin hierachy or a new variable confirming type like IsPlayer (type bool)
-                /*
-                if (card.Speed == array[i].Speed && !(card.Origin.GetName() == "Jackie"))// == array[i].Origin.GetName()) 
-                {
-                    firstPosition = i; // essentially if an enemy is first then insert player here (or insert enemy here LIFO maintained)
-                    break;
-
-                } else if (card.Speed == array[i].Speed) // kicks in later 
-                {
-                    firstPosition = i; // if an enemy is not first then LIFO for player
-                    break;
-                }
-                else 
-                */
                 if (card.Speed < array[i].Speed)
                 {
                     firstPosition++;
