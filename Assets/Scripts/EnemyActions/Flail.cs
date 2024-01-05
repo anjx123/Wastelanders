@@ -4,16 +4,13 @@ using UnityEngine;
 
 public class Flail : ActionClass
 {
-	public Flail()
-	{
-	}
 
     public override void ExecuteActionEffect()
     {
         throw new System.NotImplementedException();
     }
-
-    public void Start()
+    
+    public void Awake()
     {
         Speed = 2;
         Block = 4;

@@ -4,16 +4,13 @@ using UnityEngine;
 
 public class Slap : ActionClass
 {
-	public Slap()
-	{
-	}
 
     public override void ExecuteActionEffect()
     {
         throw new System.NotImplementedException();
     }
 
-    public void Start()
+    public void Awake()
     {
         Speed = 5;
         Block = 0;

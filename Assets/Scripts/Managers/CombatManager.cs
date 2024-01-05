@@ -37,9 +37,18 @@ public class CombatManager : MonoBehaviour
     }
 
     // Start is called before the first frame update
-    void Start()
+    IEnumerator Start()
     {
+        while (!DependenciesReady())
+        {
+            yield return null;
+        }
         GameState = GameState.SELECTION;
+    }
+
+    public bool DependenciesReady()
+    {
+        return enemies.Count == 3;
     }
 
     //Sets the Camera Center to the following Entity. 

@@ -10,7 +10,6 @@ public class WasteFrog : EnemyClass
     
     public List<GameObject> availableActions;
 
-    SpriteRenderer iconSpriteRenderer;
 
 
     // Start is called before the first frame update
@@ -31,9 +30,6 @@ public class WasteFrog : EnemyClass
         }
         
         Reshuffle();
-        iconSpriteRenderer = transform.Find("CombatCardInfo/CombatCard").GetComponent<SpriteRenderer>();
-        iconSpriteRenderer.sprite = pool[0].GetComponent<ActionClass>().GetIcon();
-
         base.Start();
 
     }
@@ -55,13 +51,13 @@ public class WasteFrog : EnemyClass
     {
         pool[0].GetComponent<ActionClass>().Target = players[Random.Range(0, players.Count - 1)];
         BattleQueue.BattleQueueInstance.AddEnemyAction(pool[0].GetComponent<ActionClass>(), this);
-        Debug.Log("I would have played: " + pool[0].name);
-        iconSpriteRenderer.sprite = pool[0].GetComponent<ActionClass>().GetIcon();
+        combatInfo.SetCombatSprite(pool[0].GetComponent<ActionClass>());
         pool.RemoveAt(0);
         if (pool.Count < 1)
         {
             Reshuffle();
         }
+        Debug.Log("My attack is being added");
     }
 
     /*  Reshuffles the deck. Should be called on start (so the enemy can display its first attack), and whenever the enemy runs out of
