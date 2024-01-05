@@ -45,7 +45,7 @@ public class BattleQueue : MonoBehaviour
         else
         {
             //Debug.Log("Something has been added to BQ");
-            ((EnemyClass)action.Target).AddAttack();
+            //((EnemyClass)action.Target).AddAttack();
             ret = true;
         }
         RenderBQ();

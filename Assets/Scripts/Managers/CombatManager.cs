@@ -71,6 +71,10 @@ public class CombatManager : MonoBehaviour
         handContainer.SetActive(true);
         baseCamera.Priority = 1;
         dynamicCamera.Priority = 0;
+        foreach (EnemyClass enemy in enemies)
+        {
+            enemy.AddAttack();
+        }
     }
 
     private void PerformFighting()
