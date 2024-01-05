@@ -18,6 +18,7 @@ public class CombatManager : MonoBehaviour
     public List<EntityClass> enemies;
 
     public GameObject handContainer;
+    public GameObject startDequeue;
 
     // Awake is called when the script instance is being loaded
     void Awake()
@@ -40,13 +41,9 @@ public class CombatManager : MonoBehaviour
         GameState = GameState.SELECTION;
     }
     
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
     private void PerformSelection()
     {
+        startDequeue.SetActive(true);
         handContainer.SetActive(true);
         baseCamera.Priority = 1;
         dynamicCamera.Priority = 0;
@@ -54,6 +51,7 @@ public class CombatManager : MonoBehaviour
 
     private void PerformFighting()
     {
+        startDequeue.SetActive(false);
         handContainer.SetActive(false);
         baseCamera.Priority = 0;
         dynamicCamera.Priority = 1;
