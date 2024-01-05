@@ -2,6 +2,7 @@ using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.EventSystems.EventTrigger;
 
 public class CombatManager : MonoBehaviour
 {
@@ -18,6 +19,7 @@ public class CombatManager : MonoBehaviour
     public List<EntityClass> enemies;
 
     public GameObject handContainer;
+    public GameObject startDequeue;
 
     // Awake is called when the script instance is being loaded
     void Awake()
@@ -39,14 +41,30 @@ public class CombatManager : MonoBehaviour
     {
         GameState = GameState.SELECTION;
     }
-    
-    // Update is called once per frame
-    void Update()
-    {
 
+    public void SetCameraCenter(EntityClass entity)
+    {
+        dynamicCamera.Follow = entity.transform;
+        UpdateCameraBounds();
     }
+
+    public void UpdateCameraBounds()
+    {
+        if ((bool) dynamicCamera.Follow.GetComponent<EntityClass>()?.IsFacingRight())
+        {
+            var transposer = dynamicCamera.GetCinemachineComponent<CinemachineFramingTransposer>();
+            transposer.m_ScreenX = 0.25f;
+        }
+        else if ((bool) !(dynamicCamera.Follow.GetComponent<EntityClass>()?.IsFacingRight()))
+        {
+            var transposer = dynamicCamera.GetCinemachineComponent<CinemachineFramingTransposer>();
+            transposer.m_ScreenX = 0.75f;
+        }
+    }
+    
     private void PerformSelection()
     {
+        startDequeue.SetActive(true);
         handContainer.SetActive(true);
         baseCamera.Priority = 1;
         dynamicCamera.Priority = 0;
@@ -54,6 +72,7 @@ public class CombatManager : MonoBehaviour
 
     private void PerformFighting()
     {
+        startDequeue.SetActive(false);
         handContainer.SetActive(false);
         baseCamera.Priority = 0;
         dynamicCamera.Priority = 1;

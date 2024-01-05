@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public abstract class EnemyClass : EntityClass
@@ -19,6 +20,23 @@ public abstract class EnemyClass : EntityClass
      *  MODIFIES: pool
      *  
      */
+
+    public override void Start()
+    {
+        base.Start();
+        combatInfo.FaceLeft();
+    }
     public abstract void AddAttack();
 
+    public override void FaceRight()
+    {
+        this.GetComponent<SpriteRenderer>().flipX = true;
+        combatInfo.FaceRight();
+    }
+
+    public override void FaceLeft()
+    {
+        this.GetComponent<SpriteRenderer>().flipX = false;
+        combatInfo.FaceLeft();
+    }
 }

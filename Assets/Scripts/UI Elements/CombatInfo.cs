@@ -27,4 +27,32 @@ public class CombatInfo : MonoBehaviour
         SpriteRenderer spriteRenderer = combatCardSprite.GetComponent<SpriteRenderer>();
         spriteRenderer.sprite = card.GetIcon();
     }
+
+    public void FaceLeft()
+    {
+        Transform parentTransform = this.transform;
+        Vector3 flippedTransform = parentTransform.localScale;
+        flippedTransform.x = -Mathf.Abs(flippedTransform.x);
+        parentTransform.localScale = flippedTransform;
+        diceRollSprite.GetComponent<SpriteRenderer>().flipX = true;
+
+        CombatManager.Instance.UpdateCameraBounds(); //Bad placement here
+    }
+
+    public void FaceRight()
+    {
+        Transform parentTransform = this.transform;
+        Vector3 flippedTransform = parentTransform.localScale;
+        flippedTransform.x = Mathf.Abs(flippedTransform.x);
+        parentTransform.localScale = flippedTransform;
+        diceRollSprite.GetComponent<SpriteRenderer>().flipX = false;
+
+        CombatManager.Instance.UpdateCameraBounds(); //Bad placement here, but I cant think of where else id put it
+
+    }
+
+    public bool IsFacingRight()
+    {
+        return transform.localScale.x > 0;
+    }
 }
