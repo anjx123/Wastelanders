@@ -66,11 +66,11 @@ public abstract class EntityClass : SelectClass
         float distance = Mathf.Sqrt(diffInLocation.x * diffInLocation.x + diffInLocation.y * diffInLocation.y);
         float maxProportionTravelled = (distance - radius) / distance;
 
-        if (diffInLocation.x > 0)
+        if (diffInLocation.x > radius)
         {
             FaceRight();
         }
-        else if (diffInLocation.x < 0)
+        else if (diffInLocation.x < -radius)
         {
             FaceLeft();
         }
@@ -113,6 +113,19 @@ public abstract class EntityClass : SelectClass
     {
         Vector3 originalPosition = myTransform.position;
         float elapsedTime = 0f;
+
+        Vector3 diffInLocation = staggeredPosition - originalPosition;
+
+        if (diffInLocation.x > 0)
+        {
+            FaceLeft();
+        }
+        else if (diffInLocation.x < -0)
+        {
+            FaceRight();
+        }
+
+
 
         if (HasParameter("IsStaggered", animator))
         {
