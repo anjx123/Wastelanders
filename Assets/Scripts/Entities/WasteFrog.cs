@@ -24,9 +24,14 @@ public class WasteFrog : EnemyClass
         myName = "Le Frog";
         Renderer renderer = GetComponent<Renderer>();
         ogMaterial = renderer.material; // og sprite of frog
-        deck = availableActions;
-        iconSpriteRenderer = transform.Find("CombatCardInfo/CombatCard").GetComponent<SpriteRenderer>();
+        for (int i = 0; i < availableActions.Count; i++)
+        {
+            GameObject toAdd = Instantiate(availableActions[i]);
+            deck.Add(toAdd);
+        }
+        
         Reshuffle();
+        iconSpriteRenderer = transform.Find("CombatCardInfo/CombatCard").GetComponent<SpriteRenderer>();
         iconSpriteRenderer.sprite = pool[0].GetComponent<ActionClass>().GetIcon();
         base.Start();
 
