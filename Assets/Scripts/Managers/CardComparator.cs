@@ -30,6 +30,7 @@ public class CardComparator : MonoBehaviour
     public IEnumerator ClashCards(ActionClass card1, ActionClass card2)
     {
         int cardOneStaggered;
+        CombatManager.Instance.SetCameraCenter(card1.Origin);
         ActivateInfo(card1, card2);
         yield return StartCoroutine(ClashBothEntities(card1.Origin, card1.Target));
 
@@ -136,8 +137,8 @@ public class CardComparator : MonoBehaviour
         float bufferedRadius = 0.25f;
         float duration = 0.6f;
         float xBuffer = 0.6f;
-        StartCoroutine(origin.MoveToPosition(HorizontalProjector(centeredDistance, origin.myTransform.position, xBuffer), bufferedRadius, duration));
-        yield return StartCoroutine(target.MoveToPosition(HorizontalProjector(centeredDistance, target.myTransform.position, xBuffer), bufferedRadius, duration));
+        StartCoroutine(origin?.MoveToPosition(HorizontalProjector(centeredDistance, origin.myTransform.position, xBuffer), bufferedRadius, duration));
+        yield return StartCoroutine(target?.MoveToPosition(HorizontalProjector(centeredDistance, target.myTransform.position, xBuffer), bufferedRadius, duration));
         yield return new WaitUntil(() => Input.GetMouseButtonDown(0));
     }
     /*

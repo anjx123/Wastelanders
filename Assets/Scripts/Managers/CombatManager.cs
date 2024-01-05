@@ -2,6 +2,7 @@ using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.EventSystems.EventTrigger;
 
 public class CombatManager : MonoBehaviour
 {
@@ -39,6 +40,26 @@ public class CombatManager : MonoBehaviour
     void Start()
     {
         GameState = GameState.SELECTION;
+    }
+
+    public void SetCameraCenter(EntityClass entity)
+    {
+        dynamicCamera.Follow = entity.transform;
+        UpdateCameraBounds();
+    }
+
+    public void UpdateCameraBounds()
+    {
+        if ((bool) dynamicCamera.Follow.GetComponent<EntityClass>()?.IsFacingRight())
+        {
+            var transposer = dynamicCamera.GetCinemachineComponent<CinemachineFramingTransposer>();
+            transposer.m_ScreenX = 0.25f;
+        }
+        else if ((bool) !(dynamicCamera.Follow.GetComponent<EntityClass>()?.IsFacingRight()))
+        {
+            var transposer = dynamicCamera.GetCinemachineComponent<CinemachineFramingTransposer>();
+            transposer.m_ScreenX = 0.75f;
+        }
     }
     
     private void PerformSelection()

@@ -35,6 +35,8 @@ public class CombatInfo : MonoBehaviour
         flippedTransform.x = -Mathf.Abs(flippedTransform.x);
         parentTransform.localScale = flippedTransform;
         diceRollSprite.GetComponent<SpriteRenderer>().flipX = true;
+
+        CombatManager.Instance.UpdateCameraBounds(); //Bad placement here
     }
 
     public void FaceRight()
@@ -45,5 +47,12 @@ public class CombatInfo : MonoBehaviour
         parentTransform.localScale = flippedTransform;
         diceRollSprite.GetComponent<SpriteRenderer>().flipX = false;
 
+        CombatManager.Instance.UpdateCameraBounds(); //Bad placement here, but I cant think of where else id put it
+
+    }
+
+    public bool IsFacingRight()
+    {
+        return transform.localScale.x > 0;
     }
 }

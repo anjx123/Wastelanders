@@ -97,6 +97,11 @@ public abstract class EntityClass : SelectClass
 
     public abstract void FaceLeft();
 
+    public bool IsFacingRight()
+    {
+        return combatInfo.IsFacingRight();
+    }
+
 
     /* Requires: "IsStaggered" bool exists on the animator controller attatched to this
      * 
