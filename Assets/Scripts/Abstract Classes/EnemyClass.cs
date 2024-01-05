@@ -21,4 +21,16 @@ public abstract class EnemyClass : EntityClass
      */
     public abstract void AddAttack();
 
+    public override void FaceLeft()
+    {
+        this.GetComponent<SpriteRenderer>().flipX = false;
+        combatInfo.FaceLeft();
+    }
+
+    public override void FaceRight() 
+    {
+        this.GetComponent<SpriteRenderer>().flipX = true;
+        combatInfo.FaceRight();
+    }
+
 }

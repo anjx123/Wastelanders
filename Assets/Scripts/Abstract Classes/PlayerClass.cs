@@ -31,4 +31,16 @@ public abstract class PlayerClass : EntityClass
      */
     abstract public void HandleUseCard(ActionClass a);
 
+    public override void FaceLeft()
+    {
+        this.GetComponent<SpriteRenderer>().flipX = true;
+        combatInfo.FaceLeft();
+    }
+
+    public override void FaceRight()
+    {
+        this.GetComponent<SpriteRenderer>().flipX = false;
+        combatInfo.FaceRight();
+    }
+
 }

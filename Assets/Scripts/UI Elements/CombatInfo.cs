@@ -27,4 +27,23 @@ public class CombatInfo : MonoBehaviour
         SpriteRenderer spriteRenderer = combatCardSprite.GetComponent<SpriteRenderer>();
         spriteRenderer.sprite = card.GetIcon();
     }
+
+    public void FaceLeft()
+    {
+        Transform parentTransform = this.transform;
+        Vector3 flippedTransform = parentTransform.localScale;
+        flippedTransform.x = -Mathf.Abs(flippedTransform.x);
+        parentTransform.localScale = flippedTransform;
+        diceRollSprite.GetComponent<SpriteRenderer>().flipX = true;
+    }
+
+    public void FaceRight()
+    {
+        Transform parentTransform = this.transform;
+        Vector3 flippedTransform = parentTransform.localScale;
+        flippedTransform.x = -Mathf.Abs(flippedTransform.x);
+        parentTransform.localScale = flippedTransform;
+        diceRollSprite.GetComponent<SpriteRenderer>().flipX = false;
+
+    }
 }
