@@ -21,6 +21,7 @@ public abstract class PlayerClass : EntityClass
     public override void Start()
     {
         CombatManager.Instance.players.Add(this);
+        base.Start();
     }
 
     /*  Draws a single card from the pool, removing it from the pool and refilling it if necessary.
