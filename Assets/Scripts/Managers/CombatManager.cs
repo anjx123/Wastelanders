@@ -15,8 +15,8 @@ public class CombatManager : MonoBehaviour
     public CinemachineVirtualCamera dynamicCamera;
 
     // Priority Queue
-    public List<EntityClass> players;
-    public List<EntityClass> enemies;
+    public List<PlayerClass> players;
+    public List<EnemyClass> enemies;
 
     public GameObject handContainer;
     public GameObject startDequeue;
@@ -73,7 +73,7 @@ public class CombatManager : MonoBehaviour
         dynamicCamera.Priority = 0;
         foreach (EnemyClass enemy in enemies)
         {
-            enemy.AddAttack();
+            enemy.AddAttack(players);
         }
     }
 

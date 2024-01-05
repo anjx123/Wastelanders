@@ -33,6 +33,8 @@ public class WasteFrog : EnemyClass
         Reshuffle();
         iconSpriteRenderer = transform.Find("CombatCardInfo/CombatCard").GetComponent<SpriteRenderer>();
         iconSpriteRenderer.sprite = pool[0].GetComponent<ActionClass>().GetIcon();
+
+        CombatManager.Instance.enemies.Add(this);
         base.Start();
 
     }
@@ -50,9 +52,9 @@ public class WasteFrog : EnemyClass
         
     }
 
-    public override void AddAttack()
+    public override void AddAttack(List<PlayerClass> players)
     {
-        pool[0].GetComponent<ActionClass>().Target = this;
+        pool[0].GetComponent<ActionClass>().Target = players[Random.Range(0, players.Count - 1)];
         BattleQueue.BattleQueueInstance.AddEnemyAction(pool[0].GetComponent<ActionClass>(), this);
         Debug.Log("I would have played: " + pool[0].name);
         iconSpriteRenderer.sprite = pool[0].GetComponent<ActionClass>().GetIcon();

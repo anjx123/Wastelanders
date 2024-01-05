@@ -26,7 +26,12 @@ public abstract class EnemyClass : EntityClass
         base.Start();
         combatInfo.FaceLeft();
     }
-    public abstract void AddAttack();
+
+    /*  Given a list of players, the enemy chooses appropriately a target/targets and adds an attack that it chooses to the bq.
+     *  It is up to the subclass HOW to implement this method, as certain enemies may prefer to attack certain players. 
+     *  
+     */
+    public abstract void AddAttack(List<PlayerClass> players);
 
     public override void FaceRight()
     {
