@@ -34,7 +34,6 @@ public class WasteFrog : EnemyClass
         iconSpriteRenderer = transform.Find("CombatCardInfo/CombatCard").GetComponent<SpriteRenderer>();
         iconSpriteRenderer.sprite = pool[0].GetComponent<ActionClass>().GetIcon();
 
-        CombatManager.Instance.enemies.Add(this);
         base.Start();
 
     }

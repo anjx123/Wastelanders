@@ -25,6 +25,7 @@ public abstract class EnemyClass : EntityClass
     {
         base.Start();
         combatInfo.FaceLeft();
+        CombatManager.Instance.enemies.Add(this);
     }
 
     /*  Given a list of players, the enemy chooses appropriately a target/targets and adds an attack that it chooses to the bq.

@@ -19,6 +19,7 @@ public class Flail : ActionClass
         Block = 4;
         Damage = 3;
         myName = "Flail";
+        CardType = CardType.MeleeAttack;
     }
 }
 

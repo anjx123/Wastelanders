@@ -1168,17 +1168,6 @@ Transform:
   - {fileID: 1436293032}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1043473112 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7740565208951490800, guid: 6395bbe6ca801ac4d97dd23203674434, type: 3}
-  m_PrefabInstance: {fileID: 21956444}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d39f9fe55a3c7d1488e2ac53490a31e9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1072442181
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1566,17 +1555,6 @@ Transform:
   - {fileID: 1230637996}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1135143031 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7740565208951490800, guid: 6395bbe6ca801ac4d97dd23203674434, type: 3}
-  m_PrefabInstance: {fileID: 1790883211}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d39f9fe55a3c7d1488e2ac53490a31e9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1155507268
 GameObject:
   m_ObjectHideFlags: 0
@@ -1857,17 +1835,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 615fa82f8a89cb04b840209d6fb53eb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1392787090 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7740565208951490800, guid: 6395bbe6ca801ac4d97dd23203674434, type: 3}
-  m_PrefabInstance: {fileID: 1072442181}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d39f9fe55a3c7d1488e2ac53490a31e9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1436293031
 GameObject:
   m_ObjectHideFlags: 3
@@ -2120,10 +2087,7 @@ MonoBehaviour:
   baseCamera: {fileID: 1026639295}
   dynamicCamera: {fileID: 1132010469}
   players: []
-  enemies:
-  - {fileID: 1135143031}
-  - {fileID: 1392787090}
-  - {fileID: 1043473112}
+  enemies: []
   handContainer: {fileID: 1437198682}
   startDequeue: {fileID: 1155507268}
 --- !u!4 &1629544401

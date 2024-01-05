@@ -16,7 +16,6 @@ public class Jackie : PlayerClass
         myName = "Jackie";
 
         HighlightManager.player = this;
-        CombatManager.Instance.players.Add(this);
 
         // initialize deck
         for (int i = 0; i < cardPrefabs.Count; i++)

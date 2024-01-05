@@ -19,6 +19,7 @@ public class Slap : ActionClass
         Block = 0;
         Damage = 2;
         myName = "Slap";
+        CardType = CardType.MeleeAttack;
     }
 }
 
