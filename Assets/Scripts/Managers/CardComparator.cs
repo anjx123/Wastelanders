@@ -61,7 +61,6 @@ public class CardComparator : MonoBehaviour
         }
 
         yield return new WaitForSeconds(1);
-        SelectionMode();
     }
 
     //Produces a positive value if Card1 is staggered by Card2
@@ -129,9 +128,6 @@ public class CardComparator : MonoBehaviour
   */
     private IEnumerator ClashBothEntities(EntityClass origin, EntityClass target)
     {
-        Debug.Log(origin.myTransform.position);
-        Debug.Log(target.myTransform.position);
-        CombatManager.Instance.GameState = GameState.FIGHTING;
         //The Distance weighting will be calculated based on speeds of the two clashing cards
         Vector2 centeredDistance = (origin.myTransform.position * 0.3f + 0.7f * target.myTransform.position);
         float bufferedRadius = 0.25f;
@@ -156,9 +152,14 @@ public class CardComparator : MonoBehaviour
 
     private void ActivateInfo(ActionClass card1, ActionClass card2)
     {
-        Debug.Log(card1.name);
         card1.Origin.ActivateCombatInfo(card1);
         card2.Origin.ActivateCombatInfo(card2);
+    }
+
+    private void DeactivateInfo(ActionClass card1, ActionClass card2)
+    {
+        card1.Origin.ActivateCombatInfo(null);
+        card2.Origin.ActivateCombatInfo(null);
     }
 
     private bool IsAttack(ActionClass card)

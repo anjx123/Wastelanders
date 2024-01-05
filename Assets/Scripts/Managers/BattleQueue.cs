@@ -103,6 +103,12 @@ public class BattleQueue : MonoBehaviour
     public IEnumerator Dequeue()
     {
         List<ActionClass> array = actionQueue.GetList();
+        bool beganFighting = false;
+        if (!(array.Count == 0))
+        {
+            CombatManager.Instance.GameState = GameState.FIGHTING;
+            beganFighting = true;
+        }
         while (!(array.Count == 0))
         {
             ActionClass e = array[0];
@@ -110,6 +116,10 @@ public class BattleQueue : MonoBehaviour
             array.Remove(e); // this utilises the default method for lists 
             RenderBQ();
             Debug.Log("An item hath been removed from the BQ");
+        }
+        if (beganFighting)
+        {
+            CombatManager.Instance.GameState = GameState.SELECTION;
         }
     }
 

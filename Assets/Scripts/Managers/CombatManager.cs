@@ -53,12 +53,12 @@ public class CombatManager : MonoBehaviour
     //Usage: Should be called everytime an Entity changes their direction. 
     public void UpdateCameraBounds()
     {
-        if ((bool) dynamicCamera.Follow.GetComponent<EntityClass>()?.IsFacingRight())
+        if (dynamicCamera.Follow.GetComponent<EntityClass>()?.IsFacingRight() ?? false)
         {
             var transposer = dynamicCamera.GetCinemachineComponent<CinemachineFramingTransposer>();
             transposer.m_ScreenX = 0.25f;
         }
-        else if ((bool) !(dynamicCamera.Follow.GetComponent<EntityClass>()?.IsFacingRight()))
+        else if (!(dynamicCamera.Follow.GetComponent<EntityClass>()?.IsFacingRight()) ?? false)
         {
             var transposer = dynamicCamera.GetCinemachineComponent<CinemachineFramingTransposer>();
             transposer.m_ScreenX = 0.75f;

@@ -19,14 +19,17 @@ public class CombatInfo : MonoBehaviour
     }
 
     /* 
-     Sets the CombatInfo sprite to the icon of this ActionClass
+     Sets the CombatInfo sprite to the icon of this ActionClass.
+    Pass in null to discard the current sprite.
      */
-    public void SetCombatSprite(ActionClass card)
+#nullable enable
+    public void SetCombatSprite(ActionClass? card)
     {
         animator.enabled = true;
         SpriteRenderer spriteRenderer = combatCardSprite.GetComponent<SpriteRenderer>();
-        spriteRenderer.sprite = card.GetIcon();
+        spriteRenderer.sprite = card?.GetIcon();
     }
+#nullable disable
     //Flips the CombatInfo so that the Icon is on the Right of the entity
     public void FaceLeft()
     {
