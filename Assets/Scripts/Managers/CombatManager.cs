@@ -42,12 +42,15 @@ public class CombatManager : MonoBehaviour
         GameState = GameState.SELECTION;
     }
 
+    //Sets the Camera Center to the following Entity. 
     public void SetCameraCenter(EntityClass entity)
     {
         dynamicCamera.Follow = entity.transform;
         UpdateCameraBounds();
     }
 
+    //Sets the Camera Bounds to "see more" in the direction that the following entity is facing
+    //Usage: Should be called everytime an Entity changes their direction. 
     public void UpdateCameraBounds()
     {
         if ((bool) dynamicCamera.Follow.GetComponent<EntityClass>()?.IsFacingRight())

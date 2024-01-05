@@ -27,7 +27,7 @@ public class CombatInfo : MonoBehaviour
         SpriteRenderer spriteRenderer = combatCardSprite.GetComponent<SpriteRenderer>();
         spriteRenderer.sprite = card.GetIcon();
     }
-
+    //Flips the CombatInfo so that the Icon is on the Right of the entity
     public void FaceLeft()
     {
         Transform parentTransform = this.transform;
@@ -38,7 +38,7 @@ public class CombatInfo : MonoBehaviour
 
         CombatManager.Instance.UpdateCameraBounds(); //Bad placement here
     }
-
+    //Flips the CombatInfo so that the Icon is on the LEFT of the entity
     public void FaceRight()
     {
         Transform parentTransform = this.transform;
@@ -51,6 +51,7 @@ public class CombatInfo : MonoBehaviour
 
     }
 
+    //A Cheat implementation that relies on the implementation of FaceRight/Left 
     public bool IsFacingRight()
     {
         return transform.localScale.x > 0;
