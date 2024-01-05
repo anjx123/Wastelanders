@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using static UnityEngine.UI.Image;
 
-public class EntityClass : SelectClass
+public abstract class EntityClass : SelectClass
 {
     protected int MAX_HEALTH;
     protected int health;
@@ -66,6 +66,15 @@ public class EntityClass : SelectClass
         float distance = Mathf.Sqrt(diffInLocation.x * diffInLocation.x + diffInLocation.y * diffInLocation.y);
         float maxProportionTravelled = (distance - radius) / distance;
 
+        if (diffInLocation.x > 0)
+        {
+            FaceRight();
+        }
+        else if (diffInLocation.x < 0)
+        {
+            FaceLeft();
+        }
+
         if (HasParameter("IsMoving", animator))
         {
             animator.SetBool("IsMoving", true);
@@ -83,6 +92,10 @@ public class EntityClass : SelectClass
             animator.SetBool("IsMoving", false);
         }
     }
+
+    public abstract void FaceRight();
+
+    public abstract void FaceLeft();
 
 
     /* Requires: "IsStaggered" bool exists on the animator controller attatched to this
