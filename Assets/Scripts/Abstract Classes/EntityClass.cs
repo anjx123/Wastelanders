@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using static UnityEngine.UI.Image;
 
-public class EntityClass : SelectClass
+public abstract class EntityClass : SelectClass
 {
     protected int MAX_HEALTH;
     protected int health;
@@ -66,6 +66,15 @@ public class EntityClass : SelectClass
         float distance = Mathf.Sqrt(diffInLocation.x * diffInLocation.x + diffInLocation.y * diffInLocation.y);
         float maxProportionTravelled = (distance - radius) / distance;
 
+        if (diffInLocation.x > CardComparator.xBuffer + radius)
+        {
+            FaceRight();
+        }
+        else if (diffInLocation.x < -(CardComparator.xBuffer + radius))
+        {
+            FaceLeft();
+        }
+
         if (HasParameter("IsMoving", animator))
         {
             animator.SetBool("IsMoving", true);
@@ -84,6 +93,15 @@ public class EntityClass : SelectClass
         }
     }
 
+    public abstract void FaceRight();
+
+    public abstract void FaceLeft();
+
+    public bool IsFacingRight()
+    {
+        return combatInfo.IsFacingRight();
+    }
+
 
     /* Requires: "IsStaggered" bool exists on the animator controller attatched to this
      * 
@@ -100,6 +118,19 @@ public class EntityClass : SelectClass
     {
         Vector3 originalPosition = myTransform.position;
         float elapsedTime = 0f;
+
+        Vector3 diffInLocation = staggeredPosition - originalPosition;
+
+        if (diffInLocation.x > 0)
+        {
+            FaceLeft();
+        }
+        else if (diffInLocation.x < -0)
+        {
+            FaceRight();
+        }
+
+
 
         if (HasParameter("IsStaggered", animator))
         {

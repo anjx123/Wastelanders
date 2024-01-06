@@ -30,6 +30,7 @@ public class CardComparator : MonoBehaviour
     public IEnumerator ClashCards(ActionClass card1, ActionClass card2)
     {
         int cardOneStaggered;
+        CombatManager.Instance.SetCameraCenter(card1.Origin);
         ActivateInfo(card1, card2);
         yield return StartCoroutine(ClashBothEntities(card1.Origin, card1.Target));
 
@@ -52,13 +53,15 @@ public class CardComparator : MonoBehaviour
         } else if (card1.CardType == CardType.Defense)
         {
             card1.Origin.BlockAnimation(); //Blocked stuff here not implemented properly
+            Debug.Log(card2.Target);
             card2.Target.TakeDamage(card2.Damage);
         } else if (card2.CardType == CardType.Defense)
         {
             card1.Target.TakeDamage(card1.Damage);
         }
-
-        yield return new WaitForSeconds(1); 
+        DeactivateInfo(card1, card2);
+        yield return new WaitForSeconds(1);
+        
     }
 
     //Produces a positive value if Card1 is staggered by Card2
@@ -97,9 +100,7 @@ public class CardComparator : MonoBehaviour
 
         Vector2 normalizedDirection = directionVector.normalized;
         float staggerPower = StaggerPowerCalculation(percentageDone);
-
         yield return StartCoroutine(target.StaggerBack(target.myTransform.position + (Vector3)normalizedDirection * staggerPower));
-        SelectionMode();
     }
 
     //Calculates the power of the stagger based on the percentage health done
@@ -126,16 +127,16 @@ public class CardComparator : MonoBehaviour
  Purpose: The two clashing enemies come together to clash, their positions will ideally be based off their speed
  Then, whoever wins the clash should stagger the opponent backwards. 
   */
+    public static readonly float xBuffer = 0.6f;
     private IEnumerator ClashBothEntities(EntityClass origin, EntityClass target)
     {
-        CombatManager.Instance.GameState = GameState.FIGHTING;
         //The Distance weighting will be calculated based on speeds of the two clashing cards
         Vector2 centeredDistance = (origin.myTransform.position * 0.3f + 0.7f * target.myTransform.position);
         float bufferedRadius = 0.25f;
         float duration = 0.6f;
-        float xBuffer = 0.6f;
-        StartCoroutine(origin.MoveToPosition(HorizontalProjector(centeredDistance, origin.myTransform.position, xBuffer), bufferedRadius, duration));
-        yield return StartCoroutine(target.MoveToPosition(HorizontalProjector(centeredDistance, target.myTransform.position, xBuffer), bufferedRadius, duration));
+        
+        StartCoroutine(origin?.MoveToPosition(HorizontalProjector(centeredDistance, origin.myTransform.position, xBuffer), bufferedRadius, duration));
+        yield return StartCoroutine(target?.MoveToPosition(HorizontalProjector(centeredDistance, target.myTransform.position, xBuffer), bufferedRadius, duration));
         yield return new WaitUntil(() => Input.GetMouseButtonDown(0));
     }
     /*
@@ -155,6 +156,12 @@ public class CardComparator : MonoBehaviour
     {
         card1.Origin.ActivateCombatInfo(card1);
         card2.Origin.ActivateCombatInfo(card2);
+    }
+
+    private void DeactivateInfo(ActionClass card1, ActionClass card2)
+    {
+        card1.Origin.ActivateCombatInfo(null);
+        card2.Origin.ActivateCombatInfo(null);
     }
 
     private bool IsAttack(ActionClass card)
