@@ -44,8 +44,7 @@ public class BattleQueue : MonoBehaviour
         }
         else
         {
-            //Debug.Log("Something has been added to BQ");
-            //((EnemyClass)action.Target).AddAttack();
+
             ret = true;
         }
         RenderBQ();
@@ -172,7 +171,8 @@ public class BattleQueue : MonoBehaviour
             if (i < array.Count) {
                 for (int x = 0; x < array.Count; x++) // ensuring uniqueness of speed for one character inside the array
                 {
-                    if (array[x].Origin.GetType().IsSubclassOf(typeof(PlayerClass)) && card.Speed == array[x].Speed)
+                    if (array[x].IsPlayedByPlayer() && card.Speed == array[x].Speed)
+
                     {
                         return false; // don't insert. 
                     }

@@ -37,19 +37,11 @@ public class CombatManager : MonoBehaviour
     }
 
     // Start is called before the first frame update
-    IEnumerator Start()
+    void Start()
     {
-        while (!DependenciesReady())
-        {
-            yield return null;
-        }
         GameState = GameState.SELECTION;
     }
 
-    public bool DependenciesReady()
-    {
-        return enemies.Count == 3;
-    }
 
     //Sets the Camera Center to the following Entity. 
     public void SetCameraCenter(EntityClass entity)
@@ -73,6 +65,7 @@ public class CombatManager : MonoBehaviour
             transposer.m_ScreenX = 0.75f;
         }
     }
+
     
     private void PerformSelection()
     {
