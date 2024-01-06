@@ -73,10 +73,13 @@ public class CombatManager : MonoBehaviour
         handContainer.SetActive(true);
         baseCamera.Priority = 1;
         dynamicCamera.Priority = 0;
+
+        // Each enemy declares an attack. players is passed to AddAttack so the enemy can choose a target.
         foreach (EnemyClass enemy in enemies)
         {
             enemy.AddAttack(players);
         }
+
         foreach (PlayerClass player in players)
         {
             player.DrawToMax();

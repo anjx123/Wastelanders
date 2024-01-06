@@ -7,10 +7,8 @@ using UnityEngine.UI;
 
 public class WasteFrog : EnemyClass
 {
-    
+    // Initialized in editor
     public List<GameObject> availableActions;
-
-
 
     // Start is called before the first frame update
     public override void Start()
@@ -47,6 +45,9 @@ public class WasteFrog : EnemyClass
         
     }
 
+    /*  Contains: 1x Slap, 1x Flail
+     * 
+     */
     public override void AddAttack(List<PlayerClass> players)
     {
         pool[0].GetComponent<ActionClass>().Target = players[Random.Range(0, players.Count - 1)];

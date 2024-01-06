@@ -31,6 +31,13 @@ public abstract class EnemyClass : EntityClass
     /*  Given a list of players, the enemy chooses appropriately a target/targets and adds an attack that it chooses to the bq.
      *  It is up to the subclass HOW to implement this method, as certain enemies may prefer to attack certain players. 
      *  
+     *  Subclasses should document this method as follows:
+     *  
+     *  By default, assume the target is a completely random player. If this is not the case (for example, the enemy might prefer
+     *  to attack some specific character), the method documentation should note this.
+     *  
+     *  Potentially? We might want to list the attacks available to the enemy at the beginning of combat for ease of balancing and
+     *  tweaking difficulty later on.
      */
     public abstract void AddAttack(List<PlayerClass> players);
 
