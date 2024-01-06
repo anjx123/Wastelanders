@@ -127,13 +127,14 @@ public class CardComparator : MonoBehaviour
  Purpose: The two clashing enemies come together to clash, their positions will ideally be based off their speed
  Then, whoever wins the clash should stagger the opponent backwards. 
   */
+    public static readonly float xBuffer = 0.6f;
     private IEnumerator ClashBothEntities(EntityClass origin, EntityClass target)
     {
         //The Distance weighting will be calculated based on speeds of the two clashing cards
         Vector2 centeredDistance = (origin.myTransform.position * 0.3f + 0.7f * target.myTransform.position);
         float bufferedRadius = 0.25f;
         float duration = 0.6f;
-        float xBuffer = 0.6f;
+        
         StartCoroutine(origin?.MoveToPosition(HorizontalProjector(centeredDistance, origin.myTransform.position, xBuffer), bufferedRadius, duration));
         yield return StartCoroutine(target?.MoveToPosition(HorizontalProjector(centeredDistance, target.myTransform.position, xBuffer), bufferedRadius, duration));
         yield return new WaitUntil(() => Input.GetMouseButtonDown(0));

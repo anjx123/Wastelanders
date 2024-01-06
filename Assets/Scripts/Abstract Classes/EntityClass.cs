@@ -66,11 +66,11 @@ public abstract class EntityClass : SelectClass
         float distance = Mathf.Sqrt(diffInLocation.x * diffInLocation.x + diffInLocation.y * diffInLocation.y);
         float maxProportionTravelled = (distance - radius) / distance;
 
-        if (diffInLocation.x > radius)
+        if (diffInLocation.x > CardComparator.xBuffer + radius)
         {
             FaceRight();
         }
-        else if (diffInLocation.x < -radius)
+        else if (diffInLocation.x < -(CardComparator.xBuffer + radius))
         {
             FaceLeft();
         }
