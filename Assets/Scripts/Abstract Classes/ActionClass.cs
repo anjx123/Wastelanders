@@ -58,6 +58,12 @@ public abstract class ActionClass : SelectClass
         CardComparator.Instance.StartStagger(Origin, Target, percentageDone);
     }
 
+    public bool IsPlayedByPlayer()
+    {
+        return Origin.GetType().IsSubclassOf(typeof(PlayerClass));
+    }
+
+
     public int getRolledDamage()
     {
         return duplicateCard.actualRoll;

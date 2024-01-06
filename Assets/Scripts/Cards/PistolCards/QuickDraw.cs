@@ -17,10 +17,9 @@ public class QuickDraw : PistolCards
         lowerBound = 1;
         upperBound = 5;
         base.Start();
-        Speed = 1;
-        Block = 2;
-        Damage = 3;
-
+        Speed = 5;
+        Block = 0;
+        Damage = 2;
         myName = "QuickDraw";
         CardType = CardType.RangedAttack;
         Renderer renderer = GetComponent<Renderer>();
