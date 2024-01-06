@@ -65,7 +65,6 @@ public static class HighlightManager // later all entity highlighter
             if (player != null && wasAdded)
             {
                 player.HandleUseCard(currentHighlightedAction);
-                Debug.Log("Card used.");
             } else
             {
                 Debug.Log("Card not used.");

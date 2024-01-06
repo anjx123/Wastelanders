@@ -56,7 +56,6 @@ public class BattleQueue : MonoBehaviour
         action.Origin = origin;
         actionQueue.Insert(action);
         RenderBQ();
-        Debug.Log("Enemy Action is adding");
     }
 
 
@@ -268,9 +267,6 @@ else
                     firstPosition++;
                 }
             }
-            Debug.Log("First position is:" + firstPosition);
-            Debug.Log("I am inserting + " + card.GetName());
-            Debug.Log("I am inserting + " + card.Speed);
             return firstPosition; // default should be the start if no cards exist of same speed or no cards at all exist. <<< Incorrect;
             // no cards at all exist.
             

@@ -57,7 +57,6 @@ public class WasteFrog : EnemyClass
         {
             Reshuffle();
         }
-        Debug.Log("My attack is being added");
     }
 
     /*  Reshuffles the deck. Should be called on start (so the enemy can display its first attack), and whenever the enemy runs out of
