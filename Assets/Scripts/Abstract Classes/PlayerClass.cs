@@ -5,7 +5,7 @@ using UnityEngine;
 public abstract class PlayerClass : EntityClass
 {
 
-    protected int maxHandSize = 3;
+    protected int maxHandSize = 4;
     // This is the deck of the player, which does not change as the player reshuffles/draws cards.
     protected List<GameObject> deck = new List<GameObject>();
 
@@ -31,6 +31,8 @@ public abstract class PlayerClass : EntityClass
      */
     abstract protected void DrawCard();
 
+    protected abstract void RenderHand();
+
     /*  Called by HighlightManager whenever an action is declared. Deletes the used card.
      *  REQUIRES: Nothing
      *  MODIFIES: hand, discard
@@ -47,5 +49,14 @@ public abstract class PlayerClass : EntityClass
     {
         this.GetComponent<SpriteRenderer>().flipX = true;
         combatInfo.FaceLeft();
+    }
+
+    public void DrawToMax()
+    {
+        for (int i = hand.Count; i < maxHandSize; i++)
+        {
+            DrawCard();
+        }
+        RenderHand();
     }
 }

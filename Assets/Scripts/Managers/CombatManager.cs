@@ -84,6 +84,10 @@ public class CombatManager : MonoBehaviour
         {
             enemy.AddAttack(players);
         }
+        foreach (PlayerClass player in players)
+        {
+            player.DrawToMax();
+        }
     }
 
     private void PerformFighting()
