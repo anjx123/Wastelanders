@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.Experimental.GraphView.GraphView;
 using static UnityEngine.UI.Image;
 
 public abstract class EntityClass : SelectClass
@@ -11,6 +12,8 @@ public abstract class EntityClass : SelectClass
     public Animator animator;
     public Transform myTransform;
     public CombatInfo combatInfo;
+
+    private static readonly float Z_LAYER = 0;
 
     protected Vector3 initalPosition;
     public int Health
@@ -42,6 +45,8 @@ public abstract class EntityClass : SelectClass
         healthBar.setHealth(MAX_HEALTH);
         initalPosition = myTransform.position;
         statusEffects = new Dictionary<string, StatusEffect>();
+
+        DeEmphasize();
     }
 
 
@@ -73,12 +78,12 @@ public abstract class EntityClass : SelectClass
 
         Vector3 diffInLocation = destination - originalPosition;
 
-        if (diffInLocation == Vector3.zero) yield break;
+        if ((Vector2) diffInLocation == Vector2.zero) yield break;
 
         float distance = Mathf.Sqrt(diffInLocation.x * diffInLocation.x + diffInLocation.y * diffInLocation.y);
         float maxProportionTravelled = (distance - radius) / distance;
 
-        UpdateFacing(diffInLocation, CardComparator.xBuffer);
+        UpdateFacing(diffInLocation, CardComparator.X_BUFFER);
 
         if (HasParameter("IsMoving", animator))
         {
@@ -144,7 +149,7 @@ public abstract class EntityClass : SelectClass
         float elapsedTime = 0f;
 
         Vector3 diffInLocation = staggeredPosition - originalPosition;
-        if (diffInLocation == Vector3.zero) yield break;
+        if ((Vector2)diffInLocation == Vector2.zero) yield break;
         UpdateFacing(-diffInLocation, 0);
 
 
@@ -255,19 +260,27 @@ public abstract class EntityClass : SelectClass
 
     public void ActivateCombatInfo(ActionClass actionClass)
     {
-        Vector3 flippedTransform = transform.localScale;
-        flippedTransform.z = flippedTransform.z + 10;
-        transform.localScale = flippedTransform;
-
         combatInfo.SetCombatSprite(actionClass);
     }
 
     public void DeactivateCombatInfo()
     {
-        Vector3 flippedTransform = transform.localScale;
-        flippedTransform.z = flippedTransform.z - 10;
-        transform.localScale = flippedTransform;
         combatInfo.DeactivateCombatSprite();
+    }
+    //Increases this Entity Class' sorting layer (negative number is higher up)
+    public void Emphasize()
+    {
+        Vector3 largeTransform = transform.position;
+        largeTransform.z = Z_LAYER - 1;
+        transform.position = largeTransform;
+    }
+
+    //Decreases this Entity Class' sorting layer. (Standardizes Sorting Layers for entities)
+    public void DeEmphasize()
+    {
+        Vector3 largeTransform = transform.position;
+        largeTransform.z = Z_LAYER;
+        transform.position = largeTransform;
     }
 
     public void SetDice(int value)

@@ -35,6 +35,7 @@ public class CardComparator : MonoBehaviour
         int cardOneStaggered;
         CombatManager.Instance.SetCameraCenter(card1.Origin);
         ActivateInfo(card1, card2);
+        EmphasizeClashers(card1, card2);
         card1.ApplyEffect();
         card2.ApplyEffect();
         yield return StartCoroutine(ClashBothEntities(card1.Origin, card1.Target));
@@ -68,7 +69,7 @@ public class CardComparator : MonoBehaviour
         }
         DeactivateInfo(card1, card2);
         yield return new WaitForSeconds(1);
-        
+        DeEmphasizeClashers(card1, card2);
     }
 
     //Produces a positive value if Card1 is staggered by Card2
@@ -135,7 +136,7 @@ public class CardComparator : MonoBehaviour
  Purpose: The two clashing enemies come together to clash, their positions will ideally be based off their speed
  Then, whoever wins the clash should stagger the opponent backwards. 
   */
-    public static readonly float xBuffer = 0.8f;
+    public static readonly float X_BUFFER = 0.8f;
     private IEnumerator ClashBothEntities(EntityClass origin, EntityClass target)
     {
         //The Distance weighting will be calculated based on speeds of the two clashing cards
@@ -143,8 +144,8 @@ public class CardComparator : MonoBehaviour
         float bufferedRadius = 0.25f;
         float duration = 0.6f;
         
-        StartCoroutine(origin?.MoveToPosition(HorizontalProjector(centeredDistance, origin.myTransform.position, xBuffer), bufferedRadius, duration));
-        yield return StartCoroutine(target?.MoveToPosition(HorizontalProjector(centeredDistance, target.myTransform.position, xBuffer), bufferedRadius, duration));
+        StartCoroutine(origin?.MoveToPosition(HorizontalProjector(centeredDistance, origin.myTransform.position, X_BUFFER), bufferedRadius, duration));
+        yield return StartCoroutine(target?.MoveToPosition(HorizontalProjector(centeredDistance, target.myTransform.position, X_BUFFER), bufferedRadius, duration));
         yield return new WaitUntil(() => Input.GetMouseButtonDown(0));
     }
     /*
@@ -162,6 +163,7 @@ public class CardComparator : MonoBehaviour
 
     private void ActivateInfo(ActionClass card1, ActionClass card2)
     {
+
         card1.Origin.ActivateCombatInfo(card1);
         card2.Origin.ActivateCombatInfo(card2);
     }
@@ -170,6 +172,18 @@ public class CardComparator : MonoBehaviour
     {
         card1.Origin.DeactivateCombatInfo();
         card2.Origin.DeactivateCombatInfo();
+    }
+
+    private void EmphasizeClashers(ActionClass card1, ActionClass card2)
+    {
+        card1.Origin.Emphasize();
+        card2.Origin.Emphasize();
+    }
+
+    private void DeEmphasizeClashers(ActionClass card1, ActionClass card2)
+    {
+        card1.Origin.DeEmphasize();
+        card2.Origin.DeEmphasize();
     }
 
     private bool IsAttack(ActionClass card)
