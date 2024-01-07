@@ -135,7 +135,7 @@ public class CardComparator : MonoBehaviour
  Purpose: The two clashing enemies come together to clash, their positions will ideally be based off their speed
  Then, whoever wins the clash should stagger the opponent backwards. 
   */
-    public static readonly float xBuffer = 0.6f;
+    public static readonly float xBuffer = 0.8f;
     private IEnumerator ClashBothEntities(EntityClass origin, EntityClass target)
     {
         //The Distance weighting will be calculated based on speeds of the two clashing cards
