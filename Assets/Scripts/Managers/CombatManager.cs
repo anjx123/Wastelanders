@@ -78,13 +78,13 @@ public class CombatManager : MonoBehaviour
         foreach (EnemyClass enemy in enemies)
         {
             enemy.AddAttack(players);
-            enemy.ResetPosition();
+            StartCoroutine(enemy.ResetPosition());
         }
 
         foreach (PlayerClass player in players)
         {
             player.DrawToMax();
-            player.ResetPosition();
+            StartCoroutine(player.ResetPosition());
 
         }
 

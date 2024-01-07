@@ -78,11 +78,11 @@ public abstract class EntityClass : SelectClass
         float distance = Mathf.Sqrt(diffInLocation.x * diffInLocation.x + diffInLocation.y * diffInLocation.y);
         float maxProportionTravelled = (distance - radius) / distance;
 
-        if (diffInLocation.x > 0)
+        if (diffInLocation.x > radius + CardComparator.xBuffer)
         {
             FaceRight();
         }
-        else if (diffInLocation.x < 0)
+        else if (diffInLocation.x < -(radius + CardComparator.xBuffer))
         {
             FaceLeft();
         }
@@ -181,7 +181,7 @@ public abstract class EntityClass : SelectClass
         HighlightManager.OnEntityClicked(this);
     }
 
-    public abstract void ResetPosition();
+    public abstract IEnumerator ResetPosition();
 
     public void Die()
     {
@@ -250,7 +250,19 @@ public abstract class EntityClass : SelectClass
 
     public void ActivateCombatInfo(ActionClass actionClass)
     {
+        Vector3 flippedTransform = transform.localScale;
+        flippedTransform.z = flippedTransform.z + 10;
+        transform.localScale = flippedTransform;
+
         combatInfo.SetCombatSprite(actionClass);
+    }
+
+    public void DeactivateCombatInfo()
+    {
+        Vector3 flippedTransform = transform.localScale;
+        flippedTransform.z = flippedTransform.z - 10;
+        transform.localScale = flippedTransform;
+        combatInfo.DeactivateCombatSprite();
     }
 
     public void SetDice(int value)

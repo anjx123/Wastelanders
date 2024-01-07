@@ -70,7 +70,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5db7018266f66d14f96894e490d80a79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  icon: {fileID: 21300000, guid: c339d976a8324644b81b2b3660aa49f8, type: 3}
+  icon: {fileID: 21300000, guid: 09d382d01f04d3a40be04169f9944b3c, type: 3}
 --- !u!212 &3212035558133251139
 SpriteRenderer:
   m_ObjectHideFlags: 0

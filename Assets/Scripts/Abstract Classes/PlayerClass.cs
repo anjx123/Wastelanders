@@ -39,9 +39,9 @@ public abstract class PlayerClass : EntityClass
      */
     abstract public void HandleUseCard(ActionClass a);
 
-    public override void ResetPosition()
+    public override IEnumerator ResetPosition()
     {
-        StartCoroutine(MoveToPosition(initalPosition, 0f, 0.8f));
+        yield return StartCoroutine(MoveToPosition(initalPosition, 0f, 0.8f));
         FaceRight();
     }
 

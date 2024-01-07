@@ -20,6 +20,7 @@ public class CombatInfo : MonoBehaviour
      */
     public void SetDice(int value)
     {
+        Debug.Log("Dice Should be stopped");
         animator.enabled = false;
         diceRollSprite.GetComponent<SpriteRenderer>().sprite = loadedSprites[0];
     }
@@ -28,14 +29,18 @@ public class CombatInfo : MonoBehaviour
      Sets the CombatInfo sprite to the icon of this ActionClass.
     Pass in null to discard the current sprite.
      */
-#nullable enable
     public void SetCombatSprite(ActionClass? card)
     {
         animator.enabled = true;
         SpriteRenderer spriteRenderer = combatCardSprite.GetComponent<SpriteRenderer>();
         spriteRenderer.sprite = card?.GetIcon();
     }
-#nullable disable
+
+    public void DeactivateCombatSprite()
+    {
+        SpriteRenderer spriteRenderer = combatCardSprite.GetComponent<SpriteRenderer>();
+        spriteRenderer.sprite = null;
+    }
     //Flips the CombatInfo so that the Icon is on the Right of the entity
     public void FaceLeft()
     {

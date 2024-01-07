@@ -168,8 +168,8 @@ public class CardComparator : MonoBehaviour
 
     private void DeactivateInfo(ActionClass card1, ActionClass card2)
     {
-        card1.Origin.ActivateCombatInfo(null);
-        card2.Origin.ActivateCombatInfo(null);
+        card1.Origin.DeactivateCombatInfo();
+        card2.Origin.DeactivateCombatInfo();
     }
 
     private bool IsAttack(ActionClass card)
