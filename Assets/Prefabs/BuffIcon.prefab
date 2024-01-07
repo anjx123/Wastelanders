@@ -339,7 +339,7 @@ RectTransform:
   m_GameObject: {fileID: 6647468808881570309}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: -1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 398063478892782208}
@@ -364,7 +364,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buffIcon: {fileID: 1156540308573898057}
   textMeshProUGUI: {fileID: 7109150430243128439}
-  rectTransform: {fileID: 1715629036518821266}
 --- !u!114 &5638829709072448918
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -39,11 +39,18 @@ public abstract class PlayerClass : EntityClass
      */
     abstract public void HandleUseCard(ActionClass a);
 
+    public override void ResetPosition()
+    {
+        StartCoroutine(MoveToPosition(initalPosition, 0f, 0.8f));
+        FaceRight();
+    }
+
     public override void FaceRight()
     {
-        Debug.Log(myName + "Is facing right");
+        
         this.GetComponent<SpriteRenderer>().flipX = false;
         combatInfo.FaceRight();
+        
         
     }
 
@@ -52,7 +59,6 @@ public abstract class PlayerClass : EntityClass
         Debug.Log(myName + "Is facing left");
         this.GetComponent<SpriteRenderer>().flipX = true;
         combatInfo.FaceLeft();
-        
     }
 
     public void DrawToMax()
@@ -62,5 +68,6 @@ public abstract class PlayerClass : EntityClass
             DrawCard();
         }
         RenderHand();
+        
     }
 }

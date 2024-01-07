@@ -11,6 +11,8 @@ public abstract class EntityClass : SelectClass
     public Animator animator;
     public Transform myTransform;
     public CombatInfo combatInfo;
+
+    protected Vector3 initalPosition;
     public int Health
     {
         get { return health; }
@@ -38,10 +40,10 @@ public abstract class EntityClass : SelectClass
 
         healthBar.setMaxHealth(MAX_HEALTH);
         healthBar.setHealth(MAX_HEALTH);
-
+        initalPosition = myTransform.position;
         statusEffects = new Dictionary<string, StatusEffect>();
-       
     }
+
 
     public virtual void TakeDamage(int damage)
     {
@@ -70,6 +72,8 @@ public abstract class EntityClass : SelectClass
         float elapsedTime = 0f;
 
         Vector3 diffInLocation = destination - originalPosition;
+
+        if (diffInLocation == Vector3.zero) yield break;
 
         float distance = Mathf.Sqrt(diffInLocation.x * diffInLocation.x + diffInLocation.y * diffInLocation.y);
         float maxProportionTravelled = (distance - radius) / distance;
@@ -128,7 +132,7 @@ public abstract class EntityClass : SelectClass
         float elapsedTime = 0f;
 
         Vector3 diffInLocation = staggeredPosition - originalPosition;
-
+        if (diffInLocation == Vector3.zero) yield break;
         if (diffInLocation.x > 0)
         {
             FaceLeft();
@@ -176,6 +180,8 @@ public abstract class EntityClass : SelectClass
     {
         HighlightManager.OnEntityClicked(this);
     }
+
+    public abstract void ResetPosition();
 
     public void Die()
     {
