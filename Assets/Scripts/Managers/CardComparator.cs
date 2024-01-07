@@ -60,7 +60,7 @@ public class CardComparator : MonoBehaviour
         } else if (card1.CardType == CardType.Defense)
         {
             card1.Origin.BlockAnimation(); //Blocked stuff here not implemented properly
-            Debug.Log(card2.Target);
+            
             card2.Target.TakeDamage(card2.Damage);
         } else if (card2.CardType == CardType.Defense)
         {

@@ -20,6 +20,7 @@ public class ChargeUp : FrogAttacks
         base.Start();
         Speed = 1;
         Block = 2;
+        focus = 2;
 
         myName = "ChargeUp";
         CardType = CardType.Defense;
@@ -32,7 +33,7 @@ public class ChargeUp : FrogAttacks
     {
         DupInit();
 
-        Origin.ApplyBuffsToCard(ref duplicateCard, Accuracy.buffName);
+        Origin.AddStacks(ref duplicateCard, Focus.buffName);
         Origin.ApplyBuffsToCard(ref duplicateCard, Focus.buffName);
     }
 }

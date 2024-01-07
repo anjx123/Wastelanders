@@ -40,7 +40,7 @@ public class QuickDraw : PistolCards
     {
 
         DupInit();
-        Debug.Log(Accuracy.buffName + Origin.GetName() + duplicateCard.rollCeiling);
+        
 
         if (Origin == null)
         {

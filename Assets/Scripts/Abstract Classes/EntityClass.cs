@@ -74,11 +74,11 @@ public abstract class EntityClass : SelectClass
         float distance = Mathf.Sqrt(diffInLocation.x * diffInLocation.x + diffInLocation.y * diffInLocation.y);
         float maxProportionTravelled = (distance - radius) / distance;
 
-        if (diffInLocation.x > CardComparator.xBuffer + radius)
+        if (diffInLocation.x > 0)
         {
             FaceRight();
         }
-        else if (diffInLocation.x < -(CardComparator.xBuffer + radius))
+        else if (diffInLocation.x < 0)
         {
             FaceLeft();
         }
@@ -133,7 +133,7 @@ public abstract class EntityClass : SelectClass
         {
             FaceLeft();
         }
-        else if (diffInLocation.x < -0)
+        else if (diffInLocation.x < 0)
         {
             FaceRight();
         }
@@ -207,7 +207,6 @@ public abstract class EntityClass : SelectClass
         {
             statusEffects[buffType] = BuffFactory.GetStatusEffect(buffType);
         }
-        Debug.Log("add buffs no error initial success" + dup.rollCeiling);
         statusEffects[buffType].ApplyStacks(ref dup);
     }
 

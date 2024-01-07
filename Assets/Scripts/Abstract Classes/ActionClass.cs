@@ -78,8 +78,6 @@ public abstract class ActionClass : SelectClass
         duplicateCard.rollCeiling = upperBound;
         duplicateCard.totalFocus = focus;
         duplicateCard.totalAccuracy = accuracy;
-
-        Debug.Log("Duplicate Card Initialized" + duplicateCard.rollFloor + duplicateCard.rollCeiling + duplicateCard.totalFocus + duplicateCard.totalAccuracy);
     }
 
     public virtual void ApplyEffect()
@@ -91,7 +89,7 @@ public abstract class ActionClass : SelectClass
     public virtual void RollDice()
     {
         duplicateCard.actualRoll = Random.Range(duplicateCard.rollFloor, duplicateCard.rollCeiling + 1);
-        Debug.Log("Ref" + duplicateCard.rollFloor + duplicateCard.rollCeiling + duplicateCard.actualRoll);
+        
         Origin.SetDice(Damage); 
     }
 

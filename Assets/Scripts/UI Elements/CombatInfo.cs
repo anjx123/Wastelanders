@@ -39,25 +39,47 @@ public class CombatInfo : MonoBehaviour
     //Flips the CombatInfo so that the Icon is on the Right of the entity
     public void FaceLeft()
     {
-        Transform parentTransform = this.transform;
-        Vector3 flippedTransform = parentTransform.localScale;
-        flippedTransform.x = -Mathf.Abs(flippedTransform.x);
-        parentTransform.localScale = flippedTransform;
+
+        FlipTransform(this.transform, false); 
+        foreach (Transform child in buffList.transform)
+        {
+            FlipTransform(child, false);
+        }
         diceRollSprite.GetComponent<SpriteRenderer>().flipX = true;
+
+        
+        
 
         CombatManager.Instance.UpdateCameraBounds(); //Bad placement here
     }
     //Flips the CombatInfo so that the Icon is on the LEFT of the entity
     public void FaceRight()
     {
-        Transform parentTransform = this.transform;
-        Vector3 flippedTransform = parentTransform.localScale;
-        flippedTransform.x = Mathf.Abs(flippedTransform.x);
-        parentTransform.localScale = flippedTransform;
+        FlipTransform(this.transform, true);
+        foreach (Transform child in buffList.transform)
+        {
+            FlipTransform(child, true);
+        }
         diceRollSprite.GetComponent<SpriteRenderer>().flipX = false;
 
         CombatManager.Instance.UpdateCameraBounds(); //Bad placement here, but I cant think of where else id put it
 
+    }
+
+    public void FlipTransform(Transform transform, bool faceRight)
+    {
+        if (faceRight) //Face Right
+        {
+            Vector3 flippedTransform = transform.localScale;
+            flippedTransform.x = Mathf.Abs(flippedTransform.x);
+            transform.localScale = flippedTransform;
+        }
+        else
+        {
+            Vector3 flippedTransform = transform.localScale;
+            flippedTransform.x = -Mathf.Abs(flippedTransform.x);
+            transform.localScale = flippedTransform;
+        }
     }
 
     //A Cheat implementation that relies on the implementation of FaceRight/Left 
@@ -79,6 +101,13 @@ public class CombatInfo : MonoBehaviour
             buffIcon.transform.SetParent(buffList.transform, false);
             buffIcon.SetIcon(buffs[str].GetIcon());
             buffIcon.SetText(buffs[str].Stacks.ToString());
+            if (IsFacingRight())
+            {
+                FlipTransform(buffIconPrefab.transform, true);
+            } else
+            {
+                FlipTransform(buffIconPrefab.transform, false);
+            }
         }
     }
 }

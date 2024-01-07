@@ -41,14 +41,18 @@ public abstract class PlayerClass : EntityClass
 
     public override void FaceRight()
     {
+        Debug.Log(myName + "Is facing right");
         this.GetComponent<SpriteRenderer>().flipX = false;
         combatInfo.FaceRight();
+        
     }
 
     public override void FaceLeft()
     {
+        Debug.Log(myName + "Is facing left");
         this.GetComponent<SpriteRenderer>().flipX = true;
         combatInfo.FaceLeft();
+        
     }
 
     public void DrawToMax()
