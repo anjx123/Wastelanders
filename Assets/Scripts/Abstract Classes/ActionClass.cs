@@ -49,6 +49,9 @@ public abstract class ActionClass : SelectClass
     }
     public virtual void OnHit()
     {
+        Vector3 diffInLocation = Target.myTransform.position - Origin.myTransform.position;
+        Origin.UpdateFacing(diffInLocation, 0);
+
         float percentageDone = 1; //Testing different powered knockbacks
         if (Target.Health != 0)
         {

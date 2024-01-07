@@ -29,11 +29,11 @@ public class CombatInfo : MonoBehaviour
      Sets the CombatInfo sprite to the icon of this ActionClass.
     Pass in null to discard the current sprite.
      */
-    public void SetCombatSprite(ActionClass? card)
+    public void SetCombatSprite(ActionClass card)
     {
         animator.enabled = true;
         SpriteRenderer spriteRenderer = combatCardSprite.GetComponent<SpriteRenderer>();
-        spriteRenderer.sprite = card?.GetIcon();
+        spriteRenderer.sprite = card.GetIcon();
     }
 
     public void DeactivateCombatSprite()
@@ -108,10 +108,10 @@ public class CombatInfo : MonoBehaviour
             buffIcon.SetText(buffs[str].Stacks.ToString());
             if (IsFacingRight())
             {
-                FlipTransform(buffIconPrefab.transform, true);
+                FlipTransform(buffIcon.transform, true);
             } else
             {
-                FlipTransform(buffIconPrefab.transform, false);
+                FlipTransform(buffIcon.transform, false);
             }
         }
     }

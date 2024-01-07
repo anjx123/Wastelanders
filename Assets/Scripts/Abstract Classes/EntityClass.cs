@@ -78,14 +78,7 @@ public abstract class EntityClass : SelectClass
         float distance = Mathf.Sqrt(diffInLocation.x * diffInLocation.x + diffInLocation.y * diffInLocation.y);
         float maxProportionTravelled = (distance - radius) / distance;
 
-        if (diffInLocation.x > CardComparator.xBuffer)
-        {
-            FaceRight();
-        }
-        else if (diffInLocation.x < -(CardComparator.xBuffer))
-        {
-            FaceLeft();
-        }
+        UpdateFacing(diffInLocation, CardComparator.xBuffer);
 
         if (HasParameter("IsMoving", animator))
         {
@@ -114,6 +107,25 @@ public abstract class EntityClass : SelectClass
         return combatInfo.IsFacingRight();
     }
 
+    /*
+     * Purpose: Updates the entitiy's direction to face a target. (Target.position - my position)
+     * diffInLocation: Will face the entity Right if the Target is to its right (positive diffInLocation)
+        Left if other way around
+        ComparingBuffer: Adds a buffer where if the  (abs) |x-distance| travelled is smaller than comparingBuffer, No flip is made   
+        Note: If you want to reverse the results, add a negative to diffInLocation before calling.
+     */
+    public void UpdateFacing(Vector3 diffInLocation, float comparingBuffer)
+    {
+        if (diffInLocation.x > comparingBuffer)
+        {
+            FaceRight();
+        }
+        else if (diffInLocation.x < -(comparingBuffer))
+        {
+            FaceLeft();
+        }
+    }
+
 
     /* Requires: "IsStaggered" bool exists on the animator controller attatched to this
      * 
@@ -133,14 +145,7 @@ public abstract class EntityClass : SelectClass
 
         Vector3 diffInLocation = staggeredPosition - originalPosition;
         if (diffInLocation == Vector3.zero) yield break;
-        if (diffInLocation.x > 0)
-        {
-            FaceLeft();
-        }
-        else if (diffInLocation.x < 0)
-        {
-            FaceRight();
-        }
+        UpdateFacing(-diffInLocation, 0);
 
 
 
