@@ -12,11 +12,11 @@ public class Spit : FrogAttacks
     }
 
     // Start is called before the first frame update
-    public override void Start()
+    public override void Awake()
     {
+        base.Awake();
         lowerBound = 1;
         upperBound = 4;
-        base.Start();
         Speed = 4;
         Block = 2;
 
