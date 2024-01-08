@@ -51,8 +51,14 @@ public class Jackie : PlayerClass
         if (hand.Count < maxHandSize)
         {
             int idx = Random.Range(0, pool.Count);
-            hand.Add(pool[idx]);
-            pool.RemoveAt(idx);
+            if (pool.Count > 0)
+            {
+                hand.Add(pool[idx]);
+                pool.RemoveAt(idx);
+            } else
+            {
+                Debug.LogWarning(myName + "'s Pool has no cards");
+            }
         }
     }
 
