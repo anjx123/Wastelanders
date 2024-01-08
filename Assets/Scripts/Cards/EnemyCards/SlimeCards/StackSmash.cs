@@ -28,8 +28,7 @@ public class StackSmash : SlimeAttacks
     {
         DupInit();
 
-        Origin.ApplyBuffsToCard(ref duplicateCard, Accuracy.buffName);
-        Origin.ApplyBuffsToCard(ref duplicateCard, Focus.buffName);
+        Origin.ApplyAllBuffsToCard(ref duplicateCard);
     }
 
     public override void OnHit()

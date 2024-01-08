@@ -15,7 +15,7 @@ public class PistolWhip : PistolCards
     public override void Start()
     {
         base.Start();
-        Speed = 3;
+        Speed = 2;
         Block = 2;
         Damage = 99;
         lowerBound = 3;
@@ -37,9 +37,8 @@ public class PistolWhip : PistolCards
     public override void ApplyEffect()
     {
         DupInit();
-
-        Origin.AddStacks(ref duplicateCard, Accuracy.buffName);
-        Origin.ApplyBuffsToCard(ref duplicateCard, Accuracy.buffName);
+        
+        Origin.ApplyAllBuffsToCard(ref duplicateCard);
     }
 
 

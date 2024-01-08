@@ -20,7 +20,7 @@ public class IronSights : PistolCards
         Damage = 1;
         lowerBound = 1;
         upperBound = 5;
-        accuracy = 1;
+        
         CardType = CardType.RangedAttack;
         myName = "IronSights";
         Renderer renderer = GetComponent<Renderer>();
@@ -39,8 +39,8 @@ public class IronSights : PistolCards
     {
         DupInit();
 
-        Origin.AddStacks(ref duplicateCard, Accuracy.buffName);
-        Origin.ApplyBuffsToCard(ref duplicateCard, Accuracy.buffName);
+        Origin.AddStacks(Accuracy.buffName, 1);
+        Origin.ApplyAllBuffsToCard(ref duplicateCard);
     }
 
 }

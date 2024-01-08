@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Xml.Linq;
@@ -20,9 +21,8 @@ public class FlowedDefense : StaffCards
         base.Start();
         Speed = 4;
         Block = 2;
-        focus = 2;
 
-        myName = "CheapStrike";
+        myName = "FlowedDefense";
         CardType = CardType.Defense;
         Renderer renderer = GetComponent<Renderer>();
         ogMaterial = renderer.material; // og sprite of card
@@ -41,7 +41,6 @@ public class FlowedDefense : StaffCards
     {
         DupInit();
 
-        Origin.ApplyBuffsToCard(ref duplicateCard, Accuracy.buffName);
-        Origin.ApplyBuffsToCard(ref duplicateCard, Focus.buffName);
+        Origin.ApplyAllBuffsToCard(ref duplicateCard);
     }
 }

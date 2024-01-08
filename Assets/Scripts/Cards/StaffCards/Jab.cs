@@ -17,7 +17,7 @@ public class Jab : StaffCards
         base.Start();
         Speed = 4;
         Block = 2;
-        focus = 2;
+        
 
         myName = "Jab";
         Renderer renderer = GetComponent<Renderer>();
@@ -39,7 +39,7 @@ public class Jab : StaffCards
 
         DupInit();
 
-        Origin.ApplyBuffsToCard(ref duplicateCard, Accuracy.buffName);
-        Origin.ApplyBuffsToCard(ref duplicateCard, Focus.buffName);
+       
+        Origin.ApplyAllBuffsToCard(ref duplicateCard);
     }
 }

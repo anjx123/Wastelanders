@@ -17,7 +17,6 @@ public class Silencer : PistolCards
         base.Start();
         Speed = 3;
         Block = 2;
-        accuracy = 2;
 
         myName = "Silencer";
         CardType = CardType.RangedAttack;
@@ -40,15 +39,15 @@ public class Silencer : PistolCards
 
         DupInit();
 
-        Origin.ApplyBuffsToCard(ref duplicateCard, Accuracy.buffName);
-        Origin.ApplyBuffsToCard(ref duplicateCard, Focus.buffName);
+        
+        Origin.ApplyAllBuffsToCard(ref duplicateCard);
 
     }
 
     public override void OnHit()
     {
         base.OnHit();
-        Origin.AddStacks(ref duplicateCard, Accuracy.buffName);
+        Origin.AddStacks(Accuracy.buffName, 2);
 
     }
 }

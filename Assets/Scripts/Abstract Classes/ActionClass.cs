@@ -10,8 +10,6 @@ public abstract class ActionClass : SelectClass
 
     protected int lowerBound;
     protected int upperBound;
-    protected int focus;
-    protected int accuracy;
 
     protected CardDup duplicateCard;
 
@@ -25,8 +23,6 @@ public abstract class ActionClass : SelectClass
     {
         public int rollFloor;
         public int rollCeiling;
-        public int totalFocus;
-        public int totalAccuracy;
         public int actualRoll;
     }
     public int Damage { get; protected set; }
@@ -70,10 +66,8 @@ public abstract class ActionClass : SelectClass
         duplicateCard = new CardDup();
         duplicateCard.rollFloor = lowerBound;
         duplicateCard.rollCeiling = upperBound;
-        duplicateCard.totalFocus = focus;
-        duplicateCard.totalAccuracy = accuracy;
 
-        Debug.Log("Duplicate Card Initialized" + duplicateCard.rollFloor + duplicateCard.rollCeiling + duplicateCard.totalFocus + duplicateCard.totalAccuracy);
+        Debug.Log("Duplicate Card Initialized" + duplicateCard.rollFloor + duplicateCard.rollCeiling);
     }
 
     public virtual void ApplyEffect()

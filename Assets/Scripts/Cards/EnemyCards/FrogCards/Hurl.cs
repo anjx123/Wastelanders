@@ -31,7 +31,6 @@ public class Hurl : FrogAttacks
     {
         DupInit();
 
-        Origin.ApplyBuffsToCard(ref duplicateCard, Accuracy.buffName);
-        Origin.ApplyBuffsToCard(ref duplicateCard, Focus.buffName);
+        Origin.ApplyAllBuffsToCard(ref duplicateCard);
     }
 }

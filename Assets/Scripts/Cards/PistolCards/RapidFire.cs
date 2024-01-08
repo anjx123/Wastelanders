@@ -38,9 +38,8 @@ public class RapidFire : PistolCards
     public override void ApplyEffect()
     {
         DupInit();
-
-        Origin.AddStacks(ref duplicateCard, Accuracy.buffName);
-        Origin.ApplyBuffsToCard(ref duplicateCard, Accuracy.buffName);
+        
+        Origin.ApplyAllBuffsToCard(ref duplicateCard);
     }
 
 

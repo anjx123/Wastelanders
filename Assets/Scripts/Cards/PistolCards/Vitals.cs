@@ -37,10 +37,9 @@ public class Vitals : PistolCards
     public override void ApplyEffect()
     {
 
-        DupInit();
+        DupInit();        
         
-        Origin.ApplyBuffsToCard(ref duplicateCard, Accuracy.buffName);
-        Origin.ApplyBuffsToCard(ref duplicateCard, Focus.buffName);
+        Origin.ApplyAllBuffsToCard(ref duplicateCard);
 
     }
 }

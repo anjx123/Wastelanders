@@ -17,7 +17,7 @@ public class QuickDraw : PistolCards
         lowerBound = 1;
         upperBound = 5;
         base.Start();
-        Speed = 1;
+        Speed = 5;
         Block = 2;
         Damage = 3;
 
@@ -47,9 +47,8 @@ public class QuickDraw : PistolCards
         {
             Debug.Log("failure");
         }
-
-        Origin.AddStacks(ref duplicateCard, Accuracy.buffName);
-        Origin.ApplyBuffsToCard(ref duplicateCard, Accuracy.buffName);
+        
+        Origin.ApplyAllBuffsToCard(ref duplicateCard);
         
     }
 

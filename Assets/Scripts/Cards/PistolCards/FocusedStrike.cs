@@ -16,7 +16,7 @@ public class FocusedStrike : ActionClass
         myName = "FocusedStrike";
         lowerBound = 2;
         upperBound = 3;
-        focus = 1;
+       
         Renderer renderer = GetComponent<Renderer>();
         ogMaterial = renderer.material; // og sprite of card, maybe refac into ActionClass?
         OriginalPosition = transform.position;
@@ -32,8 +32,8 @@ public class FocusedStrike : ActionClass
     {
         DupInit();
 
-        Origin.AddStacks(ref duplicateCard, Accuracy.buffName);
-        Origin.ApplyBuffsToCard(ref duplicateCard, Accuracy.buffName);
+        Origin.AddStacks(Focus.buffName, 1);
+        Origin.ApplyAllBuffsToCard(ref duplicateCard);
     }
 
 }

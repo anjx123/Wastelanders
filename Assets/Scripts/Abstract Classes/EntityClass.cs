@@ -158,14 +158,14 @@ public class EntityClass : SelectClass
         this.MAX_HEALTH = health;
     } */
 
-    // Adds the Stacks of the Card to the Relevant Buff Stacks of the Player
-    public void AddStacks(ref ActionClass.CardDup dup, string buffType)
-    {   
-        if (!statusEffects.ContainsKey(buffType))
-        {        
+    // Adds the Stacks of the Card to the Relevant Buff Stacks of the Player    
+    public void AddStacks(string buffType, int stacks)
+    {
+        if (!statusEffects.ContainsKey(buffType)) 
+        { 
             statusEffects[buffType] = BuffFactory.GetStatusEffect(buffType);
         }
-        statusEffects[buffType].GainStacks(ref dup);
+        statusEffects[buffType].GainStacks(stacks);
         UpdateBuffs();
     }
 
@@ -180,13 +180,22 @@ public class EntityClass : SelectClass
         statusEffects[buffType].ApplyStacks(ref dup);
     }
 
+    // Applies the Stacks of all Buffs to the Card Roll Limits
+    public void ApplyAllBuffsToCard(ref ActionClass.CardDup dup)
+    {
+        foreach (string buff in  statusEffects.Keys)
+        {
+            ApplyBuffsToCard(ref dup, buff);
+        }
+    }
+
     public int GetBuffStacks(string s)
     {
         if (statusEffects.ContainsKey(s))
         {
-            return statusEffects[s].GetStacks();
+            return statusEffects[s].Stacks;
         }
-        throw new System.Exception("Invalid Buff Name");
+        return 0;
     }
 
     public virtual void AttackAnimation(string animationName)

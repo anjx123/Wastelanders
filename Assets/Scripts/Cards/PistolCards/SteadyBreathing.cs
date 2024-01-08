@@ -20,8 +20,7 @@ public class SteadyBreathing : PistolCards
         base.Start();
         Speed = 5;
         Block = 2;
-        accuracy = 2;
-
+        
         myName = "SteadyBreathing";
         CardType = CardType.Defense;
         Renderer renderer = GetComponent<Renderer>();
@@ -41,9 +40,8 @@ public class SteadyBreathing : PistolCards
 
         DupInit();
 
-        Origin.AddStacks(ref duplicateCard, Accuracy.buffName);
-        Origin.ApplyBuffsToCard(ref duplicateCard, Accuracy.buffName);
-        Origin.ApplyBuffsToCard(ref duplicateCard, Focus.buffName);
+        Origin.AddStacks(Accuracy.buffName, 2);
+        Origin.ApplyAllBuffsToCard(ref duplicateCard);
 
     }
 }

@@ -42,10 +42,7 @@ public class Headshot : PistolCards
         DupInit();
         Debug.Log(Accuracy.buffName + Origin.GetName() + duplicateCard.rollCeiling);
 
-
-        Origin.AddStacks(ref duplicateCard, Accuracy.buffName);
-        Origin.ApplyBuffsToCard(ref duplicateCard, Accuracy.buffName);
-        Origin.ApplyBuffsToCard(ref duplicateCard, Focus.buffName);
+        Origin.ApplyAllBuffsToCard(ref duplicateCard);
 
     }
 

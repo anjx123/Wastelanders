@@ -11,8 +11,11 @@ public abstract class StatusEffect
         return this.buffStacks;
     }
 
-    // increments buffStacks by amount in the card
-    public abstract void GainStacks(ref ActionClass.CardDup dup);
+    // increments buffStacks by the amount given    
+    public virtual void GainStacks(int stacks)
+    {
+        this.buffStacks += stacks;
+    }
 
     // lowers buffStacks by amount specified
     public void LoseStacks(int amount)

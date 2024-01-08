@@ -17,7 +17,6 @@ public class CheapStrike : StaffCards
         base.Start();
         Speed = 1;
         Block = 2;
-        focus = 2;
 
         myName = "CheapStrike";
         Renderer renderer = GetComponent<Renderer>();
@@ -39,13 +38,12 @@ public class CheapStrike : StaffCards
 
         DupInit();
 
-        Origin.ApplyBuffsToCard(ref duplicateCard, Accuracy.buffName);
-        Origin.ApplyBuffsToCard(ref duplicateCard, Focus.buffName);
+        Origin.ApplyAllBuffsToCard(ref duplicateCard);
     }
 
     public override void OnHit()
     {
         base.OnHit();
-        Origin.AddStacks(ref duplicateCard, Focus.buffName);
+        Origin.AddStacks(Focus.buffName, 2);
     }
 }
