@@ -5,7 +5,14 @@ using static UnityEngine.UI.Image;
 
 public abstract class FrogAttacks : ActionClass
 {
-    public virtual void Start()
+    //SETUP CODE GOES IN AWAKE()
+    public void Start()
+    {
+        //NO CODE HERE
+    }
+
+    //ALL SETUP CODE GOES HERE
+    public virtual void Awake()
     {
         CardType = CardType.RangedAttack;
     }

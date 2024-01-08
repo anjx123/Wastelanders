@@ -2,6 +2,7 @@ using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.EventSystems.EventTrigger;
 
 public class CombatManager : MonoBehaviour
 {
@@ -14,8 +15,8 @@ public class CombatManager : MonoBehaviour
     public CinemachineVirtualCamera dynamicCamera;
 
     // Priority Queue
-    public List<EntityClass> players;
-    public List<EntityClass> enemies;
+    public List<PlayerClass> players;
+    public List<EnemyClass> enemies;
 
     public GameObject handContainer;
     public GameObject startDequeue;
@@ -40,6 +41,31 @@ public class CombatManager : MonoBehaviour
     {
         GameState = GameState.SELECTION;
     }
+
+
+    //Sets the Camera Center to the following Entity. 
+    public void SetCameraCenter(EntityClass entity)
+    {
+        dynamicCamera.Follow = entity.transform;
+        UpdateCameraBounds();
+    }
+
+    //Sets the Camera Bounds to "see more" in the direction that the following entity is facing
+    //Usage: Should be called everytime an Entity changes their direction. 
+    public void UpdateCameraBounds()
+    {
+        if (dynamicCamera.Follow.GetComponent<EntityClass>()?.IsFacingRight() ?? false)
+        {
+            var transposer = dynamicCamera.GetCinemachineComponent<CinemachineFramingTransposer>();
+            transposer.m_ScreenX = 0.25f;
+        }
+        else if (!(dynamicCamera.Follow.GetComponent<EntityClass>()?.IsFacingRight()) ?? false)
+        {
+            var transposer = dynamicCamera.GetCinemachineComponent<CinemachineFramingTransposer>();
+            transposer.m_ScreenX = 0.75f;
+        }
+    }
+
     
     private void PerformSelection()
     {
@@ -47,7 +73,23 @@ public class CombatManager : MonoBehaviour
         handContainer.SetActive(true);
         baseCamera.Priority = 1;
         dynamicCamera.Priority = 0;
+
+        // Each enemy declares an attack. players is passed to AddAttack so the enemy can choose a target.
+        foreach (EnemyClass enemy in enemies)
+        {
+            enemy.AddAttack(players);
+            StartCoroutine(enemy.ResetPosition());
+        }
+
+        foreach (PlayerClass player in players)
+        {
+            player.DrawToMax();
+            StartCoroutine(player.ResetPosition());
+
+        }
+
     }
+
 
     private void PerformFighting()
     {

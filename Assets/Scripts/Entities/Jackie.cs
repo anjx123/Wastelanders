@@ -33,13 +33,6 @@ public class Jackie : PlayerClass
             toAdd.transform.position = new Vector3(-1000, -1000, 1);
         }
 
-        // Draw starting hand
-        for (int i = 0; i < maxHandSize; i++)
-        {
-            DrawCard();
-        }
-
-        RenderHand();
         base.Start();
     }
 
@@ -58,8 +51,14 @@ public class Jackie : PlayerClass
         if (hand.Count < maxHandSize)
         {
             int idx = Random.Range(0, pool.Count);
-            hand.Add(pool[idx]);
-            pool.RemoveAt(idx);
+            if (pool.Count > 0)
+            {
+                hand.Add(pool[idx]);
+                pool.RemoveAt(idx);
+            } else
+            {
+                Debug.LogWarning(myName + "'s Pool has no cards");
+            }
         }
     }
 
@@ -69,7 +68,7 @@ public class Jackie : PlayerClass
      *  MODIFIES: Nothing
      * 
      */
-    void RenderHand()
+    protected override void RenderHand()
     {
         for (int i = 0; i < hand.Count; i++)
         {
@@ -97,7 +96,6 @@ public class Jackie : PlayerClass
         discard.Add(used);
         used.transform.position = new Vector3(500, 500, 1);
         // draw a replacement card
-        DrawCard();
         RenderHand();
     }
 

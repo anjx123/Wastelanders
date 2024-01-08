@@ -37,21 +37,26 @@ public class BattleQueue : MonoBehaviour
     public bool AddPlayerAction(ActionClass action)
     {
         bool ret;
-        if (!(actionQueue.InsertLinearSearchAndEnsureSpeedInvariant(action)))
+        if (!(actionQueue.Insert(action)))
         {
             //Debug.Log("BQ not Updated.");
             ret = false;
         }
         else
         {
-            //Debug.Log("Something has been added to BQ");
+
             ret = true;
         }
         RenderBQ();
         return ret;
     }
 
-
+    public void AddEnemyAction(ActionClass action, EntityClass origin)
+    {
+        action.Origin = origin;
+        actionQueue.Insert(action);
+        RenderBQ();
+    }
 
 
 
@@ -97,6 +102,12 @@ public class BattleQueue : MonoBehaviour
     public IEnumerator Dequeue()
     {
         List<ActionClass> array = actionQueue.GetList();
+        bool beganFighting = false;
+        if (!(array.Count == 0))
+        {
+            CombatManager.Instance.GameState = GameState.FIGHTING;
+            beganFighting = true;
+        }
         while (!(array.Count == 0))
         {
             ActionClass e = array[0];
@@ -104,6 +115,10 @@ public class BattleQueue : MonoBehaviour
             array.Remove(e); // this utilises the default method for lists 
             RenderBQ();
             Debug.Log("An item hath been removed from the BQ");
+        }
+        if (beganFighting)
+        {
+            CombatManager.Instance.GameState = GameState.SELECTION;
         }
     }
 
@@ -126,19 +141,19 @@ public class BattleQueue : MonoBehaviour
             array = new List<ActionClass>();
         }
 
-        public void Insert(ActionClass card)
+        /*public void Insert(ActionClass card)
         {
             int index = BinarySearch(card.Speed, 0, array.Count - 1, card.Origin);
 
             // Insert the new value at the correct position
             array.Insert(index, card);
-        }
+        }*/
 
         // The speed invariant refers to 
         // prevent each player character from playing cards with duplicate speeds
         // Careful, because you could have multiple player characters that can have overlapping speeds
         // But one singular player character cannot have overlapping speeds
-        public bool InsertLinearSearchAndEnsureSpeedInvariant (ActionClass card)
+        public bool Insert (ActionClass card)
         {
             int i = LinearSearch(card); // returns where to insert ensuring LIFO.
 
@@ -155,7 +170,8 @@ public class BattleQueue : MonoBehaviour
             if (i < array.Count) {
                 for (int x = 0; x < array.Count; x++) // ensuring uniqueness of speed for one character inside the array
                 {
-                    if (card.Origin.GetType().IsSubclassOf(typeof(PlayerClass)) && card.Speed == array[x].Speed)
+                    if (array[x].IsPlayedByPlayer() && card.Speed == array[x].Speed)
+
                     {
                         return false; // don't insert. 
                     }

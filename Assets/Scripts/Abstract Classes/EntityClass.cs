@@ -1,9 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.Experimental.GraphView.GraphView;
 using static UnityEngine.UI.Image;
 
-public class EntityClass : SelectClass
+public abstract class EntityClass : SelectClass
 {
     protected int MAX_HEALTH;
     protected int health;
@@ -11,6 +12,10 @@ public class EntityClass : SelectClass
     public Animator animator;
     public Transform myTransform;
     public CombatInfo combatInfo;
+
+    private static readonly float Z_LAYER = 0;
+
+    protected Vector3 initalPosition;
     public int Health
     {
         get { return health; }
@@ -38,10 +43,12 @@ public class EntityClass : SelectClass
 
         healthBar.setMaxHealth(MAX_HEALTH);
         healthBar.setHealth(MAX_HEALTH);
-
+        initalPosition = myTransform.position;
         statusEffects = new Dictionary<string, StatusEffect>();
-       
+
+        DeEmphasize();
     }
+
 
     public virtual void TakeDamage(int damage)
     {
@@ -71,8 +78,12 @@ public class EntityClass : SelectClass
 
         Vector3 diffInLocation = destination - originalPosition;
 
+        if ((Vector2) diffInLocation == Vector2.zero) yield break;
+
         float distance = Mathf.Sqrt(diffInLocation.x * diffInLocation.x + diffInLocation.y * diffInLocation.y);
         float maxProportionTravelled = (distance - radius) / distance;
+
+        UpdateFacing(diffInLocation, CardComparator.X_BUFFER);
 
         if (HasParameter("IsMoving", animator))
         {
@@ -92,6 +103,34 @@ public class EntityClass : SelectClass
         }
     }
 
+    public abstract void FaceRight();
+
+    public abstract void FaceLeft();
+
+    public bool IsFacingRight()
+    {
+        return combatInfo.IsFacingRight();
+    }
+
+    /*
+     * Purpose: Updates the entitiy's direction to face a target. (Target.position - my position)
+     * diffInLocation: Will face the entity Right if the Target is to its right (positive diffInLocation)
+        Left if other way around
+        ComparingBuffer: Adds a buffer where if the  (abs) |x-distance| travelled is smaller than comparingBuffer, No flip is made   
+        Note: If you want to reverse the results, add a negative to diffInLocation before calling.
+     */
+    public void UpdateFacing(Vector3 diffInLocation, float comparingBuffer)
+    {
+        if (diffInLocation.x > comparingBuffer)
+        {
+            FaceRight();
+        }
+        else if (diffInLocation.x < -(comparingBuffer))
+        {
+            FaceLeft();
+        }
+    }
+
 
     /* Requires: "IsStaggered" bool exists on the animator controller attatched to this
      * 
@@ -108,6 +147,12 @@ public class EntityClass : SelectClass
     {
         Vector3 originalPosition = myTransform.position;
         float elapsedTime = 0f;
+
+        Vector3 diffInLocation = staggeredPosition - originalPosition;
+        if ((Vector2)diffInLocation == Vector2.zero) yield break;
+        UpdateFacing(-diffInLocation, 0);
+
+
 
         if (HasParameter("IsStaggered", animator))
         {
@@ -146,6 +191,8 @@ public class EntityClass : SelectClass
         HighlightManager.OnEntityClicked(this);
     }
 
+    public abstract IEnumerator ResetPosition();
+
     public void Die()
     {
         Debug.Log("Entity: " + id + " has died");
@@ -176,7 +223,6 @@ public class EntityClass : SelectClass
         {
             statusEffects[buffType] = BuffFactory.GetStatusEffect(buffType);
         }
-        Debug.Log("add buffs no error initial success" + dup.rollCeiling);
         statusEffects[buffType].ApplyStacks(ref dup);
     }
 
@@ -224,6 +270,26 @@ public class EntityClass : SelectClass
     public void ActivateCombatInfo(ActionClass actionClass)
     {
         combatInfo.SetCombatSprite(actionClass);
+    }
+
+    public void DeactivateCombatInfo()
+    {
+        combatInfo.DeactivateCombatSprite();
+    }
+    //Increases this Entity Class' sorting layer (negative number is higher up)
+    public void Emphasize()
+    {
+        Vector3 largeTransform = transform.position;
+        largeTransform.z = Z_LAYER - 1;
+        transform.position = largeTransform;
+    }
+
+    //Decreases this Entity Class' sorting layer. (Standardizes Sorting Layers for entities)
+    public void DeEmphasize()
+    {
+        Vector3 largeTransform = transform.position;
+        largeTransform.z = Z_LAYER;
+        transform.position = largeTransform;
     }
 
     public void SetDice(int value)

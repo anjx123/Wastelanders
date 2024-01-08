@@ -45,6 +45,9 @@ public abstract class ActionClass : SelectClass
     }
     public virtual void OnHit()
     {
+        Vector3 diffInLocation = Target.myTransform.position - Origin.myTransform.position;
+        Origin.UpdateFacing(diffInLocation, 0);
+
         float percentageDone = 1; //Testing different powered knockbacks
         if (Target.Health != 0)
         {
@@ -53,6 +56,12 @@ public abstract class ActionClass : SelectClass
         this.Target.TakeDamage(duplicateCard.actualRoll);
         CardComparator.Instance.StartStagger(Origin, Target, percentageDone);
     }
+
+    public bool IsPlayedByPlayer()
+    {
+        return Origin.GetType().IsSubclassOf(typeof(PlayerClass));
+    }
+
 
     public int getRolledDamage()
     {
@@ -79,7 +88,7 @@ public abstract class ActionClass : SelectClass
     public virtual void RollDice()
     {
         duplicateCard.actualRoll = Random.Range(duplicateCard.rollFloor, duplicateCard.rollCeiling + 1);
-        Debug.Log("Ref" + duplicateCard.rollFloor + duplicateCard.rollCeiling + duplicateCard.actualRoll);
+        
         Origin.SetDice(Damage); 
     }
 

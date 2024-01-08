@@ -20,18 +20,77 @@ public class CombatInfo : MonoBehaviour
      */
     public void SetDice(int value)
     {
+        Debug.Log("Dice Should be stopped");
         animator.enabled = false;
         diceRollSprite.GetComponent<SpriteRenderer>().sprite = loadedSprites[0];
     }
 
     /* 
-     Sets the CombatInfo sprite to the icon of this ActionClass
+     Sets the CombatInfo sprite to the icon of this ActionClass.
+    Pass in null to discard the current sprite.
      */
     public void SetCombatSprite(ActionClass card)
     {
         animator.enabled = true;
         SpriteRenderer spriteRenderer = combatCardSprite.GetComponent<SpriteRenderer>();
         spriteRenderer.sprite = card.GetIcon();
+    }
+
+    public void DeactivateCombatSprite()
+    {
+        SpriteRenderer spriteRenderer = combatCardSprite.GetComponent<SpriteRenderer>();
+        spriteRenderer.sprite = null;
+    }
+    //Flips the CombatInfo so that the Icon is on the Right of the entity
+    public void FaceLeft()
+    {
+
+        FlipTransform(this.transform, false); 
+        foreach (Transform child in buffList.transform)
+        {
+            FlipTransform(child, false);
+        }
+        diceRollSprite.GetComponent<SpriteRenderer>().flipX = true;
+
+        
+        
+
+        CombatManager.Instance.UpdateCameraBounds(); //Bad placement here
+    }
+    //Flips the CombatInfo so that the Icon is on the LEFT of the entity
+    public void FaceRight()
+    {
+        FlipTransform(this.transform, true);
+        foreach (Transform child in buffList.transform)
+        {
+            FlipTransform(child, true);
+        }
+        diceRollSprite.GetComponent<SpriteRenderer>().flipX = false;
+
+        CombatManager.Instance.UpdateCameraBounds(); //Bad placement here, but I cant think of where else id put it
+
+    }
+
+    public void FlipTransform(Transform transform, bool faceRight)
+    {
+        if (faceRight) //Face Right
+        {
+            Vector3 flippedTransform = transform.localScale;
+            flippedTransform.x = Mathf.Abs(flippedTransform.x);
+            transform.localScale = flippedTransform;
+        }
+        else
+        {
+            Vector3 flippedTransform = transform.localScale;
+            flippedTransform.x = -Mathf.Abs(flippedTransform.x);
+            transform.localScale = flippedTransform;
+        }
+    }
+
+    //A Cheat implementation that relies on the implementation of FaceRight/Left 
+    public bool IsFacingRight()
+    {
+        return transform.localScale.x > 0;
     }
     public void UpdateBuffs(Dictionary<string, StatusEffect> buffs)
     {
@@ -47,6 +106,13 @@ public class CombatInfo : MonoBehaviour
             buffIcon.transform.SetParent(buffList.transform, false);
             buffIcon.SetIcon(buffs[str].GetIcon());
             buffIcon.SetText(buffs[str].Stacks.ToString());
+            if (IsFacingRight())
+            {
+                FlipTransform(buffIcon.transform, true);
+            } else
+            {
+                FlipTransform(buffIcon.transform, false);
+            }
         }
     }
 }
