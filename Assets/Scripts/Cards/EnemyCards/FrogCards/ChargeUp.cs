@@ -21,7 +21,6 @@ public class ChargeUp : FrogAttacks
         
         Speed = 1;
         Block = 2;
-        focus = 2;
 
         myName = "ChargeUp";
         CardType = CardType.Defense;
