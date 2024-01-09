@@ -20,7 +20,6 @@ public class CombatInfo : MonoBehaviour
      */
     public void SetDice(int value)
     {
-        Debug.Log("Dice Should be stopped");
         animator.enabled = false;
         diceRollSprite.GetComponent<SpriteRenderer>().sprite = loadedSprites[0];
     }

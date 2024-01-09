@@ -35,7 +35,6 @@ public class CardComparator : MonoBehaviour
         int cardOneStaggered;
         CombatManager.Instance.SetCameraCenter(card1.Origin);
         ActivateInfo(card1, card2);
-        EmphasizeClashers(card1, card2);
         card1.ApplyEffect();
         card2.ApplyEffect();
         yield return StartCoroutine(ClashBothEntities(card1.Origin, card1.Target));
@@ -69,7 +68,7 @@ public class CardComparator : MonoBehaviour
         }
         DeactivateInfo(card1, card2);
         yield return new WaitForSeconds(1);
-        DeEmphasizeClashers(card1, card2);
+        DeEmphasizeClashers(card1.Origin, card1.Target);
     }
 
     //Produces a positive value if Card1 is staggered by Card2
@@ -105,11 +104,11 @@ public class CardComparator : MonoBehaviour
      */
     private IEnumerator StaggerEntities(EntityClass origin, EntityClass target, float percentageDone)
     {
-        Vector2 directionVector = target.myTransform.position - origin.myTransform.position;
+        Vector3 directionVector = target.myTransform.position - origin.myTransform.position;
 
-        Vector2 normalizedDirection = directionVector.normalized;
+        Vector3 normalizedDirection = directionVector.normalized;
         float staggerPower = StaggerPowerCalculation(percentageDone);
-        yield return StartCoroutine(target.StaggerBack(target.myTransform.position + (Vector3)normalizedDirection * staggerPower));
+        yield return StartCoroutine(target.StaggerBack(target.myTransform.position + normalizedDirection * staggerPower));
     }
 
     //Calculates the power of the stagger based on the percentage health done
@@ -139,10 +138,12 @@ public class CardComparator : MonoBehaviour
     public static readonly float X_BUFFER = 0.8f;
     private IEnumerator ClashBothEntities(EntityClass origin, EntityClass target)
     {
+        EmphasizeClashers(origin, target);
         //The Distance weighting will be calculated based on speeds of the two clashing cards
-        Vector2 centeredDistance = (origin.myTransform.position * 0.3f + 0.7f * target.myTransform.position);
+        Vector3 centeredDistance = (origin.myTransform.position * 0.3f + 0.7f * target.myTransform.position);
         float bufferedRadius = 0.25f;
         float duration = 0.6f;
+        
         
         StartCoroutine(origin?.MoveToPosition(HorizontalProjector(centeredDistance, origin.myTransform.position, X_BUFFER), bufferedRadius, duration));
         yield return StartCoroutine(target?.MoveToPosition(HorizontalProjector(centeredDistance, target.myTransform.position, X_BUFFER), bufferedRadius, duration));
@@ -152,13 +153,13 @@ public class CardComparator : MonoBehaviour
      * 
      * Projects A Character's position onto the same x-axis as centeredDistnace but is 'xBuffer' x-distance away from the 'centeredDistance'
      */
-    private Vector2 HorizontalProjector(Vector2 centeredDistance, Vector2 currentPosition, float xBuffer)
+    private Vector3 HorizontalProjector(Vector3 centeredDistance, Vector3 currentPosition, float xBuffer)
     {
-        Vector2 vectorToCenter = (centeredDistance - currentPosition);
-
+        Vector3 vectorToCenter = (centeredDistance - currentPosition);
+        
         return vectorToCenter.x > 0 ?
-            currentPosition + vectorToCenter - new Vector2(xBuffer, 0) :
-            currentPosition + vectorToCenter + new Vector2(xBuffer, 0);
+            currentPosition + vectorToCenter - new Vector3(xBuffer, 0, 0) :
+            currentPosition + vectorToCenter + new Vector3(xBuffer, 0, 0);
     }
 
     private void ActivateInfo(ActionClass card1, ActionClass card2)
@@ -174,16 +175,16 @@ public class CardComparator : MonoBehaviour
         card2.Origin.DeactivateCombatInfo();
     }
 
-    private void EmphasizeClashers(ActionClass card1, ActionClass card2)
+    private void EmphasizeClashers(EntityClass origin, EntityClass target)
     {
-        card1.Origin.Emphasize();
-        card2.Origin.Emphasize();
+        origin.Emphasize();
+        target.Emphasize();
     }
 
-    private void DeEmphasizeClashers(ActionClass card1, ActionClass card2)
+    private void DeEmphasizeClashers(EntityClass origin, EntityClass target)
     {
-        card1.Origin.DeEmphasize();
-        card2.Origin.DeEmphasize();
+        origin.DeEmphasize();
+        target.DeEmphasize();
     }
 
     private bool IsAttack(ActionClass card)

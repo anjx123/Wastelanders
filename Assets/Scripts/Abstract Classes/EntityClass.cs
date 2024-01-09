@@ -13,7 +13,7 @@ public abstract class EntityClass : SelectClass
     public Transform myTransform;
     public CombatInfo combatInfo;
 
-    private static readonly float Z_LAYER = 0;
+    private static readonly float Z_LAYER = -2;
 
     protected Vector3 initalPosition;
     public int Health
