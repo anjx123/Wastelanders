@@ -56,7 +56,6 @@ public abstract class PlayerClass : EntityClass
 
     public override void FaceLeft()
     {
-        Debug.Log(myName + "Is facing left");
         this.GetComponent<SpriteRenderer>().flipX = true;
         combatInfo.FaceLeft();
     }

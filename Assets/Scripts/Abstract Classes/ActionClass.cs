@@ -75,13 +75,12 @@ public abstract class ActionClass : SelectClass
         duplicateCard = new CardDup();
         duplicateCard.rollFloor = lowerBound;
         duplicateCard.rollCeiling = upperBound;
-
-        Debug.Log("Duplicate Card Initialized" + duplicateCard.rollFloor + duplicateCard.rollCeiling);
     }
 
     public virtual void ApplyEffect()
     {
         DupInit();
+        Origin.ApplyAllBuffsToCard(ref duplicateCard);
     }
 
     // Calculates Actual Damage/Block After Applying Buffs
@@ -99,7 +98,7 @@ public abstract class ActionClass : SelectClass
             return icon;
         } else
         {
-            Debug.LogWarning("Icon is Missing");
+            Debug.LogWarning("ActionClass icon is Missing");
             return null;
         }
     }

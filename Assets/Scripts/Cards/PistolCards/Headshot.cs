@@ -32,20 +32,6 @@ public class Headshot : PistolCards
 
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-    }
-    public override void ApplyEffect()
-    {
-
-        DupInit();
-        Debug.Log(Accuracy.buffName + Origin.GetName() + duplicateCard.rollCeiling);
-
-        Origin.ApplyAllBuffsToCard(ref duplicateCard);
-
-    }
-
     public override void RollDice()
     {
         base.RollDice();
