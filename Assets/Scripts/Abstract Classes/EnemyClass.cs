@@ -41,6 +41,11 @@ public abstract class EnemyClass : EntityClass
      */
     public abstract void AddAttack(List<PlayerClass> players);
 
+    public override IEnumerator ResetPosition()
+    {
+        yield return StartCoroutine(MoveToPosition(initalPosition, 0f, 0.8f));
+        FaceLeft();
+    }
     public override void FaceRight()
     {
         this.GetComponent<SpriteRenderer>().flipX = true;

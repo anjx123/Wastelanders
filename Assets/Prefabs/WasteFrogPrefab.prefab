@@ -56,6 +56,7 @@ MonoBehaviour:
   availableActions:
   - {fileID: 2376898879351982445, guid: 1cacda7b5938348f68e539bcad13b1fa, type: 3}
   - {fileID: 5586820537936588944, guid: d7ed528b3d5934a809e97a1ef133cdd0, type: 3}
+  - {fileID: 2376898879351982445, guid: 8e1f3cbdadd7f894aa929faf762c174e, type: 3}
 --- !u!95 &3297183234373819581
 Animator:
   serializedVersion: 5
@@ -184,11 +185,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 402734221553807771, guid: 700d60a172828b047b313c7dab6975ef, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 86.988
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 402734221553807771, guid: 700d60a172828b047b313c7dab6975ef, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 19.6
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 402734221553807771, guid: 700d60a172828b047b313c7dab6975ef, type: 3}
       propertyPath: m_LocalScale.x
@@ -287,6 +288,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7946142163233550150}
     m_Modifications:
+    - target: {fileID: 5150959248165338579, guid: 941333e3be7f6f04688676f1827dbf1b, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -8.4
+      objectReference: {fileID: 0}
     - target: {fileID: 6018344303403229583, guid: 941333e3be7f6f04688676f1827dbf1b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

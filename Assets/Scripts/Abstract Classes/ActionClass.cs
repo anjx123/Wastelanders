@@ -8,6 +8,23 @@ public abstract class ActionClass : SelectClass
     public EntityClass Target { get; set; }
     public EntityClass Origin { get; set; }
 
+    protected int lowerBound;
+    protected int upperBound;
+
+    protected CardDup duplicateCard;
+
+    public CardDup GetCard()
+    {
+        return duplicateCard;
+    }
+
+    // Struct to Apply Buffs to so as to avoid modifying the cards
+    public struct CardDup
+    {
+        public int rollFloor;
+        public int rollCeiling;
+        public int actualRoll;
+    }
     public int Damage { get; protected set; }
     public int Block { get; protected set; }
     public int Speed { get; protected set; }
@@ -28,12 +45,15 @@ public abstract class ActionClass : SelectClass
     }
     public virtual void OnHit()
     {
+        Vector3 diffInLocation = Target.myTransform.position - Origin.myTransform.position;
+        Origin.UpdateFacing(diffInLocation, 0);
+
         float percentageDone = 1; //Testing different powered knockbacks
         if (Target.Health != 0)
         {
-            percentageDone = Mathf.Clamp(Damage / (float)Target.Health, 0f, 1f);
+            percentageDone = Mathf.Clamp(duplicateCard.actualRoll / (float)Target.Health, 0f, 1f);
         }
-        this.Target.TakeDamage(Damage);
+        this.Target.TakeDamage(duplicateCard.actualRoll);
         CardComparator.Instance.StartStagger(Origin, Target, percentageDone);
     }
 
@@ -43,9 +63,32 @@ public abstract class ActionClass : SelectClass
     }
 
 
-    public void RollDice()
+    public int getRolledDamage()
     {
-        Origin.SetDice(Damage);
+        return duplicateCard.actualRoll;
+    }
+
+    // Initializes a CardDup struct with the given stats of the Card to 
+    // modify further based on buffs
+    protected void DupInit()
+    {
+        duplicateCard = new CardDup();
+        duplicateCard.rollFloor = lowerBound;
+        duplicateCard.rollCeiling = upperBound;
+    }
+
+    public virtual void ApplyEffect()
+    {
+        DupInit();
+        Origin.ApplyAllBuffsToCard(ref duplicateCard);
+    }
+
+    // Calculates Actual Damage/Block After Applying Buffs
+    public virtual void RollDice()
+    {
+        duplicateCard.actualRoll = Random.Range(duplicateCard.rollFloor, duplicateCard.rollCeiling + 1);
+        
+        Origin.SetDice(Damage); 
     }
 
     public Sprite GetIcon()
@@ -55,7 +98,7 @@ public abstract class ActionClass : SelectClass
             return icon;
         } else
         {
-            Debug.LogWarning("Icon is Missing");
+            Debug.LogWarning("ActionClass icon is Missing");
             return null;
         }
     }

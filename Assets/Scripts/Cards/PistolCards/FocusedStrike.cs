@@ -14,6 +14,9 @@ public class FocusedStrike : ActionClass
     {
         CardType = CardType.MeleeAttack;
         myName = "FocusedStrike";
+        lowerBound = 2;
+        upperBound = 3;
+       
         Renderer renderer = GetComponent<Renderer>();
         ogMaterial = renderer.material; // og sprite of card, maybe refac into ActionClass?
         OriginalPosition = transform.position;
@@ -24,4 +27,13 @@ public class FocusedStrike : ActionClass
     {
         
     }
+
+    public override void ApplyEffect()
+    {
+        DupInit();
+
+        Origin.AddStacks(Focus.buffName, 1);
+        Origin.ApplyAllBuffsToCard(ref duplicateCard);
+    }
+
 }

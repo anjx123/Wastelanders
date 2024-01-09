@@ -14,21 +14,41 @@ public class QuickDraw : PistolCards
     // Start is called before the first frame update
     public override void Start()
     {
+        lowerBound = 1;
+        upperBound = 5;
         base.Start();
         Speed = 5;
-        Block = 0;
-        Damage = 2;
+        Block = 2;
+        Damage = 3;
+
         myName = "QuickDraw";
         CardType = CardType.RangedAttack;
         Renderer renderer = GetComponent<Renderer>();
         ogMaterial = renderer.material; // og sprite of card
         OriginalPosition = transform.position;
 
+        
+
     }
 
     // Update is called once per frame
     void Update()
     {
+        
+    }
+
+    public override void ApplyEffect()
+    {
+
+        DupInit();
+        
+
+        if (Origin == null)
+        {
+            Debug.Log("failure");
+        }
+        
+        Origin.ApplyAllBuffsToCard(ref duplicateCard);
         
     }
 

@@ -15,9 +15,11 @@ public class PistolWhip : PistolCards
     public override void Start()
     {
         base.Start();
-        Speed = 3;
+        Speed = 2;
         Block = 2;
         Damage = 99;
+        lowerBound = 3;
+        upperBound = 5;
         CardType = CardType.MeleeAttack;
         myName = "PistolWhip";
         Renderer renderer = GetComponent<Renderer>();
@@ -31,5 +33,14 @@ public class PistolWhip : PistolCards
     {
         
     }
+
+    public override void ApplyEffect()
+    {
+        DupInit();
+        
+        Origin.ApplyAllBuffsToCard(ref duplicateCard);
+    }
+
+
 
 }

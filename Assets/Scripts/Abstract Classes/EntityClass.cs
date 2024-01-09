@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.Experimental.GraphView.GraphView;
 using static UnityEngine.UI.Image;
 
 public abstract class EntityClass : SelectClass
@@ -11,11 +12,19 @@ public abstract class EntityClass : SelectClass
     public Animator animator;
     public Transform myTransform;
     public CombatInfo combatInfo;
+
+    private static readonly float Z_LAYER = -2;
+
+    protected Vector3 initalPosition;
     public int Health
     {
         get { return health; }
         set { health = value; }
     }
+
+    protected Dictionary<string, StatusEffect> statusEffects;
+
+
 
     protected List<ActionClass> actionsAvailable;
 
@@ -31,9 +40,15 @@ public abstract class EntityClass : SelectClass
 
     public virtual void Start()
     {
+
         healthBar.setMaxHealth(MAX_HEALTH);
         healthBar.setHealth(MAX_HEALTH);
+        initalPosition = myTransform.position;
+        statusEffects = new Dictionary<string, StatusEffect>();
+
+        DeEmphasize();
     }
+
 
     public virtual void TakeDamage(int damage)
     {
@@ -63,17 +78,12 @@ public abstract class EntityClass : SelectClass
 
         Vector3 diffInLocation = destination - originalPosition;
 
+        if ((Vector2) diffInLocation == Vector2.zero) yield break;
+
         float distance = Mathf.Sqrt(diffInLocation.x * diffInLocation.x + diffInLocation.y * diffInLocation.y);
         float maxProportionTravelled = (distance - radius) / distance;
 
-        if (diffInLocation.x > CardComparator.xBuffer + radius)
-        {
-            FaceRight();
-        }
-        else if (diffInLocation.x < -(CardComparator.xBuffer + radius))
-        {
-            FaceLeft();
-        }
+        UpdateFacing(diffInLocation, CardComparator.X_BUFFER);
 
         if (HasParameter("IsMoving", animator))
         {
@@ -102,6 +112,25 @@ public abstract class EntityClass : SelectClass
         return combatInfo.IsFacingRight();
     }
 
+    /*
+     * Purpose: Updates the entitiy's direction to face a target. (Target.position - my position)
+     * diffInLocation: Will face the entity Right if the Target is to its right (positive diffInLocation)
+        Left if other way around
+        ComparingBuffer: Adds a buffer where if the  (abs) |x-distance| travelled is smaller than comparingBuffer, No flip is made   
+        Note: If you want to reverse the results, add a negative to diffInLocation before calling.
+     */
+    public void UpdateFacing(Vector3 diffInLocation, float comparingBuffer)
+    {
+        if (diffInLocation.x > comparingBuffer)
+        {
+            FaceRight();
+        }
+        else if (diffInLocation.x < -(comparingBuffer))
+        {
+            FaceLeft();
+        }
+    }
+
 
     /* Requires: "IsStaggered" bool exists on the animator controller attatched to this
      * 
@@ -120,15 +149,8 @@ public abstract class EntityClass : SelectClass
         float elapsedTime = 0f;
 
         Vector3 diffInLocation = staggeredPosition - originalPosition;
-
-        if (diffInLocation.x > 0)
-        {
-            FaceLeft();
-        }
-        else if (diffInLocation.x < -0)
-        {
-            FaceRight();
-        }
+        if ((Vector2)diffInLocation == Vector2.zero) yield break;
+        UpdateFacing(-diffInLocation, 0);
 
 
 
@@ -169,6 +191,8 @@ public abstract class EntityClass : SelectClass
         HighlightManager.OnEntityClicked(this);
     }
 
+    public abstract IEnumerator ResetPosition();
+
     public void Die()
     {
         Debug.Log("Entity: " + id + " has died");
@@ -180,6 +204,45 @@ public abstract class EntityClass : SelectClass
         this.health = health;
         this.MAX_HEALTH = health;
     } */
+
+    // Adds the Stacks of the Card to the Relevant Buff Stacks of the Player    
+    public void AddStacks(string buffType, int stacks)
+    {
+        if (!statusEffects.ContainsKey(buffType)) 
+        { 
+            statusEffects[buffType] = BuffFactory.GetStatusEffect(buffType);
+        }
+        statusEffects[buffType].GainStacks(stacks);
+        UpdateBuffs();
+    }
+
+    // Applies the Stacks of the Specified Buff to the Card Roll Limits
+    public void ApplyBuffsToCard(ref ActionClass.CardDup dup, string buffType)
+    {
+        if (!statusEffects.ContainsKey(buffType))
+        {
+            statusEffects[buffType] = BuffFactory.GetStatusEffect(buffType);
+        }
+        statusEffects[buffType].ApplyStacks(ref dup);
+    }
+
+    // Applies the Stacks of all Buffs to the Card Roll Limits
+    public void ApplyAllBuffsToCard(ref ActionClass.CardDup dup)
+    {
+        foreach (string buff in  statusEffects.Keys)
+        {
+            ApplyBuffsToCard(ref dup, buff);
+        }
+    }
+
+    public int GetBuffStacks(string s)
+    {
+        if (statusEffects.ContainsKey(s))
+        {
+            return statusEffects[s].Stacks;
+        }
+        return 0;
+    }
 
     public virtual void AttackAnimation(string animationName)
     {
@@ -209,9 +272,34 @@ public abstract class EntityClass : SelectClass
         combatInfo.SetCombatSprite(actionClass);
     }
 
+    public void DeactivateCombatInfo()
+    {
+        combatInfo.DeactivateCombatSprite();
+    }
+    //Increases this Entity Class' sorting layer (negative number is higher up)
+    public void Emphasize()
+    {
+        Vector3 largeTransform = transform.position;
+        largeTransform.z = Z_LAYER - 1;
+        transform.position = largeTransform;
+    }
+
+    //Decreases this Entity Class' sorting layer. (Standardizes Sorting Layers for entities)
+    public void DeEmphasize()
+    {
+        Vector3 largeTransform = transform.position;
+        largeTransform.z = Z_LAYER;
+        transform.position = largeTransform;
+    }
+
     public void SetDice(int value)
     {
         combatInfo.SetDice(value);
+    }
+
+    public void UpdateBuffs()
+    {
+        combatInfo.UpdateBuffs(statusEffects);
     }
 
     public override void OnMouseEnter()
@@ -231,5 +319,4 @@ public abstract class EntityClass : SelectClass
             grewLarger = false;
         }
     }
-
 }

@@ -39,10 +39,19 @@ public abstract class PlayerClass : EntityClass
      */
     abstract public void HandleUseCard(ActionClass a);
 
+    public override IEnumerator ResetPosition()
+    {
+        yield return StartCoroutine(MoveToPosition(initalPosition, 0f, 0.8f));
+        FaceRight();
+    }
+
     public override void FaceRight()
     {
+        
         this.GetComponent<SpriteRenderer>().flipX = false;
         combatInfo.FaceRight();
+        
+        
     }
 
     public override void FaceLeft()
@@ -58,5 +67,6 @@ public abstract class PlayerClass : EntityClass
             DrawCard();
         }
         RenderHand();
+        
     }
 }
