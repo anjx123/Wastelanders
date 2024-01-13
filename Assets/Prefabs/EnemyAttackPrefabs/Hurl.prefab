@@ -70,7 +70,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ecc3bad833c93744ae6bbcd433a5f88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  myTransform: {fileID: 0}
   icon: {fileID: 21300000, guid: 7f725e2a7baa3b54c9d5c82eebce98df, type: 3}
+  fullCard: {fileID: 21300000, guid: 5a9633d121b45e44d9287e6a4219a0b9, type: 3}
 --- !u!212 &1011641279369870752
 SpriteRenderer:
   m_ObjectHideFlags: 0
