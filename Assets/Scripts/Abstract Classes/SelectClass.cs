@@ -29,7 +29,6 @@ public abstract class SelectClass : MonoBehaviour
         return myName;
     }
 
-    // abstract as actions and entities have different ways to display selection
     public virtual void OnMouseEnter()
     {
         if (CombatManager.Instance.CanHighlight())
