@@ -5,7 +5,7 @@ public class CombatCardUI : Selectable
 {
     public ActionClass actionClass; // Current/last ActionClass that we are displaying; it is set by the enemy
     public GameObject cardDisplay; // The card display object
-    protected bool isDisplaying = false;
+    public bool isDisplaying = false;
     SpriteRenderer rdr;
 
     public static CombatCardUI currentUser; // set this to self when we display; this way,

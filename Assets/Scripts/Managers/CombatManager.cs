@@ -20,6 +20,7 @@ public class CombatManager : MonoBehaviour
 
     public GameObject handContainer;
     public GameObject startDequeue;
+    public GameObject combatUICardDisplay; 
 
     // Awake is called when the script instance is being loaded
     void Awake()
@@ -95,6 +96,8 @@ public class CombatManager : MonoBehaviour
     {
         startDequeue.SetActive(false);
         handContainer.SetActive(false);
+        Destroy(combatUICardDisplay.GetComponent<SpriteRenderer>()); // hide combat info UI
+        CombatCardUI.currentUser.isDisplaying = false;
         baseCamera.Priority = 0;
         dynamicCamera.Priority = 1;
     }
