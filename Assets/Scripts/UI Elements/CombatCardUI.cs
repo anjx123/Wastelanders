@@ -32,11 +32,14 @@ public class CombatCardUI : Selectable
             ShowCard();
         }
     }
-
+    
     void ShowCard()
     {
         // Instantiate the card display object and set the flag to true
-        cardDisplay.AddComponent<SpriteRenderer>();
+        if (cardDisplay.GetComponent<SpriteRenderer>() == null)
+        {
+            cardDisplay.AddComponent<SpriteRenderer>();
+        } 
         rdr = cardDisplay.GetComponent<SpriteRenderer>();
         rdr.sprite = actionClass.fullCard;
         isDisplaying = true;
