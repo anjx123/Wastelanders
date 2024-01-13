@@ -3,10 +3,14 @@ using UnityEngine.UI;
 
 public class CombatCardUI : Selectable
 {
-    public ActionClass actionClass; // The ActionClass field you mentioned
+    public ActionClass actionClass; // Current/last ActionClass that we are displaying; it is set by the enemy
     public GameObject cardDisplay; // The card display object
-    private bool isDisplaying = false; // The flag for displaying the card
+    protected bool isDisplaying = false;
     SpriteRenderer rdr;
+
+    public static CombatCardUI currentUser; // set this to self when we display; this way,
+                                            // other instances can turn off our flag when they overwrite us
+
     void OnMouseOver()
     {
         // Increase the size of the Combat UI to indicate it's clickable
@@ -35,14 +39,19 @@ public class CombatCardUI : Selectable
     
     void ShowCard()
     {
-        // Instantiate the card display object and set the flag to true
+        if (currentUser != null)
+        {
+            currentUser.isDisplaying = false;
+        }
+
         if (cardDisplay.GetComponent<SpriteRenderer>() == null)
         {
             cardDisplay.AddComponent<SpriteRenderer>();
-        } 
+        }
         rdr = cardDisplay.GetComponent<SpriteRenderer>();
         rdr.sprite = actionClass.fullCard;
         isDisplaying = true;
+        currentUser = this;
     }
 
     void HideCard()
