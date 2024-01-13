@@ -6,7 +6,7 @@ public class CombatCardUI : Selectable
     public ActionClass actionClass; // The ActionClass field you mentioned
     public GameObject cardDisplay; // The card display object
     private bool isDisplaying = false; // The flag for displaying the card
-
+    SpriteRenderer rdr;
     void OnMouseOver()
     {
         // Increase the size of the Combat UI to indicate it's clickable
@@ -36,15 +36,15 @@ public class CombatCardUI : Selectable
     void ShowCard()
     {
         // Instantiate the card display object and set the flag to true
-        SpriteRenderer rdr = cardDisplay.AddComponent<SpriteRenderer>();
-        Debug.Log(actionClass.name);
+        cardDisplay.AddComponent<SpriteRenderer>();
+        rdr = cardDisplay.GetComponent<SpriteRenderer>();
         rdr.sprite = actionClass.fullCard;
         isDisplaying = true;
     }
 
     void HideCard()
     {
-        Destroy(cardDisplay);
+        Destroy(rdr);
         isDisplaying = false;
     }
 }
