@@ -97,7 +97,10 @@ public class CombatManager : MonoBehaviour
         startDequeue.SetActive(false);
         handContainer.SetActive(false);
         Destroy(combatUICardDisplay.GetComponent<SpriteRenderer>()); // hide combat info UI
-        CombatCardUI.currentUser.isDisplaying = false;
+        if (CombatCardUI.currentUser != null)
+        {
+            CombatCardUI.currentUser.isDisplaying = false;
+        }
         baseCamera.Priority = 0;
         dynamicCamera.Priority = 1;
     }
