@@ -7,23 +7,25 @@ public class CombatCardUI : Selectable
     public GameObject cardDisplay; // The card display object
     public bool isDisplaying = false;
     SpriteRenderer rdr;
-
     public static CombatCardUI currentUser; // set this to self when we display; this way,
                                             // other instances can turn off our flag when they overwrite us
+    private bool targetHighlighted = false;
 
-    void OnMouseOver()
+    private void OnMouseOver()
     {
         // Increase the size of the Combat UI to indicate it's clickable
         transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
+        HighlightTarget();
     }
 
-    void OnMouseExit()
+    private void OnMouseExit()
     {
         // Reset the size when the mouse is no longer over the Combat UI
         transform.localScale = Vector3.one;
+        DeHighlightTarget();
     }
 
-    void OnMouseDown()
+    private void OnMouseDown()
     {
         if (isDisplaying)
         {
@@ -37,11 +39,12 @@ public class CombatCardUI : Selectable
         }
     }
     
-    void ShowCard()
+    private void ShowCard()
     {
         if (currentUser != null)
         {
             currentUser.isDisplaying = false;
+            currentUser.DeHighlightTarget();
         }
 
         if (cardDisplay.GetComponent<SpriteRenderer>() == null)
@@ -52,9 +55,25 @@ public class CombatCardUI : Selectable
         rdr.sprite = actionClass.fullCard;
         isDisplaying = true;
         currentUser = this;
+        HighlightTarget();
     }
 
-    void HideCard()
+    private void HighlightTarget()
+    {
+        if (!targetHighlighted)
+        {
+            actionClass.Target.OnMouseEnter();
+        }
+        targetHighlighted = true;
+    }
+
+    private void DeHighlightTarget()
+    {
+        actionClass.Target.OnMouseExit();
+        targetHighlighted = false;
+    }
+
+    private void HideCard()
     {
         Destroy(rdr);
         isDisplaying = false;
