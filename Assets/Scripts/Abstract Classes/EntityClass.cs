@@ -13,13 +13,15 @@ public abstract class EntityClass : SelectClass
     public Transform myTransform;
     public CombatInfo combatInfo;
 
+    protected bool isDead = false;
+
     private static readonly float Z_LAYER = -2;
 
     protected Vector3 initalPosition;
     public int Health
     {
         get { return health; }
-        set { health = value; }
+        protected set { health = value; }
     }
 
     protected Dictionary<string, StatusEffect> statusEffects;
@@ -56,7 +58,7 @@ public abstract class EntityClass : SelectClass
         healthBar.setHealth(health);
         if (health <= 0)
         {
-           // Die();
+           StartCoroutine(Die());
         }
     }
 
@@ -193,10 +195,7 @@ public abstract class EntityClass : SelectClass
 
     public abstract IEnumerator ResetPosition();
 
-    public void Die()
-    {
-        Debug.Log("Entity: " + id + " has died");
-    }
+    public abstract IEnumerator Die();
     /*
     // Constructor
     public EntityClass(int health)

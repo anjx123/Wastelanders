@@ -20,7 +20,7 @@ public abstract class PlayerClass : EntityClass
 
     public override void Start()
     {
-        CombatManager.Instance.players.Add(this);
+        CombatManager.Instance.AddPlayer(this);
         base.Start();
     }
 
@@ -45,13 +45,18 @@ public abstract class PlayerClass : EntityClass
         FaceRight();
     }
 
+    public override IEnumerator Die()
+    {
+        yield return StartCoroutine(MoveToPosition(myTransform.position + new Vector3(-10, 0, 0), 0, 0.8f));
+        CombatManager.Instance.RemovePlayer(this);
+        isDead = true;
+        this.gameObject.SetActive(false);
+    }
+
     public override void FaceRight()
     {
-        
         this.GetComponent<SpriteRenderer>().flipX = false;
         combatInfo.FaceRight();
-        
-        
     }
 
     public override void FaceLeft()

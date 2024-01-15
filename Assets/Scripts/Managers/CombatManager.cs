@@ -14,9 +14,8 @@ public class CombatManager : MonoBehaviour
     public CinemachineVirtualCamera baseCamera;
     public CinemachineVirtualCamera dynamicCamera;
 
-    // Priority Queue
-    public List<PlayerClass> players;
-    public List<EnemyClass> enemies;
+    private List<PlayerClass> players = new();
+    private List<EnemyClass> enemies = new();
 
     public GameObject handContainer;
     public GameObject startDequeue;
@@ -88,6 +87,38 @@ public class CombatManager : MonoBehaviour
 
         }
 
+    }
+
+    public void AddPlayer(PlayerClass player)
+    {
+        players.Add(player);
+    }
+
+    public void RemovePlayer(PlayerClass player)
+    {
+        if (players.Count > 0)
+        {
+            players.Remove(player);
+        } else
+        {
+            Debug.LogWarning("All Players are dead, You Lose...");
+        }
+    }
+
+    public void AddEnemy(EnemyClass enemy)
+    {
+        enemies.Add(enemy);
+    }
+
+    public void RemoveEnemy(EnemyClass enemy)
+    {
+        if (enemies.Count > 0)
+        {
+            enemies.Remove(enemy);
+        } else
+        {
+            Debug.LogWarning("All enemies are dead, You Win!");
+        }
     }
 
 
