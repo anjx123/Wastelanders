@@ -1641,6 +1641,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3669754150432292290, guid: 18ff4a241e9f877439ebd5fd1de51dd0, type: 3}
+      propertyPath: cardDisplay
+      value: 
+      objectReference: {fileID: 412913820}
     - target: {fileID: 4438586555624364327, guid: 18ff4a241e9f877439ebd5fd1de51dd0, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -1665,7 +1669,8 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3669754150432292290, guid: 18ff4a241e9f877439ebd5fd1de51dd0, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
