@@ -190,6 +190,7 @@ public abstract class EntityClass : SelectClass
 
         Vector3 diffInLocation = staggeredPosition - originalPosition;
         if ((Vector2)diffInLocation == Vector2.zero) yield break;
+        if (isDead) yield break;
         UpdateFacing(-diffInLocation, 0);
 
 
