@@ -9,7 +9,7 @@ using static UnityEngine.UI.Image;
 public class CardComparator : MonoBehaviour
 {
     public static CardComparator Instance { get; private set; }
-
+    public static readonly float COMBAT_BUFFER_TIME = 1f;
     
 
     // Awake is called when the script instance is being loaded
@@ -68,7 +68,9 @@ public class CardComparator : MonoBehaviour
         {
             Debug.LogWarning("You forgot to specify Cardtype");
         }
-        yield return new WaitForSeconds(1);
+
+        
+        yield return new WaitForSeconds(COMBAT_BUFFER_TIME);
         DeEmphasizeClashers(card1.Origin, card1.Target);
     }
 

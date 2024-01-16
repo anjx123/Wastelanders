@@ -48,6 +48,7 @@ public abstract class PlayerClass : EntityClass
     public override IEnumerator Die()
     {
         int runDistance = 10;
+        BattleQueue.BattleQueueInstance.RemoveAllInstancesOfEntity(this);
         CombatManager.Instance.RemovePlayer(this);
         yield return StartCoroutine(MoveToPosition(myTransform.position + new Vector3(-runDistance, 0, 0), 0, 0.8f));
 

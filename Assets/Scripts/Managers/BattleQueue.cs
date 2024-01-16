@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.PackageManager;
 using UnityEngine;
 
 public class BattleQueue : MonoBehaviour
@@ -58,6 +59,12 @@ public class BattleQueue : MonoBehaviour
         RenderBQ();
     }
 
+    //Remove all cards with (@param entity) as the target and origin
+    public void RemoveAllInstancesOfEntity(EntityClass entity)
+    {
+        actionQueue.RemoveAllInstancesOfEntity(entity);
+    }
+
 
 
 
@@ -102,11 +109,9 @@ public class BattleQueue : MonoBehaviour
     public IEnumerator Dequeue()
     {
         List<ActionClass> array = actionQueue.GetList();
-        bool beganFighting = false;
         if (!(array.Count == 0))
         {
             CombatManager.Instance.GameState = GameState.FIGHTING;
-            beganFighting = true;
         }
         while (!(array.Count == 0))
         {
@@ -116,7 +121,7 @@ public class BattleQueue : MonoBehaviour
             RenderBQ();
             Debug.Log("An item hath been removed from the BQ");
         }
-        if (beganFighting)
+        if (CombatManager.Instance.GameState == GameState.FIGHTING)
         {
             CombatManager.Instance.GameState = GameState.SELECTION;
         }
@@ -184,17 +189,17 @@ public class BattleQueue : MonoBehaviour
 
         }
 
-        // remove methods are redundant??
-        public void Remove(ActionClass card)
+        public void RemoveAllInstancesOfEntity(EntityClass entity)
         {
-            int index = BinarySearch(card.Speed, 0, array.Count - 1, card.Origin);
-
-            if (index < array.Count && array[index] == card)
+            for (int i = array.Count - 1; i >= 0; i--)
             {
-                // Remove the value at the specified index
-                array.RemoveAt(index);
+                ActionClass actionClass = array[i];
+                if (actionClass.Origin == entity || actionClass.Target == entity)
+                {
+                    Debug.Log(actionClass.myName + " Has been removed from the BQ");
+                    array.RemoveAt(i); //Should update so that player cards are returned if not used. 
+                }
             }
-            // else: element not found
         }
 
         private void RemoveLinearSearch(ActionClass card)

@@ -68,7 +68,6 @@ public abstract class EntityClass : SelectClass
     private IEnumerator PlayHitAnimation(EntityClass origin, EntityClass target, float percentageDone)
     {
         if (isDead) yield break;
-
         yield return StartCoroutine(StaggerEntities(origin, target, percentageDone));
         if (health <= 0)
         {
@@ -201,6 +200,7 @@ public abstract class EntityClass : SelectClass
         }
 
         float duration = animator.GetCurrentAnimatorStateInfo(0).length;
+        if (duration > CardComparator.COMBAT_BUFFER_TIME) duration = CardComparator.COMBAT_BUFFER_TIME - 0.2f; //Ensure that animation doesn't exceed buffer time or bug will happen with death.
 
         while (elapsedTime < duration)
         {

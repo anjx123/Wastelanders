@@ -102,7 +102,7 @@ public class CombatManager : MonoBehaviour
         }
         if (players.Count == 0)
         {
-            Debug.LogWarning("All Players are dead, You Lose...");
+            GameState = GameState.GAME_LOSE;
         }
     }
 
@@ -119,9 +119,24 @@ public class CombatManager : MonoBehaviour
         } 
         if (enemies.Count == 0)
         {
-            Debug.LogWarning("All enemies are dead, You Win!");
+            GameState = GameState.GAME_WIN;
         }
     }
+
+    private void PerformLose()
+    {
+        Debug.LogWarning("All Players are dead, You Lose...");
+        baseCamera.Priority = 1;
+        dynamicCamera.Priority = 0;
+    }
+
+    private void PerformWin()
+    {
+        Debug.LogWarning("All enemies are dead, You Win!");
+        baseCamera.Priority = 1;
+        dynamicCamera.Priority = 0;
+    }
+
 
 
     private void PerformFighting()
@@ -150,6 +165,12 @@ public class CombatManager : MonoBehaviour
                     break;
                 case GameState.FIGHTING:
                     PerformFighting();
+                    break;
+                case GameState.GAME_WIN:
+                    PerformWin();
+                    break;
+                case GameState.GAME_LOSE:
+                    PerformLose();
                     break;
                 default:
                     break;
