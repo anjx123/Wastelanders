@@ -197,7 +197,6 @@ public class BattleQueue : MonoBehaviour
                 ActionClass actionClass = array[i];
                 if (actionClass.Origin == entity || actionClass.Target == entity)
                 {
-                    Debug.Log(actionClass.myName + " Has been removed from the BQ");
                     array.RemoveAt(i); //TODO: Should update so that player cards are returned if not used. 
                 }
             }
