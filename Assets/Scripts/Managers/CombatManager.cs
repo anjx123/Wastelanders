@@ -99,7 +99,8 @@ public class CombatManager : MonoBehaviour
         if (players.Count > 0)
         {
             players.Remove(player);
-        } else
+        }
+        if (players.Count == 0)
         {
             Debug.LogWarning("All Players are dead, You Lose...");
         }
@@ -115,7 +116,8 @@ public class CombatManager : MonoBehaviour
         if (enemies.Count > 0)
         {
             enemies.Remove(enemy);
-        } else
+        } 
+        if (enemies.Count == 0)
         {
             Debug.LogWarning("All enemies are dead, You Win!");
         }

@@ -47,8 +47,10 @@ public abstract class PlayerClass : EntityClass
 
     public override IEnumerator Die()
     {
-        yield return StartCoroutine(MoveToPosition(myTransform.position + new Vector3(-10, 0, 0), 0, 0.8f));
+        int runDistance = 10;
         CombatManager.Instance.RemovePlayer(this);
+        yield return StartCoroutine(MoveToPosition(myTransform.position + new Vector3(-runDistance, 0, 0), 0, 0.8f));
+
         isDead = true;
         this.gameObject.SetActive(false);
     }

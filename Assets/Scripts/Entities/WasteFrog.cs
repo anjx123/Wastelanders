@@ -32,19 +32,6 @@ public class WasteFrog : EnemyClass
 
     }
 
-    public override void TakeDamage(int damage)
-    {
-        base.TakeDamage(damage);
-
-        //StartCoroutine(StaggerBack(myTransform.position + new Vector3(1.5f, 0, 0)));
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     /*  Contains: 1x Slap, 1x Flail
      * 
      */
