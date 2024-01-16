@@ -51,6 +51,10 @@ public abstract class EntityClass : SelectClass
         DeEmphasize();
     }
 
+    /*
+     Purpose: Deals damage to this entity and staggers it back 
+     Requires: This Entity is not dead
+     */
 
     public virtual void TakeDamage(EntityClass source, int damage)
     {
@@ -61,13 +65,13 @@ public abstract class EntityClass : SelectClass
         {
             percentageDone = Mathf.Clamp(damage / (float) Health, 0f, 1f);
         }
-        if (isDead) return;
         StartCoroutine(PlayHitAnimation(source, this, percentageDone));
     }
 
+    //Plays both first the stagger entities then 
+    //Requires: Entities are not dead
     private IEnumerator PlayHitAnimation(EntityClass origin, EntityClass target, float percentageDone)
     {
-        if (isDead) yield break;
         yield return StartCoroutine(StaggerEntities(origin, target, percentageDone));
         if (health <= 0)
         {
@@ -80,6 +84,7 @@ public abstract class EntityClass : SelectClass
     origin: The origin of the damage/attack is coming from
     target: The target being staggered back
     percentageDone: Percentage health done to the target
+    Requires: Entities are not dead
      */
     private IEnumerator StaggerEntities(EntityClass origin, EntityClass target, float percentageDone)
     {
@@ -109,6 +114,8 @@ public abstract class EntityClass : SelectClass
     Modifies: this.myTransform
 
     Purpose: Moves this entity to a given location
+
+    Requires: Entity is not dead
      */
     public IEnumerator MoveToPosition(Vector3 destination, float radius, float duration)
     {
@@ -118,7 +125,6 @@ public abstract class EntityClass : SelectClass
         Vector3 diffInLocation = destination - originalPosition;
 
         if ((Vector2) diffInLocation == Vector2.zero) yield break;
-        if (isDead) yield break;
 
         float distance = Mathf.Sqrt(diffInLocation.x * diffInLocation.x + diffInLocation.y * diffInLocation.y);
         float maxProportionTravelled = (distance - radius) / distance;
@@ -182,6 +188,7 @@ public abstract class EntityClass : SelectClass
      * staggeredPosition is the location we want the enemy to stop at. 
      * 
      * Modifies: this.myTransform.position
+     * Requires: Entity is not dead
      */
     public IEnumerator StaggerBack(Vector3 staggeredPosition)
     {
@@ -190,7 +197,6 @@ public abstract class EntityClass : SelectClass
 
         Vector3 diffInLocation = staggeredPosition - originalPosition;
         if ((Vector2)diffInLocation == Vector2.zero) yield break;
-        if (isDead) yield break;
         UpdateFacing(-diffInLocation, 0);
 
 
@@ -232,9 +238,10 @@ public abstract class EntityClass : SelectClass
     {
         HighlightManager.OnEntityClicked(this);
     }
-
+    //Run this to reset the entity position back to its starting position
     public abstract IEnumerator ResetPosition();
 
+    //Removes entity cards and self from BQ and combat manager. Kills itself
     public abstract IEnumerator Die();
     /*
     // Constructor

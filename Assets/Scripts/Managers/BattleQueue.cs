@@ -189,6 +189,7 @@ public class BattleQueue : MonoBehaviour
 
         }
 
+        //Removes all cards in the battle queue that have (@param entity) as the Origin or target.
         public void RemoveAllInstancesOfEntity(EntityClass entity)
         {
             for (int i = array.Count - 1; i >= 0; i--)
@@ -197,7 +198,7 @@ public class BattleQueue : MonoBehaviour
                 if (actionClass.Origin == entity || actionClass.Target == entity)
                 {
                     Debug.Log(actionClass.myName + " Has been removed from the BQ");
-                    array.RemoveAt(i); //Should update so that player cards are returned if not used. 
+                    array.RemoveAt(i); //TODO: Should update so that player cards are returned if not used. 
                 }
             }
         }

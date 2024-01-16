@@ -41,6 +41,7 @@ public abstract class EnemyClass : EntityClass
      */
     public abstract void AddAttack(List<PlayerClass> players);
 
+    //Removes entity cards and self from BQ and combat manager. Kills itself
     public override IEnumerator Die()
     {
         int runDistance = 10;

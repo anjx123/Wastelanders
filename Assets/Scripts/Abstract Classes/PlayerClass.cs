@@ -44,7 +44,7 @@ public abstract class PlayerClass : EntityClass
         yield return StartCoroutine(MoveToPosition(initalPosition, 0f, 0.8f));
         FaceRight();
     }
-
+    //Removes entity cards and self from BQ and combat manager. Kills itself
     public override IEnumerator Die()
     {
         int runDistance = 10;

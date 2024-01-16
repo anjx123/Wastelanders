@@ -53,19 +53,19 @@ public class CombatManager : MonoBehaviour
     //Usage: Should be called everytime an Entity changes their direction. 
     public void UpdateCameraBounds()
     {
-        if (dynamicCamera.Follow.GetComponent<EntityClass>()?.IsFacingRight() ?? false)
+        if (dynamicCamera.Follow?.GetComponent<EntityClass>()?.IsFacingRight() ?? false)
         {
             var transposer = dynamicCamera.GetCinemachineComponent<CinemachineFramingTransposer>();
             transposer.m_ScreenX = 0.25f;
         }
-        else if (!(dynamicCamera.Follow.GetComponent<EntityClass>()?.IsFacingRight()) ?? false)
+        else if (!(dynamicCamera.Follow?.GetComponent<EntityClass>()?.IsFacingRight()) ?? false)
         {
             var transposer = dynamicCamera.GetCinemachineComponent<CinemachineFramingTransposer>();
             transposer.m_ScreenX = 0.75f;
         }
     }
 
-    
+    //Allows players to start selection again, resets enemies attacks and position
     private void PerformSelection()
     {
         startDequeue.SetActive(true);
@@ -93,29 +93,39 @@ public class CombatManager : MonoBehaviour
     {
         players.Add(player);
     }
-
+    
+    //Purpose: Call this when a player is removed or killed
     public void RemovePlayer(PlayerClass player)
     {
         if (players.Count > 0)
         {
             players.Remove(player);
+            if (dynamicCamera.Follow?.GetComponent<PlayerClass>() == player)
+            {
+                dynamicCamera.Follow = null;
+            }
+            
         }
         if (players.Count == 0)
         {
             GameState = GameState.GAME_LOSE;
         }
     }
-
+    
     public void AddEnemy(EnemyClass enemy)
     {
         enemies.Add(enemy);
     }
-
+    //Purpose: Call this when an enemy is removed or killed
     public void RemoveEnemy(EnemyClass enemy)
     {
         if (enemies.Count > 0)
         {
             enemies.Remove(enemy);
+            if (dynamicCamera.Follow?.GetComponent<EnemyClass>() == enemy)
+            {
+                dynamicCamera.Follow = null;
+            }
         } 
         if (enemies.Count == 0)
         {

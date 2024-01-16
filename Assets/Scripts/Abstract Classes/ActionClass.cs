@@ -44,7 +44,7 @@ public abstract class ActionClass : SelectClass
     {
         HighlightManager.OnActionClicked(this);
     }
-
+    //Called when this card hits the enemy, runs any on hit buffs or effects given.
     public virtual void OnHit()
     {
         Vector3 diffInLocation = Target.myTransform.position - Origin.myTransform.position;
