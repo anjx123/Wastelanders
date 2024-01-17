@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.ConstrainedExecution;
 using UnityEngine;
 
 public abstract class ActionClass : SelectClass
@@ -43,18 +44,12 @@ public abstract class ActionClass : SelectClass
     {
         HighlightManager.OnActionClicked(this);
     }
+    //Called when this card hits the enemy, runs any on hit buffs or effects given.
     public virtual void OnHit()
     {
         Vector3 diffInLocation = Target.myTransform.position - Origin.myTransform.position;
         Origin.UpdateFacing(diffInLocation, 0);
-
-        float percentageDone = 1; //Testing different powered knockbacks
-        if (Target.Health != 0)
-        {
-            percentageDone = Mathf.Clamp(duplicateCard.actualRoll / (float)Target.Health, 0f, 1f);
-        }
-        this.Target.TakeDamage(duplicateCard.actualRoll);
-        CardComparator.Instance.StartStagger(Origin, Target, percentageDone);
+        this.Target.TakeDamage(Origin, duplicateCard.actualRoll);
     }
 
     public bool IsPlayedByPlayer()
@@ -102,6 +97,7 @@ public abstract class ActionClass : SelectClass
             return null;
         }
     }
+
 
     public override void OnMouseEnter()
     {

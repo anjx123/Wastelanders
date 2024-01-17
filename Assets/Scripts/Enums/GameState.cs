@@ -6,5 +6,7 @@ public enum GameState
 {
     FIGHTING,
     SELECTION,
+    GAME_WIN,
+    GAME_LOSE,
 
 }
