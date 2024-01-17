@@ -25,7 +25,7 @@ public abstract class EnemyClass : EntityClass
     {
         base.Start();
         combatInfo.FaceLeft();
-        CombatManager.Instance.enemies.Add(this);
+        CombatManager.Instance.AddEnemy(this);
     }
 
     /*  Given a list of players, the enemy chooses appropriately a target/targets and adds an attack that it chooses to the bq.
@@ -40,6 +40,17 @@ public abstract class EnemyClass : EntityClass
      *  tweaking difficulty later on.
      */
     public abstract void AddAttack(List<PlayerClass> players);
+
+    //Removes entity cards and self from BQ and combat manager. Kills itself
+    public override IEnumerator Die()
+    {
+        int runDistance = 10;
+        BattleQueue.BattleQueueInstance.RemoveAllInstancesOfEntity(this);
+        CombatManager.Instance.RemoveEnemy(this);
+        yield return StartCoroutine(MoveToPosition(myTransform.position + new Vector3(runDistance, 0, 0), 0, 0.8f));
+        isDead = true;
+        this.gameObject.SetActive(false);
+    }
 
     public override IEnumerator ResetPosition()
     {

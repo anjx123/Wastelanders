@@ -12,13 +12,15 @@ public abstract class EntityClass : SelectClass
     public Animator animator;
     public CombatInfo combatInfo;
 
+    protected bool isDead = false;
+
     private static readonly float Z_LAYER = -2;
 
     protected Vector3 initalPosition;
     public int Health
     {
         get { return health; }
-        set { health = value; }
+        protected set { health = value; }
     }
 
     protected Dictionary<string, StatusEffect> statusEffects;
@@ -45,15 +47,57 @@ public abstract class EntityClass : SelectClass
         DeEmphasize();
     }
 
+    /*
+     Purpose: Deals damage to this entity and staggers it back 
+     Requires: This Entity is not dead
+     */
 
-    public virtual void TakeDamage(int damage)
+    public virtual void TakeDamage(EntityClass source, int damage)
     {
         health = Mathf.Clamp(health - damage, 0, MAX_HEALTH);
         healthBar.setHealth(health);
+        float percentageDone = 1; //Testing different powered knockbacks
+        if (Health != 0)
+        {
+            percentageDone = Mathf.Clamp(damage / (float) Health, 0f, 1f);
+        }
+        StartCoroutine(PlayHitAnimation(source, this, percentageDone));
+    }
+
+    //Plays both first the stagger entities then 
+    //Requires: Entities are not dead
+    private IEnumerator PlayHitAnimation(EntityClass origin, EntityClass target, float percentageDone)
+    {
+        yield return StartCoroutine(StaggerEntities(origin, target, percentageDone));
         if (health <= 0)
         {
-           // Die();
+            yield return StartCoroutine(Die());
         }
+    }
+
+    /* 
+    Purpose: Staggers an entity back 
+    origin: The origin of the damage/attack is coming from
+    target: The target being staggered back
+    percentageDone: Percentage health done to the target
+    Requires: Entities are not dead
+     */
+    private IEnumerator StaggerEntities(EntityClass origin, EntityClass target, float percentageDone)
+    {
+        Vector3 directionVector = target.myTransform.position - origin.myTransform.position;
+
+        Vector3 normalizedDirection = directionVector.normalized;
+        float staggerPower = StaggerPowerCalculation(percentageDone);
+        yield return StartCoroutine(target.StaggerBack(target.myTransform.position + normalizedDirection * staggerPower));
+    }
+
+    //Calculates the power of the stagger based on the percentage health done
+    private float StaggerPowerCalculation(float percentageDone)
+    {
+        float minimumPush = 0.8f;
+        float pushSlope = 1.8f;
+        float percentageUntilMaxPush = 1f / 3f; //Reaches Max push at 33% hp lost
+        return minimumPush + pushSlope * Mathf.Clamp(percentageDone / percentageUntilMaxPush, 0f, 1.5f);
     }
 
     /*
@@ -66,6 +110,8 @@ public abstract class EntityClass : SelectClass
     Modifies: this.myTransform
 
     Purpose: Moves this entity to a given location
+
+    Requires: Entity is not dead
      */
     public IEnumerator MoveToPosition(Vector3 destination, float radius, float duration)
     {
@@ -138,6 +184,7 @@ public abstract class EntityClass : SelectClass
      * staggeredPosition is the location we want the enemy to stop at. 
      * 
      * Modifies: this.myTransform.position
+     * Requires: Entity is not dead
      */
     public IEnumerator StaggerBack(Vector3 staggeredPosition)
     {
@@ -156,6 +203,7 @@ public abstract class EntityClass : SelectClass
         }
 
         float duration = animator.GetCurrentAnimatorStateInfo(0).length;
+        if (duration > CardComparator.COMBAT_BUFFER_TIME) duration = CardComparator.COMBAT_BUFFER_TIME - 0.2f; //Ensure that animation doesn't exceed buffer time or bug will happen with death.
 
         while (elapsedTime < duration)
         {
@@ -186,13 +234,11 @@ public abstract class EntityClass : SelectClass
     {
         HighlightManager.OnEntityClicked(this);
     }
-
+    //Run this to reset the entity position back to its starting position
     public abstract IEnumerator ResetPosition();
 
-    public void Die()
-    {
-        Debug.Log("Entity: " + id + " has died");
-    }
+    //Removes entity cards and self from BQ and combat manager. Kills itself
+    public abstract IEnumerator Die();
     /*
     // Constructor
     public EntityClass(int health)

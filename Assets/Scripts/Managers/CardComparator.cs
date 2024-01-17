@@ -9,7 +9,7 @@ using static UnityEngine.UI.Image;
 public class CardComparator : MonoBehaviour
 {
     public static CardComparator Instance { get; private set; }
-
+    public static readonly float COMBAT_BUFFER_TIME = 1f;
     
 
     // Awake is called when the script instance is being loaded
@@ -41,7 +41,7 @@ public class CardComparator : MonoBehaviour
 
         card1.RollDice();
         card2.RollDice();
-        
+        DeactivateInfo(card1, card2);
 
         if (IsAttack(card1) && IsAttack(card2))
         {
@@ -61,13 +61,16 @@ public class CardComparator : MonoBehaviour
         {
             card1.Origin.BlockAnimation(); //Blocked stuff here not implemented properly
             
-            card2.Target.TakeDamage(card2.Damage);
         } else if (card2.CardType == CardType.Defense)
         {
-            card1.Target.TakeDamage(card1.Damage);
+            
+        } else
+        {
+            Debug.LogWarning("You forgot to specify Cardtype");
         }
-        DeactivateInfo(card1, card2);
-        yield return new WaitForSeconds(1);
+
+        
+        yield return new WaitForSeconds(COMBAT_BUFFER_TIME);
         DeEmphasizeClashers(card1.Origin, card1.Target);
     }
 
@@ -89,43 +92,6 @@ public class CardComparator : MonoBehaviour
         }
         return cardOneStaggered;
     }
-
-    //Gives ownership of the stagger Entities animation to the card comparator
-    public void StartStagger(EntityClass origin, EntityClass target, float percentageDone)
-    {
-        StartCoroutine(StaggerEntities(origin, target, percentageDone));
-    }
-
-    /* 
-    Purpose: Staggers an entity back 
-    origin: The origin of the damage/attack is coming from
-    target: The target being staggered back
-    percentageDone: Percentage health done to the target
-     */
-    private IEnumerator StaggerEntities(EntityClass origin, EntityClass target, float percentageDone)
-    {
-        Vector3 directionVector = target.myTransform.position - origin.myTransform.position;
-
-        Vector3 normalizedDirection = directionVector.normalized;
-        float staggerPower = StaggerPowerCalculation(percentageDone);
-        yield return StartCoroutine(target.StaggerBack(target.myTransform.position + normalizedDirection * staggerPower));
-    }
-
-    //Calculates the power of the stagger based on the percentage health done
-    private float StaggerPowerCalculation(float percentageDone)
-    {
-        float minimumPush = 0.8f;
-        float pushSlope = 1.8f;
-        float percentageUntilMaxPush = 1f / 3f; //Reaches Max push at 33% hp lost
-        return minimumPush + pushSlope * Mathf.Clamp(percentageDone / percentageUntilMaxPush, 0f, 1.5f);
-    }
-
-    //Transitions the gamestate to selection mode.
-    private void SelectionMode()
-    {
-        CombatManager.Instance.GameState = GameState.SELECTION;
-    }
-
 
     /*
  EntityClass origin: Origin of the action card played

@@ -20,7 +20,7 @@ public abstract class PlayerClass : EntityClass
 
     public override void Start()
     {
-        CombatManager.Instance.players.Add(this);
+        CombatManager.Instance.AddPlayer(this);
         base.Start();
     }
 
@@ -44,14 +44,22 @@ public abstract class PlayerClass : EntityClass
         yield return StartCoroutine(MoveToPosition(initalPosition, 0f, 0.8f));
         FaceRight();
     }
+    //Removes entity cards and self from BQ and combat manager. Kills itself
+    public override IEnumerator Die()
+    {
+        int runDistance = 10;
+        BattleQueue.BattleQueueInstance.RemoveAllInstancesOfEntity(this);
+        CombatManager.Instance.RemovePlayer(this);
+        yield return StartCoroutine(MoveToPosition(myTransform.position + new Vector3(-runDistance, 0, 0), 0, 0.8f));
+
+        isDead = true;
+        this.gameObject.SetActive(false);
+    }
 
     public override void FaceRight()
     {
-        
         this.GetComponent<SpriteRenderer>().flipX = false;
         combatInfo.FaceRight();
-        
-        
     }
 
     public override void FaceLeft()
