@@ -14,16 +14,25 @@ public class BattleQueueIcons : SelectClass
 
     public override void OnMouseDown()
     {
-        if (isDisplaying)
-        {
-            // If the card is currently displaying, hide it
-            HideCard();
+        if (actionClass.Origin is PlayerClass) {
+                DeleteFromBQ();
+        } else {
+            if (isDisplaying)
+            {
+                // If the card is currently displaying, hide it
+                HideCard();
+            }
+            else
+            {
+                // If the card is not currently displaying, show it
+                ShowCard();
+            }
         }
-        else
-        {
-            // If the card is not currently displaying, show it
-            ShowCard();
-        }
+    }
+
+    private void DeleteFromBQ()
+    {
+        BattleQueue.BattleQueueInstance.DeletePlayerAction(actionClass);
     }
 
     private void ShowCard()
@@ -39,7 +48,6 @@ public class BattleQueueIcons : SelectClass
             currentUser.isDisplaying = false;
             currentUser.DeHighlightTarget();
         }
-
         if (cardDisplay.GetComponent<SpriteRenderer>() == null)
         {
             cardDisplay.AddComponent<SpriteRenderer>();

@@ -52,6 +52,14 @@ public class BattleQueue : MonoBehaviour
         return ret;
     }
 
+     public void DeletePlayerAction(ActionClass action)
+    {
+        ActionClass deletedCard = actionQueue.RemoveLinearSearch(action);
+        RenderBQ();
+        PlayerClass player = (PlayerClass)deletedCard.Origin;
+        player.ReaddCard(deletedCard);
+    }
+
     public void AddEnemyAction(ActionClass action, EntityClass origin)
     {
         action.Origin = origin;
@@ -205,7 +213,7 @@ public class BattleQueue : MonoBehaviour
             }
         }
 
-        private void RemoveLinearSearch(ActionClass card)
+        public ActionClass RemoveLinearSearch(ActionClass card)
         {
             int i = LinearSearch(card);
 
@@ -213,6 +221,8 @@ public class BattleQueue : MonoBehaviour
             {
                 array.RemoveAt(i);
             }
+
+            return card;
         }
 
         public int BinarySearch(int speed, int left, int right, EntityClass origin)
