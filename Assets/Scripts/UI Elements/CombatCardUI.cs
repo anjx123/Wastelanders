@@ -14,8 +14,11 @@ public class CombatCardUI : Selectable
     private void OnMouseOver()
     {
         // Increase the size of the Combat UI to indicate it's clickable
-        transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
-        HighlightTarget();
+        if (CombatManager.Instance.CanHighlight())
+        {
+            transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
+            HighlightTarget();
+        }
     }
 
     private void OnMouseExit()
