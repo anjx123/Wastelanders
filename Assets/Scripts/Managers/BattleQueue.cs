@@ -14,7 +14,7 @@ public class BattleQueue : MonoBehaviour
     public RectTransform bqContainer;
     public readonly int cardWidth = 1;
     public GameObject iconPrefab;
-
+    public GameObject combatInfoDisplay; // same display given to enemy combat card UI
 
     // Awake is called before Start.
     void Awake()
@@ -77,17 +77,20 @@ public class BattleQueue : MonoBehaviour
     */
     void RenderBQ()
     {
-        List<ActionClass> hand = actionQueue.GetList();
+        List<ActionClass> queue = actionQueue.GetList();
 
         foreach (Transform child in bqContainer.transform)
         {
             Destroy(child.gameObject);
         }
 
-        for (int i = 0; i < hand.Count; i++)
+        for (int i = 0; i < queue.Count; i++)
         {
             GameObject renderedCopy = Instantiate(iconPrefab, Vector3.zero, Quaternion.identity);
-            renderedCopy.GetComponent<SpriteRenderer>().sprite = hand[i].GetIcon();
+            renderedCopy.GetComponent<BattleQueueIcons>().cardDisplay = combatInfoDisplay;
+            renderedCopy.GetComponent<BattleQueueIcons>().actionClass = queue[i];
+            renderedCopy.GetComponent<BattleQueueIcons>().myTransform = renderedCopy.transform;
+            renderedCopy.GetComponent<SpriteRenderer>().sprite = queue[i].GetIcon();
             renderedCopy.transform.SetParent(bqContainer, false);
             float distanceToLeft = bqContainer.rect.width / 2 - (i * cardWidth);
             float y = bqContainer.transform.position.y;

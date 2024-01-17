@@ -41,6 +41,12 @@ public class CombatCardUI : Selectable
     
     private void ShowCard()
     {
+        if (BattleQueueIcons.currentUser != null)
+        {
+            BattleQueueIcons.currentUser.isDisplaying = false;
+            BattleQueueIcons.currentUser.DeHighlightTarget();
+            BattleQueueIcons.currentUser = null;
+        }
         if (currentUser != null)
         {
             currentUser.isDisplaying = false;
@@ -67,7 +73,7 @@ public class CombatCardUI : Selectable
         targetHighlighted = true;
     }
 
-    private void DeHighlightTarget()
+    public void DeHighlightTarget()
     {
         actionClass.Target.OnMouseExit();
         targetHighlighted = false;
