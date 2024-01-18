@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class BattleQueue : MonoBehaviour
 {
@@ -13,6 +14,14 @@ public class BattleQueue : MonoBehaviour
     public RectTransform bqContainer;
     public readonly int cardWidth = 1;
     public GameObject iconPrefab;
+
+
+    // is an indicator of sorts; essentially if this is true what this means is that the round has started and all the enemy actions have been added. The player has to add a card.
+    // upon the addition of the first card the enemy actions are FIRST tranmusted into wrappers and thereafter everything proceeds as intended. Is reset at the end of dequee. ASTER1
+    private bool roundStart = true;
+
+    // the new wrapper array
+    private WrapperArray wrapperArray;
 
 
     // Awake is called before Start.
@@ -120,6 +129,9 @@ public class BattleQueue : MonoBehaviour
         {
             CombatManager.Instance.GameState = GameState.SELECTION;
         }
+
+        // ASTER1 
+        roundStart = true;
     }
 
     // A sorted array implementation for GameObject (cards)
@@ -180,6 +192,8 @@ public class BattleQueue : MonoBehaviour
 
             // else insert 
             array.Insert(i, card);
+            // ASTER2
+            BattleQueueInstance.wrapperArray.InsertIntoWrapperArray(card);
             return true;
 
         }
@@ -280,6 +294,130 @@ else
     }
 
 
+
+    // Class for wrappers to be contained 
+    public class WrapperArray
+    {
+        private List<Wrapper> wrappers = new List<Wrapper>();
+
+        public WrapperArray()
+        {
+            // nothing here. 
+        }
+
+        // is called when roundStart is true. 
+        // transforms all enemy actions into wrappers. 
+        // is automatically sorted because iterating through a sorted array.
+
+        // peep the redundancy is referncing and calling
+        public void EnemyActionsTransformation()
+        {
+            for (int i = 0; i < BattleQueueInstance.actionQueue.GetList().Count; i++) // !!! why was BattleQueueInstance necessary here; object reference for non static field? 
+            {
+                ActionClass curAction = BattleQueueInstance.actionQueue.GetList()[i];
+                Wrapper wrapper = new Wrapper(curAction, true); // funnily enough this won't work in just C; works here because new is dynamic allocation.
+                wrappers.Add(wrapper);
+            }
+
+            // Deactivate the actionQueue;
+            // this is flawed at present and I see no point in removing this as it is already implemented; reimplementing or refactoring this functionality should come later
+            // for reference notice the implementaion of methods inside *this* class assume implementation of that.
+/*            while (BattleQueueInstance.actionQueue.GetList().Count != 0)
+            {
+                BattleQueueInstance.actionQueue.GetList().Remove(BattleQueueInstance.actionQueue.GetList()[0]);
+            }
+            // alternatively
+            BattleQueueInstance.actionQueue.GetList().Clear();*/
+        }
+
+        // only called iff Insert() method of SortedArray is about to return true; not that it returns it; is called before the method ends. // ASTER2
+        /* When a player plays a card against an enemy, the fastest action the enemy has will get promoted to the player’s speed. Even if the Enemy Attack is 
+                targeting a different target. CASE 1
+
+            If the enemy’s speed is higher than the player’s speed. The player’s card gets promoted up instead. However, it only promotes player cards 
+                that are targeting THEM, and will not promote attacks targeting different enemies. CASE 2 */
+        // if the above two are conditions are not germane create a new wrapper.
+        public void InsertIntoWrapperArray(ActionClass playerAct)
+        {
+            // implementation is based on the fact that we are not checking already clashing entities. i.e. first enemy action is doled out. 
+            // do perform check for availability
+
+            foreach (Wrapper curWrapper in wrappers)
+            {
+                if (curWrapper.PlayerAction != null) // if the wrapper is half-empty
+                {
+                    if (playerAct.Target == curWrapper.EnemyAction.Origin && curWrapper.EnemyAction.Speed > playerAct.Speed) // CASE 2; the card in wrapper is by the targeted enemy and ITS speed is greater; relying on reference equality 
+                    {
+                        curWrapper.PlayerAction = playerAct;
+                        return;
+                    } else if (playerAct.Target == curWrapper.EnemyAction.Origin)// CASE 1; 
+                    {
+                        curWrapper.PlayerAction = playerAct; 
+                        return;
+                    }
+                    // the paths represent the conditionals but in reality its just the same thing imo; could use ||
+                } 
+            }
+            // otherwise is a new wrapper; would happen if all enemy target actions are tied up 
+            wrappers.Add(new Wrapper(playerAct, false));
+        }
+
+        // Prints contents to Console
+        public void DisplayWrapperArray()
+        {
+            // hi; TODO 
+        }
+
+        // Called at the end of InsertIntoWrapperArray(...) each time; O(n^2) but doesnt matter. 
+        public void SortWrappers()
+        {
+            // ...
+        }
+    }
+
+    // Wrapper Element for WrapperArray;
+    public class Wrapper
+    {
+        public ActionClass PlayerAction { get; set; }
+        public ActionClass EnemyAction { get; set; }
+        
+        public int HighestSpeed { get; set; } // used to sort the wrappers 
+
+        // Every enemy action is transformed into a single field wrapper after all the enemy actions have been inserted;
+        // Will implement this via a field checker (roundStart) at present; should be implemented elsewhere for decorum. 
+
+        // the true corresponds to enemy action; false to player action
+        public Wrapper(ActionClass action, bool isEnemys)
+        {
+            if (isEnemys)
+            {
+                PlayerAction = null;
+                this.EnemyAction = action; // TODO checK; isCorrect; ref names
+            } else
+            {
+                this.PlayerAction = action;
+                EnemyAction = null; 
+            }
+        }
+
+        // returns the action with the highest speed. 
+        // IS NOT RESPONSIBLE FOR THE DESTRUCTION AS THE DESTRUCTION MUST TAKE PLACE AFTER THE EXECUTION
+        public ActionClass ReturnHighest()
+        {
+            if (PlayerAction == null) // account for half wrapper. 
+            {
+                return EnemyAction; 
+            } else
+            {
+                return PlayerAction.Speed >= EnemyAction.Speed ? PlayerAction : EnemyAction;
+            }
+         }
+    }
+
+
+    // >>> so at the beginning of a round enemy actions are added automatically to the battle queue; assume that it is inserted correctly. 
+
+
 }
 
 //INVALID ASSUMPTION DO NOT OMIT:
@@ -288,3 +426,22 @@ else
 
 // DO NOT OMIT: 
 // default access specifier for methods is different... Is that contingent on the variable type? 
+
+
+// public EntityClass Target { get; set; }
+// start coroutine (function returning IEnumerator; has a yield return (IEnumerator)) can be nested; see coroutine implementation in BattleQueue. 
+// start coroutine is inside a non-IEnumerator returner. 
+// Distinction betweeen array and fields. 
+// TODO: check if fields are instantiated before the Awake method
+// naming conventions 
+// .Count 
+// .Remove() 
+// .Add()
+// ctrl shift / for block comment 
+// ctrl R for rename
+// foreach (Wrapper curWrapper in wrappers)
+// { get; set; }
+// public ActionClass PlayerAction { get; set; } effectively useless as they rely on the original modifier; i.e. if set to private wouldn't matter
+// == is for reference equality
+// == for strings is different
+// case statmetn in c#
