@@ -49,6 +49,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d39f9fe55a3c7d1488e2ac53490a31e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  myName: 
   healthBar: {fileID: 618062441777076705}
   animator: {fileID: 3297183234373819581}
   myTransform: {fileID: 7946142163233550150}
@@ -254,6 +255,10 @@ PrefabInstance:
     - target: {fileID: 3340012154976706799, guid: 700d60a172828b047b313c7dab6975ef, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6830002692391934031, guid: 700d60a172828b047b313c7dab6975ef, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8501383018469864454, guid: 700d60a172828b047b313c7dab6975ef, type: 3}
       propertyPath: m_Name
