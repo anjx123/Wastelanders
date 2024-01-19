@@ -87,8 +87,11 @@ public class BattleQueueIcons : SelectClass
     public override void OnMouseEnter()
     {
         // Increase the size of the Combat UI to indicate it's clickable
-        transform.localScale = new Vector3(0.25f, 0.25f, 0.25f);
-        HighlightTarget();
+        if (CombatManager.Instance.CanHighlight())
+        {
+            transform.localScale = new Vector3(0.25f, 0.25f, 0.25f);
+            HighlightTarget();
+        }
     }
 
     public override void OnMouseExit()
