@@ -32,8 +32,11 @@ public class BattleQueueIcons : SelectClass
 
     private void DeleteFromBQ()
     {
-        DeHighlightTarget();
-        BattleQueue.BattleQueueInstance.DeletePlayerAction(actionClass);
+        if (CombatManager.Instance.CanHighlight())
+        {
+            DeHighlightTarget();
+            BattleQueue.BattleQueueInstance.DeletePlayerAction(actionClass);
+        }  
     }
 
     private void ShowCard()
