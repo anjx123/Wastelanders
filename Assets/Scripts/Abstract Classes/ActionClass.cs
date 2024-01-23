@@ -15,7 +15,7 @@ public abstract class ActionClass : SelectClass
         set
         {
             origin = value;
-            ApplyEffect();
+            UpdateDup();
         }
     }
 
@@ -82,10 +82,15 @@ public abstract class ActionClass : SelectClass
         duplicateCard.rollCeiling = upperBound;
     }
 
-    public virtual void ApplyEffect()
+    private void UpdateDup()
     {
         DupInit();
         Origin.ApplyAllBuffsToCard(ref duplicateCard);
+    }
+
+    public virtual void ApplyEffect()
+    {
+        UpdateDup();
     }
 
     // Calculates Actual Damage/Block After Applying Buffs
