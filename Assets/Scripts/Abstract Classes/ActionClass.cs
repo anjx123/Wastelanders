@@ -7,7 +7,17 @@ public abstract class ActionClass : SelectClass
 {
     //The following are 'properties' in C# that make quick getters and setters for private fields. ac.Target for access
     public EntityClass Target { get; set; }
-    public EntityClass Origin { get; set; }
+    private EntityClass origin;
+
+    public EntityClass Origin
+    {
+        get { return origin; }
+        set
+        {
+            origin = value;
+            ApplyEffect();
+        }
+    }
 
     protected int lowerBound;
     protected int upperBound;

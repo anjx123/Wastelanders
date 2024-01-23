@@ -13,9 +13,9 @@ public class WasteFrog : EnemyClass
     // Start is called before the first frame update
     public override void Start()
     {
-        
-        MAX_HEALTH = 15;
-        health = MAX_HEALTH;
+        base.Start();
+        MaxHealth = 15;
+        Health = MaxHealth;
         animator = GetComponent<Animator>();
         myTransform = GetComponent<Transform>();
         myName = "Le Frog";
@@ -24,11 +24,11 @@ public class WasteFrog : EnemyClass
         for (int i = 0; i < availableActions.Count; i++)
         {
             GameObject toAdd = Instantiate(availableActions[i]);
+            toAdd.GetComponent<ActionClass>().Origin = this;
             deck.Add(toAdd);
         }
         
         Reshuffle();
-        base.Start();
 
     }
 
