@@ -11,29 +11,22 @@ public class Jackie : PlayerClass
     // Start is called before the first frame update
     public override void Start()
     {
-        MAX_HEALTH = 30;
-        health = MAX_HEALTH;
+        base.Start();
+        MaxHealth = 30;
+        Health = MaxHealth;
         myName = "Jackie";
 
         HighlightManager.player = this;
 
-        // initialize deck
-        for (int i = 0; i < cardPrefabs.Count; i++)
-        {
-            GameObject toAdd = Instantiate(cardPrefabs[i]);
-            deck.Add(toAdd);
-            toAdd.transform.position = new Vector3(1000, 1000, 1);
-        }
-
         // deep copy deck into pool
         for (int i = 0; i < cardPrefabs.Count; i++)
         {
-            GameObject toAdd = Instantiate(deck[i]);
+            GameObject toAdd = Instantiate(cardPrefabs[i]);
+            toAdd.GetComponent<ActionClass>().Origin = this;
             pool.Add(toAdd);
             toAdd.transform.position = new Vector3(-1000, -1000, 1);
         }
 
-        base.Start();
     }
 
     override protected void DrawCard()
