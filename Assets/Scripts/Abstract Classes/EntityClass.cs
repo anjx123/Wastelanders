@@ -117,7 +117,7 @@ public abstract class EntityClass : SelectClass
 
     Requires: Entity is not dead
      */
-    public IEnumerator MoveToPosition(Vector3 destination, float radius, float duration)
+    public IEnumerator MoveToPosition(Vector3 destination, float radius, float duration, Vector3? lookAtPosition = null)
     {
         Vector3 originalPosition = myTransform.position;
         float elapsedTime = 0f;
@@ -129,7 +129,7 @@ public abstract class EntityClass : SelectClass
         float distance = Mathf.Sqrt(diffInLocation.x * diffInLocation.x + diffInLocation.y * diffInLocation.y);
         float maxProportionTravelled = (distance - radius) / distance;
 
-        UpdateFacing(diffInLocation, CardComparator.X_BUFFER);
+        UpdateFacing(diffInLocation, lookAtPosition);
 
         if (HasParameter("IsMoving", animator))
         {
@@ -159,19 +159,23 @@ public abstract class EntityClass : SelectClass
     }
 
     /*
-     * Purpose: Updates the entitiy's direction to face a target. (Target.position - my position)
+     * Purpose: Updates the entitiy's direction to face a target only when called. (Target.position - my position)
      * diffInLocation: Will face the entity Right if the Target is to its right (positive diffInLocation)
-        Left if other way around
-        ComparingBuffer: Adds a buffer where if the  (abs) |x-distance| travelled is smaller than comparingBuffer, No flip is made   
+        Left if other way around  
         Note: If you want to reverse the results, add a negative to diffInLocation before calling.
+    lookAtPosition: null if you want to use default movement facing, provide a value if you want the player to face a certain direction when called
      */
-    public void UpdateFacing(Vector3 diffInLocation, float comparingBuffer)
+    public void UpdateFacing(Vector3 diffInLocation, Vector3? lookAtPosition)
     {
-        if (diffInLocation.x > comparingBuffer)
+        if (lookAtPosition != null)
+        {
+            diffInLocation = lookAtPosition.Value - myTransform.position;
+        }
+        if (diffInLocation.x > 0)
         {
             FaceRight();
         }
-        else if (diffInLocation.x < -(comparingBuffer))
+        else if (diffInLocation.x < 0)
         {
             FaceLeft();
         }
@@ -197,7 +201,7 @@ public abstract class EntityClass : SelectClass
 
         Vector3 diffInLocation = staggeredPosition - originalPosition;
         if ((Vector2)diffInLocation == Vector2.zero) yield break;
-        UpdateFacing(-diffInLocation, 0);
+        UpdateFacing(-diffInLocation, null);
 
 
 
