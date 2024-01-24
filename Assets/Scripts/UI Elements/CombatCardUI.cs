@@ -38,7 +38,10 @@ public class CombatCardUI : Selectable
         else
         {
             // If the card is not currently displaying, show it
-            ShowCard();
+            if (CombatManager.Instance.CanHighlight())
+            {
+                ShowCard();
+            }
         }
     }
     
