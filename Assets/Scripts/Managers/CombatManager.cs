@@ -69,8 +69,8 @@ public class CombatManager : MonoBehaviour
     //Allows players to start selection again, resets enemies attacks and position
     private void PerformSelection()
     {
-        startDequeue.SetActive(true);
-        handContainer.SetActive(true);
+        Activate(startDequeue);
+        Activate(handContainer);
         baseCamera.Priority = 1;
         dynamicCamera.Priority = 0;
 
@@ -88,6 +88,28 @@ public class CombatManager : MonoBehaviour
 
         }
 
+    }
+
+    private void Activate(GameObject gameObject)
+    {
+        if (gameObject.GetComponent<Collider2D>())
+        {
+            gameObject.GetComponent<Collider2D>().enabled = true;
+        }
+        Vector3 position = gameObject.GetComponent<Transform>().position;
+        position.z = -1;
+        gameObject.GetComponent<Transform>().position = position;
+    }
+
+    private void Deactivate(GameObject gameObject)
+    {
+        if (gameObject.GetComponent<Collider2D>())
+        {
+            gameObject.GetComponent<Collider2D>().enabled = false;
+        }
+        Vector3 position = gameObject.GetComponent<Transform>().position;
+        position.z = -200;
+        gameObject.GetComponent<Transform>().position = position;
     }
 
     public void AddPlayer(PlayerClass player)
@@ -152,13 +174,14 @@ public class CombatManager : MonoBehaviour
 
     private void PerformFighting()
     {
-        startDequeue.SetActive(false);
-        handContainer.SetActive(false);
+
         Destroy(combatUICardDisplay.GetComponent<SpriteRenderer>()); // hide combat info UI
         if (CombatCardUI.currentUser != null)
         {
             CombatCardUI.currentUser.isDisplaying = false;
         }
+        Deactivate(startDequeue);
+        Deactivate(handContainer);
         baseCamera.Priority = 0;
         dynamicCamera.Priority = 1;
     }
