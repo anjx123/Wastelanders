@@ -355,7 +355,7 @@ else
                         curWrapper.PlayerAction = playerAct; 
                         return;
                     }
-                    // the paths represent the conditionals but in reality its just the same thing imo; could use ||
+                    // the paths represent the conditionals but in reality its just the same thing imo; 
                 } 
             }
             // otherwise is a new wrapper; would happen if all enemy target actions are tied up 
