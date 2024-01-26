@@ -13,7 +13,10 @@ public abstract class EnemyClass : EntityClass
     protected List<GameObject> pool = new List<GameObject>();
 
     // technically not necessaary as of now, but in case we want to do stuff with used cards (or single use)
-    protected List<GameObject> discard = new List<GameObject>();
+    protected List<GameObject> discard = new List<GameObject>();    
+    
+    // Initialized in editor
+    public List<GameObject> availableActions;
 
     /*  Plays a single card from the pool, removing it from the pool and refilling it if necessary.
      *  REQUIRES: Nothing
@@ -26,6 +29,14 @@ public abstract class EnemyClass : EntityClass
         base.Start();
         combatInfo.FaceLeft();
         CombatManager.Instance.AddEnemy(this);
+        for (int i = 0; i < availableActions.Count; i++)
+        {
+            GameObject toAdd = Instantiate(availableActions[i]);
+            toAdd.GetComponent<ActionClass>().Origin = this;
+            deck.Add(toAdd);
+        }
+
+        Reshuffle();
     }
 
     /*  Given a list of players, the enemy chooses appropriately a target/targets and adds an attack that it chooses to the bq.
@@ -40,6 +51,26 @@ public abstract class EnemyClass : EntityClass
      *  tweaking difficulty later on.
      */
     public abstract void AddAttack(List<PlayerClass> players);
+
+    /*  Reshuffles the deck. Should be called on start (so the enemy can display its first attack), and whenever the enemy runs out of
+     *  attacks.
+     *  REQUIRES: pool should be empty! But it shouldn't break anything, just mess up the enemy's order of attacks
+     *  MODIFIES: pool 
+     */
+    protected void Reshuffle()
+    {
+        List<GameObject> temp = new List<GameObject>();
+        for (int i = 0; i < deck.Count; i++)
+        {
+            temp.Add(deck[i]);
+        }
+        while (temp.Count > 0)
+        {
+            int idx = Random.Range(0, temp.Count);
+            pool.Add(temp[idx]);
+            temp.RemoveAt(idx);
+        }
+    }
 
     //Removes entity cards and self from BQ and combat manager. Kills itself
     public override IEnumerator Die()

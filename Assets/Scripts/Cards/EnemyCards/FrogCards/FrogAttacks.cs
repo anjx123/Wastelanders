@@ -18,7 +18,8 @@ public abstract class FrogAttacks : ActionClass
     }
     public override void OnHit()
     {
-        Origin.AttackAnimation("IsShooting");
         base.OnHit();
+        Origin.AttackAnimation("IsShooting");
+        
     }
 }
