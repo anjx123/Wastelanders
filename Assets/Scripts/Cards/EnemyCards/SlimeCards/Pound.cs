@@ -33,4 +33,10 @@ public class Pound : SlimeAttacks
 
         Origin.ApplyAllBuffsToCard(ref duplicateCard);
     }
+
+    public override void OnHit()
+    {
+        base.OnHit();
+        Origin.AttackAnimation("IsPounding");
+    }
 }

@@ -11,7 +11,7 @@ public abstract class SlimeAttacks : ActionClass
     }
     public override void OnHit()
     {
-        Origin.AttackAnimation("IsShooting");
         base.OnHit();
+        
     }
 }
