@@ -18,18 +18,4 @@ public class WasteFrog : EnemyClass
         myName = "Le Frog";
     }
 
-    /*  Contains: 1x Slap, 1x Flail
-     * 
-     */
-    public override void AddAttack(List<PlayerClass> players)
-    {
-        pool[0].GetComponent<ActionClass>().Target = players[Random.Range(0, players.Count - 1)];
-        BattleQueue.BattleQueueInstance.AddEnemyAction(pool[0].GetComponent<ActionClass>(), this);
-        combatInfo.SetCombatSprite(pool[0].GetComponent<ActionClass>());
-        pool.RemoveAt(0);
-        if (pool.Count < 1)
-        {
-            Reshuffle();
-        }
-    }
 }

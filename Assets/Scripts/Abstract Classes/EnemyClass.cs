@@ -16,7 +16,7 @@ public abstract class EnemyClass : EntityClass
     protected List<GameObject> discard = new List<GameObject>();    
     
     // Initialized in editor
-    public List<GameObject> availableActions;
+    public List<GameObject> availableActions = new();
 
     /*  Plays a single card from the pool, removing it from the pool and refilling it if necessary.
      *  REQUIRES: Nothing
@@ -50,7 +50,21 @@ public abstract class EnemyClass : EntityClass
      *  Potentially? We might want to list the attacks available to the enemy at the beginning of combat for ease of balancing and
      *  tweaking difficulty later on.
      */
-    public abstract void AddAttack(List<PlayerClass> players);
+    /*  Contains: 1x Pound, 1x StackSmash
+* 
+*/
+    public virtual void AddAttack(List<PlayerClass> players)
+    {
+        if (pool.Count == 0) return;
+        pool[0].GetComponent<ActionClass>().Target = players[Random.Range(0, players.Count - 1)];
+        BattleQueue.BattleQueueInstance.AddEnemyAction(pool[0].GetComponent<ActionClass>(), this);
+        combatInfo.SetCombatSprite(pool[0].GetComponent<ActionClass>());
+        pool.RemoveAt(0);
+        if (pool.Count < 1)
+        {
+            Reshuffle();
+        }
+    }
 
     /*  Reshuffles the deck. Should be called on start (so the enemy can display its first attack), and whenever the enemy runs out of
      *  attacks.

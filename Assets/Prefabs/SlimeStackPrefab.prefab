@@ -149,8 +149,8 @@ MonoBehaviour:
   myTransform: {fileID: 7946142163233550150}
   combatInfo: {fileID: 5598173080790413213}
   availableActions:
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 3041852592156658150, guid: 939542386ea29674694bf802b2e23921, type: 3}
+  - {fileID: 7334504972417615140, guid: 899f0822e15979c49983ba9695a07843, type: 3}
 --- !u!1001 &4995605236726781521
 PrefabInstance:
   m_ObjectHideFlags: 0
