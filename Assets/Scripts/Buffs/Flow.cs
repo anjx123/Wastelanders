@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Focus : StatusEffect
 {
-    public const string buffName = "Focus";
+    public const string buffName = "Flow";
 
     
     public override void ApplyStacks(ref ActionClass.CardDup dup)
