@@ -31,6 +31,7 @@ public class BattleQueue : MonoBehaviour
         {
             BattleQueueInstance = this;
             actionQueue = new SortedArray(SIZE);
+            wrapperArray = new WrapperArray();
         }
         else if (BattleQueueInstance != this)
         {
@@ -101,7 +102,44 @@ public class BattleQueue : MonoBehaviour
     //Gives BattleQueue ownership of the lifetime of the Dequeue coroutine.
     public void BeginDequeue()
     {
-        StartCoroutine(Dequeue());
+        // StartCoroutine(Dequeue());
+
+        StartCoroutine(DequeueWrappers());
+    }
+
+    // Begins the dequeueing process. 
+    // REQUIRES: An appropriate call. Note that this can be called even if the number of elements in the actionQueue is 0. Invariant array index 0 has largest speed. 
+    // MODIFIES: the actionQueue is progressively emptied until it is empty. 
+    public IEnumerator DequeueWrappers()
+    {
+        List<Wrapper> array = wrapperArray.GetWrappers();
+        bool beganFighting = false; // ASTER1: I have no idea how this got here but it renders the flag redundant 
+        if (!(array.Count == 0))
+        {
+            CombatManager.Instance.GameState = GameState.FIGHTING;
+            beganFighting = true;
+        }
+        while (!(array.Count == 0))
+        {
+            Wrapper e = array[0];
+
+            yield return StartCoroutine(CardComparator.Instance.ClashCards(e.PlayerAction, e.EnemyAction)); // For now, I'm assuming thta Clash Cards does things normally except for NULL cases which I'll have to understand first for appropriate logic 
+            // for null could just pass in the same card twice seems to get it done tbh: 
+            yield return StartCoroutine(CardComparator.Instance.ClashCards((e.PlayerAction) ? e.PlayerAction : e.EnemyAction, (e.EnemyAction) ? e.EnemyAction : e.PlayerAction)); // ? : note to self: RETURNS the result of the following expression
+
+            // array.Remove(e); >>> TO DO HIGHLY IMPORTANT
+            array.Remove(e); // right now IT IS REMOVING THE ENTIRE WRAPPER NEED TO FIX.
+
+            RenderBQ();
+            Debug.Log("An item hath been removed from the BQ"); // 
+        }
+        if (beganFighting)
+        {
+            CombatManager.Instance.GameState = GameState.SELECTION;
+        }
+
+        // ASTER1 
+        roundStart = true;    // so only inner classes have to refer to the instance itself...
     }
 
 
@@ -111,7 +149,7 @@ public class BattleQueue : MonoBehaviour
     public IEnumerator Dequeue()
     {
         List<ActionClass> array = actionQueue.GetList();
-        bool beganFighting = false;
+        bool beganFighting = false; // ASTER1: I have no idea how this got here but it renders the flag redundant 
         if (!(array.Count == 0))
         {
             CombatManager.Instance.GameState = GameState.FIGHTING;
@@ -120,7 +158,9 @@ public class BattleQueue : MonoBehaviour
         while (!(array.Count == 0))
         {
             ActionClass e = array[0];
+
             yield return StartCoroutine(CardComparator.Instance.ClashCards(e, e)); // essentially doing nothing. 
+
             array.Remove(e); // this utilises the default method for lists 
             RenderBQ();
             Debug.Log("An item hath been removed from the BQ");
@@ -131,7 +171,7 @@ public class BattleQueue : MonoBehaviour
         }
 
         // ASTER1 
-        roundStart = true;
+        roundStart = true;    // so only inner classes have to refer to the instance itself...
     }
 
     // A sorted array implementation for GameObject (cards)
@@ -319,6 +359,8 @@ else
                 wrappers.Add(wrapper);
             }
 
+            BattleQueue.BattleQueueInstance.roundStart = false;
+
             // Deactivate the actionQueue;
             // this is flawed at present and I see no point in removing this as it is already implemented; reimplementing or refactoring this functionality should come later
             // for reference notice the implementaion of methods inside *this* class assume implementation of that.
@@ -342,9 +384,15 @@ else
             // implementation is based on the fact that we are not checking already clashing entities. i.e. first enemy action is doled out. 
             // do perform check for availability
 
+            // since this is only called if there is a successful insertion
+            if (BattleQueue.BattleQueueInstance.roundStart)
+            {
+                EnemyActionsTransformation(); // roundStart = false too;
+            }
+
             foreach (Wrapper curWrapper in wrappers)
             {
-                if (curWrapper.PlayerAction != null) // if the wrapper is half-empty
+                if (curWrapper.PlayerAction == null) // if the wrapper is half-empty
                 {
                     if (playerAct.Target == curWrapper.EnemyAction.Origin && curWrapper.EnemyAction.Speed > playerAct.Speed) // CASE 2; the card in wrapper is by the targeted enemy and ITS speed is greater; relying on reference equality 
                     {
@@ -365,13 +413,18 @@ else
         // Prints contents to Console
         public void DisplayWrapperArray()
         {
-            // hi; TODO 
+            // hi; TODO
         }
 
         // Called at the end of InsertIntoWrapperArray(...) each time; O(n^2) but doesnt matter. 
         public void SortWrappers()
         {
             // ...
+        }
+
+        public List<Wrapper> GetWrappers()
+        {
+            return wrappers;
         }
     }
 
@@ -407,7 +460,10 @@ else
             if (PlayerAction == null) // account for half wrapper. 
             {
                 return EnemyAction; 
-            } else
+            } else if (EnemyAction == null)
+            {
+                return PlayerAction;
+            } else 
             {
                 return PlayerAction.Speed >= EnemyAction.Speed ? PlayerAction : EnemyAction;
             }
@@ -419,6 +475,10 @@ else
 
 
 }
+
+
+// query: when you use syntactic sugar for a member do you forego its initialisation outside the constructor; i.e. at declaration
+
 
 //INVALID ASSUMPTION DO NOT OMIT:
 // Notes for future it makes sense for the GameObject to have an instance of BattleQueue.

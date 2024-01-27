@@ -37,7 +37,7 @@ public class CardComparator : MonoBehaviour
         ActivateInfo(card1, card2);
         card1.ApplyEffect();
         card2.ApplyEffect();
-        yield return StartCoroutine(ClashBothEntities(card1.Origin, card1.Target));
+        yield return StartCoroutine(ClashBothEntities(card1.Origin, card1.Target)); // for animation purposes 
 
         card1.RollDice();
         card2.RollDice();
