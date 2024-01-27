@@ -1357,6 +1357,7 @@ MonoBehaviour:
   cardDisplay: {fileID: 412913820}
   isDisplaying: 0
   currentUser: {fileID: 0}
+  rdr: {fileID: 0}
 --- !u!1 &924634659
 GameObject:
   m_ObjectHideFlags: 0
