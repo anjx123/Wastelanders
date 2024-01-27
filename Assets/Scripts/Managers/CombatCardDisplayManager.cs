@@ -11,7 +11,7 @@ public class CombatCardDisplayManager : MonoBehaviour
 
     public GameObject cardDisplay; // The card display object
     public bool isDisplaying = false;
-    public CombatCardUI combatCardUser;
+    public SelectClass currentUser;
 
     // Awake is called before Start.
     void Awake()
@@ -26,5 +26,10 @@ public class CombatCardDisplayManager : MonoBehaviour
         }
     }
 
-
+    public void ShowCard(ActionClass a, SelectClass source)
+    {
+        SpriteRenderer rdr = cardDisplay.GetComponent<SpriteRenderer>();
+        rdr.sprite = a.fullCard;
+        currentUser = source;
+    }
 }
