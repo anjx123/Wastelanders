@@ -121,20 +121,30 @@ public class BattleQueue : MonoBehaviour
         }
         while (!(array.Count == 0))
         {
-            Wrapper e = array[0];
+            Wrapper e = array[0]; // concurrent modification problem is mitigated against
 
             // yield return StartCoroutine(CardComparator.Instance.ClashCards(e.PlayerAction, e.EnemyAction)); // For now, I'm assuming thta Clash Cards does things normally except for NULL cases which I'll have to understand first for appropriate logic 
             // for null could just pass in the same card twice seems to get it done tbh: 
-            yield return StartCoroutine(CardComparator.Instance.ClashCards((e.PlayerAction) ? e.PlayerAction : e.EnemyAction, (e.EnemyAction) ? e.EnemyAction : e.PlayerAction)); // ? : note to self: RETURNS the result of the following expression
+            // yield return StartCoroutine(CardComparator.Instance.ClashCards((e.PlayerAction) ? e.PlayerAction : e.EnemyAction, (e.EnemyAction) ? e.EnemyAction : e.PlayerAction)); // ? : note to self: RETURNS the result of the following expression
 
             // array.Remove(e); >>> TO DO HIGHLY IMPORTANT
             // array.Remove(e); // right now IT IS REMOVING THE ENTIRE WRAPPER NEED TO FIX. cannot REMOVE ANY ITEMS RN will throw a null pointer exception
 
-            RenderBQ();
-            Debug.Log("An item hath been removed from the BQ"); // 
+            // RenderBQ();
+            // Debug.Log("An item hath been removed from the BQ"); // 
 
 
             // new logic: 
+            ActionClass initial = (e.PlayerAction) ? e.PlayerAction : e.EnemyAction; // Because the player gets priority
+
+            // yield return WaitForSeconds(1); // WHY NOT !!!!!!
+            yield return null; 
+
+            // >>>>>>>>>>>>>>>>>>>>>>>>>>>>> I;m still very confused about what they mean by Register a Clash: the action itself should determine the emephasis; this behaviour should be inside the ClashComparator Class
+
+            // >>>>>>>>>>>>>>>>>>>>>>>>>>>>> maybe ClashCards should itself return the wrapper to return and should have a chnage in parameters. 
+            // >>>>>>>>>>>>>>>>>>>>>>>>>>>>> explicate this maybe I'm missing something because of how I differ from your suggested implementaion
+
         }
         if (beganFighting)
         {
