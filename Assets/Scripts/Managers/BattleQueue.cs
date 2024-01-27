@@ -128,7 +128,7 @@ public class BattleQueue : MonoBehaviour
             yield return StartCoroutine(CardComparator.Instance.ClashCards((e.PlayerAction) ? e.PlayerAction : e.EnemyAction, (e.EnemyAction) ? e.EnemyAction : e.PlayerAction)); // ? : note to self: RETURNS the result of the following expression
 
             // array.Remove(e); >>> TO DO HIGHLY IMPORTANT
-            array.Remove(e); // right now IT IS REMOVING THE ENTIRE WRAPPER NEED TO FIX.
+            // array.Remove(e); // right now IT IS REMOVING THE ENTIRE WRAPPER NEED TO FIX. cannot REMOVE ANY ITEMS RN will throw a null pointer exception
 
             RenderBQ();
             Debug.Log("An item hath been removed from the BQ"); // 
@@ -140,6 +140,8 @@ public class BattleQueue : MonoBehaviour
 
         // ASTER1 
         roundStart = true;    // so only inner classes have to refer to the instance itself...
+        // TO REMOVE: this is so that the battle queue is emptied itdelf:
+        Dequeue();
     }
 
 
