@@ -173,6 +173,7 @@ public class BattleQueue : MonoBehaviour
                     if (array[x].IsPlayedByPlayer() && card.Speed == array[x].Speed)
 
                     {
+                        PopUpNotificationManager.Instance.WarningSwitch(PopupType.SameSpeed);
                         return false; // don't insert. 
                     }
                 }

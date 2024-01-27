@@ -11,6 +11,8 @@ public class PopUpNotificationManager : MonoBehaviour
     public GameObject warningPrefab;
     public GameObject canvasObject;
 
+    public bool hover = false;
+
     // Awake is called when the script instance is being loaded
     void Awake()
     {
@@ -24,7 +26,26 @@ public class PopUpNotificationManager : MonoBehaviour
         }
 
         DontDestroyOnLoad(gameObject);
-        StartCoroutine(createWarning("ahh!!!"));
+        //StartCoroutine(createWarning("ahh!!!"));
+    }
+
+    public void WarningSwitch(PopupType popupType, GameObject obj = null)
+    {
+        switch(popupType)
+        {
+            case PopupType.SameSpeed:
+                StartCoroutine(createWarning("Multiple Cards with Same Speed Selected"));
+                break;
+            case PopupType.EnemyKilled:
+                StartCoroutine(createWarning("Enemy Killed!"));
+                break;
+            case PopupType.DeckReshuffled:
+                StartCoroutine(createWarning("Deck Reshuffled"));
+                break;
+            default:
+                break;
+        }
+
     }
 
     public IEnumerator createWarning(string message)
@@ -33,10 +54,22 @@ public class PopUpNotificationManager : MonoBehaviour
         WarningInfo info = instance.GetComponent<WarningInfo>();
         info.setText(message);
 
-        yield return new WaitForSeconds(20);
+        yield return new WaitForSeconds(8);
+        
+        while (hover)
+        {
+            yield return null;
+        }
 
-       // Destroy(instance);
+        Destroy(instance);
     }
+
+    public void Hover()
+    {
+        hover = true;
+    }
+
+    public void UnHover() { hover = false; }
 
    
 }

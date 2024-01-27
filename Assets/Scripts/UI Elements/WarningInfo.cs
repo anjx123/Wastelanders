@@ -12,4 +12,16 @@ public class WarningInfo : MonoBehaviour
     {
         warningText.text = text;
     }
+
+    public void OnMouseOver()
+    {
+        Debug.Log("AAAAAAAAAAAAAA");
+        PopUpNotificationManager.Instance.hover = true;
+    }
+
+    public void OnMouseExit()
+    {
+        Debug.Log("EEEEEEEEEEEEEE");
+        PopUpNotificationManager.Instance.hover = false;
+    }
 }
