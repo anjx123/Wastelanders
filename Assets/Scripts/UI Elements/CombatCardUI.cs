@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class CombatCardUI : Selectable
+public class CombatCardUI : SelectClass
 {
     public ActionClass actionClass; // Current/last ActionClass that we are displaying; it is set by the enemy
     public GameObject cardDisplay; // The card display object
@@ -21,14 +21,14 @@ public class CombatCardUI : Selectable
         }
     }
 
-    private void OnMouseExit()
+    public override void OnMouseExit()
     {
         // Reset the size when the mouse is no longer over the Combat UI
         transform.localScale = Vector3.one;
         DeHighlightTarget();
     }
 
-    private void OnMouseDown()
+    public override void OnMouseDown()
     {
         if (isDisplaying)
         {
@@ -90,4 +90,5 @@ public class CombatCardUI : Selectable
         Destroy(rdr);
         isDisplaying = false;
     }
+
 }
