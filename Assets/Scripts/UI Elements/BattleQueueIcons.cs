@@ -5,24 +5,16 @@ using UnityEngine;
 public class BattleQueueIcons : DisplayableClass
 {
     public GameObject cardDisplay; // The card display object
-    public bool isDisplaying = false;
-    SpriteRenderer rdr;
     public static BattleQueueIcons currentUser; // set this to self when we display; this way,
                                                 // other instances can turn off our flag when they overwrite us
 
     public override void OnMouseDown()
     {
         if (actionClass.Origin is PlayerClass) {
-                DeleteFromBQ();
+            DeleteFromBQ();
         } else {
-            if (isDisplaying)
+            if (CombatManager.Instance.CanHighlight())
             {
-                // If the card is currently displaying, hide it
-                HideCard();
-            }
-            else
-            {
-                // If the card is not currently displaying, show it
                 ShowCard();
             }
         }
@@ -39,26 +31,6 @@ public class BattleQueueIcons : DisplayableClass
 
     private void ShowCard()
     {
-        //if (CombatCardUI.currentUser != null)
-        //{
-        //    CombatCardUI.currentUser.isDisplaying = false;
-        //    CombatCardUI.currentUser.DeHighlightTarget();
-        //    CombatCardUI.currentUser = null;
-        //}
-        //if (currentUser != null)
-        //{
-        //    currentUser.isDisplaying = false;
-        //    currentUser.DeHighlightTarget();
-        //}
-        //if (cardDisplay.GetComponent<SpriteRenderer>() == null)
-        //{
-        //    cardDisplay.AddComponent<SpriteRenderer>();
-        //}
-        //rdr = cardDisplay.GetComponent<SpriteRenderer>();
-        //rdr.sprite = actionClass.fullCard;
-        //isDisplaying = true;
-        //currentUser = this;
-        //HighlightTarget();
         CombatCardDisplayManager.Instance.ShowCard(actionClass, this);
     }
 
@@ -77,12 +49,6 @@ public class BattleQueueIcons : DisplayableClass
         targetHighlighted = false;
     }
 
-    private void HideCard()
-    {
-        Destroy(rdr);
-        isDisplaying = false;
-    }
-
     public override void OnMouseEnter()
     {
         // Increase the size of the Combat UI to indicate it's clickable
@@ -98,8 +64,7 @@ public class BattleQueueIcons : DisplayableClass
     public override void OnMouseExit()
     {
         // Reset the size when the mouse is no longer over the Combat UI
-        Vector3 scale = transform.localScale;
-        scale *= 0.8f;
+        Vector3 scale = new Vector3(20, 20, (float)1.25);
         transform.localScale = scale;
         DeHighlightTarget();
     }

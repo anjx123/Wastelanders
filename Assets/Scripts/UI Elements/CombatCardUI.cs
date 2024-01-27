@@ -4,8 +4,6 @@ using UnityEngine.UI;
 public class CombatCardUI : DisplayableClass
 {
     public GameObject cardDisplay; // The card display object
-    public bool isDisplaying = false;
-    SpriteRenderer rdr;
     public static CombatCardUI currentUser; // set this to self when we display; this way,
                                             // other instances can turn off our flag when they overwrite us
 
@@ -28,44 +26,17 @@ public class CombatCardUI : DisplayableClass
 
     public override void OnMouseDown()
     {
-        if (isDisplaying)
-        {
-            // If the card is currently displaying, hide it
-            HideCard();
-        }
-        else
-        {
             // If the card is not currently displaying, show it
             if (CombatManager.Instance.CanHighlight())
             {
                 ShowCard();
             }
-        }
+        
     }
     
     private void ShowCard()
     {
-        //if (BattleQueueIcons.currentUser != null)
-        //{
-        //    BattleQueueIcons.currentUser.isDisplaying = false;
-        //    BattleQueueIcons.currentUser.DeHighlightTarget();
-        //    BattleQueueIcons.currentUser = null;
-        //}
-        //if (currentUser != null)
-        //{
-        //    currentUser.isDisplaying = false;
-        //    currentUser.DeHighlightTarget();
-        //}
 
-        //if (cardDisplay.GetComponent<SpriteRenderer>() == null)
-        //{
-        //    cardDisplay.AddComponent<SpriteRenderer>();
-        //}
-        //rdr = cardDisplay.GetComponent<SpriteRenderer>();
-        //rdr.sprite = actionClass.fullCard;
-        //isDisplaying = true;
-        //currentUser = this;
-        //HighlightTarget();
         CombatCardDisplayManager.Instance.ShowCard(actionClass, this);
     }
 
@@ -84,10 +55,5 @@ public class CombatCardUI : DisplayableClass
         targetHighlighted = false;
     }
 
-    private void HideCard()
-    {
-        Destroy(rdr);
-        isDisplaying = false;
-    }
 
 }

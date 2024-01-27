@@ -174,11 +174,9 @@ public class CombatManager : MonoBehaviour
 
     private void PerformFighting()
     {
-
-        Destroy(combatUICardDisplay.GetComponent<SpriteRenderer>()); // hide combat info UI
-        if (CombatCardUI.currentUser != null)
+        if (CombatCardDisplayManager.Instance.currentUser != null)
         {
-            CombatCardUI.currentUser.isDisplaying = false;
+            CombatCardDisplayManager.Instance.HideCard();
         }
         Deactivate(startDequeue);
         Deactivate(handContainer);

@@ -40,6 +40,7 @@ public class CombatCardDisplayManager : MonoBehaviour
         {
             rdr.enabled = true;
             rdr.sprite = a.fullCard;
+            isDisplaying = true;
             if (currentUser != null)
             {
                 DeHighlightTarget(currentUser.actionClass);
@@ -48,6 +49,14 @@ public class CombatCardDisplayManager : MonoBehaviour
             HighlightTarget(a);
         }
         
+    }
+
+    public void HideCard()
+    {
+        isDisplaying = false;
+        rdr.enabled = false;
+        DeHighlightTarget(currentUser.actionClass);
+        currentUser = null;
     }
 
     private void HighlightTarget(ActionClass a)
