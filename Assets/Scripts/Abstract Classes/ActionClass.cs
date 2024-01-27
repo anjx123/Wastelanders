@@ -50,7 +50,7 @@ public abstract class ActionClass : SelectClass
     public virtual void OnHit()
     {
         Vector3 diffInLocation = Target.myTransform.position - Origin.myTransform.position;
-        Origin.UpdateFacing(diffInLocation, 0);
+        Origin.UpdateFacing(diffInLocation, null);
         this.Target.TakeDamage(Origin, duplicateCard.actualRoll);
     }
 

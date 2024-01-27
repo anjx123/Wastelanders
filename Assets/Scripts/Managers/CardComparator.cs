@@ -111,8 +111,8 @@ public class CardComparator : MonoBehaviour
         float duration = 0.6f;
         
         
-        StartCoroutine(origin?.MoveToPosition(HorizontalProjector(centeredDistance, origin.myTransform.position, X_BUFFER), bufferedRadius, duration));
-        yield return StartCoroutine(target?.MoveToPosition(HorizontalProjector(centeredDistance, target.myTransform.position, X_BUFFER), bufferedRadius, duration));
+        StartCoroutine(origin?.MoveToPosition(HorizontalProjector(centeredDistance, origin.myTransform.position, X_BUFFER), bufferedRadius, duration, centeredDistance));
+        yield return StartCoroutine(target?.MoveToPosition(HorizontalProjector(centeredDistance, target.myTransform.position, X_BUFFER), bufferedRadius, duration, centeredDistance));
         yield return new WaitUntil(() => Input.GetMouseButtonDown(0));
     }
     /*
@@ -124,8 +124,8 @@ public class CardComparator : MonoBehaviour
         Vector3 vectorToCenter = (centeredDistance - currentPosition);
         
         return vectorToCenter.x > 0 ?
-            currentPosition + vectorToCenter - new Vector3(xBuffer, 0, 0) :
-            currentPosition + vectorToCenter + new Vector3(xBuffer, 0, 0);
+            currentPosition + vectorToCenter - new Vector3(xBuffer, 0f, 0f) :
+            currentPosition + vectorToCenter + new Vector3(xBuffer, 0f, 0f);
     }
 
     private void ActivateInfo(ActionClass card1, ActionClass card2)
