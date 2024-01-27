@@ -54,7 +54,7 @@ public class BattleQueue : MonoBehaviour
         }
         else
         {
-
+            roundStart = false; // !!!!!!
             ret = true;
         }
         RenderBQ();
@@ -123,7 +123,7 @@ public class BattleQueue : MonoBehaviour
         {
             Wrapper e = array[0];
 
-            yield return StartCoroutine(CardComparator.Instance.ClashCards(e.PlayerAction, e.EnemyAction)); // For now, I'm assuming thta Clash Cards does things normally except for NULL cases which I'll have to understand first for appropriate logic 
+            // yield return StartCoroutine(CardComparator.Instance.ClashCards(e.PlayerAction, e.EnemyAction)); // For now, I'm assuming thta Clash Cards does things normally except for NULL cases which I'll have to understand first for appropriate logic 
             // for null could just pass in the same card twice seems to get it done tbh: 
             yield return StartCoroutine(CardComparator.Instance.ClashCards((e.PlayerAction) ? e.PlayerAction : e.EnemyAction, (e.EnemyAction) ? e.EnemyAction : e.PlayerAction)); // ? : note to self: RETURNS the result of the following expression
 
@@ -132,6 +132,9 @@ public class BattleQueue : MonoBehaviour
 
             RenderBQ();
             Debug.Log("An item hath been removed from the BQ"); // 
+
+
+            // new logic: 
         }
         if (beganFighting)
         {
@@ -141,7 +144,7 @@ public class BattleQueue : MonoBehaviour
         // ASTER1 
         roundStart = true;    // so only inner classes have to refer to the instance itself...
         // TO REMOVE: this is so that the battle queue is emptied itdelf:
-        Dequeue();
+        // Dequeue();
     }
 
 
@@ -235,7 +238,7 @@ public class BattleQueue : MonoBehaviour
             // else insert 
             array.Insert(i, card);
             // ASTER2
-            BattleQueueInstance.wrapperArray.InsertIntoWrapperArray(card);
+            BattleQueueInstance.wrapperArray.InitialInsertIntoWrapperArray(card);
             return true;
 
         }
@@ -381,7 +384,8 @@ else
             If the enemy’s speed is higher than the player’s speed. The player’s card gets promoted up instead. However, it only promotes player cards 
                 that are targeting THEM, and will not promote attacks targeting different enemies. CASE 2 */
         // if the above two are conditions are not germane create a new wrapper.
-        public void InsertIntoWrapperArray(ActionClass playerAct)
+        // this is called initial insert since this relies on the invariant being held by the actionQueue itself. 
+        public void InitialInsertIntoWrapperArray(ActionClass playerAct)
         {
             // implementation is based on the fact that we are not checking already clashing entities. i.e. first enemy action is doled out. 
             // do perform check for availability
@@ -412,16 +416,30 @@ else
             wrappers.Add(new Wrapper(playerAct, false));
         }
 
+        // TODO: insert into wrapperArray
+        // IS NOT RESPONSIBLE FOR SORTING; 
+        // REQUIRES: a half-empty wrapper
+
+        // this is very iffy since this does not allow for re-pairing after the initial pairing. Could be remedied...
+        public void Insert(Wrapper act) 
+        {
+/*            if (act.IsPlayedByPlayer())
+            {
+                // 
+            }*/
+            wrappers.Add(act);
+        }
+
         // Prints contents to Console
         public void DisplayWrapperArray()
         {
             // hi; TODO
         }
 
-        // Called at the end of InsertIntoWrapperArray(...) each time; O(n^2) but doesnt matter. 
+        // Called at the end of and inside Insert(...) each time;
         public void SortWrappers()
         {
-            // ...
+            //
         }
 
         public List<Wrapper> GetWrappers()
@@ -507,3 +525,11 @@ else
 // == is for reference equality
 // == for strings is different
 // case statmetn in c#
+
+// ctrl up down for moevemnt 
+// atl for moving lines up and doww; wonder what navigating the functions shortcut is 
+// ctrl r stands for rename 
+
+// Add and insert equivalents in Java !!!!
+
+// ctrl shif / for block
