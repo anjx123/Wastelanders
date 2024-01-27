@@ -8,10 +8,12 @@ public class CombatCardDisplayManager : MonoBehaviour
 {
 
     public static CombatCardDisplayManager Instance;
-
     public GameObject cardDisplay; // The card display object
+
     public bool isDisplaying = false;
-    public SelectClass currentUser;
+    public DisplayableClass currentUser;
+    public SpriteRenderer rdr;
+    private bool targetHighlighted = false;
 
     // Awake is called before Start.
     void Awake()
@@ -22,14 +24,44 @@ public class CombatCardDisplayManager : MonoBehaviour
         }
         else if (Instance != this)
         {
-            Destroy(this); // this is out of circumspection; unsure it this is even needed.
+            Destroy(this);
         }
     }
 
-    public void ShowCard(ActionClass a, SelectClass source)
+    public void ShowCard(ActionClass a, DisplayableClass source)
     {
-        SpriteRenderer rdr = cardDisplay.GetComponent<SpriteRenderer>();
-        rdr.sprite = a.fullCard;
-        currentUser = source;
+        rdr = cardDisplay.GetComponent<SpriteRenderer>();
+        if (source == currentUser)
+        {
+            rdr.enabled = false;
+            DeHighlightTarget(a);
+        }
+        else
+        {
+            rdr.enabled = true;
+            rdr.sprite = a.fullCard;
+            if (currentUser != null)
+            {
+                DeHighlightTarget(currentUser.actionClass);
+            }
+            currentUser = source;
+            HighlightTarget(a);
+        }
+        
+    }
+
+    private void HighlightTarget(ActionClass a)
+    {
+        if (!targetHighlighted)
+        {
+            a.Target.OnMouseEnter();
+        }
+        targetHighlighted = true;
+    }
+
+    public void DeHighlightTarget(ActionClass a)
+    {
+        a.Target.OnMouseExit();
+        targetHighlighted = false;
     }
 }

@@ -2,15 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BattleQueueIcons : SelectClass
+public class BattleQueueIcons : DisplayableClass
 {
-    public ActionClass actionClass; // Current/last ActionClass that we are displaying; it is set by the enemy
     public GameObject cardDisplay; // The card display object
     public bool isDisplaying = false;
     SpriteRenderer rdr;
     public static BattleQueueIcons currentUser; // set this to self when we display; this way,
                                                 // other instances can turn off our flag when they overwrite us
-    private bool targetHighlighted = false;
 
     public override void OnMouseDown()
     {
@@ -41,26 +39,27 @@ public class BattleQueueIcons : SelectClass
 
     private void ShowCard()
     {
-        if (CombatCardUI.currentUser != null)
-        {
-            CombatCardUI.currentUser.isDisplaying = false;
-            CombatCardUI.currentUser.DeHighlightTarget();
-            CombatCardUI.currentUser = null;
-        }
-        if (currentUser != null)
-        {
-            currentUser.isDisplaying = false;
-            currentUser.DeHighlightTarget();
-        }
-        if (cardDisplay.GetComponent<SpriteRenderer>() == null)
-        {
-            cardDisplay.AddComponent<SpriteRenderer>();
-        }
-        rdr = cardDisplay.GetComponent<SpriteRenderer>();
-        rdr.sprite = actionClass.fullCard;
-        isDisplaying = true;
-        currentUser = this;
-        HighlightTarget();
+        //if (CombatCardUI.currentUser != null)
+        //{
+        //    CombatCardUI.currentUser.isDisplaying = false;
+        //    CombatCardUI.currentUser.DeHighlightTarget();
+        //    CombatCardUI.currentUser = null;
+        //}
+        //if (currentUser != null)
+        //{
+        //    currentUser.isDisplaying = false;
+        //    currentUser.DeHighlightTarget();
+        //}
+        //if (cardDisplay.GetComponent<SpriteRenderer>() == null)
+        //{
+        //    cardDisplay.AddComponent<SpriteRenderer>();
+        //}
+        //rdr = cardDisplay.GetComponent<SpriteRenderer>();
+        //rdr.sprite = actionClass.fullCard;
+        //isDisplaying = true;
+        //currentUser = this;
+        //HighlightTarget();
+        CombatCardDisplayManager.Instance.ShowCard(actionClass, this);
     }
 
     private void HighlightTarget()
