@@ -12,7 +12,6 @@ public class Hurl : FrogAttacks
 
     }
 
-    // Start is called before the first frame update
     public override void Initialize()
     {
         base.Initialize();

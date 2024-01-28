@@ -50,6 +50,11 @@ public abstract class ActionClass : SelectClass
 
     protected bool EnqueueMoveDown = false;
 
+    public virtual void Start()
+    {
+
+    }
+
     public abstract void ExecuteActionEffect();
 
     public virtual void Awake()
