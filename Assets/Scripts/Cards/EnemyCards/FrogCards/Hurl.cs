@@ -15,6 +15,7 @@ public class Hurl : FrogAttacks
     public override void Initialize()
     {
         base.Initialize();
+
         lowerBound = 3;
         upperBound = 7;
         

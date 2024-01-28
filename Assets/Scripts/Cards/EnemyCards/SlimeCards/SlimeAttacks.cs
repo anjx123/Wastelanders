@@ -5,7 +5,7 @@ using static UnityEngine.UI.Image;
 
 public abstract class SlimeAttacks : ActionClass
 {
-    public override void Start()
+    public virtual void Start()
     {
         
     }

@@ -105,11 +105,8 @@ public class CardComparator : MonoBehaviour
     private IEnumerator ClashBothEntities(EntityClass origin, EntityClass target)
     {
         EmphasizeClashers(origin, target);
-
-        float clashRatioOrigin = 0.3f;
-        float clashRatioTarget = 1 - clashRatioOrigin;
         //The Distance weighting will be calculated based on speeds of the two clashing cards
-        Vector3 centeredDistance = (origin.myTransform.position * clashRatioOrigin + clashRatioTarget * target.myTransform.position);
+        Vector3 centeredDistance = (origin.myTransform.position * 0.3f + 0.7f * target.myTransform.position);
         float bufferedRadius = 0.25f;
         float duration = 0.6f;
         

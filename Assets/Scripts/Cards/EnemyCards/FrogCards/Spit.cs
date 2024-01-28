@@ -14,6 +14,7 @@ public class Spit : FrogAttacks
     public override void Initialize()
     {
         base.Initialize();
+
         lowerBound = 1;
         upperBound = 4;
         Speed = 4;

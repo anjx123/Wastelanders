@@ -31,7 +31,7 @@ public abstract class EnemyClass : EntityClass
         CombatManager.Instance.AddEnemy(this);
         for (int i = 0; i < availableActions.Count; i++)
         {
-            GameObject toAdd = Instantiate(availableActions[i]);
+            GameObject toAdd = Instantiate(availableActions[i])
             ActionClass addedClass = toAdd.GetComponent<ActionClass>();
             addedClass.Origin = this;
             deck.Add(toAdd);

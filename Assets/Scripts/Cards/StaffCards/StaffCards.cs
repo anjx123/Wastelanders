@@ -5,7 +5,7 @@ using UnityEngine;
 public abstract class StaffCards : ActionClass
 {
     // Start is called before the first frame update
-    public override void Start()
+    public virtual void Start()
     {
         CardType = CardType.MeleeAttack;  
     }

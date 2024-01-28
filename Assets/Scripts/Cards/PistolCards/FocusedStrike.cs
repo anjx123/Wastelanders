@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FocusedStrike : StaffCards
+public class FocusedStrike : ActionClass
 {
     public override void ExecuteActionEffect()
     {
@@ -10,7 +10,7 @@ public class FocusedStrike : StaffCards
     }
 
     // Start is called before the first frame update
-    public override void Start()
+    void Start()
     {
         CardType = CardType.MeleeAttack;
         myName = "FocusedStrike";
