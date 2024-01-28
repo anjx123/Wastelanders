@@ -32,7 +32,9 @@ public abstract class EnemyClass : EntityClass
         for (int i = 0; i < availableActions.Count; i++)
         {
             GameObject toAdd = Instantiate(availableActions[i]);
-            toAdd.GetComponent<ActionClass>().Origin = this;
+            ActionClass addedClass = toAdd.GetComponent<ActionClass>();
+            addedClass.Origin = this;
+
             deck.Add(toAdd);
         }
 
