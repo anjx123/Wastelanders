@@ -98,7 +98,7 @@ public abstract class ActionClass : SelectClass
     {
         duplicateCard.actualRoll = Random.Range(duplicateCard.rollFloor, duplicateCard.rollCeiling + 1);
         
-        Origin.SetDice(Damage); 
+        Origin.SetDice(duplicateCard.actualRoll); 
     }
 
     public Sprite GetIcon()
