@@ -13,9 +13,9 @@ public class Hurl : FrogAttacks
     }
 
     // Start is called before the first frame update
-    public override void Awake()
+    public override void Initialize()
     {
-        base.Awake();
+        base.Initialize();
         lowerBound = 3;
         upperBound = 7;
         

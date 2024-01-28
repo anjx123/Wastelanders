@@ -52,6 +52,10 @@ public abstract class ActionClass : SelectClass
 
     public abstract void ExecuteActionEffect();
 
+    public virtual void Awake()
+    {
+        Initialize();
+    }
     public override void OnMouseDown()
     {
         HighlightManager.OnActionClicked(this);
@@ -69,6 +73,10 @@ public abstract class ActionClass : SelectClass
         return Origin.GetType().IsSubclassOf(typeof(PlayerClass));
     }
 
+    public virtual void Initialize()
+    {
+
+    }
 
     public int getRolledDamage()
     {

@@ -12,9 +12,14 @@ public class StackSmash : SlimeAttacks
     // Start is called before the first frame update
     public override void Start()
     {
+
+    }
+
+    public override void Initialize()
+    {
+        base.Initialize();
         lowerBound = 2;
         upperBound = 4;
-        base.Start();
         Speed = 2;
         Block = 2;
 
@@ -23,7 +28,6 @@ public class StackSmash : SlimeAttacks
         ogMaterial = renderer.material; // og sprite of card
         OriginalPosition = transform.position;
     }
-
     public override void ApplyEffect()
     {
         DupInit();

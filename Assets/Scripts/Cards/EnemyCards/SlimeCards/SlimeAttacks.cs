@@ -7,6 +7,12 @@ public abstract class SlimeAttacks : ActionClass
 {
     public virtual void Start()
     {
+        
+    }
+
+    public override void Initialize()
+    {
+        base.Initialize();
         CardType = CardType.MeleeAttack;
     }
     public override void OnHit()

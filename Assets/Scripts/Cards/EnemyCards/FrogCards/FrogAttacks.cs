@@ -11,9 +11,9 @@ public abstract class FrogAttacks : ActionClass
         //NO CODE HERE
     }
 
-    //ALL SETUP CODE GOES HERE
-    public virtual void Awake()
+    public override void Initialize()
     {
+        base.Initialize();
         CardType = CardType.RangedAttack;
     }
     public override void OnHit()
