@@ -13,14 +13,15 @@ public class ChargeUp : FrogAttacks
     }
 
     // Start is called before the first frame update
-    public override void Awake()
+    public override void Start()
     {
-        base.Awake();
+        base.Start();
         lowerBound = 1;
         upperBound = 3;
         
         Speed = 1;
         Block = 2;
+        
 
         myName = "ChargeUp";
         CardType = CardType.Defense;

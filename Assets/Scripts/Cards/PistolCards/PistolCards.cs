@@ -4,7 +4,7 @@ using UnityEngine;
 
 public abstract class PistolCards : ActionClass
 {
-    public virtual void Start()
+    public override void Start()
     {
         CardType = CardType.RangedAttack;
     }
