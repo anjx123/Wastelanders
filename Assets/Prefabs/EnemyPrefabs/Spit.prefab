@@ -70,7 +70,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5db7018266f66d14f96894e490d80a79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  myName: 
   icon: {fileID: 21300000, guid: 09d382d01f04d3a40be04169f9944b3c, type: 3}
+  spitPrefab: {fileID: 4172579226135636580, guid: 2215e5669ebb4ce439521ee582d25b32, type: 3}
 --- !u!212 &3212035558133251139
 SpriteRenderer:
   m_ObjectHideFlags: 0

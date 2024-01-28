@@ -119,4 +119,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ecc3bad833c93744ae6bbcd433a5f88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  myName: 
   icon: {fileID: 21300000, guid: 43c02bdcb24f05a4fbe0d0279871250c, type: 3}
+  spitPrefab: {fileID: 4172579226135636580, guid: 2215e5669ebb4ce439521ee582d25b32, type: 3}
