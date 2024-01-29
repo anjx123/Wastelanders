@@ -66,9 +66,15 @@ public class CombatCardDisplayManager : MonoBehaviour
     public void HideCard()
     {
         isDisplaying = false;
-        rdr.enabled = false;
-        DeHighlightTarget(currentUser.actionClass);
-        currentUser = null;
+        if (rdr != null)
+        {
+            rdr.enabled = false;
+        }
+        if (currentUser != null)
+        {
+            DeHighlightTarget(currentUser.actionClass);
+            currentUser = null;
+        }
     }
 
     // Highlights the target of a

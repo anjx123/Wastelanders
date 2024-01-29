@@ -174,10 +174,7 @@ public class CombatManager : MonoBehaviour
 
     private void PerformFighting()
     {
-        if (CombatCardDisplayManager.Instance.currentUser != null)
-        {
-            CombatCardDisplayManager.Instance.HideCard();
-        }
+        CombatCardDisplayManager.Instance.HideCard();
         Deactivate(startDequeue);
         Deactivate(handContainer);
         baseCamera.Priority = 0;
