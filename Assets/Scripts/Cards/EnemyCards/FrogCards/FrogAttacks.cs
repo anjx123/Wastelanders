@@ -68,8 +68,13 @@ public abstract class FrogAttacks : ActionClass
 
     private Quaternion UpdateAngle(EntityClass origin, EntityClass target)
     {
+        // Calculate the direction vector from the origin to the target
         Vector3 direction = target.myTransform.position - origin.myTransform.position;
-        Quaternion rotation = Quaternion.LookRotation(direction);
-        return Quaternion.identity;
+
+        // Calculate the angle in degrees
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        Debug.Log("The angle of the ball is " + angle);
+        // Apply the rotation to the arrow
+        return Quaternion.Euler(new Vector3(0, 0, angle));
     }
 }
