@@ -28,6 +28,16 @@ public class CombatCardDisplayManager : MonoBehaviour
         }
     }
 
+    //Given an ActionClass a to display, and the SOURCE of the call, shows the card in the display.
+    //REQUIRES: This function should always be called from a DisplayableClass.When it is called,
+    // source should be set to the caller.Below is an example call:
+
+
+    // CombatCardDisplayManager.Instance.ShowCard(actionClass, this);
+
+    //In other words, the second argument passed should always be "this".
+    //MODIFIES: cardDisplay.sprite, currentUser, rdr, isDisplaying
+
     public void ShowCard(ActionClass a, DisplayableClass source)
     {
         rdr = cardDisplay.GetComponent<SpriteRenderer>();
@@ -48,9 +58,11 @@ public class CombatCardDisplayManager : MonoBehaviour
             currentUser = source;
             HighlightTarget(a);
         }
-        
+
     }
 
+    // Hides the card by disabling the sprite renderer. Don't need to pass any parameters in as the manager
+    //  doesn't need to keep track of who calls this
     public void HideCard()
     {
         isDisplaying = false;
@@ -59,6 +71,7 @@ public class CombatCardDisplayManager : MonoBehaviour
         currentUser = null;
     }
 
+    // Highlights the target of a
     private void HighlightTarget(ActionClass a)
     {
         if (!targetHighlighted)
@@ -68,6 +81,7 @@ public class CombatCardDisplayManager : MonoBehaviour
         targetHighlighted = true;
     }
 
+    // Deighlights the target of a
     public void DeHighlightTarget(ActionClass a)
     {
         a.Target.OnMouseExit();
