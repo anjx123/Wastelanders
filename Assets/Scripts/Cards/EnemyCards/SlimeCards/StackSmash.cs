@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class StackSmash : SlimeAttacks
 {
+    [SerializeField]
+    private List<Sprite> animationFrame = new();
+
     public override void ExecuteActionEffect()
     {
 
@@ -37,7 +40,27 @@ public class StackSmash : SlimeAttacks
 
     public override void OnHit()
     {
+        //Origin.AttackAnimation("IsStackSmashing");
+        StartCoroutine(AttackAnimation());
+    }
+
+    public IEnumerator AttackAnimation()
+    {
+        Origin.animator.enabled = false;
+        SpriteRenderer spriteRenderer = Origin.GetComponent<SpriteRenderer>();
+        spriteRenderer.sprite = animationFrame[0];
+        yield return new WaitForSeconds(0.16f);
+        spriteRenderer.sprite = animationFrame[1];
+        yield return new WaitForSeconds(0.16f);
+        Vector3 originalPosition = Origin.myTransform.position;
+        Origin.myTransform.position = originalPosition + new Vector3(0, 1.5f, 0);
+        spriteRenderer.sprite = animationFrame[2];
+        yield return new WaitForSeconds(0.28f);
+        spriteRenderer.sprite = animationFrame[3];
+        Origin.myTransform.position = originalPosition;
         base.OnHit();
-        Origin.AttackAnimation("IsStackSmashing");
+        yield return new WaitForSeconds(0.20f);
+        spriteRenderer.sprite = animationFrame[4];
+        Origin.animator.enabled = true;
     }
 }
