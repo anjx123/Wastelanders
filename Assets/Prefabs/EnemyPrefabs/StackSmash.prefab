@@ -47,6 +47,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myName: 
   icon: {fileID: 21300000, guid: 53bc00f81960d9b4188b4febe5c7868f, type: 3}
+  animationFrame:
+  - {fileID: 21300000, guid: 73e2ceabc110c8041b3ef9253af2bdf5, type: 3}
+  - {fileID: 21300000, guid: e8c8be0959b81c84ba9002cbd84675d7, type: 3}
+  - {fileID: 21300000, guid: 1854449c738261448baf0be9c4a54d30, type: 3}
+  - {fileID: 21300000, guid: ef91a71bf4def0144b51fb37169e4e77, type: 3}
+  - {fileID: 21300000, guid: 73e2ceabc110c8041b3ef9253af2bdf5, type: 3}
 --- !u!212 &8024552615435652360
 SpriteRenderer:
   m_ObjectHideFlags: 0
