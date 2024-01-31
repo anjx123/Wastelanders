@@ -73,7 +73,6 @@ public abstract class FrogAttacks : ActionClass
 
         // Calculate the angle in degrees
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        Debug.Log("The angle of the ball is " + angle);
         // Apply the rotation to the arrow
         return Quaternion.Euler(new Vector3(0, 0, angle));
     }
