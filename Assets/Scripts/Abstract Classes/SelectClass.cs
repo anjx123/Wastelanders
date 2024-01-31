@@ -31,7 +31,7 @@ public abstract class SelectClass : MonoBehaviour
 
     public virtual void OnMouseEnter()
     {
-        if (CombatManager.Instance.CanHighlight())
+        if (CombatManager.Instance.CanHighlight() && !grewLarger)
         {
             myTransform.localScale += new Vector3((float)0.05, (float)0.05, 0);
             grewLarger = true;
