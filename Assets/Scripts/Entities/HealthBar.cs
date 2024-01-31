@@ -8,7 +8,12 @@ public class HealthBar : MonoBehaviour
 {
     public Slider slider;
     public TMP_Text healthText;
+    public Canvas canvas;
 
+    public void Start()
+    {
+        canvas.sortingLayerName = CombatManager.Instance.FADE_SORTING_LAYER;
+    }
     public void setMaxHealth(int maxHealth)
     {
         slider.maxValue = maxHealth;
