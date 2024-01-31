@@ -43,7 +43,6 @@ public class CombatManager : MonoBehaviour
             Destroy(this);
         }
 
-        DontDestroyOnLoad(gameObject);
     }
 
     // Start is called before the first frame update
