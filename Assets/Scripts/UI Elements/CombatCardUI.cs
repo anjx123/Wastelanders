@@ -33,27 +33,5 @@ public class CombatCardUI : DisplayableClass
             }
         
     }
-    
-    private void ShowCard()
-    {
-
-        CombatCardDisplayManager.Instance.ShowCard(actionClass, this);
-    }
-
-    private void HighlightTarget()
-    {
-        if (!targetHighlighted)
-        {
-            actionClass.Target.OnMouseEnter();
-        }
-        targetHighlighted = true;
-    }
-
-    public void DeHighlightTarget()
-    {
-        actionClass.Target.OnMouseExit();
-        targetHighlighted = false;
-    }
-
 
 }
