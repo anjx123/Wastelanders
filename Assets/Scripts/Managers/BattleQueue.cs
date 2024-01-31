@@ -223,7 +223,7 @@ public class BattleQueue : MonoBehaviour
         // prevent each player character from playing cards with duplicate speeds
         // Careful, because you could have multiple player characters that can have overlapping speeds
         // But one singular player character cannot have overlapping speeds
-        public bool Insert (ActionClass card)
+        public bool Insert(ActionClass card) // for both enemy and player actions
         {
             int i = LinearSearch(card); // returns where to insert ensuring LIFO.
 
@@ -232,10 +232,10 @@ public class BattleQueue : MonoBehaviour
             //            {
             //                array.Insert(i, card);
             //            } 
-            
+
 
             // code for uniqueness inside an array. 
-            
+
             // could be separate method. 
             if (i < array.Count) {
                 for (int x = 0; x < array.Count; x++) // ensuring uniqueness of speed for one character inside the array
@@ -251,7 +251,12 @@ public class BattleQueue : MonoBehaviour
             // else insert 
             array.Insert(i, card);
             // ASTER2
-            BattleQueueInstance.wrapperArray.InsertPlayerActionIntoWrappers(card);
+            if (card.IsPlayedByPlayer()) { 
+                BattleQueueInstance.wrapperArray.InsertPlayerActionIntoWrappers(card);
+            } else
+            {
+                // initial enemy actions are added via transmutation.
+            }
             return true;
 
         }
@@ -418,10 +423,14 @@ else
                     if (playerAct.Target == curWrapper.EnemyAction.Origin && curWrapper.EnemyAction.Speed > playerAct.Speed) // CASE 2; the card in wrapper is by the targeted enemy and ITS speed is greater; relying on reference equality 
                     {
                         curWrapper.PlayerAction = playerAct;
+                        SortWrappers();
+                        DisplayWrapperArray();
                         return;
                     } else if (playerAct.Target == curWrapper.EnemyAction.Origin)// CASE 1; 
                     {
-                        curWrapper.PlayerAction = playerAct; 
+                        curWrapper.PlayerAction = playerAct;
+                        SortWrappers();
+                        DisplayWrapperArray();
                         return;
                     }
                     // the paths represent the conditionals but in reality its just the same thing imo; 
@@ -430,8 +439,7 @@ else
             // otherwise is a new wrapper; would happen if all enemy target actions are tied up BUT this does not ensure sorting by speed.
             wrappers.Add(new Wrapper(playerAct, false));
 
-            DisplayWrapperArray();
-
+            
             SortWrappers();
 
             DisplayWrapperArray();
@@ -442,22 +450,21 @@ else
         // Prints contents to Console
         public void DisplayWrapperArray()
         {
-            Debug.Log("----------");
 
             foreach(Wrapper curWrapper in wrappers)
             {
                 Debug.Log("$$$$$$");
                 Debug.Log(curWrapper.PlayerAction == null ? "EMPTY " : curWrapper.PlayerAction.Speed);
                 Debug.Log(curWrapper.EnemyAction == null ? "EMPTY " : curWrapper.EnemyAction.Speed);
-                Debug.Log("$$$$$$");
             }
 
             Debug.Log("----------");
         }
 
-       public void InsertEnemyActionIntoWrappers()
+        // TODO !!! for dequeue 
+       public void InsertEnemyActionIntoWrappers(ActionClass act)
         {
-
+            // wrappers.Add(act);
         }
 
         // NOTE: alternative implementation: rely on the reference in ActionQueue and conduct a search here to remove INVALID still need to display.
@@ -470,13 +477,18 @@ else
         // REQUIRES: size is at least one. need a check in Dequeu ASTER7
         public void SortWrappers()
         {
-         // sort based on speed and priority.
-         for(int x = 0; x < wrappers.Count; x++)
-            {
-                for (int y = x; y >= 0; y--)
+            // when dealing with arrays always look for con mod
+            // sort based on speed and priority.
+            int count = wrappers.Count;
+            if (count > 0) {
+                for (int x = 0; x < count; x++)
                 {
-                    if (wrappers[y].HighestSpeed > wrappers[x].HighestSpeed && PlayerPriority(wrappers[y], wrappers[x])) { // inserted at first spot from the right 
-                        wrappers.Insert(x, wrappers[y]);
+                    for (int y = x; y > -1; y--)
+                    {
+                        if (wrappers[y].HighestSpeed > wrappers[x].HighestSpeed && PlayerPriority(wrappers[y], wrappers[x])) { // inserted at first spot from the right 
+                            wrappers.Insert(x, wrappers[y]);
+                            break;
+                        }
                     }
                 }
             }
@@ -554,6 +566,7 @@ else
 
 }
 
+// base.SuperMethod()
 
 // done with the insertion of enemy actions 
 
