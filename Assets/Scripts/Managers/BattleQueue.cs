@@ -54,7 +54,7 @@ public class BattleQueue : MonoBehaviour
         }
         else
         {
-            roundStart = false; // !!!!!!
+            roundStart = false; // ASTER1
             ret = true;
         }
         RenderBQ();
@@ -66,6 +66,8 @@ public class BattleQueue : MonoBehaviour
         action.Origin = origin;
         actionQueue.Insert(action);
         RenderBQ();
+
+        // instead of having a tranmuatation method, could have it so that insertion of the enemy action from the get-go causes an instantiation of wrapper. 
     }
 
 
@@ -77,6 +79,7 @@ public class BattleQueue : MonoBehaviour
     *  REQUIRES: Nothing
     *  MODIFIES: Nothing
     * 
+    *  NEEDS TO BE UPDATED FOR THE WRAPPERARRAY !!! TODO
     */
     void RenderBQ()
     {
@@ -102,9 +105,9 @@ public class BattleQueue : MonoBehaviour
     //Gives BattleQueue ownership of the lifetime of the Dequeue coroutine.
     public void BeginDequeue()
     {
-        // StartCoroutine(Dequeue());
+        StartCoroutine(Dequeue());
 
-        StartCoroutine(DequeueWrappers());
+        // StartCoroutine(DequeueWrappers());
     }
 
     // Begins the dequeueing process. 
@@ -113,7 +116,7 @@ public class BattleQueue : MonoBehaviour
     public IEnumerator DequeueWrappers()
     {
         List<Wrapper> array = wrapperArray.GetWrappers();
-        bool beganFighting = false; // ASTER1: I have no idea how this got here but it renders the flag redundant 
+        bool beganFighting = false; // ASTERR5
         if (!(array.Count == 0))
         {
             CombatManager.Instance.GameState = GameState.FIGHTING;
@@ -248,7 +251,7 @@ public class BattleQueue : MonoBehaviour
             // else insert 
             array.Insert(i, card);
             // ASTER2
-            BattleQueueInstance.wrapperArray.InitialInsertIntoWrapperArray(card);
+            BattleQueueInstance.wrapperArray.InsertPlayerActionIntoWrappers(card);
             return true;
 
         }
@@ -395,7 +398,9 @@ else
                 that are targeting THEM, and will not promote attacks targeting different enemies. CASE 2 */
         // if the above two are conditions are not germane create a new wrapper.
         // this is called initial insert since this relies on the invariant being held by the actionQueue itself. 
-        public void InitialInsertIntoWrapperArray(ActionClass playerAct)
+
+        // AFTER: for player actions.
+        public void InsertPlayerActionIntoWrappers(ActionClass playerAct)
         {
             // implementation is based on the fact that we are not checking already clashing entities. i.e. first enemy action is doled out. 
             // do perform check for availability
@@ -403,10 +408,10 @@ else
             // since this is only called if there is a successful insertion
             if (BattleQueue.BattleQueueInstance.roundStart)
             {
-                EnemyActionsTransformation(); // roundStart = false too;
+                EnemyActionsTransformation(); // implemented therein roundStart = false too;
             }
 
-            foreach (Wrapper curWrapper in wrappers)
+            foreach (Wrapper curWrapper in wrappers) // !!!!!! need to abstract and generalise for is just the enemy action 
             {
                 if (curWrapper.PlayerAction == null) // if the wrapper is half-empty
                 {
@@ -422,35 +427,68 @@ else
                     // the paths represent the conditionals but in reality its just the same thing imo; 
                 } 
             }
-            // otherwise is a new wrapper; would happen if all enemy target actions are tied up 
+            // otherwise is a new wrapper; would happen if all enemy target actions are tied up BUT this does not ensure sorting by speed.
             wrappers.Add(new Wrapper(playerAct, false));
+
+            DisplayWrapperArray();
+
+            SortWrappers();
+
+            DisplayWrapperArray();
+
         }
 
-        // TODO: insert into wrapperArray
-        // IS NOT RESPONSIBLE FOR SORTING; 
-        // REQUIRES: a half-empty wrapper
-
-        // this is very iffy since this does not allow for re-pairing after the initial pairing. Could be remedied...
-        public void Insert(Wrapper act) 
-        {
-/*            if (act.IsPlayedByPlayer())
-            {
-                // 
-            }*/
-            wrappers.Add(act);
-        }
 
         // Prints contents to Console
         public void DisplayWrapperArray()
         {
-            // hi; TODO
+            Debug.Log("----------");
+
+            foreach(Wrapper curWrapper in wrappers)
+            {
+                Debug.Log("$$$$$$");
+                Debug.Log(curWrapper.PlayerAction == null ? "EMPTY " : curWrapper.PlayerAction.Speed);
+                Debug.Log(curWrapper.EnemyAction == null ? "EMPTY " : curWrapper.EnemyAction.Speed);
+                Debug.Log("$$$$$$");
+            }
+
+            Debug.Log("----------");
         }
 
-        // Called at the end of and inside Insert(...) each time;
+       public void InsertEnemyActionIntoWrappers()
+        {
+
+        }
+
+        // NOTE: alternative implementation: rely on the reference in ActionQueue and conduct a search here to remove INVALID still need to display.
+        // Called inside the InitialInsert
+        // Called inside DequeueWrappers() each time a wrapper is dequed. 
+        // player priority is maintained
+        // (consider two player actions of the same speed in which one is wrapped) dequeue should ensure that the wrappers are automatically updated and sorted
+        // via an updated insert method that relies on a generalised clash.
+        // via appropriate calls to Insert (and therein Sort).
+        // REQUIRES: size is at least one. need a check in Dequeu ASTER7
         public void SortWrappers()
         {
-            //
+         // sort based on speed and priority.
+         for(int x = 0; x < wrappers.Count; x++)
+            {
+                for (int y = x; y >= 0; y--)
+                {
+                    if (wrappers[y].HighestSpeed > wrappers[x].HighestSpeed && PlayerPriority(wrappers[y], wrappers[x])) { // inserted at first spot from the right 
+                        wrappers.Insert(x, wrappers[y]);
+                    }
+                }
+            }
         }
+
+        // Subfunction for SortWrappers
+        private bool PlayerPriority(Wrapper wrapper1, Wrapper wrapper2)
+        {
+            return wrapper1.PlayerAction != null; 
+        }
+
+  
 
         public List<Wrapper> GetWrappers()
         {
@@ -465,36 +503,46 @@ else
         public ActionClass EnemyAction { get; set; }
         
         public int HighestSpeed { get; set; } // used to sort the wrappers 
+        // -1 indicates that the wrapper is empty 
+        // bad encapsulation as maintenance is done outside.
 
         // Every enemy action is transformed into a single field wrapper after all the enemy actions have been inserted;
         // Will implement this via a field checker (roundStart) at present; should be implemented elsewhere for decorum. 
 
         // the true corresponds to enemy action; false to player action
+        // TO REFACTOR !!! isEnemys
         public Wrapper(ActionClass action, bool isEnemys)
         {
             if (isEnemys)
             {
                 PlayerAction = null;
-                this.EnemyAction = action; // TODO checK; isCorrect; ref names
+                this.EnemyAction = action;
+                HighestSpeed = action.Speed;
             } else
             {
                 this.PlayerAction = action;
-                EnemyAction = null; 
+                EnemyAction = null;
+                HighestSpeed = action.Speed;
             }
         }
 
         // returns the action with the highest speed. 
-        // IS NOT RESPONSIBLE FOR THE DESTRUCTION AS THE DESTRUCTION MUST TAKE PLACE AFTER THE EXECUTION
+        // IS NOT RESPONSIBLE FOR THE DESTRUCTION AS THE DESTRUCTION MUST TAKE PLACE AFTER THE EXECUTION; for destruction check speed. 
+        // call in dequeue. 
+        // updates Highest Speed. 
         public ActionClass ReturnHighest()
         {
             if (PlayerAction == null) // account for half wrapper. 
             {
+                HighestSpeed = -1;
                 return EnemyAction; 
             } else if (EnemyAction == null)
             {
+                HighestSpeed = -1;
                 return PlayerAction;
             } else 
             {
+                HighestSpeed = PlayerAction.Speed >= EnemyAction.Speed ? PlayerAction.Speed : EnemyAction.Speed;
                 return PlayerAction.Speed >= EnemyAction.Speed ? PlayerAction : EnemyAction;
             }
          }
@@ -507,8 +555,30 @@ else
 }
 
 
+// done with the insertion of enemy actions 
+
+// initial insertion of player action 
+//          delete original wrapper and insert new wrapper OR keep original wrapper and cause it to be updated and then sort the array itself 
+
+// for dequeue:
+//          is responsible for ensuring player priority (i.e. after ReturnHighest()
+//          after that perform a check on the wrapper based on speed. (but first check if the wrapper is empty or not anf based on that)
+//          reinvoke the clashing method abstract it. 
+//          call sort 
+//          loop
+// empty the actionarray at the end. 
+//          
+//          no need for new wrapper
+//          update wrapper highest speed 
+//          need to sort the wrappers anew 
+// need a sort method that relies on the HighestSpeed attribute, maintain player priority
+
+
 // query: when you use syntactic sugar for a member do you forego its initialisation outside the constructor; i.e. at declaration
 
+
+// .getType == TypeOf; what Type is a type 
+// throw new NotImplementedException();
 
 //INVALID ASSUMPTION DO NOT OMIT:
 // Notes for future it makes sense for the GameObject to have an instance of BattleQueue.
