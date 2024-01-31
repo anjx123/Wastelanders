@@ -21,6 +21,16 @@ public class CombatManager : MonoBehaviour
     public GameObject startDequeue;
     public GameObject combatUICardDisplay; 
 
+    [SerializeField]
+    private SpriteRenderer spriteRenderer;
+    public string FADE_SORTING_LAYER
+    {
+        get
+        {
+            return spriteRenderer?.sortingLayerName;
+        }
+    }
+
     // Awake is called when the script instance is being loaded
     void Awake()
     {
@@ -73,6 +83,7 @@ public class CombatManager : MonoBehaviour
         Activate(handContainer);
         baseCamera.Priority = 1;
         dynamicCamera.Priority = 0;
+        StartCoroutine(FadeBackground(false));
 
         // Each enemy declares an attack. players is passed to AddAttack so the enemy can choose a target.
         foreach (EnemyClass enemy in enemies)
@@ -179,6 +190,32 @@ public class CombatManager : MonoBehaviour
         Deactivate(handContainer);
         baseCamera.Priority = 0;
         dynamicCamera.Priority = 1;
+        StartCoroutine(FadeBackground(true));
+    }
+
+    private IEnumerator FadeBackground(bool darkenScene)
+    {
+        float startValue = spriteRenderer.color.a;
+        float elapsedTime = 0;
+        float duration = 1f;
+
+        float endValue;
+        if (darkenScene)
+        {
+            endValue = 0.8f;
+        } else
+        {
+            startValue = Mathf.Max(spriteRenderer.color.a - 0.3f, 0f);
+            endValue = 0f;
+        }
+
+        while (elapsedTime < duration)
+        {
+            elapsedTime += Time.deltaTime;
+            float newAlpha = Mathf.Lerp(startValue, endValue, elapsedTime / duration);
+            spriteRenderer.color = new Color(spriteRenderer.color.r, spriteRenderer.color.g, spriteRenderer.color.b, newAlpha);
+            yield return null;
+        }
     }
 
     public bool CanHighlight()

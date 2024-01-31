@@ -18,6 +18,7 @@ public class CombatInfo : MonoBehaviour
     public void Start()
     {
         diceRollText.GetComponent<MeshRenderer>().sortingOrder = diceRollSprite.GetComponent<SpriteRenderer>().sortingOrder + 1;
+        buffList.gameObject.GetComponent<Canvas>().overrideSorting = true;
     }
     /* 
      Ideally sets the rolled dice value to the sprite of the value, since thats not available it uses a default sprite.

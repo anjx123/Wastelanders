@@ -49,7 +49,7 @@ public class StackSmash : SlimeAttacks
         Origin.animator.enabled = false;
         SpriteRenderer spriteRenderer = Origin.GetComponent<SpriteRenderer>();
         spriteRenderer.sprite = animationFrame[0];
-        yield return new WaitForSeconds(0.16f);
+        yield return new WaitForSeconds(0.10f);
         spriteRenderer.sprite = animationFrame[1];
         yield return new WaitForSeconds(0.16f);
         Vector3 originalPosition = Origin.myTransform.position;
