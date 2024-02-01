@@ -34,7 +34,7 @@ public class CardComparator : MonoBehaviour
      */
     public IEnumerator ClashCards(ActionClass card1, ActionClass card2)
     {
-        int cardOneStaggered;
+        int cardOneGreater;
         CombatManager.Instance.SetCameraCenter(card1.Origin);
         ActivateInfo(card1, card2);
         card1.ApplyEffect();
@@ -45,32 +45,46 @@ public class CardComparator : MonoBehaviour
         card2.RollDice();
         DeactivateInfo(card1, card2);
 
+        cardOneGreater = ClashCompare(card1, card2);
+
+
         if (IsAttack(card1) && IsAttack(card2))
         {
-            cardOneStaggered = ClashCompare(card1, card2);
             //Debug.Log(cardOneStaggered);
-            if (cardOneStaggered == 0) //Clash ties
+            if (cardOneGreater == 0) //Clash ties
             {
                 card1.OnHit(); // For testing purposes, not supposed to be here
-            } else if (cardOneStaggered > 0) //Card2 wins clash
+            } else if (cardOneGreater < 0) //Card2 wins clash
             {
                 card2.OnHit();
-            } else if (cardOneStaggered < 0) //Card1 wins clash
+            } else if (cardOneGreater > 0) //Card1 wins clash
             {
                 card1.OnHit();
             }
-        } else if (card1.CardType == CardType.Defense)
+        } else if (card1.CardType == CardType.Defense && IsAttack(card2))
         {
+            if (cardOneGreater <= 0) // Card 2 has a greater attack so it succeeds
+            {
+                card2.ReduceRoll(card1.GetCard().actualRoll);
+                card2.OnHit();
+            }
             card1.Origin.BlockAnimation(); //Blocked stuff here not implemented properly
-            
+
         } else if (card2.CardType == CardType.Defense)
         {
             
         } else
         {
             Debug.LogWarning("You forgot to specify Cardtype");
+        } else if (IsAttack(card1) && card2.CardType == CardType.Defense)
+        {
+            if (cardOneGreater >= 0) // Card 1 has a greater attack so it succeeds
+            {
+                card1.ReduceRoll(card2.GetCard().actualRoll);
+                card1.OnHit();
+            }
+            card2.Origin.BlockAnimation();
         }
-
         
         yield return new WaitForSeconds(COMBAT_BUFFER_TIME);
         if (PlayEntityDeaths != null)
@@ -84,20 +98,20 @@ public class CardComparator : MonoBehaviour
     //Produces a positive value if Card1 is staggered by Card2
     private int ClashCompare(ActionClass card1, ActionClass card2)
     {
-        int cardOneStaggered;
+        int cardOneGreater;
         
 
         if (card1.getRolledDamage() > card2.getRolledDamage())
         {;
-            cardOneStaggered = -1; //Card 1 staggers card 2
+            cardOneGreater = 1; //Card 1 is greater than card 2
         } else if (card1.getRolledDamage() < card2.getRolledDamage())
         {
-            cardOneStaggered = 1;
+            cardOneGreater = -1;
         } else 
         {
-            cardOneStaggered = 0;
+            cardOneGreater = 0;
         }
-        return cardOneStaggered;
+        return cardOneGreater;
     }
 
     /*

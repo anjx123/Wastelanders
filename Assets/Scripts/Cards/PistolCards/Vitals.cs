@@ -15,10 +15,11 @@ public class Vitals : PistolCards
         lowerBound = 1;
         upperBound = 8;
         base.Start();
-        Speed = 3;
+        Speed = 4;
         Block = 2;
 
         myName = "Vitals";
+        myDescription = "Placeholder";
         CardType = CardType.RangedAttack;
         Renderer renderer = GetComponent<Renderer>();
         ogMaterial = renderer.material; // og sprite of card
@@ -37,9 +38,7 @@ public class Vitals : PistolCards
     public override void ApplyEffect()
     {
 
-        DupInit();        
-        
-        Origin.ApplyAllBuffsToCard(ref duplicateCard);
+        base.ApplyEffect();
 
     }
 }

@@ -92,6 +92,16 @@ public abstract class ActionClass : SelectClass
         duplicateCard.rollCeiling = upperBound;
     }
 
+    public void ReduceRoll(int byValue)
+    {
+        duplicateCard.actualRoll = Mathf.Clamp(duplicateCard.actualRoll - byValue, 0, duplicateCard.actualRoll);
+    }
+
+    public void IncrementRoll(int byValue)
+    {
+        duplicateCard.actualRoll += byValue;
+    }
+
     private void UpdateDup()
     {
         DupInit();

@@ -15,13 +15,14 @@ public class PistolWhip : PistolCards
     public override void Start()
     {
         base.Start();
-        Speed = 2;
+        Speed = 1;
         Block = 2;
         Damage = 99;
         lowerBound = 3;
         upperBound = 5;
         CardType = CardType.MeleeAttack;
         myName = "PistolWhip";
+        myDescription = "Good Ol’ Reliable CQC!";
         Renderer renderer = GetComponent<Renderer>();
         ogMaterial = renderer.material; // og sprite of card
         OriginalPosition = transform.position;
@@ -36,9 +37,7 @@ public class PistolWhip : PistolCards
 
     public override void ApplyEffect()
     {
-        DupInit();
-        
-        Origin.ApplyAllBuffsToCard(ref duplicateCard);
+        base.ApplyEffect();
     }
 
 
