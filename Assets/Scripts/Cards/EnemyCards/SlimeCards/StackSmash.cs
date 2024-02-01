@@ -34,6 +34,6 @@ public class StackSmash : SlimeAttacks
     public override void OnHit()
     {
         base.OnHit();
-        // BattleQueue.BattleQueueInstance.AddPlayerAction(this); !!!!!!!!!!!!! >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> What is this?
+        BattleQueue.BattleQueueInstance.AddPlayerAction(this); // !!!!!!!!!!!!! >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> What is this?
     }
 }
