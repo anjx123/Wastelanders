@@ -9,8 +9,8 @@ public class BattleQueue : MonoBehaviour
 {
 
     public static BattleQueue BattleQueueInstance; // naming convention without the _
-    private SortedArray actionQueue; // in the same queue
-    // private List<GameObject> enemyActions; // naming convention
+    public SortedArray actionQueue; // in the same queue
+                                        // private List<GameObject> enemyActions; // naming convention
     private static int SIZE = 100; // size of actionQueue, change if necessary
     public RectTransform bqContainer;
     public readonly int cardWidth = 1;
@@ -22,7 +22,7 @@ public class BattleQueue : MonoBehaviour
     private bool roundStart = true;
 
     // the new wrapper array
-    private WrapperArray wrapperArray;
+    public WrapperArray wrapperArray;
 
 
     // Awake is called before Start.
@@ -114,22 +114,16 @@ public class BattleQueue : MonoBehaviour
     // Begins the dequeueing process. 
     // REQUIRES: An appropriate call. Note that this can be called even if the number of elements in the actionQueue is 0. Invariant array index 0 has largest speed. 
     // MODIFIES: the actionQueue is progressively emptied until it is empty. 
-
-    // double play of the first
-    // incorrect removal 
-
-    // Getting rid of the reclash. 
-
     public IEnumerator DequeueWrappers()
     {
         List<Wrapper> array = wrapperArray.GetWrappers();
-        bool beganFighting = false; 
+        bool beganFighting = false;
         if (!(array.Count == 0))
         {
             CombatManager.Instance.GameState = GameState.FIGHTING;
             beganFighting = true;
         }
-        
+
         int i = 0;
 
         while (!(array.Count == 0))
@@ -141,21 +135,22 @@ public class BattleQueue : MonoBehaviour
             }
 
 
-            Wrapper e = array[0]; 
+            Wrapper e = array[0];
 
             ActionClass action = e.ReturnHighest(); // accounts for half-wrappers too 
-            
-            if (action == null) // shouldn't be here. 
+
+            if (action == null) 
             {
-                continue;
-             }
+                throw new Exception("Empty Action Returned.");
+            }
 
             // %%% could be optimised for logic
             // removing from the Wrapper based on type
-            if (action.IsPlayedByPlayer()) // for consistency's sake; does not impact logic as the rest depends on HighestSpeed and ReturnHighest()
+            if (action.IsPlayedByPlayer()) // debugging 
             {
-                Debug.Log("A player action of speed x is removed: " +  action.Speed);
-            } else
+                Debug.Log("A player action of speed x is removed: " + action.Speed);
+            }
+            else
             {
                 Debug.Log("An enemy action of speed x is removed: " + action.Speed);
             }
@@ -166,7 +161,7 @@ public class BattleQueue : MonoBehaviour
                 {
                     throw new Exception("Wrapper Invariant not Upheld"); // $$$ what are the implications for the coroutine and the exception? 
                 }
-                wrapperArray.GetWrappers().Remove(e); // wrapper is now worthless
+                array.Remove(e); // wrapper is now worthless
             }
             else if (e.PlayerAction != null || e.EnemyAction != null)// the wrapper has a component left 
             {
@@ -174,15 +169,15 @@ public class BattleQueue : MonoBehaviour
                 {
                     // insert enemy action 
                     // wrapperArray.InsertEnemyActionIntoWrappers(e.EnemyAction);
-                    wrapperArray.InsertEnemyActionIntoWrappersWithoutClash(e.EnemyAction);
-                    wrapperArray.GetWrappers().Remove(e); // the above method creates a new wrapper regardless
+                    wrapperArray.GetWrappers().Remove(e); 
+                    wrapperArray.InsertEnemyActionIntoWrappers(e.EnemyAction);
                 }
                 else
                 {
                     // insert player action
                     // wrapperArray.InsertPlayerActionIntoWrappers(e.PlayerAction);
-                    wrapperArray.InsertPlayerActionIntoWrappersWithoutClash(e.PlayerAction);
-                    wrapperArray.GetWrappers().Remove(e); // the above method creates a new wrapper regardless
+                    wrapperArray.GetWrappers().Remove(e); 
+                    wrapperArray.InsertPlayerActionIntoWrappers(e.PlayerAction);
                 }
             }
             wrapperArray.SortWrappers();
@@ -193,8 +188,14 @@ public class BattleQueue : MonoBehaviour
             yield return StartCoroutine(CardComparator.Instance.ClashCards(action, action)); // $$$ the coroutine suspends it right?
 
             RenderBQ(); // !!! need to make a new render method. BUT before that need to rely on GameState for intial trigger of wrappers
-            
+
             actionQueue.GetList().Remove(action);
+
+
+            // how about this:
+            // use original actionQueue to remove
+
+            // check insertion of both enemies and players
 
         }
         if (beganFighting)
@@ -203,7 +204,7 @@ public class BattleQueue : MonoBehaviour
         }
 
         // ASTER1 
-        roundStart = true; 
+        roundStart = true;
     }
 
 
@@ -213,7 +214,7 @@ public class BattleQueue : MonoBehaviour
     public IEnumerator Dequeue()
     {
         List<ActionClass> array = actionQueue.GetList();
-        bool beganFighting = false; 
+        bool beganFighting = false;
         if (!(array.Count == 0))
         {
             CombatManager.Instance.GameState = GameState.FIGHTING;
@@ -235,7 +236,7 @@ public class BattleQueue : MonoBehaviour
         }
 
         // ASTER1 
-        roundStart = true;    
+        roundStart = true;
     }
 
     // A sorted array implementation for GameObject (cards)
@@ -283,7 +284,8 @@ public class BattleQueue : MonoBehaviour
             // code for uniqueness inside an array. 
 
             // could be separate method. 
-            if (i < array.Count) {
+            if (i < array.Count)
+            {
                 for (int x = 0; x < array.Count; x++) // ensuring uniqueness of speed for one character inside the array
                 {
                     if (array[x].IsPlayedByPlayer() && card.Speed == array[x].Speed)
@@ -294,15 +296,20 @@ public class BattleQueue : MonoBehaviour
                 }
             }
 
+            // this was where the initial duplication occured
+
+
             // else insert 
-            array.Insert(i, card); // the original order of the queue is ensured...
-            // ASTER2
-            if (card.IsPlayedByPlayer()) { 
+            if (card.IsPlayedByPlayer())
+            {
                 BattleQueueInstance.wrapperArray.InsertPlayerActionIntoWrappers(card);
-            } else
+            }
+            array.Insert(i, card); // the original order of the queue is ensured...
+                                    // ASTER2
+/*            else
             {
                 // initial enemy actions are added via transmutation.
-            }
+            }*/
             return true;
 
         }
@@ -391,8 +398,8 @@ else
                 }
             }
             return firstPosition; // default should be the start if no cards exist of same speed or no cards at all exist. <<< Incorrect;
-            // no cards at all exist.
-            
+                                    // no cards at all exist.
+
         }
         // NOTE: why are the attributes not lowerCamelCase? is it because of the syntactic sugar
 
@@ -434,12 +441,12 @@ else
             // Deactivate the actionQueue;
             // this is flawed at present and I see no point in removing this as it is already implemented; reimplementing or refactoring this functionality should come later
             // for reference notice the implementaion of methods inside *this* class assume implementation of that.
-/*            while (BattleQueueInstance.actionQueue.GetList().Count != 0)
-            {
-                BattleQueueInstance.actionQueue.GetList().Remove(BattleQueueInstance.actionQueue.GetList()[0]);
-            }
-            // alternatively
-            BattleQueueInstance.actionQueue.GetList().Clear();*/
+            /*            while (BattleQueueInstance.actionQueue.GetList().Count != 0)
+                        {
+                            BattleQueueInstance.actionQueue.GetList().Remove(BattleQueueInstance.actionQueue.GetList()[0]);
+                        }
+                        // alternatively
+                        BattleQueueInstance.actionQueue.GetList().Clear();*/
         }
 
         // only called inside Insert() iff Insert() method of SortedArray is about to return true; not that it returns it; is called before the method ends. // ASTER2
@@ -554,7 +561,7 @@ else
         public void DisplayWrapperArray()
         {
 
-            foreach(Wrapper curWrapper in wrappers)
+            foreach (Wrapper curWrapper in wrappers)
             {
                 Debug.Log("$$$$$$" + curWrapper.HighestSpeed);
                 Debug.Log(curWrapper.PlayerAction == null ? "EMPTY " : curWrapper.PlayerAction.Speed);
@@ -584,15 +591,15 @@ else
         // REQUIRES: size is at least one. need a check in Dequeu ASTER7; Implicity requires that no "empty" wrappers are present i.e. -1 ones
         public void SortWrappers()
         {
-           
+
             int count = wrappers.Count;
 
             // first sorting based on HighestSpeed
             // need to ensure order, however, so not equals to 
             for (int x = 0; x < count; x++)
-            {  
+            {
                 int y = x;
-                while (y > 0 && wrappers[y].HighestSpeed > wrappers[y - 1].HighestSpeed) 
+                while (y > 0 && wrappers[y].HighestSpeed > wrappers[y - 1].HighestSpeed)
                 {
                     Swap(wrappers, y - 1, y);
                     y--;
@@ -610,17 +617,18 @@ else
                     {
                         y--;
                         continue; // no swap needed 
-                    } else if (wrappers[y-1].PlayerAction == null || wrappers[y].PlayerAction.Speed > wrappers[y - 1].PlayerAction.Speed)
+                    }
+                    else if (wrappers[y - 1].PlayerAction == null || wrappers[y].PlayerAction.Speed > wrappers[y - 1].PlayerAction.Speed)
                     {
                         Swap(wrappers, y - 1, y);
                     }
                     y--;
                 }
             }
-     }
+        }
 
 
-  
+
 
         public List<Wrapper> GetWrappers()
         {
@@ -634,10 +642,10 @@ else
     {
         public ActionClass PlayerAction { get; set; }
         public ActionClass EnemyAction { get; set; }
-        
+
         public int HighestSpeed { get; set; } // used to sort the wrappers 
-        // -1 indicates that the wrapper is empty 
-        // bad encapsulation as maintenance is done outside.
+                                                // -1 indicates that the wrapper is empty 
+                                                // bad encapsulation as maintenance is done outside.
 
         // Every enemy action is transformed into a single field wrapper after all the enemy actions have been inserted;
         // Will implement this via a field checker (roundStart) at present; should be implemented elsewhere for decorum. 
@@ -651,7 +659,8 @@ else
                 PlayerAction = null;
                 this.EnemyAction = action;
                 HighestSpeed = action.Speed;
-            } else
+            }
+            else
             {
                 this.PlayerAction = action;
                 EnemyAction = null;
@@ -669,15 +678,17 @@ else
             {
                 HighestSpeed = -1;
                 ActionClass temp = EnemyAction;
-                EnemyAction = null; 
-                return temp; 
-            } else if (EnemyAction == null)
+                EnemyAction = null;
+                return temp;
+            }
+            else if (EnemyAction == null)
             {
                 HighestSpeed = -1;
                 ActionClass temp = PlayerAction;
                 PlayerAction = null;
                 return temp;
-            } else 
+            }
+            else
             {
                 if (PlayerAction.Speed >= EnemyAction.Speed)
                 {
@@ -685,15 +696,16 @@ else
                     ActionClass temp = PlayerAction;
                     PlayerAction = null;
                     return temp;
-                } else
+                }
+                else
                 {
                     HighestSpeed = PlayerAction.Speed;
                     ActionClass temp = EnemyAction;
-                    PlayerAction = null;
+                    EnemyAction = null;
                     return temp;
                 }
             }
-         }
+        }
 
         // Updates the HighestSpeed
         public void Update()
@@ -701,13 +713,16 @@ else
             if (PlayerAction != null && EnemyAction != null)
             {
                 HighestSpeed = PlayerAction.Speed >= EnemyAction.Speed ? PlayerAction.Speed : EnemyAction.Speed;
-            } else if (PlayerAction == null && EnemyAction != null)
+            }
+            else if (PlayerAction == null && EnemyAction != null)
             {
                 HighestSpeed = EnemyAction.Speed;
-            } else if (EnemyAction == null && PlayerAction != null)
+            }
+            else if (EnemyAction == null && PlayerAction != null)
             {
                 HighestSpeed = PlayerAction.Speed;
-            } else
+            }
+            else
             {
                 HighestSpeed *= -1;
             }
@@ -719,6 +734,7 @@ else
 
 
 }
+
 
 // base.SuperMethod()
 
