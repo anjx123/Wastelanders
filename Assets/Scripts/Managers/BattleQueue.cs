@@ -506,7 +506,7 @@ else
 
             foreach(Wrapper curWrapper in wrappers)
             {
-                Debug.Log("$$$$$$");
+                Debug.Log("$$$$$$" + curWrapper.HighestSpeed);
                 Debug.Log(curWrapper.PlayerAction == null ? "EMPTY " : curWrapper.PlayerAction.Speed);
                 Debug.Log(curWrapper.EnemyAction == null ? "EMPTY " : curWrapper.EnemyAction.Speed);
             }
@@ -522,39 +522,95 @@ else
         // (consider two player actions of the same speed in which one is wrapped) dequeue should ensure that the wrappers are automatically updated and sorted
         // via an updated insert method that relies on a generalised clash.
         // via appropriate calls to Insert (and therein Sort).
-        // REQUIRES: size is at least one. need a check in Dequeu ASTER7
+        // REQUIRES: size is at least one. need a check in Dequeu ASTER7; Implicity requires that no "empty" wrappers are present i.e. -1 ones
         public void SortWrappers()
         {
             // when dealing with arrays always look for con mod
             // sort based on speed and priority.
             int count = wrappers.Count;
-            if (count > 0) {
-                for (int x = 0; x < count; x++)
+            /*            if (count > 0) {
+                            for (int x = 0; x < count; x++)
+                            {
+                                for (int y = x; y > -1; y--) // TRANSFORM THIS INTO A WHILE LOOP. 
+                                {
+                                    if (wrappers[x].HighestSpeed >= wrappers[y].HighestSpeed && PlayerPriority(wrappers[x], wrappers[y])) // for when player speed is the greatest regardless of emptiness
+                                    {
+                                        Wrapper temp = wrappers[x];
+                                        wrappers.Remove(wrappers[x]);
+                                        wrappers.Insert(y, temp); // insertion doesn't remove them per se so need a temp 
+                                        // break is Invalid; need to compare with all 
+                                    } else if (wrappers[x].PlayerAction != null && wrappers[y].PlayerAction != null && wrappers[y].PlayerAction.Speed > wrappers[x].PlayerAction.Speed
+                                        && wrappers[y].HighestSpeed == wrappers[x].HighestSpeed) // for 2,5 ; 3,5; for when you have to swap certain isues 
+                                    {
+                                        Wrapper temp = wrappers[x];
+                                        wrappers.Remove(wrappers[x]);
+                                        wrappers.Insert(y, temp);
+                                    } else if (wrappers[x].HighestSpeed > wrappers[y].HighestSpeed) { // among enemy actions still allowing for via ^ pp 
+                                        // if the enemy speed is greater than the paired or absent player action still move
+                                        Wrapper temp = wrappers[x];
+                                        wrappers.Remove(wrappers[x]);
+                                        wrappers.Insert(y, temp);
+                                    }
+                                }
+                            }
+                        }*/
+
+            // $$$ while loops for ... sort 
+
+            // first sorting based on HighestSpeed
+            // need to ensure order, however, so not equals to // TODO violating LIFO 
+            for (int x = 0; x < count; x++)
+            {  
+                int y = x;
+                Wrapper temp = wrappers[y];
+                while (y > -1 && wrappers[x].HighestSpeed > wrappers[y].HighestSpeed)
                 {
-                    for (int y = x; y > -1; y--) // TRANSFORM THIS INTO A WHILE LOOP. 
-                    {
-                        if (wrappers[x].HighestSpeed >= wrappers[y].HighestSpeed && PlayerPriority(wrappers[x], wrappers[y])) // for when player speed is the greatest regardless of emptiness
-                        {
-                            Wrapper temp = wrappers[x];
-                            wrappers.Remove(wrappers[x]);
-                            wrappers.Insert(y, temp); // insertion doesn't remove them per se so need a temp 
-                            // break is Invalid; need to compare with all 
-                        } else if (wrappers[x].PlayerAction != null && wrappers[y].PlayerAction != null && wrappers[y].PlayerAction.Speed > wrappers[x].PlayerAction.Speed
-                            && wrappers[y].HighestSpeed == wrappers[x].HighestSpeed) // for 2,5 ; 3,5; for when you have to swap certain isues 
-                        {
-                            Wrapper temp = wrappers[x];
-                            wrappers.Remove(wrappers[x]);
-                            wrappers.Insert(y, temp);
-                        } else if (wrappers[x].HighestSpeed > wrappers[y].HighestSpeed) { // among enemy actions still allowing for via ^ pp 
-                            // if the enemy speed is greater than the paired or absent player action still move
-                            Wrapper temp = wrappers[x];
-                            wrappers.Remove(wrappers[x]);
-                            wrappers.Insert(y, temp);
-                        }
-                    }
+                    temp = wrappers[x];
+                    y--;
                 }
+                if (y == -1)
+                {
+                    y = 0;
+                }
+                wrappers.Remove(wrappers[x]);
+                wrappers.Insert(y, temp);
             }
-        }
+
+
+            // now sorting based on Player Priority when the highest speed is equal player wrapper comes first and fastest player comes first e.g. 5,4 and 4,5 and 2,5 and 3,5
+            for (int x = 0; x < count; x++)
+            {
+                int y = x;
+                Wrapper temp = wrappers[y];
+                while (y > -1 && wrappers[x].HighestSpeed == wrappers[y].HighestSpeed)
+                {
+                    if (wrappers[x].PlayerAction == null)
+                    {
+                        break;
+                    }
+                    else if (wrappers[y].PlayerAction == null)
+                    {
+                        temp = wrappers[x]; 
+                    } else if (wrappers[y].EnemyAction != null && wrappers[y].HighestSpeed == wrappers[y].EnemyAction.Speed && wrappers[x].PlayerAction.Speed > wrappers[y].PlayerAction.Speed) // move the faster player ahead. note above condition too
+                    {
+                        temp = wrappers[x];
+                    } else
+                    {
+                        // NADA
+                    }
+                    y--;
+                 }
+                if (y == -1)
+                {
+                    y = 0;
+                }
+                wrappers.Remove(wrappers[x]);
+                wrappers.Insert(y, temp);
+            }
+
+
+                    // 2,5 and 3,5 case
+                }
 
         // Subfunction for SortWrappers
         private bool PlayerPriority(Wrapper wrapper1, Wrapper wrapper2)
