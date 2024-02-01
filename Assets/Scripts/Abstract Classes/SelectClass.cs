@@ -6,6 +6,7 @@ public abstract class SelectClass : MonoBehaviour
 {
 
     protected string myName;
+    protected string myDescription;
     protected Material outliner;
     protected Material ogMaterial;
     protected bool isOutlined = false; // deals with enemy selection
@@ -24,6 +25,11 @@ public abstract class SelectClass : MonoBehaviour
 
     public string GetName() {
         return myName;
+    }
+
+    public string GetDescription()
+    {
+        return myDescription;
     }
 
     // abstract as actions and entities have different ways to display selection

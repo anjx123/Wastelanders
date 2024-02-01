@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Xml.Linq;
 using UnityEngine;
 
-public class FocusedStrike : ActionClass
+public class Flurry : StaffCards
 {
     public override void ExecuteActionEffect()
     {
@@ -10,30 +11,25 @@ public class FocusedStrike : ActionClass
     }
 
     // Start is called before the first frame update
-    void Start()
+    public override void Start()
     {
+        base.Start();
         CardType = CardType.MeleeAttack;
-        myName = "FocusedStrike";
+        myName = "Flurry";
+        myDescription = "Make This Attack Once, Then Make It Again";
         lowerBound = 2;
-        upperBound = 3;
-       
+        upperBound = 4;
+        Speed = 3;
+
         Renderer renderer = GetComponent<Renderer>();
         ogMaterial = renderer.material; // og sprite of card, maybe refac into ActionClass?
         OriginalPosition = transform.position;
     }
 
-    // Update is called once per frame
-    void Update()
+    public override void OnHit()
     {
-        
+        base.OnHit();
+        RollDice();
+        base.OnHit();
     }
-
-    public override void ApplyEffect()
-    {
-        DupInit();
-
-        Origin.AddStacks(Focus.buffName, 1);
-        Origin.ApplyAllBuffsToCard(ref duplicateCard);
-    }
-
 }

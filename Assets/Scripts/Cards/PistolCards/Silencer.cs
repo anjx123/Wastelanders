@@ -19,6 +19,7 @@ public class Silencer : PistolCards
         Block = 2;
 
         myName = "Silencer";
+        myDescription = "If this Attack Staggers the Opponent, Gain 2 Accuracy";
         CardType = CardType.RangedAttack;
         Renderer renderer = GetComponent<Renderer>();
         ogMaterial = renderer.material; // og sprite of card
@@ -37,10 +38,7 @@ public class Silencer : PistolCards
     public override void ApplyEffect()
     {
 
-        DupInit();
-
-        
-        Origin.ApplyAllBuffsToCard(ref duplicateCard);
+        base.ApplyEffect();
 
     }
 

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Xml.Linq;
@@ -5,7 +6,7 @@ using UnityEngine;
 using static Unity.Collections.AllocatorManager;
 using static UnityEngine.UI.Image;
 
-public class SteadyBreathing : PistolCards
+public class FocusedDefense : StaffCards
 {
     public override void ExecuteActionEffect()
     {
@@ -15,13 +16,14 @@ public class SteadyBreathing : PistolCards
     // Start is called before the first frame update
     public override void Start()
     {
-        lowerBound = 1;
-        upperBound = 3;
+        lowerBound = 2;
+        upperBound = 4;
         base.Start();
         Speed = 5;
         Block = 2;
-        
-        myName = "SteadyBreathing";
+
+        myName = "FocusedDefense";
+        myDescription = "Gain 1 Focus For Every Attack The Clashing Opponent Makes Against This Character";
         CardType = CardType.Defense;
         Renderer renderer = GetComponent<Renderer>();
         ogMaterial = renderer.material; // og sprite of card
@@ -35,13 +37,11 @@ public class SteadyBreathing : PistolCards
     void Update()
     {
     }
+
     public override void ApplyEffect()
     {
-
         DupInit();
 
-        Origin.AddStacks(Accuracy.buffName, 2);
         Origin.ApplyAllBuffsToCard(ref duplicateCard);
-
     }
 }
