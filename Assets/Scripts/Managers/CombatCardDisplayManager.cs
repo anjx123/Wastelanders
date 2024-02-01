@@ -11,7 +11,7 @@ public class CombatCardDisplayManager : MonoBehaviour
     public GameObject cardDisplay; // The card display object
 
     public bool IsDisplaying { get; set; } = false;
-    public DisplayableClass currentUser;
+    private ActionClass currentUser;
     public SpriteRenderer rdr;
     private bool targetHighlighted = false;
 
@@ -38,20 +38,18 @@ public class CombatCardDisplayManager : MonoBehaviour
     //In other words, the second argument passed should always be "this".
     //MODIFIES: cardDisplay.sprite, currentUser, rdr, isDisplaying
 
-    public void ShowCard(ActionClass a, DisplayableClass source)
+    public void ShowCard(ActionClass a)
     {
         rdr = cardDisplay.GetComponent<SpriteRenderer>();
-        if (source == currentUser)
+        if (a == currentUser)
         {
             IsDisplaying = false;
             if (rdr != null)
             {
                 rdr.enabled = false;
             }
-            if (currentUser != null)
-            {
-                currentUser = null;
-            }
+            currentUser = null;
+            
         }
         else
         {
@@ -60,9 +58,9 @@ public class CombatCardDisplayManager : MonoBehaviour
             IsDisplaying = true;
             if (currentUser != null)
             {
-                DeHighlightTarget(currentUser.actionClass);
+                DeHighlightTarget(currentUser);
             }
-            currentUser = source;
+            currentUser = a;
             HighlightTarget(a);
         }
 
@@ -79,7 +77,7 @@ public class CombatCardDisplayManager : MonoBehaviour
         }
         if (currentUser != null)
         {
-            DeHighlightTarget(currentUser.actionClass);
+            DeHighlightTarget(currentUser);
             currentUser = null;
         }
     }
