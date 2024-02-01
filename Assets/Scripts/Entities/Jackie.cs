@@ -62,6 +62,12 @@ public class Jackie : PlayerClass
         }
     }
 
+    override public void ReaddCard(ActionClass card) {
+        hand.Add(card.gameObject);
+        discard.Remove(card.gameObject);
+        RenderHand();
+    }
+
     /*  Renders the cards in List<GameObject> hand to the screen, as children of the handContainer.
      *  Cards are filled in left to right.
      *  REQUIRES: Nothing

@@ -32,6 +32,8 @@ public abstract class ActionClass : SelectClass
 
     public Sprite icon;
 
+    public Sprite fullCard; // used for displaying combat info
+
     public CardType CardType { get; protected set; }
 
     protected Vector3 OriginalPosition;
