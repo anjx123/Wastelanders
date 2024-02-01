@@ -3,9 +3,6 @@ using UnityEngine.UI;
 
 public class CombatCardUI : DisplayableClass
 {
-    public GameObject cardDisplay; // The card display object
-    public static CombatCardUI currentUser; // set this to self when we display; this way,
-                                            // other instances can turn off our flag when they overwrite us
 
     private void OnMouseOver()
     {
@@ -26,12 +23,11 @@ public class CombatCardUI : DisplayableClass
 
     public override void OnMouseDown()
     {
-            // If the card is not currently displaying, show it
-            if (CombatManager.Instance.CanHighlight())
-            {
-                ShowCard();
-            }
-        
+        // If the card is not currently displaying, show it
+        if (CombatManager.Instance.CanHighlight())
+        {
+            ShowCard();
+        }
     }
 
 }

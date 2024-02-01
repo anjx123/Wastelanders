@@ -94,8 +94,7 @@ public class BattleQueue : MonoBehaviour
 
         for (int i = 0; i < queue.Count; i++)
         {
-            GameObject renderedCopy = Instantiate(iconPrefab, new Vector3(100,100,-10), Quaternion.identity);
-            renderedCopy.GetComponent<BattleQueueIcons>().cardDisplay = combatInfoDisplay;
+            GameObject renderedCopy = Instantiate(iconPrefab, new Vector3(100, 100, -10), Quaternion.identity);
             renderedCopy.GetComponent<BattleQueueIcons>().actionClass = queue[i];
             renderedCopy.GetComponent<SpriteRenderer>().sprite = queue[i].GetIcon();
             renderedCopy.transform.SetParent(bqContainer, false);

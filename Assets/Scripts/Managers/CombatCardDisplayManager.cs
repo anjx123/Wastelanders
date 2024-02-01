@@ -10,7 +10,7 @@ public class CombatCardDisplayManager : MonoBehaviour
     public static CombatCardDisplayManager Instance;
     public GameObject cardDisplay; // The card display object
 
-    public bool isDisplaying = false;
+    public bool IsDisplaying { get; set; } = false;
     public DisplayableClass currentUser;
     public SpriteRenderer rdr;
     private bool targetHighlighted = false;
@@ -43,14 +43,21 @@ public class CombatCardDisplayManager : MonoBehaviour
         rdr = cardDisplay.GetComponent<SpriteRenderer>();
         if (source == currentUser)
         {
-            rdr.enabled = false;
-            DeHighlightTarget(a);
+            IsDisplaying = false;
+            if (rdr != null)
+            {
+                rdr.enabled = false;
+            }
+            if (currentUser != null)
+            {
+                currentUser = null;
+            }
         }
         else
         {
             rdr.enabled = true;
             rdr.sprite = a.fullCard;
-            isDisplaying = true;
+            IsDisplaying = true;
             if (currentUser != null)
             {
                 DeHighlightTarget(currentUser.actionClass);
@@ -65,7 +72,7 @@ public class CombatCardDisplayManager : MonoBehaviour
     //  doesn't need to keep track of who calls this
     public void HideCard()
     {
-        isDisplaying = false;
+        IsDisplaying = false;
         if (rdr != null)
         {
             rdr.enabled = false;
@@ -88,9 +95,12 @@ public class CombatCardDisplayManager : MonoBehaviour
     }
 
     // Deighlights the target of a
-    public void DeHighlightTarget(ActionClass a)
+    private void DeHighlightTarget(ActionClass a)
     {
-        a.Target.OnMouseExit();
+        if (targetHighlighted)
+        {
+            a.Target.OnMouseExit();
+        }
         targetHighlighted = false;
     }
 }

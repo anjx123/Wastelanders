@@ -4,10 +4,6 @@ using UnityEngine;
 
 public class BattleQueueIcons : DisplayableClass
 {
-    public GameObject cardDisplay; // The card display object
-    public static BattleQueueIcons currentUser; // set this to self when we display; this way,
-                                                // other instances can turn off our flag when they overwrite us
-
     public override void OnMouseDown()
     {
         if (actionClass.Origin is PlayerClass) {

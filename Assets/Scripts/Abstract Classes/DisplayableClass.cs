@@ -4,8 +4,8 @@
 // are "displayable" in the upper right window when clicked.
 public abstract class DisplayableClass : SelectClass
 {
-    public ActionClass actionClass; // Current/last ActionClass that we are displaying; it is set by the enemy
-    public bool targetHighlighted = false;
+    public ActionClass actionClass; // Associated ActionClass that this class displays; it is set by the entity
+    protected bool targetHighlighted = false;
 
     protected void ShowCard()
     {
@@ -23,7 +23,10 @@ public abstract class DisplayableClass : SelectClass
 
     protected void DeHighlightTarget()
     {
-        actionClass.Target.OnMouseExit();
+        if (targetHighlighted)
+        {
+            actionClass.Target.OnMouseExit();
+        }
         targetHighlighted = false;
     }
 }
