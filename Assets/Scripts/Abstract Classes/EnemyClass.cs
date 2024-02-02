@@ -52,7 +52,18 @@ public abstract class EnemyClass : EntityClass
      *  Potentially? We might want to list the attacks available to the enemy at the beginning of combat for ease of balancing and
      *  tweaking difficulty later on.
      */
-    public abstract void AddAttack(List<PlayerClass> players);
+    public virtual void AddAttack(List<PlayerClass> players)
+    {
+        pool[0].GetComponent<ActionClass>().Target = players[Random.Range(0, players.Count - 1)];
+        BattleQueue.BattleQueueInstance.AddEnemyAction(pool[0].GetComponent<ActionClass>(), this);
+        combatInfo.SetCombatSprite(pool[0].GetComponent<ActionClass>());
+        combatInfo.GetComponentInChildren<CombatCardUI>().actionClass = pool[0].GetComponent<ActionClass>();
+        pool.RemoveAt(0);
+        if (pool.Count < 1)
+        {
+            Reshuffle();
+        }
+    }
 
     /*  Reshuffles the deck. Should be called on start (so the enemy can display its first attack), and whenever the enemy runs out of
      *  attacks.
