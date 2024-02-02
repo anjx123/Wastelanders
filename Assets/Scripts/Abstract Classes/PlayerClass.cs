@@ -4,6 +4,7 @@ using UnityEngine;
 
 public abstract class PlayerClass : EntityClass
 {
+    abstract public void ReaddCard(ActionClass card);
 
     protected int maxHandSize = 4;
     // This is the deck of the player, which does not change as the player reshuffles/draws cards.

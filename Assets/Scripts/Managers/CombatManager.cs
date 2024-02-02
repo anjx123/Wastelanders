@@ -19,6 +19,7 @@ public class CombatManager : MonoBehaviour
 
     public GameObject handContainer;
     public GameObject startDequeue;
+    public GameObject combatUICardDisplay; 
 
     [SerializeField]
     private SpriteRenderer spriteRenderer;
@@ -183,6 +184,7 @@ public class CombatManager : MonoBehaviour
 
     private void PerformFighting()
     {
+        CombatCardDisplayManager.Instance.HideCard();
         Deactivate(startDequeue);
         Deactivate(handContainer);
         baseCamera.Priority = 0;

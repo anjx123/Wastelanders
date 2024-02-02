@@ -21,7 +21,6 @@ public abstract class EntityClass : SelectClass
     private int health;
     public HealthBar healthBar;
     public Animator animator;
-    public Transform myTransform;
     public CombatInfo combatInfo;
 
     protected bool isDead = false;
@@ -51,9 +50,6 @@ public abstract class EntityClass : SelectClass
         get { return id; }
         set { id = value; }
     }
-
-
-    private bool grewLarger; //Checks if entity was highlighted first to ensure proper dehighlighting. 
 
     public virtual void Start()
     {
@@ -364,21 +360,5 @@ public abstract class EntityClass : SelectClass
         combatInfo.UpdateBuffs(statusEffects);
     }
 
-    public override void OnMouseEnter()
-    {
-        if (CombatManager.Instance.CanHighlight())
-        {
-            myTransform.localScale += new Vector3((float)0.05, (float)0.05, 0);
-            grewLarger = true;
-        }
-    }
-
-    public override void OnMouseExit()
-    {
-        if (grewLarger)
-        {
-            myTransform.localScale -= new Vector3((float)0.05, (float)0.05, 0);
-            grewLarger = false;
-        }
-    }
+    
 }
