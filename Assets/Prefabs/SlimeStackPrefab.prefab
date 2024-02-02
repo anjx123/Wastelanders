@@ -144,13 +144,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myName: 
+  myTransform: {fileID: 7946142163233550150}
   healthBar: {fileID: 618062441777076705}
   animator: {fileID: 6424370051552391152}
-  myTransform: {fileID: 7946142163233550150}
   combatInfo: {fileID: 5598173080790413213}
   availableActions:
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 2376898879351982445, guid: 41158511bc5761d4386617623a2a562d, type: 3}
+  - {fileID: 2376898879351982445, guid: 63bc38449d5d80242a58e343499c03ca, type: 3}
 --- !u!1001 &4995605236726781521
 PrefabInstance:
   m_ObjectHideFlags: 0
