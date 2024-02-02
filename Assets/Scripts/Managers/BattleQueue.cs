@@ -14,7 +14,7 @@ public class BattleQueue : MonoBehaviour
     public RectTransform bqContainer;
     public readonly int cardWidth = 1;
     public GameObject iconPrefab;
-
+    public GameObject combatInfoDisplay; // same display given to enemy combat card UI
 
     // Awake is called before Start.
     void Awake()
@@ -52,6 +52,14 @@ public class BattleQueue : MonoBehaviour
         return ret;
     }
 
+     public void DeletePlayerAction(ActionClass action)
+    {
+        ActionClass deletedCard = actionQueue.RemoveLinearSearch(action);
+        RenderBQ();
+        PlayerClass player = (PlayerClass)deletedCard.Origin;
+        player.ReaddCard(deletedCard);
+    }
+
     public void AddEnemyAction(ActionClass action, EntityClass origin)
     {
         action.Origin = origin;
@@ -77,22 +85,19 @@ public class BattleQueue : MonoBehaviour
     */
     void RenderBQ()
     {
-        List<ActionClass> hand = actionQueue.GetList();
+        List<ActionClass> queue = actionQueue.GetList();
 
         foreach (Transform child in bqContainer.transform)
         {
             Destroy(child.gameObject);
         }
 
-        for (int i = 0; i < hand.Count; i++)
+        for (int i = 0; i < queue.Count; i++)
         {
-            GameObject renderedCopy = Instantiate(iconPrefab, Vector3.zero, Quaternion.identity);
-            renderedCopy.GetComponent<SpriteRenderer>().sprite = hand[i].GetIcon();
+            GameObject renderedCopy = Instantiate(iconPrefab, new Vector3(100, 100, -10), Quaternion.identity);
+            renderedCopy.GetComponent<BattleQueueIcons>().actionClass = queue[i];
+            renderedCopy.GetComponent<SpriteRenderer>().sprite = queue[i].GetIcon();
             renderedCopy.transform.SetParent(bqContainer, false);
-            float distanceToLeft = bqContainer.rect.width / 2 - (i * cardWidth);
-            float y = bqContainer.transform.position.y;
-            Vector3 v = new Vector3(-distanceToLeft, y, 1);
-            renderedCopy.transform.position = v;
         }
     }
 
@@ -202,7 +207,7 @@ public class BattleQueue : MonoBehaviour
             }
         }
 
-        private void RemoveLinearSearch(ActionClass card)
+        public ActionClass RemoveLinearSearch(ActionClass card)
         {
             int i = LinearSearch(card);
 
@@ -210,6 +215,8 @@ public class BattleQueue : MonoBehaviour
             {
                 array.RemoveAt(i);
             }
+
+            return card;
         }
 
         public int BinarySearch(int speed, int left, int right, EntityClass origin)
