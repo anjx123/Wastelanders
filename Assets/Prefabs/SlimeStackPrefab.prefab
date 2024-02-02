@@ -76,7 +76,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -727630607
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: c35873cedc48d104e80b8f3f1e1f8078, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -144,9 +144,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myName: 
+  myTransform: {fileID: 7946142163233550150}
   healthBar: {fileID: 618062441777076705}
   animator: {fileID: 6424370051552391152}
-  myTransform: {fileID: 7946142163233550150}
   combatInfo: {fileID: 5598173080790413213}
   availableActions:
   - {fileID: 3041852592156658150, guid: 939542386ea29674694bf802b2e23921, type: 3}
@@ -340,6 +340,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CombatCardInfo
       objectReference: {fileID: 0}
+    - target: {fileID: 8313258087260495552, guid: 941333e3be7f6f04688676f1827dbf1b, type: 3}
+      propertyPath: myTransform
+      value: 
+      objectReference: {fileID: 8189535486906966511}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -361,3 +365,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6adb464f1698da341ab4389bebbddc09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &8189535486906966511 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 607299130714548600, guid: 941333e3be7f6f04688676f1827dbf1b, type: 3}
+  m_PrefabInstance: {fileID: 8775998853870471319}
+  m_PrefabAsset: {fileID: 0}
