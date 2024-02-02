@@ -24,7 +24,6 @@ public class CardComparator : MonoBehaviour
             Destroy(this);
         }
 
-        DontDestroyOnLoad(gameObject);
     }
 
     /*
