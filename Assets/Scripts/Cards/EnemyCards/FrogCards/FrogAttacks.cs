@@ -47,8 +47,9 @@ public abstract class FrogAttacks : ActionClass
 
         //UpdateFacing(diffInLocation, destination);
         GameObject spitProjectile = Instantiate(spitPrefab, originalPosition, UpdateAngle(origin, target));
-        SpriteRenderer spriteRenderer = spitProjectile.GetComponent<SpriteRenderer>();
-
+        SpriteRenderer spitSpriteRenderer = spitProjectile.GetComponent<SpriteRenderer>();
+        spitSpriteRenderer.sortingOrder = CombatManager.Instance.FADE_SORTING_ORDER;
+        spitSpriteRenderer.sortingLayerName = CombatManager.Instance.FADE_SORTING_LAYER;
         float flipTimer = 0.0f;
         float flipInterval = 0.2f;
         float spitDuration = distance / 10f;
@@ -61,7 +62,7 @@ public abstract class FrogAttacks : ActionClass
 
             if (flipTimer >= flipInterval)
             {
-                spriteRenderer.flipY = !spriteRenderer.flipY;
+                spitSpriteRenderer.flipY = !spitSpriteRenderer.flipY;
                 flipTimer = 0.0f;
             }
             yield return null;

@@ -25,7 +25,6 @@ public abstract class EntityClass : SelectClass
 
     protected bool isDead = false;
 
-    private static readonly float Z_LAYER = -2;
 
     protected Vector3 initalPosition;
     public int Health
@@ -338,16 +337,22 @@ public abstract class EntityClass : SelectClass
     public void Emphasize()
     {
         Vector3 largeTransform = transform.position;
-        largeTransform.z = Z_LAYER - 1;
+        largeTransform.z = CombatManager.Instance.FADE_SORTING_ORDER - 3;
         transform.position = largeTransform;
+        GetComponent<SpriteRenderer>().sortingOrder = CombatManager.Instance.FADE_SORTING_ORDER + 1;
+        combatInfo.Emphasize();
+        healthBar.Emphasize();
     }
 
     //Decreases this Entity Class' sorting layer. (Standardizes Sorting Layers for entities)
     public void DeEmphasize()
     {
         Vector3 largeTransform = transform.position;
-        largeTransform.z = Z_LAYER;
+        largeTransform.z = CombatManager.Instance.FADE_SORTING_ORDER - 1;
         transform.position = largeTransform;
+        GetComponent<SpriteRenderer>().sortingOrder = CombatManager.Instance.FADE_SORTING_ORDER - 1;
+        combatInfo.DeEmphasize();
+        healthBar.DeEmphasize();
     }
 
     public void SetDice(int value)

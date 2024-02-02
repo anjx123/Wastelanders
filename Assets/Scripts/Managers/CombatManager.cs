@@ -26,7 +26,23 @@ public class CombatManager : MonoBehaviour
     {
         get
         {
-            return fadeScreen?.sortingLayerName;
+            return fadeScreen.sortingLayerName;
+        }
+    }
+
+    public int FADE_SORTING_ORDER
+    {
+        get
+        {
+            return fadeScreen.sortingOrder;
+        }
+    }
+
+    public float FADE_SCREEN_Z_VALUE
+    {
+        get
+        {
+            return fadeScreen.gameObject.transform.position.z;
         }
     }
 

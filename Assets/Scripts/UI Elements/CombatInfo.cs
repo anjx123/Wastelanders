@@ -14,9 +14,15 @@ public class CombatInfo : MonoBehaviour
     public GameObject diceRollText;
     public GameObject buffIconPrefab;
 
+    private Canvas buffListCanvas;
+
     public void Start()
     {
         diceRollText.GetComponent<MeshRenderer>().sortingOrder = diceRollSprite.GetComponent<SpriteRenderer>().sortingOrder + 1;
+        buffListCanvas = buffList.gameObject.GetComponent<Canvas>();
+        buffListCanvas.overrideSorting = true;
+        buffListCanvas.sortingLayerName = CombatManager.Instance.FADE_SORTING_LAYER;
+        diceRollText.GetComponent<MeshRenderer>().sortingLayerName = CombatManager.Instance.FADE_SORTING_LAYER;
     }
 
     /* 
@@ -45,6 +51,20 @@ public class CombatInfo : MonoBehaviour
     {
         SpriteRenderer spriteRenderer = combatCardSprite.GetComponent<SpriteRenderer>();
         spriteRenderer.sprite = null;
+    }
+    public void Emphasize()
+    {
+        combatCardSprite.GetComponent<SpriteRenderer>().sortingOrder = CombatManager.Instance.FADE_SORTING_ORDER + 1;
+        diceRollSprite.GetComponent<SpriteRenderer>().sortingOrder = CombatManager.Instance.FADE_SORTING_ORDER + 1;
+        buffListCanvas.sortingOrder = CombatManager.Instance.FADE_SORTING_ORDER + 1;
+        diceRollText.GetComponent<MeshRenderer>().sortingOrder = CombatManager.Instance.FADE_SORTING_ORDER + 1;
+    }
+    public void DeEmphasize()
+    {
+        combatCardSprite.GetComponent<SpriteRenderer>().sortingOrder = CombatManager.Instance.FADE_SORTING_ORDER - 1;
+        diceRollSprite.GetComponent<SpriteRenderer>().sortingOrder = CombatManager.Instance.FADE_SORTING_ORDER - 1;
+        buffListCanvas.sortingOrder = CombatManager.Instance.FADE_SORTING_ORDER - 1;
+        diceRollText.GetComponent<MeshRenderer>().sortingOrder = CombatManager.Instance.FADE_SORTING_ORDER - 1;
     }
     //Flips the CombatInfo so that the Icon is on the Right of the entity
     public void FaceLeft()

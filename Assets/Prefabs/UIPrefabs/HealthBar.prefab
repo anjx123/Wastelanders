@@ -489,5 +489,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 615fa82f8a89cb04b840209d6fb53eb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  myRectTransform: {fileID: 402734221553807771}
   slider: {fileID: 2636268116857858162}
   healthText: {fileID: 6834136677937008894}
+  healthCanvas: {fileID: 4937974532167626984}
