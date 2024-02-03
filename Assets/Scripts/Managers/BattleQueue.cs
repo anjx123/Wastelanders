@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.PackageManager;
 using UnityEngine;
 using UnityEngine.Assertions;
 using static UnityEditor.Experimental.GraphView.GraphView;
@@ -15,7 +16,7 @@ public class BattleQueue : MonoBehaviour
     public RectTransform bqContainer;
     public readonly int cardWidth = 1;
     public GameObject iconPrefab;
-
+    public GameObject combatInfoDisplay; // same display given to enemy combat card UI
 
     // is an indicator of sorts; essentially if this is true what this means is that the round has started and all the enemy actions have been added. The player has to add a card.
     // upon the addition of the first card the enemy actions are FIRST tranmusted into wrappers and thereafter everything proceeds as intended. Is reset at the end of dequee. ASTER1
@@ -62,6 +63,14 @@ public class BattleQueue : MonoBehaviour
         return ret;
     }
 
+     public void DeletePlayerAction(ActionClass action)
+    {
+        ActionClass deletedCard = actionQueue.RemoveLinearSearch(action);
+        RenderBQ();
+        PlayerClass player = (PlayerClass)deletedCard.Origin;
+        player.ReaddCard(deletedCard);
+    }
+
     public void AddEnemyAction(ActionClass action, EntityClass origin)
     {
         action.Origin = origin;
@@ -69,6 +78,12 @@ public class BattleQueue : MonoBehaviour
         RenderBQ(); // TODO
 
         // instead of having a tranmuatation method, could have it so that insertion of the enemy action from the get-go causes an instantiation of wrapper. 
+    }
+
+    //Remove all cards with (@param entity) as the target and origin
+    public void RemoveAllInstancesOfEntity(EntityClass entity)
+    {
+        actionQueue.RemoveAllInstancesOfEntity(entity);
     }
 
 
@@ -84,22 +99,19 @@ public class BattleQueue : MonoBehaviour
     */
     void RenderBQ()
     {
-        List<ActionClass> hand = actionQueue.GetList();
+        List<ActionClass> queue = actionQueue.GetList();
 
         foreach (Transform child in bqContainer.transform)
         {
             Destroy(child.gameObject);
         }
 
-        for (int i = 0; i < hand.Count; i++)
+        for (int i = 0; i < queue.Count; i++)
         {
-            GameObject renderedCopy = Instantiate(iconPrefab, Vector3.zero, Quaternion.identity);
-            renderedCopy.GetComponent<SpriteRenderer>().sprite = hand[i].GetIcon();
+            GameObject renderedCopy = Instantiate(iconPrefab, new Vector3(100, 100, -10), Quaternion.identity);
+            renderedCopy.GetComponent<BattleQueueIcons>().actionClass = queue[i];
+            renderedCopy.GetComponent<SpriteRenderer>().sprite = queue[i].GetIcon();
             renderedCopy.transform.SetParent(bqContainer, false);
-            float distanceToLeft = bqContainer.rect.width / 2 - (i * cardWidth);
-            float y = bqContainer.transform.position.y;
-            Vector3 v = new Vector3(-distanceToLeft, y, 1);
-            renderedCopy.transform.position = v;
         }
     }
 
@@ -214,11 +226,9 @@ public class BattleQueue : MonoBehaviour
     public IEnumerator Dequeue()
     {
         List<ActionClass> array = actionQueue.GetList();
-        bool beganFighting = false;
         if (!(array.Count == 0))
         {
             CombatManager.Instance.GameState = GameState.FIGHTING;
-            beganFighting = true;
         }
         while (!(array.Count == 0))
         {
@@ -230,7 +240,7 @@ public class BattleQueue : MonoBehaviour
             RenderBQ();
             Debug.Log("An item hath been removed from the BQ");
         }
-        if (beganFighting)
+        if (CombatManager.Instance.GameState == GameState.FIGHTING)
         {
             CombatManager.Instance.GameState = GameState.SELECTION;
         }
@@ -314,20 +324,20 @@ public class BattleQueue : MonoBehaviour
 
         }
 
-        // remove methods are redundant??
-        public void Remove(ActionClass card)
+        //Removes all cards in the battle queue that have (@param entity) as the Origin or target.
+        public void RemoveAllInstancesOfEntity(EntityClass entity)
         {
-            int index = BinarySearch(card.Speed, 0, array.Count - 1, card.Origin);
-
-            if (index < array.Count && array[index] == card)
+            for (int i = array.Count - 1; i >= 0; i--)
             {
-                // Remove the value at the specified index
-                array.RemoveAt(index);
+                ActionClass actionClass = array[i];
+                if (actionClass.Origin == entity || actionClass.Target == entity)
+                {
+                    array.RemoveAt(i); //TODO: Should update so that player cards are returned if not used. 
+                }
             }
-            // else: element not found
         }
 
-        private void RemoveLinearSearch(ActionClass card)
+        public ActionClass RemoveLinearSearch(ActionClass card)
         {
             int i = LinearSearch(card);
 
@@ -335,6 +345,8 @@ public class BattleQueue : MonoBehaviour
             {
                 array.RemoveAt(i);
             }
+
+            return card;
         }
 
         public int BinarySearch(int speed, int left, int right, EntityClass origin)

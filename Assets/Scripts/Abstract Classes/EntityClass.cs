@@ -10,8 +10,9 @@ public abstract class EntityClass : SelectClass
     protected int health;
     public HealthBar healthBar;
     public Animator animator;
-    public Transform myTransform;
     public CombatInfo combatInfo;
+
+    protected bool isDead = false;
 
     private static readonly float Z_LAYER = -2;
 
@@ -19,7 +20,7 @@ public abstract class EntityClass : SelectClass
     public int Health
     {
         get { return health; }
-        set { health = value; }
+        protected set { health = value; }
     }
 
     protected Dictionary<string, StatusEffect> statusEffects;
@@ -35,9 +36,6 @@ public abstract class EntityClass : SelectClass
         set { id = value; }
     }
 
-
-    private bool grewLarger; //Checks if entity was highlighted first to ensure proper dehighlighting. 
-
     public virtual void Start()
     {
 
@@ -49,15 +47,57 @@ public abstract class EntityClass : SelectClass
         DeEmphasize();
     }
 
+    /*
+     Purpose: Deals damage to this entity and staggers it back 
+     Requires: This Entity is not dead
+     */
 
-    public virtual void TakeDamage(int damage)
+    public virtual void TakeDamage(EntityClass source, int damage)
     {
         health = Mathf.Clamp(health - damage, 0, MAX_HEALTH);
         healthBar.setHealth(health);
+        float percentageDone = 1; //Testing different powered knockbacks
+        if (Health != 0)
+        {
+            percentageDone = Mathf.Clamp(damage / (float) Health, 0f, 1f);
+        }
+        StartCoroutine(PlayHitAnimation(source, this, percentageDone));
+    }
+
+    //Plays both first the stagger entities then 
+    //Requires: Entities are not dead
+    private IEnumerator PlayHitAnimation(EntityClass origin, EntityClass target, float percentageDone)
+    {
+        yield return StartCoroutine(StaggerEntities(origin, target, percentageDone));
         if (health <= 0)
         {
-           // Die();
+            yield return StartCoroutine(Die());
         }
+    }
+
+    /* 
+    Purpose: Staggers an entity back 
+    origin: The origin of the damage/attack is coming from
+    target: The target being staggered back
+    percentageDone: Percentage health done to the target
+    Requires: Entities are not dead
+     */
+    private IEnumerator StaggerEntities(EntityClass origin, EntityClass target, float percentageDone)
+    {
+        Vector3 directionVector = target.myTransform.position - origin.myTransform.position;
+
+        Vector3 normalizedDirection = directionVector.normalized;
+        float staggerPower = StaggerPowerCalculation(percentageDone);
+        yield return StartCoroutine(target.StaggerBack(target.myTransform.position + normalizedDirection * staggerPower));
+    }
+
+    //Calculates the power of the stagger based on the percentage health done
+    private float StaggerPowerCalculation(float percentageDone)
+    {
+        float minimumPush = 0.8f;
+        float pushSlope = 1.8f;
+        float percentageUntilMaxPush = 1f / 3f; //Reaches Max push at 33% hp lost
+        return minimumPush + pushSlope * Mathf.Clamp(percentageDone / percentageUntilMaxPush, 0f, 1.5f);
     }
 
     /*
@@ -70,8 +110,10 @@ public abstract class EntityClass : SelectClass
     Modifies: this.myTransform
 
     Purpose: Moves this entity to a given location
+
+    Requires: Entity is not dead
      */
-    public IEnumerator MoveToPosition(Vector3 destination, float radius, float duration)
+    public IEnumerator MoveToPosition(Vector3 destination, float radius, float duration, Vector3? lookAtPosition = null)
     {
         Vector3 originalPosition = myTransform.position;
         float elapsedTime = 0f;
@@ -83,7 +125,7 @@ public abstract class EntityClass : SelectClass
         float distance = Mathf.Sqrt(diffInLocation.x * diffInLocation.x + diffInLocation.y * diffInLocation.y);
         float maxProportionTravelled = (distance - radius) / distance;
 
-        UpdateFacing(diffInLocation, CardComparator.X_BUFFER);
+        UpdateFacing(diffInLocation, lookAtPosition);
 
         if (HasParameter("IsMoving", animator))
         {
@@ -113,19 +155,23 @@ public abstract class EntityClass : SelectClass
     }
 
     /*
-     * Purpose: Updates the entitiy's direction to face a target. (Target.position - my position)
+     * Purpose: Updates the entitiy's direction to face a target only when called. (Target.position - my position)
      * diffInLocation: Will face the entity Right if the Target is to its right (positive diffInLocation)
-        Left if other way around
-        ComparingBuffer: Adds a buffer where if the  (abs) |x-distance| travelled is smaller than comparingBuffer, No flip is made   
+        Left if other way around  
         Note: If you want to reverse the results, add a negative to diffInLocation before calling.
+    lookAtPosition: null if you want to use default movement facing, provide a value if you want the player to face a certain direction when called
      */
-    public void UpdateFacing(Vector3 diffInLocation, float comparingBuffer)
+    public void UpdateFacing(Vector3 diffInLocation, Vector3? lookAtPosition)
     {
-        if (diffInLocation.x > comparingBuffer)
+        if (lookAtPosition != null)
+        {
+            diffInLocation = lookAtPosition.Value - myTransform.position;
+        }
+        if (diffInLocation.x > 0)
         {
             FaceRight();
         }
-        else if (diffInLocation.x < -(comparingBuffer))
+        else if (diffInLocation.x < 0)
         {
             FaceLeft();
         }
@@ -142,6 +188,7 @@ public abstract class EntityClass : SelectClass
      * staggeredPosition is the location we want the enemy to stop at. 
      * 
      * Modifies: this.myTransform.position
+     * Requires: Entity is not dead
      */
     public IEnumerator StaggerBack(Vector3 staggeredPosition)
     {
@@ -150,7 +197,7 @@ public abstract class EntityClass : SelectClass
 
         Vector3 diffInLocation = staggeredPosition - originalPosition;
         if ((Vector2)diffInLocation == Vector2.zero) yield break;
-        UpdateFacing(-diffInLocation, 0);
+        UpdateFacing(-diffInLocation, null);
 
 
 
@@ -160,6 +207,7 @@ public abstract class EntityClass : SelectClass
         }
 
         float duration = animator.GetCurrentAnimatorStateInfo(0).length;
+        if (duration > CardComparator.COMBAT_BUFFER_TIME) duration = CardComparator.COMBAT_BUFFER_TIME - 0.2f; //Ensure that animation doesn't exceed buffer time or bug will happen with death.
 
         while (elapsedTime < duration)
         {
@@ -190,13 +238,11 @@ public abstract class EntityClass : SelectClass
     {
         HighlightManager.OnEntityClicked(this);
     }
-
+    //Run this to reset the entity position back to its starting position
     public abstract IEnumerator ResetPosition();
 
-    public void Die()
-    {
-        Debug.Log("Entity: " + id + " has died");
-    }
+    //Removes entity cards and self from BQ and combat manager. Kills itself
+    public abstract IEnumerator Die();
     /*
     // Constructor
     public EntityClass(int health)
@@ -302,21 +348,5 @@ public abstract class EntityClass : SelectClass
         combatInfo.UpdateBuffs(statusEffects);
     }
 
-    public override void OnMouseEnter()
-    {
-        if (CombatManager.Instance.CanHighlight())
-        {
-            myTransform.localScale += new Vector3((float)0.05, (float)0.05, 0);
-            grewLarger = true;
-        }
-    }
-
-    public override void OnMouseExit()
-    {
-        if (grewLarger)
-        {
-            myTransform.localScale -= new Vector3((float)0.05, (float)0.05, 0);
-            grewLarger = false;
-        }
-    }
+    
 }

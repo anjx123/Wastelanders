@@ -32,19 +32,6 @@ public class WasteFrog : EnemyClass
 
     }
 
-    public override void TakeDamage(int damage)
-    {
-        base.TakeDamage(damage);
-
-        //StartCoroutine(StaggerBack(myTransform.position + new Vector3(1.5f, 0, 0)));
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     /*  Contains: 1x Slap, 1x Flail
      * 
      */
@@ -53,6 +40,7 @@ public class WasteFrog : EnemyClass
         pool[0].GetComponent<ActionClass>().Target = players[Random.Range(0, players.Count - 1)];
         BattleQueue.BattleQueueInstance.AddEnemyAction(pool[0].GetComponent<ActionClass>(), this);
         combatInfo.SetCombatSprite(pool[0].GetComponent<ActionClass>());
+        combatInfo.GetComponentInChildren<CombatCardUI>().actionClass = pool[0].GetComponent<ActionClass>();
         pool.RemoveAt(0);
         if (pool.Count < 1)
         {

@@ -14,12 +14,12 @@ public class CombatManager : MonoBehaviour
     public CinemachineVirtualCamera baseCamera;
     public CinemachineVirtualCamera dynamicCamera;
 
-    // Priority Queue
-    public List<PlayerClass> players;
-    public List<EnemyClass> enemies;
+    private List<PlayerClass> players = new();
+    private List<EnemyClass> enemies = new();
 
     public GameObject handContainer;
     public GameObject startDequeue;
+    public GameObject combatUICardDisplay; 
 
     // Awake is called when the script instance is being loaded
     void Awake()
@@ -54,23 +54,23 @@ public class CombatManager : MonoBehaviour
     //Usage: Should be called everytime an Entity changes their direction. 
     public void UpdateCameraBounds()
     {
-        if (dynamicCamera.Follow.GetComponent<EntityClass>()?.IsFacingRight() ?? false)
+        if (dynamicCamera.Follow?.GetComponent<EntityClass>()?.IsFacingRight() ?? false)
         {
             var transposer = dynamicCamera.GetCinemachineComponent<CinemachineFramingTransposer>();
             transposer.m_ScreenX = 0.25f;
         }
-        else if (!(dynamicCamera.Follow.GetComponent<EntityClass>()?.IsFacingRight()) ?? false)
+        else if (!(dynamicCamera.Follow?.GetComponent<EntityClass>()?.IsFacingRight()) ?? false)
         {
             var transposer = dynamicCamera.GetCinemachineComponent<CinemachineFramingTransposer>();
             transposer.m_ScreenX = 0.75f;
         }
     }
 
-    
+    //Allows players to start selection again, resets enemies attacks and position
     private void PerformSelection()
     {
-        startDequeue.SetActive(true);
-        handContainer.SetActive(true);
+        Activate(startDequeue);
+        Activate(handContainer);
         baseCamera.Priority = 1;
         dynamicCamera.Priority = 0;
 
@@ -90,11 +90,93 @@ public class CombatManager : MonoBehaviour
 
     }
 
+    private void Activate(GameObject gameObject)
+    {
+        if (gameObject.GetComponent<Collider2D>())
+        {
+            gameObject.GetComponent<Collider2D>().enabled = true;
+        }
+        Vector3 position = gameObject.GetComponent<Transform>().position;
+        position.z = -1;
+        gameObject.GetComponent<Transform>().position = position;
+    }
+
+    private void Deactivate(GameObject gameObject)
+    {
+        if (gameObject.GetComponent<Collider2D>())
+        {
+            gameObject.GetComponent<Collider2D>().enabled = false;
+        }
+        Vector3 position = gameObject.GetComponent<Transform>().position;
+        position.z = -200;
+        gameObject.GetComponent<Transform>().position = position;
+    }
+
+    public void AddPlayer(PlayerClass player)
+    {
+        players.Add(player);
+    }
+    
+    //Purpose: Call this when a player is removed or killed
+    public void RemovePlayer(PlayerClass player)
+    {
+        if (players.Count > 0)
+        {
+            players.Remove(player);
+            if (dynamicCamera.Follow?.GetComponent<PlayerClass>() == player)
+            {
+                dynamicCamera.Follow = null;
+            }
+            
+        }
+        if (players.Count == 0)
+        {
+            GameState = GameState.GAME_LOSE;
+        }
+    }
+    
+    public void AddEnemy(EnemyClass enemy)
+    {
+        enemies.Add(enemy);
+    }
+    //Purpose: Call this when an enemy is removed or killed
+    public void RemoveEnemy(EnemyClass enemy)
+    {
+        if (enemies.Count > 0)
+        {
+            enemies.Remove(enemy);
+            if (dynamicCamera.Follow?.GetComponent<EnemyClass>() == enemy)
+            {
+                dynamicCamera.Follow = null;
+            }
+        } 
+        if (enemies.Count == 0)
+        {
+            GameState = GameState.GAME_WIN;
+        }
+    }
+
+    private void PerformLose()
+    {
+        Debug.LogWarning("All Players are dead, You Lose...");
+        baseCamera.Priority = 1;
+        dynamicCamera.Priority = 0;
+    }
+
+    private void PerformWin()
+    {
+        Debug.LogWarning("All enemies are dead, You Win!");
+        baseCamera.Priority = 1;
+        dynamicCamera.Priority = 0;
+    }
+
+
 
     private void PerformFighting()
     {
-        startDequeue.SetActive(false);
-        handContainer.SetActive(false);
+        CombatCardDisplayManager.Instance.HideCard();
+        Deactivate(startDequeue);
+        Deactivate(handContainer);
         baseCamera.Priority = 0;
         dynamicCamera.Priority = 1;
     }
@@ -117,6 +199,12 @@ public class CombatManager : MonoBehaviour
                     break;
                 case GameState.FIGHTING:
                     PerformFighting();
+                    break;
+                case GameState.GAME_WIN:
+                    PerformWin();
+                    break;
+                case GameState.GAME_LOSE:
+                    PerformLose();
                     break;
                 default:
                     break;

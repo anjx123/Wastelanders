@@ -5,10 +5,13 @@ using UnityEngine;
 public abstract class SelectClass : MonoBehaviour
 {
 
-    protected string myName;
+    public string myName;
     protected Material outliner;
     protected Material ogMaterial;
+    public Transform myTransform;
     protected bool isOutlined = false; // deals with enemy selection
+
+    private bool grewLarger; //Checks if entity was highlighted first to ensure proper dehighlighting. 
 
     // Start is called before the first frame update
     void Start()
@@ -26,9 +29,23 @@ public abstract class SelectClass : MonoBehaviour
         return myName;
     }
 
-    // abstract as actions and entities have different ways to display selection
-    public abstract void OnMouseEnter();
-    public abstract void OnMouseExit();
+    public virtual void OnMouseEnter()
+    {
+        if (CombatManager.Instance.CanHighlight() && !grewLarger)
+        {
+            myTransform.localScale += new Vector3((float)0.05, (float)0.05, 0);
+            grewLarger = true;
+        }
+    }
+
+    public virtual void OnMouseExit()
+    {
+        if (grewLarger)
+        {
+            myTransform.localScale -= new Vector3((float)0.05, (float)0.05, 0);
+            grewLarger = false;
+        }
+    }
 
     public abstract void OnMouseDown();
 
