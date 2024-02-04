@@ -77,9 +77,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: 2146528631
+  m_SortingLayer: 1
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: 040b244ecd868814db27ca72f67e561f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -106,8 +106,6 @@ MonoBehaviour:
   myName: 
   myTransform: {fileID: 0}
   actionClass: {fileID: 0}
-  cardDisplay: {fileID: 0}
-  isDisplaying: 0
 --- !u!61 &861149421085281689
 BoxCollider2D:
   m_ObjectHideFlags: 0

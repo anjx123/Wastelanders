@@ -2032,7 +2032,7 @@ Transform:
   m_GameObject: {fileID: 1132010468}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.6138709, y: -0.91999984, z: -10}
+  m_LocalPosition: {x: -1.6124907, y: -0.91999984, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2645,6 +2645,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bqContainer: {fileID: 842455749}
   iconPrefab: {fileID: 7504458634070143618, guid: f9683846bad493e429dda3ece4900989, type: 3}
+  clashingPrefab: {fileID: 5469894721144988013, guid: b10263b2eb9aadc41aa6c2d7606dba7a, type: 3}
   combatInfoDisplay: {fileID: 412913820}
 --- !u!4 &1701204150
 Transform:
