@@ -6,8 +6,17 @@ using UnityEngine.UI;
 
 public class HealthBar : MonoBehaviour
 {
+    [SerializeField]
+    private RectTransform myRectTransform;
     public Slider slider;
     public TMP_Text healthText;
+    public Canvas healthCanvas;
+
+    public void Start()
+    {
+        healthCanvas.sortingLayerName = CombatManager.Instance.FADE_SORTING_LAYER;
+        DeEmphasize();
+    }
 
     public void setMaxHealth(int maxHealth)
     {
@@ -18,5 +27,19 @@ public class HealthBar : MonoBehaviour
     {
         slider.value = health;
         healthText.text = health.ToString();
+    }
+
+    public void Emphasize()
+    {
+        Vector3 myPosition = myRectTransform.localPosition;
+        myPosition.z = CombatManager.Instance.FADE_SCREEN_Z_VALUE;
+        myRectTransform.localPosition = myPosition;
+    }
+    public void DeEmphasize()
+    {
+        Vector3 myPosition = myRectTransform.localPosition;
+        myPosition.z = CombatManager.Instance.FADE_SCREEN_Z_VALUE + 4;
+        myRectTransform.localPosition = myPosition;
+
     }
 }

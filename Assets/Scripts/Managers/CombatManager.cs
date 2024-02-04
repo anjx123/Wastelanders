@@ -19,7 +19,33 @@ public class CombatManager : MonoBehaviour
 
     public GameObject handContainer;
     public GameObject startDequeue;
-    public GameObject combatUICardDisplay; 
+    public GameObject combatUICardDisplay;
+    [SerializeField]
+    private SpriteRenderer fadeScreen;
+    public string FADE_SORTING_LAYER
+    {
+        get
+        {
+            return fadeScreen.sortingLayerName;
+        }
+    }
+
+    public int FADE_SORTING_ORDER
+    {
+        get
+        {
+            return fadeScreen.sortingOrder;
+        }
+    }
+
+    public float FADE_SCREEN_Z_VALUE
+    {
+        get
+        {
+            return fadeScreen.gameObject.transform.position.z;
+        }
+    }
+
 
     // Awake is called when the script instance is being loaded
     void Awake()
@@ -33,7 +59,6 @@ public class CombatManager : MonoBehaviour
             Destroy(this);
         }
 
-        DontDestroyOnLoad(gameObject);
     }
 
     // Start is called before the first frame update
@@ -73,6 +98,7 @@ public class CombatManager : MonoBehaviour
         Activate(handContainer);
         baseCamera.Priority = 1;
         dynamicCamera.Priority = 0;
+        StartCoroutine(FadeBackground(false));
 
         // Each enemy declares an attack. players is passed to AddAttack so the enemy can choose a target.
         foreach (EnemyClass enemy in enemies)
@@ -179,6 +205,33 @@ public class CombatManager : MonoBehaviour
         Deactivate(handContainer);
         baseCamera.Priority = 0;
         dynamicCamera.Priority = 1;
+        StartCoroutine(FadeBackground(true));
+    }
+
+    private IEnumerator FadeBackground(bool darkenScene)
+    {
+        float startValue = fadeScreen.color.a;
+        float elapsedTime = 0;
+        float duration = 1f;
+
+        float endValue;
+        if (darkenScene)
+        {
+            endValue = 0.8f;
+        }
+        else
+        {
+            startValue = Mathf.Max(fadeScreen.color.a - 0.3f, 0f);
+            endValue = 0f;
+        }
+
+        while (elapsedTime < duration)
+        {
+            elapsedTime += Time.deltaTime;
+            float newAlpha = Mathf.Lerp(startValue, endValue, elapsedTime / duration);
+            fadeScreen.color = new Color(fadeScreen.color.r, fadeScreen.color.g, fadeScreen.color.b, newAlpha);
+            yield return null;
+        }
     }
 
     public bool CanHighlight()

@@ -12,7 +12,7 @@ public abstract class StaffCards : ActionClass
 
     public override void OnHit()
     {
-        Origin.AttackAnimation("IsShooting");
+        Origin.AttackAnimation("IsStaffing");
         base.OnHit();
     }
 }

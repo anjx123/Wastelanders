@@ -50,9 +50,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myName: 
+  myTransform: {fileID: 7946142163233550150}
   healthBar: {fileID: 618062441777076705}
   animator: {fileID: 3297183234373819581}
-  myTransform: {fileID: 7946142163233550150}
   combatInfo: {fileID: 5598173080790413213}
   availableActions:
   - {fileID: 2376898879351982445, guid: 1cacda7b5938348f68e539bcad13b1fa, type: 3}
@@ -117,8 +117,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 2146528631
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 473aab34eb102ea449d7c031f047407d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

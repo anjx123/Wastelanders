@@ -45,4 +45,10 @@ public class BattleQueueIcons : DisplayableClass
         transform.localScale = scale;
         DeHighlightTarget();
     }
+
+    public void renderBQIcon(ActionClass ac)
+    {
+        actionClass = ac;
+        GetComponent<SpriteRenderer>().sprite = ac.GetIcon();
+    }
 }
