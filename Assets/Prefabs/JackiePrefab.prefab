@@ -95,8 +95,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 2146528631
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: edf85a48aa90dc84dbbffa358ce1c5ec, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -121,9 +121,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a87ba7eb40165b04db444a9367c32200, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  myName: 
+  myTransform: {fileID: 2280710332171782491}
   healthBar: {fileID: 6774299315323238008}
   animator: {fileID: 2764313202347658331}
-  myTransform: {fileID: 2280710332171782491}
   combatInfo: {fileID: 8487347338577429512}
   cardPrefabs: []
   handContainer: {fileID: 0}

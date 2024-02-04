@@ -7,7 +7,17 @@ public abstract class ActionClass : SelectClass
 {
     //The following are 'properties' in C# that make quick getters and setters for private fields. ac.Target for access
     public EntityClass Target { get; set; }
-    public EntityClass Origin { get; set; }
+    private EntityClass origin;
+
+    public EntityClass Origin
+    {
+        get { return origin; }
+        set
+        {
+            origin = value;
+            UpdateDup();
+        }
+    }
 
     protected int lowerBound;
     protected int upperBound;
@@ -42,6 +52,10 @@ public abstract class ActionClass : SelectClass
 
     public abstract void ExecuteActionEffect();
 
+    public virtual void Awake()
+    {
+        Initialize();
+    }
     public override void OnMouseDown()
     {
         HighlightManager.OnActionClicked(this);
@@ -59,6 +73,10 @@ public abstract class ActionClass : SelectClass
         return Origin.GetType().IsSubclassOf(typeof(PlayerClass));
     }
 
+    public virtual void Initialize()
+    {
+
+    }
 
     public int getRolledDamage()
     {
@@ -74,10 +92,15 @@ public abstract class ActionClass : SelectClass
         duplicateCard.rollCeiling = upperBound;
     }
 
-    public virtual void ApplyEffect()
+    private void UpdateDup()
     {
         DupInit();
         Origin.ApplyAllBuffsToCard(ref duplicateCard);
+    }
+
+    public virtual void ApplyEffect()
+    {
+        UpdateDup();
     }
 
     // Calculates Actual Damage/Block After Applying Buffs
@@ -85,7 +108,7 @@ public abstract class ActionClass : SelectClass
     {
         duplicateCard.actualRoll = Random.Range(duplicateCard.rollFloor, duplicateCard.rollCeiling + 1);
         
-        Origin.SetDice(Damage); 
+        Origin.SetDice(duplicateCard.actualRoll); 
     }
 
     public Sprite GetIcon()

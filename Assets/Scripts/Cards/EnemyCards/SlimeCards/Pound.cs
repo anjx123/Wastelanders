@@ -7,6 +7,8 @@ using static UnityEngine.UI.Image;
 
 public class Pound : SlimeAttacks
 {
+    [SerializeField]
+    private List<Sprite> animationFrame = new();
     public override void ExecuteActionEffect()
     {
 
@@ -15,9 +17,14 @@ public class Pound : SlimeAttacks
     // Start is called before the first frame update
     public override void Start()
     {
+        
+    }
+
+    public override void Initialize()
+    {
+        base.Initialize();
         lowerBound = 2;
         upperBound = 5;
-        base.Start();
         Speed = 2;
         Block = 2;
 
@@ -32,5 +39,32 @@ public class Pound : SlimeAttacks
         DupInit();
 
         Origin.ApplyAllBuffsToCard(ref duplicateCard);
+    }
+
+    public override void OnHit()
+    {
+        StartCoroutine(AttackAnimation());
+        //Origin.AttackAnimation("IsPounding");
+    }
+
+
+    public IEnumerator AttackAnimation()
+    {
+        Vector3 originalPosition = Origin.myTransform.position;
+        Origin.animator.enabled = false;
+        SpriteRenderer spriteRenderer = Origin.GetComponent<SpriteRenderer>();
+        spriteRenderer.sprite = animationFrame[0];
+        Origin.myTransform.position = originalPosition;
+        yield return new WaitForSeconds(0.05f);
+        spriteRenderer.sprite = animationFrame[1];
+        base.OnHit();
+        yield return new WaitForSeconds(0.010f);
+        spriteRenderer.sprite = animationFrame[2];
+        yield return new WaitForSeconds(0.32f);
+        spriteRenderer.sprite = animationFrame[3];
+        yield return new WaitForSeconds(0.20f);
+        spriteRenderer.sprite = animationFrame[4];
+        Origin.animator.enabled = true;
+        Origin.myTransform.position = originalPosition;
     }
 }

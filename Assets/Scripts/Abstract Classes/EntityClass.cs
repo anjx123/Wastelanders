@@ -7,20 +7,34 @@ using static UnityEngine.UI.Image;
 public abstract class EntityClass : SelectClass
 {
     protected int MAX_HEALTH;
-    protected int health;
+    protected int MaxHealth
+    {
+        get { return MAX_HEALTH; }
+        set
+        {
+            MAX_HEALTH = value;
+            healthBar.setMaxHealth(MAX_HEALTH);
+        }
+    }
+
+
+    private int health;
     public HealthBar healthBar;
     public Animator animator;
     public CombatInfo combatInfo;
 
     protected bool isDead = false;
 
-    private static readonly float Z_LAYER = -2;
 
     protected Vector3 initalPosition;
     public int Health
     {
         get { return health; }
-        protected set { health = value; }
+        protected set 
+        {
+            health = value;
+            healthBar.setHealth(health);
+        }
     }
 
     protected Dictionary<string, StatusEffect> statusEffects;
@@ -38,9 +52,6 @@ public abstract class EntityClass : SelectClass
 
     public virtual void Start()
     {
-
-        healthBar.setMaxHealth(MAX_HEALTH);
-        healthBar.setHealth(MAX_HEALTH);
         initalPosition = myTransform.position;
         statusEffects = new Dictionary<string, StatusEffect>();
 
@@ -54,8 +65,8 @@ public abstract class EntityClass : SelectClass
 
     public virtual void TakeDamage(EntityClass source, int damage)
     {
-        health = Mathf.Clamp(health - damage, 0, MAX_HEALTH);
-        healthBar.setHealth(health);
+        Health = Mathf.Clamp(Health - damage, 0, MaxHealth);
+        healthBar.setHealth(Health);
         float percentageDone = 1; //Testing different powered knockbacks
         if (Health != 0)
         {
@@ -69,7 +80,7 @@ public abstract class EntityClass : SelectClass
     private IEnumerator PlayHitAnimation(EntityClass origin, EntityClass target, float percentageDone)
     {
         yield return StartCoroutine(StaggerEntities(origin, target, percentageDone));
-        if (health <= 0)
+        if (Health <= 0)
         {
             yield return StartCoroutine(Die());
         }
@@ -230,8 +241,8 @@ public abstract class EntityClass : SelectClass
 
     public virtual void Heal(int val)
     {
-        health = Mathf.Clamp(health + val, 0, MAX_HEALTH);
-        healthBar.setHealth(health);
+        Health = Mathf.Clamp(Health + val, 0, MaxHealth);
+        healthBar.setHealth(Health);
     }
 
     public override void OnMouseDown()
@@ -326,16 +337,22 @@ public abstract class EntityClass : SelectClass
     public void Emphasize()
     {
         Vector3 largeTransform = transform.position;
-        largeTransform.z = Z_LAYER - 1;
+        largeTransform.z = CombatManager.Instance.FADE_SORTING_ORDER - 3;
         transform.position = largeTransform;
+        GetComponent<SpriteRenderer>().sortingOrder = CombatManager.Instance.FADE_SORTING_ORDER + 1;
+        combatInfo.Emphasize();
+        healthBar.Emphasize();
     }
 
     //Decreases this Entity Class' sorting layer. (Standardizes Sorting Layers for entities)
     public void DeEmphasize()
     {
         Vector3 largeTransform = transform.position;
-        largeTransform.z = Z_LAYER;
+        largeTransform.z = CombatManager.Instance.FADE_SORTING_ORDER - 1;
         transform.position = largeTransform;
+        GetComponent<SpriteRenderer>().sortingOrder = CombatManager.Instance.FADE_SORTING_ORDER - 1;
+        combatInfo.DeEmphasize();
+        healthBar.DeEmphasize();
     }
 
     public void SetDice(int value)

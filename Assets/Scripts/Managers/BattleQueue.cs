@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEditor.PackageManager;
 using UnityEngine;
 using UnityEngine.Assertions;
@@ -16,6 +17,7 @@ public class BattleQueue : MonoBehaviour
     public RectTransform bqContainer;
     public readonly int cardWidth = 1;
     public GameObject iconPrefab;
+    public GameObject clashingPrefab;
     public GameObject combatInfoDisplay; // same display given to enemy combat card UI
 
     // is an indicator of sorts; essentially if this is true what this means is that the round has started and all the enemy actions have been added. The player has to add a card.
@@ -108,11 +110,25 @@ public class BattleQueue : MonoBehaviour
 
         for (int i = 0; i < queue.Count; i++)
         {
-            GameObject renderedCopy = Instantiate(iconPrefab, new Vector3(100, 100, -10), Quaternion.identity);
-            renderedCopy.GetComponent<BattleQueueIcons>().actionClass = queue[i];
-            renderedCopy.GetComponent<SpriteRenderer>().sprite = queue[i].GetIcon();
-            renderedCopy.transform.SetParent(bqContainer, false);
+            if (isClashingStub())
+            {
+                GameObject clashingRenderedCopy = Instantiate(clashingPrefab, new Vector3(100, 100, -10), Quaternion.identity);
+                ActionClass leftClashItem = queue[i];
+                ActionClass rightClashItem = queue[i]; //Same as left for now due to lack of actual clashing
+                clashingRenderedCopy.GetComponent<ClashingBattleQueueIcon>().renderClashingIcons(leftClashItem, rightClashItem);
+                clashingRenderedCopy.transform.SetParent(bqContainer, false);
+            } else
+            {
+                GameObject renderedCopy = Instantiate(iconPrefab, new Vector3(100, 100, -10), Quaternion.identity);
+                renderedCopy.transform.SetParent(bqContainer, false);
+                renderedCopy.GetComponent<BattleQueueIcons>().renderBQIcon(queue[i]);
+            }
         }
+    }
+
+    private bool isClashingStub()
+    {
+        return new System.Random().Next(2) == 0; //Temp stub for testing Rendering Clashes
     }
 
     //Gives BattleQueue ownership of the lifetime of the Dequeue coroutine.
