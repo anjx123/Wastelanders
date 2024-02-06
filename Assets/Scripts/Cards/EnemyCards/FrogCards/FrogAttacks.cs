@@ -4,7 +4,7 @@ using UnityEngine;
 using static UnityEngine.UI.Image;
 public abstract class FrogAttacks : ActionClass
 {
-    private delegate void TakeDamageDelegate(EntityClass source, int damage);
+    private delegate IEnumerator TakeDamageDelegate(EntityClass source, int damage);
     [SerializeField]
     private GameObject spitPrefab;
 
@@ -16,21 +16,21 @@ public abstract class FrogAttacks : ActionClass
         CardType = CardType.RangedAttack;
     }
 
-    public override void OnHit()
+    public override IEnumerator OnHit()
     {
         Vector3 diffInLocation = Target.myTransform.position - Origin.myTransform.position;
         Origin.UpdateFacing(diffInLocation, null);
         Origin.AttackAnimation("IsShooting");
         if (spitPrefab != null)
         {
-            StartCoroutine(ProjectileAnimation(this.Target.TakeDamage, Origin, Target, duplicateCard.actualRoll));
+            yield return StartCoroutine(ProjectileAnimation(this.Target.TakeDamage, Origin, Target, duplicateCard.actualRoll));
         }
     }
 
     private IEnumerator ProjectileAnimation(TakeDamageDelegate takeDamageCallback, EntityClass origin, EntityClass target, int damage)
     {
         yield return StartCoroutine(StartProjectileAnimation(origin, target));
-        takeDamageCallback(origin, damage);
+        yield return StartCoroutine(takeDamageCallback(origin, damage));
     }
 
     public IEnumerator StartProjectileAnimation(EntityClass origin, EntityClass target)

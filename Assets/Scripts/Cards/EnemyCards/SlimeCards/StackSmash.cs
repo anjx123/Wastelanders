@@ -37,10 +37,10 @@ public class StackSmash : SlimeAttacks
         Origin.ApplyAllBuffsToCard(ref duplicateCard);
     }
 
-    public override void OnHit()
+    public override IEnumerator OnHit()
     {
         //Origin.AttackAnimation("IsStackSmashing");
-        StartCoroutine(AttackAnimation());
+        yield return StartCoroutine(AttackAnimation());
     }
 
     public IEnumerator AttackAnimation()
@@ -57,9 +57,10 @@ public class StackSmash : SlimeAttacks
         yield return new WaitForSeconds(0.28f);
         spriteRenderer.sprite = animationFrame[3];
         Origin.myTransform.position = originalPosition;
-        base.OnHit();
+        Coroutine coroutine = StartCoroutine(base.OnHit());
         yield return new WaitForSeconds(0.20f);
         spriteRenderer.sprite = animationFrame[4];
         Origin.animator.enabled = true;
+        yield return coroutine;
     }
 }

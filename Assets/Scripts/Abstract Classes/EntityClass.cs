@@ -63,7 +63,7 @@ public abstract class EntityClass : SelectClass
      Requires: This Entity is not dead
      */
 
-    public virtual void TakeDamage(EntityClass source, int damage)
+    public virtual IEnumerator TakeDamage(EntityClass source, int damage)
     {
         Health = Mathf.Clamp(Health - damage, 0, MaxHealth);
         healthBar.setHealth(Health);
@@ -72,7 +72,7 @@ public abstract class EntityClass : SelectClass
         {
             percentageDone = Mathf.Clamp(damage / (float) Health, 0f, 1f);
         }
-        StartCoroutine(PlayHitAnimation(source, this, percentageDone));
+        yield return StartCoroutine(PlayHitAnimation(source, this, percentageDone));
     }
 
     //Plays both first the stagger entities then 

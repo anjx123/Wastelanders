@@ -8,9 +8,9 @@ public abstract class PistolCards : ActionClass
     {
         CardType = CardType.RangedAttack;
     }
-    public override void OnHit()
+    public override IEnumerator OnHit()
     {
         Origin.AttackAnimation("IsShooting");
-        base.OnHit();
+        yield return StartCoroutine(base.OnHit());
     }
 }

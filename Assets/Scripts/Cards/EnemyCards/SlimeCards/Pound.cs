@@ -41,9 +41,9 @@ public class Pound : SlimeAttacks
         Origin.ApplyAllBuffsToCard(ref duplicateCard);
     }
 
-    public override void OnHit()
+    public override IEnumerator OnHit()
     {
-        StartCoroutine(AttackAnimation());
+        yield return StartCoroutine(AttackAnimation());
         //Origin.AttackAnimation("IsPounding");
     }
 
@@ -57,7 +57,7 @@ public class Pound : SlimeAttacks
         Origin.myTransform.position = originalPosition;
         yield return new WaitForSeconds(0.05f);
         spriteRenderer.sprite = animationFrame[1];
-        base.OnHit();
+        Coroutine coroutine = StartCoroutine(base.OnHit());
         yield return new WaitForSeconds(0.010f);
         spriteRenderer.sprite = animationFrame[2];
         yield return new WaitForSeconds(0.32f);
@@ -66,5 +66,6 @@ public class Pound : SlimeAttacks
         spriteRenderer.sprite = animationFrame[4];
         Origin.animator.enabled = true;
         Origin.myTransform.position = originalPosition;
+        yield return coroutine;
     }
 }

@@ -41,9 +41,9 @@ public class DiscreteStrike : StaffCards
         Origin.ApplyAllBuffsToCard(ref duplicateCard);
     }
 
-    public override void OnHit()
+    public override IEnumerator OnHit()
     {
-        base.OnHit();
         Origin.AddStacks(Focus.buffName, 2);
+        yield return StartCoroutine(base.OnHit());
     }
 }

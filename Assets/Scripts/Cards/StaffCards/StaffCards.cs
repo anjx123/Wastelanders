@@ -10,9 +10,9 @@ public abstract class StaffCards : ActionClass
         CardType = CardType.MeleeAttack;  
     }
 
-    public override void OnHit()
+    public override IEnumerator OnHit()
     {
         Origin.AttackAnimation("IsStaffing");
-        base.OnHit();
+        yield return StartCoroutine(base.OnHit());
     }
 }

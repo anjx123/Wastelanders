@@ -44,10 +44,9 @@ public class Silencer : PistolCards
 
     }
 
-    public override void OnHit()
+    public override IEnumerator OnHit()
     {
-        base.OnHit();
         Origin.AddStacks(Accuracy.buffName, 2);
-
+        yield return StartCoroutine(base.OnHit());
     }
 }

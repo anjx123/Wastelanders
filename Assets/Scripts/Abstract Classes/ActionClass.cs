@@ -61,11 +61,11 @@ public abstract class ActionClass : SelectClass
         HighlightManager.OnActionClicked(this);
     }
     //Called when this card hits the enemy, runs any on hit buffs or effects given.
-    public virtual void OnHit()
+    public virtual IEnumerator OnHit()
     {
         Vector3 diffInLocation = Target.myTransform.position - Origin.myTransform.position;
         Origin.UpdateFacing(diffInLocation, null);
-        this.Target.TakeDamage(Origin, duplicateCard.actualRoll);
+        yield return StartCoroutine(Target.TakeDamage(Origin, duplicateCard.actualRoll));
     }
 
     public bool IsPlayedByPlayer()

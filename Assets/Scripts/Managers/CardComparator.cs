@@ -48,13 +48,13 @@ public class CardComparator : MonoBehaviour
             //Debug.Log(cardOneStaggered);
             if (cardOneStaggered == 0) //Clash ties
             {
-                card1.OnHit(); // For testing purposes, not supposed to be here
+                yield return StartCoroutine(card1.OnHit()); // For testing purposes, not supposed to be here
             } else if (cardOneStaggered > 0) //Card2 wins clash
             {
-                card2.OnHit();
+                yield return StartCoroutine(card2.OnHit());
             } else if (cardOneStaggered < 0) //Card1 wins clash
             {
-                card1.OnHit();
+                yield return StartCoroutine(card1.OnHit());
             }
         } else if (card1.CardType == CardType.Defense)
         {
@@ -69,7 +69,7 @@ public class CardComparator : MonoBehaviour
         }
 
         
-        yield return new WaitForSeconds(COMBAT_BUFFER_TIME);
+        //yield return new WaitForSeconds(COMBAT_BUFFER_TIME);
         DeEmphasizeClashers(card1.Origin, card1.Target);
     }
 

@@ -15,9 +15,9 @@ public abstract class SlimeAttacks : ActionClass
         base.Initialize();
         CardType = CardType.MeleeAttack;
     }
-    public override void OnHit()
+    public override IEnumerator OnHit()
     {
-        base.OnHit();
+         yield return StartCoroutine(base.OnHit());
         
     }
 }
