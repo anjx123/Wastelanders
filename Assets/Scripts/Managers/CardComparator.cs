@@ -100,6 +100,29 @@ public class CardComparator : MonoBehaviour
         return cardOneStaggered;
     }
 
+    public IEnumerator OneSidedAttack(ActionClass actionClass)
+    {
+        //Setup the Scene
+        CombatManager.Instance.SetCameraCenter(actionClass.Origin);
+        ActivateInfo(actionClass, actionClass);
+        actionClass.ApplyEffect();
+        yield return StartCoroutine(ClashBothEntities(actionClass.Origin, actionClass.Target));
+        actionClass.RollDice();
+        DeactivateInfo(actionClass, actionClass);
+
+        //Hit and feel effects
+        actionClass.OnHit();
+        yield return new WaitForSeconds(COMBAT_BUFFER_TIME);
+
+        //Reset the Scene
+        if (PlayEntityDeaths != null)
+        {
+            yield return PlayEntityDeaths();
+            PlayEntityDeaths = null;
+        }
+        DeEmphasizeClashers(actionClass.Origin, actionClass.Target);
+    }
+
     /*
  EntityClass origin: Origin of the action card played
  EntityClass target: Target of the action card played
