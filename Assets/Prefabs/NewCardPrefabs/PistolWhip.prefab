@@ -853,6 +853,7 @@ GameObject:
   - component: {fileID: 8284128080877360369}
   - component: {fileID: -7228539631512178989}
   - component: {fileID: -3989981462444308772}
+  - component: {fileID: 8397291181680420657}
   m_Layer: 0
   m_Name: PistolWhip
   m_TagString: Untagged
@@ -951,6 +952,27 @@ MonoBehaviour:
   myTransform: {fileID: 8284128080877360369}
   icon: {fileID: 21300000, guid: f2a1f451840843a469d288e45df357b8, type: 3}
   fullCard: {fileID: 21300000, guid: 2b9ceabc225258043a6f790f6abfb45a, type: 3}
+--- !u!65 &8397291181680420657
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7256956916184963317}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 7.68, y: 10.24, z: 0.2}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7870062714232725661
 GameObject:
   m_ObjectHideFlags: 0

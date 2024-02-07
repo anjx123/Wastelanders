@@ -126,6 +126,7 @@ public abstract class ActionClass : SelectClass
 
     public override void OnMouseEnter()
     {
+        Debug.Log("hi");
         if (!isOutlined)
         {
             GetComponent<SpriteRenderer>().color = new Color(0.6f, 0.6f, 0.6f, 1);

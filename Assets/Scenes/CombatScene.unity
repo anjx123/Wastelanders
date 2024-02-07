@@ -347,7 +347,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0.66, y: -4.33}
+  m_AnchoredPosition: {x: 0.62, y: -4.26}
   m_SizeDelta: {x: 14.3316, y: 3.8083}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &157433433
@@ -1892,28 +1892,28 @@ PrefabInstance:
       objectReference: {fileID: 552403359}
     - target: {fileID: 3367972655850899957, guid: 18ff4a241e9f877439ebd5fd1de51dd0, type: 3}
       propertyPath: cardPrefabs.Array.size
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3367972655850899957, guid: 18ff4a241e9f877439ebd5fd1de51dd0, type: 3}
       propertyPath: cardPrefabs.Array.data[0]
       value: 
-      objectReference: {fileID: 7473027025033308495, guid: 60444f1ba48334961a82f0e5daa44608, type: 3}
+      objectReference: {fileID: 7256956916184963317, guid: 343b8399861c44edfa1cab0353421e90, type: 3}
     - target: {fileID: 3367972655850899957, guid: 18ff4a241e9f877439ebd5fd1de51dd0, type: 3}
       propertyPath: cardPrefabs.Array.data[1]
       value: 
-      objectReference: {fileID: 7473027025033308495, guid: ac821f8cfc4d947048d187cbd454a69e, type: 3}
+      objectReference: {fileID: 7256956916184963317, guid: eff453520fc6649f7a6dddba05fefb9e, type: 3}
     - target: {fileID: 3367972655850899957, guid: 18ff4a241e9f877439ebd5fd1de51dd0, type: 3}
       propertyPath: cardPrefabs.Array.data[2]
       value: 
-      objectReference: {fileID: 7473027025033308495, guid: 6dbaf4ce078f7a246accd898926ea246, type: 3}
+      objectReference: {fileID: 7256956916184963317, guid: d7f0b62ec14a840cd8a3a0fccc114917, type: 3}
     - target: {fileID: 3367972655850899957, guid: 18ff4a241e9f877439ebd5fd1de51dd0, type: 3}
       propertyPath: cardPrefabs.Array.data[3]
       value: 
-      objectReference: {fileID: 7473027025033308495, guid: 3c3d8ebcb37254dfb8204289a4f13955, type: 3}
+      objectReference: {fileID: 7256956916184963317, guid: db59558ea225e4361a4a180840f82da7, type: 3}
     - target: {fileID: 3367972655850899957, guid: 18ff4a241e9f877439ebd5fd1de51dd0, type: 3}
       propertyPath: cardPrefabs.Array.data[4]
       value: 
-      objectReference: {fileID: 7334504972417615140, guid: 6184ac15767a832498bf0a5e6945773d, type: 3}
+      objectReference: {fileID: 7473027025033308495, guid: 6dbaf4ce078f7a246accd898926ea246, type: 3}
     - target: {fileID: 3405423859819514747, guid: 18ff4a241e9f877439ebd5fd1de51dd0, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -2032,7 +2032,7 @@ Transform:
   m_GameObject: {fileID: 1132010468}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.6124907, y: -0.91999984, z: -10}
+  m_LocalPosition: {x: -1.6136732, y: -0.91999984, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
