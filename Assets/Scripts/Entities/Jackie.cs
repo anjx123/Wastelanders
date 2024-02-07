@@ -80,6 +80,7 @@ public class Jackie : PlayerClass
             Vector3 v = new Vector3(-distanceToLeft, y, -i + 10);
             hand[i].transform.position = v;
             hand[i].transform.rotation = Quaternion.Euler(0, 0, -5);
+            hand[i].GetComponent<ActionClass>().UpdateText();
         }
     }
 

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.ConstrainedExecution;
 using UnityEngine;
+using TMPro;
 
 public abstract class ActionClass : SelectClass
 {
@@ -21,6 +22,11 @@ public abstract class ActionClass : SelectClass
 
     protected int lowerBound;
     protected int upperBound;
+
+    [SerializeField] GameObject lowerBoundText;
+    [SerializeField] GameObject upperBoundText;
+    [SerializeField] GameObject speedText;
+    [SerializeField] GameObject nameText;
 
     protected CardDup duplicateCard;
 
@@ -123,6 +129,13 @@ public abstract class ActionClass : SelectClass
         }
     }
 
+    public void UpdateText()
+    {
+        Debug.Log(myName);
+        nameText.GetComponent<TextMeshProUGUI>().text = myName;
+        lowerBoundText.GetComponent<TextMeshProUGUI>().text = duplicateCard.rollFloor.ToString();
+        upperBoundText.GetComponent<TextMeshProUGUI>().text = duplicateCard.rollCeiling.ToString();
+    }
 
     public override void OnMouseEnter()
     {
@@ -198,4 +211,5 @@ public abstract class ActionClass : SelectClass
             EnqueueMoveDown = false;
         }
     }
+
 }

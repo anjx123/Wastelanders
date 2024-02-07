@@ -948,8 +948,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2282345b68b6b9341b8e028ce5272e10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myName: 
+  myName: Quick Draw
   myTransform: {fileID: 8284128080877360369}
+  lowerBoundText: {fileID: 3913226332729878225}
+  upperBoundText: {fileID: 3700495749604882748}
+  speedText: {fileID: 5342606960099249293}
+  nameText: {fileID: 1520981535418881821}
   icon: {fileID: 21300000, guid: 12f88eb21954c35419da9788c00451eb, type: 3}
   fullCard: {fileID: 21300000, guid: a807c704aa9b8de4b88abd7748844e00, type: 3}
 --- !u!65 &5653423114495639548
