@@ -129,6 +129,16 @@ public abstract class ActionClass : SelectClass
         if (!isOutlined)
         {
             GetComponent<SpriteRenderer>().color = new Color(0.6f, 0.6f, 0.6f, 1);
+
+            // Get the SpriteRenderers of the child objects
+            SpriteRenderer[] childSpriteRenderers = GetComponentsInChildren<SpriteRenderer>();
+
+            // Now we can access each SpriteRenderer
+            foreach (SpriteRenderer spriteRenderer in childSpriteRenderers)
+            {
+                spriteRenderer.color = new Color(0.6f, 0.6f, 0.6f, 1);
+            }
+
             transform.position += new Vector3((float)0.04, (float)0.4, 0);
         }
         else
@@ -142,6 +152,14 @@ public abstract class ActionClass : SelectClass
         if (!isOutlined)
         {
             GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 1);
+
+            SpriteRenderer[] childSpriteRenderers = GetComponentsInChildren<SpriteRenderer>();
+
+            foreach (SpriteRenderer spriteRenderer in childSpriteRenderers)
+            {
+                spriteRenderer.color = new Color(1f, 1f, 1f, 1);
+            }
+
             transform.position -= new Vector3((float)0.04, (float)0.4, 0);
         }
         else
@@ -154,6 +172,12 @@ public abstract class ActionClass : SelectClass
     {
         isOutlined = true;
         GetComponent<SpriteRenderer>().color = new Color(0.6f, 0.6f, 0.6f, 1);
+        SpriteRenderer[] childSpriteRenderers = GetComponentsInChildren<SpriteRenderer>();
+
+        foreach (SpriteRenderer spriteRenderer in childSpriteRenderers)
+        {
+            spriteRenderer.color = new Color(0.6f, 0.6f, 0.6f, 1);
+        }
         transform.rotation = Quaternion.Euler(0, 0, 0);
     }
 
@@ -161,6 +185,12 @@ public abstract class ActionClass : SelectClass
     {
         isOutlined = false;
         GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 1);
+        SpriteRenderer[] childSpriteRenderers = GetComponentsInChildren<SpriteRenderer>();
+
+        foreach (SpriteRenderer spriteRenderer in childSpriteRenderers)
+        {
+            spriteRenderer.color = new Color(1f, 1f, 1f, 1);
+        }
         transform.rotation = Quaternion.Euler(0, 0, -5);
         if (EnqueueMoveDown)
         {
