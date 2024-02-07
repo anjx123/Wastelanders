@@ -56,10 +56,7 @@ public class PopUpNotificationManager : MonoBehaviour
 
         yield return new WaitForSeconds(8);
         
-        while (hover)
-        {
-            yield return null;
-        }
+
 
         Destroy(instance);
     }
