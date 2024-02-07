@@ -66,6 +66,7 @@ public abstract class ActionClass : SelectClass
         Vector3 diffInLocation = Target.myTransform.position - Origin.myTransform.position;
         Origin.UpdateFacing(diffInLocation, null);
         this.Target.TakeDamage(Origin, duplicateCard.actualRoll);
+        CombatManager.Instance.AttackCameraEffect((float) duplicateCard.actualRoll / (float) duplicateCard.rollCeiling);
     }
 
     public bool IsPlayedByPlayer()

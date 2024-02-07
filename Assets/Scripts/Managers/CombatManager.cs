@@ -22,6 +22,8 @@ public class CombatManager : MonoBehaviour
     public GameObject combatUICardDisplay;
     [SerializeField]
     private SpriteRenderer fadeScreen;
+
+    public bool zoomDisabled = false;
     public string FADE_SORTING_LAYER
     {
         get
@@ -90,6 +92,70 @@ public class CombatManager : MonoBehaviour
             transposer.m_ScreenX = 0.75f;
         }
     }
+
+    public void AttackCameraEffect(float percentageMax)
+    {
+        //if (zoomDisabled) return; 
+        if (percentageMax < 0.25f)
+        {
+            //StartCoroutine(ShakeCamera(percentageMax));
+            StartCoroutine(ZoomEffect(percentageMax));
+        } else if (percentageMax < 0.75f)
+        {
+            //StartCoroutine(ShakeCamera(percentageMax));
+            StartCoroutine(ZoomEffect(percentageMax));
+        } else
+        {
+            //StartCoroutine(ShakeCamera(percentageMax));
+            StartCoroutine(ZoomEffect(percentageMax));
+            StartCoroutine(TiltEffect(percentageMax));
+        }
+    }
+
+    private IEnumerator ShakeCamera(float time)
+    {
+        Debug.Log("My shaking intensity is" + time);
+        float shakeAmplitude = 0.15f;
+        float shakeFrequency = 0.01f;
+        CinemachineBasicMultiChannelPerlin virtualCameraNoise = dynamicCamera.GetCinemachineComponent<Cinemachine.CinemachineBasicMultiChannelPerlin>();
+        virtualCameraNoise.m_AmplitudeGain = shakeAmplitude;
+        virtualCameraNoise.m_FrequencyGain = shakeFrequency;
+        yield return new WaitForSeconds(0.2f);
+        virtualCameraNoise.m_AmplitudeGain = 0f;
+        virtualCameraNoise.m_FrequencyGain = 0f;
+    }
+
+    private IEnumerator ZoomEffect(float zoomIn)
+    {
+        Debug.Log("My zoom in intensity is" + zoomIn);
+        float startFOV = dynamicCamera.m_Lens.OrthographicSize;
+        float endFOV = Mathf.Max(2.80f, startFOV - zoomIn);
+        Debug.Log("My startFOV in intensity is" + startFOV);
+        yield return StartCoroutine(ZoomCamera(startFOV, endFOV));
+        yield return new WaitForSeconds(0.4f);
+        yield return StartCoroutine(ZoomCamera(endFOV, startFOV));
+    }
+
+    private IEnumerator ZoomCamera(float startFOV, float endFOV)
+    {
+        float elapsed = 0f;
+        float duration = 0.5f;
+
+        while (elapsed < duration)
+        {
+            dynamicCamera.m_Lens.OrthographicSize = Mathf.Lerp(startFOV, endFOV, elapsed / duration);
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        dynamicCamera.m_Lens.OrthographicSize = endFOV;
+    }
+
+    private IEnumerator TiltEffect(float tilt)
+    {
+        yield break;
+    }
+
 
     //Allows players to start selection again, resets enemies attacks and position
     private void PerformSelection()
