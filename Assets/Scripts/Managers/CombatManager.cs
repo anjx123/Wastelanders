@@ -65,6 +65,7 @@ public class CombatManager : MonoBehaviour
     void Start()
     {
         GameState = GameState.SELECTION;
+        BattleQueue.BattleQueueInstance.TheBeginning();
     }
 
 
@@ -248,6 +249,7 @@ public class CombatManager : MonoBehaviour
             switch (gameState)
             {
                 case GameState.SELECTION:
+                    BattleQueue.BattleQueueInstance.TheBeginning();
                     PerformSelection();
                     break;
                 case GameState.FIGHTING:

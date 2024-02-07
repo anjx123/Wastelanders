@@ -2,56 +2,86 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
+using Unity.Profiling.Editor;
+using Unity.VisualScripting;
 using UnityEditor.PackageManager;
 using UnityEngine;
 using UnityEngine.Assertions;
+using static System.Collections.Specialized.BitVector32;
 using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class BattleQueue : MonoBehaviour
 {
 
-    public static BattleQueue BattleQueueInstance; // naming convention without the _
-    public SortedArray actionQueue; // in the same queue
-                                        // private List<GameObject> enemyActions; // naming convention
-    private static int SIZE = 100; // size of actionQueue, change if necessary
+    public static BattleQueue BattleQueueInstance; 
+    private SortedArray protoQueue;
+    private WrapperArray wrapperArray;
+    // is an indicator of sorts; essentially if this is true what this means is that the round has started and all the enemy actions have been added. The player has to add a card.
+    // upon the addition of the first card the enemy actions are FIRST tranmusted into wrappers and thereafter everything proceeds as intended. Is reset at the end of dequee. ASTER1
+    // TODO low priority; would have to go to the combat manager subclass and invoke initial transmutation there but visually there is no distinction.
+    private bool roundStart = true;
+
+
+    // visuals:
     public RectTransform bqContainer;
     public readonly int cardWidth = 1;
     public GameObject iconPrefab;
     public GameObject clashingPrefab;
     public GameObject combatInfoDisplay; // same display given to enemy combat card UI
 
-    // is an indicator of sorts; essentially if this is true what this means is that the round has started and all the enemy actions have been added. The player has to add a card.
-    // upon the addition of the first card the enemy actions are FIRST tranmusted into wrappers and thereafter everything proceeds as intended. Is reset at the end of dequee. ASTER1
-    private bool roundStart = true;
 
-    // the new wrapper array
-    public WrapperArray wrapperArray;
-
-
-    // Awake is called before Start.
     void Awake()
     {
         if (BattleQueueInstance == null)
         {
             BattleQueueInstance = this;
-            actionQueue = new SortedArray(SIZE);
+            protoQueue = new SortedArray();
             wrapperArray = new WrapperArray();
         }
         else if (BattleQueueInstance != this)
         {
-            Destroy(this); // this is out of circumspection; unsure it this is even needed.
+            Destroy(this);
         }
     }
 
 
-    // to add an action to the actionList
-    // REQUIRES: appropriate handling in the invoking superclass; note how the entity is INFERRED to be the player.
-    //           the queue is sorted
-    // TO_UPDATE: for that speed thing Anrui specified.
+    // is referenced whenever game state changes to selection.
+    public void TheBeginning()
+    {
+        RenderInitialBQ();
+
+    }
+
+    // for when the round has just started. 
+    void RenderInitialBQ()
+    {
+        List<ActionClass> queue = protoQueue.GetList();
+
+        foreach (Transform child in bqContainer.transform)
+        {
+            Destroy(child.gameObject);
+        }
+
+        for (int i = 0; i < queue.Count; i++)
+        {
+            GameObject renderedCopy = Instantiate(iconPrefab, new Vector3(100, 100, -10), Quaternion.identity);
+            renderedCopy.transform.SetParent(bqContainer, false);
+            renderedCopy.GetComponent<BattleQueueIcons>().renderBQIcon(queue[i]);
+        }
+        
+    }
+
+
+    // FOR ALL ADD METHODS: the Insert() method of SortedArray() is responsible for insertion into the WrapperArray as well. 
+
+
+    // to add an action to the actionList and the wrapperArray
+    // REQUIRES: the queue is sorted before invocation
+    // AFTER: the player action may or not have been inserted; is still sorted regardless
     public bool AddPlayerAction(ActionClass action)
     {
-        bool ret;
-        if (!(actionQueue.Insert(action)))
+        bool ret; // indicator for invoking method: if true should remove the card from the deck.
+        if (!(protoQueue.Insert(action)))
         {
             //Debug.Log("BQ not Updated.");
             ret = false;
@@ -61,35 +91,35 @@ public class BattleQueue : MonoBehaviour
             roundStart = false; // ASTER1
             ret = true;
         }
-        RenderBQ(); // TODO 
+        RenderBQ(); 
         return ret;
     }
 
+    // @author Anrui TODO ask what this does and if I need to remove from the wrapperArray as well.
+    // Removes the card if it is clicked on by the player whilst it is in the Queue, right?
      public void DeletePlayerAction(ActionClass action)
     {
-        ActionClass deletedCard = actionQueue.RemoveLinearSearch(action);
+        ActionClass deletedCard = protoQueue.RemoveLinearSearch(action);
         RenderBQ();
-        PlayerClass player = (PlayerClass)deletedCard.Origin;
+        PlayerClass player = (PlayerClass) deletedCard.Origin;
         player.ReaddCard(deletedCard);
     }
 
+    // to add an enemy action to the actionQueue and the WrapperArray
     public void AddEnemyAction(ActionClass action, EntityClass origin)
     {
         action.Origin = origin;
-        actionQueue.Insert(action);
-        RenderBQ(); // TODO
-
-        // instead of having a tranmuatation method, could have it so that insertion of the enemy action from the get-go causes an instantiation of wrapper. 
+        protoQueue.Insert(action);
+        RenderBQ(); 
     }
 
+    // !!! TODO remove from the Wrapper Array as well 
+    // @Author Anrui 
     //Remove all cards with (@param entity) as the target and origin
     public void RemoveAllInstancesOfEntity(EntityClass entity)
     {
-        actionQueue.RemoveAllInstancesOfEntity(entity);
+        protoQueue.RemoveAllInstancesOfEntity(entity);
     }
-
-
-
 
 
     /*  Renders the cards in List<GameObject> bq to the screen, as children of the bqContainer.
@@ -97,41 +127,43 @@ public class BattleQueue : MonoBehaviour
     *  REQUIRES: Nothing
     *  MODIFIES: Nothing
     * 
-    *  NEEDS TO BE UPDATED FOR THE WRAPPERARRAY !!! TODO
     */
     void RenderBQ()
     {
-        List<ActionClass> queue = actionQueue.GetList();
+        List<Wrapper> wrappers = wrapperArray.GetWrappers();
 
         foreach (Transform child in bqContainer.transform)
         {
             Destroy(child.gameObject);
         }
 
-        for (int i = 0; i < queue.Count; i++)
+        foreach (Wrapper wrapper in wrappers)
         {
-            if (isClashingStub())
+            if (ClashCheck(wrapper))
             {
                 GameObject clashingRenderedCopy = Instantiate(clashingPrefab, new Vector3(100, 100, -10), Quaternion.identity);
-                ActionClass leftClashItem = queue[i];
-                ActionClass rightClashItem = queue[i]; //Same as left for now due to lack of actual clashing
+                ActionClass leftClashItem = wrapper.PlayerAction;
+                ActionClass rightClashItem = wrapper.EnemyAction;
                 clashingRenderedCopy.GetComponent<ClashingBattleQueueIcon>().renderClashingIcons(leftClashItem, rightClashItem);
                 clashingRenderedCopy.transform.SetParent(bqContainer, false);
             } else
             {
                 GameObject renderedCopy = Instantiate(iconPrefab, new Vector3(100, 100, -10), Quaternion.identity);
                 renderedCopy.transform.SetParent(bqContainer, false);
-                renderedCopy.GetComponent<BattleQueueIcons>().renderBQIcon(queue[i]);
+                renderedCopy.GetComponent<BattleQueueIcons>().renderBQIcon(wrapper.ReturnWhaYouHave());
             }
         }
-    }
+    }    
+   
 
-    private bool isClashingStub()
+    // returns true if there is a "Clash"
+    // @param wrapper is the current wrapper being inspected;
+    private bool ClashCheck(Wrapper wrapper)
     {
-        return new System.Random().Next(2) == 0; //Temp stub for testing Rendering Clashes
+        return !wrapper.IsHalfEmpty();
     }
 
-    //Gives BattleQueue ownership of the lifetime of the Dequeue coroutine.
+    // Gives BattleQueue ownership of the lifetime of the Dequeue coroutine.
     public void BeginDequeue()
     {
         // StartCoroutine(Dequeue());
@@ -152,7 +184,7 @@ public class BattleQueue : MonoBehaviour
             beganFighting = true;
         }
 
-        int i = 0;
+        int i = 0; // for debugging 
 
         while (!(array.Count == 0))
         {
@@ -161,122 +193,43 @@ public class BattleQueue : MonoBehaviour
                 wrapperArray.DisplayWrapperArray();
                 i = 1;
             }
-
-
             Wrapper e = array[0];
+            array.Remove(e); 
+            wrapperArray.SortWrappers();
 
-            ActionClass action = e.ReturnHighest(); // accounts for half-wrappers too 
-
-            if (action == null) 
+            // the same functionality is maintained; BattleQueue is responsible for the wrappers and dewrapping. 
+            if (e.IsHalfEmpty())
             {
-                throw new Exception("Empty Action Returned.");
-            }
-
-            // %%% could be optimised for logic
-            // removing from the Wrapper based on type
-            if (action.IsPlayedByPlayer()) // debugging 
-            {
-                Debug.Log("A player action of speed x is removed: " + action.Speed);
+                ActionClass action = e.ReturnWhaYouHave();
+                yield return StartCoroutine(CardComparator.Instance.ClashCards(action, action)); // by my undertanding this should have no impact on the animation or anything of importance.
+                protoQueue.GetList().Remove(action);
             }
             else
             {
-                Debug.Log("An enemy action of speed x is removed: " + action.Speed);
+                ActionClass pla = e.PlayerAction;
+                ActionClass ene = e.EnemyAction;
+                yield return StartCoroutine(CardComparator.Instance.ClashCards(pla, ene));
+                protoQueue.GetList().Remove(pla);
+                protoQueue.GetList().Remove(ene);
             }
 
-            if (e.HighestSpeed == -1 || (e.PlayerAction == null && e.EnemyAction == null))
-            {
-                if (e.EnemyAction != null || e.PlayerAction != null)
-                {
-                    throw new Exception("Wrapper Invariant not Upheld"); // $$$ what are the implications for the coroutine and the exception? 
-                }
-                array.Remove(e); // wrapper is now worthless
-            }
-            else if (e.PlayerAction != null || e.EnemyAction != null)// the wrapper has a component left 
-            {
-                if (action.IsPlayedByPlayer())
-                {
-                    // insert enemy action 
-                    // wrapperArray.InsertEnemyActionIntoWrappers(e.EnemyAction);
-                    wrapperArray.GetWrappers().Remove(e); 
-                    wrapperArray.InsertEnemyActionIntoWrappers(e.EnemyAction);
-                }
-                else
-                {
-                    // insert player action
-                    // wrapperArray.InsertPlayerActionIntoWrappers(e.PlayerAction);
-                    wrapperArray.GetWrappers().Remove(e); 
-                    wrapperArray.InsertPlayerActionIntoWrappers(e.PlayerAction);
-                }
-            }
-            wrapperArray.SortWrappers();
-
-            // wrapperArray.SortWrappers(); // circumspection
-
-            // the same functionality is maintained; BattleQueue is responsible for the wrappers and dewrapping. 
-            yield return StartCoroutine(CardComparator.Instance.ClashCards(action, action)); // $$$ the coroutine suspends it right?
-
-            RenderBQ(); // !!! need to make a new render method. BUT before that need to rely on GameState for intial trigger of wrappers
-
-            actionQueue.GetList().Remove(action);
-
-
-            // how about this:
-            // use original actionQueue to remove
-
-            // check insertion of both enemies and players
+            RenderBQ(); 
 
         }
         if (beganFighting)
         {
             CombatManager.Instance.GameState = GameState.SELECTION;
+            TheBeginning();
         }
 
         // ASTER1 
         roundStart = true;
     }
 
-
-    // Begins the dequeueing process. 
-    // REQUIRES: An appropriate call. Note that this can be called even if the number of elements in the actionQueue is 0. Invariant array index 0 has largest speed. 
-    // MODIFIES: the actionQueue is progressively emptied until it is empty. 
-    public IEnumerator Dequeue()
-    {
-        List<ActionClass> array = actionQueue.GetList();
-        if (!(array.Count == 0))
-        {
-            CombatManager.Instance.GameState = GameState.FIGHTING;
-        }
-        while (!(array.Count == 0))
-        {
-            ActionClass e = array[0];
-
-            yield return StartCoroutine(CardComparator.Instance.ClashCards(e, e)); // essentially doing nothing. 
-
-            array.Remove(e); // this utilises the default method for lists 
-            RenderBQ();
-            Debug.Log("An item hath been removed from the BQ");
-        }
-        if (CombatManager.Instance.GameState == GameState.FIGHTING)
-        {
-            CombatManager.Instance.GameState = GameState.SELECTION;
-        }
-
-        // ASTER1 
-        roundStart = true;
-    }
-
-    // A sorted array implementation for GameObject (cards)
-    public class SortedArray
+    // A sorted array implementation for ActionClass.
+    private class SortedArray
     {
         private List<ActionClass> array;
-        // public int entryNumber; // no of actual entries inside the array. INVALID because binary search uses all 100 slots. <<<<< INVALID dynamic array always I think
-
-        // constructor for static array
-        public SortedArray(int capacity)
-        {
-            array = new List<ActionClass>(capacity);
-            // entryNumber = 0;
-        }
 
         // constructor for dynamic array
         public SortedArray()
@@ -284,35 +237,22 @@ public class BattleQueue : MonoBehaviour
             array = new List<ActionClass>();
         }
 
-        /*public void Insert(ActionClass card)
-        {
-            int index = BinarySearch(card.Speed, 0, array.Count - 1, card.Origin);
-
-            // Insert the new value at the correct position
-            array.Insert(index, card);
-        }*/
-
-        // The speed invariant refers to 
+        // The speed INVARIANT refers to 
         // prevent each player character from playing cards with duplicate speeds
         // Careful, because you could have multiple player characters that can have overlapping speeds
         // But one singular player character cannot have overlapping speeds
-        public bool Insert(ActionClass card) // for both enemy and player actions
+
+        // Insertion of an ActionClass (PlayerAction or EnemyAction) into the protoQueue and the wrapperArray
+        // MODIFIES: this, wrapperArray
+        // return value: whether or not the @param card was inserted 
+        public bool Insert(ActionClass card) 
         {
             int i = LinearSearch(card); // returns where to insert ensuring LIFO.
 
-            // TODO manual checking need to generalise.
-            //            if (card.Origin.GetName() == "Jackie" && i < array.Count && card.Speed != array[i].Speed)
-            //            {
-            //                array.Insert(i, card);
-            //            } 
-
-
-            // code for uniqueness inside an array. 
-
-            // could be separate method. 
+            // ensuring uniqueness of speed for one character inside the array
             if (i < array.Count)
             {
-                for (int x = 0; x < array.Count; x++) // ensuring uniqueness of speed for one character inside the array
+                for (int x = 0; x < array.Count; x++) 
                 {
                     if (array[x].IsPlayedByPlayer() && card.Speed == array[x].Speed)
 
@@ -322,35 +262,54 @@ public class BattleQueue : MonoBehaviour
                 }
             }
 
-            // this was where the initial duplication occured
+            // else insert:
 
-
-            // else insert 
+            // this check here is necessary since all enemy actions are inserted before any player action and this is how this is
+            // handled; this is arbitrary and can be refactored.
             if (card.IsPlayedByPlayer())
             {
                 BattleQueueInstance.wrapperArray.InsertPlayerActionIntoWrappers(card);
+                // initial enemy actions are added via transmutation so no invocation here. 
             }
             array.Insert(i, card); // the original order of the queue is ensured...
-                                    // ASTER2
-/*            else
-            {
-                // initial enemy actions are added via transmutation.
-            }*/
+                                    // ASTER2 refer to note inside WrapperArray
             return true;
 
         }
 
         //Removes all cards in the battle queue that have (@param entity) as the Origin or target.
+        // TODO 
         public void RemoveAllInstancesOfEntity(EntityClass entity)
         {
-            for (int i = array.Count - 1; i >= 0; i--)
+            // remove from both queues 
+
+            // TODO: Should update so that player cards are returned if not used. 
+
+            // TODO now would you have the actions reclash or no?
+            List<Wrapper> wrappers = BattleQueue.BattleQueueInstance.wrapperArray.GetWrappers();
+            foreach (Wrapper wrapper in wrappers) 
             {
-                ActionClass actionClass = array[i];
-                if (actionClass.Origin == entity || actionClass.Target == entity)
+                if (wrapper.IsHalfEmpty())  // risk concurrent modification to remove empty wrappers?
                 {
-                    array.RemoveAt(i); //TODO: Should update so that player cards are returned if not used. 
+
+                } else
+                {
+                    ActionClass player = wrapper.PlayerAction;
+                    ActionClass enemy = wrapper.EnemyAction;
+                    // would need a check for whether or not a player has died or an enemy TODO for reinsertion of player cards
+                    if (player.Origin == entity || player.Target == entity)
+                    {
+
+                    }
+
+                    if (enemy.Origin == entity || enemy.Target == entity)
+                    {
+
+                    }
+
                 }
             }
+            BattleQueue.BattleQueueInstance.wrapperArray.SortWrappers();
         }
 
         public ActionClass RemoveLinearSearch(ActionClass card)
@@ -365,38 +324,10 @@ public class BattleQueue : MonoBehaviour
             return card;
         }
 
-        public int BinarySearch(int speed, int left, int right, EntityClass origin)
-        {
-            while (left <= right)
-            {
-                int mid = left + (right - left) / 2;
-
-                // comparison to sort in descending order
-                if (array[mid].Speed == speed && array[mid].Origin == origin)
-                {
-                    return mid; // Element found
-                }
-                else if (array[mid].Speed > speed) // Change from < to >
-                {
-                    left = mid + 1;
-                }
-                else
-                {
-                    right = mid - 1;
-                }
-            }
-
-            return left; // Element not found, return the position where it should be inserted; implies ascending order. 
-        }
-
         // essentially replaces binary search and is easier for LIFO insertion (Stack)
         // REQUIRES: the speed wherewith to intially sort the BQ and the apparent origin of the card
         // MODIFIES: nothing; modification is done (removal and addition) based on the calling function 
         // RETURNS:  the position to finally place the new action
-
-        // NOTE: REMAINS: TESTING WITH ENEMY ACTIONS
-        // NOTE: manual checking of the player entities and the enemy entities; this should not be the case; consider a change of party or perhaps a change in the enemy;
-        //       need a dynamic system of generating the enemies (Andrew) and holding a reference herein and a system for keeping track of player party members. TODO
 
         // BQ is sorted like this: GREATER SPEED > SLOWER SPEED; and is discharged on this assumption as well; vide Dequeue 
 
@@ -405,31 +336,20 @@ public class BattleQueue : MonoBehaviour
         {
             int elements = array.Count;
             int firstPosition = 0;
-            for (int i = 0; i < elements; i++)
+            if (elements != 0)
             {
-                /*
-if (card.Speed == array[i].Speed && !(card.Origin.GetName() == "Jackie"))// == array[i].Origin.GetName()) 
-{
-    firstPosition = i; // essentially if an enemy is first then insert player here (or insert enemy here LIFO maintained)
-    break;
-
-} else if (card.Speed == array[i].Speed) // kicks in later 
-{
-    firstPosition = i; // if an enemy is not first then LIFO for player
-    break;
-}
-else 
-*/
-                if (card.Speed < array[i].Speed)
+                for (int i = 0; i < elements; i++)
                 {
-                    firstPosition++;
+                    if (card.Speed < array[i].Speed)
+                    {
+                        firstPosition++;
+                    }
                 }
             }
-            return firstPosition; // default should be the start if no cards exist of same speed or no cards at all exist. <<< Incorrect;
-                                    // no cards at all exist.
+            return firstPosition; 
+                                    
 
         }
-        // NOTE: why are the attributes not lowerCamelCase? is it because of the syntactic sugar
 
         public List<ActionClass> GetList()
         {
@@ -440,7 +360,7 @@ else
 
 
     // Class for wrappers to be contained 
-    public class WrapperArray
+    private class WrapperArray
     {
         private List<Wrapper> wrappers = new List<Wrapper>();
 
@@ -453,36 +373,30 @@ else
         // transforms all enemy actions into wrappers. 
         // is automatically sorted because iterating through a sorted array.
 
-        // peep the redundancy is referncing and calling
+        // REQUIRES: the protoQueue is populated and roundStart is true;
         public void EnemyActionsTransformation()
         {
-            for (int i = 0; i < BattleQueueInstance.actionQueue.GetList().Count; i++) // !!! why was BattleQueueInstance necessary here; object reference for non static field? 
+            for (int i = 0; i < BattleQueueInstance.protoQueue.GetList().Count; i++) 
             {
-                ActionClass curAction = BattleQueueInstance.actionQueue.GetList()[i];
-                Wrapper wrapper = new Wrapper(curAction, true); // funnily enough this won't work in just C; works here because new is dynamic allocation.
+                ActionClass curAction = BattleQueueInstance.protoQueue.GetList()[i];
+                Wrapper wrapper = new Wrapper(curAction);
                 wrappers.Add(wrapper);
             }
             // DisplayWrapperArray();
 
             BattleQueue.BattleQueueInstance.roundStart = false;
-
-            // Deactivate the actionQueue;
-            // this is flawed at present and I see no point in removing this as it is already implemented; reimplementing or refactoring this functionality should come later
-            // for reference notice the implementaion of methods inside *this* class assume implementation of that.
-            /*            while (BattleQueueInstance.actionQueue.GetList().Count != 0)
-                        {
-                            BattleQueueInstance.actionQueue.GetList().Remove(BattleQueueInstance.actionQueue.GetList()[0]);
-                        }
-                        // alternatively
-                        BattleQueueInstance.actionQueue.GetList().Clear();*/
         }
 
         // only called inside Insert() iff Insert() method of SortedArray is about to return true; not that it returns it; is called before the method ends. // ASTER2
         /* When a player plays a card against an enemy, the fastest action the enemy has will get promoted to the player’s speed. Even if the Enemy Attack is 
-                targeting a different target. CASE 1
+                targeting a different target. CASE 1 
 
             If the enemy’s speed is higher than the player’s speed. The player’s card gets promoted up instead. However, it only promotes player cards 
-                that are targeting THEM, and will not promote attacks targeting different enemies. CASE 2 */
+                that are targeting THEM, and will not promote attacks targeting different enemies. CASE 2 
+            
+            Case 1 V Case 2 == Case 1; in essence the speed doesn't matter, only the origin does. 
+         */
+
         // if the above two are conditions are not germane create a new wrapper.
         public void InsertPlayerActionIntoWrappers(ActionClass playerAct)
         {
@@ -501,7 +415,7 @@ else
                 {
                     if (curWrapper.PlayerAction == null && curWrapper.EnemyAction != null) // if the wrapper is half-empty
                     {
-                        if (playerAct.Target == curWrapper.EnemyAction.Origin && curWrapper.EnemyAction.Speed > playerAct.Speed) // CASE 2; the card in wrapper is by the targeted enemy and ITS speed is greater; relying on reference equality 
+                        if (playerAct.Target == curWrapper.EnemyAction.Origin)// CASE 1; 
                         {
                             curWrapper.PlayerAction = playerAct;
                             curWrapper.Update();
@@ -509,38 +423,19 @@ else
                             // DisplayWrapperArray();
                             return;
                         }
-                        else if (playerAct.Target == curWrapper.EnemyAction.Origin)// CASE 1; 
-                        {
-                            curWrapper.PlayerAction = playerAct;
-                            curWrapper.Update();
-                            SortWrappers();
-                            // DisplayWrapperArray();
-                            return;
-                        }
-                        // the paths represent the conditionals but in reality its just the same thing imo; 
                     }
                 }
-                // otherwise is a new wrapper; would happen if all enemy target actions are tied up BUT this does not ensure sorting by speed.
-                Wrapper temp = new Wrapper(playerAct, false);
-                temp.Update(); // this was reduddant..........
+                // otherwise is a new wrapper; would happen if all enemy target actions are tied up BUT this does not ensure sorting by speed and player priority.
+                Wrapper temp = new Wrapper(playerAct);
+                temp.Update(); 
                 wrappers.Add(temp);
                 SortWrappers();
-                // DisplayWrapperArray(); // debugging 
+                // DisplayWrapperArray;
             }
 
         }
 
-        public void InsertPlayerActionIntoWrappersWithoutClash(ActionClass act)
-        {
-            if (act != null)
-            {
-                Wrapper temp = new Wrapper(act, false);
-                temp.Update(); // this was reduddant..........
-                wrappers.Add(temp);
-                SortWrappers();
-            }
-        }
-
+        // IS REDUNDANT NOW. 
         // The clashing implementation here is
         /* When a player plays a card against an enemy, the fastest action the enemy has will get promoted to the player’s speed. Even if the Enemy Attack is 
         targeting a different target. CASE 1
@@ -565,22 +460,11 @@ else
                     }
                 }
                 // otherwise is a new wrapper
-                Wrapper temp = new Wrapper(act, true);
-                temp.Update(); // this was redundant.....
+                Wrapper temp = new Wrapper(act);
+                temp.Update(); 
                 wrappers.Add(temp);
                 SortWrappers();
                 // DisplayWrapperArray();
-            }
-        }
-
-        public void InsertEnemyActionIntoWrappersWithoutClash(ActionClass act)
-        {
-            if (act != null)
-            {
-                Wrapper temp = new Wrapper(act, true);
-                temp.Update(); // this was redundant.....
-                wrappers.Add(temp);
-                SortWrappers();
             }
         }
 
@@ -609,28 +493,26 @@ else
         }
 
 
-        // NOTE: alternative implementation: rely on the reference in ActionQueue and conduct a search here to remove INVALID still need to display.
-        // Called inside the InitialInsert
-        // Called inside DequeueWrappers() each time a wrapper is dequed. 
+        // called upon ALL insertions excepting the initial insertion of the enemy actions which relies on sorting done by protoQueue.
         // player priority is maintained
-        // (consider two player actions of the same speed in which one is wrapped) dequeue should ensure that the wrappers are automatically updated and sorted
-        // via an updated insert method that relies on a generalised clash.
-        // via appropriate calls to Insert (and therein Sort).
-        // REQUIRES: size is at least one. need a check in Dequeu ASTER7; Implicity requires that no "empty" wrappers are present i.e. -1 ones
+        // sorts the wrapperArray
         public void SortWrappers()
         {
 
             int count = wrappers.Count;
 
-            // first sorting based on HighestSpeed
-            // need to ensure order, however, so not equals to 
-            for (int x = 0; x < count; x++)
-            {
-                int y = x;
-                while (y > 0 && wrappers[y].HighestSpeed > wrappers[y - 1].HighestSpeed)
+            if (count > 0)
                 {
-                    Swap(wrappers, y - 1, y);
-                    y--;
+                // first sorting based on HighestSpeed
+                // need to ensure LIFO order, however, so not equals to 
+                for (int x = 0; x < count; x++)
+                {
+                    int y = x;
+                    while (y > 0 && wrappers[y].HighestSpeed > wrappers[y - 1].HighestSpeed) // ok I know this is bubble sort but Insertiona and Selection both have worst case complexity of n2; though, arguably insertion is better here because the array is already sorted... 
+                    {
+                        Swap(wrappers, y - 1, y);
+                        y--;
+                    }
                 }
             }
 
@@ -673,16 +555,11 @@ else
 
         public int HighestSpeed { get; set; } // used to sort the wrappers 
                                                 // -1 indicates that the wrapper is empty 
-                                                // bad encapsulation as maintenance is done outside.
 
         // Every enemy action is transformed into a single field wrapper after all the enemy actions have been inserted;
-        // Will implement this via a field checker (roundStart) at present; should be implemented elsewhere for decorum. 
-
-        // the true corresponds to enemy action; false to player action
-        // TO REFACTOR !!! isEnemys
-        public Wrapper(ActionClass action, bool isEnemys)
+        public Wrapper(ActionClass action)
         {
-            if (isEnemys)
+            if (!action.IsPlayedByPlayer())
             {
                 PlayerAction = null;
                 this.EnemyAction = action;
@@ -696,9 +573,9 @@ else
             }
         }
 
+        // IS REDUNDANT NOW
         // returns the action with the highest speed. 
-        // IS NOT RESPONSIBLE FOR THE DESTRUCTION AS THE DESTRUCTION MUST TAKE PLACE AFTER THE EXECUTION; for destruction check speed. 
-        // call in dequeue. 
+        // IS NOT RESPONSIBLE FOR THE DESTRUCTION AS THE DESTRUCTION MUST TAKE PLACE AFTER THE EXECUTION; 
         // updates Highest Speed. 
         public ActionClass ReturnHighest()
         {
@@ -735,6 +612,17 @@ else
             }
         }
 
+        // REQUIRES: that it only has one element. Exception handling implemented. 
+        // is intended for the rendering
+        public ActionClass ReturnWhaYouHave()
+        {
+            if (PlayerAction != null && EnemyAction != null)
+            {
+                throw new Exception("Invalid call to method. Should only be called if one of the ActionClasses is emepty ");
+            }
+            return PlayerAction == null ? EnemyAction : PlayerAction;
+        }
+
         // Updates the HighestSpeed
         public void Update()
         {
@@ -755,109 +643,15 @@ else
                 HighestSpeed *= -1;
             }
         }
+
+        // returns true if the the wrapper is half empty; used for the displaying method.
+        public bool IsHalfEmpty()
+        {
+            if (PlayerAction == null && EnemyAction == null)
+            {
+                throw new Exception("Why is there an empty wrapper?");
+            }
+            return PlayerAction == null || EnemyAction == null;
+        }
     }
-
-
-    // >>> so at the beginning of a round enemy actions are added automatically to the battle queue; assume that it is inserted correctly. 
-
-
 }
-
-
-// base.SuperMethod()
-
-// done with the insertion of enemy actions 
-
-// initial insertion of player action 
-//          delete original wrapper and insert new wrapper OR keep original wrapper and cause it to be updated and then sort the array itself 
-
-// for dequeue:
-//          is responsible for ensuring player priority (i.e. after ReturnHighest()
-//          after that perform a check on the wrapper based on speed. (but first check if the wrapper is empty or not anf based on that)
-//          reinvoke the clashing method abstract it. 
-//          call sort 
-//          loop
-// empty the actionarray at the end. 
-//          
-//          no need for new wrapper
-//          update wrapper highest speed 
-//          need to sort the wrappers anew 
-// need a sort method that relies on the HighestSpeed attribute, maintain player priority
-
-
-// query: when you use syntactic sugar for a member do you forego its initialisation outside the constructor; i.e. at declaration
-
-
-// .getType == TypeOf; what Type is a type 
-// throw new NotImplementedException();
-
-//INVALID ASSUMPTION DO NOT OMIT:
-// Notes for future it makes sense for the GameObject to have an instance of BattleQueue.
-// That way they can automtically insert themselve herein and BattleQueue doesn't have to poll.
-
-// DO NOT OMIT: 
-// default access specifier for methods is different... Is that contingent on the variable type? 
-
-
-// public EntityClass Target { get; set; }
-// start coroutine (function returning IEnumerator; has a yield return (IEnumerator)) can be nested; see coroutine implementation in BattleQueue. 
-// start coroutine is inside a non-IEnumerator returner. 
-// Distinction betweeen array and fields. 
-// TODO: check if fields are instantiated before the Awake method
-// naming conventions 
-// .Count 
-// .Remove() 
-// .Add()
-// ctrl shift / for block comment 
-// ctrl R for rename
-// foreach (Wrapper curWrapper in wrappers)
-// { get; set; }
-// public ActionClass PlayerAction { get; set; } effectively useless as they rely on the original modifier; i.e. if set to private wouldn't matter
-// == is for reference equality
-// == for strings is different
-// case statmetn in c#
-
-// ctrl up down for moevemnt 
-// atl for moving lines up and doww; wonder what navigating the functions shortcut is 
-// ctrl r stands for rename 
-
-// Add and insert equivalents in Java !!!!
-
-// ctrl shif / for block
-
-// Ctrl D for duplicate 
-
-// so only inner classes have to refer to the instance itself for static contexts; i.e. an inner class would have to use the class name with static variables/nmethod 4
-
-
-// What is wrong with this:
-// when dealing with arrays always look for con mod
-// sort based on speed and priority.
-/*            if (count > 0) {
-                for (int x = 0; x < count; x++)
-                {
-                    for (int y = x; y > -1; y--) // TRANSFORM THIS INTO A WHILE LOOP. 
-                    {
-                        if (wrappers[x].HighestSpeed >= wrappers[y].HighestSpeed && PlayerPriority(wrappers[x], wrappers[y])) // for when player speed is the greatest regardless of emptiness
-                        {
-                            Wrapper temp = wrappers[x];
-                            wrappers.Remove(wrappers[x]);
-                            wrappers.Insert(y, temp); // insertion doesn't remove them per se so need a temp 
-                            // break is Invalid; need to compare with all 
-                        } else if (wrappers[x].PlayerAction != null && wrappers[y].PlayerAction != null && wrappers[y].PlayerAction.Speed > wrappers[x].PlayerAction.Speed
-                            && wrappers[y].HighestSpeed == wrappers[x].HighestSpeed) // for 2,5 ; 3,5; for when you have to swap certain isues 
-                        {
-                            Wrapper temp = wrappers[x];
-                            wrappers.Remove(wrappers[x]);
-                            wrappers.Insert(y, temp);
-                        } else if (wrappers[x].HighestSpeed > wrappers[y].HighestSpeed) { // among enemy actions still allowing for via ^ pp 
-                            // if the enemy speed is greater than the paired or absent player action still move
-                            Wrapper temp = wrappers[x];
-                            wrappers.Remove(wrappers[x]);
-                            wrappers.Insert(y, temp);
-                        }
-                    }
-                }
-            }*/
-
-// $$$ while loops for ... sort 
