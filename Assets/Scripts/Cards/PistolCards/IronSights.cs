@@ -15,12 +15,12 @@ public class IronSights : PistolCards
     public override void Initialize()
     {
         lowerBound = 1;
-        upperBound = 3;
+        upperBound = 4;
 
         Speed = 2;
-        Block = 4;
+        Block = 0;
         Damage = 1;
-        description = "Gain accuracy";
+        description = "Gain 1 accuracy.";
 
         CardType = CardType.RangedAttack;
         myName = "IronSights";

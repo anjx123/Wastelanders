@@ -15,11 +15,11 @@ public class QuickDraw : PistolCards
     public override void Initialize()
     {
         lowerBound = 1; // MAKE SURE BOUNDS ARE SET BEFORE CALLING SUPERCLASS START
-        upperBound = 4;
+        upperBound = 5;
         Speed = 5;
         Block = 2;
         Damage = 3;
-        description = "quick but lethal";
+        description = "They’ll never see it coming!";
         myName = "QuickDraw";
         CardType = CardType.RangedAttack;
         Renderer renderer = GetComponent<Renderer>();

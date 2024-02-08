@@ -16,10 +16,10 @@ public class PistolWhip : PistolCards
     {
         lowerBound = 3;
         upperBound = 5;
-        Speed = 2;
-        Block = 2;
-        Damage = 99;
-        description = "KYS!";
+        Speed = 1;
+        Block = 0;
+        Damage = 0;
+        description = "Good Ol’ reliable CQC!";
         CardType = CardType.MeleeAttack;
         myName = "PistolWhip";
         Renderer renderer = GetComponent<Renderer>();

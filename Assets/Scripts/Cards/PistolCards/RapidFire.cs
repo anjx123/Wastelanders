@@ -16,10 +16,10 @@ public class RapidFire : PistolCards
     {
         lowerBound = 1;
         upperBound = 4;
-        Speed = 3;
+        Speed = 2;
         Block = 2;
         Damage = 3;
-        description = "BAM BAM BAM";
+        description = "Attack, Lose 1 accuracy, then make this attack again.";
         CardType = CardType.MeleeAttack;
         myName = "RapidFire";
         Renderer renderer = GetComponent<Renderer>();
