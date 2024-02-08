@@ -368,10 +368,10 @@ public class BattleQueue : MonoBehaviour
         }
 
         // only called inside Insert() iff Insert() method of SortedArray is about to return true; not that it returns it; is called before the method ends. // ASTER2
-        /* When a player plays a card against an enemy, the fastest action the enemy has will get promoted to the player’s speed. Even if the Enemy Attack is 
+        /* When a player plays a card against an enemy, the fastest action the enemy has will get promoted to the playerï¿½s speed. Even if the Enemy Attack is 
                 targeting a different target. CASE 1 
 
-            If the enemy’s speed is higher than the player’s speed. The player’s card gets promoted up instead. However, it only promotes player cards 
+            If the enemyï¿½s speed is higher than the playerï¿½s speed. The playerï¿½s card gets promoted up instead. However, it only promotes player cards 
                 that are targeting THEM, and will not promote attacks targeting different enemies. CASE 2 
             
             Case 1 V Case 2 == Case 1; in essence the speed doesn't matter, only the origin does. 
@@ -415,12 +415,11 @@ public class BattleQueue : MonoBehaviour
 
         }
 
-        // IS REDUNDANT NOW. 
         // The clashing implementation here is
-        /* When a player plays a card against an enemy, the fastest action the enemy has will get promoted to the player’s speed. Even if the Enemy Attack is 
+        /* When a player plays a card against an enemy, the fastest action the enemy has will get promoted to the playerï¿½s speed. Even if the Enemy Attack is 
         targeting a different target. CASE 1
 
-        If the enemy’s speed is higher than the player’s speed. The player’s card gets promoted up instead. However, it only promotes player cards 
+        If the enemyï¿½s speed is higher than the playerï¿½s speed. The playerï¿½s card gets promoted up instead. However, it only promotes player cards 
         that are targeting THEM, and will not promote attacks targeting different enemies. CASE 2 */
         // enemy card pairs with the highest speed player card that is targeting them.
 
@@ -449,6 +448,7 @@ public class BattleQueue : MonoBehaviour
         }
 
         //Removes and returns Wrapper that contains (@param removedCard), null if it cant be found
+        // method is for returning from the queue to the hand
         //If the removed ActionClass is clashing, then reinsert the other Clashing Card.
         public Wrapper? RemoveWrapperWithActionClass(ActionClass removedCard)
         {
@@ -474,6 +474,7 @@ public class BattleQueue : MonoBehaviour
         }
 
         //Removes all cards in the battle queue that have (@param entity) as the Origin or target.
+        // for death
         public void RemoveAllInstancesOfEntity(EntityClass entity)
         {
             for (int i = wrappers.Count - 1; i >= 0; i--)
