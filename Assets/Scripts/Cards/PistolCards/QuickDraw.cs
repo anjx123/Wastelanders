@@ -19,7 +19,7 @@ public class QuickDraw : PistolCards
         Speed = 5;
         Block = 2;
         Damage = 3;
-
+        description = "quick but lethal";
         myName = "QuickDraw";
         CardType = CardType.RangedAttack;
         Renderer renderer = GetComponent<Renderer>();

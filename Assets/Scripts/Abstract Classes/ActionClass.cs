@@ -46,6 +46,8 @@ public abstract class ActionClass : SelectClass
     public int Damage { get; protected set; }
     public int Block { get; protected set; }
     public int Speed { get; protected set; }
+    public string description;
+
     [SerializeField] string titleName;
 
     public Sprite icon;
@@ -169,6 +171,11 @@ public abstract class ActionClass : SelectClass
         {
             EnqueueMoveDown = false;
         }
+
+        if (description != null)
+        {
+            DescriptionManager.Instance.DisplayText(description);
+        }
     }
 
     public override void OnMouseExit()
@@ -190,6 +197,8 @@ public abstract class ActionClass : SelectClass
         {
             EnqueueMoveDown = true;
         }
+
+        DescriptionManager.Instance.RemoveDescription();
     }
 
     public override void Highlight()

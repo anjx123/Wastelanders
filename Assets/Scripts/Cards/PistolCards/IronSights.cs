@@ -20,7 +20,7 @@ public class IronSights : PistolCards
         Speed = 2;
         Block = 4;
         Damage = 1;
-
+        description = "Gain accuracy";
 
         CardType = CardType.RangedAttack;
         myName = "IronSights";

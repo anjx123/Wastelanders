@@ -19,6 +19,7 @@ public class PistolWhip : PistolCards
         Speed = 2;
         Block = 2;
         Damage = 99;
+        description = "KYS!";
         CardType = CardType.MeleeAttack;
         myName = "PistolWhip";
         Renderer renderer = GetComponent<Renderer>();

@@ -19,6 +19,7 @@ public class RapidFire : PistolCards
         Speed = 3;
         Block = 2;
         Damage = 3;
+        description = "BAM BAM BAM";
         CardType = CardType.MeleeAttack;
         myName = "RapidFire";
         Renderer renderer = GetComponent<Renderer>();
