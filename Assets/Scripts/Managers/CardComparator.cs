@@ -51,7 +51,7 @@ public class CardComparator : MonoBehaviour
             //Debug.Log(cardOneStaggered);
             if (cardOneStaggered == 0) //Clash ties
             {
-                card1.OnHit(); // For testing purposes, not supposed to be here
+                //Play both animations
             } else if (cardOneStaggered > 0) //Card2 wins clash
             {
                 card2.OnHit();
@@ -98,6 +98,29 @@ public class CardComparator : MonoBehaviour
             cardOneStaggered = 0;
         }
         return cardOneStaggered;
+    }
+
+    public IEnumerator OneSidedAttack(ActionClass actionClass)
+    {
+        //Setup the Scene
+        CombatManager.Instance.SetCameraCenter(actionClass.Origin);
+        ActivateInfo(actionClass, actionClass);
+        actionClass.ApplyEffect();
+        yield return StartCoroutine(ClashBothEntities(actionClass.Origin, actionClass.Target));
+        actionClass.RollDice();
+        DeactivateInfo(actionClass, actionClass);
+
+        //Hit and feel effects
+        actionClass.OnHit();
+        yield return new WaitForSeconds(COMBAT_BUFFER_TIME);
+
+        //Reset the Scene
+        if (PlayEntityDeaths != null)
+        {
+            yield return PlayEntityDeaths();
+            PlayEntityDeaths = null;
+        }
+        DeEmphasizeClashers(actionClass.Origin, actionClass.Target);
     }
 
     /*

@@ -29,7 +29,7 @@ public class BattleQueue : MonoBehaviour
     public GameObject clashingPrefab;
     public GameObject combatInfoDisplay; // same display given to enemy combat card UI
 
-
+    #nullable enable
     void Awake()
     {
         if (BattleQueueInstance == null)
@@ -99,10 +99,11 @@ public class BattleQueue : MonoBehaviour
     // Removes the card if it is clicked on by the player whilst it is in the Queue, right?
      public void DeletePlayerAction(ActionClass action)
     {
-        ActionClass deletedCard = protoQueue.RemoveLinearSearch(action);
+        wrapperArray.RemoveWrapperWithActionClass(action);
+        protoQueue.RemoveLinearSearch(action);
         RenderBQ();
-        PlayerClass player = (PlayerClass) deletedCard.Origin;
-        player.ReaddCard(deletedCard);
+        PlayerClass player = (PlayerClass)action.Origin;
+        player.ReaddCard(action);
     }
 
     // to add an enemy action to the actionQueue and the WrapperArray
@@ -118,7 +119,7 @@ public class BattleQueue : MonoBehaviour
     //Remove all cards with (@param entity) as the target and origin
     public void RemoveAllInstancesOfEntity(EntityClass entity)
     {
-        protoQueue.RemoveAllInstancesOfEntity(entity);
+        wrapperArray.RemoveAllInstancesOfEntity(entity);
     }
 
 
@@ -201,7 +202,7 @@ public class BattleQueue : MonoBehaviour
             if (e.IsHalfEmpty())
             {
                 ActionClass action = e.ReturnWhaYouHave();
-                yield return StartCoroutine(CardComparator.Instance.ClashCards(action, action)); // by my undertanding this should have no impact on the animation or anything of importance.
+                yield return StartCoroutine(CardComparator.Instance.OneSidedAttack(action));
                 protoQueue.GetList().Remove(action);
             }
             else
@@ -275,41 +276,6 @@ public class BattleQueue : MonoBehaviour
                                     // ASTER2 refer to note inside WrapperArray
             return true;
 
-        }
-
-        //Removes all cards in the battle queue that have (@param entity) as the Origin or target.
-        // TODO 
-        public void RemoveAllInstancesOfEntity(EntityClass entity)
-        {
-            // remove from both queues 
-
-            // TODO: Should update so that player cards are returned if not used. 
-
-            // TODO now would you have the actions reclash or no?
-            List<Wrapper> wrappers = BattleQueue.BattleQueueInstance.wrapperArray.GetWrappers();
-            foreach (Wrapper wrapper in wrappers) 
-            {
-                if (wrapper.IsHalfEmpty())  // risk concurrent modification to remove empty wrappers?
-                {
-
-                } else
-                {
-                    ActionClass player = wrapper.PlayerAction;
-                    ActionClass enemy = wrapper.EnemyAction;
-                    // would need a check for whether or not a player has died or an enemy TODO for reinsertion of player cards
-                    if (player.Origin == entity || player.Target == entity)
-                    {
-
-                    }
-
-                    if (enemy.Origin == entity || enemy.Target == entity)
-                    {
-
-                    }
-
-                }
-            }
-            BattleQueue.BattleQueueInstance.wrapperArray.SortWrappers();
         }
 
         public ActionClass RemoveLinearSearch(ActionClass card)
@@ -468,6 +434,43 @@ public class BattleQueue : MonoBehaviour
             }
         }
 
+        //Removes and returns Wrapper that contains (@param removedCard), null if it cant be found
+        //If the removed ActionClass is clashing, then reinsert the other Clashing Card.
+        public Wrapper? RemoveWrapperWithActionClass(ActionClass removedCard)
+        {
+            foreach (Wrapper existingWrapper in wrappers)
+            {
+                if (existingWrapper.PlayerAction == removedCard || existingWrapper.EnemyAction == removedCard)
+                {
+                    wrappers.Remove(existingWrapper);
+                    if (existingWrapper.PlayerAction != null && existingWrapper.EnemyAction != null)
+                    {
+                        if (existingWrapper.PlayerAction == removedCard)
+                        {
+                            InsertEnemyActionIntoWrappers(existingWrapper.EnemyAction);
+                        } else
+                        {
+                            InsertPlayerActionIntoWrappers(existingWrapper.PlayerAction);
+                        }
+                    }
+                    return existingWrapper;
+                }
+            }
+            return null;
+        }
+
+        //Removes all cards in the battle queue that have (@param entity) as the Origin or target.
+        public void RemoveAllInstancesOfEntity(EntityClass entity)
+        {
+            for (int i = wrappers.Count - 1; i >= 0; i--)
+            {
+                Wrapper existingWrapper = wrappers[i];
+                if ((existingWrapper.PlayerAction != null && existingWrapper.PlayerAction.Origin == entity) || (existingWrapper.EnemyAction != null && existingWrapper.EnemyAction.Target == entity))
+                {
+                    wrappers.RemoveAt(i); 
+                }
+            }
+        }
 
         // Prints contents to Console
         public void DisplayWrapperArray()
@@ -550,8 +553,8 @@ public class BattleQueue : MonoBehaviour
     // Wrapper Element for WrapperArray;
     public class Wrapper
     {
-        public ActionClass PlayerAction { get; set; }
-        public ActionClass EnemyAction { get; set; }
+        public ActionClass? PlayerAction { get; set; }
+        public ActionClass? EnemyAction { get; set; }
 
         public int HighestSpeed { get; set; } // used to sort the wrappers 
                                                 // -1 indicates that the wrapper is empty 
