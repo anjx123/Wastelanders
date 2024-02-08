@@ -13,11 +13,11 @@ public class SteadyBreathing : PistolCards
     }
 
     // Start is called before the first frame update
-    public override void Start()
+    public override void Initialize()
     {
         lowerBound = 1;
         upperBound = 3;
-        base.Start();
+        
         Speed = 5;
         Block = 2;
         
@@ -26,9 +26,7 @@ public class SteadyBreathing : PistolCards
         Renderer renderer = GetComponent<Renderer>();
         ogMaterial = renderer.material; // og sprite of card
         OriginalPosition = transform.position;
-
-
-
+        base.Initialize();
     }
 
     // Update is called once per frame

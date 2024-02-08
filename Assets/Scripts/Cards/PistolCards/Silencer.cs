@@ -10,11 +10,10 @@ public class Silencer : PistolCards
     }
 
     // Start is called before the first frame update
-    public override void Start()
+    public override void Initialize()
     {
         lowerBound = 1;
         upperBound = 4;
-        base.Start();
         Speed = 3;
         Block = 2;
 
@@ -23,7 +22,7 @@ public class Silencer : PistolCards
         Renderer renderer = GetComponent<Renderer>();
         ogMaterial = renderer.material; // og sprite of card
         OriginalPosition = transform.position;
-
+        base.Initialize();
 
 
     }

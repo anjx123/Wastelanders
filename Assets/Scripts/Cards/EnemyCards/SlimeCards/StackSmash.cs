@@ -11,11 +11,7 @@ public class StackSmash : SlimeAttacks
 
     }
 
-    // Start is called before the first frame update
-    public override void Start()
-    {
-
-    }
+   
 
     public override void Initialize()
     {
