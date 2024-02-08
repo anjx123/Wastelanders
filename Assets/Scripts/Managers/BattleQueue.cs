@@ -29,7 +29,7 @@ public class BattleQueue : MonoBehaviour
     public GameObject clashingPrefab;
     public GameObject combatInfoDisplay; // same display given to enemy combat card UI
 
-    #nullable enable
+    #nullable enable //Turns on pedantic null checks, use exclamation mark (!) operator to assert non null and supress warnings.
     void Awake()
     {
         if (BattleQueueInstance == null)
@@ -120,6 +120,7 @@ public class BattleQueue : MonoBehaviour
     public void RemoveAllInstancesOfEntity(EntityClass entity)
     {
         wrapperArray.RemoveAllInstancesOfEntity(entity);
+        protoQueue.RemoveAllInstancesOfEntity(entity);
     }
 
 
@@ -143,8 +144,8 @@ public class BattleQueue : MonoBehaviour
             if (ClashCheck(wrapper))
             {
                 GameObject clashingRenderedCopy = Instantiate(clashingPrefab, new Vector3(100, 100, -10), Quaternion.identity);
-                ActionClass leftClashItem = wrapper.PlayerAction;
-                ActionClass rightClashItem = wrapper.EnemyAction;
+                ActionClass leftClashItem = wrapper.PlayerAction!;
+                ActionClass rightClashItem = wrapper.EnemyAction!;
                 clashingRenderedCopy.GetComponent<ClashingBattleQueueIcon>().renderClashingIcons(leftClashItem, rightClashItem);
                 clashingRenderedCopy.transform.SetParent(bqContainer, false);
             } else
@@ -185,8 +186,7 @@ public class BattleQueue : MonoBehaviour
             beganFighting = true;
         }
 
-        int i = 0; // for debugging 
-
+        int i = 0; // for debugging
         while (!(array.Count == 0))
         {
             if (i == 0)
@@ -207,8 +207,8 @@ public class BattleQueue : MonoBehaviour
             }
             else
             {
-                ActionClass pla = e.PlayerAction;
-                ActionClass ene = e.EnemyAction;
+                ActionClass pla = e.PlayerAction!;
+                ActionClass ene = e.EnemyAction!;
                 yield return StartCoroutine(CardComparator.Instance.ClashCards(pla, ene));
                 protoQueue.GetList().Remove(pla);
                 protoQueue.GetList().Remove(ene);
@@ -275,6 +275,20 @@ public class BattleQueue : MonoBehaviour
             array.Insert(i, card); // the original order of the queue is ensured...
                                     // ASTER2 refer to note inside WrapperArray
             return true;
+
+        }
+
+        //Removes all instances of an entity from the queue
+        public void RemoveAllInstancesOfEntity(EntityClass entity)
+        {
+            for (int i = array.Count - 1; i >= 0; i--)
+            {
+                ActionClass actionClass = array[i];
+                if (actionClass.Origin == entity || actionClass.Target == entity)
+                {
+                    array.RemoveAt(i); //TODO: Should update so that player cards are returned if not used
+                }
+            }
 
         }
 
@@ -585,7 +599,7 @@ public class BattleQueue : MonoBehaviour
             if (PlayerAction == null) // account for half wrapper. 
             {
                 HighestSpeed = -1;
-                ActionClass temp = EnemyAction;
+                ActionClass temp = EnemyAction!;
                 EnemyAction = null;
                 return temp;
             }
@@ -623,7 +637,7 @@ public class BattleQueue : MonoBehaviour
             {
                 throw new Exception("Invalid call to method. Should only be called if one of the ActionClasses is emepty ");
             }
-            return PlayerAction == null ? EnemyAction : PlayerAction;
+            return PlayerAction == null ? EnemyAction! : PlayerAction;
         }
 
         // Updates the HighestSpeed
