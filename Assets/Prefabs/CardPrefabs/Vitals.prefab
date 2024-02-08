@@ -119,4 +119,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f1c8a5155bcfaf46ae1934e5aeee9c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  icon: {fileID: 21300000, guid: 43c02bdcb24f05a4fbe0d0279871250c, type: 3}
+  myName: 
+  myTransform: {fileID: 0}
+  icon: {fileID: 21300000, guid: 9c4f1024dbdc1c44db0ccd7f58d3d59b, type: 3}
+  fullCard: {fileID: 0}

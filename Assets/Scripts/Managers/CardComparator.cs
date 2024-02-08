@@ -10,7 +10,10 @@ public class CardComparator : MonoBehaviour
 {
     public static CardComparator Instance { get; private set; }
     public static readonly float COMBAT_BUFFER_TIME = 1f;
-    
+    public delegate IEnumerator DeadEntities();
+    public static event DeadEntities PlayEntityDeaths;
+
+
 
     // Awake is called when the script instance is being loaded
     void Awake()
@@ -70,6 +73,11 @@ public class CardComparator : MonoBehaviour
 
         
         yield return new WaitForSeconds(COMBAT_BUFFER_TIME);
+        if (PlayEntityDeaths != null)
+        {
+            yield return PlayEntityDeaths();
+            PlayEntityDeaths = null;
+        }
         DeEmphasizeClashers(card1.Origin, card1.Target);
     }
 

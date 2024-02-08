@@ -71,6 +71,9 @@ public abstract class EntityClass : SelectClass
         if (Health != 0)
         {
             percentageDone = Mathf.Clamp(damage / (float) Health, 0f, 1f);
+        } else
+        {
+            CardComparator.PlayEntityDeaths += Die;
         }
         StartCoroutine(PlayHitAnimation(source, this, percentageDone));
     }
@@ -80,10 +83,6 @@ public abstract class EntityClass : SelectClass
     private IEnumerator PlayHitAnimation(EntityClass origin, EntityClass target, float percentageDone)
     {
         yield return StartCoroutine(StaggerEntities(origin, target, percentageDone));
-        if (Health <= 0)
-        {
-            yield return StartCoroutine(Die());
-        }
     }
 
     /* 
