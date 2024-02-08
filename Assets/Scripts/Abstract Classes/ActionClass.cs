@@ -66,7 +66,7 @@ public abstract class ActionClass : SelectClass
 
     public virtual void Start()
     {
-        DupInit();
+        
     }
 
     public override void OnMouseDown()
@@ -88,7 +88,7 @@ public abstract class ActionClass : SelectClass
 
     public virtual void Initialize()
     {
-
+        DupInit();
     }
 
     public int getRolledDamage()
