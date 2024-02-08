@@ -672,3 +672,7 @@ public class BattleQueue : MonoBehaviour
         }
     }
 }
+/*
+ * TODO: Remove the protoQueue in the future to reduce coupling
+ * TODO: If the player inserted nothing, Dequeue should bounce. Right now, no wrappers are present in the BQ entirely so it causes Dequeue to bounce.
+ */ 
