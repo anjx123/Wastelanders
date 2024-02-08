@@ -14,12 +14,12 @@ public class PistolWhip : PistolCards
     // Start is called before the first frame update
     public override void Start()
     {
+        lowerBound = 3;
+        upperBound = 5;
         base.Start();
         Speed = 2;
         Block = 2;
         Damage = 99;
-        lowerBound = 3;
-        upperBound = 5;
         CardType = CardType.MeleeAttack;
         myName = "PistolWhip";
         Renderer renderer = GetComponent<Renderer>();

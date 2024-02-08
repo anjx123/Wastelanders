@@ -14,8 +14,8 @@ public class QuickDraw : PistolCards
     // Start is called before the first frame update
     public override void Start()
     {
-        lowerBound = 1;
-        upperBound = 5;
+        lowerBound = 1; // MAKE SURE BOUNDS ARE SET BEFORE CALLING SUPERCLASS START
+        upperBound = 4;
         base.Start();
         Speed = 5;
         Block = 2;

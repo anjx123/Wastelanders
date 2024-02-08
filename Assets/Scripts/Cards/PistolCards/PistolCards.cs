@@ -4,8 +4,9 @@ using UnityEngine;
 
 public abstract class PistolCards : ActionClass
 {
-    public virtual void Start()
+    public override void Start()
     {
+        base.Start();
         CardType = CardType.RangedAttack;
     }
     public override void OnHit()

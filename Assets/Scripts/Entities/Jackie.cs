@@ -48,7 +48,8 @@ public class Jackie : PlayerClass
             {
                 hand.Add(pool[idx]);
                 pool.RemoveAt(idx);
-            } else
+            }
+            else
             {
                 Debug.LogWarning(myName + "'s Pool has no cards");
             }
@@ -80,6 +81,14 @@ public class Jackie : PlayerClass
             Vector3 v = new Vector3(-distanceToLeft, y, -i + 10);
             hand[i].transform.position = v;
             hand[i].transform.rotation = Quaternion.Euler(0, 0, -5);
+        }
+        RenderText();
+    }
+
+    protected void RenderText()
+    {
+        for (int i = 0; i < hand.Count; i++)
+        {
             hand[i].GetComponent<ActionClass>().UpdateText();
         }
     }

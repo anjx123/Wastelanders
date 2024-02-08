@@ -45,6 +45,7 @@ public abstract class ActionClass : SelectClass
     public int Damage { get; protected set; }
     public int Block { get; protected set; }
     public int Speed { get; protected set; }
+    [SerializeField] string titleName;
 
     public Sprite icon;
 
@@ -62,6 +63,12 @@ public abstract class ActionClass : SelectClass
     {
         Initialize();
     }
+
+    public virtual void Start()
+    {
+        DupInit();
+    }
+
     public override void OnMouseDown()
     {
         HighlightManager.OnActionClicked(this);
@@ -131,10 +138,10 @@ public abstract class ActionClass : SelectClass
 
     public void UpdateText()
     {
-        Debug.Log(myName);
-        nameText.GetComponent<TextMeshProUGUI>().text = myName;
+        nameText.GetComponent<TextMeshProUGUI>().text = titleName;
         lowerBoundText.GetComponent<TextMeshProUGUI>().text = duplicateCard.rollFloor.ToString();
         upperBoundText.GetComponent<TextMeshProUGUI>().text = duplicateCard.rollCeiling.ToString();
+        speedText.GetComponent<TextMeshProUGUI>().text = Speed.ToString();
     }
 
     public override void OnMouseEnter()

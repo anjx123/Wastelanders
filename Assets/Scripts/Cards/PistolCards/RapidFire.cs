@@ -14,13 +14,12 @@ public class RapidFire : PistolCards
     // Start is called before the first frame update
     public override void Start()
     {
-
+        lowerBound = 1;
+        upperBound = 4;
         base.Start();
         Speed = 3;
         Block = 2;
         Damage = 3;
-        lowerBound = 1;
-        upperBound = 4;
         CardType = CardType.MeleeAttack;
         myName = "RapidFire";
         Renderer renderer = GetComponent<Renderer>();

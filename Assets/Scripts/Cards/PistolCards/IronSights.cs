@@ -14,12 +14,13 @@ public class IronSights : PistolCards
     // Start is called before the first frame update
     public override void Start()
     {
+        lowerBound = 1;
+        upperBound = 3;
         base.Start();
         Speed = 2;
         Block = 4;
         Damage = 1;
-        lowerBound = 1;
-        upperBound = 5;
+        
         
         CardType = CardType.RangedAttack;
         myName = "IronSights";

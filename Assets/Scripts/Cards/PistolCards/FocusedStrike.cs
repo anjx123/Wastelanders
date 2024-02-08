@@ -10,7 +10,7 @@ public class FocusedStrike : ActionClass
     }
 
     // Start is called before the first frame update
-    void Start()
+    public override void Start()
     {
         CardType = CardType.MeleeAttack;
         myName = "FocusedStrike";
