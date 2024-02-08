@@ -27,6 +27,7 @@ public abstract class ActionClass : SelectClass
     [SerializeField] GameObject upperBoundText;
     [SerializeField] GameObject speedText;
     [SerializeField] GameObject nameText;
+    [SerializeField] GameObject textCanvas;
 
     protected CardDup duplicateCard;
 
@@ -138,6 +139,9 @@ public abstract class ActionClass : SelectClass
 
     public void UpdateText()
     {
+        Vector3 position = textCanvas.GetComponent<RectTransform>().localPosition;
+        position.z = -2;
+        textCanvas.GetComponent<RectTransform>().localPosition = position;
         nameText.GetComponent<TextMeshProUGUI>().text = titleName;
         lowerBoundText.GetComponent<TextMeshProUGUI>().text = duplicateCard.rollFloor.ToString();
         upperBoundText.GetComponent<TextMeshProUGUI>().text = duplicateCard.rollCeiling.ToString();
