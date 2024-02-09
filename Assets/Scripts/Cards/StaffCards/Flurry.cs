@@ -11,19 +11,17 @@ public class Flurry : StaffCards
     }
 
     // Start is called before the first frame update
-    public override void Start()
+    public override void Initialize()
     {
-        base.Start();
+        
         CardType = CardType.MeleeAttack;
         myName = "Flurry";
-        myDescription = "Make This Attack Once, Then Make It Again";
+        description = "Make This Attack Once, Then Make It Again";
         lowerBound = 2;
         upperBound = 4;
         Speed = 3;
 
-        Renderer renderer = GetComponent<Renderer>();
-        ogMaterial = renderer.material; // og sprite of card, maybe refac into ActionClass?
-        OriginalPosition = transform.position;
+        base.Initialize();
     }
 
     public override void OnHit()

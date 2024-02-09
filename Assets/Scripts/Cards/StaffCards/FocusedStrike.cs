@@ -10,19 +10,16 @@ public class FocusedStrike : StaffCards
     }
 
     // Start is called before the first frame update
-    public override void Start()
+    public override void Initialize()
     {
-        base.Start();
         CardType = CardType.MeleeAttack;
         myName = "FocusedStrike";
-        myDescription = "Gain 1 Focus, Then Attack";
+        description = "Gain 1 Focus, Then Attack";
         lowerBound = 2;
         upperBound = 2;
         Speed = 2;
        
-        Renderer renderer = GetComponent<Renderer>();
-        ogMaterial = renderer.material; // og sprite of card, maybe refac into ActionClass?
-        OriginalPosition = transform.position;
+       base.Initialize();
     }
 
     // Update is called once per frame

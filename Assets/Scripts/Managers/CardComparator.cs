@@ -72,10 +72,7 @@ public class CardComparator : MonoBehaviour
 
         } else if (card2.CardType == CardType.Defense)
         {
-            
-        } else
-        {
-            Debug.LogWarning("You forgot to specify Cardtype");
+
         } else if (IsAttack(card1) && card2.CardType == CardType.Defense)
         {
             if (cardOneGreater >= 0) // Card 1 has a greater attack so it succeeds

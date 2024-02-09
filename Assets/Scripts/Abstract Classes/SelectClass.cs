@@ -52,9 +52,6 @@ public abstract class SelectClass : MonoBehaviour
         return myDescription;
     }
 
-    // abstract as actions and entities have different ways to display selection
-    public abstract void OnMouseEnter();
-    public abstract void OnMouseExit();
 
     public abstract void OnMouseDown();
 

@@ -18,7 +18,6 @@ public class Silencer : PistolCards
         Block = 2;
         description = "If this Attack Staggers the opponent, gain 2 accuracy.";
         myName = "Silencer";
-        myDescription = "If this Attack Staggers the Opponent, Gain 2 Accuracy";
         CardType = CardType.RangedAttack;
         Renderer renderer = GetComponent<Renderer>();
         ogMaterial = renderer.material; // og sprite of card

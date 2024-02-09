@@ -11,19 +11,16 @@ public class Trip : StaffCards
     }
 
     // Start is called before the first frame update
-    public override void Start()
+    public override void Initialize()
     {
-        base.Start();
         CardType = CardType.MeleeAttack;
         myName = "Trip";
-        myDescription = "If This Attack Staggers The Opponent, Gain 1 Focus";
+        description = "If This Attack Staggers The Opponent, Gain 1 Focus";
         lowerBound = 2;
         upperBound = 4;
         Speed = 4;
-
-        Renderer renderer = GetComponent<Renderer>();
-        ogMaterial = renderer.material; // og sprite of card, maybe refac into ActionClass?
-        OriginalPosition = transform.position;
+        
+        base.Initialize();
     }
 
     public override void OnHit()
