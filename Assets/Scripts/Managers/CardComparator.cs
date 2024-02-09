@@ -39,7 +39,7 @@ public class CardComparator : MonoBehaviour
         ActivateInfo(card1, card2);
         card1.ApplyEffect();
         card2.ApplyEffect();
-        yield return StartCoroutine(ClashBothEntities(card1.Origin, card1.Target));
+        yield return StartCoroutine(ClashBothEntities(card1.Origin, card1.Target)); // for animation purposes 
 
         card1.RollDice();
         card2.RollDice();
@@ -53,7 +53,7 @@ public class CardComparator : MonoBehaviour
             //Debug.Log(cardOneStaggered);
             if (cardOneGreater == 0) //Clash ties
             {
-                card1.OnHit(); // For testing purposes, not supposed to be here
+
             } else if (cardOneGreater < 0) //Card2 wins clash
             {
                 card2.OnHit();
@@ -112,6 +112,29 @@ public class CardComparator : MonoBehaviour
             cardOneGreater = 0;
         }
         return cardOneGreater;
+    }
+
+    public IEnumerator OneSidedAttack(ActionClass actionClass)
+    {
+        //Setup the Scene
+        CombatManager.Instance.SetCameraCenter(actionClass.Origin);
+        ActivateInfo(actionClass, actionClass);
+        actionClass.ApplyEffect();
+        yield return StartCoroutine(ClashBothEntities(actionClass.Origin, actionClass.Target));
+        actionClass.RollDice();
+        DeactivateInfo(actionClass, actionClass);
+
+        //Hit and feel effects
+        actionClass.OnHit();
+        yield return new WaitForSeconds(COMBAT_BUFFER_TIME);
+
+        //Reset the Scene
+        if (PlayEntityDeaths != null)
+        {
+            yield return PlayEntityDeaths();
+            PlayEntityDeaths = null;
+        }
+        DeEmphasizeClashers(actionClass.Origin, actionClass.Target);
     }
 
     /*
