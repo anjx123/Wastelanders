@@ -13,12 +13,11 @@ public class SteadiedShot : PistolCards
     }
 
     // Start is called before the first frame update
-    public override void Start()
+    public override void Initialize()
     {
         lowerBound = 1;
         upperBound = 5;
-        base.Start();
-        Speed = 1;
+        Speed = 3;
         Block = 2;
         Damage = 3;
 
@@ -28,7 +27,7 @@ public class SteadiedShot : PistolCards
         Renderer renderer = GetComponent<Renderer>();
         ogMaterial = renderer.material; // og sprite of card
         OriginalPosition = transform.position;
-
+        base.Initialize();
 
 
     }
