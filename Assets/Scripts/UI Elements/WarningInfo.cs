@@ -9,35 +9,22 @@ using UnityEngine.UIElements;
 public class WarningInfo : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     public TMP_Text warningText;
+    public UnityEngine.UI.Image popupImage;
     public bool mouseHover = false;
-    public float secondTImer = 5f;
+    public float secondTimer = 4f;
 
     public void setText(string text)
     {
         warningText.text = text;
     }
 
-    public void OnMouseOver()
-    {
-        Debug.Log("AAAAAAAAAAAAAA");
-        PopUpNotificationManager.Instance.hover = true;
-    }
-
-    public void OnMouseExit()
-    {
-        Debug.Log("EEEEEEEEEEEEEE");
-        PopUpNotificationManager.Instance.hover = false;
-    }
-
     public void OnPointerEnter(PointerEventData eventData)
     {
-        Debug.Log("aaaaaaa");
         mouseHover = true;
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        Debug.Log("eeeeeeeeee");
         mouseHover = false;
     }
 
@@ -45,15 +32,31 @@ public class WarningInfo : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     {
         if (mouseHover)
         {
-            secondTImer = 5;
+            secondTimer = 4f;
+            Color textColor = warningText.color;
+            Color imageColor = popupImage.color;
+            textColor.a = 1f;
+            imageColor.a = 1f;
+            warningText.color = textColor;
+            popupImage.color = imageColor;
         }
         else
         {
-            secondTImer -= Time.deltaTime;
-            if (secondTImer <= 0)
+            secondTimer -= Time.deltaTime;
+            if (secondTimer < 0)
             {
-                PopUpNotificationManager.Instance.hover = false;
-                //Destroy(this);
+                float disappearSpeed = 1f;
+                Color textColor = warningText.color;
+                Color imageColor = popupImage.color;
+                textColor.a -= disappearSpeed * Time.deltaTime;
+                imageColor.a -= disappearSpeed * Time.deltaTime;
+                warningText.color = textColor;
+                popupImage.color = imageColor;
+                if (textColor.a < 0)
+                {
+                    PopUpNotificationManager.Instance.isRunning = false;
+                    Destroy(gameObject);
+                }
             }
         }
     }

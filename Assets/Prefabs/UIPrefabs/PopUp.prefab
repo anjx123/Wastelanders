@@ -383,5 +383,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   warningText: {fileID: 7109150430243128439}
+  popupImage: {fileID: 1156540308573898057}
   mouseHover: 0
-  secondTImer: 5
+  secondTimer: 4
