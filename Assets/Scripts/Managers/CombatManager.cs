@@ -253,7 +253,6 @@ public class CombatManager : MonoBehaviour
         set
         {
             gameState = value;
-            OnGameStateChanged?.Invoke(gameState);
             switch (gameState)
             {
                 case GameState.SELECTION:
@@ -275,6 +274,7 @@ public class CombatManager : MonoBehaviour
                     break;
 
             }
+            OnGameStateChanged?.Invoke(gameState);
         }
     }
 }

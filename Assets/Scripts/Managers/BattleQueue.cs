@@ -42,10 +42,6 @@ public class BattleQueue : MonoBehaviour
         {
             Destroy(this);
         }
-    }
-
-    private void Start()
-    {
         CombatManager.Instance.OnGameStateChanged += TheBeginning; //Subscribes to the game state event
     }
 
