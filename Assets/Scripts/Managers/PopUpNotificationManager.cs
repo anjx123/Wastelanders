@@ -35,6 +35,11 @@ public class PopUpNotificationManager : MonoBehaviour
         CombatManager.Instance.OnGameStateChanged += DismissDescription;
     }
 
+    private void OnDestroy()
+    {
+        CombatManager.Instance.OnGameStateChanged -= DismissDescription;
+    }
+
     public void DisplayWarning(PopupType popupType, GameObject obj = null)
     {
         switch (popupType)

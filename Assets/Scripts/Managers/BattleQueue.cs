@@ -49,6 +49,11 @@ public class BattleQueue : MonoBehaviour
         CombatManager.Instance.OnGameStateChanged += TheBeginning; //Subscribes to the game state event
     }
 
+    private void OnDestroy()
+    {
+        CombatManager.Instance.OnGameStateChanged -= TheBeginning;
+    }
+
 
     // is referenced whenever game state changes to selection.
     public void TheBeginning(GameState gameState)

@@ -15,6 +15,11 @@ public class HighlightManager : MonoBehaviour // later all entity highlighter
         CombatManager.Instance.OnGameStateChanged += ResetSelection;
     }
 
+    private void OnDestroy()
+    {
+        CombatManager.Instance.OnGameStateChanged -= ResetSelection;
+    }
+
     static HighlightManager()
     {
         currentHighlightedEntity = null; // no entity highlighted
