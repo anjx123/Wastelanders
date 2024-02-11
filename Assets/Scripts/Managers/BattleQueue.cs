@@ -44,12 +44,19 @@ public class BattleQueue : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        CombatManager.Instance.OnGameStateChanged += TheBeginning; //Subscribes to the game state event
+    }
+
 
     // is referenced whenever game state changes to selection.
-    public void TheBeginning()
+    public void TheBeginning(GameState gameState)
     {
-        RenderInitialBQ();
-
+        if (gameState == GameState.SELECTION)
+        {
+            RenderInitialBQ();
+        }
     }
 
     // for when the round has just started. 
@@ -220,7 +227,6 @@ public class BattleQueue : MonoBehaviour
         if (beganFighting)
         {
             CombatManager.Instance.GameState = GameState.SELECTION;
-            TheBeginning();
         }
 
         // ASTER1 

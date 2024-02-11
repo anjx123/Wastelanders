@@ -27,7 +27,12 @@ public class PopUpNotificationManager : MonoBehaviour
         }
 
         DontDestroyOnLoad(gameObject);
-        createWarning("ahh!!!");
+        createWarning("Round Start!!!");
+    }
+
+    private void Start()
+    {
+        CombatManager.Instance.OnGameStateChanged += DismissDescription;
     }
 
     public void DisplayWarning(PopupType popupType, GameObject obj = null)
@@ -66,6 +71,14 @@ public class PopUpNotificationManager : MonoBehaviour
     public void RemoveDescription()
     {
         warningObject.GetComponent<WarningInfo>().RemoveDescription();
+    }
+
+    public void DismissDescription(GameState gameState)
+    {
+        if (gameState == GameState.FIGHTING)
+        {
+            RemoveDescription();
+        }
     }
 
 }

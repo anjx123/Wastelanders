@@ -3,11 +3,17 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public static class HighlightManager // later all entity highlighter
+public class HighlightManager : MonoBehaviour // later all entity highlighter
 {
-    private static EntityClass currentHighlightedEntity;
-    private static ActionClass currentHighlightedAction;
-    public static PlayerClass player = null;
+#nullable enable
+    private static EntityClass? currentHighlightedEntity = null;
+    private static ActionClass? currentHighlightedAction = null;
+    public static PlayerClass? selectedPlayer = null;
+
+    private void Start()
+    {
+        CombatManager.Instance.OnGameStateChanged += ResetSelection;
+    }
 
     static HighlightManager()
     {
@@ -17,6 +23,7 @@ public static class HighlightManager // later all entity highlighter
 
     public static void OnEntityClicked(EntityClass clicked)
     {
+        if (CombatManager.Instance.GameState != GameState.SELECTION) return;
         bool isOutlined = false;
 
         if (currentHighlightedAction == null) 
@@ -45,10 +52,10 @@ public static class HighlightManager // later all entity highlighter
             // no call to PQueue.
         }
 
-        if (currentHighlightedEntity && currentHighlightedAction && isOutlined)
+        if (currentHighlightedEntity != null && currentHighlightedAction != null && isOutlined)
         {
             currentHighlightedAction.Target = currentHighlightedEntity;
-            currentHighlightedAction.Origin = player;
+            currentHighlightedAction.Origin = selectedPlayer;
             // ------------------------------------------
             // ActionClass action = new QuickDraw(); // not possible; must be added using AddComponent method. was irrelevenat in the first place 
             // BUT damn Alissa you circumvented the entire problem using Event Managers!
@@ -63,9 +70,9 @@ public static class HighlightManager // later all entity highlighter
 
             currentHighlightedEntity.DeHighlight();
             currentHighlightedAction.DeHighlight();
-            if (player != null && wasAdded)
+            if (selectedPlayer != null && wasAdded)
             {
-                player.HandleUseCard(currentHighlightedAction);
+                selectedPlayer.HandleUseCard(currentHighlightedAction);
             } else
             {
                 PopUpNotificationManager.Instance.DisplayWarning(PopupType.SameSpeed);
@@ -79,6 +86,7 @@ public static class HighlightManager // later all entity highlighter
 
     public static void OnActionClicked(ActionClass clicked)
     {
+        if (CombatManager.Instance.GameState != GameState.SELECTION) return;
         if (currentHighlightedAction == null)
         {
             currentHighlightedAction = clicked;
@@ -95,12 +103,28 @@ public static class HighlightManager // later all entity highlighter
             if (!currentHighlightedAction.Toggle()) // if enemy chosen but no card chosen
             {
                 currentHighlightedAction = null;
-                if (currentHighlightedEntity) 
+                if (currentHighlightedEntity != null) 
                 {
                     currentHighlightedEntity.DeHighlight();
                 }
                 
-                Debug.Log("Select card first!");
+            }
+        }
+    }
+
+    private void ResetSelection(GameState gameState)
+    {
+        if (gameState == GameState.FIGHTING)
+        {
+            //Untoggle card if it is still selected when entering fighting
+            if (currentHighlightedAction != null && !currentHighlightedAction.Toggle())
+            {
+                currentHighlightedAction = null;
+                if (currentHighlightedEntity != null)
+                {
+                    currentHighlightedEntity.DeHighlight();
+                }
+
             }
         }
     }

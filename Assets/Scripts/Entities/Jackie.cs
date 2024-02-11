@@ -16,7 +16,7 @@ public class Jackie : PlayerClass
         Health = MaxHealth;
         myName = "Jackie";
 
-        HighlightManager.player = this;
+        HighlightManager.selectedPlayer = this;
 
         // deep copy deck into pool
         for (int i = 0; i < cardPrefabs.Count; i++)

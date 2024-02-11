@@ -8,5 +8,6 @@ public enum GameState
     SELECTION,
     GAME_WIN,
     GAME_LOSE,
+    GAME_START,
 
 }
