@@ -347,7 +347,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 200, y: 100}
+  m_AnchoredPosition: {x: 200, y: 250}
   m_SizeDelta: {x: 200, y: 100}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &5638829709072448918
@@ -384,5 +384,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   warningText: {fileID: 7109150430243128439}
   popupImage: {fileID: 1156540308573898057}
-  mouseHover: 0
+  popUpCanFade: 0
   secondTimer: 4
+  isActive: 1

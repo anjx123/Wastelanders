@@ -21,7 +21,7 @@ public static class HighlightManager // later all entity highlighter
 
         if (currentHighlightedAction == null) 
         {
-            Debug.Log("Select card first!");
+            PopUpNotificationManager.Instance.DisplayWarning(PopupType.SelectEnemyFirst);
             // no call to PQueue. 
 
         } else if (currentHighlightedEntity == null)
@@ -68,7 +68,7 @@ public static class HighlightManager // later all entity highlighter
                 player.HandleUseCard(currentHighlightedAction);
             } else
             {
-                Debug.Log("Card not used.");
+                PopUpNotificationManager.Instance.DisplayWarning(PopupType.SameSpeed);
             }
             currentHighlightedEntity = null;
             currentHighlightedAction = null;

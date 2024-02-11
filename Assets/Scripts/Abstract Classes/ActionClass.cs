@@ -184,7 +184,7 @@ public abstract class ActionClass : SelectClass
 
         if (description != null)
         {
-            DescriptionManager.Instance.DisplayText(description);
+            PopUpNotificationManager.Instance.DisplayText(description);
         }
     }
 
@@ -208,7 +208,7 @@ public abstract class ActionClass : SelectClass
             EnqueueMoveDown = true;
         }
 
-        DescriptionManager.Instance.RemoveDescription();
+        PopUpNotificationManager.Instance.RemoveDescription();
     }
 
     public override void Highlight()
