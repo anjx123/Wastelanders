@@ -480,7 +480,8 @@ public class BattleQueue : MonoBehaviour
             for (int i = wrappers.Count - 1; i >= 0; i--)
             {
                 Wrapper existingWrapper = wrappers[i];
-                if ((existingWrapper.PlayerAction != null && existingWrapper.PlayerAction.Origin == entity) || (existingWrapper.EnemyAction != null && existingWrapper.EnemyAction.Target == entity))
+                if ((existingWrapper.PlayerAction != null && (existingWrapper.PlayerAction.Origin == entity || existingWrapper.PlayerAction.Target == entity)) 
+                    || (existingWrapper.EnemyAction != null && (existingWrapper.EnemyAction.Target == entity || existingWrapper.EnemyAction.Origin == entity)))
                 {
                     wrappers.RemoveAt(i); 
                 }
@@ -546,7 +547,7 @@ public class BattleQueue : MonoBehaviour
                         y--;
                         continue; // no swap needed 
                     }
-                    else if (wrappers[y - 1].PlayerAction == null || wrappers[y].PlayerAction.Speed > wrappers[y - 1].PlayerAction.Speed)
+                    else if (wrappers[y - 1].PlayerAction == null || wrappers[y].PlayerAction!.Speed > wrappers[y - 1].PlayerAction!.Speed) // follow the conditional; check both nulls so can supress null warning
                     {
                         Swap(wrappers, y - 1, y);
                     }
