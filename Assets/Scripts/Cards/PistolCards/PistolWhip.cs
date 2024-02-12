@@ -12,20 +12,20 @@ public class PistolWhip : PistolCards
     }
 
     // Start is called before the first frame update
-    public override void Start()
+    public override void Initialize()
     {
-        base.Start();
-        Speed = 2;
-        Block = 2;
-        Damage = 99;
         lowerBound = 3;
         upperBound = 5;
+        Speed = 1;
+        Block = 0;
+        Damage = 0;
+        description = "Good Ol' reliable CQC!";
         CardType = CardType.MeleeAttack;
         myName = "PistolWhip";
         Renderer renderer = GetComponent<Renderer>();
         ogMaterial = renderer.material; // og sprite of card
         OriginalPosition = transform.position;
-
+        base.Initialize();
     }
 
     // Update is called once per frame
@@ -36,9 +36,7 @@ public class PistolWhip : PistolCards
 
     public override void ApplyEffect()
     {
-        DupInit();
-        
-        Origin.ApplyAllBuffsToCard(ref duplicateCard);
+        base.ApplyEffect();
     }
 
 

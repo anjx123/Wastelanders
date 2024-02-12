@@ -13,21 +13,21 @@ public class SteadiedShot : PistolCards
     }
 
     // Start is called before the first frame update
-    public override void Start()
+    public override void Initialize()
     {
         lowerBound = 1;
         upperBound = 5;
-        base.Start();
         Speed = 3;
         Block = 2;
         Damage = 3;
 
         myName = "SteadiedShot";
+        myDescription = "Gain 2 Accuracy Stacks, Then Attack";
         CardType = CardType.RangedAttack;
         Renderer renderer = GetComponent<Renderer>();
         ogMaterial = renderer.material; // og sprite of card
         OriginalPosition = transform.position;
-
+        base.Initialize();
 
 
     }
@@ -38,11 +38,9 @@ public class SteadiedShot : PistolCards
     }
     public override void ApplyEffect()
     {
-        DupInit();
-        Debug.Log(Accuracy.buffName + Origin.GetName() + duplicateCard.rollCeiling);
-
+        
         Origin.AddStacks(Accuracy.buffName, 2);
-        Origin.ApplyAllBuffsToCard(ref duplicateCard);
+        base.ApplyEffect();
 
     }
 }

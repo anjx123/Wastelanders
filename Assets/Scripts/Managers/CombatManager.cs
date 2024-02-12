@@ -22,6 +22,9 @@ public class CombatManager : MonoBehaviour
     public GameObject combatUICardDisplay;
     [SerializeField]
     private SpriteRenderer fadeScreen;
+
+    public delegate void GameStateChangedHandler(GameState newState); // Subscribe to this delegate if you want something to be run when gamestate changes
+    public event GameStateChangedHandler OnGameStateChanged;
     public string FADE_SORTING_LAYER
     {
         get
@@ -64,7 +67,7 @@ public class CombatManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GameState = GameState.SELECTION;
+        GameState = GameState.GAME_START; //Put game start code in the performGameStart method.
     }
 
 
@@ -208,6 +211,11 @@ public class CombatManager : MonoBehaviour
         StartCoroutine(FadeBackground(true));
     }
 
+    private void PerformGameStart()
+    {
+        GameState = GameState.SELECTION;
+    }
+
     private IEnumerator FadeBackground(bool darkenScene)
     {
         float startValue = fadeScreen.color.a;
@@ -259,10 +267,14 @@ public class CombatManager : MonoBehaviour
                 case GameState.GAME_LOSE:
                     PerformLose();
                     break;
+                case GameState.GAME_START:
+                    PerformGameStart();
+                    break;
                 default:
                     break;
 
             }
+            OnGameStateChanged?.Invoke(gameState);
         }
     }
 }

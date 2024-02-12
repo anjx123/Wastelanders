@@ -272,6 +272,14 @@ public abstract class EntityClass : SelectClass
         UpdateBuffs();
     }
 
+    public void ReduceStacks(string buffType, int stacks)
+    {
+        if (statusEffects.ContainsKey(buffType))
+        {
+            statusEffects[buffType].LoseStacks(stacks);
+        }
+    }
+
     // Applies the Stacks of the Specified Buff to the Card Roll Limits
     public void ApplyBuffsToCard(ref ActionClass.CardDup dup, string buffType)
     {

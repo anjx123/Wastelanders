@@ -10,20 +10,21 @@ public class Jab : StaffCards
     }
 
     // Start is called before the first frame update
-    public override void Start()
+    public override void Initialize()
     {
         lowerBound = 2;
-        upperBound = 3;
-        base.Start();
+        upperBound = 4;
+
         Speed = 4;
         Block = 2;
         
 
         myName = "Jab";
+        description = "Quick but Lethal";
         Renderer renderer = GetComponent<Renderer>();
         ogMaterial = renderer.material; // og sprite of card
         OriginalPosition = transform.position;
-
+        base.Initialize();
 
 
     }
@@ -37,9 +38,6 @@ public class Jab : StaffCards
     public override void ApplyEffect()
     {
 
-        DupInit();
-
-       
-        Origin.ApplyAllBuffsToCard(ref duplicateCard);
+        base.ApplyEffect();
     }
 }

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.ConstrainedExecution;
 using UnityEngine;
+using TMPro;
 
 public abstract class ActionClass : SelectClass
 {
@@ -22,6 +23,12 @@ public abstract class ActionClass : SelectClass
     protected int lowerBound;
     protected int upperBound;
 
+    [SerializeField] GameObject lowerBoundText;
+    [SerializeField] GameObject upperBoundText;
+    [SerializeField] GameObject speedText;
+    [SerializeField] GameObject nameText;
+    [SerializeField] GameObject textCanvas;
+
     protected CardDup duplicateCard;
 
     public CardDup GetCard()
@@ -39,6 +46,9 @@ public abstract class ActionClass : SelectClass
     public int Damage { get; protected set; }
     public int Block { get; protected set; }
     public int Speed { get; protected set; }
+    public string description;
+
+    [SerializeField] string titleName;
 
     public Sprite icon;
 
@@ -56,6 +66,12 @@ public abstract class ActionClass : SelectClass
     {
         Initialize();
     }
+
+    public virtual void Start()
+    {
+        
+    }
+
     public override void OnMouseDown()
     {
         HighlightManager.OnActionClicked(this);
@@ -75,7 +91,7 @@ public abstract class ActionClass : SelectClass
 
     public virtual void Initialize()
     {
-
+        DupInit();
     }
 
     public int getRolledDamage()
@@ -90,6 +106,16 @@ public abstract class ActionClass : SelectClass
         duplicateCard = new CardDup();
         duplicateCard.rollFloor = lowerBound;
         duplicateCard.rollCeiling = upperBound;
+    }
+
+    public void ReduceRoll(int byValue)
+    {
+        duplicateCard.actualRoll = Mathf.Clamp(duplicateCard.actualRoll - byValue, 0, duplicateCard.actualRoll);
+    }
+
+    public void IncrementRoll(int byValue)
+    {
+        duplicateCard.actualRoll += byValue;
     }
 
     private void UpdateDup()
@@ -123,17 +149,42 @@ public abstract class ActionClass : SelectClass
         }
     }
 
+    public void UpdateText()
+    {
+        Vector3 position = textCanvas.GetComponent<RectTransform>().localPosition;
+        position.z = -2;
+        textCanvas.GetComponent<RectTransform>().localPosition = position;
+        nameText.GetComponent<TextMeshProUGUI>().text = titleName;
+        lowerBoundText.GetComponent<TextMeshProUGUI>().text = duplicateCard.rollFloor.ToString();
+        upperBoundText.GetComponent<TextMeshProUGUI>().text = duplicateCard.rollCeiling.ToString();
+        speedText.GetComponent<TextMeshProUGUI>().text = Speed.ToString();
+    }
 
     public override void OnMouseEnter()
     {
         if (!isOutlined)
         {
             GetComponent<SpriteRenderer>().color = new Color(0.6f, 0.6f, 0.6f, 1);
+
+            // Get the SpriteRenderers of the child objects
+            SpriteRenderer[] childSpriteRenderers = GetComponentsInChildren<SpriteRenderer>();
+
+            // Now we can access each SpriteRenderer
+            foreach (SpriteRenderer spriteRenderer in childSpriteRenderers)
+            {
+                spriteRenderer.color = new Color(0.6f, 0.6f, 0.6f, 1);
+            }
+
             transform.position += new Vector3((float)0.04, (float)0.4, 0);
         }
         else
         {
             EnqueueMoveDown = false;
+        }
+
+        if (description != null)
+        {
+            PopUpNotificationManager.Instance.DisplayText(description);
         }
     }
 
@@ -142,18 +193,34 @@ public abstract class ActionClass : SelectClass
         if (!isOutlined)
         {
             GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 1);
+
+            SpriteRenderer[] childSpriteRenderers = GetComponentsInChildren<SpriteRenderer>();
+
+            foreach (SpriteRenderer spriteRenderer in childSpriteRenderers)
+            {
+                spriteRenderer.color = new Color(1f, 1f, 1f, 1);
+            }
+
             transform.position -= new Vector3((float)0.04, (float)0.4, 0);
         }
         else
         {
             EnqueueMoveDown = true;
         }
+
+        PopUpNotificationManager.Instance.RemoveDescription();
     }
 
     public override void Highlight()
     {
         isOutlined = true;
         GetComponent<SpriteRenderer>().color = new Color(0.6f, 0.6f, 0.6f, 1);
+        SpriteRenderer[] childSpriteRenderers = GetComponentsInChildren<SpriteRenderer>();
+
+        foreach (SpriteRenderer spriteRenderer in childSpriteRenderers)
+        {
+            spriteRenderer.color = new Color(0.6f, 0.6f, 0.6f, 1);
+        }
         transform.rotation = Quaternion.Euler(0, 0, 0);
     }
 
@@ -161,6 +228,12 @@ public abstract class ActionClass : SelectClass
     {
         isOutlined = false;
         GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 1);
+        SpriteRenderer[] childSpriteRenderers = GetComponentsInChildren<SpriteRenderer>();
+
+        foreach (SpriteRenderer spriteRenderer in childSpriteRenderers)
+        {
+            spriteRenderer.color = new Color(1f, 1f, 1f, 1);
+        }
         transform.rotation = Quaternion.Euler(0, 0, -5);
         if (EnqueueMoveDown)
         {
@@ -168,4 +241,5 @@ public abstract class ActionClass : SelectClass
             EnqueueMoveDown = false;
         }
     }
+
 }

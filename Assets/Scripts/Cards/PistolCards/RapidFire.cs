@@ -12,21 +12,21 @@ public class RapidFire : PistolCards
     }
 
     // Start is called before the first frame update
-    public override void Start()
+    public override void Initialize()
     {
-
-        base.Start();
-        Speed = 3;
-        Block = 2;
-        Damage = 3;
         lowerBound = 1;
         upperBound = 4;
+        Speed = 2;
+        Block = 2;
+        Damage = 3;
+        description = "Attack, Lose 1 accuracy, then make this attack again.";
         CardType = CardType.MeleeAttack;
         myName = "RapidFire";
+        myDescription = "Attack, Lose 1 Accuracy, Then Make This Attack Again";
         Renderer renderer = GetComponent<Renderer>();
         ogMaterial = renderer.material; // og sprite of card
         OriginalPosition = transform.position;
-
+        base.Initialize();
     }
 
     // Update is called once per frame
@@ -37,9 +37,16 @@ public class RapidFire : PistolCards
 
     public override void ApplyEffect()
     {
-        DupInit();
-        
-        Origin.ApplyAllBuffsToCard(ref duplicateCard);
+        base.ApplyEffect();
+    }
+
+    public override void OnHit()
+    {
+        base.OnHit();
+        Origin.ReduceStacks(Accuracy.buffName, 1); // Reduce Accuracy by 1
+        ApplyEffect(); // Reinitializes roll values
+        RollDice(); // Calculates new Roll
+        base.OnHit(); // Makes attack again
     }
 
 
