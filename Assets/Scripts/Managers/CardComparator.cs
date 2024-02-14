@@ -37,6 +37,7 @@ public class CardComparator : MonoBehaviour
         int cardOneGreater;
         CombatManager.Instance.SetCameraCenter(card1.Origin);
         ActivateInfo(card1, card2);
+        EnableDice(card1.Origin, card1.Target);
         card1.ApplyEffect();
         card2.ApplyEffect();
         yield return StartCoroutine(ClashBothEntities(card1, card2)); // for animation purposes 
@@ -91,6 +92,7 @@ public class CardComparator : MonoBehaviour
             PlayEntityDeaths = null;
         }
         DeEmphasizeClashers(card1.Origin, card1.Target);
+        DisableDice(card1.Origin, card1.Target);
     }
 
     //Produces a positive value if Card1 is staggered by Card2
@@ -117,6 +119,7 @@ public class CardComparator : MonoBehaviour
         //Setup the Scene
         CombatManager.Instance.SetCameraCenter(actionClass.Origin);
         ActivateInfo(actionClass, actionClass);
+        EnableDice(actionClass.Origin, actionClass.Origin);
         actionClass.ApplyEffect();
         yield return StartCoroutine(ClashBothEntities(actionClass, actionClass));
         actionClass.RollDice();
@@ -133,6 +136,7 @@ public class CardComparator : MonoBehaviour
             PlayEntityDeaths = null;
         }
         DeEmphasizeClashers(actionClass.Origin, actionClass.Target);
+        DisableDice(actionClass.Origin, actionClass.Origin);
     }
 
     /*
@@ -226,6 +230,18 @@ public class CardComparator : MonoBehaviour
     {
         origin.DeEmphasize();
         target.DeEmphasize();
+    }
+
+    private void EnableDice(EntityClass origin, EntityClass target)
+    {
+        origin.EnableDice();
+        target.EnableDice();
+    }
+
+    private void DisableDice(EntityClass origin, EntityClass target)
+    {
+        origin.DisableDice();
+        target.DisableDice();
     }
 
     private bool IsAttack(ActionClass card)

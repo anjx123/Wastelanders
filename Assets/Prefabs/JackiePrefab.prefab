@@ -121,7 +121,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a87ba7eb40165b04db444a9367c32200, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myName: 
   myTransform: {fileID: 2280710332171782491}
   healthBar: {fileID: 6774299315323238008}
   animator: {fileID: 2764313202347658331}
@@ -286,6 +285,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2280710332171782491}
     m_Modifications:
+    - target: {fileID: 3781379592661886730, guid: 941333e3be7f6f04688676f1827dbf1b, type: 3}
+      propertyPath: diceAnimator
+      value: 
+      objectReference: {fileID: 7769636084067756352}
     - target: {fileID: 6018344303403229583, guid: 941333e3be7f6f04688676f1827dbf1b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.4
@@ -338,6 +341,11 @@ PrefabInstance:
 --- !u!4 &1312308472458396301 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6018344303403229583, guid: 941333e3be7f6f04688676f1827dbf1b, type: 3}
+  m_PrefabInstance: {fileID: 4734186851043517186}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &7769636084067756352 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 3053580193322781250, guid: 941333e3be7f6f04688676f1827dbf1b, type: 3}
   m_PrefabInstance: {fileID: 4734186851043517186}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &8487347338577429512 stripped

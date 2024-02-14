@@ -56,6 +56,7 @@ public abstract class EntityClass : SelectClass
         statusEffects = new Dictionary<string, StatusEffect>();
 
         DeEmphasize();
+        DisableDice();
     }
 
     /*
@@ -370,6 +371,15 @@ public abstract class EntityClass : SelectClass
     public void UpdateBuffs()
     {
         combatInfo.UpdateBuffs(statusEffects);
+    }
+
+    public void EnableDice()
+    {
+        combatInfo.EnableDice();
+    }
+    public void DisableDice()
+    {
+        combatInfo.DisableDice();
     }
 
     
