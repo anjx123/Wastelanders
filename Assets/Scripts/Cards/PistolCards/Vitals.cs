@@ -19,7 +19,7 @@ public class Vitals : PistolCards
         Block = 2;
 
         myName = "Vitals";
-        description = "Placeholder";
+        description = "Hit em where it hurts";
         CardType = CardType.RangedAttack;
         Renderer renderer = GetComponent<Renderer>();
         ogMaterial = renderer.material; // og sprite of card

@@ -27,7 +27,6 @@ public class Flurry : StaffCards
     public override void OnHit()
     {
         base.OnHit();
-        RollDice();
-        base.OnHit();
+        //TODO: Reinsert this card into the battlequeue
     }
 }

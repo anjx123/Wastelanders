@@ -15,8 +15,7 @@ public class Silencer : PistolCards
         lowerBound = 1;
         upperBound = 4;
         Speed = 3;
-        Block = 2;
-        description = "If this Attack Staggers the opponent, gain 2 accuracy.";
+        description = "If this Attack is unstaggered, gain 2 accuracy.";
         myName = "Silencer";
         CardType = CardType.RangedAttack;
         Renderer renderer = GetComponent<Renderer>();
