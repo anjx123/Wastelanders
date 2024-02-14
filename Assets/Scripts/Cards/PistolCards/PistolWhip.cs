@@ -20,12 +20,12 @@ public class PistolWhip : PistolCards
         Block = 0;
         Damage = 0;
         description = "Good Ol' reliable CQC!";
-        CardType = CardType.MeleeAttack;
         myName = "PistolWhip";
         Renderer renderer = GetComponent<Renderer>();
         ogMaterial = renderer.material; // og sprite of card
         OriginalPosition = transform.position;
         base.Initialize();
+        CardType = CardType.MeleeAttack; //Has to be after otherwise it will get overwritten by superclass
     }
 
     // Update is called once per frame
