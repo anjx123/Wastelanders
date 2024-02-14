@@ -168,9 +168,6 @@ public class CardComparator : MonoBehaviour
         originRatio = 1f - ((float) card1.Speed / (float) (card1.Speed + card2.Speed));
         targetRatio = 1f - originRatio;
 
-        Debug.Log("Card 1 speed is " + card1.name + "Card type is" + card1.CardType + + card1.Speed);
-        Debug.Log("Card 2 name is " + card2.name + "Card type is" + card2.CardType + "speed is " + card2.Speed);
-
         float rangedSpeedReduction = 0.5f;
 
 
@@ -192,8 +189,6 @@ public class CardComparator : MonoBehaviour
         }
         targetRatio = 1f - originRatio;
 
-        Debug.Log(" originRatio is: " + originRatio);
-        Debug.Log( " targetRatio is: " + targetRatio);
     }
     /*
      * 
