@@ -63,23 +63,24 @@ public class CardComparator : MonoBehaviour
             }
         } else if (card1.CardType == CardType.Defense && IsAttack(card2))
         {
-            if (cardOneGreater <= 0) // Card 2 has a greater attack so it succeeds
+            if (cardOneGreater > 0) // Card 2 has a greater attack so it succeeds
             {
-                card2.ReduceRoll(card1.GetCard().actualRoll);
-                card2.OnHit();
+                card1.OnHit(); // Defensive card is unstaggered. 
             }
-            card1.Origin.BlockAnimation(); //Blocked stuff here not implemented properly
 
-        } else if (card2.CardType == CardType.Defense)
-        {
+            card2.ReduceRoll(card1.GetCard().actualRoll); //Possibly no damage dealt
+            card2.OnHit();
+            card1.Origin.BlockAnimation(); //Blocked stuff animation here not implemented properly
 
         } else if (IsAttack(card1) && card2.CardType == CardType.Defense)
         {
-            if (cardOneGreater >= 0) // Card 1 has a greater attack so it succeeds
+            if (cardOneGreater < 0) // Card 1 has a greater attack so it succeeds
             {
-                card1.ReduceRoll(card2.GetCard().actualRoll);
-                card1.OnHit();
-            }
+                card2.OnHit(); // Defensive card is unstaggered
+            } 
+
+            card1.ReduceRoll(card2.GetCard().actualRoll); //Possibly no damage dealt
+            card1.OnHit();
             card2.Origin.BlockAnimation();
         }
         

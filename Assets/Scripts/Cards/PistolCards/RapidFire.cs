@@ -44,9 +44,10 @@ public class RapidFire : PistolCards
     {
         base.OnHit();
         Origin.ReduceStacks(Accuracy.buffName, 1); // Reduce Accuracy by 1
-        ApplyEffect(); // Reinitializes roll values
-        RollDice(); // Calculates new Roll
-        base.OnHit(); // Makes attack again
+        if (Origin.GetBuffStacks(Accuracy.buffName)  > 0)
+        {
+            //TODO: Reinsert this card so that this attacks again
+        }
     }
 
 

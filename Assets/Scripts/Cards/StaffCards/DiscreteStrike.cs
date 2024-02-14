@@ -18,6 +18,7 @@ public class DiscreteStrike : StaffCards
         Block = 2;
 
         myName = "DiscreteStrike";
+        description = "Gain 2 focus, then strike";
         Renderer renderer = GetComponent<Renderer>();
         ogMaterial = renderer.material; // og sprite of card
         OriginalPosition = transform.position;
@@ -40,7 +41,7 @@ public class DiscreteStrike : StaffCards
 
     public override void OnHit()
     {
-        base.OnHit();
         Origin.AddStacks(Focus.buffName, 2);
+        base.OnHit();
     }
 }

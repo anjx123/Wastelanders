@@ -15,7 +15,7 @@ public class Trip : StaffCards
     {
         CardType = CardType.MeleeAttack;
         myName = "Trip";
-        description = "If This Attack Staggers The Opponent, Gain 1 Focus";
+        description = "If this attack hits the opponent, gain 1 Focus";
         lowerBound = 2;
         upperBound = 4;
         Speed = 4;

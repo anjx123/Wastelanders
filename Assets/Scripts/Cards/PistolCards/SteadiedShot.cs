@@ -18,11 +18,9 @@ public class SteadiedShot : PistolCards
         lowerBound = 1;
         upperBound = 5;
         Speed = 3;
-        Block = 2;
-        Damage = 3;
 
         myName = "SteadiedShot";
-        myDescription = "Gain 2 Accuracy Stacks, Then Attack";
+        description = "Gain 1 Accuracy Stacks, Then Attack";
         CardType = CardType.RangedAttack;
         Renderer renderer = GetComponent<Renderer>();
         ogMaterial = renderer.material; // og sprite of card
@@ -39,7 +37,7 @@ public class SteadiedShot : PistolCards
     public override void ApplyEffect()
     {
         
-        Origin.AddStacks(Accuracy.buffName, 2);
+        Origin.AddStacks(Accuracy.buffName, 1);
         base.ApplyEffect();
 
     }

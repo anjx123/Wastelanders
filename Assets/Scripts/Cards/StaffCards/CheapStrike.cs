@@ -16,9 +16,9 @@ public class CheapStrike : StaffCards
         upperBound = 3;
         
         Speed = 1;
-        Block = 2;
 
         myName = "CheapStrike";
+        description = "If this card hits the opponent, gain 2 flow";
         Renderer renderer = GetComponent<Renderer>();
         ogMaterial = renderer.material; // og sprite of card
         OriginalPosition = transform.position;

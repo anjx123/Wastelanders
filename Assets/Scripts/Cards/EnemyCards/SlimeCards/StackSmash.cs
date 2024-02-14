@@ -22,6 +22,7 @@ public class StackSmash : SlimeAttacks
         Block = 2;
 
         myName = "StackSmash";
+        description = "If this attack is unstaggered, attack again";
         Renderer renderer = GetComponent<Renderer>();
         ogMaterial = renderer.material; // og sprite of card
         OriginalPosition = transform.position;
@@ -35,7 +36,7 @@ public class StackSmash : SlimeAttacks
 
     public override void OnHit()
     {
-        //Origin.AttackAnimation("IsStackSmashing");
+        //TODO: Reinsert a copy into the BQ
         StartCoroutine(AttackAnimation());
     }
 

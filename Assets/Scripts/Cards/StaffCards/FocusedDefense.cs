@@ -21,7 +21,6 @@ public class FocusedDefense : StaffCards
 
         Speed = 5;
 
-        Block = 2;
 
         myName = "FocusedDefense";
         description = "Gain 1 Focus For Every Attack The Clashing Opponent Makes Against This Character";
@@ -41,8 +40,7 @@ public class FocusedDefense : StaffCards
 
     public override void ApplyEffect()
     {
-        DupInit();
-
-        Origin.ApplyAllBuffsToCard(ref duplicateCard);
+        //TODO: Search the BQ for every attack the clashing opponent makes against this character 
+        base.ApplyEffect();
     }
 }
