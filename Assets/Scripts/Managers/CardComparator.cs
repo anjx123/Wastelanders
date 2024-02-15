@@ -159,7 +159,8 @@ public class CardComparator : MonoBehaviour
         float bufferedRadius = 0.25f;
         float duration = 0.6f;
         
-        float xBuffer = card1.CardType == CardType.RangedAttack && card2.CardType == CardType.RangedAttack ? X_BUFFER * 3 : X_BUFFER; //Calculates how far away clashers should be when striking
+        float xBuffer = (card1.CardType == CardType.RangedAttack || card1.CardType == CardType.Defense) &&
+                        (card2.CardType == CardType.RangedAttack || card2.CardType == CardType.Defense) ? X_BUFFER * 3 : X_BUFFER; //Calculates how far away clashers should be when striking
         
         StartCoroutine(origin?.MoveToPosition(HorizontalProjector(centeredDistance, origin.myTransform.position, xBuffer), bufferedRadius, duration, centeredDistance));
         yield return StartCoroutine(target?.MoveToPosition(HorizontalProjector(centeredDistance, target.myTransform.position, xBuffer), bufferedRadius, duration, centeredDistance));
@@ -176,21 +177,21 @@ public class CardComparator : MonoBehaviour
 
 
 
-        if (card1.CardType == CardType.RangedAttack)
+        if (card1.CardType == CardType.RangedAttack || card1.CardType == CardType.Defense)
         {
             targetRatio *= rangedSpeedReduction;
             originRatio = 1f - targetRatio;
         }
-        if (card2.CardType == CardType.RangedAttack)
+        if (card2.CardType == CardType.RangedAttack || card2.CardType == CardType.Defense)
         {
             originRatio *= rangedSpeedReduction;
-            targetRatio = 1f - originRatio;
         }
         if (card1 == card2)
         {
             originRatio = 0.1f;
-            
         }
+
+
         targetRatio = 1f - originRatio;
 
     }
