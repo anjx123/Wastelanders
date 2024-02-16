@@ -321,7 +321,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1715629036518821266}
-  - component: {fileID: 5638829709072448918}
   - component: {fileID: 6824498272623008323}
   m_Layer: 0
   m_Name: PopUp
@@ -350,26 +349,6 @@ RectTransform:
   m_AnchoredPosition: {x: 200, y: 250}
   m_SizeDelta: {x: 200, y: 100}
   m_Pivot: {x: 1, y: 1}
---- !u!114 &5638829709072448918
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6647468808881570309}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 306cc8c2b49d7114eaa3623786fc2126, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_IgnoreLayout: 0
-  m_MinWidth: -1
-  m_MinHeight: -1
-  m_PreferredWidth: -1
-  m_PreferredHeight: -1
-  m_FlexibleWidth: -1
-  m_FlexibleHeight: -1
-  m_LayoutPriority: 1
 --- !u!114 &6824498272623008323
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -384,6 +363,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   warningText: {fileID: 7109150430243128439}
   popupImage: {fileID: 1156540308573898057}
-  popUpCanFade: 0
+  popUpCanFade: 1
   secondTimer: 4
   isActive: 1

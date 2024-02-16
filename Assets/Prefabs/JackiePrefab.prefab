@@ -127,7 +127,7 @@ MonoBehaviour:
   combatInfo: {fileID: 8487347338577429512}
   cardPrefabs: []
   handContainer: {fileID: 0}
-  cardWidth: 0
+  cardWidth: 2
 --- !u!1001 &1424014546549291464
 PrefabInstance:
   m_ObjectHideFlags: 0
