@@ -12,12 +12,12 @@ public class HighlightManager : MonoBehaviour // later all entity highlighter
 
     private void Start()
     {
-        CombatManager.Instance.OnGameStateChanged += ResetSelection;
+        CombatManager.OnGameStateChanged += ResetSelection;
     }
 
     private void OnDestroy()
     {
-        CombatManager.Instance.OnGameStateChanged -= ResetSelection;
+        CombatManager.OnGameStateChanged -= ResetSelection;
     }
 
     static HighlightManager()
