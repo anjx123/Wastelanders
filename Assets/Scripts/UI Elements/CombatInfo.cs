@@ -8,7 +8,7 @@ public class CombatInfo : MonoBehaviour
 {
     public GameObject combatCardSprite;
     public HorizontalLayoutGroup buffList;
-    public Animator animator;
+    public Animator diceAnimator;
     public GameObject diceRollSprite;
     public List<Sprite> loadedSprites = new();
     public GameObject diceRollText;
@@ -30,7 +30,7 @@ public class CombatInfo : MonoBehaviour
      */
     public void SetDice(int value)
     {
-        animator.enabled = false;
+        diceAnimator.enabled = false;
         diceRollSprite.GetComponent<SpriteRenderer>().sprite = loadedSprites[0];
         diceRollText.GetComponent<TMP_Text>().text = value.ToString();
     }
@@ -41,9 +41,24 @@ public class CombatInfo : MonoBehaviour
      */
     public void SetCombatSprite(ActionClass card)
     {
-        animator.enabled = true;
+        diceAnimator.enabled = true;
         SpriteRenderer spriteRenderer = combatCardSprite.GetComponent<SpriteRenderer>();
         spriteRenderer.sprite = card.GetIcon();
+        diceRollText.GetComponent<TextMeshPro>().text = null;
+    }
+
+    public void EnableDice()
+    {
+        diceAnimator.enabled = true;
+        diceRollSprite.GetComponent<SpriteRenderer>().enabled = true;
+        diceRollText.GetComponent<TMP_Text>().enabled = true;
+    }
+
+    public void DisableDice()
+    {
+        diceAnimator.enabled = false;
+        diceRollSprite.GetComponent<SpriteRenderer>().enabled = false;
+        diceRollText.GetComponent<TMP_Text>().enabled = false;
         diceRollText.GetComponent<TextMeshPro>().text = null;
     }
 

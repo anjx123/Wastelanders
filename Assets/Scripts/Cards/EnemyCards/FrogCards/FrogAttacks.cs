@@ -4,7 +4,7 @@ using UnityEngine;
 using static UnityEngine.UI.Image;
 public abstract class FrogAttacks : ActionClass
 {
-    private delegate void TakeDamageDelegate(EntityClass source, int damage);
+    private delegate void OnHitDelegate();
     [SerializeField]
     private GameObject spitPrefab;
 
@@ -23,14 +23,14 @@ public abstract class FrogAttacks : ActionClass
         Origin.AttackAnimation("IsShooting");
         if (spitPrefab != null)
         {
-            StartCoroutine(ProjectileAnimation(this.Target.TakeDamage, Origin, Target, duplicateCard.actualRoll));
+            StartCoroutine(ProjectileAnimation(base.OnHit, Origin, Target));
         }
     }
 
-    private IEnumerator ProjectileAnimation(TakeDamageDelegate takeDamageCallback, EntityClass origin, EntityClass target, int damage)
+    private IEnumerator ProjectileAnimation(OnHitDelegate onHitCallback, EntityClass origin, EntityClass target)
     {
         yield return StartCoroutine(StartProjectileAnimation(origin, target));
-        takeDamageCallback(origin, damage);
+        onHitCallback();
     }
 
     public IEnumerator StartProjectileAnimation(EntityClass origin, EntityClass target)

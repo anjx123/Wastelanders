@@ -37,9 +37,10 @@ public class CardComparator : MonoBehaviour
         int cardOneGreater;
         CombatManager.Instance.SetCameraCenter(card1.Origin);
         ActivateInfo(card1, card2);
+        EnableDice(card1.Origin, card1.Target);
         card1.ApplyEffect();
         card2.ApplyEffect();
-        yield return StartCoroutine(ClashBothEntities(card1.Origin, card1.Target)); // for animation purposes 
+        yield return StartCoroutine(ClashBothEntities(card1, card2)); // for animation purposes 
 
         card1.RollDice();
         card2.RollDice();
@@ -91,6 +92,7 @@ public class CardComparator : MonoBehaviour
             PlayEntityDeaths = null;
         }
         DeEmphasizeClashers(card1.Origin, card1.Target);
+        DisableDice(card1.Origin, card1.Target);
     }
 
     //Produces a positive value if Card1 is staggered by Card2
@@ -117,8 +119,9 @@ public class CardComparator : MonoBehaviour
         //Setup the Scene
         CombatManager.Instance.SetCameraCenter(actionClass.Origin);
         ActivateInfo(actionClass, actionClass);
+        EnableDice(actionClass.Origin, actionClass.Origin);
         actionClass.ApplyEffect();
-        yield return StartCoroutine(ClashBothEntities(actionClass.Origin, actionClass.Target));
+        yield return StartCoroutine(ClashBothEntities(actionClass, actionClass));
         actionClass.RollDice();
         DeactivateInfo(actionClass, actionClass);
 
@@ -133,29 +136,64 @@ public class CardComparator : MonoBehaviour
             PlayEntityDeaths = null;
         }
         DeEmphasizeClashers(actionClass.Origin, actionClass.Target);
+        DisableDice(actionClass.Origin, actionClass.Origin);
     }
 
     /*
- EntityClass origin: Origin of the action card played
- EntityClass target: Target of the action card played
+ ActionClass card1: Card1 in the clash (usually the player) target should be origin of card2
+ ActionClass card2: Card2 in the clash (usually the enemy) target should be origin of card1
     bufferedRadius: The buffer circle in which the entity will stop before that circle. 
 
  Purpose: The two clashing enemies come together to clash, their positions will ideally be based off their speed
  Then, whoever wins the clash should stagger the opponent backwards. 
   */
     public static readonly float X_BUFFER = 0.8f;
-    private IEnumerator ClashBothEntities(EntityClass origin, EntityClass target)
+    private IEnumerator ClashBothEntities(ActionClass card1, ActionClass card2)
     {
+        EntityClass origin = card1.Origin;
+        EntityClass target = card1.Target;
         EmphasizeClashers(origin, target);
+        CalculateSpeedRatio(card1, card2, out float originRatio, out float targetRatio);
         //The Distance weighting will be calculated based on speeds of the two clashing cards
-        Vector3 centeredDistance = (origin.myTransform.position * 0.3f + 0.7f * target.myTransform.position);
+        Vector3 centeredDistance = (origin.myTransform.position * originRatio + targetRatio * target.myTransform.position);
         float bufferedRadius = 0.25f;
         float duration = 0.6f;
         
+        float xBuffer = (card1.CardType == CardType.RangedAttack || card1.CardType == CardType.Defense) &&
+                        (card2.CardType == CardType.RangedAttack || card2.CardType == CardType.Defense) ? X_BUFFER * 3 : X_BUFFER; //Calculates how far away clashers should be when striking
         
-        StartCoroutine(origin?.MoveToPosition(HorizontalProjector(centeredDistance, origin.myTransform.position, X_BUFFER), bufferedRadius, duration, centeredDistance));
-        yield return StartCoroutine(target?.MoveToPosition(HorizontalProjector(centeredDistance, target.myTransform.position, X_BUFFER), bufferedRadius, duration, centeredDistance));
+        StartCoroutine(origin?.MoveToPosition(HorizontalProjector(centeredDistance, origin.myTransform.position, xBuffer), bufferedRadius, duration, centeredDistance));
+        yield return StartCoroutine(target?.MoveToPosition(HorizontalProjector(centeredDistance, target.myTransform.position, xBuffer), bufferedRadius, duration, centeredDistance));
         yield return new WaitUntil(() => Input.GetMouseButtonDown(0));
+    }
+
+    //The higher the ratio, the "slower" you will feel. i.e. the closer the middle point is to you so you move less
+    private void CalculateSpeedRatio(ActionClass card1, ActionClass card2, out float originRatio, out float targetRatio)
+    {
+        originRatio = 1f - ((float) card1.Speed / (float) (card1.Speed + card2.Speed));
+        targetRatio = 1f - originRatio;
+
+        float rangedSpeedReduction = 0.5f;
+
+
+
+        if (card1.CardType == CardType.RangedAttack || card1.CardType == CardType.Defense)
+        {
+            targetRatio *= rangedSpeedReduction;
+            originRatio = 1f - targetRatio;
+        }
+        if (card2.CardType == CardType.RangedAttack || card2.CardType == CardType.Defense)
+        {
+            originRatio *= rangedSpeedReduction;
+        }
+        if (card1 == card2)
+        {
+            originRatio = 0.1f;
+        }
+
+
+        targetRatio = 1f - originRatio;
+
     }
     /*
      * 
@@ -193,6 +231,18 @@ public class CardComparator : MonoBehaviour
     {
         origin.DeEmphasize();
         target.DeEmphasize();
+    }
+
+    private void EnableDice(EntityClass origin, EntityClass target)
+    {
+        origin.EnableDice();
+        target.EnableDice();
+    }
+
+    private void DisableDice(EntityClass origin, EntityClass target)
+    {
+        origin.DisableDice();
+        target.DisableDice();
     }
 
     private bool IsAttack(ActionClass card)

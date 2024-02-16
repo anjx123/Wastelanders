@@ -22,7 +22,6 @@ public class RapidFire : PistolCards
         description = "Attack, Lose 1 accuracy, then make this attack again.";
         CardType = CardType.MeleeAttack;
         myName = "RapidFire";
-        myDescription = "Attack, Lose 1 Accuracy, Then Make This Attack Again";
         Renderer renderer = GetComponent<Renderer>();
         ogMaterial = renderer.material; // og sprite of card
         OriginalPosition = transform.position;
@@ -46,7 +45,7 @@ public class RapidFire : PistolCards
         Origin.ReduceStacks(Accuracy.buffName, 1); // Reduce Accuracy by 1
         if (Origin.GetBuffStacks(Accuracy.buffName)  > 0)
         {
-            //TODO: Reinsert this card so that this attacks again
+            //TODO: Reinsert this card into BQ so that this attacks again
         }
     }
 

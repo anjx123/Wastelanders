@@ -199,7 +199,6 @@ public class BattleQueue : MonoBehaviour
         {
             if (i == 0)
             {
-                wrapperArray.DisplayWrapperArray();
                 i = 1;
             }
             Wrapper e = array[0];
@@ -494,19 +493,7 @@ public class BattleQueue : MonoBehaviour
             }
         }
 
-        // Prints contents to Console
-        public void DisplayWrapperArray()
-        {
-
-            foreach (Wrapper curWrapper in wrappers)
-            {
-                Debug.Log("$$$$$$" + curWrapper.HighestSpeed);
-                Debug.Log(curWrapper.PlayerAction == null ? "EMPTY " : curWrapper.PlayerAction.Speed);
-                Debug.Log(curWrapper.EnemyAction == null ? "EMPTY " : curWrapper.EnemyAction.Speed);
-            }
-
-            Debug.Log("----------");
-        }
+        
 
         public void Swap(List<Wrapper> wrappers, int i, int j)
         {

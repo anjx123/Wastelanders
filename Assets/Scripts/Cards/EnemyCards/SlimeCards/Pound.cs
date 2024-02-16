@@ -25,6 +25,7 @@ public class Pound : SlimeAttacks
 
         myName = "Pound";
         description = "I wouldn't stand still if I were you";
+        CardType = CardType.MeleeAttack;
         Renderer renderer = GetComponent<Renderer>();
         ogMaterial = renderer.material; // og sprite of card
         OriginalPosition = transform.position;
