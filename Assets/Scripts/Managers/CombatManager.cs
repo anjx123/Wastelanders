@@ -19,7 +19,6 @@ public class CombatManager : MonoBehaviour
 
     public GameObject handContainer;
     public GameObject startDequeue;
-    public GameObject combatUICardDisplay;
     [SerializeField]
     private SpriteRenderer fadeScreen;
 
