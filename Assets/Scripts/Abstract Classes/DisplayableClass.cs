@@ -4,7 +4,8 @@
 // are "displayable" in the upper right window when clicked.
 public abstract class DisplayableClass : SelectClass
 {
-    public ActionClass actionClass; // Associated ActionClass that this class displays; it is set by the entity
+#nullable enable
+    public ActionClass? actionClass; // Associated ActionClass that this class displays; it is set by the entity
     protected bool targetHighlighted = false;
 
     protected void ShowCard()
@@ -16,7 +17,7 @@ public abstract class DisplayableClass : SelectClass
     {
         if (!targetHighlighted)
         {
-            actionClass.Target.OnMouseEnter();
+            actionClass?.Target.OnMouseEnter();
         }
         targetHighlighted = true;
     }
@@ -25,7 +26,7 @@ public abstract class DisplayableClass : SelectClass
     {
         if (targetHighlighted)
         {
-            actionClass.Target.OnMouseExit();
+            actionClass?.Target.OnMouseExit();
         }
         targetHighlighted = false;
     }

@@ -23,7 +23,7 @@ public class CombatManager : MonoBehaviour
     private SpriteRenderer fadeScreen;
 
     public delegate void GameStateChangedHandler(GameState newState); // Subscribe to this delegate if you want something to be run when gamestate changes
-    public event GameStateChangedHandler OnGameStateChanged;
+    public static event GameStateChangedHandler OnGameStateChanged;
     public string FADE_SORTING_LAYER
     {
         get

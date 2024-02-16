@@ -27,7 +27,6 @@ public class BattleQueue : MonoBehaviour
     public readonly int cardWidth = 1;
     public GameObject iconPrefab;
     public GameObject clashingPrefab;
-    public GameObject combatInfoDisplay; // same display given to enemy combat card UI
 
     #nullable enable //Turns on pedantic null checks, use exclamation mark (!) operator to assert non null and supress warnings.
     void Awake()
@@ -42,12 +41,16 @@ public class BattleQueue : MonoBehaviour
         {
             Destroy(this);
         }
-        CombatManager.Instance.OnGameStateChanged += TheBeginning; //Subscribes to the game state event
     }
 
-    private void OnDestroy()
+    private void OnEnable()
     {
-        CombatManager.Instance.OnGameStateChanged -= TheBeginning;
+        CombatManager.OnGameStateChanged += TheBeginning; //Subscribes to the game state event
+    }
+
+    private void OnDisable()
+    {
+        CombatManager.OnGameStateChanged -= TheBeginning;
     }
 
 
