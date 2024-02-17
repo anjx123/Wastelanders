@@ -12,7 +12,7 @@ public class CombatCardDisplayManager : MonoBehaviour
 
     public bool IsDisplaying { get; set; } = false;
     private ActionClass currentUser;
-    public SpriteRenderer rdr;
+    private SpriteRenderer rdr;
     private bool targetHighlighted = false;
 
     // Awake is called before Start.

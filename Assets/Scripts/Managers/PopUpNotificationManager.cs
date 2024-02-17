@@ -10,7 +10,6 @@ public class PopUpNotificationManager : MonoBehaviour
     public static PopUpNotificationManager Instance { get; private set; }
 
     public GameObject warningObject;
-    public GameObject canvasObject;
 
     public bool isRunning = false;
 
@@ -21,23 +20,21 @@ public class PopUpNotificationManager : MonoBehaviour
         {
             Instance = this;
         }
-        else if (Instance != null && Instance != this)
+        else if (Instance != this)
         {
-            Destroy(this);
+            Destroy(gameObject);
         }
-
-        DontDestroyOnLoad(gameObject);
         createWarning("Round Start!!!");
     }
 
     private void Start()
     {
-        CombatManager.Instance.OnGameStateChanged += DismissDescription;
+        CombatManager.OnGameStateChanged += DismissDescription;
     }
 
     private void OnDestroy()
     {
-        CombatManager.Instance.OnGameStateChanged -= DismissDescription;
+        CombatManager.OnGameStateChanged -= DismissDescription;
     }
 
     public void DisplayWarning(PopupType popupType, GameObject obj = null)
