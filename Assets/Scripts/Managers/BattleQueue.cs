@@ -543,7 +543,7 @@ public class BattleQueue : MonoBehaviour
                         y--;
                         continue; // no swap needed 
                     }
-                    else if (wrappers[y - 1].PlayerAction == null || wrappers[y].PlayerAction.Speed > wrappers[y - 1].PlayerAction.Speed)
+                    else if (wrappers[y - 1].PlayerAction == null || wrappers[y]!.PlayerAction!.Speed > wrappers[y - 1].PlayerAction!.Speed)
                     {
                         Swap(wrappers, y - 1, y);
                     }

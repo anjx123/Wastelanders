@@ -37,9 +37,12 @@ public class ChargeUp : FrogAttacks
 
         Origin.ApplyAllBuffsToCard(ref duplicateCard);
     }
-
+    
+    // @Author Muhammad 
+    // Inserts Hurl Next Turn.
     public override void OnHit()
     {
-        //TODO: Insert Hurl
+        WasteFrog frog = (WasteFrog )this.Origin;
+        frog.UseHurl = true;
     }
 }
