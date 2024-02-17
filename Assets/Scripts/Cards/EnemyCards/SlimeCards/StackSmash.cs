@@ -7,7 +7,7 @@ public class StackSmash : SlimeAttacks
     [SerializeField]
     private List<Sprite> animationFrame = new();
 
-    public bool IsDup {  get; set; }
+    protected bool original = true;
 
     public override void ExecuteActionEffect()
     {
@@ -31,7 +31,6 @@ public class StackSmash : SlimeAttacks
         ogMaterial = renderer.material; // og sprite of card
         OriginalPosition = transform.position;
 
-        IsDup = false;
     }
     public override void ApplyEffect()
     {
@@ -40,17 +39,22 @@ public class StackSmash : SlimeAttacks
         Origin.ApplyAllBuffsToCard(ref duplicateCard);
     }
 
+    // add the attack again if unstaggered.
     public override void OnHit()
     {
-
-        // Muhammad
-/*        if (!IsDup) 
+        if (original)
         {
+            // Muhammad
             List<PlayerClass> players = CombatManager.Instance.GetPlayers();
-            SlimeStack origin = (SlimeStack) Origin;
-
-            StackSmash dup = new StackSmash();
-        }*/
+            SlimeStack origin = (SlimeStack)Origin;
+            List<GameObject> dupActions = origin.dupActions;
+            // NOTE HERE THAT THIS RELIES ON KNOWLEDGE OF 0.
+            StackSmashDuplicate a = Instantiate(dupActions[0]).GetComponent<StackSmashDuplicate>(); // Instantiate
+            a.Origin = origin;
+            a.Target = players[Random.Range(0, players.Count - 1)];
+            a.original = false;
+            BattleQueue.BattleQueueInstance.InsertDup(a);
+        }
         base.OnHit(); 
         // Muhammad end
 

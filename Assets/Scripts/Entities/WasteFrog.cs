@@ -35,6 +35,7 @@ public class WasteFrog : EnemyClass
 
     // @Author Muhammad; excerpt from Andrew
     // if UseHurl then add Hurl this time around otherwise add actions normally.
+    // this doesn't have to deal with the "new" conundrum because... follow logic; emphasis on played next turn and don't discard
     public override void AddAttack(List<PlayerClass> players)
     {
         if (UseHurl)

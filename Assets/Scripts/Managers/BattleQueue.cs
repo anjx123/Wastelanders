@@ -236,6 +236,11 @@ public class BattleQueue : MonoBehaviour
         roundStart = true;
     }
 
+    public void InsertDup(ActionClass a)
+    {
+        protoQueue.InsertDupEnemyCard(a);
+    }
+
     // A sorted array implementation for ActionClass.
     private class SortedArray
     {
@@ -285,6 +290,27 @@ public class BattleQueue : MonoBehaviour
                                     // ASTER2 refer to note inside WrapperArray
             return true;
 
+        }
+
+        // has to be introduced because enemeies CAN now add actions after initial based on game conditions.
+        public void InsertDupEnemyCard(ActionClass card)
+
+        {
+            int elements = array.Count;
+            int firstPosition = 0;
+            if (elements != 0)
+            {
+                for (int i = 0; i < elements; i++)
+                {
+                    if (card.Speed < array[i].Speed || (card.Speed == array[i].Speed && array[i].IsPlayedByPlayer()))
+                    {
+                        firstPosition++;
+                    }
+                }
+            }
+            array.Insert(firstPosition, card);
+            BattleQueue.BattleQueueInstance.wrapperArray.InsertEnemyActionIntoWrappers(card);
+            
         }
 
         //Removes all instances of an entity from the queue

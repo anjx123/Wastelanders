@@ -150,6 +150,8 @@ MonoBehaviour:
   availableActions:
   - {fileID: 2376898879351982445, guid: 41158511bc5761d4386617623a2a562d, type: 3}
   - {fileID: 2376898879351982445, guid: 63bc38449d5d80242a58e343499c03ca, type: 3}
+  dupActions:
+  - {fileID: 8032408625995450409, guid: 070567522da493546af6e1a3cc24a1f2, type: 3}
 --- !u!1001 &4995605236726781521
 PrefabInstance:
   m_ObjectHideFlags: 0

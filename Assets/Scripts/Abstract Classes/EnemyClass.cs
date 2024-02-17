@@ -18,6 +18,9 @@ public abstract class EnemyClass : EntityClass
     // Initialized in editor
     public List<GameObject> availableActions;
 
+    // Initializsed in editor
+    public List<GameObject> dupActions;
+
     /*  Plays a single card from the pool, removing it from the pool and refilling it if necessary.
      *  REQUIRES: Nothing
      *  MODIFIES: pool
