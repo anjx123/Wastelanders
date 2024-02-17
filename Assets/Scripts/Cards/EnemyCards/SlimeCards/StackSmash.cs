@@ -6,6 +6,9 @@ public class StackSmash : SlimeAttacks
 {
     [SerializeField]
     private List<Sprite> animationFrame = new();
+
+    public bool IsDup {  get; set; }
+
     public override void ExecuteActionEffect()
     {
 
@@ -27,6 +30,8 @@ public class StackSmash : SlimeAttacks
         Renderer renderer = GetComponent<Renderer>();
         ogMaterial = renderer.material; // og sprite of card
         OriginalPosition = transform.position;
+
+        IsDup = false;
     }
     public override void ApplyEffect()
     {
@@ -37,7 +42,18 @@ public class StackSmash : SlimeAttacks
 
     public override void OnHit()
     {
-        //TODO: Reinsert a copy into the BQ
+
+        // Muhammad
+/*        if (!IsDup) 
+        {
+            List<PlayerClass> players = CombatManager.Instance.GetPlayers();
+            SlimeStack origin = (SlimeStack) Origin;
+
+            StackSmash dup = new StackSmash();
+        }*/
+        base.OnHit(); 
+        // Muhammad end
+
         StartCoroutine(AttackAnimation());
     }
 
