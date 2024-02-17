@@ -42,20 +42,20 @@ public class StackSmash : SlimeAttacks
     // add the attack again if unstaggered.
     public override void OnHit()
     {
+        // Muhammad
         if (original)
         {
-            // Muhammad
             List<PlayerClass> players = CombatManager.Instance.GetPlayers();
             SlimeStack origin = (SlimeStack)Origin;
             List<GameObject> dupActions = origin.dupActions;
-            // NOTE HERE THAT THIS RELIES ON KNOWLEDGE OF 0.
-            StackSmashDuplicate a = Instantiate(dupActions[0]).GetComponent<StackSmashDuplicate>(); // Instantiate
+            // NOTE HERE THAT THIS RELIES ON KNOWLEDGE OF 0 i.e. place in the dupActions; could implement as a HashMap
+            StackSmashDuplicate a = Instantiate(dupActions[0]).GetComponent<StackSmashDuplicate>(); // Instantiate a prefab; why isn't this superimposed?
             a.Origin = origin;
             a.Target = players[Random.Range(0, players.Count - 1)];
             a.original = false;
             BattleQueue.BattleQueueInstance.InsertDup(a);
         }
-        base.OnHit(); 
+        // base.OnHit(); NOT NEEDED HERE AS ATTACKANIMATION causes the damage 
         // Muhammad end
 
         StartCoroutine(AttackAnimation());
