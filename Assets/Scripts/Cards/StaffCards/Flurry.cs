@@ -24,9 +24,10 @@ public class Flurry : StaffCards
         base.Initialize();
     }
 
-    public override void OnHit()
+
+
+    public override void CardIsUnstaggered()
     {
-        base.OnHit();
         //TODO: Reinsert this card into the battlequeue
     }
 }

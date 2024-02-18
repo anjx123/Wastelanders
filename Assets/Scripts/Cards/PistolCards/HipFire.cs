@@ -11,10 +11,10 @@ public class HipFire : PistolCards
         Debug.Log("Executing Effect");
     }
 
-    public override void OnHit()
+
+    public override void CardIsUnstaggered()
     {
-        RollDice();
-        base.OnHit();
+        //TODO: Add attack again
     }
 
 

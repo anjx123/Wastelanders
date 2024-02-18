@@ -19,7 +19,7 @@ public class RapidFire : PistolCards
         Speed = 2;
         Block = 2;
         Damage = 3;
-        description = "Attack, Lose 1 accuracy, then make this attack again.";
+        description = "Attack, Lose 1 accuracy, if unstaggered, make this attack again.";
         CardType = CardType.MeleeAttack;
         myName = "RapidFire";
         Renderer renderer = GetComponent<Renderer>();
@@ -39,11 +39,10 @@ public class RapidFire : PistolCards
         base.ApplyEffect();
     }
 
-    public override void OnHit()
+    public override void CardIsUnstaggered()
     {
-        base.OnHit();
         Origin.ReduceStacks(Accuracy.buffName, 1); // Reduce Accuracy by 1
-        if (Origin.GetBuffStacks(Accuracy.buffName)  > 0)
+        if (Origin.GetBuffStacks(Accuracy.buffName) > 0)
         {
             //TODO: Reinsert this card into BQ so that this attacks again
         }
