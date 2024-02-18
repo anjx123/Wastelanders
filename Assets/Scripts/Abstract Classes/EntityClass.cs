@@ -6,6 +6,7 @@ using static UnityEngine.UI.Image;
 
 public abstract class EntityClass : SelectClass
 {
+    private float PLAY_RUNNING_ANIMATION_DELTA = 0.01f; //Represents how little change in position we should at least see before playing running animation
     protected int MAX_HEALTH;
     protected int MaxHealth
     {
@@ -138,7 +139,7 @@ public abstract class EntityClass : SelectClass
 
         UpdateFacing(diffInLocation, lookAtPosition);
 
-        if (HasParameter("IsMoving", animator))
+        if (HasParameter("IsMoving", animator) && distance > radius + PLAY_RUNNING_ANIMATION_DELTA)
         {
             animator.SetBool("IsMoving", true);
         }
