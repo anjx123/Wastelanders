@@ -7,6 +7,8 @@ using static UnityEngine.UI.Image;
 
 public class Hurl : FrogAttacks
 {
+
+    public static string HURL_NAME = "Hurl";
     public override void ExecuteActionEffect()
     {
 
@@ -22,7 +24,7 @@ public class Hurl : FrogAttacks
         Speed = 5;
         Block = 2;
 
-        myName = "Hurl";
+        myName = HURL_NAME;
         Renderer renderer = GetComponent<Renderer>();
         ogMaterial = renderer.material; // og sprite of card
         OriginalPosition = transform.position;

@@ -7,8 +7,10 @@ using UnityEngine.UI;
 
 public class WasteFrog : EnemyClass
 {
+
     // @Author Muhammad
     private bool useHurl = false;
+    private GameObject hurlCard;
 
     // Start is called before the first frame update
     public override void Start()
@@ -33,28 +35,43 @@ public class WasteFrog : EnemyClass
         }
     }
 
+    //@Author Anrui; Instantiate pool without Hurl
+    public override void InstantiatePool()
+    { 
+        for (int i = 0; i < availableActions.Count; i++)
+        {
+            GameObject toAdd = Instantiate(availableActions[i]);
+            ActionClass addedClass = toAdd.GetComponent<ActionClass>();
+            addedClass.Origin = this;
+
+            if (addedClass.GetName() == Hurl.HURL_NAME)
+            {
+                hurlCard = toAdd;   
+            } else
+            {
+                deck.Add(toAdd);
+            }
+        }
+        if (hurlCard == null) 
+        {
+            Debug.LogWarning("Hurl Card Not Instantiated");
+        }
+    }
     // @Author Muhammad; excerpt from Andrew
     // if UseHurl then add Hurl this time around otherwise add actions normally.
     // this doesn't have to deal with the "new" conundrum because... follow logic; emphasis on played next turn and don't discard
     public override void AddAttack(List<PlayerClass> players)
     {
-        if (UseHurl)
+        if (UseHurl && hurlCard != null)
         {
             UseHurl = false;
             if (players.Count == 0) return;
-            ActionClass temporaryHurl;
-            foreach(GameObject a in deck)
-            {
-                if (a.GetComponent<ActionClass>().GetName() == "Hurl")
-                {
-                    temporaryHurl = a.GetComponent<ActionClass>();
-                    temporaryHurl.Target = players[Random.Range(0, players.Count - 1)];
-                    BattleQueue.BattleQueueInstance.AddEnemyAction(temporaryHurl, this);
-                    combatInfo.SetCombatSprite(a.GetComponent<ActionClass>());
-                    combatInfo.GetComponentInChildren<CombatCardUI>().actionClass = a.GetComponent<ActionClass>();
-
-                }
-            }
+            
+            ActionClass temporaryHurl = hurlCard.GetComponent<ActionClass>();
+            temporaryHurl.Target = players[Random.Range(0, players.Count - 1)];
+            BattleQueue.BattleQueueInstance.AddEnemyAction(temporaryHurl, this);
+            combatInfo.SetCombatSprite(temporaryHurl);
+            combatInfo.GetComponentInChildren<CombatCardUI>().actionClass = temporaryHurl;
         } else
         {
             base.AddAttack(players);
