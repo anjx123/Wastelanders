@@ -39,10 +39,9 @@ public class StackSmash : SlimeAttacks
         Origin.ApplyAllBuffsToCard(ref duplicateCard);
     }
 
-    // add the attack again if unstaggered.
-    public override void OnHit()
+    //@Author: Anrui. Called by ActionClass.OnHit() 
+    public override void CardIsUnstaggered()
     {
-        // Muhammad
         if (original)
         {
             List<PlayerClass> players = CombatManager.Instance.GetPlayers();
@@ -55,9 +54,14 @@ public class StackSmash : SlimeAttacks
             a.original = false;
             BattleQueue.BattleQueueInstance.InsertDup(a);
         }
+        // Muhammad
+
         // base.OnHit(); NOT NEEDED HERE AS ATTACKANIMATION causes the damage 
         // Muhammad end
 
+    }
+    public override void OnHit()
+    {
         StartCoroutine(AttackAnimation());
     }
 

@@ -76,12 +76,20 @@ public abstract class ActionClass : SelectClass
     {
         HighlightManager.OnActionClicked(this);
     }
+    //@Author: Anrui
     //Called when this card hits the enemy, runs any on hit buffs or effects given.
+    //Note: that OnHit implies CardIsUnstaggered, thus it calls it. Please be **very careful** about the timing that CardIsUnstaggered is called. 
     public virtual void OnHit()
     {
+        CardIsUnstaggered();
         Vector3 diffInLocation = Target.myTransform.position - Origin.myTransform.position;
         Origin.UpdateFacing(diffInLocation, null);
         this.Target.TakeDamage(Origin, duplicateCard.actualRoll);
+    }
+
+    public virtual void CardIsUnstaggered()
+    {
+
     }
 
     public bool IsPlayedByPlayer()
