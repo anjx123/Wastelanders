@@ -239,6 +239,7 @@ public class BattleQueue : MonoBehaviour
     public void InsertDup(ActionClass a)
     {
         protoQueue.InsertDupEnemyCard(a);
+        RenderBQ(); 
     }
 
     // A sorted array implementation for ActionClass.
