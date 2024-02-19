@@ -54,7 +54,7 @@ MonoBehaviour:
   animator: {fileID: 3297183234373819581}
   combatInfo: {fileID: 5598173080790413213}
   availableActions:
-  - {fileID: 2376898879351982445, guid: 1cacda7b5938348f68e539bcad13b1fa, type: 3}
+  - {fileID: 2376898879351982445, guid: 763a690f87eae40e2ba78421da934720, type: 3}
   - {fileID: 5586820537936588944, guid: d7ed528b3d5934a809e97a1ef133cdd0, type: 3}
   - {fileID: 2376898879351982445, guid: 8e1f3cbdadd7f894aa929faf762c174e, type: 3}
 --- !u!95 &3297183234373819581

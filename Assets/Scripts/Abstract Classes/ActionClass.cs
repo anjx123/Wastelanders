@@ -53,6 +53,7 @@ public abstract class ActionClass : SelectClass
     public Sprite icon;
 
     public Sprite fullCard; // used for displaying combat info
+    public GameObject fullCardObjectPrefab;
 
     public CardType CardType { get; protected set; }
 
@@ -69,7 +70,7 @@ public abstract class ActionClass : SelectClass
 
     public virtual void Start()
     {
-        
+
     }
 
     public override void OnMouseDown()
@@ -122,6 +123,7 @@ public abstract class ActionClass : SelectClass
     {
         DupInit();
         Origin.ApplyAllBuffsToCard(ref duplicateCard);
+        UpdateText();
     }
 
     public virtual void ApplyEffect()
@@ -151,13 +153,17 @@ public abstract class ActionClass : SelectClass
 
     public void UpdateText()
     {
-        Vector3 position = textCanvas.GetComponent<RectTransform>().localPosition;
-        position.z = -2;
-        textCanvas.GetComponent<RectTransform>().localPosition = position;
-        nameText.GetComponent<TextMeshProUGUI>().text = titleName;
-        lowerBoundText.GetComponent<TextMeshProUGUI>().text = duplicateCard.rollFloor.ToString();
-        upperBoundText.GetComponent<TextMeshProUGUI>().text = duplicateCard.rollCeiling.ToString();
-        speedText.GetComponent<TextMeshProUGUI>().text = Speed.ToString();
+        if (textCanvas != null)
+        {
+            Vector3 position = textCanvas.GetComponent<RectTransform>().localPosition;
+            position.z = -2;
+            textCanvas.GetComponent<RectTransform>().localPosition = position;
+            nameText.GetComponent<TextMeshProUGUI>().text = titleName;
+            lowerBoundText.GetComponent<TextMeshProUGUI>().text = duplicateCard.rollFloor.ToString();
+            upperBoundText.GetComponent<TextMeshProUGUI>().text = duplicateCard.rollCeiling.ToString();
+            speedText.GetComponent<TextMeshProUGUI>().text = Speed.ToString();
+        }
+        
     }
 
     public override void OnMouseEnter()

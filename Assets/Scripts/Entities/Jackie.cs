@@ -75,7 +75,7 @@ public class Jackie : PlayerClass
             hand[i].transform.SetParent(handContainer.transform, false);
             hand[i].transform.position = Vector3.zero;
 
-            float distanceToLeft = (float)(handContainer.rect.width / 2 - (i * cardWidth * 0.9));
+            float distanceToLeft = (float)(handContainer.rect.width / 2 - (i * cardWidth));
 
             float y = handContainer.transform.position.y;
             Vector3 v = new Vector3(-distanceToLeft, y, -i);
