@@ -34,9 +34,8 @@ public class CombatCardDisplayManager : MonoBehaviour
     // source should be set to the caller. Below is an example call:
 
 
-    // CombatCardDisplayManager.Instance.ShowCard(actionClass, this);
+    // CombatCardDisplayManager.Instance.ShowCard(actionClass);
 
-    //In other words, the second argument passed should always be "this".
     //MODIFIES: cardDisplay.sprite, currentUser, rdr, isDisplaying
 
     public void ShowCard(ActionClass a)
@@ -80,9 +79,9 @@ public class CombatCardDisplayManager : MonoBehaviour
     public void HideCard()
     {
         IsDisplaying = false;
-        if (rdr != null)
+        if (fullCardObject != null)
         {
-            rdr.enabled = false;
+            Destroy(fullCardObject);
         }
         if (currentUser != null)
         {
