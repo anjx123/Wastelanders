@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.PackageManager;
 using UnityEngine;
+using TMPro;
 
 public class CombatCardDisplayManager : MonoBehaviour
 {
@@ -62,6 +63,7 @@ public class CombatCardDisplayManager : MonoBehaviour
             {
                 fullCardObject.transform.position = new Vector3(0, 0, 0);
                 fullCardObject.transform.SetParent(cardDisplay.transform, false);
+                UpdateText(a);
             }
 
             IsDisplaying = true;
@@ -74,7 +76,16 @@ public class CombatCardDisplayManager : MonoBehaviour
         }
     }
 
-    // Hides the card by disabling the sprite renderer. Don't need to pass any parameters in as the manager
+    private void UpdateText(ActionClass a)
+    {
+        // TODO: fix bug with not updating text properly? It works first time, but if you are swapping from another card it breaks.
+        // lower priority for now since we don't change enemy card stats yet, but it will come eventually
+        GameObject textContainer = cardDisplay.transform.GetChild(0).Find("TextCanvas").gameObject;
+        textContainer.transform.Find("LowerBoundText").gameObject.GetComponent<TextMeshProUGUI>().text = a.GetCard().rollFloor.ToString();
+        // more text updates...
+    }
+
+    // Hides the card by destroying the child. Don't need to pass any parameters in as the manager
     //  doesn't need to keep track of who calls this
     public void HideCard()
     {
