@@ -9,6 +9,7 @@ public class CombatCardDisplayManager : MonoBehaviour
 
     public static CombatCardDisplayManager Instance;
     public GameObject cardDisplay; // The card display object
+    GameObject fullCardObject; // keep ref to object to destroy
 
     public bool IsDisplaying { get; set; } = false;
     private ActionClass currentUser;
@@ -44,27 +45,26 @@ public class CombatCardDisplayManager : MonoBehaviour
         if (a == currentUser)
         {
             IsDisplaying = false;
-            if (rdr != null)
+            if (fullCardObject != null)
             {
-                rdr.enabled = false;
+                Destroy(fullCardObject);
+                fullCardObject = null;
             }
             currentUser = null;
-            
         }
         else
         {
-            if (a.fullCardObject != null)
+            if (fullCardObject != null)
             {
-                Debug.Log("peepeepoopoo");
-                a.fullCardObject.transform.SetParent(cardDisplay.transform, false);
-                a.fullCardObject.transform.position = new Vector3(0, 0, 0);
+                Destroy(fullCardObject);
             }
-            else
+            fullCardObject = Instantiate(a.fullCardObjectPrefab);
+            if (fullCardObject != null)
             {
-                rdr.enabled = true;
-                rdr.sprite = a.fullCard;
+                fullCardObject.transform.position = new Vector3(0, 0, 0);
+                fullCardObject.transform.SetParent(cardDisplay.transform, false);
             }
-            
+
             IsDisplaying = true;
             if (currentUser != null)
             {
@@ -73,7 +73,6 @@ public class CombatCardDisplayManager : MonoBehaviour
             currentUser = a;
             HighlightTarget(a);
         }
-
     }
 
     // Hides the card by disabling the sprite renderer. Don't need to pass any parameters in as the manager

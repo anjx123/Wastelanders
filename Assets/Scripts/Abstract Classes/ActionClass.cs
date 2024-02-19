@@ -54,7 +54,7 @@ public abstract class ActionClass : SelectClass
 
     public Sprite fullCard; // used for displaying combat info
     public GameObject fullCardObjectPrefab;
-    public GameObject fullCardObject;
+    //public GameObject fullCardObject;
 
     public CardType CardType { get; protected set; }
 
@@ -71,11 +71,11 @@ public abstract class ActionClass : SelectClass
 
     public virtual void Start()
     {
-        if (fullCardObjectPrefab != null)
-        {
-            fullCardObject = Instantiate(fullCardObjectPrefab);
-            fullCardObject.transform.position = new Vector3(69, 420, 0);
-        }
+        //if (fullCardObjectPrefab != null)
+        //{
+        //    fullCardObject = Instantiate(fullCardObjectPrefab);
+        //    fullCardObject.transform.position = new Vector3(69, 420, 0);
+        //}
     }
 
     public override void OnMouseDown()
