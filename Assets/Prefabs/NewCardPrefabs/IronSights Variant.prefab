@@ -1,0 +1,129 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &3799102881852465712
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1866809560200078547, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: c4f7aec21b684724f81317d1f90bb049, type: 3}
+    - target: {fileID: 1866809560200078547, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7256956916184963317, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
+      propertyPath: m_Name
+      value: IronSights Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 8284128080877360369, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8284128080877360369, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8284128080877360369, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8284128080877360369, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8284128080877360369, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8284128080877360369, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8284128080877360369, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8284128080877360369, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8284128080877360369, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8284128080877360369, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 9059084073755274666, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7256956916184963317, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2494557783371585323}
+  m_SourcePrefab: {fileID: 100100000, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
+--- !u!1 &213795004901688545 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3913226332729878225, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
+  m_PrefabInstance: {fileID: 3799102881852465712}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &568529659016256268 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3700495749604882748, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
+  m_PrefabInstance: {fileID: 3799102881852465712}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1858200893448569855 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3274319442286895567, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
+  m_PrefabInstance: {fileID: 3799102881852465712}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2423643949121451309 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1520981535418881821, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
+  m_PrefabInstance: {fileID: 3799102881852465712}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &5066054149459818177 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8284128080877360369, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
+  m_PrefabInstance: {fileID: 3799102881852465712}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &5768262490987068101 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7256956916184963317, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
+  m_PrefabInstance: {fileID: 3799102881852465712}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2494557783371585323
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5768262490987068101}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1ffdd7177d8e43708b5f3d515791e3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myTransform: {fileID: 5066054149459818177}
+  lowerBoundText: {fileID: 213795004901688545}
+  upperBoundText: {fileID: 568529659016256268}
+  speedText: {fileID: 9123693920566668989}
+  nameText: {fileID: 2423643949121451309}
+  textCanvas: {fileID: 1858200893448569855}
+  description: 
+  titleName: Iron SIghts
+  icon: {fileID: 21300000, guid: c4f7aec21b684724f81317d1f90bb049, type: 3}
+  fullCard: {fileID: 21300000, guid: 4faec21ea655d394c9ad82f1d2f7bbc2, type: 3}
+  fullCardObjectPrefab: {fileID: 0}
+--- !u!1 &9123693920566668989 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5342606960099249293, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
+  m_PrefabInstance: {fileID: 3799102881852465712}
+  m_PrefabAsset: {fileID: 0}
