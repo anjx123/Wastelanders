@@ -30,7 +30,7 @@ public class CombatCardDisplayManager : MonoBehaviour
 
     //Given an ActionClass a to display, and the SOURCE of the call, shows the card in the display.
     //REQUIRES: This function should always be called from a DisplayableClass.When it is called,
-    // source should be set to the caller.Below is an example call:
+    // source should be set to the caller. Below is an example call:
 
 
     // CombatCardDisplayManager.Instance.ShowCard(actionClass, this);
@@ -53,8 +53,18 @@ public class CombatCardDisplayManager : MonoBehaviour
         }
         else
         {
-            rdr.enabled = true;
-            rdr.sprite = a.fullCard;
+            if (a.fullCardObject != null)
+            {
+                Debug.Log("peepeepoopoo");
+                a.fullCardObject.transform.SetParent(cardDisplay.transform, false);
+                a.fullCardObject.transform.position = new Vector3(0, 0, 0);
+            }
+            else
+            {
+                rdr.enabled = true;
+                rdr.sprite = a.fullCard;
+            }
+            
             IsDisplaying = true;
             if (currentUser != null)
             {
