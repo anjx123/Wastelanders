@@ -873,6 +873,14 @@ PrefabInstance:
       propertyPath: cardPrefabs.Array.data[3]
       value: 
       objectReference: {fileID: 2001586882262830925, guid: 41810010507274fba9929be6c7b2e511, type: 3}
+    - target: {fileID: 3606799263845106433, guid: 18ff4a241e9f877439ebd5fd1de51dd0, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3606799263845106433, guid: 18ff4a241e9f877439ebd5fd1de51dd0, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4438586555624364327, guid: 18ff4a241e9f877439ebd5fd1de51dd0, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -884,6 +892,14 @@ PrefabInstance:
     - target: {fileID: 5836655443787502691, guid: 18ff4a241e9f877439ebd5fd1de51dd0, type: 3}
       propertyPath: m_Name
       value: JackiePrefab
+      objectReference: {fileID: 0}
+    - target: {fileID: 6894702762072357437, guid: 18ff4a241e9f877439ebd5fd1de51dd0, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6894702762072357437, guid: 18ff4a241e9f877439ebd5fd1de51dd0, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1284,7 +1300,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6635998426718021455, guid: b9c5e4b3c9f7e024f8fe9012e7a2e437, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -10.20146
+      value: -10.201168
       objectReference: {fileID: 0}
     - target: {fileID: 6635998426718021455, guid: b9c5e4b3c9f7e024f8fe9012e7a2e437, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1752,9 +1768,9 @@ MonoBehaviour:
   jackie: {fileID: 1662895618}
   jackieDefaultTransform: {fileID: 525387720}
   dialogueText:
-  - bodyText: MyBodyName
+  - bodyText: MyBodyName and every kline after that
     speakerName: Jackie
-  - bodyText: NextElement
+  - bodyText: NextElement and more lines even after that
     speakerName: Nameless Solider
   - bodyText: Next text after that
     speakerName: Ives
