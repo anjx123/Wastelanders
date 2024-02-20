@@ -99,7 +99,7 @@ public abstract class EnemyClass : EntityClass
 
     public override IEnumerator ResetPosition()
     {
-        yield return StartCoroutine(MoveToPosition(initalPosition, 0f, 0.8f));
+        yield return StartCoroutine(MoveToPosition(initialPosition, 0f, 0.8f));
         FaceLeft();
     }
     public override void FaceRight()

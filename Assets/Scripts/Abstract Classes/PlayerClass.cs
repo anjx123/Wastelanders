@@ -42,7 +42,7 @@ public abstract class PlayerClass : EntityClass
 
     public override IEnumerator ResetPosition()
     {
-        yield return StartCoroutine(MoveToPosition(initalPosition, 0f, 0.8f));
+        yield return StartCoroutine(MoveToPosition(initialPosition, 0f, 0.8f));
         FaceRight();
     }
     //Removes entity cards and self from BQ and combat manager. Kills itself

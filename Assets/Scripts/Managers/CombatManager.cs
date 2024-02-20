@@ -19,8 +19,11 @@ public class CombatManager : MonoBehaviour
 
     public GameObject handContainer;
     public GameObject startDequeue;
+    public GameObject battleQueueParent;
+    
     [SerializeField]
     private SpriteRenderer fadeScreen;
+    bool fadeActive = false;
 
     public delegate void GameStateChangedHandler(GameState newState); // Subscribe to this delegate if you want something to be run when gamestate changes
     public static event GameStateChangedHandler OnGameStateChanged;
@@ -60,7 +63,6 @@ public class CombatManager : MonoBehaviour
         {
             Destroy(this);
         }
-
     }
 
     // Start is called before the first frame update
@@ -98,9 +100,10 @@ public class CombatManager : MonoBehaviour
     {
         Activate(startDequeue);
         Activate(handContainer);
+        battleQueueParent.SetActive(true);
         baseCamera.Priority = 1;
         dynamicCamera.Priority = 0;
-        StartCoroutine(FadeBackground(false));
+        StartCoroutine(FadeCombatBackground(false));
 
         // Each enemy declares an attack. players is passed to AddAttack so the enemy can choose a target.
         foreach (EnemyClass enemy in enemies)
@@ -207,18 +210,26 @@ public class CombatManager : MonoBehaviour
         Deactivate(handContainer);
         baseCamera.Priority = 0;
         dynamicCamera.Priority = 1;
-        StartCoroutine(FadeBackground(true));
+        StartCoroutine(FadeCombatBackground(true));
     }
 
     private void PerformGameStart()
     {
-        GameState = GameState.SELECTION;
+        StartCoroutine(FadeBackground(1f, 0f, 2f));
     }
 
-    private IEnumerator FadeBackground(bool darkenScene)
+    private void PerformOutOfCombat()
     {
+        Deactivate(handContainer);
+        Deactivate(startDequeue);
+        battleQueueParent.SetActive(false);
+    }
+
+    //set (@param darkenScene) true to fade **combat background** in, false to fade out
+    private IEnumerator FadeCombatBackground(bool darkenScene)
+    {
+
         float startValue = fadeScreen.color.a;
-        float elapsedTime = 0;
         float duration = 1f;
 
         float endValue;
@@ -228,17 +239,27 @@ public class CombatManager : MonoBehaviour
         }
         else
         {
-            startValue = Mathf.Max(fadeScreen.color.a - 0.3f, 0f);
+            startValue = Mathf.Max(fadeScreen.color.a - 0.3f, 0f); //Clamped to prevent visual nausua with strange alpha change
             endValue = 0f;
         }
+
+        yield return StartCoroutine(FadeBackground(startValue, endValue, duration));
+    }
+    //Fade Background that gives you more control over the level of fade
+    private IEnumerator FadeBackground(float startAlpha, float endAlpha, float duration)
+    {
+        if (fadeActive) yield break;
+        fadeActive = true;
+        float elapsedTime = 0f;
 
         while (elapsedTime < duration)
         {
             elapsedTime += Time.deltaTime;
-            float newAlpha = Mathf.Lerp(startValue, endValue, elapsedTime / duration);
+            float newAlpha = Mathf.Lerp(startAlpha, endAlpha, elapsedTime / duration);
             fadeScreen.color = new Color(fadeScreen.color.r, fadeScreen.color.g, fadeScreen.color.b, newAlpha);
             yield return null;
         }
+        fadeActive = false;
     }
 
     public bool CanHighlight()
@@ -255,7 +276,7 @@ public class CombatManager : MonoBehaviour
             switch (gameState)
             {
                 case GameState.SELECTION:
-                    PerformSelection();
+                    PerformSelection(); //Gamestate no longer enters selection automatically and requires a scene object to manually start combat. 
                     break;
                 case GameState.FIGHTING:
                     PerformFighting();
@@ -267,13 +288,17 @@ public class CombatManager : MonoBehaviour
                     PerformLose();
                     break;
                 case GameState.GAME_START:
-                    PerformGameStart();
+                    PerformGameStart(); //Careful, if you set the game state within these methods you can get strange behaviour
+                    break;
+                case GameState.OUT_OF_COMBAT:
+                    PerformOutOfCombat();
                     break;
                 default:
                     break;
 
             }
-            OnGameStateChanged?.Invoke(gameState);
+            Debug.Log(value);
+            OnGameStateChanged?.Invoke(value);
         }
     }
 }

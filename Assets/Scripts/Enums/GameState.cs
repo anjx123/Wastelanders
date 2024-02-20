@@ -9,5 +9,6 @@ public enum GameState
     GAME_WIN,
     GAME_LOSE,
     GAME_START,
+    OUT_OF_COMBAT,
 
 }

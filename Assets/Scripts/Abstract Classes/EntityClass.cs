@@ -26,7 +26,7 @@ public abstract class EntityClass : SelectClass
     protected bool isDead = false;
 
 
-    protected Vector3 initalPosition;
+    protected Vector3 initialPosition;
     public int Health
     {
         get { return health; }
@@ -52,7 +52,7 @@ public abstract class EntityClass : SelectClass
 
     public virtual void Start()
     {
-        initalPosition = myTransform.position;
+        initialPosition = myTransform.position;
         statusEffects = new Dictionary<string, StatusEffect>();
 
         DeEmphasize();
@@ -380,5 +380,11 @@ public abstract class EntityClass : SelectClass
         combatInfo.DisableDice();
     }
 
+    //@Author: Anrui
+    //Sets the location an entity returns to after fighting ends.
+    public void SetReturnPosition(Vector3 newReturningPosition)
+    {
+        initialPosition = newReturningPosition;
+    }
     
 }

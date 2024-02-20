@@ -11,7 +11,7 @@ public class DialogueBox : MonoBehaviour
 
     [SerializeField] private TextMeshPro bodyText;
     [SerializeField] private TextMeshPro nameText;
-    private string currentLine;
+    private string currentLine = string.Empty;
 
     public float rollingSpeed;
 
@@ -19,12 +19,20 @@ public class DialogueBox : MonoBehaviour
 
     public void SetLine(DialogueText line)
     {
+        Debug.Log("New line body set" + line.BodyText);
         bodyText.text = string.Empty;
         this.currentLine = line.BodyText;
         nameText.text = line.SpeakerName;
         StartDialogue();
     }
 
+    private void Awake()
+    {
+        if (rollingSpeed == 0)
+        {
+            rollingSpeed = DEFAULTROLLSPEED;
+        }
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -40,13 +48,6 @@ public class DialogueBox : MonoBehaviour
         MeshRenderer nameTextRenderer = nameText.GetComponent<MeshRenderer>();
         nameTextRenderer.sortingLayerName = RENDERING_LAYER;
         nameTextRenderer.sortingOrder = 1;
-
-        if (rollingSpeed == 0)
-        {
-            rollingSpeed = DEFAULTROLLSPEED;
-        }
-        bodyText.text = string.Empty;
-
     }
 
     // Update is called once per frame
@@ -54,6 +55,7 @@ public class DialogueBox : MonoBehaviour
     {
         if (bodyText.text == currentLine)
         {
+            
             lineIsFinished = true;
         }
         else

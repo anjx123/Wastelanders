@@ -30,18 +30,15 @@ public class DialogueManager : MonoBehaviour
     //Manager is going to listen to a bunch of events that then cause it to gain new sentences and 
     void Start()
     {
-        //clearPanel();
+        clearPanel();
     }
 
-    public void StartDialogue(List<DialogueText> newSentences)
+    public IEnumerator StartDialogue(List<DialogueText> newSentences)
     {
         if (dialogueBoxObj.activeInHierarchy)
         {
-            return;
+            yield break;
         }
-        Debug.Log("Receiving the new sentence here it is" + newSentences);
-
-        Time.timeScale = 0; //Time freezes
 
         dialogueBoxObj.SetActive(true);
 
@@ -49,13 +46,13 @@ public class DialogueManager : MonoBehaviour
         inDialogue = true;
 
         DisplayNextSentence();
+        yield return new WaitUntil(() => !inDialogue);
     }
 
     public void clearPanel()
     {
         dialogueBoxObj.SetActive(false);
         sentences.Clear();
-        Time.timeScale = 1;
         inDialogue = false;
     }
 
