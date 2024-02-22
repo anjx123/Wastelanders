@@ -44,8 +44,8 @@ public class RapidFire : PistolCards
 
     public override void CardIsUnstaggered()
     {
-/*        Debug.Log(Origin.GetBuffStacks(Accuracy.buffName));
-        Origin.AddStacks(Accuracy.buffName, 10); // for debugging*/
+        Debug.Log(Origin.GetBuffStacks(Accuracy.buffName));
+        Origin.AddStacks(Accuracy.buffName, 10); // for debugging
 
         if (Origin.GetBuffStacks(Accuracy.buffName) > 0)
         {

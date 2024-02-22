@@ -1864,7 +1864,7 @@ PrefabInstance:
     - target: {fileID: 3367972655850899957, guid: 18ff4a241e9f877439ebd5fd1de51dd0, type: 3}
       propertyPath: duplicates.Array.data[1]
       value: 
-      objectReference: {fileID: 7473027025033308495, guid: 449ea8b5c344c314f88cc907a31cc939, type: 3}
+      objectReference: {fileID: 7473027025033308495, guid: 09a2204622889a743a9357a175409dc2, type: 3}
     - target: {fileID: 3367972655850899957, guid: 18ff4a241e9f877439ebd5fd1de51dd0, type: 3}
       propertyPath: cardPrefabs.Array.data[0]
       value: 
@@ -1880,7 +1880,7 @@ PrefabInstance:
     - target: {fileID: 3367972655850899957, guid: 18ff4a241e9f877439ebd5fd1de51dd0, type: 3}
       propertyPath: cardPrefabs.Array.data[3]
       value: 
-      objectReference: {fileID: 1669074630}
+      objectReference: {fileID: 7473027025033308495, guid: 3c3d8ebcb37254dfb8204289a4f13955, type: 3}
     - target: {fileID: 3367972655850899957, guid: 18ff4a241e9f877439ebd5fd1de51dd0, type: 3}
       propertyPath: cardPrefabs.Array.data[4]
       value: 
