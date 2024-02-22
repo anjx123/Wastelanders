@@ -79,6 +79,8 @@ public abstract class ActionClass : SelectClass
     //@Author: Anrui
     //Called when this card hits the enemy, runs any on hit buffs or effects given.
     //Note: that OnHit implies CardIsUnstaggered, thus it calls it. Please be **very careful** about the timing that CardIsUnstaggered is called. 
+    // This also implies that OnHit is highly unlikely to be overriden in ANY derived class: tge emphasis should almost entirely be on CardIsUnstaggered
+    // (excepting few cases like StackSmash that has a unique Animation)
     public virtual void OnHit()
     {
         CardIsUnstaggered();

@@ -52,7 +52,7 @@ public class StackSmash : SlimeAttacks
             a.Origin = origin;
             a.Target = players[Random.Range(0, players.Count - 1)];
             a.original = false;
-            BattleQueue.BattleQueueInstance.InsertDup(a);
+            BattleQueue.BattleQueueInstance.InsertDupEnemyAction(a);
         }
         // Muhammad
 

@@ -1850,9 +1850,21 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 552403359}
     - target: {fileID: 3367972655850899957, guid: 18ff4a241e9f877439ebd5fd1de51dd0, type: 3}
+      propertyPath: duplicates.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3367972655850899957, guid: 18ff4a241e9f877439ebd5fd1de51dd0, type: 3}
       propertyPath: cardPrefabs.Array.size
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 3367972655850899957, guid: 18ff4a241e9f877439ebd5fd1de51dd0, type: 3}
+      propertyPath: duplicates.Array.data[0]
+      value: 
+      objectReference: {fileID: 6523536501014627819, guid: 3c5b2aaf12707d84a9c2966edc00858e, type: 3}
+    - target: {fileID: 3367972655850899957, guid: 18ff4a241e9f877439ebd5fd1de51dd0, type: 3}
+      propertyPath: duplicates.Array.data[1]
+      value: 
+      objectReference: {fileID: 7473027025033308495, guid: 449ea8b5c344c314f88cc907a31cc939, type: 3}
     - target: {fileID: 3367972655850899957, guid: 18ff4a241e9f877439ebd5fd1de51dd0, type: 3}
       propertyPath: cardPrefabs.Array.data[0]
       value: 
@@ -1876,7 +1888,7 @@ PrefabInstance:
     - target: {fileID: 3367972655850899957, guid: 18ff4a241e9f877439ebd5fd1de51dd0, type: 3}
       propertyPath: cardPrefabs.Array.data[5]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 6523536501014627819, guid: e2bf95b5823fd4344bc1c2ecddfd6b02, type: 3}
     - target: {fileID: 3367972655850899957, guid: 18ff4a241e9f877439ebd5fd1de51dd0, type: 3}
       propertyPath: cardPrefabs.Array.data[6]
       value: 
@@ -3244,7 +3256,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6635998426718021455, guid: b9c5e4b3c9f7e024f8fe9012e7a2e437, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.5729411
+      value: -0.87550116
       objectReference: {fileID: 0}
     - target: {fileID: 6635998426718021455, guid: b9c5e4b3c9f7e024f8fe9012e7a2e437, type: 3}
       propertyPath: m_LocalPosition.y

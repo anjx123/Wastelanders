@@ -187,6 +187,7 @@ public class BattleQueue : MonoBehaviour
     // Begins the dequeueing process. 
     // REQUIRES: An appropriate call. Note that this can be called even if the number of elements in the actionQueue is 0. Invariant array index 0 has largest speed. 
     // MODIFIES: the actionQueue is progressively emptied until it is empty. 
+    // Note the positioning of the Remove from Wrappers/protoQueue: this is important for the dup cards invariant.
     public IEnumerator DequeueWrappers()
     {
         List<Wrapper> array = wrapperArray.GetWrappers();
@@ -212,16 +213,16 @@ public class BattleQueue : MonoBehaviour
             if (e.IsHalfEmpty())
             {
                 ActionClass action = e.ReturnWhaYouHave();
+                protoQueue.GetList().Remove(action); 
                 yield return StartCoroutine(CardComparator.Instance.OneSidedAttack(action));
-                protoQueue.GetList().Remove(action);
             }
             else
             {
                 ActionClass pla = e.PlayerAction!;
                 ActionClass ene = e.EnemyAction!;
-                yield return StartCoroutine(CardComparator.Instance.ClashCards(pla, ene));
                 protoQueue.GetList().Remove(pla);
                 protoQueue.GetList().Remove(ene);
+                yield return StartCoroutine(CardComparator.Instance.ClashCards(pla, ene));
             }
 
             RenderBQ(); 
@@ -236,10 +237,22 @@ public class BattleQueue : MonoBehaviour
         roundStart = true;
     }
 
-    public void InsertDup(ActionClass a)
+    // for duplicate enemy actions 
+    public void InsertDupEnemyAction(ActionClass a)
     {
         protoQueue.InsertDupEnemyCard(a);
         RenderBQ(); 
+    }
+
+    // for duplicate/"special" player actions
+    // Utilises the protoQueue's insert method as there is not need to redefine the method as the Invariant is upheld throughout
+    // lifeline (BattleQueue itself never has two player actions by the same player entity together since the previous action is removed
+    // vide Dequeu for above.
+    public void InsertDupPlayerAction(ActionClass a)
+    {
+        // use just Insert as checks for initialisation of the dequeing process is redundant i.e. no call to AddPlayerAction 
+        protoQueue.Insert(a);
+        RenderBQ();
     }
 
     // A sorted array implementation for ActionClass.
@@ -516,7 +529,8 @@ public class BattleQueue : MonoBehaviour
             for (int i = wrappers.Count - 1; i >= 0; i--)
             {
                 Wrapper existingWrapper = wrappers[i];
-                if ((existingWrapper.PlayerAction != null && existingWrapper.PlayerAction.Origin == entity) || (existingWrapper.EnemyAction != null && existingWrapper.EnemyAction.Target == entity))
+                if ((existingWrapper.PlayerAction != null && (existingWrapper.PlayerAction.Origin == entity || existingWrapper.PlayerAction.Target == entity)) 
+                    || (existingWrapper.EnemyAction != null && (existingWrapper.EnemyAction.Target == entity || existingWrapper.EnemyAction.Origin == entity)))
                 {
                     wrappers.RemoveAt(i); 
                 }

@@ -10,6 +10,7 @@ public class WasteFrog : EnemyClass
 
     // @Author Muhammad
     private bool useHurl = false;
+    // @Author Anrui; Note by Muhammad: it should be retained that Hurl is inside the availableActions and therefore any modifications should take this into account.
     private GameObject hurlCard;
 
     // Start is called before the first frame update
