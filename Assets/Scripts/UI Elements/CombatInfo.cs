@@ -16,6 +16,8 @@ public class CombatInfo : MonoBehaviour
     public HealthBar healthBar;
     public GameObject crosshair;
 
+    private float ROTATION_SPEED = 30f;
+
     private Canvas buffListCanvas;
 
     public void Start()
@@ -25,6 +27,11 @@ public class CombatInfo : MonoBehaviour
         buffListCanvas.overrideSorting = true;
         buffListCanvas.sortingLayerName = CombatManager.Instance.FADE_SORTING_LAYER;
         diceRollText.GetComponent<MeshRenderer>().sortingLayerName = CombatManager.Instance.FADE_SORTING_LAYER;
+    }
+
+    public void Update()
+    {
+        crosshair.transform.Rotate(Vector3.forward * ROTATION_SPEED * Time.deltaTime);
     }
 
     /* 
