@@ -153,17 +153,31 @@ public abstract class ActionClass : SelectClass
 
     public void UpdateText()
     {
-        if (textCanvas != null)
+        Transform textContainerTransform = transform.Find("TextCanvas");
+        if (textContainerTransform == null)
         {
-            Vector3 position = textCanvas.GetComponent<RectTransform>().localPosition;
-            position.z = -2;
-            textCanvas.GetComponent<RectTransform>().localPosition = position;
-            nameText.GetComponent<TextMeshProUGUI>().text = titleName;
-            lowerBoundText.GetComponent<TextMeshProUGUI>().text = duplicateCard.rollFloor.ToString();
-            upperBoundText.GetComponent<TextMeshProUGUI>().text = duplicateCard.rollCeiling.ToString();
-            speedText.GetComponent<TextMeshProUGUI>().text = Speed.ToString();
+            // ALL GOOD IF IT IS MISSING FROM ENEMY!
+            Debug.Log("Did not find TextCanvas; missing on " + myName);
+            return;
         }
-        
+        GameObject textContainer = textContainerTransform.gameObject;
+        textContainer.transform.Find("NameText").gameObject.GetComponent<TextMeshProUGUI>().text = titleName;
+        textContainer.transform.Find("LowerBoundText").gameObject.GetComponent<TextMeshProUGUI>().text = duplicateCard.rollFloor.ToString();
+        textContainer.transform.Find("UpperBoundText").gameObject.GetComponent<TextMeshProUGUI>().text = duplicateCard.rollCeiling.ToString();
+        textContainer.transform.Find("SpeedText").gameObject.GetComponent<TextMeshProUGUI>().text = Speed.ToString();
+
+
+        //if (textCanvas != null)
+        //{
+        //    Vector3 position = textCanvas.GetComponent<RectTransform>().localPosition;
+        //    position.z = -2;
+        //    textCanvas.GetComponent<RectTransform>().localPosition = position;
+        //    nameText.GetComponent<TextMeshProUGUI>().text = titleName;
+        //    lowerBoundText.GetComponent<TextMeshProUGUI>().text = duplicateCard.rollFloor.ToString();
+        //    upperBoundText.GetComponent<TextMeshProUGUI>().text = duplicateCard.rollCeiling.ToString();
+        //    speedText.GetComponent<TextMeshProUGUI>().text = Speed.ToString();
+        //}
+
     }
 
     public override void OnMouseEnter()
