@@ -9,7 +9,6 @@ public abstract class EntityClass : SelectClass
     private float PLAY_RUNNING_ANIMATION_DELTA = 0.01f; //Represents how little change in position we should at least see before playing running animation
     protected int MAX_HEALTH;
     [SerializeField]
-    protected GameObject crosshairPrefab; 
     protected int MaxHealth
     {
         get { return MAX_HEALTH; }
@@ -54,7 +53,6 @@ public abstract class EntityClass : SelectClass
 
     public virtual void Start()
     {
-        crosshairPrefab.SetActive(false);
         initalPosition = myTransform.position;
         statusEffects = new Dictionary<string, StatusEffect>();
 
@@ -241,8 +239,6 @@ public abstract class EntityClass : SelectClass
         return (Mathf.Pow(speed, power) / Mathf.Pow(((-elapsedTime) / duration - speed), power) + 1);
     }
 
-    private bool alreadyActive = false;
-
     public virtual void Heal(int val)
     {
         Health = Mathf.Clamp(Health + val, 0, MaxHealth);
@@ -250,27 +246,20 @@ public abstract class EntityClass : SelectClass
 
     public override void OnMouseEnter()
     {
-        if (!crosshairPrefab.activeSelf) {
-            crosshairPrefab.SetActive(true);
-        }
+        combatInfo.ActivateCrosshair();
     }
 
     public override void OnMouseExit()
     {
-        if (!alreadyActive) {
-            crosshairPrefab.SetActive(false);
-        }
-        
+        combatInfo.DeactivateCrosshair();
     }
 
     public void CrossHair() {
-        crosshairPrefab.SetActive(true);
-        alreadyActive = true;
+        combatInfo.ActivateCrosshair();
     }
 
     public void UnCrossHair() {
-        crosshairPrefab.SetActive(false);
-        alreadyActive = false;
+        combatInfo.DeactivateCrosshair();
     }
 
     public override void OnMouseDown()

@@ -14,6 +14,7 @@ public class CombatInfo : MonoBehaviour
     public GameObject diceRollText;
     public GameObject buffIconPrefab;
     public HealthBar healthBar;
+    public GameObject crosshair;
 
     private Canvas buffListCanvas;
 
@@ -67,6 +68,22 @@ public class CombatInfo : MonoBehaviour
     {
         SpriteRenderer spriteRenderer = combatCardSprite.GetComponent<SpriteRenderer>();
         spriteRenderer.sprite = null;
+    }
+
+    public void ActivateCrosshair()
+    {
+        if (!crosshair.activeSelf)
+        {
+            crosshair.SetActive(true);
+        }
+    }
+
+    public void DeactivateCrosshair()
+    {
+        if (crosshair.activeSelf)
+        {
+            crosshair.SetActive(false);
+        }
     }
     public void Emphasize()
     {
