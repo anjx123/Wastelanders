@@ -25,6 +25,7 @@ public abstract class EntityClass : SelectClass
     public CombatInfo combatInfo;
 
     protected bool isDead = false;
+    private bool crosshairStaysActive = false;
 
 
     protected Vector3 initalPosition;
@@ -246,20 +247,40 @@ public abstract class EntityClass : SelectClass
 
     public override void OnMouseEnter()
     {
-        combatInfo.ActivateCrosshair();
+        Highlight();
     }
 
     public override void OnMouseExit()
     {
-        combatInfo.DeactivateCrosshair();
+        DeHighlight();
     }
 
-    public void CrossHair() {
-        combatInfo.ActivateCrosshair();
+    public void CrossHair()
+    {
+        crosshairStaysActive = true;
+        Highlight();
     }
 
-    public void UnCrossHair() {
-        combatInfo.DeactivateCrosshair();
+    public void UnCrossHair()
+    {
+        crosshairStaysActive = false;
+        DeHighlight();
+    }
+
+    public override void Highlight()
+    {
+        if (CombatManager.Instance.CanHighlight())
+        {
+            combatInfo.ActivateCrosshair();
+        }
+    }
+
+    public override void DeHighlight()
+    {
+        if (!crosshairStaysActive)
+        {
+            combatInfo.DeactivateCrosshair();
+        }
     }
 
     public override void OnMouseDown()

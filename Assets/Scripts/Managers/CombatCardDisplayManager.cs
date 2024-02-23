@@ -50,6 +50,7 @@ public class CombatCardDisplayManager : MonoBehaviour
                 Destroy(fullCardObject);
                 fullCardObject = null;
             }
+            DeHighlightTarget(currentUser);
             currentUser = null;
         }
         else
