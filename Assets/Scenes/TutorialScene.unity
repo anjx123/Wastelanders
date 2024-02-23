@@ -1300,7 +1300,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6635998426718021455, guid: b9c5e4b3c9f7e024f8fe9012e7a2e437, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -10.201168
+      value: -10.20167
       objectReference: {fileID: 0}
     - target: {fileID: 6635998426718021455, guid: b9c5e4b3c9f7e024f8fe9012e7a2e437, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1767,8 +1767,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   jackie: {fileID: 1662895618}
   jackieDefaultTransform: {fileID: 525387720}
+  soldierGreeting:
+  - bodyText: Morning, Jackie!
+    speakerName: Soldier
   dialogueText:
-  - bodyText: MyBodyName and every kline after that
+  - bodyText: Good morning!
     speakerName: Jackie
   - bodyText: NextElement and more lines even after that
     speakerName: Nameless Solider

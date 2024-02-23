@@ -6,6 +6,8 @@ public class TutorialIntroduction : DialogueClasses
 {
     [SerializeField] private Jackie jackie;
     [SerializeField] private Transform jackieDefaultTransform;
+    [SerializeField] private List<DialogueText> soldierGreeting;
+
     [SerializeField] private List<DialogueText> dialogueText;
 
     private IEnumerator ExecuteGameStart()
@@ -16,11 +18,13 @@ public class TutorialIntroduction : DialogueClasses
         jackie.SetReturnPosition(jackieDefaultTransform.position);
         yield return StartCoroutine(jackie.ResetPosition());
 
-        yield return StartCoroutine(DialogueManager.Instance.StartDialogue(dialogueText));
+        yield return StartCoroutine(DialogueManager.Instance.StartDialogue(soldierGreeting));
 
         yield return new WaitForSeconds(1f);
         jackie.FaceLeft();
+        yield return new WaitForSeconds(0.2f);
 
+        yield return StartCoroutine(DialogueManager.Instance.StartDialogue(dialogueText));
 
 
         yield break;
