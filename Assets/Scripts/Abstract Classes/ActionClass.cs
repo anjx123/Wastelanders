@@ -23,12 +23,6 @@ public abstract class ActionClass : SelectClass
     protected int lowerBound;
     protected int upperBound;
 
-    [SerializeField] GameObject lowerBoundText;
-    [SerializeField] GameObject upperBoundText;
-    [SerializeField] GameObject speedText;
-    [SerializeField] GameObject nameText;
-    [SerializeField] GameObject textCanvas;
-
     protected CardDup duplicateCard;
 
     public CardDup GetCard()
@@ -161,22 +155,38 @@ public abstract class ActionClass : SelectClass
             return;
         }
         GameObject textContainer = textContainerTransform.gameObject;
-        textContainer.transform.Find("NameText").gameObject.GetComponent<TextMeshProUGUI>().text = titleName;
-        textContainer.transform.Find("LowerBoundText").gameObject.GetComponent<TextMeshProUGUI>().text = duplicateCard.rollFloor.ToString();
-        textContainer.transform.Find("UpperBoundText").gameObject.GetComponent<TextMeshProUGUI>().text = duplicateCard.rollCeiling.ToString();
-        textContainer.transform.Find("SpeedText").gameObject.GetComponent<TextMeshProUGUI>().text = Speed.ToString();
+        TextMeshProUGUI NameText = textContainer.transform.Find("NameText").gameObject.GetComponent<TextMeshProUGUI>();
+        TextMeshProUGUI lowerBoundText = textContainer.transform.Find("LowerBoundText").gameObject.GetComponent<TextMeshProUGUI>();
+        TextMeshProUGUI UpperBoundText = textContainer.transform.Find("UpperBoundText").gameObject.GetComponent<TextMeshProUGUI>();
+        TextMeshProUGUI SpeedText = textContainer.transform.Find("SpeedText").gameObject.GetComponent<TextMeshProUGUI>();
 
+        // Set the text first
+        NameText.text = titleName;
+        lowerBoundText.text = duplicateCard.rollFloor.ToString();
+        UpperBoundText.text = duplicateCard.rollCeiling.ToString();
+        SpeedText.text = Speed.ToString();
 
-        //if (textCanvas != null)
-        //{
-        //    Vector3 position = textCanvas.GetComponent<RectTransform>().localPosition;
-        //    position.z = -2;
-        //    textCanvas.GetComponent<RectTransform>().localPosition = position;
-        //    nameText.GetComponent<TextMeshProUGUI>().text = titleName;
-        //    lowerBoundText.GetComponent<TextMeshProUGUI>().text = duplicateCard.rollFloor.ToString();
-        //    upperBoundText.GetComponent<TextMeshProUGUI>().text = duplicateCard.rollCeiling.ToString();
-        //    speedText.GetComponent<TextMeshProUGUI>().text = Speed.ToString();
-        //}
+        // Now update colors
+        if (duplicateCard.rollFloor > lowerBound)
+        {
+            lowerBoundText.color = Color.green;
+        }
+
+        if (duplicateCard.rollCeiling > upperBound)
+        {
+            UpperBoundText.color = Color.green;
+        }
+
+        if (duplicateCard.rollFloor < lowerBound)
+        {
+            lowerBoundText.color = Color.red;
+        }
+
+        if (duplicateCard.rollCeiling < upperBound)
+        {
+            UpperBoundText.color = Color.red;
+        }
+
 
     }
 
