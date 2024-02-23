@@ -58,9 +58,13 @@ public class CardComparator : MonoBehaviour
             } else if (cardOneGreater < 0) //Card2 wins clash
             {
                 card2.OnHit();
+                card1.Origin.combatInfo.setDiceColor(false);
+                card2.Origin.combatInfo.setDiceColor(true);
             } else if (cardOneGreater > 0) //Card1 wins clash
             {
                 card1.OnHit();
+                card2.Origin.combatInfo.setDiceColor(false);
+                card1.Origin.combatInfo.setDiceColor(true);
             }
         } else if (card1.CardType == CardType.Defense && IsAttack(card2))
         {
