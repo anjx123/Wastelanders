@@ -9,7 +9,7 @@ public class RapidFireDuplicate : RapidFire
     public override void CardIsUnstaggered()
     {
         base.CardIsUnstaggered();
-        Destroy(this);
+        Destroy(this.gameObject);
         // you've instantiated the prefab of the card and THAT needs to be destoryed: mem leak solved. 
     }
 }
