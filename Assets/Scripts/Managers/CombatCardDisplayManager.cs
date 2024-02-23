@@ -106,7 +106,7 @@ public class CombatCardDisplayManager : MonoBehaviour
     {
         if (!targetHighlighted)
         {
-            a.Target.OnMouseEnter();
+            a.Target.CrossHair();
         }
         targetHighlighted = true;
     }
@@ -116,7 +116,7 @@ public class CombatCardDisplayManager : MonoBehaviour
     {
         if (targetHighlighted)
         {
-            a.Target.OnMouseExit();
+            a.Target.UnCrossHair();
         }
         targetHighlighted = false;
     }
