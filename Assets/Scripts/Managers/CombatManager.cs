@@ -32,6 +32,18 @@ public class CombatManager : MonoBehaviour
         }
     }
 
+    public void CrosshairAllEnemies() {
+        foreach (EnemyClass enemy in enemies) {
+            enemy.CrossHair();
+        }
+    }
+
+    public void UncrosshairAllEnemies() {
+        foreach (EnemyClass enemy in enemies) {
+            enemy.UnCrossHair();
+        }
+    }
+
     public int FADE_SORTING_ORDER
     {
         get

@@ -17,7 +17,7 @@ public abstract class DisplayableClass : SelectClass
     {
         if (!targetHighlighted)
         {
-            actionClass?.Target.OnMouseEnter();
+            actionClass?.Target.Highlight();
         }
         targetHighlighted = true;
     }
@@ -26,7 +26,7 @@ public abstract class DisplayableClass : SelectClass
     {
         if (targetHighlighted)
         {
-            actionClass?.Target.OnMouseExit();
+            actionClass?.Target.DeHighlight();
         }
         targetHighlighted = false;
     }
