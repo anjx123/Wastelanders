@@ -143,7 +143,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myTransform: {fileID: 7946142163233550150}
-  healthBar: {fileID: 0}
+  crosshairPrefab: {fileID: 1659748562456849422, guid: 69108d309b2cece4dbad3db2a665faf9, type: 3}
   animator: {fileID: 6424370051552391152}
   combatInfo: {fileID: 5598173080790413213}
   availableActions:
@@ -204,6 +204,10 @@ PrefabInstance:
     - target: {fileID: 6018344303403229583, guid: 941333e3be7f6f04688676f1827dbf1b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6240049359335720621, guid: 941333e3be7f6f04688676f1827dbf1b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -5
       objectReference: {fileID: 0}
     - target: {fileID: 8036639253418242914, guid: 941333e3be7f6f04688676f1827dbf1b, type: 3}
       propertyPath: m_Name
