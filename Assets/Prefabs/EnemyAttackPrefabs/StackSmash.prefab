@@ -122,10 +122,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba137836d3acc1f4f8817ee400588d5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myName: 
   myTransform: {fileID: 0}
+  lowerBoundText: {fileID: 0}
+  upperBoundText: {fileID: 0}
+  speedText: {fileID: 0}
+  nameText: {fileID: 0}
+  textCanvas: {fileID: 0}
+  description: 
+  titleName: 
   icon: {fileID: 21300000, guid: dd8cc9f22fab37347beba8ec3b041c9f, type: 3}
   fullCard: {fileID: 21300000, guid: ecf15b415f0ab2a41be99a0fb1040d6e, type: 3}
+  fullCardObjectPrefab: {fileID: 7256956916184963317, guid: c57d65bb8ce2d4689b44d223cfe67556, type: 3}
   animationFrame:
   - {fileID: 21300000, guid: 73e2ceabc110c8041b3ef9253af2bdf5, type: 3}
   - {fileID: 21300000, guid: e8c8be0959b81c84ba9002cbd84675d7, type: 3}

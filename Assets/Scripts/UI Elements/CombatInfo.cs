@@ -13,6 +13,7 @@ public class CombatInfo : MonoBehaviour
     public List<Sprite> loadedSprites = new();
     public GameObject diceRollText;
     public GameObject buffIconPrefab;
+    public HealthBar healthBar;
 
     private Canvas buffListCanvas;
 
@@ -73,6 +74,7 @@ public class CombatInfo : MonoBehaviour
         diceRollSprite.GetComponent<SpriteRenderer>().sortingOrder = CombatManager.Instance.FADE_SORTING_ORDER + 1;
         buffListCanvas.sortingOrder = CombatManager.Instance.FADE_SORTING_ORDER + 1;
         diceRollText.GetComponent<MeshRenderer>().sortingOrder = CombatManager.Instance.FADE_SORTING_ORDER + 1;
+        healthBar.Emphasize();
     }
     public void DeEmphasize()
     {
@@ -80,6 +82,17 @@ public class CombatInfo : MonoBehaviour
         diceRollSprite.GetComponent<SpriteRenderer>().sortingOrder = CombatManager.Instance.FADE_SORTING_ORDER - 1;
         buffListCanvas.sortingOrder = CombatManager.Instance.FADE_SORTING_ORDER - 1;
         diceRollText.GetComponent<MeshRenderer>().sortingOrder = CombatManager.Instance.FADE_SORTING_ORDER - 1;
+        healthBar.DeEmphasize();
+    }
+
+    public void SetMaxHealth(int maxHealth)
+    {
+        healthBar.setMaxHealth(maxHealth);
+    }
+
+    public void SetHealth(int health)
+    {
+        healthBar.setHealth(health);
     }
     //Flips the CombatInfo so that the Icon is on the Right of the entity
     public void FaceLeft()
@@ -87,6 +100,7 @@ public class CombatInfo : MonoBehaviour
 
         FlipTransform(this.transform, false);
         FlipTransform(diceRollText.transform, false);
+        FlipTransform(healthBar.transform, false);
         foreach (Transform child in buffList.transform)
         {
             FlipTransform(child, false);
@@ -103,6 +117,7 @@ public class CombatInfo : MonoBehaviour
     {
         FlipTransform(this.transform, true);
         FlipTransform(diceRollText.transform, true);
+        FlipTransform(healthBar.transform, true);
         foreach (Transform child in buffList.transform)
         {
             FlipTransform(child, true);
