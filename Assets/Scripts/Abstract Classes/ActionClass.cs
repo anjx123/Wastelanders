@@ -244,6 +244,7 @@ public abstract class ActionClass : SelectClass
             spriteRenderer.color = new Color(0.6f, 0.6f, 0.6f, 1);
         }
         transform.rotation = Quaternion.Euler(0, 0, 0);
+        CombatManager.Instance.CrosshairAllEnemies();
     }
 
     public override void DeHighlight()
@@ -262,6 +263,7 @@ public abstract class ActionClass : SelectClass
             transform.position -= new Vector3((float)0.04, (float)0.4, 0);
             EnqueueMoveDown = false;
         }
+        CombatManager.Instance.UncrosshairAllEnemies();
     }
 
 }
