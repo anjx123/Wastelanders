@@ -7,8 +7,6 @@ public class StackSmash : SlimeAttacks
     [SerializeField]
     private List<Sprite> animationFrame = new();
 
-    protected bool original = true;
-
     public override void ExecuteActionEffect()
     {
 
@@ -30,7 +28,6 @@ public class StackSmash : SlimeAttacks
         Renderer renderer = GetComponent<Renderer>();
         ogMaterial = renderer.material; // og sprite of card
         OriginalPosition = transform.position;
-
     }
     public override void ApplyEffect()
     {
@@ -42,22 +39,24 @@ public class StackSmash : SlimeAttacks
     //@Author: Anrui. Called by ActionClass.OnHit() 
     public override void CardIsUnstaggered()
     {
-        if (original)
+        // branhces separated for mem leaks 
+        if (proto && activeDupCardInstance == null)
         {
-            List<PlayerClass> players = CombatManager.Instance.GetPlayers();
-            SlimeStack origin = (SlimeStack)Origin;
-            List<GameObject> dupActions = origin.dupActions;
-            // NOTE HERE THAT THIS RELIES ON KNOWLEDGE OF 0 i.e. place in the dupActions; could implement as a HashMap
-            StackSmashDuplicate a = Instantiate(dupActions[0]).GetComponent<StackSmashDuplicate>(); // Instantiate a prefab; why isn't this superimposed?
-            a.Origin = origin;
-            a.Target = players[Random.Range(0, players.Count - 1)];
-            a.original = false;
-            BattleQueue.BattleQueueInstance.InsertDupEnemyAction(a);
+            activeDupCardInstance = Instantiate(duplicateCardInstance.GetComponent<StackSmashDuplicate>()); 
+            ((StackSmashDuplicate)activeDupCardInstance).proto = false;
+            ((StackSmashDuplicate)activeDupCardInstance).duplicateCardInstance = null;
+            activeDupCardInstance.transform.position = new Vector3(-10, 10, 10);
         }
-        // Muhammad
+        if (proto)
+        {
+            SlimeStack origin = (SlimeStack)Origin;
+            activeDupCardInstance.Origin = origin;
+            activeDupCardInstance.Target = Target;
+            BattleQueue.BattleQueueInstance.InsertDupEnemyAction(activeDupCardInstance);
+        }
 
         // base.OnHit(); NOT NEEDED HERE AS ATTACKANIMATION causes the damage 
-        // Muhammad end
+
 
     }
     public override void OnHit()

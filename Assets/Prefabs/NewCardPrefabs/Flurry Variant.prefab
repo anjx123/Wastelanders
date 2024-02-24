@@ -108,6 +108,8 @@ MonoBehaviour:
   speedText: {fileID: 1064860920565186320}
   nameText: {fileID: 5906604232027890816}
   textCanvas: {fileID: 7607527324181795410}
+  duplicateCardInstance: {fileID: 2330056699190291304, guid: 84213c24e598c464c8c2dc212d0ee98c, type: 3}
+  activeDupCardInstance: {fileID: 0}
   description: 
   titleName: Flurry
   icon: {fileID: 21300000, guid: cea5678db7ab09a48ad216800b9bda74, type: 3}

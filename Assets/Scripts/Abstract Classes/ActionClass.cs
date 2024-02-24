@@ -29,6 +29,12 @@ public abstract class ActionClass : SelectClass
     [SerializeField] GameObject nameText;
     [SerializeField] GameObject textCanvas;
 
+    #nullable enable
+    [SerializeField] protected GameObject? duplicateCardInstance; // set in editor for now
+    [SerializeField] protected ActionClass activeDupCardInstance;
+    protected bool proto = true;
+    #nullable disable 
+
     protected CardDup duplicateCard;
 
     public CardDup GetCard()

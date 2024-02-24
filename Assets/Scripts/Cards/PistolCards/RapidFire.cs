@@ -5,9 +5,7 @@ using UnityEngine;
 public class RapidFire : PistolCards
 {
 
-    // @Author Muhammad
-    protected bool original = true;
-
+    // static int count = 4;
     
     public override void ExecuteActionEffect()
     {
@@ -31,12 +29,6 @@ public class RapidFire : PistolCards
         base.Initialize();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public override void ApplyEffect()
     {
         base.ApplyEffect();
@@ -44,30 +36,26 @@ public class RapidFire : PistolCards
 
     public override void CardIsUnstaggered()
     {
-        Debug.Log(Origin.GetBuffStacks(Accuracy.buffName));
-        Origin.AddStacks(Accuracy.buffName, 10); // for debugging
+        /*        Debug.Log(Origin.GetBuffStacks(Accuracy.buffName));
+                Origin.AddStacks(Accuracy.buffName, 10); // for debuggin*/
 
-        if (Origin.GetBuffStacks(Accuracy.buffName) > 0)
+        if (proto && activeDupCardInstance == null)
         {
-            if (original)
-            {
-                Origin.ReduceStacks(Accuracy.buffName, 1); // Reduce Accuracy by 1; only once 
+            activeDupCardInstance = Instantiate(duplicateCardInstance.GetComponent<RapidFireDuplicate>());
+            ((RapidFireDuplicate)activeDupCardInstance).proto = false;
+            ((RapidFireDuplicate)activeDupCardInstance).duplicateCardInstance = null;
+            activeDupCardInstance.transform.position = new Vector3(-10, 10, 10);
+        }
 
-                PlayerClass origin = (PlayerClass)Origin;
-                List<GameObject> dupActions = origin.GetDuplicates();
-                RapidFireDuplicate a = null;
-                // a = Instantiate(dupActions[0]).GetComponent<HipFireDuplicate>(); // The object itself has a component of itself
-                // a = Instantiate(origin.GetComponent<RapidFireDuplicate>()); // since Origin is a Game Object and it contains it contains this Component somewhere down the line FALSE
-                a = Instantiate(origin.GetDuplicates()[1].GetComponent<RapidFireDuplicate>());
-                if (a == null)
-                {
-                    throw new System.Exception("The card Duplicate has either not been defined or is not present inside the duplicates field.");
-                }
-                a.Origin = origin;
-                a.Target = this.Target; // attacking twice against the same target. !!! COULD THROW AN EXCEPTION POTENTIALLY IF THE PLAYER IS DEAD UNLESS PROPER REMOVEINSTANCES ISN'T CALLED
-                a.original = false;
-                BattleQueue.BattleQueueInstance.InsertDupPlayerAction(a);
-            }
+        if (proto && Origin.GetBuffStacks(Accuracy.buffName) > 0) //&& (count > 0)) // doesn't have to be the original card 
+        {
+            // count--;
+            PlayerClass origin = (PlayerClass)Origin;
+            activeDupCardInstance.Origin = origin;
+            activeDupCardInstance.Target = Target;
+            BattleQueue.BattleQueueInstance.InsertDupPlayerAction(activeDupCardInstance);
+            Origin.ReduceStacks(Accuracy.buffName, 1); // Reduce Accuracy by 1; only once 
+
         }
     }
 

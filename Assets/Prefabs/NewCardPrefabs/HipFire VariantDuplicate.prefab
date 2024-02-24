@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &5257721867071509895
+--- !u!1001 &4221858090225635259
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -10,23 +10,23 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1866809560200078547, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
       propertyPath: m_Size.x
-      value: 4.4
+      value: 4.47
       objectReference: {fileID: 0}
     - target: {fileID: 1866809560200078547, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
       propertyPath: m_Size.y
-      value: 2.8
+      value: 2.87
       objectReference: {fileID: 0}
     - target: {fileID: 1866809560200078547, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: a04b270ae1f43d14fbab84ed3d181b48, type: 3}
+      objectReference: {fileID: 21300000, guid: 601769b83c413394f9dcef8bf9a4ef38, type: 3}
     - target: {fileID: 1866809560200078547, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
       propertyPath: m_WasSpriteAssigned
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7256956916184963317, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
       propertyPath: m_Name
-      value: RapidFire Variant
+      value: HipFire Variant 1
       objectReference: {fileID: 0}
     - target: {fileID: 8284128080877360369, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
       propertyPath: m_LocalPosition.x
@@ -68,67 +68,41 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 9059084073755274666, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 7256956916184963317, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 3632232491122551209}
+      addedObject: {fileID: 1476428959409071623}
   m_SourcePrefab: {fileID: 100100000, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
---- !u!1 &203768741436528906 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5342606960099249293, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
-  m_PrefabInstance: {fileID: 5257721867071509895}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &3189337932731059570 stripped
+--- !u!1 &6783246004654626638 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7256956916184963317, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
-  m_PrefabInstance: {fileID: 5257721867071509895}
+  m_PrefabInstance: {fileID: 4221858090225635259}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &3632232491122551209
+--- !u!114 &1476428959409071623
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3189337932731059570}
+  m_GameObject: {fileID: 6783246004654626638}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2082053e56a8f452ea3bc067454f9498, type: 3}
+  m_Script: {fileID: 11500000, guid: c416340a1a8139a438cb06c91a213504, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   myTransform: {fileID: 0}
-  lowerBoundText: {fileID: 9131537199249519446}
-  upperBoundText: {fileID: 8912029279065435323}
-  speedText: {fileID: 203768741436528906}
-  nameText: {fileID: 6767980652618564250}
-  textCanvas: {fileID: 7315981051534488648}
-  duplicateCardInstance: {fileID: 3189337932731059570, guid: 51e58b745da95984b8ed85234182d23b, type: 3}
+  lowerBoundText: {fileID: 0}
+  upperBoundText: {fileID: 0}
+  speedText: {fileID: 0}
+  nameText: {fileID: 0}
+  textCanvas: {fileID: 0}
+  duplicateCardInstance: {fileID: 0}
   activeDupCardInstance: {fileID: 0}
   description: 
-  titleName: Rapid Fire
-  icon: {fileID: 21300000, guid: a04b270ae1f43d14fbab84ed3d181b48, type: 3}
-  fullCard: {fileID: 21300000, guid: 6084c3207746d704390ec19aae0ba62b, type: 3}
+  titleName: 
+  icon: {fileID: 21300000, guid: 601769b83c413394f9dcef8bf9a4ef38, type: 3}
+  fullCard: {fileID: 0}
   fullCardObjectPrefab: {fileID: 0}
---- !u!1 &6767980652618564250 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1520981535418881821, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
-  m_PrefabInstance: {fileID: 5257721867071509895}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &7315981051534488648 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3274319442286895567, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
-  m_PrefabInstance: {fileID: 5257721867071509895}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &8912029279065435323 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3700495749604882748, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
-  m_PrefabInstance: {fileID: 5257721867071509895}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &9131537199249519446 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3913226332729878225, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
-  m_PrefabInstance: {fileID: 5257721867071509895}
-  m_PrefabAsset: {fileID: 0}
