@@ -75,7 +75,7 @@ public abstract class EntityClass : SelectClass
         {
             CardComparator.PlayEntityDeaths += Die;
         }
-        if (statusEffects.ContainsKey(Accuracy.buffName)) { statusEffects[Accuracy.buffName].LoseStacks(1); UpdateBuffs(); }
+        if (statusEffects.ContainsKey(Accuracy.buffName)) { statusEffects[Accuracy.buffName].OnBuffedEntityHit(); UpdateBuffs(); }
         StartCoroutine(PlayHitAnimation(source, this, percentageDone));
     }
 
