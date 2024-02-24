@@ -77,6 +77,7 @@ public abstract class EntityClass : SelectClass
         {
             CardComparator.PlayEntityDeaths += Die;
         }
+        if (statusEffects.ContainsKey(Accuracy.buffName)) { statusEffects[Accuracy.buffName].OnBuffedEntityHit(); UpdateBuffs(); }
         StartCoroutine(PlayHitAnimation(source, this, percentageDone));
     }
 
@@ -300,13 +301,19 @@ public abstract class EntityClass : SelectClass
         this.MAX_HEALTH = health;
     } */
 
+    // Checks if a Given Buff exists, instantiates it if not
+    public void CheckBuff(string buffType)
+    {
+        if (!statusEffects.ContainsKey(buffType))
+        {
+            statusEffects[buffType] = BuffFactory.GetStatusEffect(buffType);
+        }
+    }
+
     // Adds the Stacks of the Card to the Relevant Buff Stacks of the Player    
     public void AddStacks(string buffType, int stacks)
     {
-        if (!statusEffects.ContainsKey(buffType)) 
-        { 
-            statusEffects[buffType] = BuffFactory.GetStatusEffect(buffType);
-        }
+        CheckBuff(buffType);
         statusEffects[buffType].GainStacks(stacks);
         UpdateBuffs();
     }
@@ -322,10 +329,7 @@ public abstract class EntityClass : SelectClass
     // Applies the Stacks of the Specified Buff to the Card Roll Limits
     public void ApplyBuffsToCard(ref ActionClass.CardDup dup, string buffType)
     {
-        if (!statusEffects.ContainsKey(buffType))
-        {
-            statusEffects[buffType] = BuffFactory.GetStatusEffect(buffType);
-        }
+        CheckBuff(buffType);
         statusEffects[buffType].ApplyStacks(ref dup);
     }
 
@@ -345,6 +349,12 @@ public abstract class EntityClass : SelectClass
             return statusEffects[s].Stacks;
         }
         return 0;
+    }
+
+    // Clears all stacks of specified buff
+    public void ClearStacks(string buffType)
+    {
+        if (statusEffects.ContainsKey(buffType)) {statusEffects[buffType].ClearBuff(); UpdateBuffs();}
     }
 
     public virtual void AttackAnimation(string animationName)

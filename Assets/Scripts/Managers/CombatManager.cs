@@ -267,6 +267,9 @@ public class CombatManager : MonoBehaviour
             switch (gameState)
             {
                 case GameState.SELECTION:
+                    foreach (EntityClass e in players) {
+                        e.ClearStacks(Focus.buffName);
+                    }
                     PerformSelection();
                     break;
                 case GameState.FIGHTING:

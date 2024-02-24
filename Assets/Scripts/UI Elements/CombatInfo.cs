@@ -182,6 +182,8 @@ public class CombatInfo : MonoBehaviour
 
         foreach (string str in buffs.Keys)
         {
+            if (buffs[str].Stacks == 0) continue;
+
             GameObject instance = Instantiate(buffIconPrefab);
             BuffIcons buffIcon = instance.GetComponent<BuffIcons>();
             buffIcon.transform.SetParent(buffList.transform, false);
