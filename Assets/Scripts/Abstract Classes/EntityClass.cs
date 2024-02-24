@@ -8,6 +8,7 @@ public abstract class EntityClass : SelectClass
 {
     private float PLAY_RUNNING_ANIMATION_DELTA = 0.01f; //Represents how little change in position we should at least see before playing running animation
     protected int MAX_HEALTH;
+    [SerializeField]
     protected int MaxHealth
     {
         get { return MAX_HEALTH; }
@@ -24,6 +25,7 @@ public abstract class EntityClass : SelectClass
     public CombatInfo combatInfo;
 
     protected bool isDead = false;
+    private bool crosshairStaysActive = false;
 
 
     protected Vector3 initialPosition;
@@ -75,6 +77,7 @@ public abstract class EntityClass : SelectClass
         {
             CardComparator.PlayEntityDeaths += Die;
         }
+        if (statusEffects.ContainsKey(Accuracy.buffName)) { statusEffects[Accuracy.buffName].OnBuffedEntityHit(); UpdateBuffs(); }
         StartCoroutine(PlayHitAnimation(source, this, percentageDone));
     }
 
@@ -243,6 +246,44 @@ public abstract class EntityClass : SelectClass
         Health = Mathf.Clamp(Health + val, 0, MaxHealth);
     }
 
+    public override void OnMouseEnter()
+    {
+        Highlight();
+    }
+
+    public override void OnMouseExit()
+    {
+        DeHighlight();
+    }
+
+    public void CrossHair()
+    {
+        crosshairStaysActive = true;
+        Highlight();
+    }
+
+    public void UnCrossHair()
+    {
+        crosshairStaysActive = false;
+        DeHighlight();
+    }
+
+    public override void Highlight()
+    {
+        if (CombatManager.Instance.CanHighlight())
+        {
+            combatInfo.ActivateCrosshair();
+        }
+    }
+
+    public override void DeHighlight()
+    {
+        if (!crosshairStaysActive)
+        {
+            combatInfo.DeactivateCrosshair();
+        }
+    }
+
     public override void OnMouseDown()
     {
         HighlightManager.OnEntityClicked(this);
@@ -260,13 +301,19 @@ public abstract class EntityClass : SelectClass
         this.MAX_HEALTH = health;
     } */
 
+    // Checks if a Given Buff exists, instantiates it if not
+    public void CheckBuff(string buffType)
+    {
+        if (!statusEffects.ContainsKey(buffType))
+        {
+            statusEffects[buffType] = BuffFactory.GetStatusEffect(buffType);
+        }
+    }
+
     // Adds the Stacks of the Card to the Relevant Buff Stacks of the Player    
     public void AddStacks(string buffType, int stacks)
     {
-        if (!statusEffects.ContainsKey(buffType)) 
-        { 
-            statusEffects[buffType] = BuffFactory.GetStatusEffect(buffType);
-        }
+        CheckBuff(buffType);
         statusEffects[buffType].GainStacks(stacks);
         UpdateBuffs();
     }
@@ -282,10 +329,7 @@ public abstract class EntityClass : SelectClass
     // Applies the Stacks of the Specified Buff to the Card Roll Limits
     public void ApplyBuffsToCard(ref ActionClass.CardDup dup, string buffType)
     {
-        if (!statusEffects.ContainsKey(buffType))
-        {
-            statusEffects[buffType] = BuffFactory.GetStatusEffect(buffType);
-        }
+        CheckBuff(buffType);
         statusEffects[buffType].ApplyStacks(ref dup);
     }
 
@@ -305,6 +349,12 @@ public abstract class EntityClass : SelectClass
             return statusEffects[s].Stacks;
         }
         return 0;
+    }
+
+    // Clears all stacks of specified buff
+    public void ClearStacks(string buffType)
+    {
+        if (statusEffects.ContainsKey(buffType)) {statusEffects[buffType].ClearBuff(); UpdateBuffs();}
     }
 
     public virtual void AttackAnimation(string animationName)

@@ -23,6 +23,8 @@ public abstract class StatusEffect
         this.buffStacks = Mathf.Clamp(this.buffStacks - amount, 0, this.buffStacks);
     }
 
+    public virtual void OnBuffedEntityHit() { }
+
     // adds buffStacks to the struct card limits
     public abstract void ApplyStacks(ref ActionClass.CardDup dup);
 

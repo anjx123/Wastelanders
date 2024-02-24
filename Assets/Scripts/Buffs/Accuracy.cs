@@ -20,4 +20,9 @@ public class Accuracy : StatusEffect
         }
         return buffSprite;
     }
+
+    public override void OnBuffedEntityHit()
+    {
+        LoseStacks(1);
+    }
 }
