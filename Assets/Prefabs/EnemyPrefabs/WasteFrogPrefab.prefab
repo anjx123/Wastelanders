@@ -49,7 +49,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myTransform: {fileID: 7946142163233550150}
-  healthBar: {fileID: 0}
+  crosshairPrefab: {fileID: 1659748562456849422, guid: 69108d309b2cece4dbad3db2a665faf9, type: 3}
   animator: {fileID: 3297183234373819581}
   combatInfo: {fileID: 5598173080790413213}
   availableActions:

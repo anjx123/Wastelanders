@@ -14,6 +14,9 @@ public class CombatInfo : MonoBehaviour
     public GameObject diceRollText;
     public GameObject buffIconPrefab;
     public HealthBar healthBar;
+    public GameObject crosshair;
+
+    private float ROTATION_SPEED = 30f;
 
     private Canvas buffListCanvas;
 
@@ -24,6 +27,11 @@ public class CombatInfo : MonoBehaviour
         buffListCanvas.overrideSorting = true;
         buffListCanvas.sortingLayerName = CombatManager.Instance.FADE_SORTING_LAYER;
         diceRollText.GetComponent<MeshRenderer>().sortingLayerName = CombatManager.Instance.FADE_SORTING_LAYER;
+    }
+
+    public void Update()
+    {
+        crosshair.transform.Rotate(Vector3.forward * ROTATION_SPEED * Time.deltaTime);
     }
 
     /* 
@@ -67,6 +75,22 @@ public class CombatInfo : MonoBehaviour
     {
         SpriteRenderer spriteRenderer = combatCardSprite.GetComponent<SpriteRenderer>();
         spriteRenderer.sprite = null;
+    }
+
+    public void ActivateCrosshair()
+    {
+        if (!crosshair.activeSelf)
+        {
+            crosshair.SetActive(true);
+        }
+    }
+
+    public void DeactivateCrosshair()
+    {
+        if (crosshair.activeSelf)
+        {
+            crosshair.SetActive(false);
+        }
     }
     public void Emphasize()
     {
@@ -158,6 +182,8 @@ public class CombatInfo : MonoBehaviour
 
         foreach (string str in buffs.Keys)
         {
+            if (buffs[str].Stacks == 0) continue;
+
             GameObject instance = Instantiate(buffIconPrefab);
             BuffIcons buffIcon = instance.GetComponent<BuffIcons>();
             buffIcon.transform.SetParent(buffList.transform, false);
