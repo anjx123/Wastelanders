@@ -76,6 +76,5 @@ public abstract class PlayerClass : EntityClass
             DrawCard();
         }
         RenderHand();
-        
     }
 }

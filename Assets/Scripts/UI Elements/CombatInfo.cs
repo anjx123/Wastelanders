@@ -8,11 +8,12 @@ public class CombatInfo : MonoBehaviour
 {
     public GameObject combatCardSprite;
     public HorizontalLayoutGroup buffList;
-    public Animator animator;
+    public Animator diceAnimator;
     public GameObject diceRollSprite;
     public List<Sprite> loadedSprites = new();
     public GameObject diceRollText;
     public GameObject buffIconPrefab;
+    public HealthBar healthBar;
 
     private Canvas buffListCanvas;
 
@@ -30,7 +31,7 @@ public class CombatInfo : MonoBehaviour
      */
     public void SetDice(int value)
     {
-        animator.enabled = false;
+        diceAnimator.enabled = false;
         diceRollSprite.GetComponent<SpriteRenderer>().sprite = loadedSprites[0];
         diceRollText.GetComponent<TMP_Text>().text = value.ToString();
     }
@@ -41,9 +42,24 @@ public class CombatInfo : MonoBehaviour
      */
     public void SetCombatSprite(ActionClass card)
     {
-        animator.enabled = true;
+        diceAnimator.enabled = true;
         SpriteRenderer spriteRenderer = combatCardSprite.GetComponent<SpriteRenderer>();
         spriteRenderer.sprite = card.GetIcon();
+        diceRollText.GetComponent<TextMeshPro>().text = null;
+    }
+
+    public void EnableDice()
+    {
+        diceAnimator.enabled = true;
+        diceRollSprite.GetComponent<SpriteRenderer>().enabled = true;
+        diceRollText.GetComponent<TMP_Text>().enabled = true;
+    }
+
+    public void DisableDice()
+    {
+        diceAnimator.enabled = false;
+        diceRollSprite.GetComponent<SpriteRenderer>().enabled = false;
+        diceRollText.GetComponent<TMP_Text>().enabled = false;
         diceRollText.GetComponent<TextMeshPro>().text = null;
     }
 
@@ -58,6 +74,7 @@ public class CombatInfo : MonoBehaviour
         diceRollSprite.GetComponent<SpriteRenderer>().sortingOrder = CombatManager.Instance.FADE_SORTING_ORDER + 1;
         buffListCanvas.sortingOrder = CombatManager.Instance.FADE_SORTING_ORDER + 1;
         diceRollText.GetComponent<MeshRenderer>().sortingOrder = CombatManager.Instance.FADE_SORTING_ORDER + 1;
+        healthBar.Emphasize();
     }
     public void DeEmphasize()
     {
@@ -65,6 +82,17 @@ public class CombatInfo : MonoBehaviour
         diceRollSprite.GetComponent<SpriteRenderer>().sortingOrder = CombatManager.Instance.FADE_SORTING_ORDER - 1;
         buffListCanvas.sortingOrder = CombatManager.Instance.FADE_SORTING_ORDER - 1;
         diceRollText.GetComponent<MeshRenderer>().sortingOrder = CombatManager.Instance.FADE_SORTING_ORDER - 1;
+        healthBar.DeEmphasize();
+    }
+
+    public void SetMaxHealth(int maxHealth)
+    {
+        healthBar.setMaxHealth(maxHealth);
+    }
+
+    public void SetHealth(int health)
+    {
+        healthBar.setHealth(health);
     }
     //Flips the CombatInfo so that the Icon is on the Right of the entity
     public void FaceLeft()
@@ -72,6 +100,7 @@ public class CombatInfo : MonoBehaviour
 
         FlipTransform(this.transform, false);
         FlipTransform(diceRollText.transform, false);
+        FlipTransform(healthBar.transform, false);
         foreach (Transform child in buffList.transform)
         {
             FlipTransform(child, false);
@@ -88,6 +117,7 @@ public class CombatInfo : MonoBehaviour
     {
         FlipTransform(this.transform, true);
         FlipTransform(diceRollText.transform, true);
+        FlipTransform(healthBar.transform, true);
         foreach (Transform child in buffList.transform)
         {
             FlipTransform(child, true);

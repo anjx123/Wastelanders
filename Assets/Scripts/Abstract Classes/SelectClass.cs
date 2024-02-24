@@ -4,8 +4,8 @@ using UnityEngine;
 
 public abstract class SelectClass : MonoBehaviour
 {
-
-    public string myName;
+    protected string myName;
+    protected string myDescription;
     protected Material outliner;
     protected Material ogMaterial;
     public Transform myTransform;
@@ -46,6 +46,12 @@ public abstract class SelectClass : MonoBehaviour
             grewLarger = false;
         }
     }
+
+    public string GetDescription()
+    {
+        return myDescription;
+    }
+
 
     public abstract void OnMouseDown();
 

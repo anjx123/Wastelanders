@@ -6,5 +6,6 @@ public enum PopupType
 {
     SameSpeed,
     EnemyKilled,
-    DeckReshuffled
+    DeckReshuffled,
+    SelectEnemyFirst,
 }
