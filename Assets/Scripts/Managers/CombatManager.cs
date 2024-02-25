@@ -94,6 +94,7 @@ public class CombatManager : MonoBehaviour
     //Allows players to start selection again, resets enemies attacks and position
     private void PerformSelection()
     {
+        NewRoundPlayerBuffs();
         Activate(startDequeue);
         Activate(handContainer);
         baseCamera.Priority = 1;
@@ -248,9 +249,6 @@ public class CombatManager : MonoBehaviour
             switch (gameState)
             {
                 case GameState.SELECTION:
-                    foreach (EntityClass e in players) {
-                        e.ClearStacks(Focus.buffName);
-                    }
                     PerformSelection();
                     break;
                 case GameState.FIGHTING:
@@ -266,6 +264,14 @@ public class CombatManager : MonoBehaviour
                     break;
 
             }
+        }
+    }
+
+    public void NewRoundPlayerBuffs()
+    {
+        foreach (EntityClass e in players)
+        {
+            e.UpdateBuffsNewRound();
         }
     }
 }

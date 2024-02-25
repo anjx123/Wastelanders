@@ -21,4 +21,9 @@ public class Focus : StatusEffect
         }
         return buffSprite;
     }
+
+    public override void NewRound()
+    {
+        ClearBuff();
+    }
 }
