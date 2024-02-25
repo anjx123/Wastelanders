@@ -40,13 +40,13 @@ public abstract class ActionClass : SelectClass
     public int Damage { get; protected set; }
     public int Block { get; protected set; }
     public int Speed { get; protected set; }
-    public string description;
+    protected string description;
 
     [SerializeField] string titleName;
 
     public Sprite icon;
 
-    public Sprite fullCard; // used for displaying combat info
+    protected Sprite fullCard; // used for displaying combat info
     public GameObject fullCardObjectPrefab;
 
     public CardType CardType { get; protected set; }
