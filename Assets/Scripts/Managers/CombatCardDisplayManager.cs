@@ -3,16 +3,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.PackageManager;
 using UnityEngine;
+using TMPro;
 
 public class CombatCardDisplayManager : MonoBehaviour
 {
 
     public static CombatCardDisplayManager Instance;
     public GameObject cardDisplay; // The card display object
+    GameObject fullCardObject; // keep ref to object to destroy
 
     public bool IsDisplaying { get; set; } = false;
     private ActionClass currentUser;
-    public SpriteRenderer rdr;
+    private SpriteRenderer rdr;
     private bool targetHighlighted = false;
 
     // Awake is called before Start.
@@ -30,12 +32,11 @@ public class CombatCardDisplayManager : MonoBehaviour
 
     //Given an ActionClass a to display, and the SOURCE of the call, shows the card in the display.
     //REQUIRES: This function should always be called from a DisplayableClass.When it is called,
-    // source should be set to the caller.Below is an example call:
+    // source should be set to the caller. Below is an example call:
 
 
-    // CombatCardDisplayManager.Instance.ShowCard(actionClass, this);
+    // CombatCardDisplayManager.Instance.ShowCard(actionClass);
 
-    //In other words, the second argument passed should always be "this".
     //MODIFIES: cardDisplay.sprite, currentUser, rdr, isDisplaying
 
     public void ShowCard(ActionClass a)
@@ -44,17 +45,27 @@ public class CombatCardDisplayManager : MonoBehaviour
         if (a == currentUser)
         {
             IsDisplaying = false;
-            if (rdr != null)
+            if (fullCardObject != null)
             {
-                rdr.enabled = false;
+                Destroy(fullCardObject);
+                fullCardObject = null;
             }
             currentUser = null;
-            
         }
         else
         {
-            rdr.enabled = true;
-            rdr.sprite = a.fullCard;
+            if (fullCardObject != null)
+            {
+                Destroy(fullCardObject);
+            }
+            fullCardObject = Instantiate(a.fullCardObjectPrefab);
+            if (fullCardObject != null)
+            {
+                fullCardObject.transform.position = new Vector3(0, 0, 0);
+                fullCardObject.transform.SetParent(cardDisplay.transform, false);
+                UpdateText(a);
+            }
+
             IsDisplaying = true;
             if (currentUser != null)
             {
@@ -63,17 +74,25 @@ public class CombatCardDisplayManager : MonoBehaviour
             currentUser = a;
             HighlightTarget(a);
         }
-
     }
 
-    // Hides the card by disabling the sprite renderer. Don't need to pass any parameters in as the manager
+    private void UpdateText(ActionClass a)
+    {
+        // TODO: fix bug with not updating text properly? It works first time, but if you are swapping from another card it breaks.
+        // lower priority for now since we don't change enemy card stats yet, but it will come eventually
+        GameObject textContainer = cardDisplay.transform.GetChild(0).Find("TextCanvas").gameObject;
+        textContainer.transform.Find("LowerBoundText").gameObject.GetComponent<TextMeshProUGUI>().text = a.GetCard().rollFloor.ToString();
+        // more text updates...
+    }
+
+    // Hides the card by destroying the child. Don't need to pass any parameters in as the manager
     //  doesn't need to keep track of who calls this
     public void HideCard()
     {
         IsDisplaying = false;
-        if (rdr != null)
+        if (fullCardObject != null)
         {
-            rdr.enabled = false;
+            Destroy(fullCardObject);
         }
         if (currentUser != null)
         {

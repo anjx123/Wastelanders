@@ -4,10 +4,14 @@ using UnityEngine;
 
 public abstract class StaffCards : ActionClass
 {
-    // Start is called before the first frame update
-    public virtual void Start()
+    public override sealed void Start()
     {
-        CardType = CardType.MeleeAttack;  
+        //No initialization code here
+    }
+    public override void Initialize()
+    {
+        CardType = CardType.MeleeAttack;
+        base.Initialize();
     }
 
     public override void OnHit()

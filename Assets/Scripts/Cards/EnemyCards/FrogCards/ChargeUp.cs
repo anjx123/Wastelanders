@@ -22,6 +22,8 @@ public class ChargeUp : FrogAttacks
         Speed = 1;
         Block = 2;
 
+        description = "If this ability is unstaggered, use 'Hurl' next turn";
+
         myName = "ChargeUp";
         CardType = CardType.Defense;
         Renderer renderer = GetComponent<Renderer>();
@@ -34,5 +36,10 @@ public class ChargeUp : FrogAttacks
         DupInit();
 
         Origin.ApplyAllBuffsToCard(ref duplicateCard);
+    }
+
+    public override void OnHit()
+    {
+        //TODO: Insert Hurl
     }
 }

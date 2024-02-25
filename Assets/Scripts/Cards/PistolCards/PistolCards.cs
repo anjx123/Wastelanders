@@ -4,9 +4,15 @@ using UnityEngine;
 
 public abstract class PistolCards : ActionClass
 {
-    public virtual void Start()
+    public override sealed void Start()
+    {
+        //No initialization code here
+    }
+
+    public override void Initialize()
     {
         CardType = CardType.RangedAttack;
+        base.Initialize();
     }
     public override void OnHit()
     {

@@ -16,7 +16,7 @@ public class Jackie : PlayerClass
         Health = MaxHealth;
         myName = "Jackie";
 
-        HighlightManager.player = this;
+        HighlightManager.selectedPlayer = this;
 
         // deep copy deck into pool
         for (int i = 0; i < cardPrefabs.Count; i++)
@@ -48,7 +48,8 @@ public class Jackie : PlayerClass
             {
                 hand.Add(pool[idx]);
                 pool.RemoveAt(idx);
-            } else
+            }
+            else
             {
                 Debug.LogWarning(myName + "'s Pool has no cards");
             }
@@ -74,12 +75,21 @@ public class Jackie : PlayerClass
             hand[i].transform.SetParent(handContainer.transform, false);
             hand[i].transform.position = Vector3.zero;
 
-            float distanceToLeft = (float)(handContainer.rect.width / 2 - (i * cardWidth * 0.9));
+            float distanceToLeft = (float)(handContainer.rect.width / 2 - (i * cardWidth));
 
             float y = handContainer.transform.position.y;
-            Vector3 v = new Vector3(-distanceToLeft, y, -i + 10);
+            Vector3 v = new Vector3(-distanceToLeft, y, -i);
             hand[i].transform.position = v;
             hand[i].transform.rotation = Quaternion.Euler(0, 0, -5);
+        }
+        RenderText();
+    }
+
+    protected void RenderText()
+    {
+        for (int i = 0; i < hand.Count; i++)
+        {
+            hand[i].GetComponent<ActionClass>().UpdateText();
         }
     }
 

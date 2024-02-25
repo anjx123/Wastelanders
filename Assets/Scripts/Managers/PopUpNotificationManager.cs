@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEditorInternal;
 using UnityEngine;
 
@@ -8,8 +9,7 @@ public class PopUpNotificationManager : MonoBehaviour
 {
     public static PopUpNotificationManager Instance { get; private set; }
 
-    public GameObject warningPrefab;
-    public GameObject canvasObject;
+    public GameObject warningObject;
 
     public bool isRunning = false;
 
@@ -20,16 +20,24 @@ public class PopUpNotificationManager : MonoBehaviour
         {
             Instance = this;
         }
-        else if (Instance != null && Instance != this)
+        else if (Instance != this)
         {
-            Destroy(this);
+            Destroy(gameObject);
         }
-
-        DontDestroyOnLoad(gameObject);
-        createWarning("ahh!!!");
+        createWarning("Round Start!!!");
     }
 
-    public void WarningSwitch(PopupType popupType, GameObject obj = null)
+    private void Start()
+    {
+        CombatManager.OnGameStateChanged += DismissDescription;
+    }
+
+    private void OnDestroy()
+    {
+        CombatManager.OnGameStateChanged -= DismissDescription;
+    }
+
+    public void DisplayWarning(PopupType popupType, GameObject obj = null)
     {
         switch (popupType)
         {
@@ -42,6 +50,9 @@ public class PopUpNotificationManager : MonoBehaviour
             case PopupType.DeckReshuffled:
                 createWarning("Deck Reshuffled");
                 break;
+            case PopupType.SelectEnemyFirst: 
+                createWarning("Select a card first!");
+                break;
             default:
                 break;
         }
@@ -50,8 +61,26 @@ public class PopUpNotificationManager : MonoBehaviour
 
     public void createWarning(string message)
     {
-        GameObject instance = Instantiate(warningPrefab, canvasObject.transform);
-        WarningInfo info = instance.GetComponent<WarningInfo>();
-        info.setText(message);
+        WarningInfo info = warningObject.GetComponent<WarningInfo>();
+        info.showWarning(message);
     }
+
+    public void DisplayText(string description)
+    {
+        warningObject.GetComponent<WarningInfo>().DisplayDescription(description);
+    }
+
+    public void RemoveDescription()
+    {
+        warningObject.GetComponent<WarningInfo>().RemoveDescription();
+    }
+
+    public void DismissDescription(GameState gameState)
+    {
+        if (gameState == GameState.FIGHTING)
+        {
+            RemoveDescription();
+        }
+    }
+
 }

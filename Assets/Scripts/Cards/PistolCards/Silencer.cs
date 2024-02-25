@@ -10,20 +10,18 @@ public class Silencer : PistolCards
     }
 
     // Start is called before the first frame update
-    public override void Start()
+    public override void Initialize()
     {
         lowerBound = 1;
         upperBound = 4;
-        base.Start();
         Speed = 3;
-        Block = 2;
-
+        description = "If this Attack is unstaggered, gain 2 accuracy.";
         myName = "Silencer";
         CardType = CardType.RangedAttack;
         Renderer renderer = GetComponent<Renderer>();
         ogMaterial = renderer.material; // og sprite of card
         OriginalPosition = transform.position;
-
+        base.Initialize();
 
 
     }
@@ -37,10 +35,7 @@ public class Silencer : PistolCards
     public override void ApplyEffect()
     {
 
-        DupInit();
-
-        
-        Origin.ApplyAllBuffsToCard(ref duplicateCard);
+        base.ApplyEffect();
 
     }
 

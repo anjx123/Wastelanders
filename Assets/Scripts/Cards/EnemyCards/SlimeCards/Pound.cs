@@ -14,11 +14,6 @@ public class Pound : SlimeAttacks
 
     }
 
-    // Start is called before the first frame update
-    public override void Start()
-    {
-        
-    }
 
     public override void Initialize()
     {
@@ -29,6 +24,8 @@ public class Pound : SlimeAttacks
         Block = 2;
 
         myName = "Pound";
+        description = "I wouldn't stand still if I were you";
+        CardType = CardType.MeleeAttack;
         Renderer renderer = GetComponent<Renderer>();
         ogMaterial = renderer.material; // og sprite of card
         OriginalPosition = transform.position;

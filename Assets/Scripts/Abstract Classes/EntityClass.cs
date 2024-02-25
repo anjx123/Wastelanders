@@ -6,6 +6,7 @@ using static UnityEngine.UI.Image;
 
 public abstract class EntityClass : SelectClass
 {
+    private float PLAY_RUNNING_ANIMATION_DELTA = 0.01f; //Represents how little change in position we should at least see before playing running animation
     protected int MAX_HEALTH;
     protected int MaxHealth
     {
@@ -13,13 +14,12 @@ public abstract class EntityClass : SelectClass
         set
         {
             MAX_HEALTH = value;
-            healthBar.setMaxHealth(MAX_HEALTH);
+            combatInfo.SetMaxHealth(MAX_HEALTH);
         }
     }
 
 
     private int health;
-    public HealthBar healthBar;
     public Animator animator;
     public CombatInfo combatInfo;
 
@@ -33,7 +33,7 @@ public abstract class EntityClass : SelectClass
         protected set 
         {
             health = value;
-            healthBar.setHealth(health);
+            combatInfo.SetHealth(health);
         }
     }
 
@@ -56,6 +56,7 @@ public abstract class EntityClass : SelectClass
         statusEffects = new Dictionary<string, StatusEffect>();
 
         DeEmphasize();
+        DisableDice();
     }
 
     /*
@@ -66,7 +67,6 @@ public abstract class EntityClass : SelectClass
     public virtual void TakeDamage(EntityClass source, int damage)
     {
         Health = Mathf.Clamp(Health - damage, 0, MaxHealth);
-        healthBar.setHealth(Health);
         float percentageDone = 1; //Testing different powered knockbacks
         if (Health != 0)
         {
@@ -138,7 +138,7 @@ public abstract class EntityClass : SelectClass
 
         UpdateFacing(diffInLocation, lookAtPosition);
 
-        if (HasParameter("IsMoving", animator))
+        if (HasParameter("IsMoving", animator) && distance > radius + PLAY_RUNNING_ANIMATION_DELTA)
         {
             animator.SetBool("IsMoving", true);
         }
@@ -242,7 +242,6 @@ public abstract class EntityClass : SelectClass
     public virtual void Heal(int val)
     {
         Health = Mathf.Clamp(Health + val, 0, MaxHealth);
-        healthBar.setHealth(Health);
     }
 
     public override void OnMouseDown()
@@ -277,6 +276,14 @@ public abstract class EntityClass : SelectClass
         CheckBuff(buffType);
         statusEffects[buffType].GainStacks(stacks);
         UpdateBuffs();
+    }
+
+    public void ReduceStacks(string buffType, int stacks)
+    {
+        if (statusEffects.ContainsKey(buffType))
+        {
+            statusEffects[buffType].LoseStacks(stacks);
+        }
     }
 
     // Applies the Stacks of the Specified Buff to the Card Roll Limits
@@ -370,7 +377,7 @@ public abstract class EntityClass : SelectClass
         transform.position = largeTransform;
         GetComponent<SpriteRenderer>().sortingOrder = CombatManager.Instance.FADE_SORTING_ORDER + 1;
         combatInfo.Emphasize();
-        healthBar.Emphasize();
+        
     }
 
     //Decreases this Entity Class' sorting layer. (Standardizes Sorting Layers for entities)
@@ -381,7 +388,7 @@ public abstract class EntityClass : SelectClass
         transform.position = largeTransform;
         GetComponent<SpriteRenderer>().sortingOrder = CombatManager.Instance.FADE_SORTING_ORDER - 1;
         combatInfo.DeEmphasize();
-        healthBar.DeEmphasize();
+        
     }
 
     public void SetDice(int value)
@@ -392,6 +399,15 @@ public abstract class EntityClass : SelectClass
     public void UpdateBuffs()
     {
         combatInfo.UpdateBuffs(statusEffects);
+    }
+
+    public void EnableDice()
+    {
+        combatInfo.EnableDice();
+    }
+    public void DisableDice()
+    {
+        combatInfo.DisableDice();
     }
 
     
