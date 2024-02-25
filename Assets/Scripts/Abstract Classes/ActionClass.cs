@@ -150,8 +150,6 @@ public abstract class ActionClass : SelectClass
         Transform textContainerTransform = transform.Find("TextCanvas");
         if (textContainerTransform == null)
         {
-            // ALL GOOD IF IT IS MISSING FROM ENEMY!
-            Debug.Log("Did not find TextCanvas; missing on " + myName);
             return;
         }
         GameObject textContainer = textContainerTransform.gameObject;
@@ -187,8 +185,8 @@ public abstract class ActionClass : SelectClass
             UpperBoundText.color = Color.red;
         }
 
-
     }
+
 
     public override void OnMouseEnter()
     {

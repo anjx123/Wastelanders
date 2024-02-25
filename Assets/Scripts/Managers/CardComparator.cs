@@ -141,6 +141,7 @@ public class CardComparator : MonoBehaviour
 
         //Hit and feel effects
         actionClass.OnHit();
+        actionClass.Origin.combatInfo.setDiceColor(true);
         yield return new WaitForSeconds(COMBAT_BUFFER_TIME);
 
         //Reset the Scene
