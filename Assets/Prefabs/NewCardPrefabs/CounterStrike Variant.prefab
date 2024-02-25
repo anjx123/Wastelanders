@@ -104,5 +104,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myTransform: {fileID: 5012185014399619682}
   titleName: Counter Strike
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: bdc2c25ddbd262c4e9076aa904cc7e6c, type: 3}
   fullCardObjectPrefab: {fileID: 0}

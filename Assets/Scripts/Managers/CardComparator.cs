@@ -48,6 +48,20 @@ public class CardComparator : MonoBehaviour
 
         cardOneGreater = ClashCompare(card1, card2);
 
+        if (cardOneGreater < 0)
+        {
+            card1.Origin.combatInfo.setDiceColor(false);
+            card2.Origin.combatInfo.setDiceColor(true);
+        }
+        else if (cardOneGreater == 0)
+        {
+            // idk what color to use on tie lol
+        }
+        else
+        {
+            card2.Origin.combatInfo.setDiceColor(false);
+            card1.Origin.combatInfo.setDiceColor(true);
+        }
 
         if (IsAttack(card1) && IsAttack(card2))
         {
@@ -58,13 +72,9 @@ public class CardComparator : MonoBehaviour
             } else if (cardOneGreater < 0) //Card2 wins clash
             {
                 card2.OnHit();
-                card1.Origin.combatInfo.setDiceColor(false);
-                card2.Origin.combatInfo.setDiceColor(true);
             } else if (cardOneGreater > 0) //Card1 wins clash
             {
-                card1.OnHit();
-                card2.Origin.combatInfo.setDiceColor(false);
-                card1.Origin.combatInfo.setDiceColor(true);
+                card1.OnHit();  
             }
         } else if (card1.CardType == CardType.Defense && IsAttack(card2))
         {
