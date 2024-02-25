@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class HighlightManager : MonoBehaviour // later all entity highlighter
 {
+    private List<PlayerClass> players;
+
 #nullable enable
     private static EntityClass? currentHighlightedEntity = null;
     private static ActionClass? currentHighlightedAction = null;
@@ -13,6 +15,7 @@ public class HighlightManager : MonoBehaviour // later all entity highlighter
     private void Start()
     {
         CombatManager.OnGameStateChanged += ResetSelection;
+        players = CombatManager.Instance.GetPlayers();
     }
 
     private void OnDestroy()
@@ -31,6 +34,13 @@ public class HighlightManager : MonoBehaviour // later all entity highlighter
         if (CombatManager.Instance.GameState != GameState.SELECTION) return;
         bool isOutlined = false;
 
+        Debug.Log(clicked.GetType());
+
+        if (clicked is PlayerClass)
+        {
+            ((PlayerClass)clicked).PleaseRenderMyHand();
+        }
+
         if (currentHighlightedAction == null) 
         {
             PopUpNotificationManager.Instance.DisplayWarning(PopupType.SelectEnemyFirst);
@@ -42,6 +52,7 @@ public class HighlightManager : MonoBehaviour // later all entity highlighter
             currentHighlightedEntity.Highlight();
             isOutlined = true;
             // no call to PQueue.
+
         }
         else if (currentHighlightedEntity != clicked)
         {
@@ -83,9 +94,7 @@ public class HighlightManager : MonoBehaviour // later all entity highlighter
                 PopUpNotificationManager.Instance.DisplayWarning(PopupType.SameSpeed);
             }
             currentHighlightedEntity = null;
-            currentHighlightedAction = null;
-
-            
+            currentHighlightedAction = null;   
         }
     }
 
@@ -131,6 +140,28 @@ public class HighlightManager : MonoBehaviour // later all entity highlighter
                 }
 
             }
+            // temp implementation
+            if (selectedPlayer == null)
+            {
+                return;
+            } else
+            {
+                selectedPlayer.UnRenderHand();
+            }
+        } 
+    }
+
+    public static bool RenderHandIfAppropriate(PlayerClass player)
+    {
+        if (selectedPlayer == player)
+        {
+            player.PleaseRenderMyHand();
+            return true;
+        } else
+        {
+            return false;
         }
     }
+
+    // destruction should automatically destory the object itself and therefore it's container.
 }

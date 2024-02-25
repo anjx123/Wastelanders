@@ -1,9 +1,14 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class PlayerClass : EntityClass
 {
+    public List<GameObject> cardPrefabs;
+    public RectTransform handContainer;
+    public int cardWidth;
+
     abstract public void ReaddCard(ActionClass card);
 
     protected int maxHandSize = 4;
@@ -32,6 +37,14 @@ public abstract class PlayerClass : EntityClass
      */
     abstract protected void DrawCard();
 
+    public abstract void UnRenderHand();
+
+    public void PleaseRenderMyHand()
+    {
+        RenderHand();
+    }
+
+    // shouldI is if a render should take place at all.
     protected abstract void RenderHand();
 
     /*  Called by HighlightManager whenever an action is declared. Deletes the used card.
@@ -75,6 +88,6 @@ public abstract class PlayerClass : EntityClass
         {
             DrawCard();
         }
-        RenderHand();
+        // RenderHand();
     }
 }

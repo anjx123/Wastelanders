@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class Jackie : PlayerClass
 {
-    public List<GameObject> cardPrefabs;
-    public RectTransform handContainer;
-    public int cardWidth;
 
     // Start is called before the first frame update
     public override void Start()
@@ -59,7 +56,9 @@ public class Jackie : PlayerClass
     override public void ReaddCard(ActionClass card) {
         hand.Add(card.gameObject);
         discard.Remove(card.gameObject);
-        RenderHand();
+        // RenderHand(); // !!!
+        HighlightManager.RenderHandIfAppropriate(this);
+
     }
 
     /*  Renders the cards in List<GameObject> hand to the screen, as children of the handContainer.
@@ -70,19 +69,30 @@ public class Jackie : PlayerClass
      */
     protected override void RenderHand()
     {
+        {
+            for (int i = 0; i < hand.Count; i++)
+            {
+                hand[i].transform.SetParent(handContainer.transform, false);
+                hand[i].transform.position = Vector3.zero;
+
+                float distanceToLeft = (float)(handContainer.rect.width / 2 - (i * cardWidth));
+
+                float y = handContainer.transform.position.y;
+                Vector3 v = new Vector3(-distanceToLeft, y, -i);
+                hand[i].transform.position = v;
+                hand[i].transform.rotation = Quaternion.Euler(0, 0, -5);
+            }
+            RenderText();
+        }
+    }
+
+    // "unrenders" the hand
+    public override void UnRenderHand()
+    {
         for (int i = 0; i < hand.Count; i++)
         {
-            hand[i].transform.SetParent(handContainer.transform, false);
-            hand[i].transform.position = Vector3.zero;
-
-            float distanceToLeft = (float)(handContainer.rect.width / 2 - (i * cardWidth));
-
-            float y = handContainer.transform.position.y;
-            Vector3 v = new Vector3(-distanceToLeft, y, -i);
-            hand[i].transform.position = v;
-            hand[i].transform.rotation = Quaternion.Euler(0, 0, -5);
+            hand[i].transform.position = new Vector3(-10, -10, 10);
         }
-        RenderText();
     }
 
     protected void RenderText()
@@ -105,8 +115,10 @@ public class Jackie : PlayerClass
         discard.Add(used);
         used.transform.position = new Vector3(500, 500, 1);
         // draw a replacement card
-        RenderHand();
-    }
+        // RenderHand(); 
+        HighlightManager.RenderHandIfAppropriate(this);
+
+}
 
     /* helper function for HandleUseCard, it takes a gameobject and type and returns
      * a child gameobject that has a script of that type.

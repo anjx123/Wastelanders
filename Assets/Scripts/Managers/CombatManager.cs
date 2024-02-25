@@ -291,4 +291,9 @@ public class CombatManager : MonoBehaviour
             OnGameStateChanged?.Invoke(gameState);
         }
     }
+
+    public List<PlayerClass> GetPlayers()
+    {
+        return players;
+    }
 }
