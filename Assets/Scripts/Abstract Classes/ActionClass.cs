@@ -94,7 +94,7 @@ public abstract class ActionClass : SelectClass
 
     // Initializes a CardDup struct with the given stats of the Card to 
     // modify further based on buffs
-    protected void DupInit()
+    private void DupInit()
     {
         duplicateCard = new CardDup();
         duplicateCard.rollFloor = lowerBound;

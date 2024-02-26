@@ -25,10 +25,5 @@ public class Spit : FrogAttacks
         OriginalPosition = transform.position;
     }
 
-    public override void ApplyEffect()
-    {
-        DupInit();
 
-        Origin.ApplyAllBuffsToCard(ref duplicateCard);
-    }
 }

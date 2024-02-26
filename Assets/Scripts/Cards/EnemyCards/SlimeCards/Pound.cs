@@ -30,12 +30,6 @@ public class Pound : SlimeAttacks
         OriginalPosition = transform.position;
     }
 
-    public override void ApplyEffect()
-    {
-        DupInit();
-
-        Origin.ApplyAllBuffsToCard(ref duplicateCard);
-    }
 
     public override void OnHit()
     {

@@ -27,12 +27,7 @@ public class StackSmash : SlimeAttacks
         ogMaterial = renderer.material; // og sprite of card
         OriginalPosition = transform.position;
     }
-    public override void ApplyEffect()
-    {
-        DupInit();
 
-        Origin.ApplyAllBuffsToCard(ref duplicateCard);
-    }
 
     public override void OnHit()
     {

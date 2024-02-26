@@ -30,13 +30,6 @@ public class DiscreteStrike : StaffCards
 
     }
 
-    public override void ApplyEffect()
-    {
-
-        DupInit();
-
-        Origin.ApplyAllBuffsToCard(ref duplicateCard);
-    }
 
     public override void OnHit()
     {

@@ -32,11 +32,5 @@ public class HipFire : PistolCards
     }
 
 
-    public override void ApplyEffect()
-    {
-        DupInit();
-        
-        Origin.ApplyAllBuffsToCard(ref duplicateCard);
-    }
 
 }
