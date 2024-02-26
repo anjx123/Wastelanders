@@ -20,7 +20,6 @@ public class Hurl : FrogAttacks
         upperBound = 7;
         
         Speed = 5;
-        Block = 2;
 
         myName = "Hurl";
         Renderer renderer = GetComponent<Renderer>();

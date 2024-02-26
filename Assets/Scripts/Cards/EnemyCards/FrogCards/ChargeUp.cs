@@ -20,7 +20,6 @@ public class ChargeUp : FrogAttacks
         upperBound = 3;
         
         Speed = 1;
-        Block = 2;
 
         description = "If this ability is unstaggered, use 'Hurl' next turn";
 

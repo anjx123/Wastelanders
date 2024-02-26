@@ -16,7 +16,6 @@ public class Vitals : PistolCards
         upperBound = 8;
 
         Speed = 3;
-        Block = 2;
 
         myName = "Vitals";
         description = "Hit 'em where it hurts";

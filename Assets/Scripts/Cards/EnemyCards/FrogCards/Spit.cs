@@ -18,7 +18,6 @@ public class Spit : FrogAttacks
         lowerBound = 1;
         upperBound = 4;
         Speed = 4;
-        Block = 2;
 
         myName = "Spit";
         Renderer renderer = GetComponent<Renderer>();

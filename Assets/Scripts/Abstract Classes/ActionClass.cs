@@ -37,8 +37,6 @@ public abstract class ActionClass : SelectClass
         public int rollCeiling;
         public int actualRoll;
     }
-    public int Damage { get; protected set; }
-    public int Block { get; protected set; }
     public int Speed { get; protected set; }
     protected string description;
 

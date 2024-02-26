@@ -20,7 +20,6 @@ public class CounterStrike : StaffCards
 
 
         Speed = 5;
-        Block = 2;
         
         myName = "CounterStrike";
         description = "Make a melee attack at speed 1 with this card’s lower and upper bound for every attack the clashing opponent makes against this character.";
