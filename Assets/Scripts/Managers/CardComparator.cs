@@ -50,17 +50,18 @@ public class CardComparator : MonoBehaviour
 
         if (cardOneGreater < 0)
         {
-            card1.Origin.combatInfo.setDiceColor(false);
-            card2.Origin.combatInfo.setDiceColor(true);
+            card1.Origin.combatInfo.setDiceColor(Color.red);
+            card2.Origin.combatInfo.setDiceColor(Color.green);
         }
         else if (cardOneGreater == 0)
         {
-            // idk what color to use on tie lol
+            card1.Origin.combatInfo.setDiceColor(Color.white);
+            card2.Origin.combatInfo.setDiceColor(Color.white);
         }
         else
         {
-            card2.Origin.combatInfo.setDiceColor(false);
-            card1.Origin.combatInfo.setDiceColor(true);
+            card2.Origin.combatInfo.setDiceColor(Color.red);
+            card1.Origin.combatInfo.setDiceColor(Color.green);
         }
 
         if (IsAttack(card1) && IsAttack(card2))
@@ -141,7 +142,7 @@ public class CardComparator : MonoBehaviour
 
         //Hit and feel effects
         actionClass.OnHit();
-        actionClass.Origin.combatInfo.setDiceColor(true);
+        actionClass.Origin.combatInfo.setDiceColor(Color.green);
         yield return new WaitForSeconds(COMBAT_BUFFER_TIME);
 
         //Reset the Scene

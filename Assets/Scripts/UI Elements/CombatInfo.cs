@@ -45,16 +45,9 @@ public class CombatInfo : MonoBehaviour
     }
 
     // Sets the appropriate color of the dice
-    public void setDiceColor(bool won)
+    public void setDiceColor(Color color)
     {
-        if (won)
-        {
-            diceRollText.GetComponent<TMP_Text>().color = Color.green;
-        }
-        else
-        {
-            diceRollText.GetComponent<TMP_Text>().color = Color.red;
-        }
+        diceRollText.GetComponent<TMP_Text>().color = color;
     }
 
     /* 
