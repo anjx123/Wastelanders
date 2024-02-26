@@ -111,7 +111,7 @@ public abstract class ActionClass : SelectClass
         duplicateCard.actualRoll += byValue;
     }
 
-    private void UpdateDup()
+    public void UpdateDup()
     {
         DupInit();
         Origin.ApplyAllBuffsToCard(ref duplicateCard);
@@ -143,7 +143,7 @@ public abstract class ActionClass : SelectClass
         }
     }
 
-    public void UpdateText()
+    private void UpdateText()
     {
         Transform textContainerTransform = transform.Find("TextCanvas");
         if (textContainerTransform == null)
