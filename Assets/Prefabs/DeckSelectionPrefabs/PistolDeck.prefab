@@ -8,13 +8,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3522037383136847448, guid: f4e3c39036a0e964ca15018d4479d8e4, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 601769b83c413394f9dcef8bf9a4ef38, type: 3}
+    - target: {fileID: 3522037383136847448, guid: f4e3c39036a0e964ca15018d4479d8e4, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5372623935015044124, guid: f4e3c39036a0e964ca15018d4479d8e4, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.088398
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5372623935015044124, guid: f4e3c39036a0e964ca15018d4479d8e4, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.558011
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5372623935015044124, guid: f4e3c39036a0e964ca15018d4479d8e4, type: 3}
       propertyPath: m_LocalPosition.z
@@ -50,7 +58,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5600832855789982161, guid: f4e3c39036a0e964ca15018d4479d8e4, type: 3}
       propertyPath: m_Name
-      value: WeaponDeckPrefab Variant
+      value: PistolDeck
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

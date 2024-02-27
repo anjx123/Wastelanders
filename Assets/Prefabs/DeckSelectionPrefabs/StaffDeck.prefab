@@ -8,17 +8,25 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1954977229092721418, guid: f4e3c39036a0e964ca15018d4479d8e4, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 4.37
+      objectReference: {fileID: 0}
+    - target: {fileID: 1954977229092721418, guid: f4e3c39036a0e964ca15018d4479d8e4, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 2.79
+      objectReference: {fileID: 0}
     - target: {fileID: 3522037383136847448, guid: f4e3c39036a0e964ca15018d4479d8e4, type: 3}
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: a34c4d771cecc3e40814a015e6e3b31d, type: 3}
     - target: {fileID: 5372623935015044124, guid: f4e3c39036a0e964ca15018d4479d8e4, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.411216
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5372623935015044124, guid: f4e3c39036a0e964ca15018d4479d8e4, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.65301025
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5372623935015044124, guid: f4e3c39036a0e964ca15018d4479d8e4, type: 3}
       propertyPath: m_LocalPosition.z
@@ -54,7 +62,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5600832855789982161, guid: f4e3c39036a0e964ca15018d4479d8e4, type: 3}
       propertyPath: m_Name
-      value: WeaponDeckPrefab (1) Variant
+      value: StaffDeck
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
