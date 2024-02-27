@@ -59,6 +59,13 @@ public abstract class EntityClass : SelectClass
 
         DeEmphasize();
         DisableDice();
+
+        CombatManager.OnGameStateChanged += UpdateBuffsNewRound;
+    }
+
+    private void OnDestroy()
+    {
+        CombatManager.OnGameStateChanged -= UpdateBuffsNewRound;
     }
 
     /*
@@ -368,13 +375,16 @@ public abstract class EntityClass : SelectClass
     }
 
     // Updates buffs that change when a new round begins
-    public void UpdateBuffsNewRound()
+    public void UpdateBuffsNewRound(GameState newState)
     {
-        foreach (string s in statusEffects.Keys)
+        if (newState == GameState.SELECTION)
         {
-            statusEffects[s].NewRound();
+            foreach (string s in statusEffects.Keys)
+            {
+                statusEffects[s].NewRound();
+            }
+            UpdateBuffs();
         }
-        UpdateBuffs();
     }
 
     public virtual void AttackAnimation(string animationName)

@@ -78,13 +78,7 @@ public class CombatManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        CombatManager.OnGameStateChanged += NewRoundPlayerBuffs;
         GameState = GameState.GAME_START; //Put game start code in the performGameStart method.
-    }
-
-    private void OnDestroy()
-    {
-        CombatManager.OnGameStateChanged -= NewRoundPlayerBuffs;
     }
 
 
@@ -292,17 +286,6 @@ public class CombatManager : MonoBehaviour
 
             }
             OnGameStateChanged?.Invoke(gameState);
-        }
-    }
-
-    public void NewRoundPlayerBuffs(GameState newState)
-    {
-        if (newState == GameState.SELECTION)
-        {
-            foreach (EntityClass e in players)
-            {
-                e.UpdateBuffsNewRound();
-            }
         }
     }
 }
