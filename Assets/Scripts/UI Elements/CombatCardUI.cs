@@ -26,6 +26,7 @@ public class CombatCardUI : DisplayableClass
         // If the card is not currently displaying, show it
         if (CombatManager.Instance.CanHighlight())
         {
+            
             ShowCard();
         }
     }
