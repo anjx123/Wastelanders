@@ -29,17 +29,4 @@ public class CounterStrike : StaffCards
         OriginalPosition = transform.position;
         base.Initialize();
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-    }
-    public override void ApplyEffect()
-    {
-        
-        Origin.AddStacks(Focus.buffName, 2);
-        base.ApplyEffect();
-        
-
-    }
 }
