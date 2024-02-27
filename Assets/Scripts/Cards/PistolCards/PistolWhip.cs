@@ -17,8 +17,6 @@ public class PistolWhip : PistolCards
         lowerBound = 3;
         upperBound = 5;
         Speed = 1;
-        Block = 0;
-        Damage = 0;
         description = "Good Ol' reliable CQC!";
         myName = "PistolWhip";
         Renderer renderer = GetComponent<Renderer>();
