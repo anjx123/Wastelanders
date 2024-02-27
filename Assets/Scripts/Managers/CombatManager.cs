@@ -78,7 +78,13 @@ public class CombatManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        CombatManager.OnGameStateChanged += NewRoundPlayerBuffs;
         GameState = GameState.GAME_START; //Put game start code in the performGameStart method.
+    }
+
+    private void OnDestroy()
+    {
+        CombatManager.OnGameStateChanged -= NewRoundPlayerBuffs;
     }
 
 
@@ -108,7 +114,6 @@ public class CombatManager : MonoBehaviour
     //Allows players to start selection again, resets enemies attacks and position
     private void PerformSelection()
     {
-        NewRoundPlayerBuffs();
         Activate(startDequeue);
         Activate(handContainer);
         baseCamera.Priority = 1;
@@ -290,11 +295,14 @@ public class CombatManager : MonoBehaviour
         }
     }
 
-    public void NewRoundPlayerBuffs()
+    public void NewRoundPlayerBuffs(GameState newState)
     {
-        foreach (EntityClass e in players)
+        if (newState == GameState.SELECTION)
         {
-            e.UpdateBuffsNewRound();
+            foreach (EntityClass e in players)
+            {
+                e.UpdateBuffsNewRound();
+            }
         }
     }
 }
