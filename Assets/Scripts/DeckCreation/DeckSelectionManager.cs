@@ -59,10 +59,25 @@ public class DeckSelectionManager : MonoBehaviour
         deckSelectionUi.SetActive(false);
     }
 
+    public int width = 10; // The width of the grid
+    public int height = 10; // The height of the grid
+    public float spacing = 2.0f; // The space between each object
+
     private void PerformDeckSelection()
     {
         characterSelectionUi.SetActive(false);
         weaponSelectionUi.SetActive(false);
         deckSelectionUi.SetActive(true);
+        for (int x = 0; x < width; x++)
+        {
+            for (int y = 0; y < height; y++)
+            {
+                // Calculate the position for each object
+                Vector3 pos = new Vector3(x * spacing, y * spacing, 0);
+
+                // Instantiate the object at the calculated position
+                //Instantiate(prefab, pos, Quaternion.identity);
+            }
+        }
     }
 }
