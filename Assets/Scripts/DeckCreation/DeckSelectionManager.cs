@@ -79,6 +79,17 @@ public class DeckSelectionManager : MonoBehaviour
 
         List<ActionClass> cardsToRender = cardDatabase.GetCardsByType(weaponType);
 
+        List<GameObject> instantiatedCards = new List<GameObject>();
+
+        //In order to sort, the cards must be instantiated and initialized first :pensive:
+        foreach (ActionClass card in cardsToRender)
+        {
+            instantiatedCards.Add(Instantiate(card.gameObject));
+        }
+
+        instantiatedCards.Sort((card1, card2) => card1.GetComponent<ActionClass>().Speed.CompareTo(card2.GetComponent<ActionClass>().Speed));
+
+
         int index = 0;
 
         for (int y = 0; y < height; y++)
@@ -87,19 +98,18 @@ public class DeckSelectionManager : MonoBehaviour
             {
                 Vector3 pos = new Vector3(x * xSpacing + xOffset, y * ySpacing + yOffset, 0);
 
-                if (index < cardsToRender.Count)
+                if (index < instantiatedCards.Count)
                 {
-                    GameObject prefab = cardsToRender[index].gameObject;
+                    GameObject cardPrefab = instantiatedCards[index];
 
-                    GameObject instance = Instantiate(prefab, pos, Quaternion.identity);
-
-                    instance.transform.SetParent(cardArrayParent.transform);
+                    cardPrefab.transform.SetParent(cardArrayParent.transform);
+                    cardPrefab.transform.position = pos;
 
                     // Scale the instance
-                    Vector3 scale = instance.transform.localScale;
+                    Vector3 scale = cardPrefab.transform.localScale;
                     scale.x *= cardScaling;
                     scale.y *= cardScaling;
-                    instance.transform.localScale = scale;
+                    cardPrefab.transform.localScale = scale;
 
                     index++; 
                 }
@@ -109,7 +119,7 @@ public class DeckSelectionManager : MonoBehaviour
                 }
             }
 
-            if (index >= cardsToRender.Count)
+            if (index >= instantiatedCards.Count)
             {
                 break;
             }
