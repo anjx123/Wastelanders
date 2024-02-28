@@ -49,9 +49,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myTransform: {fileID: 7946142163233550150}
-  crosshairPrefab: {fileID: 1659748562456849422, guid: 69108d309b2cece4dbad3db2a665faf9, type: 3}
   animator: {fileID: 3297183234373819581}
   combatInfo: {fileID: 5598173080790413213}
+  boxCollider: {fileID: 6773406975685228959}
   availableActions:
   - {fileID: 2376898879351982445, guid: 763a690f87eae40e2ba78421da934720, type: 3}
   - {fileID: 5586820537936588944, guid: d7ed528b3d5934a809e97a1ef133cdd0, type: 3}
@@ -120,7 +120,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 473aab34eb102ea449d7c031f047407d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
+  m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 5.12, y: 5.12}
@@ -209,6 +209,14 @@ PrefabInstance:
     - target: {fileID: 8036639253418242914, guid: 941333e3be7f6f04688676f1827dbf1b, type: 3}
       propertyPath: m_Name
       value: CombatCardInfo
+      objectReference: {fileID: 0}
+    - target: {fileID: 8340342195121217539, guid: 941333e3be7f6f04688676f1827dbf1b, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8340342195121217539, guid: 941333e3be7f6f04688676f1827dbf1b, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

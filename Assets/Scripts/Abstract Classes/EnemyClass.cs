@@ -102,15 +102,4 @@ public abstract class EnemyClass : EntityClass
         yield return StartCoroutine(MoveToPosition(initialPosition, 0f, 0.8f));
         FaceLeft();
     }
-    public override void FaceRight()
-    {
-        this.GetComponent<SpriteRenderer>().flipX = true;
-        combatInfo.FaceRight();
-    }
-
-    public override void FaceLeft()
-    {
-        this.GetComponent<SpriteRenderer>().flipX = false;
-        combatInfo.FaceLeft();
-    }
 }

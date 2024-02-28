@@ -57,18 +57,6 @@ public abstract class PlayerClass : EntityClass
         this.gameObject.SetActive(false);
     }
 
-    public override void FaceRight()
-    {
-        this.GetComponent<SpriteRenderer>().flipX = false;
-        combatInfo.FaceRight();
-    }
-
-    public override void FaceLeft()
-    {
-        this.GetComponent<SpriteRenderer>().flipX = true;
-        combatInfo.FaceLeft();
-    }
-
     public void DrawToMax()
     {
         for (int i = hand.Count; i < maxHandSize; i++)

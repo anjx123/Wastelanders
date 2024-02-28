@@ -24,6 +24,7 @@ public abstract class EntityClass : SelectClass
     public Animator animator;
     public CombatInfo combatInfo;
 
+    [SerializeField] private BoxCollider boxCollider;
     protected bool isDead = false;
     private bool crosshairStaysActive = false;
 
@@ -164,14 +165,46 @@ public abstract class EntityClass : SelectClass
             animator.SetBool("IsMoving", false);
         }
     }
+    public void FaceRight()
+    {
+        FlipTransform(this.transform, true);
+        combatInfo.FaceRight();
+    }
 
-    public abstract void FaceRight();
-
-    public abstract void FaceLeft();
+    public void FaceLeft()
+    {
+        FlipTransform(this.transform, false);
+        combatInfo.FaceLeft();
+    }
 
     public bool IsFacingRight()
     {
-        return combatInfo.IsFacingRight();
+        return transform.localScale.x > 0;
+    }
+    public void FlipTransform(Transform transform, bool faceRight)
+    {
+        if (faceRight) //Face Right
+        {
+            Vector3 flippedTransform = transform.localScale;
+            flippedTransform.x = Mathf.Abs(flippedTransform.x);
+            transform.localScale = flippedTransform;
+            if (boxCollider)
+            {
+                Vector3 currentScale = boxCollider.size;
+                boxCollider.size = new Vector3(Mathf.Abs(currentScale.x), Mathf.Abs(currentScale.y), Mathf.Abs(currentScale.z));
+            }
+        }
+        else
+        {
+            Vector3 flippedTransform = transform.localScale;
+            flippedTransform.x = -Mathf.Abs(flippedTransform.x);
+            transform.localScale = flippedTransform;
+            if (boxCollider)
+            {
+                Vector3 currentScale = boxCollider.size;
+                boxCollider.size = new Vector3(-Mathf.Abs(currentScale.x), Mathf.Abs(currentScale.y), Mathf.Abs(currentScale.z));
+            }
+        }
     }
 
     /*

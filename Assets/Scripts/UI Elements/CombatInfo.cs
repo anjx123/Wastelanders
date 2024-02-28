@@ -128,7 +128,7 @@ public class CombatInfo : MonoBehaviour
     public void FaceLeft()
     {
 
-        FlipTransform(this.transform, false);
+       
         FlipTransform(diceRollText.transform, false);
         FlipTransform(healthBar.transform, false);
         foreach (Transform child in buffList.transform)
@@ -145,7 +145,6 @@ public class CombatInfo : MonoBehaviour
     //Flips the CombatInfo so that the Icon is on the LEFT of the entity
     public void FaceRight()
     {
-        FlipTransform(this.transform, true);
         FlipTransform(diceRollText.transform, true);
         FlipTransform(healthBar.transform, true);
         foreach (Transform child in buffList.transform)
@@ -173,12 +172,6 @@ public class CombatInfo : MonoBehaviour
             transform.localScale = flippedTransform;
         }
     }
-
-    //A Cheat implementation that relies on the implementation of FaceRight/Left 
-    public bool IsFacingRight()
-    {
-        return transform.localScale.x > 0;
-    }
     public void UpdateBuffs(Dictionary<string, StatusEffect> buffs)
     {
         foreach (Transform child in buffList.transform)
@@ -195,13 +188,6 @@ public class CombatInfo : MonoBehaviour
             buffIcon.transform.SetParent(buffList.transform, false);
             buffIcon.SetIcon(buffs[str].GetIcon());
             buffIcon.SetText(buffs[str].Stacks.ToString());
-            if (IsFacingRight())
-            {
-                FlipTransform(buffIcon.transform, true);
-            } else
-            {
-                FlipTransform(buffIcon.transform, false);
-            }
         }
     }
 }
