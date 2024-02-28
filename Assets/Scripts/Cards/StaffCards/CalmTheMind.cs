@@ -20,7 +20,6 @@ public class CalmTheMind : StaffCards
 
 
         Speed = 4;
-        Block = 2;
         
         myName = "CalmTheMind";
         description = "Gain 2 Stacks Of Focus";

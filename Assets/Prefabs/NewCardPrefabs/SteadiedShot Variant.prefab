@@ -76,11 +76,6 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 893399958756392302}
   m_SourcePrefab: {fileID: 100100000, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
---- !u!1 &978375089902247028 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5342606960099249293, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
-  m_PrefabInstance: {fileID: 5167636810020950265}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2522791571507431436 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7256956916184963317, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
@@ -99,38 +94,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myTransform: {fileID: 3837067799679763464}
-  lowerBoundText: {fileID: 8212789809154471464}
-  upperBoundText: {fileID: 8425653311046330821}
-  speedText: {fileID: 978375089902247028}
-  nameText: {fileID: 5957346316200314852}
-  textCanvas: {fileID: 7694288242188906806}
-  description: 
   titleName: Steadied Shot
   icon: {fileID: 21300000, guid: dea52a053c967f44fb04582357015c35, type: 3}
-  fullCard: {fileID: 0}
   fullCardObjectPrefab: {fileID: 0}
+  cardUI: {fileID: 4927219339933139279}
 --- !u!4 &3837067799679763464 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8284128080877360369, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
   m_PrefabInstance: {fileID: 5167636810020950265}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &5957346316200314852 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1520981535418881821, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
+--- !u!114 &4927219339933139279 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 276933645572133302, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
   m_PrefabInstance: {fileID: 5167636810020950265}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &7694288242188906806 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3274319442286895567, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
-  m_PrefabInstance: {fileID: 5167636810020950265}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &8212789809154471464 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3913226332729878225, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
-  m_PrefabInstance: {fileID: 5167636810020950265}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &8425653311046330821 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3700495749604882748, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
-  m_PrefabInstance: {fileID: 5167636810020950265}
-  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 834784dfb02aeaf438f42ae334048e93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

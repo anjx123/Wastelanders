@@ -59,6 +59,13 @@ public abstract class EntityClass : SelectClass
 
         DeEmphasize();
         DisableDice();
+
+        CombatManager.OnGameStateChanged += UpdateBuffsNewRound;
+    }
+
+    private void OnDestroy()
+    {
+        CombatManager.OnGameStateChanged -= UpdateBuffsNewRound;
     }
 
     /*
@@ -77,7 +84,7 @@ public abstract class EntityClass : SelectClass
         {
             CardComparator.PlayEntityDeaths += Die;
         }
-        if (statusEffects.ContainsKey(Accuracy.buffName)) { statusEffects[Accuracy.buffName].OnBuffedEntityHit(); UpdateBuffs(); }
+        UpdateBuffsOnDamage();
         StartCoroutine(PlayHitAnimation(source, this, percentageDone));
     }
 
@@ -355,6 +362,29 @@ public abstract class EntityClass : SelectClass
     public void ClearStacks(string buffType)
     {
         if (statusEffects.ContainsKey(buffType)) {statusEffects[buffType].ClearBuff(); UpdateBuffs();}
+    }
+
+    // Updates buffs affected by player taking damage
+    protected void UpdateBuffsOnDamage()
+    {
+        foreach (string s in statusEffects.Keys)
+        {
+            statusEffects[s].OnBuffedEntityHit();
+        }
+        UpdateBuffs();
+    }
+
+    // Updates buffs that change when a new round begins
+    public void UpdateBuffsNewRound(GameState newState)
+    {
+        if (newState == GameState.SELECTION)
+        {
+            foreach (string s in statusEffects.Keys)
+            {
+                statusEffects[s].NewRound();
+            }
+            UpdateBuffs();
+        }
     }
 
     public virtual void AttackAnimation(string animationName)
