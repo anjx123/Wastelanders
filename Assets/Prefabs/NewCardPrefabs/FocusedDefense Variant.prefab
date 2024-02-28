@@ -80,6 +80,17 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 5998065100771217553}
   m_SourcePrefab: {fileID: 100100000, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
+--- !u!114 &538496351984370446 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 276933645572133302, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
+  m_PrefabInstance: {fileID: 337420579926774456}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 834784dfb02aeaf438f42ae334048e93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6925166128267643469 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7256956916184963317, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
@@ -101,6 +112,7 @@ MonoBehaviour:
   titleName: Focused Defense
   icon: {fileID: 21300000, guid: fa803f65c1e04b44f892de787f8cc226, type: 3}
   fullCardObjectPrefab: {fileID: 0}
+  cardUI: {fileID: 538496351984370446}
 --- !u!4 &8528094363861485129 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8284128080877360369, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
