@@ -20,7 +20,6 @@ public class ChargeUp : FrogAttacks
         upperBound = 3;
         
         Speed = 1;
-        Block = 2;
 
         description = "If this ability is unstaggered, use 'Hurl' next turn";
 
@@ -31,12 +30,7 @@ public class ChargeUp : FrogAttacks
         OriginalPosition = transform.position;
     }
 
-    public override void ApplyEffect()
-    {
-        DupInit();
 
-        Origin.ApplyAllBuffsToCard(ref duplicateCard);
-    }
 
     public override void OnHit()
     {
