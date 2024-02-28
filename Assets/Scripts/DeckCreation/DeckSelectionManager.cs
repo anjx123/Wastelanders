@@ -41,8 +41,7 @@ public class DeckSelectionManager : MonoBehaviour
 
     private void Start()
     {
-        RenderDecks(CardDatabase.WeaponType.PISTOL);
-
+        RenderDecks(CardDatabase.WeaponType.PISTOL); //Simply for testing, remove once broadcasting weapon type is hooked up
     }
 
     private void OnDestroy()
@@ -74,8 +73,9 @@ public class DeckSelectionManager : MonoBehaviour
         float ySpacing = -3.3f;
         float xOffset = -6f; //initial x Offset
         float yOffset = 1f; //initial y Offset
-        float cardScaling = 0.8f; 
+        float cardScaling = 0.8f;
 
+        UnrenderDecks();
 
         List<ActionClass> cardsToRender = cardDatabase.GetCardsByType(weaponType);
 
@@ -123,6 +123,14 @@ public class DeckSelectionManager : MonoBehaviour
             {
                 break;
             }
+        }
+    }
+
+    private void UnrenderDecks()
+    {
+        foreach (Transform child in cardArrayParent.transform)
+        {
+            Destroy(child.gameObject);
         }
     }
 
