@@ -84,7 +84,7 @@ public abstract class ActionClass : SelectClass
 
     public virtual void Initialize()
     {
-        DupInit();
+        UpdateDup();
     }
 
     public int getRolledDamage()
@@ -114,7 +114,7 @@ public abstract class ActionClass : SelectClass
     public void UpdateDup()
     {
         DupInit();
-        Origin.ApplyAllBuffsToCard(ref duplicateCard);
+        Origin?.ApplyAllBuffsToCard(ref duplicateCard);
         UpdateText();
     }
 
