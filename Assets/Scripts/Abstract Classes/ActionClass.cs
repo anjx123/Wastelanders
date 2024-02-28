@@ -47,6 +47,8 @@ public abstract class ActionClass : SelectClass
     protected Sprite fullCard; // used for displaying combat info
     public GameObject fullCardObjectPrefab;
 
+    [SerializeField] private CardUI cardUI;
+
     public CardType CardType { get; protected set; }
 
     protected Vector3 OriginalPosition;
@@ -280,4 +282,10 @@ public abstract class ActionClass : SelectClass
         CombatManager.Instance.UncrosshairAllEnemies();
     }
 
+
+    //Will activate the checkmark on card UI for indication that it is in the player's deck
+    public void SetSelectedForDeck(bool isSelectedForDeck)
+    {
+        cardUI.SetSelectedForDeck(isSelectedForDeck);
+    }
 }
