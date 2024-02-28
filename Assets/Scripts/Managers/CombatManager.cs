@@ -27,6 +27,7 @@ public class CombatManager : MonoBehaviour
 
     public delegate void GameStateChangedHandler(GameState newState); // Subscribe to this delegate if you want something to be run when gamestate changes
     public static event GameStateChangedHandler OnGameStateChanged;
+    public static event GameStateChangedHandler OnGameStateChanging;
     public string FADE_SORTING_LAYER
     {
         get
@@ -285,9 +286,9 @@ public class CombatManager : MonoBehaviour
         get => gameState;
         set
         {
+            OnGameStateChanging?.Invoke(value);
             gameState = value;
-            OnGameStateChanged?.Invoke(gameState);
-            switch (gameState)
+            switch (value)
             {
                 case GameState.SELECTION:
                     PerformSelection(); //Gamestate no longer enters selection automatically and requires a scene object to manually start combat. 
@@ -309,8 +310,8 @@ public class CombatManager : MonoBehaviour
                     break;
                 default:
                     break;
-
             }
+            OnGameStateChanged?.Invoke(value);
         }
     }
 }

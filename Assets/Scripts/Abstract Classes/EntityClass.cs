@@ -60,12 +60,12 @@ public abstract class EntityClass : SelectClass
         DeEmphasize();
         DisableDice();
 
-        CombatManager.OnGameStateChanged += UpdateBuffsNewRound;
+        CombatManager.OnGameStateChanging += UpdateBuffsNewRound;
     }
 
     private void OnDestroy()
     {
-        CombatManager.OnGameStateChanged -= UpdateBuffsNewRound;
+        CombatManager.OnGameStateChanging -= UpdateBuffsNewRound;
     }
 
     /*
