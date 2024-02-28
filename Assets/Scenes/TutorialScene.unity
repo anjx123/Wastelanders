@@ -532,6 +532,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1102207189}
   - {fileID: 1662895617}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -789,6 +790,98 @@ Transform:
   - {fileID: 674198775}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1102207188
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 638988698}
+    m_Modifications:
+    - target: {fileID: 2280710332171782491, guid: 75f09660183a2304fac17861f4ee9fc7, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 2280710332171782491, guid: 75f09660183a2304fac17861f4ee9fc7, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 2280710332171782491, guid: 75f09660183a2304fac17861f4ee9fc7, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 2280710332171782491, guid: 75f09660183a2304fac17861f4ee9fc7, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2280710332171782491, guid: 75f09660183a2304fac17861f4ee9fc7, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2280710332171782491, guid: 75f09660183a2304fac17861f4ee9fc7, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2280710332171782491, guid: 75f09660183a2304fac17861f4ee9fc7, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2280710332171782491, guid: 75f09660183a2304fac17861f4ee9fc7, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2280710332171782491, guid: 75f09660183a2304fac17861f4ee9fc7, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2280710332171782491, guid: 75f09660183a2304fac17861f4ee9fc7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2280710332171782491, guid: 75f09660183a2304fac17861f4ee9fc7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2280710332171782491, guid: 75f09660183a2304fac17861f4ee9fc7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3606799263845106433, guid: 75f09660183a2304fac17861f4ee9fc7, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3606799263845106433, guid: 75f09660183a2304fac17861f4ee9fc7, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5836655443787502691, guid: 75f09660183a2304fac17861f4ee9fc7, type: 3}
+      propertyPath: m_Name
+      value: IvesPrefab
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7393747964791779722, guid: 75f09660183a2304fac17861f4ee9fc7, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
+  m_SourcePrefab: {fileID: 100100000, guid: 75f09660183a2304fac17861f4ee9fc7, type: 3}
+--- !u!4 &1102207189 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2280710332171782491, guid: 75f09660183a2304fac17861f4ee9fc7, type: 3}
+  m_PrefabInstance: {fileID: 1102207188}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1102207190 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1176295796460791934, guid: 75f09660183a2304fac17861f4ee9fc7, type: 3}
+  m_PrefabInstance: {fileID: 1102207188}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88893f4fb2f8b47489eae31d27fa2105, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1207646555
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -811,11 +904,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2280710332171782491, guid: 18ff4a241e9f877439ebd5fd1de51dd0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -12.87
+      value: -12.8
       objectReference: {fileID: 0}
     - target: {fileID: 2280710332171782491, guid: 18ff4a241e9f877439ebd5fd1de51dd0, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.32
+      value: -1.3
       objectReference: {fileID: 0}
     - target: {fileID: 2280710332171782491, guid: 18ff4a241e9f877439ebd5fd1de51dd0, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1284,7 +1377,39 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 525387720}
+  - {fileID: 1538394867}
   m_Father: {fileID: 2011333043}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1538394866
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1538394867}
+  m_Layer: 0
+  m_Name: IvesPosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1538394867
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1538394866}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 3.65, y: -1.6, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1536881501}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1542478168
 PrefabInstance:
@@ -1300,11 +1425,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6635998426718021455, guid: b9c5e4b3c9f7e024f8fe9012e7a2e437, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -10.20167
+      value: -10.134855
       objectReference: {fileID: 0}
     - target: {fileID: 6635998426718021455, guid: b9c5e4b3c9f7e024f8fe9012e7a2e437, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.0199999
+      value: -0.99999976
       objectReference: {fileID: 0}
     - target: {fileID: 6635998426718021455, guid: b9c5e4b3c9f7e024f8fe9012e7a2e437, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1767,16 +1892,34 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   jackie: {fileID: 1662895618}
   jackieDefaultTransform: {fileID: 525387720}
+  ives: {fileID: 1102207190}
+  ivesDefaultTransform: {fileID: 1538394867}
   soldierGreeting:
   - bodyText: Morning, Jackie!
     speakerName: Soldier
-  dialogueText:
+  jackieTalksWithSolider:
   - bodyText: Good morning!
     speakerName: Jackie
-  - bodyText: NextElement and more lines even after that
-    speakerName: Nameless Solider
-  - bodyText: Next text after that
-    speakerName: Ives
+  - bodyText: 'More wasteland monsters than usual have been seen roaming near the
+      walls  '
+    speakerName: Soldier
+  - bodyText: A scout came back last night and reported seeing something like a giant
+      beetle scuttling around the forest.
+    speakerName: Soldier
+  - bodyText: " Although, it was pretty dark so the jury's still out on whether it\u2019s
+      something to worry about."
+    speakerName: Soldier
+  - bodyText: Hm, sounds like it could be a problem. A nest of wasteland beetles
+      could attract more monsters. Keep me updated.
+    speakerName: Jackie
+  - bodyText: '[The soldier nods, gives a friendly salute, and leaves.]'
+    speakerName: 
+  - bodyText: "Jackie! I see you\u2019ve been busy yapping? Get in here! Training
+      is about to start. "
+    speakerName: ???
+  ivesScoldsJackie:
+  - bodyText: Sorry, Ives. Did you hear about the scout reports?
+    speakerName: Jackie
 --- !u!1001 &2102825245
 PrefabInstance:
   m_ObjectHideFlags: 0
