@@ -123,6 +123,37 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &70395782
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 70395783}
+  m_Layer: 0
+  m_Name: CardArray
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &70395783
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 70395782}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 649517393}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &243963191
 GameObject:
   m_ObjectHideFlags: 0
@@ -270,10 +301,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 5907034407925818277, guid: 45259cd223a7bd941b08d08990f299fb, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 0}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 45259cd223a7bd941b08d08990f299fb, type: 3}
 --- !u!4 &548949321 stripped
 Transform:
@@ -344,6 +372,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1021007424}
+  - {fileID: 70395783}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &685926812
@@ -505,10 +534,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 1085967606015718589, guid: 383eb88529f54c546b708a146799bfac, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 0}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 383eb88529f54c546b708a146799bfac, type: 3}
 --- !u!4 &751354717 stripped
 Transform:
@@ -559,12 +585,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bf16de9b1985e447889b705fea9854f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterSelectionUi: {fileID: 0}
-  weaponSelectionUi: {fileID: 0}
-  deckSelectionUi: {fileID: 0}
-  width: 10
-  height: 10
-  spacing: 2
+  characterSelectionUi: {fileID: 573864430}
+  weaponSelectionUi: {fileID: 2016508818}
+  deckSelectionUi: {fileID: 649517392}
+  cardArrayParent: {fileID: 70395782}
+  cardDatabase: {fileID: 11400000, guid: 4ee9950b3d655254fb0def1cd879db6a, type: 2}
+  playerDatabase: {fileID: 11400000, guid: 8727bc367ba518d4496483da96ba1cf0, type: 2}
 --- !u!1 &795779547
 GameObject:
   m_ObjectHideFlags: 0
@@ -976,10 +1002,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 8320406679068454789, guid: 484a449710984334283e3a4a0c860542, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 0}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 484a449710984334283e3a4a0c860542, type: 3}
 --- !u!4 &1030286424 stripped
 Transform:
@@ -1011,7 +1034,7 @@ Transform:
   m_GameObject: {fileID: 1254554944}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.0113597, y: 1.8096529, z: 12.694123}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1138,10 +1161,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 7035526047344014328, guid: 11797fb1537b0c14ca7953804d655285, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 0}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 11797fb1537b0c14ca7953804d655285, type: 3}
 --- !u!4 &1493004623 stripped
 Transform:

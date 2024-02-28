@@ -8,9 +8,13 @@ public class DeckSelectionManager : MonoBehaviour
     [SerializeField] private GameObject characterSelectionUi;
     [SerializeField] private GameObject weaponSelectionUi;
     [SerializeField] private GameObject deckSelectionUi;
+    [SerializeField] private GameObject cardArrayParent;
+    [SerializeField] private CardDatabase cardDatabase;
+    [SerializeField] private PlayerDatabase playerDatabase;
+    
 
     private DeckSelectionState deckSelectionState;
-    private DeckSelectionState DeckSelectionState
+    private DeckSelectionState DeckSelectionState //Might want to swap out this state machine for an event driven changing phases.
     {
         get
         {
@@ -37,6 +41,7 @@ public class DeckSelectionManager : MonoBehaviour
 
     private void Start()
     {
+        RenderDecks(CardDatabase.WeaponType.PISTOL);
 
     }
 
@@ -59,25 +64,62 @@ public class DeckSelectionManager : MonoBehaviour
         deckSelectionUi.SetActive(false);
     }
 
-    public int width = 10; // The width of the grid
-    public int height = 10; // The height of the grid
-    public float spacing = 2.0f; // The space between each object
+    
+
+    public void RenderDecks(CardDatabase.WeaponType weaponType)
+    {
+        int width = 6; // The width of the grid in # of cards 
+        int height = 6; // The height of the grid in # of cards 
+        float xSpacing = 2.3f; 
+        float ySpacing = -3.3f;
+        float xOffset = -6f; //initial x Offset
+        float yOffset = 1f; //initial y Offset
+        float cardScaling = 0.8f; 
+
+
+        List<ActionClass> cardsToRender = cardDatabase.GetCardsByType(weaponType);
+
+        int index = 0;
+
+        for (int y = 0; y < height; y++)
+        {
+            for (int x = 0; x < width; x++)
+            {
+                Vector3 pos = new Vector3(x * xSpacing + xOffset, y * ySpacing + yOffset, 0);
+
+                if (index < cardsToRender.Count)
+                {
+                    GameObject prefab = cardsToRender[index].gameObject;
+
+                    GameObject instance = Instantiate(prefab, pos, Quaternion.identity);
+
+                    instance.transform.SetParent(cardArrayParent.transform);
+
+                    // Scale the instance
+                    Vector3 scale = instance.transform.localScale;
+                    scale.x *= cardScaling;
+                    scale.y *= cardScaling;
+                    instance.transform.localScale = scale;
+
+                    index++; 
+                }
+                else
+                {
+                    break;
+                }
+            }
+
+            if (index >= cardsToRender.Count)
+            {
+                break;
+            }
+        }
+    }
 
     private void PerformDeckSelection()
     {
         characterSelectionUi.SetActive(false);
         weaponSelectionUi.SetActive(false);
         deckSelectionUi.SetActive(true);
-        for (int x = 0; x < width; x++)
-        {
-            for (int y = 0; y < height; y++)
-            {
-                // Calculate the position for each object
-                Vector3 pos = new Vector3(x * spacing, y * spacing, 0);
-
-                // Instantiate the object at the calculated position
-                //Instantiate(prefab, pos, Quaternion.identity);
-            }
-        }
     }
 }
