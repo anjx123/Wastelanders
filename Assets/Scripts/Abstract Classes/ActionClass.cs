@@ -153,13 +153,13 @@ public abstract class ActionClass : SelectClass
         GameObject textContainer = textContainerTransform.gameObject;
         TextMeshProUGUI NameText = textContainer.transform.Find("NameText").gameObject.GetComponent<TextMeshProUGUI>();
         TextMeshProUGUI lowerBoundText = textContainer.transform.Find("LowerBoundText").gameObject.GetComponent<TextMeshProUGUI>();
-        TextMeshProUGUI UpperBoundText = textContainer.transform.Find("UpperBoundText").gameObject.GetComponent<TextMeshProUGUI>();
+        TextMeshProUGUI upperBoundText = textContainer.transform.Find("UpperBoundText").gameObject.GetComponent<TextMeshProUGUI>();
         TextMeshProUGUI SpeedText = textContainer.transform.Find("SpeedText").gameObject.GetComponent<TextMeshProUGUI>();
 
         // Set the text first
         NameText.text = titleName;
         lowerBoundText.text = duplicateCard.rollFloor.ToString();
-        UpperBoundText.text = duplicateCard.rollCeiling.ToString();
+        upperBoundText.text = duplicateCard.rollCeiling.ToString();
         SpeedText.text = Speed.ToString();
 
         // Now update colors
@@ -170,7 +170,7 @@ public abstract class ActionClass : SelectClass
 
         if (duplicateCard.rollCeiling > upperBound)
         {
-            UpperBoundText.color = Color.green;
+            upperBoundText.color = Color.green;
         }
 
         if (duplicateCard.rollFloor < lowerBound)
@@ -180,7 +180,17 @@ public abstract class ActionClass : SelectClass
 
         if (duplicateCard.rollCeiling < upperBound)
         {
-            UpperBoundText.color = Color.red;
+            upperBoundText.color = Color.red;
+        }
+
+        if (duplicateCard.rollFloor == lowerBound)
+        {
+            lowerBoundText.color = Color.black;
+        }
+
+        if (duplicateCard.rollCeiling == upperBound)
+        {
+            upperBoundText.color = Color.black;
         }
 
     }
