@@ -46,7 +46,7 @@ public class DeckSelectionManager : MonoBehaviour
 
     private void OnDestroy()
     {
-        
+        //Free up subscribed events here to prevent mem leak 
     }
 
     private void PerformCharacterSelection()
@@ -63,8 +63,14 @@ public class DeckSelectionManager : MonoBehaviour
         deckSelectionUi.SetActive(false);
     }
 
-    
+    private void PerformDeckSelection()
+    {
+        characterSelectionUi.SetActive(false);
+        weaponSelectionUi.SetActive(false);
+        deckSelectionUi.SetActive(true);
+    }
 
+    //Renders the deck corresponding to (@param weaponType)
     public void RenderDecks(CardDatabase.WeaponType weaponType)
     {
         int width = 6; // The width of the grid in # of cards 
@@ -132,12 +138,5 @@ public class DeckSelectionManager : MonoBehaviour
         {
             Destroy(child.gameObject);
         }
-    }
-
-    private void PerformDeckSelection()
-    {
-        characterSelectionUi.SetActive(false);
-        weaponSelectionUi.SetActive(false);
-        deckSelectionUi.SetActive(true);
     }
 }

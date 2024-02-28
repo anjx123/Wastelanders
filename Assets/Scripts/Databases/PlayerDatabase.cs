@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ * Class that holds the information of all players like level, weapon proficiency, decks. Can be edited in the unity editor
+ *  */
 [CreateAssetMenu(fileName = "New Player Database", menuName = "Player Database")]
 public class PlayerDatabase : ScriptableObject
 {
