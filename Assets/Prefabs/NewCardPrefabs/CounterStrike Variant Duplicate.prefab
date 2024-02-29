@@ -30,7 +30,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7256956916184963317, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
       propertyPath: m_Name
-      value: CounterStrike Variant
+      value: CounterStrike Variant Duplicate
       objectReference: {fileID: 0}
     - target: {fileID: 8284128080877360369, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
       propertyPath: m_LocalPosition.x
@@ -78,19 +78,14 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 7256956916184963317, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1140042972143940012}
+      addedObject: {fileID: -73753029278694796}
   m_SourcePrefab: {fileID: 100100000, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
---- !u!4 &5012185014399619682 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8284128080877360369, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
-  m_PrefabInstance: {fileID: 3997500120992827027}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &6038230835383967334 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7256956916184963317, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
   m_PrefabInstance: {fileID: 3997500120992827027}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1140042972143940012
+--- !u!114 &-73753029278694796
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -99,19 +94,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 6038230835383967334}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ca0fc042081ef4b05b3a27bf149125f7, type: 3}
+  m_Script: {fileID: 11500000, guid: e9fa9f1d7197e4a4ca6a7c596f5105db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myTransform: {fileID: 5012185014399619682}
+  myTransform: {fileID: 0}
   lowerBoundText: {fileID: 0}
   upperBoundText: {fileID: 0}
   speedText: {fileID: 0}
   nameText: {fileID: 0}
   textCanvas: {fileID: 0}
-  duplicateCardInstance: {fileID: 6038230835383967334, guid: a277672cc1abfed4dae238737ce550e2, type: 3}
+  duplicateCardInstance: {fileID: 0}
   activeDupCardInstance: {fileID: 0}
   description: 
-  titleName: Counter Strike
+  titleName: 
   icon: {fileID: 21300000, guid: bdc2c25ddbd262c4e9076aa904cc7e6c, type: 3}
   fullCard: {fileID: 0}
   fullCardObjectPrefab: {fileID: 0}

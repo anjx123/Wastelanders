@@ -22,7 +22,7 @@ public class HipFire : PistolCards
             activeDupCardInstance = Instantiate(duplicateCardInstance.GetComponent<HipFireDuplicate>());
             ((HipFireDuplicate)activeDupCardInstance).proto = false;
             ((HipFireDuplicate)activeDupCardInstance).duplicateCardInstance = null;
-            activeDupCardInstance.transform.position = new Vector3(-10, 10, 10);
+            activeDupCardInstance.transform.position = new Vector3(-10, -10, -10);
         }
 
         if (proto)

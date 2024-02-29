@@ -18,9 +18,6 @@ public abstract class EnemyClass : EntityClass
     // Initialized in editor
     public List<GameObject> availableActions;
 
-    // Initializsed in editor
-    public List<GameObject> dupActions;
-
     /*  Plays a single card from the pool, removing it from the pool and refilling it if necessary.
      *  REQUIRES: Nothing
      *  MODIFIES: pool
@@ -79,7 +76,7 @@ public abstract class EnemyClass : EntityClass
      *  REQUIRES: pool should be empty! But it shouldn't break anything, just mess up the enemy's order of attacks
      *  MODIFIES: pool 
      */
-    protected void Reshuffle()
+    protected virtual void Reshuffle()
     {
         List<GameObject> temp = new List<GameObject>();
         for (int i = 0; i < deck.Count; i++)
