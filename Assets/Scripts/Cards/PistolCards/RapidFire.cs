@@ -17,8 +17,6 @@ public class RapidFire : PistolCards
         lowerBound = 1;
         upperBound = 4;
         Speed = 2;
-        Block = 2;
-        Damage = 3;
         description = "Attack, Lose 1 accuracy, then make this attack again.";
         CardType = CardType.MeleeAttack;
         myName = "RapidFire";

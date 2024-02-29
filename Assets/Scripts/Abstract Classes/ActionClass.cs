@@ -23,12 +23,6 @@ public abstract class ActionClass : SelectClass
     protected int lowerBound;
     protected int upperBound;
 
-    [SerializeField] GameObject lowerBoundText;
-    [SerializeField] GameObject upperBoundText;
-    [SerializeField] GameObject speedText;
-    [SerializeField] GameObject nameText;
-    [SerializeField] GameObject textCanvas;
-
     protected CardDup duplicateCard;
 
     public CardDup GetCard()
@@ -43,17 +37,17 @@ public abstract class ActionClass : SelectClass
         public int rollCeiling;
         public int actualRoll;
     }
-    public int Damage { get; protected set; }
-    public int Block { get; protected set; }
     public int Speed { get; protected set; }
-    public string description;
+    protected string description;
 
     [SerializeField] string titleName;
 
     public Sprite icon;
 
-    public Sprite fullCard; // used for displaying combat info
+    protected Sprite fullCard; // used for displaying combat info
     public GameObject fullCardObjectPrefab;
+
+    [SerializeField] private CardUI cardUI;
 
     public CardType CardType { get; protected set; }
 
@@ -92,7 +86,7 @@ public abstract class ActionClass : SelectClass
 
     public virtual void Initialize()
     {
-        DupInit();
+        UpdateDup();
     }
 
     public int getRolledDamage()
@@ -102,7 +96,7 @@ public abstract class ActionClass : SelectClass
 
     // Initializes a CardDup struct with the given stats of the Card to 
     // modify further based on buffs
-    protected void DupInit()
+    private void DupInit()
     {
         duplicateCard = new CardDup();
         duplicateCard.rollFloor = lowerBound;
@@ -119,10 +113,10 @@ public abstract class ActionClass : SelectClass
         duplicateCard.actualRoll += byValue;
     }
 
-    private void UpdateDup()
+    public void UpdateDup()
     {
         DupInit();
-        Origin.ApplyAllBuffsToCard(ref duplicateCard);
+        Origin?.ApplyAllBuffsToCard(ref duplicateCard);
         UpdateText();
     }
 
@@ -151,20 +145,58 @@ public abstract class ActionClass : SelectClass
         }
     }
 
-    public void UpdateText()
+    private void UpdateText()
     {
-        if (textCanvas != null)
+        Transform textContainerTransform = transform.Find("TextCanvas");
+        if (textContainerTransform == null)
         {
-            Vector3 position = textCanvas.GetComponent<RectTransform>().localPosition;
-            position.z = -2;
-            textCanvas.GetComponent<RectTransform>().localPosition = position;
-            nameText.GetComponent<TextMeshProUGUI>().text = titleName;
-            lowerBoundText.GetComponent<TextMeshProUGUI>().text = duplicateCard.rollFloor.ToString();
-            upperBoundText.GetComponent<TextMeshProUGUI>().text = duplicateCard.rollCeiling.ToString();
-            speedText.GetComponent<TextMeshProUGUI>().text = Speed.ToString();
+            return;
         }
-        
+        GameObject textContainer = textContainerTransform.gameObject;
+        TextMeshProUGUI NameText = textContainer.transform.Find("NameText").gameObject.GetComponent<TextMeshProUGUI>();
+        TextMeshProUGUI lowerBoundText = textContainer.transform.Find("LowerBoundText").gameObject.GetComponent<TextMeshProUGUI>();
+        TextMeshProUGUI upperBoundText = textContainer.transform.Find("UpperBoundText").gameObject.GetComponent<TextMeshProUGUI>();
+        TextMeshProUGUI SpeedText = textContainer.transform.Find("SpeedText").gameObject.GetComponent<TextMeshProUGUI>();
+
+        // Set the text first
+        NameText.text = titleName;
+        lowerBoundText.text = duplicateCard.rollFloor.ToString();
+        upperBoundText.text = duplicateCard.rollCeiling.ToString();
+        SpeedText.text = Speed.ToString();
+
+        // Now update colors
+        if (duplicateCard.rollFloor > lowerBound)
+        {
+            lowerBoundText.color = Color.green;
+        }
+
+        if (duplicateCard.rollCeiling > upperBound)
+        {
+            upperBoundText.color = Color.green;
+        }
+
+        if (duplicateCard.rollFloor < lowerBound)
+        {
+            lowerBoundText.color = Color.red;
+        }
+
+        if (duplicateCard.rollCeiling < upperBound)
+        {
+            upperBoundText.color = Color.red;
+        }
+
+        if (duplicateCard.rollFloor == lowerBound)
+        {
+            lowerBoundText.color = Color.black;
+        }
+
+        if (duplicateCard.rollCeiling == upperBound)
+        {
+            upperBoundText.color = Color.black;
+        }
+
     }
+
 
     public override void OnMouseEnter()
     {
@@ -250,4 +282,10 @@ public abstract class ActionClass : SelectClass
         CombatManager.Instance.UncrosshairAllEnemies();
     }
 
+
+    //Will activate the checkmark on card UI for indication that it is in the player's deck
+    public void SetSelectedForDeck(bool isSelectedForDeck)
+    {
+        cardUI.SetSelectedForDeck(isSelectedForDeck);
+    }
 }
