@@ -20,7 +20,6 @@ public class StackSmash : SlimeAttacks
         lowerBound = 2;
         upperBound = 4;
         Speed = 2;
-        Block = 2;
 
         myName = "StackSmash";
         description = "If this attack is unstaggered, attack again";
@@ -29,12 +28,7 @@ public class StackSmash : SlimeAttacks
         ogMaterial = renderer.material; // og sprite of card
         OriginalPosition = transform.position;
     }
-    public override void ApplyEffect()
-    {
-        DupInit();
 
-        Origin.ApplyAllBuffsToCard(ref duplicateCard);
-    }
 
     //@Author: Anrui. Called by ActionClass.OnHit() 
     public override void CardIsUnstaggered()

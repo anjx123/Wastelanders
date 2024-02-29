@@ -15,7 +15,6 @@ public class DiscreteStrike : StaffCards
         lowerBound = 1;
         upperBound = 1;
         Speed = 1;
-        Block = 2;
 
         myName = "DiscreteStrike";
         description = "Gain 2 focus, then strike";
@@ -31,14 +30,10 @@ public class DiscreteStrike : StaffCards
 
     }
 
-    public override void ApplyEffect()
-    {
-        Origin.AddStacks(Focus.buffName, 2);
-        base.ApplyEffect();
-    }
 
     public override void OnHit()
     {
+        Origin.AddStacks(Focus.buffName, 2);
         base.OnHit();
     }
 }

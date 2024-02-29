@@ -45,22 +45,17 @@ public class BattleQueue : MonoBehaviour
 
     private void OnEnable()
     {
-        CombatManager.OnGameStateChanged += TheBeginning; //Subscribes to the game state event
     }
 
     private void OnDisable()
     {
-        CombatManager.OnGameStateChanged -= TheBeginning;
     }
 
 
     // is referenced whenever game state changes to selection.
-    public void TheBeginning(GameState gameState)
+    public void TheBeginning()
     {
-        if (gameState == GameState.SELECTION)
-        {
-            RenderInitialBQ();
-        }
+        RenderInitialBQ();
     }
 
     // for when the round has just started. 

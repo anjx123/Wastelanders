@@ -17,8 +17,6 @@ public class QuickDraw : PistolCards
         lowerBound = 1; // MAKE SURE BOUNDS ARE SET BEFORE CALLING SUPERCLASS START
         upperBound = 5;
         Speed = 5;
-        Block = 2;
-        Damage = 3;
         myName = "QuickDraw";
         description = "They'll Never See It Coming!";
         CardType = CardType.RangedAttack;
