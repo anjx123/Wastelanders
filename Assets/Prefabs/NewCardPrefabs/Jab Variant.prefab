@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &5257721867071509895
+--- !u!1001 &5547277567496125110
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -8,37 +8,41 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -7228539631512178989, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: b9d9ffafd54db4d16be447f80c7ef42d, type: 3}
     - target: {fileID: 1866809560200078547, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
       propertyPath: m_Size.x
-      value: 4.4
+      value: 4.33
       objectReference: {fileID: 0}
     - target: {fileID: 1866809560200078547, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
       propertyPath: m_Size.y
-      value: 2.8
+      value: 2.74
       objectReference: {fileID: 0}
     - target: {fileID: 1866809560200078547, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: a04b270ae1f43d14fbab84ed3d181b48, type: 3}
+      objectReference: {fileID: 21300000, guid: 57baba5992d9e224988e93fcacf9f7eb, type: 3}
     - target: {fileID: 1866809560200078547, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
       propertyPath: m_WasSpriteAssigned
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7256956916184963317, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
       propertyPath: m_Name
-      value: RapidFire Variant
+      value: Jab Variant
       objectReference: {fileID: 0}
     - target: {fileID: 8284128080877360369, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -3.8779163
       objectReference: {fileID: 0}
     - target: {fileID: 8284128080877360369, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -11.037751
       objectReference: {fileID: 0}
     - target: {fileID: 8284128080877360369, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -0.9658041
       objectReference: {fileID: 0}
     - target: {fileID: 8284128080877360369, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
       propertyPath: m_LocalRotation.w
@@ -46,15 +50,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8284128080877360369, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 8284128080877360369, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 8284128080877360369, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 8284128080877360369, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -68,41 +72,40 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 9059084073755274666, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 7256956916184963317, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 3632232491122551209}
+      addedObject: {fileID: 9083684502879287757}
   m_SourcePrefab: {fileID: 100100000, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
---- !u!1 &3189337932731059570 stripped
+--- !u!1 &2904259167568896579 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7256956916184963317, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
-  m_PrefabInstance: {fileID: 5257721867071509895}
+  m_PrefabInstance: {fileID: 5547277567496125110}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &3632232491122551209
+--- !u!114 &9083684502879287757
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3189337932731059570}
+  m_GameObject: {fileID: 2904259167568896579}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2082053e56a8f452ea3bc067454f9498, type: 3}
+  m_Script: {fileID: 11500000, guid: 1f3d1e96da677e34e8166a18f7bedef3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   myTransform: {fileID: 0}
-  titleName: Rapid Fire
-  icon: {fileID: 21300000, guid: a04b270ae1f43d14fbab84ed3d181b48, type: 3}
+  titleName: Jab
+  icon: {fileID: 21300000, guid: 57baba5992d9e224988e93fcacf9f7eb, type: 3}
   fullCardObjectPrefab: {fileID: 0}
-  cardUI: {fileID: 5413594485398930481}
---- !u!114 &5413594485398930481 stripped
+  cardUI: {fileID: 5705003136804399872}
+--- !u!114 &5705003136804399872 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 276933645572133302, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
-  m_PrefabInstance: {fileID: 5257721867071509895}
+  m_PrefabInstance: {fileID: 5547277567496125110}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1

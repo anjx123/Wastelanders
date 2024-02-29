@@ -2,7 +2,7 @@
 Wastelanders is a 2-D turnbased story RPG set in the wastelands... where... 
 Carefully manage your moves to counter your opponents and uncover the truth behind the dangerous and alien Waste.
 
-<img width="1345" alt="Screenshot 2023-12-22 at 11 32 54 AM" src="https://github.com/anjx123/Wastelanders/assets/115036225/555f1227-7789-47de-bc75-2d0bb1f96d83">
+![image](https://github.com/anjx123/Wastelanders/assets/137996848/59349ec1-d1f7-4ad6-b2ca-33b6eeeda2e3)
 
 # Gameplay Loop
 The gameplay seeks to innovate on traditional turned based RPG's where the players attack, then patiently wait for the enemies to respond. In Wastelanders, you and your enemies will clash together head on based on power and agility to duke it out.
