@@ -14,6 +14,11 @@ public class Ives : PlayerClass
         throw new System.NotImplementedException();
     }
 
+    public override void UnRenderHand()
+    {
+        throw new System.NotImplementedException();
+    }
+
     protected override void DrawCard()
     {
         throw new System.NotImplementedException();

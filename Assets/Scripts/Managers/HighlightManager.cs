@@ -12,6 +12,9 @@ public class HighlightManager : MonoBehaviour // later all entity highlighter
     private static ActionClass? currentHighlightedAction = null;
     public static PlayerClass? selectedPlayer = null;
 
+    // Note by Muhammad: I'll concede this may be a bit redundant and could be conflated with selectedPlayer but that's a load of refactoring cuz of the innumerable conditionals
+    private static PlayerClass? currentPlayerDisplayDeck = null;
+
     private void Start()
     {
         CombatManager.OnGameStateChanged += ResetSelection;
@@ -38,6 +41,11 @@ public class HighlightManager : MonoBehaviour // later all entity highlighter
 
         if (clicked is PlayerClass)
         {
+            if ((PlayerClass)clicked != currentPlayerDisplayDeck)
+            {
+                currentPlayerDisplayDeck?.UnRenderHand();
+            }
+            currentPlayerDisplayDeck = (PlayerClass) clicked;
             ((PlayerClass)clicked).PleaseRenderMyHand();
         }
 
@@ -151,9 +159,10 @@ public class HighlightManager : MonoBehaviour // later all entity highlighter
         } 
     }
 
+    // This method is actually redundant since you would HAVE to see the updated deck if you have a player selected.
     public static bool RenderHandIfAppropriate(PlayerClass player)
     {
-        if (selectedPlayer == player)
+        if (currentPlayerDisplayDeck == player)
         {
             player.PleaseRenderMyHand();
             return true;
