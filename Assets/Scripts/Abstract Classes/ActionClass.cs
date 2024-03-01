@@ -135,9 +135,8 @@ public abstract class ActionClass : SelectClass
         duplicateCard.actualRoll += byValue;
     }
 
-    public void UpdateDup()
+    private void UpdateDup()
     {
-
         DupInit();
         Origin.ApplyAllBuffsToCard(ref duplicateCard);
         UpdateText();

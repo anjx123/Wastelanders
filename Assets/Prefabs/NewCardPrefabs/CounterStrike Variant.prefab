@@ -80,6 +80,17 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1140042972143940012}
   m_SourcePrefab: {fileID: 100100000, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
+--- !u!114 &3796011671851734821 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 276933645572133302, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
+  m_PrefabInstance: {fileID: 3997500120992827027}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 834784dfb02aeaf438f42ae334048e93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &5012185014399619682 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8284128080877360369, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
@@ -103,15 +114,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myTransform: {fileID: 5012185014399619682}
-  lowerBoundText: {fileID: 0}
-  upperBoundText: {fileID: 0}
-  speedText: {fileID: 0}
-  nameText: {fileID: 0}
-  textCanvas: {fileID: 0}
-  duplicateCardInstance: {fileID: 6038230835383967334, guid: a277672cc1abfed4dae238737ce550e2, type: 3}
-  activeDupCardInstance: {fileID: 0}
-  description: 
   titleName: Counter Strike
   icon: {fileID: 21300000, guid: bdc2c25ddbd262c4e9076aa904cc7e6c, type: 3}
-  fullCard: {fileID: 0}
   fullCardObjectPrefab: {fileID: 0}
+  cardUI: {fileID: 3796011671851734821}

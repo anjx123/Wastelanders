@@ -5,13 +5,10 @@ using UnityEngine;
 public class RapidFire : PistolCards
 {
 
-    private int originalLower;
-    private int originalUpper;
-
-
+    
     public override void ExecuteActionEffect()
     {
-
+        
     }
 
     // Start is called before the first frame update
@@ -19,10 +16,8 @@ public class RapidFire : PistolCards
     {
         lowerBound = 1;
         upperBound = 4;
-        originalLower = lowerBound;
-        originalUpper = upperBound;
         Speed = 2;
-        description = "Attack, if unstaggered make this card again with bounds * min(3, Accuracy), consuming accuracy in process.";
+        description = "Attack, Lose 1 accuracy, then make this attack again.";
         CardType = CardType.MeleeAttack;
         myName = "RapidFire";
         Renderer renderer = GetComponent<Renderer>();
@@ -31,41 +26,27 @@ public class RapidFire : PistolCards
         base.Initialize();
     }
 
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+
     public override void ApplyEffect()
     {
         base.ApplyEffect();
     }
 
     public override void OnHit()
-    {   
+    {
         base.OnHit();
-        Debug.Log(Origin.GetBuffStacks(Accuracy.buffName));
-        Origin.AddStacks(Accuracy.buffName, 10); // for debuggin
-
-        if (proto && activeDupCardInstance == null)
+        Origin.ReduceStacks(Accuracy.buffName, 1); // Reduce Accuracy by 1
+        if (Origin.GetBuffStacks(Accuracy.buffName)  > 0)
         {
-            activeDupCardInstance = Instantiate(duplicateCardInstance.GetComponent<RapidFireDuplicate>());
-            ((RapidFireDuplicate)activeDupCardInstance).proto = false;
-            ((RapidFireDuplicate)activeDupCardInstance).duplicateCardInstance = null;
-            activeDupCardInstance.transform.position = new Vector3(-10, -10, -10);
-        }
-
-        if (proto && Origin.GetBuffStacks(Accuracy.buffName) > 0) // has to be the original card that inserts the duplicate Instance
-        {
-            ((RapidFireDuplicate)activeDupCardInstance).lowerBound = this.originalLower; // reset it each time
-            ((RapidFireDuplicate)activeDupCardInstance).lowerBound = this.originalUpper;
-            int incrementValue = 0;
-            while (Origin.GetBuffStacks(Accuracy.buffName) > 0 && incrementValue < 3)
-            {
-                incrementValue++;
-                Origin.ReduceStacks(Accuracy.buffName, 1);
-            }
-            PlayerClass origin = (PlayerClass)Origin;
-            activeDupCardInstance.Origin = origin;
-            activeDupCardInstance.Target = Target;
-            ((RapidFireDuplicate)activeDupCardInstance).lowerBound = incrementValue * lowerBound;
-            ((RapidFireDuplicate)activeDupCardInstance).upperBound = incrementValue * upperBound;
-            BattleQueue.BattleQueueInstance.InsertDupPlayerAction(activeDupCardInstance);
+            //TODO: Reinsert this card into BQ so that this attacks again
         }
     }
+
+
+
 }

@@ -250,11 +250,6 @@ public class BattleQueue : MonoBehaviour
         RenderBQ();
     }
 
-    public bool SearchForClash(EntityClass origin)
-    {
-        return false;
-    }
-
     // A sorted array implementation for ActionClass.
     private class SortedArray
     {

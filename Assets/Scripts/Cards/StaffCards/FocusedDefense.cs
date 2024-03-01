@@ -33,18 +33,14 @@ public class FocusedDefense : StaffCards
 
     }
 
+    // Update is called once per frame
+    void Update()
+    {
+    }
+
     public override void ApplyEffect()
     {
-/*        //TODO: Search the BQ for every attack the clashing opponent makes against this character 
-        // card doesn't know who they're clashing with; player does. 
-        // in essence: ask bq to search for an attack (i.e. there is a clash); if yes, reinsert THIS and gain focus, else retire.
-        if (BattleQueue.BattleQueueInstance.SearchForClash(this.Origin))
-        {
-            Origin.AddStacks(Focus.buffName, 1);
-            BattleQueue.BattleQueueInstance.InsertDupPlayerAction(this); // this works because the card itself is removed from the BQ before clash cards is called
-        }*/
-
-        // UPDATE: This cannot work as has been instructed since there is no way to detect a clash because the wrapper is removed before this is called. 
+        //TODO: Search the BQ for every attack the clashing opponent makes against this character 
         base.ApplyEffect();
     }
 }

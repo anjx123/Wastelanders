@@ -69,7 +69,6 @@ public class WasteFrog : EnemyClass
             if (players.Count == 0) return;
             
             ActionClass temporaryHurl = hurlCard.GetComponent<ActionClass>();
-            Debug.Log(temporaryHurl);
             temporaryHurl.Target = players[Random.Range(0, players.Count - 1)];
             BattleQueue.BattleQueueInstance.AddEnemyAction(temporaryHurl, this);
             combatInfo.SetCombatSprite(temporaryHurl);
@@ -77,24 +76,6 @@ public class WasteFrog : EnemyClass
         } else
         {
             base.AddAttack(players);
-        }
-    }
-
-    protected override void Reshuffle()
-    {
-        List<GameObject> temp = new List<GameObject>();
-        for (int i = 0; i < deck.Count; i++)
-        {
-            if (deck[i].GetComponent<ActionClass>().name != Hurl.HURL_NAME)
-            {
-                temp.Add(deck[i]);
-            }
-        }
-        while (temp.Count > 0)
-        {
-            int idx = Random.Range(0, temp.Count);
-            pool.Add(temp[idx]);
-            temp.RemoveAt(idx);
         }
     }
 }
