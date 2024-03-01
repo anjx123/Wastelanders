@@ -128,7 +128,6 @@ public class CombatManager : MonoBehaviour
 
         }
 
-        BattleQueue.BattleQueueInstance.TheBeginning(); //Nasty but necessary for rendering the current implementation of BQ
     }
 
     private void Activate(GameObject gameObject)
@@ -265,10 +264,12 @@ public class CombatManager : MonoBehaviour
         set
         {
             gameState = value;
-            OnGameStateChanged?.Invoke(gameState);
             switch (gameState)
             {
                 case GameState.SELECTION:
+                    foreach (EntityClass e in players) {
+                        e.ClearStacks(Focus.buffName);
+                    }
                     PerformSelection();
                     break;
                 case GameState.FIGHTING:
@@ -287,6 +288,7 @@ public class CombatManager : MonoBehaviour
                     break;
 
             }
+            OnGameStateChanged?.Invoke(gameState);
         }
     }
 

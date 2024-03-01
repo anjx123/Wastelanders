@@ -48,21 +48,6 @@ public class CardComparator : MonoBehaviour
 
         cardOneGreater = ClashCompare(card1, card2);
 
-        if (cardOneGreater < 0)
-        {
-            card1.Origin.combatInfo.setDiceColor(Color.red);
-            card2.Origin.combatInfo.setDiceColor(Color.green);
-        }
-        else if (cardOneGreater == 0)
-        {
-            card1.Origin.combatInfo.setDiceColor(Color.white);
-            card2.Origin.combatInfo.setDiceColor(Color.white);
-        }
-        else
-        {
-            card2.Origin.combatInfo.setDiceColor(Color.red);
-            card1.Origin.combatInfo.setDiceColor(Color.green);
-        }
 
         if (IsAttack(card1) && IsAttack(card2))
         {
@@ -77,7 +62,7 @@ public class CardComparator : MonoBehaviour
                 card2.OnHit(); 
             } else if (cardOneGreater > 0) //Card1 wins clash
             {
-                card1.OnHit();  
+                card1.OnHit();
             }
         } else if (card1.CardType == CardType.Defense && IsAttack(card2))
         {
@@ -144,7 +129,6 @@ public class CardComparator : MonoBehaviour
 
         //Hit and feel effects
         actionClass.OnHit();
-        actionClass.Origin.combatInfo.setDiceColor(Color.green);
         yield return new WaitForSeconds(COMBAT_BUFFER_TIME);
 
         //Reset the Scene

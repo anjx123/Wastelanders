@@ -18,6 +18,7 @@ public class Spit : FrogAttacks
         lowerBound = 1;
         upperBound = 4;
         Speed = 4;
+        Block = 2;
 
         myName = "Spit";
         Renderer renderer = GetComponent<Renderer>();
@@ -25,5 +26,10 @@ public class Spit : FrogAttacks
         OriginalPosition = transform.position;
     }
 
+    public override void ApplyEffect()
+    {
+        DupInit();
 
+        Origin.ApplyAllBuffsToCard(ref duplicateCard);
+    }
 }

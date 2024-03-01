@@ -22,6 +22,7 @@ public class Hurl : FrogAttacks
         upperBound = 7;
         
         Speed = 5;
+        Block = 2;
 
         myName = HURL_NAME;
         Renderer renderer = GetComponent<Renderer>();
@@ -29,5 +30,10 @@ public class Hurl : FrogAttacks
         OriginalPosition = transform.position;
     }
 
+    public override void ApplyEffect()
+    {
+        DupInit();
 
+        Origin.ApplyAllBuffsToCard(ref duplicateCard);
+    }
 }

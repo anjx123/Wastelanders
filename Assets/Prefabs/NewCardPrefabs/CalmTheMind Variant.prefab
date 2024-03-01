@@ -80,6 +80,11 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 3973575574785175939}
   m_SourcePrefab: {fileID: 100100000, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
+--- !u!1 &691344168291610417 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5342606960099249293, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
+  m_PrefabInstance: {fileID: 4881028309522179004}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2812786860688227145 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7256956916184963317, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
@@ -98,23 +103,38 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myTransform: {fileID: 3552152615472691021}
+  lowerBoundText: {fileID: 8498987384700945773}
+  upperBoundText: {fileID: 8135233919621225088}
+  speedText: {fileID: 691344168291610417}
+  nameText: {fileID: 6244093304500384929}
+  textCanvas: {fileID: 7983858827820499571}
+  description: 
   titleName: Calm The Mind
   icon: {fileID: 21300000, guid: e911752727e0c1b4d859bdaf86735fcc, type: 3}
+  fullCard: {fileID: 0}
   fullCardObjectPrefab: {fileID: 0}
-  cardUI: {fileID: 4641866289980092938}
 --- !u!4 &3552152615472691021 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8284128080877360369, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
   m_PrefabInstance: {fileID: 4881028309522179004}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &4641866289980092938 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 276933645572133302, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
+--- !u!1 &6244093304500384929 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1520981535418881821, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
   m_PrefabInstance: {fileID: 4881028309522179004}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 834784dfb02aeaf438f42ae334048e93, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+--- !u!1 &7983858827820499571 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3274319442286895567, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
+  m_PrefabInstance: {fileID: 4881028309522179004}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &8135233919621225088 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3700495749604882748, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
+  m_PrefabInstance: {fileID: 4881028309522179004}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &8498987384700945773 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3913226332729878225, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
+  m_PrefabInstance: {fileID: 4881028309522179004}
+  m_PrefabAsset: {fileID: 0}
