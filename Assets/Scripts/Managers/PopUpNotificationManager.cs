@@ -50,8 +50,11 @@ public class PopUpNotificationManager : MonoBehaviour
             case PopupType.DeckReshuffled:
                 createWarning("Deck Reshuffled");
                 break;
-            case PopupType.SelectEnemyFirst: 
+            case PopupType.SelectActionFirst: 
                 createWarning("Select a card first!");
+                break;
+            case PopupType.SelectPlayerFirst:
+                createWarning("Select a player first!");
                 break;
             default:
                 break;

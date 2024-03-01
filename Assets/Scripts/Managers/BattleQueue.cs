@@ -101,8 +101,8 @@ public class BattleQueue : MonoBehaviour
         return ret;
     }
 
-    // @author Anrui TODO ask what this does and if I need to remove from the wrapperArray as well.
-    // Removes the card if it is clicked on by the player whilst it is in the Queue, right?
+
+    // Removes the card if it is clicked on by the player whilst it is in the Queue. And then reinserts it into the issuing player's hand/deck. 
      public void DeletePlayerAction(ActionClass action)
     {
         wrapperArray.RemoveWrapperWithActionClass(action);
@@ -259,7 +259,7 @@ public class BattleQueue : MonoBehaviour
             {
                 for (int x = 0; x < array.Count; x++) 
                 {
-                    if (array[x].IsPlayedByPlayer() && card.Speed == array[x].Speed)
+                    if (array[x].IsPlayedByPlayer() && array[x].Origin == card.Origin && card.Speed == array[x].Speed)
 
                     {
                         return false; // don't insert. 
@@ -538,7 +538,7 @@ public class BattleQueue : MonoBehaviour
                         y--;
                         continue; // no swap needed 
                     }
-                    else if (wrappers[y - 1].PlayerAction == null || wrappers[y].PlayerAction.Speed > wrappers[y - 1].PlayerAction.Speed)
+                    else if (wrappers[y - 1].PlayerAction == null || wrappers[y].PlayerAction!.Speed > wrappers[y - 1].PlayerAction!.Speed)
                     {
                         Swap(wrappers, y - 1, y);
                     }
