@@ -25,8 +25,6 @@ public abstract class StatusEffect
 
     public virtual void OnBuffedEntityHit() { }
 
-    public virtual void NewRound() { }
-
     // adds buffStacks to the struct card limits
     public abstract void ApplyStacks(ref ActionClass.CardDup dup);
 

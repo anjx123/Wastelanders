@@ -2,25 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Ives : PlayerClass
+public class Ives : MonoBehaviour
 {
-    public override void HandleUseCard(ActionClass a)
+    // Start is called before the first frame update
+    void Start()
     {
-        throw new System.NotImplementedException();
+        
     }
 
-    public override void ReaddCard(ActionClass card)
+    // Update is called once per frame
+    void Update()
     {
-        throw new System.NotImplementedException();
-    }
-
-    protected override void DrawCard()
-    {
-        throw new System.NotImplementedException();
-    }
-
-    protected override void RenderHand()
-    {
-        throw new System.NotImplementedException();
+        
     }
 }

@@ -16,6 +16,7 @@ public class Jab : StaffCards
         upperBound = 4;
 
         Speed = 4;
+        Block = 2;
         
 
         myName = "Jab";

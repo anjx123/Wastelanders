@@ -19,6 +19,9 @@ public class Headshot : PistolCards
         upperBound = 5;
         Speed = 5;
 
+        Block = 2;
+        Damage = 3;
+
         myName = "Headshot";
         description = "If This Card Staggers The Opponent, Deal +1 Damage For Each Stack Of Accuracy";
         CardType = CardType.RangedAttack;

@@ -27,7 +27,6 @@ public class Jackie : PlayerClass
             toAdd.transform.position = new Vector3(-1000, -1000, 1);
         }
 
-        
     }
 
     override protected void DrawCard()
@@ -55,7 +54,6 @@ public class Jackie : PlayerClass
                 Debug.LogWarning(myName + "'s Pool has no cards");
             }
         }
-
     }
 
     override public void ReaddCard(ActionClass card) {
@@ -91,7 +89,7 @@ public class Jackie : PlayerClass
     {
         for (int i = 0; i < hand.Count; i++)
         {
-            hand[i].GetComponent<ActionClass>().UpdateDup();
+            hand[i].GetComponent<ActionClass>().UpdateText();
         }
     }
 
