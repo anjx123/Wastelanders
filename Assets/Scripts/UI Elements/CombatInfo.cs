@@ -44,6 +44,12 @@ public class CombatInfo : MonoBehaviour
         diceRollText.GetComponent<TMP_Text>().text = value.ToString();
     }
 
+    // Sets the appropriate color of the dice
+    public void setDiceColor(Color color)
+    {
+        diceRollText.GetComponent<TMP_Text>().color = color;
+    }
+
     /* 
      Sets the CombatInfo sprite to the icon of this ActionClass.
     Pass in null to discard the current sprite.
