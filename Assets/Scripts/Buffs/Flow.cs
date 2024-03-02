@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 
@@ -20,5 +21,10 @@ public class Focus : StatusEffect
             Debug.LogWarning("Buff Sprite is missing");
         }
         return buffSprite;
+    }
+
+    public override void NewRound()
+    {
+        ClearBuff();
     }
 }

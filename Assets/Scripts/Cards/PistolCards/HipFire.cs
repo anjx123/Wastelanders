@@ -41,7 +41,6 @@ public class HipFire : PistolCards
         lowerBound = 1;
         upperBound = 5;
         Speed = 1;
-        Damage = 3;
         description = "Make This Attack Once, If Unstaggered, Make It Again";
         CardType = CardType.RangedAttack;
         myName = "HipFire";
@@ -50,11 +49,5 @@ public class HipFire : PistolCards
     }
 
 
-    public override void ApplyEffect()
-    {
-        DupInit();
-        
-        Origin.ApplyAllBuffsToCard(ref duplicateCard);
-    }
 
 }

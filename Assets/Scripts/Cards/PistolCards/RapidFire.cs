@@ -22,7 +22,7 @@ public class RapidFire : PistolCards
         originalLower = lowerBound;
         originalUpper = upperBound;
         Speed = 2;
-        description = "Attack, if unstaggered make this card again with bounds * min(3, Accuracy), consuming accuracy in process.";
+        description = "If unstaggered, lose 1 accuracy then make this card again (Max extra 3 times)";
         CardType = CardType.MeleeAttack;
         myName = "RapidFire";
         Renderer renderer = GetComponent<Renderer>();

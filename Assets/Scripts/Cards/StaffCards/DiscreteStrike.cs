@@ -15,7 +15,6 @@ public class DiscreteStrike : StaffCards
         lowerBound = 1;
         upperBound = 1;
         Speed = 1;
-        Block = 2;
 
         myName = "DiscreteStrike";
         description = "Gain 2 focus, then strike";

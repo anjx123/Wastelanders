@@ -76,26 +76,17 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 2430182313616302391}
   m_SourcePrefab: {fileID: 100100000, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
---- !u!1 &706432749036680839 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3700495749604882748, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
+--- !u!114 &4125526225033387533 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 276933645572133302, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
   m_PrefabInstance: {fileID: 4221858090225635259}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &925946077659769194 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3913226332729878225, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
-  m_PrefabInstance: {fileID: 4221858090225635259}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1722545218037247604 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3274319442286895567, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
-  m_PrefabInstance: {fileID: 4221858090225635259}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &3426273075229890726 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1520981535418881821, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
-  m_PrefabInstance: {fileID: 4221858090225635259}
-  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 834784dfb02aeaf438f42ae334048e93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &5215220087393000266 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8284128080877360369, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
@@ -119,20 +110,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myTransform: {fileID: 5215220087393000266}
-  lowerBoundText: {fileID: 925946077659769194}
-  upperBoundText: {fileID: 706432749036680839}
-  speedText: {fileID: 8121060132801790774}
-  nameText: {fileID: 3426273075229890726}
-  textCanvas: {fileID: 1722545218037247604}
   duplicateCardInstance: {fileID: 6783246004654626638, guid: c2f8d4fb14416604fbdc60aaa147614c, type: 3}
   activeDupCardInstance: {fileID: 0}
-  description: 
+  description:
   titleName: Hip Fire
   icon: {fileID: 21300000, guid: 601769b83c413394f9dcef8bf9a4ef38, type: 3}
-  fullCard: {fileID: 0}
   fullCardObjectPrefab: {fileID: 0}
---- !u!1 &8121060132801790774 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5342606960099249293, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
-  m_PrefabInstance: {fileID: 4221858090225635259}
-  m_PrefabAsset: {fileID: 0}
+  cardUI: {fileID: 4125526225033387533}

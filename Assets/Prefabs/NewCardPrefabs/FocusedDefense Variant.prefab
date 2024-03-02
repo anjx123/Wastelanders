@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &5167636810020950265
+--- !u!1001 &337420579926774456
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -8,25 +8,29 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -7228539631512178989, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: b9d9ffafd54db4d16be447f80c7ef42d, type: 3}
     - target: {fileID: 1866809560200078547, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
       propertyPath: m_Size.x
       value: 4.32
       objectReference: {fileID: 0}
     - target: {fileID: 1866809560200078547, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
       propertyPath: m_Size.y
-      value: 2.76
+      value: 2.73
       objectReference: {fileID: 0}
     - target: {fileID: 1866809560200078547, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: dea52a053c967f44fb04582357015c35, type: 3}
+      objectReference: {fileID: 21300000, guid: fa803f65c1e04b44f892de787f8cc226, type: 3}
     - target: {fileID: 1866809560200078547, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
       propertyPath: m_WasSpriteAssigned
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7256956916184963317, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
       propertyPath: m_Name
-      value: SteadiedShot Variant
+      value: FocusedDefense Variant
       objectReference: {fileID: 0}
     - target: {fileID: 8284128080877360369, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
       propertyPath: m_LocalPosition.x
@@ -74,39 +78,12 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 7256956916184963317, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 893399958756392302}
+      addedObject: {fileID: 5998065100771217553}
   m_SourcePrefab: {fileID: 100100000, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
---- !u!1 &2522791571507431436 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7256956916184963317, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
-  m_PrefabInstance: {fileID: 5167636810020950265}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &893399958756392302
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2522791571507431436}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 85f2d404022e8b443bb0c6b4e696609c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  myTransform: {fileID: 3837067799679763464}
-  titleName: Steadied Shot
-  icon: {fileID: 21300000, guid: dea52a053c967f44fb04582357015c35, type: 3}
-  fullCardObjectPrefab: {fileID: 0}
-  cardUI: {fileID: 4927219339933139279}
---- !u!4 &3837067799679763464 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8284128080877360369, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
-  m_PrefabInstance: {fileID: 5167636810020950265}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &4927219339933139279 stripped
+--- !u!114 &538496351984370446 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 276933645572133302, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
-  m_PrefabInstance: {fileID: 5167636810020950265}
+  m_PrefabInstance: {fileID: 337420579926774456}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
@@ -114,3 +91,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 834784dfb02aeaf438f42ae334048e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &6925166128267643469 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7256956916184963317, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
+  m_PrefabInstance: {fileID: 337420579926774456}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5998065100771217553
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6925166128267643469}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 609d001358e642f40b5aa6387f51354b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myTransform: {fileID: 8528094363861485129}
+  titleName: Focused Defense
+  icon: {fileID: 21300000, guid: fa803f65c1e04b44f892de787f8cc226, type: 3}
+  fullCardObjectPrefab: {fileID: 0}
+  cardUI: {fileID: 538496351984370446}
+--- !u!4 &8528094363861485129 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8284128080877360369, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
+  m_PrefabInstance: {fileID: 337420579926774456}
+  m_PrefabAsset: {fileID: 0}

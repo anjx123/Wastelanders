@@ -14,7 +14,6 @@ public class CombatCardDisplayManager : MonoBehaviour
 
     public bool IsDisplaying { get; set; } = false;
     private ActionClass currentUser;
-    private SpriteRenderer rdr;
     private bool targetHighlighted = false;
 
     // Awake is called before Start.
@@ -41,7 +40,6 @@ public class CombatCardDisplayManager : MonoBehaviour
 
     public void ShowCard(ActionClass a)
     {
-        rdr = cardDisplay.GetComponent<SpriteRenderer>();
         if (a == currentUser)
         {
             IsDisplaying = false;

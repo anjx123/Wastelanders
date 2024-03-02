@@ -21,7 +21,6 @@ public class Pound : SlimeAttacks
         lowerBound = 2;
         upperBound = 5;
         Speed = 2;
-        Block = 2;
 
         myName = "Pound";
         description = "I wouldn't stand still if I were you";
@@ -31,12 +30,6 @@ public class Pound : SlimeAttacks
         OriginalPosition = transform.position;
     }
 
-    public override void ApplyEffect()
-    {
-        DupInit();
-
-        Origin.ApplyAllBuffsToCard(ref duplicateCard);
-    }
 
     public override void OnHit()
     {
