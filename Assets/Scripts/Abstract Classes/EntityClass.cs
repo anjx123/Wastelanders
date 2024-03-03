@@ -318,7 +318,7 @@ public abstract class EntityClass : SelectClass
     }
 
     // Adds the Stacks of the Card to the Relevant Buff Stacks of the Player    
-    public void AddStacks(string buffType, int stacks)
+    public virtual void AddStacks(string buffType, int stacks)
     {
         CheckBuff(buffType);
         statusEffects[buffType].GainStacks(stacks);

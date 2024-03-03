@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BeetleScout : EnemyClass
+public class BeetleScout : BeetleMinions
 {
+    protected ActionClass excavateClone;
     // Start is called before the first frame update
     public override void Start()
     {
@@ -21,16 +22,11 @@ public class BeetleScout : EnemyClass
         combatInfo.SetCombatSprite(pool[0].GetComponent<ActionClass>());
         combatInfo.GetComponentInChildren<CombatCardUI>().actionClass = pool[0].GetComponent<ActionClass>();
 
-        ActionClass clonedAttack = Instantiate(pool[0].GetComponent<ActionClass>());
-        clonedAttack.Target = players[Random.Range(0, players.Count - 1)];
-        BattleQueue.BattleQueueInstance.AddEnemyAction(clonedAttack, this);
-        combatInfo.SetCombatSprite(clonedAttack);
-        combatInfo.GetComponentInChildren<CombatCardUI>().actionClass = clonedAttack;
-
-        pool.RemoveAt(0);
-        if (pool.Count < 1)
-        {
-            Reshuffle();
-        }
+        ActionClass cloned = pool[1].GetComponent<ActionClass>();
+        cloned.Target = players[Random.Range(0, players.Count - 1)];
+        BattleQueue.BattleQueueInstance.AddEnemyAction(cloned, this);
+        combatInfo.SetCombatSprite(cloned);
+        combatInfo.GetComponentInChildren<CombatCardUI>().actionClass = cloned;
+        
     }
 }

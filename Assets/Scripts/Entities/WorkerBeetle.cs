@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WorkerBeetle : EnemyClass
+public class WorkerBeetle : BeetleMinions
 {
     // Start is called before the first frame update
     public override void Start()
