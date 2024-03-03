@@ -13,9 +13,7 @@ public class Jackie : PlayerClass
         Health = MaxHealth;
         myName = "Jackie";
 
-        // HighlightManager.selectedPlayer = this;      // MAGIC!
-
-        // deep copy deck into pool
+        // deep copy deck into pool; this can't be abstracted because of dispatch rules; base.base.Start() requires these cards and these cards are introduced in the editor (added to the cardPrefabs field)
         for (int i = 0; i < cardPrefabs.Count; i++)
         {
             GameObject toAdd = Instantiate(cardPrefabs[i]);
@@ -23,5 +21,6 @@ public class Jackie : PlayerClass
             pool.Add(toAdd);
             toAdd.transform.position = new Vector3(-1000, -1000, 1);
         }
+        // HighlightManager.selectedPlayer = this;      // MAGIC! Joke aside: irrelevant but keep for future debugging and obviation.
     }
 }

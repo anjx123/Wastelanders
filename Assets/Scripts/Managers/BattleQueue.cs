@@ -105,8 +105,16 @@ public class BattleQueue : MonoBehaviour
     // Removes the card if it is clicked on by the player whilst it is in the Queue. And then reinserts it into the issuing player's hand/deck. 
      public void DeletePlayerAction(ActionClass action)
     {
-        wrapperArray.RemoveWrapperWithActionClass(action);
-        protoQueue.RemoveLinearSearch(action);
+        Wrapper w = wrapperArray.RemoveWrapperWithActionClass(action);
+        ActionClass a = protoQueue.RemoveLinearSearch(action);
+/*        if (w == null)
+        {
+            Debug.Log("Check Removal in Wrappers");
+        }
+        if (a == null)
+        {
+            Debug.Log("Check Removal in Array");
+        }*/
         RenderBQ();
         PlayerClass player = (PlayerClass)action.Origin;
         player.ReaddCard(action);
@@ -297,15 +305,20 @@ public class BattleQueue : MonoBehaviour
         }
 
         public ActionClass RemoveLinearSearch(ActionClass card)
-        {
-            int i = LinearSearch(card);
-
-            if (i < array.Count && array[i] == card)  // reference comparison is ok here; follow the code usage; is used at dequeue; same instance.
+        { 
+            int elements = array.Count;
+            if (elements != 0)
             {
-                array.RemoveAt(i);
+                for (int i = 0; i < elements; i++)
+                {
+                    if (card == array[i]) // check for the reference 
+                    {
+                        array.RemoveAt(i);
+                        return card;
+                    }
+                }
             }
-
-            return card;
+            throw new Exception("Invalid Call to Remove");
         }
 
         // essentially replaces binary search and is easier for LIFO insertion (Stack)
@@ -484,9 +497,10 @@ public class BattleQueue : MonoBehaviour
             for (int i = wrappers.Count - 1; i >= 0; i--)
             {
                 Wrapper existingWrapper = wrappers[i];
-                if ((existingWrapper.PlayerAction != null && existingWrapper.PlayerAction.Origin == entity) || (existingWrapper.EnemyAction != null && existingWrapper.EnemyAction.Target == entity))
+                if ((existingWrapper.PlayerAction != null && (existingWrapper.PlayerAction.Origin == entity || existingWrapper.PlayerAction.Target == entity)) || 
+                    (existingWrapper.EnemyAction != null && (existingWrapper.EnemyAction.Target == entity || existingWrapper.EnemyAction.Origin == entity)))
                 {
-                    wrappers.RemoveAt(i); 
+                    wrappers.RemoveAt(i); // would wanna remove all cards amiritie; NOTE: you could possibly transfer the attacks...
                 }
             }
         }

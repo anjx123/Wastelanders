@@ -141,7 +141,7 @@ public abstract class PlayerClass : EntityClass
         {
             Transform child = parent.transform.GetChild(i);
             ActionClass[] components = child.gameObject.GetComponents<ActionClass>();
-            Debug.Log(components[0].GetType());
+            // Debug.Log(components[0].GetType());
             if (components[0].GetType() == type)
             {
                 return child.gameObject;

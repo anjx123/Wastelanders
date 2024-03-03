@@ -7,8 +7,8 @@ public class HighlightManager : MonoBehaviour // later all entity highlighter
 {
 
 #nullable enable
-    private static EntityClass? currentHighlightedEnemyEntity = null;
-    private static ActionClass? currentHighlightedAction = null;
+    public static EntityClass? currentHighlightedEnemyEntity = null;
+    public static ActionClass? currentHighlightedAction = null;
     public static PlayerClass? selectedPlayer = null;
 
     private void Start()
@@ -108,27 +108,30 @@ public class HighlightManager : MonoBehaviour // later all entity highlighter
     public static void OnActionClicked(ActionClass clicked)
     {
         if (CombatManager.Instance.GameState != GameState.SELECTION) return;
-        if (currentHighlightedAction == null)
+        if (selectedPlayer != null)
         {
-            currentHighlightedAction = clicked;
-            currentHighlightedAction.Highlight();
-        }
-        else if (currentHighlightedAction != clicked)
-        {
-            currentHighlightedAction.DeHighlight();
-            clicked.Highlight();
-            currentHighlightedAction = clicked;
-        }
-        else
-        {
-            if (!currentHighlightedAction.Toggle()) // if enemy chosen but no card chosen
+            if (currentHighlightedAction == null)
             {
-                currentHighlightedAction = null;
-                if (currentHighlightedEnemyEntity != null) 
+                currentHighlightedAction = clicked;
+                currentHighlightedAction.Highlight();
+            }
+            else if (currentHighlightedAction != clicked)
+            {
+                currentHighlightedAction.DeHighlight();
+                clicked.Highlight();
+                currentHighlightedAction = clicked;
+            }
+            else
+            {
+                if (!currentHighlightedAction.Toggle()) // if enemy chosen but no card chosen
                 {
-                    currentHighlightedEnemyEntity.DeHighlight();
+                    currentHighlightedAction = null;
+                    if (currentHighlightedEnemyEntity != null)
+                    {
+                        currentHighlightedEnemyEntity.DeHighlight();
+                    }
+
                 }
-                
             }
         }
     }
@@ -147,22 +150,24 @@ public class HighlightManager : MonoBehaviour // later all entity highlighter
                 }
 
             }
-            selectedPlayer?.UnRenderHand();
+            selectedPlayer?.UnRenderHand(); // NOTE: selectedPlayer should logically never be null here as you never initiate Fighting without playing a card and you can never have an unselected player after making a selection.
         } 
     }
 
-    // This method is actually redundant since you would HAVE to see the updated deck if you have a player selected.
-    public static bool RenderHandIfAppropriate(PlayerClass player)
+    // Note that there should only be one instance per round in which selectedPlayer is null, hence the non-assertion. (initial player selection) 
+    // Auto shifts to relevant player
+    public static void RenderHandIfAppropriate(PlayerClass player)
     {
-        if (selectedPlayer == player)
+        if (player == null)
         {
-            player.RenderHand();
-            return true;
-        } else
-        {
-            selectedPlayer?.UnRenderHand();
-            player.RenderHand();
-            return false;
+            throw new System.Exception("This method was called from an invalid location or there is a logic conundrum in OnEntityClicked");
         }
+
+        selectedPlayer?.UnRenderHand();
+        player.UnRenderHand();
+
+        selectedPlayer = player; 
+        selectedPlayer!.RenderHand();
+        
     }
 }
