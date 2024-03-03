@@ -474,6 +474,16 @@ public abstract class EntityClass : SelectClass
         
     }
 
+    public void OutOfCombat()
+    {
+        DisableHealthBar();
+    }
+
+    public void InCombat()
+    {
+        EnableHealthBar();
+    }
+
     public void SetDice(int value)
     {
         combatInfo.SetDice(value);
@@ -491,6 +501,16 @@ public abstract class EntityClass : SelectClass
     public void DisableDice()
     {
         combatInfo.DisableDice();
+    }
+
+    private void EnableHealthBar()
+    {
+        combatInfo.EnableHealthBar();
+    }
+
+    private void DisableHealthBar()
+    {
+        combatInfo.DisableHealthBar();
     }
 
     //@Author: Anrui

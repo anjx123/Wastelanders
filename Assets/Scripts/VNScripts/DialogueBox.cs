@@ -19,7 +19,6 @@ public class DialogueBox : MonoBehaviour
 
     public void SetLine(DialogueText line)
     {
-        Debug.Log("New line body set" + line.BodyText);
         bodyText.text = string.Empty;
         this.currentLine = line.BodyText;
         nameText.text = line.SpeakerName;

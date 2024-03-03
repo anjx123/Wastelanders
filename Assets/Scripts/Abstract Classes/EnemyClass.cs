@@ -27,7 +27,6 @@ public abstract class EnemyClass : EntityClass
     public override void Start()
     {
         base.Start();
-        combatInfo.FaceLeft();
         CombatManager.Instance.AddEnemy(this);
         for (int i = 0; i < availableActions.Count; i++)
         {
@@ -55,6 +54,7 @@ public abstract class EnemyClass : EntityClass
     public virtual void AddAttack(List<PlayerClass> players)
     {
         if (players.Count == 0) return;
+        if (pool.Count == 0) return;
         pool[0].GetComponent<ActionClass>().Target = players[Random.Range(0, players.Count - 1)];
         BattleQueue.BattleQueueInstance.AddEnemyAction(pool[0].GetComponent<ActionClass>(), this);
         combatInfo.SetCombatSprite(pool[0].GetComponent<ActionClass>());

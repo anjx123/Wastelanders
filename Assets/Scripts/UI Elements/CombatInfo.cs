@@ -18,12 +18,11 @@ public class CombatInfo : MonoBehaviour
 
     private float ROTATION_SPEED = 30f;
 
-    private Canvas buffListCanvas;
+    public Canvas buffListCanvas;
 
     public void Start()
     {
         diceRollText.GetComponent<MeshRenderer>().sortingOrder = diceRollSprite.GetComponent<SpriteRenderer>().sortingOrder + 1;
-        buffListCanvas = buffList.gameObject.GetComponent<Canvas>();
         buffListCanvas.overrideSorting = true;
         buffListCanvas.sortingLayerName = CombatManager.Instance.FADE_SORTING_LAYER;
         diceRollText.GetComponent<MeshRenderer>().sortingLayerName = CombatManager.Instance.FADE_SORTING_LAYER;
@@ -75,6 +74,16 @@ public class CombatInfo : MonoBehaviour
         diceRollSprite.GetComponent<SpriteRenderer>().enabled = false;
         diceRollText.GetComponent<TMP_Text>().enabled = false;
         diceRollText.GetComponent<TextMeshPro>().text = null;
+    }
+
+    public void EnableHealthBar()
+    {
+        healthBar.gameObject.SetActive(true);
+    }
+
+    public void DisableHealthBar()
+    {
+        healthBar.gameObject.SetActive(false);
     }
 
     public void DeactivateCombatSprite()

@@ -8,6 +8,8 @@ public class TutorialIntroduction : DialogueClasses
     [SerializeField] private Transform jackieDefaultTransform;
     [SerializeField] private EnemyIves ives;
     [SerializeField] private Transform ivesDefaultTransform;
+    [SerializeField] private GameObject trainingDummyPrefab;
+    [SerializeField] private Transform dummy1StartingPos;
 
     [SerializeField] private List<DialogueText> soldierGreeting;
     [SerializeField] private List<DialogueText> jackieTalksWithSolider;
@@ -17,7 +19,8 @@ public class TutorialIntroduction : DialogueClasses
     {
         CombatManager.Instance.GameState = GameState.OUT_OF_COMBAT;
         yield return new WaitForSeconds(3f);
-
+        ives.OutOfCombat();
+        jackie.OutOfCombat(); //Workaround for now, ill have to remove this once i manually start instantiating players
         jackie.SetReturnPosition(jackieDefaultTransform.position);
         yield return StartCoroutine(jackie.ResetPosition()); //Jackie Runs into the scene
 
@@ -41,6 +44,22 @@ public class TutorialIntroduction : DialogueClasses
         yield return new WaitForSeconds(0.2f);
 
         yield return StartCoroutine(DialogueManager.Instance.StartDialogue(ivesScoldsJackie));
+
+        yield return StartCoroutine(ives.MoveToPosition(dummy1StartingPos.position, 1.2f, 1.2f)); //Ives goes to place a dummy down
+        Instantiate(trainingDummyPrefab, dummy1StartingPos);
+
+
+        yield return new WaitForSeconds(1f);
+        yield return StartCoroutine(jackie.MoveToPosition(dummy1StartingPos.position, 1.4f, 0.8f));
+
+
+        yield return new WaitForSeconds(1f);
+        ives.InCombat();
+        jackie.InCombat(); //Workaround for now, ill have to remove this once i manually start instantiating players
+        CombatManager.Instance.GameState = GameState.SELECTION;
+
+
+
 
 
 

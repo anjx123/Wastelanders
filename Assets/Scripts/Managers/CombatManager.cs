@@ -237,6 +237,16 @@ public class CombatManager : MonoBehaviour
         Deactivate(handContainer);
         Deactivate(startDequeue);
         battleQueueParent.SetActive(false);
+
+        foreach (PlayerClass player in players)
+        {
+            player.OutOfCombat();
+        }
+
+        foreach (EnemyClass enemy in enemies)
+        {
+            enemy.OutOfCombat();
+        }
     }
 
     //set (@param darkenScene) true to fade **combat background** in, false to fade out
