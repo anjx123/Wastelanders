@@ -107,8 +107,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 6.470001, y: 4.51486, z: 1}
+  m_Center: {x: -0.16475868, y: -0.41738987, z: 0}
 --- !u!114 &7705635274264210574
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -125,8 +125,7 @@ MonoBehaviour:
   animator: {fileID: 3552047448212555760}
   combatInfo: {fileID: 9191087331242654797}
   availableActions:
-  - {fileID: 2376898879351982445, guid: 41158511bc5761d4386617623a2a562d, type: 3}
-  - {fileID: 2376898879351982445, guid: 63bc38449d5d80242a58e343499c03ca, type: 3}
+  - {fileID: 2376898879351982445, guid: 7090f976358e24551b91b2b219740e7b, type: 3}
 --- !u!95 &3552047448212555760
 Animator:
   serializedVersion: 5

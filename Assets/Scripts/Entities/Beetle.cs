@@ -13,7 +13,7 @@ public class Beetle : EnemyClass
     public override void Start()
     {
         base.Start();
-        MaxHealth = 15;
+        MaxHealth = 8;
         Health = MaxHealth;
         myName = "Beetle";
     }
