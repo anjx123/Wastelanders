@@ -5,7 +5,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
-public abstract class Beetle : EnemyClass
+public class WorkerBeetle : Beetle
 {
 
 
@@ -13,7 +13,8 @@ public abstract class Beetle : EnemyClass
     public override void Start()
     {
         base.Start();
-        
-        myName = "Beetle";
+        MaxHealth = 8;
+        Health = MaxHealth;
+        myName = "WorkerBeetle";
     }
 }
