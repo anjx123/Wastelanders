@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2731077104277925276}
   - component: {fileID: 8686784205400784684}
   - component: {fileID: 3212035558133251139}
-  - component: {fileID: 4984780383365653745}
+  - component: {fileID: 499407785069588361}
   m_Layer: 0
   m_Name: Fragment
   m_TagString: Untagged
@@ -110,7 +110,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &4984780383365653745
+--- !u!114 &499407785069588361
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -119,11 +119,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 2376898879351982445}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0f05a21eaa81c47c4a21eb56a3cea041, type: 3}
+  m_Script: {fileID: 11500000, guid: 73e44258672624d958e3457e3552c8f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myTransform: {fileID: 0}
-  titleName: Excavate
-  icon: {fileID: 21300000, guid: 37bbc3e0e4af26b43ab745918185fc6e, type: 3}
-  fullCardObjectPrefab: {fileID: 7256956916184963317, guid: 7992639b56b18474daa2eec959b79cb0, type: 3}
+  myTransform: {fileID: 2731077104277925276}
+  titleName: Fragment
+  icon: {fileID: 21300000, guid: 5c59be28949fc4359bdc7f1c11394014, type: 3}
+  fullCardObjectPrefab: {fileID: 7256956916184963317, guid: 68cba8f76cf3c4535920ea569c8e73cd, type: 3}
   cardUI: {fileID: 0}
