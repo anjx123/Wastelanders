@@ -8,7 +8,6 @@ using UnityEngine.UI;
 public class QueenBeetle : EnemyClass
 {
 
-
     // Start is called before the first frame update
     public override void Start()
     {
@@ -17,4 +16,6 @@ public class QueenBeetle : EnemyClass
         Health = MaxHealth;
         myName = "The Queen";
     }
+
+
 }
