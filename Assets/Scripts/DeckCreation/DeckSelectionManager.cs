@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.Search;
 using UnityEngine;
+using static CardDatabase;
 
 public class DeckSelectionManager : MonoBehaviour
 {
@@ -41,7 +42,7 @@ public class DeckSelectionManager : MonoBehaviour
 
     private void Start()
     {
-        RenderDecks(CardDatabase.WeaponType.PISTOL); //Simply for testing, remove once broadcasting weapon type is hooked up
+       RenderDecks(CardDatabase.WeaponType.STAFF); //Simply for testing, remove once broadcasting weapon type is hooked up
     }
 
     private void OnDestroy()

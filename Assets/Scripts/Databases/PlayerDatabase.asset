@@ -14,7 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   JackieData:
     name: Jackie
-    level: 10
+    playerWeaponProficiency: []
   IvesData:
     name: Ives
-    level: 15
+    playerWeaponProficiency:
+    - Item1: 0
+      Item2: 10
+    - Item1: 3
+      Item2: 2

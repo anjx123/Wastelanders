@@ -17,7 +17,8 @@ public class PlayerDatabase : ScriptableObject
     public class PlayerData
     {
         public string name;
-        public int level; //Will determine amount of cards you can select for now
+        public List<SerializableTuple<CardDatabase.WeaponType, int>> playerWeaponProficiency = new();
+
         private (CardDatabase.WeaponType, List<ActionClass>)? _deck1 = null;
         private (CardDatabase.WeaponType, List<ActionClass>)? _deck2 = null;
 
@@ -34,7 +35,7 @@ public class PlayerDatabase : ScriptableObject
         }
 
         //Gets the combination of both smaller decks
-        public List<ActionClass> getCombinedDeck()
+        public List<ActionClass> GetCombinedDeck()
         {
             List<ActionClass> combinedDeck = new List<ActionClass>();
 

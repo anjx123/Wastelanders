@@ -20,6 +20,8 @@ public abstract class ActionClass : SelectClass
         }
     }
 
+    public int CostToAddToDeck { get; set; } = 2;
+
     protected int lowerBound;
     protected int upperBound;
 
