@@ -1617,6 +1617,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 141643689}
     m_Modifications:
+    - target: {fileID: 565243660519602255, guid: ffe5e716a68f6484aa03d7e79a4dc2a7, type: 3}
+      propertyPath: availableActions.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 565243660519602255, guid: ffe5e716a68f6484aa03d7e79a4dc2a7, type: 3}
+      propertyPath: availableActions.Array.data[1]
+      value: 
+      objectReference: {fileID: 2376898879351982445, guid: d9b234b17f5614282a831238d30604be, type: 3}
     - target: {fileID: 2002373752629993316, guid: ffe5e716a68f6484aa03d7e79a4dc2a7, type: 3}
       propertyPath: m_Name
       value: QueenPrefab

@@ -27,4 +27,6 @@ public class QueenBeetle : EnemyClass
         AddStacks(buffType, stacks);
         Debug.Log("Queen received " + stacks + " stacks of " + buffType + ".");
     }
+
+
 }
