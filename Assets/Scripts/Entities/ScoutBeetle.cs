@@ -17,4 +17,11 @@ public class ScoutBeetle : Beetle
         Health = MaxHealth;
         myName = "ScoutBeetle";
     }
+
+    // Scout attacks twice in a turn
+    public override void AddAttack(List<PlayerClass> players)
+    {
+        base.AddAttack(players);
+        base.AddAttack(players);
+    }
 }
