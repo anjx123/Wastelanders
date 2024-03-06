@@ -9,7 +9,7 @@ public class AddBuffTester : MonoBehaviour
 
     void OnMouseDown()
     {
-        beetles[UnityEngine.Random.Range(0, beetles.Count)].GetComponent<EntityClass>().AddStacks(Accuracy.buffName, 2);
+        beetles[UnityEngine.Random.Range(0, beetles.Count)].GetComponent<EntityClass>().AddStacks(Resonate.buffName, 2);
     }
 }
 
