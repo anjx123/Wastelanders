@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 3576713871262507216}
   - component: {fileID: 5069809743003330988}
   - component: {fileID: 3552047448212555760}
-  - component: {fileID: 5232295061604255744}
+  - component: {fileID: 4445560835001526495}
   m_Layer: 0
-  m_Name: BeetlePrefab
+  m_Name: ScoutBeetlePrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -77,7 +77,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: c4daaaf4112fc7e41b48f0e27c19807f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8e689c8a0c25e9f43adc851a97a79a46, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -130,7 +130,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &5232295061604255744
+--- !u!114 &4445560835001526495
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -139,14 +139,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 8044949296705636452}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 183874078d8194649a324016f66d1a65, type: 3}
+  m_Script: {fileID: 11500000, guid: ccd8cb759a4d8482399a8cf995466975, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   myTransform: {fileID: 617082415006753302}
   animator: {fileID: 3552047448212555760}
   combatInfo: {fileID: 9191087331242654797}
   availableActions:
-  - {fileID: 2376898879351982445, guid: 7090f976358e24551b91b2b219740e7b, type: 3}
+  - {fileID: 2376898879351982445, guid: 47b019d96704c455391a1f89ba0d1714, type: 3}
 --- !u!1001 &5473955538084191047
 PrefabInstance:
   m_ObjectHideFlags: 0
