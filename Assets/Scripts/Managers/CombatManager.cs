@@ -289,4 +289,9 @@ public class CombatManager : MonoBehaviour
             }
         }
     }
+
+    public List<PlayerClass> GetPlayers()
+    {
+        return players;
+    }
 }
