@@ -25,6 +25,9 @@ public abstract class Beetle : EnemyClass
         OnGainBuffs?.Invoke(buffType, stacks);
     }
 
+    // Adds attack(s) to the bq. Beetles are capable of directing their attacks to crystals
+    //  on top of players. Individual beetle subclasses may further override this method to
+    //  favour targeting on crystals/players.
     public override void AddAttack(List<PlayerClass> players) {
         if (players.Count == 0) return; // if there are no players, no need to attack crystals
         // add crystals to list of potential targets
@@ -32,10 +35,6 @@ public abstract class Beetle : EnemyClass
         List<EntityClass> crystals = CombatManager.Instance.getCrystals().Cast<EntityClass>().ToList();
         targets.AddRange(crystals);
 
-        for (int i = 0; i < 100; i++)
-        {
-            Debug.Log(Random.Range(0, targets.Count));
-        }
         // rest is the same
         pool[0].GetComponent<ActionClass>().Target = targets[Random.Range(0, targets.Count)];
         BattleQueue.BattleQueueInstance.AddEnemyAction(pool[0].GetComponent<ActionClass>(), this);

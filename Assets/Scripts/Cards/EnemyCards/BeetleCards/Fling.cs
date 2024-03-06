@@ -34,6 +34,7 @@ public class Fling : BeetleAttacks
 
     public override void OnHit()
     {
-        // TODO: give stacks
+        base.OnHit();
+        Origin.AddStacks(Resonate.buffName, 1);
     }
 }

@@ -34,6 +34,7 @@ public class Excavate : BeetleAttacks
 
     public override void OnHit()
     {
+        base.OnHit();
         // TODO: give stacks
     }
 }

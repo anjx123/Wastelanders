@@ -25,7 +25,6 @@ public class QueenBeetle : EnemyClass
     private void HandleGainedBuffs(string buffType, int stacks)
     {
         AddStacks(buffType, stacks);
-        Debug.Log("Queen received " + stacks + " stacks of " + buffType + ".");
     }
 
 

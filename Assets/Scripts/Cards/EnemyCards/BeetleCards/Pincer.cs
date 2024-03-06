@@ -30,10 +30,4 @@ public class Pincer : BeetleAttacks
         OriginalPosition = transform.position;
     }
 
-
-
-    public override void OnHit()
-    {
-        
-    }
 }

@@ -30,6 +30,7 @@ public class Hatchery : ActionClass
 
     public override void OnHit()
     {
+        base.OnHit();
         // TODO: spawn beetle
     }
 }
