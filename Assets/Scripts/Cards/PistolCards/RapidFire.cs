@@ -22,7 +22,7 @@ public class RapidFire : PistolCards
         originalLower = lowerBound;
         originalUpper = upperBound;
         Speed = 2;
-        description = "If unstaggered, lose 1 accuracy then make this card again (Max extra 3 times)";
+        description = "If unstaggered, conditionally make a card consuming accuracy upto 3 times multiplying possible damage."; // () => {accuracy > 3 ? 3 : accuracy} // assume accuracy is deducted
         CardType = CardType.MeleeAttack;
         myName = "RapidFire";
         Renderer renderer = GetComponent<Renderer>();
@@ -39,8 +39,8 @@ public class RapidFire : PistolCards
     public override void OnHit()
     {
         base.OnHit();
-        Debug.Log(Origin.GetBuffStacks(Accuracy.buffName));
-        Origin.AddStacks(Accuracy.buffName, 10); // for debuggin
+/*        Debug.Log(Origin.GetBuffStacks(Accuracy.buffName));
+        Origin.AddStacks(Accuracy.buffName, 10); // for debuggin*/
 
         if (proto && activeDupCardInstance == null)
         {
