@@ -31,6 +31,6 @@ public class Fragment : ActionClass
     public override void OnHit()
     {
         base.OnHit();
-        // TODO: give resonate on hit
+        Origin.AddStacks(Resonate.buffName, 1);
     }
 }

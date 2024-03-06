@@ -21,7 +21,7 @@ public class Excavate : BeetleAttacks
         
         Speed = 2;
 
-        description = "Deals 2x damage to crystals. Gives all resonate stacks to the queen beetle.";
+        description = "Deals 2x damage to crystals.";
 
         myName = "Excavate";
         CardType = CardType.MeleeAttack;
@@ -31,10 +31,18 @@ public class Excavate : BeetleAttacks
     }
 
 
-
+    // does 2x damage if target is crystal
     public override void OnHit()
     {
-        base.OnHit();
-        // TODO: give stacks
+        if (Target is Crystals)
+        {
+            Vector3 diffInLocation = Target.myTransform.position - Origin.myTransform.position;
+            Origin.UpdateFacing(diffInLocation, null);
+            this.Target.TakeDamage(Origin, 2 * duplicateCard.actualRoll);
+        }
+        else
+        {
+            base.OnHit();
+        }
     }
 }
