@@ -24,5 +24,7 @@ public abstract class Beetle : EnemyClass
         OnGainBuffs?.Invoke(buffType, stacks);
     }
 
+    public override void AddAttack(List<PlayerClass> players) {
 
+    }
 }

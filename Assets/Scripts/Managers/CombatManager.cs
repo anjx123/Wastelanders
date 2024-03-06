@@ -2,6 +2,7 @@ using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 using static UnityEngine.EventSystems.EventTrigger;
 
 public class CombatManager : MonoBehaviour
@@ -195,6 +196,11 @@ public class CombatManager : MonoBehaviour
         {
             GameState = GameState.GAME_WIN;
         }
+    }
+
+    public List<Crystals> getCrystals()
+    {
+        return enemies.OfType<Crystals>().ToList();
     }
 
     private void PerformLose()
