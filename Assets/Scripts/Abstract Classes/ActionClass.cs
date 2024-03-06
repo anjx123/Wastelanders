@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.ConstrainedExecution;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public abstract class ActionClass : SelectClass
 {
@@ -71,7 +72,13 @@ public abstract class ActionClass : SelectClass
 
     public override void OnMouseDown()
     {
-        HighlightManager.OnActionClicked(this);
+        Scene activeScene = SceneManager.GetActiveScene();
+        string name = activeScene.name;
+        if (name == "CombatScene") {
+            HighlightManager.OnActionClicked(this);
+        } else if (name == "SelectionScene") {
+            Debug.Log("name: " + name);
+        }
     }
     //Called when this card hits the enemy, runs any on hit buffs or effects given.
     public virtual void OnHit()

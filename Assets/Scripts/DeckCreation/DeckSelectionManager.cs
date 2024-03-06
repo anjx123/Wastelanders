@@ -12,8 +12,8 @@ public class DeckSelectionManager : MonoBehaviour
     [SerializeField] private GameObject cardArrayParent;
     [SerializeField] private CardDatabase cardDatabase;
     [SerializeField] private PlayerDatabase playerDatabase;
-    
-
+    public List<GameObject> deckPrefabs;
+    public static DeckSelectionManager Instance { get; private set; }
     private DeckSelectionState deckSelectionState;
     private DeckSelectionState DeckSelectionState //Might want to swap out this state machine for an event driven changing phases.
     {
@@ -40,9 +40,61 @@ public class DeckSelectionManager : MonoBehaviour
         }
     }
 
+    void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else if (Instance != null && Instance != this)
+        {
+            Destroy(this);
+        }
+
+    }
+
+    public void PistolSelected(CardDatabase.WeaponType weaponType)
+    {
+        
+    }
+
+    public void CharacterChosen(PlayerDatabase.PlayerData playerData) 
+    {
+        DeckSelectionState = DeckSelectionState.WeaponSelection;
+        bool rendered1 = false;
+        float xOffset = -3f;
+        
+        foreach (var deckPrefab in deckPrefabs)
+        {
+            string name = deckPrefab.name;
+            string removeDeck = name[..^4].ToUpper();
+
+            foreach (var tuple in playerData.playerWeaponProficiency)
+            {
+                Debug.Log(tuple.Item1.ToString() + " " + removeDeck);
+                if (tuple.Item1.ToString() == removeDeck)
+                {
+                    Debug.Log("true");
+                    GameObject deck = Instantiate(deckPrefab);
+                    Vector3 newPosition = deck.transform.position; // Get initial position of the deck
+            
+                    if (!rendered1) {
+                        deck.transform.position = newPosition + new Vector3(xOffset, 0f, 0f); // Position the first deck
+                        rendered1 = true;
+                        xOffset += 6f; // Adjust the x offset for the second deck
+                    } else {
+                        deck.transform.position = newPosition + new Vector3(xOffset, 0f, 0f); // Position the second deck
+                    }
+                    break;
+                }
+            }
+        }
+
+    }
+
     private void Start()
     {
-       RenderDecks(CardDatabase.WeaponType.STAFF); //Simply for testing, remove once broadcasting weapon type is hooked up
+    //    RenderDecks(CardDatabase.WeaponType.STAFF); //Simply for testing, remove once broadcasting weapon type is hooked up
     }
 
     private void OnDestroy()

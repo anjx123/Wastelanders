@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 1791623885007026242}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -1}
   m_LocalScale: {x: 0.4, y: 0.4, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -96,6 +96,7 @@ GameObject:
   - component: {fileID: 4624491365486866069}
   - component: {fileID: -9060474440951163627}
   - component: {fileID: 7774072083836099472}
+  - component: {fileID: 2044456040249909562}
   m_Layer: 0
   m_Name: IvesSelection
   m_TagString: Untagged
@@ -216,6 +217,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 7.68, y: 7.68}
   m_EdgeRadius: 0
+--- !u!114 &2044456040249909562
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4787599355962805138}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5956981a16ff6d41a1dd3d05e2d61ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8320406679068454789
 GameObject:
   m_ObjectHideFlags: 0
