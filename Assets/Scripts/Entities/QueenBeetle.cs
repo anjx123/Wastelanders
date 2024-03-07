@@ -52,6 +52,7 @@ public class QueenBeetle : EnemyClass
             {
                 AddAttackFromPool(players, 0); // hatchery
                 ReduceStacks(Resonate.buffName, 2);
+                UpdateBuffs();
             }
             else
             {
@@ -87,6 +88,5 @@ public class QueenBeetle : EnemyClass
         beetle.transform.SetParent(enemyContainer.transform);
         beetle.transform.position = beetleLocations[numActiveBeetles];
         CombatManager.Instance.AddEnemy(beetle.GetComponent<EnemyClass>());
-        numActiveBeetles++;
     }
 }
