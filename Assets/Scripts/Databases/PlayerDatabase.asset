@@ -22,7 +22,12 @@ MonoBehaviour:
     playerDeck:
     - key: 1
       value:
-      - {fileID: 7473027025033308495, guid: 6dbaf4ce078f7a246accd898926ea246, type: 3}
+      - {fileID: 0}
+    - key: 2
+      value:
+      - {fileID: 0}
+      - {fileID: 0}
+    weapons: 
   IvesData:
     name: Ives
     playerWeaponProficiency:
@@ -31,3 +36,4 @@ MonoBehaviour:
     - Item1: 3
       Item2: 2
     playerDeck: []
+    weapons: 

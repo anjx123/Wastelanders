@@ -101,21 +101,22 @@ public class DeckSelectionManager : MonoBehaviour
         RenderDecks(weaponType);
     }
 
-    public void ActionSelected(ActionClass obj)
+    public void ActionSelected(ActionClass ac)
     {
         List<SerializableWeaponListEntry> playerDeck = playerData.playerDeck;
         for (int i = 0; i < playerDeck.Count; i++)
         {
             if (playerDeck[i].key == weaponType)
             {
-                List<ActionClass> gobjs = playerDeck[i].value;
-                if (gobjs.Contains(obj))
+                List<ActionClass> actions = playerDeck[i].value;
+                if (actions.Contains(ac))
                 {
-                    gobjs.Remove(obj);
+                    actions.Remove(ac);
                 }
                 else
                 {
-                    gobjs.Add(obj);
+                    Debug.Log("type: "+ ac.GetType());
+                    actions.Add(ac);
                 }
 
                 return;
@@ -125,7 +126,7 @@ public class DeckSelectionManager : MonoBehaviour
         SerializableWeaponListEntry newEntry = new()
         {
             key = weaponType,
-            value = new List<ActionClass> { obj }
+            value = new List<ActionClass> { ac }
         };
         
         playerDeck.Add(newEntry);
