@@ -18,6 +18,9 @@ public class PlayerDatabase : ScriptableObject
     {
         public string name;
         public List<SerializableTuple<CardDatabase.WeaponType, int>> playerWeaponProficiency = new();
+        [SerializeField]
+        public List<SerializableWeaponListEntry> playerDeck = new();
+        public List<CardDatabase.WeaponType> weapons = new();
 
         private (CardDatabase.WeaponType, List<ActionClass>)? _deck1 = null;
         private (CardDatabase.WeaponType, List<ActionClass>)? _deck2 = null;

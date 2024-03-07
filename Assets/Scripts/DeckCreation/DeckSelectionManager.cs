@@ -4,6 +4,7 @@ using UnityEditor.Search;
 using UnityEngine;
 using static CardDatabase;
 using UnityEngine.SceneManagement;
+using System;
 
 public class DeckSelectionManager : MonoBehaviour
 {
@@ -87,9 +88,9 @@ public class DeckSelectionManager : MonoBehaviour
         }
     }
 
-    public List<GameObject> getPool(string myName)
+    public List<GameObject> GetDeck(string myName)
     {
-        
+        return new List<GameObject>();
     }
 
 
@@ -100,9 +101,34 @@ public class DeckSelectionManager : MonoBehaviour
         RenderDecks(weaponType);
     }
 
-    public void ActionSelected(ActionClass action)
+    public void ActionSelected(ActionClass obj)
     {
-        playerData.
+        List<SerializableWeaponListEntry> playerDeck = playerData.playerDeck;
+        for (int i = 0; i < playerDeck.Count; i++)
+        {
+            if (playerDeck[i].key == weaponType)
+            {
+                List<ActionClass> gobjs = playerDeck[i].value;
+                if (gobjs.Contains(obj))
+                {
+                    gobjs.Remove(obj);
+                }
+                else
+                {
+                    gobjs.Add(obj);
+                }
+
+                return;
+            }
+        }
+
+        SerializableWeaponListEntry newEntry = new()
+        {
+            key = weaponType,
+            value = new List<ActionClass> { obj }
+        };
+        
+        playerDeck.Add(newEntry);
     }
 
     public void CharacterChosen(PlayerDatabase.PlayerData playerData) 
@@ -184,9 +210,23 @@ public class DeckSelectionManager : MonoBehaviour
         deckSelectionUi.SetActive(true);
     }
 
+    private List<ActionClass> GetChosenCards(CardDatabase.WeaponType weaponType) {
+        foreach (var entry in playerData.playerDeck)
+        {
+            // Check if the current entry's key matches the keyToCheck
+            if (entry.key == weaponType)
+            {
+                return entry.value;
+            }
+        }
+
+        return new List<ActionClass>();
+    }
+
     //Renders the deck corresponding to (@param weaponType)
     public void RenderDecks(CardDatabase.WeaponType weaponType)
     {
+        List<ActionClass> chosenCardList = GetChosenCards(weaponType);
         int width = 6; // The width of the grid in # of cards 
         int height = 6; // The height of the grid in # of cards 
         float xSpacing = 2.3f; 
@@ -205,6 +245,9 @@ public class DeckSelectionManager : MonoBehaviour
         foreach (ActionClass card in cardsToRender)
         {
             instantiatedCards.Add(Instantiate(card.gameObject));
+            if (chosenCardList.Contains(card)) {
+                card.SetSelectedForDeck(true);
+            }
         }
 
         instantiatedCards.Sort((card1, card2) => card1.GetComponent<ActionClass>().Speed.CompareTo(card2.GetComponent<ActionClass>().Speed));

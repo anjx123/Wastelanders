@@ -4,26 +4,26 @@ using UnityEngine;
 
 public class Jackie : PlayerClass
 {
-    // public List<GameObject> cardPrefabs;
+    public List<GameObject> cardPrefabs;
     public RectTransform handContainer;
     public int cardWidth;
 
     // Start is called before the first frame update
     public override void Start()
     {
-        myName = "Jackie";
         base.Start();
         MaxHealth = 30;
         Health = MaxHealth;
+        myName = "Jackie";
 
         HighlightManager.selectedPlayer = this;
 
         // deep copy deck into pool
-        for (int i = 0; i < pool.Count; i++)
+        for (int i = 0; i < cardPrefabs.Count; i++)
         {
-            GameObject toAdd = Instantiate(pool[i]);
+            GameObject toAdd = Instantiate(cardPrefabs[i]);
             toAdd.GetComponent<ActionClass>().Origin = this;
-            // pool.Add(toAdd);
+            pool.Add(toAdd);
             toAdd.transform.position = new Vector3(-1000, -1000, 1);
         }
 
