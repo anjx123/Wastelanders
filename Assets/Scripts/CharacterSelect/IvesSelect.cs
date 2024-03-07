@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class IvesSelect : CharacterSelect
 {
-    // Start is called before the first frame update
+    [SerializeField] PlayerDatabase playerDatabase;
+
     public override void OnMouseDown()
     {
-      Debug.Log("Ives selected");
+      DeckSelectionManager.Instance.CharacterChosen(playerDatabase.IvesData);
     }
 
 }

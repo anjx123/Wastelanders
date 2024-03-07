@@ -76,8 +76,8 @@ public abstract class ActionClass : SelectClass
         string name = activeScene.name;
         if (name == "CombatScene") {
             HighlightManager.OnActionClicked(this);
-        } else if (name == "SelectionScene") {
-            Debug.Log("name: " + name);
+        } else if (name == "SelectionScreen") {
+            DeckSelectionManager.Instance.ActionSelected(this);
         }
     }
     //Called when this card hits the enemy, runs any on hit buffs or effects given.

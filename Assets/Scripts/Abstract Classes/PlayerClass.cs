@@ -21,6 +21,7 @@ public abstract class PlayerClass : EntityClass
 
     public override void Start()
     {
+        pool = DeckSelectionManager.Instance.getPool(myName);
         CombatManager.Instance.AddPlayer(this);
         base.Start();
     }

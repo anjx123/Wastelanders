@@ -6,11 +6,10 @@ public class JackieSelect : CharacterSelect
 {
     // Start is called before the first frame update
     [SerializeField] PlayerDatabase playerDatabase;
+    
 
     public override void OnMouseDown()
     {
-      Debug.Log("Jackie selected");
-      Debug.Log("jack data: " + playerDatabase.JackieData);
       DeckSelectionManager.Instance.CharacterChosen(playerDatabase.JackieData);
     }
 

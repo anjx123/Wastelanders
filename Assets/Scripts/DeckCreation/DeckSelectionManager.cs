@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEditor.Search;
 using UnityEngine;
 using static CardDatabase;
+using UnityEngine.SceneManagement;
 
 public class DeckSelectionManager : MonoBehaviour
 {
@@ -12,9 +13,12 @@ public class DeckSelectionManager : MonoBehaviour
     [SerializeField] private GameObject cardArrayParent;
     [SerializeField] private CardDatabase cardDatabase;
     [SerializeField] private PlayerDatabase playerDatabase;
+    private PlayerDatabase.PlayerData playerData;
+    private WeaponType weaponType;
     public List<GameObject> deckPrefabs;
     public static DeckSelectionManager Instance { get; private set; }
     private DeckSelectionState deckSelectionState;
+    private List<GameObject> instantiated;
     private DeckSelectionState DeckSelectionState //Might want to swap out this state machine for an event driven changing phases.
     {
         get
@@ -53,16 +57,61 @@ public class DeckSelectionManager : MonoBehaviour
 
     }
 
-    public void PistolSelected(CardDatabase.WeaponType weaponType)
+    public void PrevState()
+    {
+        if (DeckSelectionState == DeckSelectionState.WeaponSelection) {
+            DestroyWeapons();
+            DeckSelectionState = DeckSelectionState.CharacterSelection;
+
+        } else if (DeckSelectionState == DeckSelectionState.DeckSelection) {
+            RenderWeapons();
+            DeckSelectionState = DeckSelectionState.WeaponSelection;
+        } else if (DeckSelectionState == DeckSelectionState.CharacterSelection) {
+            SceneManager.LoadScene("LevelSelect");
+        }
+    }
+
+    private void DestroyWeapons() {
+        foreach (var obj in instantiated) {
+            GameObject.Destroy(obj);
+        }
+
+        instantiated.Clear();
+    }
+
+    private void RenderWeapons() 
+    {
+
+        foreach (var obj in instantiated) {
+            obj.SetActive(true);
+        }
+    }
+
+    public List<GameObject> getPool(string myName)
     {
         
     }
 
+
+    public void WeaponSelected(CardDatabase.WeaponType weaponType)
+    {
+        this.weaponType = weaponType;
+        DeckSelectionState = DeckSelectionState.DeckSelection;
+        RenderDecks(weaponType);
+    }
+
+    public void ActionSelected(ActionClass action)
+    {
+        playerData.
+    }
+
     public void CharacterChosen(PlayerDatabase.PlayerData playerData) 
     {
+        this.playerData = playerData;
         DeckSelectionState = DeckSelectionState.WeaponSelection;
         bool rendered1 = false;
         float xOffset = -3f;
+        instantiated.Clear();
         
         foreach (var deckPrefab in deckPrefabs)
         {
@@ -71,11 +120,10 @@ public class DeckSelectionManager : MonoBehaviour
 
             foreach (var tuple in playerData.playerWeaponProficiency)
             {
-                Debug.Log(tuple.Item1.ToString() + " " + removeDeck);
                 if (tuple.Item1.ToString() == removeDeck)
                 {
-                    Debug.Log("true");
                     GameObject deck = Instantiate(deckPrefab);
+                    instantiated.Add(deck);
                     Vector3 newPosition = deck.transform.position; // Get initial position of the deck
             
                     if (!rendered1) {
@@ -94,6 +142,7 @@ public class DeckSelectionManager : MonoBehaviour
 
     private void Start()
     {
+        instantiated = new List<GameObject>();
     //    RenderDecks(CardDatabase.WeaponType.STAFF); //Simply for testing, remove once broadcasting weapon type is hooked up
     }
 
@@ -116,8 +165,20 @@ public class DeckSelectionManager : MonoBehaviour
         deckSelectionUi.SetActive(false);
     }
 
+    private void SetInactiveWeapons()
+    {
+        foreach (GameObject obj in instantiated)
+        {
+            if (obj != null)
+            {
+                obj.SetActive(false); // De-instantiate each GameObject
+            }
+        }
+    }
+
     private void PerformDeckSelection()
     {
+        SetInactiveWeapons();
         characterSelectionUi.SetActive(false);
         weaponSelectionUi.SetActive(false);
         deckSelectionUi.SetActive(true);
