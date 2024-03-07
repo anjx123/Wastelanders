@@ -11,10 +11,10 @@ public class Jackie : PlayerClass
     // Start is called before the first frame update
     public override void Start()
     {
+        myName = "Jackie";
         base.Start();
         MaxHealth = 30;
         Health = MaxHealth;
-        myName = "Jackie";
 
         HighlightManager.selectedPlayer = this;
 

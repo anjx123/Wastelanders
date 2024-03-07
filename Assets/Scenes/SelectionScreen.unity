@@ -165,6 +165,7 @@ GameObject:
   - component: {fileID: 200217057}
   - component: {fileID: 200217059}
   - component: {fileID: 200217058}
+  - component: {fileID: 200217060}
   m_Layer: 0
   m_Name: Current Amount Selected
   m_TagString: Untagged
@@ -325,6 +326,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &200217060
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 200217056}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb666818df6d3f347ab7519345a15450, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponNum: {fileID: 0}
 --- !u!1 &243963191
 GameObject:
   m_ObjectHideFlags: 0
@@ -421,6 +435,10 @@ PrefabInstance:
       propertyPath: m_Size.y
       value: 2.6
       objectReference: {fileID: 0}
+    - target: {fileID: 741953016204202599, guid: 9f5b6b4e42a9a5e44aea3cf8872c4f20, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6475834044420958145, guid: 9f5b6b4e42a9a5e44aea3cf8872c4f20, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.5
@@ -475,7 +493,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6839712255784792588, guid: 9f5b6b4e42a9a5e44aea3cf8872c4f20, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -484,9 +502,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 741953016204202599, guid: 9f5b6b4e42a9a5e44aea3cf8872c4f20, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1077581484}
-    - targetCorrespondingSourceObject: {fileID: 6208749111005813556, guid: 9f5b6b4e42a9a5e44aea3cf8872c4f20, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 9f5b6b4e42a9a5e44aea3cf8872c4f20, type: 3}
 --- !u!4 &455316568 stripped
 Transform:
@@ -858,6 +873,8 @@ MonoBehaviour:
   cardArrayParent: {fileID: 70395782}
   cardDatabase: {fileID: 11400000, guid: 4ee9950b3d655254fb0def1cd879db6a, type: 2}
   playerDatabase: {fileID: 11400000, guid: 8727bc367ba518d4496483da96ba1cf0, type: 2}
+  wa: {fileID: 200217060}
+  pa: {fileID: 1021007427}
   deckPrefabs:
   - {fileID: 6428996333735742109, guid: 45259cd223a7bd941b08d08990f299fb, type: 3}
   - {fileID: 7593446994048490176, guid: 11797fb1537b0c14ca7953804d655285, type: 3}
@@ -1044,6 +1061,7 @@ GameObject:
   - component: {fileID: 1021007424}
   - component: {fileID: 1021007426}
   - component: {fileID: 1021007425}
+  - component: {fileID: 1021007427}
   m_Layer: 0
   m_Name: ChooseCardsText
   m_TagString: Untagged
@@ -1092,7 +1110,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Select Your Cards:
 
-    Available Points for ___: xx'
+    Available Points: 0'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1206,6 +1224,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &1021007427
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1021007423}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 286b768e1dbf06849be4b3aead400ce1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  points: {fileID: 0}
 --- !u!1001 &1030286423
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1300,6 +1331,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1476a097bbee8944bbdba82d00d7843f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  checkmark: {fileID: 0}
 --- !u!1 &1115058807 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6647468808881570309, guid: 2bf19bd78e328204fb34ccaa75296151, type: 3}
@@ -1769,7 +1801,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2016508819
 Transform:
   m_ObjectHideFlags: 0

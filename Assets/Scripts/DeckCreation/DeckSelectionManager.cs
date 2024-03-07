@@ -18,6 +18,8 @@ public class DeckSelectionManager : MonoBehaviour
     [SerializeField] private PlayerDatabase playerDatabase;
     private PlayerDatabase.PlayerData playerData;
     private WeaponType weaponType;
+    public WeaponAmount wa;
+    public PointsAmount pa;
     public List<GameObject> deckPrefabs;
     public static DeckSelectionManager Instance { get; private set; }
     private DeckSelectionState deckSelectionState;
@@ -92,7 +94,14 @@ public class DeckSelectionManager : MonoBehaviour
 
     public List<GameObject> GetDeck(string myName)
     {
-        return new List<GameObject>();
+        List<ActionClass> actions = playerDatabase.GetDeck(myName);
+        List<GameObject> go = new();
+
+        foreach (var a in actions) {
+            go.Add(Instantiate(a.gameObject));
+        }
+
+        return go;
     }
 
 
@@ -101,9 +110,12 @@ public class DeckSelectionManager : MonoBehaviour
         if (playerData.weapons.Contains(weaponType)) {
             playerData.weapons.Remove(weaponType);
             c.SetSelected(false);
+            wa.TextUpdate(playerData.weapons.Count.ToString() + "/2 Selected");
         } else if (playerData.weapons.Count < 2) {
             playerData.weapons.Add(weaponType);
             c.SetSelected(true);
+            wa.TextUpdate(playerData.weapons.Count.ToString() + "/2 Selected");
+
         } else {
             Debug.LogWarning("Can only select 2 weapons");
         }
@@ -136,11 +148,14 @@ public class DeckSelectionManager : MonoBehaviour
                 tupple.Item2 += ac.CostToAddToDeck;          
                 ac.SetSelectedForDeck(false);
                 entry.value.Remove(actionFound);
+                int totalPoints = points + ac.CostToAddToDeck;
+                pa.TextUpdate("Select Your Cards:\nAvailable Points: " + totalPoints.ToString());
             } else {
                 if (points - ac.CostToAddToDeck >= 0) {
                     tupple.Item2 = points - ac.CostToAddToDeck;
                     ac.SetSelectedForDeck(true);
                     entry.value.Add(pref);
+                    pa.TextUpdate("Select Your Cards:\nAvailable Points: " + tupple.Item2.ToString());
                 } else {
                     Debug.LogWarning("Insufficient experience points");
                 }
@@ -195,6 +210,8 @@ public class DeckSelectionManager : MonoBehaviour
                 }
             }
         }
+
+         wa.TextUpdate(playerData.weapons.Count.ToString() + "/2 Selected");
 
     }
 
@@ -280,7 +297,6 @@ public class DeckSelectionManager : MonoBehaviour
             instantiatedCards.Add(go);
             ActionClass pref = chosenCardList.FirstOrDefault(action => action.GetType() == card.GetType());
             if (pref != null) {
-                Debug.Log("pref not null for: " + card.GetType());
                 ActionClass ac = go.GetComponent<ActionClass>();
                 ac.SetSelectedForDeck(true);
             }
@@ -323,6 +339,13 @@ public class DeckSelectionManager : MonoBehaviour
                 break;
             }
         }
+        SerializableTuple<WeaponType, int> tupple = playerData.playerWeaponProficiency.FirstOrDefault(entry => entry.Item1 == weaponType);
+        int points = 0;
+        if (tupple != null) {
+            points = tupple.Item2;
+        }
+
+        pa.TextUpdate("Select Your Cards:\nAvailable Points: " + points);
     }
 
     private void UnrenderDecks()

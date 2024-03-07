@@ -12,6 +12,27 @@ public class PlayerDatabase : ScriptableObject
     public PlayerData IvesData;
 
     #nullable enable //Turns on pedantic null checks 
+    public List<ActionClass> GetDeck(string myName)
+    {
+        PlayerData playerData;
+        if (myName == "Jackie") {
+            playerData = JackieData;
+        } else if (myName == "Ives") {
+            playerData = IvesData;
+        } else {
+            return new List<ActionClass>();
+        }
+
+        List<ActionClass> combinedDeck = new();
+
+        foreach (var entry in playerData.playerDeck) {
+            if (playerData.weapons.Contains(entry.key)) {
+                combinedDeck.AddRange(entry.value);
+            }
+        }
+
+        return combinedDeck;
+    }
 
     [System.Serializable]
     public class PlayerData

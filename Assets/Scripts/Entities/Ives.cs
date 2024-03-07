@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class Ives : PlayerClass
 {
+    public override void Start()
+    {
+        myName = "Ives";
+        base.Start();
+    }
+
     public override void HandleUseCard(ActionClass a)
     {
         throw new System.NotImplementedException();
