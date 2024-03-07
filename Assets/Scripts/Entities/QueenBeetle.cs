@@ -18,9 +18,6 @@ public class QueenBeetle : EnemyClass
     // spawn locations for the beetles
     private readonly Vector3[] beetleLocations = { new Vector3(0.63f, 0, 0), new Vector3(2.3f, -2.89f, 0), new Vector3(2.3f, 2.4f, 0) };
 
-    // current number of beetles
-    private int numActiveBeetles = 0;
-
     // Start is called before the first frame update
     public override void Start()
     {
@@ -30,7 +27,6 @@ public class QueenBeetle : EnemyClass
         myName = "The Queen";
 
         Beetle.OnGainBuffs += HandleGainedBuffs;
-        Beetle.OnDeath += HandleDeadBeetle;
     }
 
     // event handler for Beetle.OnGainBuffs. This is called whenever a beetle tries to
@@ -39,11 +35,6 @@ public class QueenBeetle : EnemyClass
     private void HandleGainedBuffs(string buffType, int stacks)
     {
         AddStacks(buffType, stacks);
-    }
-
-    private void HandleDeadBeetle()
-    {
-        numActiveBeetles--;
     }
 
     // adds the queens attacks according to the following rules:
@@ -81,6 +72,7 @@ public class QueenBeetle : EnemyClass
     // Summons a beetle at random. Called by Hatchery on-hit.
     public void SummonBeetle()
     {
+        int numActiveBeetles = 0; // TODO: make this not suck
         if (numActiveBeetles > 2)
         {
             Debug.Log("BEETLE OVERLOAD!!! (too many beetles)");
