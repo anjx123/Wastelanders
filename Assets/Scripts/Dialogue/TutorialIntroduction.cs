@@ -16,7 +16,7 @@ public class TutorialIntroduction : DialogueClasses
     [SerializeField] private List<DialogueText> jackieMonologue;
     [SerializeField] private List<DialogueText> soldierGreeting;
     [SerializeField] private List<DialogueText> jackieTalksWithSolider;
-    [SerializeField] private List<DialogueText> ivesChatsWithJackie;
+    [SerializeField] private DialogueWrapper ivesChatsWithJackie;
 
     private const float BRIEF_PAUSE = 0.2f; // For use after an animation to make it visually seem smoother
     private const float MEDIUM_PAUSE = 1f; //For use after a text box comes down and we want to add some weight to the text.
@@ -55,7 +55,7 @@ public class TutorialIntroduction : DialogueClasses
         yield return new WaitForSeconds(0.2f);
         jackie.FaceRight(); //Jackie turns to face the person approaching her
 
-        yield return StartCoroutine(DialogueManager.Instance.StartDialogue(ivesChatsWithJackie));
+        yield return StartCoroutine(DialogueManager.Instance.StartDialogue(ivesChatsWithJackie.Dialogue));
 
         yield return StartCoroutine(ives.MoveToPosition(dummy1StartingPos.position, 1.2f, 1.2f)); //Ives goes to place a dummy down
         Instantiate(trainingDummyPrefab, dummy1StartingPos);

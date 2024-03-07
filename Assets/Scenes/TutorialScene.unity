@@ -1461,7 +1461,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6635998426718021455, guid: b9c5e4b3c9f7e024f8fe9012e7a2e437, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -10.130276
+      value: -10.135354
       objectReference: {fileID: 0}
     - target: {fileID: 6635998426718021455, guid: b9c5e4b3c9f7e024f8fe9012e7a2e437, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2006,11 +2006,7 @@ MonoBehaviour:
     speakerName: Jackie
   - bodyText: '[The soldier nods, gives a friendly salute, and leaves..]'
     speakerName: 
-  ivesScoldsJackie:
-  - bodyText: "Thought I\u2019d find you here"
-    speakerName: Ives
-  - bodyText: Sorry, Ives. Did you hear about the scout reports?
-    speakerName: Jackie
+  ivesChatsWithJackie: {fileID: 11400000, guid: 707ae62d407677b4883cb678c2660881, type: 2}
 --- !u!1001 &2102825245
 PrefabInstance:
   m_ObjectHideFlags: 0
