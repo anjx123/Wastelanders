@@ -22,6 +22,8 @@ public class BattleQueueIcons : DisplayableClass
         {
             DeHighlightTarget();
             BattleQueue.BattleQueueInstance.DeletePlayerAction(actionClass);
+            HighlightManager.currentHighlightedAction = null;
+            HighlightManager.currentHighlightedEnemyEntity = null;
         }  
     }
 
