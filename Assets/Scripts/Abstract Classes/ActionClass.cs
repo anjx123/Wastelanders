@@ -67,7 +67,7 @@ public abstract class ActionClass : SelectClass
 
     public virtual void Start()
     {
-
+        SetSelectedForDeck(false);
     }
 
     public override void OnMouseDown()

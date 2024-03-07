@@ -18,22 +18,24 @@ MonoBehaviour:
     - Item1: 2
       Item2: 2
     - Item1: 1
-      Item2: 10
+      Item2: 16
     playerDeck:
     - key: 1
-      value:
-      - {fileID: 0}
+      value: []
     - key: 2
-      value:
-      - {fileID: 0}
-      - {fileID: 0}
-    weapons: 
+      value: []
+    weapons: 0200000001000000
   IvesData:
     name: Ives
     playerWeaponProficiency:
     - Item1: 0
-      Item2: 10
+      Item2: 18
     - Item1: 3
       Item2: 2
-    playerDeck: []
-    weapons: 
+    playerDeck:
+    - key: 0
+      value:
+      - {fileID: 8623671996724246683, guid: 22d2d82111a0948258cf8bce73da7ca2, type: 3}
+      - {fileID: 8129549867484360148, guid: 96833b1ed63d040c08a43d590f8a54ec, type: 3}
+      - {fileID: 1140042972143940012, guid: d2b04a73aaa3e410dbacfb117cd8fabf, type: 3}
+    weapons: 00000000

@@ -7,7 +7,7 @@ public class PistolDeck : CharacterSelect
     // Start is called before the first frame update
     public override void OnMouseDown()
     {
-      DeckSelectionManager.Instance.WeaponSelected(CardDatabase.WeaponType.PISTOL);
+      DeckSelectionManager.Instance.WeaponSelected(this, CardDatabase.WeaponType.PISTOL);
     }
 
 }

@@ -5,6 +5,8 @@ using UnityEngine;
 using static CardDatabase;
 using UnityEngine.SceneManagement;
 using System;
+using System.Linq;
+using UnityEngine.AI;
 
 public class DeckSelectionManager : MonoBehaviour
 {
@@ -94,39 +96,63 @@ public class DeckSelectionManager : MonoBehaviour
     }
 
 
-    public void WeaponSelected(CardDatabase.WeaponType weaponType)
+    public void WeaponSelected(CharacterSelect c, CardDatabase.WeaponType weaponType)
+    {
+        if (playerData.weapons.Contains(weaponType)) {
+            playerData.weapons.Remove(weaponType);
+            c.SetSelected(false);
+        } else if (playerData.weapons.Count < 2) {
+            playerData.weapons.Add(weaponType);
+            c.SetSelected(true);
+        } else {
+            Debug.LogWarning("Can only select 2 weapons");
+        }
+    }
+
+    public void WeaponDeckEdit(CardDatabase.WeaponType weaponType)
     {
         this.weaponType = weaponType;
-        DeckSelectionState = DeckSelectionState.DeckSelection;
         RenderDecks(weaponType);
+        DeckSelectionState = DeckSelectionState.DeckSelection;
     }
 
     public void ActionSelected(ActionClass ac)
     {
         List<SerializableWeaponListEntry> playerDeck = playerData.playerDeck;
-        for (int i = 0; i < playerDeck.Count; i++)
-        {
-            if (playerDeck[i].key == weaponType)
-            {
-                List<ActionClass> actions = playerDeck[i].value;
-                if (actions.Contains(ac))
-                {
-                    actions.Remove(ac);
-                }
-                else
-                {
-                    Debug.Log("type: "+ ac.GetType());
-                    actions.Add(ac);
-                }
+        ActionClass pref = cardDatabase.GetCardsByType(weaponType).FirstOrDefault(action => action.GetType() == ac.GetType());
+        SerializableWeaponListEntry entry = playerDeck.FirstOrDefault(entry => entry.key == weaponType);
+        SerializableTuple<WeaponType, int> tupple = playerData.playerWeaponProficiency.FirstOrDefault(entry => entry.Item1 == weaponType);
+        int points = 0;
+        if (tupple != null) {
+            points = tupple.Item2;
+        } else {
+            tupple = new(weaponType, 0);
+            playerData.playerWeaponProficiency.Add(tupple);
+        }
 
-                return;
+        if (entry != null) {
+            ActionClass actionFound = entry.value.FirstOrDefault(action => action.GetType() == ac.GetType());
+            if (actionFound != null) {  
+                tupple.Item2 += ac.CostToAddToDeck;          
+                ac.SetSelectedForDeck(false);
+                entry.value.Remove(actionFound);
+            } else {
+                if (points - ac.CostToAddToDeck >= 0) {
+                    tupple.Item2 = points - ac.CostToAddToDeck;
+                    ac.SetSelectedForDeck(true);
+                    entry.value.Add(pref);
+                } else {
+                    Debug.LogWarning("Insufficient experience points");
+                }
             }
+
+            return;
         }
 
         SerializableWeaponListEntry newEntry = new()
         {
             key = weaponType,
-            value = new List<ActionClass> { ac }
+            value = new List<ActionClass> { pref }
         };
         
         playerDeck.Add(newEntry);
@@ -150,6 +176,11 @@ public class DeckSelectionManager : MonoBehaviour
                 if (tuple.Item1.ToString() == removeDeck)
                 {
                     GameObject deck = Instantiate(deckPrefab);
+                    CharacterSelect c = deck.GetComponent<CharacterSelect>();
+                    if (Enum.TryParse(removeDeck, out WeaponType weapT) && playerData.weapons.Contains(weapT)) {
+                        c.SetSelected(true);
+                    }
+                    
                     instantiated.Add(deck);
                     Vector3 newPosition = deck.transform.position; // Get initial position of the deck
             
@@ -245,9 +276,13 @@ public class DeckSelectionManager : MonoBehaviour
         //In order to sort, the cards must be instantiated and initialized first :pensive:
         foreach (ActionClass card in cardsToRender)
         {
-            instantiatedCards.Add(Instantiate(card.gameObject));
-            if (chosenCardList.Contains(card)) {
-                card.SetSelectedForDeck(true);
+            GameObject go = Instantiate(card.gameObject);
+            instantiatedCards.Add(go);
+            ActionClass pref = chosenCardList.FirstOrDefault(action => action.GetType() == card.GetType());
+            if (pref != null) {
+                Debug.Log("pref not null for: " + card.GetType());
+                ActionClass ac = go.GetComponent<ActionClass>();
+                ac.SetSelectedForDeck(true);
             }
         }
 
