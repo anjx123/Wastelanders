@@ -1461,7 +1461,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6635998426718021455, guid: b9c5e4b3c9f7e024f8fe9012e7a2e437, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -10.134329
+      value: -10.130276
       objectReference: {fileID: 0}
     - target: {fileID: 6635998426718021455, guid: b9c5e4b3c9f7e024f8fe9012e7a2e437, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1937,30 +1937,78 @@ MonoBehaviour:
   ivesDefaultTransform: {fileID: 1538394867}
   trainingDummyPrefab: {fileID: 7915807930978314633, guid: 267f1a54b9abb71469992e756836dd87, type: 3}
   dummy1StartingPos: {fileID: 946615943}
+  openingDiscussion:
+  - bodyText: ' [The City of New Haven - East Wall Boot Camp]  '
+    speakerName: 
+  - bodyText: Hey have you heard? Apparently, Jackie is trying out for the NITES
+      exam again.
+    speakerName: Laid-back Soldier
+  - bodyText: What? Again? After her performance last year, do you think she really
+      is prepared to try again?
+    speakerName: Puzzled Soldier
+  - bodyText: "Beats me. If I were her, I\u2019d take it easy and spend a couple
+      more years training. "
+    speakerName: Laid-back Soldier
+  - bodyText: I've heard horror stories about what the NITES have to deal with in
+      the Wasteland.
+    speakerName: Laid-back Soldier
+  - bodyText: Do you think shes going for the glory of being the youngest to join
+      the NITES?
+    speakerName: Laid-back Soldier
+  - bodyText: "No I don\u2019t think so, wasn\u2019t her mother younger than her
+      when she scored top marks on that exam?"
+    speakerName: Puzzled Soldier
+  - bodyText: "Hmm right, guess going on NITES\u2019 wasteland expeditions runs in
+      the family. I think life inside the Wall is much more peaceful."
+    speakerName: Puzzled Soldier
+  - bodyText: 'Of course you do... But do you really plan on being just a grunt forever? '
+    speakerName: Puzzled Soldier
+  - bodyText: Mmm, maybe I'll give that exam a shot in a couple years.
+    speakerName: Laid-back Soldier
+  - bodyText: "Then come on, we should get to training. Pass or not, the fact that
+      she\u2019s trying makes us look like chumps"
+    speakerName: Puzzled Soldier
+  jackieMonologue:
+  - bodyText: "Well\u2026 Today\u2019s the day I\u2019ve been preparing the past
+      year for. "
+    speakerName: Jackie
+  - bodyText: 'I won''t fail again. '
+    speakerName: Jackie
+  - bodyText: ' I''ve will make it on those wasteland expeditions. Mama is counting
+      on me. '
+    speakerName: Jackie
   soldierGreeting:
   - bodyText: Morning, Jackie!
     speakerName: Soldier
   jackieTalksWithSolider:
   - bodyText: Good morning!
     speakerName: Jackie
-  - bodyText: 'More wasteland monsters than usual have been seen roaming near the
-      walls  '
-    speakerName: Soldier
-  - bodyText: A scout came back last night and reported seeing something like a giant
-      beetle scuttling around the forest.
-    speakerName: Soldier
-  - bodyText: " Although, it was pretty dark so the jury's still out on whether it\u2019s
-      something to worry about."
-    speakerName: Soldier
-  - bodyText: Hm, sounds like it could be a problem. A nest of wasteland beetles
-      could attract more monsters. Keep me updated.
+  - bodyText: " So today\u2019s the day, huh. NITES exam. How are you feeling? "
+    speakerName: Mustached Soldier
+  - bodyText: I'm feeling... Fine.
     speakerName: Jackie
-  - bodyText: '[The soldier nods, gives a friendly salute, and leaves.]'
+  - bodyText: Haha, really? I guess those extra hours you put in with Ives have really
+      paid off then?
+    speakerName: Mustached Soldier
+  - bodyText: 'Yeah, '
+    speakerName: Jackie
+  - bodyText: "Haha great! Just be careful out there will ya? I\u2019m not trying
+      to scare you, but there\u2019s been an unusual increase in monster activity
+      in the Wasteland around the city.  "
+    speakerName: Mustached Soldier
+  - bodyText: 'A recent scout reported seeing hundreds of piercing purplish eyes,
+      and what sounded like piles of bones clattering in the forest. '
+    speakerName: Mustached Soldier
+  - bodyText: You know the wasteland is not a friendly place, even your mother knew
+      that. No matter how much she tried not to show it.
+    speakerName: Mustached Soldier
+  - bodyText: "Sure\u2026 I\u2019ll keep that in mind. Thanks for the concern\u2026"
+    speakerName: Jackie
+  - bodyText: '[The soldier nods, gives a friendly salute, and leaves..]'
     speakerName: 
-  - bodyText: "Jackie! I see you\u2019ve been busy yapping? Get in here! Training
-      is about to start. "
-    speakerName: ???
   ivesScoldsJackie:
+  - bodyText: "Thought I\u2019d find you here"
+    speakerName: Ives
   - bodyText: Sorry, Ives. Did you hear about the scout reports?
     speakerName: Jackie
 --- !u!1001 &2102825245

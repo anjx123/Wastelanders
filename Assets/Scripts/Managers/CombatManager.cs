@@ -229,9 +229,18 @@ public class CombatManager : MonoBehaviour
 
     private void PerformGameStart()
     {
-        StartCoroutine(FadeBackground(1f, 0f, 2f));
+        
     }
 
+    public void SetDarkScreen()
+    {
+        fadeScreen.color = new Color(fadeScreen.color.r, fadeScreen.color.g, fadeScreen.color.b, 1f);
+    }
+
+    public IEnumerator SetLightScreen()
+    {
+        yield return StartCoroutine(FadeBackground(1f, 0f, 2f));
+    }
     private void PerformOutOfCombat()
     {
         Deactivate(handContainer);
