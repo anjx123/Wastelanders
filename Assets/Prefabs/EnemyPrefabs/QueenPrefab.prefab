@@ -127,6 +127,10 @@ MonoBehaviour:
   availableActions:
   - {fileID: 2376898879351982445, guid: d9b234b17f5614282a831238d30604be, type: 3}
   - {fileID: 2376898879351982445, guid: 2d2d7caa1fc6840a6a62172b5b70f553, type: 3}
+  beetlePrefabs:
+  - {fileID: 8044949296705636452, guid: 276880eff6e9b4907a1ea5430761a162, type: 3}
+  - {fileID: 8044949296705636452, guid: fa2244f9c89fb2c42ae45cb8f73816be, type: 3}
+  - {fileID: 8044949296705636452, guid: 692030d7a70f84e1e9949eb9b07ebce5, type: 3}
 --- !u!95 &376453256025329576
 Animator:
   serializedVersion: 5

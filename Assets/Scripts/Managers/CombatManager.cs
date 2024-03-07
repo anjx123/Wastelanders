@@ -181,6 +181,7 @@ public class CombatManager : MonoBehaviour
     {
         enemies.Add(enemy);
     }
+
     //Purpose: Call this when an enemy is removed or killed
     public void RemoveEnemy(EnemyClass enemy)
     {

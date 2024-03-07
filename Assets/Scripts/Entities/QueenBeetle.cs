@@ -8,6 +8,8 @@ using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class QueenBeetle : EnemyClass
 {
+    [SerializeField]
+    private GameObject[] beetlePrefabs = new GameObject[3];
 
     // Start is called before the first frame update
     public override void Start()
@@ -60,4 +62,8 @@ public class QueenBeetle : EnemyClass
         combatInfo.GetComponentInChildren<CombatCardUI>().actionClass = pool[idx].GetComponent<ActionClass>();
     }
 
+    public void SummonBeetle()
+    {
+
+    }
 }
