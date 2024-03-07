@@ -1737,7 +1737,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 617082415006753302, guid: 276880eff6e9b4907a1ea5430761a162, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.25
+      value: 2.32
       objectReference: {fileID: 0}
     - target: {fileID: 617082415006753302, guid: 276880eff6e9b4907a1ea5430761a162, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1819,6 +1819,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 141643689}
     m_Modifications:
+    - target: {fileID: 565243660519602255, guid: ffe5e716a68f6484aa03d7e79a4dc2a7, type: 3}
+      propertyPath: enemyContainer
+      value: 
+      objectReference: {fileID: 141643688}
     - target: {fileID: 2002373752629993316, guid: ffe5e716a68f6484aa03d7e79a4dc2a7, type: 3}
       propertyPath: m_Name
       value: QueenPrefab

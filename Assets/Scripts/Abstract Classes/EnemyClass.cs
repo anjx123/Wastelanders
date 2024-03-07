@@ -78,6 +78,13 @@ public abstract class EnemyClass : EntityClass
         {
             temp.Add(deck[i]);
         }
+
+        if (GetType() == typeof(QueenBeetle))
+        {
+            pool = temp;
+            return;
+        }
+
         while (temp.Count > 0)
         {
             int idx = Random.Range(0, temp.Count);

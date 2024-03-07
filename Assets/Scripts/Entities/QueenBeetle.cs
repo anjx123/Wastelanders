@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,6 +12,15 @@ public class QueenBeetle : EnemyClass
     [SerializeField]
     private GameObject[] beetlePrefabs = new GameObject[3];
 
+    [SerializeField]
+    public GameObject enemyContainer;
+
+    // spawn locations for the beetles
+    private readonly Vector3[] beetleLocations = { new Vector3(0.63f, 0, 0), new Vector3(2.3f, -2.89f, 0), new Vector3(2.3f, 2.4f, 0) };
+
+    // current number of beetles
+    private int numActiveBeetles = 0;
+
     // Start is called before the first frame update
     public override void Start()
     {
@@ -20,6 +30,7 @@ public class QueenBeetle : EnemyClass
         myName = "The Queen";
 
         Beetle.OnGainBuffs += HandleGainedBuffs;
+        Beetle.OnDeath += HandleDeadBeetle;
     }
 
     // event handler for Beetle.OnGainBuffs. This is called whenever a beetle tries to
@@ -28,6 +39,11 @@ public class QueenBeetle : EnemyClass
     private void HandleGainedBuffs(string buffType, int stacks)
     {
         AddStacks(buffType, stacks);
+    }
+
+    private void HandleDeadBeetle()
+    {
+        numActiveBeetles--;
     }
 
     // adds the queens attacks according to the following rules:
@@ -41,19 +57,19 @@ public class QueenBeetle : EnemyClass
     {
         for (int i = 0; i < 2; i++)
         {
-            Debug.Log(GetBuffStacks(Resonate.buffName));
             if (GetBuffStacks(Resonate.buffName) >= 2)
             {
-                AddAttackFromPool(players, 0);
+                AddAttackFromPool(players, 0); // hatchery
                 ReduceStacks(Resonate.buffName, 2);
             }
             else
             {
-                AddAttackFromPool(players, Random.Range(1, pool.Count));
+                AddAttackFromPool(players, Random.Range(1, pool.Count - 1));
             }
         }
     }
 
+    // helper function for AddAttack
     private void AddAttackFromPool(List<PlayerClass> players, int idx)
     {
         pool[idx].GetComponent<ActionClass>().Target = players[Random.Range(0, players.Count - 1)];
@@ -62,8 +78,23 @@ public class QueenBeetle : EnemyClass
         combatInfo.GetComponentInChildren<CombatCardUI>().actionClass = pool[idx].GetComponent<ActionClass>();
     }
 
+    // Summons a beetle at random. Called by Hatchery on-hit.
     public void SummonBeetle()
     {
-
+        if (numActiveBeetles > 2)
+        {
+            Debug.Log("BEETLE OVERLOAD!!! (too many beetles)");
+            return;
+        }
+        if (enemyContainer == null)
+        {
+            Debug.Log("you forgot to assign enemyContainer in queen");
+            return;
+        }
+        GameObject beetle = Instantiate(beetlePrefabs[Random.Range(0, 2)]);
+        beetle.transform.SetParent(enemyContainer.transform);
+        beetle.transform.position = beetleLocations[numActiveBeetles];
+        CombatManager.Instance.AddEnemy(beetle.GetComponent<EnemyClass>());
+        numActiveBeetles++;
     }
 }

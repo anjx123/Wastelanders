@@ -14,7 +14,7 @@ public class Hatchery : ActionClass
         base.Initialize();
         lowerBound = 2;
         upperBound = 4;
-        
+
         Speed = 1;
 
         description = "Spend +2 resonate to play this card. If this card is unstaggered, spawn 1 random beetle.";
@@ -27,10 +27,14 @@ public class Hatchery : ActionClass
     }
 
 
-
+    // if origin is a queen beetle, summon a beetle on hit
     public override void OnHit()
     {
         base.OnHit();
-        // TODO: spawn beetle
+        if (Origin.GetType() == typeof(QueenBeetle))
+        {
+            ((QueenBeetle)Origin).SummonBeetle();
+        }
+
     }
 }
