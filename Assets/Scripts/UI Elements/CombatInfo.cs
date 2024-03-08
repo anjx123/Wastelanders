@@ -113,8 +113,6 @@ public class CombatInfo : MonoBehaviour
     }
     public void DeEmphasize()
     {
-        Debug.Log(transform.parent);
-        Debug.Log("canvas:" + buffListCanvas);
         combatCardSprite.GetComponent<SpriteRenderer>().sortingOrder = CombatManager.Instance.FADE_SORTING_ORDER - 1;
         diceRollSprite.GetComponent<SpriteRenderer>().sortingOrder = CombatManager.Instance.FADE_SORTING_ORDER - 1;
         buffListCanvas.sortingOrder = CombatManager.Instance.FADE_SORTING_ORDER - 1;

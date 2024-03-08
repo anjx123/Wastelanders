@@ -11,6 +11,7 @@ public class QueenBeetle : EnemyClass
 {
     [SerializeField]
     private GameObject[] beetlePrefabs = new GameObject[3];
+    private Beetle[] availability = new Beetle[3];
 
     [SerializeField]
     public GameObject enemyContainer;
@@ -27,6 +28,12 @@ public class QueenBeetle : EnemyClass
         myName = "The Queen";
 
         Beetle.OnGainBuffs += HandleGainedBuffs;
+        Beetle.OnDeath += HandleBeetleDied;
+
+        for (int i = 0; i < 3; i++)
+        {
+            availability[i] = null;
+        }
     }
 
     // event handler for Beetle.OnGainBuffs. This is called whenever a beetle tries to
@@ -35,6 +42,30 @@ public class QueenBeetle : EnemyClass
     private void HandleGainedBuffs(string buffType, int stacks)
     {
         AddStacks(buffType, stacks);
+    }
+
+    private void HandleBeetleDied(Beetle victim)
+    {
+        for (int i = 0; i < 3; i++)
+        {
+            if (availability[i] == victim)
+            {
+                availability[i] = null;
+            }
+        }
+    }
+
+    // returns the index of the first "null" element in availability. Returns -1 if filled.
+    private int FindFirstOpenSlot()
+    {
+        for (int i = 0; i < 3; i++)
+        {
+            if (availability[i] == null)
+            {
+                return i;
+            }
+        }
+        return -1;
     }
 
     // adds the queens attacks according to the following rules:
@@ -73,8 +104,8 @@ public class QueenBeetle : EnemyClass
     // Summons a beetle at random. Called by Hatchery on-hit.
     public void SummonBeetle()
     {
-        int numActiveBeetles = 0; // TODO: make this not suck
-        if (numActiveBeetles > 2)
+        int slot = FindFirstOpenSlot();
+        if (slot == -1)
         {
             Debug.Log("BEETLE OVERLOAD!!! (too many beetles)");
             return;
@@ -86,7 +117,8 @@ public class QueenBeetle : EnemyClass
         }
         GameObject beetle = Instantiate(beetlePrefabs[Random.Range(0, 2)]);
         beetle.transform.SetParent(enemyContainer.transform);
-        beetle.transform.position = beetleLocations[numActiveBeetles];
+        beetle.transform.position = beetleLocations[slot];
+        availability[slot] = beetle.GetComponent<Beetle>();
         CombatManager.Instance.AddEnemy(beetle.GetComponent<EnemyClass>());
     }
 }
