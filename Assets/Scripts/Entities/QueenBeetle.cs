@@ -117,8 +117,8 @@ public class QueenBeetle : EnemyClass
         }
         GameObject beetle = Instantiate(beetlePrefabs[Random.Range(0, 2)]);
         beetle.transform.SetParent(enemyContainer.transform);
+        beetle.transform.localScale *= 0.8f;
         beetle.transform.position = beetleLocations[slot];
         availability[slot] = beetle.GetComponent<Beetle>();
-        CombatManager.Instance.AddEnemy(beetle.GetComponent<EnemyClass>());
     }
 }
