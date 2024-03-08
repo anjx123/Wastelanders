@@ -79,7 +79,7 @@ public class QueenBeetle : EnemyClass
     {
         for (int i = 0; i < 2; i++)
         {
-            if (GetBuffStacks(Resonate.buffName) >= 2)
+            if (GetBuffStacks(Resonate.buffName) >= 2 && FindFirstOpenSlot() != -1)
             {
                 AddAttackFromPool(players, 0); // hatchery
                 ReduceStacks(Resonate.buffName, 2);
