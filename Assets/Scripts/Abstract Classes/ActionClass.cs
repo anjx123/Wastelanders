@@ -55,7 +55,16 @@ public abstract class ActionClass : SelectClass
 
     protected bool EnqueueMoveDown = false;
 
-    public abstract void ExecuteActionEffect();
+    #nullable enable
+
+    public delegate void CardEventDelegate(ActionClass card);
+    public static event CardEventDelegate? cardClickedEvent;
+    public static event CardEventDelegate? cardHighlightedEvent;
+
+    public virtual void ExecuteActionEffect()
+    {
+
+    }
 
     public virtual void Awake()
     {
@@ -70,6 +79,7 @@ public abstract class ActionClass : SelectClass
     public override void OnMouseDown()
     {
         HighlightManager.OnActionClicked(this);
+        cardClickedEvent?.Invoke(this);
     }
     //Called when this card hits the enemy, runs any on hit buffs or effects given.
     public virtual void OnHit()
@@ -133,7 +143,7 @@ public abstract class ActionClass : SelectClass
         Origin.SetDice(duplicateCard.actualRoll); 
     }
 
-    public Sprite GetIcon()
+    public Sprite? GetIcon()
     {
         if (icon)
         {
@@ -224,6 +234,7 @@ public abstract class ActionClass : SelectClass
         {
             PopUpNotificationManager.Instance.DisplayText(description);
         }
+        cardHighlightedEvent?.Invoke(this);
     }
 
     public override void OnMouseExit()

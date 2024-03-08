@@ -172,11 +172,6 @@ public class CombatManager : MonoBehaviour
             {
                 dynamicCamera.Follow = null;
             }
-            
-        }
-        if (players.Count == 0)
-        {
-            GameState = GameState.GAME_LOSE;
         }
     }
     
@@ -194,10 +189,6 @@ public class CombatManager : MonoBehaviour
             {
                 dynamicCamera.Follow = null;
             }
-        } 
-        if (enemies.Count == 0)
-        {
-            GameState = GameState.GAME_WIN;
         }
     }
 

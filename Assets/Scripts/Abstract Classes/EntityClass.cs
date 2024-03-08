@@ -52,6 +52,11 @@ public abstract class EntityClass : SelectClass
         get { return id; }
         set { id = value; }
     }
+    #nullable enable
+
+    public delegate void EntityDelegate(EntityClass player);
+    public static event EntityDelegate? onEntityDeath;
+
 
     public virtual void Start()
     {
@@ -83,7 +88,7 @@ public abstract class EntityClass : SelectClass
             percentageDone = Mathf.Clamp(damage / (float) Health, 0f, 1f);
         } else
         {
-            CardComparator.PlayEntityDeaths += Die;
+            onEntityDeath?.Invoke(this);
         }
         UpdateBuffsOnDamage();
         StartCoroutine(PlayHitAnimation(source, this, percentageDone));

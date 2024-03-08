@@ -1461,7 +1461,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6635998426718021455, guid: b9c5e4b3c9f7e024f8fe9012e7a2e437, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -10.135354
+      value: -10.132857
       objectReference: {fileID: 0}
     - target: {fileID: 6635998426718021455, guid: b9c5e4b3c9f7e024f8fe9012e7a2e437, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2007,6 +2007,49 @@ MonoBehaviour:
   - bodyText: '[The soldier nods, gives a friendly salute, and leaves..]'
     speakerName: 
   ivesChatsWithJackie: {fileID: 11400000, guid: 707ae62d407677b4883cb678c2660881, type: 2}
+  youCanPlayCardsTutorial:
+  - bodyText: Every round, the enemy gives you a couple opportunities to attack.
+      Let's select an Action.
+    speakerName: Ives
+  cardFieldsTutorial:
+  - bodyText: Each action has a Power range in which your Damage can fall.
+    speakerName: Ives
+  - bodyText: And a Speed which dictates the order in which you and your opponent's
+      attacks will come out.
+    speakerName: Ives
+  - bodyText: Target an enemy to declare the attack.
+    speakerName: Ives
+  queueUpActionsTutorial:
+  - bodyText: This will queue up the action to attack, you can retrieve it back into
+      your hand by tapping on its icon.
+    speakerName: Ives
+  - bodyText: Each round, you can queue up as many attacks as you'd like. However...
+    speakerName: Ives
+  - bodyText: 'You cannot play two actions that share the same speed. '
+    speakerName: Ives
+  - bodyText: After all, if you could be in two places at once, they'd probably skip
+      your exam entirely!
+    speakerName: Ives
+  - bodyText: Once you feel confident in your attacks, hit that confirm button to
+      begin the bout
+    speakerName: Ives
+  rollingDiceTutorial:
+  - bodyText: The outcome of a clash is unpredictable, [Click] to roll the die and
+      see your chances
+    speakerName: Ives
+  buffTutorial:
+  - bodyText: You might have noticed that while making some attacks, you get into
+      this state of focus.
+    speakerName: Ives
+  - bodyText: However, it clears out at the end of every bout.
+    speakerName: Ives
+  - bodyText: Make sure to capitalize and use that burst to take out your opponents.
+    speakerName: Ives
+  readingOpponentTutorial: []
+  clashingCardsTutorial: []
+  clashingOutcomeTutorial: []
+  cardsExhaustedTutorial: []
+  endingTutorialDialogue: {fileID: 0}
 --- !u!1001 &2102825245
 PrefabInstance:
   m_ObjectHideFlags: 0
