@@ -139,7 +139,7 @@ public abstract class EntityClass : SelectClass
 
     Requires: Entity is not dead
      */
-    public IEnumerator MoveToPosition(Vector3 destination, float radius, float duration, Vector3? lookAtPosition = null)
+    public virtual IEnumerator MoveToPosition(Vector3 destination, float radius, float duration, Vector3? lookAtPosition = null)
     {
         Vector3 originalPosition = myTransform.position;
         float elapsedTime = 0f;

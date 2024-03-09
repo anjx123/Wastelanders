@@ -21,4 +21,30 @@ public class TrainingDummy : EnemyClass
         isDead = true;
         yield break;
     }
+
+    protected override float StaggerPowerCalculation(float percentageDone)
+    {
+        float minimumPush = 0f;
+        float pushSlope = 1f;
+        float staggerMultiplier = 1f;
+
+        float percentageUntilMaxPush = 1f / 2f; //Reaches Max push at 33% hp lost
+        return minimumPush + pushSlope * Mathf.Clamp(percentageDone / percentageUntilMaxPush, 0f, staggerMultiplier);
+    }
+
+    public override IEnumerator MoveToPosition(Vector3 destination, float radius, float duration, Vector3? lookAtPosition = null)
+    {
+        Vector3 originalPosition = myTransform.position;
+        float elapsedTime = 0f;
+
+        Vector3 diffInLocation = destination - originalPosition;
+
+        if ((Vector2)diffInLocation == Vector2.zero) yield break;
+
+        float distance = Mathf.Sqrt(diffInLocation.x * diffInLocation.x + diffInLocation.y * diffInLocation.y);
+        float maxProportionTravelled = (distance - radius) / distance;
+
+        UpdateFacing(diffInLocation, lookAtPosition);
+        yield break;
+    }
 }
