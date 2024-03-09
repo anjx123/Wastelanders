@@ -1455,6 +1455,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PopUp
       objectReference: {fileID: 0}
+    - target: {fileID: 6647468808881570309, guid: 2bf19bd78e328204fb34ccaa75296151, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6824498272623008323, guid: 2bf19bd78e328204fb34ccaa75296151, type: 3}
       propertyPath: popUpCanFade
       value: 0
@@ -1534,6 +1538,7 @@ GameObject:
   - component: {fileID: 1525248175}
   - component: {fileID: 1525248174}
   - component: {fileID: 1525248177}
+  - component: {fileID: 1525248178}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1649,6 +1654,22 @@ MonoBehaviour:
   m_CameraActivatedEvent:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1525248178
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1525248173}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56666c5a40171f54783dd416a44f42bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EventMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_MaxRayIntersections: 0
 --- !u!1 &1536881500
 GameObject:
   m_ObjectHideFlags: 0
@@ -1728,7 +1749,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6635998426718021455, guid: b9c5e4b3c9f7e024f8fe9012e7a2e437, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -10.133887
+      value: -10.134023
       objectReference: {fileID: 0}
     - target: {fileID: 6635998426718021455, guid: b9c5e4b3c9f7e024f8fe9012e7a2e437, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1844,112 +1865,6 @@ Transform:
   - {fileID: 2054760237}
   m_Father: {fileID: 2011333043}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1775041211
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1775041212}
-  - component: {fileID: 1775041214}
-  - component: {fileID: 1775041213}
-  m_Layer: 3
-  m_Name: DialogueScrim
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &1775041212
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1775041211}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 20, y: 15, z: 0}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1877041900}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &1775041213
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1775041211}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!212 &1775041214
-SpriteRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1775041211}
-  m_Enabled: 1
-  m_CastShadows: 0
-  m_ReceiveShadows: 0
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 0
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 0
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 37f940bb5dfa7d744b7f29df1b0dd09d, type: 3}
-  m_Color: {r: 0.6377357, g: 0.6377357, b: 0.6377357, a: 0.078431375}
-  m_FlipX: 0
-  m_FlipY: 0
-  m_DrawMode: 0
-  m_Size: {x: 9.3, y: 7.24}
-  m_AdaptiveModeThreshold: 0.5
-  m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
-  m_SpriteSortPoint: 0
 --- !u!1001 &1852793025
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2069,7 +1984,6 @@ Transform:
   - {fileID: 1852793026}
   - {fileID: 939972736}
   - {fileID: 596087403}
-  - {fileID: 1775041212}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1894012316
@@ -2116,7 +2030,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4669219b148a06340b6ef30bcb5d86ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogueScrim: {fileID: 1775041211}
+  dialogueScrim: {fileID: 0}
   dialogueBoxObj: {fileID: 1983380839}
 --- !u!1001 &1922851634
 PrefabInstance:
@@ -2383,34 +2297,45 @@ MonoBehaviour:
     speakerName: 
   ivesChatsWithJackie: {fileID: 11400000, guid: 707ae62d407677b4883cb678c2660881, type: 2}
   youCanPlayCardsTutorial:
-  - bodyText: Every round, the enemy gives you a couple opportunities to attack.
-      Let's select an Action.
+  - bodyText: Every round, you draw actions into your hand that you can play against
+      the enemy.
+    speakerName: Ives
+  - bodyText: Let's hover over one of the cards
     speakerName: Ives
   cardFieldsTutorial:
-  - bodyText: Each action has a Power range in which your Damage can fall.
+  - bodyText: Each action has two stats.
     speakerName: Ives
-  - bodyText: And a Speed which dictates the order in which you and your opponent's
-      attacks will come out.
+  - bodyText: ' Power - which is a range where your damage can fall in '
     speakerName: Ives
-  - bodyText: Target an enemy to declare the attack.
+  - bodyText: "And Speed - which dictates the order that you and your opponent\u2019s
+      attacks come out"
+    speakerName: Ives
+  - bodyText: "Let\u2019s select a card and target an enemy!"
     speakerName: Ives
   queueUpActionsTutorial:
-  - bodyText: This will queue up the action to attack, you can retrieve it back into
-      your hand by tapping on its icon.
+  - bodyText: 'Targeting an enemy will queue up the action to attack in the queue, '
+    speakerName: Ives
+  - bodyText: You can retrieve a card back from the queue by clicking on its icon.
     speakerName: Ives
   - bodyText: Each round, you can queue up as many attacks as you'd like. However...
     speakerName: Ives
   - bodyText: 'You cannot play two actions that share the same speed. '
     speakerName: Ives
-  - bodyText: After all, if you could be in two places at once, they'd probably skip
-      your exam entirely!
+  - bodyText: "If you can\u2019t play a card, it's likely that you have already played
+      a card with the same speed. "
     speakerName: Ives
   - bodyText: Once you feel confident in your attacks, hit that confirm button to
-      begin the bout
+      start combat.
     speakerName: Ives
   rollingDiceTutorial:
-  - bodyText: The outcome of a clash is unpredictable, [Click] to roll the die and
-      see your chances
+  - bodyText: ' The outcome of a clash is unpredictable, remember how power falls
+      in a range? '
+    speakerName: Ives
+  - bodyText: 'As you approach an enemy to attack, [Click] again to roll the attack
+      power of the action. '
+    speakerName: Ives
+  - bodyText: "Since the dummy isn\u2019t fighting back, your action will directly
+      deal its power in damage."
     speakerName: Ives
   buffTutorial:
   - bodyText: You might have noticed that while making some attacks, you get into
@@ -2424,7 +2349,7 @@ MonoBehaviour:
   clashingCardsTutorial: []
   clashingOutcomeTutorial: []
   cardsExhaustedTutorial: []
-  endingTutorialDialogue: {fileID: 0}
+  endingTutorialDialogue: {fileID: 11400000, guid: 71bc8b72e567a434fb451296dad29b2f, type: 2}
   jumpToCombat: 1
 --- !u!1001 &2102825245
 PrefabInstance:

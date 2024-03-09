@@ -99,6 +99,7 @@ public class TutorialIntroduction : DialogueClasses
             Instantiate(trainingDummyPrefab, dummy1StartingPos);
             yield return StartCoroutine(CombatManager.Instance.SetLightScreen());
         }
+
         ives.InCombat();
         jackie.InCombat(); //Workaround for now, ill have to remove this once i manually start instantiating players
         DialogueManager.Instance.MoveBoxToTop();
@@ -134,6 +135,7 @@ public class TutorialIntroduction : DialogueClasses
     //Once a player targets an enemy, we talk about the queue
     private void OnPlayerFirstInsertCard(ActionClass card)
     {
+        DialogueManager.Instance.MoveBoxToBottom();
         BattleQueue.playerActionInsertedEvent -= OnPlayerFirstInsertCard;
         StartCoroutine(StartDialogueWithNextEvent(queueUpActionsTutorial, () => { CardComparator.playersAreRollingDiceEvent += OnPlayerFightsDummy; }));
     }
@@ -147,6 +149,7 @@ public class TutorialIntroduction : DialogueClasses
 
     private void FirstDummyDies(EntityClass entity)
     {
+        DialogueManager.Instance.MoveBoxToTop();
         if (entity is TrainingDummy)
         {
             EntityClass.onEntityDeath -= FirstDummyDies;

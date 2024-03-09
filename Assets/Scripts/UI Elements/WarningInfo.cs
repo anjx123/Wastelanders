@@ -16,7 +16,7 @@ public class WarningInfo : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 
     public bool isActive = true; //controls whether active on screen
 
-    public void showWarning(string text)
+    public void ShowWarning(string text)
     {
         warningText.text = text;
         warningText.color = Color.black;

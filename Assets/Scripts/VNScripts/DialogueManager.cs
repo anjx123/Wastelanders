@@ -60,6 +60,7 @@ public class DialogueManager : MonoBehaviour
     {
         dialogueBoxObj.GetComponent<RectTransform>().anchorMin = new Vector2(0.5f, 0);
         dialogueBoxObj.GetComponent<RectTransform>().anchorMax = new Vector2(0.5f, 0);
+        dialogueBoxObj.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, 0);
     }
 
     public void MoveBoxToTop()
@@ -71,12 +72,12 @@ public class DialogueManager : MonoBehaviour
 
     public void BlockPlayerClick()
     {
-        dialogueScrim.SetActive(true);
+        //dialogueScrim?.SetActive(true);
     }
 
     public void UnblockPlayerClick()
     {
-        dialogueScrim.SetActive(false);
+        //dialogueScrim?.SetActive(false);
     }
 
     public void DisplayNextSentence()
