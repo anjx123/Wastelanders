@@ -12,6 +12,9 @@ public class TutorialIntroduction : DialogueClasses
     [SerializeField] private Transform ivesDefaultTransform;
     [SerializeField] private GameObject trainingDummyPrefab;
     [SerializeField] private Transform dummy1StartingPos;
+    [SerializeField] private Transform dummy2StartingPos;
+    [SerializeField] private Transform dummy3StartingPos;
+    [SerializeField] private Transform ivesPassiveBattlePosition;
 
     [SerializeField] private List<DialogueText> openingDiscussion;
     [SerializeField] private List<DialogueText> jackieMonologue;
@@ -37,6 +40,8 @@ public class TutorialIntroduction : DialogueClasses
 
 
     [SerializeField] private bool jumpToCombat;
+
+    private List<GameObject> trainingDummies = new();
 
 
 
@@ -83,7 +88,7 @@ public class TutorialIntroduction : DialogueClasses
             yield return StartCoroutine(DialogueManager.Instance.StartDialogue(ivesChatsWithJackie.Dialogue));
 
             yield return StartCoroutine(ives.MoveToPosition(dummy1StartingPos.position, 1.2f, 1.2f)); //Ives goes to place a dummy down
-            Instantiate(trainingDummyPrefab, dummy1StartingPos);
+            trainingDummies.Add(Instantiate(trainingDummyPrefab, dummy1StartingPos));
 
 
             yield return new WaitForSeconds(1f);
@@ -96,19 +101,40 @@ public class TutorialIntroduction : DialogueClasses
             ives.SetReturnPosition(ivesDefaultTransform.position);
             StartCoroutine(ives.MoveToPosition(ivesDefaultTransform.position, 0, 0.1f)); //Ives comes into the scene
             StartCoroutine(ives.MoveToPosition(dummy1StartingPos.position, 1.2f, 0.1f)); //Ives goes to place a dummy down
-            Instantiate(trainingDummyPrefab, dummy1StartingPos);
+            trainingDummies.Add(Instantiate(trainingDummyPrefab, dummy1StartingPos));
             yield return StartCoroutine(CombatManager.Instance.SetLightScreen());
         }
 
         ives.InCombat();
         jackie.InCombat(); //Workaround for now, ill have to remove this once i manually start instantiating players
         DialogueManager.Instance.MoveBoxToTop();
+        ives.SetReturnPosition(ivesPassiveBattlePosition.position);
         CombatManager.Instance.GameState = GameState.SELECTION;
         BeginCombatTutorial();
-
+        EntityClass.onEntityDeath += FirstDummyDies;
         yield return new WaitUntil(() => CombatManager.Instance.GameState == GameState.GAME_WIN);
 
         yield return StartCoroutine(DialogueManager.Instance.StartDialogue(buffTutorial));
+
+        foreach (GameObject trainingDummy in trainingDummies)
+        {
+            yield return StartCoroutine(ives.MoveToPosition(trainingDummy.transform.position, 1.2f, 0.8f));
+            yield return new WaitForSeconds(0.6f);
+            Destroy(trainingDummy);
+        }
+
+        yield return StartCoroutine(ives.MoveToPosition(dummy1StartingPos.position, 1.2f, 0.8f)); //Ives goes to place a dummy down
+        yield return new WaitForSeconds(0.3f);
+        trainingDummies.Add(Instantiate(trainingDummyPrefab, dummy1StartingPos));
+        yield return StartCoroutine(ives.MoveToPosition(dummy2StartingPos.position, 1.2f, 0.8f)); //Ives goes to place a dummy down
+        yield return new WaitForSeconds(0.3f);
+        trainingDummies.Add(Instantiate(trainingDummyPrefab, dummy2StartingPos));
+        yield return StartCoroutine(ives.MoveToPosition(dummy3StartingPos.position, 1.2f, 0.8f)); //Ives goes to place a dummy down
+        yield return new WaitForSeconds(0.3f);
+        trainingDummies.Add(Instantiate(trainingDummyPrefab, dummy3StartingPos));
+        yield return new WaitForSeconds(0.3f);
+        CombatManager.Instance.GameState = GameState.SELECTION;
+
 
 
 
@@ -144,7 +170,6 @@ public class TutorialIntroduction : DialogueClasses
     {
         CardComparator.playersAreRollingDiceEvent -= OnPlayerFightsDummy;
         yield return StartCoroutine(DialogueManager.Instance.StartDialogue(rollingDiceTutorial));
-        EntityClass.onEntityDeath += FirstDummyDies;
     }
 
     private void FirstDummyDies(EntityClass entity)

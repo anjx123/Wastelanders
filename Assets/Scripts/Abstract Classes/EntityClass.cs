@@ -6,7 +6,7 @@ using static UnityEngine.UI.Image;
 
 public abstract class EntityClass : SelectClass
 {
-    private float PLAY_RUNNING_ANIMATION_DELTA = 0.01f; //Represents how little change in position we should at least see before playing running animation
+    private float PLAY_RUNNING_ANIMATION_DELTA = 0.03f; //Represents how little change in position we should at least see before playing running animation
     protected int MAX_HEALTH;
     [SerializeField]
     protected int MaxHealth
@@ -151,10 +151,11 @@ public abstract class EntityClass : SelectClass
         float distance = Mathf.Sqrt(diffInLocation.x * diffInLocation.x + diffInLocation.y * diffInLocation.y);
         float maxProportionTravelled = (distance - radius) / distance;
 
-        UpdateFacing(diffInLocation, lookAtPosition);
+        
 
         if (HasParameter("IsMoving", animator) && distance > radius + PLAY_RUNNING_ANIMATION_DELTA)
         {
+            UpdateFacing(diffInLocation, lookAtPosition);
             animator.SetBool("IsMoving", true);
         }
 
