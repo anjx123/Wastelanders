@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 977118586956487566}
   - component: {fileID: 4700618330078765247}
   - component: {fileID: 8354290643624178621}
+  - component: {fileID: 1830226759925159690}
   m_Layer: 0
   m_Name: DummyPrefab
   m_TagString: Untagged
@@ -54,8 +55,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 2.8647387, y: 6.4438386, z: 1}
+  m_Center: {x: -0.2406127, y: 1.8497028, z: 0}
 --- !u!212 &4700618330078765247
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -121,10 +122,31 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myTransform: {fileID: 7783764551123862074}
-  animator: {fileID: 0}
+  animator: {fileID: 1830226759925159690}
   combatInfo: {fileID: 6395893620585175647}
   boxCollider: {fileID: 977118586956487566}
   availableActions: []
+--- !u!95 &1830226759925159690
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7915807930978314633}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: e0d280df3e7b7054b91525956cea06f0, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1001 &7834275331953360213
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -133,6 +155,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7783764551123862074}
     m_Modifications:
+    - target: {fileID: 5714486089811996398, guid: 941333e3be7f6f04688676f1827dbf1b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -3.5
+      objectReference: {fileID: 0}
     - target: {fileID: 6018344303403229583, guid: 941333e3be7f6f04688676f1827dbf1b, type: 3}
       propertyPath: m_LocalScale.x
       value: 1.3

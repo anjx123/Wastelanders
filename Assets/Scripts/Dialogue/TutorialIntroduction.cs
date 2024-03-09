@@ -36,7 +36,7 @@ public class TutorialIntroduction : DialogueClasses
     [SerializeField] private DialogueWrapper endingTutorialDialogue;
 
 
-
+    [SerializeField] private bool jumpToCombat;
 
 
 
@@ -46,52 +46,63 @@ public class TutorialIntroduction : DialogueClasses
     {
         CombatManager.Instance.GameState = GameState.OUT_OF_COMBAT;
         CombatManager.Instance.SetDarkScreen();
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(1f);
         ives.OutOfCombat();
         jackie.OutOfCombat(); //Workaround for now, ill have to remove this once i manually start instantiating players
         jackie.SetReturnPosition(jackieDefaultTransform.position);
+        if (!jumpToCombat)
+        {
+            yield return new WaitForSeconds(2f);
 
-        yield return StartCoroutine(DialogueManager.Instance.StartDialogue(openingDiscussion));
+            yield return StartCoroutine(DialogueManager.Instance.StartDialogue(openingDiscussion));
 
-        jackie.Emphasize(); //Jackie shows up above the black background
-        yield return StartCoroutine(jackie.ResetPosition()); //Jackie Runs into the scene and talks 
-        yield return new WaitForSeconds(MEDIUM_PAUSE);
+            jackie.Emphasize(); //Jackie shows up above the black background
+            yield return StartCoroutine(jackie.ResetPosition()); //Jackie Runs into the scene and talks 
+            yield return new WaitForSeconds(MEDIUM_PAUSE);
 
-        yield return StartCoroutine(DialogueManager.Instance.StartDialogue(jackieMonologue));
-        yield return StartCoroutine(CombatManager.Instance.SetLightScreen());
-        jackie.DeEmphasize();
+            yield return StartCoroutine(DialogueManager.Instance.StartDialogue(jackieMonologue));
+            yield return StartCoroutine(CombatManager.Instance.SetLightScreen());
+            jackie.DeEmphasize();
 
-        yield return StartCoroutine(DialogueManager.Instance.StartDialogue(soldierGreeting));
+            yield return StartCoroutine(DialogueManager.Instance.StartDialogue(soldierGreeting));
 
-        yield return new WaitForSeconds(1f);
-        jackie.FaceLeft(); //Jackie faces the soldier talking to her
-        yield return new WaitForSeconds(0.2f);
+            yield return new WaitForSeconds(1f);
+            jackie.FaceLeft(); //Jackie faces the soldier talking to her
+            yield return new WaitForSeconds(0.2f);
 
-        yield return StartCoroutine(DialogueManager.Instance.StartDialogue(jackieTalksWithSolider));
+            yield return StartCoroutine(DialogueManager.Instance.StartDialogue(jackieTalksWithSolider));
 
-        yield return new WaitForSeconds(MEDIUM_PAUSE);
+            yield return new WaitForSeconds(MEDIUM_PAUSE);
 
-        ives.SetReturnPosition(ivesDefaultTransform.position);
-        yield return StartCoroutine(ives.MoveToPosition(ivesDefaultTransform.position, 0, 0.8f)); //Ives comes into the scene
+            ives.SetReturnPosition(ivesDefaultTransform.position);
+            yield return StartCoroutine(ives.MoveToPosition(ivesDefaultTransform.position, 0, 0.8f)); //Ives comes into the scene
 
-        yield return new WaitForSeconds(0.2f);
-        jackie.FaceRight(); //Jackie turns to face the person approaching her
+            yield return new WaitForSeconds(0.2f);
+            jackie.FaceRight(); //Jackie turns to face the person approaching her
 
-        yield return StartCoroutine(DialogueManager.Instance.StartDialogue(ivesChatsWithJackie.Dialogue));
+            yield return StartCoroutine(DialogueManager.Instance.StartDialogue(ivesChatsWithJackie.Dialogue));
 
-        yield return StartCoroutine(ives.MoveToPosition(dummy1StartingPos.position, 1.2f, 1.2f)); //Ives goes to place a dummy down
-        Instantiate(trainingDummyPrefab, dummy1StartingPos);
-
-
-        yield return new WaitForSeconds(1f);
-        yield return StartCoroutine(jackie.MoveToPosition(dummy1StartingPos.position, 1.4f, 0.8f));
+            yield return StartCoroutine(ives.MoveToPosition(dummy1StartingPos.position, 1.2f, 1.2f)); //Ives goes to place a dummy down
+            Instantiate(trainingDummyPrefab, dummy1StartingPos);
 
 
-        yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(1f);
+            yield return StartCoroutine(jackie.MoveToPosition(dummy1StartingPos.position, 1.4f, 0.8f));
+
+
+            yield return new WaitForSeconds(1f);
+        } else
+        {
+            ives.SetReturnPosition(ivesDefaultTransform.position);
+            StartCoroutine(ives.MoveToPosition(ivesDefaultTransform.position, 0, 0.1f)); //Ives comes into the scene
+            StartCoroutine(ives.MoveToPosition(dummy1StartingPos.position, 1.2f, 0.1f)); //Ives goes to place a dummy down
+            Instantiate(trainingDummyPrefab, dummy1StartingPos);
+            yield return StartCoroutine(CombatManager.Instance.SetLightScreen());
+        }
         ives.InCombat();
         jackie.InCombat(); //Workaround for now, ill have to remove this once i manually start instantiating players
+        DialogueManager.Instance.MoveBoxToTop();
         CombatManager.Instance.GameState = GameState.SELECTION;
-
         BeginCombatTutorial();
 
         yield return new WaitUntil(() => CombatManager.Instance.GameState == GameState.GAME_WIN);

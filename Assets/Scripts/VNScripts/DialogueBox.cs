@@ -9,8 +9,8 @@ public class DialogueBox : MonoBehaviour
     public const string RENDERING_LAYER = "DialogueLayer";
     private const float DEFAULTROLLSPEED = 50f;
 
-    [SerializeField] private TextMeshPro bodyText;
-    [SerializeField] private TextMeshPro nameText;
+    [SerializeField] private TextMeshProUGUI bodyText;
+    [SerializeField] private TextMeshProUGUI nameText;
     private string currentLine = string.Empty;
 
     public float rollingSpeed;
@@ -36,17 +36,7 @@ public class DialogueBox : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        SpriteRenderer dialogueBoxRenderer = GetComponent<SpriteRenderer>();
-        dialogueBoxRenderer.sortingLayerName = RENDERING_LAYER;
-        dialogueBoxRenderer.sortingOrder = 0;
-
-        MeshRenderer bodyTextRenderer = bodyText.GetComponent<MeshRenderer>();
-        bodyTextRenderer.sortingLayerName = RENDERING_LAYER;
-        bodyTextRenderer.sortingOrder = 1;
-
-        MeshRenderer nameTextRenderer = nameText.GetComponent<MeshRenderer>();
-        nameTextRenderer.sortingLayerName = RENDERING_LAYER;
-        nameTextRenderer.sortingOrder = 1;
+        
     }
 
     // Update is called once per frame

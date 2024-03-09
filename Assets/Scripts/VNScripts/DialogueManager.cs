@@ -6,10 +6,10 @@ using TMPro;
 public class DialogueManager : MonoBehaviour
 {
     public static DialogueManager Instance { get; private set; }
-
+    public GameObject dialogueScrim; //Blocks player interaction with the game while in dialogue
     public GameObject dialogueBoxObj;
     private DialogueBox dialogueBoxComponent;
-    public List<DialogueText> sentences;
+    private List<DialogueText> sentences = new();
 
     private bool inDialogue = false;
 
@@ -30,7 +30,7 @@ public class DialogueManager : MonoBehaviour
     //Manager is going to listen to a bunch of events that then cause it to gain new sentences and 
     void Start()
     {
-        clearPanel();
+        ClearPanel();
     }
 
     public IEnumerator StartDialogue(List<DialogueText> newSentences)
@@ -49,11 +49,34 @@ public class DialogueManager : MonoBehaviour
         yield return new WaitUntil(() => !inDialogue);
     }
 
-    public void clearPanel()
+    public void ClearPanel()
     {
         dialogueBoxObj.SetActive(false);
         sentences.Clear();
         inDialogue = false;
+    }
+
+    public void MoveBoxToBottom()
+    {
+        dialogueBoxObj.GetComponent<RectTransform>().anchorMin = new Vector2(0.5f, 0);
+        dialogueBoxObj.GetComponent<RectTransform>().anchorMax = new Vector2(0.5f, 0);
+    }
+
+    public void MoveBoxToTop()
+    {
+        dialogueBoxObj.GetComponent<RectTransform>().anchorMin = new Vector2(0.5f, 1);
+        dialogueBoxObj.GetComponent<RectTransform>().anchorMax = new Vector2(0.5f, 1);
+        dialogueBoxObj.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -113);
+    }
+
+    public void BlockPlayerClick()
+    {
+        dialogueScrim.SetActive(true);
+    }
+
+    public void UnblockPlayerClick()
+    {
+        dialogueScrim.SetActive(false);
     }
 
     public void DisplayNextSentence()
@@ -71,7 +94,7 @@ public class DialogueManager : MonoBehaviour
 
     void EndDialogue()
     {
-        clearPanel();
+        ClearPanel();
     }
 
     void Update()
@@ -85,6 +108,13 @@ public class DialogueManager : MonoBehaviour
                     DisplayNextSentence();
                 }
             }
+        }
+        if (inDialogue)
+        {
+            BlockPlayerClick();
+        } else
+        {
+            UnblockPlayerClick();
         }
     }
 }

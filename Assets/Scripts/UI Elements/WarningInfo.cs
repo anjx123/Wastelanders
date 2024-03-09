@@ -19,7 +19,7 @@ public class WarningInfo : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     public void showWarning(string text)
     {
         warningText.text = text;
-
+        warningText.color = Color.black;
         popUpCanFade = true; //Warnings can fade out
         SetPopUpActive();
     }
@@ -43,7 +43,7 @@ public class WarningInfo : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     public void DisplayDescription(string description)
     {
         warningText.text = description;
-
+        warningText.color = Color.white;
         popUpCanFade = false; //Descriptions do not fade
         SetPopUpActive();
     }

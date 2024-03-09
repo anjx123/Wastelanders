@@ -118,7 +118,7 @@ public abstract class EntityClass : SelectClass
     }
 
     //Calculates the power of the stagger based on the percentage health done
-    private float StaggerPowerCalculation(float percentageDone)
+    protected virtual float StaggerPowerCalculation(float percentageDone)
     {
         float minimumPush = 0.8f;
         float pushSlope = 1.8f;

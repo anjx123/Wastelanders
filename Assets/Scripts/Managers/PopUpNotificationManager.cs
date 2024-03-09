@@ -24,7 +24,6 @@ public class PopUpNotificationManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        createWarning("Round Start!!!");
     }
 
     private void Start()

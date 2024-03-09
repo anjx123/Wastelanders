@@ -124,14 +124,18 @@ public class CombatManager : MonoBehaviour
             enemy.AddAttack(players);
             StartCoroutine(enemy.ResetPosition());
         }
+        Debug.Log(players.Count + "Number of players rn");
 
         foreach (PlayerClass player in players)
         {
             player.DrawToMax();
             StartCoroutine(player.ResetPosition());
-
         }
 
+        if (players.Count > 0)
+        {
+            HighlightManager.OnEntityClicked(players[0]);
+        }
         BattleQueue.BattleQueueInstance.TheBeginning(); //Nasty but necessary for rendering the current implementation of BQ
     }
 
