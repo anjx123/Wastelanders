@@ -67,7 +67,7 @@ public class DialogueManager : MonoBehaviour
     {
         dialogueBoxObj.GetComponent<RectTransform>().anchorMin = new Vector2(0.5f, 1);
         dialogueBoxObj.GetComponent<RectTransform>().anchorMax = new Vector2(0.5f, 1);
-        dialogueBoxObj.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -113);
+        dialogueBoxObj.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -1 * dialogueBoxComponent.GetComponent<RectTransform>().rect.height);
     }
 
     public void BlockPlayerClick()

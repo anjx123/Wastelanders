@@ -12,7 +12,7 @@ public class DialogueBox : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI bodyText;
     [SerializeField] private TextMeshProUGUI nameText;
-    [SerializeField] private Image faceImage;
+    [SerializeField] private Image displayingImage;
 
     private string currentLine = string.Empty;
 
@@ -22,6 +22,14 @@ public class DialogueBox : MonoBehaviour
 
     public void SetLine(DialogueText line)
     {
+        if (line.DisplayingImage == null)
+        {
+            displayingImage.enabled = false;
+        } else
+        {
+            displayingImage.enabled = true;
+            displayingImage.sprite = line.DisplayingImage;
+        }
         bodyText.text = string.Empty;
         this.currentLine = line.BodyText;
         nameText.text = line.SpeakerName;
