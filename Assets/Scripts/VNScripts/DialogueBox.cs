@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 //This class handles Rolling Text behavior, Use this in place of TextMeshProUGUI components to set text
 public class DialogueBox : MonoBehaviour
@@ -11,6 +12,8 @@ public class DialogueBox : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI bodyText;
     [SerializeField] private TextMeshProUGUI nameText;
+    [SerializeField] private Image faceImage;
+
     private string currentLine = string.Empty;
 
     public float rollingSpeed;
