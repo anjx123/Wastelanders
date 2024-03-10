@@ -181,6 +181,12 @@ public class CombatInfo : MonoBehaviour
             transform.localScale = flippedTransform;
         }
     }
+
+    private bool IsFacingRight()
+    {
+        return this.gameObject.transform.lossyScale.x > 0;
+    }
+
     public void UpdateBuffs(Dictionary<string, StatusEffect> buffs)
     {
         foreach (Transform child in buffList.transform)
@@ -197,6 +203,14 @@ public class CombatInfo : MonoBehaviour
             buffIcon.transform.SetParent(buffList.transform, false);
             buffIcon.SetIcon(buffs[str].GetIcon());
             buffIcon.SetText(buffs[str].Stacks.ToString());
+            if (IsFacingRight())
+            {
+                FlipTransform(buffIcon.transform, true);
+            }
+            else
+            {
+                FlipTransform(buffIcon.transform, false);
+            }
         }
     }
 }

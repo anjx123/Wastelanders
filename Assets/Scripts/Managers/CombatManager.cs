@@ -208,10 +208,6 @@ public class CombatManager : MonoBehaviour
         Debug.LogWarning("All enemies are dead, You Win!");
         baseCamera.Priority = 1;
         dynamicCamera.Priority = 0;
-        foreach (PlayerClass player in players)
-        {
-            StartCoroutine(player.ResetPosition());
-        }
     }
 
 

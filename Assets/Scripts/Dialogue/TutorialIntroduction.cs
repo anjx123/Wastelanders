@@ -47,6 +47,15 @@ public class TutorialIntroduction : DialogueClasses
 
     private const float BRIEF_PAUSE = 0.2f; // For use after an animation to make it visually seem smoother
     private const float MEDIUM_PAUSE = 1f; //For use after a text box comes down and we want to add some weight to the text.
+
+    protected override void GameStateChange(GameState gameState)
+    {
+        if (gameState == GameState.GAME_START)
+        {
+            StartCoroutine(ExecuteGameStart());
+        }
+    }
+
     private IEnumerator ExecuteGameStart()
     {
         CombatManager.Instance.GameState = GameState.OUT_OF_COMBAT;
@@ -111,7 +120,7 @@ public class TutorialIntroduction : DialogueClasses
         ives.SetReturnPosition(ivesPassiveBattlePosition.position);
         CombatManager.Instance.GameState = GameState.SELECTION;
         BeginCombatTutorial();
-        EntityClass.onEntityDeath += FirstDummyDies;
+         EntityClass.onEntityDeath += FirstDummyDies;
         yield return new WaitUntil(() => CombatManager.Instance.GameState == GameState.GAME_WIN);
 
         yield return StartCoroutine(DialogueManager.Instance.StartDialogue(buffTutorial));
@@ -122,18 +131,15 @@ public class TutorialIntroduction : DialogueClasses
             yield return new WaitForSeconds(0.6f);
             Destroy(trainingDummy);
         }
-
-        yield return StartCoroutine(ives.MoveToPosition(dummy1StartingPos.position, 1.2f, 0.8f)); //Ives goes to place a dummy down
-        yield return new WaitForSeconds(0.3f);
-        trainingDummies.Add(Instantiate(trainingDummyPrefab, dummy1StartingPos));
-        yield return StartCoroutine(ives.MoveToPosition(dummy2StartingPos.position, 1.2f, 0.8f)); //Ives goes to place a dummy down
-        yield return new WaitForSeconds(0.3f);
-        trainingDummies.Add(Instantiate(trainingDummyPrefab, dummy2StartingPos));
-        yield return StartCoroutine(ives.MoveToPosition(dummy3StartingPos.position, 1.2f, 0.8f)); //Ives goes to place a dummy down
-        yield return new WaitForSeconds(0.3f);
-        trainingDummies.Add(Instantiate(trainingDummyPrefab, dummy3StartingPos));
-        yield return new WaitForSeconds(0.3f);
+        // Have Ives fight and teach clashing now.
+        ives.SetReturnPosition(dummy1StartingPos.position);
+        jackie.SetReturnPosition(jackie.gameObject.transform.position);
         CombatManager.Instance.GameState = GameState.SELECTION;
+
+
+        yield return new WaitUntil(() => CombatManager.Instance.GameState == GameState.GAME_WIN);
+
+        yield return StartCoroutine(DialogueManager.Instance.StartDialogue(endingTutorialDialogue.Dialogue));
 
 
 
@@ -190,22 +196,25 @@ public class TutorialIntroduction : DialogueClasses
 
 
 
+    private IEnumerator InstantiateDummies()
+    {
+        yield return StartCoroutine(ives.MoveToPosition(dummy1StartingPos.position, 1.2f, 0.8f)); //Ives goes to place a dummy down
+        yield return new WaitForSeconds(0.3f);
+        trainingDummies.Add(Instantiate(trainingDummyPrefab, dummy1StartingPos));
+        yield return StartCoroutine(ives.MoveToPosition(dummy2StartingPos.position, 1.2f, 0.8f)); //Ives goes to place a dummy down
+        yield return new WaitForSeconds(0.3f);
+        trainingDummies.Add(Instantiate(trainingDummyPrefab, dummy2StartingPos));
+        yield return StartCoroutine(ives.MoveToPosition(dummy3StartingPos.position, 1.2f, 0.8f)); //Ives goes to place a dummy down
+        yield return new WaitForSeconds(0.3f);
+        trainingDummies.Add(Instantiate(trainingDummyPrefab, dummy3StartingPos));
+        yield return new WaitForSeconds(0.3f);
+    }
 
-
-
-
-
+    //Helper to start @param dialogue, then run a callback like setting up a new event. 
     private IEnumerator StartDialogueWithNextEvent(List<DialogueText> dialogue, Action callbackToRun)
     {
         yield return StartCoroutine(DialogueManager.Instance.StartDialogue(dialogue));
         callbackToRun();
     }
 
-    protected override void GameStateChange(GameState gameState)
-    {
-        if (gameState == GameState.GAME_START)
-        {
-            StartCoroutine(ExecuteGameStart());
-        }
-    }
 }
