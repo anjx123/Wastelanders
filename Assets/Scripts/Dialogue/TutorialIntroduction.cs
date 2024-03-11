@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.ConstrainedExecution;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class TutorialIntroduction : DialogueClasses
 {
@@ -68,7 +69,8 @@ public class TutorialIntroduction : DialogueClasses
         jackie.SetReturnPosition(jackieDefaultTransform.position);
         if (!jumpToCombat)
         {
-            yield return new WaitForSeconds(2f);
+            //Text here handles dialogue before Jackie Ives combat
+            yield return new WaitForSeconds(1f);
 
             yield return StartCoroutine(DialogueManager.Instance.StartDialogue(openingDiscussion));
 
@@ -77,23 +79,22 @@ public class TutorialIntroduction : DialogueClasses
             yield return new WaitForSeconds(MEDIUM_PAUSE);
 
             yield return StartCoroutine(DialogueManager.Instance.StartDialogue(jackieMonologue));
-            yield return StartCoroutine(CombatManager.Instance.SetLightScreen());
+            yield return StartCoroutine(CombatManager.Instance.FadeInLightScreen(2f));
             jackie.DeEmphasize();
 
             yield return StartCoroutine(DialogueManager.Instance.StartDialogue(soldierGreeting));
-
             yield return new WaitForSeconds(1f);
+
             jackie.FaceLeft(); //Jackie faces the soldier talking to her
             yield return new WaitForSeconds(0.2f);
 
             yield return StartCoroutine(DialogueManager.Instance.StartDialogue(jackieTalksWithSolider));
-
             yield return new WaitForSeconds(MEDIUM_PAUSE);
 
             ives.SetReturnPosition(ivesDefaultTransform.position);
             yield return StartCoroutine(ives.MoveToPosition(ivesDefaultTransform.position, 0, 0.8f)); //Ives comes into the scene
-
             yield return new WaitForSeconds(0.2f);
+
             jackie.FaceRight(); //Jackie turns to face the person approaching her
 
             yield return StartCoroutine(DialogueManager.Instance.StartDialogue(ivesChatsWithJackie.Dialogue));
@@ -104,29 +105,29 @@ public class TutorialIntroduction : DialogueClasses
 
             yield return new WaitForSeconds(1f);
             yield return StartCoroutine(jackie.MoveToPosition(dummy1StartingPos.position, 1.4f, 0.8f));
-
-
             yield return new WaitForSeconds(1f);
         } else
         {
+            //Set up the scene for a combat Jump in.
             ives.SetReturnPosition(ivesDefaultTransform.position);
             StartCoroutine(ives.MoveToPosition(ivesDefaultTransform.position, 0, 0.1f)); //Ives comes into the scene
             StartCoroutine(ives.MoveToPosition(dummy1StartingPos.position, 1.2f, 0.1f)); //Ives goes to place a dummy down
             trainingDummies.Add(Instantiate(trainingDummyPrefab, dummy1StartingPos));
-            yield return StartCoroutine(CombatManager.Instance.SetLightScreen());
+            yield return StartCoroutine(CombatManager.Instance.FadeInLightScreen(2f));
         }
 
+        jackie.InCombat(); //Workaround for now, ill have to remove this once i manually start instantiating 
         ives.InCombat();
-        jackie.InCombat(); //Workaround for now, ill have to remove this once i manually start instantiating players
-        DialogueManager.Instance.MoveBoxToTop();
         ives.SetReturnPosition(ivesPassiveBattlePosition.position);
+
+        DialogueManager.Instance.MoveBoxToTop();
         CombatManager.Instance.GameState = GameState.SELECTION;
+
         BeginCombatTutorial();
         yield return new WaitUntil(() => CombatManager.Instance.GameState == GameState.GAME_WIN);
 
         yield return StartCoroutine(DialogueManager.Instance.StartDialogue(buffTutorial));
         
-
         //Ives retrieves the dead training dummy
         foreach (GameObject trainingDummy in trainingDummies)
         {
@@ -134,11 +135,13 @@ public class TutorialIntroduction : DialogueClasses
             yield return new WaitForSeconds(0.6f);
             Destroy(trainingDummy);
         }
-        // Have Ives fight and teach clashing now.
-        ives.SetReturnPosition(dummy1StartingPos.position);
-        jackie.SetReturnPosition(jackie.gameObject.transform.position);
 
+        // Have Ives fight and teach clashing now.
+
+        jackie.SetReturnPosition(jackie.gameObject.transform.position);
+        ives.SetReturnPosition(dummy1StartingPos.position);
         ives.InjectDeck(ivesTutorialDeck);
+
         yield return new WaitUntil(() => !DialogueManager.Instance.IsInDialogue());
         CombatManager.Instance.GameState = GameState.SELECTION;
 
@@ -147,21 +150,20 @@ public class TutorialIntroduction : DialogueClasses
         yield return new WaitUntil(() => CombatManager.Instance.GameState == GameState.GAME_WIN);
 
         yield return StartCoroutine(DialogueManager.Instance.StartDialogue(ivesIsDefeated));
-
         yield return new WaitForSeconds(0.6f);
 
+        //Ives Stands back up
         ives.Heal(5);
         ives.SetUnstaggered();
-
         yield return new WaitForSeconds(0.8f);
+
         yield return StartCoroutine(DialogueManager.Instance.StartDialogue(endingTutorialDialogue.Dialogue));
 
+
+        StartCoroutine(CombatManager.Instance.FadeInDarkScreen(3f));
         yield return StartCoroutine(jackie.MoveToPosition(jackieEndPosition.position, 0, 4f));
 
-
-
-
-
+        SceneManager.LoadScene("LevelSelect");
 
         yield break;
     }
@@ -237,7 +239,6 @@ public class TutorialIntroduction : DialogueClasses
     {
         CardComparator.playersAreRollingDiceEvent -= OnPlayerClashingWithIves;
         yield return StartCoroutine(DialogueManager.Instance.StartDialogue(clashingOutcomeTutorial));
-
     }
 
     private void IvesDies(EntityClass entity)
@@ -248,13 +249,7 @@ public class TutorialIntroduction : DialogueClasses
             CombatManager.Instance.GameState = GameState.GAME_WIN;
         }
     }
-
-
-
-
-
-
-
+//------------------------------------------------------Helpers---------------------------------------------------------------------------------
 
     private IEnumerator InstantiateDummies()
     {

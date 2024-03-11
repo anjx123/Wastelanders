@@ -232,9 +232,14 @@ public class CombatManager : MonoBehaviour
         fadeScreen.color = new Color(fadeScreen.color.r, fadeScreen.color.g, fadeScreen.color.b, 1f);
     }
 
-    public IEnumerator SetLightScreen()
+    public IEnumerator FadeInLightScreen(float duration)
     {
-        yield return StartCoroutine(FadeBackground(1f, 0f, 2f));
+        yield return StartCoroutine(FadeBackground(1f, 0f, duration));
+    }
+
+    public IEnumerator FadeInDarkScreen(float duration)
+    {
+        yield return StartCoroutine(FadeBackground(0f, 1f, duration));
     }
     private void PerformOutOfCombat()
     {

@@ -13,6 +13,7 @@ public class DialogueBox : MonoBehaviour
     [SerializeField] private TextMeshProUGUI bodyText;
     [SerializeField] private TextMeshProUGUI nameText;
     [SerializeField] private Image displayingImage;
+    [SerializeField] private AspectRatioFitter aspectRatioFitter;
 
     private string currentLine = string.Empty;
 
@@ -27,6 +28,7 @@ public class DialogueBox : MonoBehaviour
             displayingImage.enabled = false;
         } else
         {
+            aspectRatioFitter.aspectRatio = line.DisplayingImage.bounds.size.x / line.DisplayingImage.bounds.size.y;
             displayingImage.enabled = true;
             displayingImage.sprite = line.DisplayingImage;
         }
