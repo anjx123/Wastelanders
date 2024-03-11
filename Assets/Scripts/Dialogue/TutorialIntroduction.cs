@@ -12,9 +12,10 @@ public class TutorialIntroduction : DialogueClasses
     [SerializeField] private Transform ivesDefaultTransform;
     [SerializeField] private GameObject trainingDummyPrefab;
     [SerializeField] private Transform dummy1StartingPos;
-    [SerializeField] private Transform dummy2StartingPos;
-    [SerializeField] private Transform dummy3StartingPos;
+    [SerializeField] private Transform jackieEndPosition;
+
     [SerializeField] private Transform ivesPassiveBattlePosition;
+    [SerializeField] private List<GameObject> ivesTutorialDeck;
 
     [SerializeField] private List<DialogueText> openingDiscussion;
     [SerializeField] private List<DialogueText> jackieMonologue;
@@ -29,13 +30,14 @@ public class TutorialIntroduction : DialogueClasses
     [SerializeField] private List<DialogueText> rollingDiceTutorial;
     //Plays after first Dummy killed
     [SerializeField] private List<DialogueText> buffTutorial;
-    //After three dummies are killed
+    //After Ives Starts fighting
     [SerializeField] private List<DialogueText> readingOpponentTutorial;
     [SerializeField] private List<DialogueText> clashingCardsTutorial;
     [SerializeField] private List<DialogueText> clashingOutcomeTutorial;
     [SerializeField] private List<DialogueText> cardsExhaustedTutorial;
 
     //After Ives is defeated
+    [SerializeField] private List<DialogueText> ivesIsDefeated;
     [SerializeField] private DialogueWrapper endingTutorialDialogue;
 
 
@@ -120,11 +122,12 @@ public class TutorialIntroduction : DialogueClasses
         ives.SetReturnPosition(ivesPassiveBattlePosition.position);
         CombatManager.Instance.GameState = GameState.SELECTION;
         BeginCombatTutorial();
-         EntityClass.onEntityDeath += FirstDummyDies;
         yield return new WaitUntil(() => CombatManager.Instance.GameState == GameState.GAME_WIN);
 
         yield return StartCoroutine(DialogueManager.Instance.StartDialogue(buffTutorial));
+        
 
+        //Ives retrieves the dead training dummy
         foreach (GameObject trainingDummy in trainingDummies)
         {
             yield return StartCoroutine(ives.MoveToPosition(trainingDummy.transform.position, 1.2f, 0.8f));
@@ -134,14 +137,26 @@ public class TutorialIntroduction : DialogueClasses
         // Have Ives fight and teach clashing now.
         ives.SetReturnPosition(dummy1StartingPos.position);
         jackie.SetReturnPosition(jackie.gameObject.transform.position);
+
+        ives.InjectDeck(ivesTutorialDeck);
+        yield return new WaitUntil(() => !DialogueManager.Instance.IsInDialogue());
         CombatManager.Instance.GameState = GameState.SELECTION;
 
+        BeginCombatIvesFight();
 
         yield return new WaitUntil(() => CombatManager.Instance.GameState == GameState.GAME_WIN);
 
+        yield return StartCoroutine(DialogueManager.Instance.StartDialogue(ivesIsDefeated));
+
+        yield return new WaitForSeconds(0.6f);
+
+        ives.Heal(5);
+        ives.SetUnstaggered();
+
+        yield return new WaitForSeconds(0.8f);
         yield return StartCoroutine(DialogueManager.Instance.StartDialogue(endingTutorialDialogue.Dialogue));
 
-
+        yield return StartCoroutine(jackie.MoveToPosition(jackieEndPosition.position, 0, 4f));
 
 
 
@@ -154,9 +169,25 @@ public class TutorialIntroduction : DialogueClasses
     //Player first sees that they can play cards
     private void BeginCombatTutorial()
     {
+        EntityClass.onEntityDeath += FirstDummyDies; //Setup Listener to set state to Game Win
+        PlayerClass.playerReshuffleDeck += PlayerLostOneMaxHandSize;
         StartCoroutine(StartDialogueWithNextEvent(youCanPlayCardsTutorial, () => { ActionClass.cardHighlightedEvent += OnPlayerFirstHighlightCard; }));
     }
 
+    private void PlayerLostOneMaxHandSize(PlayerClass player)
+    {
+        if (player == jackie)
+        {
+            StartCoroutine(HandSizeDecreasedDialogue());
+        }
+    }
+
+    private IEnumerator HandSizeDecreasedDialogue()
+    {
+        PlayerClass.playerReshuffleDeck -= PlayerLostOneMaxHandSize;
+        yield return new WaitUntil(() => !DialogueManager.Instance.IsInDialogue());
+        StartCoroutine(DialogueManager.Instance.StartDialogue(cardsExhaustedTutorial));
+    }
     //Once hovering over a card, we talk about speed and power
     private void OnPlayerFirstHighlightCard(ActionClass card)
     {
@@ -180,7 +211,6 @@ public class TutorialIntroduction : DialogueClasses
 
     private void FirstDummyDies(EntityClass entity)
     {
-        DialogueManager.Instance.MoveBoxToTop();
         if (entity is TrainingDummy)
         {
             EntityClass.onEntityDeath -= FirstDummyDies;
@@ -188,6 +218,36 @@ public class TutorialIntroduction : DialogueClasses
         }
     }
 
+    //-----------------------------------Ives Fight----------------------------------------
+
+    private void BeginCombatIvesFight()
+    {
+        EntityClass.onEntityDeath += IvesDies; //Setup Listener to set state to Game Win
+        DialogueManager.Instance.MoveBoxToBottom();
+        StartCoroutine(StartDialogueWithNextEvent(readingOpponentTutorial, () => { BattleQueue.playerActionInsertedEvent += OnPlayerPlayClashingCard; }));
+    }
+
+    private void OnPlayerPlayClashingCard(ActionClass actionClass)
+    {
+        BattleQueue.playerActionInsertedEvent -= OnPlayerPlayClashingCard;
+        StartCoroutine(StartDialogueWithNextEvent(clashingCardsTutorial, () => { CardComparator.playersAreRollingDiceEvent += OnPlayerClashingWithIves; }));
+    }
+
+    private IEnumerator OnPlayerClashingWithIves()
+    {
+        CardComparator.playersAreRollingDiceEvent -= OnPlayerClashingWithIves;
+        yield return StartCoroutine(DialogueManager.Instance.StartDialogue(clashingOutcomeTutorial));
+
+    }
+
+    private void IvesDies(EntityClass entity)
+    {
+        if (entity is EnemyIves)
+        {
+            EntityClass.onEntityDeath -= IvesDies;
+            CombatManager.Instance.GameState = GameState.GAME_WIN;
+        }
+    }
 
 
 
@@ -201,18 +261,15 @@ public class TutorialIntroduction : DialogueClasses
         yield return StartCoroutine(ives.MoveToPosition(dummy1StartingPos.position, 1.2f, 0.8f)); //Ives goes to place a dummy down
         yield return new WaitForSeconds(0.3f);
         trainingDummies.Add(Instantiate(trainingDummyPrefab, dummy1StartingPos));
-        yield return StartCoroutine(ives.MoveToPosition(dummy2StartingPos.position, 1.2f, 0.8f)); //Ives goes to place a dummy down
+        yield return StartCoroutine(ives.MoveToPosition(jackieEndPosition.position, 1.2f, 0.8f)); //Ives goes to place a dummy down
         yield return new WaitForSeconds(0.3f);
-        trainingDummies.Add(Instantiate(trainingDummyPrefab, dummy2StartingPos));
-        yield return StartCoroutine(ives.MoveToPosition(dummy3StartingPos.position, 1.2f, 0.8f)); //Ives goes to place a dummy down
-        yield return new WaitForSeconds(0.3f);
-        trainingDummies.Add(Instantiate(trainingDummyPrefab, dummy3StartingPos));
-        yield return new WaitForSeconds(0.3f);
+        trainingDummies.Add(Instantiate(trainingDummyPrefab, jackieEndPosition));
     }
 
-    //Helper to start @param dialogue, then run a callback like setting up a new event. 
+    //Helper to wait until dialogue is done, then start @param dialogue, then run a callback like setting up a new event. 
     private IEnumerator StartDialogueWithNextEvent(List<DialogueText> dialogue, Action callbackToRun)
     {
+        yield return new WaitUntil(() => !DialogueManager.Instance.IsInDialogue());
         yield return StartCoroutine(DialogueManager.Instance.StartDialogue(dialogue));
         callbackToRun();
     }

@@ -9,6 +9,10 @@ public abstract class PlayerClass : EntityClass
     public List<GameObject> cardPrefabs;
     public RectTransform handContainer;
     public int cardWidth;
+#nullable enable
+
+    public delegate void PlayerEventDelegate(PlayerClass player);
+    public static event PlayerEventDelegate? playerReshuffleDeck;
 
 
     // for manual removal from the battle queue in case the player changes their mind. 
@@ -47,6 +51,7 @@ public abstract class PlayerClass : EntityClass
     {
         if (pool.Count == 0)
         {
+            playerReshuffleDeck?.Invoke(this);
             maxHandSize--;
             for (int i = 0; i < discard.Count; i++)
             {

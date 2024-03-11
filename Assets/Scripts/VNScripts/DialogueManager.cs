@@ -33,6 +33,11 @@ public class DialogueManager : MonoBehaviour
         ClearPanel();
     }
 
+    public bool IsInDialogue()
+    {
+        return inDialogue;
+    }
+
     public IEnumerator StartDialogue(List<DialogueText> newSentences)
     {
         if (dialogueBoxObj.activeInHierarchy)
@@ -100,22 +105,20 @@ public class DialogueManager : MonoBehaviour
 
     void Update()
     {
-        if (dialogueBoxComponent.FinishedLine())
+
+        if (Input.GetKeyDown(KeyCode.Mouse0) || Input.GetKey(KeyCode.Space))
         {
-            if (Input.GetKeyDown(KeyCode.Mouse0) || Input.GetKey(KeyCode.Space))
+            if (inDialogue)
             {
-                if (inDialogue)
+                if (dialogueBoxComponent.FinishedLine())
                 {
                     DisplayNextSentence();
                 }
+                else
+                {
+                    dialogueBoxComponent.StopScrollingText();
+                }
             }
-        }
-        if (inDialogue)
-        {
-            BlockPlayerClick();
-        } else
-        {
-            UnblockPlayerClick();
         }
     }
 }

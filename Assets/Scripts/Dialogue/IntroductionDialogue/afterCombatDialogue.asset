@@ -13,12 +13,14 @@ MonoBehaviour:
   m_Name: afterCombatDialogue
   m_EditorClassIdentifier: 
   dialogue:
-  - bodyText: "Phew, you\u2019ve improved so quickly. Hardly could tell you were
-      the same gal as last year. "
-    speakerName: Ives
   - bodyText: All NITES candidates, please make your way to the armory and gear up.
       The NITES exam will begin shortly.
     speakerName: 'Speaker:'
+    displayingImage: {fileID: 0}
   - bodyText: "That\u2019s all the time we\u2019ve got then. See you out on the field,
       Jackie. You\u2019ve got this."
     speakerName: Ives
+    displayingImage: {fileID: 0}
+  - bodyText: Alright, thanks for the spar Ives, I'll see you soon.
+    speakerName: Jackie
+    displayingImage: {fileID: 0}

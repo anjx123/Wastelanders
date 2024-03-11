@@ -33,7 +33,7 @@ public abstract class EntityClass : SelectClass
     public int Health
     {
         get { return health; }
-        protected set 
+        protected set
         {
             health = value;
             combatInfo.SetHealth(health);
@@ -47,12 +47,12 @@ public abstract class EntityClass : SelectClass
     protected List<ActionClass> actionsAvailable;
 
     protected int id;
-    public int Id 
-    { 
+    public int Id
+    {
         get { return id; }
         set { id = value; }
     }
-    #nullable enable
+#nullable enable
 
     public delegate void EntityDelegate(EntityClass player);
     public static event EntityDelegate? onEntityDeath;
@@ -85,7 +85,7 @@ public abstract class EntityClass : SelectClass
         float percentageDone = 1; //Testing different powered knockbacks
         if (Health != 0)
         {
-            percentageDone = Mathf.Clamp(damage / (float) Health, 0f, 1f);
+            percentageDone = Mathf.Clamp(damage / (float)Health, 0f, 1f);
         } else
         {
             onEntityDeath?.Invoke(this);
@@ -146,12 +146,12 @@ public abstract class EntityClass : SelectClass
 
         Vector3 diffInLocation = destination - originalPosition;
 
-        if ((Vector2) diffInLocation == Vector2.zero) yield break;
+        if ((Vector2)diffInLocation == Vector2.zero) yield break;
 
         float distance = Mathf.Sqrt(diffInLocation.x * diffInLocation.x + diffInLocation.y * diffInLocation.y);
         float maxProportionTravelled = (distance - radius) / distance;
 
-        
+
 
         if (HasParameter("IsMoving", animator) && distance > radius + PLAY_RUNNING_ANIMATION_DELTA)
         {
@@ -290,6 +290,14 @@ public abstract class EntityClass : SelectClass
     public virtual void Heal(int val)
     {
         Health = Mathf.Clamp(Health + val, 0, MaxHealth);
+    }
+
+    public void SetUnstaggered()
+    {
+        if (HasParameter("IsStaggered", animator))
+        {
+            animator.SetBool("IsStaggered", false);
+        }
     }
 
     public override void OnMouseEnter()

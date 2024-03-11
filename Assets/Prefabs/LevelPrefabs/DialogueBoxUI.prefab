@@ -27,14 +27,14 @@ RectTransform:
   m_GameObject: {fileID: 2079817092824413852}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.87271, y: 0.87271, z: 0.87271}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7336354512828228472}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 48, y: 0}
+  m_AnchoredPosition: {x: 37, y: -7}
   m_SizeDelta: {x: 120, y: 120}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!222 &7506554022084877737
@@ -222,7 +222,7 @@ GameObject:
   - component: {fileID: 549291967672297354}
   - component: {fileID: 857937859890098148}
   m_Layer: 5
-  m_Name: DialogueBox 1
+  m_Name: DialogueBoxUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -248,7 +248,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 564, y: 168}
+  m_SizeDelta: {x: 470, y: 140}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!222 &588853515858118028
 CanvasRenderer:
@@ -432,7 +432,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 4.0092916, y: 0.44406846, z: 1.6523142, w: 1.0379043}
+  m_margin: {x: 9.928847, y: -2.5156865, z: 5.5986643, w: 5.313104}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0

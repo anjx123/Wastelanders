@@ -50,26 +50,13 @@ public class DialogueBox : MonoBehaviour
         
     }
 
-    // Update is called once per frame
-    void Update()
+    public void StopScrollingText()
     {
-        if (bodyText.text == currentLine)
+        if (bodyText.text != currentLine)
         {
-            
+            StopAllCoroutines();
+            bodyText.text = currentLine;
             lineIsFinished = true;
-        }
-        else
-        {
-            lineIsFinished = false;
-        }
-
-        if (Input.GetMouseButtonUp(0) || Input.GetKeyDown(KeyCode.Space))
-        {
-            if (bodyText.text != currentLine)
-            {
-                StopAllCoroutines();
-                bodyText.text = currentLine;
-            }
         }
     }
 
@@ -83,6 +70,7 @@ public class DialogueBox : MonoBehaviour
     IEnumerator TypeLine()
     {
 
+        lineIsFinished = false;
         int currentIndex = 0;
         string displayedText = "";
 
@@ -95,6 +83,8 @@ public class DialogueBox : MonoBehaviour
 
             yield return new WaitForSecondsRealtime(1f / rollingSpeed);
         }
+
+        lineIsFinished = true;
 
     }
 

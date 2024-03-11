@@ -490,7 +490,7 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1983380840}
+  - {fileID: 1872758577}
   m_Father: {fileID: 1877041900}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -527,7 +527,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}
@@ -753,6 +753,103 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &923165396
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 596087403}
+    m_Modifications:
+    - target: {fileID: 4728857978263358706, guid: 026e787f6af83dc4ca1645e16e8acf98, type: 3}
+      propertyPath: m_Name
+      value: DialogueBoxUI
+      objectReference: {fileID: 0}
+    - target: {fileID: 7336354512828228472, guid: 026e787f6af83dc4ca1645e16e8acf98, type: 3}
+      propertyPath: m_Pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7336354512828228472, guid: 026e787f6af83dc4ca1645e16e8acf98, type: 3}
+      propertyPath: m_Pivot.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7336354512828228472, guid: 026e787f6af83dc4ca1645e16e8acf98, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7336354512828228472, guid: 026e787f6af83dc4ca1645e16e8acf98, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7336354512828228472, guid: 026e787f6af83dc4ca1645e16e8acf98, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7336354512828228472, guid: 026e787f6af83dc4ca1645e16e8acf98, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7336354512828228472, guid: 026e787f6af83dc4ca1645e16e8acf98, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 470
+      objectReference: {fileID: 0}
+    - target: {fileID: 7336354512828228472, guid: 026e787f6af83dc4ca1645e16e8acf98, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 140
+      objectReference: {fileID: 0}
+    - target: {fileID: 7336354512828228472, guid: 026e787f6af83dc4ca1645e16e8acf98, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7336354512828228472, guid: 026e787f6af83dc4ca1645e16e8acf98, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7336354512828228472, guid: 026e787f6af83dc4ca1645e16e8acf98, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7336354512828228472, guid: 026e787f6af83dc4ca1645e16e8acf98, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7336354512828228472, guid: 026e787f6af83dc4ca1645e16e8acf98, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7336354512828228472, guid: 026e787f6af83dc4ca1645e16e8acf98, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7336354512828228472, guid: 026e787f6af83dc4ca1645e16e8acf98, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7336354512828228472, guid: 026e787f6af83dc4ca1645e16e8acf98, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7336354512828228472, guid: 026e787f6af83dc4ca1645e16e8acf98, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7336354512828228472, guid: 026e787f6af83dc4ca1645e16e8acf98, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7336354512828228472, guid: 026e787f6af83dc4ca1645e16e8acf98, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7336354512828228472, guid: 026e787f6af83dc4ca1645e16e8acf98, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 026e787f6af83dc4ca1645e16e8acf98, type: 3}
 --- !u!1001 &939972735
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1704,7 +1801,6 @@ Transform:
   - {fileID: 946615943}
   - {fileID: 1644944200}
   - {fileID: 1543907276}
-  - {fileID: 1963934488}
   m_Father: {fileID: 2011333043}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1538394866
@@ -1752,7 +1848,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6635998426718021455, guid: b9c5e4b3c9f7e024f8fe9012e7a2e437, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -10.1338215
+      value: -10.133234
       objectReference: {fileID: 0}
     - target: {fileID: 6635998426718021455, guid: b9c5e4b3c9f7e024f8fe9012e7a2e437, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1825,7 +1921,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1543907276}
   m_Layer: 0
-  m_Name: Dummy2Pos
+  m_Name: JackieEndPosition
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1840,7 +1936,7 @@ Transform:
   m_GameObject: {fileID: 1543907275}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.94, y: -0.49, z: 0}
+  m_LocalPosition: {x: 15.04, y: -0.49, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2013,6 +2109,16 @@ SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 2919222511910680948, guid: 5027f4741873b7e49893b1382013ba7b, type: 3}
   m_PrefabInstance: {fileID: 1852793025}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1872758576 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4728857978263358706, guid: 026e787f6af83dc4ca1645e16e8acf98, type: 3}
+  m_PrefabInstance: {fileID: 923165396}
+  m_PrefabAsset: {fileID: 0}
+--- !u!224 &1872758577 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 7336354512828228472, guid: 026e787f6af83dc4ca1645e16e8acf98, type: 3}
+  m_PrefabInstance: {fileID: 923165396}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1877041899
 GameObject:
   m_ObjectHideFlags: 0
@@ -2096,7 +2202,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogueScrim: {fileID: 0}
-  dialogueBoxObj: {fileID: 1983380839}
+  dialogueBoxObj: {fileID: 1872758576}
 --- !u!1001 &1922851634
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2198,47 +2304,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5b9370b1c559d0c4f95c6370dd8a2c6d, type: 3}
---- !u!1 &1963934487
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1963934488}
-  m_Layer: 0
-  m_Name: Dummy3Pos
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1963934488
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1963934487}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.01, y: -2.84, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1536881501}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1983380839 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4728857978263358706, guid: 026e787f6af83dc4ca1645e16e8acf98, type: 3}
-  m_PrefabInstance: {fileID: 2581319566323256402}
-  m_PrefabAsset: {fileID: 0}
---- !u!224 &1983380840 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 7336354512828228472, guid: 026e787f6af83dc4ca1645e16e8acf98, type: 3}
-  m_PrefabInstance: {fileID: 2581319566323256402}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2011333042
 GameObject:
   m_ObjectHideFlags: 0
@@ -2322,9 +2387,12 @@ MonoBehaviour:
   ivesDefaultTransform: {fileID: 1538394867}
   trainingDummyPrefab: {fileID: 7915807930978314633, guid: 267f1a54b9abb71469992e756836dd87, type: 3}
   dummy1StartingPos: {fileID: 946615943}
-  dummy2StartingPos: {fileID: 1543907276}
-  dummy3StartingPos: {fileID: 1963934488}
+  jackieEndPosition: {fileID: 1543907276}
   ivesPassiveBattlePosition: {fileID: 1644944200}
+  ivesTutorialDeck:
+  - {fileID: 2904259167568896579, guid: 01e98381d7acf426196a2d3249245d3b, type: 3}
+  - {fileID: 7486843006211322568, guid: 9fd05c05ac41a46b8a9036735bd47e88, type: 3}
+  - {fileID: 6925166128267643469, guid: 862f00b36058344289c1c7c4dffccd6d, type: 3}
   openingDiscussion:
   - bodyText: ' [The City of New Haven - East Wall Boot Camp]  '
     speakerName: 
@@ -2424,73 +2492,145 @@ MonoBehaviour:
   - bodyText: Every round, you draw actions into your hand that you can play against
       the enemy.
     speakerName: Ives
-    displayingImage: {fileID: 0}
+    displayingImage: {fileID: 21300000, guid: 88f7822572f3ba040b6fb2d48aaa77b8, type: 3}
   - bodyText: Let's hover over one of the cards
     speakerName: Ives
-    displayingImage: {fileID: 21300000, guid: 084171bdb9370ac43b84a6350416b15c, type: 3}
+    displayingImage: {fileID: 21300000, guid: 57baba5992d9e224988e93fcacf9f7eb, type: 3}
   cardFieldsTutorial:
   - bodyText: Each action has two stats.
     speakerName: Ives
-    displayingImage: {fileID: 0}
-  - bodyText: ' Power - which is a range where your damage can fall in '
+    displayingImage: {fileID: 21300000, guid: 57baba5992d9e224988e93fcacf9f7eb, type: 3}
+  - bodyText: 'Power - which is a range where your damage can fall in '
     speakerName: Ives
-    displayingImage: {fileID: 21300000, guid: 084171bdb9370ac43b84a6350416b15c, type: 3}
+    displayingImage: {fileID: 21300000, guid: 3fea2e94140c08246a0e502ee92d3761, type: 3}
   - bodyText: "And Speed - which dictates the order that you and your opponent\u2019s
       attacks come out"
     speakerName: Ives
-    displayingImage: {fileID: 21300000, guid: 084171bdb9370ac43b84a6350416b15c, type: 3}
+    displayingImage: {fileID: 21300000, guid: 61a3ecbde544e124ba8f329d0e4f6fb2, type: 3}
   - bodyText: "Let\u2019s select a card and target an enemy!"
     speakerName: Ives
-    displayingImage: {fileID: 0}
+    displayingImage: {fileID: 21300000, guid: 88f7822572f3ba040b6fb2d48aaa77b8, type: 3}
   queueUpActionsTutorial:
   - bodyText: 'Targeting an enemy will queue up the action to attack in the queue, '
     speakerName: Ives
-    displayingImage: {fileID: 0}
+    displayingImage: {fileID: 21300000, guid: 84d19d73f4fee204d8d42cc16de51cf7, type: 3}
   - bodyText: You can retrieve a card back from the queue by clicking on its icon.
     speakerName: Ives
-    displayingImage: {fileID: 0}
+    displayingImage: {fileID: 21300000, guid: 37bb591021fc5c144b17eb812d5bf5da, type: 3}
   - bodyText: Each round, you can queue up as many attacks as you'd like. However...
     speakerName: Ives
-    displayingImage: {fileID: 0}
+    displayingImage: {fileID: 21300000, guid: 37bb591021fc5c144b17eb812d5bf5da, type: 3}
   - bodyText: 'You cannot play two actions that share the same speed. '
     speakerName: Ives
-    displayingImage: {fileID: 0}
+    displayingImage: {fileID: 21300000, guid: 61a3ecbde544e124ba8f329d0e4f6fb2, type: 3}
   - bodyText: "If you can\u2019t play a card, it's likely that you have already played
       a card with the same speed. "
     speakerName: Ives
-    displayingImage: {fileID: 0}
+    displayingImage: {fileID: 21300000, guid: 61a3ecbde544e124ba8f329d0e4f6fb2, type: 3}
   - bodyText: Once you feel confident in your attacks, hit that confirm button to
       start combat.
     speakerName: Ives
-    displayingImage: {fileID: 0}
+    displayingImage: {fileID: 21300000, guid: 10381d6e797f9674c8a1b171612f09bd, type: 3}
   rollingDiceTutorial:
   - bodyText: 'The outcome of a clash is unpredictable, remember how power falls
       in a range? '
     speakerName: Ives
-    displayingImage: {fileID: 0}
+    displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
   - bodyText: "Since the dummy isn\u2019t fighting back, your action will directly
       deal its power in damage."
     speakerName: Ives
-    displayingImage: {fileID: 0}
+    displayingImage: {fileID: 21300000, guid: 3fea2e94140c08246a0e502ee92d3761, type: 3}
   - bodyText: 'As you approach an enemy to attack, [Click] to roll the attack power
       of the action. '
     speakerName: Ives
-    displayingImage: {fileID: 0}
+    displayingImage: {fileID: 21300000, guid: 05aec2f8237521d4f84b7c3d335550b0, type: 3}
   buffTutorial:
-  - bodyText: You might have noticed that while making some attacks, you get into
-      this state of focus.
+  - bodyText: While making staff attacks, some cards will grant you 'Focus'.
     speakerName: Ives
-    displayingImage: {fileID: 0}
-  - bodyText: However, it clears out at the end of every bout.
+    displayingImage: {fileID: 21300000, guid: 820631014ce088c4cb748224d5467c86, type: 3}
+  - bodyText: Focus grants you +1 Power on your attacks, but it clears out at the
+      end of every round.
     speakerName: Ives
-    displayingImage: {fileID: 0}
-  - bodyText: Make sure to capitalize and use that burst to take out your opponents.
+    displayingImage: {fileID: 21300000, guid: 820631014ce088c4cb748224d5467c86, type: 3}
+  - bodyText: Each different weapon has it's unique fighting style, make sure to
+      capitalize on them and take out your opponents.
     speakerName: Ives
+    displayingImage: {fileID: 21300000, guid: 820631014ce088c4cb748224d5467c86, type: 3}
+  readingOpponentTutorial:
+  - bodyText: Alright, gloves off. Time to get serious
+    speakerName: Ives
+    displayingImage: {fileID: 21300000, guid: ade9660133ca00a499bfa3ad449b87bd, type: 3}
+  - bodyText: Since the previous exam, your extra training should allow you to accurately
+      read enemy attacks now.
+    speakerName: Ives
+    displayingImage: {fileID: 21300000, guid: 305bbe4aee0eef34586b3def011ea974, type: 3}
+  - bodyText: Next to the enemy, you can see the attack they are declaring
+    speakerName: Ives
+    displayingImage: {fileID: 21300000, guid: 305bbe4aee0eef34586b3def011ea974, type: 3}
+  - bodyText: Hovering over this icon allows you to see their target.
+    speakerName: Ives
+    displayingImage: {fileID: 21300000, guid: 84d19d73f4fee204d8d42cc16de51cf7, type: 3}
+  - bodyText: '[Clicking] on the attack allows you to see its Power and Speed and
+      any Abilities'
+    speakerName: Ives
+    displayingImage: {fileID: 21300000, guid: 84d19d73f4fee204d8d42cc16de51cf7, type: 3}
+  - bodyText: 'Their action has also been placed into the queue. '
+    speakerName: Ives
+    displayingImage: {fileID: 21300000, guid: 84d19d73f4fee204d8d42cc16de51cf7, type: 3}
+  - bodyText: Come on, make an attack against me
+    speakerName: Ives
+    displayingImage: {fileID: 21300000, guid: ade9660133ca00a499bfa3ad449b87bd, type: 3}
+  clashingCardsTutorial:
+  - bodyText: "When you target an enemy with an attack, that attack will clash with
+      the opponent\u2019s fastest attack"
+    speakerName: Ives
+    displayingImage: {fileID: 21300000, guid: b0d27b9163eb2554996f368bd5b8d4e2, type: 3}
+  - bodyText: Promoting both attack's speeds to be the fastest between the two
+    speakerName: Ives
+    displayingImage: {fileID: 21300000, guid: b0d27b9163eb2554996f368bd5b8d4e2, type: 3}
+  - bodyText: Experiment with this wisely to manipulate the order of attacks. Come
+      at me once you are ready.
+    speakerName: Ives
+    displayingImage: {fileID: 21300000, guid: b0d27b9163eb2554996f368bd5b8d4e2, type: 3}
+  clashingOutcomeTutorial:
+  - bodyText: During a clash, both you and your opponent will both roll your attacks
+      at the same time
+    speakerName: Ives
+    displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
+  - bodyText: The clasher who rolls the highest Power 'wins' the clash and deals
+      the attack's entire Power to the loser
+    speakerName: Ives
+    displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
+  - bodyText: 'Losing clashes are unforgiving as you lose your entire attack, so
+      choose the attacks that clash wisely. '
+    speakerName: Ives
+    displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
+  cardsExhaustedTutorial:
+  - bodyText: Be wary of exhausting yourself during a fight in the wasteland Jackie.
+    speakerName: Ives
+    displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
+  - bodyText: When you run out of cards in your Action Deck, it will be reshuffled.
+      However...
+    speakerName: Ives
+    displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
+  - bodyText: 'Your maximum hand size will be decreased for the rest of the fight! '
+    speakerName: Ives
+    displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
+  - bodyText: So stay sharp and try to use every action to its highest potential
+    speakerName: Ives
+    displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
+  - bodyText: 'Let''s continue where we left off. '
+    speakerName: Ives
+    displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
+  ivesIsDefeated:
+  - bodyText: "Phew, you\u2019ve improved so quickly. Hardly could tell you were
+      the same gal as last year. "
+    speakerName: Ives
+    displayingImage: {fileID: 21300000, guid: be935693778d6004d9427d82e6ce5798, type: 3}
+  - bodyText: Phew. Well, I learned from the best after all, I feel much better about
+      my chances now.
+    speakerName: Jackie
     displayingImage: {fileID: 0}
-  readingOpponentTutorial: []
-  clashingCardsTutorial: []
-  clashingOutcomeTutorial: []
-  cardsExhaustedTutorial: []
   endingTutorialDialogue: {fileID: 11400000, guid: 71bc8b72e567a434fb451296dad29b2f, type: 2}
   jumpToCombat: 1
 --- !u!1001 &2102825245
@@ -2713,167 +2853,6 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 0ce0ee3d06315164a88fea5184a490b6, type: 3}
---- !u!1001 &2581319566323256402
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 596087403}
-    m_Modifications:
-    - target: {fileID: 1880917191316494813, guid: 026e787f6af83dc4ca1645e16e8acf98, type: 3}
-      propertyPath: m_margin.x
-      value: 15.075656
-      objectReference: {fileID: 0}
-    - target: {fileID: 1880917191316494813, guid: 026e787f6af83dc4ca1645e16e8acf98, type: 3}
-      propertyPath: m_margin.z
-      value: 8.019296
-      objectReference: {fileID: 0}
-    - target: {fileID: 3009351223007997610, guid: 026e787f6af83dc4ca1645e16e8acf98, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 283
-      objectReference: {fileID: 0}
-    - target: {fileID: 3009351223007997610, guid: 026e787f6af83dc4ca1645e16e8acf98, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 83
-      objectReference: {fileID: 0}
-    - target: {fileID: 3009351223007997610, guid: 026e787f6af83dc4ca1645e16e8acf98, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 80
-      objectReference: {fileID: 0}
-    - target: {fileID: 3009351223007997610, guid: 026e787f6af83dc4ca1645e16e8acf98, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -13.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4728857978263358706, guid: 026e787f6af83dc4ca1645e16e8acf98, type: 3}
-      propertyPath: m_Name
-      value: DialogueBox
-      objectReference: {fileID: 0}
-    - target: {fileID: 5240262970261086955, guid: 026e787f6af83dc4ca1645e16e8acf98, type: 3}
-      propertyPath: m_margin.x
-      value: 10.282162
-      objectReference: {fileID: 0}
-    - target: {fileID: 5240262970261086955, guid: 026e787f6af83dc4ca1645e16e8acf98, type: 3}
-      propertyPath: m_margin.z
-      value: 21.839539
-      objectReference: {fileID: 0}
-    - target: {fileID: 6910402266545344168, guid: 026e787f6af83dc4ca1645e16e8acf98, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 118
-      objectReference: {fileID: 0}
-    - target: {fileID: 6910402266545344168, guid: 026e787f6af83dc4ca1645e16e8acf98, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 21
-      objectReference: {fileID: 0}
-    - target: {fileID: 6910402266545344168, guid: 026e787f6af83dc4ca1645e16e8acf98, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: -16
-      objectReference: {fileID: 0}
-    - target: {fileID: 6910402266545344168, guid: 026e787f6af83dc4ca1645e16e8acf98, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -11
-      objectReference: {fileID: 0}
-    - target: {fileID: 7336354512828228472, guid: 026e787f6af83dc4ca1645e16e8acf98, type: 3}
-      propertyPath: m_Pivot.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7336354512828228472, guid: 026e787f6af83dc4ca1645e16e8acf98, type: 3}
-      propertyPath: m_Pivot.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7336354512828228472, guid: 026e787f6af83dc4ca1645e16e8acf98, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7336354512828228472, guid: 026e787f6af83dc4ca1645e16e8acf98, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7336354512828228472, guid: 026e787f6af83dc4ca1645e16e8acf98, type: 3}
-      propertyPath: m_AnchorMin.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7336354512828228472, guid: 026e787f6af83dc4ca1645e16e8acf98, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7336354512828228472, guid: 026e787f6af83dc4ca1645e16e8acf98, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 434
-      objectReference: {fileID: 0}
-    - target: {fileID: 7336354512828228472, guid: 026e787f6af83dc4ca1645e16e8acf98, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 140
-      objectReference: {fileID: 0}
-    - target: {fileID: 7336354512828228472, guid: 026e787f6af83dc4ca1645e16e8acf98, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7336354512828228472, guid: 026e787f6af83dc4ca1645e16e8acf98, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7336354512828228472, guid: 026e787f6af83dc4ca1645e16e8acf98, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7336354512828228472, guid: 026e787f6af83dc4ca1645e16e8acf98, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7336354512828228472, guid: 026e787f6af83dc4ca1645e16e8acf98, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7336354512828228472, guid: 026e787f6af83dc4ca1645e16e8acf98, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7336354512828228472, guid: 026e787f6af83dc4ca1645e16e8acf98, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7336354512828228472, guid: 026e787f6af83dc4ca1645e16e8acf98, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7336354512828228472, guid: 026e787f6af83dc4ca1645e16e8acf98, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7336354512828228472, guid: 026e787f6af83dc4ca1645e16e8acf98, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7336354512828228472, guid: 026e787f6af83dc4ca1645e16e8acf98, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7336354512828228472, guid: 026e787f6af83dc4ca1645e16e8acf98, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8710621881311274143, guid: 026e787f6af83dc4ca1645e16e8acf98, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 110
-      objectReference: {fileID: 0}
-    - target: {fileID: 8710621881311274143, guid: 026e787f6af83dc4ca1645e16e8acf98, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 110
-      objectReference: {fileID: 0}
-    - target: {fileID: 8710621881311274143, guid: 026e787f6af83dc4ca1645e16e8acf98, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 26.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8710621881311274143, guid: 026e787f6af83dc4ca1645e16e8acf98, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -4.8
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 026e787f6af83dc4ca1645e16e8acf98, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
