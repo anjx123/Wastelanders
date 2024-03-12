@@ -105,7 +105,7 @@ public class BattleQueue : MonoBehaviour
     // Removes the card if it is clicked on by the player whilst it is in the Queue. And then reinserts it into the issuing player's hand/deck. 
      public void DeletePlayerAction(ActionClass action)
     {
-        Wrapper w = wrapperArray.RemoveWrapperWithActionClass(action); // this builds new wrappers bear in mind. 
+        Wrapper? w = wrapperArray.RemoveWrapperWithActionClass(action); // this builds new wrappers bear in mind. 
         ActionClass a = protoQueue.RemoveLinearSearch(action);
 /*        if (w == null)
         {

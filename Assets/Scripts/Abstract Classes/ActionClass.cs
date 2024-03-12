@@ -36,7 +36,7 @@ public abstract class ActionClass : SelectClass
 
     #nullable enable
     [SerializeField] protected GameObject? duplicateCardInstance; // set in editor for now
-    protected ActionClass activeDupCardInstance;
+    protected ActionClass? activeDupCardInstance;
     protected bool proto = true;
     #nullable disable 
 
