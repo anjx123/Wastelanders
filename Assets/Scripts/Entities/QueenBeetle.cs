@@ -36,6 +36,13 @@ public class QueenBeetle : EnemyClass
         }
     }
 
+    public override IEnumerator Die()
+    {
+        Beetle.OnGainBuffs -= HandleGainedBuffs;
+        Beetle.OnDeath -= HandleBeetleDied;
+        return base.Die();
+    }
+
     // event handler for Beetle.OnGainBuffs. This is called whenever a beetle tries to
     // add a buff.
     // Adds the stacks that were directed to the beetle to the Queen instead.

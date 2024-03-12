@@ -28,9 +28,9 @@ public class Hatchery : ActionClass
 
 
     // if origin is a queen beetle, summon a beetle on hit
-    public override void OnHit()
+    public override void CardIsUnstaggered()
     {
-        base.OnHit();
+        base.CardIsUnstaggered();
         if (Origin.GetType() == typeof(QueenBeetle))
         {
             ((QueenBeetle)Origin).SummonBeetle();

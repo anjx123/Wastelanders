@@ -53,7 +53,7 @@ public abstract class Beetle : EnemyClass
     // notifies of death
     public override IEnumerator Die()
     {
-        OnDeath.Invoke(this);
+        OnDeath?.Invoke(this);
         return base.Die();
     }
 }
