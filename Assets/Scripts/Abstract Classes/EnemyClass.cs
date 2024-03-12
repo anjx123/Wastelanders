@@ -18,6 +18,9 @@ public abstract class EnemyClass : EntityClass
     // Initialized in editor
     public List<GameObject> availableActions;
 
+    // Initializsed in editor
+    public List<GameObject> dupActions;
+
     /*  Plays a single card from the pool, removing it from the pool and refilling it if necessary.
      *  REQUIRES: Nothing
      *  MODIFIES: pool
@@ -29,6 +32,13 @@ public abstract class EnemyClass : EntityClass
         base.Start();
         combatInfo.FaceLeft();
         CombatManager.Instance.AddEnemy(this);
+        InstantiatePool();
+
+        Reshuffle();
+    }
+
+    public virtual void InstantiatePool()
+    {
         for (int i = 0; i < availableActions.Count; i++)
         {
             GameObject toAdd = Instantiate(availableActions[i]);
@@ -37,8 +47,6 @@ public abstract class EnemyClass : EntityClass
 
             deck.Add(toAdd);
         }
-
-        Reshuffle();
     }
 
     /*  Given a list of players, the enemy chooses appropriately a target/targets and adds an attack that it chooses to the bq.
@@ -55,7 +63,7 @@ public abstract class EnemyClass : EntityClass
     public virtual void AddAttack(List<PlayerClass> players)
     {
         if (players.Count == 0) return;
-        pool[0].GetComponent<ActionClass>().Target = players[Random.Range(0, players.Count - 1)];
+        pool[0].GetComponent<ActionClass>().Target = players[Random.Range(0, players.Count)]; // excludes the last value 
         BattleQueue.BattleQueueInstance.AddEnemyAction(pool[0].GetComponent<ActionClass>(), this);
         combatInfo.SetCombatSprite(pool[0].GetComponent<ActionClass>());
         combatInfo.GetComponentInChildren<CombatCardUI>().actionClass = pool[0].GetComponent<ActionClass>();

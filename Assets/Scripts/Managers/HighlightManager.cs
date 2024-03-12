@@ -5,9 +5,10 @@ using UnityEngine;
 
 public class HighlightManager : MonoBehaviour // later all entity highlighter
 {
+
 #nullable enable
-    private static EntityClass? currentHighlightedEntity = null;
-    private static ActionClass? currentHighlightedAction = null;
+    public static EntityClass? currentHighlightedEnemyEntity = null;
+    public static ActionClass? currentHighlightedAction = null;
     public static PlayerClass? selectedPlayer = null;
 
     private void Start()
@@ -20,99 +21,117 @@ public class HighlightManager : MonoBehaviour // later all entity highlighter
         CombatManager.OnGameStateChanged -= ResetSelection;
     }
 
-    static HighlightManager()
-    {
-        currentHighlightedEntity = null; // no entity highlighted
-        currentHighlightedAction = null; // no action highlighted
-    }
-
     public static void OnEntityClicked(EntityClass clicked)
     {
         if (CombatManager.Instance.GameState != GameState.SELECTION) return;
         bool isOutlined = false;
 
-        if (currentHighlightedAction == null) 
-        {
-            PopUpNotificationManager.Instance.DisplayWarning(PopupType.SelectEnemyFirst);
-            // no call to PQueue. 
+/*        Debug.Log(clicked.GetType());
+        Debug.Log(selectedPlayer);*/
 
-        } else if (currentHighlightedEntity == null)
+        if (clicked is PlayerClass)
         {
-            currentHighlightedEntity = clicked;
-            currentHighlightedEntity.Highlight();
-            isOutlined = true;
-            // no call to PQueue.
-        }
-        else if (currentHighlightedEntity != clicked)
-        {
-            currentHighlightedEntity.DeHighlight();
-            clicked.Highlight();
-            currentHighlightedEntity = clicked;
-            isOutlined = true;
-            // no call to PQueue. 
+            if ((PlayerClass)clicked != selectedPlayer)
+            {
+                currentHighlightedAction?.DeHighlight();
+                currentHighlightedAction = null;
+                selectedPlayer?.UnRenderHand();
+            }
+            selectedPlayer = (PlayerClass)clicked;
+            ((PlayerClass)clicked).RenderHand();
         }
         else
         {
-            isOutlined = currentHighlightedEntity.Toggle();
-            // no call to PQueue.
+            if (selectedPlayer == null && clicked is EnemyClass) // don't need to check for highlighted action
+            {
+                PopUpNotificationManager.Instance.DisplayWarning(PopupType.SelectPlayerFirst);
+                // no call to PQueue.
+            }
+            else if (currentHighlightedAction == null)
+            {
+                PopUpNotificationManager.Instance.DisplayWarning(PopupType.SelectActionFirst);
+                // no call to PQueue. 
+            }
+            else if (currentHighlightedEnemyEntity == null && clicked is EnemyClass)
+            {
+                currentHighlightedEnemyEntity = clicked;
+                currentHighlightedEnemyEntity.Highlight();
+                isOutlined = true;
+                // no call to PQueue.
+            }
+            else if (currentHighlightedEnemyEntity != clicked && clicked is EnemyClass)
+            {
+                currentHighlightedEnemyEntity?.DeHighlight();
+                clicked.Highlight();
+                currentHighlightedEnemyEntity = clicked;
+                isOutlined = true;
+                // no call to PQueue. 
+            }
+            else if (clicked is EnemyClass && currentHighlightedEnemyEntity != null)
+            {
+                isOutlined = currentHighlightedEnemyEntity.Toggle();
+                // no call to PQueue.
+            }
         }
 
-        if (currentHighlightedEntity != null && currentHighlightedAction != null && isOutlined)
+        if (currentHighlightedEnemyEntity != null && currentHighlightedAction != null && isOutlined)
         {
-            currentHighlightedAction.Target = currentHighlightedEntity;
-            currentHighlightedAction.Origin = selectedPlayer;
-            // ------------------------------------------
-            // ActionClass action = new QuickDraw(); // not possible; must be added using AddComponent method. was irrelevenat in the first place 
-            // BUT damn Alissa you circumvented the entire problem using Event Managers!
-            bool wasAdded = BattleQueue.BattleQueueInstance.AddPlayerAction(currentHighlightedAction); // action class is abstract using a derivative TODO.
+            if (selectedPlayer == null)
+            {
+                throw new System.Exception("There has been a logical flaw in the preceding conditional set. You should never have currentHighlightedAction without a PlayerSelected.");
+            }
 
+            // note a tricky case here: you select a player, and an action from that player's deck. You select another player.
+            // Now you select an enemy. Who issued the action?; To counter this vide the setting of highlighted action to null at the beginning of the function
+
+            currentHighlightedAction.Target = currentHighlightedEnemyEntity;
             
-            // ------------------------------------------- 
-            // this requires rectification: the logic is cogent but we want all of this AFTER confirmation.
+            // currentHighlightedAction.Origin = selectedPlayer;
+            // the preceding line of code is redundant (look at Initalisation of PlayerClass) and incorrect (see above)
 
-            //currentHighlightedEntity.TakeDamage(currentHighlightedAction.getRolledDamage());
-            //Debug.Log("attack: " + currentHighlightedAction.getName() + ", target: " + currentHighlightedEntity.Id + ", damage: " + currentHighlightedAction.getRolledDamage());
+            bool wasAdded = BattleQueue.BattleQueueInstance.AddPlayerAction(currentHighlightedAction); 
 
-            currentHighlightedEntity.DeHighlight();
+            currentHighlightedEnemyEntity.DeHighlight();
             currentHighlightedAction.DeHighlight();
-            if (selectedPlayer != null && wasAdded)
+            if (selectedPlayer != null && wasAdded) // you would NEED a selected player here. look in present code block
             {
                 selectedPlayer.HandleUseCard(currentHighlightedAction);
             } else
             {
                 PopUpNotificationManager.Instance.DisplayWarning(PopupType.SameSpeed);
             }
-            currentHighlightedEntity = null;
-            currentHighlightedAction = null;
-
-            
+            currentHighlightedEnemyEntity = null;
+            currentHighlightedAction = null;   
         }
     }
 
     public static void OnActionClicked(ActionClass clicked)
     {
         if (CombatManager.Instance.GameState != GameState.SELECTION) return;
-        if (currentHighlightedAction == null)
+        if (selectedPlayer != null)
         {
-            currentHighlightedAction = clicked;
-            currentHighlightedAction.Highlight();
-        }
-        else if (currentHighlightedAction != clicked)
-        {
-            currentHighlightedAction.DeHighlight();
-            clicked.Highlight();
-            currentHighlightedAction = clicked;
-        }
-        else
-        {
-            if (!currentHighlightedAction.Toggle()) // if enemy chosen but no card chosen
+            if (currentHighlightedAction == null)
             {
-                currentHighlightedAction = null;
-                if (currentHighlightedEntity != null) 
+                currentHighlightedAction = clicked;
+                currentHighlightedAction.Highlight();
+            }
+            else if (currentHighlightedAction != clicked)
+            {
+                currentHighlightedAction.DeHighlight();
+                clicked.Highlight();
+                currentHighlightedAction = clicked;
+            }
+            else
+            {
+                if (!currentHighlightedAction.Toggle()) // if enemy chosen but no card chosen
                 {
-                    currentHighlightedEntity.DeHighlight();
+                    currentHighlightedAction = null;
+                    if (currentHighlightedEnemyEntity != null)
+                    {
+                        currentHighlightedEnemyEntity.DeHighlight();
+                    }
+
                 }
-                
             }
         }
     }
@@ -125,12 +144,30 @@ public class HighlightManager : MonoBehaviour // later all entity highlighter
             if (currentHighlightedAction != null && !currentHighlightedAction.Toggle())
             {
                 currentHighlightedAction = null;
-                if (currentHighlightedEntity != null)
+                if (currentHighlightedEnemyEntity != null)
                 {
-                    currentHighlightedEntity.DeHighlight();
+                    currentHighlightedEnemyEntity.DeHighlight();
                 }
 
             }
+            selectedPlayer?.UnRenderHand(); // NOTE: selectedPlayer should logically never be null here as you never initiate Fighting without playing a card and you can never have an unselected player after making a selection.
+        } 
+    }
+
+    // Note that there should only be one instance per round in which selectedPlayer is null, hence the non-assertion. (initial player selection) 
+    // Auto shifts to relevant player
+    public static void RenderHandIfAppropriate(PlayerClass player)
+    {
+        if (player == null)
+        {
+            throw new System.Exception("This method was called from an invalid location or there is a logic conundrum in OnEntityClicked");
         }
+
+        selectedPlayer?.UnRenderHand();
+        player.UnRenderHand();
+
+        selectedPlayer = player; 
+        selectedPlayer!.RenderHand();
+        
     }
 }

@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.PackageManager;
+﻿using TMPro;
 using UnityEngine;
-using TMPro;
 
 public class CombatCardDisplayManager : MonoBehaviour
 {
@@ -93,21 +89,23 @@ public class CombatCardDisplayManager : MonoBehaviour
     }
 
     // Highlights the target of a
-    private void HighlightTarget(ActionClass a)
+    private void HighlightTarget(ActionClass actionClass)
     {
         if (!targetHighlighted)
         {
-            a.Target.CrossHair();
+            actionClass.Target.CrossHair();
         }
         targetHighlighted = true;
+        actionClass.targetChanged += DeHighlightTarget;
     }
 
     // Deighlights the target of a
-    private void DeHighlightTarget(ActionClass a)
+    private void DeHighlightTarget(ActionClass actionClass)
     {
+        actionClass.targetChanged -= DeHighlightTarget;
         if (targetHighlighted)
         {
-            a.Target.UnCrossHair();
+            actionClass.Target.UnCrossHair();
         }
         targetHighlighted = false;
     }

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Ives : PlayerClass
+public class FlurryDuplicate : Flurry
 {
-    // Hi my name is Ives. Pwease implement me :_(
+    
 }

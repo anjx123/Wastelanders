@@ -7,6 +7,8 @@ using static UnityEngine.UI.Image;
 
 public class Hurl : FrogAttacks
 {
+
+    public static string HURL_NAME = "Hurl";
     public override void ExecuteActionEffect()
     {
 
