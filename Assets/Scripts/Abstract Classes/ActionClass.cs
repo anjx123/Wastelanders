@@ -14,7 +14,6 @@ public abstract class ActionClass : SelectClass
         get { return target; }
         set
         {
-            Debug.Log("My target is being changed");
             targetChanged?.Invoke(this);
             target = value;
         }
