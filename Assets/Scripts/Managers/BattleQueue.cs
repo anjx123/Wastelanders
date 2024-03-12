@@ -433,7 +433,7 @@ public class BattleQueue : MonoBehaviour
             {
                 foreach (Wrapper curWrapper in wrappers)
                 {
-                    if (curWrapper.PlayerAction != null && curWrapper.PlayerAction.Target == act.Origin) // speed is maintained 
+                    if (curWrapper.PlayerAction != null && curWrapper.EnemyAction == null && curWrapper.PlayerAction.Target == act.Origin) // speed is maintained 
                     {
                         curWrapper.EnemyAction = act;
                         curWrapper.Update();
