@@ -5,10 +5,6 @@ using UnityEngine;
 public class RapidFire : PistolCards
 {
 
-    private int originalLower;
-    private int originalUpper;
-
-
     public override void ExecuteActionEffect()
     {
 
@@ -18,12 +14,10 @@ public class RapidFire : PistolCards
     public override void Initialize()
     {
         lowerBound = 1;
-        upperBound = 4;
-        originalLower = lowerBound;
-        originalUpper = upperBound;
+        upperBound = 3;
         Speed = 2;
-        description = "If unstaggered, conditionally make a card consuming accuracy upto 3 times multiplying possible damage."; // () => {accuracy > 3 ? 3 : accuracy} // assume accuracy is deducted
-        CardType = CardType.MeleeAttack;
+        description = "If unstaggered, consume 1 accuracy, then make another rapid fire attack";
+        CardType = CardType.RangedAttack;
         myName = "RapidFire";
         Renderer renderer = GetComponent<Renderer>();
         ogMaterial = renderer.material; // og sprite of card
@@ -31,41 +25,12 @@ public class RapidFire : PistolCards
         base.Initialize();
     }
 
-    public override void ApplyEffect()
+    public override void CardIsUnstaggered()
     {
-        base.ApplyEffect();
-    }
-
-    public override void OnHit()
-    {
-        base.OnHit();
-/*        Debug.Log(Origin.GetBuffStacks(Accuracy.buffName));
-        Origin.AddStacks(Accuracy.buffName, 10); // for debuggin*/
-
-        if (proto && activeDupCardInstance == null)
+        if (Origin.GetBuffStacks(Accuracy.buffName) > 0)
         {
-            activeDupCardInstance = Instantiate(duplicateCardInstance.GetComponent<RapidFireDuplicate>());
-            ((RapidFireDuplicate)activeDupCardInstance).proto = false;
-            ((RapidFireDuplicate)activeDupCardInstance).duplicateCardInstance = null;
-            activeDupCardInstance.transform.position = new Vector3(-10, -10, -10);
-        }
-
-        if (proto && Origin.GetBuffStacks(Accuracy.buffName) > 0) // has to be the original card that inserts the duplicate Instance
-        {
-            ((RapidFireDuplicate)activeDupCardInstance).lowerBound = this.originalLower; // reset it each time
-            ((RapidFireDuplicate)activeDupCardInstance).lowerBound = this.originalUpper;
-            int incrementValue = 0;
-            while (Origin.GetBuffStacks(Accuracy.buffName) > 0 && incrementValue < 3)
-            {
-                incrementValue++;
-                Origin.ReduceStacks(Accuracy.buffName, 1);
-            }
-            PlayerClass origin = (PlayerClass)Origin;
-            activeDupCardInstance.Origin = origin;
-            activeDupCardInstance.Target = Target;
-            ((RapidFireDuplicate)activeDupCardInstance).lowerBound = incrementValue * lowerBound;
-            ((RapidFireDuplicate)activeDupCardInstance).upperBound = incrementValue * upperBound;
-            BattleQueue.BattleQueueInstance.InsertDupPlayerAction(activeDupCardInstance);
+            Origin.ReduceStacks(Accuracy.buffName, 1);
+            BattleQueue.BattleQueueInstance.AddPlayerAction(this);
         }
     }
 }
