@@ -6,6 +6,7 @@ public class StackSmash : SlimeAttacks
 {
     [SerializeField]
     private List<Sprite> animationFrame = new();
+
     public override void ExecuteActionEffect()
     {
 
@@ -29,9 +30,31 @@ public class StackSmash : SlimeAttacks
     }
 
 
+    //@Author: Anrui. Called by ActionClass.OnHit() 
+    public override void CardIsUnstaggered()
+    {
+        // branhces separated for mem leaks 
+        if (proto && activeDupCardInstance == null)
+        {
+            activeDupCardInstance = Instantiate(duplicateCardInstance.GetComponent<StackSmashDuplicate>()); 
+            ((StackSmashDuplicate)activeDupCardInstance).proto = false;
+            ((StackSmashDuplicate)activeDupCardInstance).duplicateCardInstance = null;
+            activeDupCardInstance.transform.position = new Vector3(-10, 10, 10);
+        }
+        if (proto)
+        {
+            SlimeStack origin = (SlimeStack)Origin;
+            activeDupCardInstance.Origin = origin;
+            activeDupCardInstance.Target = Target;
+            BattleQueue.BattleQueueInstance.InsertDupEnemyAction(activeDupCardInstance);
+        }
+
+        // base.OnHit(); NOT NEEDED HERE AS ATTACKANIMATION causes the damage 
+
+
+    }
     public override void OnHit()
     {
-        //TODO: Reinsert a copy into the BQ
         StartCoroutine(AttackAnimation());
     }
 

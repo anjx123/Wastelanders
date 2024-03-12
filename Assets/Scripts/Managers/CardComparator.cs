@@ -69,19 +69,21 @@ public class CardComparator : MonoBehaviour
             //Debug.Log(cardOneStaggered);
             if (cardOneGreater == 0) //Clash ties
             {
+                card1.CardIsUnstaggered();
+                card2.CardIsUnstaggered();
 
             } else if (cardOneGreater < 0) //Card2 wins clash
             {
-                card2.OnHit();
+                card2.OnHit(); 
             } else if (cardOneGreater > 0) //Card1 wins clash
             {
                 card1.OnHit();  
             }
         } else if (card1.CardType == CardType.Defense && IsAttack(card2))
         {
-            if (cardOneGreater > 0) // Card 2 has a greater attack so it succeeds
+            if (cardOneGreater >= 0)
             {
-                card1.OnHit(); // Defensive card is unstaggered. 
+                card1.CardIsUnstaggered(); // Defensive card is unstaggered. 
             }
 
             card2.ReduceRoll(card1.GetCard().actualRoll); //Possibly no damage dealt
@@ -90,9 +92,9 @@ public class CardComparator : MonoBehaviour
 
         } else if (IsAttack(card1) && card2.CardType == CardType.Defense)
         {
-            if (cardOneGreater < 0) // Card 1 has a greater attack so it succeeds
+            if (cardOneGreater <= 0)
             {
-                card2.OnHit(); // Defensive card is unstaggered
+                card2.CardIsUnstaggered(); // Defensive card is unstaggered
             } 
 
             card1.ReduceRoll(card2.GetCard().actualRoll); //Possibly no damage dealt

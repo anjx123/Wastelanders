@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Xml.Linq;
 using UnityEngine;
 
+// REQUIRES TESTING TODO (Haven't done this yet owing to the dearth of staff user presumably Ives.
 public class Flurry : StaffCards
 {
+
     public override void ExecuteActionEffect()
     {
         Debug.Log("Executing Effect");
@@ -24,9 +26,31 @@ public class Flurry : StaffCards
         base.Initialize();
     }
 
-    public override void OnHit()
+    public override void ApplyEffect()
     {
-        base.OnHit();
-        //TODO: Reinsert this card into the battlequeue
+        if (proto && activeDupCardInstance == null)
+        {
+            activeDupCardInstance = Instantiate(duplicateCardInstance.GetComponent<FlurryDuplicate>());
+            ((FlurryDuplicate)activeDupCardInstance).proto = false;
+            ((FlurryDuplicate)activeDupCardInstance).duplicateCardInstance = null;
+            activeDupCardInstance.transform.position = new Vector3(-10, 10, 10);
+        }
+
+        if (proto)
+        {
+            PlayerClass origin = (PlayerClass)Origin;
+            activeDupCardInstance.Origin = origin;
+            activeDupCardInstance.Target = Target;
+            BattleQueue.BattleQueueInstance.InsertDupPlayerAction(activeDupCardInstance);
+        }
+        base.ApplyEffect();
+    }
+
+
+
+    // @Author Muhammad
+    public override void CardIsUnstaggered()
+    {
+        // do a dance    
     }
 }

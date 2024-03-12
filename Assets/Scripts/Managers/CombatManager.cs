@@ -294,4 +294,10 @@ public class CombatManager : MonoBehaviour
     {
         return players;
     }
+
+    public List<EnemyClass> GetEnemies() 
+    {
+     return enemies;
+    }
+
 }
