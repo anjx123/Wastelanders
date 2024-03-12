@@ -71,18 +71,12 @@ public abstract class EnemyClass : EntityClass
      *  REQUIRES: pool should be empty! But it shouldn't break anything, just mess up the enemy's order of attacks
      *  MODIFIES: pool 
      */
-    protected void Reshuffle()
+    protected virtual void Reshuffle()
     {
         List<GameObject> temp = new List<GameObject>();
         for (int i = 0; i < deck.Count; i++)
         {
             temp.Add(deck[i]);
-        }
-
-        if (GetType() == typeof(QueenBeetle))
-        {
-            pool = temp;
-            return;
         }
 
         while (temp.Count > 0)

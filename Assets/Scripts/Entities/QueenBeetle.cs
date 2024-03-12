@@ -121,4 +121,16 @@ public class QueenBeetle : EnemyClass
         beetle.transform.position = beetleLocations[slot];
         availability[slot] = beetle.GetComponent<Beetle>();
     }
+
+    protected override void Reshuffle()
+    {
+        List<GameObject> temp = new List<GameObject>();
+        for (int i = 0; i < deck.Count; i++)
+        {
+            temp.Add(deck[i]);
+        }
+
+        pool = temp;
+        return;
+    }
 }

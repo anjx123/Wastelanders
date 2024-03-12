@@ -35,6 +35,6 @@ public class Hatchery : ActionClass
         {
             ((QueenBeetle)Origin).SummonBeetle();
         }
-
     }
+
 }
