@@ -6,10 +6,22 @@ using TMPro;
 
 public abstract class ActionClass : SelectClass
 {
-    //The following are 'properties' in C# that make quick getters and setters for private fields. ac.Target for access
-    public EntityClass Target { get; set; }
-    private EntityClass origin;
 
+    //The following are 'properties' in C# that make quick getters and setters for private fields. ac.Target for access
+    private EntityClass target;
+    public EntityClass Target
+    {
+        get { return target; }
+        set
+        {
+            Debug.Log("My target is being changed");
+            targetChanged?.Invoke(this);
+            target = value;
+        }
+    }
+    private EntityClass origin;
+    public delegate void ActionClassDelegate(ActionClass target);
+    public event ActionClassDelegate targetChanged;
     public EntityClass Origin
     {
         get { return origin; }

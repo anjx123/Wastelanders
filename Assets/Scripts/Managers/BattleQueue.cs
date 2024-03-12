@@ -105,7 +105,7 @@ public class BattleQueue : MonoBehaviour
     // Removes the card if it is clicked on by the player whilst it is in the Queue. And then reinserts it into the issuing player's hand/deck. 
      public void DeletePlayerAction(ActionClass action)
     {
-        Wrapper w = wrapperArray.RemoveWrapperWithActionClass(action);
+        Wrapper w = wrapperArray.RemoveWrapperWithActionClass(action); // this builds new wrappers bear in mind. 
         ActionClass a = protoQueue.RemoveLinearSearch(action);
 /*        if (w == null)
         {
@@ -115,6 +115,17 @@ public class BattleQueue : MonoBehaviour
         {
             Debug.Log("Check Removal in Array");
         }*/
+        if (w == null || a == null)
+        {
+            throw new Exception("Logic is flawed. This method was called to delete an action that never existed.");
+        }
+        if (w.EnemyAction != null)
+        {
+            if (!wrapperArray.FindAvailablePlayerActionAndRedirect(w)) // if there is still a clash. 
+            {
+                w.EnemyAction.Target = w.ProtoEnemysTarget; 
+            }
+        }
         RenderBQ();
         PlayerClass player = (PlayerClass)action.Origin;
         player.ReaddCard(action);
@@ -455,6 +466,15 @@ public class BattleQueue : MonoBehaviour
                         if (playerAct.Target == curWrapper.EnemyAction.Origin)// CASE 1; 
                         {
                             curWrapper.PlayerAction = playerAct;
+
+                            // The redirection occurs here because this method is invoked only when the player action can be successfully inserted; this code block's conditions are requisites as well.
+                            if (curWrapper.ProtoEnemysTarget == null) // very important since this is the ORIGINAL target. 
+                            {
+                                curWrapper.ProtoEnemysTarget = (PlayerClass)curWrapper.EnemyAction.Target;
+                                curWrapper.EnemyAction.Target = playerAct.Origin;
+                            }
+                            // redirection complete
+
                             curWrapper.Update();
                             SortWrappers();
                             // DisplayWrapperArray();
@@ -601,14 +621,35 @@ public class BattleQueue : MonoBehaviour
             }
         }
 
-
-
-
         public List<Wrapper> GetWrappers()
         {
             return wrappers;
         }
 
+        // REQUIRES: w.EnemyAction != null
+        // note that the new clash has already been formed at this point. 
+        // w is the discarded wrapper.
+        public bool FindAvailablePlayerActionAndRedirect(Wrapper w)
+        {
+            foreach (Wrapper wrapper in wrappers)
+            {
+                if (wrapper.PlayerAction != null && wrapper.PlayerAction.Target == w.EnemyAction!.Origin && w.EnemyAction == wrapper.EnemyAction)
+                {
+
+                    if (w.ProtoEnemysTarget != null)
+                    {
+                        wrapper.ProtoEnemysTarget = w.ProtoEnemysTarget;
+                    }
+                    else if (wrapper.ProtoEnemysTarget == null)
+                    {
+                        wrapper.ProtoEnemysTarget = (PlayerClass)wrapper.EnemyAction.Target;
+                    }
+                    wrapper.EnemyAction.Target = wrapper.PlayerAction.Origin;
+                    return true;
+                }
+            }
+            return false;
+        }
     }
 
     // Wrapper Element for WrapperArray;
@@ -616,6 +657,10 @@ public class BattleQueue : MonoBehaviour
     {
         public ActionClass? PlayerAction { get; set; }
         public ActionClass? EnemyAction { get; set; }
+
+        // This field is ONLY ever updated if a clash is introduced. It remains null until so. If a clash is inserted, it will retain information of the primary target until the round ends. Knowledge of this field should remain inside BQ.
+        // Cannot see perfect access modifiers so as to obviate incorrect modification. 
+        public PlayerClass? ProtoEnemysTarget { get; set; } 
 
         public int HighestSpeed { get; set; } // used to sort the wrappers 
                                                 // -1 indicates that the wrapper is empty 
