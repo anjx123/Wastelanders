@@ -38,7 +38,7 @@ public abstract class ActionClass : SelectClass
         public int actualRoll;
     }
     public int Speed { get; protected set; }
-    protected string description;
+    public string description;
 
     [SerializeField] string titleName;
 

@@ -75,13 +75,17 @@ public class CombatCardDisplayManager : MonoBehaviour
         }
     }
 
-    private void UpdateText(ActionClass a)
+
+    private IEnumerator UpdateTextCoroutine(ActionClass a)
     {
-        // TODO: fix bug with not updating text properly? It works first time, but if you are swapping from another card it breaks.
-        // lower priority for now since we don't change enemy card stats yet, but it will come eventually
         GameObject textContainer = cardDisplay.transform.GetChild(0).Find("TextCanvas").gameObject;
-        textContainer.transform.Find("LowerBoundText").gameObject.GetComponent<TextMeshProUGUI>().text = a.GetCard().rollFloor.ToString();
-        // more text updates...
+        textContainer.transform.Find("Info Popup").transform.Find("Canvas").transform.Find("DescriptionText").GetComponent<TextMeshProUGUI>().text = a.description;
+        yield return null;
+    }
+
+    public void UpdateText(ActionClass a)
+    {
+        StartCoroutine(UpdateTextCoroutine(a));
     }
 
     // Hides the card by destroying the child. Don't need to pass any parameters in as the manager
