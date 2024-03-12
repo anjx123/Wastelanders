@@ -62,7 +62,7 @@ public class CombatCardDisplayManager : MonoBehaviour
             {
                 fullCardObject.transform.position = new Vector3(0, 0, 0);
                 fullCardObject.transform.SetParent(cardDisplay.transform, false);
-                UpdateText(a);
+                fullCardObject.transform.Find("TextCanvas").transform.Find("Info Popup").transform.Find("Canvas").transform.Find("DescriptionText").GetComponent<TextMeshProUGUI>().text = a.description;
             }
 
             IsDisplaying = true;
@@ -75,18 +75,6 @@ public class CombatCardDisplayManager : MonoBehaviour
         }
     }
 
-
-    private IEnumerator UpdateTextCoroutine(ActionClass a)
-    {
-        GameObject textContainer = cardDisplay.transform.GetChild(0).Find("TextCanvas").gameObject;
-        textContainer.transform.Find("Info Popup").transform.Find("Canvas").transform.Find("DescriptionText").GetComponent<TextMeshProUGUI>().text = a.description;
-        yield return null;
-    }
-
-    public void UpdateText(ActionClass a)
-    {
-        StartCoroutine(UpdateTextCoroutine(a));
-    }
 
     // Hides the card by destroying the child. Don't need to pass any parameters in as the manager
     //  doesn't need to keep track of who calls this
