@@ -25,7 +25,13 @@ public abstract class Beetle : EnemyClass
     // Overrides the normal behaviour of adding buffs. Instead, broadcasts for the queen to handle
     public override void AddStacks(string buffType, int stacks)
     {
-        OnGainBuffs?.Invoke(buffType, stacks);
+        if (buffType == Resonate.buffName)
+        {
+            OnGainBuffs?.Invoke(buffType, stacks);
+        } else
+        {
+            base.AddStacks(buffType, stacks);
+        }
     }
 
     // Adds attack(s) to the bq. Beetles are capable of directing their attacks to crystals
