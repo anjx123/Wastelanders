@@ -2527,7 +2527,7 @@ MonoBehaviour:
   - bodyText: Every round, you draw actions into your hand that you can play against
       the enemy.
     speakerName: Ives
-    displayingImage: {fileID: 21300000, guid: 88f7822572f3ba040b6fb2d48aaa77b8, type: 3}
+    displayingImage: {fileID: 21300000, guid: 129371176f9cef24792b6226a17f2eae, type: 3}
   - bodyText: Let's hover over one of the cards.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 57baba5992d9e224988e93fcacf9f7eb, type: 3}
@@ -2608,7 +2608,7 @@ MonoBehaviour:
   - bodyText: '[Clicking] on the attack allows you to see its Power and Speed and
       any Abilities.'
     speakerName: Ives
-    displayingImage: {fileID: 21300000, guid: 84d19d73f4fee204d8d42cc16de51cf7, type: 3}
+    displayingImage: {fileID: 21300000, guid: 82dbf38ae23fe224e90be99093d02604, type: 3}
   - bodyText: 'Their action has also been placed into the queue. '
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 305bbe4aee0eef34586b3def011ea974, type: 3}
@@ -2668,7 +2668,7 @@ MonoBehaviour:
     speakerName: Jackie
     displayingImage: {fileID: 0}
   endingTutorialDialogue: {fileID: 11400000, guid: 71bc8b72e567a434fb451296dad29b2f, type: 2}
-  jumpToCombat: 0
+  jumpToCombat: 1
 --- !u!1001 &2102825245
 PrefabInstance:
   m_ObjectHideFlags: 0
