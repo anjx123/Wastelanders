@@ -24,7 +24,7 @@ public abstract class EntityClass : SelectClass
     public Animator animator;
     public CombatInfo combatInfo;
 
-    [SerializeField] private BoxCollider boxCollider;
+    [SerializeField] protected BoxCollider boxCollider;
     protected bool isDead = false;
     private bool crosshairStaysActive = false;
 

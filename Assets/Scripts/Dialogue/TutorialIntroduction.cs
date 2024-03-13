@@ -119,10 +119,12 @@ public class TutorialIntroduction : DialogueClasses
         jackie.InCombat(); //Workaround for now, ill have to remove this once i manually start instantiating 
         ives.InCombat();
         ives.SetReturnPosition(ivesPassiveBattlePosition.position);
+        StartCoroutine(ives.ResetPosition()); //Prevent Players from attacking Ives LOL
+        ives.UnTargetable();
 
         DialogueManager.Instance.MoveBoxToTop();
         CombatManager.Instance.GameState = GameState.SELECTION;
-
+        
         BeginCombatTutorial();
         yield return new WaitUntil(() => CombatManager.Instance.GameState == GameState.GAME_WIN);
 
@@ -141,6 +143,9 @@ public class TutorialIntroduction : DialogueClasses
         jackie.SetReturnPosition(jackie.gameObject.transform.position);
         ives.SetReturnPosition(dummy1StartingPos.position);
         ives.InjectDeck(ivesTutorialDeck);
+        CombatManager.Instance.AddEnemy(ives);
+        ives.Targetable();
+
 
         yield return new WaitUntil(() => !DialogueManager.Instance.IsInDialogue());
         CombatManager.Instance.GameState = GameState.SELECTION;

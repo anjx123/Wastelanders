@@ -124,7 +124,6 @@ public class CombatManager : MonoBehaviour
             enemy.AddAttack(players);
             StartCoroutine(enemy.ResetPosition());
         }
-        Debug.Log(players.Count + "Number of players rn");
 
         foreach (PlayerClass player in players)
         {
