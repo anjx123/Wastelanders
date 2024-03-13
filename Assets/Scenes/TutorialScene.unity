@@ -2668,7 +2668,7 @@ MonoBehaviour:
     speakerName: Jackie
     displayingImage: {fileID: 0}
   endingTutorialDialogue: {fileID: 11400000, guid: 71bc8b72e567a434fb451296dad29b2f, type: 2}
-  jumpToCombat: 1
+  jumpToCombat: 0
 --- !u!1001 &2102825245
 PrefabInstance:
   m_ObjectHideFlags: 0
