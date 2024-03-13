@@ -30,10 +30,14 @@ public class DiscreteStrike : StaffCards
 
     }
 
+    public override void ApplyEffect()
+    {
+        Origin.AddStacks(Focus.buffName, 2);
+        base.ApplyEffect();
+    }
 
     public override void OnHit()
     {
-        Origin.AddStacks(Focus.buffName, 2);
         base.OnHit();
     }
 }

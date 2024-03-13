@@ -6,10 +6,21 @@ using TMPro;
 
 public abstract class ActionClass : SelectClass
 {
-    //The following are 'properties' in C# that make quick getters and setters for private fields. ac.Target for access
-    public EntityClass Target { get; set; }
-    private EntityClass origin;
 
+    //The following are 'properties' in C# that make quick getters and setters for private fields. ac.Target for access
+    private EntityClass target;
+    public EntityClass Target
+    {
+        get { return target; }
+        set
+        {
+            targetChanged?.Invoke(this);
+            target = value;
+        }
+    }
+    private EntityClass origin;
+    public delegate void ActionClassDelegate(ActionClass target);
+    public event ActionClassDelegate targetChanged;
     public EntityClass Origin
     {
         get { return origin; }
@@ -22,6 +33,12 @@ public abstract class ActionClass : SelectClass
 
     protected int lowerBound;
     protected int upperBound;
+
+    #nullable enable
+    [SerializeField] protected GameObject? duplicateCardInstance; // set in editor for now
+    protected ActionClass? activeDupCardInstance;
+    protected bool proto = true;
+    #nullable disable 
 
     protected CardDup duplicateCard;
 
@@ -81,12 +98,22 @@ public abstract class ActionClass : SelectClass
         HighlightManager.OnActionClicked(this);
         cardClickedEvent?.Invoke(this);
     }
+    //@Author: Anrui
     //Called when this card hits the enemy, runs any on hit buffs or effects given.
+    //Note: that OnHit implies CardIsUnstaggered, thus it calls it. Please be **very careful** about the timing that CardIsUnstaggered is called. 
+    // This also implies that OnHit is highly unlikely to be overriden in ANY derived class: tge emphasis should almost entirely be on CardIsUnstaggered
+    // (excepting few cases like StackSmash that has a unique Animation)
     public virtual void OnHit()
     {
+        CardIsUnstaggered();
         Vector3 diffInLocation = Target.myTransform.position - Origin.myTransform.position;
         Origin.UpdateFacing(diffInLocation, null);
         this.Target.TakeDamage(Origin, duplicateCard.actualRoll);
+    }
+
+    public virtual void CardIsUnstaggered()
+    {
+
     }
 
     public bool IsPlayedByPlayer()

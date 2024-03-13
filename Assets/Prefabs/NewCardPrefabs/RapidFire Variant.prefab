@@ -95,6 +95,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myTransform: {fileID: 0}
+  duplicateCardInstance: {fileID: 3189337932731059570, guid: 51e58b745da95984b8ed85234182d23b, type: 3}
+  activeDupCardInstance: {fileID: 0}
+  description:
   titleName: Rapid Fire
   icon: {fileID: 21300000, guid: a04b270ae1f43d14fbab84ed3d181b48, type: 3}
   fullCardObjectPrefab: {fileID: 0}

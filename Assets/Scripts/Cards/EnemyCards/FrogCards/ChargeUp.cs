@@ -32,8 +32,10 @@ public class ChargeUp : FrogAttacks
 
 
 
-    public override void OnHit()
+    public override void CardIsUnstaggered()
     {
-        //TODO: Insert Hurl
+        WasteFrog frog = (WasteFrog)this.Origin;
+        frog.UseHurl = true;
     }
+
 }

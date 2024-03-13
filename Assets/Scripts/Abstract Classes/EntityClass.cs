@@ -377,6 +377,7 @@ public abstract class EntityClass : SelectClass
         if (statusEffects.ContainsKey(buffType))
         {
             statusEffects[buffType].LoseStacks(stacks);
+            UpdateBuffs();
         }
     }
 
