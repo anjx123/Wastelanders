@@ -761,6 +761,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 596087403}
     m_Modifications:
+    - target: {fileID: 857937859890098148, guid: 026e787f6af83dc4ca1645e16e8acf98, type: 3}
+      propertyPath: rollingSpeed
+      value: 60
+      objectReference: {fileID: 0}
     - target: {fileID: 4728857978263358706, guid: 026e787f6af83dc4ca1645e16e8acf98, type: 3}
       propertyPath: m_Name
       value: DialogueBoxUI
@@ -2421,8 +2425,8 @@ MonoBehaviour:
       exam again.
     speakerName: Laid-back Soldier
     displayingImage: {fileID: 0}
-  - bodyText: What? Again? After her performance last year, do you think she really
-      is prepared to try again?
+  - bodyText: What? So soon? After her performance last year, do you really think
+      she is prepared to try again?
     speakerName: Puzzled Soldier
     displayingImage: {fileID: 0}
   - bodyText: "Beats me. If I were her, I\u2019d take it easy and spend a couple
@@ -2449,16 +2453,16 @@ MonoBehaviour:
       forever?
     speakerName: Puzzled Soldier
     displayingImage: {fileID: 0}
-  - bodyText: 'Mmm, maybe I''ll give that exam a shot in a couple years. '
+  - bodyText: Mmm, maybe I'll give that exam a shot in a couple years.
     speakerName: Laid-back Soldier
     displayingImage: {fileID: 0}
   - bodyText: "Then come on, we should get to training. Pass or not, the fact is
-      that she\u2019s trying to make us look like chumps"
+      that she\u2019s trying to make us look like chumps."
     speakerName: Puzzled Soldier
     displayingImage: {fileID: 0}
   jackieMonologue:
   - bodyText: "Well\u2026 Today\u2019s the day I\u2019ve been preparing the past
-      year for. "
+      year for."
     speakerName: Jackie
     displayingImage: {fileID: 0}
   - bodyText: 'I can''t be afraid. I won''t fail again. '
@@ -2493,7 +2497,7 @@ MonoBehaviour:
       a challenge itself, but how you grow to overcome it.
     speakerName: Mustached Soldier
     displayingImage: {fileID: 0}
-  - bodyText: You are strong Jackie. I've seen it with my own eyes.
+  - bodyText: You are strong Jackie. I've seen your immense growth with my own eyes.
     speakerName: Mustached Soldier
     displayingImage: {fileID: 0}
   - bodyText: Thanks, Dan. I appreciate the confidence.
@@ -2501,11 +2505,11 @@ MonoBehaviour:
     displayingImage: {fileID: 0}
   - bodyText: "Haha great! Just be careful out there will ya? I\u2019m not trying
       to scare you, but there\u2019s been an unusual increase in monster activity
-      in the Wasteland around the city.  "
+      in the Wasteland around the city. "
     speakerName: Mustached Soldier
     displayingImage: {fileID: 0}
-  - bodyText: 'A recent scout reported seeing hundreds of piercing purplish eyes,
-      and what sounded like piles of bones clattering in the forest. '
+  - bodyText: A recent scout reported seeing hundreds of piercing purplish eyes,
+      and what sounded like piles of bones clattering in the forest.
     speakerName: Mustached Soldier
     displayingImage: {fileID: 0}
   - bodyText: You know the wasteland is not a friendly place, even your mother knew
@@ -2524,25 +2528,25 @@ MonoBehaviour:
       the enemy.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 88f7822572f3ba040b6fb2d48aaa77b8, type: 3}
-  - bodyText: Let's hover over one of the cards
+  - bodyText: Let's hover over one of the cards.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 57baba5992d9e224988e93fcacf9f7eb, type: 3}
   cardFieldsTutorial:
   - bodyText: Each action has two stats.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 57baba5992d9e224988e93fcacf9f7eb, type: 3}
-  - bodyText: 'Power - which is a range where your damage can fall in '
+  - bodyText: Power - which is a range where your damage can fall in .
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 3fea2e94140c08246a0e502ee92d3761, type: 3}
   - bodyText: "And Speed - which dictates the order that you and your opponent\u2019s
-      attacks come out"
+      attacks come out."
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 61a3ecbde544e124ba8f329d0e4f6fb2, type: 3}
   - bodyText: "Let\u2019s select a card and target an enemy!"
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 84d19d73f4fee204d8d42cc16de51cf7, type: 3}
   queueUpActionsTutorial:
-  - bodyText: 'Targeting an enemy will queue up the action to attack in the queue, '
+  - bodyText: Targeting an enemy will queue up the action to attack in the queue.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 84d19d73f4fee204d8d42cc16de51cf7, type: 3}
   - bodyText: You can retrieve a card back from the queue by clicking on its icon.
@@ -2555,7 +2559,7 @@ MonoBehaviour:
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 61a3ecbde544e124ba8f329d0e4f6fb2, type: 3}
   - bodyText: "If you can\u2019t play a card, it's likely that you have already played
-      a card with the same speed. "
+      a card with the same speed."
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 61a3ecbde544e124ba8f329d0e4f6fb2, type: 3}
   - bodyText: Once you feel confident in your attacks, hit that confirm button to
@@ -2563,16 +2567,16 @@ MonoBehaviour:
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 10381d6e797f9674c8a1b171612f09bd, type: 3}
   rollingDiceTutorial:
-  - bodyText: 'The outcome of a clash is unpredictable, remember how power falls
-      in a range? '
+  - bodyText: The outcome of a clash is unpredictable, remember how power falls in
+      a range?
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
   - bodyText: "Since the dummy isn\u2019t fighting back, your action will directly
       deal its power in damage."
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 3fea2e94140c08246a0e502ee92d3761, type: 3}
-  - bodyText: 'As you approach an enemy to attack, [Click] to roll the attack power
-      of the action. '
+  - bodyText: As you approach an enemy to attack, [Click] to roll the attack power
+      of the action.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 05aec2f8237521d4f84b7c3d335550b0, type: 3}
   buffTutorial:
@@ -2588,35 +2592,35 @@ MonoBehaviour:
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 820631014ce088c4cb748224d5467c86, type: 3}
   readingOpponentTutorial:
-  - bodyText: Gloves are off. Time to get serious
+  - bodyText: Gloves are off. Time to get serious.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: ade9660133ca00a499bfa3ad449b87bd, type: 3}
   - bodyText: Since the previous exam, your extra training should allow you to accurately
       read enemy attacks now.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 305bbe4aee0eef34586b3def011ea974, type: 3}
-  - bodyText: Next to the enemy, you can see the attack they are declaring
+  - bodyText: Next to the enemy, you can see the attack they are declaring.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 305bbe4aee0eef34586b3def011ea974, type: 3}
   - bodyText: Hovering over this icon allows you to see their target.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 305bbe4aee0eef34586b3def011ea974, type: 3}
   - bodyText: '[Clicking] on the attack allows you to see its Power and Speed and
-      any Abilities'
+      any Abilities.'
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 84d19d73f4fee204d8d42cc16de51cf7, type: 3}
   - bodyText: 'Their action has also been placed into the queue. '
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 305bbe4aee0eef34586b3def011ea974, type: 3}
-  - bodyText: Come on, make an attack against me
+  - bodyText: Come on, make an attack against me.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: ade9660133ca00a499bfa3ad449b87bd, type: 3}
   clashingCardsTutorial:
   - bodyText: "When you target an enemy with an attack, that attack will clash with
-      the opponent\u2019s fastest attack"
+      the opponent\u2019s fastest attack."
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: b0d27b9163eb2554996f368bd5b8d4e2, type: 3}
-  - bodyText: Promoting both attack's speeds to be the fastest between the two
+  - bodyText: Promoting both attack's speeds to be the fastest between the two.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: b0d27b9163eb2554996f368bd5b8d4e2, type: 3}
   - bodyText: Experiment with this wisely to manipulate the order of attacks. Come
@@ -2625,15 +2629,15 @@ MonoBehaviour:
     displayingImage: {fileID: 21300000, guid: b0d27b9163eb2554996f368bd5b8d4e2, type: 3}
   clashingOutcomeTutorial:
   - bodyText: During a clash, both you and your opponent will both roll your attacks
-      at the same time
+      at the same time.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
-  - bodyText: The clasher who rolls the highest Power 'wins' the clash and deals
-      the attack's entire Power to the loser
+  - bodyText: The clasher who rolls the highest Power 'staggers' the opponent and
+      deals the attack's entire Power to the loser.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
-  - bodyText: 'Losing clashes are unforgiving as you lose your entire attack, so
-      choose the attacks that clash wisely. '
+  - bodyText: Being staggered means you lose your entire attack, so choose the attacks
+      that clash wisely. Being staggered is unforgiving.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
   cardsExhaustedTutorial:
@@ -2648,7 +2652,7 @@ MonoBehaviour:
   - bodyText: 'Your maximum hand size will be decreased for the rest of the fight! '
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
-  - bodyText: So stay sharp and try to use every action to its highest potential
+  - bodyText: So stay sharp and try to use every action to its highest potential.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
   - bodyText: 'Anyways, let''s continue where we left off. '
