@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: afterCombatDialogue
   m_EditorClassIdentifier: 
   dialogue:
-  - bodyText: All NITES candidates, please make your way to the armory and gear up.
-      The NITES exam will begin shortly.
-    speakerName: 'Speaker:'
+  - bodyText: '"All NITES candidates, please make your way to the armory and gear
+      up. The NITES exam will begin shortly."'
+    speakerName: Loud Speaker
     displayingImage: {fileID: 0}
   - bodyText: "That\u2019s all the time we\u2019ve got then. See you out on the field,
       Jackie. You\u2019ve got this."

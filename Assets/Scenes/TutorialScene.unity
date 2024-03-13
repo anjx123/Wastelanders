@@ -1868,7 +1868,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6635998426718021455, guid: b9c5e4b3c9f7e024f8fe9012e7a2e437, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -10.134426
+      value: -10.13218
       objectReference: {fileID: 0}
     - target: {fileID: 6635998426718021455, guid: b9c5e4b3c9f7e024f8fe9012e7a2e437, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2433,8 +2433,8 @@ MonoBehaviour:
       the Wasteland.
     speakerName: Laid-back Soldier
     displayingImage: {fileID: 0}
-  - bodyText: Do you think shes going for the achievement of being the youngest to
-      join the NITES?
+  - bodyText: She's still so young, maybe even the youngest to join the NITES if
+      she passes?
     speakerName: Laid-back Soldier
     displayingImage: {fileID: 0}
   - bodyText: "No I don\u2019t think so, wasn\u2019t her mother younger than her
@@ -2445,14 +2445,15 @@ MonoBehaviour:
       the family. I think life inside the Wall is much more peaceful."
     speakerName: Puzzled Soldier
     displayingImage: {fileID: 0}
-  - bodyText: 'Of course you do... But do you really plan on being just a grunt forever? '
+  - bodyText: Of course you do. But do you really plan on being just a grunt soldier
+      forever?
     speakerName: Puzzled Soldier
     displayingImage: {fileID: 0}
-  - bodyText: Mmm, maybe I'll give that exam a shot in a couple years.
+  - bodyText: 'Mmm, maybe I''ll give that exam a shot in a couple years. '
     speakerName: Laid-back Soldier
     displayingImage: {fileID: 0}
-  - bodyText: "Then come on, we should get to training. Pass or not, the fact that
-      she\u2019s trying makes us look like chumps"
+  - bodyText: "Then come on, we should get to training. Pass or not, the fact is
+      that she\u2019s trying to make us look like chumps"
     speakerName: Puzzled Soldier
     displayingImage: {fileID: 0}
   jackieMonologue:
@@ -2460,7 +2461,7 @@ MonoBehaviour:
       year for. "
     speakerName: Jackie
     displayingImage: {fileID: 0}
-  - bodyText: 'I won''t fail again. '
+  - bodyText: 'I can''t be afraid. I won''t fail again. '
     speakerName: Jackie
     displayingImage: {fileID: 0}
   - bodyText: 'I will make it on those wasteland expeditions. Mama is counting on
@@ -2475,7 +2476,7 @@ MonoBehaviour:
   - bodyText: Good morning!
     speakerName: Jackie
     displayingImage: {fileID: 0}
-  - bodyText: " So today\u2019s the day, huh. NITES exam. How are you feeling? "
+  - bodyText: "So today\u2019s the day, huh. NITES exam. How are you feeling? "
     speakerName: Mustached Soldier
     displayingImage: {fileID: 0}
   - bodyText: I'm feeling... Fine.
@@ -2485,7 +2486,17 @@ MonoBehaviour:
       paid off then?
     speakerName: Mustached Soldier
     displayingImage: {fileID: 0}
-  - bodyText: 'Yeah, '
+  - bodyText: "Yeah, I guess so. I hope it\u2019s enough. "
+    speakerName: Jackie
+    displayingImage: {fileID: 0}
+  - bodyText: Haha, don't lose heart. True strength does not come from conquering
+      a challenge itself, but how you grow to overcome it.
+    speakerName: Mustached Soldier
+    displayingImage: {fileID: 0}
+  - bodyText: You are strong Jackie. I've seen it with my own eyes.
+    speakerName: Mustached Soldier
+    displayingImage: {fileID: 0}
+  - bodyText: Thanks, Dan. I appreciate the confidence.
     speakerName: Jackie
     displayingImage: {fileID: 0}
   - bodyText: "Haha great! Just be careful out there will ya? I\u2019m not trying
@@ -2529,17 +2540,17 @@ MonoBehaviour:
     displayingImage: {fileID: 21300000, guid: 61a3ecbde544e124ba8f329d0e4f6fb2, type: 3}
   - bodyText: "Let\u2019s select a card and target an enemy!"
     speakerName: Ives
-    displayingImage: {fileID: 21300000, guid: 88f7822572f3ba040b6fb2d48aaa77b8, type: 3}
+    displayingImage: {fileID: 21300000, guid: 84d19d73f4fee204d8d42cc16de51cf7, type: 3}
   queueUpActionsTutorial:
   - bodyText: 'Targeting an enemy will queue up the action to attack in the queue, '
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 84d19d73f4fee204d8d42cc16de51cf7, type: 3}
   - bodyText: You can retrieve a card back from the queue by clicking on its icon.
     speakerName: Ives
-    displayingImage: {fileID: 21300000, guid: 37bb591021fc5c144b17eb812d5bf5da, type: 3}
+    displayingImage: {fileID: 21300000, guid: cea5678db7ab09a48ad216800b9bda74, type: 3}
   - bodyText: Each round, you can queue up as many attacks as you'd like. However...
     speakerName: Ives
-    displayingImage: {fileID: 21300000, guid: 37bb591021fc5c144b17eb812d5bf5da, type: 3}
+    displayingImage: {fileID: 21300000, guid: cea5678db7ab09a48ad216800b9bda74, type: 3}
   - bodyText: 'You cannot play two actions that share the same speed. '
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 61a3ecbde544e124ba8f329d0e4f6fb2, type: 3}
@@ -2589,14 +2600,14 @@ MonoBehaviour:
     displayingImage: {fileID: 21300000, guid: 305bbe4aee0eef34586b3def011ea974, type: 3}
   - bodyText: Hovering over this icon allows you to see their target.
     speakerName: Ives
-    displayingImage: {fileID: 21300000, guid: 84d19d73f4fee204d8d42cc16de51cf7, type: 3}
+    displayingImage: {fileID: 21300000, guid: 305bbe4aee0eef34586b3def011ea974, type: 3}
   - bodyText: '[Clicking] on the attack allows you to see its Power and Speed and
       any Abilities'
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 84d19d73f4fee204d8d42cc16de51cf7, type: 3}
   - bodyText: 'Their action has also been placed into the queue. '
     speakerName: Ives
-    displayingImage: {fileID: 21300000, guid: 84d19d73f4fee204d8d42cc16de51cf7, type: 3}
+    displayingImage: {fileID: 21300000, guid: 305bbe4aee0eef34586b3def011ea974, type: 3}
   - bodyText: Come on, make an attack against me
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: ade9660133ca00a499bfa3ad449b87bd, type: 3}
@@ -2648,8 +2659,8 @@ MonoBehaviour:
       the same gal as last year. "
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: be935693778d6004d9427d82e6ce5798, type: 3}
-  - bodyText: Phew. Well, I learned from the best after all, I feel much better about
-      my chances now.
+  - bodyText: Well, I learned from the best after all, I feel much better about my
+      chances now.
     speakerName: Jackie
     displayingImage: {fileID: 0}
   endingTutorialDialogue: {fileID: 11400000, guid: 71bc8b72e567a434fb451296dad29b2f, type: 2}
