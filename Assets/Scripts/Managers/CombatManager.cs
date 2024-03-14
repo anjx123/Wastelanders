@@ -25,9 +25,14 @@ public class CombatManager : MonoBehaviour
     private SpriteRenderer fadeScreen;
     bool fadeActive = false;
 
+#nullable enable
     public delegate void GameStateChangedHandler(GameState newState); // Subscribe to this delegate if you want something to be run when gamestate changes
-    public static event GameStateChangedHandler OnGameStateChanged;
-    public static event GameStateChangedHandler OnGameStateChanging;
+    public static event GameStateChangedHandler? OnGameStateChanged;
+    public static event GameStateChangedHandler? OnGameStateChanging;
+
+    public delegate void EntitiesWinLoseDelegate();
+    public static event EntitiesWinLoseDelegate? PlayersWinEvent;
+    public static event EntitiesWinLoseDelegate? EnemiesWinEvent;
     public string FADE_SORTING_LAYER
     {
         get
@@ -175,6 +180,9 @@ public class CombatManager : MonoBehaviour
             {
                 dynamicCamera.Follow = null;
             }
+        } else
+        {
+            EnemiesWinEvent?.Invoke();
         }
     }
     
@@ -192,6 +200,9 @@ public class CombatManager : MonoBehaviour
             {
                 dynamicCamera.Follow = null;
             }
+        } else
+        {
+            PlayersWinEvent?.Invoke();
         }
     }
 
