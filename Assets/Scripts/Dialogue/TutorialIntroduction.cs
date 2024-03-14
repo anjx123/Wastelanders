@@ -80,7 +80,7 @@ public class TutorialIntroduction : DialogueClasses
 
             yield return StartCoroutine(DialogueManager.Instance.StartDialogue(jackieMonologue));
             yield return StartCoroutine(CombatManager.Instance.FadeInLightScreen(2f));
-            jackie.DeEmphasize();
+            jackie.DeEmphasize(); //Jackie is below the black background
 
             yield return StartCoroutine(DialogueManager.Instance.StartDialogue(soldierGreeting));
             yield return new WaitForSeconds(1f);
@@ -100,7 +100,7 @@ public class TutorialIntroduction : DialogueClasses
             yield return StartCoroutine(DialogueManager.Instance.StartDialogue(ivesChatsWithJackie.Dialogue));
 
             yield return StartCoroutine(ives.MoveToPosition(dummy1StartingPos.position, 1.2f, 1.2f)); //Ives goes to place a dummy down
-            trainingDummies.Add(Instantiate(trainingDummyPrefab, dummy1StartingPos));
+            trainingDummies.Add(Instantiate(trainingDummyPrefab, dummy1StartingPos)); //Ives summons Dummy
 
 
             yield return new WaitForSeconds(1f);
