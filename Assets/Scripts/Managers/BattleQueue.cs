@@ -463,8 +463,13 @@ public class BattleQueue : MonoBehaviour
                 {
                     if (curWrapper.PlayerAction == null && curWrapper.EnemyAction != null) // if the wrapper is half-empty
                     {
-                        if (playerAct.Target == curWrapper.EnemyAction.Origin)// CASE 1; 
+                        if (playerAct.Target == curWrapper.EnemyAction.Origin) // where it's confirmed that the player has clicked the target like selected it. 
                         {
+                            if (curWrapper.EnemyAction.Target != playerAct.Origin && curWrapper.EnemyAction.Speed > playerAct.Speed)
+                            {
+                                continue;
+                            }
+                            
                             curWrapper.PlayerAction = playerAct;
 
                             // The redirection occurs here because this method is invoked only when the player action can be successfully inserted; this code block's conditions are requisites as well.
