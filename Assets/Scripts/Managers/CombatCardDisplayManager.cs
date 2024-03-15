@@ -8,8 +8,9 @@ public class CombatCardDisplayManager : MonoBehaviour
     public GameObject cardDisplay; // The card display object
     GameObject fullCardObject; // keep ref to object to destroy
 
+#nullable enable
     public bool IsDisplaying { get; set; } = false;
-    private ActionClass currentUser;
+    private ActionClass? currentUser;
     private bool targetHighlighted = false;
 
     // Awake is called before Start.
