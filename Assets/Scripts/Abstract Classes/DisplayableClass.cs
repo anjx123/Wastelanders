@@ -10,7 +10,10 @@ public abstract class DisplayableClass : SelectClass
 
     protected void ShowCard()
     {
-        CombatCardDisplayManager.Instance.ShowCard(actionClass);
+        if (actionClass != null)
+        {
+            CombatCardDisplayManager.Instance.ShowCard(actionClass);
+        }
     }
 
     protected void HighlightTarget()
