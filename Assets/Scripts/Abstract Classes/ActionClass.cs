@@ -167,7 +167,7 @@ public abstract class ActionClass : SelectClass
             return icon;
         } else
         {
-            Debug.LogWarning("ActionClass icon is Missing");
+            Debug.LogWarning("ActionClass icon is Missing for " + name);
             return null;
         }
     }
