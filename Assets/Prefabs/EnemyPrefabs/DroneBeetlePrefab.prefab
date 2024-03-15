@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 617082415006753302}
   - component: {fileID: 3576713871262507216}
   - component: {fileID: 5069809743003330988}
-  - component: {fileID: 3552047448212555760}
   - component: {fileID: 6950428195291563312}
+  - component: {fileID: 9113950075905683569}
   m_Layer: 0
   m_Name: DroneBeetlePrefab
   m_TagString: Untagged
@@ -109,27 +109,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 6.470001, y: 4.51486, z: 1}
   m_Center: {x: -0.16475868, y: -0.41738987, z: 0}
---- !u!95 &3552047448212555760
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8044949296705636452}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 420490636adcc4f00ad15c453c4d5015, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &6950428195291563312
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -143,10 +122,32 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myTransform: {fileID: 617082415006753302}
-  animator: {fileID: 3552047448212555760}
+  animator: {fileID: 0}
   combatInfo: {fileID: 9191087331242654797}
   availableActions:
   - {fileID: 2376898879351982445, guid: 38b1a7009416e41d1b59bcad42219d05, type: 3}
+  dupActions: []
+--- !u!95 &9113950075905683569
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8044949296705636452}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 7a88fcda89e904244aa576e1dcbf73ee, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1001 &5473955538084191047
 PrefabInstance:
   m_ObjectHideFlags: 0

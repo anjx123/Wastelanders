@@ -119,7 +119,7 @@ Animator:
   m_GameObject: {fileID: 8044949296705636452}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 420490636adcc4f00ad15c453c4d5015, type: 2}
+  m_Controller: {fileID: 9100000, guid: 3c61c32bb5935e84a9656413ef31f177, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -147,6 +147,7 @@ MonoBehaviour:
   combatInfo: {fileID: 9191087331242654797}
   availableActions:
   - {fileID: 2376898879351982445, guid: 47b019d96704c455391a1f89ba0d1714, type: 3}
+  dupActions: []
 --- !u!1001 &5473955538084191047
 PrefabInstance:
   m_ObjectHideFlags: 0
