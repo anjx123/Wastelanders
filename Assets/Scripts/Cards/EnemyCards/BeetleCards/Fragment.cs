@@ -14,8 +14,8 @@ public class Fragment : ActionClass
     public override void Initialize()
     {
         base.Initialize();
-        lowerBound = 2;
-        upperBound = 3;
+        lowerBound = 3;
+        upperBound = 4;
         
         Speed = 5;
 

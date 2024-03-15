@@ -122,7 +122,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myTransform: {fileID: 617082415006753302}
-  animator: {fileID: 0}
+  animator: {fileID: 9113950075905683569}
   combatInfo: {fileID: 9191087331242654797}
   availableActions:
   - {fileID: 2376898879351982445, guid: 38b1a7009416e41d1b59bcad42219d05, type: 3}
