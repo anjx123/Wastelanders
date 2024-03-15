@@ -31,6 +31,8 @@ public class Fragment : ActionClass
     public override void OnHit()
     {
         base.OnHit();
-        Origin.AddStacks(Resonate.buffName, 1);
+        if (Target is PlayerClass) {
+            Origin.AddStacks(Resonate.buffName, 1);
+        }
     }
 }
