@@ -127,7 +127,7 @@ public class BattleQueue : MonoBehaviour
             }
         }
         RenderBQ();
-        PlayerClass player = (PlayerClass)action.Origin;
+        PlayerClass player = action.Origin as PlayerClass;
         player.ReaddCard(action);
     }
 
@@ -470,7 +470,7 @@ public class BattleQueue : MonoBehaviour
                             // The redirection occurs here because this method is invoked only when the player action can be successfully inserted; this code block's conditions are requisites as well.
                             if (curWrapper.ProtoEnemysTarget == null) // very important since this is the ORIGINAL target. 
                             {
-                                curWrapper.ProtoEnemysTarget = (PlayerClass)curWrapper.EnemyAction.Target;
+                                curWrapper.ProtoEnemysTarget = curWrapper.EnemyAction.Target as PlayerClass;
                                 curWrapper.EnemyAction.Target = playerAct.Origin;
                             }
                             // redirection complete
@@ -642,7 +642,7 @@ public class BattleQueue : MonoBehaviour
                     }
                     else if (wrapper.ProtoEnemysTarget == null)
                     {
-                        wrapper.ProtoEnemysTarget = (PlayerClass)wrapper.EnemyAction.Target;
+                        wrapper.ProtoEnemysTarget = wrapper.EnemyAction.Target as PlayerClass;
                     }
                     wrapper.EnemyAction.Target = wrapper.PlayerAction.Origin;
                     return true;
