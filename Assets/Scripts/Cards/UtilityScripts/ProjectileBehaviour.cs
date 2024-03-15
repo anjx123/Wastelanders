@@ -1,39 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEngine.UI.Image;
-public abstract class FrogAttacks : ActionClass
+
+public class ProjectileBehaviour : MonoBehaviour
 {
-    private delegate void OnHitDelegate();
+#nullable enable
+    public delegate void OnHitDelegate();
     [SerializeField]
-    private GameObject spitPrefab;
+    private GameObject? projectilePrefab;
 
-    public override void Initialize()
-    {
-        base.Initialize();
-        CardType = CardType.RangedAttack;
-    }
-
-    public override void OnHit()
-    {
-        Vector3 diffInLocation = Target.myTransform.position - Origin.myTransform.position;
-        CardIsUnstaggered();
-        Origin.UpdateFacing(diffInLocation, null);
-        if (spitPrefab != null)
-        {
-            Origin.AttackAnimation("IsShooting");
-            StartCoroutine(ProjectileAnimation(base.OnHit, Origin, Target));
-        }
-    }
-
-    private IEnumerator ProjectileAnimation(OnHitDelegate onHitCallback, EntityClass origin, EntityClass target)
+    public IEnumerator ProjectileAnimation(OnHitDelegate onHitCallback, EntityClass origin, EntityClass target)
     {
         yield return StartCoroutine(StartProjectileAnimation(origin, target));
         onHitCallback();
     }
 
-    public IEnumerator StartProjectileAnimation(EntityClass origin, EntityClass target)
+    private IEnumerator StartProjectileAnimation(EntityClass origin, EntityClass target)
     {
+        if (projectilePrefab == null) yield break;
         Vector3 originalPosition = origin.myTransform.position;
         Vector3 destination = target.myTransform.position;
         float elapsedTime = 0f;
@@ -45,7 +29,7 @@ public abstract class FrogAttacks : ActionClass
         float distance = Mathf.Sqrt(diffInLocation.x * diffInLocation.x + diffInLocation.y * diffInLocation.y);
 
         //UpdateFacing(diffInLocation, destination);
-        GameObject spitProjectile = Instantiate(spitPrefab, originalPosition, UpdateAngle(origin, target));
+        GameObject spitProjectile = Instantiate(projectilePrefab, originalPosition, UpdateAngle(origin, target));
         SpriteRenderer spitSpriteRenderer = spitProjectile.GetComponent<SpriteRenderer>();
         spitSpriteRenderer.sortingOrder = CombatManager.Instance.FADE_SORTING_ORDER;
         spitSpriteRenderer.sortingLayerName = CombatManager.Instance.FADE_SORTING_LAYER;

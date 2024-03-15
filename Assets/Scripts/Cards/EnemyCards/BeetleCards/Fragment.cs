@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class Fragment : ActionClass
 {
+    [SerializeField] private ProjectileBehaviour projectileBehaviour;
+
     public override void ExecuteActionEffect()
     {
 
@@ -20,7 +22,7 @@ public class Fragment : ActionClass
         description = "If this card hits a player, gain +1 resonate";
 
         myName = "Fragment";
-        CardType = CardType.MeleeAttack;
+        CardType = CardType.RangedAttack;
         Renderer renderer = GetComponent<Renderer>();
         ogMaterial = renderer.material; // og sprite of card
         OriginalPosition = transform.position;
@@ -30,7 +32,11 @@ public class Fragment : ActionClass
 
     public override void OnHit()
     {
-        base.OnHit();
+        if (Origin.HasAnimationParameter("IsShooting"))
+        {
+            Origin.AttackAnimation("IsShooting");
+        }
+        StartCoroutine(projectileBehaviour.ProjectileAnimation(base.OnHit, Origin, Target));
         if (Target is PlayerClass) {
             Origin.AddStacks(Resonate.buffName, 1);
         }

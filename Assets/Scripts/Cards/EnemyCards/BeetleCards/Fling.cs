@@ -7,6 +7,9 @@ using static UnityEngine.UI.Image;
 
 public class Fling : BeetleAttacks
 {
+    [SerializeField] private ProjectileBehaviour projectileBehaviour;
+
+
     public override void ExecuteActionEffect()
     {
 
@@ -34,7 +37,11 @@ public class Fling : BeetleAttacks
 
     public override void OnHit()
     {
-        base.OnHit();
+        if (Origin.HasAnimationParameter("IsShooting"))
+        {
+            Origin.AttackAnimation("IsShooting");
+        }
+        StartCoroutine(projectileBehaviour.ProjectileAnimation(base.OnHit, Origin, Target));
         if (Target is PlayerClass) {
             Origin.AddStacks(Resonate.buffName, 1);
         }
