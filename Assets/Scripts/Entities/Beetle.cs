@@ -41,7 +41,7 @@ public abstract class Beetle : EnemyClass
         if (players.Count == 0) return; // if there are no players, no need to attack crystals
         // add crystals to list of potential targets
         List<EntityClass> targets = players.Cast<EntityClass>().ToList();
-        List<EntityClass> crystals = CombatManager.Instance.getCrystals().Cast<EntityClass>().ToList();
+        List<EntityClass> crystals = CombatManager.Instance.GetEnemies().OfType<Crystals>().ToList().Cast<EntityClass>().ToList();
         targets.AddRange(crystals);
 
         // rest is the same

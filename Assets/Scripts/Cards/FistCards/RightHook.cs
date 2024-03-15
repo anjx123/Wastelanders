@@ -7,6 +7,11 @@ using static UnityEngine.UI.Image;
 
 public class RightHook : FistCards
 {
+    [SerializeField]
+    private GameObject leftHookPrefab;
+
+    private GameObject leftHook;
+
     public override void ExecuteActionEffect()
     {
 
@@ -30,8 +35,18 @@ public class RightHook : FistCards
 
     public override void OnHit()
     {
-        Ives ives = (Ives)this.Origin;
         base.OnHit();
-        ives.AddLeftHook();
+    }
+
+    public override void CardIsUnstaggered()
+    {
+        base.CardIsUnstaggered();
+        if (!leftHook) { leftHook = Instantiate(leftHookPrefab); leftHook.transform.position = new Vector3(-10, 10, 10); }
+        ActionClass ac = leftHook.GetComponent<ActionClass>();
+        ac.Origin = this.Origin;
+        ac.Target = this.Target;
+        BattleQueue.BattleQueueInstance.InsertDupPlayerAction(ac);
+
+
     }
 }

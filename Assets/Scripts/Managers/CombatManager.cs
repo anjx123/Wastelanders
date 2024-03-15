@@ -199,11 +199,6 @@ public class CombatManager : MonoBehaviour
         }
     }
 
-    public List<Crystals> getCrystals()
-    {
-        return enemies.OfType<Crystals>().ToList();
-    }
-
     private void PerformLose()
     {
         Debug.LogWarning("All Players are dead, You Lose...");
@@ -299,12 +294,12 @@ public class CombatManager : MonoBehaviour
 
     public List<PlayerClass> GetPlayers()
     {
-        return players;
+        return new List<PlayerClass>(players);
     }
 
     public List<EnemyClass> GetEnemies() 
     {
-     return enemies;
+     return new List<EnemyClass>(enemies);
     }
 
 }
