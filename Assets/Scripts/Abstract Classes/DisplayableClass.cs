@@ -20,7 +20,7 @@ public abstract class DisplayableClass : SelectClass
     {
         if (!targetHighlighted)
         {
-            actionClass?.Target.Highlight();
+            actionClass?.Target?.Highlight();
         }
         targetHighlighted = true;
     }
@@ -29,7 +29,7 @@ public abstract class DisplayableClass : SelectClass
     {
         if (targetHighlighted)
         {
-            actionClass?.Target.DeHighlight();
+            actionClass?.Target?.DeHighlight();
         }
         targetHighlighted = false;
     }

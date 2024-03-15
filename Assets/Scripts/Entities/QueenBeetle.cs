@@ -9,16 +9,36 @@ using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class QueenBeetle : EnemyClass
 {
+    private int MAX_BEETLES;
     [SerializeField]
     private GameObject[] beetlePrefabs = new GameObject[3];
-    private Beetle[] availability = new Beetle[3];
+    private Beetle[] availability;
 
     [SerializeField]
     public GameObject enemyContainer;
 
     // spawn locations for the beetles
-    private readonly Vector3[] beetleLocations = { new Vector3(0.63f, 0, 0), new Vector3(2.3f, -2.89f, 0), new Vector3(2.3f, 2.4f, 0) };
+    [SerializeField] private Transform[] beetleLocations;
 
+    private const float BEETLE_SCALING = 0.6f;
+
+    public void Awake()
+    {
+        MAX_BEETLES = beetleLocations.Length;
+        availability = new Beetle[MAX_BEETLES];
+        for (int i = 0; i < availability.Length; i++)
+        {
+            availability[i] = null;
+        }
+        for (int i = 0; i < beetlePrefabs.Length; ++i)
+        {
+            GameObject beetle = Instantiate(beetlePrefabs[i]);
+            beetle.transform.SetParent(enemyContainer.transform);
+            beetle.transform.localScale *= BEETLE_SCALING;
+            beetle.transform.position = beetleLocations[i].position;
+            availability[i] = beetle.GetComponent<Beetle>();
+        }
+    }
     // Start is called before the first frame update
     public override void Start()
     {
@@ -30,10 +50,6 @@ public class QueenBeetle : EnemyClass
         Beetle.OnGainBuffs += HandleGainedBuffs;
         Beetle.OnDeath += HandleBeetleDied;
 
-        for (int i = 0; i < 3; i++)
-        {
-            availability[i] = null;
-        }
     }
 
     public override IEnumerator Die()
@@ -53,7 +69,7 @@ public class QueenBeetle : EnemyClass
 
     private void HandleBeetleDied(Beetle victim)
     {
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < availability.Length; i++)
         {
             if (availability[i] == victim)
             {
@@ -65,7 +81,7 @@ public class QueenBeetle : EnemyClass
     // returns the index of the first "null" element in availability. Returns -1 if filled.
     private int FindFirstOpenSlot()
     {
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < availability.Length; i++)
         {
             if (availability[i] == null)
             {
@@ -94,7 +110,7 @@ public class QueenBeetle : EnemyClass
             }
             else
             {
-                AddAttackFromPool(players, Random.Range(1, pool.Count - 1));
+                AddAttackFromPool(players, Random.Range(1, pool.Count));
             }
         }
     }
@@ -102,7 +118,7 @@ public class QueenBeetle : EnemyClass
     // helper function for AddAttack
     private void AddAttackFromPool(List<PlayerClass> players, int idx)
     {
-        pool[idx].GetComponent<ActionClass>().Target = players[Random.Range(0, players.Count - 1)];
+        pool[idx].GetComponent<ActionClass>().Target = players[Random.Range(0, players.Count)];
         BattleQueue.BattleQueueInstance.AddEnemyAction(pool[idx].GetComponent<ActionClass>(), this);
         combatInfo.SetCombatSprite(pool[idx].GetComponent<ActionClass>());
         combatInfo.GetComponentInChildren<CombatCardUI>().actionClass = pool[idx].GetComponent<ActionClass>();
@@ -122,10 +138,10 @@ public class QueenBeetle : EnemyClass
             Debug.Log("you forgot to assign enemyContainer in queen");
             return;
         }
-        GameObject beetle = Instantiate(beetlePrefabs[Random.Range(0, 2)]);
+        GameObject beetle = Instantiate(beetlePrefabs[Random.Range(0, beetlePrefabs.Length)]);
         beetle.transform.SetParent(enemyContainer.transform);
-        beetle.transform.localScale *= 0.8f;
-        beetle.transform.position = beetleLocations[slot];
+        beetle.transform.localScale *= BEETLE_SCALING;
+        beetle.transform.position = beetleLocations[slot].position;
         availability[slot] = beetle.GetComponent<Beetle>();
     }
 
