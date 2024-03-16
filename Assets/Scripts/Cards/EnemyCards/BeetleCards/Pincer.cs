@@ -48,7 +48,7 @@ public class Pincer : BeetleAttacks
     IEnumerator MoveBasedOnDirection(bool isFacingRight)
     {
         Vector3 moveRight = new Vector3(0.3f, 0, 0);
-        float moveTime = 0.8f;
+        float moveTime = 0.6f;
         
 
         if (isFacingRight)
