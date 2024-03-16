@@ -1200,7 +1200,10 @@ MonoBehaviour:
   jackieDefaultTransform: {fileID: 2041699582}
   ives: {fileID: 605471067}
   ivesDefaultTransform: {fileID: 1895702309}
-  openingDiscussion: []
+  openingDiscussion:
+  - bodyText: Welcome back to my youtube channel
+    speakerName: Jackie
+    displayingImage: {fileID: 0}
   jumpToCombat: 0
 --- !u!1 &1277541862
 GameObject:
