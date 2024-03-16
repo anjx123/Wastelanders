@@ -75,7 +75,7 @@ public class BattleQueue : MonoBehaviour
         {
             GameObject renderedCopy = Instantiate(iconPrefab, new Vector3(100, 100, -10), Quaternion.identity);
             renderedCopy.transform.SetParent(bqContainer, false);
-            renderedCopy.GetComponent<BattleQueueIcons>().renderBQIcon(queue[i]);
+            renderedCopy.GetComponent<BattleQueueIcons>().RenderBQIcon(queue[i]);
         }
         
     }
@@ -132,8 +132,8 @@ public class BattleQueue : MonoBehaviour
             }
         }
         RenderBQ();
-        PlayerClass player = (PlayerClass)action.Origin;
-        player.ReaddCard(action);
+        PlayerClass? player = action.Origin as PlayerClass;
+        player?.ReaddCard(action);
     }
 
     // to add an enemy action to the actionQueue and the WrapperArray
@@ -182,7 +182,7 @@ public class BattleQueue : MonoBehaviour
             {
                 GameObject renderedCopy = Instantiate(iconPrefab, new Vector3(100, 100, -10), Quaternion.identity);
                 renderedCopy.transform.SetParent(bqContainer, false);
-                renderedCopy.GetComponent<BattleQueueIcons>().renderBQIcon(wrapper.ReturnWhaYouHave());
+                renderedCopy.GetComponent<BattleQueueIcons>().RenderBQIcon(wrapper.ReturnWhaYouHave());
             }
         }
     }    
@@ -300,14 +300,12 @@ public class BattleQueue : MonoBehaviour
             // ensuring uniqueness of speed for one character inside the array
             if (i < array.Count)
             {
-                for (int x = 0; x < array.Count; x++) 
+                bool canInsert = CanInsertCard(card);
+                if (!canInsert)
                 {
-                    if (array[x].IsPlayedByPlayer() && array[x].Origin == card.Origin && card.Speed == array[x].Speed)
-
-                    {
-                        return false; // don't insert. 
-                    }
+                    return false;
                 }
+
             }
 
             // else insert:
@@ -323,6 +321,19 @@ public class BattleQueue : MonoBehaviour
                                     // ASTER2 refer to note inside WrapperArray
             return true;
 
+        }
+
+        public bool CanInsertCard(ActionClass card)
+        {
+            for (int x = 0; x < array.Count; x++)
+            {
+                if (array[x].IsPlayedByPlayer() && array[x].Origin == card.Origin && card.Speed == array[x].Speed)
+
+                {
+                    return false; // don't insert. 
+                }
+            }
+            return true;
         }
 
         // has to be introduced because enemeies CAN now add actions after initial based on game conditions.
@@ -468,14 +479,19 @@ public class BattleQueue : MonoBehaviour
                 {
                     if (curWrapper.PlayerAction == null && curWrapper.EnemyAction != null) // if the wrapper is half-empty
                     {
-                        if (playerAct.Target == curWrapper.EnemyAction.Origin)// CASE 1; 
+                        if (playerAct.Target == curWrapper.EnemyAction.Origin) // where it's confirmed that the player has clicked the target like selected it. 
                         {
+                            if (curWrapper.EnemyAction.Target != playerAct.Origin && curWrapper.EnemyAction.Speed > playerAct.Speed)
+                            {
+                                continue;
+                            }
+                            
                             curWrapper.PlayerAction = playerAct;
 
                             // The redirection occurs here because this method is invoked only when the player action can be successfully inserted; this code block's conditions are requisites as well.
                             if (curWrapper.ProtoEnemysTarget == null) // very important since this is the ORIGINAL target. 
                             {
-                                curWrapper.ProtoEnemysTarget = (PlayerClass)curWrapper.EnemyAction.Target;
+                                curWrapper.ProtoEnemysTarget = curWrapper.EnemyAction.Target;
                                 curWrapper.EnemyAction.Target = playerAct.Origin;
                             }
                             // redirection complete
@@ -511,7 +527,7 @@ public class BattleQueue : MonoBehaviour
             {
                 foreach (Wrapper curWrapper in wrappers)
                 {
-                    if (curWrapper.PlayerAction != null && curWrapper.PlayerAction.Target == act.Origin) // speed is maintained 
+                    if (curWrapper.PlayerAction != null && curWrapper.EnemyAction == null && curWrapper.PlayerAction.Target == act.Origin) // speed is maintained 
                     {
                         curWrapper.EnemyAction = act;
                         curWrapper.Update();
@@ -647,7 +663,7 @@ public class BattleQueue : MonoBehaviour
                     }
                     else if (wrapper.ProtoEnemysTarget == null)
                     {
-                        wrapper.ProtoEnemysTarget = (PlayerClass)wrapper.EnemyAction.Target;
+                        wrapper.ProtoEnemysTarget = wrapper.EnemyAction.Target;
                     }
                     wrapper.EnemyAction.Target = wrapper.PlayerAction.Origin;
                     return true;
@@ -665,7 +681,7 @@ public class BattleQueue : MonoBehaviour
 
         // This field is ONLY ever updated if a clash is introduced. It remains null until so. If a clash is inserted, it will retain information of the primary target until the round ends. Knowledge of this field should remain inside BQ.
         // Cannot see perfect access modifiers so as to obviate incorrect modification. 
-        public PlayerClass? ProtoEnemysTarget { get; set; } 
+        public EntityClass? ProtoEnemysTarget { get; set; } 
 
         public int HighestSpeed { get; set; } // used to sort the wrappers 
                                                 // -1 indicates that the wrapper is empty 

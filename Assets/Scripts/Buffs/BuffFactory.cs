@@ -15,6 +15,9 @@ public class BuffFactory : MonoBehaviour
             case Focus.buffName:
                 return new Focus();
 
+            case Resonate.buffName:
+                return new Resonate();
+
             default:
                 throw new System.Exception("Unkown Buff: " + buffType);
         }

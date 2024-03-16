@@ -8,8 +8,6 @@ public abstract class FrogAttacks : ActionClass
     [SerializeField]
     private GameObject spitPrefab;
 
-
-
     public override void Initialize()
     {
         base.Initialize();

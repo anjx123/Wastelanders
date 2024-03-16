@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class StackSmash : SlimeAttacks
 {
+#nullable enable
     [SerializeField]
     private List<Sprite> animationFrame = new();
 
@@ -36,7 +37,7 @@ public class StackSmash : SlimeAttacks
         // branhces separated for mem leaks 
         if (proto && activeDupCardInstance == null)
         {
-            activeDupCardInstance = Instantiate(duplicateCardInstance.GetComponent<StackSmashDuplicate>()); 
+            activeDupCardInstance = Instantiate(duplicateCardInstance!.GetComponent<StackSmashDuplicate>()); 
             ((StackSmashDuplicate)activeDupCardInstance).proto = false;
             ((StackSmashDuplicate)activeDupCardInstance).duplicateCardInstance = null;
             activeDupCardInstance.transform.position = new Vector3(-10, 10, 10);
@@ -44,21 +45,19 @@ public class StackSmash : SlimeAttacks
         if (proto)
         {
             SlimeStack origin = (SlimeStack)Origin;
-            activeDupCardInstance.Origin = origin;
+            activeDupCardInstance!.Origin = origin;
             activeDupCardInstance.Target = Target;
             BattleQueue.BattleQueueInstance.InsertDupEnemyAction(activeDupCardInstance);
         }
-
-        // base.OnHit(); NOT NEEDED HERE AS ATTACKANIMATION causes the damage 
-
-
+        base.CardIsUnstaggered();
     }
     public override void OnHit()
     {
-        StartCoroutine(AttackAnimation());
+        onHitWasCalled = true;
+        StartCoroutine(AttackAnimation(base.OnHit));
     }
 
-    public IEnumerator AttackAnimation()
+    protected override IEnumerator AttackAnimation(AttackCallback? attackCallback)
     {
         Origin.animator.enabled = false;
         SpriteRenderer spriteRenderer = Origin.GetComponent<SpriteRenderer>();
@@ -72,7 +71,7 @@ public class StackSmash : SlimeAttacks
         yield return new WaitForSeconds(0.28f);
         spriteRenderer.sprite = animationFrame[3];
         Origin.myTransform.position = originalPosition;
-        base.OnHit();
+        attackCallback?.Invoke();
         yield return new WaitForSeconds(0.20f);
         spriteRenderer.sprite = animationFrame[4];
         Origin.animator.enabled = true;

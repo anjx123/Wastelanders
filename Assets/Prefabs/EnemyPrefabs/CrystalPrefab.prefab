@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 7638263227755287879}
   - component: {fileID: 8366521506237882045}
   - component: {fileID: 1125175451406190241}
+  - component: {fileID: -3618748775260971989}
+  - component: {fileID: -6096755080030448896}
   m_Layer: 0
   m_Name: CrystalPrefab
   m_TagString: Untagged
@@ -28,7 +30,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5416320824912184890}
@@ -105,8 +107,47 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 4.0821605, y: 4.0821595, z: 1}
+  m_Center: {x: 0.10628144, y: 0.15942195, z: 0}
+--- !u!114 &-3618748775260971989
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4912719815260960585}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7233ff0cadad3784dbdeba856f026aec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myTransform: {fileID: 7638263227755287879}
+  animator: {fileID: -6096755080030448896}
+  combatInfo: {fileID: 3230769655843684543}
+  icon: {fileID: 21300000, guid: 8ab5c83e49fa48f44b1cd1c0b8eb3ed2, type: 3}
+  availableActions: []
+  dupActions: []
+--- !u!95 &-6096755080030448896
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4912719815260960585}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 9ac5e14a2a78242628b8757d8382700b, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1001 &1778877142238062517
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -115,6 +156,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7638263227755287879}
     m_Modifications:
+    - target: {fileID: 3781379592661886730, guid: 941333e3be7f6f04688676f1827dbf1b, type: 3}
+      propertyPath: diceAnimator
+      value: 
+      objectReference: {fileID: 3661330117416005111}
     - target: {fileID: 5150959248165338579, guid: 941333e3be7f6f04688676f1827dbf1b, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -8.1
@@ -176,6 +221,22 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 941333e3be7f6f04688676f1827dbf1b, type: 3}
+--- !u!114 &3230769655843684543 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3781379592661886730, guid: 941333e3be7f6f04688676f1827dbf1b, type: 3}
+  m_PrefabInstance: {fileID: 1778877142238062517}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6adb464f1698da341ab4389bebbddc09, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!95 &3661330117416005111 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 3053580193322781250, guid: 941333e3be7f6f04688676f1827dbf1b, type: 3}
+  m_PrefabInstance: {fileID: 1778877142238062517}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5416320824912184890 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6018344303403229583, guid: 941333e3be7f6f04688676f1827dbf1b, type: 3}

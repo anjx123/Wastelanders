@@ -23,7 +23,8 @@ public class Hurl : FrogAttacks
         
         Speed = 5;
 
-        myName = HURL_NAME;
+        myName = "Hurl";
+        description = "Watch out!";
         Renderer renderer = GetComponent<Renderer>();
         ogMaterial = renderer.material; // og sprite of card
         OriginalPosition = transform.position;

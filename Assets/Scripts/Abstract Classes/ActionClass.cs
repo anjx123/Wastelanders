@@ -55,7 +55,7 @@ public abstract class ActionClass : SelectClass
         public int actualRoll;
     }
     public int Speed { get; protected set; }
-    protected string description;
+    public string description;
 
     [SerializeField] string titleName;
 
@@ -105,9 +105,9 @@ public abstract class ActionClass : SelectClass
     // (excepting few cases like StackSmash that has a unique Animation)
     public virtual void OnHit()
     {
-        CardIsUnstaggered();
         Vector3 diffInLocation = Target.myTransform.position - Origin.myTransform.position;
         Origin.UpdateFacing(diffInLocation, null);
+        CardIsUnstaggered();
         this.Target.TakeDamage(Origin, duplicateCard.actualRoll);
     }
 
@@ -177,7 +177,7 @@ public abstract class ActionClass : SelectClass
             return icon;
         } else
         {
-            Debug.LogWarning("ActionClass icon is Missing");
+            Debug.LogWarning("ActionClass icon is Missing for " + name);
             return null;
         }
     }

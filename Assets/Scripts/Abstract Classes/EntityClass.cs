@@ -46,17 +46,12 @@ public abstract class EntityClass : SelectClass
 
     protected List<ActionClass> actionsAvailable;
 
-    protected int id;
-    public int Id
-    {
-        get { return id; }
-        set { id = value; }
-    }
 #nullable enable
 
     public delegate void EntityDelegate(EntityClass player);
-    public static event EntityDelegate? onEntityDeath;
+    public static event EntityDelegate? OnEntityDeath;
 
+    public Sprite? icon;
 
     public virtual void Start()
     {
@@ -65,6 +60,7 @@ public abstract class EntityClass : SelectClass
 
         DeEmphasize();
         DisableDice();
+        GetComponent<SpriteRenderer>().sortingLayerName = CombatManager.Instance.FADE_SORTING_LAYER;
 
         CombatManager.OnGameStateChanging += UpdateBuffsNewRound;
     }
@@ -88,7 +84,7 @@ public abstract class EntityClass : SelectClass
             percentageDone = Mathf.Clamp(damage / (float)Health, 0f, 1f);
         } else
         {
-            onEntityDeath?.Invoke(this);
+            OnEntityDeath?.Invoke(this);
         }
         UpdateBuffsOnDamage();
         StartCoroutine(PlayHitAnimation(source, this, percentageDone));
@@ -153,7 +149,7 @@ public abstract class EntityClass : SelectClass
 
 
 
-        if (HasParameter("IsMoving", animator) && distance > radius + PLAY_RUNNING_ANIMATION_DELTA)
+        if (HasAnimationParameter("IsMoving") && distance > radius + PLAY_RUNNING_ANIMATION_DELTA)
         {
             UpdateFacing(diffInLocation, lookAtPosition);
             animator.SetBool("IsMoving", true);
@@ -166,7 +162,7 @@ public abstract class EntityClass : SelectClass
             yield return null;
         }
 
-        if (HasParameter("IsMoving", animator))
+        if (HasAnimationParameter("IsMoving"))
         {
             animator.SetBool("IsMoving", false);
         }
@@ -260,7 +256,7 @@ public abstract class EntityClass : SelectClass
 
 
 
-        if (HasParameter("IsStaggered", animator))
+        if (HasAnimationParameter("IsStaggered"))
         {
             animator.SetBool("IsStaggered", true);
         }
@@ -275,7 +271,7 @@ public abstract class EntityClass : SelectClass
             yield return null;
         }
 
-        if (HasParameter("IsStaggered", animator))
+        if (HasAnimationParameter("IsStaggered"))
         {
             animator.SetBool("IsStaggered", false);
         }
@@ -365,7 +361,7 @@ public abstract class EntityClass : SelectClass
     }
 
     // Adds the Stacks of the Card to the Relevant Buff Stacks of the Player    
-    public void AddStacks(string buffType, int stacks)
+    public virtual void AddStacks(string buffType, int stacks)
     {
         CheckBuff(buffType);
         statusEffects[buffType].GainStacks(stacks);
@@ -437,7 +433,7 @@ public abstract class EntityClass : SelectClass
 
     public virtual void AttackAnimation(string animationName)
     {
-        if (HasParameter(animationName, animator))
+        if (HasAnimationParameter(animationName))
         {
             animator.SetTrigger(animationName);
         }
@@ -449,9 +445,13 @@ public abstract class EntityClass : SelectClass
         //Implement Block Animation
     }
 
-    public static bool HasParameter(string paramName, Animator animator)
+    public bool HasAnimationParameter(string paramName, Animator? paramAnimator = null)
     {
-        foreach (AnimatorControllerParameter param in animator.parameters)
+        if (!paramAnimator)
+        {
+            paramAnimator = animator;
+        }
+        foreach (AnimatorControllerParameter param in paramAnimator.parameters)
         {
             if (param.name == paramName) return true;
         }
@@ -516,7 +516,6 @@ public abstract class EntityClass : SelectClass
     {
         combatInfo.DisableDice();
     }
-
     private void EnableHealthBar()
     {
         combatInfo.EnableHealthBar();
@@ -533,5 +532,4 @@ public abstract class EntityClass : SelectClass
     {
         initialPosition = newReturningPosition;
     }
-    
 }

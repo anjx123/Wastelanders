@@ -20,6 +20,11 @@ public class CombatInfo : MonoBehaviour
 
     public Canvas buffListCanvas;
 
+    public void Awake()
+    {
+        buffListCanvas = buffList.gameObject.GetComponent<Canvas>();
+    }
+
     public void Start()
     {
         diceRollText.GetComponent<MeshRenderer>().sortingOrder = diceRollSprite.GetComponent<SpriteRenderer>().sortingOrder + 1;
