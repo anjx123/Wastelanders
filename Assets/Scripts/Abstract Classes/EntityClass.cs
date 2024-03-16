@@ -475,7 +475,6 @@ public abstract class EntityClass : SelectClass
         transform.position = largeTransform;
         GetComponent<SpriteRenderer>().sortingOrder = CombatManager.Instance.FADE_SORTING_ORDER + 1;
         combatInfo.Emphasize();
-        
     }
 
     //Decreases this Entity Class' sorting layer. (Standardizes Sorting Layers for entities)

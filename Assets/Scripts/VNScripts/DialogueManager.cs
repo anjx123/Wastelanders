@@ -54,7 +54,7 @@ public class DialogueManager : MonoBehaviour
         yield return new WaitUntil(() => !inDialogue);
     }
 
-    public void ClearPanel()
+    void ClearPanel()
     {
         dialogueBoxObj.SetActive(false);
         sentences.Clear();
@@ -75,17 +75,7 @@ public class DialogueManager : MonoBehaviour
         dialogueBoxObj.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -1 * dialogueBoxComponent.GetComponent<RectTransform>().rect.height);
     }
 
-    public void BlockPlayerClick()
-    {
-        //dialogueScrim?.SetActive(true);
-    }
-
-    public void UnblockPlayerClick()
-    {
-        //dialogueScrim?.SetActive(false);
-    }
-
-    public void DisplayNextSentence()
+    void DisplayNextSentence()
     {
         if (sentences.Count == 0)
         {
