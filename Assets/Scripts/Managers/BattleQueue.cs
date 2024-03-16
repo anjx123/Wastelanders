@@ -127,8 +127,8 @@ public class BattleQueue : MonoBehaviour
             }
         }
         RenderBQ();
-        PlayerClass player = action.Origin as PlayerClass;
-        player.ReaddCard(action);
+        PlayerClass? player = action.Origin as PlayerClass;
+        player?.ReaddCard(action);
     }
 
     // to add an enemy action to the actionQueue and the WrapperArray
@@ -475,7 +475,7 @@ public class BattleQueue : MonoBehaviour
                             // The redirection occurs here because this method is invoked only when the player action can be successfully inserted; this code block's conditions are requisites as well.
                             if (curWrapper.ProtoEnemysTarget == null) // very important since this is the ORIGINAL target. 
                             {
-                                curWrapper.ProtoEnemysTarget = curWrapper.EnemyAction.Target as PlayerClass;
+                                curWrapper.ProtoEnemysTarget = curWrapper.EnemyAction.Target;
                                 curWrapper.EnemyAction.Target = playerAct.Origin;
                             }
                             // redirection complete
@@ -647,7 +647,7 @@ public class BattleQueue : MonoBehaviour
                     }
                     else if (wrapper.ProtoEnemysTarget == null)
                     {
-                        wrapper.ProtoEnemysTarget = wrapper.EnemyAction.Target as PlayerClass;
+                        wrapper.ProtoEnemysTarget = wrapper.EnemyAction.Target;
                     }
                     wrapper.EnemyAction.Target = wrapper.PlayerAction.Origin;
                     return true;
@@ -665,7 +665,7 @@ public class BattleQueue : MonoBehaviour
 
         // This field is ONLY ever updated if a clash is introduced. It remains null until so. If a clash is inserted, it will retain information of the primary target until the round ends. Knowledge of this field should remain inside BQ.
         // Cannot see perfect access modifiers so as to obviate incorrect modification. 
-        public PlayerClass? ProtoEnemysTarget { get; set; } 
+        public EntityClass? ProtoEnemysTarget { get; set; } 
 
         public int HighestSpeed { get; set; } // used to sort the wrappers 
                                                 // -1 indicates that the wrapper is empty 
