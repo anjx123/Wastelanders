@@ -8,8 +8,9 @@ public class CombatCardDisplayManager : MonoBehaviour
     public GameObject cardDisplay; // The card display object
     GameObject fullCardObject; // keep ref to object to destroy
 
+#nullable enable
     public bool IsDisplaying { get; set; } = false;
-    private ActionClass currentUser;
+    private ActionClass? currentUser;
     private bool targetHighlighted = false;
 
     // Awake is called before Start.
@@ -58,7 +59,7 @@ public class CombatCardDisplayManager : MonoBehaviour
             {
                 fullCardObject.transform.position = new Vector3(0, 0, 0);
                 fullCardObject.transform.SetParent(cardDisplay.transform, false);
-                UpdateText(a);
+                fullCardObject.transform.Find("TextCanvas").transform.Find("Info Popup").transform.Find("Canvas").transform.Find("DescriptionText").GetComponent<TextMeshProUGUI>().text = a.description;
             }
 
             IsDisplaying = true;
@@ -71,14 +72,6 @@ public class CombatCardDisplayManager : MonoBehaviour
         }
     }
 
-    private void UpdateText(ActionClass a)
-    {
-        // TODO: fix bug with not updating text properly? It works first time, but if you are swapping from another card it breaks.
-        // lower priority for now since we don't change enemy card stats yet, but it will come eventually
-        GameObject textContainer = cardDisplay.transform.GetChild(0).Find("TextCanvas").gameObject;
-        textContainer.transform.Find("LowerBoundText").gameObject.GetComponent<TextMeshProUGUI>().text = a.GetCard().rollFloor.ToString();
-        // more text updates...
-    }
 
     // Hides the card by destroying the child. Don't need to pass any parameters in as the manager
     //  doesn't need to keep track of who calls this

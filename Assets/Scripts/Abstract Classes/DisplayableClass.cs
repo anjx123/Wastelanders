@@ -10,14 +10,17 @@ public abstract class DisplayableClass : SelectClass
 
     protected void ShowCard()
     {
-        CombatCardDisplayManager.Instance.ShowCard(actionClass);
+        if (actionClass != null)
+        {
+            CombatCardDisplayManager.Instance.ShowCard(actionClass);
+        }
     }
 
     protected void HighlightTarget()
     {
         if (!targetHighlighted)
         {
-            actionClass?.Target.Highlight();
+            actionClass?.Target?.Highlight();
         }
         targetHighlighted = true;
     }
@@ -26,7 +29,7 @@ public abstract class DisplayableClass : SelectClass
     {
         if (targetHighlighted)
         {
-            actionClass?.Target.DeHighlight();
+            actionClass?.Target?.DeHighlight();
         }
         targetHighlighted = false;
     }

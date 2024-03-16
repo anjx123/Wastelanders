@@ -11,8 +11,10 @@ GameObject:
   - component: {fileID: 617082415006753302}
   - component: {fileID: 3576713871262507216}
   - component: {fileID: 5069809743003330988}
+  - component: {fileID: 3552047448212555760}
+  - component: {fileID: 5232295061604255744}
   m_Layer: 0
-  m_Name: BeetlePrefab
+  m_Name: WorkerBeetlePrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28,7 +30,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.3, y: 0.3, z: 1}
+  m_LocalScale: {x: 0.375, y: 0.375, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1761489983527598792}
@@ -105,8 +107,46 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 6.470001, y: 4.51486, z: 1}
+  m_Center: {x: -0.16475868, y: -0.41738987, z: 0}
+--- !u!95 &3552047448212555760
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8044949296705636452}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 420490636adcc4f00ad15c453c4d5015, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &5232295061604255744
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8044949296705636452}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 183874078d8194649a324016f66d1a65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myTransform: {fileID: 617082415006753302}
+  animator: {fileID: 3552047448212555760}
+  combatInfo: {fileID: 9191087331242654797}
+  availableActions:
+  - {fileID: 2376898879351982445, guid: 7090f976358e24551b91b2b219740e7b, type: 3}
 --- !u!1001 &5473955538084191047
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -119,6 +159,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.x
       value: -6.38
       objectReference: {fileID: 0}
+    - target: {fileID: 3781379592661886730, guid: 941333e3be7f6f04688676f1827dbf1b, type: 3}
+      propertyPath: diceAnimator
+      value: 
+      objectReference: {fileID: 7032118543032652037}
     - target: {fileID: 5150959248165338579, guid: 941333e3be7f6f04688676f1827dbf1b, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -9.46
@@ -193,3 +237,19 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6018344303403229583, guid: 941333e3be7f6f04688676f1827dbf1b, type: 3}
   m_PrefabInstance: {fileID: 5473955538084191047}
   m_PrefabAsset: {fileID: 0}
+--- !u!95 &7032118543032652037 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 3053580193322781250, guid: 941333e3be7f6f04688676f1827dbf1b, type: 3}
+  m_PrefabInstance: {fileID: 5473955538084191047}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &9191087331242654797 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3781379592661886730, guid: 941333e3be7f6f04688676f1827dbf1b, type: 3}
+  m_PrefabInstance: {fileID: 5473955538084191047}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6adb464f1698da341ab4389bebbddc09, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

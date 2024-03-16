@@ -2,6 +2,7 @@ using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 using static UnityEngine.EventSystems.EventTrigger;
 
 public class CombatManager : MonoBehaviour
@@ -180,6 +181,7 @@ public class CombatManager : MonoBehaviour
     {
         enemies.Add(enemy);
     }
+
     //Purpose: Call this when an enemy is removed or killed
     public void RemoveEnemy(EnemyClass enemy)
     {
@@ -292,12 +294,12 @@ public class CombatManager : MonoBehaviour
 
     public List<PlayerClass> GetPlayers()
     {
-        return players;
+        return new List<PlayerClass>(players);
     }
 
     public List<EnemyClass> GetEnemies() 
     {
-     return enemies;
+     return new List<EnemyClass>(enemies);
     }
 
 }

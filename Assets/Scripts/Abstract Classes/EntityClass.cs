@@ -147,7 +147,7 @@ public abstract class EntityClass : SelectClass
 
         UpdateFacing(diffInLocation, lookAtPosition);
 
-        if (HasParameter("IsMoving", animator) && distance > radius + PLAY_RUNNING_ANIMATION_DELTA)
+        if (HasAnimationParameter("IsMoving") && distance > radius + PLAY_RUNNING_ANIMATION_DELTA)
         {
             animator.SetBool("IsMoving", true);
         }
@@ -159,7 +159,7 @@ public abstract class EntityClass : SelectClass
             yield return null;
         }
 
-        if (HasParameter("IsMoving", animator))
+        if (HasAnimationParameter("IsMoving"))
         {
             animator.SetBool("IsMoving", false);
         }
@@ -221,7 +221,7 @@ public abstract class EntityClass : SelectClass
 
 
 
-        if (HasParameter("IsStaggered", animator))
+        if (HasAnimationParameter("IsStaggered"))
         {
             animator.SetBool("IsStaggered", true);
         }
@@ -236,7 +236,7 @@ public abstract class EntityClass : SelectClass
             yield return null;
         }
 
-        if (HasParameter("IsStaggered", animator))
+        if (HasAnimationParameter("IsStaggered"))
         {
             animator.SetBool("IsStaggered", false);
         }
@@ -318,7 +318,7 @@ public abstract class EntityClass : SelectClass
     }
 
     // Adds the Stacks of the Card to the Relevant Buff Stacks of the Player    
-    public void AddStacks(string buffType, int stacks)
+    public virtual void AddStacks(string buffType, int stacks)
     {
         CheckBuff(buffType);
         statusEffects[buffType].GainStacks(stacks);
@@ -390,7 +390,7 @@ public abstract class EntityClass : SelectClass
 
     public virtual void AttackAnimation(string animationName)
     {
-        if (HasParameter(animationName, animator))
+        if (HasAnimationParameter(animationName))
         {
             animator.SetTrigger(animationName);
         }
@@ -402,9 +402,13 @@ public abstract class EntityClass : SelectClass
         //Implement Block Animation
     }
 
-    public static bool HasParameter(string paramName, Animator animator)
+    public bool HasAnimationParameter(string paramName, Animator? paramAnimator = null)
     {
-        foreach (AnimatorControllerParameter param in animator.parameters)
+        if (!paramAnimator)
+        {
+            paramAnimator = animator;
+        }
+        foreach (AnimatorControllerParameter param in paramAnimator.parameters)
         {
             if (param.name == paramName) return true;
         }

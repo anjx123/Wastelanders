@@ -5,19 +5,18 @@ using static UnityEngine.UI.Image;
 
 public abstract class SlimeAttacks : ActionClass
 {
-    public override sealed void Start()
+#nullable enable
+    protected bool onHitWasCalled = false;
+    protected delegate void AttackCallback();
+
+    public override void CardIsUnstaggered()
     {
-        
+        if (!onHitWasCalled)
+        {
+            StartCoroutine(AttackAnimation(null));
+        }
+        onHitWasCalled=false;
     }
 
-    public override void Initialize()
-    {
-        base.Initialize();
-        CardType = CardType.MeleeAttack;
-    }
-    public override void OnHit()
-    {
-        base.OnHit();
-        
-    }
+    protected abstract IEnumerator AttackAnimation(AttackCallback? attackCallback);
 }

@@ -20,10 +20,15 @@ public class CombatInfo : MonoBehaviour
 
     private Canvas buffListCanvas;
 
+    public void Awake()
+    {
+        buffListCanvas = buffList.gameObject.GetComponent<Canvas>();
+    }
+
     public void Start()
     {
         diceRollText.GetComponent<MeshRenderer>().sortingOrder = diceRollSprite.GetComponent<SpriteRenderer>().sortingOrder + 1;
-        buffListCanvas = buffList.gameObject.GetComponent<Canvas>();
+        
         buffListCanvas.overrideSorting = true;
         buffListCanvas.sortingLayerName = CombatManager.Instance.FADE_SORTING_LAYER;
         diceRollText.GetComponent<MeshRenderer>().sortingLayerName = CombatManager.Instance.FADE_SORTING_LAYER;

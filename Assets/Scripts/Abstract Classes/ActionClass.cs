@@ -55,7 +55,7 @@ public abstract class ActionClass : SelectClass
         public int actualRoll;
     }
     public int Speed { get; protected set; }
-    protected string description;
+    public string description;
 
     [SerializeField] string titleName;
 
@@ -167,7 +167,7 @@ public abstract class ActionClass : SelectClass
             return icon;
         } else
         {
-            Debug.LogWarning("ActionClass icon is Missing");
+            Debug.LogWarning("ActionClass icon is Missing for " + name);
             return null;
         }
     }

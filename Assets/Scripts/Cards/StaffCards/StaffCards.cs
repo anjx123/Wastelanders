@@ -14,6 +14,17 @@ public abstract class StaffCards : ActionClass
         base.Initialize();
     }
 
+    public override void CardIsUnstaggered()
+    {
+        if (Origin.HasAnimationParameter("IsStaffing"))
+        {
+            Origin.AttackAnimation("IsStaffing");
+        } else
+        {
+            Origin.AttackAnimation("MeleeAttack");
+        }
+        base.CardIsUnstaggered();
+    }
     public override void OnHit()
     {
         Origin.AttackAnimation("IsStaffing");

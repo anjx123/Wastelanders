@@ -20,6 +20,7 @@ public class Spit : FrogAttacks
         Speed = 4;
 
         myName = "Spit";
+        description = "Gross!";
         Renderer renderer = GetComponent<Renderer>();
         ogMaterial = renderer.material; // og sprite of card
         OriginalPosition = transform.position;
