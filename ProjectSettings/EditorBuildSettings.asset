@@ -6,9 +6,15 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/LevelSelect.unity
+    guid: c64c1e358b70f4b4f9b827da61f04084
+  - enabled: 1
     path: Assets/Scenes/CombatScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
-    path: Assets/Scenes/LevelSelect.unity
-    guid: c64c1e358b70f4b4f9b827da61f04084
+    path: Assets/Scenes/BeetleCombatScene.unity
+    guid: 73c98f4d0b055437f91532d79fb70e0e
+  - enabled: 1
+    path: Assets/Scenes/TutorialScene.unity
+    guid: b71821f2dc91647488c0f36149b56d88
   m_configObjects: {}
