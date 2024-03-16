@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class BattleQueueIcons : DisplayableClass
 {
+    [SerializeField] SpriteRenderer targetRenderer;
+
     public override void OnMouseDown()
     {
         if (actionClass.Origin is PlayerClass) {
@@ -48,9 +50,10 @@ public class BattleQueueIcons : DisplayableClass
         DeHighlightTarget();
     }
 
-    public void renderBQIcon(ActionClass ac)
+    public void RenderBQIcon(ActionClass ac)
     {
         actionClass = ac;
+        targetRenderer.sprite = ac.Target.icon;
         GetComponent<SpriteRenderer>().sprite = ac.GetIcon();
     }
 }

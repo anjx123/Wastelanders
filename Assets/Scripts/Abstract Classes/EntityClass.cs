@@ -45,12 +45,7 @@ public abstract class EntityClass : SelectClass
 
     protected List<ActionClass> actionsAvailable;
 
-    protected int id;
-    public int Id 
-    { 
-        get { return id; }
-        set { id = value; }
-    }
+    public Sprite? icon;
 
     public virtual void Start()
     {

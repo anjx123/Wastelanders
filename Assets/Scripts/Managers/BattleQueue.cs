@@ -72,7 +72,7 @@ public class BattleQueue : MonoBehaviour
         {
             GameObject renderedCopy = Instantiate(iconPrefab, new Vector3(100, 100, -10), Quaternion.identity);
             renderedCopy.transform.SetParent(bqContainer, false);
-            renderedCopy.GetComponent<BattleQueueIcons>().renderBQIcon(queue[i]);
+            renderedCopy.GetComponent<BattleQueueIcons>().RenderBQIcon(queue[i]);
         }
         
     }
@@ -177,7 +177,7 @@ public class BattleQueue : MonoBehaviour
             {
                 GameObject renderedCopy = Instantiate(iconPrefab, new Vector3(100, 100, -10), Quaternion.identity);
                 renderedCopy.transform.SetParent(bqContainer, false);
-                renderedCopy.GetComponent<BattleQueueIcons>().renderBQIcon(wrapper.ReturnWhaYouHave());
+                renderedCopy.GetComponent<BattleQueueIcons>().RenderBQIcon(wrapper.ReturnWhaYouHave());
             }
         }
     }    

@@ -11,7 +11,7 @@ public class ClashingBattleQueueIcon : MonoBehaviour
 
     public void renderClashingIcons(ActionClass leftClashingItem,  ActionClass rightClashingItem)
     {
-        leftClashingAction.renderBQIcon(leftClashingItem);
-        rightClashingAction.renderBQIcon(rightClashingItem);
+        leftClashingAction.RenderBQIcon(leftClashingItem);
+        rightClashingAction.RenderBQIcon(rightClashingItem);
     }
 }
