@@ -95,9 +95,9 @@ public abstract class ActionClass : SelectClass
     // (excepting few cases like StackSmash that has a unique Animation)
     public virtual void OnHit()
     {
-        CardIsUnstaggered();
         Vector3 diffInLocation = Target.myTransform.position - Origin.myTransform.position;
         Origin.UpdateFacing(diffInLocation, null);
+        CardIsUnstaggered();
         this.Target.TakeDamage(Origin, duplicateCard.actualRoll);
     }
 

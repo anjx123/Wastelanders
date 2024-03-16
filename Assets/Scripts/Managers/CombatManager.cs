@@ -33,6 +33,14 @@ public class CombatManager : MonoBehaviour
         }
     }
 
+    public int FADE_SORTING_LAYER_ID
+    {
+        get
+        {
+            return fadeScreen.sortingLayerID;
+        }
+    }
+
     public void CrosshairAllEnemies() {
         foreach (EnemyClass enemy in enemies) {
             enemy.CrossHair();
@@ -58,6 +66,21 @@ public class CombatManager : MonoBehaviour
         get
         {
             return fadeScreen.gameObject.transform.position.z;
+        }
+    }
+    public static int GetNextSortingLayerID(int currentSortingLayerID)
+    {
+        var layers = SortingLayer.layers;
+        var currentLayerIndex = System.Array.FindIndex(layers, layer => layer.id == currentSortingLayerID);
+
+        // If the current layer is the last one, return the first layer id
+        if (currentLayerIndex == layers.Length - 1)
+        {
+            return layers[0].id;
+        }
+        else
+        {
+            return layers[currentLayerIndex + 1].id;
         }
     }
 

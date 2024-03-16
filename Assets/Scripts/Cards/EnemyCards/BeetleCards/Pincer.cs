@@ -30,4 +30,41 @@ public class Pincer : BeetleAttacks
         OriginalPosition = transform.position;
     }
 
+    public override void CardIsUnstaggered()
+    {
+        if (Origin.HasAnimationParameter("IsAttacking"))
+        {
+            Origin.AttackAnimation("IsAttacking");
+        }
+        if (Origin.IsFacingRight())
+        {
+            StartCoroutine(MoveBasedOnDirection(/* isFacingRight = */true));
+        } else
+        {
+            StartCoroutine(MoveBasedOnDirection(/* isFacingRight = */ false));
+        }
+    }
+
+    IEnumerator MoveBasedOnDirection(bool isFacingRight)
+    {
+        Vector3 moveRight = new Vector3(0.3f, 0, 0);
+        float moveTime = 0.8f;
+        
+
+        if (isFacingRight)
+        {
+            Vector3 originalPosition = Origin.myTransform.position;
+            Origin.myTransform.position = originalPosition + moveRight;
+            yield return new WaitForSeconds(moveTime);
+            Origin.myTransform.position = originalPosition;
+        }
+        else
+        {
+            Vector3 originalPosition = Origin.myTransform.position;
+            Origin.myTransform.position = originalPosition - moveRight;
+            yield return new WaitForSeconds(moveTime);
+            Origin.myTransform.position = originalPosition;
+        }
+    }
+
 }

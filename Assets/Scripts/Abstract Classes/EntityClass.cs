@@ -59,6 +59,7 @@ public abstract class EntityClass : SelectClass
 
         DeEmphasize();
         DisableDice();
+        GetComponent<SpriteRenderer>().sortingLayerName = CombatManager.Instance.FADE_SORTING_LAYER;
 
         CombatManager.OnGameStateChanged += UpdateBuffsNewRound;
     }
@@ -464,6 +465,4 @@ public abstract class EntityClass : SelectClass
     {
         combatInfo.DisableDice();
     }
-
-    
 }

@@ -30,12 +30,24 @@ public class Excavate : BeetleAttacks
         OriginalPosition = transform.position;
     }
 
+    public override void CardIsUnstaggered()
+    {
+        base.CardIsUnstaggered();
+        if (Origin.HasAnimationParameter("IsAttacking"))
+        {
+            Origin.AttackAnimation("IsAttacking");
+        }
+    }
 
     // does 2x damage if target is crystal
     public override void OnHit()
     {
         if (Target is Crystals)
         {
+            if (Origin.HasAnimationParameter("IsAttacking"))
+            {
+                Origin.AttackAnimation("IsAttacking");
+            }
             Vector3 diffInLocation = Target.myTransform.position - Origin.myTransform.position;
             Origin.UpdateFacing(diffInLocation, null);
             this.Target.TakeDamage(Origin, 2 * duplicateCard.actualRoll);
