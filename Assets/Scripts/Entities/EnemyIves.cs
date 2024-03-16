@@ -31,7 +31,7 @@ public class EnemyIves : EnemyClass
     {
         BattleQueue.BattleQueueInstance.RemoveAllInstancesOfEntity(this);
         CombatManager.Instance.RemoveEnemy(this);
-        if (HasParameter("IsStaggered", animator))
+        if (HasAnimationParameter("IsStaggered"))
         {
             animator.SetBool("IsStaggered", true);
         }

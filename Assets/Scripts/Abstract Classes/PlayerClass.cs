@@ -134,7 +134,8 @@ public abstract class PlayerClass : EntityClass
     public void HandleUseCard(ActionClass a)
     {
         // remove the used card
-        GameObject used = FindChildWithScript(handContainer.gameObject, a.GetType());
+        GameObject? used = FindChildWithScript(handContainer.gameObject, a.GetType());
+        if (used == null) return;
         hand.Remove(used);
         discard.Add(used);
         used.transform.position = new Vector3(500, 500, 1); // spirit the action away; Note: this works because if the action is readded to the deck, the RenderHand() method effectively spirits it back.
@@ -146,7 +147,7 @@ public abstract class PlayerClass : EntityClass
 /*    helper function for HandleUseCard, it takes a gameobject and type and returns
     * a child gameobject that has a script of that type.*/
 
-    GameObject FindChildWithScript(GameObject parent, System.Type type)
+    GameObject? FindChildWithScript(GameObject parent, System.Type type)
     {
         for (int i = 0; i < parent.transform.childCount; i++)
         {

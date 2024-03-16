@@ -25,4 +25,16 @@ public class Crystals : EnemyClass
     }
 
     public override void AddAttack(List<PlayerClass> players) {}
+
+    public override IEnumerator MoveToPosition(Vector3 destination, float radius, float duration, Vector3? lookAtPosition = null)
+    {
+        Vector3 originalPosition = myTransform.position;
+
+        Vector3 diffInLocation = destination - originalPosition;
+
+        if ((Vector2)diffInLocation == Vector2.zero) yield break;
+
+        UpdateFacing(diffInLocation, lookAtPosition);
+        yield break;
+    }
 }

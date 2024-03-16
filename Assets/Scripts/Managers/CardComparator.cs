@@ -8,8 +8,8 @@ using static UnityEngine.UI.Image;
 
 public class CardComparator : MonoBehaviour
 {
-    #nullable enable
     public static CardComparator Instance { get; private set; }
+#nullable enable
     public static readonly float COMBAT_BUFFER_TIME = 1f;
     private delegate IEnumerator DeadEntities();
     private static event DeadEntities? PlayEntityDeaths;

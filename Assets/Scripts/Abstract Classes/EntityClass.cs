@@ -290,7 +290,7 @@ public abstract class EntityClass : SelectClass
 
     public void SetUnstaggered()
     {
-        if (HasParameter("IsStaggered", animator))
+        if (HasAnimationParameter("IsStaggered"))
         {
             animator.SetBool("IsStaggered", false);
         }
@@ -451,7 +451,7 @@ public abstract class EntityClass : SelectClass
         {
             paramAnimator = animator;
         }
-        foreach (AnimatorControllerParameter param in paramAnimator.parameters)
+        foreach (AnimatorControllerParameter param in paramAnimator!.parameters)
         {
             if (param.name == paramName) return true;
         }

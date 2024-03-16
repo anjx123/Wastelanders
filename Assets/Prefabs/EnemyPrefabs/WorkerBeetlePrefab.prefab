@@ -79,7 +79,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: f9e9ef99cec2ac0419803c45f18836b5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
+  m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 9.23, y: 7.56}
@@ -145,6 +145,8 @@ MonoBehaviour:
   myTransform: {fileID: 617082415006753302}
   animator: {fileID: 3552047448212555760}
   combatInfo: {fileID: 9191087331242654797}
+  boxCollider: {fileID: 5069809743003330988}
+  icon: {fileID: 0}
   availableActions:
   - {fileID: 2376898879351982445, guid: 7090f976358e24551b91b2b219740e7b, type: 3}
   dupActions: []

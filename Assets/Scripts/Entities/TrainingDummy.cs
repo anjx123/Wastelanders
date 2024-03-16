@@ -35,14 +35,10 @@ public class TrainingDummy : EnemyClass
     public override IEnumerator MoveToPosition(Vector3 destination, float radius, float duration, Vector3? lookAtPosition = null)
     {
         Vector3 originalPosition = myTransform.position;
-        float elapsedTime = 0f;
 
         Vector3 diffInLocation = destination - originalPosition;
 
         if ((Vector2)diffInLocation == Vector2.zero) yield break;
-
-        float distance = Mathf.Sqrt(diffInLocation.x * diffInLocation.x + diffInLocation.y * diffInLocation.y);
-        float maxProportionTravelled = (distance - radius) / distance;
 
         UpdateFacing(diffInLocation, lookAtPosition);
         yield break;
