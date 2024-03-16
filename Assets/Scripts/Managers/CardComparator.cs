@@ -33,12 +33,12 @@ public class CardComparator : MonoBehaviour
 
     void Start()
     {
-        EntityClass.onEntityDeath += SubscribeEntityDeath;
+        EntityClass.OnEntityDeath += SubscribeEntityDeath;
     }
 
     private void OnDestroy()
     {
-        EntityClass.onEntityDeath -= SubscribeEntityDeath;
+        EntityClass.OnEntityDeath -= SubscribeEntityDeath;
     }
 
 

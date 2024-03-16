@@ -176,7 +176,7 @@ public class TutorialIntroduction : DialogueClasses
     //Player first sees that they can play cards
     private void BeginCombatTutorial()
     {
-        EntityClass.onEntityDeath += FirstDummyDies; //Setup Listener to set state to Game Win
+        EntityClass.OnEntityDeath += FirstDummyDies; //Setup Listener to set state to Game Win
         PlayerClass.playerReshuffleDeck += PlayerLostOneMaxHandSize;
         StartCoroutine(StartDialogueWithNextEvent(youCanPlayCardsTutorial, () => { ActionClass.cardHighlightedEvent += OnPlayerFirstHighlightCard; }));
     }
@@ -220,7 +220,7 @@ public class TutorialIntroduction : DialogueClasses
     {
         if (entity is TrainingDummy)
         {
-            EntityClass.onEntityDeath -= FirstDummyDies;
+            EntityClass.OnEntityDeath -= FirstDummyDies;
             CombatManager.Instance.GameState = GameState.GAME_WIN;
         }
     }
@@ -229,7 +229,7 @@ public class TutorialIntroduction : DialogueClasses
 
     private void BeginCombatIvesFight()
     {
-        EntityClass.onEntityDeath += IvesDies; //Setup Listener to set state to Game Win
+        EntityClass.OnEntityDeath += IvesDies; //Setup Listener to set state to Game Win
         DialogueManager.Instance.MoveBoxToBottom();
         StartCoroutine(StartDialogueWithNextEvent(readingOpponentTutorial, () => { BattleQueue.playerActionInsertedEvent += OnPlayerPlayClashingCard; }));
     }
@@ -250,7 +250,7 @@ public class TutorialIntroduction : DialogueClasses
     {
         if (entity is EnemyIves)
         {
-            EntityClass.onEntityDeath -= IvesDies;
+            EntityClass.OnEntityDeath -= IvesDies;
             CombatManager.Instance.GameState = GameState.GAME_WIN;
         }
     }
