@@ -18,7 +18,7 @@ public class CombatInfo : MonoBehaviour
 
     private float ROTATION_SPEED = 30f;
 
-    private Canvas buffListCanvas;
+    public Canvas buffListCanvas;
 
     public void Awake()
     {
@@ -28,7 +28,6 @@ public class CombatInfo : MonoBehaviour
     public void Start()
     {
         diceRollText.GetComponent<MeshRenderer>().sortingOrder = diceRollSprite.GetComponent<SpriteRenderer>().sortingOrder + 1;
-        
         buffListCanvas.overrideSorting = true;
         buffListCanvas.sortingLayerName = CombatManager.Instance.FADE_SORTING_LAYER;
         diceRollText.GetComponent<MeshRenderer>().sortingLayerName = CombatManager.Instance.FADE_SORTING_LAYER;
@@ -82,6 +81,16 @@ public class CombatInfo : MonoBehaviour
         diceRollText.GetComponent<TextMeshPro>().text = null;
     }
 
+    public void EnableHealthBar()
+    {
+        healthBar.gameObject.SetActive(true);
+    }
+
+    public void DisableHealthBar()
+    {
+        healthBar.gameObject.SetActive(false);
+    }
+
     public void DeactivateCombatSprite()
     {
         SpriteRenderer spriteRenderer = combatCardSprite.GetComponent<SpriteRenderer>();
@@ -133,7 +142,7 @@ public class CombatInfo : MonoBehaviour
     public void FaceLeft()
     {
 
-        FlipTransform(this.transform, false);
+       
         FlipTransform(diceRollText.transform, false);
         FlipTransform(healthBar.transform, false);
         foreach (Transform child in buffList.transform)
@@ -150,7 +159,6 @@ public class CombatInfo : MonoBehaviour
     //Flips the CombatInfo so that the Icon is on the LEFT of the entity
     public void FaceRight()
     {
-        FlipTransform(this.transform, true);
         FlipTransform(diceRollText.transform, true);
         FlipTransform(healthBar.transform, true);
         foreach (Transform child in buffList.transform)
@@ -179,11 +187,11 @@ public class CombatInfo : MonoBehaviour
         }
     }
 
-    //A Cheat implementation that relies on the implementation of FaceRight/Left 
-    public bool IsFacingRight()
+    private bool IsFacingRight()
     {
-        return transform.localScale.x > 0;
+        return this.gameObject.transform.lossyScale.x > 0;
     }
+
     public void UpdateBuffs(Dictionary<string, StatusEffect> buffs)
     {
         foreach (Transform child in buffList.transform)
@@ -203,7 +211,8 @@ public class CombatInfo : MonoBehaviour
             if (IsFacingRight())
             {
                 FlipTransform(buffIcon.transform, true);
-            } else
+            }
+            else
             {
                 FlipTransform(buffIcon.transform, false);
             }

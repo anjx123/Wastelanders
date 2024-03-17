@@ -6,7 +6,7 @@ using static UnityEngine.UI.Image;
 
 public abstract class EntityClass : SelectClass
 {
-    private float PLAY_RUNNING_ANIMATION_DELTA = 0.01f; //Represents how little change in position we should at least see before playing running animation
+    private float PLAY_RUNNING_ANIMATION_DELTA = 0.03f; //Represents how little change in position we should at least see before playing running animation
     protected int MAX_HEALTH;
     [SerializeField]
     protected int MaxHealth
@@ -24,15 +24,16 @@ public abstract class EntityClass : SelectClass
     public Animator animator;
     public CombatInfo combatInfo;
 
+    [SerializeField] protected BoxCollider boxCollider;
     protected bool isDead = false;
     private bool crosshairStaysActive = false;
 
 
-    protected Vector3 initalPosition;
+    protected Vector3 initialPosition;
     public int Health
     {
         get { return health; }
-        protected set 
+        protected set
         {
             health = value;
             combatInfo.SetHealth(health);
@@ -45,23 +46,28 @@ public abstract class EntityClass : SelectClass
 
     protected List<ActionClass> actionsAvailable;
 
+#nullable enable
+
+    public delegate void EntityDelegate(EntityClass player);
+    public static event EntityDelegate? OnEntityDeath;
+
     public Sprite? icon;
 
     public virtual void Start()
     {
-        initalPosition = myTransform.position;
+        initialPosition = myTransform.position;
         statusEffects = new Dictionary<string, StatusEffect>();
 
         DeEmphasize();
         DisableDice();
         GetComponent<SpriteRenderer>().sortingLayerName = CombatManager.Instance.FADE_SORTING_LAYER;
 
-        CombatManager.OnGameStateChanged += UpdateBuffsNewRound;
+        CombatManager.OnGameStateChanging += UpdateBuffsNewRound;
     }
 
     private void OnDestroy()
     {
-        CombatManager.OnGameStateChanged -= UpdateBuffsNewRound;
+        CombatManager.OnGameStateChanging -= UpdateBuffsNewRound;
     }
 
     /*
@@ -75,10 +81,10 @@ public abstract class EntityClass : SelectClass
         float percentageDone = 1; //Testing different powered knockbacks
         if (Health != 0)
         {
-            percentageDone = Mathf.Clamp(damage / (float) Health, 0f, 1f);
+            percentageDone = Mathf.Clamp(damage / (float)Health, 0f, 1f);
         } else
         {
-            CardComparator.PlayEntityDeaths += Die;
+            OnEntityDeath?.Invoke(this);
         }
         UpdateBuffsOnDamage();
         StartCoroutine(PlayHitAnimation(source, this, percentageDone));
@@ -108,7 +114,7 @@ public abstract class EntityClass : SelectClass
     }
 
     //Calculates the power of the stagger based on the percentage health done
-    private float StaggerPowerCalculation(float percentageDone)
+    protected virtual float StaggerPowerCalculation(float percentageDone)
     {
         float minimumPush = 0.8f;
         float pushSlope = 1.8f;
@@ -129,22 +135,23 @@ public abstract class EntityClass : SelectClass
 
     Requires: Entity is not dead
      */
-    public IEnumerator MoveToPosition(Vector3 destination, float radius, float duration, Vector3? lookAtPosition = null)
+    public virtual IEnumerator MoveToPosition(Vector3 destination, float radius, float duration, Vector3? lookAtPosition = null)
     {
         Vector3 originalPosition = myTransform.position;
         float elapsedTime = 0f;
 
         Vector3 diffInLocation = destination - originalPosition;
 
-        if ((Vector2) diffInLocation == Vector2.zero) yield break;
+        if ((Vector2)diffInLocation == Vector2.zero) yield break;
 
         float distance = Mathf.Sqrt(diffInLocation.x * diffInLocation.x + diffInLocation.y * diffInLocation.y);
         float maxProportionTravelled = (distance - radius) / distance;
 
-        UpdateFacing(diffInLocation, lookAtPosition);
+
 
         if (HasAnimationParameter("IsMoving") && distance > radius + PLAY_RUNNING_ANIMATION_DELTA)
         {
+            UpdateFacing(diffInLocation, lookAtPosition);
             animator.SetBool("IsMoving", true);
         }
 
@@ -160,14 +167,46 @@ public abstract class EntityClass : SelectClass
             animator.SetBool("IsMoving", false);
         }
     }
+    public void FaceRight()
+    {
+        FlipTransform(this.transform, true);
+        combatInfo.FaceRight();
+    }
 
-    public abstract void FaceRight();
-
-    public abstract void FaceLeft();
+    public void FaceLeft()
+    {
+        FlipTransform(this.transform, false);
+        combatInfo.FaceLeft();
+    }
 
     public bool IsFacingRight()
     {
-        return combatInfo.IsFacingRight();
+        return transform.localScale.x > 0;
+    }
+    public void FlipTransform(Transform transform, bool faceRight)
+    {
+        if (faceRight) //Face Right
+        {
+            Vector3 flippedTransform = transform.localScale;
+            flippedTransform.x = Mathf.Abs(flippedTransform.x);
+            transform.localScale = flippedTransform;
+            if (boxCollider)
+            {
+                Vector3 currentScale = boxCollider.size;
+                boxCollider.size = new Vector3(Mathf.Abs(currentScale.x), Mathf.Abs(currentScale.y), Mathf.Abs(currentScale.z));
+            }
+        }
+        else
+        {
+            Vector3 flippedTransform = transform.localScale;
+            flippedTransform.x = -Mathf.Abs(flippedTransform.x);
+            transform.localScale = flippedTransform;
+            if (boxCollider)
+            {
+                Vector3 currentScale = boxCollider.size;
+                boxCollider.size = new Vector3(-Mathf.Abs(currentScale.x), Mathf.Abs(currentScale.y), Mathf.Abs(currentScale.z));
+            }
+        }
     }
 
     /*
@@ -247,6 +286,14 @@ public abstract class EntityClass : SelectClass
     public virtual void Heal(int val)
     {
         Health = Mathf.Clamp(Health + val, 0, MaxHealth);
+    }
+
+    public void SetUnstaggered()
+    {
+        if (HasAnimationParameter("IsStaggered"))
+        {
+            animator.SetBool("IsStaggered", false);
+        }
     }
 
     public override void OnMouseEnter()
@@ -404,7 +451,7 @@ public abstract class EntityClass : SelectClass
         {
             paramAnimator = animator;
         }
-        foreach (AnimatorControllerParameter param in paramAnimator.parameters)
+        foreach (AnimatorControllerParameter param in paramAnimator!.parameters)
         {
             if (param.name == paramName) return true;
         }
@@ -428,7 +475,6 @@ public abstract class EntityClass : SelectClass
         transform.position = largeTransform;
         GetComponent<SpriteRenderer>().sortingOrder = CombatManager.Instance.FADE_SORTING_ORDER + 1;
         combatInfo.Emphasize();
-        
     }
 
     //Decreases this Entity Class' sorting layer. (Standardizes Sorting Layers for entities)
@@ -440,6 +486,16 @@ public abstract class EntityClass : SelectClass
         GetComponent<SpriteRenderer>().sortingOrder = CombatManager.Instance.FADE_SORTING_ORDER - 1;
         combatInfo.DeEmphasize();
         
+    }
+
+    public void OutOfCombat()
+    {
+        DisableHealthBar();
+    }
+
+    public void InCombat()
+    {
+        EnableHealthBar();
     }
 
     public void SetDice(int value)
@@ -459,5 +515,21 @@ public abstract class EntityClass : SelectClass
     public void DisableDice()
     {
         combatInfo.DisableDice();
+    }
+    private void EnableHealthBar()
+    {
+        combatInfo.EnableHealthBar();
+    }
+
+    private void DisableHealthBar()
+    {
+        combatInfo.DisableHealthBar();
+    }
+
+    //@Author: Anrui
+    //Sets the location an entity returns to after fighting ends.
+    public void SetReturnPosition(Vector3 newReturningPosition)
+    {
+        initialPosition = newReturningPosition;
     }
 }

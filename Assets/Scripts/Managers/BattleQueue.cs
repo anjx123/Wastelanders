@@ -29,6 +29,9 @@ public class BattleQueue : MonoBehaviour
     public GameObject clashingPrefab;
 
     #nullable enable //Turns on pedantic null checks, use exclamation mark (!) operator to assert non null and supress warnings.
+    public delegate void ActionAddedDelegate(ActionClass card);
+    public static event ActionAddedDelegate? playerActionInsertedEvent;
+
     void Awake()
     {
         if (BattleQueueInstance == null)
@@ -86,6 +89,7 @@ public class BattleQueue : MonoBehaviour
     // AFTER: the player action may or not have been inserted; is still sorted regardless
     public bool AddPlayerAction(ActionClass action)
     {
+
         bool ret; // indicator for invoking method: if true should remove the card from the deck.
         if (!(protoQueue.Insert(action)))
         {
@@ -94,6 +98,7 @@ public class BattleQueue : MonoBehaviour
         }
         else
         {
+            playerActionInsertedEvent?.Invoke(action);
             roundStart = false; // ASTER1
             ret = true;
         }

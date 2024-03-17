@@ -9,11 +9,13 @@ using static UnityEngine.UI.Image;
 public class CardComparator : MonoBehaviour
 {
     public static CardComparator Instance { get; private set; }
+#nullable enable
     public static readonly float COMBAT_BUFFER_TIME = 1f;
-    public delegate IEnumerator DeadEntities();
-    public static event DeadEntities PlayEntityDeaths;
+    private delegate IEnumerator DeadEntities();
+    private static event DeadEntities? PlayEntityDeaths;
 
-
+    public delegate IEnumerator ClashersAreReadyToRoll();
+    public static event ClashersAreReadyToRoll? playersAreRollingDiceEvent;
 
     // Awake is called when the script instance is being loaded
     void Awake()
@@ -28,6 +30,17 @@ public class CardComparator : MonoBehaviour
         }
 
     }
+
+    void Start()
+    {
+        EntityClass.OnEntityDeath += SubscribeEntityDeath;
+    }
+
+    private void OnDestroy()
+    {
+        EntityClass.OnEntityDeath -= SubscribeEntityDeath;
+    }
+
 
     /*
      * Clashes two cards together handling logic calls and activating the Combat Info
@@ -182,8 +195,15 @@ public class CardComparator : MonoBehaviour
         
         StartCoroutine(origin?.MoveToPosition(HorizontalProjector(centeredDistance, origin.myTransform.position, xBuffer), bufferedRadius, duration, centeredDistance));
         yield return StartCoroutine(target?.MoveToPosition(HorizontalProjector(centeredDistance, target.myTransform.position, xBuffer), bufferedRadius, duration, centeredDistance));
+
+        if (playersAreRollingDiceEvent != null)
+        {
+            yield return StartCoroutine(playersAreRollingDiceEvent.Invoke());
+            yield return new WaitUntil(() => Input.GetMouseButtonDown(0)); //Necessary to not immediately roll the dice
+        }
         yield return new WaitUntil(() => Input.GetMouseButtonDown(0));
     }
+
 
     //The higher the ratio, the "slower" you will feel. i.e. the closer the middle point is to you so you move less
     private void CalculateSpeedRatio(ActionClass card1, ActionClass card2, out float originRatio, out float targetRatio)
@@ -224,6 +244,10 @@ public class CardComparator : MonoBehaviour
         return vectorToCenter.x > 0 ?
             currentPosition + vectorToCenter - new Vector3(xBuffer, 0f, 0f) :
             currentPosition + vectorToCenter + new Vector3(xBuffer, 0f, 0f);
+    }
+    private void SubscribeEntityDeath(EntityClass entity)
+    {
+        PlayEntityDeaths += entity.Die;
     }
 
     private void ActivateInfo(ActionClass card1, ActionClass card2)

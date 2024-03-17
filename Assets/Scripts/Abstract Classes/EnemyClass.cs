@@ -30,7 +30,6 @@ public abstract class EnemyClass : EntityClass
     public override void Start()
     {
         base.Start();
-        combatInfo.FaceLeft();
         CombatManager.Instance.AddEnemy(this);
         InstantiatePool();
 
@@ -63,6 +62,7 @@ public abstract class EnemyClass : EntityClass
     public virtual void AddAttack(List<PlayerClass> players)
     {
         if (players.Count == 0) return;
+        if (pool.Count == 0) return;
         pool[0].GetComponent<ActionClass>().Target = players[Random.Range(0, players.Count)]; // excludes the last value 
         BattleQueue.BattleQueueInstance.AddEnemyAction(pool[0].GetComponent<ActionClass>(), this);
         combatInfo.SetCombatSprite(pool[0].GetComponent<ActionClass>());
@@ -108,18 +108,7 @@ public abstract class EnemyClass : EntityClass
 
     public override IEnumerator ResetPosition()
     {
-        yield return StartCoroutine(MoveToPosition(initalPosition, 0f, 0.8f));
+        yield return StartCoroutine(MoveToPosition(initialPosition, 0f, 0.8f));
         FaceLeft();
-    }
-    public override void FaceRight()
-    {
-        this.GetComponent<SpriteRenderer>().flipX = true;
-        combatInfo.FaceRight();
-    }
-
-    public override void FaceLeft()
-    {
-        this.GetComponent<SpriteRenderer>().flipX = false;
-        combatInfo.FaceLeft();
     }
 }

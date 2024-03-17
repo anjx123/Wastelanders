@@ -8,7 +8,7 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - BlockInput
   - Water
   - UI
   - 
@@ -43,6 +43,10 @@ TagManager:
     locked: 0
   - name: CombatLayer
     uniqueID: 2146528631
+    locked: 0
+  - name: DialogueLayer
+    uniqueID: 2310111905
+    locked: 0
   - name: Top
     uniqueID: 4122416031
     locked: 0

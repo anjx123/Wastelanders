@@ -9,6 +9,10 @@ public abstract class PlayerClass : EntityClass
     public List<GameObject> cardPrefabs;
     public RectTransform handContainer;
     public int cardWidth;
+#nullable enable
+
+    public delegate void PlayerEventDelegate(PlayerClass player);
+    public static event PlayerEventDelegate? playerReshuffleDeck;
 
 
     // for manual removal from the battle queue in case the player changes their mind. 
@@ -53,6 +57,7 @@ public abstract class PlayerClass : EntityClass
     {
         if (pool.Count == 0)
         {
+            playerReshuffleDeck?.Invoke(this);
             maxHandSize--;
             for (int i = 0; i < discard.Count; i++)
             {
@@ -129,7 +134,8 @@ public abstract class PlayerClass : EntityClass
     public void HandleUseCard(ActionClass a)
     {
         // remove the used card
-        GameObject used = FindChildWithScript(handContainer.gameObject, a.GetType());
+        GameObject? used = FindChildWithScript(handContainer.gameObject, a.GetType());
+        if (used == null) return;
         hand.Remove(used);
         discard.Add(used);
         used.transform.position = new Vector3(500, 500, 1); // spirit the action away; Note: this works because if the action is readded to the deck, the RenderHand() method effectively spirits it back.
@@ -141,7 +147,7 @@ public abstract class PlayerClass : EntityClass
 /*    helper function for HandleUseCard, it takes a gameobject and type and returns
     * a child gameobject that has a script of that type.*/
 
-    GameObject FindChildWithScript(GameObject parent, System.Type type)
+    GameObject? FindChildWithScript(GameObject parent, System.Type type)
     {
         for (int i = 0; i < parent.transform.childCount; i++)
         {
@@ -159,7 +165,7 @@ public abstract class PlayerClass : EntityClass
 
     public override IEnumerator ResetPosition()
     {
-        yield return StartCoroutine(MoveToPosition(initalPosition, 0f, 0.8f));
+        yield return StartCoroutine(MoveToPosition(initialPosition, 0f, 0.8f));
         FaceRight();
     }
     //Removes entity cards and self from BQ and combat manager. Kills itself
@@ -172,18 +178,6 @@ public abstract class PlayerClass : EntityClass
 
         isDead = true;
         this.gameObject.SetActive(false);
-    }
-
-    public override void FaceRight()
-    {
-        this.GetComponent<SpriteRenderer>().flipX = false;
-        combatInfo.FaceRight();
-    }
-
-    public override void FaceLeft()
-    {
-        this.GetComponent<SpriteRenderer>().flipX = true;
-        combatInfo.FaceLeft();
     }
 
     public void DrawToMax()

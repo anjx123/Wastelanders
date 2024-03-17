@@ -124,6 +124,7 @@ MonoBehaviour:
   myTransform: {fileID: 7638263227755287879}
   animator: {fileID: -6096755080030448896}
   combatInfo: {fileID: 3230769655843684543}
+  boxCollider: {fileID: 1125175451406190241}
   icon: {fileID: 21300000, guid: 8ab5c83e49fa48f44b1cd1c0b8eb3ed2, type: 3}
   availableActions: []
   dupActions: []
