@@ -1,16 +1,29 @@
-using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class HighlightManager : MonoBehaviour // later all entity highlighter
 {
 
+    public static HighlightManager Instance { get; private set; }
 #nullable enable
     public static EntityClass? currentHighlightedEnemyEntity = null;
     public static ActionClass? currentHighlightedAction = null;
     public static PlayerClass? selectedPlayer = null;
+    public RectTransform handContainer;
+    private int CARD_WIDTH = 2;
 
+    // Awake is called when the script instance is being loaded
+    void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else if (Instance != null && Instance != this)
+        {
+            Destroy(this);
+        }
+    }
     private void Start()
     {
         CombatManager.OnGameStateChanged += ResetSelection;
@@ -21,7 +34,7 @@ public class HighlightManager : MonoBehaviour // later all entity highlighter
         CombatManager.OnGameStateChanged -= ResetSelection;
     }
 
-    public static void OnEntityClicked(EntityClass clicked)
+    public void OnEntityClicked(EntityClass clicked)
     {
         if (CombatManager.Instance.GameState != GameState.SELECTION) return;
         bool isOutlined = false;
@@ -35,10 +48,10 @@ public class HighlightManager : MonoBehaviour // later all entity highlighter
             {
                 currentHighlightedAction?.DeHighlight();
                 currentHighlightedAction = null;
-                selectedPlayer?.UnRenderHand();
+                UnRenderHand();
             }
             selectedPlayer = (PlayerClass)clicked;
-            ((PlayerClass)clicked).RenderHand();
+            RenderHand(selectedPlayer.Hand);
         }
         else
         {
@@ -150,24 +163,73 @@ public class HighlightManager : MonoBehaviour // later all entity highlighter
                 }
 
             }
-            selectedPlayer?.UnRenderHand(); // NOTE: selectedPlayer should logically never be null here as you never initiate Fighting without playing a card and you can never have an unselected player after making a selection.
+            UnRenderHand(); // NOTE: selectedPlayer should logically never be null here as you never initiate Fighting without playing a card and you can never have an unselected player after making a selection.
         } 
     }
 
     // Note that there should only be one instance per round in which selectedPlayer is null, hence the non-assertion. (initial player selection) 
     // Auto shifts to relevant player
-    public static void RenderHandIfAppropriate(PlayerClass player)
+    public void RenderHandIfAppropriate(PlayerClass player)
     {
         if (player == null)
         {
             throw new System.Exception("This method was called from an invalid location or there is a logic conundrum in OnEntityClicked");
         }
 
-        selectedPlayer?.UnRenderHand();
-        player.UnRenderHand();
-
+        UnRenderHand();
         selectedPlayer = player; 
-        selectedPlayer!.RenderHand();
-        
+        RenderHand(player.Hand);
     }
+
+    /*  Renders the cards in List<GameObject> hand to the screen, as children of the handContainer.
+    *  Cards are filled in left to right.
+    *  REQUIRES: Nothing
+    *  MODIFIES: Nothing
+    * 
+    */
+    public void RenderHand(List<GameObject> hand)
+    {
+        for (int i = 0; i < hand.Count; i++)
+        {
+            hand[i].transform.SetParent(handContainer.transform, false);
+            hand[i].transform.position = Vector3.zero;
+
+            float distanceToLeft = (float)(handContainer.rect.width / 2 - (i * CARD_WIDTH));
+
+            float y = handContainer.transform.position.y;
+            Vector3 v = new Vector3(-distanceToLeft, y, -i);
+            hand[i].transform.position = v;
+            hand[i].transform.rotation = Quaternion.Euler(0, 0, -5);
+        }
+        RenderText(hand);
+    }
+
+    // Renders the information (text) of each card inside the player's hand. 
+    private void RenderText(List<GameObject> hand)
+    {
+        for (int i = 0; i < hand.Count; i++)
+        {
+            hand[i].GetComponent<ActionClass>().UpdateDup();
+        }
+    }
+    
+
+    // "unrenders" the hand or more explictly:
+    // " Moves the player's cards off-screen to hide them.
+    // Note that this doesn't disable the card objects. "
+
+    public void UnRenderHand()
+    {
+        List<GameObject> hand = new List<GameObject>();
+        foreach (Transform child in handContainer)
+        {
+            hand.Add(child.gameObject);
+        }
+
+        for (int i = 0; i < hand.Count; i++)
+        {
+            hand[i].transform.position = new Vector3(-10, -10, -10);
+        }
+    }
+    
 }

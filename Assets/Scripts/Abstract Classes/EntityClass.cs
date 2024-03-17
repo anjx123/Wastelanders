@@ -334,7 +334,7 @@ public abstract class EntityClass : SelectClass
 
     public override void OnMouseDown()
     {
-        HighlightManager.OnEntityClicked(this);
+        HighlightManager.Instance.OnEntityClicked(this);
     }
     //Run this to reset the entity position back to its starting position
     public abstract IEnumerator ResetPosition();
