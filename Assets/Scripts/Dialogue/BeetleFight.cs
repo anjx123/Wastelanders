@@ -11,6 +11,7 @@ public class BeetleFight : DialogueClasses
 {
     [SerializeField] private Jackie jackie;
     [SerializeField] private Transform jackieDefaultTransform;
+    [SerializeField] private Transform jackieChasingTransform;
     [SerializeField] private Ives ives;
     [SerializeField] private Transform ivesDefaultTransform;
 
@@ -18,6 +19,7 @@ public class BeetleFight : DialogueClasses
     [SerializeField] private Beetle ambushBeetle;
     [SerializeField] private Transform ambushBeetleTransform;
 
+    [SerializeField] private GameObject background;
 
     [SerializeField] private DialogueWrapper openingDiscussion;
     [SerializeField] private DialogueWrapper jackieSurprised;
@@ -82,8 +84,9 @@ public class BeetleFight : DialogueClasses
             yield return StartCoroutine(ambushBeetle.Die()); // beetle runs away
             yield return StartCoroutine(DialogueManager.Instance.StartDialogue(jackieChase.Dialogue));
 
+            StartCoroutine(ShiftBackgroundCoroutine(17, 2));
+            yield return StartCoroutine(jackie.MoveToPosition(jackieChasingTransform.position, 0, 2f)); //Jackie Runs into the scene
 
-            // Change of scene as jackie chases
         }
         else
         {
@@ -112,7 +115,7 @@ public class BeetleFight : DialogueClasses
 
         StartCoroutine(origin?.MoveToPosition(HorizontalProjector(centeredDistance, origin.myTransform.position, xBuffer), bufferedRadius, duration, centeredDistance));
         yield return StartCoroutine(target?.MoveToPosition(HorizontalProjector(centeredDistance, target.myTransform.position, xBuffer), bufferedRadius, duration, centeredDistance));
-        e1.TakeDamage(jackie, 5);
+        e1.TakeDamage(e2, 5);
     }
 
     private Vector3 HorizontalProjector(Vector3 centeredDistance, Vector3 currentPosition, float xBuffer)
@@ -124,4 +127,26 @@ public class BeetleFight : DialogueClasses
             currentPosition + vectorToCenter + new Vector3(xBuffer, 0f, 0f);
     }
 
+    // moves the background. positive units shift to the left
+    private IEnumerator ShiftBackgroundCoroutine(float shiftDistance, float shiftDuration)
+    {
+        float elapsedTime = 0.0f;
+        Vector3 initialPosition = background.transform.position;
+        while (elapsedTime < shiftDuration)
+        {
+            elapsedTime += Time.deltaTime;
+
+            // Calculate the new position based on the elapsed time and shift duration
+            float t = Mathf.Clamp01(elapsedTime / shiftDuration);
+            Vector3 newPosition = initialPosition + shiftDistance * t * Vector3.left;
+
+            // Update the position of the background
+            background.transform.position = newPosition;
+
+            yield return null; // Wait for the next frame
+        }
+
+        // Shift is complete
+        Debug.Log("Background shift complete!");
+    }
 }
