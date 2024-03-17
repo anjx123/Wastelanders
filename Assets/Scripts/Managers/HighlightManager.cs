@@ -10,6 +10,7 @@ public class HighlightManager : MonoBehaviour // later all entity highlighter
     public static ActionClass? currentHighlightedAction = null;
     public static PlayerClass? selectedPlayer = null;
     public RectTransform handContainer;
+    public Transform deckContainer;
     private int CARD_WIDTH = 2;
 
     // Awake is called when the script instance is being loaded
@@ -228,7 +229,8 @@ public class HighlightManager : MonoBehaviour // later all entity highlighter
 
         for (int i = 0; i < hand.Count; i++)
         {
-            hand[i].transform.position = new Vector3(-10, -10, -10);
+            hand[i].transform.SetParent(deckContainer, false);
+            hand[i].transform.localPosition = Vector3.zero;
         }
     }
     

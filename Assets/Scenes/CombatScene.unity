@@ -1780,6 +1780,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   handContainer: {fileID: 552403359}
+  deckContainer: {fileID: 1599019524}
 --- !u!1 &1437198682
 GameObject:
   m_ObjectHideFlags: 0
