@@ -1282,7 +1282,8 @@ MonoBehaviour:
   jackieDefaultTransform: {fileID: 2041699582}
   ives: {fileID: 605471067}
   ivesDefaultTransform: {fileID: 1895702309}
-  openingDiscussion: []
+  frog: {fileID: 1442728990}
+  openingDiscussion: {fileID: 11400000, guid: f7fa0f4b78eeb4583ab772158a3e2874, type: 2}
   jumpToCombat: 0
 --- !u!1 &1277541862
 GameObject:
@@ -1584,6 +1585,17 @@ Transform:
   - {fileID: 1513545304}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1442728990 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7740565208951490800, guid: 6395bbe6ca801ac4d97dd23203674434, type: 3}
+  m_PrefabInstance: {fileID: 1108437219}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d39f9fe55a3c7d1488e2ac53490a31e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1445141095 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3003710098663250916, guid: dae0c425ea64d6043bee84267d82ea32, type: 3}
@@ -2346,7 +2358,7 @@ Transform:
   m_GameObject: {fileID: 2041699581}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.24, y: -1.28, z: 0}
+  m_LocalPosition: {x: -7.58, y: -1.12, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

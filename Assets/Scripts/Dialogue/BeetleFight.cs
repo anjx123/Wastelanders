@@ -57,7 +57,7 @@ public class BeetleFight : DialogueClasses
 
 
             jackie.DeEmphasize(); //Jackie is below the black background
-
+            yield return new WaitForSeconds(MEDIUM_PAUSE);
             frog.FaceLeft(); // frog sees jackie
             yield return new WaitForSeconds(MEDIUM_PAUSE);
             yield return StartCoroutine(frog.Die()); // frog runs away
