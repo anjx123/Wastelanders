@@ -12,8 +12,10 @@ public class BeetleFight : DialogueClasses
     [SerializeField] private Ives ives;
     [SerializeField] private Transform ivesDefaultTransform;
 
+    [SerializeField] private WasteFrog frog;
 
-    [SerializeField] private List<DialogueText> openingDiscussion;
+
+    [SerializeField] private DialogueWrapper openingDiscussion;
 
 
 
@@ -44,16 +46,23 @@ public class BeetleFight : DialogueClasses
             //Text here handles dialogue before Jackie Ives combat
             yield return new WaitForSeconds(1f);
 
-            yield return StartCoroutine(DialogueManager.Instance.StartDialogue(openingDiscussion));
-
             jackie.Emphasize(); //Jackie shows up above the black background
-            yield return StartCoroutine(jackie.ResetPosition()); //Jackie Runs into the scene and talks 
+            
             yield return new WaitForSeconds(MEDIUM_PAUSE);
 
             yield return StartCoroutine(CombatManager.Instance.FadeInLightScreen(2f));
+
+            yield return StartCoroutine(jackie.ResetPosition()); //Jackie Runs into the scene
+            
+
+
             jackie.DeEmphasize(); //Jackie is below the black background
 
-
+            frog.FaceLeft(); // frog sees jackie
+            yield return new WaitForSeconds(MEDIUM_PAUSE);
+            yield return StartCoroutine(frog.Die()); // frog runs away
+            yield return new WaitForSeconds(MEDIUM_PAUSE);
+            yield return StartCoroutine(DialogueManager.Instance.StartDialogue(openingDiscussion.Dialogue));
         }
         else
         {
@@ -61,6 +70,13 @@ public class BeetleFight : DialogueClasses
 
         }
 
+
+    }
+
+    //------helpers------
+
+    private void jackieAim()
+    {
 
     }
 
