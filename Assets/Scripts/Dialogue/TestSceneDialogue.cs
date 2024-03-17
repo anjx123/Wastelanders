@@ -8,8 +8,13 @@ public class TestSceneDialogue : DialogueClasses
     {
         if (gameState == GameState.GAME_START)
         {
-            CombatManager.Instance.GameState = GameState.SELECTION;
+            StartCoroutine(ExecuteGameStart());
         }
     }
 
+    private IEnumerator ExecuteGameStart()
+    {
+        yield return new WaitForEndOfFrame();
+        CombatManager.Instance.GameState = GameState.SELECTION;
+    }
 }
