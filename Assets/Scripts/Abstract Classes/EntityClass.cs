@@ -1,8 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEditor.Experimental.GraphView.GraphView;
-using static UnityEngine.UI.Image;
 
 public abstract class EntityClass : SelectClass
 {
@@ -336,7 +334,7 @@ public abstract class EntityClass : SelectClass
 
     public override void OnMouseDown()
     {
-        HighlightManager.OnEntityClicked(this);
+        HighlightManager.Instance.OnEntityClicked(this);
     }
     //Run this to reset the entity position back to its starting position
     public abstract IEnumerator ResetPosition();

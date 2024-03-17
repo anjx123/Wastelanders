@@ -162,7 +162,7 @@ public class CombatManager : MonoBehaviour
 
         if (players.Count > 0)
         {
-            HighlightManager.OnEntityClicked(players[0]);
+            HighlightManager.Instance.OnEntityClicked(players[0]);
         }
         BattleQueue.BattleQueueInstance.TheBeginning(); //Nasty but necessary for rendering the current implementation of BQ
     }
