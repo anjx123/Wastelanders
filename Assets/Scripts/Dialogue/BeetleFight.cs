@@ -18,12 +18,15 @@ public class BeetleFight : DialogueClasses
     [SerializeField] private WasteFrog frog;
     [SerializeField] private Beetle ambushBeetle;
     [SerializeField] private Transform ambushBeetleTransform;
+    [SerializeField] private List<Beetle> campBeetles;
+    [SerializeField] private List<Crystals> crystals;
 
     [SerializeField] private GameObject background;
 
     [SerializeField] private DialogueWrapper openingDiscussion;
     [SerializeField] private DialogueWrapper jackieSurprised;
     [SerializeField] private DialogueWrapper jackieChase;
+    [SerializeField] private DialogueWrapper jackieBeetleCamp;
 
 
     [SerializeField] private bool jumpToCombat;
@@ -84,8 +87,17 @@ public class BeetleFight : DialogueClasses
             yield return StartCoroutine(ambushBeetle.Die()); // beetle runs away
             yield return StartCoroutine(DialogueManager.Instance.StartDialogue(jackieChase.Dialogue));
 
-            StartCoroutine(ShiftBackgroundCoroutine(17, 2));
+            ShiftScene(17, 2);
+
             yield return StartCoroutine(jackie.MoveToPosition(jackieChasingTransform.position, 0, 2f)); //Jackie Runs into the scene
+            yield return new WaitForSeconds(MEDIUM_PAUSE);
+
+            yield return StartCoroutine(DialogueManager.Instance.StartDialogue(jackieBeetleCamp.Dialogue));
+            yield return new WaitForSeconds(MEDIUM_PAUSE);
+
+            StartCoroutine(jackie.MoveToPosition(jackieDefaultTransform.position, 0, 1.6f));
+            StartCoroutine(CombatManager.Instance.FadeInDarkScreen(1.5f));
+            ShiftScene(-17, 2);
 
         }
         else
@@ -127,11 +139,37 @@ public class BeetleFight : DialogueClasses
             currentPosition + vectorToCenter + new Vector3(xBuffer, 0f, 0f);
     }
 
+    // shifts the whole scene minus jackie to give the illusion of moving. i realize as i write this comment
+    // that it would have been easier to just move jackie and the camera. but i am stupid. and i don't want to
+    // redo this.
+    private void ShiftScene(float shiftDistance, float shiftDuration)
+    {
+        StartCoroutine(ShiftObjectCoroutine(background, shiftDistance, shiftDuration)); // shift background
+
+        // shift beetles; worker beetles stay facing right
+        foreach (Beetle b in campBeetles)
+        {
+            b.OutOfCombat();
+            if (b.GetType() != typeof(WorkerBeetle))
+            {
+                b.FaceLeft();
+            }
+            StartCoroutine(ShiftObjectCoroutine(b.gameObject, shiftDistance, shiftDuration));
+        }
+
+        //shift crystals
+        foreach (Crystals c in crystals)
+        {
+            c.OutOfCombat();
+            StartCoroutine(ShiftObjectCoroutine(c.gameObject, shiftDistance, shiftDuration));
+        }
+    }
+
     // moves the background. positive units shift to the left
-    private IEnumerator ShiftBackgroundCoroutine(float shiftDistance, float shiftDuration)
+    private IEnumerator ShiftObjectCoroutine(GameObject g, float shiftDistance, float shiftDuration)
     {
         float elapsedTime = 0.0f;
-        Vector3 initialPosition = background.transform.position;
+        Vector3 initialPosition = g.transform.position;
         while (elapsedTime < shiftDuration)
         {
             elapsedTime += Time.deltaTime;
@@ -141,12 +179,10 @@ public class BeetleFight : DialogueClasses
             Vector3 newPosition = initialPosition + shiftDistance * t * Vector3.left;
 
             // Update the position of the background
-            background.transform.position = newPosition;
+            g.transform.position = newPosition;
 
             yield return null; // Wait for the next frame
         }
 
-        // Shift is complete
-        Debug.Log("Background shift complete!");
     }
 }
