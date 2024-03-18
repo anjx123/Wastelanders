@@ -192,11 +192,13 @@ public abstract class ActionClass : SelectClass
             return;
         }
         GameObject textContainer = textContainerTransform.gameObject;
+        Canvas textCanvas = textContainer.GetComponent<Canvas>();
         TextMeshProUGUI NameText = textContainer.transform.Find("NameText").gameObject.GetComponent<TextMeshProUGUI>();
         TextMeshProUGUI lowerBoundText = textContainer.transform.Find("LowerBoundText").gameObject.GetComponent<TextMeshProUGUI>();
         TextMeshProUGUI upperBoundText = textContainer.transform.Find("UpperBoundText").gameObject.GetComponent<TextMeshProUGUI>();
         TextMeshProUGUI SpeedText = textContainer.transform.Find("SpeedText").gameObject.GetComponent<TextMeshProUGUI>();
 
+        textCanvas.overrideSorting = true;
         // Set the text first
         NameText.text = titleName;
         lowerBoundText.text = duplicateCard.rollFloor.ToString();
