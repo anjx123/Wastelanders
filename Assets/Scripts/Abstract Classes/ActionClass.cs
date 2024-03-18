@@ -198,7 +198,7 @@ public abstract class ActionClass : SelectClass
         TextMeshProUGUI upperBoundText = textContainer.transform.Find("UpperBoundText").gameObject.GetComponent<TextMeshProUGUI>();
         TextMeshProUGUI SpeedText = textContainer.transform.Find("SpeedText").gameObject.GetComponent<TextMeshProUGUI>();
 
-        textCanvas.overrideSorting = true;
+        textCanvas.overrideSorting = true; //Added so it overrides the layer of its parent canvas
         // Set the text first
         NameText.text = titleName;
         lowerBoundText.text = duplicateCard.rollFloor.ToString();

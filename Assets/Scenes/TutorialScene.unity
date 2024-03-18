@@ -2448,9 +2448,9 @@ MonoBehaviour:
   jackieEndPosition: {fileID: 1543907276}
   ivesPassiveBattlePosition: {fileID: 1644944200}
   ivesTutorialDeck:
-  - {fileID: 2904259167568896579, guid: 01e98381d7acf426196a2d3249245d3b, type: 3}
-  - {fileID: 7486843006211322568, guid: 9fd05c05ac41a46b8a9036735bd47e88, type: 3}
-  - {fileID: 6925166128267643469, guid: 862f00b36058344289c1c7c4dffccd6d, type: 3}
+  - {fileID: 365813191591832820, guid: 0f9d35f67947f2241aac5a9ed31099d3, type: 3}
+  - {fileID: 1570116063941554911, guid: 4ceb98929208ac64ab848aa79d636595, type: 3}
+  - {fileID: 6429530541201259997, guid: 4e812ef45f6aef54092f7985015b5248, type: 3}
   openingDiscussion:
   - bodyText: ' [The City of New Haven - East Wall Boot Camp]  '
     speakerName: 
