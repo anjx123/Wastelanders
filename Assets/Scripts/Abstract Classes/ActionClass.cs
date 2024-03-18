@@ -80,7 +80,7 @@ public abstract class ActionClass : SelectClass
     protected Vector3 OriginalPosition;
 
 #nullable enable
-    public delegate void CardStateDelegate(CardState cardState);
+    public delegate void CardStateDelegate(CardState previousState, CardState currentState);
     public delegate void CardEventDelegate(ActionClass card);
     public static event CardEventDelegate? CardClickedEvent;
     public static event CardEventDelegate? CardHighlightedEvent;
@@ -344,7 +344,6 @@ public abstract class ActionClass : SelectClass
 
         }
 
-        CardStateChange?.Invoke(nextState);
         // Apply the new state
         cardState = nextState;
 
@@ -358,6 +357,7 @@ public abstract class ActionClass : SelectClass
         {
             spriteRenderer.color = newColor;
         }
+        CardStateChange?.Invoke(previousState, nextState);
     }
 
 

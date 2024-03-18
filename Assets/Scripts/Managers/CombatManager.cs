@@ -135,7 +135,7 @@ public class CombatManager : MonoBehaviour
 
         if (players.Count > 0)
         {
-            HighlightManager.Instance.OnEntityClicked(players[0]);
+            HighlightManager.Instance.SetActivePlayer(players[0]);
         }
         BattleQueue.BattleQueueInstance.TheBeginning(); //Nasty but necessary for rendering the current implementation of BQ
     }
@@ -318,13 +318,13 @@ public class CombatManager : MonoBehaviour
         }
     }
 
-    private void HandleCrosshairEnemies(ActionClass.CardState cardState)
+    private void HandleCrosshairEnemies(ActionClass.CardState previousState, ActionClass.CardState nextState)
     {
-        if (cardState == ActionClass.CardState.CLICKED_STATE)
+        if (nextState == ActionClass.CardState.CLICKED_STATE && previousState == ActionClass.CardState.HOVER)
         {
             CrosshairAllEnemies();
         }
-        else if (cardState == ActionClass.CardState.HOVER)
+        else if (nextState == ActionClass.CardState.HOVER && previousState == ActionClass.CardState.CLICKED_STATE)
         {
             UncrosshairAllEnemies();
         }
