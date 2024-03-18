@@ -66,7 +66,6 @@ public abstract class EnemyClass : EntityClass
         pool[0].GetComponent<ActionClass>().Target = players[Random.Range(0, players.Count)]; // excludes the last value 
         BattleQueue.BattleQueueInstance.AddEnemyAction(pool[0].GetComponent<ActionClass>(), this);
         combatInfo.SetCombatSprite(pool[0].GetComponent<ActionClass>());
-        combatInfo.GetComponentInChildren<CombatCardUI>().actionClass = pool[0].GetComponent<ActionClass>();
         pool.RemoveAt(0);
         if (pool.Count < 1)
         {

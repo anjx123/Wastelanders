@@ -63,6 +63,8 @@ public class CombatInfo : MonoBehaviour
         diceAnimator.enabled = true;
         SpriteRenderer spriteRenderer = combatCardSprite.GetComponent<SpriteRenderer>();
         spriteRenderer.sprite = card.GetIcon();
+        CombatCardUI combatCardUI = combatCardSprite.GetComponent<CombatCardUI>();
+        combatCardUI.SetActionClass(card);
         diceRollText.GetComponent<TextMeshPro>().text = null;
     }
 

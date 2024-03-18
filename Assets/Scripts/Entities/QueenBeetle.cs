@@ -115,7 +115,6 @@ public class QueenBeetle : EnemyClass
         pool[idx].GetComponent<ActionClass>().Target = players[Random.Range(0, players.Count)];
         BattleQueue.BattleQueueInstance.AddEnemyAction(pool[idx].GetComponent<ActionClass>(), this);
         combatInfo.SetCombatSprite(pool[idx].GetComponent<ActionClass>());
-        combatInfo.GetComponentInChildren<CombatCardUI>().actionClass = pool[idx].GetComponent<ActionClass>();
     }
 
     // Summons a beetle at random. Called by Hatchery on-hit.

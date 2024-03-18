@@ -30,7 +30,7 @@ public class CardUI : MonoBehaviour
         lowerBoundText.text = duplicateCard.rollFloor.ToString();
         upperBoundText.text = duplicateCard.rollCeiling.ToString();
         SpeedText.text = actionClass.Speed.ToString();
-        iconRenderer.sprite = actionClass.icon;
+        iconRenderer.sprite = actionClass.GetIcon();
         if (actionClass.cardBack != null)
         {
             cardBackRenderer.sprite = actionClass.cardBack;
