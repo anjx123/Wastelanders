@@ -35,7 +35,7 @@ public class HighlightManager : MonoBehaviour // later all entity highlighter
         CombatManager.OnGameStateChanged -= ResetSelection;
     }
 
-    private void OnEntityClicked(EntityClass clicked)
+    public void OnEntityClicked(EntityClass clicked)
     {
         if (CombatManager.Instance.GameState != GameState.SELECTION) return;
         bool isOutlined = false;

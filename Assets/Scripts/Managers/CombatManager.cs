@@ -83,7 +83,7 @@ public class CombatManager : MonoBehaviour
     void Start()
     {
         GameState = GameState.GAME_START; //Put game start code in the performGameStart method.
-        ActionClass.CardSelectedEvent += HandleCrosshairEnemies;
+        ActionClass.CardStateChange += HandleCrosshairEnemies;
     }
 
 

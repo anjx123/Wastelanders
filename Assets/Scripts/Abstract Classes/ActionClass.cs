@@ -82,9 +82,9 @@ public abstract class ActionClass : SelectClass
 #nullable enable
     public delegate void CardStateDelegate(CardState cardState);
     public delegate void CardEventDelegate(ActionClass card);
-    public static event CardEventDelegate? cardClickedEvent;
-    public static event CardEventDelegate? cardHighlightedEvent;
-    public static event CardStateDelegate? CardSelectedEvent;
+    public static event CardEventDelegate? CardClickedEvent;
+    public static event CardEventDelegate? CardHighlightedEvent;
+    public static event CardStateDelegate? CardStateChange;
 
     public virtual void ExecuteActionEffect()
     {
@@ -238,7 +238,7 @@ public abstract class ActionClass : SelectClass
     public override void OnMouseDown()
     {
         HighlightManager.OnActionClicked(this);
-        cardClickedEvent?.Invoke(this);
+        CardClickedEvent?.Invoke(this);
     }
 
     public void ToggleSelected()
@@ -262,7 +262,7 @@ public abstract class ActionClass : SelectClass
         {
             PopUpNotificationManager.Instance.DisplayText(description);
         }
-        cardHighlightedEvent?.Invoke(this);
+        CardHighlightedEvent?.Invoke(this);
     }
 
     public override void OnMouseExit()
@@ -308,7 +308,6 @@ public abstract class ActionClass : SelectClass
             (previousState == CardState.HOVER && (nextState != CardState.NORMAL && nextState != CardState.CLICKED_STATE)) ||
             (previousState == CardState.CLICKED_STATE && (nextState != CardState.HOVER)))
         {
-            Debug.Log("Bouncing my state where previous: " + previousState + " and current: " + nextState);
             return;
         }
 
@@ -331,10 +330,6 @@ public abstract class ActionClass : SelectClass
                 {
                     positionChange = new Vector3(0.04f, 0.4f, 0);
                 }
-                if (previousState == CardState.CLICKED_STATE)
-                {
-                    CardSelectedEvent?.Invoke(CardState.HOVER);
-                }
                 break;
             case CardState.CANT_PLAY:
                 newColor = new Color(1f, 200f / 255f, 200f / 255f, 1);
@@ -345,14 +340,11 @@ public abstract class ActionClass : SelectClass
                 break;
             case CardState.CLICKED_STATE:
                 newColor = new Color(0.5f, 0.5f, 0.5f, 1);
-                if (previousState == CardState.HOVER)
-                {
-                    CardSelectedEvent?.Invoke(CardState.CLICKED_STATE);
-                }
                 break;
 
         }
 
+        CardStateChange?.Invoke(nextState);
         // Apply the new state
         cardState = nextState;
 
