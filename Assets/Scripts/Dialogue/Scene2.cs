@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UIElements;
 
 public class Scene2 : DialogueClasses
 {
@@ -12,6 +13,9 @@ public class Scene2 : DialogueClasses
     [SerializeField] private Transform jackieWander2;
     [SerializeField] private Transform jackieWander3;
     [SerializeField] private Transform outOfScreen;
+
+    [SerializeField] private GameObject ives;
+    [SerializeField] private Transform ivesAnnouncePosition;
 
     [SerializeField] private WasteFrog frog;
     [SerializeField] private Transform frogInitialWalkIn;
@@ -44,21 +48,30 @@ public class Scene2 : DialogueClasses
         yield return new WaitForSeconds(1f);
         jackie.OutOfCombat();
         frog.OutOfCombat();
+        ives.GetComponent<EnemyIves>().OutOfCombat();
         
         jackie.SetReturnPosition(jackieDefaultTransform.position);
         frog.SetReturnPosition(frogInitialWalkIn.position);
 
         frog.UnTargetable();
+        ives.GetComponent<EnemyIves>().UnTargetable();
         if (!jumpToCombat)
         {
             yield return new WaitForSeconds(1f);
 
             yield return StartCoroutine(DialogueManager.Instance.StartDialogue(sceneNarration));
+            yield return new WaitForSeconds(BRIEF_PAUSE);
+
+            ives.GetComponent<EnemyIves>().Emphasize();
+            yield return StartCoroutine(ives.GetComponent<EnemyIves>().MoveToPosition(ivesAnnouncePosition.position, 0f, 1.2f));
             yield return StartCoroutine(DialogueManager.Instance.StartDialogue(ivesInstruction));
+            ives.GetComponent<EnemyIves>().DeEmphasize();
+            DestroyImmediate(ives);
 
             jackie.Emphasize();
             yield return StartCoroutine(jackie.ResetPosition());
             yield return StartCoroutine(CombatManager.Instance.FadeInLightScreen(MEDIUM_PAUSE));
+            jackie.DeEmphasize();
             yield return StartCoroutine(DialogueManager.Instance.StartDialogue(jackieStrategyPlan));
             yield return StartCoroutine(jackie.MoveToPosition(jackieWander1.position, 0f, 1.2f));
             yield return StartCoroutine(jackie.MoveToPosition(jackieWander2.position, 0f, 1.2f));
@@ -68,11 +81,17 @@ public class Scene2 : DialogueClasses
             yield return StartCoroutine(jackie.MoveToPosition(jackieDefaultTransform.position, 0f, .5f));
             yield return StartCoroutine(WalkWhileScreenFades());
             // layering bush to be done l8r
+        } else
+        {
+            DestroyImmediate(ives);
         }
        
         yield return StartCoroutine(DialogueManager.Instance.StartDialogue(jackieMissedShot));
+        // start frog fight
         yield return StartCoroutine(jackie.ResetPosition());
         yield return StartCoroutine(frog.ResetPosition());
+        jackie.InCombat();
+        frog.Targetable(); frog.InCombat();
         yield return new WaitUntil(() => !DialogueManager.Instance.IsInDialogue());
         CombatManager.Instance.GameState = GameState.SELECTION;
 
