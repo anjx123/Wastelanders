@@ -54,6 +54,15 @@ public abstract class ActionClass : SelectClass
         public int rollCeiling;
         public int actualRoll;
     }
+    public enum CardState
+    {
+        NORMAL,
+        HOVER,
+        CANT_PLAY,
+        CLICKED_STATE,
+    }
+
+    private CardState cardState = CardState.NORMAL;
     public int Speed { get; protected set; }
     public string description;
 
@@ -70,13 +79,12 @@ public abstract class ActionClass : SelectClass
 
     protected Vector3 OriginalPosition;
 
-    protected bool EnqueueMoveDown = false;
-
-    #nullable enable
-
+#nullable enable
+    public delegate void CardStateDelegate(CardState previousState, CardState currentState);
     public delegate void CardEventDelegate(ActionClass card);
-    public static event CardEventDelegate? cardClickedEvent;
-    public static event CardEventDelegate? cardHighlightedEvent;
+    public static event CardEventDelegate? CardClickedEvent;
+    public static event CardEventDelegate? CardHighlightedEvent;
+    public static event CardStateDelegate? CardStateChange;
 
     public virtual void ExecuteActionEffect()
     {
@@ -91,12 +99,6 @@ public abstract class ActionClass : SelectClass
     public virtual void Start()
     {
 
-    }
-
-    public override void OnMouseDown()
-    {
-        HighlightManager.OnActionClicked(this);
-        cardClickedEvent?.Invoke(this);
     }
     //@Author: Anrui
     //Called when this card hits the enemy, runs any on hit buffs or effects given.
@@ -190,11 +192,13 @@ public abstract class ActionClass : SelectClass
             return;
         }
         GameObject textContainer = textContainerTransform.gameObject;
+        Canvas textCanvas = textContainer.GetComponent<Canvas>();
         TextMeshProUGUI NameText = textContainer.transform.Find("NameText").gameObject.GetComponent<TextMeshProUGUI>();
         TextMeshProUGUI lowerBoundText = textContainer.transform.Find("LowerBoundText").gameObject.GetComponent<TextMeshProUGUI>();
         TextMeshProUGUI upperBoundText = textContainer.transform.Find("UpperBoundText").gameObject.GetComponent<TextMeshProUGUI>();
         TextMeshProUGUI SpeedText = textContainer.transform.Find("SpeedText").gameObject.GetComponent<TextMeshProUGUI>();
 
+        textCanvas.overrideSorting = true;
         // Set the text first
         NameText.text = titleName;
         lowerBoundText.text = duplicateCard.rollFloor.ToString();
@@ -233,92 +237,133 @@ public abstract class ActionClass : SelectClass
         }
 
     }
+    public override void OnMouseDown()
+    {
+        HighlightManager.OnActionClicked(this);
+        CardClickedEvent?.Invoke(this);
+    }
 
+    public void ToggleSelected()
+    {
+        SetCardState(CardState.CLICKED_STATE);
+    }
+
+    public void ToggleUnSelected()
+    {
+        SetCardState(CardState.HOVER);
+    }
 
     public override void OnMouseEnter()
     {
-        if (!isOutlined)
+        if (cardState == CardState.NORMAL)
         {
-            GetComponent<SpriteRenderer>().color = new Color(0.6f, 0.6f, 0.6f, 1);
-
-            // Get the SpriteRenderers of the child objects
-            SpriteRenderer[] childSpriteRenderers = GetComponentsInChildren<SpriteRenderer>();
-
-            // Now we can access each SpriteRenderer
-            foreach (SpriteRenderer spriteRenderer in childSpriteRenderers)
-            {
-                spriteRenderer.color = new Color(0.6f, 0.6f, 0.6f, 1);
-            }
-
-            transform.position += new Vector3((float)0.04, (float)0.4, 0);
-        }
-        else
-        {
-            EnqueueMoveDown = false;
+            SetCardState(CardState.HOVER);
         }
 
         if (description != null)
         {
             PopUpNotificationManager.Instance.DisplayText(description);
         }
-        cardHighlightedEvent?.Invoke(this);
+        CardHighlightedEvent?.Invoke(this);
     }
 
     public override void OnMouseExit()
     {
-        if (!isOutlined)
+        if (cardState == CardState.HOVER)
         {
-            GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 1);
-
-            SpriteRenderer[] childSpriteRenderers = GetComponentsInChildren<SpriteRenderer>();
-
-            foreach (SpriteRenderer spriteRenderer in childSpriteRenderers)
-            {
-                spriteRenderer.color = new Color(1f, 1f, 1f, 1);
-            }
-
-            transform.position -= new Vector3((float)0.04, (float)0.4, 0);
-        }
-        else
-        {
-            EnqueueMoveDown = true;
+            SetCardState(CardState.NORMAL);
         }
 
         PopUpNotificationManager.Instance.RemoveDescription();
     }
 
-    public override void Highlight()
+    public void SetCanPlay(bool canPlay)
     {
-        isOutlined = true;
-        GetComponent<SpriteRenderer>().color = new Color(0.6f, 0.6f, 0.6f, 1);
-        SpriteRenderer[] childSpriteRenderers = GetComponentsInChildren<SpriteRenderer>();
+        if (canPlay)
+        {
+            SetCardState(CardState.NORMAL);
+        }
+        else
+        {
+            SetCardState(CardState.CANT_PLAY);
+        }
+    } 
 
+    public void ForceNormalState()
+    {
+        if (cardState == CardState.CLICKED_STATE)
+        {
+            SetCardState(CardState.HOVER);
+            SetCardState(CardState.NORMAL);
+        }
+    }
+    private void SetCardState(CardState nextState)
+    {
+        CardState previousState = cardState;
+        
+        //Transition Diagram
+        // CANT_PLAY <-> NORMAL <-> HOVER <-> CLICKED_STATE
+
+        //Bounces all the bad state transitions
+        if ((previousState == CardState.CANT_PLAY && nextState != CardState.NORMAL) ||
+            (previousState == CardState.NORMAL && (nextState != CardState.CANT_PLAY && nextState != CardState.HOVER)) || 
+            (previousState == CardState.HOVER && (nextState != CardState.NORMAL && nextState != CardState.CLICKED_STATE)) ||
+            (previousState == CardState.CLICKED_STATE && (nextState != CardState.HOVER)))
+        {
+            return;
+        }
+
+        // Determine the color and position changes based on the current and new states
+        Color newColor = Color.white;
+        Vector3 positionChange = Vector3.zero;
+
+        switch (nextState)
+        {
+            case CardState.NORMAL:
+                newColor = Color.white;
+                if (previousState == CardState.HOVER)
+                {
+                    positionChange = new Vector3(-0.04f, -0.4f, 0);
+                }
+                break;
+            case CardState.HOVER:
+                newColor = new Color(0.6f, 0.6f, 0.6f, 1);
+                if (previousState == CardState.NORMAL)
+                {
+                    positionChange = new Vector3(0.04f, 0.4f, 0);
+                }
+                break;
+            case CardState.CANT_PLAY:
+                newColor = new Color(1f, 200f / 255f, 200f / 255f, 1);
+                if (cardState == CardState.HOVER)
+                {
+                    positionChange = new Vector3(-0.04f, -0.4f, 0); //This state cant happen?
+                }
+                break;
+            case CardState.CLICKED_STATE:
+                newColor = new Color(0.5f, 0.5f, 0.5f, 1);
+                break;
+
+        }
+
+        // Apply the new state
+        cardState = nextState;
+
+        // Apply the color and position changes
+        GetComponent<SpriteRenderer>().color = newColor;
+        transform.position += positionChange;
+
+        // Apply the same color change to child SpriteRenderers
+        SpriteRenderer[] childSpriteRenderers = GetComponentsInChildren<SpriteRenderer>();
         foreach (SpriteRenderer spriteRenderer in childSpriteRenderers)
         {
-            spriteRenderer.color = new Color(0.6f, 0.6f, 0.6f, 1);
+            spriteRenderer.color = newColor;
         }
-        transform.rotation = Quaternion.Euler(0, 0, 0);
-        CombatManager.Instance.CrosshairAllEnemies();
+        CardStateChange?.Invoke(previousState, nextState);
     }
 
-    public override void DeHighlight()
-    {
-        isOutlined = false;
-        GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 1);
-        SpriteRenderer[] childSpriteRenderers = GetComponentsInChildren<SpriteRenderer>();
 
-        foreach (SpriteRenderer spriteRenderer in childSpriteRenderers)
-        {
-            spriteRenderer.color = new Color(1f, 1f, 1f, 1);
-        }
-        transform.rotation = Quaternion.Euler(0, 0, -5);
-        if (EnqueueMoveDown)
-        {
-            transform.position -= new Vector3((float)0.04, (float)0.4, 0);
-            EnqueueMoveDown = false;
-        }
-        CombatManager.Instance.UncrosshairAllEnemies();
-    }
+
 
 
     //Will activate the checkmark on card UI for indication that it is in the player's deck

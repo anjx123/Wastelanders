@@ -48,6 +48,7 @@ public abstract class EntityClass : SelectClass
 
     public delegate void EntityDelegate(EntityClass player);
     public static event EntityDelegate? OnEntityDeath;
+    public static event EntityDelegate? OnEntityClicked;
 
     public Sprite? icon;
 
@@ -334,7 +335,7 @@ public abstract class EntityClass : SelectClass
 
     public override void OnMouseDown()
     {
-        HighlightManager.Instance.OnEntityClicked(this);
+        OnEntityClicked?.Invoke(this);
     }
     //Run this to reset the entity position back to its starting position
     public abstract IEnumerator ResetPosition();
