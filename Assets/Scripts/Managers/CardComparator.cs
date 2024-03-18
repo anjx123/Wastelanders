@@ -262,8 +262,8 @@ public class CardComparator : MonoBehaviour
 
     private void DeactivateInfo(ActionClass card1, ActionClass card2)
     {
-        card1.Origin.DeactivateCombatInfo();
-        card2.Origin.DeactivateCombatInfo();
+        card1.Origin.DeactivateCombatInfo(card1);
+        card2.Origin.DeactivateCombatInfo(card2);
     }
 
     private void EmphasizeClashers(EntityClass origin, EntityClass target)

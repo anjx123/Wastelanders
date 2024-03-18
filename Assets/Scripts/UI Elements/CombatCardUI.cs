@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 public class CombatCardUI : DisplayableClass
 {
-
+    [SerializeField] SpriteRenderer targetRenderer;
     private void OnMouseOver()
     {
         // Increase the size of the Combat UI to indicate it's clickable
@@ -31,4 +31,22 @@ public class CombatCardUI : DisplayableClass
         }
     }
 
+    public void SetActionClass(ActionClass actionClass)
+    {
+        ActionClass = actionClass;
+        targetRenderer.sprite = actionClass.Target.icon;
+        GetComponent<SpriteRenderer>().sprite = actionClass.GetIcon();
+    }
+
+    public void Emphasize()
+    {
+        GetComponent<SpriteRenderer>().sortingOrder = CombatManager.Instance.FADE_SORTING_ORDER + 1;
+        targetRenderer.GetComponent<SpriteRenderer>().sortingOrder = CombatManager.Instance.FADE_SORTING_ORDER + 2;
+    }
+
+    public void DeEmphasize()
+    {
+        GetComponent<SpriteRenderer>().sortingOrder = CombatManager.Instance.FADE_SORTING_ORDER - 2;
+        targetRenderer.GetComponent<SpriteRenderer>().sortingOrder = CombatManager.Instance.FADE_SORTING_ORDER - 1;
+    }
 }

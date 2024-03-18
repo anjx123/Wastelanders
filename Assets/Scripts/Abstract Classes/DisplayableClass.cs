@@ -34,9 +34,5 @@ public abstract class DisplayableClass : SelectClass
         targetHighlighted = false;
     }
 
-    public void SetActionClass(ActionClass actionClass)
-    {
-        this.ActionClass = actionClass;
-    }
 }
 
