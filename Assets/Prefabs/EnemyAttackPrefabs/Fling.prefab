@@ -126,9 +126,8 @@ MonoBehaviour:
   myTransform: {fileID: 2731077104277925276}
   duplicateCardInstance: {fileID: 0}
   description: 
-  titleName: Fling
   icon: {fileID: 21300000, guid: 232f707db71b07b4191279338d75b399, type: 3}
-  fullCardObjectPrefab: {fileID: 7256956916184963317, guid: a2b995ab0a6504454b9f30321a89044a, type: 3}
+  cardBack: {fileID: 21300000, guid: 8ac8a46b814e1b14f89b3829e430de25, type: 3}
   cardUI: {fileID: 0}
   projectileBehaviour: {fileID: 2027773056581410051}
 --- !u!114 &2027773056581410051

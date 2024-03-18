@@ -5,12 +5,13 @@ public class HighlightManager : MonoBehaviour // later all entity highlighter
 {
 
     public static HighlightManager Instance { get; private set; }
+    public RectTransform handContainer;
+    public Transform deckContainer;
 #nullable enable
     public static EntityClass? currentHighlightedEnemyEntity = null;
     public static ActionClass? currentHighlightedAction = null;
     public static PlayerClass? selectedPlayer = null;
-    public RectTransform handContainer;
-    public Transform deckContainer;
+ 
     private int CARD_WIDTH = 2;
 
     // Awake is called when the script instance is being loaded

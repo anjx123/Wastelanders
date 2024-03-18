@@ -13,7 +13,7 @@ public class FocusedStrike : StaffCards
     public override void Initialize()
     {
         CardType = CardType.MeleeAttack;
-        myName = "FocusedStrike";
+        myName = "Focused Strike";
         description = "Gain 1 Focus, Then Attack";
         lowerBound = 2;
         upperBound = 2;

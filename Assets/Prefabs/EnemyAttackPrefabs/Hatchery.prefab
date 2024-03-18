@@ -123,7 +123,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myTransform: {fileID: 0}
-  titleName: Hatchery
+  duplicateCardInstance: {fileID: 0}
+  description: 
   icon: {fileID: 21300000, guid: 5c42f22b680694218be05c960a2e3400, type: 3}
-  fullCardObjectPrefab: {fileID: 7256956916184963317, guid: e30bebcc08ac14bf6af3aa8b433f3e5d, type: 3}
+  cardBack: {fileID: 21300000, guid: 8ac8a46b814e1b14f89b3829e430de25, type: 3}
   cardUI: {fileID: 0}

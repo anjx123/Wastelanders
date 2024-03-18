@@ -22,7 +22,7 @@ public class StackSmash : SlimeAttacks
         upperBound = 4;
         Speed = 2;
 
-        myName = "StackSmash";
+        myName = "Stack Smash";
         description = "If this attack is unstaggered, attack again";
         CardType = CardType.MeleeAttack;
         Renderer renderer = GetComponent<Renderer>();

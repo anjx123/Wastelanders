@@ -22,7 +22,7 @@ public class FocusedDefense : StaffCards
         Speed = 5;
 
 
-        myName = "FocusedDefense";
+        myName = "Focused Defense";
         description = "Gain 1 Focus For Every Attack The Clashing Opponent Makes Against This Character";
         CardType = CardType.Defense;
         Renderer renderer = GetComponent<Renderer>();

@@ -16,7 +16,7 @@ public class DiscreteStrike : StaffCards
         upperBound = 1;
         Speed = 1;
 
-        myName = "DiscreteStrike";
+        myName = "Discrete Strike";
         description = "Gain 2 focus, then strike";
         Renderer renderer = GetComponent<Renderer>();
         ogMaterial = renderer.material; // og sprite of card

@@ -18,7 +18,7 @@ public class CounterStrike : StaffCards
         upperBound = 3;
         Speed = 5;
 
-        myName = "CounterStrike";
+        myName = "Counter Strike";
         description = "Block with this card, then make an attack with this card";
         CardType = CardType.Defense;
         Renderer renderer = GetComponent<Renderer>();

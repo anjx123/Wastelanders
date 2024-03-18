@@ -21,7 +21,7 @@ public class CalmTheMind : StaffCards
 
         Speed = 4;
         
-        myName = "CalmTheMind";
+        myName = "Calm The Mind";
         description = "Gain 2 Stacks Of Focus";
         CardType = CardType.Defense;
         Renderer renderer = GetComponent<Renderer>();
