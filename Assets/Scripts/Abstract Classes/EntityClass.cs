@@ -147,11 +147,13 @@ public abstract class EntityClass : SelectClass
         float maxProportionTravelled = (distance - radius) / distance;
 
 
-
-        if (HasAnimationParameter("IsMoving") && distance > radius + PLAY_RUNNING_ANIMATION_DELTA)
+        if (distance > radius + PLAY_RUNNING_ANIMATION_DELTA)
         {
             UpdateFacing(diffInLocation, lookAtPosition);
-            animator.SetBool("IsMoving", true);
+            if (HasAnimationParameter("IsMoving"))
+            {
+                animator.SetBool("IsMoving", true);
+            }
         }
 
         while (elapsedTime < duration)
