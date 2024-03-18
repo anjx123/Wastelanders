@@ -73,6 +73,16 @@ public class BattleQueue : MonoBehaviour
         
     }
 
+    public bool CanInsertCard(ActionClass actionClass)
+    {
+        if (!actionClass)
+        {
+            Debug.LogWarning("Asking to insert a null action class");
+            return false;
+        }
+        return protoQueue.CanInsertCard(actionClass);
+    }
+
 
     // FOR ALL ADD METHODS: the Insert() method of SortedArray() is responsible for insertion into the WrapperArray as well. 
 

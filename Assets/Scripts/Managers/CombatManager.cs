@@ -50,18 +50,6 @@ public class CombatManager : MonoBehaviour
         }
     }
 
-    public void CrosshairAllEnemies() {
-        foreach (EnemyClass enemy in enemies) {
-            enemy.CrossHair();
-        }
-    }
-
-    public void UncrosshairAllEnemies() {
-        foreach (EnemyClass enemy in enemies) {
-            enemy.UnCrossHair();
-        }
-    }
-
     public int FADE_SORTING_ORDER
     {
         get
@@ -77,22 +65,6 @@ public class CombatManager : MonoBehaviour
             return fadeScreen.gameObject.transform.position.z;
         }
     }
-    public static int GetNextSortingLayerID(int currentSortingLayerID)
-    {
-        var layers = SortingLayer.layers;
-        var currentLayerIndex = System.Array.FindIndex(layers, layer => layer.id == currentSortingLayerID);
-
-        // If the current layer is the last one, return the first layer id
-        if (currentLayerIndex == layers.Length - 1)
-        {
-            return layers[0].id;
-        }
-        else
-        {
-            return layers[currentLayerIndex + 1].id;
-        }
-    }
-
 
     // Awake is called when the script instance is being loaded
     void Awake()
@@ -111,6 +83,7 @@ public class CombatManager : MonoBehaviour
     void Start()
     {
         GameState = GameState.GAME_START; //Put game start code in the performGameStart method.
+        ActionClass.CardSelectedEvent += HandleCrosshairEnemies;
     }
 
 
@@ -328,6 +301,33 @@ public class CombatManager : MonoBehaviour
             yield return null;
         }
         fadeActive = false;
+    }
+    private void CrosshairAllEnemies()
+    {
+        foreach (EnemyClass enemy in enemies)
+        {
+            enemy.CrossHair();
+        }
+    }
+
+    private void UncrosshairAllEnemies()
+    {
+        foreach (EnemyClass enemy in enemies)
+        {
+            enemy.UnCrossHair();
+        }
+    }
+
+    private void HandleCrosshairEnemies(ActionClass.CardState cardState)
+    {
+        if (cardState == ActionClass.CardState.CLICKED_STATE)
+        {
+            CrosshairAllEnemies();
+        }
+        else if (cardState == ActionClass.CardState.HOVER)
+        {
+            UncrosshairAllEnemies();
+        }
     }
 
     public bool CanHighlight()

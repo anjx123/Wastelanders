@@ -35,7 +35,7 @@ public class HighlightManager : MonoBehaviour // later all entity highlighter
         CombatManager.OnGameStateChanged -= ResetSelection;
     }
 
-    public void OnEntityClicked(EntityClass clicked)
+    private void OnEntityClicked(EntityClass clicked)
     {
         if (CombatManager.Instance.GameState != GameState.SELECTION) return;
         bool isOutlined = false;
@@ -43,16 +43,16 @@ public class HighlightManager : MonoBehaviour // later all entity highlighter
 /*        Debug.Log(clicked.GetType());
         Debug.Log(selectedPlayer);*/
 
-        if (clicked is PlayerClass)
+        if (clicked is PlayerClass clickedPlayer) //Pattern Matching in C# :)
         {
-            if ((PlayerClass)clicked != selectedPlayer)
+            if (clickedPlayer != selectedPlayer)
             {
                 currentHighlightedAction?.DeHighlight();
                 currentHighlightedAction = null;
                 UnRenderHand();
             }
-            selectedPlayer = (PlayerClass)clicked;
-            RenderHand(selectedPlayer.Hand);
+            selectedPlayer = clickedPlayer;
+            RenderHand(clickedPlayer.Hand);
         }
         else
         {
@@ -109,6 +109,7 @@ public class HighlightManager : MonoBehaviour // later all entity highlighter
             currentHighlightedAction.DeHighlight();
             if (selectedPlayer != null && wasAdded) // you would NEED a selected player here. look in present code block
             {
+                currentHighlightedAction.ForceNormalState();
                 selectedPlayer.HandleUseCard(currentHighlightedAction);
             } else
             {
@@ -124,27 +125,29 @@ public class HighlightManager : MonoBehaviour // later all entity highlighter
         if (CombatManager.Instance.GameState != GameState.SELECTION) return;
         if (selectedPlayer != null)
         {
+            if (BattleQueue.BattleQueueInstance.CanInsertCard(clicked) == false)
+            {
+                PopUpNotificationManager.Instance.DisplayWarning(PopupType.SameSpeed);
+                return;
+            }
             if (currentHighlightedAction == null)
             {
+                clicked.ToggleSelected();
                 currentHighlightedAction = clicked;
-                currentHighlightedAction.Highlight();
             }
             else if (currentHighlightedAction != clicked)
             {
-                currentHighlightedAction.DeHighlight();
-                clicked.Highlight();
+                currentHighlightedAction.ForceNormalState();
+                clicked.ToggleSelected();
                 currentHighlightedAction = clicked;
             }
-            else
+            else //Current Action is the same as clicked
             {
-                if (!currentHighlightedAction.Toggle()) // if enemy chosen but no card chosen
+                currentHighlightedAction.ToggleUnSelected();
+                currentHighlightedAction = null;
+                if (currentHighlightedEnemyEntity != null)
                 {
-                    currentHighlightedAction = null;
-                    if (currentHighlightedEnemyEntity != null)
-                    {
-                        currentHighlightedEnemyEntity.DeHighlight();
-                    }
-
+                    currentHighlightedEnemyEntity.DeHighlight();
                 }
             }
         }
@@ -155,8 +158,9 @@ public class HighlightManager : MonoBehaviour // later all entity highlighter
         if (gameState == GameState.FIGHTING)
         {
             //Untoggle card if it is still selected when entering fighting
-            if (currentHighlightedAction != null && !currentHighlightedAction.Toggle())
+            if (currentHighlightedAction != null)
             {
+                currentHighlightedAction.ToggleUnSelected();
                 currentHighlightedAction = null;
                 if (currentHighlightedEnemyEntity != null)
                 {
@@ -188,19 +192,22 @@ public class HighlightManager : MonoBehaviour // later all entity highlighter
     *  MODIFIES: Nothing
     * 
     */
-    public void RenderHand(List<GameObject> hand)
+    private void RenderHand(List<GameObject> hand)
     {
         for (int i = 0; i < hand.Count; i++)
         {
-            hand[i].transform.SetParent(handContainer.transform, false);
-            hand[i].transform.position = Vector3.zero;
+            GameObject handItem = hand[i];
+            handItem.transform.SetParent(handContainer.transform, false);
+            handItem.transform.position = Vector3.zero;
 
             float distanceToLeft = (float)(handContainer.rect.width / 2 - (i * CARD_WIDTH));
 
             float y = handContainer.transform.position.y;
             Vector3 v = new Vector3(-distanceToLeft, y, -i);
-            hand[i].transform.position = v;
-            hand[i].transform.rotation = Quaternion.Euler(0, 0, -5);
+            handItem.transform.position = v;
+            handItem.transform.rotation = Quaternion.Euler(0, 0, -5);
+            ActionClass insertingAction = handItem.GetComponent<ActionClass>();
+            insertingAction.SetCanPlay(BattleQueue.BattleQueueInstance.CanInsertCard(insertingAction));
         }
         RenderText(hand);
     }
@@ -219,7 +226,7 @@ public class HighlightManager : MonoBehaviour // later all entity highlighter
     // " Moves the player's cards off-screen to hide them.
     // Note that this doesn't disable the card objects. "
 
-    public void UnRenderHand()
+    private void UnRenderHand()
     {
         List<GameObject> hand = new List<GameObject>();
         foreach (Transform child in handContainer)

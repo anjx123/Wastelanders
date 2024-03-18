@@ -48,6 +48,7 @@ public abstract class EntityClass : SelectClass
 
     public delegate void EntityDelegate(EntityClass player);
     public static event EntityDelegate? OnEntityDeath;
+    public static event EntityDelegate? OnEntityClicked;
 
     public Sprite? icon;
 
