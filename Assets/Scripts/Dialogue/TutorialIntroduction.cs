@@ -178,7 +178,7 @@ public class TutorialIntroduction : DialogueClasses
     {
         EntityClass.OnEntityDeath += FirstDummyDies; //Setup Listener to set state to Game Win
         PlayerClass.playerReshuffleDeck += PlayerLostOneMaxHandSize;
-        StartCoroutine(StartDialogueWithNextEvent(youCanPlayCardsTutorial, () => { ActionClass.cardHighlightedEvent += OnPlayerFirstHighlightCard; }));
+        StartCoroutine(StartDialogueWithNextEvent(youCanPlayCardsTutorial, () => { ActionClass.CardHighlightedEvent += OnPlayerFirstHighlightCard; }));
     }
 
     private void PlayerLostOneMaxHandSize(PlayerClass player)
@@ -198,7 +198,7 @@ public class TutorialIntroduction : DialogueClasses
     //Once hovering over a card, we talk about speed and power
     private void OnPlayerFirstHighlightCard(ActionClass card)
     {
-        ActionClass.cardHighlightedEvent -= OnPlayerFirstHighlightCard;
+        ActionClass.CardHighlightedEvent -= OnPlayerFirstHighlightCard;
         StartCoroutine(StartDialogueWithNextEvent(cardFieldsTutorial, () => { BattleQueue.playerActionInsertedEvent += OnPlayerFirstInsertCard; }));
     }
 

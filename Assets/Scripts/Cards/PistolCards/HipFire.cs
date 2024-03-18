@@ -43,7 +43,7 @@ public class HipFire : PistolCards
         Speed = 1;
         description = "Make This Attack Once, If Unstaggered, Make It Again";
         CardType = CardType.RangedAttack;
-        myName = "HipFire";
+        myName = "Hip Fire";
 
         base.Initialize();
     }

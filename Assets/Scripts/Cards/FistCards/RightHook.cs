@@ -8,9 +8,9 @@ using static UnityEngine.UI.Image;
 public class RightHook : FistCards
 {
     [SerializeField]
-    private GameObject leftHookPrefab;
+    private GameObject haymakerPrefab;
 
-    private GameObject leftHook;
+    private GameObject haymaker;
 
     public override void ExecuteActionEffect()
     {
@@ -25,8 +25,8 @@ public class RightHook : FistCards
         Speed = 4;
 
         myName = "Right Hook";
-        description = "Hook to the Right";
-       
+        description = "If this attack lands, use Haymaker";
+        CardType = CardType.MeleeAttack;
         Renderer renderer = GetComponent<Renderer>();
         ogMaterial = renderer.material; // og sprite of card
         OriginalPosition = transform.position;
@@ -41,8 +41,9 @@ public class RightHook : FistCards
     public override void CardIsUnstaggered()
     {
         base.CardIsUnstaggered();
-        if (!leftHook) { leftHook = Instantiate(leftHookPrefab); leftHook.transform.position = new Vector3(-10, 10, 10); }
-        ActionClass ac = leftHook.GetComponent<ActionClass>();
+        Origin.AttackAnimation("IsMelee");
+        if (!haymaker) { haymaker = Instantiate(haymakerPrefab); haymaker.transform.position = new Vector3(-10, 10, 10); }
+        ActionClass ac = haymaker.GetComponent<ActionClass>();
         ac.Origin = this.Origin;
         ac.Target = this.Target;
         BattleQueue.BattleQueueInstance.InsertDupPlayerAction(ac);

@@ -193,8 +193,11 @@ public class CardComparator : MonoBehaviour
         float xBuffer = (card1.CardType == CardType.RangedAttack || card1.CardType == CardType.Defense) &&
                         (card2.CardType == CardType.RangedAttack || card2.CardType == CardType.Defense) ? X_BUFFER * 3 : X_BUFFER; //Calculates how far away clashers should be when striking
         
-        StartCoroutine(origin?.MoveToPosition(HorizontalProjector(centeredDistance, origin.myTransform.position, xBuffer), bufferedRadius, duration, centeredDistance));
-        yield return StartCoroutine(target?.MoveToPosition(HorizontalProjector(centeredDistance, target.myTransform.position, xBuffer), bufferedRadius, duration, centeredDistance));
+        Coroutine playerMove = StartCoroutine(origin?.MoveToPosition(HorizontalProjector(centeredDistance, origin.myTransform.position, xBuffer), bufferedRadius, duration, centeredDistance));
+        Coroutine enemyMove = StartCoroutine(target?.MoveToPosition(HorizontalProjector(centeredDistance, target.myTransform.position, xBuffer), bufferedRadius, duration, centeredDistance));
+
+        yield return playerMove;
+        yield return enemyMove;
 
         if (playersAreRollingDiceEvent != null)
         {

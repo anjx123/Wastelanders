@@ -18,7 +18,7 @@ public class PistolWhip : PistolCards
         upperBound = 5;
         Speed = 1;
         description = "Good Ol' reliable CQC!";
-        myName = "PistolWhip";
+        myName = "Pistol Whip";
         Renderer renderer = GetComponent<Renderer>();
         ogMaterial = renderer.material; // og sprite of card
         OriginalPosition = transform.position;
