@@ -19,7 +19,7 @@ public class SteadiedShot : PistolCards
         upperBound = 5;
         Speed = 3;
 
-        myName = "SteadiedShot";
+        myName = "Steadied Shot";
         description = "Gain 1 Accuracy Stack, Then Attack";
         CardType = CardType.RangedAttack;
         Renderer renderer = GetComponent<Renderer>();

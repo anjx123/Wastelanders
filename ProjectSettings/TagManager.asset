@@ -44,6 +44,9 @@ TagManager:
   - name: CombatLayer
     uniqueID: 2146528631
     locked: 0
+  - name: CardUILayer
+    uniqueID: 1520415093
+    locked: 0
   - name: DialogueLayer
     uniqueID: 2310111905
     locked: 0

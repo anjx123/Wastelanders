@@ -7,6 +7,10 @@ using static UnityEngine.UI.Image;
 
 public class LeftHook : FistCards
 {
+    [SerializeField]
+    private GameObject rightHookPrefab;
+
+    private GameObject righthook;
     public override void ExecuteActionEffect()
     {
 
@@ -20,8 +24,8 @@ public class LeftHook : FistCards
         Speed = 2;
 
         myName = "Left Hook";
-        description = "Hook to the Left";
-        
+        description = "If this card lands, use Right Hook";
+        CardType = CardType.MeleeAttack;
         Renderer renderer = GetComponent<Renderer>();
         ogMaterial = renderer.material; // og sprite of card
         OriginalPosition = transform.position;
@@ -31,5 +35,17 @@ public class LeftHook : FistCards
     public override void OnHit()
     {
         base.OnHit();
+    }
+
+
+    public override void CardIsUnstaggered()
+    {
+        base.CardIsUnstaggered();
+        Origin.AttackAnimation("IsMelee");
+        if (!righthook) { righthook = Instantiate(rightHookPrefab); righthook.transform.position = new Vector3(-10, 10, 10); }
+        ActionClass ac = righthook.GetComponent<ActionClass>();
+        ac.Origin = this.Origin;
+        ac.Target = this.Target;
+        BattleQueue.BattleQueueInstance.InsertDupPlayerAction(ac);
     }
 }

@@ -55,7 +55,7 @@ public abstract class SelectClass : MonoBehaviour
 
     public abstract void OnMouseDown();
 
-    public bool Toggle()
+    public virtual bool Toggle()
     {
         isOutlined = !isOutlined;
 
