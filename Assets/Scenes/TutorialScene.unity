@@ -2592,8 +2592,8 @@ MonoBehaviour:
   - bodyText: 'You cannot play two actions that share the same speed. '
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 61a3ecbde544e124ba8f329d0e4f6fb2, type: 3}
-  - bodyText: "If you can\u2019t play a card, it's likely that you have already played
-      a card with the same speed."
+  - bodyText: If a card is highlighted red, it means you have already played a card
+      with the same speed.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 61a3ecbde544e124ba8f329d0e4f6fb2, type: 3}
   - bodyText: Once you feel confident in your attacks, hit that confirm button to
@@ -2702,7 +2702,7 @@ MonoBehaviour:
     speakerName: Jackie
     displayingImage: {fileID: 0}
   endingTutorialDialogue: {fileID: 11400000, guid: 71bc8b72e567a434fb451296dad29b2f, type: 2}
-  jumpToCombat: 0
+  jumpToCombat: 1
 --- !u!1001 &2102825245
 PrefabInstance:
   m_ObjectHideFlags: 0
