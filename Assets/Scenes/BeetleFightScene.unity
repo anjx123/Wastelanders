@@ -353,6 +353,37 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 55dd1017896a4294ebc48577819d6683, type: 3}
+--- !u!1 &199907581
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 199907582}
+  m_Layer: 0
+  m_Name: DeckSelection
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &199907582
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 199907581}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 10, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1877041900}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &202292275 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7946142163233550150, guid: 6395bbe6ca801ac4d97dd23203674434, type: 3}
@@ -574,7 +605,7 @@ Transform:
   m_GameObject: {fileID: 466674210}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.98, y: -1.19, z: 0}
+  m_LocalPosition: {x: -4.6, y: -0.65, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -953,8 +984,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 679523eb71397df4a9276a7796116b46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  handContainer: {fileID: 0}
-  deckContainer: {fileID: 0}
+  handContainer: {fileID: 2102825246}
+  deckContainer: {fileID: 199907582}
 --- !u!1 &638988697
 GameObject:
   m_ObjectHideFlags: 0
@@ -1172,6 +1203,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ccd8cb759a4d8482399a8cf995466975, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &824088325
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 824088326}
+  m_Layer: 0
+  m_Name: JackieTalkingPosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &824088326
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 824088325}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -4.65, y: 0.4, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1513545304}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &873744480 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6950428195291563312, guid: 276880eff6e9b4907a1ea5430761a162, type: 3}
@@ -1870,6 +1932,7 @@ MonoBehaviour:
   jackie: {fileID: 1790411082}
   jackieDefaultTransform: {fileID: 2041699582}
   jackieChasingTransform: {fileID: 466674211}
+  jackieTalkingTransform: {fileID: 824088326}
   ives: {fileID: 605471067}
   ivesDefaultTransform: {fileID: 1895702309}
   frog: {fileID: 1442728990}
@@ -1891,6 +1954,7 @@ MonoBehaviour:
   jackieSurprised: {fileID: 11400000, guid: ef525486e53e94fd19087011cb06dbc4, type: 2}
   jackieChase: {fileID: 11400000, guid: 25519401af7684475b37287100201de3, type: 2}
   jackieBeetleCamp: {fileID: 11400000, guid: e1042be5eb85c4416ad37e200410a003, type: 2}
+  NarratorCamp: {fileID: 11400000, guid: b05322c39a1d34cbda01da3bf4866321, type: 2}
   jumpToCombat: 0
 --- !u!1 &1277541862
 GameObject:
@@ -2371,6 +2435,7 @@ Transform:
   - {fileID: 1314452446}
   - {fileID: 1965198846}
   - {fileID: 466674211}
+  - {fileID: 824088326}
   m_Father: {fileID: 1394440205}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1525248173
@@ -2531,7 +2596,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6635998426718021455, guid: b9c5e4b3c9f7e024f8fe9012e7a2e437, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -8.486904
+      value: -8.817768
       objectReference: {fileID: 0}
     - target: {fileID: 6635998426718021455, guid: b9c5e4b3c9f7e024f8fe9012e7a2e437, type: 3}
       propertyPath: m_LocalPosition.y
@@ -3014,6 +3079,7 @@ Transform:
   - {fileID: 1852793026}
   - {fileID: 939972736}
   - {fileID: 596087403}
+  - {fileID: 199907582}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1894012316
@@ -3087,7 +3153,7 @@ Transform:
   m_GameObject: {fileID: 1895702308}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.65, y: -1.6, z: 0}
+  m_LocalPosition: {x: -6.3, y: 0.51, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3334,7 +3400,7 @@ Transform:
   m_GameObject: {fileID: 2041699581}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.58, y: -1.12, z: 0}
+  m_LocalPosition: {x: -7.29, y: -2.48, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

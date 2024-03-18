@@ -12,6 +12,7 @@ public class BeetleFight : DialogueClasses
     [SerializeField] private Jackie jackie;
     [SerializeField] private Transform jackieDefaultTransform;
     [SerializeField] private Transform jackieChasingTransform;
+    [SerializeField] private Transform jackieTalkingTransform;
     [SerializeField] private Ives ives;
     [SerializeField] private Transform ivesDefaultTransform;
 
@@ -27,6 +28,7 @@ public class BeetleFight : DialogueClasses
     [SerializeField] private DialogueWrapper jackieSurprised;
     [SerializeField] private DialogueWrapper jackieChase;
     [SerializeField] private DialogueWrapper jackieBeetleCamp;
+    [SerializeField] private DialogueWrapper NarratorCamp;
 
 
     [SerializeField] private bool jumpToCombat;
@@ -93,11 +95,16 @@ public class BeetleFight : DialogueClasses
             yield return new WaitForSeconds(MEDIUM_PAUSE);
 
             yield return StartCoroutine(DialogueManager.Instance.StartDialogue(jackieBeetleCamp.Dialogue));
-            yield return new WaitForSeconds(MEDIUM_PAUSE);
+            yield return new WaitForSeconds(BRIEF_PAUSE);
 
-            StartCoroutine(jackie.MoveToPosition(jackieDefaultTransform.position, 0, 1.6f));
-            StartCoroutine(CombatManager.Instance.FadeInDarkScreen(1.5f));
+            StartCoroutine(jackie.MoveToPosition(jackieTalkingTransform.position, 0, 1.6f));   
             ShiftScene(-17, 2);
+            yield return StartCoroutine(CombatManager.Instance.FadeInDarkScreen(1.5f));
+
+            yield return StartCoroutine(DialogueManager.Instance.StartDialogue(NarratorCamp.Dialogue));
+
+            ives.transform.position = ivesDefaultTransform.position;
+            yield return StartCoroutine(CombatManager.Instance.FadeInLightScreen(2f));
 
         }
         else
