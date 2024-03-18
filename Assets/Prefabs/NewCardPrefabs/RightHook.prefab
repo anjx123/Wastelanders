@@ -114,6 +114,6 @@ MonoBehaviour:
   description: 
   titleName: 
   icon: {fileID: 21300000, guid: 305bbe4aee0eef34586b3def011ea974, type: 3}
-  fullCardObjectPrefab: {fileID: 0}
+  fullCardObjectPrefab: {fileID: 7256956916184963317, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
   cardUI: {fileID: 4492474242553214110}
   haymakerPrefab: {fileID: 365813191591832820, guid: 0f9d35f67947f2241aac5a9ed31099d3, type: 3}

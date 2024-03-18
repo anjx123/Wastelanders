@@ -23,7 +23,7 @@ public class ChargeUp : FrogAttacks
 
         description = "If this ability is unstaggered, use 'Hurl' next turn";
 
-        myName = "ChargeUp";
+        myName = "Charge Up";
         CardType = CardType.Defense;
         Renderer renderer = GetComponent<Renderer>();
         ogMaterial = renderer.material; // og sprite of card

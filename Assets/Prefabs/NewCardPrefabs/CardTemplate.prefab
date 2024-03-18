@@ -940,6 +940,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   selectedForDeckUI: {fileID: 2459814067889663477}
+  NameText: {fileID: 4483932651697627571}
+  lowerBoundText: {fileID: 6372328020853972940}
+  upperBoundText: {fileID: 2187855665233927581}
+  SpeedText: {fileID: 2781438634006456598}
+  textCanvas: {fileID: 5153878671164437630}
+  iconRenderer: {fileID: 1866809560200078547}
+  cardBackRenderer: {fileID: -7228539631512178989}
 --- !u!1 &5342606960099249293
 GameObject:
   m_ObjectHideFlags: 0

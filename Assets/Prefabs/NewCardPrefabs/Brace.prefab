@@ -103,7 +103,7 @@ MonoBehaviour:
   description: 
   titleName: 
   icon: {fileID: 21300000, guid: 3d960dbc71940e64480b485c0537ca24, type: 3}
-  fullCardObjectPrefab: {fileID: 0}
+  fullCardObjectPrefab: {fileID: 7256956916184963317, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
   cardUI: {fileID: 8261873646762752924}
 --- !u!114 &8261873646762752924 stripped
 MonoBehaviour:

@@ -34,6 +34,9 @@ public abstract class ActionClass : SelectClass
     protected int lowerBound;
     protected int upperBound;
 
+    public int LowerBound { get { return lowerBound; }}
+    public int UpperBound { get { return upperBound; }}
+
     #nullable enable
     [SerializeField] protected GameObject? duplicateCardInstance; // set in editor for now
     protected ActionClass? activeDupCardInstance;
@@ -65,14 +68,8 @@ public abstract class ActionClass : SelectClass
     private CardState cardState = CardState.NORMAL;
     public int Speed { get; protected set; }
     public string description;
-
-    [SerializeField] string titleName;
-
     public Sprite icon;
-
-    protected Sprite fullCard; // used for displaying combat info
-    public GameObject fullCardObjectPrefab;
-
+    public Sprite cardBack;
     [SerializeField] private CardUI cardUI;
 
     public CardType CardType { get; protected set; }
@@ -186,56 +183,7 @@ public abstract class ActionClass : SelectClass
 
     private void UpdateText()
     {
-        Transform textContainerTransform = transform.Find("TextCanvas");
-        if (textContainerTransform == null)
-        {
-            return;
-        }
-        GameObject textContainer = textContainerTransform.gameObject;
-        Canvas textCanvas = textContainer.GetComponent<Canvas>();
-        TextMeshProUGUI NameText = textContainer.transform.Find("NameText").gameObject.GetComponent<TextMeshProUGUI>();
-        TextMeshProUGUI lowerBoundText = textContainer.transform.Find("LowerBoundText").gameObject.GetComponent<TextMeshProUGUI>();
-        TextMeshProUGUI upperBoundText = textContainer.transform.Find("UpperBoundText").gameObject.GetComponent<TextMeshProUGUI>();
-        TextMeshProUGUI SpeedText = textContainer.transform.Find("SpeedText").gameObject.GetComponent<TextMeshProUGUI>();
-
-        textCanvas.overrideSorting = true; //Added so it overrides the layer of its parent canvas
-        // Set the text first
-        NameText.text = titleName;
-        lowerBoundText.text = duplicateCard.rollFloor.ToString();
-        upperBoundText.text = duplicateCard.rollCeiling.ToString();
-        SpeedText.text = Speed.ToString();
-
-        // Now update colors
-        if (duplicateCard.rollFloor > lowerBound)
-        {
-            lowerBoundText.color = Color.green;
-        }
-
-        if (duplicateCard.rollCeiling > upperBound)
-        {
-            upperBoundText.color = Color.green;
-        }
-
-        if (duplicateCard.rollFloor < lowerBound)
-        {
-            lowerBoundText.color = Color.red;
-        }
-
-        if (duplicateCard.rollCeiling < upperBound)
-        {
-            upperBoundText.color = Color.red;
-        }
-
-        if (duplicateCard.rollFloor == lowerBound)
-        {
-            lowerBoundText.color = Color.black;
-        }
-
-        if (duplicateCard.rollCeiling == upperBound)
-        {
-            upperBoundText.color = Color.black;
-        }
-
+        cardUI?.RenderCard(this);
     }
     public override void OnMouseDown()
     {

@@ -18,7 +18,7 @@ public class RapidFire : PistolCards
         Speed = 2;
         description = "If unstaggered, consume 1 accuracy, then make another rapid fire attack";
         CardType = CardType.RangedAttack;
-        myName = "RapidFire";
+        myName = "Rapid Fire";
         Renderer renderer = GetComponent<Renderer>();
         ogMaterial = renderer.material; // og sprite of card
         OriginalPosition = transform.position;

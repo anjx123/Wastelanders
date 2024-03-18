@@ -19,7 +19,7 @@ public class IronSights : PistolCards
 	    Speed = 2;
 
         CardType = CardType.RangedAttack;
-        myName = "IronSights";
+        myName = "Iron Sights";
         description = "Gain One Accuracy, then attack";
         Renderer renderer = GetComponent<Renderer>();
         ogMaterial = renderer.material; // og sprite of card
