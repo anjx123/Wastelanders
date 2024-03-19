@@ -1530,23 +1530,25 @@ MonoBehaviour:
       but it will be worth the Product quality."
     speakerName: Jackie
     displayingImage: {fileID: 0}
-  jackieMissedShot:
+  jackiePreMissedShot:
   - bodyText: "Well, it\u2019s not the most dangerous monster, but I\u2019ve got
-      to start collecting Waste Products. I can't fall behind. (Inhales and aims
-      her pistol.)"
+      to start collecting Waste Products. I can't fall behind."
     speakerName: Jackie
     displayingImage: {fileID: 0}
+  - bodyText: (Inhales and aims her pistol.)
+    speakerName: Jackie
+    displayingImage: {fileID: 0}
+  jackieJustMissedShot:
   - bodyText: (A pistol shot rings out. The bullet misses and the frog flinches at
       the gunshot sound. It begins to jump away.)
-    speakerName: Jackie
+    speakerName: 
     displayingImage: {fileID: 0}
+  jackiePostMissedShot:
   - bodyText: "Tsk, stay calm, Jackie. It\u2019s just a frog. I can still take it
       down by force."
     speakerName: Jackie
     displayingImage: {fileID: 0}
-  - bodyText: (Jackie chases after the frog and enters into combat.)
-    speakerName: Jackie
-    displayingImage: {fileID: 0}
+  jackiePreCombat:
   - bodyText: "Uh oh, well that didn\u2019t quite work out."
     speakerName: Jackie
     displayingImage: {fileID: 0}
@@ -2020,7 +2022,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6635998426718021455, guid: b9c5e4b3c9f7e024f8fe9012e7a2e437, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -10.133333
+      value: -10.134616
       objectReference: {fileID: 0}
     - target: {fileID: 6635998426718021455, guid: b9c5e4b3c9f7e024f8fe9012e7a2e437, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2220,6 +2222,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3367972655850899957, guid: 18ff4a241e9f877439ebd5fd1de51dd0, type: 3}
+      propertyPath: cardPrefabs.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3367972655850899957, guid: 18ff4a241e9f877439ebd5fd1de51dd0, type: 3}
+      propertyPath: cardPrefabs.Array.data[0]
+      value: 
+      objectReference: {fileID: 5768262490987068101, guid: 633c72c5790e34db48cdf19c15c0b684, type: 3}
+    - target: {fileID: 3367972655850899957, guid: 18ff4a241e9f877439ebd5fd1de51dd0, type: 3}
+      propertyPath: cardPrefabs.Array.data[1]
+      value: 
+      objectReference: {fileID: 2001586882262830925, guid: 41810010507274fba9929be6c7b2e511, type: 3}
+    - target: {fileID: 3367972655850899957, guid: 18ff4a241e9f877439ebd5fd1de51dd0, type: 3}
+      propertyPath: cardPrefabs.Array.data[2]
+      value: 
+      objectReference: {fileID: 8271862646823671611, guid: 03abd4f8331fd4c7e958cbe3a7d9f2b4, type: 3}
+    - target: {fileID: 3367972655850899957, guid: 18ff4a241e9f877439ebd5fd1de51dd0, type: 3}
+      propertyPath: cardPrefabs.Array.data[3]
+      value: 
+      objectReference: {fileID: 3591868733916564045, guid: 0408266e8e04747b6b14ac2c44aed735, type: 3}
     - target: {fileID: 3606799263845106433, guid: 18ff4a241e9f877439ebd5fd1de51dd0, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
