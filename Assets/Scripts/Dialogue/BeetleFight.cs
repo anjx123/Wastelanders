@@ -147,6 +147,7 @@ public class BeetleFight : DialogueClasses
         CombatManager.Instance.AddPlayer(ives);
         DialogueManager.Instance.MoveBoxToTop();
         CombatManager.Instance.GameState = GameState.SELECTION;
+        HighlightManager.Instance.SetActivePlayer(jackie);
         yield return StartCoroutine(DialogueManager.Instance.StartDialogue(TwoPlayerCombatTutorial.Dialogue));
         Begin2PCombatTutorial();
         yield return new WaitUntil(() => CombatManager.Instance.GameState == GameState.GAME_WIN);
