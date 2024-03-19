@@ -14,13 +14,13 @@ public abstract class ActionClass : SelectClass
         get { return target; }
         set
         {
-            targetChanged?.Invoke(this);
             target = value;
+            TargetChanged?.Invoke(this);
         }
     }
     private EntityClass origin;
     public delegate void ActionClassDelegate(ActionClass target);
-    public event ActionClassDelegate targetChanged;
+    public event ActionClassDelegate TargetChanged;
     public EntityClass Origin
     {
         get { return origin; }

@@ -110,13 +110,13 @@ public class CombatCardDisplayManager : MonoBehaviour
             actionClass.Target.CrossHair();
         }
         targetHighlighted = true;
-        actionClass.targetChanged += DeHighlightTarget;
+        actionClass.TargetChanged += DeHighlightTarget;
     }
 
     // Deighlights the target of a
     private void DeHighlightTarget(ActionClass actionClass)
     {
-        actionClass.targetChanged -= DeHighlightTarget;
+        actionClass.TargetChanged -= DeHighlightTarget;
         if (targetHighlighted)
         {
             actionClass.Target.UnCrossHair();

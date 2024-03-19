@@ -30,10 +30,24 @@ public class CombatCardUI : DisplayableClass
             ShowCard();
         }
     }
+    void OnDestroy()
+    {
+        if (ActionClass != null)
+        {
+            ActionClass.TargetChanged -= SetTargetIcon;
+        }
+    }
+
+
 
     public void SetActionClass(ActionClass actionClass)
     {
+        if (ActionClass != null)
+        {
+            ActionClass.TargetChanged -= SetTargetIcon;
+        }
         ActionClass = actionClass;
+        ActionClass.TargetChanged += SetTargetIcon;
         targetRenderer.sprite = actionClass.Target.icon;
         GetComponent<SpriteRenderer>().sprite = actionClass.GetIcon();
     }
@@ -48,5 +62,10 @@ public class CombatCardUI : DisplayableClass
     {
         GetComponent<SpriteRenderer>().sortingOrder = CombatManager.Instance.FADE_SORTING_ORDER - 2;
         targetRenderer.GetComponent<SpriteRenderer>().sortingOrder = CombatManager.Instance.FADE_SORTING_ORDER - 1;
+    }
+
+    private void SetTargetIcon(ActionClass actionClass)
+    {
+        targetRenderer.sprite = actionClass.Target.icon;
     }
 }
