@@ -74,6 +74,10 @@ public class HighlightManager : MonoBehaviour // later all entity highlighter
             selectedPlayer = clickedPlayer;
             RenderHand(clickedPlayer.Hand);
         }
+        else
+        {
+            UnRenderHand();
+        }
     }
 
     private void ResetCurrentHighlightedAction()
