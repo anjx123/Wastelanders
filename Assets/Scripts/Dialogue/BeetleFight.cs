@@ -144,6 +144,12 @@ public class BeetleFight : DialogueClasses
         DialogueManager.Instance.MoveBoxToTop();
         CombatManager.Instance.GameState = GameState.SELECTION;
 
+        Begin2PCombatTutorial();
+        yield return new WaitUntil(() => CombatManager.Instance.GameState == GameState.GAME_WIN);
+    }
+
+    private void Begin2PCombatTutorial()
+    {
 
     }
 

@@ -6,7 +6,8 @@ public class Ives : PlayerClass
 {
     // Hi my name is Ives. Pwease implement me :_(
 
-    // 
+    // @author: andrew
+    // i copy pasted jackie's code. it may not work completely, this is just for testing purposes.
     public override void Start()
     {
         base.Start();

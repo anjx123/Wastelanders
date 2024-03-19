@@ -11,7 +11,10 @@ public class HighlightManager : MonoBehaviour // later all entity highlighter
     public static EntityClass? currentHighlightedEnemyEntity = null;
     public static ActionClass? currentHighlightedAction = null;
     public static PlayerClass? selectedPlayer = null;
- 
+
+    public delegate void HighlightEventDelegate(EntityClass e);
+    public static event HighlightEventDelegate? EntityClicked;
+
     private int CARD_WIDTH = 2;
 
     // Awake is called when the script instance is being loaded
@@ -42,6 +45,7 @@ public class HighlightManager : MonoBehaviour // later all entity highlighter
     public void OnEntityClicked(EntityClass clicked)
     {
         if (CombatManager.Instance.GameState != GameState.SELECTION) return;
+        EntityClicked?.Invoke(clicked);
 
         if (clicked is PlayerClass clickedPlayer)
         {
