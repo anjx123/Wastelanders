@@ -130,13 +130,13 @@ public class BeetleFight : DialogueClasses
             jackie.transform.position = jackieDefaultTransform.position;
             ives.transform.position = ivesDefaultTransform.position;
             RemoveEnemyFromScene(frog);
+            RemoveEnemyFromScene(ambushBeetle);
             yield return StartCoroutine(CombatManager.Instance.FadeInLightScreen(2f));
         }
 
         // combat time!
         beetles_alive = campBeetles.Count;
         RemoveEnemyFromScene(wrangledBeetle);
-        RemoveEnemyFromScene(ambushBeetle);
         foreach (Crystals c in crystals)
         {
             RemoveEnemyFromScene(c);
