@@ -27,9 +27,19 @@ public abstract class ActionClass : SelectClass
         get { return origin; }
         set
         {
+            if (origin != null)
+            {
+                origin.BuffsUpdatedEvent -= UpdateBuffValue;
+            }
             origin = value;
+            origin.BuffsUpdatedEvent += UpdateBuffValue;
             UpdateDup();
         }
+    }
+
+    private void UpdateBuffValue(EntityClass origin)
+    {
+        UpdateDup();
     }
 
     public int CostToAddToDeck { get; set; } = 2;
@@ -100,17 +110,23 @@ public abstract class ActionClass : SelectClass
     {
         
     }
-/*
-    public override void OnMouseDown()
+
+    private void OnDestroy()
     {
-        Scene activeScene = SceneManager.GetActiveScene();
-        string name = activeScene.name;
-        if (name == "CombatScene") {
-            HighlightManager.OnActionClicked(this);
-        } else if (name == "SelectionScreen") {
-            DeckSelectionManager.Instance.ActionSelected(this);
-        }
-    }*/
+        origin.BuffsUpdatedEvent -= UpdateBuffValue;
+    }
+
+    /*
+        public override void OnMouseDown()
+        {
+            Scene activeScene = SceneManager.GetActiveScene();
+            string name = activeScene.name;
+            if (name == "CombatScene") {
+                HighlightManager.OnActionClicked(this);
+            } else if (name == "SelectionScreen") {
+                DeckSelectionManager.Instance.ActionSelected(this);
+            }
+        }*/
     //Called when this card hits the enemy, runs any on hit buffs or effects given.
     //Note: that OnHit implies CardIsUnstaggered, thus it calls it. Please be **very careful** about the timing that CardIsUnstaggered is called. 
     // This also implies that OnHit is highly unlikely to be overriden in ANY derived class: tge emphasis should almost entirely be on CardIsUnstaggered

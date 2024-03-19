@@ -109,9 +109,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myTransform: {fileID: 8528094363861485129}
-  titleName: Focused Defense
+  duplicateCardInstance: {fileID: 0}
+  description: 
   icon: {fileID: 21300000, guid: fa803f65c1e04b44f892de787f8cc226, type: 3}
-  fullCardObjectPrefab: {fileID: 0}
+  cardBack: {fileID: 0}
   cardUI: {fileID: 538496351984370446}
 --- !u!4 &8528094363861485129 stripped
 Transform:

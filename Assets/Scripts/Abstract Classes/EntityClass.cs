@@ -49,6 +49,7 @@ public abstract class EntityClass : SelectClass
     public delegate void EntityDelegate(EntityClass player);
     public static event EntityDelegate? OnEntityDeath;
     public static event EntityDelegate? OnEntityClicked;
+    public event EntityDelegate? BuffsUpdatedEvent;
 
     public Sprite? icon;
 
@@ -353,7 +354,7 @@ public abstract class EntityClass : SelectClass
     } */
 
     // Checks if a Given Buff exists, instantiates it if not
-    public void CheckBuff(string buffType)
+    private void CheckBuff(string buffType)
     {
         if (!statusEffects.ContainsKey(buffType))
         {
@@ -379,7 +380,7 @@ public abstract class EntityClass : SelectClass
     }
 
     // Applies the Stacks of the Specified Buff to the Card Roll Limits
-    public void ApplyBuffsToCard(ref ActionClass.CardDup dup, string buffType)
+    private void ApplyBuffsToCard(ref ActionClass.CardDup dup, string buffType)
     {
         CheckBuff(buffType);
         statusEffects[buffType].ApplyStacks(ref dup);
@@ -403,12 +404,6 @@ public abstract class EntityClass : SelectClass
         return 0;
     }
 
-    // Clears all stacks of specified buff
-    public void ClearStacks(string buffType)
-    {
-        if (statusEffects.ContainsKey(buffType)) {statusEffects[buffType].ClearBuff(); UpdateBuffs();}
-    }
-
     // Updates buffs affected by player taking damage
     protected void UpdateBuffsOnDamage()
     {
@@ -420,7 +415,7 @@ public abstract class EntityClass : SelectClass
     }
 
     // Updates buffs that change when a new round begins
-    public void UpdateBuffsNewRound(GameState newState)
+    private void UpdateBuffsNewRound(GameState newState)
     {
         if (newState == GameState.SELECTION)
         {
@@ -507,6 +502,7 @@ public abstract class EntityClass : SelectClass
     public void UpdateBuffs()
     {
         combatInfo.UpdateBuffs(statusEffects);
+        BuffsUpdatedEvent?.Invoke(this);
     }
 
     public void EnableDice()
