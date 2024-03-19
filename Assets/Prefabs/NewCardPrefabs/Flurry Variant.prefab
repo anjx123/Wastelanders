@@ -28,6 +28,10 @@ PrefabInstance:
       propertyPath: m_WasSpriteAssigned
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2459814067889663477, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7256956916184963317, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
       propertyPath: m_Name
       value: Flurry Variant
