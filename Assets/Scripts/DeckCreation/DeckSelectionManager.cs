@@ -18,12 +18,10 @@ public class DeckSelectionManager : MonoBehaviour
     [SerializeField] private PlayerDatabase playerDatabase;
     private PlayerDatabase.PlayerData playerData;
     private WeaponType weaponType;
-    public WeaponAmount wa;
-    public PointsAmount pa;
-    public List<GameObject> deckPrefabs;
+    public WeaponAmount weaponText;
+    public PointsAmount pointsText;
     public static DeckSelectionManager Instance { get; private set; }
     private DeckSelectionState deckSelectionState;
-    private List<GameObject> instantiated;
     private DeckSelectionState DeckSelectionState //Might want to swap out this state machine for an event driven changing phases.
     {
         get
@@ -65,56 +63,30 @@ public class DeckSelectionManager : MonoBehaviour
     public void PrevState()
     {
         if (DeckSelectionState == DeckSelectionState.WeaponSelection) {
-            DestroyWeapons();
             DeckSelectionState = DeckSelectionState.CharacterSelection;
 
         } else if (DeckSelectionState == DeckSelectionState.DeckSelection) {
-            RenderWeapons();
             DeckSelectionState = DeckSelectionState.WeaponSelection;
         } else if (DeckSelectionState == DeckSelectionState.CharacterSelection) {
             SceneManager.LoadScene("LevelSelect");
         }
     }
-
-    private void DestroyWeapons() {
-        foreach (var obj in instantiated) {
-            GameObject.Destroy(obj);
-        }
-
-        instantiated.Clear();
+    public void CharacterChosen(PlayerDatabase.PlayerData playerData)
+    {
+        this.playerData = playerData;
+        DeckSelectionState = DeckSelectionState.WeaponSelection;
     }
 
-    private void RenderWeapons() 
+    public void WeaponSelected(WeaponSelect c, CardDatabase.WeaponType weaponType)
     {
-
-        foreach (var obj in instantiated) {
-            obj.SetActive(true);
-        }
-    }
-
-    public List<GameObject> GetDeck(string myName)
-    {
-        List<ActionClass> actions = playerDatabase.GetDeck(myName);
-        List<GameObject> go = new();
-
-        foreach (var a in actions) {
-            go.Add(Instantiate(a.gameObject));
-        }
-
-        return go;
-    }
-
-
-    public void WeaponSelected(CharacterSelect c, CardDatabase.WeaponType weaponType)
-    {
-        if (playerData.weapons.Contains(weaponType)) {
-            playerData.weapons.Remove(weaponType);
+        if (playerData.selectedWeapons.Contains(weaponType)) {
+            playerData.selectedWeapons.Remove(weaponType);
             c.SetSelected(false);
-            wa.TextUpdate(playerData.weapons.Count.ToString() + "/2 Selected");
-        } else if (playerData.weapons.Count < 2) {
-            playerData.weapons.Add(weaponType);
+            weaponText.TextUpdate(playerData.selectedWeapons.Count.ToString() + "/2 Selected");
+        } else if (playerData.selectedWeapons.Count < 2) {
+            playerData.selectedWeapons.Add(weaponType);
             c.SetSelected(true);
-            wa.TextUpdate(playerData.weapons.Count.ToString() + "/2 Selected");
+            weaponText.TextUpdate(playerData.selectedWeapons.Count.ToString() + "/2 Selected");
 
         } else {
             Debug.LogWarning("Can only select 2 weapons");
@@ -149,13 +121,13 @@ public class DeckSelectionManager : MonoBehaviour
                 ac.SetSelectedForDeck(false);
                 entry.value.Remove(actionFound);
                 int totalPoints = points + ac.CostToAddToDeck;
-                pa.TextUpdate("Select Your Cards:\nAvailable Points: " + totalPoints.ToString());
+                pointsText.TextUpdate("Select Your Cards:\nAvailable Points: " + totalPoints.ToString());
             } else {
                 if (points - ac.CostToAddToDeck >= 0) {
                     tupple.Item2 = points - ac.CostToAddToDeck;
                     ac.SetSelectedForDeck(true);
                     entry.value.Add(pref);
-                    pa.TextUpdate("Select Your Cards:\nAvailable Points: " + tupple.Item2.ToString());
+                    pointsText.TextUpdate("Select Your Cards:\nAvailable Points: " + tupple.Item2.ToString());
                 } else {
                     Debug.LogWarning("Insufficient experience points");
                 }
@@ -173,52 +145,10 @@ public class DeckSelectionManager : MonoBehaviour
         playerDeck.Add(newEntry);
     }
 
-    public void CharacterChosen(PlayerDatabase.PlayerData playerData) 
-    {
-        this.playerData = playerData;
-        DeckSelectionState = DeckSelectionState.WeaponSelection;
-        bool rendered1 = false;
-        float xOffset = -3f;
-        instantiated.Clear();
-        
-        foreach (var deckPrefab in deckPrefabs)
-        {
-            string name = deckPrefab.name;
-            string removeDeck = name[..^4].ToUpper();
-
-            foreach (var tuple in playerData.playerWeaponProficiency)
-            {
-                if (tuple.Item1.ToString() == removeDeck)
-                {
-                    GameObject deck = Instantiate(deckPrefab);
-                    CharacterSelect c = deck.GetComponent<CharacterSelect>();
-                    if (Enum.TryParse(removeDeck, out WeaponType weapT) && playerData.weapons.Contains(weapT)) {
-                        c.SetSelected(true);
-                    }
-                    
-                    instantiated.Add(deck);
-                    Vector3 newPosition = deck.transform.position; // Get initial position of the deck
-            
-                    if (!rendered1) {
-                        deck.transform.position = newPosition + new Vector3(xOffset, 0f, 0f); // Position the first deck
-                        rendered1 = true;
-                        xOffset += 6f; // Adjust the x offset for the second deck
-                    } else {
-                        deck.transform.position = newPosition + new Vector3(xOffset, 0f, 0f); // Position the second deck
-                    }
-                    break;
-                }
-            }
-        }
-
-         wa.TextUpdate(playerData.weapons.Count.ToString() + "/2 Selected");
-
-    }
+    
 
     private void Start()
     {
-        instantiated = new List<GameObject>();
-    //    RenderDecks(CardDatabase.WeaponType.STAFF); //Simply for testing, remove once broadcasting weapon type is hooked up
     }
 
     private void OnDestroy()
@@ -238,44 +168,28 @@ public class DeckSelectionManager : MonoBehaviour
         characterSelectionUi.SetActive(false);
         weaponSelectionUi.SetActive(true);
         deckSelectionUi.SetActive(false);
-    }
-
-    private void SetInactiveWeapons()
-    {
-        foreach (GameObject obj in instantiated)
+        weaponText.TextUpdate(playerData.selectedWeapons.Count.ToString() + "/2 Selected");
+        foreach (Transform child in weaponSelectionUi.transform)
         {
-            if (obj != null)
+            WeaponSelect deckItem = child.GetComponent<WeaponSelect>();
+            if (deckItem)
             {
-                obj.SetActive(false); // De-instantiate each GameObject
+                deckItem.SetSelected(playerData.selectedWeapons.Contains(deckItem.type));
             }
         }
     }
 
     private void PerformDeckSelection()
     {
-        SetInactiveWeapons();
         characterSelectionUi.SetActive(false);
         weaponSelectionUi.SetActive(false);
         deckSelectionUi.SetActive(true);
     }
 
-    private List<ActionClass> GetChosenCards(CardDatabase.WeaponType weaponType) {
-        foreach (var entry in playerData.playerDeck)
-        {
-            // Check if the current entry's key matches the keyToCheck
-            if (entry.key == weaponType)
-            {
-                return entry.value;
-            }
-        }
-
-        return new List<ActionClass>();
-    }
 
     //Renders the deck corresponding to (@param weaponType)
     public void RenderDecks(CardDatabase.WeaponType weaponType)
     {
-        List<ActionClass> chosenCardList = GetChosenCards(weaponType);
         int width = 6; // The width of the grid in # of cards 
         int height = 6; // The height of the grid in # of cards 
         float xSpacing = 2.3f; 
@@ -286,6 +200,7 @@ public class DeckSelectionManager : MonoBehaviour
 
         UnrenderDecks();
 
+        List<ActionClass> chosenCardList = playerData.GetDeckByWeaponType(weaponType);
         List<ActionClass> cardsToRender = cardDatabase.GetCardsByType(weaponType);
 
         List<GameObject> instantiatedCards = new List<GameObject>();
@@ -345,7 +260,7 @@ public class DeckSelectionManager : MonoBehaviour
             points = tupple.Item2;
         }
 
-        pa.TextUpdate("Select Your Cards:\nAvailable Points: " + points);
+        pointsText.TextUpdate("Select Your Cards:\nAvailable Points: " + points);
     }
 
     private void UnrenderDecks()

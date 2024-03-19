@@ -335,10 +335,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 200217056}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fb666818df6d3f347ab7519345a15450, type: 3}
+  m_Script: {fileID: 11500000, guid: 914883fa2f377284cb37e7e5f59d1ee7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponNum: {fileID: 0}
+  weaponNum: {fileID: 200217058}
 --- !u!1 &243963191
 GameObject:
   m_ObjectHideFlags: 0
@@ -435,10 +435,18 @@ PrefabInstance:
       propertyPath: m_Size.y
       value: 2.6
       objectReference: {fileID: 0}
+    - target: {fileID: 608219796442345687, guid: 9f5b6b4e42a9a5e44aea3cf8872c4f20, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 4.41
+      objectReference: {fileID: 0}
     - target: {fileID: 741953016204202599, guid: 9f5b6b4e42a9a5e44aea3cf8872c4f20, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2571950759499679109, guid: 9f5b6b4e42a9a5e44aea3cf8872c4f20, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 305bbe4aee0eef34586b3def011ea974, type: 3}
     - target: {fileID: 6475834044420958145, guid: 9f5b6b4e42a9a5e44aea3cf8872c4f20, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.5
@@ -493,15 +501,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6839712255784792588, guid: 9f5b6b4e42a9a5e44aea3cf8872c4f20, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 741953016204202599, guid: 9f5b6b4e42a9a5e44aea3cf8872c4f20, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1077581484}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9f5b6b4e42a9a5e44aea3cf8872c4f20, type: 3}
 --- !u!4 &455316568 stripped
 Transform:
@@ -522,7 +527,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6428996333735742109, guid: 45259cd223a7bd941b08d08990f299fb, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6777109110366936912, guid: 45259cd223a7bd941b08d08990f299fb, type: 3}
       propertyPath: m_LocalScale.x
@@ -873,12 +878,8 @@ MonoBehaviour:
   cardArrayParent: {fileID: 70395782}
   cardDatabase: {fileID: 11400000, guid: 4ee9950b3d655254fb0def1cd879db6a, type: 2}
   playerDatabase: {fileID: 11400000, guid: 8727bc367ba518d4496483da96ba1cf0, type: 2}
-  wa: {fileID: 200217060}
-  pa: {fileID: 1021007427}
-  deckPrefabs:
-  - {fileID: 6428996333735742109, guid: 45259cd223a7bd941b08d08990f299fb, type: 3}
-  - {fileID: 7593446994048490176, guid: 11797fb1537b0c14ca7953804d655285, type: 3}
-  - {fileID: 6839712255784792588, guid: 9f5b6b4e42a9a5e44aea3cf8872c4f20, type: 3}
+  weaponText: {fileID: 200217060}
+  pointsText: {fileID: 1021007427}
 --- !u!1 &795779547
 GameObject:
   m_ObjectHideFlags: 0
@@ -1233,10 +1234,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1021007423}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 286b768e1dbf06849be4b3aead400ce1, type: 3}
+  m_Script: {fileID: 11500000, guid: bd82232e1f44d5a47a86b58cb17d44c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  points: {fileID: 0}
+  points: {fileID: 1021007425}
 --- !u!1001 &1030286423
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1314,24 +1315,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4624491365486866069, guid: 484a449710984334283e3a4a0c860542, type: 3}
   m_PrefabInstance: {fileID: 1030286423}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1077581480 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 741953016204202599, guid: 9f5b6b4e42a9a5e44aea3cf8872c4f20, type: 3}
-  m_PrefabInstance: {fileID: 455316567}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1077581484
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1077581480}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1476a097bbee8944bbdba82d00d7843f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  checkmark: {fileID: 0}
 --- !u!1 &1115058807 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6647468808881570309, guid: 2bf19bd78e328204fb34ccaa75296151, type: 3}
@@ -1555,7 +1538,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7593446994048490176, guid: 11797fb1537b0c14ca7953804d655285, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7950002336336908045, guid: 11797fb1537b0c14ca7953804d655285, type: 3}
       propertyPath: m_LocalScale.x

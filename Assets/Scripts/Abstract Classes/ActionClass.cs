@@ -113,7 +113,10 @@ public abstract class ActionClass : SelectClass
 
     private void OnDestroy()
     {
-        origin.BuffsUpdatedEvent -= UpdateBuffValue;
+        if (origin != null)
+        {
+            origin.BuffsUpdatedEvent -= UpdateBuffValue;
+        }
     }
 
     /*

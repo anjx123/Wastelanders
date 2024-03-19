@@ -95,6 +95,7 @@ GameObject:
   - component: {fileID: 8246025877672965904}
   - component: {fileID: 8150974180724953677}
   - component: {fileID: 7655428536980855890}
+  - component: {fileID: 2845581384058024356}
   m_Layer: 0
   m_Name: Edit
   m_TagString: Untagged
@@ -215,6 +216,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 6.4, y: 3.6}
   m_EdgeRadius: 0
+--- !u!114 &2845581384058024356
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1808863300182831546}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bcae931aa9453784c89af658e893bb90, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5005827590477641961
 GameObject:
   m_ObjectHideFlags: 0
@@ -397,6 +410,7 @@ GameObject:
   - component: {fileID: 5372623935015044124}
   - component: {fileID: 3522037383136847448}
   - component: {fileID: 1954977229092721418}
+  - component: {fileID: 8351759767076173433}
   m_Layer: 0
   m_Name: TemplateDeck
   m_TagString: Untagged
@@ -518,3 +532,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 4.47, y: 2.87}
   m_EdgeRadius: 0
+--- !u!114 &8351759767076173433
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5600832855789982161}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a968158a80a6e5a46b3d98ec3b462f4b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 0
+  checkmark: {fileID: 1584068781406208054}
+  weaponEdit: {fileID: 2845581384058024356}
