@@ -6,7 +6,10 @@ using UnityEngine.UI;
 
 public class CombatInfo : MonoBehaviour
 {
-    public GameObject combatCardSprite;
+    [SerializeField] private GameObject combatCardIconPrefab;
+    [SerializeField] private GameObject cardIconRendering;
+    private List<ActionClass> combatCards = new();
+    private ActionClass activeActionClass;
     public HorizontalLayoutGroup buffList;
     public Animator diceAnimator;
     public GameObject diceRollSprite;
@@ -54,16 +57,66 @@ public class CombatInfo : MonoBehaviour
         diceRollText.GetComponent<TMP_Text>().color = color;
     }
 
-    /* 
-     Sets the CombatInfo sprite to the icon of this ActionClass.
-    Pass in null to discard the current sprite.
-     */
-    public void SetCombatSprite(ActionClass card)
+    public void ActivateCombatSprite(ActionClass actionClass)
     {
         diceAnimator.enabled = true;
-        SpriteRenderer spriteRenderer = combatCardSprite.GetComponent<SpriteRenderer>();
-        spriteRenderer.sprite = card.GetIcon();
         diceRollText.GetComponent<TextMeshPro>().text = null;
+        if (!combatCards.Contains(actionClass))
+        {
+            combatCards.Add(actionClass);
+            RenderCombatIcons();
+        }
+        activeActionClass = actionClass;
+    }
+
+    public void AddCombatSprite(ActionClass actionClass)
+    {
+        combatCards.Add(actionClass);
+        RenderCombatIcons();
+    }
+
+    private void RenderCombatIcons()
+    {
+        int num = combatCards.Count;
+        float iconHeight = combatCardIconPrefab.GetComponent<SpriteRenderer>().bounds.size.y;
+        float totalHeight = num * iconHeight;
+        float startY = totalHeight / 2 - iconHeight / 2;
+
+        UnrenderCombatIcons();
+        for (int i = 0; i < num; i++)
+        {
+            GameObject combatIcon = Instantiate(combatCardIconPrefab);
+            combatIcon.transform.SetParent(cardIconRendering.transform);
+            combatIcon.transform.localScale = Vector3.one;
+            combatIcon.transform.localPosition = new Vector3(0, startY - i * iconHeight, 0);
+            combatIcon.GetComponent<CombatCardUI>().SetActionClass(combatCards[i]);
+            combatIcon.GetComponent<CombatCardUI>().DeEmphasize();
+        }
+    }
+    private void UnrenderCombatIcons()
+    {
+        foreach (Transform child in cardIconRendering.transform)
+        {
+            Destroy(child.gameObject);
+        }
+    }
+
+    private void EmphasizeCombatIcon()
+    {
+        bool onlyHighlightOne = true;
+        foreach (Transform child in cardIconRendering.transform)
+        {
+            CombatCardUI combatUI = child.GetComponent<CombatCardUI>();
+            if (child.GetComponent<CombatCardUI>().ActionClass == activeActionClass && onlyHighlightOne)
+            {
+                combatUI.Emphasize();
+                onlyHighlightOne = false;
+            }
+            else
+            {
+                combatUI.DeEmphasize();
+            }
+        }
     }
 
     public void EnableDice()
@@ -91,10 +144,10 @@ public class CombatInfo : MonoBehaviour
         healthBar.gameObject.SetActive(false);
     }
 
-    public void DeactivateCombatSprite()
+    public void DeactivateCombatSprite(ActionClass actionClass)
     {
-        SpriteRenderer spriteRenderer = combatCardSprite.GetComponent<SpriteRenderer>();
-        spriteRenderer.sprite = null;
+        combatCards.Remove(actionClass);
+        RenderCombatIcons();
     }
 
     public void ActivateCrosshair()
@@ -114,7 +167,7 @@ public class CombatInfo : MonoBehaviour
     }
     public void Emphasize()
     {
-        combatCardSprite.GetComponent<SpriteRenderer>().sortingOrder = CombatManager.Instance.FADE_SORTING_ORDER + 1;
+        EmphasizeCombatIcon();
         diceRollSprite.GetComponent<SpriteRenderer>().sortingOrder = CombatManager.Instance.FADE_SORTING_ORDER + 1;
         buffListCanvas.sortingOrder = CombatManager.Instance.FADE_SORTING_ORDER + 1;
         diceRollText.GetComponent<MeshRenderer>().sortingOrder = CombatManager.Instance.FADE_SORTING_ORDER + 1;
@@ -122,7 +175,10 @@ public class CombatInfo : MonoBehaviour
     }
     public void DeEmphasize()
     {
-        combatCardSprite.GetComponent<SpriteRenderer>().sortingOrder = CombatManager.Instance.FADE_SORTING_ORDER - 1;
+        foreach (Transform child in cardIconRendering.transform)
+        {
+            child.GetComponent<CombatCardUI>().DeEmphasize();
+        }
         diceRollSprite.GetComponent<SpriteRenderer>().sortingOrder = CombatManager.Instance.FADE_SORTING_ORDER - 1;
         buffListCanvas.sortingOrder = CombatManager.Instance.FADE_SORTING_ORDER - 1;
         diceRollText.GetComponent<MeshRenderer>().sortingOrder = CombatManager.Instance.FADE_SORTING_ORDER - 1;

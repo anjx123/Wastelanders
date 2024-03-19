@@ -16,18 +16,18 @@ public class CalmTheMind : StaffCards
     public override void Initialize()
     {
         lowerBound = 1;
-        upperBound = 3;
-
+        upperBound = 1;
 
         Speed = 4;
         
         myName = "Calm The Mind";
-        description = "Gain 2 Stacks Of Focus";
-        CardType = CardType.Defense;
+        description = "Gain 2 Stacks Of Focus, then block";
+        
         Renderer renderer = GetComponent<Renderer>();
         ogMaterial = renderer.material; // og sprite of card
         OriginalPosition = transform.position;
         base.Initialize();
+        CardType = CardType.Defense;
     }
 
     // Update is called once per frame
@@ -39,7 +39,5 @@ public class CalmTheMind : StaffCards
         
         Origin.AddStacks(Focus.buffName, 2);
         base.ApplyEffect();
-        
-
     }
 }

@@ -461,12 +461,12 @@ public abstract class EntityClass : SelectClass
 
     public void ActivateCombatInfo(ActionClass actionClass)
     {
-        combatInfo.SetCombatSprite(actionClass);
+        combatInfo.ActivateCombatSprite(actionClass);
     }
 
-    public void DeactivateCombatInfo()
+    public void DeactivateCombatInfo(ActionClass actionClass)
     {
-        combatInfo.DeactivateCombatSprite();
+        combatInfo.DeactivateCombatSprite(actionClass);
     }
     //Increases this Entity Class' sorting layer (negative number is higher up)
     public void Emphasize()

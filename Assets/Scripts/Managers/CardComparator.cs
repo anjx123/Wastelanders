@@ -148,12 +148,12 @@ public class CardComparator : MonoBehaviour
     {
         //Setup the Scene
         CombatManager.Instance.SetCameraCenter(actionClass.Origin);
-        ActivateInfo(actionClass, actionClass);
-        EnableDice(actionClass.Origin, actionClass.Origin);
+        ActivateInfo(actionClass);
+        EnableDice(actionClass.Origin);
         actionClass.ApplyEffect();
         yield return StartCoroutine(ClashBothEntities(actionClass, actionClass));
         actionClass.RollDice();
-        DeactivateInfo(actionClass, actionClass);
+        DeactivateInfo(actionClass);
 
         //Hit and feel effects
         actionClass.OnHit();
@@ -167,7 +167,7 @@ public class CardComparator : MonoBehaviour
             PlayEntityDeaths = null;
         }
         DeEmphasizeClashers(actionClass.Origin, actionClass.Target);
-        DisableDice(actionClass.Origin, actionClass.Origin);
+        DisableDice(actionClass.Origin);
     }
 
     /*
@@ -253,42 +253,53 @@ public class CardComparator : MonoBehaviour
         PlayEntityDeaths += entity.Die;
     }
 
-    private void ActivateInfo(ActionClass card1, ActionClass card2)
+    private void ActivateInfo(params ActionClass[] cards)
     {
-
-        card1.Origin.ActivateCombatInfo(card1);
-        card2.Origin.ActivateCombatInfo(card2);
+        foreach (ActionClass card in cards)
+        {
+            card.Origin.ActivateCombatInfo(card);
+        }
     }
 
-    private void DeactivateInfo(ActionClass card1, ActionClass card2)
+    private void DeactivateInfo(params ActionClass[] cards)
     {
-        card1.Origin.DeactivateCombatInfo();
-        card2.Origin.DeactivateCombatInfo();
+        foreach (ActionClass card in cards)
+        {
+            card.Origin.DeactivateCombatInfo(card);
+        }
+    }
+    private void EmphasizeClashers(params EntityClass[] entities)
+    {
+        foreach (EntityClass entity in entities)
+        {
+            entity.Emphasize();
+        }
     }
 
-    private void EmphasizeClashers(EntityClass origin, EntityClass target)
+    private void DeEmphasizeClashers(params EntityClass[] entities)
     {
-        origin.Emphasize();
-        target.Emphasize();
+        foreach (EntityClass entity in entities)
+        {
+            entity.DeEmphasize();
+        }
     }
 
-    private void DeEmphasizeClashers(EntityClass origin, EntityClass target)
+    private void EnableDice(params EntityClass[] entities)
     {
-        origin.DeEmphasize();
-        target.DeEmphasize();
+        foreach (EntityClass entity in entities)
+        {
+            entity.EnableDice();
+        }
     }
 
-    private void EnableDice(EntityClass origin, EntityClass target)
+    private void DisableDice(params EntityClass[] entities)
     {
-        origin.EnableDice();
-        target.EnableDice();
+        foreach (EntityClass entity in entities)
+        {
+            entity.DisableDice();
+        }
     }
 
-    private void DisableDice(EntityClass origin, EntityClass target)
-    {
-        origin.DisableDice();
-        target.DisableDice();
-    }
 
     private bool IsAttack(ActionClass card)
     {
