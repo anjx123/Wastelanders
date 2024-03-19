@@ -19,8 +19,12 @@ public class BeetleFight : DialogueClasses
     [SerializeField] private WasteFrog frog;
     [SerializeField] private Beetle ambushBeetle;
     [SerializeField] private Transform ambushBeetleTransform;
+    [SerializeField] private Beetle wrangledBeetle;
+    [SerializeField] private Transform wrangledBeetleTransform;
     [SerializeField] private List<Beetle> campBeetles;
     [SerializeField] private List<Crystals> crystals;
+
+    [SerializeField] private List<Transform> combatBeetleTransforms;
 
     [SerializeField] private GameObject background;
 
@@ -28,8 +32,8 @@ public class BeetleFight : DialogueClasses
     [SerializeField] private DialogueWrapper jackieSurprised;
     [SerializeField] private DialogueWrapper jackieChase;
     [SerializeField] private DialogueWrapper jackieBeetleCamp;
-    [SerializeField] private DialogueWrapper NarratorCamp;
-
+    [SerializeField] private DialogueWrapper narratorCamp;
+    [SerializeField] private DialogueWrapper ivesConversation;
 
     [SerializeField] private bool jumpToCombat;
 
@@ -54,6 +58,7 @@ public class BeetleFight : DialogueClasses
         jackie.OutOfCombat(); //Workaround for now, ill have to remove this once i manually start instantiating players
         frog.OutOfCombat();
         ambushBeetle.OutOfCombat();
+        wrangledBeetle.OutOfCombat();
         jackie.SetReturnPosition(jackieDefaultTransform.position);
         if (!jumpToCombat)
         {
@@ -101,17 +106,43 @@ public class BeetleFight : DialogueClasses
             ShiftScene(-17, 2);
             yield return StartCoroutine(CombatManager.Instance.FadeInDarkScreen(1.5f));
 
-            yield return StartCoroutine(DialogueManager.Instance.StartDialogue(NarratorCamp.Dialogue));
+            yield return StartCoroutine(DialogueManager.Instance.StartDialogue(narratorCamp.Dialogue));
 
             ives.transform.position = ivesDefaultTransform.position;
+            wrangledBeetle.transform.position = wrangledBeetleTransform.position;
+            yield return StartCoroutine(CombatManager.Instance.FadeInLightScreen(2f));
+
+            yield return StartCoroutine(DialogueManager.Instance.StartDialogue(ivesConversation.Dialogue));
+            yield return StartCoroutine(CombatManager.Instance.FadeInDarkScreen(1.5f));
+            wrangledBeetle.transform.position = new Vector3(200, 200, 1);
+            jackie.transform.position = jackieDefaultTransform.position;
+            jackie.FaceRight();
             yield return StartCoroutine(CombatManager.Instance.FadeInLightScreen(2f));
 
         }
-        else
+        else // setup scene
         {
-            //Set up the scene for a combat Jump in.
-
+            jackie.transform.position = jackieDefaultTransform.position;
+            ives.transform.position = ivesDefaultTransform.position;
+            RemoveEnemyFromScene(frog);
+            yield return StartCoroutine(CombatManager.Instance.FadeInLightScreen(2f));
         }
+        RemoveEnemyFromScene(wrangledBeetle);
+        foreach (Crystals c in crystals)
+        {
+            RemoveEnemyFromScene(c);
+        }
+        for (int i = 0; i < campBeetles.Count; i++)
+        {
+            StartCoroutine(campBeetles[i].MoveToPosition(combatBeetleTransforms[i].position, 0, 1.5f));
+            campBeetles[i].SetReturnPosition(combatBeetleTransforms[i].position);
+        }
+        jackie.InCombat(); 
+        ives.InCombat();
+        ives.SetReturnPosition(ivesDefaultTransform.position);
+        CombatManager.Instance.AddPlayer(ives);
+        DialogueManager.Instance.MoveBoxToTop();
+        CombatManager.Instance.GameState = GameState.SELECTION;
 
 
     }
@@ -191,5 +222,13 @@ public class BeetleFight : DialogueClasses
             yield return null; // Wait for the next frame
         }
 
+    }
+
+    // removes the entity from combat
+    private void RemoveEnemyFromScene(EnemyClass e)
+    {
+        BattleQueue.BattleQueueInstance.RemoveAllInstancesOfEntity(e);
+        CombatManager.Instance.RemoveEnemy(e);
+        e.gameObject.SetActive(false);
     }
 }
