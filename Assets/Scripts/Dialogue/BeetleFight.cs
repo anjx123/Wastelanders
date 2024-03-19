@@ -34,6 +34,8 @@ public class BeetleFight : DialogueClasses
     [SerializeField] private DialogueWrapper jackieBeetleCamp;
     [SerializeField] private DialogueWrapper narratorCamp;
     [SerializeField] private DialogueWrapper ivesConversation;
+    [SerializeField] private DialogueWrapper TwoPlayerCombatTutorial;
+    [SerializeField] private DialogueWrapper ivesTutorial;
 
     [SerializeField] private bool jumpToCombat;
 
@@ -127,6 +129,8 @@ public class BeetleFight : DialogueClasses
             RemoveEnemyFromScene(frog);
             yield return StartCoroutine(CombatManager.Instance.FadeInLightScreen(2f));
         }
+
+        // combat time!
         RemoveEnemyFromScene(wrangledBeetle);
         foreach (Crystals c in crystals)
         {
@@ -143,15 +147,31 @@ public class BeetleFight : DialogueClasses
         CombatManager.Instance.AddPlayer(ives);
         DialogueManager.Instance.MoveBoxToTop();
         CombatManager.Instance.GameState = GameState.SELECTION;
-
+        yield return StartCoroutine(DialogueManager.Instance.StartDialogue(TwoPlayerCombatTutorial.Dialogue));
         Begin2PCombatTutorial();
         yield return new WaitUntil(() => CombatManager.Instance.GameState == GameState.GAME_WIN);
     }
 
     private void Begin2PCombatTutorial()
     {
-
+        HighlightManager.EntityClicked += EntityClicked;
     }
+
+    private void EntityClicked(EntityClass e)
+    {
+        if (e.GetType() == typeof(Ives))
+        {
+            StartCoroutine(TwoPlayerDialogue());
+        }
+    }
+
+    private IEnumerator TwoPlayerDialogue()
+    {
+        HighlightManager.EntityClicked -= EntityClicked;
+        yield return new WaitUntil(() => !DialogueManager.Instance.IsInDialogue());
+        StartCoroutine(DialogueManager.Instance.StartDialogue(ivesTutorial.Dialogue));
+    }
+
 
     //------helpers------
 
