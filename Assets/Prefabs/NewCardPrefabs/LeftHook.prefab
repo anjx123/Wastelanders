@@ -96,9 +96,8 @@ MonoBehaviour:
   myTransform: {fileID: 1887577999620364607}
   duplicateCardInstance: {fileID: 0}
   description: 
-  titleName: 
   icon: {fileID: 21300000, guid: 3d63c28b554015b4e91ac1c061f67c3b, type: 3}
-  fullCardObjectPrefab: {fileID: 7256956916184963317, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
+  cardBack: {fileID: 21300000, guid: 832b52c38e4d56144852f606484babb9, type: 3}
   cardUI: {fileID: 7715502921257852024}
   rightHookPrefab: {fileID: 6429530541201259997, guid: 4e812ef45f6aef54092f7985015b5248, type: 3}
 --- !u!4 &1887577999620364607 stripped
