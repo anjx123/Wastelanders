@@ -2083,8 +2083,9 @@ MonoBehaviour:
   jackieBeetleCamp: {fileID: 11400000, guid: e1042be5eb85c4416ad37e200410a003, type: 2}
   narratorCamp: {fileID: 11400000, guid: b05322c39a1d34cbda01da3bf4866321, type: 2}
   ivesConversation: {fileID: 11400000, guid: 66e08737ade094da196cc3f5bb88fd90, type: 2}
-  TwoPlayerCombatTutorial: {fileID: 11400000, guid: 6b67fbf4de11c4562a0efa41e86e33d9, type: 2}
+  twoPlayerCombatTutorial: {fileID: 11400000, guid: 6b67fbf4de11c4562a0efa41e86e33d9, type: 2}
   ivesTutorial: {fileID: 11400000, guid: 907e97d12424741f483ff139b4c6647e, type: 2}
+  postBattleDialogue: {fileID: 11400000, guid: 4e4b8c8e00eb44ae38056c9c653cd3a5, type: 2}
   jumpToCombat: 1
 --- !u!1 &1277541862
 GameObject:

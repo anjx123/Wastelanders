@@ -34,14 +34,17 @@ public class BeetleFight : DialogueClasses
     [SerializeField] private DialogueWrapper jackieBeetleCamp;
     [SerializeField] private DialogueWrapper narratorCamp;
     [SerializeField] private DialogueWrapper ivesConversation;
-    [SerializeField] private DialogueWrapper TwoPlayerCombatTutorial;
+    [SerializeField] private DialogueWrapper twoPlayerCombatTutorial;
     [SerializeField] private DialogueWrapper ivesTutorial;
+    [SerializeField] private DialogueWrapper postBattleDialogue;
 
     [SerializeField] private bool jumpToCombat;
 
 
     private const float BRIEF_PAUSE = 0.2f; // For use after an animation to make it visually seem smoother
     private const float MEDIUM_PAUSE = 1f; //For use after a text box comes down and we want to add some weight to the text.
+
+    private int beetles_alive;
 
     protected override void GameStateChange(GameState gameState)
     {
@@ -131,31 +134,43 @@ public class BeetleFight : DialogueClasses
         }
 
         // combat time!
+        beetles_alive = campBeetles.Count;
         RemoveEnemyFromScene(wrangledBeetle);
+        RemoveEnemyFromScene(ambushBeetle);
         foreach (Crystals c in crystals)
         {
             RemoveEnemyFromScene(c);
         }
         for (int i = 0; i < campBeetles.Count; i++)
         {
-            StartCoroutine(campBeetles[i].MoveToPosition(combatBeetleTransforms[i].position, 0, 1.5f));
             campBeetles[i].SetReturnPosition(combatBeetleTransforms[i].position);
+            campBeetles[i].InCombat();
         }
         jackie.InCombat(); 
         ives.InCombat();
         ives.SetReturnPosition(ivesDefaultTransform.position);
-        CombatManager.Instance.AddPlayer(ives);
         DialogueManager.Instance.MoveBoxToTop();
         CombatManager.Instance.GameState = GameState.SELECTION;
         HighlightManager.Instance.SetActivePlayer(jackie);
-        yield return StartCoroutine(DialogueManager.Instance.StartDialogue(TwoPlayerCombatTutorial.Dialogue));
+        yield return StartCoroutine(DialogueManager.Instance.StartDialogue(twoPlayerCombatTutorial.Dialogue));
         Begin2PCombatTutorial();
         yield return new WaitUntil(() => CombatManager.Instance.GameState == GameState.GAME_WIN);
+
+        DialogueManager.Instance.MoveBoxToBottom();
+        CombatManager.Instance.GameState = GameState.OUT_OF_COMBAT;
+        jackie.OutOfCombat();
+        ives.OutOfCombat();
+        jackie.FaceLeft();
+        StartCoroutine(ives.MoveToPosition(ivesDefaultTransform.position, 0, 1.5f));
+        yield return StartCoroutine(jackie.MoveToPosition(jackieTalkingTransform.position, 0, 1.5f));
+        yield return StartCoroutine(DialogueManager.Instance.StartDialogue(postBattleDialogue.Dialogue));
+        yield return StartCoroutine(CombatManager.Instance.FadeInDarkScreen(1.5f));
     }
 
     private void Begin2PCombatTutorial()
     {
         HighlightManager.EntityClicked += EntityClicked;
+        EntityClass.OnEntityDeath += EntityDied;
     }
 
     private void EntityClicked(EntityClass e)
@@ -170,7 +185,21 @@ public class BeetleFight : DialogueClasses
     {
         HighlightManager.EntityClicked -= EntityClicked;
         yield return new WaitUntil(() => !DialogueManager.Instance.IsInDialogue());
-        StartCoroutine(DialogueManager.Instance.StartDialogue(ivesTutorial.Dialogue));
+        yield return StartCoroutine(DialogueManager.Instance.StartDialogue(ivesTutorial.Dialogue));
+    }
+
+    private void EntityDied(EntityClass e)
+    {
+        if (e.GetType().IsSubclassOf(typeof(Beetle)))
+        {
+            beetles_alive--;
+            Debug.Log(beetles_alive);
+            if (beetles_alive < 1)
+            {
+                CombatManager.Instance.GameState = GameState.GAME_WIN;
+                EntityClass.OnEntityDeath -= EntityDied;
+            }
+        }
     }
 
 
@@ -256,6 +285,7 @@ public class BeetleFight : DialogueClasses
     {
         BattleQueue.BattleQueueInstance.RemoveAllInstancesOfEntity(e);
         CombatManager.Instance.RemoveEnemy(e);
+        StartCoroutine(e.Die());
         e.gameObject.SetActive(false);
     }
 }
