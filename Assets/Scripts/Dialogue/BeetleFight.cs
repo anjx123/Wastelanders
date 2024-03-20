@@ -83,7 +83,9 @@ public class BeetleFight : DialogueClasses
             yield return new WaitForSeconds(MEDIUM_PAUSE);
             frog.FaceLeft(); // frog sees jackie
             //TODO: make the frog jump
-            yield return new WaitForSeconds(MEDIUM_PAUSE);
+            yield return new WaitForSeconds(BRIEF_PAUSE);
+            yield return StartCoroutine(MakeJump(frog.gameObject, 2f, 0.2f));
+            yield return new WaitForSeconds(BRIEF_PAUSE);
             yield return StartCoroutine(frog.Die()); // frog runs away
             yield return new WaitForSeconds(MEDIUM_PAUSE);
             yield return StartCoroutine(DialogueManager.Instance.StartDialogue(openingDiscussion.Dialogue));
@@ -288,5 +290,39 @@ public class BeetleFight : DialogueClasses
         CombatManager.Instance.RemoveEnemy(e);
         StartCoroutine(e.Die());
         e.gameObject.SetActive(false);
+    }
+
+    public IEnumerator MakeJump(GameObject obj, float jumpHeight, float jumpDuration)
+    {
+        // Set the start and end positions
+        Vector3 startPosition = obj.transform.position;
+        Vector3 endPosition = new(obj.transform.position.x, obj.transform.position.y + jumpHeight, obj.transform.position.z);
+
+        // Start the jump coroutine
+        yield return StartCoroutine(JumpCoroutine(obj, startPosition, endPosition, jumpDuration));
+    }
+
+    private IEnumerator JumpCoroutine(GameObject obj, Vector3 startPosition, Vector3 endPosition, float jumpDuration)
+    {
+        float elapsedTime = 0;
+
+        // First half of the jump
+        while (elapsedTime < jumpDuration / 2)
+        {
+            obj.transform.position = Vector3.Lerp(startPosition, endPosition, elapsedTime / (jumpDuration / 2));
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        // Second half of the jump
+        while (elapsedTime < jumpDuration)
+        {
+            obj.transform.position = Vector3.Lerp(endPosition, startPosition, (elapsedTime - jumpDuration / 2) / (jumpDuration / 2));
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        // Ensure the object returns to the exact start position
+        transform.position = startPosition;
     }
 }
