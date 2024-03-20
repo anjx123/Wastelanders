@@ -20,6 +20,14 @@ public class Scene2 : DialogueClasses
     [SerializeField] private WasteFrog frog;
     [SerializeField] private Transform frogInitialWalkIn;
 
+    [SerializeField] private WasteFrog frog2;
+    [SerializeField] private Transform frog2Battle;
+    [SerializeField] private Transform frog2WalkIn;
+
+    [SerializeField] private SlimeStack slime;
+    [SerializeField] private Transform slimeBattle;
+    [SerializeField] private Transform slimeWalkIn;
+
     [SerializeField] private List<DialogueText> sceneNarration;
     [SerializeField] private List<DialogueText> ivesInstruction;
     [SerializeField] private List<DialogueText> jackieStrategyPlan;
@@ -36,6 +44,9 @@ public class Scene2 : DialogueClasses
     private const float BRIEF_PAUSE = 0.2f; // For use after an animation to make it visually seem smoother
     private const float MEDIUM_PAUSE = 1f; //For use after a text box comes down and we want to add some weight to the text.
 
+    private const int NUM_ENTITIES = 3;
+    private int entitiesAlive = 0;
+
     protected override void GameStateChange(GameState gameState)
     {
         if (gameState == GameState.GAME_START)
@@ -49,14 +60,16 @@ public class Scene2 : DialogueClasses
         CombatManager.Instance.GameState = GameState.OUT_OF_COMBAT;
         CombatManager.Instance.SetDarkScreen();
         yield return new WaitForSeconds(0.8f);
+
         jackie.OutOfCombat();
-        frog.OutOfCombat();
         ives.GetComponent<EnemyIves>().OutOfCombat();
         
         jackie.SetReturnPosition(jackieDefaultTransform.position);
         frog.SetReturnPosition(frogInitialWalkIn.position);
+        frog2.SetReturnPosition(frog2Battle.position);
+        slime.SetReturnPosition(slimeBattle.position);
 
-        frog.UnTargetable();
+        frog.UnTargetable(); frog2.UnTargetable(); slime.UnTargetable();
         ives.GetComponent<EnemyIves>().UnTargetable();
         if (!jumpToCombat)
         {
@@ -109,19 +122,24 @@ public class Scene2 : DialogueClasses
             yield return StartCoroutine(jackie.MoveToPosition(frogInitialWalkIn.position + new Vector3(1.5f, 0, 0), 0f, 1.6f));
             yield return new WaitForSeconds(MEDIUM_PAUSE);
             frog.FaceLeft();
+            
+            StartCoroutine(frog2.MoveToPosition(frog2WalkIn.position, 0f, 2f));
+            yield return StartCoroutine(slime.MoveToPosition(slimeWalkIn.position, 0f, 2f));
             yield return new WaitForSeconds(MEDIUM_PAUSE);
+            
             yield return StartCoroutine(DialogueManager.Instance.StartDialogue(jackiePreCombat));
         } else
         {
             DestroyImmediate(ives);
         }
        
-        //yield return StartCoroutine(DialogueManager.Instance.StartDialogue(jackieMissedShot));
         // start frog fight
-        yield return StartCoroutine(jackie.ResetPosition());
+        StartCoroutine(jackie.ResetPosition());
+        StartCoroutine(frog2.ResetPosition());
+        StartCoroutine(slime.ResetPosition());
         yield return StartCoroutine(frog.ResetPosition());
         jackie.InCombat();
-        frog.Targetable(); frog.InCombat();
+        frog.Targetable(); frog.InCombat(); frog2.Targetable(); frog2.InCombat(); slime.Targetable(); slime.InCombat();
         yield return new WaitUntil(() => !DialogueManager.Instance.IsInDialogue());
         EntityClass.OnEntityDeath += FrogDies;
         CombatManager.Instance.GameState = GameState.SELECTION;
@@ -148,10 +166,14 @@ public class Scene2 : DialogueClasses
 
     private void FrogDies(EntityClass entity)
     {
-        if (entity is WasteFrog)
+        if (entity is EnemyClass)
         {
-            EntityClass.OnEntityDeath -= FrogDies;
-            CombatManager.Instance.GameState = GameState.GAME_WIN;
+            if (++entitiesAlive == NUM_ENTITIES)
+            {
+                EntityClass.OnEntityDeath -= FrogDies;
+                entitiesAlive = 0;
+                CombatManager.Instance.GameState = GameState.GAME_WIN;
+            } 
         }
     }
 
