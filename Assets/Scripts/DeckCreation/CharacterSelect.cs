@@ -1,24 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
-public class WeaponSelect : MonoBehaviour
+public class CharacterSelect : MonoBehaviour
 {
-    public CardDatabase.WeaponType type;
-    [SerializeField] private GameObject checkmark;
-    [SerializeField] private WeaponEdit weaponEdit;
-
+    public PlayerDatabase.PlayerName playerName;
     private bool isMouseDown = false;
-
-    private void Start()
-    {
-        weaponEdit.SetType(type);
-    }
-
-    public void SetSelected(bool isSelected)
-    {
-        checkmark.SetActive(isSelected);
-    }
 
     public void OnMouseDown()
     {
@@ -31,7 +19,7 @@ public class WeaponSelect : MonoBehaviour
         if (isMouseDown)
         {
             SetColor(Color.white);
-            DeckSelectionManager.Instance.WeaponSelected(this, type);
+            DeckSelectionManager.Instance.CharacterChosen(playerName);
         }
         isMouseDown = false;
     }
@@ -50,6 +38,12 @@ public class WeaponSelect : MonoBehaviour
     public void SetColor(Color newColor)
     {
         GetComponent<SpriteRenderer>().color = newColor;
+        SpriteRenderer[] childSpriteRenderers = GetComponentsInChildren<SpriteRenderer>();
+        foreach (SpriteRenderer spriteRenderer in childSpriteRenderers)
+        {
+            spriteRenderer.color = newColor;
+        }
     }
+
 
 }

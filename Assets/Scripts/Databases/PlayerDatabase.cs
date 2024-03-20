@@ -12,16 +12,29 @@ public class PlayerDatabase : ScriptableObject
     public PlayerData JackieData;
     public PlayerData IvesData;
 
-    public void GetDeckByPlayerName(PlayerName player)
+    public PlayerData GetDataByPlayerName(PlayerName player)
     {
         switch (player)
         {
             case PlayerName.JACKIE:
-                JackieData.GetCombinedDeck();
-                break;
+                return JackieData;
             case PlayerName.IVES:
-                IvesData.GetCombinedDeck();
-                break;
+                return IvesData;
+            default:
+                throw new System.Exception("No Valid Database for that player name" + player);
+        }
+    }
+
+    public List<ActionClass> GetDeckByPlayerName(PlayerName player)
+    {
+        switch (player)
+        {
+            case PlayerName.JACKIE:
+                return JackieData.GetCombinedDeck();
+            case PlayerName.IVES:
+                return IvesData.GetCombinedDeck();
+            default:
+                throw new System.Exception("No Valid Database for that player name" + player);
         }
     }
 

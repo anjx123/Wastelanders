@@ -182,7 +182,7 @@ GameObject:
   - component: {fileID: 8310555058881237846}
   - component: {fileID: 2062046371814979055}
   - component: {fileID: 5369578171842252942}
-  - component: {fileID: 5885458675646107122}
+  - component: {fileID: 1324054535390361887}
   m_Layer: 0
   m_Name: JackieSelection
   m_TagString: Untagged
@@ -303,7 +303,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 6.8, y: 7.68}
   m_EdgeRadius: 0
---- !u!114 &5885458675646107122
+--- !u!114 &1324054535390361887
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -312,9 +312,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2941428255650742268}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f6ada6a00e21a304aacc281e076e9c74, type: 3}
+  m_Script: {fileID: 11500000, guid: 6c30196fc261cd242bbe302d5afe871b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerName: 0
 --- !u!1 &8754682468671336673
 GameObject:
   m_ObjectHideFlags: 0

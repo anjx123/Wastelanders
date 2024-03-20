@@ -81,9 +81,9 @@ public class DeckSelectionManager : MonoBehaviour
             SceneManager.LoadScene("LevelSelect");
         }
     }
-    public void CharacterChosen(PlayerDatabase.PlayerData playerData)
+    public void CharacterChosen(PlayerDatabase.PlayerName playerName)
     {
-        this.playerData = playerData;
+        this.playerData = playerDatabase.GetDataByPlayerName(playerName);
         DeckSelectionState = DeckSelectionState.WeaponSelection;
     }
 
