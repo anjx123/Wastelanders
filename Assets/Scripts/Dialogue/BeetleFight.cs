@@ -161,6 +161,7 @@ public class BeetleFight : DialogueClasses
         jackie.OutOfCombat();
         ives.OutOfCombat();
         jackie.FaceLeft();
+        ives.FaceRight();
         StartCoroutine(ives.MoveToPosition(ivesDefaultTransform.position, 0, 1.5f));
         yield return StartCoroutine(jackie.MoveToPosition(jackieTalkingTransform.position, 0, 1.5f));
         yield return StartCoroutine(DialogueManager.Instance.StartDialogue(postBattleDialogue.Dialogue));
@@ -193,7 +194,6 @@ public class BeetleFight : DialogueClasses
         if (e.GetType().IsSubclassOf(typeof(Beetle)))
         {
             beetles_alive--;
-            Debug.Log(beetles_alive);
             if (beetles_alive < 1)
             {
                 CombatManager.Instance.GameState = GameState.GAME_WIN;
