@@ -100,7 +100,8 @@ public class Scene2 : DialogueClasses
             yield return StartCoroutine(frog.MoveToPosition(frogInitialWalkIn.position, 0f, 3f));
             yield return StartCoroutine(DialogueManager.Instance.StartDialogue(jackiePreMissedShot));
 
-            
+
+            jackie.AttackAnimation("IsShooting");
             yield return StartCoroutine(DialogueManager.Instance.StartDialogue(jackieJustMissedShot));
             yield return StartCoroutine(frog.MoveToPosition(frogInitialWalkIn.position + new Vector3(3.5f, 0, 0), 0f, 1.2f, outOfScreen.position));
             yield return StartCoroutine(DialogueManager.Instance.StartDialogue(jackiePostMissedShot));
