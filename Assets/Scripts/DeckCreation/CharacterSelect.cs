@@ -7,6 +7,9 @@ public class CharacterSelect : MonoBehaviour
 {
     public PlayerDatabase.PlayerName playerName;
     private bool isMouseDown = false;
+#nullable enable
+    public delegate void CharacterSelectDelegate(PlayerDatabase.PlayerName playerName);
+    public static event CharacterSelectDelegate? CharacterSelectedEvent;
 
     public void OnMouseDown()
     {
@@ -19,7 +22,7 @@ public class CharacterSelect : MonoBehaviour
         if (isMouseDown)
         {
             SetColor(Color.white);
-            DeckSelectionManager.Instance.CharacterChosen(playerName);
+            CharacterSelectedEvent?.Invoke(playerName);
         }
         isMouseDown = false;
     }

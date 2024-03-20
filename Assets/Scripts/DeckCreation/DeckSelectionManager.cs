@@ -16,6 +16,7 @@ public class DeckSelectionManager : MonoBehaviour
     [SerializeField] private GameObject cardArrayParent;
     [SerializeField] private CardDatabase cardDatabase;
     [SerializeField] private PlayerDatabase playerDatabase;
+    [SerializeField] private FadeScreenHandler fadeScreenHandler;
     private PlayerDatabase.PlayerData playerData;
     private WeaponType weaponType;
     public WeaponAmount weaponText;
@@ -63,14 +64,23 @@ public class DeckSelectionManager : MonoBehaviour
     void Start()
     {
         ActionClass.CardClickedEvent += ActionSelected;
+        CharacterSelect.CharacterSelectedEvent += CharacterChosen;
+        WeaponSelect.WeaponSelectEvent += WeaponSelected;
+        WeaponEdit.WeaponEditEvent += WeaponDeckEdit;
+        DeckSelectionArrow.DeckSelectionArrowEvent += PrevState;
+
     }
 
     void OnDestroy()
     {
         ActionClass.CardClickedEvent -= ActionSelected;
+        CharacterSelect.CharacterSelectedEvent -= CharacterChosen;
+        WeaponSelect.WeaponSelectEvent -= WeaponSelected;
+        WeaponEdit.WeaponEditEvent -= WeaponDeckEdit;
+        DeckSelectionArrow.DeckSelectionArrowEvent -= PrevState;
     }
 
-    public void PrevState()
+    private void PrevState()
     {
         if (DeckSelectionState == DeckSelectionState.WeaponSelection) {
             DeckSelectionState = DeckSelectionState.CharacterSelection;
@@ -78,16 +88,22 @@ public class DeckSelectionManager : MonoBehaviour
         } else if (DeckSelectionState == DeckSelectionState.DeckSelection) {
             DeckSelectionState = DeckSelectionState.WeaponSelection;
         } else if (DeckSelectionState == DeckSelectionState.CharacterSelection) {
-            SceneManager.LoadScene("LevelSelect");
+            ExitDeckSelection();
         }
     }
-    public void CharacterChosen(PlayerDatabase.PlayerName playerName)
+
+    private IEnumerator ExitDeckSelection()
     {
-        this.playerData = playerDatabase.GetDataByPlayerName(playerName);
+        yield return StartCoroutine(fadeScreenHandler.FadeInDarkScreen(2f));
+        SceneManager.LoadScene("LevelSelect");
+    }
+    private void CharacterChosen(PlayerDatabase.PlayerName playerName)
+    {
+        playerData = playerDatabase.GetDataByPlayerName(playerName);
         DeckSelectionState = DeckSelectionState.WeaponSelection;
     }
 
-    public void WeaponSelected(WeaponSelect c, CardDatabase.WeaponType weaponType)
+    private void WeaponSelected(WeaponSelect c, CardDatabase.WeaponType weaponType)
     {
         if (playerData.selectedWeapons.Contains(weaponType)) {
             playerData.selectedWeapons.Remove(weaponType);
@@ -103,7 +119,7 @@ public class DeckSelectionManager : MonoBehaviour
         }
     }
 
-    public void WeaponDeckEdit(CardDatabase.WeaponType weaponType)
+    private void WeaponDeckEdit(CardDatabase.WeaponType weaponType)
     {
         this.weaponType = weaponType;
         RenderDecks(weaponType);

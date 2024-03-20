@@ -6,6 +6,10 @@ public class DeckSelectionArrow : MonoBehaviour
 {
     private bool isMouseDown = false;
 
+#nullable enable
+    public delegate void DeckSelectionArrowDelegate();
+    public static event DeckSelectionArrowDelegate? DeckSelectionArrowEvent;
+
     public void OnMouseDown()
     {
         GetComponent<SpriteRenderer>().color = new Color(0.4f, 0.4f, 0.4f);
@@ -17,7 +21,7 @@ public class DeckSelectionArrow : MonoBehaviour
         if (isMouseDown)
         {
             GetComponent<SpriteRenderer>().color = Color.white;
-            DeckSelectionManager.Instance.PrevState();
+            DeckSelectionArrowEvent?.Invoke();
         }
         isMouseDown = false;
     }

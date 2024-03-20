@@ -7,6 +7,12 @@ public class WeaponEdit : MonoBehaviour
 {
     private CardDatabase.WeaponType type;
     private bool isMouseDown = false;
+
+#nullable enable
+    public delegate void WeaponEditDelegate(CardDatabase.WeaponType type);
+    public static event WeaponEditDelegate? WeaponEditEvent;
+
+
     public void SetType(CardDatabase.WeaponType type)
     {
         this.type = type;
@@ -22,7 +28,7 @@ public class WeaponEdit : MonoBehaviour
         if (isMouseDown)
         {
             GetComponent<SpriteRenderer>().color = Color.white;
-            DeckSelectionManager.Instance.WeaponDeckEdit(type);
+            WeaponEditEvent?.Invoke(type);
         }
         isMouseDown = false;
     }

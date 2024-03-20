@@ -8,6 +8,10 @@ public class WeaponSelect : MonoBehaviour
     [SerializeField] private GameObject checkmark;
     [SerializeField] private WeaponEdit weaponEdit;
 
+#nullable enable
+    public delegate void WeaponSelectDelegate(WeaponSelect weaponSelect, CardDatabase.WeaponType type);
+    public static event WeaponSelectDelegate? WeaponSelectEvent;
+
     private bool isMouseDown = false;
 
     private void Start()
@@ -31,7 +35,7 @@ public class WeaponSelect : MonoBehaviour
         if (isMouseDown)
         {
             SetColor(Color.white);
-            DeckSelectionManager.Instance.WeaponSelected(this, type);
+            WeaponSelectEvent?.Invoke(this, type);
         }
         isMouseDown = false;
     }
