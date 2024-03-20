@@ -158,6 +158,7 @@ public class BeetleFight : DialogueClasses
 
         DialogueManager.Instance.MoveBoxToBottom();
         CombatManager.Instance.GameState = GameState.OUT_OF_COMBAT;
+        yield return new WaitForSeconds(2);
         jackie.OutOfCombat();
         ives.OutOfCombat();
         jackie.FaceLeft();
