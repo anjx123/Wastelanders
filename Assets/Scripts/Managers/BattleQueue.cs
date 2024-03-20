@@ -213,11 +213,9 @@ public class BattleQueue : MonoBehaviour
     public IEnumerator DequeueWrappers()
     {
         List<Wrapper> array = wrapperArray.GetWrappers();
-        bool beganFighting = false;
         if (!(array.Count == 0))
         {
             CombatManager.Instance.GameState = GameState.FIGHTING;
-            beganFighting = true;
         }
 
         int i = 0; // for debugging
@@ -250,7 +248,7 @@ public class BattleQueue : MonoBehaviour
             RenderBQ(); 
 
         }
-        if (beganFighting)
+        if (CombatManager.Instance.GameState == GameState.FIGHTING)
         {
             CombatManager.Instance.GameState = GameState.SELECTION;
         }
