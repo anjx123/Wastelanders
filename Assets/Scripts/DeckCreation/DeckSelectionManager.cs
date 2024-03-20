@@ -60,6 +60,16 @@ public class DeckSelectionManager : MonoBehaviour
 
     }
 
+    void Start()
+    {
+        ActionClass.CardClickedEvent += ActionSelected;
+    }
+
+    void OnDestroy()
+    {
+        ActionClass.CardClickedEvent -= ActionSelected;
+    }
+
     public void PrevState()
     {
         if (DeckSelectionState == DeckSelectionState.WeaponSelection) {
@@ -100,61 +110,50 @@ public class DeckSelectionManager : MonoBehaviour
         DeckSelectionState = DeckSelectionState.DeckSelection;
     }
 
-    public void ActionSelected(ActionClass ac)
+    private void ActionSelected(ActionClass ac)
     {
         List<SerializableWeaponListEntry> playerDeck = playerData.playerDeck;
         ActionClass pref = cardDatabase.GetCardsByType(weaponType).FirstOrDefault(action => action.GetType() == ac.GetType());
         SerializableWeaponListEntry entry = playerDeck.FirstOrDefault(entry => entry.key == weaponType);
-        SerializableTuple<WeaponType, int> tupple = playerData.playerWeaponProficiency.FirstOrDefault(entry => entry.Item1 == weaponType);
+        SerializableTuple<WeaponType, int> proficiencyPointsTuple = playerData.playerWeaponProficiency.FirstOrDefault(entry => entry.Item1 == weaponType);
         int points = 0;
-        if (tupple != null) {
-            points = tupple.Item2;
+        if (proficiencyPointsTuple != null) {
+            points = proficiencyPointsTuple.Item2;
         } else {
-            tupple = new(weaponType, 0);
-            playerData.playerWeaponProficiency.Add(tupple);
+            proficiencyPointsTuple = new(weaponType, 0);
+            playerData.playerWeaponProficiency.Add(proficiencyPointsTuple);
         }
 
         if (entry != null) {
             ActionClass actionFound = entry.value.FirstOrDefault(action => action.GetType() == ac.GetType());
             if (actionFound != null) {  
-                tupple.Item2 += ac.CostToAddToDeck;          
+                proficiencyPointsTuple.Item2 += ac.CostToAddToDeck;          
                 ac.SetSelectedForDeck(false);
                 entry.value.Remove(actionFound);
                 int totalPoints = points + ac.CostToAddToDeck;
                 pointsText.TextUpdate("Select Your Cards:\nAvailable Points: " + totalPoints.ToString());
             } else {
                 if (points - ac.CostToAddToDeck >= 0) {
-                    tupple.Item2 = points - ac.CostToAddToDeck;
+                    proficiencyPointsTuple.Item2 = points - ac.CostToAddToDeck;
                     ac.SetSelectedForDeck(true);
                     entry.value.Add(pref);
-                    pointsText.TextUpdate("Select Your Cards:\nAvailable Points: " + tupple.Item2.ToString());
+                    pointsText.TextUpdate("Select Your Cards:\nAvailable Points: " + proficiencyPointsTuple.Item2.ToString());
                 } else {
                     Debug.LogWarning("Insufficient experience points");
                 }
             }
-
-            return;
-        }
-
-        SerializableWeaponListEntry newEntry = new()
+        } else
         {
-            key = weaponType,
-            value = new List<ActionClass> { pref }
-        };
-        
-        playerDeck.Add(newEntry);
+            SerializableWeaponListEntry newEntry = new()
+            {
+                key = weaponType,
+                value = new List<ActionClass> { pref }
+            };
+            playerDeck.Add(newEntry);
+        }
     }
 
-    
 
-    private void Start()
-    {
-    }
-
-    private void OnDestroy()
-    {
-        //Free up subscribed events here to prevent mem leak 
-    }
 
     private void PerformCharacterSelection()
     {

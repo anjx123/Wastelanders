@@ -12,6 +12,19 @@ public class PlayerDatabase : ScriptableObject
     public PlayerData JackieData;
     public PlayerData IvesData;
 
+    public void GetDeckByPlayerName(PlayerName player)
+    {
+        switch (player)
+        {
+            case PlayerName.JACKIE:
+                JackieData.GetCombinedDeck();
+                break;
+            case PlayerName.IVES:
+                IvesData.GetCombinedDeck();
+                break;
+        }
+    }
+
     [System.Serializable]
     public class PlayerData
     {
@@ -50,6 +63,12 @@ public class PlayerDatabase : ScriptableObject
 
             return new List<ActionClass>();
         }
+    }
+
+    public enum PlayerName
+    {
+        JACKIE,
+        IVES,
     }
 }
 
