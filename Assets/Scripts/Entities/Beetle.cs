@@ -47,8 +47,7 @@ public abstract class Beetle : EnemyClass
         // rest is the same
         pool[0].GetComponent<ActionClass>().Target = targets[Random.Range(0, targets.Count)];
         BattleQueue.BattleQueueInstance.AddEnemyAction(pool[0].GetComponent<ActionClass>(), this);
-        combatInfo.SetCombatSprite(pool[0].GetComponent<ActionClass>());
-        combatInfo.GetComponentInChildren<CombatCardUI>().actionClass = pool[0].GetComponent<ActionClass>();
+        combatInfo.AddCombatSprite(pool[0].GetComponent<ActionClass>());
         pool.RemoveAt(0);
         if (pool.Count < 1)
         {

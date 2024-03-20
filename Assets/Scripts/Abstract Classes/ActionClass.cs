@@ -14,13 +14,13 @@ public abstract class ActionClass : SelectClass
         get { return target; }
         set
         {
-            targetChanged?.Invoke(this);
             target = value;
+            TargetChanged?.Invoke(this);
         }
     }
     private EntityClass origin;
     public delegate void ActionClassDelegate(ActionClass target);
-    public event ActionClassDelegate targetChanged;
+    public event ActionClassDelegate TargetChanged;
     public EntityClass Origin
     {
         get { return origin; }
@@ -68,7 +68,7 @@ public abstract class ActionClass : SelectClass
     private CardState cardState = CardState.NORMAL;
     public int Speed { get; protected set; }
     public string description;
-    public Sprite icon;
+    [SerializeField] private Sprite icon;
     public Sprite cardBack;
     [SerializeField] private CardUI cardUI;
 
