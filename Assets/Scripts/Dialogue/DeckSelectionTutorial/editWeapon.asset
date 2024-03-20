@@ -12,4 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 207ddad3e1c90594ba3f48e2a5a6a796, type: 3}
   m_Name: editWeapon
   m_EditorClassIdentifier: 
-  dialogue: []
+  dialogue:
+  - bodyText: Awesome now I gotta focus, which special techniques should I prepare
+      before hand?
+    speakerName: Jackie
+    displayingImage: {fileID: 0}
+  - bodyText: '[''Click'' on the Edit button to edit the Action Deck of each weapon.]'
+    speakerName: Jackie
+    displayingImage: {fileID: 0}

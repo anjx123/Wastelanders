@@ -21,7 +21,14 @@ public class DeckSelectionManager : MonoBehaviour
     private WeaponType weaponType;
     public WeaponAmount weaponText;
     public PointsAmount pointsText;
+    private bool isFadingOut = false;
     public static DeckSelectionManager Instance { get; private set; }
+#nullable enable
+    public delegate void PlayerActionDeckDelegate(int points);
+    public event PlayerActionDeckDelegate? PlayerActionDeckModifiedEvent;
+
+    private string nextScene = "LevelSelect";
+    
     private DeckSelectionState deckSelectionState;
     private DeckSelectionState DeckSelectionState //Might want to swap out this state machine for an event driven changing phases.
     {
@@ -88,15 +95,24 @@ public class DeckSelectionManager : MonoBehaviour
         } else if (DeckSelectionState == DeckSelectionState.DeckSelection) {
             DeckSelectionState = DeckSelectionState.WeaponSelection;
         } else if (DeckSelectionState == DeckSelectionState.CharacterSelection) {
-            ExitDeckSelection();
+            StartCoroutine(ExitDeckSelection());
         }
     }
-
     private IEnumerator ExitDeckSelection()
     {
-        yield return StartCoroutine(fadeScreenHandler.FadeInDarkScreen(2f));
-        SceneManager.LoadScene("LevelSelect");
+        if (!isFadingOut)
+        {
+            isFadingOut = true;
+            yield return StartCoroutine(fadeScreenHandler.FadeInDarkScreen(2f));
+            SceneManager.LoadScene(nextScene);
+            isFadingOut = false;
+        }
     }
+    public void SetNextScene(string newScene)
+    {
+        nextScene = newScene;
+    }
+
     private void CharacterChosen(PlayerDatabase.PlayerName playerName)
     {
         playerData = playerDatabase.GetDataByPlayerName(playerName);
@@ -158,6 +174,7 @@ public class DeckSelectionManager : MonoBehaviour
                     Debug.LogWarning("Insufficient experience points");
                 }
             }
+            PlayerActionDeckModifiedEvent?.Invoke(proficiencyPointsTuple.Item2);
         } else
         {
             SerializableWeaponListEntry newEntry = new()
