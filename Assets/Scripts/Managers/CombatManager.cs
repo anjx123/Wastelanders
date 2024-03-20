@@ -206,16 +206,26 @@ public class CombatManager : MonoBehaviour
 
     private void PerformLose()
     {
+        StartCoroutine(FadeCombatBackground(false));
         Debug.LogWarning("All Players are dead, You Lose...");
         baseCamera.Priority = 1;
         dynamicCamera.Priority = 0;
+        foreach (EnemyClass enemy in enemies)
+        {
+            StartCoroutine(enemy.ResetPosition());
+        }
     }
 
     private void PerformWin()
     {
+        StartCoroutine(FadeCombatBackground(false));
         Debug.LogWarning("All enemies are dead, You Win!");
         baseCamera.Priority = 1;
         dynamicCamera.Priority = 0;
+        foreach (PlayerClass player in players)
+        {
+            StartCoroutine(player.ResetPosition());
+        }
     }
 
 
