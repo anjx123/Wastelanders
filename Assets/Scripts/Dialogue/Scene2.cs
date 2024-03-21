@@ -19,6 +19,7 @@ public class Scene2 : DialogueClasses
 
     [SerializeField] private WasteFrog frog;
     [SerializeField] private Transform frogInitialWalkIn;
+    [SerializeField] private Transform frogFightPosition;
 
     [SerializeField] private WasteFrog frog2;
     [SerializeField] private Transform frog2Battle;
@@ -36,6 +37,8 @@ public class Scene2 : DialogueClasses
     [SerializeField] private List<DialogueText> jackieJustMissedShot;
     [SerializeField] private List<DialogueText> jackiePostMissedShot;
     [SerializeField] private List<DialogueText> jackiePreCombat;
+    //Combat Dialogue
+    [SerializeField] private List<DialogueText> startOfCombatDialogue;
     // After the frog is defeated
     [SerializeField] private List<DialogueText> crystalExtraction;
 
@@ -132,11 +135,12 @@ public class Scene2 : DialogueClasses
         {
             DestroyImmediate(ives);
         }
-       
+
         // start frog fight
         StartCoroutine(jackie.ResetPosition());
         StartCoroutine(frog2.ResetPosition());
         StartCoroutine(slime.ResetPosition());
+        frog.SetReturnPosition(frogFightPosition.position);
         yield return StartCoroutine(frog.ResetPosition());
         jackie.InCombat();
         frog.Targetable(); frog.InCombat(); frog2.Targetable(); frog2.InCombat(); slime.Targetable(); slime.InCombat();
@@ -144,6 +148,8 @@ public class Scene2 : DialogueClasses
         EntityClass.OnEntityDeath += FrogDies;
         CombatManager.Instance.GameState = GameState.SELECTION;
 
+        yield return new WaitForSeconds(1f);
+        yield return StartCoroutine(DialogueManager.Instance.StartDialogue(startOfCombatDialogue));
         yield return new WaitUntil(() => CombatManager.Instance.GameState == GameState.GAME_WIN);
         CombatManager.Instance.GameState = GameState.OUT_OF_COMBAT;
 

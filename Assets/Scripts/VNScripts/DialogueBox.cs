@@ -21,6 +21,9 @@ public class DialogueBox : MonoBehaviour
 
     private bool lineIsFinished;
 
+    public delegate void DialogueBoxDelegate();
+    public static event DialogueBoxDelegate DialogueBoxEvent; //New event to help you coordinate cool things during dialogue
+
     public void SetLine(DialogueText line)
     {
         if (line.DisplayingImage == null)
@@ -32,9 +35,14 @@ public class DialogueBox : MonoBehaviour
             displayingImage.enabled = true;
             displayingImage.sprite = line.DisplayingImage;
         }
+
+        SetFontStyles(line);
+       
         bodyText.text = string.Empty;
         this.currentLine = line.BodyText;
         nameText.text = line.SpeakerName;
+
+        if (line.broadcastAnEvent) DialogueBoxEvent?.Invoke();
         StartDialogue();
     }
 
@@ -43,6 +51,28 @@ public class DialogueBox : MonoBehaviour
         if (rollingSpeed == 0)
         {
             rollingSpeed = DEFAULTROLLSPEED;
+        }
+    }
+
+    void SetFontStyles(DialogueText line)
+    {
+
+        if (line.Bold)
+        {
+            bodyText.fontStyle |= FontStyles.Bold;
+        }
+        else
+        {
+            bodyText.fontStyle &= ~FontStyles.Bold;
+        }
+
+        if (line.Italics)
+        {
+            bodyText.fontStyle |= FontStyles.Italic;
+        }
+        else
+        {
+            bodyText.fontStyle &= ~FontStyles.Italic;
         }
     }
 
