@@ -13,9 +13,8 @@ MonoBehaviour:
   m_Name: selectActions
   m_EditorClassIdentifier: 
   dialogue:
-  - bodyText: Each special technique takes a lot of strength and stamina to use,
-      given my current proficiency level with the weapon, I should choose wisely
-      which techniques I should use
+  - bodyText: I will only have the stamina to use a couple of techniques, I should
+      choose them wisely.
     speakerName: Jackie
     displayingImage: {fileID: 0}
   - bodyText: '[Each individual character has their own weapon proficiencies that

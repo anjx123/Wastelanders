@@ -242,11 +242,13 @@ public class DeckSelectionManager : MonoBehaviour
         {
             GameObject go = Instantiate(card.gameObject);
             instantiatedCards.Add(go);
+            ActionClass ac = go.GetComponent<ActionClass>();
             ActionClass pref = chosenCardList.FirstOrDefault(action => action.GetType() == card.GetType());
             if (pref != null) {
-                ActionClass ac = go.GetComponent<ActionClass>();
                 ac.SetSelectedForDeck(true);
             }
+            ac.SetRenderCost(true);
+            ac.UpdateDup();
         }
 
         instantiatedCards.Sort((card1, card2) => card1.GetComponent<ActionClass>().Speed.CompareTo(card2.GetComponent<ActionClass>().Speed));

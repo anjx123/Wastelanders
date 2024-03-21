@@ -6,6 +6,8 @@ using UnityEngine;
 public class DeckSelectionTutorial : MonoBehaviour
 {
     [SerializeField] private FadeScreenHandler fadeHandler;
+    [SerializeField] private PlayerDatabase playerDatabase;
+    [SerializeField] private CharacterSelect jackieSelect;
 
     [SerializeField] private DialogueWrapper selectYourCharacter;
     [SerializeField] private DialogueWrapper selectYourWeapon;
@@ -27,12 +29,17 @@ public class DeckSelectionTutorial : MonoBehaviour
         GameStateManager.shouldPlayDeckSelectionTutorial = true;
         if (GameStateManager.shouldPlayDeckSelectionTutorial == false) yield break;
 
+        jackieSelect.GetComponent<BoxCollider2D>().enabled = false;
         fadeHandler.SetDarkScreen();
         foreach (CharacterSelect character in lockedCharacters) {
             character.SetLockedState(true);
         }
+        foreach (WeaponSelect weapon in lockedWeapons)
+        {
+            weapon.SetLockedState(true);
+        }
         yield return StartCoroutine(fadeHandler.FadeInLightScreen(2f));
-        yield return StartCoroutine(StartDialogueWithNextEvent(selectYourCharacter.Dialogue, () => { CharacterSelect.CharacterSelectedEvent += HandleCharacterSelected; } ));
+        yield return StartCoroutine(StartDialogueWithNextEvent(selectYourCharacter.Dialogue, () => { jackieSelect.GetComponent<BoxCollider2D>().enabled = true; CharacterSelect.CharacterSelectedEvent += HandleCharacterSelected; } ));
     }
 
     private void HandleCharacterSelected(PlayerDatabase.PlayerName playerName)

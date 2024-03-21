@@ -17,10 +17,10 @@ MonoBehaviour:
     speakerName: Jackie
     displayingImage: {fileID: 0}
   - bodyText: "I already have my staff with me, and since I\u2019ve been training
-      hard to use the pistol recently, I should bring that during my exam"
+      hard to use the pistol recently, I should bring that during my exam."
     speakerName: Jackie
     displayingImage: {fileID: 21300000, guid: 601769b83c413394f9dcef8bf9a4ef38, type: 3}
   - bodyText: '[''Click'' on the weapon to select and bring it into combat. You can
-      only select up to two]'
+      only select up to two.]'
     speakerName: Jackie
     displayingImage: {fileID: 21300000, guid: 601769b83c413394f9dcef8bf9a4ef38, type: 3}

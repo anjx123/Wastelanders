@@ -8,10 +8,11 @@ public class CharacterSelect : MonoBehaviour
 {
     public PlayerDatabase.PlayerName playerName;
     private bool isMouseDown = false;
+    public TMP_Text editText;
 #nullable enable
     public delegate void CharacterSelectDelegate(PlayerDatabase.PlayerName playerName);
     public static event CharacterSelectDelegate? CharacterSelectedEvent;
-    public TMP_Text editText;
+   
     private bool isLocked = false;
 
     public void OnMouseDown()
@@ -56,18 +57,18 @@ public class CharacterSelect : MonoBehaviour
     }
 
     public void SetLockedState(bool isLocked) {
-            if (isLocked)
-            {
-                this.isLocked = true;
-                SetColor(Color.grey);
-                editText.text = "Locked";
-            } else
-            {
-                this.isLocked = false;
-                SetColor(Color.grey);
-                editText.text = "Edit";
-            }
+        if (isLocked)
+        {
+            this.isLocked = true;
+            SetColor(Color.grey);
+            editText.text = "Locked";
+        } else
+        {
+            this.isLocked = false;
+            SetColor(Color.grey);
+            editText.text = "Edit";
         }
+    }
 
 
 }

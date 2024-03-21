@@ -350,4 +350,9 @@ public abstract class ActionClass : SelectClass
     {
         cardUI.SetSelectedForDeck(isSelectedForDeck);
     }
+
+    public void SetRenderCost(bool renderCost)
+    {
+        cardUI.shouldRenderCost = renderCost;
+    }
 }
