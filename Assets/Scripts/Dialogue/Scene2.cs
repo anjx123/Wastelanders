@@ -29,6 +29,8 @@ public class Scene2 : DialogueClasses
     [SerializeField] private Transform slimeBattle;
     [SerializeField] private Transform slimeWalkIn;
 
+    [SerializeField] private GameOver gameOver;
+
     [SerializeField] private List<DialogueText> sceneNarration;
     [SerializeField] private List<DialogueText> ivesInstruction;
     [SerializeField] private List<DialogueText> jackieStrategyPlan;
@@ -41,6 +43,10 @@ public class Scene2 : DialogueClasses
     [SerializeField] private List<DialogueText> startOfCombatDialogue;
     // After the frog is defeated
     [SerializeField] private List<DialogueText> crystalExtraction;
+
+    //Game Lose Dialogue
+    [SerializeField] private List<DialogueText> gameLoseDialogue;
+
 
     [SerializeField] private bool jumpToCombat;
 
@@ -170,6 +176,16 @@ public class Scene2 : DialogueClasses
         yield break;
     }
 
+    private IEnumerator GameLose()
+    {
+        yield return StartCoroutine(CombatManager.Instance.FadeInDarkScreen(2f));
+        //Set Jump into combat to be true
+        gameOver.gameObject.SetActive(true);
+        gameOver.FadeIn();
+
+        yield return StartCoroutine(DialogueManager.Instance.StartDialogue(gameLoseDialogue));
+    }
+
     private void FrogDies(EntityClass entity)
     {
         if (entity is EnemyClass)
@@ -180,6 +196,11 @@ public class Scene2 : DialogueClasses
                 entitiesAlive = 0;
                 CombatManager.Instance.GameState = GameState.GAME_WIN;
             } 
+        }
+        if (entity is PlayerClass)
+        {
+            EntityClass.OnEntityDeath -= FrogDies;
+            StartCoroutine(GameLose());
         }
     }
 
