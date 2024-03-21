@@ -28,6 +28,9 @@ public class DeckSelectionTutorial : MonoBehaviour
         if (GameStateManager.shouldPlayDeckSelectionTutorial == false) yield break;
 
         fadeHandler.SetDarkScreen();
+        foreach (CharacterSelect character in lockedCharacters) {
+            character.SetLockedState(true);
+        }
         yield return StartCoroutine(fadeHandler.FadeInLightScreen(2f));
         yield return StartCoroutine(StartDialogueWithNextEvent(selectYourCharacter.Dialogue, () => { CharacterSelect.CharacterSelectedEvent += HandleCharacterSelected; } ));
     }
