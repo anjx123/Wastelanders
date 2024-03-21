@@ -1566,18 +1566,23 @@ MonoBehaviour:
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
   - bodyText: As you all know, the Waste Products retrieved from mutated creatures
-      and plants are indispensable, as they are the main material in weapon manufacturing
-      and energy production.
+      and plants are essential for weapon manufacturing and energy production.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
-  - bodyText: 'Examiners will be judging your ability to extract as much Waste Products
-      from the local flora and fauna as you can. Keep this mind: the more powerful
-      the Waste creature, the more valuable the extracted Waste Product.'
+  - bodyText: Our role as NITES is to extract as much of these products from the
+      local flora and fauna to combat the waste from spreading further.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
-  - bodyText: ' We will not interfere with the exam unless we believe you are in
-      serious danger or an emergency arises. You have until noon tomorrow. Good luck,
-      your time starts now.'
+  - bodyText: This exam will judge your ability to exploit your surroundings and
+      extract as much valuable Waste Products as you can.
+    speakerName: Ives
+    displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
+  - bodyText: 'The Examiners will also be discreetly evaluating you, and will not
+      interfere with the exam unless we believe you are in serious danger or an emergency
+      arises. '
+    speakerName: Ives
+    displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
+  - bodyText: You have until noon tomorrow. Good luck, your time starts now.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
   jackieStrategyPlan:
