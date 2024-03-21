@@ -423,6 +423,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &439599444 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3746938701483567848, guid: 45259cd223a7bd941b08d08990f299fb, type: 3}
+  m_PrefabInstance: {fileID: 548949320}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bcae931aa9453784c89af658e893bb90, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &455316567
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -794,7 +805,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fadeHandler: {fileID: 1261007668}
-  playerDatabase: {fileID: 0}
+  playerDatabase: {fileID: 11400000, guid: 8727bc367ba518d4496483da96ba1cf0, type: 2}
   jackieSelect: {fileID: 1453917758}
   selectYourCharacter: {fileID: 11400000, guid: a84e804fe223e4b45bdf24e3dda56017, type: 2}
   selectYourWeapon: {fileID: 11400000, guid: 606854e7174308e41b7ac2d35253ea2d, type: 2}
@@ -805,6 +816,10 @@ MonoBehaviour:
   - {fileID: 1703198200}
   lockedWeapons:
   - {fileID: 1915986179}
+  weaponEditBoxCollidersToDisable:
+  - {fileID: 439599444}
+  - {fileID: 1932402269}
+  - {fileID: 1446819734}
 --- !u!1001 &751354716
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1874,6 +1889,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 187fbc93202bc88469d62711b6550524, type: 3}
+--- !u!114 &1446819734 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 263171616467876533, guid: 11797fb1537b0c14ca7953804d655285, type: 3}
+  m_PrefabInstance: {fileID: 1493004622}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bcae931aa9453784c89af658e893bb90, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1453917758 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1324054535390361887, guid: 383eb88529f54c546b708a146799bfac, type: 3}
@@ -2211,6 +2237,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a968158a80a6e5a46b3d98ec3b462f4b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1932402269 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3759420406931182201, guid: 9f5b6b4e42a9a5e44aea3cf8872c4f20, type: 3}
+  m_PrefabInstance: {fileID: 455316567}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bcae931aa9453784c89af658e893bb90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &2016508818

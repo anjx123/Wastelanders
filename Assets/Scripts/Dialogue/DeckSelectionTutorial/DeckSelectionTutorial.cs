@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class DeckSelectionTutorial : MonoBehaviour
@@ -18,6 +19,8 @@ public class DeckSelectionTutorial : MonoBehaviour
     [SerializeField] private List<CharacterSelect> lockedCharacters;
     [SerializeField] private List<WeaponSelect> lockedWeapons;
 
+    [SerializeField] private List<WeaponEdit> weaponEditBoxCollidersToDisable;
+
 
     private void Start()
     {
@@ -29,6 +32,12 @@ public class DeckSelectionTutorial : MonoBehaviour
         GameStateManager.shouldPlayDeckSelectionTutorial = true;
         if (GameStateManager.shouldPlayDeckSelectionTutorial == false) yield break;
 
+        NormalizeTutorialDecks();
+
+        foreach (WeaponEdit boxCollider in weaponEditBoxCollidersToDisable)
+        {
+            boxCollider.GetComponent<BoxCollider2D>().enabled = false;
+        }
         jackieSelect.GetComponent<BoxCollider2D>().enabled = false;
         fadeHandler.SetDarkScreen();
         foreach (CharacterSelect character in lockedCharacters) {
@@ -51,7 +60,12 @@ public class DeckSelectionTutorial : MonoBehaviour
     private void HandleWeaponSelected(WeaponSelect weaponSelect, CardDatabase.WeaponType type)
     {
         WeaponSelect.WeaponSelectEvent -= HandleWeaponSelected;
-        StartCoroutine(StartDialogueWithNextEvent(editYourWeapon.Dialogue, () => { WeaponEdit.WeaponEditEvent += HandleWeaponEdited; }));
+        StartCoroutine(StartDialogueWithNextEvent(editYourWeapon.Dialogue, () => {
+            foreach (WeaponEdit boxCollider in weaponEditBoxCollidersToDisable)
+            {
+                boxCollider.GetComponent<BoxCollider2D>().enabled = true;
+            }
+            WeaponEdit.WeaponEditEvent += HandleWeaponEdited; }));
     }
 
     private void HandleWeaponEdited(CardDatabase.WeaponType type)
@@ -69,6 +83,19 @@ public class DeckSelectionTutorial : MonoBehaviour
             DeckSelectionManager.Instance.PlayerActionDeckModifiedEvent -= HandleRunOutOfPoints;
             StartCoroutine(DialogueManager.Instance.StartDialogue(backButtonTutorial.Dialogue));
         }
+    }
+
+
+
+
+    //Completely removes the pistol deck from jackie
+    private void NormalizeTutorialDecks()
+    {
+        playerDatabase.JackieData.selectedWeapons.Remove(CardDatabase.WeaponType.PISTOL);
+        SerializableWeaponListEntry pistolDeck = playerDatabase.JackieData.playerDeck.FirstOrDefault(deck => deck.key == CardDatabase.WeaponType.PISTOL);
+        pistolDeck.value = new List<ActionClass>();
+        SerializableTuple<CardDatabase.WeaponType, SerializableTuple<int, int>> pointsAvailableForPistol = playerDatabase.JackieData.playerWeaponProficiency.FirstOrDefault(proficiency => proficiency.Item1 == CardDatabase.WeaponType.PISTOL);
+        pointsAvailableForPistol.Item2.Item1 = 0;
     }
 
 
