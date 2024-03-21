@@ -40,7 +40,6 @@ public class CardUI : MonoBehaviour
 
         if (shouldRenderCost)
         {
-            Debug.Log("Rendering Cost");
             cardCost.gameObject.SetActive(true); 
             cardCost.text = actionClass.CostToAddToDeck.ToString();
             cardCost.gameObject.GetComponent<MeshRenderer>().sortingOrder = cardBackRenderer.sortingOrder + 1;

@@ -41,8 +41,8 @@ public class PlayerDatabase : ScriptableObject
     [System.Serializable]
     public class PlayerData
     {
-        public string name = "";
-        public List<SerializableTuple<CardDatabase.WeaponType, int>> playerWeaponProficiency = new();
+        public string name = ""; 
+        public List<SerializableTuple<CardDatabase.WeaponType, SerializableTuple<int, int>>> playerWeaponProficiency = new(); //left int is current points taken up, right is MAX proficiency points
         public List<CardDatabase.WeaponType> selectedWeapons = new();
         public List<SerializableWeaponListEntry> playerDeck = new();
 
