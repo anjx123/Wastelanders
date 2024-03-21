@@ -794,6 +794,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fadeHandler: {fileID: 1261007668}
+  playerDatabase: {fileID: 0}
+  jackieSelect: {fileID: 1453917758}
   selectYourCharacter: {fileID: 11400000, guid: a84e804fe223e4b45bdf24e3dda56017, type: 2}
   selectYourWeapon: {fileID: 11400000, guid: 606854e7174308e41b7ac2d35253ea2d, type: 2}
   editYourWeapon: {fileID: 11400000, guid: c46007170a30ada4bb762d8356896f77, type: 2}
@@ -1872,6 +1874,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 187fbc93202bc88469d62711b6550524, type: 3}
+--- !u!114 &1453917758 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1324054535390361887, guid: 383eb88529f54c546b708a146799bfac, type: 3}
+  m_PrefabInstance: {fileID: 751354716}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c30196fc261cd242bbe302d5afe871b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1493004622
 PrefabInstance:
   m_ObjectHideFlags: 0
