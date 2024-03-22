@@ -37,4 +37,11 @@ public class Crystals : EnemyClass
         UpdateFacing(diffInLocation, lookAtPosition);
         yield break;
     }
+
+    // @author: andrew
+    // i NEEDED to move crystals
+    public IEnumerator CrystalMoveToPosition(Vector3 destination, float radius, float duration, Vector3? lookAtPosition = null)
+    {
+        yield return StartCoroutine(base.MoveToPosition(destination, radius, duration));
+    }
 }

@@ -11,13 +11,13 @@ public class PreQueenFight : DialogueClasses
 {
     [SerializeField] private Jackie jackie;
     [SerializeField] private Transform jackieDefaultTransform;
-    [SerializeField] private Transform jackieChasingTransform;
     [SerializeField] private Transform jackieTalkingTransform;
     [SerializeField] private Ives ives;
     [SerializeField] private Transform ivesDefaultTransform;
 
     [SerializeField] private Beetle draggerBeetle;
     [SerializeField] private Transform draggerBeetleTransform;
+    [SerializeField] private Crystals draggedCrystal;
     [SerializeField] private List<Beetle> campBeetles;
     [SerializeField] private List<Crystals> crystals;
 
@@ -25,18 +25,12 @@ public class PreQueenFight : DialogueClasses
 
     [SerializeField] private GameObject background;
 
-    [SerializeField] private DialogueWrapper openingDiscussion;
-    [SerializeField] private DialogueWrapper jackieSurprised;
-    [SerializeField] private DialogueWrapper jackieChase;
-    [SerializeField] private DialogueWrapper jackieBeetleCamp;
-    [SerializeField] private DialogueWrapper narratorCamp;
-    [SerializeField] private DialogueWrapper ivesConversation;
-    [SerializeField] private DialogueWrapper twoPlayerCombatTutorial;
-    [SerializeField] private DialogueWrapper ivesTutorial;
-    [SerializeField] private DialogueWrapper postBattleDialogue;
-
     [SerializeField] private bool jumpToCombat;
 
+    [SerializeField] private DialogueWrapper IntroDialogue;
+    [SerializeField] private DialogueWrapper MakingPlanDialogue;
+    [SerializeField] private DialogueWrapper AfterBeetleFightDialogue;
+    [SerializeField] private DialogueWrapper PreQueenFightDialogue;
 
     private const float BRIEF_PAUSE = 0.2f; // For use after an animation to make it visually seem smoother
     private const float MEDIUM_PAUSE = 1f; //For use after a text box comes down and we want to add some weight to the text.
@@ -60,6 +54,19 @@ public class PreQueenFight : DialogueClasses
         jackie.OutOfCombat(); //Workaround for now, ill have to remove this once i manually start instantiating players
         draggerBeetle.OutOfCombat();
         jackie.SetReturnPosition(jackieDefaultTransform.position);
+        foreach (Crystals c in crystals)
+        {
+            c.OutOfCombat();
+        }
+        foreach (Beetle b in campBeetles)
+        {
+            b.OutOfCombat();
+            if (b.GetType() != typeof(WorkerBeetle))
+            {
+                b.FaceLeft();
+            }
+        }
+
         if (!jumpToCombat)
         {
             yield return new WaitForSeconds(1f);
@@ -70,36 +77,25 @@ public class PreQueenFight : DialogueClasses
 
             yield return StartCoroutine(CombatManager.Instance.FadeInLightScreen(2f));
 
+            ives.SetReturnPosition(ivesDefaultTransform.position);
+            StartCoroutine(ives.ResetPosition());
             yield return StartCoroutine(jackie.ResetPosition()); //Jackie Runs into the scene
+            yield return new WaitForSeconds(MEDIUM_PAUSE);
+            yield return StartCoroutine(DialogueManager.Instance.StartDialogue(IntroDialogue.Dialogue));
 
+            yield return new WaitForSeconds(BRIEF_PAUSE);
 
+            yield return StartCoroutine(BeetleDragCrystal(draggerBeetle, draggedCrystal, draggerBeetleTransform.position, 2f));
+
+            yield return new WaitForSeconds(BRIEF_PAUSE);
+
+            yield return StartCoroutine(draggerBeetle.Die());
 
         }
         else //setup scene
         {
 
         }
-    }
-
-    private void Begin2PCombatTutorial()
-    {
-        HighlightManager.EntityClicked += EntityClicked;
-        EntityClass.OnEntityDeath += EntityDied;
-    }
-
-    private void EntityClicked(EntityClass e)
-    {
-        if (e.GetType() == typeof(Ives))
-        {
-            StartCoroutine(TwoPlayerDialogue());
-        }
-    }
-
-    private IEnumerator TwoPlayerDialogue()
-    {
-        HighlightManager.EntityClicked -= EntityClicked;
-        yield return new WaitUntil(() => !DialogueManager.Instance.IsInDialogue());
-        yield return StartCoroutine(DialogueManager.Instance.StartDialogue(ivesTutorial.Dialogue));
     }
 
     private void EntityDied(EntityClass e)
@@ -234,5 +230,26 @@ public class PreQueenFight : DialogueClasses
 
         // Ensure the object returns to the exact start position
         transform.position = startPosition;
+    }
+
+    // assumes the crystal is in the right spot lol to begin with
+    private IEnumerator BeetleDragCrystal(Beetle b, Crystals c, Vector3 destination, float duration)
+    {
+        //bool goingLeft = b.transform.position.x > destination.x;
+        //if (goingLeft)
+        //{
+
+        //}
+        //else
+        //{
+
+        //}
+
+        float distance = b.transform.position.x - c.transform.position.x;
+        Vector3 crystalDestination = new(destination.x - distance, destination.y, destination.z);
+
+        StartCoroutine(b.MoveToPosition(destination, 0, duration));
+        yield return StartCoroutine(c.CrystalMoveToPosition(crystalDestination, 0, duration));
+        yield return null;
     }
 }
