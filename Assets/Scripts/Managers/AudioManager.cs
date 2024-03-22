@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+// NOTE: VERY IMPORTANT: This implementation requires that Audio file names be systematically maintained. Please do NOT update a name in the assets without proper understanding.
 public class AudioManager : MonoBehaviour
 {
 
@@ -11,25 +13,38 @@ public class AudioManager : MonoBehaviour
     public AudioSource SFXSoundsPlayer, BackgroundMusicPlayer;
     public AudioClip BackgroundMusicPrimary;
     public AudioClip BackgroundMusicVictory; // Actually ...Secondary ; for extensibility purposes such as you WANT to be able to alternate between two Background Musics during gameplay
+    [SerializeField]
+    private Dictionary<string, AudioClip> sfxDictionary;
+    [SerializeField]
+    private List<AudioClip> sfxList; 
 
     public void Awake()
     {
         if (Instance == null)
         {
             Instance = this;
+            BackgroundMusicPlayer.clip = BackgroundMusicPrimary;
+            BackgroundMusicPlayer.Play();
+            sfxDictionary = new Dictionary<string, AudioClip>();
+            foreach (AudioClip entry in sfxList)
+            {
+                sfxDictionary[entry.name] = entry;
+            }
         }
         else if (Instance != this)
         {
             Destroy(this);
         }
-        BackgroundMusicPlayer.clip = BackgroundMusicPrimary;
-        BackgroundMusicPlayer.Play(); 
     }
 
-    public void PlaySFX(AudioClip clip)
+    // Plays the sfx that is appropriate
+    // REQUIRES: the value provided is valid. 
+    public void PlaySFX(string effect)
     {
-        SFXSoundsPlayer.PlayOneShot(clip);
+        SFXSoundsPlayer.PlayOneShot(sfxDictionary[effect]);
     }
+
+
 
     public void StopMusic()
     {
@@ -55,10 +70,13 @@ public class AudioManager : MonoBehaviour
         None,
     }
 
-    // would border on bad neuroticism; besides this has to be dynamic for each Scene; there is no point in keeping redundant references. 
-    // However, if need be, you could enumerate and refactor so that objects do not know what sounds they make (which seems wrong?). 
+    // enumeration of all possible sound effects playable; this serves for documentation purposes and because I couldn't find an alternate owing to paucity. 
+    // each member correponds EXACTLY to a string. so pistol => "pistol". 
+    // plausible solution involves a tandem list but that just seems redundant...
     public enum SFXList
     {
-
+        pistol, 
+        staff,
+        wastefrog_damage_taken
     }
 }

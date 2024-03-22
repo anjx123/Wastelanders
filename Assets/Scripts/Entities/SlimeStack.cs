@@ -14,4 +14,10 @@ public class SlimeStack : EnemyClass
         myName = "Le Slime Stack";
     }
 
+    public override void TakeDamage(EntityClass source, int damage)
+    {
+        AudioManager.Instance.PlaySFX("slime_damage_taken");
+        base.TakeDamage(source, damage);
+    }
+
 }

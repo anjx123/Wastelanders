@@ -29,6 +29,7 @@ public abstract class PistolCards : ActionClass
     public override void OnHit()
     {
         Origin.AttackAnimation("IsShooting");
+        AudioManager.Instance.PlaySFX("pistol");// granted you wouldn't want a pew for rapid fire...
         base.OnHit();
     }
 }

@@ -77,4 +77,10 @@ public class WasteFrog : EnemyClass
             base.AddAttack(players);
         }
     }
+
+    public override void TakeDamage(EntityClass source, int damage)
+    {
+        AudioManager.Instance.PlaySFX("wastefrog_damage_taken");
+        base.TakeDamage(source, damage);
+    }
 }
