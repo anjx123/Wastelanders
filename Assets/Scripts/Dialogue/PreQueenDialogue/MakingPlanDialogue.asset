@@ -12,4 +12,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 207ddad3e1c90594ba3f48e2a5a6a796, type: 3}
   m_Name: MakingPlanDialogue
   m_EditorClassIdentifier: 
-  dialogue: []
+  dialogue:
+  - bodyText: "Hmm\u2026 This is a bit troublesome. We did not expect there to be
+      so many beetles\u2026 The plan might not work with our current manpower."
+    speakerName: Ives
+    displayingImage: {fileID: 0}
+  - bodyText: "I was attacked by the beetle earlier when I pulled out a crystal.
+      I think I also started being followed when I first picked up the crystal too.
+      Maybe\u2026"
+    speakerName: Jackie
+    displayingImage: {fileID: 0}
+  - bodyText: ...
+    speakerName: Jackie
+    displayingImage: {fileID: 0}
+  - bodyText: "Maybe the beetles are sensitive to the Waste energy in these crystals,
+      that\u2019s how they could find such a large amount to stockpile. Ives, couldn\u2019t
+      we lure over a couple of the beetles with the crystals from the dead beetles
+      and ambush them? "
+    speakerName: Jackie
+    displayingImage: {fileID: 0}
+  - bodyText: "Maybe the beetles are sensitive to the Waste energy in these crystals,
+      that\u2019s how they could find such a large amount to stockpile. Ives, couldn\u2019t
+      we lure over a couple of the beetles with the crystals from the dead beetles
+      and ambush them? "
+    speakerName: Jackie
+    displayingImage: {fileID: 0}
+  - bodyText: "Hmm, pretty sharp observation, Jackie. I\u2019ll let the other examiners
+      know. We can use this info and alter our plan to improve our odds. Let\u2019s
+      bring their numbers down a notch! "
+    speakerName: Ives
+    displayingImage: {fileID: 0}

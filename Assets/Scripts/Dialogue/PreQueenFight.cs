@@ -91,6 +91,8 @@ public class PreQueenFight : DialogueClasses
 
             yield return StartCoroutine(draggerBeetle.Die());
 
+            yield return StartCoroutine(DialogueManager.Instance.StartDialogue(MakingPlanDialogue.Dialogue));
+
         }
         else //setup scene
         {
