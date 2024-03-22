@@ -8,10 +8,10 @@ public class Jackie : PlayerClass
     // Start is called before the first frame update
     public override void Start()
     {
+        myName = "Jackie";
         base.Start();
         MaxHealth = 30;
         Health = MaxHealth;
-        myName = "Jackie";
 
         // deep copy deck into pool; this can't be abstracted because of dispatch rules; base.base.Start() requires these cards and these cards are introduced in the editor (added to the cardPrefabs field)
         for (int i = 0; i < cardPrefabs.Count; i++)

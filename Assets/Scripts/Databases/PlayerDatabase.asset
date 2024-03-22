@@ -1,0 +1,67 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9051792ce0afed41ba7de5bd8497446, type: 3}
+  m_Name: PlayerDatabase
+  m_EditorClassIdentifier: 
+  JackieData:
+    name: Jackie
+    playerWeaponProficiency:
+    - Item1: 2
+      Item2:
+        Item1: 0
+        Item2: 0
+    - Item1: 1
+      Item2:
+        Item1: 6
+        Item2: 16
+    - Item1: 0
+      Item2:
+        Item1: 0
+        Item2: 12
+    selectedWeapons: 0000000001000000
+    playerDeck:
+    - key: 1
+      value:
+      - {fileID: 2494557783371585323, guid: 633c72c5790e34db48cdf19c15c0b684, type: 3}
+      - {fileID: 3632232491122551209, guid: b4b8154037ed249d3a59e3b1a22e4d0d, type: 3}
+      - {fileID: 5945341865506535684, guid: fe835bfb09f0d49b39c488a76bca4c48, type: 3}
+    - key: 2
+      value: []
+    - key: 0
+      value: []
+  IvesData:
+    name: Ives
+    playerWeaponProficiency:
+    - Item1: 0
+      Item2:
+        Item1: 0
+        Item2: 10
+    - Item1: 3
+      Item2:
+        Item1: 0
+        Item2: 12
+    - Item1: 1
+      Item2:
+        Item1: 0
+        Item2: 8
+    - Item1: 2
+      Item2:
+        Item1: 0
+        Item2: 12
+    selectedWeapons: 01000000
+    playerDeck:
+    - key: 0
+      value: []
+    - key: 1
+      value: []
+    - key: 2
+      value: []

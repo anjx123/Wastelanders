@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 785897aa09f8d66479697c23d1869ae5, type: 3}
+  m_Name: CardDatabase
+  m_EditorClassIdentifier: 
+  staffCards:
+  - {fileID: 3973575574785175939, guid: eb52d226768d642a08586d76c6aec608, type: 3}
+  - {fileID: 1140042972143940012, guid: d2b04a73aaa3e410dbacfb117cd8fabf, type: 3}
+  - {fileID: 8623671996724246683, guid: 22d2d82111a0948258cf8bce73da7ca2, type: 3}
+  - {fileID: 5998065100771217553, guid: 862f00b36058344289c1c7c4dffccd6d, type: 3}
+  - {fileID: 993729557918272865, guid: 9fd05c05ac41a46b8a9036735bd47e88, type: 3}
+  - {fileID: 9083684502879287757, guid: 01e98381d7acf426196a2d3249245d3b, type: 3}
+  - {fileID: 8129549867484360148, guid: 96833b1ed63d040c08a43d590f8a54ec, type: 3}
+  pistolCards:
+  - {fileID: 6338642344117945642, guid: 6f0993ff25bed42b1a5ca5c5fc9b28cb, type: 3}
+  - {fileID: 2430182313616302391, guid: 2c4942a3476704b14a94084bb449ab70, type: 3}
+  - {fileID: 2494557783371585323, guid: 633c72c5790e34db48cdf19c15c0b684, type: 3}
+  - {fileID: 2919359078374899024, guid: 41810010507274fba9929be6c7b2e511, type: 3}
+  - {fileID: 9144012445204595868, guid: 03abd4f8331fd4c7e958cbe3a7d9f2b4, type: 3}
+  - {fileID: 3632232491122551209, guid: b4b8154037ed249d3a59e3b1a22e4d0d, type: 3}
+  - {fileID: 5945341865506535684, guid: fe835bfb09f0d49b39c488a76bca4c48, type: 3}
+  - {fileID: 893399958756392302, guid: 5a6e401bcd4244f71b3425bb2042ec66, type: 3}
+  - {fileID: 4005928018173293241, guid: 0408266e8e04747b6b14ac2c44aed735, type: 3}
+  fistCards:
+  - {fileID: 5998065100771217553, guid: 862f00b36058344289c1c7c4dffccd6d, type: 3}
+  - {fileID: 993729557918272865, guid: 9fd05c05ac41a46b8a9036735bd47e88, type: 3}
+  - {fileID: 6338642344117945642, guid: 6f0993ff25bed42b1a5ca5c5fc9b28cb, type: 3}
+  - {fileID: 2430182313616302391, guid: 2c4942a3476704b14a94084bb449ab70, type: 3}
+  - {fileID: 2494557783371585323, guid: 633c72c5790e34db48cdf19c15c0b684, type: 3}
+  - {fileID: 9083684502879287757, guid: 01e98381d7acf426196a2d3249245d3b, type: 3}
+  - {fileID: 2919359078374899024, guid: 41810010507274fba9929be6c7b2e511, type: 3}
+  - {fileID: 3973575574785175939, guid: eb52d226768d642a08586d76c6aec608, type: 3}
