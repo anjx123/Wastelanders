@@ -30,12 +30,14 @@ public class HighlightManager : MonoBehaviour // later all entity highlighter
     {
         CombatManager.OnGameStateChanged += ResetSelection;
         EntityClass.OnEntityClicked += OnEntityClicked;
+        ActionClass.CardClickedEvent += OnActionClicked;
     }
 
     private void OnDestroy()
     {
         CombatManager.OnGameStateChanged -= ResetSelection;
         EntityClass.OnEntityClicked -= OnEntityClicked;
+        ActionClass.CardClickedEvent -= OnActionClicked;
     }
 
 
