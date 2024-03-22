@@ -12,6 +12,7 @@ public class DialogueBox : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI bodyText;
     [SerializeField] private TextMeshProUGUI nameText;
+
     [SerializeField] private Image displayingImage;
     [SerializeField] private AspectRatioFitter aspectRatioFitter;
 

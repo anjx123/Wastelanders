@@ -14,14 +14,4 @@ public class SlimeStack : EnemyClass
         myName = "Le Slime Stack";
     }
 
-    public void UnTargetable()
-    {
-        boxCollider.enabled = false;
-    }
-
-    public void Targetable()
-    {
-        boxCollider.enabled = true;
-    }
-
 }

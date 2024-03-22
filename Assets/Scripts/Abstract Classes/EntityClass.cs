@@ -494,6 +494,16 @@ public abstract class EntityClass : SelectClass
         EnableHealthBar();
     }
 
+    public void UnTargetable()
+    {
+        boxCollider.enabled = false;
+    }
+
+    public void Targetable()
+    {
+        boxCollider.enabled = true;
+    }
+
     public void SetDice(int value)
     {
         combatInfo.SetDice(value);

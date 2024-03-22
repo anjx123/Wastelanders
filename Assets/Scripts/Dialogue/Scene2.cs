@@ -1,9 +1,10 @@
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UIElements;
+using UnityEngine.UI;
 
 public class Scene2 : DialogueClasses
 {
@@ -13,12 +14,12 @@ public class Scene2 : DialogueClasses
     [SerializeField] private Transform jackieWander2;
     [SerializeField] private Transform jackieWander3;
     [SerializeField] private Transform outOfScreen;
-
-    [SerializeField] private GameObject ives;
-    [SerializeField] private Transform ivesAnnouncePosition;
+    [SerializeField] private Transform treeHidingPositionJackie;
+    [SerializeField] private Transform jackieFiresShotTransform;
 
     [SerializeField] private WasteFrog frog;
     [SerializeField] private Transform frogInitialWalkIn;
+    [SerializeField] private Transform frogConfrontPosition;
     [SerializeField] private Transform frogFightPosition;
 
     [SerializeField] private WasteFrog frog2;
@@ -30,6 +31,9 @@ public class Scene2 : DialogueClasses
     [SerializeField] private Transform slimeWalkIn;
 
     [SerializeField] private GameOver gameOver;
+
+    [SerializeField] CinemachineVirtualCamera closeUpCamera;
+    [SerializeField] Image ivesImage;
 
     [SerializeField] private List<DialogueText> sceneNarration;
     [SerializeField] private List<DialogueText> ivesInstruction;
@@ -53,8 +57,6 @@ public class Scene2 : DialogueClasses
     private const float BRIEF_PAUSE = 0.2f; // For use after an animation to make it visually seem smoother
     private const float MEDIUM_PAUSE = 1f; //For use after a text box comes down and we want to add some weight to the text.
 
-    private const int NUM_ENTITIES = 3;
-    private int entitiesAlive = 0;
 
     protected override void GameStateChange(GameState gameState)
     {
@@ -64,74 +66,79 @@ public class Scene2 : DialogueClasses
         }
     }
 
-    private IEnumerator ExecuteGameStart()
+    int numberOfBroadcasts = 0;
+private IEnumerator ExecuteGameStart()
     {
         CombatManager.Instance.GameState = GameState.OUT_OF_COMBAT;
         CombatManager.Instance.SetDarkScreen();
         yield return new WaitForSeconds(0.8f);
 
         jackie.OutOfCombat();
-        ives.GetComponent<EnemyIves>().OutOfCombat();
+        frog.OutOfCombat();
         
         jackie.SetReturnPosition(jackieDefaultTransform.position);
-        frog.SetReturnPosition(frogInitialWalkIn.position);
+        frog.SetReturnPosition(frogFightPosition.position);
         frog2.SetReturnPosition(frog2Battle.position);
         slime.SetReturnPosition(slimeBattle.position);
 
         frog.UnTargetable(); frog2.UnTargetable(); slime.UnTargetable();
-        ives.GetComponent<EnemyIves>().UnTargetable();
         if (!jumpToCombat)
         {
-            //yield return new WaitForSeconds(1f);
 
+            //Narrate the scene
             yield return StartCoroutine(DialogueManager.Instance.StartDialogue(sceneNarration));
             yield return new WaitForSeconds(BRIEF_PAUSE);
 
-            ives.GetComponent<EnemyIves>().Emphasize();
-            yield return StartCoroutine(ives.GetComponent<EnemyIves>().MoveToPosition(ivesAnnouncePosition.position, 0f, 2.6f));
+            //Ives Talks to the examinees
+            yield return StartCoroutine(FadeImage(ivesImage, 1f, true));
             yield return new WaitForSeconds(BRIEF_PAUSE);
             yield return StartCoroutine(DialogueManager.Instance.StartDialogue(ivesInstruction));
-            ives.GetComponent<EnemyIves>().DeEmphasize();
-            DestroyImmediate(ives);
+            yield return StartCoroutine(FadeImage(ivesImage, 1f, false));
+            ivesImage.gameObject.SetActive(false);
 
+            //Jackie walks in the scene
             jackie.Emphasize();
-            yield return StartCoroutine(jackie.MoveToPosition(jackieDefaultTransform.position, 0f, 1.4f));
+            yield return StartCoroutine(jackie.MoveToPosition(jackieDefaultTransform.position, 0f, 1.2f));
             yield return new WaitForSeconds(BRIEF_PAUSE);
-            yield return StartCoroutine(CombatManager.Instance.FadeInLightScreen(3f));
+            yield return StartCoroutine(CombatManager.Instance.FadeInLightScreen(1.5f));
             jackie.DeEmphasize();
+
+            //Jackie Wanders around
+            DialogueBox.DialogueBoxEvent += OnDialogueBoxEvent;
+            Coroutine jackieWander = StartCoroutine(HaveJackieWander());
             yield return StartCoroutine(DialogueManager.Instance.StartDialogue(jackieStrategyPlan));
-            yield return StartCoroutine(jackie.MoveToPosition(jackieWander1.position, 0f, 1.2f));
-            yield return new WaitForSeconds(BRIEF_PAUSE);
-            yield return StartCoroutine(jackie.MoveToPosition(jackieWander2.position, 0f, 1.15f));
-            yield return new WaitForSeconds(BRIEF_PAUSE);
-            jackie.FaceLeft();
-            yield return new WaitForSeconds(BRIEF_PAUSE);
-            yield return StartCoroutine(jackie.MoveToPosition(jackieWander3.position, 0f, 2.2f));
-            yield return new WaitForSeconds(BRIEF_PAUSE);
-            jackie.FaceRight();
-            yield return new WaitForSeconds (BRIEF_PAUSE);
-            yield return StartCoroutine(jackie.MoveToPosition(jackieDefaultTransform.position, 0f, .5f));
-            yield return new WaitForSeconds(BRIEF_PAUSE);
+            yield return jackieWander;
             yield return StartCoroutine(WalkWhileScreenFades());
-            yield return new WaitForSeconds(2f);
-      
-            yield return StartCoroutine(jackie.ResetPosition());
-            
-            yield return StartCoroutine(CombatManager.Instance.FadeInLightScreen(3f));
+
+            //Jackie Hides behind tree
+            closeUpCamera.Priority = 2;
+            jackie.gameObject.transform.position = treeHidingPositionJackie.position;
+            jackie.gameObject.transform.rotation = treeHidingPositionJackie.rotation;
+            jackie.animator.enabled = false;
+            yield return new WaitForSeconds(1f);
+            yield return StartCoroutine(CombatManager.Instance.FadeInLightScreen(2f));
+
             // layering bush to be done l8r
-            yield return StartCoroutine(frog.MoveToPosition(frogInitialWalkIn.position, 0f, 3f));
+            StartCoroutine(frog.MoveToPosition(frogInitialWalkIn.position, 0f, 2f));
+            yield return new WaitForSeconds(1f);
+            yield return StartCoroutine(MoveObjectInRotationDirection(jackie.gameObject, 0.4f, 0.3f));
+            yield return new WaitForSeconds(BRIEF_PAUSE);
             yield return StartCoroutine(DialogueManager.Instance.StartDialogue(jackiePreMissedShot));
-
-
+            yield return new WaitForSeconds(1f);
+            jackie.gameObject.transform.rotation = new Quaternion(0,0,0,0);
+            jackie.animator.enabled = true;
             jackie.AttackAnimation("IsShooting");
             yield return StartCoroutine(DialogueManager.Instance.StartDialogue(jackieJustMissedShot));
-            yield return StartCoroutine(frog.MoveToPosition(frogInitialWalkIn.position + new Vector3(3.5f, 0, 0), 0f, 1.2f, outOfScreen.position));
-            yield return StartCoroutine(DialogueManager.Instance.StartDialogue(jackiePostMissedShot));
 
-            yield return StartCoroutine(jackie.MoveToPosition(frogInitialWalkIn.position + new Vector3(1.5f, 0, 0), 0f, 1.6f));
+            //Jackie Misses and frog runs away with jackie chasing it
+            yield return StartCoroutine(frog.MoveToPosition(frogConfrontPosition.position, 0f, 1.2f, outOfScreen.position));
+            yield return StartCoroutine(DialogueManager.Instance.StartDialogue(jackiePostMissedShot));
+            closeUpCamera.Priority = 0;
+            yield return StartCoroutine(jackie.MoveToPosition(frogConfrontPosition.position, 2f, 1.6f));
             yield return new WaitForSeconds(MEDIUM_PAUSE);
             frog.FaceLeft();
             
+            //Other Enemies walk in
             StartCoroutine(frog2.MoveToPosition(frog2WalkIn.position, 0f, 2f));
             yield return StartCoroutine(slime.MoveToPosition(slimeWalkIn.position, 0f, 2f));
             yield return new WaitForSeconds(MEDIUM_PAUSE);
@@ -139,10 +146,10 @@ public class Scene2 : DialogueClasses
             yield return StartCoroutine(DialogueManager.Instance.StartDialogue(jackiePreCombat));
         } else
         {
-            DestroyImmediate(ives);
+            GameStateManager.jumpIntoFrogAndSlimeFight = false;
         }
 
-        // start frog fight
+       // start frog fight
         StartCoroutine(jackie.ResetPosition());
         StartCoroutine(frog2.ResetPosition());
         StartCoroutine(slime.ResetPosition());
@@ -151,7 +158,10 @@ public class Scene2 : DialogueClasses
         jackie.InCombat();
         frog.Targetable(); frog.InCombat(); frog2.Targetable(); frog2.InCombat(); slime.Targetable(); slime.InCombat();
         yield return new WaitUntil(() => !DialogueManager.Instance.IsInDialogue());
-        EntityClass.OnEntityDeath += FrogDies;
+
+        CombatManager.PlayersWinEvent += PlayersWin;
+        CombatManager.EnemiesWinEvent += EnemiesWin;
+
         CombatManager.Instance.GameState = GameState.SELECTION;
 
         yield return new WaitForSeconds(1f);
@@ -169,39 +179,114 @@ public class Scene2 : DialogueClasses
 
     private IEnumerator WalkWhileScreenFades()
     {
-        IEnumerator i1 = jackie.MoveToPosition(jackieWander2.position, 0f, 2.2f);
+        IEnumerator i1 = jackie.MoveToPosition(outOfScreen.position, 0f, 2.2f);
         IEnumerator i2 = CombatManager.Instance.FadeInDarkScreen(2f);
         StartCoroutine(i1);
         yield return StartCoroutine(i2);
         yield break;
     }
+    IEnumerator HaveJackieWander()
+    {
+        //Jackie wanders up
+        yield return new WaitUntil(() => numberOfBroadcasts >= 1);
+        yield return StartCoroutine(jackie.MoveToPosition(jackieWander1.position, 0f, 1.2f));
+        yield return new WaitForSeconds(BRIEF_PAUSE);
 
+        //jackie Shakes her head
+        yield return new WaitUntil(() => numberOfBroadcasts >= 2);
+        jackie.FaceLeft();
+        yield return new WaitForSeconds(0.3f);
+        jackie.FaceRight();
+        yield return new WaitForSeconds(0.3f);
+        jackie.FaceLeft();
+        yield return new WaitForSeconds(0.3f);
+        jackie.FaceRight();
+
+        //Jackie wanders down
+        yield return new WaitUntil(() => numberOfBroadcasts >= 3);
+        yield return StartCoroutine(jackie.MoveToPosition(jackieWander2.position, 0f, 1f));
+        yield return new WaitForSeconds(BRIEF_PAUSE);
+
+        //Jackie wanders to the middle
+        yield return new WaitUntil(() => numberOfBroadcasts >= 4);
+        yield return new WaitForSeconds(BRIEF_PAUSE);
+        yield return StartCoroutine(jackie.MoveToPosition(jackieWander3.position, 0f, 0.8f));
+        yield return new WaitForSeconds(BRIEF_PAUSE);
+
+        //jackie turns left
+        yield return new WaitUntil(() => numberOfBroadcasts >= 5);
+        jackie.FaceLeft();
+        DialogueBox.DialogueBoxEvent -= OnDialogueBoxEvent;
+    }
+
+    IEnumerator FadeImage(Image image, float duration, bool fadeIn)
+    {
+        if (fadeIn)
+        {
+            // Fade in
+            image.color = new Color(image.color.r, image.color.g, image.color.b, 0);
+            while (image.color.a < 1.0f)
+            {
+                image.color = new Color(image.color.r, image.color.g, image.color.b, image.color.a + (Time.deltaTime / duration));
+                yield return null;
+            }
+        }
+        else
+        {
+            // Fade out
+            image.color = new Color(image.color.r, image.color.g, image.color.b, 1);
+            while (image.color.a > 0.0f)
+            {
+                image.color = new Color(image.color.r, image.color.g, image.color.b, image.color.a - (Time.deltaTime / duration));
+                yield return null;
+            }
+        }
+    }
+    IEnumerator MoveObjectInRotationDirection(GameObject obj, float distance, float duration)
+    {
+        Vector3 startPosition = obj.transform.position;
+        Vector3 endPosition = obj.transform.position + obj.transform.up * distance;
+        float elapsedTime = 0;
+
+        while (elapsedTime < duration)
+        {
+            obj.transform.position = Vector3.Lerp(startPosition, endPosition, (elapsedTime / duration));
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        // Ensure the object ends up at the exact end position
+        obj.transform.position = endPosition;
+    }
+
+    private void OnDialogueBoxEvent()
+    {
+        ++numberOfBroadcasts;
+    }
+
+    private void PlayersWin()
+    {
+        CombatManager.EnemiesWinEvent -= EnemiesWin;
+        CombatManager.PlayersWinEvent -= PlayersWin;
+        CombatManager.Instance.GameState = GameState.GAME_WIN;
+    }
+
+    private void EnemiesWin()
+    {
+        CombatManager.EnemiesWinEvent -= EnemiesWin;
+        CombatManager.PlayersWinEvent -= PlayersWin;
+        StartCoroutine(GameLose());
+        CombatManager.Instance.GameState = GameState.GAME_LOSE;
+    }
     private IEnumerator GameLose()
     {
         yield return StartCoroutine(CombatManager.Instance.FadeInDarkScreen(2f));
+
         //Set Jump into combat to be true
         gameOver.gameObject.SetActive(true);
         gameOver.FadeIn();
 
         yield return StartCoroutine(DialogueManager.Instance.StartDialogue(gameLoseDialogue));
-    }
-
-    private void FrogDies(EntityClass entity)
-    {
-        if (entity is EnemyClass)
-        {
-            if (++entitiesAlive == NUM_ENTITIES)
-            {
-                EntityClass.OnEntityDeath -= FrogDies;
-                entitiesAlive = 0;
-                CombatManager.Instance.GameState = GameState.GAME_WIN;
-            } 
-        }
-        if (entity is PlayerClass)
-        {
-            EntityClass.OnEntityDeath -= FrogDies;
-            StartCoroutine(GameLose());
-        }
     }
 
 }

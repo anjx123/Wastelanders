@@ -20,11 +20,11 @@ public class CounterStrike : StaffCards
 
         myName = "Counter Strike";
         description = "Block with this card, then make an attack with this card";
-        CardType = CardType.Defense;
         Renderer renderer = GetComponent<Renderer>();
         ogMaterial = renderer.material; // og sprite of card
         OriginalPosition = transform.position;
         base.Initialize();
+        CardType = CardType.Defense;
     }
 
     public override void ApplyEffect()

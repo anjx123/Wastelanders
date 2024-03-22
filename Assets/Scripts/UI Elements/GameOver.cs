@@ -12,14 +12,12 @@ public class GameOver : MonoBehaviour
     [SerializeField] Button levelSelectButton; 
     [SerializeField] GameObject gameOverText;
 
-    void Start()
+    void OnEnable()
     {
         // Assign the click events to the buttons
         restartButton.onClick.AddListener(OnRestartClick);
         levelSelectButton.onClick.AddListener(OnLevelSelectClick);
         canvasGroup.alpha = 0f;
-        FadeIn();
-
     }
     public void FadeIn()
     {
@@ -63,6 +61,7 @@ public class GameOver : MonoBehaviour
         canvasGroup.alpha = 1f;
     }
 
+    //If your game over isnt registering clicks, check the evenSystem in the hiearchy to see where your clicks are actually landing on 
     private void OnRestartClick()
     {
         Scene activeScene = SceneManager.GetActiveScene();

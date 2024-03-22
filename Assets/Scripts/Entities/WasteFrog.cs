@@ -77,14 +77,5 @@ public class WasteFrog : EnemyClass
             base.AddAttack(players);
         }
     }
-
-    public void UnTargetable()
-    {
-        boxCollider.enabled = false;
-    }
-
-    public void Targetable()
-    {
-        boxCollider.enabled = true;
-    }
+   
 }
