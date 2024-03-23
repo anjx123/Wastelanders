@@ -98,7 +98,7 @@ private IEnumerator ExecuteGameStart()
         slime.SetReturnPosition(slimeBattle.position);
 
         frog.UnTargetable(); frog2.UnTargetable(); slime.UnTargetable();
-        if (!jumpToCombat)
+        if (!jumpToCombat && !GameStateManager.jumpIntoFrogAndSlimeFight)
         {
 
             //Narrate the scene
@@ -218,8 +218,8 @@ private IEnumerator ExecuteGameStart()
         yield return new WaitForSeconds(MEDIUM_PAUSE);
 
         //Beetle is spawned in and follows Jackie
-        Vector3 bottomLeft = mainCamera.ViewportToWorldPoint(new Vector3(0, 0.4f, mainCamera.nearClipPlane));
-        GameObject scoutBeetleObj = Instantiate(scoutBeetlePrefab, bottomLeft + new Vector3(-0.3f, 0, 0), Quaternion.identity);
+        Vector3 bottomLeft = mainCamera.ViewportToWorldPoint(new Vector3(0, 0.6f, mainCamera.nearClipPlane));
+        GameObject scoutBeetleObj = Instantiate(scoutBeetlePrefab, bottomLeft + new Vector3(-0.32f, 0, 0), Quaternion.identity);
         ScoutBeetle scoutBeetle = scoutBeetleObj.GetComponent<ScoutBeetle>();
         scoutBeetle.OutOfCombat();
         scoutBeetle.UnTargetable();
@@ -368,6 +368,7 @@ private IEnumerator ExecuteGameStart()
     {
         yield return StartCoroutine(CombatManager.Instance.FadeInDarkScreen(2f));
 
+        GameStateManager.jumpIntoFrogAndSlimeFight = true;
         //Set Jump into combat to be true
         ivesImage.gameObject.SetActive(false);
         gameOver.gameObject.SetActive(true);
