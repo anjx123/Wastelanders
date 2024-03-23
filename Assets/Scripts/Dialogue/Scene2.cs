@@ -33,6 +33,8 @@ public class Scene2 : DialogueClasses
 
     [SerializeField] private GameOver gameOver;
 
+    [SerializeField] private Camera mainCamera;
+    [SerializeField] private GameObject scoutBeetlePrefab;
     [SerializeField] CinemachineVirtualCamera closeUpCamera;
     [SerializeField] Image ivesImage;
     [SerializeField] private SpriteRenderer treeOverlay;
@@ -87,6 +89,8 @@ private IEnumerator ExecuteGameStart()
 
         jackie.OutOfCombat();
         frog.OutOfCombat();
+        frog2.OutOfCombat();
+        slime.OutOfCombat();
         
         jackie.SetReturnPosition(jackieDefaultTransform.position);
         frog.SetReturnPosition(frogFightPosition.position);
@@ -124,12 +128,13 @@ private IEnumerator ExecuteGameStart()
             //Jackie Hides behind tree
             closeUpCamera.Priority = 2;
             yield return new WaitForSeconds(1f);
+            jackie.GetComponent<SpriteRenderer>().sortingOrder = treeOverlay.sortingOrder - 1;
             jackie.gameObject.transform.position = treeHidingPositionJackie.position;
             jackie.gameObject.transform.rotation = treeHidingPositionJackie.rotation;
             jackie.animator.enabled = false;
             yield return StartCoroutine(CombatManager.Instance.FadeInLightScreen(2f));
 
-            // layering bush to be done l8r
+            // layering tree  to be done l8r
             StartCoroutine(frog.MoveToPosition(frogInitialWalkIn.position, 0f, 2f));
             yield return new WaitForSeconds(1f);
             yield return StartCoroutine(MoveObjectInRotationDirection(jackie.gameObject, 0.3f, 0.3f));
@@ -177,21 +182,24 @@ private IEnumerator ExecuteGameStart()
         EntityClass.OnEntityDeath += EnsureFrogDeath;
 
         CombatManager.Instance.GameState = GameState.SELECTION;
-
+        
+        //Starting Combat
         yield return new WaitForSeconds(1f);
         yield return StartCoroutine(DialogueManager.Instance.StartDialogue(startOfCombatDialogue));
         yield return new WaitUntil(() => CombatManager.Instance.GameState == GameState.GAME_WIN);
         CombatManager.Instance.GameState = GameState.OUT_OF_COMBAT;
         yield return new WaitForSeconds(MEDIUM_PAUSE);
 
-        CombatManager.Instance.ActivateDynamicCamera();
+        //After Combat
         yield return StartCoroutine(DialogueManager.Instance.StartDialogue(afterCombatDialogue));
         yield return new WaitForSeconds(BRIEF_PAUSE);
-        yield return StartCoroutine(jackie.MoveToPosition(lastKilledFrog.transform.position, 1.5f, 2f));
+        CombatManager.Instance.ActivateDynamicCamera();
+        yield return StartCoroutine(jackie.MoveToPosition(lastKilledFrog.transform.position, 1.5f, 1.7f));
         yield return new WaitForSeconds(MEDIUM_PAUSE);
         closeUpCamera.transform.position = CombatManager.Instance.dynamicCamera.transform.position;
         closeUpCamera.m_Lens.OrthographicSize = CombatManager.Instance.dynamicCamera.m_Lens.OrthographicSize;
 
+        //Jackei picks up the crystal
         jackie.animator.enabled = false;
         jackie.transform.rotation = Quaternion.Euler(0, 0, -25);
         yield return new WaitForSeconds(MEDIUM_PAUSE);
@@ -199,20 +207,28 @@ private IEnumerator ExecuteGameStart()
         yield return new WaitForSeconds(MEDIUM_PAUSE);
         jackie.transform.rotation = Quaternion.identity;
         yield return new WaitForSeconds(BRIEF_PAUSE);
-
         yield return StartCoroutine(DialogueManager.Instance.StartDialogue(crystalExtraction));
 
+        //Jackie moves off screen
         closeUpCamera.Priority = 2;
         jackie.animator.enabled = true;
-        yield return StartCoroutine(jackie.MoveToPosition(outOfScreen.position, 0f, 2.2f));
+        jackie.Emphasize();
+        yield return new WaitForSeconds(MEDIUM_PAUSE);
+        yield return StartCoroutine(jackie.MoveToPosition(jackie.transform.position + new Vector3(12f, -1f, 0), 0f, 1.5f));
         yield return new WaitForSeconds(MEDIUM_PAUSE);
 
-        //Beetle Walks in 
-
-        yield return StartCoroutine(WalkWhileScreenFades());
+        //Beetle is spawned in and follows Jackie
+        Vector3 bottomLeft = mainCamera.ViewportToWorldPoint(new Vector3(0, 0.4f, mainCamera.nearClipPlane));
+        GameObject scoutBeetleObj = Instantiate(scoutBeetlePrefab, bottomLeft + new Vector3(-0.3f, 0, 0), Quaternion.identity);
+        ScoutBeetle scoutBeetle = scoutBeetleObj.GetComponent<ScoutBeetle>();
+        scoutBeetle.OutOfCombat();
+        scoutBeetle.UnTargetable();
+        yield return new WaitForSeconds(2f);
+        StartCoroutine(scoutBeetle.MoveToPosition(jackie.transform.position, 0f, 2.5f));
+        yield return new WaitForSeconds(2f);
+        yield return StartCoroutine(CombatManager.Instance.FadeInDarkScreen(1.5f));
 
         SceneManager.LoadScene("LevelSelect");
-
         yield break;
     }
 
@@ -248,7 +264,6 @@ private IEnumerator ExecuteGameStart()
 
         //Jackie wanders to the middle
         yield return new WaitUntil(() => numberOfBroadcasts >= 4);
-        yield return new WaitForSeconds(BRIEF_PAUSE);
         yield return StartCoroutine(jackie.MoveToPosition(jackieWander3.position, 0f, 0.8f));
         yield return new WaitForSeconds(BRIEF_PAUSE);
 
@@ -317,7 +332,7 @@ private IEnumerator ExecuteGameStart()
                     wasteFrog.GetComponent<SpriteRenderer>().sprite = frogDeathSprite;
                     wasteFrog.OutOfCombat();
                     wasteFrog.UnTargetable();
-                    wasteFrog.combatInfo.enabled = false;
+                    wasteFrog.combatInfo.gameObject.SetActive(false);
                     wasteFrog.transform.rotation = Quaternion.Euler(0, 0, 75);
                     yield break;
                 }
@@ -354,6 +369,7 @@ private IEnumerator ExecuteGameStart()
         yield return StartCoroutine(CombatManager.Instance.FadeInDarkScreen(2f));
 
         //Set Jump into combat to be true
+        ivesImage.gameObject.SetActive(false);
         gameOver.gameObject.SetActive(true);
         gameOver.FadeIn();
 

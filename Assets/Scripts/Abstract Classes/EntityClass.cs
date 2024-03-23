@@ -39,7 +39,7 @@ public abstract class EntityClass : SelectClass
         }
     }
 
-    protected Dictionary<string, StatusEffect> statusEffects;
+    protected readonly Dictionary<string, StatusEffect> statusEffects = new Dictionary<string, StatusEffect>();
 
 
 
@@ -59,7 +59,6 @@ public abstract class EntityClass : SelectClass
     public virtual void Start()
     {
         initialPosition = myTransform.position;
-        statusEffects = new Dictionary<string, StatusEffect>();
 
         DeEmphasize();
         DisableDice();
@@ -91,7 +90,10 @@ public abstract class EntityClass : SelectClass
         {
             OnEntityDeath?.Invoke(this);
         }
-        UpdateBuffsOnDamage();
+        if (percentageDone > 0)
+        {
+            UpdateBuffsOnDamage();
+        }
         StartCoroutine(PlayHitAnimation(source, this, percentageDone));
     }
 
@@ -492,6 +494,8 @@ public abstract class EntityClass : SelectClass
     public void OutOfCombat()
     {
         DisableHealthBar();
+        statusEffects.Clear();
+        UpdateBuffs();
     }
 
     public void InCombat()

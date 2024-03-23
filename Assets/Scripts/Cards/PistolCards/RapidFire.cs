@@ -25,10 +25,13 @@ public class RapidFire : PistolCards
         base.Initialize();
     }
 
-    bool cardIsUnstaggered = false;
     public override void CardIsUnstaggered()
     {
-        cardIsUnstaggered = true;
+        if (Origin.GetBuffStacks(Accuracy.buffName) > 0)
+        {
+            Origin.ReduceStacks(Accuracy.buffName, 1);
+            BattleQueue.BattleQueueInstance.AddPlayerAction(this);
+        }
     }
 
     public override void OnHit()
@@ -36,16 +39,7 @@ public class RapidFire : PistolCards
         Origin.AttackAnimation("IsShooting");
         Vector3 diffInLocation = Target.myTransform.position - Origin.myTransform.position;
         Origin.UpdateFacing(diffInLocation, null);
-        CardIsUnstaggered();
         this.Target.TakeDamage(Origin, duplicateCard.actualRoll);
-        if (cardIsUnstaggered)
-        {
-            cardIsUnstaggered = false;
-            if (Origin.GetBuffStacks(Accuracy.buffName) > 0)
-            {
-                Origin.ReduceStacks(Accuracy.buffName, 1);
-                BattleQueue.BattleQueueInstance.AddPlayerAction(this);
-            }
-        }
+        CardIsUnstaggered();
     }
 }

@@ -166,7 +166,7 @@ public abstract class ActionClass : SelectClass
     // modify further based on buffs
     private void DupInit()
     {
-        duplicateCard = new CardDup();
+        duplicateCard = new CardDup();   
         duplicateCard.rollFloor = lowerBound;
         duplicateCard.rollCeiling = upperBound;
     }

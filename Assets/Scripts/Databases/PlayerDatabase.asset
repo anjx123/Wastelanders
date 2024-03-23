@@ -21,7 +21,7 @@ MonoBehaviour:
         Item2: 0
     - Item1: 1
       Item2:
-        Item1: 6
+        Item1: 12
         Item2: 12
     - Item1: 0
       Item2:
@@ -31,9 +31,12 @@ MonoBehaviour:
     playerDeck:
     - key: 1
       value:
-      - {fileID: 2494557783371585323, guid: 633c72c5790e34db48cdf19c15c0b684, type: 3}
       - {fileID: 3632232491122551209, guid: b4b8154037ed249d3a59e3b1a22e4d0d, type: 3}
       - {fileID: 5945341865506535684, guid: fe835bfb09f0d49b39c488a76bca4c48, type: 3}
+      - {fileID: 2919359078374899024, guid: 41810010507274fba9929be6c7b2e511, type: 3}
+      - {fileID: 4005928018173293241, guid: 0408266e8e04747b6b14ac2c44aed735, type: 3}
+      - {fileID: 6338642344117945642, guid: 6f0993ff25bed42b1a5ca5c5fc9b28cb, type: 3}
+      - {fileID: 2494557783371585323, guid: 633c72c5790e34db48cdf19c15c0b684, type: 3}
     - key: 2
       value: []
     - key: 0

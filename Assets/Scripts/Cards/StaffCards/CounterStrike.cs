@@ -24,7 +24,6 @@ public class CounterStrike : StaffCards
         ogMaterial = renderer.material; // og sprite of card
         OriginalPosition = transform.position;
         base.Initialize();
-        CardType = CardType.Defense;
     }
 
     public override void ApplyEffect()
@@ -40,6 +39,7 @@ public class CounterStrike : StaffCards
 
         if (proto)
         {
+            CardType = CardType.Defense;
             PlayerClass origin = (PlayerClass)Origin;
             activeDupCardInstance.Origin = origin;
             activeDupCardInstance.Target = Target;

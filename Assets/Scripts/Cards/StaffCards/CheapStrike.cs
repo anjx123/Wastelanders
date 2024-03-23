@@ -32,11 +32,17 @@ public class CheapStrike : StaffCards
 
     }
 
-
+    public override void CardIsUnstaggered()
+    {
+        base.CardIsUnstaggered();
+        Origin.AddStacks(Focus.buffName, 2);
+    }
 
     public override void OnHit()
     {
-        base.OnHit();
-        Origin.AddStacks(Focus.buffName, 2);
+        Vector3 diffInLocation = Target.myTransform.position - Origin.myTransform.position;
+        Origin.UpdateFacing(diffInLocation, null);
+        this.Target.TakeDamage(Origin, duplicateCard.actualRoll);
+        CardIsUnstaggered();
     }
 }

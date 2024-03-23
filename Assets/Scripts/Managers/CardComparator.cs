@@ -156,7 +156,13 @@ public class CardComparator : MonoBehaviour
         DeactivateInfo(actionClass);
 
         //Hit and feel effects
-        actionClass.OnHit();
+        if (actionClass.CardType == CardType.Defense)
+        {
+            actionClass.CardIsUnstaggered();
+        } else
+        {
+            actionClass.OnHit();
+        }
         actionClass.Origin.combatInfo.setDiceColor(Color.green);
         yield return new WaitForSeconds(COMBAT_BUFFER_TIME);
 
