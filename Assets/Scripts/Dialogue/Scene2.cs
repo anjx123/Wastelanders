@@ -34,6 +34,7 @@ public class Scene2 : DialogueClasses
 
     [SerializeField] CinemachineVirtualCamera closeUpCamera;
     [SerializeField] Image ivesImage;
+    [SerializeField] private SpriteRenderer treeOverlay;
 
     [SerializeField] private List<DialogueText> sceneNarration;
     [SerializeField] private List<DialogueText> ivesInstruction;
@@ -109,24 +110,25 @@ private IEnumerator ExecuteGameStart()
             yield return StartCoroutine(DialogueManager.Instance.StartDialogue(jackieStrategyPlan));
             yield return jackieWander;
             yield return StartCoroutine(WalkWhileScreenFades());
-
             //Jackie Hides behind tree
             closeUpCamera.Priority = 2;
+            yield return new WaitForSeconds(1f);
             jackie.gameObject.transform.position = treeHidingPositionJackie.position;
             jackie.gameObject.transform.rotation = treeHidingPositionJackie.rotation;
             jackie.animator.enabled = false;
-            yield return new WaitForSeconds(1f);
             yield return StartCoroutine(CombatManager.Instance.FadeInLightScreen(2f));
 
             // layering bush to be done l8r
             StartCoroutine(frog.MoveToPosition(frogInitialWalkIn.position, 0f, 2f));
             yield return new WaitForSeconds(1f);
-            yield return StartCoroutine(MoveObjectInRotationDirection(jackie.gameObject, 0.4f, 0.3f));
+            yield return StartCoroutine(MoveObjectInRotationDirection(jackie.gameObject, 0.3f, 0.3f));
             yield return new WaitForSeconds(BRIEF_PAUSE);
             yield return StartCoroutine(DialogueManager.Instance.StartDialogue(jackiePreMissedShot));
             yield return new WaitForSeconds(1f);
             jackie.gameObject.transform.rotation = new Quaternion(0,0,0,0);
+            jackie.gameObject.transform.position = treeHidingPositionJackie.position + new Vector3(0.8f, 0, 0);
             jackie.animator.enabled = true;
+            jackie.GetComponent<SpriteRenderer>().sortingOrder = treeOverlay.sortingOrder + 1;
             jackie.AttackAnimation("IsShooting");
             yield return StartCoroutine(DialogueManager.Instance.StartDialogue(jackieJustMissedShot));
 
