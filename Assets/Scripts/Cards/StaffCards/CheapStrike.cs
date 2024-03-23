@@ -18,10 +18,11 @@ public class CheapStrike : StaffCards
         Speed = 1;
 
         myName = "Cheap Strike";
-        description = "If this card hits the opponent, gain 2 flow";
+        description = "If this card hits the opponent, gain 2 Focus";
         Renderer renderer = GetComponent<Renderer>();
         ogMaterial = renderer.material; // og sprite of card
         OriginalPosition = transform.position;
+        CardType = CardType.MeleeAttack;
         base.Initialize();
     }
 

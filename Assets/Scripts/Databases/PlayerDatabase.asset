@@ -22,11 +22,11 @@ MonoBehaviour:
     - Item1: 1
       Item2:
         Item1: 6
-        Item2: 16
+        Item2: 12
     - Item1: 0
       Item2:
         Item1: 0
-        Item2: 12
+        Item2: 10
     selectedWeapons: 0000000001000000
     playerDeck:
     - key: 1

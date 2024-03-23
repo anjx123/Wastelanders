@@ -5,6 +5,7 @@ using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using static Beetle;
 
 public class Scene2 : DialogueClasses
 {
@@ -35,6 +36,8 @@ public class Scene2 : DialogueClasses
     [SerializeField] CinemachineVirtualCamera closeUpCamera;
     [SerializeField] Image ivesImage;
     [SerializeField] private SpriteRenderer treeOverlay;
+    [SerializeField] private Sprite frogDeathSprite;
+    [SerializeField] private Sprite jackieHoldingCrystalSprite;
 
     [SerializeField] private List<DialogueText> sceneNarration;
     [SerializeField] private List<DialogueText> ivesInstruction;
@@ -47,6 +50,7 @@ public class Scene2 : DialogueClasses
     //Combat Dialogue
     [SerializeField] private List<DialogueText> startOfCombatDialogue;
     // After the frog is defeated
+    [SerializeField] private List<DialogueText> afterCombatDialogue;
     [SerializeField] private List<DialogueText> crystalExtraction;
 
     //Game Lose Dialogue
@@ -54,6 +58,13 @@ public class Scene2 : DialogueClasses
 
 
     [SerializeField] private bool jumpToCombat;
+
+
+
+    private bool playDeadFrog = false;
+    private WasteFrog lastKilledFrog;
+
+
 
     private const float BRIEF_PAUSE = 0.2f; // For use after an animation to make it visually seem smoother
     private const float MEDIUM_PAUSE = 1f; //For use after a text box comes down and we want to add some weight to the text.
@@ -163,6 +174,7 @@ private IEnumerator ExecuteGameStart()
 
         CombatManager.PlayersWinEvent += PlayersWin;
         CombatManager.EnemiesWinEvent += EnemiesWin;
+        EntityClass.OnEntityDeath += EnsureFrogDeath;
 
         CombatManager.Instance.GameState = GameState.SELECTION;
 
@@ -170,9 +182,34 @@ private IEnumerator ExecuteGameStart()
         yield return StartCoroutine(DialogueManager.Instance.StartDialogue(startOfCombatDialogue));
         yield return new WaitUntil(() => CombatManager.Instance.GameState == GameState.GAME_WIN);
         CombatManager.Instance.GameState = GameState.OUT_OF_COMBAT;
+        yield return new WaitForSeconds(MEDIUM_PAUSE);
+
+        CombatManager.Instance.ActivateDynamicCamera();
+        yield return StartCoroutine(DialogueManager.Instance.StartDialogue(afterCombatDialogue));
+        yield return new WaitForSeconds(BRIEF_PAUSE);
+        yield return StartCoroutine(jackie.MoveToPosition(lastKilledFrog.transform.position, 1.5f, 2f));
+        yield return new WaitForSeconds(MEDIUM_PAUSE);
+        closeUpCamera.transform.position = CombatManager.Instance.dynamicCamera.transform.position;
+        closeUpCamera.m_Lens.OrthographicSize = CombatManager.Instance.dynamicCamera.m_Lens.OrthographicSize;
+
+        jackie.animator.enabled = false;
+        jackie.transform.rotation = Quaternion.Euler(0, 0, -25);
+        yield return new WaitForSeconds(MEDIUM_PAUSE);
+        jackie.GetComponent<SpriteRenderer>().sprite = jackieHoldingCrystalSprite;
+        yield return new WaitForSeconds(MEDIUM_PAUSE);
+        jackie.transform.rotation = Quaternion.identity;
+        yield return new WaitForSeconds(BRIEF_PAUSE);
 
         yield return StartCoroutine(DialogueManager.Instance.StartDialogue(crystalExtraction));
-        yield return StartCoroutine(CombatManager.Instance.FadeInDarkScreen(2f));
+
+        closeUpCamera.Priority = 2;
+        jackie.animator.enabled = true;
+        yield return StartCoroutine(jackie.MoveToPosition(outOfScreen.position, 0f, 2.2f));
+        yield return new WaitForSeconds(MEDIUM_PAUSE);
+
+        //Beetle Walks in 
+
+        yield return StartCoroutine(WalkWhileScreenFades());
 
         SceneManager.LoadScene("LevelSelect");
 
@@ -265,6 +302,38 @@ private IEnumerator ExecuteGameStart()
     {
         ++numberOfBroadcasts;
     }
+    private void EnsureFrogDeath(EntityClass entity)
+    {
+        if (entity is WasteFrog wasteFrog) 
+        {
+            if (playDeadFrog)
+            {
+                //Function that overrides death animation to die in the scene
+                IEnumerator DieInScene()
+                {
+                    BattleQueue.BattleQueueInstance.RemoveAllInstancesOfEntity(wasteFrog);
+                    CombatManager.Instance.RemoveEnemy(wasteFrog);
+                    wasteFrog.animator.enabled = false;
+                    wasteFrog.GetComponent<SpriteRenderer>().sprite = frogDeathSprite;
+                    wasteFrog.OutOfCombat();
+                    wasteFrog.UnTargetable();
+                    wasteFrog.combatInfo.enabled = false;
+                    wasteFrog.transform.rotation = Quaternion.Euler(0, 0, 75);
+                    yield break;
+                }
+
+                wasteFrog._DeathHandler = DieInScene;
+                lastKilledFrog = wasteFrog;
+            }
+            playDeadFrog = true; //Only change death animation of the second frog
+        }
+    }
+
+
+
+
+    
+
 
     private void PlayersWin()
     {

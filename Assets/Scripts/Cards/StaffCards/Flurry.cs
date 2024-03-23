@@ -45,12 +45,4 @@ public class Flurry : StaffCards
         }
         base.ApplyEffect();
     }
-
-
-
-    // @Author Muhammad
-    public override void CardIsUnstaggered()
-    {
-        // do a dance    
-    }
 }

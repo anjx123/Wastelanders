@@ -97,6 +97,7 @@ public abstract class EnemyClass : EntityClass
     //Removes entity cards and self from BQ and combat manager. Kills itself
     public override IEnumerator Die()
     {
+        Debug.Log("I am dying");
         int runDistance = 10;
         BattleQueue.BattleQueueInstance.RemoveAllInstancesOfEntity(this);
         CombatManager.Instance.RemoveEnemy(this);

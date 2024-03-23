@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static CardComparator;
 
 public abstract class EntityClass : SelectClass
 {
@@ -43,6 +44,8 @@ public abstract class EntityClass : SelectClass
 
 
     protected List<ActionClass> actionsAvailable;
+    public DeadEntities _DeathHandler { protected get;  set; }
+    public DeadEntities DeathHandler { get; private set; } 
 
 #nullable enable
 
@@ -62,6 +65,8 @@ public abstract class EntityClass : SelectClass
         DisableDice();
         GetComponent<SpriteRenderer>().sortingLayerName = CombatManager.Instance.FADE_SORTING_LAYER;
 
+        _DeathHandler = Die;
+        DeathHandler = delegate { return _DeathHandler(); };
         CombatManager.OnGameStateChanging += UpdateBuffsNewRound;
     }
 

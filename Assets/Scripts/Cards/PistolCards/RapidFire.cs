@@ -13,8 +13,8 @@ public class RapidFire : PistolCards
     // Start is called before the first frame update
     public override void Initialize()
     {
-        lowerBound = 1;
-        upperBound = 4;
+        lowerBound = 2;
+        upperBound = 3;
         Speed = 2;
         description = "If unstaggered, consume 1 accuracy, then make another rapid fire attack";
         CardType = CardType.RangedAttack;
