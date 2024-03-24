@@ -5,30 +5,13 @@ using UnityEngine;
 
 public abstract class PlayerClass : EntityClass
 {
-    public List<GameObject> cardPrefabs;
+    public List<ActionClass> cardPrefabs;
 #nullable enable
 
     public delegate void PlayerEventDelegate(PlayerClass player);
     public static event PlayerEventDelegate? playerReshuffleDeck;
 
-
-    // for manual removal from the battle queue in case the player changes their mind. 
-    public void ReaddCard(ActionClass card)
-    {
-        hand.Add(card.gameObject);
-        discard.Remove(card.gameObject);
-        HighlightManager.Instance.RenderHandIfAppropriate(this);
-    }
-
     protected int maxHandSize = 4;
-    // This is the deck of the player, which does not change as the player reshuffles/draws cards.
-    protected List<GameObject> deck = new List<GameObject>(); // this is unusued; it's functionality is implemented in the derived classes under alias cardPrefabs
-
-    // @Author Muhammad
-    // This is an accompanying deck that is NOT directly available to the player; it is for duplicate actions solely (though you could have conditional cards inserted herein, as well)
-    // Is populated inside the editor
-    [SerializeField]
-    protected List<GameObject> duplicates = new List<GameObject>();
 
     // This is the pool, which is initialized to the deck. Then draws will remove cards from the pool.
     protected List<GameObject> pool = new List<GameObject>();
@@ -95,6 +78,15 @@ public abstract class PlayerClass : EntityClass
         HighlightManager.Instance.RenderHandIfAppropriate(this);
     }
 
+
+    // for manual removal from the battle queue in case the player changes their mind. 
+    public void ReaddCard(ActionClass card)
+    {
+        hand.Add(card.gameObject);
+        discard.Remove(card.gameObject);
+        HighlightManager.Instance.RenderHandIfAppropriate(this);
+    }
+
     public override IEnumerator ResetPosition()
     {
         yield return StartCoroutine(MoveToPosition(initialPosition, 0f, 0.8f));
@@ -118,10 +110,5 @@ public abstract class PlayerClass : EntityClass
         {
             DrawCard();
         }
-    }
-
-    public List<GameObject> GetDuplicates()
-    {
-        return this.duplicates;
     }
 }

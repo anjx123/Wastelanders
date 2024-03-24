@@ -20,7 +20,6 @@ public class CounterStrike : StaffCards
 
         myName = "Counter Strike";
         description = "Block with this card, then make an attack with this card";
-        CardType = CardType.Defense;
         Renderer renderer = GetComponent<Renderer>();
         ogMaterial = renderer.material; // og sprite of card
         OriginalPosition = transform.position;
@@ -31,15 +30,16 @@ public class CounterStrike : StaffCards
     {
         if (proto && activeDupCardInstance == null)
         {
-            activeDupCardInstance = Instantiate(duplicateCardInstance.GetComponent<CounterStrikeDuplicate>());
-            ((CounterStrikeDuplicate)activeDupCardInstance).proto = false;
-            ((CounterStrikeDuplicate)activeDupCardInstance).duplicateCardInstance = null;
-            ((CounterStrikeDuplicate)activeDupCardInstance).CardType = CardType.MeleeAttack;
+            activeDupCardInstance = Instantiate(this.GetComponent<CounterStrike>());
+            ((CounterStrike)activeDupCardInstance).proto = false;
+            ((CounterStrike)activeDupCardInstance).duplicateCardInstance = null;
+            ((CounterStrike)activeDupCardInstance).CardType = CardType.MeleeAttack;
             activeDupCardInstance.transform.position = new Vector3(-10, -10, -10);
         }
 
         if (proto)
         {
+            CardType = CardType.Defense;
             PlayerClass origin = (PlayerClass)Origin;
             activeDupCardInstance.Origin = origin;
             activeDupCardInstance.Target = Target;

@@ -33,12 +33,14 @@ public class HighlightManager : MonoBehaviour // later all entity highlighter
     {
         CombatManager.OnGameStateChanged += ResetSelection;
         EntityClass.OnEntityClicked += OnEntityClicked;
+        ActionClass.CardClickedEvent += OnActionClicked;
     }
 
     private void OnDestroy()
     {
         CombatManager.OnGameStateChanged -= ResetSelection;
         EntityClass.OnEntityClicked -= OnEntityClicked;
+        ActionClass.CardClickedEvent -= OnActionClicked;
     }
 
 
@@ -217,6 +219,8 @@ public class HighlightManager : MonoBehaviour // later all entity highlighter
         for (int i = 0; i < hand.Count; i++)
         {
             GameObject handItem = hand[i];
+            ActionClass insertingAction = handItem.GetComponent<ActionClass>();
+            insertingAction.ForceNormalState();
             handItem.transform.SetParent(handContainer.transform, false);
             handItem.transform.position = Vector3.zero;
 
@@ -226,7 +230,6 @@ public class HighlightManager : MonoBehaviour // later all entity highlighter
             Vector3 v = new Vector3(-distanceToLeft, y, -i);
             handItem.transform.position = v;
             handItem.transform.rotation = Quaternion.Euler(0, 0, -5);
-            ActionClass insertingAction = handItem.GetComponent<ActionClass>();
             insertingAction.SetCanPlay(BattleQueue.BattleQueueInstance.CanInsertCard(insertingAction));
         }
         RenderText(hand);

@@ -38,13 +38,4 @@ public class EnemyIves : EnemyClass
         yield break;
     }
 
-    public void UnTargetable()
-    {
-        boxCollider.enabled = false;
-    }
-
-    public void Targetable()
-    {
-        boxCollider.enabled = true;
-    }
 }

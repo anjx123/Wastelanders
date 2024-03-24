@@ -28,6 +28,10 @@ PrefabInstance:
       propertyPath: m_WasSpriteAssigned
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2459814067889663477, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7256956916184963317, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
       propertyPath: m_Name
       value: Trip Variant
@@ -109,9 +113,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myTransform: {fileID: 8130685015988693017}
-  titleName: Trip
+  duplicateCardInstance: {fileID: 0}
+  description: 
   icon: {fileID: 21300000, guid: 9f9ed1dc22ecf5144918e709e6ff0dd3, type: 3}
-  fullCardObjectPrefab: {fileID: 0}
+  cardBack: {fileID: 0}
   cardUI: {fileID: 141020914366950750}
 --- !u!4 &8130685015988693017 stripped
 Transform:

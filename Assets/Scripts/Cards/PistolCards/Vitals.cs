@@ -15,7 +15,7 @@ public class Vitals : PistolCards
         lowerBound = 1;
         upperBound = 8;
 
-        Speed = 3;
+        Speed = 5;
 
         myName = "Vitals";
         description = "Hit 'em where it hurts";
