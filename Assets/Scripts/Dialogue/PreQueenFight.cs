@@ -12,7 +12,6 @@ public class PreQueenFight : DialogueClasses
     [SerializeField] private ScreenShake mainCamera;
 
     [SerializeField] private Jackie jackie;
-    [SerializeField] private Sprite jackieStaff;
     [SerializeField] private Transform jackieDefaultTransform;
     [SerializeField] private Transform jackieTalkingTransform;
     [SerializeField] private Ives ives;
@@ -24,9 +23,13 @@ public class PreQueenFight : DialogueClasses
     [SerializeField] private List<Beetle> campBeetles;
     [SerializeField] private List<Crystals> crystals;
     [SerializeField] private Crystals bigCrystal;
+    [SerializeField] private List<Crystals> bigCrystals;
 
 
-    [SerializeField] private List<Transform> combatBeetleTransforms;
+    [SerializeField] private QueenBeetle theQueen;
+    [SerializeField] private Transform queenTransform;
+    [SerializeField] private List<Beetle> queenGuardBeetles;
+    [SerializeField] private List<Transform> queenGuardBeetleTransforms;
 
     [SerializeField] private GameObject background;
 
@@ -37,6 +40,7 @@ public class PreQueenFight : DialogueClasses
     [SerializeField] private DialogueWrapper AfterBeetleFightDialogue;
     [SerializeField] private DialogueWrapper CrystalHitDialogue;
     [SerializeField] private DialogueWrapper PreQueenFightDialogue;
+    [SerializeField] private DialogueWrapper LastBitDialogue;
 
     private const float BRIEF_PAUSE = 0.2f; // For use after an animation to make it visually seem smoother
     private const float MEDIUM_PAUSE = 1f; //For use after a text box comes down and we want to add some weight to the text.
@@ -121,18 +125,40 @@ public class PreQueenFight : DialogueClasses
             yield return StartCoroutine(jackie.MoveToPosition(bigCrystal.transform.position, 1f, 0.5f));
 
             jackie.AttackAnimation("IsStaffing");
+            yield return new WaitForSeconds(BRIEF_PAUSE);
+            foreach (Crystals c in bigCrystals)
+            {
+                StartCoroutine(c.Die());
+            }
             yield return new WaitForSeconds(MEDIUM_PAUSE);
 
             yield return StartCoroutine(DialogueManager.Instance.StartDialogue(CrystalHitDialogue.Dialogue));
 
             //TODO: shake?
+            StartCoroutine(jackie.MoveToPosition(jackieDefaultTransform.position, 0f, 1.5f));
+            yield return StartCoroutine(ives.MoveToPosition(ivesDefaultTransform.position, 0f, 1.5f));
+            jackie.FaceRight();
+            ives.FaceRight();
 
             yield return StartCoroutine(DialogueManager.Instance.StartDialogue(PreQueenFightDialogue.Dialogue));
-        }
-        else //setup scene
-        {
+
+            theQueen.OutOfCombat();
+            for (int i = 0; i < queenGuardBeetles.Count; i++)
+            {
+                queenGuardBeetles[i].OutOfCombat();
+                queenGuardBeetles[i].transform.position = new Vector3(
+                    queenGuardBeetles[i].transform.position.x,
+                    queenGuardBeetles[i].transform.position.y, -1);
+                StartCoroutine(queenGuardBeetles[i].MoveToPosition(queenGuardBeetleTransforms[i].position, 0f, 1.5f));
+            }
+            yield return StartCoroutine(theQueen.MoveToPosition(queenTransform.position, 0f, 1.5f));
+
+            yield return StartCoroutine(DialogueManager.Instance.StartDialogue(LastBitDialogue.Dialogue));
+
+            yield return StartCoroutine(CombatManager.Instance.FadeInDarkScreen(1.5f));
 
         }
+        
     }
 
     private void EntityDied(EntityClass e)
