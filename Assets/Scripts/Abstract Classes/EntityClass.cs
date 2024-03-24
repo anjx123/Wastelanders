@@ -111,7 +111,7 @@ public abstract class EntityClass : SelectClass
     percentageDone: Percentage health done to the target
     Requires: Entities are not dead
      */
-    private IEnumerator StaggerEntities(EntityClass origin, EntityClass target, float percentageDone)
+    public IEnumerator StaggerEntities(EntityClass origin, EntityClass target, float percentageDone)
     {
         Vector3 directionVector = target.myTransform.position - origin.myTransform.position;
 
@@ -170,7 +170,6 @@ public abstract class EntityClass : SelectClass
             elapsedTime += Time.deltaTime;
             yield return null;
         }
-
         if (HasAnimationParameter("IsMoving"))
         {
             animator.SetBool("IsMoving", false);
@@ -263,8 +262,6 @@ public abstract class EntityClass : SelectClass
         if ((Vector2)diffInLocation == Vector2.zero) yield break;
         UpdateFacing(-diffInLocation, null);
 
-
-
         if (HasAnimationParameter("IsStaggered"))
         {
             animator.SetBool("IsStaggered", true);
@@ -284,6 +281,7 @@ public abstract class EntityClass : SelectClass
         {
             animator.SetBool("IsStaggered", false);
         }
+
     }
     private float AnimationCurve(float elapsedTime, float duration)
     {

@@ -5,7 +5,9 @@ using System.Runtime.ConstrainedExecution;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using static Unity.VisualScripting.Member;
-
+using static UnityEngine.UI.Image;
+using System.Reflection;
+using Cinemachine;
 //@author: Andrew
 public class BeetleFight : DialogueClasses
 {
@@ -17,6 +19,8 @@ public class BeetleFight : DialogueClasses
     [SerializeField] private Transform ivesDefaultTransform;
 
     [SerializeField] private WasteFrog frog;
+    [SerializeField] private WasteFrog frogThatRunsAway;
+
     [SerializeField] private Beetle ambushBeetle;
     [SerializeField] private Transform ambushBeetleTransform;
     [SerializeField] private Beetle wrangledBeetle;
@@ -27,6 +31,8 @@ public class BeetleFight : DialogueClasses
     [SerializeField] private List<Transform> combatBeetleTransforms;
 
     [SerializeField] private GameObject background;
+    [SerializeField] private CinemachineVirtualCamera sceneCamera;
+    [SerializeField] private Sprite frogDeathSprite;
 
     [SerializeField] private DialogueWrapper openingDiscussion;
     [SerializeField] private DialogueWrapper jackieSurprised;
@@ -62,32 +68,44 @@ public class BeetleFight : DialogueClasses
         ives.OutOfCombat();
         jackie.OutOfCombat(); //Workaround for now, ill have to remove this once i manually start instantiating players
         frog.OutOfCombat();
+        frog.FaceLeft();
+        frogThatRunsAway.OutOfCombat();
+        frogThatRunsAway.FaceLeft();
         ambushBeetle.OutOfCombat();
         wrangledBeetle.OutOfCombat();
         jackie.SetReturnPosition(jackieDefaultTransform.position);
+        sceneCamera.Priority = 2;
         if (!jumpToCombat)
         {
+            Coroutine fade = StartCoroutine(CombatManager.Instance.FadeInLightScreen(2f));
             yield return new WaitForSeconds(1f);
+            frogThatRunsAway.FaceRight();
+            yield return fade;
 
-            jackie.Emphasize(); //Jackie shows up above the black background
-            
-            yield return new WaitForSeconds(MEDIUM_PAUSE);
-
-            yield return StartCoroutine(CombatManager.Instance.FadeInLightScreen(2f));
-
-            yield return StartCoroutine(jackie.ResetPosition()); //Jackie Runs into the scene
+            //Jackie runs in gun blazing
+            Coroutine jackieRunCoroutine = StartCoroutine(jackie.MoveToPosition(jackieDefaultTransform.position, 0, 1f)); //Jackie Runs into the scene
             
 
+            yield return new WaitForSeconds(0.5f);
+            yield return StartCoroutine(MakeFrogJump(frogThatRunsAway, 1f));
+            StartCoroutine(KillFrog(frogThatRunsAway)); //Just moves them offscreen and kills them
+            frog.FaceRight();
+            yield return jackieRunCoroutine;
 
-            jackie.DeEmphasize(); //Jackie is below the black background
-            yield return new WaitForSeconds(MEDIUM_PAUSE);
-            frog.FaceLeft(); // frog sees jackie
-            //TODO: make the frog jump
+            jackie.AttackAnimation("IsShooting");
+            yield return StartCoroutine(frog.StaggerEntities(jackie, frog, 0.2f));
+            CombatManager.Instance.ActivateDynamicCamera();
+            sceneCamera.Priority = 0;
+            Coroutine frogTriesToRun = StartCoroutine(frog.MoveToPosition(frog.transform.position + new Vector3(-2, 0, 0), 0, 1f));
             yield return new WaitForSeconds(BRIEF_PAUSE);
-            yield return StartCoroutine(MakeJump(frog.gameObject, 2f, 0.2f));
-            yield return new WaitForSeconds(BRIEF_PAUSE);
-            yield return StartCoroutine(frog.Die()); // frog runs away
-            yield return new WaitForSeconds(MEDIUM_PAUSE);
+            yield return StartCoroutine(jackie.MoveToPosition(frog.transform.position, 1f, 1f));
+            StopCoroutine(frogTriesToRun);
+            jackie.AttackAnimation("IsStaffing");
+            yield return StartCoroutine(frog.StaggerEntities(jackie, frog, 0.3f));
+            DieInScene(frog);
+            //yield return StartCoroutine(jackie.MoveToPosition(frog.transform.position, 0f, 1f));
+
+
             yield return StartCoroutine(DialogueManager.Instance.StartDialogue(openingDiscussion.Dialogue));
 
             // BEETLE AMBUSH!!
@@ -291,16 +309,44 @@ public class BeetleFight : DialogueClasses
         StartCoroutine(e.Die());
         e.gameObject.SetActive(false);
     }
-
-    public IEnumerator MakeJump(GameObject obj, float jumpHeight, float jumpDuration)
+    IEnumerator MakeFrogJump(EntityClass origin, float jumpHeight)
     {
-        // Set the start and end positions
-        Vector3 startPosition = obj.transform.position;
-        Vector3 endPosition = new(obj.transform.position.x, obj.transform.position.y + jumpHeight, obj.transform.position.z);
-
-        // Start the jump coroutine
-        yield return StartCoroutine(JumpCoroutine(obj, startPosition, endPosition, jumpDuration));
+        yield return new WaitForSeconds(0.10f);
+        if (origin.HasAnimationParameter("IsStaggered"))
+        {
+            origin.animator.SetBool("IsStaggered", true);
+        }
+        yield return new WaitForSeconds(0.16f);
+        Vector3 originalPosition = origin.myTransform.position;
+        origin.myTransform.position = originalPosition + new Vector3(0, jumpHeight, 0);
+        yield return new WaitForSeconds(0.28f);
+        origin.myTransform.position = originalPosition;
+        yield return new WaitForSeconds(0.20f);
+        if (origin.HasAnimationParameter("IsStaggered"))
+        {
+            origin.animator.SetBool("IsStaggered", false);
+        }
     }
+
+    IEnumerator KillFrog(WasteFrog wasteFrog)
+    {
+        int runDistance = -10;
+        CombatManager.Instance.RemoveEnemy(wasteFrog);
+        yield return StartCoroutine(wasteFrog.MoveToPosition(wasteFrog.transform.position + new Vector3(runDistance, 0, 0), 0, 1.2f));
+        wasteFrog.gameObject.SetActive(false);
+    }
+    void DieInScene(WasteFrog wasteFrog)
+    {
+        BattleQueue.BattleQueueInstance.RemoveAllInstancesOfEntity(wasteFrog);
+        CombatManager.Instance.RemoveEnemy(wasteFrog);
+        wasteFrog.animator.enabled = false;
+        wasteFrog.GetComponent<SpriteRenderer>().sprite = frogDeathSprite;
+        wasteFrog.OutOfCombat();
+        wasteFrog.UnTargetable();
+        wasteFrog.combatInfo.gameObject.SetActive(false);
+        wasteFrog.transform.rotation = Quaternion.Euler(0, 0, 75);
+    }
+
 
     private IEnumerator JumpCoroutine(GameObject obj, Vector3 startPosition, Vector3 endPosition, float jumpDuration)
     {
