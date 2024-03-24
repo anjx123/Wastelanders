@@ -625,7 +625,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7638263227755287879, guid: 55dd1017896a4294ebc48577819d6683, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 2
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 7638263227755287879, guid: 55dd1017896a4294ebc48577819d6683, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2093,7 +2093,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9d2a7fcaa5514b7d837e7f792d4e358, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainCamera: {fileID: 1525248179}
   jackie: {fileID: 1790411082}
+  jackieStaff: {fileID: 0}
   jackieDefaultTransform: {fileID: 2041699582}
   jackieTalkingTransform: {fileID: 824088326}
   ives: {fileID: 605471067}
@@ -2103,9 +2105,9 @@ MonoBehaviour:
   draggedCrystal: {fileID: 460078809}
   campBeetles:
   - {fileID: 873744480}
+  - {fileID: 1582787204}
   - {fileID: 324089119}
   - {fileID: 790133405}
-  - {fileID: 1582787204}
   crystals:
   - {fileID: 1958997492}
   - {fileID: 1144758387}
@@ -2116,6 +2118,7 @@ MonoBehaviour:
   - {fileID: 1908024817}
   - {fileID: 704085757}
   - {fileID: 460078809}
+  bigCrystal: {fileID: 1908024817}
   combatBeetleTransforms:
   - {fileID: 0}
   - {fileID: 0}
@@ -2126,6 +2129,7 @@ MonoBehaviour:
   IntroDialogue: {fileID: 11400000, guid: 5fdec75b151e64afa925aa47f1f51179, type: 2}
   MakingPlanDialogue: {fileID: 11400000, guid: 30e16747302de43048d05e2c0f028000, type: 2}
   AfterBeetleFightDialogue: {fileID: 11400000, guid: 71f3662f57d9b437f9bb33f140334a8f, type: 2}
+  CrystalHitDialogue: {fileID: 11400000, guid: 2d1ca4dd96f5346089448956a7733c18, type: 2}
   PreQueenFightDialogue: {fileID: 11400000, guid: 818b75a2acc324bafa25832c21f63f07, type: 2}
 --- !u!1 &1277541862
 GameObject:
@@ -2297,7 +2301,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7638263227755287879, guid: 55dd1017896a4294ebc48577819d6683, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -2
       objectReference: {fileID: 0}
     - target: {fileID: 7638263227755287879, guid: 55dd1017896a4294ebc48577819d6683, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2857,6 +2861,7 @@ GameObject:
   - component: {fileID: 1525248174}
   - component: {fileID: 1525248177}
   - component: {fileID: 1525248178}
+  - component: {fileID: 1525248179}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -2988,6 +2993,18 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   m_MaxRayIntersections: 0
+--- !u!114 &1525248179
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1525248173}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6aa41b926b29e4283b2720e94db2cf4c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1542478168
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3677,7 +3694,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7638263227755287879, guid: 55dd1017896a4294ebc48577819d6683, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 7638263227755287879, guid: 55dd1017896a4294ebc48577819d6683, type: 3}
       propertyPath: m_LocalRotation.w

@@ -12,4 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 207ddad3e1c90594ba3f48e2a5a6a796, type: 3}
   m_Name: PreQueenFightDialogue
   m_EditorClassIdentifier: 
-  dialogue: []
+  dialogue:
+  - bodyText: Eeeeeeeekekeke
+    speakerName: ???
+    displayingImage: {fileID: 0}
+  - bodyText: (Confusion and fear spreads among the candidates as they turn to face
+      the source of the sound.)
+    speakerName: 
+    displayingImage: {fileID: 0}

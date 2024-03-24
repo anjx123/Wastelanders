@@ -9,7 +9,10 @@ using static Unity.VisualScripting.Member;
 //@author: Andrew
 public class PreQueenFight : DialogueClasses
 {
+    [SerializeField] private ScreenShake mainCamera;
+
     [SerializeField] private Jackie jackie;
+    [SerializeField] private Sprite jackieStaff;
     [SerializeField] private Transform jackieDefaultTransform;
     [SerializeField] private Transform jackieTalkingTransform;
     [SerializeField] private Ives ives;
@@ -20,6 +23,8 @@ public class PreQueenFight : DialogueClasses
     [SerializeField] private Crystals draggedCrystal;
     [SerializeField] private List<Beetle> campBeetles;
     [SerializeField] private List<Crystals> crystals;
+    [SerializeField] private Crystals bigCrystal;
+
 
     [SerializeField] private List<Transform> combatBeetleTransforms;
 
@@ -30,6 +35,7 @@ public class PreQueenFight : DialogueClasses
     [SerializeField] private DialogueWrapper IntroDialogue;
     [SerializeField] private DialogueWrapper MakingPlanDialogue;
     [SerializeField] private DialogueWrapper AfterBeetleFightDialogue;
+    [SerializeField] private DialogueWrapper CrystalHitDialogue;
     [SerializeField] private DialogueWrapper PreQueenFightDialogue;
 
     private const float BRIEF_PAUSE = 0.2f; // For use after an animation to make it visually seem smoother
@@ -87,12 +93,41 @@ public class PreQueenFight : DialogueClasses
 
             yield return StartCoroutine(BeetleDragCrystal(draggerBeetle, draggedCrystal, draggerBeetleTransform.position, 2f));
 
-            yield return new WaitForSeconds(BRIEF_PAUSE);
+            yield return new WaitForSeconds(MEDIUM_PAUSE);
 
             yield return StartCoroutine(draggerBeetle.Die());
 
             yield return StartCoroutine(DialogueManager.Instance.StartDialogue(MakingPlanDialogue.Dialogue));
 
+            StartCoroutine(NoCombatClash(jackie, campBeetles[3], false));
+            yield return new WaitForSeconds(BRIEF_PAUSE);
+            yield return StartCoroutine(NoCombatClash(ives, campBeetles[0], false));
+            yield return new WaitForSeconds(BRIEF_PAUSE);
+            StartCoroutine(campBeetles[0].Die());
+            StartCoroutine(campBeetles[3].Die());
+
+            yield return new WaitForSeconds(MEDIUM_PAUSE);//TODO: layering
+
+            StartCoroutine(NoCombatClash(jackie, campBeetles[2], false));
+            yield return new WaitForSeconds(BRIEF_PAUSE);
+            yield return StartCoroutine(NoCombatClash(ives, campBeetles[1], false));
+            yield return new WaitForSeconds(BRIEF_PAUSE);
+            StartCoroutine(campBeetles[1].Die());
+            StartCoroutine(campBeetles[2].Die());
+
+            yield return new WaitForSeconds(MEDIUM_PAUSE);
+            yield return StartCoroutine(DialogueManager.Instance.StartDialogue(AfterBeetleFightDialogue.Dialogue));
+
+            yield return StartCoroutine(jackie.MoveToPosition(bigCrystal.transform.position, 1f, 0.5f));
+
+            jackie.AttackAnimation("IsStaffing");
+            yield return new WaitForSeconds(MEDIUM_PAUSE);
+
+            yield return StartCoroutine(DialogueManager.Instance.StartDialogue(CrystalHitDialogue.Dialogue));
+
+            //TODO: shake?
+
+            yield return StartCoroutine(DialogueManager.Instance.StartDialogue(PreQueenFightDialogue.Dialogue));
         }
         else //setup scene
         {
@@ -116,13 +151,13 @@ public class PreQueenFight : DialogueClasses
 
     //------helpers------
 
-    // "clashes" both entities, without rolling dice. e1 gets staggered modestly.
+    // "clashes" both entities, without rolling dice. bool parameter decides who gets staggered
     // this is stolen from card comparator (code duplication!) if there is a better way of doing this pls lmk
-    private IEnumerator NoCombatClash(EntityClass e1, EntityClass e2)
+    private IEnumerator NoCombatClash(EntityClass e1, EntityClass e2, bool e1GetsHit)
     {
         EntityClass origin = e1;
         EntityClass target = e2;
-        float originRatio = 0.1f;
+        float originRatio = 0.5f;
         float targetRatio = 1f - originRatio;
         Vector3 centeredDistance = (origin.myTransform.position * originRatio + targetRatio * target.myTransform.position);
         float bufferedRadius = 0.25f;
@@ -132,7 +167,14 @@ public class PreQueenFight : DialogueClasses
 
         StartCoroutine(origin?.MoveToPosition(HorizontalProjector(centeredDistance, origin.myTransform.position, xBuffer), bufferedRadius, duration, centeredDistance));
         yield return StartCoroutine(target?.MoveToPosition(HorizontalProjector(centeredDistance, target.myTransform.position, xBuffer), bufferedRadius, duration, centeredDistance));
-        e1.TakeDamage(e2, 5);
+        if (e1GetsHit)
+        {
+            e1.TakeDamage(e2, 100);
+        }
+        else
+        {
+            e2.TakeDamage(e1, 100);
+        }
     }
 
     private Vector3 HorizontalProjector(Vector3 centeredDistance, Vector3 currentPosition, float xBuffer)
