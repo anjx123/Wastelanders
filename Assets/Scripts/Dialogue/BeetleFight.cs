@@ -30,9 +30,13 @@ public class BeetleFight : DialogueClasses
 
     [SerializeField] private List<Transform> combatBeetleTransforms;
 
+    [SerializeField] private ActionClass beetleAction;
+    [SerializeField] private ActionClass jackieAction;
+
     [SerializeField] private GameObject background;
     [SerializeField] private CinemachineVirtualCamera sceneCamera;
     [SerializeField] private Sprite frogDeathSprite;
+    [SerializeField] private Sprite jackieCrystalSprite;
 
     [SerializeField] private DialogueWrapper openingDiscussion;
     [SerializeField] private DialogueWrapper jackieSurprised;
@@ -77,54 +81,84 @@ public class BeetleFight : DialogueClasses
         sceneCamera.Priority = 2;
         if (!jumpToCombat)
         {
-            Coroutine fade = StartCoroutine(CombatManager.Instance.FadeInLightScreen(2f));
-            yield return new WaitForSeconds(1f);
-            frogThatRunsAway.FaceRight();
-            yield return fade;
+            //Lights Camera Action!!
+            {
+                Coroutine fade = StartCoroutine(CombatManager.Instance.FadeInLightScreen(2f));
+                yield return new WaitForSeconds(1f);
+                frogThatRunsAway.FaceRight();
+                yield return fade;
+            }
 
             //Jackie runs in gun blazing
-            Coroutine jackieRunCoroutine = StartCoroutine(jackie.MoveToPosition(jackieDefaultTransform.position, 0, 1f)); //Jackie Runs into the scene
-            
+            {
+                Coroutine jackieRunCoroutine = StartCoroutine(jackie.MoveToPosition(jackieDefaultTransform.position, 0, 1f)); //Jackie Runs into the scene
+                yield return new WaitForSeconds(0.5f);
+                yield return StartCoroutine(MakeFrogJump(frogThatRunsAway, 1f));
+                StartCoroutine(KillFrog(frogThatRunsAway)); //Just moves them offscreen and kills them
+                frog.FaceRight();
+                yield return jackieRunCoroutine;
+            }
 
-            yield return new WaitForSeconds(0.5f);
-            yield return StartCoroutine(MakeFrogJump(frogThatRunsAway, 1f));
-            StartCoroutine(KillFrog(frogThatRunsAway)); //Just moves them offscreen and kills them
-            frog.FaceRight();
-            yield return jackieRunCoroutine;
+            //Jackie takes down a wild frog
+            {
+                jackie.AttackAnimation("IsShooting");
+                yield return StartCoroutine(frog.StaggerEntities(jackie, frog, 0.2f));
+                CombatManager.Instance.ActivateDynamicCamera();
+                sceneCamera.Priority = 0;
+                Coroutine frogTriesToRun = StartCoroutine(frog.MoveToPosition(frog.transform.position + new Vector3(-2, 0, 0), 0, 1f));
+                yield return new WaitForSeconds(BRIEF_PAUSE);
+                yield return StartCoroutine(jackie.MoveToPosition(frog.transform.position, 1f, 1f));
+                StopCoroutine(frogTriesToRun);
+                jackie.AttackAnimation("IsStaffing");
+                yield return StartCoroutine(frog.StaggerEntities(jackie, frog, 0.3f));
+                DieInScene(frog);
+                //yield return StartCoroutine(jackie.MoveToPosition(frog.transform.position, 0f, 1f));
+            }
 
-            jackie.AttackAnimation("IsShooting");
-            yield return StartCoroutine(frog.StaggerEntities(jackie, frog, 0.2f));
-            CombatManager.Instance.ActivateDynamicCamera();
-            sceneCamera.Priority = 0;
-            Coroutine frogTriesToRun = StartCoroutine(frog.MoveToPosition(frog.transform.position + new Vector3(-2, 0, 0), 0, 1f));
-            yield return new WaitForSeconds(BRIEF_PAUSE);
-            yield return StartCoroutine(jackie.MoveToPosition(frog.transform.position, 1f, 1f));
-            StopCoroutine(frogTriesToRun);
-            jackie.AttackAnimation("IsStaffing");
-            yield return StartCoroutine(frog.StaggerEntities(jackie, frog, 0.3f));
-            DieInScene(frog);
-            //yield return StartCoroutine(jackie.MoveToPosition(frog.transform.position, 0f, 1f));
-
-
-            yield return StartCoroutine(DialogueManager.Instance.StartDialogue(openingDiscussion.Dialogue));
 
             // BEETLE AMBUSH!!
+            {
+                void ShowCrystal()
+                {
+                    jackie.animator.enabled = false;
+                    jackie.GetComponent<SpriteRenderer>().sprite = jackieCrystalSprite;
+                    DialogueBox.DialogueBoxEvent -= ShowCrystal;
+                }
+                DialogueBox.DialogueBoxEvent += ShowCrystal;
+                yield return StartCoroutine(DialogueManager.Instance.StartDialogue(openingDiscussion.Dialogue));
 
-            ambushBeetle.FaceLeft();
-            yield return StartCoroutine(ambushBeetle.MoveToPosition(ambushBeetleTransform.position, 0, 0.4f));
-            yield return StartCoroutine(DialogueManager.Instance.StartDialogue(jackieSurprised.Dialogue));
-            yield return StartCoroutine(NoCombatClash(ambushBeetle, jackie));
-            yield return new WaitForSeconds(MEDIUM_PAUSE);
-            ambushBeetle.FaceRight();
-            yield return StartCoroutine(ambushBeetle.Die()); // beetle runs away
-            yield return StartCoroutine(DialogueManager.Instance.StartDialogue(jackieChase.Dialogue));
+                beetleAction.Target = jackie;
+                beetleAction.Origin = ambushBeetle;
+                jackieAction.Target = ambushBeetle;
+                jackieAction.Origin = jackie;
 
-            ShiftScene(17, 2);
+                //Using reflection to set speed because speed because its a protected setter
+                PropertyInfo cardPropInfo = typeof(ActionClass).GetProperty(nameof(jackieAction.Speed), BindingFlags.Public | BindingFlags.Instance);
+                MethodInfo setMethod = cardPropInfo.GetSetMethod(true);
+                setMethod.Invoke(jackieAction, new object[] { /* jackieAction.Speed = */ 1 });
 
-            yield return StartCoroutine(jackie.MoveToPosition(jackieChasingTransform.position, 0, 2f)); //Jackie Runs into the scene
+                yield return StartCoroutine(ambushBeetle.MoveToPosition(ambushBeetleTransform.position, 0, 0.4f));
+                yield return StartCoroutine(DialogueManager.Instance.StartDialogue(jackieSurprised.Dialogue));
+                jackie.animator.enabled = true;
+                yield return StartCoroutine(CardComparator.Instance.ClashCards(jackieAction, beetleAction));
+            }
+
+            //Jackie Chases the beetle and we fade
+            {
+                sceneCamera.transform.position = CombatManager.Instance.dynamicCamera.transform.position;
+                yield return StartCoroutine(ambushBeetle.MoveToPosition(jackieChasingTransform.position, 0, 1.2f)); // beetle runs away
+                sceneCamera.Priority = 2;
+                CombatManager.Instance.ActivateBaseCamera();
+                yield return StartCoroutine(DialogueManager.Instance.StartDialogue(jackieChase.Dialogue));
+                Coroutine fade = StartCoroutine(CombatManager.Instance.FadeInDarkScreen(1f));
+                yield return StartCoroutine(jackie.MoveToPosition(jackieChasingTransform.position, 1f, 1f)); //Jackie Runs into the scene
+                yield return fade;
+            }
+
             yield return new WaitForSeconds(MEDIUM_PAUSE);
 
             yield return StartCoroutine(DialogueManager.Instance.StartDialogue(jackieBeetleCamp.Dialogue));
+            yield return StartCoroutine(CombatManager.Instance.FadeInLightScreen(1.2f));
             yield return new WaitForSeconds(BRIEF_PAUSE);
 
             StartCoroutine(jackie.MoveToPosition(jackieTalkingTransform.position, 0, 1.6f));   

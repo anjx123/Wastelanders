@@ -13,6 +13,11 @@ MonoBehaviour:
   m_Name: JackieSurprised
   m_EditorClassIdentifier: 
   dialogue:
+  - bodyText: KRCRHKK---
+    speakerName: ???
+    displayingImage: {fileID: 21300000, guid: fbee88a0df434324a95d7b22b3fa32e7, type: 3}
+    broadcastAnEvent: 0
   - bodyText: What the-
     speakerName: Jackie
     displayingImage: {fileID: 0}
+    broadcastAnEvent: 0
