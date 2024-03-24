@@ -149,6 +149,7 @@ MonoBehaviour:
   icon: {fileID: 0}
   availableActions:
   - {fileID: 2376898879351982445, guid: 47b019d96704c455391a1f89ba0d1714, type: 3}
+  - {fileID: 2376898879351982445, guid: 47b019d96704c455391a1f89ba0d1714, type: 3}
   dupActions: []
 --- !u!1001 &5473955538084191047
 PrefabInstance:

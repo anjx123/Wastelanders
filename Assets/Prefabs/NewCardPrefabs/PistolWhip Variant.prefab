@@ -95,9 +95,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myTransform: {fileID: 0}
-  titleName: Pistol Whip
+  duplicateCardInstance: {fileID: 0}
+  description: 
   icon: {fileID: 21300000, guid: f2a1f451840843a469d288e45df357b8, type: 3}
-  fullCardObjectPrefab: {fileID: 0}
+  cardBack: {fileID: 0}
   cardUI: {fileID: 8981636541695723022}
 --- !u!114 &8981636541695723022 stripped
 MonoBehaviour:

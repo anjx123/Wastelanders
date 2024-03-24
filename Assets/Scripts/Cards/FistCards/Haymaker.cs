@@ -25,8 +25,9 @@ public class Haymaker : FistCards
         base.Initialize();
     }
 
-    public override void OnHit()
+    public override void CardIsUnstaggered()
     {
-        base.OnHit();
+        base.CardIsUnstaggered();
+        Origin.AttackAnimation("IsMelee");
     }
 }

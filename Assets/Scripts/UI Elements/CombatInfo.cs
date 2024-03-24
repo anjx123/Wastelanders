@@ -89,7 +89,7 @@ public class CombatInfo : MonoBehaviour
             combatIcon.transform.SetParent(cardIconRendering.transform);
             combatIcon.transform.localScale = Vector3.one;
             combatIcon.transform.localPosition = new Vector3(0, startY - i * iconHeight, 0);
-            combatIcon.GetComponent<CombatCardUI>().SetActionClass(combatCards[i]);
+            combatIcon.GetComponent<CombatCardUI>().SetActionClass(combatCards[num - i - 1]); //Reverse the order of rendering 
             combatIcon.GetComponent<CombatCardUI>().DeEmphasize();
         }
     }
