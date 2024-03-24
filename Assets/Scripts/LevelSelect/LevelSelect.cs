@@ -9,7 +9,7 @@ public class LevelSelect : MonoBehaviour
     public Button[] buttons;
     public GameObject levelButtons;
 
-    private void Awake()
+    protected virtual void Awake()
     {
         ButtonArray();
     }
