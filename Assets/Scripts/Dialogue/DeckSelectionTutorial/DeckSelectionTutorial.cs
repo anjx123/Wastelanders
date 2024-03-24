@@ -29,7 +29,6 @@ public class DeckSelectionTutorial : MonoBehaviour
 
     private IEnumerator ExecuteGameStart()
     {
-        GameStateManager.shouldPlayDeckSelectionTutorial = true;
         if (GameStateManager.shouldPlayDeckSelectionTutorial == false) yield break;
 
         NormalizeTutorialDecks();
@@ -72,12 +71,11 @@ public class DeckSelectionTutorial : MonoBehaviour
     {
         WeaponEdit.WeaponEditEvent -= HandleWeaponEdited;
         GameStateManager.shouldPlayDeckSelectionTutorial = false;
-        //DeckSelectionManager.Instance.SetNextScene("Scene2");
+        DeckSelectionManager.Instance.SetNextScene("Scene2");
         StartCoroutine(StartDialogueWithNextEvent(selectYourActions.Dialogue, () => { DeckSelectionManager.Instance.PlayerActionDeckModifiedEvent += HandleRunOutOfPoints; }));
     }
     private void HandleRunOutOfPoints(int points)
     {
-        Debug.Log("Poitns i am getting" + points);
         if (points < 2)
         {
             DeckSelectionManager.Instance.PlayerActionDeckModifiedEvent -= HandleRunOutOfPoints;
