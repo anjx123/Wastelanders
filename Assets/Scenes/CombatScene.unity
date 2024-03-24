@@ -1199,6 +1199,38 @@ PrefabInstance:
       propertyPath: BackgroundMusicPrimary
       value: 
       objectReference: {fileID: 8300000, guid: 6f3df3ec532940047937486685b7960e, type: 3}
+    - target: {fileID: 2372011432706839889, guid: d052c0d2097e66140970430f9f4a493f, type: 3}
+      propertyPath: SFXSoundsPlayer
+      value: 
+      objectReference: {fileID: 1098260438}
+    - target: {fileID: 2372011432706839889, guid: d052c0d2097e66140970430f9f4a493f, type: 3}
+      propertyPath: sfxTuples.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2372011432706839889, guid: d052c0d2097e66140970430f9f4a493f, type: 3}
+      propertyPath: BackgroundMusicPlayer
+      value: 
+      objectReference: {fileID: 906789505}
+    - target: {fileID: 2372011432706839889, guid: d052c0d2097e66140970430f9f4a493f, type: 3}
+      propertyPath: BackgroundMusicPrimary
+      value: 
+      objectReference: {fileID: 8300000, guid: 6f3df3ec532940047937486685b7960e, type: 3}
+    - target: {fileID: 2372011432706839889, guid: d052c0d2097e66140970430f9f4a493f, type: 3}
+      propertyPath: sfxTuples.Array.data[2].Item1
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2372011432706839889, guid: d052c0d2097e66140970430f9f4a493f, type: 3}
+      propertyPath: sfxTuples.Array.data[2].Item2
+      value: 
+      objectReference: {fileID: 8300000, guid: 1f01deee0b9c25c4f865c84973dc5db1, type: 3}
+    - target: {fileID: 2372011432706839889, guid: d052c0d2097e66140970430f9f4a493f, type: 3}
+      propertyPath: sfxTuples.Array.data[3].Item1
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2372011432706839889, guid: d052c0d2097e66140970430f9f4a493f, type: 3}
+      propertyPath: sfxTuples.Array.data[3].Item2
+      value: 
+      objectReference: {fileID: 8300000, guid: f5f6403acb36b594ebebf7a272a125a0, type: 3}
     - target: {fileID: 4099917221276572097, guid: d052c0d2097e66140970430f9f4a493f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1243,7 +1275,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Audio System
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: -6012362882193805816, guid: d052c0d2097e66140970430f9f4a493f, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 4099917221276572097, guid: d052c0d2097e66140970430f9f4a493f, type: 3}
@@ -3152,7 +3185,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6635998426718021455, guid: b9c5e4b3c9f7e024f8fe9012e7a2e437, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.1461649
+      value: -0.8779309
       objectReference: {fileID: 0}
     - target: {fileID: 6635998426718021455, guid: b9c5e4b3c9f7e024f8fe9012e7a2e437, type: 3}
       propertyPath: m_LocalPosition.y

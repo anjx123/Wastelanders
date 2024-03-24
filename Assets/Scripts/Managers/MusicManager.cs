@@ -1,25 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
-
-// NOTE: VERY IMPORTANT: This implementation requires that Audio file names be systematically maintained. Please do NOT update a name in the assets without proper understanding.
-public class AudioManager : MonoBehaviour
+public class MusicManager : MonoBehaviour
 {
 
-    public static AudioManager Instance;
+    public static MusicManager Instance;
 
     // NOTE: All of these fields are set in the editor.
     public AudioSource SFXSoundsPlayer, BackgroundMusicPlayer;
     public AudioClip BackgroundMusicPrimary;
     public AudioClip BackgroundMusicVictory; // Actually ...Secondary ; for extensibility purposes such as you WANT to be able to alternate between two Background Musics during gameplay
     [SerializeField]
-    private Dictionary<string, AudioClip> sfxDictionary;
-    [SerializeField]
-    private List<AudioClip> sfxList;
-    
-    [SerializeField]
-    private List<SerializableTuple> sfxTuples; 
+    private List<SerializableTuple<SFXList, AudioClip>> sfxTuples;
 
     public void Awake()
     {
@@ -28,17 +22,7 @@ public class AudioManager : MonoBehaviour
             Instance = this;
             BackgroundMusicPlayer.clip = BackgroundMusicPrimary;
             BackgroundMusicPlayer.Play();
-
-            sfxTuples = new List<SerializableTuple>();
-            
-            sfxDictionary = new Dictionary<string, AudioClip>();  
-
-            foreach (AudioClip entry in sfxList)
-            {
-                sfxTuples.Item2 = entry;
-            }
-
-
+            // sfxTuples = new List<SerializableTuple<SFXList, AudioClip>>();
         }
         else if (Instance != this)
         {
@@ -48,9 +32,18 @@ public class AudioManager : MonoBehaviour
 
     // Plays the sfx that is appropriate
     // REQUIRES: the value provided is valid. 
-    public void PlaySFX(string effect)
+    public void PlaySFX(SFXList effect)
     {
-        SFXSoundsPlayer.PlayOneShot(sfxDictionary[effect]);
+        foreach (SerializableTuple<SFXList, AudioClip> entry in sfxTuples) 
+        {
+            Debug.Log(entry.Item1 + "\n");
+            Debug.Log(entry.Item1 + "\n");
+
+            if (entry.Item1 == effect)
+            {
+                SFXSoundsPlayer.PlayOneShot(entry.Item2);
+            }            
+        }
     }
 
 
@@ -84,8 +77,9 @@ public class AudioManager : MonoBehaviour
     // plausible solution involves a tandem list but that just seems redundant...
     public enum SFXList
     {
-        pistol, 
+        pistol,
         staff,
-        wastefrog_damage_taken
+        wastefrog_damage_taken,
+        slime_damage_taken
     }
 }

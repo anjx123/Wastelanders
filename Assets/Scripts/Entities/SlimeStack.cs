@@ -16,7 +16,7 @@ public class SlimeStack : EnemyClass
 
     public override void TakeDamage(EntityClass source, int damage)
     {
-        AudioManager.Instance.PlaySFX("slime_damage_taken");
+        MusicManager.Instance.PlaySFX(MusicManager.SFXList.slime_damage_taken);
         base.TakeDamage(source, damage);
     }
 
