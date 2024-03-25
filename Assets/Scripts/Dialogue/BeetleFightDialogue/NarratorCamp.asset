@@ -14,11 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogue:
   - bodyText: (Jackie quickly retraces her steps as the sky mourns the setting sun,
-      noting down her path. She returns to the camp in chaos. Candidates and examiners
-      alike are engaged in combat against a swarm of beetles.)
+      noting down her path.)
     speakerName: 
     displayingImage: {fileID: 0}
-  - bodyText: (She spots Ives wrangling a particularly large beetle and runs over
-      to help. Together, they defeat the beetle.)
-    speakerName: 
-    displayingImage: {fileID: 0}
+    broadcastAnEvent: 0

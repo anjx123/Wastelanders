@@ -13,18 +13,11 @@ MonoBehaviour:
   m_Name: JackieBeetleCamp
   m_EditorClassIdentifier: 
   dialogue:
-  - bodyText: "Huff, huff. You\u2019re not getting away that easily. I could keep
-      chasing you for days. Wha- huh? "
-    speakerName: Jackie
-    displayingImage: {fileID: 0}
   - bodyText: ...
     speakerName: Jackie
     displayingImage: {fileID: 0}
-  - bodyText: "Seems like the beetles are stockpiling every crystal they can gather
-      here\u2026 But for what? "
+    broadcastAnEvent: 0
+  - bodyText: Nope, I'm out.
     speakerName: Jackie
     displayingImage: {fileID: 0}
-  - bodyText: "Tsk, it's probably better if I go back and let the examiners know.
-      Whatever they are doing with those crystals, it can\u2019t be good."
-    speakerName: Jackie
-    displayingImage: {fileID: 0}
+    broadcastAnEvent: 0

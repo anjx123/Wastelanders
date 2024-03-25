@@ -14,6 +14,10 @@ public class BeetleFight : DialogueClasses
     [SerializeField] private Jackie jackie;
     [SerializeField] private Transform jackieDefaultTransform;
     [SerializeField] private Transform jackieChasingTransform;
+    [SerializeField] private Transform rightEntrance;
+    [SerializeField] private Transform beetleRunsFromJackieTransform;
+    [SerializeField] private Transform jackieFirstShot;
+    [SerializeField] private Transform jackieSecondShot;
     [SerializeField] private Transform jackieTalkingTransform;
     [SerializeField] private Ives ives;
     [SerializeField] private Transform ivesDefaultTransform;
@@ -24,7 +28,10 @@ public class BeetleFight : DialogueClasses
     [SerializeField] private Beetle ambushBeetle;
     [SerializeField] private Transform ambushBeetleTransform;
     [SerializeField] private Beetle wrangledBeetle;
+    [SerializeField] private Beetle beetleDraggingCrystal;
     [SerializeField] private Transform wrangledBeetleTransform;
+    
+
     [SerializeField] private List<Beetle> campBeetles;
     [SerializeField] private List<Crystals> crystals;
 
@@ -33,15 +40,24 @@ public class BeetleFight : DialogueClasses
     [SerializeField] private ActionClass beetleAction;
     [SerializeField] private ActionClass jackieAction;
 
+    [SerializeField] private GameObject beetleNest;
     [SerializeField] private GameObject background;
     [SerializeField] private CinemachineVirtualCamera sceneCamera;
     [SerializeField] private Sprite frogDeathSprite;
     [SerializeField] private Sprite jackieCrystalSprite;
 
+    [SerializeField] private List<DialogueText> openingJackieQuipt;
     [SerializeField] private DialogueWrapper openingDiscussion;
     [SerializeField] private DialogueWrapper jackieSurprised;
     [SerializeField] private DialogueWrapper jackieChase;
+    [SerializeField] private List<DialogueText> jackieWonAgainstBeetle;
+    [SerializeField] private List<DialogueText> jackieLostAgainstBeetle;
+    [SerializeField] private List<DialogueText> p2jackieWonAgainstBeetle;
+    [SerializeField] private List<DialogueText> p2jackieLostAgainstBeetle;
+    [SerializeField] private List<DialogueText> jackieDeclarationOfResolve;
     [SerializeField] private DialogueWrapper jackieBeetleCamp;
+    [SerializeField] private List<DialogueText> jackieConcernedAboutBeetles;
+
     [SerializeField] private DialogueWrapper narratorCamp;
     [SerializeField] private DialogueWrapper ivesConversation;
     [SerializeField] private DialogueWrapper twoPlayerCombatTutorial;
@@ -68,7 +84,8 @@ public class BeetleFight : DialogueClasses
     {
         CombatManager.Instance.GameState = GameState.OUT_OF_COMBAT;
         CombatManager.Instance.SetDarkScreen();
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.2f);
+        beetleNest.SetActive(false);
         ives.OutOfCombat();
         jackie.OutOfCombat(); //Workaround for now, ill have to remove this once i manually start instantiating players
         frog.OutOfCombat();
@@ -112,19 +129,25 @@ public class BeetleFight : DialogueClasses
                 jackie.AttackAnimation("IsStaffing");
                 yield return StartCoroutine(frog.StaggerEntities(jackie, frog, 0.3f));
                 DieInScene(frog);
-                //yield return StartCoroutine(jackie.MoveToPosition(frog.transform.position, 0f, 1f));
+                yield return StartCoroutine(DialogueManager.Instance.StartDialogue(openingJackieQuipt));
             }
-
 
             // BEETLE AMBUSH!!
             {
                 void ShowCrystal()
                 {
+                    jackie.FaceRight();
                     jackie.animator.enabled = false;
                     jackie.GetComponent<SpriteRenderer>().sprite = jackieCrystalSprite;
                     DialogueBox.DialogueBoxEvent -= ShowCrystal;
                 }
                 DialogueBox.DialogueBoxEvent += ShowCrystal;
+                yield return new WaitForSeconds(BRIEF_PAUSE);
+                yield return StartCoroutine(jackie.MoveToPosition(frog.transform.position, 1.2f, 1f));
+                sceneCamera.transform.position = CombatManager.Instance.dynamicCamera.transform.position;
+                yield return new WaitForSeconds(BRIEF_PAUSE);
+                sceneCamera.Priority = 2;
+                yield return new WaitForSeconds(BRIEF_PAUSE);
                 yield return StartCoroutine(DialogueManager.Instance.StartDialogue(openingDiscussion.Dialogue));
 
                 beetleAction.Target = jackie;
@@ -138,8 +161,11 @@ public class BeetleFight : DialogueClasses
                 setMethod.Invoke(jackieAction, new object[] { /* jackieAction.Speed = */ 1 });
 
                 yield return StartCoroutine(ambushBeetle.MoveToPosition(ambushBeetleTransform.position, 0, 0.4f));
+                jackie.FaceLeft();
                 yield return StartCoroutine(DialogueManager.Instance.StartDialogue(jackieSurprised.Dialogue));
                 jackie.animator.enabled = true;
+
+                sceneCamera.Priority = 0;
                 yield return StartCoroutine(CardComparator.Instance.ClashCards(jackieAction, beetleAction));
             }
 
@@ -147,37 +173,101 @@ public class BeetleFight : DialogueClasses
             {
                 sceneCamera.transform.position = CombatManager.Instance.dynamicCamera.transform.position;
                 yield return StartCoroutine(ambushBeetle.MoveToPosition(jackieChasingTransform.position, 0, 1.2f)); // beetle runs away
+
+                jackie.DeEmphasize();
                 sceneCamera.Priority = 2;
                 CombatManager.Instance.ActivateBaseCamera();
                 yield return StartCoroutine(DialogueManager.Instance.StartDialogue(jackieChase.Dialogue));
                 Coroutine fade = StartCoroutine(CombatManager.Instance.FadeInDarkScreen(1f));
                 yield return StartCoroutine(jackie.MoveToPosition(jackieChasingTransform.position, 1f, 1f)); //Jackie Runs into the scene
                 yield return fade;
+
             }
 
-            yield return new WaitForSeconds(MEDIUM_PAUSE);
+            //Jackie Vows to hunt down that beetle 
+            {
+                RemoveEnemyFromScene(frog);
+                sceneCamera.m_Lens.OrthographicSize = CombatManager.Instance.baseCamera.m_Lens.OrthographicSize;
+                sceneCamera.transform.position = CombatManager.Instance.baseCamera.transform.position;
 
-            yield return StartCoroutine(DialogueManager.Instance.StartDialogue(jackieBeetleCamp.Dialogue));
-            yield return StartCoroutine(CombatManager.Instance.FadeInLightScreen(1.2f));
-            yield return new WaitForSeconds(BRIEF_PAUSE);
+                CombatManager.Instance.ActivateBaseCamera();
+                yield return new WaitForSeconds(MEDIUM_PAUSE);
+                if (jackieAction.getRolledDamage() >= beetleAction.getRolledDamage())
+                {
+                    yield return StartCoroutine(DialogueManager.Instance.StartDialogue(jackieWonAgainstBeetle));
 
-            StartCoroutine(jackie.MoveToPosition(jackieTalkingTransform.position, 0, 1.6f));   
-            ShiftScene(-17, 2);
-            yield return StartCoroutine(CombatManager.Instance.FadeInDarkScreen(1.5f));
+                }
+                else
+                {
+                    yield return StartCoroutine(DialogueManager.Instance.StartDialogue(jackieLostAgainstBeetle));
+                }
+                yield return StartCoroutine(DialogueManager.Instance.StartDialogue(jackieDeclarationOfResolve));
+                jackie.transform.position = rightEntrance.position;
+                ambushBeetle.transform.position = rightEntrance.position;
 
-            yield return StartCoroutine(DialogueManager.Instance.StartDialogue(narratorCamp.Dialogue));
+            }
 
-            ives.transform.position = ivesDefaultTransform.position;
-            wrangledBeetle.transform.position = wrangledBeetleTransform.position;
-            yield return StartCoroutine(CombatManager.Instance.FadeInLightScreen(2f));
+            //Jackie chases after beetle who might have stolen her crystal
+            {
+                beetleNest.SetActive(true);
+                yield return StartCoroutine(CombatManager.Instance.FadeInLightScreen(1.2f));
+                Coroutine beetleRunsIn = StartCoroutine(ambushBeetle.MoveToPosition(beetleRunsFromJackieTransform.position, 0f, 2.5f));
+                yield return new WaitForSeconds(0.7f);
+                yield return StartCoroutine(jackie.MoveToPosition(jackieSecondShot.position, 0f, 1f));
+                yield return new WaitForSeconds(BRIEF_PAUSE);
+                jackie.AttackAnimation("IsShooting");
+                StopCoroutine(beetleRunsIn);
+                yield return StartCoroutine(ambushBeetle.StaggerEntities(jackie, ambushBeetle, 0.3f));
+                DieInScene(ambushBeetle);
+                yield return new WaitForSeconds(BRIEF_PAUSE);
+                if (jackieAction.getRolledDamage() >= beetleAction.getRolledDamage())
+                {
+                    jackieConcernedAboutBeetles.RemoveAt(jackieConcernedAboutBeetles.Count - 1);
+                    yield return StartCoroutine(DialogueManager.Instance.StartDialogue(p2jackieWonAgainstBeetle));
+                }
+                else
+                {
+                    yield return StartCoroutine(DialogueManager.Instance.StartDialogue(p2jackieLostAgainstBeetle));
+                }
+                yield return StartCoroutine(jackie.MoveToPosition(ambushBeetle.transform.position, 1.2f, 1f));
+                yield return new WaitForSeconds(BRIEF_PAUSE);
 
-            yield return StartCoroutine(DialogueManager.Instance.StartDialogue(ivesConversation.Dialogue));
-            yield return StartCoroutine(CombatManager.Instance.FadeInDarkScreen(1.5f));
-            wrangledBeetle.transform.position = new Vector3(200, 200, 1);
-            jackie.transform.position = jackieDefaultTransform.position;
-            jackie.FaceRight();
-            yield return StartCoroutine(CombatManager.Instance.FadeInLightScreen(2f));
+                StartCoroutine(beetleDraggingCrystal.MoveToPosition(beetleDraggingCrystal.transform.position + new Vector3(-5, 0, 0), 0, 8f, rightEntrance.position));
+                yield return StartCoroutine(ShiftObjectCoroutine(sceneCamera.gameObject, 8f, 2f));
+                yield return StartCoroutine(DialogueManager.Instance.StartDialogue(jackieBeetleCamp.Dialogue));
+                yield return StartCoroutine(jackie.MoveToPosition(rightEntrance.transform.position, 1.2f, 1f));
+                yield return StartCoroutine(CombatManager.Instance.FadeInDarkScreen(0.6f));
+            }
 
+            //Jackie sees the nest of beetles
+            {
+                beetleNest.SetActive(false);
+                RemoveEnemyFromScene(ambushBeetle);
+                sceneCamera.Priority = 0;
+                CombatManager.Instance.ActivateDynamicCamera();
+                ives.transform.position = ivesDefaultTransform.position;
+                wrangledBeetle.transform.position = wrangledBeetleTransform.position;
+                yield return StartCoroutine(DialogueManager.Instance.StartDialogue(jackieConcernedAboutBeetles));
+                yield return StartCoroutine(DialogueManager.Instance.StartDialogue(narratorCamp.Dialogue));
+                yield return StartCoroutine(CombatManager.Instance.FadeInLightScreen(0.6f));
+                yield return StartCoroutine(jackie.MoveToPosition(ivesDefaultTransform.transform.position, 1.2f, 2f));
+            }
+
+            /*{ 
+                StartCoroutine(jackie.MoveToPosition(jackieTalkingTransform.position, 0, 1.6f));
+                ShiftScene(-17, 2);
+                yield return StartCoroutine(CombatManager.Instance.FadeInDarkScreen(1.5f));
+
+
+                yield return StartCoroutine(CombatManager.Instance.FadeInLightScreen(2f));
+
+                yield return StartCoroutine(DialogueManager.Instance.StartDialogue(ivesConversation.Dialogue));
+                yield return StartCoroutine(CombatManager.Instance.FadeInDarkScreen(1.5f));
+                wrangledBeetle.transform.position = new Vector3(200, 200, 1);
+                jackie.transform.position = jackieDefaultTransform.position;
+                jackie.FaceRight();
+                yield return StartCoroutine(CombatManager.Instance.FadeInLightScreen(2f));
+            }*/
         }
         else // setup scene
         {
@@ -257,36 +347,6 @@ public class BeetleFight : DialogueClasses
         }
     }
 
-
-    //------helpers------
-
-    // "clashes" both entities, without rolling dice. e1 gets staggered modestly.
-    // this is stolen from card comparator (code duplication!) if there is a better way of doing this pls lmk
-    private IEnumerator NoCombatClash(EntityClass e1, EntityClass e2)
-    {
-        EntityClass origin = e1;
-        EntityClass target = e2;
-        float originRatio = 0.1f;
-        float targetRatio = 1f - originRatio;
-        Vector3 centeredDistance = (origin.myTransform.position * originRatio + targetRatio * target.myTransform.position);
-        float bufferedRadius = 0.25f;
-        float duration = 0.6f;
-
-        float xBuffer = CardComparator.X_BUFFER;
-
-        StartCoroutine(origin?.MoveToPosition(HorizontalProjector(centeredDistance, origin.myTransform.position, xBuffer), bufferedRadius, duration, centeredDistance));
-        yield return StartCoroutine(target?.MoveToPosition(HorizontalProjector(centeredDistance, target.myTransform.position, xBuffer), bufferedRadius, duration, centeredDistance));
-        e1.TakeDamage(e2, 5);
-    }
-
-    private Vector3 HorizontalProjector(Vector3 centeredDistance, Vector3 currentPosition, float xBuffer)
-    {
-        Vector3 vectorToCenter = (centeredDistance - currentPosition);
-
-        return vectorToCenter.x > 0 ?
-            currentPosition + vectorToCenter - new Vector3(xBuffer, 0f, 0f) :
-            currentPosition + vectorToCenter + new Vector3(xBuffer, 0f, 0f);
-    }
 
     // shifts the whole scene minus jackie to give the illusion of moving. i realize as i write this comment
     // that it would have been easier to just move jackie and the camera. but i am stupid. and i don't want to
@@ -369,16 +429,20 @@ public class BeetleFight : DialogueClasses
         yield return StartCoroutine(wasteFrog.MoveToPosition(wasteFrog.transform.position + new Vector3(runDistance, 0, 0), 0, 1.2f));
         wasteFrog.gameObject.SetActive(false);
     }
-    void DieInScene(WasteFrog wasteFrog)
+    void DieInScene(EnemyClass enemyEntity)
     {
-        BattleQueue.BattleQueueInstance.RemoveAllInstancesOfEntity(wasteFrog);
-        CombatManager.Instance.RemoveEnemy(wasteFrog);
-        wasteFrog.animator.enabled = false;
-        wasteFrog.GetComponent<SpriteRenderer>().sprite = frogDeathSprite;
-        wasteFrog.OutOfCombat();
-        wasteFrog.UnTargetable();
-        wasteFrog.combatInfo.gameObject.SetActive(false);
-        wasteFrog.transform.rotation = Quaternion.Euler(0, 0, 75);
+        BattleQueue.BattleQueueInstance.RemoveAllInstancesOfEntity(enemyEntity);
+        CombatManager.Instance.RemoveEnemy(enemyEntity);
+        enemyEntity.animator.enabled = false;
+        if (enemyEntity is WasteFrog)
+        {
+            enemyEntity.GetComponent<SpriteRenderer>().sprite = frogDeathSprite;
+        }
+        enemyEntity.GetComponent<SpriteRenderer>().sortingOrder -= 1;
+        enemyEntity.OutOfCombat();
+        enemyEntity.UnTargetable();
+        enemyEntity.combatInfo.gameObject.SetActive(false);
+        enemyEntity.transform.rotation = Quaternion.Euler(0, 0, 75);
     }
 
 
