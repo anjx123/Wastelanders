@@ -1902,7 +1902,6 @@ MonoBehaviour:
     speakerName: Jackie
     displayingImage: {fileID: 0}
     broadcastAnEvent: 0
-  jackieJustMissedShot: []
   jackiePostMissedShot:
   - bodyText: "Tsk, stay calm, Jackie. It\u2019s just a frog. I can still take it
       down by force."
@@ -3600,7 +3599,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6236433946665406741, guid: ffdf6c0e873fb734ca3cd40ff3507571, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -6
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6236433946665406741, guid: ffdf6c0e873fb734ca3cd40ff3507571, type: 3}
       propertyPath: m_AnchoredPosition.y
