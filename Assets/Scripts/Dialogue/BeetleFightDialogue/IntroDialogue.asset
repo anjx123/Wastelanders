@@ -17,12 +17,16 @@ MonoBehaviour:
     speakerName: Jackie
     displayingImage: {fileID: 0}
     broadcastAnEvent: 0
-  - bodyText: 'I wonder just where you came from... '
+  - bodyText: 'I just wonder where the heck this came from... '
     speakerName: Jackie
     displayingImage: {fileID: 0}
     broadcastAnEvent: 1
-  - bodyText: I have to pass this exam for mama, maybe I should head deeper into
-      the marsh. Then again, the sun is setting soon...
+  - bodyText: Come on Jackie, you got this. You have to pass the exam for Mama.
+    speakerName: Jackie
+    displayingImage: {fileID: 0}
+    broadcastAnEvent: 0
+  - bodyText: 'Maybe I should head deeper into the marsh. Although the sun is setting
+      soon... '
     speakerName: Jackie
     displayingImage: {fileID: 0}
     broadcastAnEvent: 0

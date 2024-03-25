@@ -399,6 +399,7 @@ public class CombatManager : MonoBehaviour
                 default:
                     break;
             }
+            Debug.Log("Current gamestate is" + value);
             OnGameStateChanged?.Invoke(value);
         }
     }

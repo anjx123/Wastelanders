@@ -227,7 +227,8 @@ public class HighlightManager : MonoBehaviour // later all entity highlighter
             float distanceToLeft = (float)(handContainer.rect.width / 2 - (i * CARD_WIDTH));
 
             float y = handContainer.transform.position.y;
-            Vector3 v = new Vector3(-distanceToLeft, y, -i);
+            float x = handContainer.transform.position.x;
+            Vector3 v = new Vector3(x-distanceToLeft, y, -i);
             handItem.transform.position = v;
             handItem.transform.rotation = Quaternion.Euler(0, 0, -5);
             insertingAction.SetCanPlay(BattleQueue.BattleQueueInstance.CanInsertCard(insertingAction));
