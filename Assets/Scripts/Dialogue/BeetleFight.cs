@@ -8,6 +8,8 @@ using static Unity.VisualScripting.Member;
 using static UnityEngine.UI.Image;
 using System.Reflection;
 using Cinemachine;
+using UnityEditor.Build;
+using static Unity.Burst.Intrinsics.X86;
 //@author: Andrew
 public class BeetleFight : DialogueClasses
 {
@@ -48,6 +50,9 @@ public class BeetleFight : DialogueClasses
     [SerializeField] private GameObject theCampWithBeetles;
     [SerializeField] private GameObject beetleNest;
     [SerializeField] private GameObject background;
+    [SerializeField] private GameObject wave1Fight;
+    [SerializeField] private GameObject wave2Fight;
+    [SerializeField] private GameObject wave3Fight;
     [SerializeField] private CinemachineVirtualCamera sceneCamera;
     [SerializeField] private Sprite frogDeathSprite;
     [SerializeField] private Sprite jackieCrystalSprite;
@@ -75,6 +80,10 @@ public class BeetleFight : DialogueClasses
 
     private List<EnemyClass> campBeetlesAndCrystals = new();
     private List<EnemyClass> nitesCampBeetles = new();
+    List<EnemyClass> wave1 = new();
+    List<EnemyClass> wave2 = new();
+    List<EnemyClass> wave3 = new();
+
 
 
     private const float BRIEF_PAUSE = 0.2f; // For use after an animation to make it visually seem smoother
@@ -90,11 +99,8 @@ public class BeetleFight : DialogueClasses
         }
     }
 
-    private IEnumerator ExecuteGameStart()
+    private void SetUpEnemyLists()
     {
-        CombatManager.Instance.GameState = GameState.OUT_OF_COMBAT;
-        CombatManager.Instance.SetDarkScreen();
-        yield return new WaitForSeconds(0.2f);
         foreach (Transform entity in beetleNest.transform)
         {
             campBeetlesAndCrystals.Add(entity.GetComponent<EnemyClass>());
@@ -106,6 +112,28 @@ public class BeetleFight : DialogueClasses
             entity.GetComponent<EnemyClass>().OutOfCombat();
             entity.GetComponent<EnemyClass>().animator.enabled = false;
         }
+        foreach (Transform enemy in wave1Fight.transform)
+        {
+            EnemyClass enemyBeetle = enemy.GetComponent<EnemyClass>();
+            wave1.Add(enemyBeetle);
+        }
+        foreach (Transform enemy in wave2Fight.transform)
+        {
+            EnemyClass enemyBeetle = enemy.GetComponent<EnemyClass>();
+            wave2.Add(enemyBeetle);
+        }
+        foreach (Transform enemy in wave3Fight.transform)
+        {
+            EnemyClass enemyBeetle = enemy.GetComponent<EnemyClass>();
+            wave3.Add(enemyBeetle);
+        }
+        CombatManager.Instance.SetEnemiesPassive(wave1);
+        CombatManager.Instance.SetEnemiesPassive(wave2);
+        CombatManager.Instance.SetEnemiesPassive(wave3);
+    }
+
+    private void SetUpCombatStatus()
+    {
         draggedCrystal.OutOfCombat();
         beetleNest.SetActive(false);
         theCampWithBeetles.SetActive(false);
@@ -119,6 +147,15 @@ public class BeetleFight : DialogueClasses
         wrangledBeetle.OutOfCombat();
         jackie.SetReturnPosition(jackieCombatTransform.position);
         ives.SetReturnPosition(ivesCombatTransform.position);
+    }
+
+    private IEnumerator ExecuteGameStart()
+    {
+        CombatManager.Instance.GameState = GameState.OUT_OF_COMBAT;
+        CombatManager.Instance.SetDarkScreen();
+        yield return new WaitForSeconds(0.2f);
+        SetUpEnemyLists();
+        SetUpCombatStatus();
         if (!jumpToCombat)
         {
             sceneCamera.Priority = 2;
@@ -315,7 +352,7 @@ public class BeetleFight : DialogueClasses
             DieInScene(entity);
             Destroy(entity);
         }
-
+        CombatManager.Instance.SetEnemiesHostile(wave1);
         jackie.InCombat(); 
         ives.InCombat();
         jackie.Targetable();

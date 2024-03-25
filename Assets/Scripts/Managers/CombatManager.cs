@@ -300,6 +300,26 @@ public class CombatManager : MonoBehaviour
         }
     }
 
+    public void SetEnemiesPassive(List<EnemyClass> passiveEnemies)
+    {
+        enemies.RemoveAll(enemy => passiveEnemies.Contains(enemy));
+        foreach (EnemyClass enemy in passiveEnemies)
+        {
+            enemy.OutOfCombat();
+            enemy.UnTargetable();
+        }
+    }
+
+    public void SetEnemiesHostile(List<EnemyClass> hostileEnemies)
+    {
+        enemies.AddRange(hostileEnemies);
+        foreach (EnemyClass enemy in hostileEnemies)
+        {
+            enemy.InCombat();
+            enemy.Targetable();
+        }
+    }
+
     //set (@param darkenScene) true to fade **combat background** in, false to fade out
     private IEnumerator FadeCombatBackground(bool darkenScene)
     {
@@ -399,7 +419,6 @@ public class CombatManager : MonoBehaviour
                 default:
                     break;
             }
-            Debug.Log("Current gamestate is" + value);
             OnGameStateChanged?.Invoke(value);
         }
     }
