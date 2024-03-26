@@ -16,7 +16,7 @@ public class IronSights : PistolCards
     {
         lowerBound = 1;
         upperBound = 4;
-	    Speed = 2;
+	    Speed = 4;
 
         CardType = CardType.RangedAttack;
         myName = "Iron Sights";

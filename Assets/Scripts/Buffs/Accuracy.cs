@@ -21,8 +21,9 @@ public class Accuracy : StatusEffect
         return buffSprite;
     }
 
+    //Getting hit with accuracy halves it 
     public override void OnBuffedEntityHit()
     {
-        LoseStacks(1);
+        buffStacks = Stacks / 2;
     }
 }

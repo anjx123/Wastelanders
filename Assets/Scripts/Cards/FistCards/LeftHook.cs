@@ -21,7 +21,7 @@ public class LeftHook : FistCards
     {
         lowerBound = 2;
         upperBound = 3;
-        Speed = 2;
+        Speed = 5;
 
         myName = "Left Hook";
         description = "If this card lands, use Right Hook";

@@ -13,27 +13,20 @@ MonoBehaviour:
   m_Name: IntroDialogue
   m_EditorClassIdentifier: 
   dialogue:
-  - bodyText: "Not another one! I hope there\u2019s no examiners around. This cannot
-      be good for my exam record."
+  - bodyText: Tsk, nothing much again. No sign of another crystal.
     speakerName: Jackie
     displayingImage: {fileID: 0}
-  - bodyText: (Jackie takes out all the Products she has collected so far.)
-    speakerName: 
-    displayingImage: {fileID: 0}
-  - bodyText: "Hmm, I\u2019ve only managed to extract minor Waste Products so far.
-      That crystal I found earlier is still the best thing I have. Where can I encounter
-      a stronger monster?"
+    broadcastAnEvent: 0
+  - bodyText: 'I just wonder where the heck this came from... '
     speakerName: Jackie
     displayingImage: {fileID: 0}
-  - bodyText: "Although\u2026 It is getting pretty dark. Maybe I should just return
-      to camp and store my Products. I wish I extracted a little bit more though."
-    speakerName: 
-    displayingImage: {fileID: 0}
-  - bodyText: (Jackie grabs the Waste Crystal and inspects it as she thinks.)
+    broadcastAnEvent: 1
+  - bodyText: Come on Jackie, you got this. You have to pass the exam for Mama.
     speakerName: Jackie
     displayingImage: {fileID: 0}
-  - bodyText: " \u2026I\u2019ll keep looking a little longer, I\u2019ll have to be
-      a little bolder this time. I can\u2019t fail this exam again. Joining the NITES
-      means I can finally look for Mama."
+    broadcastAnEvent: 0
+  - bodyText: 'Maybe I should head deeper into the marsh. Although the sun is setting
+      soon... '
     speakerName: Jackie
     displayingImage: {fileID: 0}
+    broadcastAnEvent: 0

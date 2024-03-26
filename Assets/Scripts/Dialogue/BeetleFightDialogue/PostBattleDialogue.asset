@@ -13,30 +13,60 @@ MonoBehaviour:
   m_Name: PostBattleDialogue
   m_EditorClassIdentifier: 
   dialogue:
-  - bodyText: (After the battle, Candidates catch their breath. Some examiners inspect
-      the dropped Waste Crystals, while others discuss amongst themselves.)
+  - bodyText: (After the battle, various examinees who have returned to camp regroup
+      and catch their breath.)
     speakerName: 
     displayingImage: {fileID: 0}
+    broadcastAnEvent: 0
+  - bodyText: (Some examiners inspect the dropped Waste Crystals, while others discuss
+      amongst themselves.)
+    speakerName: Jackie
+    displayingImage: {fileID: 0}
+    broadcastAnEvent: 0
+  - bodyText: These beetles were among some of the most aggressive monsters I have
+      seen in the wasteland.
+    speakerName: Ives
+    displayingImage: {fileID: 0}
+    broadcastAnEvent: 0
+  - bodyText: Hoarding waste products like its life depends on it.
+    speakerName: Ives
+    displayingImage: {fileID: 0}
+    broadcastAnEvent: 0
+  - bodyText: " And they weren\u2019t dumb either, they fought with a surprising
+      amount of coordination. "
+    speakerName: Ives
+    displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
+    broadcastAnEvent: 0
+  - bodyText: Just where could they have come from...
+    speakerName: Ives
+    displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
+    broadcastAnEvent: 0
   - bodyText: Um! Earlier, I encountered another one of these beetles. I was chasing
       it when it led me back to its nest.
     speakerName: Jackie
     displayingImage: {fileID: 0}
-  - bodyText: Do you remember how to get back there? To the nest?
+    broadcastAnEvent: 1
+  - bodyText: Oh? Do you remember how to get back there? To the nest?
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
-  - bodyText: Yes, I remember the path I took.
+    broadcastAnEvent: 0
+  - bodyText: Yeah, I made a mental note of it.
     speakerName: Jackie
     displayingImage: {fileID: 0}
+    broadcastAnEvent: 0
   - bodyText: "Excellent. Since the beetles seem to be attracted to Waste Products,
       the city\u2019s collection of Products could spell trouble. All the examiners
       agree that it would be best to deal with the beetles now before they become
       an even larger problem."
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
-  - bodyText: "Everyone, rest and recuperate for now. We\u2019ll come up with a plan
-      of attack to neutralize the beetle swarm."
+    broadcastAnEvent: 0
+  - bodyText: 'Everyone, rest and recuperate for now. Let''s come up with a plan
+      of attack to neutralize the beetle swarm. '
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
-  - bodyText: Seems like this expedition will be more than just an exam.
+    broadcastAnEvent: 0
+  - bodyText: Seems like this expedition will be more than just an exam...
     speakerName: Jackie
     displayingImage: {fileID: 0}
+    broadcastAnEvent: 0

@@ -22,7 +22,7 @@ public class Fling : BeetleAttacks
         lowerBound = 1;
         upperBound = 4;
         
-        Speed = 4;
+        Speed = 3;
 
         description = "If this card hits a player, gain +1 resonate.";
 

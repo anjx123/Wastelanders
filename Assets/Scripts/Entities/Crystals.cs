@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics.Tracing;
 using UnityEngine;
 
-public class Crystals : EnemyClass
+public class Crystals : EnemyClass, NeutralEntityInterface
 {
     // Start is called before the first frame update
     public override void Start()

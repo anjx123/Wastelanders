@@ -7,7 +7,6 @@ public class EnemyIves : EnemyClass
     public override void Start()
     {
         base.Start();
-        CombatManager.Instance.RemoveEnemy(this);
         MaxHealth = 20;
         Health = MaxHealth;
         myName = "Le Ives";
@@ -38,13 +37,4 @@ public class EnemyIves : EnemyClass
         yield break;
     }
 
-    public void UnTargetable()
-    {
-        boxCollider.enabled = false;
-    }
-
-    public void Targetable()
-    {
-        boxCollider.enabled = true;
-    }
 }

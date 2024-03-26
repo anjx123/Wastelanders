@@ -117,10 +117,9 @@ public class TutorialIntroduction : DialogueClasses
         }
 
         jackie.InCombat(); //Workaround for now, ill have to remove this once i manually start instantiating 
-        ives.InCombat();
         ives.SetReturnPosition(ivesPassiveBattlePosition.position);
         StartCoroutine(ives.ResetPosition()); //Prevent Players from attacking Ives LOL
-        ives.UnTargetable();
+        CombatManager.Instance.SetEnemiesPassive(new List<EnemyClass> { ives });
 
         DialogueManager.Instance.MoveBoxToTop();
         CombatManager.Instance.GameState = GameState.SELECTION;
@@ -168,8 +167,8 @@ public class TutorialIntroduction : DialogueClasses
         StartCoroutine(CombatManager.Instance.FadeInDarkScreen(3f));
         yield return StartCoroutine(jackie.MoveToPosition(jackieEndPosition.position, 0, 4f));
 
+        GameStateManager.shouldPlayDeckSelectionTutorial = true;
         SceneManager.LoadScene("LevelSelect");
-
         yield break;
     }
 

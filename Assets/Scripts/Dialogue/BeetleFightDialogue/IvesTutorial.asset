@@ -13,22 +13,37 @@ MonoBehaviour:
   m_Name: IvesTutorial
   m_EditorClassIdentifier: 
   dialogue:
-  - bodyText: You can play cards as normal, but the only thing that has changed is
-      how forming clashes works.
+  - bodyText: Combat remains mostly the same, but now the enemy has more targets
+      to choose from.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
-  - bodyText: "If the opponent is not targeting you, you can attempt to retarget
-      and redirect the attack to yourself by forming a clash with them. However\u2026"
+    broadcastAnEvent: 0
+  - bodyText: You'll see that you can retarget enemy attacks by clashing with them
+      if your card is faster than theirs.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
-  - bodyText: Your card must be faster than the card you are trying to redirect,
-      otherwise the enemy will do as they please and a clash will not form.
+    broadcastAnEvent: 0
+  - bodyText: ' If it fails to form a clash, that means your card was too slow to
+      redirect the attack. '
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
-  - bodyText: If you see that a clash does not form, it may be because your card
-      is not fast enough to redirect the attack.
+    broadcastAnEvent: 0
+  - bodyText: 'Unfortunately, we will not be able to play actions with overlapping
+      speeds.   '
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
-  - bodyText: "Alright, now let\u2019s focus on the battle!"
+    broadcastAnEvent: 0
+  - bodyText: Crowded fights like these mean we can easily get in each others' way
+      if we do!
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
+    broadcastAnEvent: 0
+  - bodyText: But as you improve in duo combat, you'll find that you can much more
+      easily cover each other's weaknesses!
+    speakerName: Ives
+    displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
+    broadcastAnEvent: 0
+  - bodyText: "Alright, now let\u2019s crush these bugs!"
+    speakerName: Ives
+    displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
+    broadcastAnEvent: 0

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using static UnityEngine.EventSystems.EventTrigger;
+using System.Security.Cryptography;
 
 public class CombatManager : MonoBehaviour
 {
@@ -25,6 +26,13 @@ public class CombatManager : MonoBehaviour
     [SerializeField]
     private SpriteRenderer fadeScreen;
     bool fadeActive = false;
+
+    [SerializeField] private PlayerDatabase playerDatabase;
+
+    public List<ActionClass> GetDeck(PlayerDatabase.PlayerName playerName)
+    {
+        return playerDatabase.GetDeckByPlayerName(playerName);  
+    }
 
 #nullable enable
     public delegate void GameStateChangedHandler(GameState newState); // Subscribe to this delegate if you want something to be run when gamestate changes
@@ -135,7 +143,14 @@ public class CombatManager : MonoBehaviour
 
         if (players.Count > 0)
         {
-            HighlightManager.Instance.SetActivePlayer(players[^1]);
+            PlayerClass? jackie = players.FirstOrDefault(player => player is Jackie);
+            if (jackie != null)
+            {
+                HighlightManager.Instance.SetActivePlayer(jackie);
+            } else
+            {
+                HighlightManager.Instance.SetActivePlayer(players[0]);
+            }
         }
         BattleQueue.BattleQueueInstance.TheBeginning(); //Nasty but necessary for rendering the current implementation of BQ
     }
@@ -170,14 +185,13 @@ public class CombatManager : MonoBehaviour
     //Purpose: Call this when a player is removed or killed
     public void RemovePlayer(PlayerClass player)
     {
-        if (players.Count > 0)
+        players.Remove(player);
+        if (dynamicCamera.Follow?.GetComponent<PlayerClass>() == player)
         {
-            players.Remove(player);
-            if (dynamicCamera.Follow?.GetComponent<PlayerClass>() == player)
-            {
-                dynamicCamera.Follow = null;
-            }
-        } else
+            dynamicCamera.Follow = null;
+        }
+
+        if (players.Count == 0)
         {
             EnemiesWinEvent?.Invoke();
         }
@@ -191,14 +205,14 @@ public class CombatManager : MonoBehaviour
     //Purpose: Call this when an enemy is removed or killed
     public void RemoveEnemy(EnemyClass enemy)
     {
-        if (enemies.Count > 0)
+        enemies.Remove(enemy);
+        if (dynamicCamera.Follow?.GetComponent<EnemyClass>() == enemy)
         {
-            enemies.Remove(enemy);
-            if (dynamicCamera.Follow?.GetComponent<EnemyClass>() == enemy)
-            {
-                dynamicCamera.Follow = null;
-            }
-        } else
+            dynamicCamera.Follow = null;
+        }
+
+        bool allAreNeutral = enemies.OfType<NeutralEntityInterface>().Count() == enemies.Count;
+        if (enemies.Count == 0 || allAreNeutral)
         {
             PlayersWinEvent?.Invoke();
         }
@@ -210,6 +224,7 @@ public class CombatManager : MonoBehaviour
         Debug.LogWarning("All Players are dead, You Lose...");
         baseCamera.Priority = 1;
         dynamicCamera.Priority = 0;
+        PerformOutOfCombat();
     }
 
     private void PerformWin()
@@ -229,6 +244,18 @@ public class CombatManager : MonoBehaviour
         baseCamera.Priority = 0;
         dynamicCamera.Priority = 1;
         StartCoroutine(FadeCombatBackground(true));
+    }
+
+    public void ActivateDynamicCamera()
+    {
+        baseCamera.Priority = 0;
+        dynamicCamera.Priority = 1;
+    }
+
+    public void ActivateBaseCamera()
+    {
+        baseCamera.Priority = 1;
+        dynamicCamera.Priority = 0;
     }
 
     private void PerformGameStart()
@@ -259,11 +286,48 @@ public class CombatManager : MonoBehaviour
         foreach (PlayerClass player in players)
         {
             player.OutOfCombat();
+            player.UnTargetable();
         }
 
         foreach (EnemyClass enemy in enemies)
         {
             enemy.OutOfCombat();
+            enemy.UnTargetable();
+        }
+    }
+
+    private void PerformInCombat()
+    {
+        foreach (PlayerClass player in players)
+        {
+            player.InCombat();
+            player.Targetable();
+        }
+
+        foreach (EnemyClass enemy in enemies)
+        {
+            enemy.InCombat();
+            enemy.Targetable();
+        }
+    }
+
+    public void SetEnemiesPassive(List<EnemyClass> passiveEnemies)
+    {
+        enemies.RemoveAll(enemy => passiveEnemies.Contains(enemy));
+        foreach (EnemyClass enemy in passiveEnemies)
+        {
+            enemy.OutOfCombat();
+            enemy.UnTargetable();
+        }
+    }
+
+    public void SetEnemiesHostile(List<EnemyClass> hostileEnemies)
+    {
+        enemies.AddRange(hostileEnemies);
+        foreach (EnemyClass enemy in hostileEnemies)
+        {
+            enemy.InCombat();
+            enemy.Targetable();
         }
     }
 

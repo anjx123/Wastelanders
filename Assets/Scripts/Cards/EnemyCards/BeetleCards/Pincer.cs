@@ -19,7 +19,7 @@ public class Pincer : BeetleAttacks
         lowerBound = 1;
         upperBound = 4;
         
-        Speed = 3;
+        Speed = 4;
 
         description = "Ouch!";
 
