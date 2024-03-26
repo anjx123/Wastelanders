@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -18,7 +19,7 @@ public class CombatInfo : MonoBehaviour
     public GameObject buffIconPrefab;
     public HealthBar healthBar;
     public GameObject crosshair;
-
+    public GameObject damageDisplay;
     private float ROTATION_SPEED = 30f;
 
     public Canvas buffListCanvas;
@@ -34,6 +35,21 @@ public class CombatInfo : MonoBehaviour
         buffListCanvas.overrideSorting = true;
         buffListCanvas.sortingLayerName = CombatManager.Instance.FADE_SORTING_LAYER;
         diceRollText.GetComponent<MeshRenderer>().sortingLayerName = CombatManager.Instance.FADE_SORTING_LAYER;
+    }
+
+    public IEnumerator DisplayDamage(int damage, EntityClass entity)
+    {
+        GameObject damageText = damageDisplay.transform.Find("DamageText").gameObject;
+        TMP_Text textField = damageText.GetComponent<TMP_Text>();
+        textField.text = "-" + damage.ToString();
+        if (entity.GetType().IsSubclassOf(typeof (EnemyClass)))
+        {
+            RectTransform rectTransform = textField.GetComponent<RectTransform>();
+            rectTransform.localScale = new Vector3(-1, rectTransform.localScale.y, rectTransform.localScale.z);
+        }
+        damageText.SetActive(true);
+        yield return new WaitForSeconds(1f);
+        damageText.SetActive(false);
     }
 
     public void Update()
