@@ -154,10 +154,13 @@ public class PreQueenFight : DialogueClasses
             yield return StartCoroutine(theQueen.MoveToPosition(queenTransform.position, 0f, 1.5f));
 
             yield return StartCoroutine(DialogueManager.Instance.StartDialogue(LastBitDialogue.Dialogue));
+            jackie.transform.position = new Vector3(jackie.transform.position.x, jackie.transform.position.y, 0);
 
             yield return StartCoroutine(CombatManager.Instance.FadeInDarkScreen(1.5f));
 
         }
+
+        SceneManager.LoadScene("BeetleCombatScene");
         
     }
 
