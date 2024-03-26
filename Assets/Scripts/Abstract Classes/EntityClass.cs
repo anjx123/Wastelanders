@@ -90,7 +90,6 @@ public abstract class EntityClass : SelectClass
         {
             OnEntityDeath?.Invoke(this);
         }
-        UpdateBuffsOnDamage();
         if (percentageDone > 0)
         {
             UpdateBuffsOnDamage();
