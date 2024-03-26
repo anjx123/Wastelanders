@@ -3577,6 +3577,7 @@ MonoBehaviour:
   wave2Dialogue: {fileID: 11400000, guid: 377753e56fae3204ea946cbbea8973c3, type: 2}
   wave3Dialogue: {fileID: 11400000, guid: 04e309d31bbd2094cbd5fbbeb969c8cf, type: 2}
   postBattleDialogue: {fileID: 11400000, guid: 4e4b8c8e00eb44ae38056c9c653cd3a5, type: 2}
+
   gameLoseDialogue: {fileID: 11400000, guid: 676bae3a33f603b4b810e2beea6db7c0, type: 2}
   resonateExplanation: {fileID: 11400000, guid: c263fe95eae201a439296c687b51e21c, type: 2}
   crystalExplanation: {fileID: 11400000, guid: 9f914eeee4cd7d14bb9c4bc27eaf8e52, type: 2}
