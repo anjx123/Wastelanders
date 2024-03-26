@@ -85,6 +85,7 @@ public abstract class EntityClass : SelectClass
             CardComparator.PlayEntityDeaths += Die;
         }
         UpdateBuffsOnDamage();
+        StartCoroutine(combatInfo.DisplayDamage(damage, this));
         StartCoroutine(PlayHitAnimation(source, this, percentageDone));
     }
 
