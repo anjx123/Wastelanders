@@ -17,11 +17,12 @@ public class CheapStrike : StaffCards
         
         Speed = 1;
 
-        myName = "CheapStrike";
-        description = "If this card hits the opponent, gain 2 flow";
+        myName = "Cheap Strike";
+        description = "If this card hits the opponent, gain 2 Focus";
         Renderer renderer = GetComponent<Renderer>();
         ogMaterial = renderer.material; // og sprite of card
         OriginalPosition = transform.position;
+        CardType = CardType.MeleeAttack;
         base.Initialize();
     }
 
@@ -31,11 +32,17 @@ public class CheapStrike : StaffCards
 
     }
 
-
+    public override void CardIsUnstaggered()
+    {
+        base.CardIsUnstaggered();
+        Origin.AddStacks(Focus.buffName, 2);
+    }
 
     public override void OnHit()
     {
-        base.OnHit();
-        Origin.AddStacks(Focus.buffName, 2);
+        Vector3 diffInLocation = Target.myTransform.position - Origin.myTransform.position;
+        Origin.UpdateFacing(diffInLocation, null);
+        this.Target.TakeDamage(Origin, duplicateCard.actualRoll);
+        CardIsUnstaggered();
     }
 }

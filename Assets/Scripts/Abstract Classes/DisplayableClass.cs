@@ -5,19 +5,22 @@
 public abstract class DisplayableClass : SelectClass
 {
 #nullable enable
-    public ActionClass? actionClass; // Associated ActionClass that this class displays; it is set by the entity
+    public ActionClass? ActionClass { get; protected set; }   
     protected bool targetHighlighted = false;
 
     protected void ShowCard()
     {
-        CombatCardDisplayManager.Instance.ShowCard(actionClass);
+        if (ActionClass != null)
+        {
+            CombatCardDisplayManager.Instance.ShowCard(ActionClass);
+        }
     }
 
     protected void HighlightTarget()
     {
         if (!targetHighlighted)
         {
-            actionClass?.Target.Highlight();
+            ActionClass?.Target?.Highlight();
         }
         targetHighlighted = true;
     }
@@ -26,9 +29,10 @@ public abstract class DisplayableClass : SelectClass
     {
         if (targetHighlighted)
         {
-            actionClass?.Target.DeHighlight();
+            ActionClass?.Target?.DeHighlight();
         }
         targetHighlighted = false;
     }
+
 }
 

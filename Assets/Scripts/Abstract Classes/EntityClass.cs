@@ -1,12 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEditor.Experimental.GraphView.GraphView;
-using static UnityEngine.UI.Image;
+using static CardComparator;
 
 public abstract class EntityClass : SelectClass
 {
-    private float PLAY_RUNNING_ANIMATION_DELTA = 0.01f; //Represents how little change in position we should at least see before playing running animation
+    private float PLAY_RUNNING_ANIMATION_DELTA = 0.03f; //Represents how little change in position we should at least see before playing running animation
     protected int MAX_HEALTH;
     [SerializeField]
     protected int MaxHealth
@@ -24,48 +23,55 @@ public abstract class EntityClass : SelectClass
     public Animator animator;
     public CombatInfo combatInfo;
 
+    [SerializeField] protected BoxCollider boxCollider;
     protected bool isDead = false;
     private bool crosshairStaysActive = false;
 
 
-    protected Vector3 initalPosition;
+    protected Vector3 initialPosition;
     public int Health
     {
         get { return health; }
-        protected set 
+        protected set
         {
             health = value;
             combatInfo.SetHealth(health);
         }
     }
 
-    protected Dictionary<string, StatusEffect> statusEffects;
+    protected readonly Dictionary<string, StatusEffect> statusEffects = new Dictionary<string, StatusEffect>();
 
 
 
     protected List<ActionClass> actionsAvailable;
+    public DeadEntities _DeathHandler { protected get;  set; }
+    public DeadEntities DeathHandler { get; private set; } 
 
-    protected int id;
-    public int Id 
-    { 
-        get { return id; }
-        set { id = value; }
-    }
+#nullable enable
+
+    public delegate void EntityDelegate(EntityClass player);
+    public static event EntityDelegate? OnEntityDeath;
+    public static event EntityDelegate? OnEntityClicked;
+    public event EntityDelegate? BuffsUpdatedEvent;
+
+    public Sprite? icon;
 
     public virtual void Start()
     {
-        initalPosition = myTransform.position;
-        statusEffects = new Dictionary<string, StatusEffect>();
+        initialPosition = myTransform.position;
 
         DeEmphasize();
         DisableDice();
+        GetComponent<SpriteRenderer>().sortingLayerName = CombatManager.Instance.FADE_SORTING_LAYER;
 
-        CombatManager.OnGameStateChanged += UpdateBuffsNewRound;
+        _DeathHandler = Die;
+        DeathHandler = delegate { return _DeathHandler(); };
+        CombatManager.OnGameStateChanging += UpdateBuffsNewRound;
     }
 
     private void OnDestroy()
     {
-        CombatManager.OnGameStateChanged -= UpdateBuffsNewRound;
+        CombatManager.OnGameStateChanging -= UpdateBuffsNewRound;
     }
 
     /*
@@ -79,12 +85,16 @@ public abstract class EntityClass : SelectClass
         float percentageDone = 1; //Testing different powered knockbacks
         if (Health != 0)
         {
-            percentageDone = Mathf.Clamp(damage / (float) Health, 0f, 1f);
+            percentageDone = Mathf.Clamp(damage / (float)Health, 0f, 1f);
         } else
         {
-            CardComparator.PlayEntityDeaths += Die;
+            OnEntityDeath?.Invoke(this);
         }
         UpdateBuffsOnDamage();
+        if (percentageDone > 0)
+        {
+            UpdateBuffsOnDamage();
+        }
         StartCoroutine(combatInfo.DisplayDamage(damage, this));
         StartCoroutine(PlayHitAnimation(source, this, percentageDone));
     }
@@ -113,7 +123,7 @@ public abstract class EntityClass : SelectClass
     }
 
     //Calculates the power of the stagger based on the percentage health done
-    private float StaggerPowerCalculation(float percentageDone)
+    protected virtual float StaggerPowerCalculation(float percentageDone)
     {
         float minimumPush = 0.8f;
         float pushSlope = 1.8f;
@@ -134,23 +144,26 @@ public abstract class EntityClass : SelectClass
 
     Requires: Entity is not dead
      */
-    public IEnumerator MoveToPosition(Vector3 destination, float radius, float duration, Vector3? lookAtPosition = null)
+    public virtual IEnumerator MoveToPosition(Vector3 destination, float radius, float duration, Vector3? lookAtPosition = null)
     {
         Vector3 originalPosition = myTransform.position;
         float elapsedTime = 0f;
 
         Vector3 diffInLocation = destination - originalPosition;
 
-        if ((Vector2) diffInLocation == Vector2.zero) yield break;
+        if ((Vector2)diffInLocation == Vector2.zero) yield break;
 
         float distance = Mathf.Sqrt(diffInLocation.x * diffInLocation.x + diffInLocation.y * diffInLocation.y);
         float maxProportionTravelled = (distance - radius) / distance;
 
-        UpdateFacing(diffInLocation, lookAtPosition);
 
-        if (HasParameter("IsMoving", animator) && distance > radius + PLAY_RUNNING_ANIMATION_DELTA)
+        if (distance > radius + PLAY_RUNNING_ANIMATION_DELTA)
         {
-            animator.SetBool("IsMoving", true);
+            UpdateFacing(diffInLocation, lookAtPosition);
+            if (HasAnimationParameter("IsMoving"))
+            {
+                animator.SetBool("IsMoving", true);
+            }
         }
 
         while (elapsedTime < duration)
@@ -160,19 +173,51 @@ public abstract class EntityClass : SelectClass
             yield return null;
         }
 
-        if (HasParameter("IsMoving", animator))
+        if (HasAnimationParameter("IsMoving"))
         {
             animator.SetBool("IsMoving", false);
         }
     }
+    public void FaceRight()
+    {
+        FlipTransform(this.transform, true);
+        combatInfo.FaceRight();
+    }
 
-    public abstract void FaceRight();
-
-    public abstract void FaceLeft();
+    public void FaceLeft()
+    {
+        FlipTransform(this.transform, false);
+        combatInfo.FaceLeft();
+    }
 
     public bool IsFacingRight()
     {
-        return combatInfo.IsFacingRight();
+        return transform.localScale.x > 0;
+    }
+    public void FlipTransform(Transform transform, bool faceRight)
+    {
+        if (faceRight) //Face Right
+        {
+            Vector3 flippedTransform = transform.localScale;
+            flippedTransform.x = Mathf.Abs(flippedTransform.x);
+            transform.localScale = flippedTransform;
+            if (boxCollider)
+            {
+                Vector3 currentScale = boxCollider.size;
+                boxCollider.size = new Vector3(Mathf.Abs(currentScale.x), Mathf.Abs(currentScale.y), Mathf.Abs(currentScale.z));
+            }
+        }
+        else
+        {
+            Vector3 flippedTransform = transform.localScale;
+            flippedTransform.x = -Mathf.Abs(flippedTransform.x);
+            transform.localScale = flippedTransform;
+            if (boxCollider)
+            {
+                Vector3 currentScale = boxCollider.size;
+                boxCollider.size = new Vector3(-Mathf.Abs(currentScale.x), Mathf.Abs(currentScale.y), Mathf.Abs(currentScale.z));
+            }
+        }
     }
 
     /*
@@ -222,7 +267,7 @@ public abstract class EntityClass : SelectClass
 
 
 
-        if (HasParameter("IsStaggered", animator))
+        if (HasAnimationParameter("IsStaggered"))
         {
             animator.SetBool("IsStaggered", true);
         }
@@ -237,7 +282,7 @@ public abstract class EntityClass : SelectClass
             yield return null;
         }
 
-        if (HasParameter("IsStaggered", animator))
+        if (HasAnimationParameter("IsStaggered"))
         {
             animator.SetBool("IsStaggered", false);
         }
@@ -252,6 +297,14 @@ public abstract class EntityClass : SelectClass
     public virtual void Heal(int val)
     {
         Health = Mathf.Clamp(Health + val, 0, MaxHealth);
+    }
+
+    public void SetUnstaggered()
+    {
+        if (HasAnimationParameter("IsStaggered"))
+        {
+            animator.SetBool("IsStaggered", false);
+        }
     }
 
     public override void OnMouseEnter()
@@ -294,7 +347,7 @@ public abstract class EntityClass : SelectClass
 
     public override void OnMouseDown()
     {
-        HighlightManager.OnEntityClicked(this);
+        OnEntityClicked?.Invoke(this);
     }
     //Run this to reset the entity position back to its starting position
     public abstract IEnumerator ResetPosition();
@@ -310,7 +363,7 @@ public abstract class EntityClass : SelectClass
     } */
 
     // Checks if a Given Buff exists, instantiates it if not
-    public void CheckBuff(string buffType)
+    private void CheckBuff(string buffType)
     {
         if (!statusEffects.ContainsKey(buffType))
         {
@@ -319,7 +372,7 @@ public abstract class EntityClass : SelectClass
     }
 
     // Adds the Stacks of the Card to the Relevant Buff Stacks of the Player    
-    public void AddStacks(string buffType, int stacks)
+    public virtual void AddStacks(string buffType, int stacks)
     {
         CheckBuff(buffType);
         statusEffects[buffType].GainStacks(stacks);
@@ -331,11 +384,12 @@ public abstract class EntityClass : SelectClass
         if (statusEffects.ContainsKey(buffType))
         {
             statusEffects[buffType].LoseStacks(stacks);
+            UpdateBuffs();
         }
     }
 
     // Applies the Stacks of the Specified Buff to the Card Roll Limits
-    public void ApplyBuffsToCard(ref ActionClass.CardDup dup, string buffType)
+    private void ApplyBuffsToCard(ref ActionClass.CardDup dup, string buffType)
     {
         CheckBuff(buffType);
         statusEffects[buffType].ApplyStacks(ref dup);
@@ -359,12 +413,6 @@ public abstract class EntityClass : SelectClass
         return 0;
     }
 
-    // Clears all stacks of specified buff
-    public void ClearStacks(string buffType)
-    {
-        if (statusEffects.ContainsKey(buffType)) {statusEffects[buffType].ClearBuff(); UpdateBuffs();}
-    }
-
     // Updates buffs affected by player taking damage
     protected void UpdateBuffsOnDamage()
     {
@@ -376,7 +424,7 @@ public abstract class EntityClass : SelectClass
     }
 
     // Updates buffs that change when a new round begins
-    public void UpdateBuffsNewRound(GameState newState)
+    private void UpdateBuffsNewRound(GameState newState)
     {
         if (newState == GameState.SELECTION)
         {
@@ -390,7 +438,7 @@ public abstract class EntityClass : SelectClass
 
     public virtual void AttackAnimation(string animationName)
     {
-        if (HasParameter(animationName, animator))
+        if (HasAnimationParameter(animationName))
         {
             animator.SetTrigger(animationName);
         }
@@ -402,9 +450,13 @@ public abstract class EntityClass : SelectClass
         //Implement Block Animation
     }
 
-    public static bool HasParameter(string paramName, Animator animator)
+    public bool HasAnimationParameter(string paramName, Animator? paramAnimator = null)
     {
-        foreach (AnimatorControllerParameter param in animator.parameters)
+        if (!paramAnimator)
+        {
+            paramAnimator = animator;
+        }
+        foreach (AnimatorControllerParameter param in paramAnimator!.parameters)
         {
             if (param.name == paramName) return true;
         }
@@ -413,12 +465,12 @@ public abstract class EntityClass : SelectClass
 
     public void ActivateCombatInfo(ActionClass actionClass)
     {
-        combatInfo.SetCombatSprite(actionClass);
+        combatInfo.ActivateCombatSprite(actionClass);
     }
 
-    public void DeactivateCombatInfo()
+    public void DeactivateCombatInfo(ActionClass actionClass)
     {
-        combatInfo.DeactivateCombatSprite();
+        combatInfo.DeactivateCombatSprite(actionClass);
     }
     //Increases this Entity Class' sorting layer (negative number is higher up)
     public void Emphasize()
@@ -428,7 +480,6 @@ public abstract class EntityClass : SelectClass
         transform.position = largeTransform;
         GetComponent<SpriteRenderer>().sortingOrder = CombatManager.Instance.FADE_SORTING_ORDER + 1;
         combatInfo.Emphasize();
-        
     }
 
     //Decreases this Entity Class' sorting layer. (Standardizes Sorting Layers for entities)
@@ -442,6 +493,28 @@ public abstract class EntityClass : SelectClass
         
     }
 
+    public void OutOfCombat()
+    {
+        DisableHealthBar();
+        statusEffects.Clear();
+        UpdateBuffs();
+    }
+
+    public void InCombat()
+    {
+        EnableHealthBar();
+    }
+
+    public void UnTargetable()
+    {
+        boxCollider.enabled = false;
+    }
+
+    public void Targetable()
+    {
+        boxCollider.enabled = true;
+    }
+
     public void SetDice(int value)
     {
         combatInfo.SetDice(value);
@@ -450,6 +523,7 @@ public abstract class EntityClass : SelectClass
     public void UpdateBuffs()
     {
         combatInfo.UpdateBuffs(statusEffects);
+        BuffsUpdatedEvent?.Invoke(this);
     }
 
     public void EnableDice()
@@ -460,6 +534,20 @@ public abstract class EntityClass : SelectClass
     {
         combatInfo.DisableDice();
     }
+    private void EnableHealthBar()
+    {
+        combatInfo.EnableHealthBar();
+    }
 
-    
+    private void DisableHealthBar()
+    {
+        combatInfo.DisableHealthBar();
+    }
+
+    //@Author: Anrui
+    //Sets the location an entity returns to after fighting ends.
+    public void SetReturnPosition(Vector3 newReturningPosition)
+    {
+        initialPosition = newReturningPosition;
+    }
 }

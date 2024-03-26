@@ -1,0 +1,52 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 207ddad3e1c90594ba3f48e2a5a6a796, type: 3}
+  m_Name: jackieIvesDiscussion
+  m_EditorClassIdentifier: 
+  dialogue:
+  - bodyText: Thought I'd find you here.
+    speakerName: Ives
+    displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
+  - bodyText: Ives!
+    speakerName: Jackie
+    displayingImage: {fileID: 0}
+  - bodyText: "Mornin\u2019, Jackie. I trust that you have everything prepared? Just
+      a heads up, I\u2019ll be one of the examiners joining the expedition."
+    speakerName: Ives
+    displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
+  - bodyText: "You\u2019ll be coming with us? You better be watching to see me pass
+      this exam with flying colors."
+    speakerName: Jackie
+    displayingImage: {fileID: 0}
+  - bodyText: "Hah, don\u2019t worry. I won\u2019t be the only one watching you leave
+      everyone in the dust."
+    speakerName: Ives
+    displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
+  - bodyText: Just remember that the exam is going to simulate a real NITES expedition
+      into the wasteland. There have been casualties before.
+    speakerName: Ives
+    displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
+  - bodyText: "Yes, I know. I\u2019m Ready."
+    speakerName: Jackie
+    displayingImage: {fileID: 0}
+  - bodyText: Still, let's go over the fundamentals again.
+    speakerName: Jackie
+    displayingImage: {fileID: 0}
+  - bodyText: As a warm up.
+    speakerName: Jackie
+    displayingImage: {fileID: 0}
+  - bodyText: Haha sure kid, there's always room to improve the fundamentals.
+    speakerName: Ives
+    displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
+  - bodyText: Just make sure not to overexert yourself.
+    speakerName: Ives
+    displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}

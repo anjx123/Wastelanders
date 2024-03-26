@@ -11,22 +11,41 @@ public class CounterStrike : StaffCards
     {
 
     }
-
-    // Start is called before the first frame update
+    
     public override void Initialize()
     {
         lowerBound = 1;
         upperBound = 3;
-
-
         Speed = 5;
-        
-        myName = "CounterStrike";
-        description = "Make a melee attack at speed 1 with this card’s lower and upper bound for every attack the clashing opponent makes against this character.";
-        CardType = CardType.Defense;
+
+        myName = "Counter Strike";
+        description = "Block with this card, then make an attack with this card";
         Renderer renderer = GetComponent<Renderer>();
         ogMaterial = renderer.material; // og sprite of card
         OriginalPosition = transform.position;
         base.Initialize();
     }
+
+    public override void ApplyEffect()
+    {
+        if (proto && activeDupCardInstance == null)
+        {
+            activeDupCardInstance = Instantiate(this.GetComponent<CounterStrike>());
+            ((CounterStrike)activeDupCardInstance).proto = false;
+            ((CounterStrike)activeDupCardInstance).duplicateCardInstance = null;
+            ((CounterStrike)activeDupCardInstance).CardType = CardType.MeleeAttack;
+            activeDupCardInstance.transform.position = new Vector3(-10, -10, -10);
+        }
+
+        if (proto)
+        {
+            CardType = CardType.Defense;
+            PlayerClass origin = (PlayerClass)Origin;
+            activeDupCardInstance.Origin = origin;
+            activeDupCardInstance.Target = Target;
+            BattleQueue.BattleQueueInstance.InsertDupPlayerAction(activeDupCardInstance);
+        }
+        base.ApplyEffect();
+    }
+
 }

@@ -1,19 +1,18 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.PackageManager;
+﻿using TMPro;
 using UnityEngine;
-using TMPro;
 
 public class CombatCardDisplayManager : MonoBehaviour
 {
 
     public static CombatCardDisplayManager Instance;
     public GameObject cardDisplay; // The card display object
-    GameObject fullCardObject; // keep ref to object to destroy
-
+    [SerializeField] private GameObject cardTemplatePrefab;
+    private GameObject fullCardObject; // keep ref to object to destroy
+    [SerializeField] private GameObject descriptionHolderPrefab;
+    private GameObject descriptionHolder;
+#nullable enable
     public bool IsDisplaying { get; set; } = false;
-    private ActionClass currentUser;
+    private ActionClass? currentUser;
     private bool targetHighlighted = false;
 
     // Awake is called before Start.
@@ -29,6 +28,27 @@ public class CombatCardDisplayManager : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        CombatManager.OnGameStateChanging += HideCard;
+        fullCardObject = Instantiate(cardTemplatePrefab);
+        fullCardObject.transform.SetParent(cardDisplay.transform, false);
+        fullCardObject.transform.localPosition = new Vector3(0, 0, 0);
+        fullCardObject.SetActive(false);
+
+        descriptionHolder = Instantiate(descriptionHolderPrefab);
+        descriptionHolder.transform.SetParent(cardDisplay.transform, false);
+        descriptionHolder.transform.localPosition = new Vector3(0, -2.5f, 0);
+        descriptionHolder.GetComponentInChildren<MeshRenderer>().sortingLayerName = descriptionHolder.GetComponent<SpriteRenderer>().sortingLayerName;
+        descriptionHolder.GetComponentInChildren<MeshRenderer>().sortingOrder = descriptionHolder.GetComponent<SpriteRenderer>().sortingOrder + 1;
+        descriptionHolder.SetActive(false);
+    }
+
+    private void OnDestroy()
+    {
+        CombatManager.OnGameStateChanging -= HideCard;
+    }
+
     //Given an ActionClass a to display, and the SOURCE of the call, shows the card in the display.
     //REQUIRES: This function should always be called from a DisplayableClass.When it is called,
     // source should be set to the caller. Below is an example call:
@@ -42,30 +62,17 @@ public class CombatCardDisplayManager : MonoBehaviour
     {
         if (a == currentUser)
         {
-            IsDisplaying = false;
-            if (fullCardObject != null)
-            {
-                Destroy(fullCardObject);
-                fullCardObject = null;
-            }
+            fullCardObject.SetActive(false);
+            descriptionHolder.SetActive(false);
             DeHighlightTarget(currentUser);
             currentUser = null;
         }
         else
         {
-            if (fullCardObject != null)
-            {
-                Destroy(fullCardObject);
-            }
-            fullCardObject = Instantiate(a.fullCardObjectPrefab);
-            if (fullCardObject != null)
-            {
-                fullCardObject.transform.position = new Vector3(0, 0, 0);
-                fullCardObject.transform.SetParent(cardDisplay.transform, false);
-                UpdateText(a);
-            }
-
-            IsDisplaying = true;
+            fullCardObject.SetActive(true);
+            descriptionHolder.SetActive(true);
+            fullCardObject.GetComponentInChildren<CardUI>().RenderCard(a);
+            descriptionHolder.GetComponentInChildren<TextMeshPro>().text = a.description;
             if (currentUser != null)
             {
                 DeHighlightTarget(currentUser);
@@ -75,47 +82,44 @@ public class CombatCardDisplayManager : MonoBehaviour
         }
     }
 
-    private void UpdateText(ActionClass a)
-    {
-        // TODO: fix bug with not updating text properly? It works first time, but if you are swapping from another card it breaks.
-        // lower priority for now since we don't change enemy card stats yet, but it will come eventually
-        GameObject textContainer = cardDisplay.transform.GetChild(0).Find("TextCanvas").gameObject;
-        textContainer.transform.Find("LowerBoundText").gameObject.GetComponent<TextMeshProUGUI>().text = a.GetCard().rollFloor.ToString();
-        // more text updates...
-    }
 
     // Hides the card by destroying the child. Don't need to pass any parameters in as the manager
     //  doesn't need to keep track of who calls this
-    public void HideCard()
+    private void HideCard(GameState gameState)
     {
-        IsDisplaying = false;
-        if (fullCardObject != null)
+        if (gameState == GameState.FIGHTING)
         {
-            Destroy(fullCardObject);
-        }
-        if (currentUser != null)
-        {
-            DeHighlightTarget(currentUser);
-            currentUser = null;
+            if (fullCardObject != null)
+            {
+                fullCardObject.SetActive(false);
+                descriptionHolder.SetActive(false);
+            }
+            if (currentUser != null)
+            {
+                DeHighlightTarget(currentUser);
+                currentUser = null;
+            }
         }
     }
 
     // Highlights the target of a
-    private void HighlightTarget(ActionClass a)
+    private void HighlightTarget(ActionClass actionClass)
     {
         if (!targetHighlighted)
         {
-            a.Target.CrossHair();
+            actionClass.Target.CrossHair();
         }
         targetHighlighted = true;
+        actionClass.TargetChanged += DeHighlightTarget;
     }
 
     // Deighlights the target of a
-    private void DeHighlightTarget(ActionClass a)
+    private void DeHighlightTarget(ActionClass actionClass)
     {
+        actionClass.TargetChanged -= DeHighlightTarget;
         if (targetHighlighted)
         {
-            a.Target.UnCrossHair();
+            actionClass.Target.UnCrossHair();
         }
         targetHighlighted = false;
     }

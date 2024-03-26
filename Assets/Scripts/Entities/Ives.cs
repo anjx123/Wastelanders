@@ -4,5 +4,10 @@ using UnityEngine;
 
 public class Ives : PlayerClass
 {
-    // Hi my name is Ives. Pwease implement me :_(
+    public override void Start()
+    {
+        myName = "Ives";
+        base.Start();
+    }
+
 }

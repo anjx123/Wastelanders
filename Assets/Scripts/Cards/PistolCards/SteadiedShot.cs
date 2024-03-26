@@ -19,8 +19,8 @@ public class SteadiedShot : PistolCards
         upperBound = 5;
         Speed = 3;
 
-        myName = "SteadiedShot";
-        description = "Gain 1 Accuracy Stack, Then Attack";
+        myName = "Steadied Shot";
+        description = "Gain One Accuracy, then attack";
         CardType = CardType.RangedAttack;
         Renderer renderer = GetComponent<Renderer>();
         ogMaterial = renderer.material; // og sprite of card

@@ -7,6 +7,7 @@ using static UnityEngine.UI.Image;
 
 public class Pound : SlimeAttacks
 {
+#nullable enable
     [SerializeField]
     private List<Sprite> animationFrame = new();
     public override void ExecuteActionEffect()
@@ -33,12 +34,12 @@ public class Pound : SlimeAttacks
 
     public override void OnHit()
     {
-        StartCoroutine(AttackAnimation());
-        //Origin.AttackAnimation("IsPounding");
+        onHitWasCalled = true;
+        StartCoroutine(AttackAnimation(base.OnHit));
     }
 
 
-    public IEnumerator AttackAnimation()
+    protected override IEnumerator AttackAnimation(AttackCallback? attackCallback)
     {
         Vector3 originalPosition = Origin.myTransform.position;
         Origin.animator.enabled = false;
@@ -47,7 +48,7 @@ public class Pound : SlimeAttacks
         Origin.myTransform.position = originalPosition;
         yield return new WaitForSeconds(0.05f);
         spriteRenderer.sprite = animationFrame[1];
-        base.OnHit();
+        attackCallback?.Invoke();
         yield return new WaitForSeconds(0.010f);
         spriteRenderer.sprite = animationFrame[2];
         yield return new WaitForSeconds(0.32f);

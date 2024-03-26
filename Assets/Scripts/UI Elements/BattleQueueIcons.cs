@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class BattleQueueIcons : DisplayableClass
 {
+    [SerializeField] SpriteRenderer targetRenderer;
+
     public override void OnMouseDown()
     {
-        if (actionClass.Origin is PlayerClass) {
+        if (ActionClass.Origin is PlayerClass) {
             DeleteFromBQ();
         } else {
             if (CombatManager.Instance.CanHighlight())
@@ -21,7 +23,7 @@ public class BattleQueueIcons : DisplayableClass
         if (CombatManager.Instance.CanHighlight())
         {
             DeHighlightTarget();
-            BattleQueue.BattleQueueInstance.DeletePlayerAction(actionClass);
+            BattleQueue.BattleQueueInstance.DeletePlayerAction(ActionClass);
             HighlightManager.currentHighlightedAction = null;
             HighlightManager.currentHighlightedEnemyEntity = null;
         }  
@@ -48,9 +50,10 @@ public class BattleQueueIcons : DisplayableClass
         DeHighlightTarget();
     }
 
-    public void renderBQIcon(ActionClass ac)
+    public void RenderBQIcon(ActionClass ac)
     {
-        actionClass = ac;
+        ActionClass = ac;
+        targetRenderer.sprite = ac.Target.icon;
         GetComponent<SpriteRenderer>().sprite = ac.GetIcon();
     }
 }

@@ -9,11 +9,13 @@ using static UnityEngine.UI.Image;
 public class CardComparator : MonoBehaviour
 {
     public static CardComparator Instance { get; private set; }
+#nullable enable
     public static readonly float COMBAT_BUFFER_TIME = 1f;
     public delegate IEnumerator DeadEntities();
-    public static event DeadEntities PlayEntityDeaths;
+    private static event DeadEntities? PlayEntityDeaths;
 
-
+    public delegate IEnumerator ClashersAreReadyToRoll();
+    public static event ClashersAreReadyToRoll? playersAreRollingDiceEvent;
 
     // Awake is called when the script instance is being loaded
     void Awake()
@@ -28,6 +30,17 @@ public class CardComparator : MonoBehaviour
         }
 
     }
+
+    void Start()
+    {
+        EntityClass.OnEntityDeath += SubscribeEntityDeath;
+    }
+
+    private void OnDestroy()
+    {
+        EntityClass.OnEntityDeath -= SubscribeEntityDeath;
+    }
+
 
     /*
      * Clashes two cards together handling logic calls and activating the Combat Info
@@ -69,19 +82,21 @@ public class CardComparator : MonoBehaviour
             //Debug.Log(cardOneStaggered);
             if (cardOneGreater == 0) //Clash ties
             {
+                card1.CardIsUnstaggered();
+                card2.CardIsUnstaggered();
 
             } else if (cardOneGreater < 0) //Card2 wins clash
             {
-                card2.OnHit();
+                card2.OnHit(); 
             } else if (cardOneGreater > 0) //Card1 wins clash
             {
                 card1.OnHit();  
             }
         } else if (card1.CardType == CardType.Defense && IsAttack(card2))
         {
-            if (cardOneGreater > 0) // Card 2 has a greater attack so it succeeds
+            if (cardOneGreater >= 0)
             {
-                card1.OnHit(); // Defensive card is unstaggered. 
+                card1.CardIsUnstaggered(); // Defensive card is unstaggered. 
             }
 
             card2.ReduceRoll(card1.GetCard().actualRoll); //Possibly no damage dealt
@@ -90,9 +105,9 @@ public class CardComparator : MonoBehaviour
 
         } else if (IsAttack(card1) && card2.CardType == CardType.Defense)
         {
-            if (cardOneGreater < 0) // Card 1 has a greater attack so it succeeds
+            if (cardOneGreater <= 0)
             {
-                card2.OnHit(); // Defensive card is unstaggered
+                card2.CardIsUnstaggered(); // Defensive card is unstaggered
             } 
 
             card1.ReduceRoll(card2.GetCard().actualRoll); //Possibly no damage dealt
@@ -133,15 +148,21 @@ public class CardComparator : MonoBehaviour
     {
         //Setup the Scene
         CombatManager.Instance.SetCameraCenter(actionClass.Origin);
-        ActivateInfo(actionClass, actionClass);
-        EnableDice(actionClass.Origin, actionClass.Origin);
+        ActivateInfo(actionClass);
+        EnableDice(actionClass.Origin);
         actionClass.ApplyEffect();
         yield return StartCoroutine(ClashBothEntities(actionClass, actionClass));
         actionClass.RollDice();
-        DeactivateInfo(actionClass, actionClass);
+        DeactivateInfo(actionClass);
 
         //Hit and feel effects
-        actionClass.OnHit();
+        if (actionClass.CardType == CardType.Defense)
+        {
+            actionClass.CardIsUnstaggered();
+        } else
+        {
+            actionClass.OnHit();
+        }
         actionClass.Origin.combatInfo.setDiceColor(Color.green);
         yield return new WaitForSeconds(COMBAT_BUFFER_TIME);
 
@@ -152,7 +173,7 @@ public class CardComparator : MonoBehaviour
             PlayEntityDeaths = null;
         }
         DeEmphasizeClashers(actionClass.Origin, actionClass.Target);
-        DisableDice(actionClass.Origin, actionClass.Origin);
+        DisableDice(actionClass.Origin);
     }
 
     /*
@@ -178,10 +199,20 @@ public class CardComparator : MonoBehaviour
         float xBuffer = (card1.CardType == CardType.RangedAttack || card1.CardType == CardType.Defense) &&
                         (card2.CardType == CardType.RangedAttack || card2.CardType == CardType.Defense) ? X_BUFFER * 3 : X_BUFFER; //Calculates how far away clashers should be when striking
         
-        StartCoroutine(origin?.MoveToPosition(HorizontalProjector(centeredDistance, origin.myTransform.position, xBuffer), bufferedRadius, duration, centeredDistance));
-        yield return StartCoroutine(target?.MoveToPosition(HorizontalProjector(centeredDistance, target.myTransform.position, xBuffer), bufferedRadius, duration, centeredDistance));
+        Coroutine playerMove = StartCoroutine(origin?.MoveToPosition(HorizontalProjector(centeredDistance, origin.myTransform.position, xBuffer), bufferedRadius, duration, centeredDistance));
+        Coroutine enemyMove = StartCoroutine(target?.MoveToPosition(HorizontalProjector(centeredDistance, target.myTransform.position, xBuffer), bufferedRadius, duration, centeredDistance));
+
+        yield return playerMove;
+        yield return enemyMove;
+
+        if (playersAreRollingDiceEvent != null)
+        {
+            yield return StartCoroutine(playersAreRollingDiceEvent.Invoke());
+            yield return new WaitUntil(() => Input.GetMouseButtonDown(0)); //Necessary to not immediately roll the dice
+        }
         yield return new WaitUntil(() => Input.GetMouseButtonDown(0));
     }
+
 
     //The higher the ratio, the "slower" you will feel. i.e. the closer the middle point is to you so you move less
     private void CalculateSpeedRatio(ActionClass card1, ActionClass card2, out float originRatio, out float targetRatio)
@@ -223,43 +254,58 @@ public class CardComparator : MonoBehaviour
             currentPosition + vectorToCenter - new Vector3(xBuffer, 0f, 0f) :
             currentPosition + vectorToCenter + new Vector3(xBuffer, 0f, 0f);
     }
-
-    private void ActivateInfo(ActionClass card1, ActionClass card2)
+    private void SubscribeEntityDeath(EntityClass entity)
     {
-
-        card1.Origin.ActivateCombatInfo(card1);
-        card2.Origin.ActivateCombatInfo(card2);
+        PlayEntityDeaths += entity.DeathHandler;
     }
 
-    private void DeactivateInfo(ActionClass card1, ActionClass card2)
+    private void ActivateInfo(params ActionClass[] cards)
     {
-        card1.Origin.DeactivateCombatInfo();
-        card2.Origin.DeactivateCombatInfo();
+        foreach (ActionClass card in cards)
+        {
+            card.Origin.ActivateCombatInfo(card);
+        }
     }
 
-    private void EmphasizeClashers(EntityClass origin, EntityClass target)
+    private void DeactivateInfo(params ActionClass[] cards)
     {
-        origin.Emphasize();
-        target.Emphasize();
+        foreach (ActionClass card in cards)
+        {
+            card.Origin.DeactivateCombatInfo(card);
+        }
+    }
+    private void EmphasizeClashers(params EntityClass[] entities)
+    {
+        foreach (EntityClass entity in entities)
+        {
+            entity.Emphasize();
+        }
     }
 
-    private void DeEmphasizeClashers(EntityClass origin, EntityClass target)
+    private void DeEmphasizeClashers(params EntityClass[] entities)
     {
-        origin.DeEmphasize();
-        target.DeEmphasize();
+        foreach (EntityClass entity in entities)
+        {
+            entity.DeEmphasize();
+        }
     }
 
-    private void EnableDice(EntityClass origin, EntityClass target)
+    private void EnableDice(params EntityClass[] entities)
     {
-        origin.EnableDice();
-        target.EnableDice();
+        foreach (EntityClass entity in entities)
+        {
+            entity.EnableDice();
+        }
     }
 
-    private void DisableDice(EntityClass origin, EntityClass target)
+    private void DisableDice(params EntityClass[] entities)
     {
-        origin.DisableDice();
-        target.DisableDice();
+        foreach (EntityClass entity in entities)
+        {
+            entity.DisableDice();
+        }
     }
+
 
     private bool IsAttack(ActionClass card)
     {

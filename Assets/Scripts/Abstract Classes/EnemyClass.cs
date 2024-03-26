@@ -18,6 +18,9 @@ public abstract class EnemyClass : EntityClass
     // Initialized in editor
     public List<GameObject> availableActions;
 
+    // Initializsed in editor
+    public List<GameObject> dupActions;
+
     /*  Plays a single card from the pool, removing it from the pool and refilling it if necessary.
      *  REQUIRES: Nothing
      *  MODIFIES: pool
@@ -27,8 +30,14 @@ public abstract class EnemyClass : EntityClass
     public override void Start()
     {
         base.Start();
-        combatInfo.FaceLeft();
         CombatManager.Instance.AddEnemy(this);
+        InstantiatePool();
+
+        Reshuffle();
+    }
+
+    public virtual void InstantiatePool()
+    {
         for (int i = 0; i < availableActions.Count; i++)
         {
             GameObject toAdd = Instantiate(availableActions[i]);
@@ -37,8 +46,6 @@ public abstract class EnemyClass : EntityClass
 
             deck.Add(toAdd);
         }
-
-        Reshuffle();
     }
 
     /*  Given a list of players, the enemy chooses appropriately a target/targets and adds an attack that it chooses to the bq.
@@ -55,10 +62,10 @@ public abstract class EnemyClass : EntityClass
     public virtual void AddAttack(List<PlayerClass> players)
     {
         if (players.Count == 0) return;
+        if (pool.Count == 0) return;
         pool[0].GetComponent<ActionClass>().Target = players[Random.Range(0, players.Count)]; // excludes the last value 
         BattleQueue.BattleQueueInstance.AddEnemyAction(pool[0].GetComponent<ActionClass>(), this);
-        combatInfo.SetCombatSprite(pool[0].GetComponent<ActionClass>());
-        combatInfo.GetComponentInChildren<CombatCardUI>().actionClass = pool[0].GetComponent<ActionClass>();
+        combatInfo.AddCombatSprite(pool[0].GetComponent<ActionClass>());
         pool.RemoveAt(0);
         if (pool.Count < 1)
         {
@@ -71,13 +78,14 @@ public abstract class EnemyClass : EntityClass
      *  REQUIRES: pool should be empty! But it shouldn't break anything, just mess up the enemy's order of attacks
      *  MODIFIES: pool 
      */
-    protected void Reshuffle()
+    protected virtual void Reshuffle()
     {
         List<GameObject> temp = new List<GameObject>();
         for (int i = 0; i < deck.Count; i++)
         {
             temp.Add(deck[i]);
         }
+
         while (temp.Count > 0)
         {
             int idx = Random.Range(0, temp.Count);
@@ -99,18 +107,7 @@ public abstract class EnemyClass : EntityClass
 
     public override IEnumerator ResetPosition()
     {
-        yield return StartCoroutine(MoveToPosition(initalPosition, 0f, 0.8f));
+        yield return StartCoroutine(MoveToPosition(initialPosition, 0f, 0.8f));
         FaceLeft();
-    }
-    public override void FaceRight()
-    {
-        this.GetComponent<SpriteRenderer>().flipX = true;
-        combatInfo.FaceRight();
-    }
-
-    public override void FaceLeft()
-    {
-        this.GetComponent<SpriteRenderer>().flipX = false;
-        combatInfo.FaceLeft();
     }
 }

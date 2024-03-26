@@ -8,8 +8,6 @@ public abstract class FrogAttacks : ActionClass
     [SerializeField]
     private GameObject spitPrefab;
 
-
-
     public override void Initialize()
     {
         base.Initialize();
@@ -19,10 +17,11 @@ public abstract class FrogAttacks : ActionClass
     public override void OnHit()
     {
         Vector3 diffInLocation = Target.myTransform.position - Origin.myTransform.position;
+        CardIsUnstaggered();
         Origin.UpdateFacing(diffInLocation, null);
-        Origin.AttackAnimation("IsShooting");
         if (spitPrefab != null)
         {
+            Origin.AttackAnimation("IsShooting");
             StartCoroutine(ProjectileAnimation(base.OnHit, Origin, Target));
         }
     }

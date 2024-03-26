@@ -7,7 +7,10 @@ using UnityEngine.UI;
 
 public class CombatInfo : MonoBehaviour
 {
-    public GameObject combatCardSprite;
+    [SerializeField] private GameObject combatCardIconPrefab;
+    [SerializeField] private GameObject cardIconRendering;
+    private List<ActionClass> combatCards = new();
+    private ActionClass activeActionClass;
     public HorizontalLayoutGroup buffList;
     public Animator diceAnimator;
     public GameObject diceRollSprite;
@@ -19,12 +22,16 @@ public class CombatInfo : MonoBehaviour
     public GameObject damageDisplay;
     private float ROTATION_SPEED = 30f;
 
-    private Canvas buffListCanvas;
+    public Canvas buffListCanvas;
+
+    public void Awake()
+    {
+        buffListCanvas = buffList.gameObject.GetComponent<Canvas>();
+    }
 
     public void Start()
     {
         diceRollText.GetComponent<MeshRenderer>().sortingOrder = diceRollSprite.GetComponent<SpriteRenderer>().sortingOrder + 1;
-        buffListCanvas = buffList.gameObject.GetComponent<Canvas>();
         buffListCanvas.overrideSorting = true;
         buffListCanvas.sortingLayerName = CombatManager.Instance.FADE_SORTING_LAYER;
         diceRollText.GetComponent<MeshRenderer>().sortingLayerName = CombatManager.Instance.FADE_SORTING_LAYER;
@@ -66,16 +73,66 @@ public class CombatInfo : MonoBehaviour
         diceRollText.GetComponent<TMP_Text>().color = color;
     }
 
-    /* 
-     Sets the CombatInfo sprite to the icon of this ActionClass.
-    Pass in null to discard the current sprite.
-     */
-    public void SetCombatSprite(ActionClass card)
+    public void ActivateCombatSprite(ActionClass actionClass)
     {
         diceAnimator.enabled = true;
-        SpriteRenderer spriteRenderer = combatCardSprite.GetComponent<SpriteRenderer>();
-        spriteRenderer.sprite = card.GetIcon();
         diceRollText.GetComponent<TextMeshPro>().text = null;
+        if (!combatCards.Contains(actionClass))
+        {
+            combatCards.Add(actionClass);
+            RenderCombatIcons();
+        }
+        activeActionClass = actionClass;
+    }
+
+    public void AddCombatSprite(ActionClass actionClass)
+    {
+        combatCards.Add(actionClass);
+        RenderCombatIcons();
+    }
+
+    private void RenderCombatIcons()
+    {
+        int num = combatCards.Count;
+        float iconHeight = combatCardIconPrefab.GetComponent<SpriteRenderer>().bounds.size.y;
+        float totalHeight = num * iconHeight;
+        float startY = totalHeight / 2 - iconHeight / 2;
+
+        UnrenderCombatIcons();
+        for (int i = 0; i < num; i++)
+        {
+            GameObject combatIcon = Instantiate(combatCardIconPrefab);
+            combatIcon.transform.SetParent(cardIconRendering.transform);
+            combatIcon.transform.localScale = Vector3.one;
+            combatIcon.transform.localPosition = new Vector3(0, startY - i * iconHeight, 0);
+            combatIcon.GetComponent<CombatCardUI>().SetActionClass(combatCards[num - i - 1]); //Reverse the order of rendering 
+            combatIcon.GetComponent<CombatCardUI>().DeEmphasize();
+        }
+    }
+    private void UnrenderCombatIcons()
+    {
+        foreach (Transform child in cardIconRendering.transform)
+        {
+            Destroy(child.gameObject);
+        }
+    }
+
+    private void EmphasizeCombatIcon()
+    {
+        bool onlyHighlightOne = true;
+        foreach (Transform child in cardIconRendering.transform)
+        {
+            CombatCardUI combatUI = child.GetComponent<CombatCardUI>();
+            if (child.GetComponent<CombatCardUI>().ActionClass == activeActionClass && onlyHighlightOne)
+            {
+                combatUI.Emphasize();
+                onlyHighlightOne = false;
+            }
+            else
+            {
+                combatUI.DeEmphasize();
+            }
+        }
     }
 
     public void EnableDice()
@@ -93,10 +150,20 @@ public class CombatInfo : MonoBehaviour
         diceRollText.GetComponent<TextMeshPro>().text = null;
     }
 
-    public void DeactivateCombatSprite()
+    public void EnableHealthBar()
     {
-        SpriteRenderer spriteRenderer = combatCardSprite.GetComponent<SpriteRenderer>();
-        spriteRenderer.sprite = null;
+        healthBar.gameObject.SetActive(true);
+    }
+
+    public void DisableHealthBar()
+    {
+        healthBar.gameObject.SetActive(false);
+    }
+
+    public void DeactivateCombatSprite(ActionClass actionClass)
+    {
+        combatCards.Remove(actionClass);
+        RenderCombatIcons();
     }
 
     public void ActivateCrosshair()
@@ -116,7 +183,7 @@ public class CombatInfo : MonoBehaviour
     }
     public void Emphasize()
     {
-        combatCardSprite.GetComponent<SpriteRenderer>().sortingOrder = CombatManager.Instance.FADE_SORTING_ORDER + 1;
+        EmphasizeCombatIcon();
         diceRollSprite.GetComponent<SpriteRenderer>().sortingOrder = CombatManager.Instance.FADE_SORTING_ORDER + 1;
         buffListCanvas.sortingOrder = CombatManager.Instance.FADE_SORTING_ORDER + 1;
         diceRollText.GetComponent<MeshRenderer>().sortingOrder = CombatManager.Instance.FADE_SORTING_ORDER + 1;
@@ -124,7 +191,10 @@ public class CombatInfo : MonoBehaviour
     }
     public void DeEmphasize()
     {
-        combatCardSprite.GetComponent<SpriteRenderer>().sortingOrder = CombatManager.Instance.FADE_SORTING_ORDER - 1;
+        foreach (Transform child in cardIconRendering.transform)
+        {
+            child.GetComponent<CombatCardUI>().DeEmphasize();
+        }
         diceRollSprite.GetComponent<SpriteRenderer>().sortingOrder = CombatManager.Instance.FADE_SORTING_ORDER - 1;
         buffListCanvas.sortingOrder = CombatManager.Instance.FADE_SORTING_ORDER - 1;
         diceRollText.GetComponent<MeshRenderer>().sortingOrder = CombatManager.Instance.FADE_SORTING_ORDER - 1;
@@ -144,7 +214,7 @@ public class CombatInfo : MonoBehaviour
     public void FaceLeft()
     {
 
-        FlipTransform(this.transform, false);
+       
         FlipTransform(diceRollText.transform, false);
         FlipTransform(healthBar.transform, false);
         foreach (Transform child in buffList.transform)
@@ -161,7 +231,6 @@ public class CombatInfo : MonoBehaviour
     //Flips the CombatInfo so that the Icon is on the LEFT of the entity
     public void FaceRight()
     {
-        FlipTransform(this.transform, true);
         FlipTransform(diceRollText.transform, true);
         FlipTransform(healthBar.transform, true);
         foreach (Transform child in buffList.transform)
@@ -190,11 +259,11 @@ public class CombatInfo : MonoBehaviour
         }
     }
 
-    //A Cheat implementation that relies on the implementation of FaceRight/Left 
-    public bool IsFacingRight()
+    private bool IsFacingRight()
     {
-        return transform.localScale.x > 0;
+        return this.gameObject.transform.lossyScale.x > 0;
     }
+
     public void UpdateBuffs(Dictionary<string, StatusEffect> buffs)
     {
         foreach (Transform child in buffList.transform)
@@ -214,7 +283,8 @@ public class CombatInfo : MonoBehaviour
             if (IsFacingRight())
             {
                 FlipTransform(buffIcon.transform, true);
-            } else
+            }
+            else
             {
                 FlipTransform(buffIcon.transform, false);
             }

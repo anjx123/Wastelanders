@@ -390,7 +390,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6373172873634443639}
-  - {fileID: 607299130714548600}
   - {fileID: 7669802168277398618}
   - {fileID: 5150959248165338579}
   - {fileID: 5714486089811996398}
@@ -409,9 +408,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6adb464f1698da341ab4389bebbddc09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  combatCardSprite: {fileID: 8450828019453354243}
+  combatCardIconPrefab: {fileID: 5493987427202702900, guid: c8ea4d9207153a04ba34afb4ee1c5e9d, type: 3}
+  cardIconRendering: {fileID: 8083412974278511799}
   buffList: {fileID: 9208932905090809071}
-  diceAnimator: {fileID: 0}
+  diceAnimator: {fileID: 3053580193322781250}
   diceRollSprite: {fileID: 8283439913592688960}
   loadedSprites:
   - {fileID: 21300000, guid: 66f5fea59517b27418057314e8eaffe6, type: 3}

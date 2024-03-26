@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 207ddad3e1c90594ba3f48e2a5a6a796, type: 3}
+  m_Name: JackieTalksWithSoldier 1
+  m_EditorClassIdentifier: 
+  dialogue:
+  - bodyText: Good morning!
+    speakerName: Jackie
+    displayingImage: {fileID: 0}
+  - bodyText: "So today\u2019s the day, huh. NITES exam. How are you feeling? "
+    speakerName: Mustached Soldier
+    displayingImage: {fileID: 0}
+  - bodyText: I'm feeling... Fine.
+    speakerName: Jackie
+    displayingImage: {fileID: 0}
+  - bodyText: Haha, really? I guess those extra hours you put in with Ives have really
+      paid off then?
+    speakerName: Mustached Soldier
+    displayingImage: {fileID: 0}
+  - bodyText: "Yeah, I guess so. I hope it\u2019s enough. "
+    speakerName: Jackie
+    displayingImage: {fileID: 0}
+  - bodyText: Haha, don't lose heart. True strength does not come from conquering
+      a challenge itself, but how you grow to overcome it.
+    speakerName: Mustached Soldier
+    displayingImage: {fileID: 0}
+  - bodyText: You are strong Jackie. I've seen your immense growth with my own eyes.
+    speakerName: Mustached Soldier
+    displayingImage: {fileID: 0}
+  - bodyText: Thanks, Dan. I appreciate the confidence.
+    speakerName: Jackie
+    displayingImage: {fileID: 0}
+  - bodyText: "Haha great! Just be careful out there will ya? I\u2019m not trying
+      to scare you, but there\u2019s been an unusual increase in monster activity
+      in the Wasteland around the city. "
+    speakerName: Mustached Soldier
+    displayingImage: {fileID: 0}
+  - bodyText: A recent scout reported seeing hundreds of piercing purplish eyes,
+      and what sounded like piles of bones clattering in the forest.
+    speakerName: Mustached Soldier
+    displayingImage: {fileID: 0}
+  - bodyText: You know the wasteland is not a friendly place, even your mother knew
+      that. No matter how much she tried not to show it.
+    speakerName: Mustached Soldier
+    displayingImage: {fileID: 0}
+  - bodyText: "Sure\u2026 I\u2019ll keep that in mind. Thanks for the concern\u2026"
+    speakerName: Jackie
+    displayingImage: {fileID: 0}
+  - bodyText: '[The soldier nods, gives a friendly salute, and leaves..]'
+    speakerName: 
+    displayingImage: {fileID: 0}

@@ -1,0 +1,80 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 207ddad3e1c90594ba3f48e2a5a6a796, type: 3}
+  m_Name: IntroCombatDialogue
+  m_EditorClassIdentifier: 
+  dialogue:
+  - bodyText: Every round, the enemy gives you a couple opportunities to attack.
+      Let's select an Action.
+    speakerName: Ives
+  - bodyText: Each action has a Power range in which your Damage can fall.
+    speakerName: Ives
+  - bodyText: And a Speed which dictates the order in which you and your opponent's
+      attacks will come out.
+    speakerName: Ives
+  - bodyText: Target an enemy to declare the attack.
+    speakerName: Ives
+  - bodyText: This will queue up the action to attack, you can retrieve it back into
+      your hand by tapping on its icon.
+    speakerName: Ives
+  - bodyText: Each round, you can queue up as many attacks as you'd like. However...
+    speakerName: Ives
+  - bodyText: 'You cannot play two actions that share the same speed. '
+    speakerName: Ives
+  - bodyText: After all, if you could be in two places at once, they'd probably skip
+      your exam entirely!
+    speakerName: Ives
+  - bodyText: Once you feel confident in your attacks, hit that confirm button to
+      begin the bout
+    speakerName: Ives
+  - bodyText: Light work, lets kick things up a notch
+    speakerName: Ives
+  - bodyText: Light work, lets kick things up a notch
+    speakerName: Ives
+  - bodyText: During the exam, you might find yourself outnumbered. Plan out your
+      attack carefully
+    speakerName: Ives
+  - bodyText: You might have noticed that while making some attacks, you get into
+      this state of focus.
+    speakerName: Ives
+  - bodyText: However, it clears out at the end of the bout.
+    speakerName: Ives
+  - bodyText: Make sure to capitalize and use that burst to take out your opponents.
+    speakerName: Ives
+  - bodyText: Alright, time for the real warm up you've been waiting for.
+    speakerName: Ives
+  - bodyText: In a battle against a waste enemy, I've taught you to first read your
+      opponent's intentions
+    speakerName: Ives
+  - bodyText: Use that to help plan your offensive
+    speakerName: Ives
+  - bodyText: When you play a card against an enemy, your attacks will clash together.
+    speakerName: Ives
+  - bodyText: Come at me!
+    speakerName: Ives
+  - bodyText: 'During a clash, the attack that rolls the highest power wins, dealing
+      all its power as damage to the loser. '
+    speakerName: Ives
+  - bodyText: Your mother always believed the best offense is the greatest defense.
+    speakerName: Ives
+  - bodyText: Now, as the battle drags on, your deck of Actions will be slowly exhausted.
+    speakerName: Ives
+  - bodyText: Alright, now it's for real, I'll use my fists to keep things fair.
+    speakerName: Ives
+  - bodyText: Once exhausted, your deck will reshuffle. However, the maximum Actions
+      you can hold will decrease by 1 everytime this happens.
+    speakerName: Ives
+  - bodyText: Alright, now it's for real, I'll keep using my fists to keep things
+      fair.
+    speakerName: Ives
+  - bodyText: Make sure to pace yourself!
+    speakerName: Ives

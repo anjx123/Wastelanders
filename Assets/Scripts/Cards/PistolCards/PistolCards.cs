@@ -14,6 +14,18 @@ public abstract class PistolCards : ActionClass
         CardType = CardType.RangedAttack;
         base.Initialize();
     }
+
+    public override void CardIsUnstaggered()
+    {
+        if (Origin.HasAnimationParameter("IsShooting"))
+        {
+            Origin.AttackAnimation("IsShooting");
+        } else
+        {
+            Origin.AttackAnimation("RangedAttack");
+        }
+        base.CardIsUnstaggered();
+    }
     public override void OnHit()
     {
         Origin.AttackAnimation("IsShooting");

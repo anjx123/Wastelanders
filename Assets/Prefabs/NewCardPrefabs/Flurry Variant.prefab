@@ -28,6 +28,10 @@ PrefabInstance:
       propertyPath: m_WasSpriteAssigned
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2459814067889663477, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7256956916184963317, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
       propertyPath: m_Name
       value: Flurry Variant
@@ -98,9 +102,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myTransform: {fileID: 3896958921172969324}
-  titleName: Flurry
+  duplicateCardInstance: {fileID: 2330056699190291304, guid: 84213c24e598c464c8c2dc212d0ee98c, type: 3}
+  description: 
   icon: {fileID: 21300000, guid: cea5678db7ab09a48ad216800b9bda74, type: 3}
-  fullCardObjectPrefab: {fileID: 0}
+  cardBack: {fileID: 0}
   cardUI: {fileID: 5130787766848397867}
 --- !u!4 &3896958921172969324 stripped
 Transform:

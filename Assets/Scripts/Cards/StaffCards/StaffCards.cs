@@ -10,10 +10,20 @@ public abstract class StaffCards : ActionClass
     }
     public override void Initialize()
     {
-        CardType = CardType.MeleeAttack;
         base.Initialize();
     }
 
+    public override void CardIsUnstaggered()
+    {
+        if (Origin.HasAnimationParameter("IsStaffing"))
+        {
+            Origin.AttackAnimation("IsStaffing");
+        } else
+        {
+            Origin.AttackAnimation("MeleeAttack");
+        }
+        base.CardIsUnstaggered();
+    }
     public override void OnHit()
     {
         Origin.AttackAnimation("IsStaffing");

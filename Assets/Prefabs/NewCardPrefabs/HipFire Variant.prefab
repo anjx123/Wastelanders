@@ -110,7 +110,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myTransform: {fileID: 5215220087393000266}
-  titleName: Hip Fire
+  duplicateCardInstance: {fileID: 6783246004654626638, guid: c2f8d4fb14416604fbdc60aaa147614c, type: 3}
+  description: 
   icon: {fileID: 21300000, guid: 601769b83c413394f9dcef8bf9a4ef38, type: 3}
-  fullCardObjectPrefab: {fileID: 0}
+  cardBack: {fileID: 0}
   cardUI: {fileID: 4125526225033387533}

@@ -1,14 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.Mathematics;
-using Unity.Profiling.Editor;
-using Unity.VisualScripting;
-using UnityEditor.PackageManager;
 using UnityEngine;
-using UnityEngine.Assertions;
-using static System.Collections.Specialized.BitVector32;
-using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class BattleQueue : MonoBehaviour
 {
@@ -29,6 +22,9 @@ public class BattleQueue : MonoBehaviour
     public GameObject clashingPrefab;
 
     #nullable enable //Turns on pedantic null checks, use exclamation mark (!) operator to assert non null and supress warnings.
+    public delegate void ActionAddedDelegate(ActionClass card);
+    public static event ActionAddedDelegate? playerActionInsertedEvent;
+
     void Awake()
     {
         if (BattleQueueInstance == null)
@@ -72,9 +68,19 @@ public class BattleQueue : MonoBehaviour
         {
             GameObject renderedCopy = Instantiate(iconPrefab, new Vector3(100, 100, -10), Quaternion.identity);
             renderedCopy.transform.SetParent(bqContainer, false);
-            renderedCopy.GetComponent<BattleQueueIcons>().renderBQIcon(queue[i]);
+            renderedCopy.GetComponent<BattleQueueIcons>().RenderBQIcon(queue[i]);
         }
         
+    }
+
+    public bool CanInsertCard(ActionClass actionClass)
+    {
+        if (!actionClass)
+        {
+            Debug.LogWarning("Asking to insert a null action class");
+            return false;
+        }
+        return protoQueue.CanInsertCard(actionClass);
     }
 
 
@@ -86,6 +92,7 @@ public class BattleQueue : MonoBehaviour
     // AFTER: the player action may or not have been inserted; is still sorted regardless
     public bool AddPlayerAction(ActionClass action)
     {
+
         bool ret; // indicator for invoking method: if true should remove the card from the deck.
         if (!(protoQueue.Insert(action)))
         {
@@ -94,6 +101,7 @@ public class BattleQueue : MonoBehaviour
         }
         else
         {
+            playerActionInsertedEvent?.Invoke(action);
             roundStart = false; // ASTER1
             ret = true;
         }
@@ -105,7 +113,7 @@ public class BattleQueue : MonoBehaviour
     // Removes the card if it is clicked on by the player whilst it is in the Queue. And then reinserts it into the issuing player's hand/deck. 
      public void DeletePlayerAction(ActionClass action)
     {
-        Wrapper w = wrapperArray.RemoveWrapperWithActionClass(action);
+        Wrapper? w = wrapperArray.RemoveWrapperWithActionClass(action); // this builds new wrappers bear in mind. 
         ActionClass a = protoQueue.RemoveLinearSearch(action);
 /*        if (w == null)
         {
@@ -115,9 +123,20 @@ public class BattleQueue : MonoBehaviour
         {
             Debug.Log("Check Removal in Array");
         }*/
+        if (w == null || a == null)
+        {
+            throw new Exception("Logic is flawed. This method was called to delete an action that never existed.");
+        }
+        if (w.EnemyAction != null)
+        {
+            if (!wrapperArray.FindAvailablePlayerActionAndRedirect(w)) // if there is still a clash. 
+            {
+                w.EnemyAction.Target = w.ProtoEnemysTarget; 
+            }
+        }
         RenderBQ();
-        PlayerClass player = (PlayerClass)action.Origin;
-        player.ReaddCard(action);
+        PlayerClass? player = action.Origin as PlayerClass;
+        player?.ReaddCard(action);
     }
 
     // to add an enemy action to the actionQueue and the WrapperArray
@@ -166,7 +185,7 @@ public class BattleQueue : MonoBehaviour
             {
                 GameObject renderedCopy = Instantiate(iconPrefab, new Vector3(100, 100, -10), Quaternion.identity);
                 renderedCopy.transform.SetParent(bqContainer, false);
-                renderedCopy.GetComponent<BattleQueueIcons>().renderBQIcon(wrapper.ReturnWhaYouHave());
+                renderedCopy.GetComponent<BattleQueueIcons>().RenderBQIcon(wrapper.ReturnWhaYouHave());
             }
         }
     }    
@@ -190,14 +209,13 @@ public class BattleQueue : MonoBehaviour
     // Begins the dequeueing process. 
     // REQUIRES: An appropriate call. Note that this can be called even if the number of elements in the actionQueue is 0. Invariant array index 0 has largest speed. 
     // MODIFIES: the actionQueue is progressively emptied until it is empty. 
+    // Note the positioning of the Remove from Wrappers/protoQueue: this is important for the dup cards invariant.
     public IEnumerator DequeueWrappers()
     {
         List<Wrapper> array = wrapperArray.GetWrappers();
-        bool beganFighting = false;
         if (!(array.Count == 0))
         {
             CombatManager.Instance.GameState = GameState.FIGHTING;
-            beganFighting = true;
         }
 
         int i = 0; // for debugging
@@ -215,28 +233,46 @@ public class BattleQueue : MonoBehaviour
             if (e.IsHalfEmpty())
             {
                 ActionClass action = e.ReturnWhaYouHave();
+                protoQueue.GetList().Remove(action); 
                 yield return StartCoroutine(CardComparator.Instance.OneSidedAttack(action));
-                protoQueue.GetList().Remove(action);
             }
             else
             {
                 ActionClass pla = e.PlayerAction!;
                 ActionClass ene = e.EnemyAction!;
-                yield return StartCoroutine(CardComparator.Instance.ClashCards(pla, ene));
                 protoQueue.GetList().Remove(pla);
                 protoQueue.GetList().Remove(ene);
+                yield return StartCoroutine(CardComparator.Instance.ClashCards(pla, ene));
             }
 
             RenderBQ(); 
 
         }
-        if (beganFighting)
+        if (CombatManager.Instance.GameState == GameState.FIGHTING)
         {
             CombatManager.Instance.GameState = GameState.SELECTION;
         }
 
         // ASTER1 
         roundStart = true;
+    }
+
+    // for duplicate enemy actions 
+    public void InsertDupEnemyAction(ActionClass a)
+    {
+        protoQueue.InsertDupEnemyCard(a);
+        RenderBQ(); 
+    }
+
+    // for duplicate/"special" player actions
+    // Utilises the protoQueue's insert method as there is not need to redefine the method as the Invariant is upheld throughout
+    // lifeline (BattleQueue itself never has two player actions by the same player entity together since the previous action is removed
+    // vide Dequeu for above.
+    public void InsertDupPlayerAction(ActionClass a)
+    {
+        // use just Insert as checks for initialisation of the dequeing process is redundant i.e. no call to AddPlayerAction 
+        protoQueue.Insert(a);
+        RenderBQ();
     }
 
     // A sorted array implementation for ActionClass.
@@ -265,14 +301,12 @@ public class BattleQueue : MonoBehaviour
             // ensuring uniqueness of speed for one character inside the array
             if (i < array.Count)
             {
-                for (int x = 0; x < array.Count; x++) 
+                bool canInsert = CanInsertCard(card);
+                if (!canInsert)
                 {
-                    if (array[x].IsPlayedByPlayer() && array[x].Origin == card.Origin && card.Speed == array[x].Speed)
-
-                    {
-                        return false; // don't insert. 
-                    }
+                    return false;
                 }
+
             }
 
             // else insert:
@@ -288,6 +322,40 @@ public class BattleQueue : MonoBehaviour
                                     // ASTER2 refer to note inside WrapperArray
             return true;
 
+        }
+
+        public bool CanInsertCard(ActionClass card)
+        {
+            for (int x = 0; x < array.Count; x++)
+            {
+                if (array[x].IsPlayedByPlayer() && array[x].Origin == card.Origin && card.Speed == array[x].Speed)
+
+                {
+                    return false; // don't insert. 
+                }
+            }
+            return true;
+        }
+
+        // has to be introduced because enemeies CAN now add actions after initial based on game conditions.
+        public void InsertDupEnemyCard(ActionClass card)
+
+        {
+            int elements = array.Count;
+            int firstPosition = 0;
+            if (elements != 0)
+            {
+                for (int i = 0; i < elements; i++)
+                {
+                    if (card.Speed < array[i].Speed || (card.Speed == array[i].Speed && array[i].IsPlayedByPlayer()))
+                    {
+                        firstPosition++;
+                    }
+                }
+            }
+            array.Insert(firstPosition, card);
+            BattleQueue.BattleQueueInstance.wrapperArray.InsertEnemyActionIntoWrappers(card);
+            
         }
 
         //Removes all instances of an entity from the queue
@@ -412,9 +480,23 @@ public class BattleQueue : MonoBehaviour
                 {
                     if (curWrapper.PlayerAction == null && curWrapper.EnemyAction != null) // if the wrapper is half-empty
                     {
-                        if (playerAct.Target == curWrapper.EnemyAction.Origin)// CASE 1; 
+                        if (playerAct.Target == curWrapper.EnemyAction.Origin) // where it's confirmed that the player has clicked the target like selected it. 
                         {
+                            if (curWrapper.EnemyAction.Target != playerAct.Origin && curWrapper.EnemyAction.Speed > playerAct.Speed)
+                            {
+                                continue;
+                            }
+                            
                             curWrapper.PlayerAction = playerAct;
+
+                            // The redirection occurs here because this method is invoked only when the player action can be successfully inserted; this code block's conditions are requisites as well.
+                            if (curWrapper.ProtoEnemysTarget == null) // very important since this is the ORIGINAL target. 
+                            {
+                                curWrapper.ProtoEnemysTarget = curWrapper.EnemyAction.Target;
+                                curWrapper.EnemyAction.Target = playerAct.Origin;
+                            }
+                            // redirection complete
+
                             curWrapper.Update();
                             SortWrappers();
                             // DisplayWrapperArray();
@@ -446,7 +528,7 @@ public class BattleQueue : MonoBehaviour
             {
                 foreach (Wrapper curWrapper in wrappers)
                 {
-                    if (curWrapper.PlayerAction != null && curWrapper.PlayerAction.Target == act.Origin) // speed is maintained 
+                    if (curWrapper.PlayerAction != null && curWrapper.EnemyAction == null && curWrapper.PlayerAction.Target == act.Origin) // speed is maintained 
                     {
                         curWrapper.EnemyAction = act;
                         curWrapper.Update();
@@ -552,7 +634,7 @@ public class BattleQueue : MonoBehaviour
                         y--;
                         continue; // no swap needed 
                     }
-                    else if (wrappers[y - 1].PlayerAction == null || wrappers[y].PlayerAction!.Speed > wrappers[y - 1].PlayerAction!.Speed)
+                    else if (wrappers[y - 1].PlayerAction == null || wrappers[y]!.PlayerAction!.Speed > wrappers[y - 1].PlayerAction!.Speed)
                     {
                         Swap(wrappers, y - 1, y);
                     }
@@ -561,14 +643,35 @@ public class BattleQueue : MonoBehaviour
             }
         }
 
-
-
-
         public List<Wrapper> GetWrappers()
         {
             return wrappers;
         }
 
+        // REQUIRES: w.EnemyAction != null
+        // note that the new clash has already been formed at this point. 
+        // w is the discarded wrapper.
+        public bool FindAvailablePlayerActionAndRedirect(Wrapper w)
+        {
+            foreach (Wrapper wrapper in wrappers)
+            {
+                if (wrapper.PlayerAction != null && wrapper.PlayerAction.Target == w.EnemyAction!.Origin && w.EnemyAction == wrapper.EnemyAction)
+                {
+
+                    if (w.ProtoEnemysTarget != null)
+                    {
+                        wrapper.ProtoEnemysTarget = w.ProtoEnemysTarget;
+                    }
+                    else if (wrapper.ProtoEnemysTarget == null)
+                    {
+                        wrapper.ProtoEnemysTarget = wrapper.EnemyAction.Target;
+                    }
+                    wrapper.EnemyAction.Target = wrapper.PlayerAction.Origin;
+                    return true;
+                }
+            }
+            return false;
+        }
     }
 
     // Wrapper Element for WrapperArray;
@@ -576,6 +679,10 @@ public class BattleQueue : MonoBehaviour
     {
         public ActionClass? PlayerAction { get; set; }
         public ActionClass? EnemyAction { get; set; }
+
+        // This field is ONLY ever updated if a clash is introduced. It remains null until so. If a clash is inserted, it will retain information of the primary target until the round ends. Knowledge of this field should remain inside BQ.
+        // Cannot see perfect access modifiers so as to obviate incorrect modification. 
+        public EntityClass? ProtoEnemysTarget { get; set; } 
 
         public int HighestSpeed { get; set; } // used to sort the wrappers 
                                                 // -1 indicates that the wrapper is empty 

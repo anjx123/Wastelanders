@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using TMPro;
-using UnityEditorInternal;
+
 using UnityEngine;
 
 
@@ -24,12 +21,12 @@ public class PopUpNotificationManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        createWarning("Round Start!!!");
     }
 
     private void Start()
     {
         CombatManager.OnGameStateChanged += DismissDescription;
+        RemoveDescription();
     }
 
     private void OnDestroy()
@@ -65,7 +62,7 @@ public class PopUpNotificationManager : MonoBehaviour
     public void createWarning(string message)
     {
         WarningInfo info = warningObject.GetComponent<WarningInfo>();
-        info.showWarning(message);
+        info.ShowWarning(message);
     }
 
     public void DisplayText(string description)

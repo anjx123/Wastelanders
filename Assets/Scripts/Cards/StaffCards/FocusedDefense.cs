@@ -22,25 +22,21 @@ public class FocusedDefense : StaffCards
         Speed = 5;
 
 
-        myName = "FocusedDefense";
-        description = "Gain 1 Focus For Every Attack The Clashing Opponent Makes Against This Character";
-        CardType = CardType.Defense;
+        myName = "Focused Defense";
+        description = "Gain 1 Focus, If this card is unstaggerd, Gain another Focus";
         Renderer renderer = GetComponent<Renderer>();
         ogMaterial = renderer.material; // og sprite of card
         OriginalPosition = transform.position;
         base.Initialize();
-
-
+        CardType = CardType.Defense;
     }
 
-    // Update is called once per frame
-    void Update()
+    public override void CardIsUnstaggered()
     {
+        Origin.AddStacks(Focus.buffName, 1);
     }
-
     public override void ApplyEffect()
     {
-        //TODO: Search the BQ for every attack the clashing opponent makes against this character 
-        base.ApplyEffect();
+        Origin.AddStacks(Focus.buffName, 1);
     }
 }
