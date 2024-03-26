@@ -2573,7 +2573,7 @@ MonoBehaviour:
     displayingImage: {fileID: 0}
     broadcastAnEvent: 0
   ivesFinal:
-  - bodyText: Haha ofcourse, but you might want to brush on that stealth of yours
+  - bodyText: Haha of course, but you might want to brush on that stealth of yours
       first.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: ade9660133ca00a499bfa3ad449b87bd, type: 3}
@@ -2584,33 +2584,19 @@ MonoBehaviour:
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: ade9660133ca00a499bfa3ad449b87bd, type: 3}
     broadcastAnEvent: 0
+  ivesHug:
   - bodyText: (Ives winks at Jackie. She spreads her arms out.)
     speakerName: 
     displayingImage: {fileID: 0}
     broadcastAnEvent: 0
   - bodyText: "Com \u2018ere, Jackie. Welcome to the NITES."
     speakerName: Ives
-    displayingImage: {fileID: 0}
+    displayingImage: {fileID: 21300000, guid: ade9660133ca00a499bfa3ad449b87bd, type: 3}
     broadcastAnEvent: 0
   jackieLetter:
   - bodyText: '[Hours later, the crowds have dispersed and Jackie is sitting alone
       on a wall, overlooking the Wasteland.]'
     speakerName: 
-    displayingImage: {fileID: 0}
-    broadcastAnEvent: 0
-  - bodyText: Hey Ma,
-    speakerName: Jackie
-    displayingImage: {fileID: 0}
-    broadcastAnEvent: 0
-  - bodyText: "I still can\u2019t believe it. I\u2019m finally one of the NITES. 
-      All those years of training finally paid off. Mama\u2026 I can finally begin
-      my search for you.  I swear, no matter where you are in the Wasteland, I\u2019ll
-      find you. And we will go home, together. "
-    speakerName: Jackie
-    displayingImage: {fileID: 0}
-    broadcastAnEvent: 0
-  - bodyText: 'Love you, Jackie '
-    speakerName: Jackie
     displayingImage: {fileID: 0}
     broadcastAnEvent: 0
 --- !u!1 &1894012316

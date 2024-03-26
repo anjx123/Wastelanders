@@ -23,4 +23,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Scene2.unity
     guid: 21c0fffe00ac8f4449c8c7c9192036d6
+  - enabled: 1
+    path: Assets/Scenes/PostQueenBeetle.unity
+    guid: 33caba34539bdda4e98da8c600874816
+  - enabled: 1
+    path: Assets/Scenes/Jackie's Letter.unity
+    guid: 4ba50ff3ff6653e46bb7276e979af597
   m_configObjects: {}

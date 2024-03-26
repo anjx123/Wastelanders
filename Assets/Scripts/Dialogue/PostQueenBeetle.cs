@@ -23,6 +23,7 @@ public class PostQueenBeetle : DialogueClasses
     [SerializeField] private List<DialogueText> ivesYapping;
     [SerializeField] private List<DialogueText> jackieInterjects;
     [SerializeField] private List<DialogueText> ivesFinal;
+    [SerializeField] private List<DialogueText> ivesHug;
     [SerializeField] private List<DialogueText> jackieLetter;
     protected override void GameStateChange(GameState gameState)
     {
@@ -59,25 +60,32 @@ public class PostQueenBeetle : DialogueClasses
         CombatManager.Instance.ActivateBaseCamera();
         yield return StartCoroutine(FadeImage(jackieImage, 1f, true));
         yield return StartCoroutine(DialogueManager.Instance.StartDialogue(jackieResultsConfusion));
-        yield return StartCoroutine(FadeImage(jackieImage, 0f, false));
+        yield return StartCoroutine(FadeImage(jackieImage, 1f, false));
+        yield return new WaitForSeconds(0.8f);
 
         ives.FaceRight(); ives.animator.enabled = false; yield return new WaitForSeconds(1.6f);
 
         yield return StartCoroutine(FadeImage(ivesImage, 1f, true));
         yield return StartCoroutine(DialogueManager.Instance.StartDialogue(ivesYapping));
-        yield return StartCoroutine(FadeImage(ivesImage, 0f, false));
+        yield return StartCoroutine(FadeImage(ivesImage, 1f, false));
+        yield return new WaitForSeconds(0.6f);
 
         yield return StartCoroutine(FadeImage(jackieImage, 1f, true));
         yield return StartCoroutine(DialogueManager.Instance.StartDialogue(jackieInterjects));
-        yield return StartCoroutine(FadeImage(jackieImage, 0f, false));
+        yield return StartCoroutine(FadeImage(jackieImage, 1f, false));
+        yield return new WaitForSeconds(0.6f);
 
         yield return StartCoroutine(FadeImage(ivesImage, 1f, true));
         yield return StartCoroutine(DialogueManager.Instance.StartDialogue(ivesFinal));
-        yield return StartCoroutine(FadeImage(ivesImage, 0f, false));
+        yield return StartCoroutine(FadeImage(ivesImage, 1f, false));
+        yield return new WaitForSeconds(0.6f);
+
+        yield return StartCoroutine(DialogueManager.Instance.StartDialogue(ivesHug));
 
         yield return StartCoroutine(CombatManager.Instance.FadeInDarkScreen(2f));
         yield return StartCoroutine(DialogueManager.Instance.StartDialogue(jackieLetter));
-        Debug.Log("fin");
+
+        SceneManager.LoadScene("Jackie's Letter");
 
 
 
