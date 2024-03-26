@@ -25,6 +25,7 @@ public abstract class EntityClass : SelectClass
 
     [SerializeField] protected BoxCollider boxCollider;
     protected bool isDead = false;
+    public bool IsDead { get { return isDead; } set { isDead = value; } }
     private bool crosshairStaysActive = false;
 
 

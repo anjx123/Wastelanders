@@ -28,6 +28,10 @@ public class BeetleFight : DialogueClasses
     [SerializeField] private Transform ivesDefaultTransform;
     [SerializeField] private Transform ivesCombatTransform;
     [SerializeField] private Transform jackieCombatTransform;
+    [SerializeField] private Transform ivesCombat2Transform;
+    [SerializeField] private Transform jackieCombat2Transform;
+    [SerializeField] private Transform ivesCombat3Transform;
+    [SerializeField] private Transform jackieCombat3Transform;
 
     [SerializeField] private WasteFrog frog;
     [SerializeField] private WasteFrog frogThatRunsAway;
@@ -56,6 +60,7 @@ public class BeetleFight : DialogueClasses
     [SerializeField] private CinemachineVirtualCamera sceneCamera;
     [SerializeField] private Sprite frogDeathSprite;
     [SerializeField] private Sprite jackieCrystalSprite;
+    [SerializeField] private GameOver gameOver;
 
     [SerializeField] private List<DialogueText> openingJackieQuipt;
     [SerializeField] private DialogueWrapper openingDiscussion;
@@ -74,7 +79,10 @@ public class BeetleFight : DialogueClasses
     [SerializeField] private DialogueWrapper ivesConversation;
     [SerializeField] private DialogueWrapper twoPlayerCombatTutorial;
     [SerializeField] private DialogueWrapper ivesTutorial;
-    [SerializeField] private DialogueWrapper postBattleDialogue;
+    [SerializeField] private DialogueWrapper wave2Dialogue;
+    [SerializeField] private DialogueWrapper wave3Dialogue;
+    [SerializeField] private DialogueWrapper postBattleDialogue; 
+    [SerializeField] private DialogueWrapper gameLoseDialogue;
 
     [SerializeField] private bool jumpToCombat;
 
@@ -340,29 +348,67 @@ public class BeetleFight : DialogueClasses
             ives.transform.position = ivesCombatTransform.position + new Vector3(-4, 0, 0);
             Coroutine fade = StartCoroutine(CombatManager.Instance.FadeInLightScreen(2f));
         }
-        theCampWithBeetles.SetActive(true);
-        beetleNest.SetActive(true);
-        foreach (EnemyClass entity in campBeetlesAndCrystals)
+
         {
-            DieInScene(entity);
-            Destroy(entity);
+            theCampWithBeetles.SetActive(true);
+            beetleNest.SetActive(true);
+            foreach (EnemyClass entity in campBeetlesAndCrystals)
+            {
+                DieInScene(entity);
+                Destroy(entity);
+            }
+            foreach (EnemyClass entity in nitesCampBeetles)
+            {
+                DieInScene(entity);
+                Destroy(entity);
+            }
         }
-        foreach (EnemyClass entity in nitesCampBeetles)
+
         {
-            DieInScene(entity);
-            Destroy(entity);
+            CombatManager.Instance.SetEnemiesHostile(wave1);
+            jackie.InCombat();
+            ives.InCombat();
+            jackie.Targetable();
+            ives.Targetable();
+            DialogueManager.Instance.MoveBoxToTop();
+            CombatManager.Instance.GameState = GameState.SELECTION;
+            yield return StartCoroutine(DialogueManager.Instance.StartDialogue(twoPlayerCombatTutorial.Dialogue));
+            Begin2PCombatTutorial();
+            yield return new WaitUntil(() => CombatManager.Instance.GameState == GameState.GAME_WIN);
         }
-        CombatManager.Instance.SetEnemiesHostile(wave1);
-        jackie.InCombat(); 
-        ives.InCombat();
-        jackie.Targetable();
-        ives.Targetable();
-        DialogueManager.Instance.MoveBoxToTop();
-        CombatManager.Instance.GameState = GameState.SELECTION;
-        HighlightManager.Instance.SetActivePlayer(jackie);
-        yield return StartCoroutine(DialogueManager.Instance.StartDialogue(twoPlayerCombatTutorial.Dialogue));
-        Begin2PCombatTutorial();
-        yield return new WaitUntil(() => CombatManager.Instance.GameState == GameState.GAME_WIN);
+
+        {
+            CombatManager.Instance.SetEnemiesHostile(wave2);
+            if (!jackie.IsDead)
+            {
+                jackie.SetReturnPosition(jackieCombat2Transform.position);
+            }
+            if (!ives.IsDead)
+            {
+                ives.SetReturnPosition(ivesCombat2Transform.position);
+            }
+            CombatManager.Instance.GameState = GameState.SELECTION;
+            yield return StartCoroutine(DialogueManager.Instance.StartDialogue(wave2Dialogue.Dialogue));
+            BeginWave2();
+            yield return new WaitUntil(() => CombatManager.Instance.GameState == GameState.GAME_WIN);
+        }
+
+        {
+            CombatManager.Instance.SetEnemiesHostile(wave3);
+            if (!jackie.IsDead)
+            {
+                jackie.SetReturnPosition(jackieCombat3Transform.position);
+            }
+            if (!ives.IsDead)
+            {
+                ives.SetReturnPosition(ivesCombat3Transform.position);
+            }
+            CombatManager.Instance.GameState = GameState.SELECTION;
+            yield return StartCoroutine(DialogueManager.Instance.StartDialogue(wave3Dialogue.Dialogue));
+            BeginWave3();
+            yield return new WaitUntil(() => CombatManager.Instance.GameState == GameState.GAME_WIN);
+
+        }
 
         DialogueManager.Instance.MoveBoxToBottom();
         CombatManager.Instance.GameState = GameState.OUT_OF_COMBAT;
@@ -371,8 +417,6 @@ public class BeetleFight : DialogueClasses
         ives.OutOfCombat();
         jackie.FaceLeft();
         ives.FaceRight();
-        StartCoroutine(ives.MoveToPosition(ivesDefaultTransform.position, 0, 1.5f));
-        yield return StartCoroutine(jackie.MoveToPosition(ivesDefaultTransform.position, 1.5f, 1.5f));
         yield return StartCoroutine(DialogueManager.Instance.StartDialogue(postBattleDialogue.Dialogue));
         yield return StartCoroutine(CombatManager.Instance.FadeInDarkScreen(1.5f));
     }
@@ -380,8 +424,20 @@ public class BeetleFight : DialogueClasses
     private void Begin2PCombatTutorial()
     {
         HighlightManager.EntityClicked += EntityClicked;
-        EntityClass.OnEntityDeath += EntityDied;
+        CombatManager.PlayersWinEvent += AllEntitiesDied;
+        CombatManager.EnemiesWinEvent += EnemiesWin;
     }
+    private void BeginWave2()
+    {
+        CombatManager.PlayersWinEvent += AllEntitiesDied;
+        CombatManager.EnemiesWinEvent += EnemiesWin;
+    }
+
+    private void BeginWave3()
+    {
+        CombatManager.PlayersWinEvent += AllEntitiesDied;
+        CombatManager.EnemiesWinEvent += EnemiesWin;
+    } 
 
     private void EntityClicked(EntityClass e)
     {
@@ -398,17 +454,32 @@ public class BeetleFight : DialogueClasses
         yield return StartCoroutine(DialogueManager.Instance.StartDialogue(ivesTutorial.Dialogue));
     }
 
-    private void EntityDied(EntityClass e)
+    private void AllEntitiesDied()
     {
-        if (e.GetType().IsSubclassOf(typeof(Beetle)))
-        {
-            beetles_alive--;
-            if (beetles_alive < 1)
-            {
-                CombatManager.Instance.GameState = GameState.GAME_WIN;
-                EntityClass.OnEntityDeath -= EntityDied;
-            }
-        }
+        CombatManager.Instance.GameState = GameState.GAME_WIN;
+        CombatManager.PlayersWinEvent -= AllEntitiesDied;
+        HighlightManager.EntityClicked -= EntityClicked;
+        CombatManager.EnemiesWinEvent -= EnemiesWin;
+    }
+
+
+    private void EnemiesWin()
+    {
+        CombatManager.EnemiesWinEvent -= EnemiesWin;
+        CombatManager.PlayersWinEvent -= AllEntitiesDied;
+        HighlightManager.EntityClicked -= EntityClicked;
+        StartCoroutine(GameLose());
+        CombatManager.Instance.GameState = GameState.GAME_LOSE;
+    }
+    private IEnumerator GameLose()
+    {
+        yield return StartCoroutine(CombatManager.Instance.FadeInDarkScreen(2f));
+
+        GameStateManager.jumpIntoFrogAndSlimeFight = true;
+        gameOver.gameObject.SetActive(true);
+        gameOver.FadeIn();
+
+        yield return StartCoroutine(DialogueManager.Instance.StartDialogue(gameLoseDialogue.Dialogue));
     }
 
 

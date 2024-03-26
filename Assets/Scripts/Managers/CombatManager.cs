@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using static UnityEngine.EventSystems.EventTrigger;
+using System.Security.Cryptography;
 
 public class CombatManager : MonoBehaviour
 {
@@ -142,7 +143,14 @@ public class CombatManager : MonoBehaviour
 
         if (players.Count > 0)
         {
-            HighlightManager.Instance.SetActivePlayer(players[^1]);
+            PlayerClass? jackie = players.FirstOrDefault(player => player is Jackie);
+            if (jackie != null)
+            {
+                HighlightManager.Instance.SetActivePlayer(jackie);
+            } else
+            {
+                HighlightManager.Instance.SetActivePlayer(players[0]);
+            }
         }
         BattleQueue.BattleQueueInstance.TheBeginning(); //Nasty but necessary for rendering the current implementation of BQ
     }
