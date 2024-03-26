@@ -875,11 +875,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 617082415006753302, guid: 276880eff6e9b4907a1ea5430761a162, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.69
+      value: 1.29
       objectReference: {fileID: 0}
     - target: {fileID: 617082415006753302, guid: 276880eff6e9b4907a1ea5430761a162, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.11
+      value: 0.38
       objectReference: {fileID: 0}
     - target: {fileID: 617082415006753302, guid: 276880eff6e9b4907a1ea5430761a162, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3512,6 +3512,7 @@ MonoBehaviour:
   wave1Fight: {fileID: 1208587911}
   wave2Fight: {fileID: 1810605316}
   wave3Fight: {fileID: 1248876798}
+  wave3Crystal: {fileID: 1889769761}
   sceneCamera: {fileID: 355728265}
   frogDeathSprite: {fileID: 21300000, guid: 87829d35cc4de8b4db02b857e0431956, type: 3}
   jackieCrystalSprite: {fileID: 21300000, guid: 39aee1878ca221043839f79d83a21ecd, type: 3}
@@ -3579,6 +3580,59 @@ MonoBehaviour:
   gameLoseDialogue: {fileID: 11400000, guid: 676bae3a33f603b4b810e2beea6db7c0, type: 2}
   resonateExplanation: {fileID: 11400000, guid: c263fe95eae201a439296c687b51e21c, type: 2}
   crystalExplanation: {fileID: 11400000, guid: 9f914eeee4cd7d14bb9c4bc27eaf8e52, type: 2}
+  afterWave3Dialogue:
+  - bodyText: 'Wow, those beetles just don''t let up. '
+    speakerName: Jackie
+    displayingImage: {fileID: 0}
+    broadcastAnEvent: 0
+  outOfCombatCrystalDialogue:
+  - bodyText: Hey Ives, why do you think the beetles were so fixated on these crystals.
+    speakerName: Jackie
+    displayingImage: {fileID: 0}
+    broadcastAnEvent: 0
+  - bodyText: Not too sure, but it seemed like the crystals on their back brightened
+      up when they went near it. It must make them stronger somehow.
+    speakerName: Ives
+    displayingImage: {fileID: 0}
+    broadcastAnEvent: 0
+  - bodyText: ' [Crystals give +1 resonate to the atacker who reduces its health
+      below each third of its health] '
+    speakerName: 
+    displayingImage: {fileID: 0}
+    broadcastAnEvent: 0
+  - bodyText: Whatever it is, it isn't good news to keep around.
+    speakerName: Jackie
+    displayingImage: {fileID: 0}
+    broadcastAnEvent: 0
+  jackieFeelsStronger:
+  - bodyText: Woah, whats this feeling. I feel stronger after hitting the crysta?
+    speakerName: Jackie
+    displayingImage: {fileID: 0}
+    broadcastAnEvent: 0
+  - bodyText: It's as if I can feel the fatigue from the fight leaving me.
+    speakerName: Jackie
+    displayingImage: {fileID: 0}
+    broadcastAnEvent: 0
+  ivesFeelsStronger:
+  - bodyText: Woah, I feel stronger after hitting that crystal.
+    speakerName: Ives
+    displayingImage: {fileID: 0}
+    broadcastAnEvent: 0
+  - bodyText: It's as if I can feel the fatigue from the fight leaving me.
+    speakerName: Ives
+    displayingImage: {fileID: 0}
+    broadcastAnEvent: 0
+  ivesAnalyzeAfterExam:
+  - bodyText: 'We should take some shard samples for the Scientists to analyze after
+      the exam. '
+    speakerName: Ives
+    displayingImage: {fileID: 0}
+    broadcastAnEvent: 0
+  - bodyText: For now, lets store the rest in a safe place where the beetles can't
+      find.
+    speakerName: Ives
+    displayingImage: {fileID: 0}
+    broadcastAnEvent: 0
   jumpToCombat: 1
 --- !u!1 &1277541862
 GameObject:
@@ -5600,6 +5654,87 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a87ba7eb40165b04db444a9367c32200, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1001 &1805357432
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1810605317}
+    m_Modifications:
+    - target: {fileID: 617082415006753302, guid: 276880eff6e9b4907a1ea5430761a162, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 617082415006753302, guid: 276880eff6e9b4907a1ea5430761a162, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 617082415006753302, guid: 276880eff6e9b4907a1ea5430761a162, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1.09
+      objectReference: {fileID: 0}
+    - target: {fileID: 617082415006753302, guid: 276880eff6e9b4907a1ea5430761a162, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -4.44
+      objectReference: {fileID: 0}
+    - target: {fileID: 617082415006753302, guid: 276880eff6e9b4907a1ea5430761a162, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 617082415006753302, guid: 276880eff6e9b4907a1ea5430761a162, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 617082415006753302, guid: 276880eff6e9b4907a1ea5430761a162, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 617082415006753302, guid: 276880eff6e9b4907a1ea5430761a162, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 617082415006753302, guid: 276880eff6e9b4907a1ea5430761a162, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 617082415006753302, guid: 276880eff6e9b4907a1ea5430761a162, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 617082415006753302, guid: 276880eff6e9b4907a1ea5430761a162, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 617082415006753302, guid: 276880eff6e9b4907a1ea5430761a162, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4055980226737126212, guid: 276880eff6e9b4907a1ea5430761a162, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4055980226737126212, guid: 276880eff6e9b4907a1ea5430761a162, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8044949296705636452, guid: 276880eff6e9b4907a1ea5430761a162, type: 3}
+      propertyPath: m_Name
+      value: DroneBeetlePrefab (2)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7845146088618199503, guid: 276880eff6e9b4907a1ea5430761a162, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
+  m_SourcePrefab: {fileID: 100100000, guid: 276880eff6e9b4907a1ea5430761a162, type: 3}
+--- !u!4 &1805357433 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 617082415006753302, guid: 276880eff6e9b4907a1ea5430761a162, type: 3}
+  m_PrefabInstance: {fileID: 1805357432}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1808829897
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5711,6 +5846,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1421950279}
+  - {fileID: 1805357433}
   - {fileID: 1822375161}
   - {fileID: 495401017}
   m_Father: {fileID: 884201476}
@@ -5733,11 +5869,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 617082415006753302, guid: 276880eff6e9b4907a1ea5430761a162, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.79
+      value: 2.6
       objectReference: {fileID: 0}
     - target: {fileID: 617082415006753302, guid: 276880eff6e9b4907a1ea5430761a162, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.52
+      value: -2.23
       objectReference: {fileID: 0}
     - target: {fileID: 617082415006753302, guid: 276880eff6e9b4907a1ea5430761a162, type: 3}
       propertyPath: m_LocalPosition.z
@@ -6117,6 +6253,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7638263227755287879, guid: 55dd1017896a4294ebc48577819d6683, type: 3}
   m_PrefabInstance: {fileID: 1889769758}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1889769761 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -3618748775260971989, guid: 55dd1017896a4294ebc48577819d6683, type: 3}
+  m_PrefabInstance: {fileID: 1889769758}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7233ff0cadad3784dbdeba856f026aec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1894012316
 GameObject:
   m_ObjectHideFlags: 0
