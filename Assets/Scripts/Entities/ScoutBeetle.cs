@@ -13,9 +13,9 @@ public class ScoutBeetle : Beetle
     public override void Start()
     {
         base.Start();
-        MaxHealth = 7;
+        MaxHealth = 8;
         Health = MaxHealth;
-        myName = "ScoutBeetle";
+        myName = "Scout Beetle";
     }
 
     // Scout attacks twice in a turn

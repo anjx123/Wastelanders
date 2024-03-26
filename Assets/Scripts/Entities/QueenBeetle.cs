@@ -56,9 +56,13 @@ public class QueenBeetle : EnemyClass
     // event handler for Beetle.OnGainBuffs. This is called whenever a beetle tries to
     // add a buff.
     // Adds the stacks that were directed to the beetle to the Queen instead.
-    private void HandleGainedBuffs(string buffType, int stacks)
+    private void HandleGainedBuffs(string buffType, int stacks, Beetle beetle)
     {
-        AddStacks(buffType, stacks);
+        if (buffType == Resonate.buffName)
+        {
+            AddStacks(buffType, stacks);
+            beetle.ReduceStacks(buffType, stacks);
+        }
     }
 
     private void HandleBeetleDied(Beetle victim)

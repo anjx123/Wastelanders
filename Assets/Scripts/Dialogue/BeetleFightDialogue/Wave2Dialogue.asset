@@ -12,4 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 207ddad3e1c90594ba3f48e2a5a6a796, type: 3}
   m_Name: Wave2Dialogue
   m_EditorClassIdentifier: 
-  dialogue: []
+  dialogue:
+  - bodyText: Seems like there are more beetles than I thought. Make sure to conserve
+      your stamina and play wisely.
+    speakerName: Ives
+    displayingImage: {fileID: 0}
+    broadcastAnEvent: 0

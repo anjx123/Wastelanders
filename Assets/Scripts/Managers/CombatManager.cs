@@ -190,6 +190,7 @@ public class CombatManager : MonoBehaviour
         {
             dynamicCamera.Follow = null;
         }
+
         if (players.Count == 0)
         {
             EnemiesWinEvent?.Invoke();
@@ -209,7 +210,9 @@ public class CombatManager : MonoBehaviour
         {
             dynamicCamera.Follow = null;
         }
-        if (enemies.Count == 0)
+
+        bool allAreNeutral = enemies.OfType<NeutralEntityInterface>().Count() == enemies.Count;
+        if (enemies.Count == 0 || allAreNeutral)
         {
             PlayersWinEvent?.Invoke();
         }

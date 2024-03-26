@@ -13,8 +13,8 @@ public class DroneBeetle : Beetle
     public override void Start()
     {
         base.Start();
-        MaxHealth = 7;
+        MaxHealth = 8;
         Health = MaxHealth;
-        myName = "DroneBeetle";
+        myName = "Drone Beetle";
     }
 }
