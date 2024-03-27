@@ -107,7 +107,6 @@ public class BeetleFight : DialogueClasses
     private const float BRIEF_PAUSE = 0.2f; // For use after an animation to make it visually seem smoother
     private const float MEDIUM_PAUSE = 1f; //For use after a text box comes down and we want to add some weight to the text.
 
-    private int beetles_alive;
     private bool crystalsExplained = false;
 
     private void OnDestroy()
@@ -191,6 +190,7 @@ public class BeetleFight : DialogueClasses
         if (!jumpToCombat)
         {
             sceneCamera.Priority = 2;
+            yield return new WaitForSeconds(1f);
             //Lights Camera Action!!
             {
                 Coroutine fade = StartCoroutine(CombatManager.Instance.FadeInLightScreen(2f));

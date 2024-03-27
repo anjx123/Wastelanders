@@ -13,7 +13,7 @@ public class Vitals : PistolCards
     public override void Initialize()
     {
         lowerBound = 1;
-        upperBound = 8;
+        upperBound = 7;
 
         Speed = 5;
 

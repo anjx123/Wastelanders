@@ -1,44 +1,36 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Xml.Linq;
 using UnityEngine;
-using static Unity.Collections.AllocatorManager;
-using static UnityEngine.UI.Image;
+using static StatusEffect;
 
 public class SteadiedShot : PistolCards
 {
-    public override void OnCardStagger()
-    {
-
-    }
 
     // Start is called before the first frame update
     public override void Initialize()
     {
         lowerBound = 1;
-        upperBound = 5;
-        Speed = 3;
+        upperBound = 3;
+        Speed = 4;
 
         myName = "Steadied Shot";
-        description = "Gain One Accuracy, then attack";
-        CardType = CardType.RangedAttack;
+        description = "When played, do not lose accuracy when you get hit this round.";
         Renderer renderer = GetComponent<Renderer>();
         ogMaterial = renderer.material; // og sprite of card
         OriginalPosition = transform.position;
         base.Initialize();
-
-
+        CardType = CardType.Defense;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-    }
     public override void ApplyEffect()
     {
-        
-        Origin.AddStacks(Accuracy.buffName, 1);
-        base.ApplyEffect();
-
+        StatusEffectDelegate originalHandler = Origin.SetBuffsOnHitHandler(Accuracy.buffName, () => { });
+        CombatManager.OnGameStateChanged += ResetBuffHandler;
+        void ResetBuffHandler(GameState gameState)
+        {
+            if (gameState == GameState.SELECTION)
+            {
+                CombatManager.OnGameStateChanged -= ResetBuffHandler;
+                Origin.SetBuffsOnHitHandler(Accuracy.buffName, originalHandler);
+            }
+        }
     }
 }

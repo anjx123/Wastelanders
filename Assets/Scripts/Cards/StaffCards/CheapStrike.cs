@@ -14,35 +14,31 @@ public class CheapStrike : StaffCards
     {
         lowerBound = 1;
         upperBound = 3;
-        
+
         Speed = 1;
 
+
         myName = "Cheap Strike";
-        description = "If this card hits the opponent, gain 2 Focus";
+        description = "On Hit, gain 1 Focus next turn";
         Renderer renderer = GetComponent<Renderer>();
         ogMaterial = renderer.material; // og sprite of card
         OriginalPosition = transform.position;
         CardType = CardType.MeleeAttack;
         base.Initialize();
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
 
-    }
-
-    public override void CardIsUnstaggered()
-    {
-        base.CardIsUnstaggered();
-        Origin.AddStacks(Focus.buffName, 2);
     }
 
     public override void OnHit()
     {
-        Vector3 diffInLocation = Target.myTransform.position - Origin.myTransform.position;
-        Origin.UpdateFacing(diffInLocation, null);
-        this.Target.TakeDamage(Origin, duplicateCard.actualRoll);
-        CardIsUnstaggered();
+        CombatManager.OnGameStateChanged += AddFocus;
+        void AddFocus(GameState gameState)
+        {
+            if (gameState == GameState.SELECTION)
+            {
+                CombatManager.OnGameStateChanged -= AddFocus;
+                Origin.AddStacks(Focus.buffName, 1);
+            }
+        }
     }
 }

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using static CardComparator;
+using static StatusEffect;
 
 public abstract class EntityClass : SelectClass
 {
@@ -415,7 +416,7 @@ public abstract class EntityClass : SelectClass
     {
         foreach (string s in statusEffects.Keys)
         {
-            statusEffects[s].OnBuffedEntityHit();
+            statusEffects[s].OnEntityHitHandler();
         }
         UpdateBuffs();
     }
@@ -522,6 +523,17 @@ public abstract class EntityClass : SelectClass
         combatInfo.UpdateBuffs(statusEffects);
         BuffsUpdatedEvent?.Invoke(this);
     }
+
+    //Please use the originalHandler to resubscribe when you are done :3
+    public StatusEffectDelegate SetBuffsOnHitHandler(string buff, StatusEffectDelegate handler)
+    {
+        CheckBuff(buff);
+        StatusEffectDelegate originalHandler = statusEffects[buff].OnEntityHitHandler;
+        statusEffects[buff].OnEntityHitHandler = handler;
+        Debug.Log("A buff handler is being reassigned, be careful!");
+        return originalHandler;
+    }
+
 
     public void EnableDice()
     {
