@@ -94,7 +94,7 @@ public abstract class EntityClass : SelectClass
         {
             UpdateBuffsOnDamage();
         }
-        StartCoroutine(combatInfo.DisplayDamage(damage, this));
+        combatInfo.DisplayDamage(damage);
         StartCoroutine(PlayHitAnimation(source, this, percentageDone));
     }
 
