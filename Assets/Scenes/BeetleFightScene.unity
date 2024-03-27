@@ -3584,7 +3584,7 @@ MonoBehaviour:
   - {fileID: 779216461}
   - {fileID: 1550188052}
   beetleAction: {fileID: 638397237}
-  jackieAction: {fileID: 0}
+  jackieAction: {fileID: 1944675057}
   theCampWithBeetles: {fileID: 573563645}
   beetleNest: {fileID: 739592175}
   background: {fileID: 674198774}
