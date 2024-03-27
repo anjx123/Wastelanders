@@ -8,6 +8,7 @@ public class QueenBeetle : EnemyClass
     [SerializeField]
     private GameObject[] beetlePrefabs = new GameObject[3];
     private Beetle[] availability;
+    [SerializeField] bool combatMode;
 
     [SerializeField]
     public GameObject enemyContainer;
@@ -25,13 +26,16 @@ public class QueenBeetle : EnemyClass
         {
             availability[i] = null;
         }
-        for (int i = 0; i < beetlePrefabs.Length; ++i)
+        if (combatMode)
         {
-            GameObject beetle = Instantiate(beetlePrefabs[i]);
-            beetle.transform.SetParent(enemyContainer.transform);
-            beetle.transform.localScale *= BEETLE_SCALING;
-            beetle.transform.position = beetleLocations[i].position;
-            availability[i] = beetle.GetComponent<Beetle>();
+            for (int i = 0; i < beetlePrefabs.Length; ++i)
+            {
+                GameObject beetle = Instantiate(beetlePrefabs[i]);
+                beetle.transform.SetParent(enemyContainer.transform);
+                beetle.transform.localScale *= BEETLE_SCALING;
+                beetle.transform.position = beetleLocations[i].position;
+                availability[i] = beetle.GetComponent<Beetle>();
+            }
         }
     }
     // Start is called before the first frame update
