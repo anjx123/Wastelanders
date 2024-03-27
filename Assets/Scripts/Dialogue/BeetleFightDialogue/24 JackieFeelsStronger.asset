@@ -10,23 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 207ddad3e1c90594ba3f48e2a5a6a796, type: 3}
-  m_Name: IntroDialogue
+  m_Name: 24 JackieFeelsStronger
   m_EditorClassIdentifier: 
   dialogue:
-  - bodyText: Tsk, nothing much again. No sign of another crystal.
+  - bodyText: Woah, whats this feeling. I feel stronger after hitting the crystal?
     speakerName: Jackie
     displayingImage: {fileID: 0}
     broadcastAnEvent: 0
-  - bodyText: 'I wonder where the heck this came from... '
-    speakerName: Jackie
-    displayingImage: {fileID: 0}
-    broadcastAnEvent: 1
-  - bodyText: 'Maybe I should head deeper into the marsh. Although the sun is setting
-      soon... '
-    speakerName: Jackie
-    displayingImage: {fileID: 0}
-    broadcastAnEvent: 0
-  - bodyText: Come on Jackie, you got this. You have to pass the exam for Mama.
+  - bodyText: It's as if I can feel the fatigue from the fight leaving me.
     speakerName: Jackie
     displayingImage: {fileID: 0}
     broadcastAnEvent: 0

@@ -10,15 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 207ddad3e1c90594ba3f48e2a5a6a796, type: 3}
-  m_Name: crystalExplanation
+  m_Name: 6 P2 Jackie Won
   m_EditorClassIdentifier: 
   dialogue:
-  - bodyText: Hmm, seems like the beetles were getting stronger by attacking the
-      crystal.
-    speakerName: Jackie
-    displayingImage: {fileID: 0}
-    broadcastAnEvent: 0
-  - bodyText: Now I wonder if I can do the same...
+  - bodyText: Alright! Let's see what we have here...
     speakerName: Jackie
     displayingImage: {fileID: 0}
     broadcastAnEvent: 0

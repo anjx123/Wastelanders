@@ -10,11 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 207ddad3e1c90594ba3f48e2a5a6a796, type: 3}
-  m_Name: NarratorCamp
+  m_Name: 9 JackieBeetleCamp
   m_EditorClassIdentifier: 
   dialogue:
-  - bodyText: (Jackie quickly retraces her steps as the sky mourns the setting sun,
-      noting down her path.)
-    speakerName: 
+  - bodyText: ...
+    speakerName: Jackie
+    displayingImage: {fileID: 0}
+    broadcastAnEvent: 0
+  - bodyText: Nope, I'm out.
+    speakerName: Jackie
     displayingImage: {fileID: 0}
     broadcastAnEvent: 0
