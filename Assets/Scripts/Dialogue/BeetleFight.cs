@@ -369,6 +369,7 @@ public class BeetleFight : DialogueClasses
                 Coroutine ivesReset = StartCoroutine(ives.ResetPosition());
                 yield return StartCoroutine(jackie.ResetPosition());
                 yield return ivesReset;
+                yield return new WaitForSeconds(1f);
             }
 
         }

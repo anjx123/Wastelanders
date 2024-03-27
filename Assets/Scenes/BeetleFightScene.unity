@@ -3584,7 +3584,7 @@ MonoBehaviour:
   - {fileID: 779216461}
   - {fileID: 1550188052}
   beetleAction: {fileID: 638397237}
-  jackieAction: {fileID: 1371300109}
+  jackieAction: {fileID: 0}
   theCampWithBeetles: {fileID: 573563645}
   beetleNest: {fileID: 739592175}
   background: {fileID: 674198774}
@@ -3712,7 +3712,7 @@ MonoBehaviour:
     speakerName: Ives
     displayingImage: {fileID: 0}
     broadcastAnEvent: 0
-  jumpToCombat: 1
+  jumpToCombat: 0
 --- !u!1 &1277541862
 GameObject:
   m_ObjectHideFlags: 0
@@ -4285,22 +4285,22 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 617082415006753302, guid: 692030d7a70f84e1e9949eb9b07ebce5, type: 3}
   m_PrefabInstance: {fileID: 1350765139}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &1371300107 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4471160837814480455, guid: 01e98381d7acf426196a2d3249245d3b, type: 3}
-  m_PrefabInstance: {fileID: 1471187439}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1371300109 stripped
+--- !u!114 &1360995282 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 9083684502879287757, guid: 01e98381d7acf426196a2d3249245d3b, type: 3}
+  m_CorrespondingSourceObject: {fileID: 5705003136804399872, guid: 01e98381d7acf426196a2d3249245d3b, type: 3}
   m_PrefabInstance: {fileID: 1471187439}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1f3d1e96da677e34e8166a18f7bedef3, type: 3}
+  m_Script: {fileID: 11500000, guid: 834784dfb02aeaf438f42ae334048e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &1371300107 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4471160837814480455, guid: 01e98381d7acf426196a2d3249245d3b, type: 3}
+  m_PrefabInstance: {fileID: 1471187439}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1394440204
 GameObject:
   m_ObjectHideFlags: 0
@@ -4484,10 +4484,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 9083684502879287757, guid: 01e98381d7acf426196a2d3249245d3b, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2904259167568896579, guid: 01e98381d7acf426196a2d3249245d3b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1944675057}
   m_SourcePrefab: {fileID: 100100000, guid: 01e98381d7acf426196a2d3249245d3b, type: 3}
 --- !u!1001 &1472195498
 PrefabInstance:
@@ -6692,6 +6696,29 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5b9370b1c559d0c4f95c6370dd8a2c6d, type: 3}
+--- !u!1 &1944675054 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2904259167568896579, guid: 01e98381d7acf426196a2d3249245d3b, type: 3}
+  m_PrefabInstance: {fileID: 1471187439}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1944675057
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1944675054}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65462e779aeebe94a81026dfeaa84a3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myTransform: {fileID: 1371300107}
+  duplicateCardInstance: {fileID: 0}
+  description: 
+  icon: {fileID: 21300000, guid: 57baba5992d9e224988e93fcacf9f7eb, type: 3}
+  cardBack: {fileID: 21300000, guid: b9d9ffafd54db4d16be447f80c7ef42d, type: 3}
+  cardUI: {fileID: 1360995282}
 --- !u!4 &1956243773 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 617082415006753302, guid: fa2244f9c89fb2c42ae45cb8f73816be, type: 3}
