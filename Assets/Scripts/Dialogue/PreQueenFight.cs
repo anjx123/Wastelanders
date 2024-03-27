@@ -151,10 +151,12 @@ public class PreQueenFight : DialogueClasses
                     queenGuardBeetles[i].transform.position.y, -1);
                 StartCoroutine(queenGuardBeetles[i].MoveToPosition(queenGuardBeetleTransforms[i].position, 0f, 1.5f));
             }
+            theQueen.Emphasize();
             yield return StartCoroutine(theQueen.MoveToPosition(queenTransform.position, 0f, 1.5f));
 
             yield return StartCoroutine(DialogueManager.Instance.StartDialogue(LastBitDialogue.Dialogue));
-            jackie.transform.position = new Vector3(jackie.transform.position.x, jackie.transform.position.y, 0);
+            jackie.DeEmphasize();
+            theQueen.DeEmphasize();
 
             yield return StartCoroutine(CombatManager.Instance.FadeInDarkScreen(1.5f));
 
