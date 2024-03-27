@@ -369,7 +369,7 @@ public class BeetleFight : DialogueClasses
                 Coroutine ivesReset = StartCoroutine(ives.ResetPosition());
                 yield return StartCoroutine(jackie.ResetPosition());
                 yield return ivesReset;
-                yield return new WaitForSeconds(0.8f);
+                yield return new WaitForSeconds(0.5f);
             }
 
         }
@@ -430,7 +430,7 @@ public class BeetleFight : DialogueClasses
                 ives.SetReturnPosition(ivesCombat2Transform.position);
             }
             yield return ShiftObjectCoroutine(CombatManager.Instance.baseCamera.gameObject, -7.5f, 3f);
-            yield return new WaitForSeconds(0.8f);
+            yield return new WaitForSeconds(0.5f);
             CombatManager.Instance.GameState = GameState.SELECTION;
             yield return StartCoroutine(DialogueManager.Instance.StartDialogue(wave2Dialogue.Dialogue));
             BeginWave2();
@@ -450,7 +450,7 @@ public class BeetleFight : DialogueClasses
                 ives.SetReturnPosition(ivesCombat3Transform.position);
             }
             yield return ShiftObjectCoroutine(CombatManager.Instance.baseCamera.gameObject, -9.5f, 3f);
-            yield return new WaitForSeconds(0.8f);
+            yield return new WaitForSeconds(0.5f);
             CombatManager.Instance.GameState = GameState.SELECTION;
             yield return StartCoroutine(DialogueManager.Instance.StartDialogue(wave3Dialogue.Dialogue));
             BeginWave3();
@@ -647,6 +647,7 @@ public class BeetleFight : DialogueClasses
     {
         yield return StartCoroutine(CombatManager.Instance.FadeInDarkScreen(2f));
 
+        DialogueManager.Instance.MoveBoxToBottom();
         GameStateManager.jumpIntoFrogAndSlimeFight = true;
         gameOver.gameObject.SetActive(true);
         gameOver.FadeIn();

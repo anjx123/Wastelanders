@@ -3712,7 +3712,7 @@ MonoBehaviour:
     speakerName: Ives
     displayingImage: {fileID: 0}
     broadcastAnEvent: 0
-  jumpToCombat: 0
+  jumpToCombat: 1
 --- !u!1 &1277541862
 GameObject:
   m_ObjectHideFlags: 0

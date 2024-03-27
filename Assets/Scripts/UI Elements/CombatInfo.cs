@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -28,6 +29,24 @@ public class CombatInfo : MonoBehaviour
         buffListCanvas = buffList.gameObject.GetComponent<Canvas>();
     }
 
+    private void OnEnable()
+    {
+        EntityClass.OnEntityDeath += RemoveCardFromTarget;
+    }
+
+    private void OnDisable()
+    {
+        EntityClass.OnEntityDeath -= RemoveCardFromTarget;
+    }
+
+    void RemoveCardFromTarget(EntityClass entity)
+    {
+        List<ActionClass> removedActions = combatCards.Where(card => card.Target == entity).ToList();
+        foreach (ActionClass action in removedActions)
+        {
+            DeactivateCombatSprite(action);
+        }
+    }
     public void Start()
     {
         diceRollText.GetComponent<MeshRenderer>().sortingOrder = diceRollSprite.GetComponent<SpriteRenderer>().sortingOrder + 1;
@@ -74,6 +93,12 @@ public class CombatInfo : MonoBehaviour
         combatCards.Add(actionClass);
         RenderCombatIcons();
     }
+    public void DeactivateCombatSprite(ActionClass actionClass)
+    {
+        combatCards.Remove(actionClass);
+        RenderCombatIcons();
+    }
+
 
     private void RenderCombatIcons()
     {
@@ -142,12 +167,6 @@ public class CombatInfo : MonoBehaviour
     public void DisableHealthBar()
     {
         healthBar.gameObject.SetActive(false);
-    }
-
-    public void DeactivateCombatSprite(ActionClass actionClass)
-    {
-        combatCards.Remove(actionClass);
-        RenderCombatIcons();
     }
 
     public void ActivateCrosshair()
