@@ -3684,7 +3684,7 @@ MonoBehaviour:
     displayingImage: {fileID: 0}
     broadcastAnEvent: 0
   jackieFeelsStronger:
-  - bodyText: Woah, whats this feeling. I feel stronger after hitting the crysta?
+  - bodyText: Woah, whats this feeling. I feel stronger after hitting the crystal?
     speakerName: Jackie
     displayingImage: {fileID: 0}
     broadcastAnEvent: 0

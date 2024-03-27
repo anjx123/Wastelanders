@@ -20,7 +20,7 @@ MonoBehaviour:
     broadcastAnEvent: 0
   - bodyText: (Some examiners inspect the dropped Waste Crystals, while others discuss
       amongst themselves.)
-    speakerName: Jackie
+    speakerName: 
     displayingImage: {fileID: 0}
     broadcastAnEvent: 0
   - bodyText: These beetles were among some of the most aggressive monsters I have
