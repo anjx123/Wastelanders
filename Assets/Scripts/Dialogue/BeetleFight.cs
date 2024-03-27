@@ -111,8 +111,6 @@ public class BeetleFight : DialogueClasses
     private const float BRIEF_PAUSE = 0.2f; // For use after an animation to make it visually seem smoother
     private const float MEDIUM_PAUSE = 1f; //For use after a text box comes down and we want to add some weight to the text.
 
-    private bool crystalsExplained = false;
-
     private void OnDestroy()
     {
         HighlightManager.EntityClicked -= EntityClicked;
@@ -586,7 +584,6 @@ public class BeetleFight : DialogueClasses
 
     private IEnumerator ExplainCrystalsDialogue()
     {
-        crystalsExplained = true;
         Beetle.OnGainBuffs -= ExplainCrystals;
         yield return new WaitUntil(() => !DialogueManager.Instance.IsInDialogue() && CombatManager.Instance.GameState != GameState.FIGHTING);
         yield return StartCoroutine(DialogueManager.Instance.StartDialogue(crystalExplanation.Dialogue));
@@ -594,7 +591,6 @@ public class BeetleFight : DialogueClasses
 
     private IEnumerator OutOfCombatCrystalDialogue()
     {
-        crystalsExplained = true;
         Beetle.OnGainBuffs -= ExplainCrystals;
         yield return new WaitUntil(() => !DialogueManager.Instance.IsInDialogue() && CombatManager.Instance.GameState != GameState.FIGHTING);
         yield return StartCoroutine(DialogueManager.Instance.StartDialogue(outOfCombatCrystalDialogue));

@@ -3617,7 +3617,7 @@ MonoBehaviour:
     displayingImage: {fileID: 0}
     broadcastAnEvent: 0
   p2jackieWonAgainstBeetle:
-  - bodyText: Let's see just how much you are worth...
+  - bodyText: Alright! Let's see what we have here...
     speakerName: Jackie
     displayingImage: {fileID: 0}
     broadcastAnEvent: 0
