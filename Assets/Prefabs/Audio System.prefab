@@ -48,12 +48,4 @@ MonoBehaviour:
   BackgroundMusicPlayer: {fileID: 0}
   BackgroundMusicPrimary: {fileID: 0}
   BackgroundMusicVictory: {fileID: 0}
-  sfxTuples:
-  - Item1: 0
-    Item2: {fileID: 8300000, guid: 22206f1f374a037478adbfbad7d4cc7c, type: 3}
-  - Item1: 1
-    Item2: {fileID: 8300000, guid: e1afe1b152218d6479beb04c74047897, type: 3}
-  - Item1: 2
-    Item2: {fileID: 8300000, guid: 1f01deee0b9c25c4f865c84973dc5db1, type: 3}
-  - Item1: 3
-    Item2: {fileID: 8300000, guid: f5f6403acb36b594ebebf7a272a125a0, type: 3}
+  sfxTuples: []

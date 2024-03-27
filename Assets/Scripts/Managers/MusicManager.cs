@@ -36,9 +36,6 @@ public class MusicManager : MonoBehaviour
     {
         foreach (SerializableTuple<SFXList, AudioClip> entry in sfxTuples) 
         {
-            Debug.Log(entry.Item1 + "\n");
-            Debug.Log(entry.Item1 + "\n");
-
             if (entry.Item1 == effect)
             {
                 SFXSoundsPlayer.PlayOneShot(entry.Item2);
