@@ -183,7 +183,7 @@ public class HighlightManager : MonoBehaviour // later all entity highlighter
             //Untoggle card if it is still selected when entering fighting
             if (currentHighlightedAction != null)
             {
-                currentHighlightedAction.ToggleUnSelected();
+                currentHighlightedAction.ForceNormalState();
                 currentHighlightedAction = null;
                 if (currentHighlightedEnemyEntity != null)
                 {

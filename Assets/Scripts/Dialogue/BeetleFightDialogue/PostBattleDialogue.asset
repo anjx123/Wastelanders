@@ -32,8 +32,8 @@ MonoBehaviour:
     speakerName: Ives
     displayingImage: {fileID: 0}
     broadcastAnEvent: 0
-  - bodyText: " And they weren\u2019t dumb either, they fought with a surprising
-      amount of coordination. "
+  - bodyText: "And they weren\u2019t dumb either, they fought with a surprising amount
+      of coordination. "
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
     broadcastAnEvent: 0
@@ -55,11 +55,14 @@ MonoBehaviour:
     displayingImage: {fileID: 0}
     broadcastAnEvent: 0
   - bodyText: "Excellent. Since the beetles seem to be attracted to Waste Products,
-      the city\u2019s collection of Products could spell trouble. All the examiners
-      agree that it would be best to deal with the beetles now before they become
-      an even larger problem."
+      the city\u2019s collection of Products could spell trouble. "
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
+    broadcastAnEvent: 0
+  - bodyText: All the examiners agree that it would be best to deal with the beetles
+      now before they become an even larger problem.
+    speakerName: Jackie
+    displayingImage: {fileID: 0}
     broadcastAnEvent: 0
   - bodyText: 'Everyone, rest and recuperate for now. Let''s come up with a plan
       of attack to neutralize the beetle swarm. '

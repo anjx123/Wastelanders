@@ -667,6 +667,81 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 183874078d8194649a324016f66d1a65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &324691198
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 324691199}
+  - component: {fileID: 324691201}
+  - component: {fileID: 324691200}
+  m_Layer: 5
+  m_Name: Jackie
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &324691199
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 324691198}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.12, y: 0.13, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 596087403}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 0}
+  m_AnchoredPosition: {x: -568, y: -10}
+  m_SizeDelta: {x: 2800, y: 3058.3464}
+  m_Pivot: {x: 0.5, y: 0}
+--- !u!114 &324691200
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 324691198}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 422f3cda08073664b8a46361afe442fb, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &324691201
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 324691198}
+  m_CullTransparentMesh: 1
 --- !u!1 &355728263
 GameObject:
   m_ObjectHideFlags: 0
@@ -1458,6 +1533,8 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 324691199}
+  - {fileID: 1656845245}
   - {fileID: 1872758577}
   m_Father: {fileID: 1877041900}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3499,6 +3576,8 @@ MonoBehaviour:
   wrangledBeetle: {fileID: 1256772860}
   beetleDraggingCrystal: {fileID: 324089119}
   draggedCrystal: {fileID: 624578775}
+  ivesVNSprite: {fileID: 1656845246}
+  jackieVNSprite: {fileID: 324691200}
   combatBeetleTransforms:
   - {fileID: 1587123019}
   - {fileID: 1919900978}
@@ -3538,12 +3617,12 @@ MonoBehaviour:
     displayingImage: {fileID: 0}
     broadcastAnEvent: 0
   p2jackieWonAgainstBeetle:
-  - bodyText: Let's see what goods you have in store.
+  - bodyText: Let's see just how much you are worth...
     speakerName: Jackie
     displayingImage: {fileID: 0}
     broadcastAnEvent: 0
   p2jackieLostAgainstBeetle:
-  - bodyText: Take that you filthy theif!
+  - bodyText: Take that you filthy thief!
     speakerName: Jackie
     displayingImage: {fileID: 0}
     broadcastAnEvent: 0
@@ -3577,7 +3656,6 @@ MonoBehaviour:
   wave2Dialogue: {fileID: 11400000, guid: 377753e56fae3204ea946cbbea8973c3, type: 2}
   wave3Dialogue: {fileID: 11400000, guid: 04e309d31bbd2094cbd5fbbeb969c8cf, type: 2}
   postBattleDialogue: {fileID: 11400000, guid: 4e4b8c8e00eb44ae38056c9c653cd3a5, type: 2}
-
   gameLoseDialogue: {fileID: 11400000, guid: 676bae3a33f603b4b810e2beea6db7c0, type: 2}
   resonateExplanation: {fileID: 11400000, guid: c263fe95eae201a439296c687b51e21c, type: 2}
   crystalExplanation: {fileID: 11400000, guid: 9f914eeee4cd7d14bb9c4bc27eaf8e52, type: 2}
@@ -3596,12 +3674,12 @@ MonoBehaviour:
     speakerName: Ives
     displayingImage: {fileID: 0}
     broadcastAnEvent: 0
-  - bodyText: ' [Crystals give +1 resonate to the atacker who reduces its health
-      below each third of its health] '
+  - bodyText: '[Crystals give +1 resonate to the atacker who reduces its health below
+      each third of its health] '
     speakerName: 
     displayingImage: {fileID: 0}
     broadcastAnEvent: 0
-  - bodyText: Whatever it is, it isn't good news to keep around.
+  - bodyText: Whatever it is, it isn't good news to keep anymore around.
     speakerName: Jackie
     displayingImage: {fileID: 0}
     broadcastAnEvent: 0
@@ -3629,8 +3707,8 @@ MonoBehaviour:
     speakerName: Ives
     displayingImage: {fileID: 0}
     broadcastAnEvent: 0
-  - bodyText: For now, lets store the rest in a safe place where the beetles can't
-      find.
+  - bodyText: For now, lets store the fragments in a safe place where the beetles
+      can't find.
     speakerName: Ives
     displayingImage: {fileID: 0}
     broadcastAnEvent: 0
@@ -5166,6 +5244,81 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1513545304}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1656845244
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1656845245}
+  - component: {fileID: 1656845247}
+  - component: {fileID: 1656845246}
+  m_Layer: 5
+  m_Name: Ives
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &1656845245
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1656845244}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.13, y: 0.13, z: 0}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 596087403}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 0}
+  m_AnchoredPosition: {x: 167.6, y: 0}
+  m_SizeDelta: {x: 2800, y: 3058.3464}
+  m_Pivot: {x: 0.5, y: 0}
+--- !u!114 &1656845246
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1656845244}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1656845247
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1656845244}
+  m_CullTransparentMesh: 1
 --- !u!1001 &1674425905
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5673,11 +5826,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 617082415006753302, guid: 276880eff6e9b4907a1ea5430761a162, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.09
+      value: 0.69
       objectReference: {fileID: 0}
     - target: {fileID: 617082415006753302, guid: 276880eff6e9b4907a1ea5430761a162, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4.44
+      value: -3.41
       objectReference: {fileID: 0}
     - target: {fileID: 617082415006753302, guid: 276880eff6e9b4907a1ea5430761a162, type: 3}
       propertyPath: m_LocalPosition.z
@@ -5842,7 +5995,7 @@ Transform:
   m_GameObject: {fileID: 1810605316}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 36.39, y: 3.26, z: 0}
+  m_LocalPosition: {x: 36.02, y: 3.64, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

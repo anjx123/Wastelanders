@@ -18,11 +18,6 @@ MonoBehaviour:
     speakerName: Jackie
     displayingImage: {fileID: 0}
     broadcastAnEvent: 0
-  - bodyText: '[Crystals give +1 resonate to the atacker who reduces its health below
-      each third of its health]'
-    speakerName: 
-    displayingImage: {fileID: 0}
-    broadcastAnEvent: 0
   - bodyText: Now I wonder if I can do the same...
     speakerName: Jackie
     displayingImage: {fileID: 0}

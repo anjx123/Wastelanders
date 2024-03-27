@@ -87,6 +87,14 @@ public class CombatManager : MonoBehaviour
         }
     }
 
+    public static void ClearEvents()
+    {
+        OnGameStateChanged = null;
+        OnGameStateChanging = null;
+        PlayersWinEvent = null;
+        EnemiesWinEvent = null;
+    }
+
     // Start is called before the first frame update
     void Start()
     {

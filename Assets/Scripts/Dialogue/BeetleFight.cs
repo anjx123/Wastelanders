@@ -10,6 +10,7 @@ using System.Reflection;
 using Cinemachine;
 using UnityEditor.Build;
 using static Unity.Burst.Intrinsics.X86;
+using UnityEngine.UI;
 //@author: Andrew
 public class BeetleFight : DialogueClasses
 {
@@ -41,9 +42,12 @@ public class BeetleFight : DialogueClasses
     [SerializeField] private Beetle wrangledBeetle;
     [SerializeField] private Beetle beetleDraggingCrystal;
     [SerializeField] private Crystals draggedCrystal;
-    
 
-    
+    [SerializeField] private Image ivesVNSprite;
+    [SerializeField] private Image jackieVNSprite;
+
+
+
 
     [SerializeField] private List<Transform> combatBeetleTransforms;
 
@@ -121,6 +125,9 @@ public class BeetleFight : DialogueClasses
         ives.BuffsUpdatedEvent -= ExplainPlayerBuffed;
 
         Beetle.OnGainBuffs -= ExplainResonate;
+
+        CombatManager.ClearEvents();
+        DialogueBox.ClearDialogueEvents();
     }
     protected override void GameStateChange(GameState gameState)
     {
@@ -330,6 +337,7 @@ public class BeetleFight : DialogueClasses
                 yield return StartCoroutine(DialogueManager.Instance.StartDialogue(jackieBeetleCamp.Dialogue));
                 yield return StartCoroutine(jackie.MoveToPosition(rightEntrance.transform.position, 1.2f, 1f));
                 yield return StartCoroutine(CombatManager.Instance.FadeInDarkScreen(0.6f));
+                jackie.Heal(5);
             }
 
             //Jackie sees the nest of beetles
@@ -420,7 +428,7 @@ public class BeetleFight : DialogueClasses
             {
                 ives.SetReturnPosition(ivesCombat2Transform.position);
             }
-            yield return ShiftObjectCoroutine(CombatManager.Instance.baseCamera.gameObject, -7f, 3f);
+            yield return ShiftObjectCoroutine(CombatManager.Instance.baseCamera.gameObject, -7.5f, 3f);
             CombatManager.Instance.GameState = GameState.SELECTION;
             yield return StartCoroutine(DialogueManager.Instance.StartDialogue(wave2Dialogue.Dialogue));
             BeginWave2();
@@ -439,7 +447,7 @@ public class BeetleFight : DialogueClasses
             {
                 ives.SetReturnPosition(ivesCombat3Transform.position);
             }
-            yield return ShiftObjectCoroutine(CombatManager.Instance.baseCamera.gameObject, -9f, 3f);
+            yield return ShiftObjectCoroutine(CombatManager.Instance.baseCamera.gameObject, -9.5f, 3f);
             CombatManager.Instance.GameState = GameState.SELECTION;
             yield return StartCoroutine(DialogueManager.Instance.StartDialogue(wave3Dialogue.Dialogue));
             BeginWave3();
@@ -450,6 +458,21 @@ public class BeetleFight : DialogueClasses
         //End of Scene
         {
             yield return new WaitForSeconds(2);
+            if (ives.IsDead)
+            {
+                ives.gameObject.SetActive(true);
+                ives.OutOfCombat();
+                ives.SetReturnPosition(ivesCombat3Transform.transform.position);
+                StartCoroutine(ives.ResetPosition());
+            }
+
+            if (jackie.IsDead)
+            {
+                jackie.gameObject.SetActive(true);
+                jackie.OutOfCombat();
+                jackie.SetReturnPosition(jackieCombat3Transform.transform.position);
+                StartCoroutine(jackie.ResetPosition());
+            }
             DialogueManager.Instance.MoveBoxToBottom();
             yield return StartCoroutine(DialogueManager.Instance.StartDialogue(afterWave3Dialogue));
             yield return new WaitForSeconds(BRIEF_PAUSE);
@@ -458,23 +481,43 @@ public class BeetleFight : DialogueClasses
             {
                 yield return new WaitForSeconds(BRIEF_PAUSE);
                 yield return StartCoroutine(jackie.MoveToPosition(wave3Crystal.transform.position, 1.2f, 1f));
-                if (!crystalsExplained)
-                {
-                    yield return StartCoroutine(OutOfCombatCrystalDialogue());
-                }
+            }
+
+            yield return StartCoroutine(OutOfCombatCrystalDialogue());
+            if (!wave3Crystal.IsDead)
+            {
                 jackie.AttackAnimation("IsStaffing");
                 wave3Crystal.TakeDamage(jackie, 5);
                 yield return new WaitForSeconds(MEDIUM_PAUSE);
-                yield return StartCoroutine(DialogueManager.Instance.StartDialogue(ivesAnalyzeAfterExam));
             }
+            yield return StartCoroutine(DialogueManager.Instance.StartDialogue(ivesAnalyzeAfterExam));
 
             CombatManager.Instance.GameState = GameState.OUT_OF_COMBAT;
             jackie.OutOfCombat();
             ives.OutOfCombat();
             jackie.FaceLeft();
             ives.FaceRight();
+
+            jackieVNSprite.gameObject.SetActive(true);
+            ivesVNSprite.gameObject.SetActive(true);
+
+
+            DialogueBox.DialogueBoxEvent += JackieMentionsSheSawBeetles;
+            void JackieMentionsSheSawBeetles() {
+                DialogueBox.DialogueBoxEvent -= JackieMentionsSheSawBeetles;
+                StartCoroutine(MoveToRight(jackieVNSprite.gameObject.GetComponent<RectTransform>(), 400f, 0.8f));
+            }
+
+            yield return StartCoroutine(CombatManager.Instance.FadeInDarkScreen(2f));
+            yield return StartCoroutine(FadeImage(ivesVNSprite, 1.1f, true));
             yield return StartCoroutine(DialogueManager.Instance.StartDialogue(postBattleDialogue.Dialogue));
-            yield return StartCoroutine(CombatManager.Instance.FadeInDarkScreen(1.5f));
+
+            Coroutine ivesFade = StartCoroutine(FadeImage(ivesVNSprite, 1.5f, false));
+            yield return StartCoroutine(FadeImage(jackieVNSprite, 1.5f, false));
+            yield return ivesFade;
+            yield return new WaitForSeconds(MEDIUM_PAUSE);
+            SceneManager.LoadScene("LevelSelect");
+            yield break;
         }
     }
 
@@ -523,17 +566,11 @@ public class BeetleFight : DialogueClasses
             StartCoroutine(ExplainResonateDialogue());
         }
     }
-    private bool resonateExplained = false;
-
     private IEnumerator ExplainResonateDialogue()
     {
         Beetle.OnGainBuffs -= ExplainResonate;
-        resonateExplained = true;
         yield return new WaitUntil(() => !DialogueManager.Instance.IsInDialogue() && CombatManager.Instance.GameState != GameState.FIGHTING);
-        if (!resonateExplained)
-        {
-            yield return StartCoroutine(DialogueManager.Instance.StartDialogue(resonateExplanation.Dialogue));
-        }
+        yield return StartCoroutine(DialogueManager.Instance.StartDialogue(resonateExplanation.Dialogue));
     }
     //If a beetle other than a drone has gained stacks, that means they broke a crystal
     private void ExplainCrystals(string buffType, int stacks, Beetle beetle)
@@ -634,6 +671,45 @@ public class BeetleFight : DialogueClasses
             yield return null; // Wait for the next frame
         }
 
+    }
+
+    IEnumerator MoveToRight(RectTransform rectTransform, float moveAmount, float duration)
+    {
+        float counter = 0;
+        Vector2 startPos = rectTransform.anchoredPosition;
+        Vector2 endPos = new Vector2(startPos.x + moveAmount, startPos.y);
+
+        while (counter < duration)
+        {
+            counter += Time.deltaTime;
+            float t = counter / duration;
+            rectTransform.anchoredPosition = Vector2.Lerp(startPos, endPos, t);
+            yield return null;
+        }
+    }
+
+    IEnumerator FadeImage(Image image, float duration, bool fadeIn)
+    {
+        if (fadeIn)
+        {
+            // Fade in
+            image.color = new Color(image.color.r, image.color.g, image.color.b, 0);
+            while (image.color.a < 1.0f)
+            {
+                image.color = new Color(image.color.r, image.color.g, image.color.b, image.color.a + (Time.deltaTime / duration));
+                yield return null;
+            }
+        }
+        else
+        {
+            // Fade out
+            image.color = new Color(image.color.r, image.color.g, image.color.b, 1);
+            while (image.color.a > 0.0f)
+            {
+                image.color = new Color(image.color.r, image.color.g, image.color.b, image.color.a - (Time.deltaTime / duration));
+                yield return null;
+            }
+        }
     }
 
     // removes the entity from combat

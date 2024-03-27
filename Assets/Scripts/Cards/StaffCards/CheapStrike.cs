@@ -13,7 +13,7 @@ public class CheapStrike : StaffCards
     public override void Initialize()
     {
         lowerBound = 1;
-        upperBound = 3;
+        upperBound = 1;
 
         Speed = 1;
 
@@ -31,6 +31,7 @@ public class CheapStrike : StaffCards
 
     public override void OnHit()
     {
+        base.OnHit();
         CombatManager.OnGameStateChanged += AddFocus;
         void AddFocus(GameState gameState)
         {
