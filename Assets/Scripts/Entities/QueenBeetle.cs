@@ -149,8 +149,8 @@ public class QueenBeetle : EnemyClass
         pool = temp;
         return;
     }
-    public float cycleScaling = 2f; // Higher the number, the faster one phase is 
-    public float bobbingAmount = 0.1f; //Amplitude
+    private float cycleScaling = 2f; // Higher the number, the faster one phase is 
+    private float bobbingAmount = 0.1f; //Amplitude
     private float timer = 0;
     private float verticalOffset = 0;
 

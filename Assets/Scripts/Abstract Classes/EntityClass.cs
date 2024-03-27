@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static CardComparator;
 
 public abstract class EntityClass : SelectClass
 {
@@ -38,11 +39,13 @@ public abstract class EntityClass : SelectClass
         }
     }
 
-    protected Dictionary<string, StatusEffect> statusEffects;
+    protected readonly Dictionary<string, StatusEffect> statusEffects = new Dictionary<string, StatusEffect>();
 
 
 
     protected List<ActionClass> actionsAvailable;
+    public DeadEntities _DeathHandler { protected get;  set; }
+    public DeadEntities DeathHandler { get; private set; } 
 
 #nullable enable
 
@@ -56,12 +59,13 @@ public abstract class EntityClass : SelectClass
     public virtual void Start()
     {
         initialPosition = myTransform.position;
-        statusEffects = new Dictionary<string, StatusEffect>();
 
         DeEmphasize();
         DisableDice();
         GetComponent<SpriteRenderer>().sortingLayerName = CombatManager.Instance.FADE_SORTING_LAYER;
 
+        _DeathHandler = Die;
+        DeathHandler = delegate { return _DeathHandler(); };
         CombatManager.OnGameStateChanging += UpdateBuffsNewRound;
     }
 
@@ -86,7 +90,10 @@ public abstract class EntityClass : SelectClass
         {
             OnEntityDeath?.Invoke(this);
         }
-        UpdateBuffsOnDamage();
+        if (percentageDone > 0)
+        {
+            UpdateBuffsOnDamage();
+        }
         StartCoroutine(PlayHitAnimation(source, this, percentageDone));
     }
 
@@ -487,11 +494,23 @@ public abstract class EntityClass : SelectClass
     public void OutOfCombat()
     {
         DisableHealthBar();
+        statusEffects.Clear();
+        UpdateBuffs();
     }
 
     public void InCombat()
     {
         EnableHealthBar();
+    }
+
+    public void UnTargetable()
+    {
+        boxCollider.enabled = false;
+    }
+
+    public void Targetable()
+    {
+        boxCollider.enabled = true;
     }
 
     public void SetDice(int value)

@@ -11,7 +11,7 @@ public class CardComparator : MonoBehaviour
     public static CardComparator Instance { get; private set; }
 #nullable enable
     public static readonly float COMBAT_BUFFER_TIME = 1f;
-    private delegate IEnumerator DeadEntities();
+    public delegate IEnumerator DeadEntities();
     private static event DeadEntities? PlayEntityDeaths;
 
     public delegate IEnumerator ClashersAreReadyToRoll();
@@ -156,7 +156,13 @@ public class CardComparator : MonoBehaviour
         DeactivateInfo(actionClass);
 
         //Hit and feel effects
-        actionClass.OnHit();
+        if (actionClass.CardType == CardType.Defense)
+        {
+            actionClass.CardIsUnstaggered();
+        } else
+        {
+            actionClass.OnHit();
+        }
         actionClass.Origin.combatInfo.setDiceColor(Color.green);
         yield return new WaitForSeconds(COMBAT_BUFFER_TIME);
 
@@ -250,7 +256,7 @@ public class CardComparator : MonoBehaviour
     }
     private void SubscribeEntityDeath(EntityClass entity)
     {
-        PlayEntityDeaths += entity.Die;
+        PlayEntityDeaths += entity.DeathHandler;
     }
 
     private void ActivateInfo(params ActionClass[] cards)

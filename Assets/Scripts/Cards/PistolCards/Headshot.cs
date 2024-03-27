@@ -17,7 +17,7 @@ public class Headshot : PistolCards
     {
         lowerBound = 1;
         upperBound = 5;
-        Speed = 5;
+        Speed = 2;
 
         myName = "Headshot";
         description = "If This Card Staggers The Opponent, Deal +1 Damage For Each Stack Of Accuracy";

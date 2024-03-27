@@ -10,7 +10,6 @@ public abstract class StaffCards : ActionClass
     }
     public override void Initialize()
     {
-        CardType = CardType.MeleeAttack;
         base.Initialize();
     }
 
