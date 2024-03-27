@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Jab : StaffCards
 {
-    public override void ExecuteActionEffect()
+    public override void OnCardStagger()
     {
 
     }

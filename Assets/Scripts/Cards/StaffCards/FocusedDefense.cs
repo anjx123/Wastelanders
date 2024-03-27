@@ -8,7 +8,7 @@ using static UnityEngine.UI.Image;
 
 public class FocusedDefense : StaffCards
 {
-    public override void ExecuteActionEffect()
+    public override void OnCardStagger()
     {
 
     }

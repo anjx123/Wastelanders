@@ -530,7 +530,10 @@ public class BeetleFight : DialogueClasses
         Beetle.OnGainBuffs -= ExplainResonate;
         resonateExplained = true;
         yield return new WaitUntil(() => !DialogueManager.Instance.IsInDialogue() && CombatManager.Instance.GameState != GameState.FIGHTING);
-        yield return StartCoroutine(DialogueManager.Instance.StartDialogue(resonateExplanation.Dialogue));
+        if (!resonateExplained)
+        {
+            yield return StartCoroutine(DialogueManager.Instance.StartDialogue(resonateExplanation.Dialogue));
+        }
     }
     //If a beetle other than a drone has gained stacks, that means they broke a crystal
     private void ExplainCrystals(string buffType, int stacks, Beetle beetle)
@@ -546,7 +549,7 @@ public class BeetleFight : DialogueClasses
         crystalsExplained = true;
         Beetle.OnGainBuffs -= ExplainCrystals;
         yield return new WaitUntil(() => !DialogueManager.Instance.IsInDialogue() && CombatManager.Instance.GameState != GameState.FIGHTING);
-        yield return StartCoroutine(DialogueManager.Instance.StartDialogue(resonateExplanation.Dialogue));
+        yield return StartCoroutine(DialogueManager.Instance.StartDialogue(crystalExplanation.Dialogue));
     }
 
     private IEnumerator OutOfCombatCrystalDialogue()

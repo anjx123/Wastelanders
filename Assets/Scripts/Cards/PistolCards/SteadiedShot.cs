@@ -7,7 +7,7 @@ using static UnityEngine.UI.Image;
 
 public class SteadiedShot : PistolCards
 {
-    public override void ExecuteActionEffect()
+    public override void OnCardStagger()
     {
 
     }

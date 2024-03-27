@@ -10,7 +10,7 @@ public class Fling : BeetleAttacks
     [SerializeField] private ProjectileBehaviour projectileBehaviour;
 
 
-    public override void ExecuteActionEffect()
+    public override void OnCardStagger()
     {
 
     }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Vitals : PistolCards
 {
-    public override void ExecuteActionEffect()
+    public override void OnCardStagger()
     {
 
     }

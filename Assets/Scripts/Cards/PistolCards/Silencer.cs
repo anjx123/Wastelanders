@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Silencer : PistolCards
 {
-    public override void ExecuteActionEffect()
+    public override void OnCardStagger()
     {
 
     }

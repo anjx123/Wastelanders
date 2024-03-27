@@ -5,7 +5,7 @@ public class Fragment : ActionClass
 {
     [SerializeField] private ProjectileBehaviour projectileBehaviour;
 
-    public override void ExecuteActionEffect()
+    public override void OnCardStagger()
     {
 
     }

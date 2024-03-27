@@ -87,10 +87,12 @@ public class CardComparator : MonoBehaviour
 
             } else if (cardOneGreater < 0) //Card2 wins clash
             {
-                card2.OnHit(); 
+                card2.OnHit();
+                card1.OnCardStagger();
             } else if (cardOneGreater > 0) //Card1 wins clash
             {
-                card1.OnHit();  
+                card1.OnHit();
+                card2.OnCardStagger();
             }
         } else if (card1.CardType == CardType.Defense && IsAttack(card2))
         {
