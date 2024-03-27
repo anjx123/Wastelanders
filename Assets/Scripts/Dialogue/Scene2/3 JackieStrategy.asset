@@ -1,0 +1,49 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 207ddad3e1c90594ba3f48e2a5a6a796, type: 3}
+  m_Name: 3 JackieStrategy
+  m_EditorClassIdentifier: 
+  dialogue:
+  - bodyText: 'Hmm let me come up with a plan, I know that the more dangerous the
+      waste enemy, the higher quality the Waste Product they drop when slain.  '
+    speakerName: Jackie
+    displayingImage: {fileID: 0}
+    broadcastAnEvent: 0
+  - bodyText: Should I work with a team again to try and hunt down a larger waste
+      monster?
+    speakerName: Jackie
+    displayingImage: {fileID: 0}
+    broadcastAnEvent: 1
+  - bodyText: 'No, I came back almost empty handed last year after I froze up and
+      let the others do the fighting. '
+    speakerName: Jackie
+    displayingImage: {fileID: 0}
+    broadcastAnEvent: 1
+  - bodyText: By the time I felt okay, there were basically no products left!
+    speakerName: Jackie
+    displayingImage: {fileID: 0}
+    broadcastAnEvent: 1
+  - bodyText: "I can push myself and do this solo, that\u2019s what the past year
+      of training was for."
+    speakerName: Jackie
+    displayingImage: {fileID: 0}
+    broadcastAnEvent: 1
+  - bodyText: 'This way I get the full cut of the products, and it should impress
+      the examiners, I hope. '
+    speakerName: Jackie
+    displayingImage: {fileID: 0}
+    broadcastAnEvent: 0
+  - bodyText: "Although I\u2019ll definitely have to be more sneaky and careful if
+      I\u2019m hunting alone..."
+    speakerName: Jackie
+    displayingImage: {fileID: 0}
+    broadcastAnEvent: 1

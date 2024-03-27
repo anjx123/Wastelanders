@@ -54,6 +54,8 @@ public class Scene2 : DialogueClasses
     // After the frog is defeated
     [SerializeField] private List<DialogueText> afterCombatDialogue;
     [SerializeField] private List<DialogueText> crystalExtraction;
+    [SerializeField] private List<DialogueText> beetleEntrance;
+
 
     //Game Lose Dialogue
     [SerializeField] private List<DialogueText> gameLoseDialogue;
@@ -217,6 +219,8 @@ private IEnumerator ExecuteGameStart()
         yield return StartCoroutine(jackie.MoveToPosition(jackie.transform.position + new Vector3(12f, -1f, 0), 0f, 1.5f));
         yield return new WaitForSeconds(MEDIUM_PAUSE);
 
+        yield return StartCoroutine(DialogueManager.Instance.StartDialogue(beetleEntrance));
+        yield return new WaitForSeconds(BRIEF_PAUSE);
         //Beetle is spawned in and follows Jackie
         Vector3 bottomLeft = mainCamera.ViewportToWorldPoint(new Vector3(0, 0.6f, mainCamera.nearClipPlane));
         GameObject scoutBeetleObj = Instantiate(scoutBeetlePrefab, bottomLeft + new Vector3(-0.32f, 0, 0), Quaternion.identity);

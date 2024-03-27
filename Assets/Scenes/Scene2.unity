@@ -1954,6 +1954,11 @@ MonoBehaviour:
     speakerName: Jackie
     displayingImage: {fileID: 0}
     broadcastAnEvent: 0
+  beetleEntrance:
+  - bodyText: KCCRRKR?
+    speakerName: ???
+    displayingImage: {fileID: 21300000, guid: 320fd4765facdcb488b31229396fad33, type: 3}
+    broadcastAnEvent: 0
   gameLoseDialogue:
   - bodyText: Tsk, I better get away. Maybe I'll have better luck somewhere else...
     speakerName: Jackie
