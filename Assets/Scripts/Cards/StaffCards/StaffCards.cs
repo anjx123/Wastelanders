@@ -27,6 +27,7 @@ public abstract class StaffCards : ActionClass
     public override void OnHit()
     {
         Origin.AttackAnimation("IsStaffing");
+        MusicManager.Instance.PlaySFX(MusicManager.SFXList.staff);
         base.OnHit();
     }
 }
