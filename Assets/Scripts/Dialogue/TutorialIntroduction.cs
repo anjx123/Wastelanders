@@ -237,6 +237,7 @@ public class TutorialIntroduction : DialogueClasses
         CombatManager.PlayersWinEvent += IvesDies; //Setup Listener to set state to Game Win
         CombatManager.EnemiesWinEvent += EnemiesWin;
         DialogueManager.Instance.MoveBoxToBottom();
+        CombatManager.OnGameStateChanged += ExplainDefense;
         StartCoroutine(StartDialogueWithNextEvent(readingOpponentTutorial, () => { BattleQueue.playerActionInsertedEvent += OnPlayerPlayClashingCard; }));
     }
 
@@ -252,6 +253,23 @@ public class TutorialIntroduction : DialogueClasses
         yield return StartCoroutine(DialogueManager.Instance.StartDialogue(clashingOutcomeTutorial));
     }
 
+    private void ExplainDefense(GameState gameState)
+    {
+        if (gameState == GameState.SELECTION)
+        {
+            CombatManager.OnGameStateChanged -= ExplainDefense;
+            StartCoroutine(StartDialogueWithNextEvent(defensiveCardsTutorial, () => { CombatManager.OnGameStateChanged += ExplainAbilities; }));
+        }
+    }
+
+    private void ExplainAbilities(GameState gameState)
+    {
+        if (gameState == GameState.SELECTION)
+        {
+            CombatManager.OnGameStateChanged -= ExplainAbilities;
+            StartCoroutine(StartDialogueWithNextEvent(cardAbilitiesTutorial, () => { }));
+        }
+    }
     private void IvesDies()
     {
         CombatManager.PlayersWinEvent -= IvesDies; //Setup Listener to set state to Game Win
