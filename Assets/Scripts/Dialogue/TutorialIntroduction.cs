@@ -41,6 +41,9 @@ public class TutorialIntroduction : DialogueClasses
     [SerializeField] private List<DialogueText> ivesIsDefeated;
     [SerializeField] private DialogueWrapper endingTutorialDialogue;
 
+    [SerializeField] private GameOver gameOver;
+    [SerializeField] private List<DialogueText> gameLoseDialogue;
+
 
     [SerializeField] private bool jumpToCombat;
 
@@ -225,7 +228,8 @@ public class TutorialIntroduction : DialogueClasses
 
     private void BeginCombatIvesFight()
     {
-        EntityClass.OnEntityDeath += IvesDies; //Setup Listener to set state to Game Win
+        CombatManager.PlayersWinEvent += IvesDies; //Setup Listener to set state to Game Win
+        CombatManager.EnemiesWinEvent += EnemiesWin;
         DialogueManager.Instance.MoveBoxToBottom();
         StartCoroutine(StartDialogueWithNextEvent(readingOpponentTutorial, () => { BattleQueue.playerActionInsertedEvent += OnPlayerPlayClashingCard; }));
     }
@@ -242,15 +246,28 @@ public class TutorialIntroduction : DialogueClasses
         yield return StartCoroutine(DialogueManager.Instance.StartDialogue(clashingOutcomeTutorial));
     }
 
-    private void IvesDies(EntityClass entity)
+    private void IvesDies()
     {
-        if (entity is EnemyIves)
-        {
-            EntityClass.OnEntityDeath -= IvesDies;
-            CombatManager.Instance.GameState = GameState.GAME_WIN;
-        }
+        CombatManager.PlayersWinEvent -= IvesDies; //Setup Listener to set state to Game Win
+        CombatManager.Instance.GameState = GameState.GAME_WIN;
     }
-//------------------------------------------------------Helpers---------------------------------------------------------------------------------
+
+    private void EnemiesWin()
+    {
+        StartCoroutine(GameLose());
+        CombatManager.Instance.GameState = GameState.GAME_LOSE;
+    }
+
+    private IEnumerator GameLose()
+    {
+        yield return StartCoroutine(CombatManager.Instance.FadeInDarkScreen(2f));
+
+        gameOver.gameObject.SetActive(true);
+        gameOver.FadeIn();
+
+        yield return StartCoroutine(DialogueManager.Instance.StartDialogue(gameLoseDialogue));
+    }
+    //------------------------------------------------------Helpers---------------------------------------------------------------------------------
 
     private IEnumerator InstantiateDummies()
     {
