@@ -18,7 +18,7 @@ MonoBehaviour:
     - Item1: 2
       Item2:
         Item1: 0
-        Item2: 0
+        Item2: 10
     - Item1: 1
       Item2:
         Item1: 12
@@ -26,6 +26,10 @@ MonoBehaviour:
     - Item1: 0
       Item2:
         Item1: 10
+        Item2: 12
+    - Item1: 3
+      Item2:
+        Item1: 0
         Item2: 10
     selectedWeapons: 0000000001000000
     playerDeck:

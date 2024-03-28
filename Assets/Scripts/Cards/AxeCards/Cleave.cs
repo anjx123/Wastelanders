@@ -6,8 +6,8 @@ public class Cleave : AxeCards
 {
     public override void Initialize()
     {
-        lowerBound = 3;
-        upperBound = 5;
+        lowerBound = 2;
+        upperBound = 6;
         Speed = 2;
 
         myName = "Cleave";
