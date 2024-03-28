@@ -139,12 +139,9 @@ public class TutorialIntroduction : DialogueClasses
 
         // Have Ives fight and teach clashing now.
 
-        jackie.SetReturnPosition(jackie.gameObject.transform.position);
         ives.SetReturnPosition(dummy1StartingPos.position);
         ives.InjectDeck(ivesTutorialDeck);
-        CombatManager.Instance.AddEnemy(ives);
-        ives.Targetable();
-
+        CombatManager.Instance.SetEnemiesHostile(new List<EnemyClass> { ives });
 
         yield return new WaitUntil(() => !DialogueManager.Instance.IsInDialogue());
         CombatManager.Instance.GameState = GameState.SELECTION;

@@ -1611,6 +1611,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2101527321769255671, guid: 2bf19bd78e328204fb34ccaa75296151, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 1520415093
+      objectReference: {fileID: 0}
     - target: {fileID: 5747343100457332867, guid: 2bf19bd78e328204fb34ccaa75296151, type: 3}
       propertyPath: m_PresetInfoIsWorld
       value: 1
@@ -2676,7 +2680,7 @@ MonoBehaviour:
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 57baba5992d9e224988e93fcacf9f7eb, type: 3}
     broadcastAnEvent: 0
-  - bodyText: Power - which is a range where your damage can fall in .
+  - bodyText: Power - which is a range where your damage can be rolled into.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 3fea2e94140c08246a0e502ee92d3761, type: 3}
     broadcastAnEvent: 0
@@ -2737,7 +2741,7 @@ MonoBehaviour:
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 820631014ce088c4cb748224d5467c86, type: 3}
     broadcastAnEvent: 0
-  - bodyText: Focus grants you +1 Power on your attacks, but it clears out at the
+  - bodyText: Focus grants you +1 power on your attacks, but it clears out at the
       end of every round.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 820631014ce088c4cb748224d5467c86, type: 3}
@@ -2844,7 +2848,7 @@ MonoBehaviour:
     displayingImage: {fileID: 0}
     broadcastAnEvent: 0
   endingTutorialDialogue: {fileID: 11400000, guid: 71bc8b72e567a434fb451296dad29b2f, type: 2}
-  jumpToCombat: 1
+  jumpToCombat: 0
 --- !u!1001 &2102825245
 PrefabInstance:
   m_ObjectHideFlags: 0
