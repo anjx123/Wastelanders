@@ -9,6 +9,7 @@ public class DialogueManager : MonoBehaviour
     public GameObject dialogueScrim; //Blocks player interaction with the game while in dialogue
     public GameObject dialogueBoxObj;
     private DialogueBox dialogueBoxComponent;
+    private DialogueBox picturelessDialogueBoxComponent;
     private List<DialogueText> sentences = new();
 
     private bool inDialogue = false;
@@ -85,7 +86,21 @@ public class DialogueManager : MonoBehaviour
         DialogueText sentence = sentences[0];
         sentences.RemoveAt(0); //Uses a list instead of a Queue so we can see it in the Unity Editor
 
-        dialogueBoxComponent.SetLine(sentence);
+        if (sentence.DisplayingImage == null && picturelessDialogueBoxComponent != null)
+        {
+            picturelessDialogueBoxComponent.gameObject.SetActive(true);
+            dialogueBoxComponent.gameObject.SetActive(false);
+            picturelessDialogueBoxComponent.SetLine(sentence);
+
+        } else
+        {
+            if (picturelessDialogueBoxComponent != null)
+            {
+                picturelessDialogueBoxComponent.gameObject.SetActive(false);
+            }
+            dialogueBoxComponent.gameObject.SetActive(true);
+            dialogueBoxComponent.SetLine(sentence);
+        }
     }
 
     void EndDialogue()
