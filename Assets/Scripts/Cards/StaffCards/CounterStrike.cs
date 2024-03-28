@@ -14,7 +14,7 @@ public class CounterStrike : StaffCards
     {
         lowerBound = 1;
         upperBound = 3;
-        Speed = 5;
+        Speed = 4;
 
         myName = "Counter Strike";
         description = "Block with this card, then make an attack with this card";
@@ -22,7 +22,7 @@ public class CounterStrike : StaffCards
         ogMaterial = renderer.material; // og sprite of card
         OriginalPosition = transform.position;
         base.Initialize();
-        CardType = CardType.MeleeAttack;
+        CardType = CardType.Defense;
     }
 
     public override void ApplyEffect()
@@ -34,7 +34,7 @@ public class CounterStrike : StaffCards
                 activeDuplicateInstance = Instantiate(this.GetComponent<CounterStrike>());
                 activeDuplicateInstance.originalCopy = false;
                 activeDuplicateInstance.transform.position = new Vector3(-10, 10, 10);
-                activeDuplicateInstance.CardType = CardType.Defense;
+                activeDuplicateInstance.CardType = CardType.MeleeAttack;
             }
             activeDuplicateInstance.Origin = Origin;
             activeDuplicateInstance.Target = Target;

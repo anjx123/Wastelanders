@@ -16,7 +16,7 @@ public class Spit : FrogAttacks
     {
         base.Initialize();
         lowerBound = 1;
-        upperBound = 5;
+        upperBound = 4;
         Speed = 4;
 
         myName = "Spit";
