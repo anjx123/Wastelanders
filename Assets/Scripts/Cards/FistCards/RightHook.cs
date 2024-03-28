@@ -12,10 +12,6 @@ public class RightHook : FistCards
 
     private GameObject haymaker;
 
-    public override void OnCardStagger()
-    {
-
-    }
 
     // Start is called before the first frame update
     public override void Initialize()
@@ -33,15 +29,9 @@ public class RightHook : FistCards
         base.Initialize();
     }
 
-    public override void OnHit()
-    {
-        base.OnHit();
-    }
-
     public override void CardIsUnstaggered()
     {
         base.CardIsUnstaggered();
-        Origin.AttackAnimation("IsMelee");
         if (!haymaker) { haymaker = Instantiate(haymakerPrefab); haymaker.transform.position = new Vector3(-10, 10, 10); }
         ActionClass ac = haymaker.GetComponent<ActionClass>();
         ac.Origin = this.Origin;

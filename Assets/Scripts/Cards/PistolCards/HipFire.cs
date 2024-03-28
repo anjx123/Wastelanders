@@ -10,11 +10,6 @@ public class HipFire : PistolCards
 #nullable enable
     HipFire? activeDuplicateInstance = null;
     bool originalCopy = true;
-    public override void OnCardStagger()
-    {
-        Debug.Log("Executing Effect");
-    }
-
 
     // @Author Muhammad
     public override void CardIsUnstaggered()
@@ -26,9 +21,9 @@ public class HipFire : PistolCards
                 activeDuplicateInstance = Instantiate(this.GetComponent<HipFire>());
                 activeDuplicateInstance.originalCopy = false;
                 activeDuplicateInstance.transform.position = new Vector3(-10, 10, 10);
-                activeDuplicateInstance.Origin = Origin;
-                activeDuplicateInstance.Target = Target;
             }
+            activeDuplicateInstance.Origin = Origin;
+            activeDuplicateInstance.Target = Target;
             BattleQueue.BattleQueueInstance.InsertDupPlayerAction(activeDuplicateInstance!);
         }
     }

@@ -10,11 +10,6 @@ public class CounterStrike : StaffCards
 #nullable enable
     CounterStrike? activeDuplicateInstance = null;
     private bool originalCopy = true;
-    public override void OnCardStagger()
-    {
-
-    }
-    
     public override void Initialize()
     {
         lowerBound = 1;
@@ -39,10 +34,10 @@ public class CounterStrike : StaffCards
                 activeDuplicateInstance = Instantiate(this.GetComponent<CounterStrike>());
                 activeDuplicateInstance.originalCopy = false;
                 activeDuplicateInstance.transform.position = new Vector3(-10, 10, 10);
-                activeDuplicateInstance.Origin = Origin;
-                activeDuplicateInstance.Target = Target;
                 activeDuplicateInstance.CardType = CardType.Defense;
             }
+            activeDuplicateInstance.Origin = Origin;
+            activeDuplicateInstance.Target = Target;
             BattleQueue.BattleQueueInstance.InsertDupPlayerAction(activeDuplicateInstance!);
         }
         base.ApplyEffect();

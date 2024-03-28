@@ -34,9 +34,9 @@ public class Flurry : StaffCards
                 activeDuplicateInstance = Instantiate(this.GetComponent<Flurry>());
                 activeDuplicateInstance.originalCopy = false;
                 activeDuplicateInstance.transform.position = new Vector3(-10, 10, 10);
-                activeDuplicateInstance.Origin = Origin;
-                activeDuplicateInstance.Target = Target;
             }
+            activeDuplicateInstance.Origin = Origin;
+            activeDuplicateInstance.Target = Target;
             BattleQueue.BattleQueueInstance.InsertDupPlayerAction(activeDuplicateInstance!);
         }
         base.ApplyEffect();

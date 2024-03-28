@@ -8,20 +8,12 @@ using static StatusEffect;
 public class Mutilate : AxeCards
 {
 #nullable enable
-    private CombatManager.GameStateChangedHandler resetBuffHandler;
     CombatManager.GameStateChangedHandler? GameStateChangedHandler;
     private void OnDestroy()
     {
         if (GameStateChangedHandler != null)
         {
             CombatManager.OnGameStateChanged -= GameStateChangedHandler;
-        }
-    }
-    public void Destroy()
-    {
-        if (resetBuffHandler != null)
-        {
-            CombatManager.OnGameStateChanged -= resetBuffHandler;
         }
     }
     public override void Initialize()

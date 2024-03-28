@@ -32,9 +32,9 @@ public class Pummel : FistCards
                 activeDuplicateInstance = Instantiate(this.GetComponent<Pummel>());
                 activeDuplicateInstance.cardVersion = 2;
                 activeDuplicateInstance.transform.position = new Vector3(-10, 10, 10);
-                activeDuplicateInstance.Origin = Origin;
-                activeDuplicateInstance.Target = Target;
             }
+            activeDuplicateInstance.Origin = Origin;
+            activeDuplicateInstance.Target = Target;
             BattleQueue.BattleQueueInstance.InsertDupPlayerAction(activeDuplicateInstance!);
         }
 
@@ -45,9 +45,9 @@ public class Pummel : FistCards
                 activeDuplicateInstance = Instantiate(this.GetComponent<Pummel>());
                 activeDuplicateInstance.cardVersion = 3;
                 activeDuplicateInstance.transform.position = new Vector3(-10, 10, 10);
-                activeDuplicateInstance.Origin = Origin;
-                activeDuplicateInstance.Target = Target;
             }
+            activeDuplicateInstance.Origin = Origin;
+            activeDuplicateInstance.Target = Target;
             BattleQueue.BattleQueueInstance.InsertDupPlayerAction(activeDuplicateInstance!);
         }
         base.ApplyEffect();

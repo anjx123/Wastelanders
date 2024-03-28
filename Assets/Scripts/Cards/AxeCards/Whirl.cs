@@ -34,9 +34,9 @@ public class Whirl : AxeCards
                 activeDuplicateInstance = Instantiate(this.GetComponent<Whirl>());
                 activeDuplicateInstance.originalCopy = false;
                 activeDuplicateInstance.transform.position = new Vector3(-10, 10, 10);
-                activeDuplicateInstance.Origin = Origin;
-                activeDuplicateInstance.Target = Target;
             }
+            activeDuplicateInstance.Origin = Origin;
+            activeDuplicateInstance.Target = Target;
             BattleQueue.BattleQueueInstance.InsertDupPlayerAction(activeDuplicateInstance!);
         }
 

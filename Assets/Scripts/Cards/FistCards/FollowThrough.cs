@@ -38,9 +38,9 @@ public class FollowThrough : FistCards
                 activeDuplicateInstance = Instantiate(this.GetComponent<FollowThrough>());
                 activeDuplicateInstance.originalCopy = false;
                 activeDuplicateInstance.transform.position = new Vector3(-10, 10, 10);
-                activeDuplicateInstance.Origin = Origin;
-                activeDuplicateInstance.Target = Target;
             }
+            activeDuplicateInstance.Origin = Origin;
+            activeDuplicateInstance.Target = Target;
             void MakeAnotherAttack(int damage)
             {
                 if (damage > 0)

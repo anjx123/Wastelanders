@@ -38,9 +38,9 @@ public class StackSmash : SlimeAttacks
                 activeDuplicateInstance = Instantiate(this.GetComponent<StackSmash>());
                 activeDuplicateInstance.originalCopy = false;
                 activeDuplicateInstance.transform.position = new Vector3(-10, 10, 10);
-                activeDuplicateInstance.Origin = Origin;
-                activeDuplicateInstance.Target = Target;
             }
+            activeDuplicateInstance.Origin = Origin;
+            activeDuplicateInstance.Target = Target;
             BattleQueue.BattleQueueInstance.InsertDupEnemyAction(activeDuplicateInstance!);
         }
 
