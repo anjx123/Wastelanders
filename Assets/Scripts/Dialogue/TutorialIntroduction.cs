@@ -17,6 +17,7 @@ public class TutorialIntroduction : DialogueClasses
 
     [SerializeField] private Transform ivesPassiveBattlePosition;
     [SerializeField] private List<GameObject> ivesTutorialDeck;
+    [SerializeField] private List<GameObject> jackieTutorialDeck;
 
     [SerializeField] private List<DialogueText> openingDiscussion;
     [SerializeField] private List<DialogueText> jackieMonologue;

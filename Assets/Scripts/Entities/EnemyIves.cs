@@ -21,8 +21,7 @@ public class EnemyIves : EnemyClass
             addedClass.Origin = this;
 
             deck.Add(toAdd);
-
-            Reshuffle();
+            pool.Add(toAdd);
         }
     }
 
