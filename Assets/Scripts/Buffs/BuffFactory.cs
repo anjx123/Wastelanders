@@ -18,6 +18,9 @@ public class BuffFactory : MonoBehaviour
             case Resonate.buffName:
                 return new Resonate();
 
+            case Wound.buffName:
+                return new Wound();
+
             default:
                 throw new System.Exception("Unkown Buff: " + buffType);
         }
