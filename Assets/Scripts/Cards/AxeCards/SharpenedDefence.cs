@@ -24,7 +24,7 @@ public class SharpenedDefence : AxeCards
 
     public override void CardIsUnstaggered()
     {
-        // wound stacks. 
+        Target.AddStacks(Wound.buffName, 2);
         base.CardIsUnstaggered();
     }
 }

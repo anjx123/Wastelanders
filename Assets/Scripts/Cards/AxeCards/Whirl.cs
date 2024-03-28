@@ -6,6 +6,10 @@ using UnityEngine;
 
 public class Whirl : AxeCards
 {
+#nullable enable
+    Whirl? activeDuplicateInstance = null;
+    bool originalCopy = true;
+
     public override void Initialize()
     {
         lowerBound = 2;
@@ -13,7 +17,7 @@ public class Whirl : AxeCards
         Speed = 3;
 
         myName = "Whirl";
-        description = "Make this attack twice if unstaggered, apply 1 wound if this attack deals damage.";
+        description = "Make this attack, if unstaggered, apply one wound then make it again.";
         Renderer renderer = GetComponent<Renderer>();
         ogMaterial = renderer.material;
         OriginalPosition = transform.position;
@@ -22,24 +26,21 @@ public class Whirl : AxeCards
 
     // for the "deals damage" portion how will you know? there is no reference to the enemy nor the outcome of a clash. 
     public override void CardIsUnstaggered()
-
     {
-        if (proto && activeDupCardInstance == null)
+        if (originalCopy)
         {
-            activeDupCardInstance = Instantiate(duplicateCardInstance.GetComponent<WhirlDuplicate>());
-            ((WhirlDuplicate)activeDupCardInstance).proto = false;
-            ((WhirlDuplicate)activeDupCardInstance).duplicateCardInstance = null;
-            activeDupCardInstance.transform.position = new Vector3(-10, 10, 10);
+            if (activeDuplicateInstance == null)
+            {
+                activeDuplicateInstance = Instantiate(this.GetComponent<Whirl>());
+                activeDuplicateInstance.originalCopy = false;
+                activeDuplicateInstance.transform.position = new Vector3(-10, 10, 10);
+                activeDuplicateInstance.Origin = Origin;
+                activeDuplicateInstance.Target = Target;
+            }
+            BattleQueue.BattleQueueInstance.InsertDupPlayerAction(activeDuplicateInstance!);
         }
 
-        if (proto)
-        {
-            PlayerClass origin = (PlayerClass)Origin;
-            activeDupCardInstance.Origin = origin;
-            activeDupCardInstance.Target = Target;
-            BattleQueue.BattleQueueInstance.InsertDupPlayerAction(activeDupCardInstance);
-        } 
-
+        Target.AddStacks(Wound.buffName, 1);
         base.CardIsUnstaggered();
     }
 

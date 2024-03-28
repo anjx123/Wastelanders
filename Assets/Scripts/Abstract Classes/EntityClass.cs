@@ -531,6 +531,12 @@ public abstract class EntityClass : SelectClass
         return originalHandler;
     }
 
+    public StatusEffectModifyValueDelegate GetBuffsOnHitHandler(string buff)
+    {
+        CheckBuff(buff);
+        return statusEffects[buff].OnEntityHitHandler;
+    }
+
 
     public void EnableDice()
     {

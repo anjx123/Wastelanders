@@ -13,7 +13,7 @@ public class Decimate : AxeCards
         Speed = 2;
 
         myName = "Decimate";
-        description = "Double up to 3 wounds if this attack is unstaggered."; 
+        description = "On hit, double the amount of wounds on the target."; 
         Renderer renderer = GetComponent<Renderer>();
         ogMaterial = renderer.material;
         OriginalPosition = transform.position;
@@ -22,7 +22,7 @@ public class Decimate : AxeCards
 
     public override void CardIsUnstaggered()
     {
-        // something with wound
+        Target.AddStacks(Wound.buffName, Target.GetBuffStacks(Wound.buffName));
         base.CardIsUnstaggered();
     }
 }

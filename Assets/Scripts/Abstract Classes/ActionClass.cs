@@ -4,6 +4,7 @@ using System.Runtime.ConstrainedExecution;
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
+using System;
 
 public abstract class ActionClass : SelectClass
 {
@@ -52,7 +53,9 @@ public abstract class ActionClass : SelectClass
 
     #nullable enable
     [SerializeField] protected GameObject? duplicateCardInstance; // set in editor for now
+    [Obsolete("activeDupCardInstance is deprecated, please use a private variable instead and refer to the Axe card Whirl for implementation.")]
     protected ActionClass? activeDupCardInstance;
+    [Obsolete("proto is deprecated, please use a private variable and refer to the Axe card Whirl for implementation")]
     protected bool proto = true;
     #nullable disable 
 

@@ -11,7 +11,7 @@ public class Cleave : AxeCards
         Speed = 2;
 
         myName = "Cleave";
-        description = "On hit, apply 2 stacks of wound.";
+        description = "On hit, apply 2 stacks of wound to the target.";
         Renderer renderer = GetComponent<Renderer>();
         ogMaterial = renderer.material; 
         OriginalPosition = transform.position;
@@ -20,7 +20,7 @@ public class Cleave : AxeCards
 
     public override void OnHit()
     {
-        // something with stacks. 
+        Target.AddStacks(Wound.buffName, 2);
         base.OnHit();
     }
 }
