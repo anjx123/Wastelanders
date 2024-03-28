@@ -7,7 +7,9 @@ using UnityEngine;
 // Minor note: there is inconsisteny in the script naming: Hip Fire != HipFire; I added the space for the duplicates on purpose 
 public class HipFire : PistolCards
 {
-
+#nullable enable
+    HipFire? activeDuplicateInstance = null;
+    bool originalCopy = true;
     public override void OnCardStagger()
     {
         Debug.Log("Executing Effect");
@@ -17,20 +19,17 @@ public class HipFire : PistolCards
     // @Author Muhammad
     public override void CardIsUnstaggered()
     {
-        if (proto && activeDupCardInstance == null)
+        if (originalCopy)
         {
-            activeDupCardInstance = Instantiate(duplicateCardInstance.GetComponent<HipFireDuplicate>());
-            ((HipFireDuplicate)activeDupCardInstance).proto = false;
-            ((HipFireDuplicate)activeDupCardInstance).duplicateCardInstance = null;
-            activeDupCardInstance.transform.position = new Vector3(-10, 10, 10);
-        }
-
-        if (proto)
-        {
-            PlayerClass origin = (PlayerClass)Origin;
-            activeDupCardInstance.Origin = origin;
-            activeDupCardInstance.Target = Target;
-            BattleQueue.BattleQueueInstance.InsertDupPlayerAction(activeDupCardInstance);
+            if (activeDuplicateInstance == null)
+            {
+                activeDuplicateInstance = Instantiate(this.GetComponent<HipFire>());
+                activeDuplicateInstance.originalCopy = false;
+                activeDuplicateInstance.transform.position = new Vector3(-10, 10, 10);
+                activeDuplicateInstance.Origin = Origin;
+                activeDuplicateInstance.Target = Target;
+            }
+            BattleQueue.BattleQueueInstance.InsertDupPlayerAction(activeDuplicateInstance!);
         }
     }
 

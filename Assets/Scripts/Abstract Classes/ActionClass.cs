@@ -51,14 +51,6 @@ public abstract class ActionClass : SelectClass
     public int LowerBound { get { return lowerBound; }}
     public int UpperBound { get { return upperBound; }}
 
-    #nullable enable
-    [SerializeField] protected GameObject? duplicateCardInstance; // set in editor for now
-    [Obsolete("activeDupCardInstance is deprecated, please use a private variable instead and refer to the Axe card Whirl for implementation.")]
-    protected ActionClass? activeDupCardInstance;
-    [Obsolete("proto is deprecated, please use a private variable and refer to the Axe card Whirl for implementation")]
-    protected bool proto = true;
-    #nullable disable 
-
     protected CardDup duplicateCard = new CardDup();
 
     public CardDup GetCard()
@@ -83,7 +75,8 @@ public abstract class ActionClass : SelectClass
 
     private CardState cardState = CardState.NORMAL;
     public int Speed { get; protected set; }
-    public string description;
+    protected string description;
+    public string Description {  get { return description; }}
     [SerializeField] private Sprite icon;
     public Sprite cardBack;
     [SerializeField] private CardUI cardUI;
@@ -122,17 +115,6 @@ public abstract class ActionClass : SelectClass
         }
     }
 
-    /*
-        public override void OnMouseDown()
-        {
-            Scene activeScene = SceneManager.GetActiveScene();
-            string name = activeScene.name;
-            if (name == "CombatScene") {
-                HighlightManager.OnActionClicked(this);
-            } else if (name == "SelectionScreen") {
-                DeckSelectionManager.Instance.ActionSelected(this);
-            }
-        }*/
     //Called when this card hits the enemy, runs any on hit buffs or effects given.
     //Note: that OnHit implies CardIsUnstaggered, thus it calls it. Please be **very careful** about the timing that CardIsUnstaggered is called. 
     // This also implies that OnHit is highly unlikely to be overriden in ANY derived class: tge emphasis should almost entirely be on CardIsUnstaggered
@@ -201,7 +183,7 @@ public abstract class ActionClass : SelectClass
     // Calculates Actual Damage/Block After Applying Buffs
     public virtual void RollDice()
     {
-        duplicateCard.actualRoll = Random.Range(duplicateCard.rollFloor, duplicateCard.rollCeiling + 1);
+        duplicateCard.actualRoll = UnityEngine.Random.Range(duplicateCard.rollFloor, duplicateCard.rollCeiling + 1);
         
         Origin.SetDice(duplicateCard.actualRoll); 
     }

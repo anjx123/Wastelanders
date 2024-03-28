@@ -7,6 +7,9 @@ using static UnityEngine.UI.Image;
 
 public class CounterStrike : StaffCards
 {
+#nullable enable
+    CounterStrike? activeDuplicateInstance = null;
+    private bool originalCopy = true;
     public override void OnCardStagger()
     {
 
@@ -24,26 +27,23 @@ public class CounterStrike : StaffCards
         ogMaterial = renderer.material; // og sprite of card
         OriginalPosition = transform.position;
         base.Initialize();
+        CardType = CardType.MeleeAttack;
     }
 
     public override void ApplyEffect()
     {
-        if (proto && activeDupCardInstance == null)
+        if (originalCopy)
         {
-            activeDupCardInstance = Instantiate(this.GetComponent<CounterStrike>());
-            ((CounterStrike)activeDupCardInstance).proto = false;
-            ((CounterStrike)activeDupCardInstance).duplicateCardInstance = null;
-            ((CounterStrike)activeDupCardInstance).CardType = CardType.MeleeAttack;
-            activeDupCardInstance.transform.position = new Vector3(-10, -10, -10);
-        }
-
-        if (proto)
-        {
-            CardType = CardType.Defense;
-            PlayerClass origin = (PlayerClass)Origin;
-            activeDupCardInstance.Origin = origin;
-            activeDupCardInstance.Target = Target;
-            BattleQueue.BattleQueueInstance.InsertDupPlayerAction(activeDupCardInstance);
+            if (activeDuplicateInstance == null)
+            {
+                activeDuplicateInstance = Instantiate(this.GetComponent<CounterStrike>());
+                activeDuplicateInstance.originalCopy = false;
+                activeDuplicateInstance.transform.position = new Vector3(-10, 10, 10);
+                activeDuplicateInstance.Origin = Origin;
+                activeDuplicateInstance.Target = Target;
+                activeDuplicateInstance.CardType = CardType.Defense;
+            }
+            BattleQueue.BattleQueueInstance.InsertDupPlayerAction(activeDuplicateInstance!);
         }
         base.ApplyEffect();
     }

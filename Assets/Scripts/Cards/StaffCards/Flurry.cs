@@ -7,6 +7,9 @@ using UnityEngine;
 public class Flurry : StaffCards
 {
 
+#nullable enable
+    Flurry? activeDuplicateInstance = null;
+    bool originalCopy = true;
     public override void OnCardStagger()
     {
         Debug.Log("Executing Effect");
@@ -28,20 +31,17 @@ public class Flurry : StaffCards
 
     public override void ApplyEffect()
     {
-        if (proto && activeDupCardInstance == null)
+        if (originalCopy)
         {
-            activeDupCardInstance = Instantiate(duplicateCardInstance.GetComponent<FlurryDuplicate>());
-            ((FlurryDuplicate)activeDupCardInstance).proto = false;
-            ((FlurryDuplicate)activeDupCardInstance).duplicateCardInstance = null;
-            activeDupCardInstance.transform.position = new Vector3(-10, 10, 10);
-        }
-
-        if (proto)
-        {
-            PlayerClass origin = (PlayerClass)Origin;
-            activeDupCardInstance.Origin = origin;
-            activeDupCardInstance.Target = Target;
-            BattleQueue.BattleQueueInstance.InsertDupPlayerAction(activeDupCardInstance);
+            if (activeDuplicateInstance == null)
+            {
+                activeDuplicateInstance = Instantiate(this.GetComponent<Flurry>());
+                activeDuplicateInstance.originalCopy = false;
+                activeDuplicateInstance.transform.position = new Vector3(-10, 10, 10);
+                activeDuplicateInstance.Origin = Origin;
+                activeDuplicateInstance.Target = Target;
+            }
+            BattleQueue.BattleQueueInstance.InsertDupPlayerAction(activeDuplicateInstance!);
         }
         base.ApplyEffect();
     }
