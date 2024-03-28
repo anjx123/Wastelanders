@@ -92,10 +92,7 @@ public abstract class EntityClass : SelectClass
         {
             OnEntityDeath?.Invoke(this);
         }
-        if (percentageDone > 0)
-        {
-            UpdateBuffsOnDamage();
-        }
+        BuffsOnDamageEvent(ref damage);
         combatInfo.DisplayDamage(damage);
         StartCoroutine(PlayHitAnimation(source, this, percentageDone));
     }
@@ -151,7 +148,6 @@ public abstract class EntityClass : SelectClass
         float elapsedTime = 0f;
 
         Vector3 diffInLocation = destination - originalPosition;
-
         if ((Vector2)diffInLocation == Vector2.zero) yield break;
 
         float distance = Mathf.Sqrt(diffInLocation.x * diffInLocation.x + diffInLocation.y * diffInLocation.y);
@@ -413,11 +409,11 @@ public abstract class EntityClass : SelectClass
     }
 
     // Updates buffs affected by player taking damage
-    protected void UpdateBuffsOnDamage()
+    protected void BuffsOnDamageEvent(ref int damage)
     {
         foreach (string s in statusEffects.Keys)
         {
-            statusEffects[s].OnEntityHitHandler();
+            statusEffects[s].OnEntityHitHandler(ref damage);
         }
         UpdateBuffs();
     }
@@ -526,10 +522,10 @@ public abstract class EntityClass : SelectClass
     }
 
     //Please use the originalHandler to resubscribe when you are done :3
-    public StatusEffectDelegate SetBuffsOnHitHandler(string buff, StatusEffectDelegate handler)
+    public StatusEffectModifyValueDelegate SetBuffsOnHitHandler(string buff, StatusEffectModifyValueDelegate handler)
     {
         CheckBuff(buff);
-        StatusEffectDelegate originalHandler = statusEffects[buff].OnEntityHitHandler;
+        StatusEffectModifyValueDelegate originalHandler = statusEffects[buff].OnEntityHitHandler;
         statusEffects[buff].OnEntityHitHandler = handler;
         Debug.Log("A buff handler is being reassigned, be careful!");
         return originalHandler;

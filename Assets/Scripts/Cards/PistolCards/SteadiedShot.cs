@@ -22,7 +22,7 @@ public class SteadiedShot : PistolCards
 
     public override void ApplyEffect()
     {
-        StatusEffectDelegate originalHandler = Origin.SetBuffsOnHitHandler(Accuracy.buffName, () => { });
+        StatusEffectModifyValueDelegate originalHandler = Origin.SetBuffsOnHitHandler(Accuracy.buffName, (ref int damage) => { });
         CombatManager.OnGameStateChanged += ResetBuffHandler;
         void ResetBuffHandler(GameState gameState)
         {

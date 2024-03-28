@@ -7,11 +7,15 @@ public class Wound : StatusEffect
 {
 
     public const string buffName = "Wound";
-    public override void ApplyStacks(ref ActionClass.CardDup dup)
+    public Wound()
     {
-        throw new System.NotImplementedException();
+        OnEntityHitHandler = delegate (ref int damage)
+        {
+            if (damage > 0) {
+                damage += Stacks;
+            }
+        };
     }
-
 
     public override Sprite GetIcon()
     {
