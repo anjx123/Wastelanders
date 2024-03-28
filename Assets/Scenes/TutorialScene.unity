@@ -2837,24 +2837,24 @@ MonoBehaviour:
   - bodyText: Since the previous exam, your extra training should allow you to accurately
       read enemy attacks now.
     speakerName: Ives
-    displayingImage: {fileID: 21300000, guid: 305bbe4aee0eef34586b3def011ea974, type: 3}
+    displayingImage: {fileID: 21300000, guid: fbdbcaab28794334bb84176f7e052fb5, type: 3}
     broadcastAnEvent: 0
   - bodyText: Next to the enemy, you can see the attack they are declaring.
     speakerName: Ives
-    displayingImage: {fileID: 21300000, guid: 305bbe4aee0eef34586b3def011ea974, type: 3}
+    displayingImage: {fileID: 21300000, guid: fbdbcaab28794334bb84176f7e052fb5, type: 3}
     broadcastAnEvent: 0
-  - bodyText: Hovering over this icon allows you to see their target.
+  - bodyText: At the top of that icon, you can see the attack's intended target.
     speakerName: Ives
-    displayingImage: {fileID: 21300000, guid: 305bbe4aee0eef34586b3def011ea974, type: 3}
+    displayingImage: {fileID: 21300000, guid: c35542e8d8ad61c4087e817dd9aa7c15, type: 3}
     broadcastAnEvent: 0
   - bodyText: '[Clicking] on the attack allows you to see its Power and Speed and
-      any Abilities.'
+      Abilities.'
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 82dbf38ae23fe224e90be99093d02604, type: 3}
     broadcastAnEvent: 0
   - bodyText: 'Their action has also been placed into the queue. '
     speakerName: Ives
-    displayingImage: {fileID: 21300000, guid: 305bbe4aee0eef34586b3def011ea974, type: 3}
+    displayingImage: {fileID: 21300000, guid: fbdbcaab28794334bb84176f7e052fb5, type: 3}
     broadcastAnEvent: 0
   - bodyText: Come on, make an attack against me.
     speakerName: Ives
@@ -2874,6 +2874,30 @@ MonoBehaviour:
       at me once you are ready.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: b0d27b9163eb2554996f368bd5b8d4e2, type: 3}
+    broadcastAnEvent: 0
+  defensiveCardsTutorial:
+  - bodyText: Defensive cards are marked by the defense icon.
+    speakerName: Ives
+    displayingImage: {fileID: 21300000, guid: 926dc102ee6ad62488fa7f3605a127ce, type: 3}
+    broadcastAnEvent: 0
+  - bodyText: Even upon losing a clash, it will subtract its power from the incoming
+      damage to mitage it.
+    speakerName: Ives
+    displayingImage: {fileID: 21300000, guid: 926dc102ee6ad62488fa7f3605a127ce, type: 3}
+    broadcastAnEvent: 0
+  - bodyText: It's often a good idea to use them against clashes you might not win
+      to guarantee value.
+    speakerName: Ives
+    displayingImage: {fileID: 21300000, guid: ade9660133ca00a499bfa3ad449b87bd, type: 3}
+    broadcastAnEvent: 0
+  cardAbilitiesTutorial:
+  - bodyText: Watch out, enemy cards can also sometimes have abilities too.
+    speakerName: Ives
+    displayingImage: {fileID: 21300000, guid: 305bbe4aee0eef34586b3def011ea974, type: 3}
+    broadcastAnEvent: 0
+  - bodyText: Click on my card to check out the ability of my attack.
+    speakerName: Ives
+    displayingImage: {fileID: 21300000, guid: 305bbe4aee0eef34586b3def011ea974, type: 3}
     broadcastAnEvent: 0
   clashingOutcomeTutorial:
   - bodyText: During a clash, both you and your opponent will both roll your attacks

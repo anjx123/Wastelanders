@@ -34,6 +34,8 @@ public class TutorialIntroduction : DialogueClasses
     //After Ives Starts fighting
     [SerializeField] private List<DialogueText> readingOpponentTutorial;
     [SerializeField] private List<DialogueText> clashingCardsTutorial;
+    [SerializeField] private List<DialogueText> defensiveCardsTutorial;
+    [SerializeField] private List<DialogueText> cardAbilitiesTutorial;
     [SerializeField] private List<DialogueText> clashingOutcomeTutorial;
     [SerializeField] private List<DialogueText> cardsExhaustedTutorial;
 
@@ -100,14 +102,18 @@ public class TutorialIntroduction : DialogueClasses
 
             jackie.FaceRight(); //Jackie turns to face the person approaching her
 
-            yield return StartCoroutine(DialogueManager.Instance.StartDialogue(ivesChatsWithJackie.Dialogue));
-
+            {
+                DialogueBox.DialogueBoxEvent += JackieGoesToGetStaff;
+                void JackieGoesToGetStaff()
+                {
+                    DialogueBox.DialogueBoxEvent -= JackieGoesToGetStaff;
+                    StartCoroutine(jackie.MoveToPosition(dummy1StartingPos.position, 1.4f, 0.8f));
+                }
+                yield return StartCoroutine(DialogueManager.Instance.StartDialogue(ivesChatsWithJackie.Dialogue));
+            }
+            yield return new WaitForSeconds(BRIEF_PAUSE);
             yield return StartCoroutine(ives.MoveToPosition(dummy1StartingPos.position, 1.2f, 1.2f)); //Ives goes to place a dummy down
             trainingDummies.Add(Instantiate(trainingDummyPrefab, dummy1StartingPos)); //Ives summons Dummy
-
-
-            yield return new WaitForSeconds(1f);
-            yield return StartCoroutine(jackie.MoveToPosition(dummy1StartingPos.position, 1.4f, 0.8f));
             yield return new WaitForSeconds(1f);
         } else
         {
