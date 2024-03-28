@@ -100,7 +100,10 @@ public abstract class EntityClass : SelectClass
 
         EntityTookDamage?.Invoke(damage);
         combatInfo.DisplayDamage(damage);
-        StartCoroutine(PlayHitAnimation(source, this, percentageDone));
+        if (damage > 0)
+        {
+            StartCoroutine(PlayHitAnimation(source, this, percentageDone));
+        }
     }
 
     //Plays both first the stagger entities then 
