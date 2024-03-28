@@ -10,10 +10,6 @@ public class Flurry : StaffCards
 #nullable enable
     Flurry? activeDuplicateInstance = null;
     bool originalCopy = true;
-    public override void OnCardStagger()
-    {
-        Debug.Log("Executing Effect");
-    }
 
     // Start is called before the first frame update
     public override void Initialize()

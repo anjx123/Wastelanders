@@ -10,13 +10,7 @@ public class StackSmash : SlimeAttacks
 #nullable enable
     StackSmash? activeDuplicateInstance = null;
     bool originalCopy = true;
-
-    public override void OnCardStagger()
-    {
-
-    }
-
-   
+      
 
     public override void Initialize()
     {

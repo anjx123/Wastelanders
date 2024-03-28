@@ -47,9 +47,12 @@ public abstract class EntityClass : SelectClass
 
     protected List<ActionClass> actionsAvailable;
     public DeadEntities _DeathHandler { protected get;  set; }
-    public DeadEntities DeathHandler { get; private set; } 
+    public DeadEntities DeathHandler { get; private set; }
 
 #nullable enable
+
+    public delegate void DamageDelegate(int damage);
+    public event DamageDelegate? EntityTookDamage;
 
     public delegate void EntityDelegate(EntityClass player);
     public static event EntityDelegate? OnEntityDeath;
@@ -83,6 +86,8 @@ public abstract class EntityClass : SelectClass
 
     public virtual void TakeDamage(EntityClass source, int damage)
     {
+        BuffsOnDamageEvent(ref damage);
+
         Health = Mathf.Clamp(Health - damage, 0, MaxHealth);
         float percentageDone = 1; //Testing different powered knockbacks
         if (Health != 0)
@@ -92,7 +97,8 @@ public abstract class EntityClass : SelectClass
         {
             OnEntityDeath?.Invoke(this);
         }
-        BuffsOnDamageEvent(ref damage);
+
+        EntityTookDamage?.Invoke(damage);
         combatInfo.DisplayDamage(damage);
         StartCoroutine(PlayHitAnimation(source, this, percentageDone));
     }
