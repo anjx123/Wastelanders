@@ -6,7 +6,7 @@ public class IronSights : PistolCards
 {
 
     
-    public override void ExecuteActionEffect()
+    public override void OnCardStagger()
     {
         
     }

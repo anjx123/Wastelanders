@@ -8,6 +8,7 @@ public class QueenBeetle : EnemyClass
     [SerializeField]
     private GameObject[] beetlePrefabs = new GameObject[3];
     private Beetle[] availability;
+    [SerializeField] bool combatMode;
 
     [SerializeField]
     public GameObject enemyContainer;
@@ -25,13 +26,16 @@ public class QueenBeetle : EnemyClass
         {
             availability[i] = null;
         }
-        for (int i = 0; i < beetlePrefabs.Length; ++i)
+        if (combatMode)
         {
-            GameObject beetle = Instantiate(beetlePrefabs[i]);
-            beetle.transform.SetParent(enemyContainer.transform);
-            beetle.transform.localScale *= BEETLE_SCALING;
-            beetle.transform.position = beetleLocations[i].position;
-            availability[i] = beetle.GetComponent<Beetle>();
+            for (int i = 0; i < beetlePrefabs.Length; ++i)
+            {
+                GameObject beetle = Instantiate(beetlePrefabs[i]);
+                beetle.transform.SetParent(enemyContainer.transform);
+                beetle.transform.localScale *= BEETLE_SCALING;
+                beetle.transform.position = beetleLocations[i].position;
+                availability[i] = beetle.GetComponent<Beetle>();
+            }
         }
     }
     // Start is called before the first frame update
@@ -56,9 +60,13 @@ public class QueenBeetle : EnemyClass
     // event handler for Beetle.OnGainBuffs. This is called whenever a beetle tries to
     // add a buff.
     // Adds the stacks that were directed to the beetle to the Queen instead.
-    private void HandleGainedBuffs(string buffType, int stacks)
+    private void HandleGainedBuffs(string buffType, int stacks, Beetle beetle)
     {
-        AddStacks(buffType, stacks);
+        if (buffType == Resonate.buffName)
+        {
+            AddStacks(buffType, stacks);
+            beetle.ReduceStacks(buffType, stacks);
+        }
     }
 
     private void HandleBeetleDied(Beetle victim)

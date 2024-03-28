@@ -56,7 +56,7 @@ public abstract class ActionClass : SelectClass
     protected bool proto = true;
     #nullable disable 
 
-    protected CardDup duplicateCard;
+    protected CardDup duplicateCard = new CardDup();
 
     public CardDup GetCard()
     {
@@ -96,7 +96,7 @@ public abstract class ActionClass : SelectClass
     public static event CardEventDelegate? CardHighlightedEvent;
     public static event CardStateDelegate? CardStateChange;
 
-    public virtual void ExecuteActionEffect()
+    public virtual void OnCardStagger()
     {
 
     }
@@ -166,9 +166,11 @@ public abstract class ActionClass : SelectClass
     // modify further based on buffs
     private void DupInit()
     {
+        CardDup oldDup = duplicateCard;
         duplicateCard = new CardDup();   
         duplicateCard.rollFloor = lowerBound;
         duplicateCard.rollCeiling = upperBound;
+        duplicateCard.actualRoll = oldDup.actualRoll;
     }
 
     public void ReduceRoll(int byValue)

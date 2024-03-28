@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Hatchery : ActionClass
 {
-    public override void ExecuteActionEffect()
+    public override void OnCardStagger()
     {
 
     }

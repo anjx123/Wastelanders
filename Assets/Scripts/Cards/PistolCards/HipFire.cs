@@ -8,7 +8,7 @@ using UnityEngine;
 public class HipFire : PistolCards
 {
 
-    public override void ExecuteActionEffect()
+    public override void OnCardStagger()
     {
         Debug.Log("Executing Effect");
     }

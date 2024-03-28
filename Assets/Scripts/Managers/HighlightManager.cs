@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Xml.Linq;
 using UnityEngine;
 
 public class HighlightManager : MonoBehaviour // later all entity highlighter
@@ -11,7 +12,10 @@ public class HighlightManager : MonoBehaviour // later all entity highlighter
     public static EntityClass? currentHighlightedEnemyEntity = null;
     public static ActionClass? currentHighlightedAction = null;
     public static PlayerClass? selectedPlayer = null;
- 
+
+    public delegate void HighlightEventDelegate(EntityClass e);
+    public static event HighlightEventDelegate? EntityClicked;
+
     private int CARD_WIDTH = 2;
 
     // Awake is called when the script instance is being loaded
@@ -44,6 +48,7 @@ public class HighlightManager : MonoBehaviour // later all entity highlighter
     public void OnEntityClicked(EntityClass clicked)
     {
         if (CombatManager.Instance.GameState != GameState.SELECTION) return;
+        EntityClicked?.Invoke(clicked);
 
         if (clicked is PlayerClass clickedPlayer)
         {
@@ -178,7 +183,7 @@ public class HighlightManager : MonoBehaviour // later all entity highlighter
             //Untoggle card if it is still selected when entering fighting
             if (currentHighlightedAction != null)
             {
-                currentHighlightedAction.ToggleUnSelected();
+                currentHighlightedAction.ForceNormalState();
                 currentHighlightedAction = null;
                 if (currentHighlightedEnemyEntity != null)
                 {
@@ -223,7 +228,8 @@ public class HighlightManager : MonoBehaviour // later all entity highlighter
             float distanceToLeft = (float)(handContainer.rect.width / 2 - (i * CARD_WIDTH));
 
             float y = handContainer.transform.position.y;
-            Vector3 v = new Vector3(-distanceToLeft, y, -i);
+            float x = handContainer.transform.position.x;
+            Vector3 v = new Vector3(x-distanceToLeft, y, -i);
             handItem.transform.position = v;
             handItem.transform.rotation = Quaternion.Euler(0, 0, -5);
             insertingAction.SetCanPlay(BattleQueue.BattleQueueInstance.CanInsertCard(insertingAction));

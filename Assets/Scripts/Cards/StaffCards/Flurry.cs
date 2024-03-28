@@ -7,7 +7,7 @@ using UnityEngine;
 public class Flurry : StaffCards
 {
 
-    public override void ExecuteActionEffect()
+    public override void OnCardStagger()
     {
         Debug.Log("Executing Effect");
     }

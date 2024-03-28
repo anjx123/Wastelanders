@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Brace : FistCards
 {
-    public override void ExecuteActionEffect()
+    public override void OnCardStagger()
     {
 
     }

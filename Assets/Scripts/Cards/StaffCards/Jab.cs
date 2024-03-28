@@ -4,40 +4,22 @@ using UnityEngine;
 
 public class Jab : StaffCards
 {
-    public override void ExecuteActionEffect()
-    {
-
-    }
-
     // Start is called before the first frame update
     public override void Initialize()
     {
+        CardType = CardType.MeleeAttack;
+        myName = "Jab";
+        description = "If this attack hits the opponent, gain 1 Focus";
         lowerBound = 2;
         upperBound = 4;
-
         Speed = 4;
-        
 
-        myName = "Jab";
-        description = "Quick but Lethal";
-        Renderer renderer = GetComponent<Renderer>();
-        ogMaterial = renderer.material; // og sprite of card
-        OriginalPosition = transform.position;
-        CardType = CardType.MeleeAttack;
         base.Initialize();
-
-
     }
 
-    // Update is called once per frame
-    void Update()
+    public override void OnHit()
     {
-
-    }
-
-    public override void ApplyEffect()
-    {
-
-        base.ApplyEffect();
+        base.OnHit();
+        Origin.AddStacks(Focus.buffName, 1);
     }
 }

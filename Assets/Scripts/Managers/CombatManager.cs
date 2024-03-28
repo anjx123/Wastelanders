@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using static UnityEngine.EventSystems.EventTrigger;
+using System.Security.Cryptography;
 
 public class CombatManager : MonoBehaviour
 {
@@ -86,6 +87,14 @@ public class CombatManager : MonoBehaviour
         }
     }
 
+    public static void ClearEvents()
+    {
+        OnGameStateChanged = null;
+        OnGameStateChanging = null;
+        PlayersWinEvent = null;
+        EnemiesWinEvent = null;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -142,7 +151,14 @@ public class CombatManager : MonoBehaviour
 
         if (players.Count > 0)
         {
-            HighlightManager.Instance.SetActivePlayer(players[0]);
+            PlayerClass? jackie = players.FirstOrDefault(player => player is Jackie);
+            if (jackie != null)
+            {
+                HighlightManager.Instance.SetActivePlayer(jackie);
+            } else
+            {
+                HighlightManager.Instance.SetActivePlayer(players[0]);
+            }
         }
         BattleQueue.BattleQueueInstance.TheBeginning(); //Nasty but necessary for rendering the current implementation of BQ
     }
@@ -182,6 +198,7 @@ public class CombatManager : MonoBehaviour
         {
             dynamicCamera.Follow = null;
         }
+
         if (players.Count == 0)
         {
             EnemiesWinEvent?.Invoke();
@@ -201,7 +218,9 @@ public class CombatManager : MonoBehaviour
         {
             dynamicCamera.Follow = null;
         }
-        if (enemies.Count == 0)
+
+        bool allAreNeutral = enemies.OfType<NeutralEntityInterface>().Count() == enemies.Count;
+        if (enemies.Count == 0 || allAreNeutral)
         {
             PlayersWinEvent?.Invoke();
         }
@@ -294,6 +313,26 @@ public class CombatManager : MonoBehaviour
         }
 
         foreach (EnemyClass enemy in enemies)
+        {
+            enemy.InCombat();
+            enemy.Targetable();
+        }
+    }
+
+    public void SetEnemiesPassive(List<EnemyClass> passiveEnemies)
+    {
+        enemies.RemoveAll(enemy => passiveEnemies.Contains(enemy));
+        foreach (EnemyClass enemy in passiveEnemies)
+        {
+            enemy.OutOfCombat();
+            enemy.UnTargetable();
+        }
+    }
+
+    public void SetEnemiesHostile(List<EnemyClass> hostileEnemies)
+    {
+        enemies.AddRange(hostileEnemies);
+        foreach (EnemyClass enemy in hostileEnemies)
         {
             enemy.InCombat();
             enemy.Targetable();

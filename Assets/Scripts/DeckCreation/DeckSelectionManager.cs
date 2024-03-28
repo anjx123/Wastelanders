@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 using System;
 using System.Linq;
 using UnityEngine.AI;
+using UnityEditor;
 
 public class DeckSelectionManager : MonoBehaviour
 {
@@ -95,6 +96,7 @@ public class DeckSelectionManager : MonoBehaviour
         } else if (DeckSelectionState == DeckSelectionState.DeckSelection) {
             DeckSelectionState = DeckSelectionState.WeaponSelection;
         } else if (DeckSelectionState == DeckSelectionState.CharacterSelection) {
+            EditorUtility.SetDirty(playerDatabase); //Probably will have to remove in production
             StartCoroutine(ExitDeckSelection());
         }
     }

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using static CardComparator;
+using static StatusEffect;
 
 public abstract class EntityClass : SelectClass
 {
@@ -25,6 +26,7 @@ public abstract class EntityClass : SelectClass
 
     [SerializeField] protected BoxCollider boxCollider;
     protected bool isDead = false;
+    public bool IsDead { get { return isDead; } set { isDead = value; } }
     private bool crosshairStaysActive = false;
 
 
@@ -112,7 +114,7 @@ public abstract class EntityClass : SelectClass
     percentageDone: Percentage health done to the target
     Requires: Entities are not dead
      */
-    private IEnumerator StaggerEntities(EntityClass origin, EntityClass target, float percentageDone)
+    public IEnumerator StaggerEntities(EntityClass origin, EntityClass target, float percentageDone)
     {
         Vector3 directionVector = target.myTransform.position - origin.myTransform.position;
 
@@ -171,7 +173,6 @@ public abstract class EntityClass : SelectClass
             elapsedTime += Time.deltaTime;
             yield return null;
         }
-
         if (HasAnimationParameter("IsMoving"))
         {
             animator.SetBool("IsMoving", false);
@@ -264,8 +265,6 @@ public abstract class EntityClass : SelectClass
         if ((Vector2)diffInLocation == Vector2.zero) yield break;
         UpdateFacing(-diffInLocation, null);
 
-
-
         if (HasAnimationParameter("IsStaggered"))
         {
             animator.SetBool("IsStaggered", true);
@@ -285,6 +284,7 @@ public abstract class EntityClass : SelectClass
         {
             animator.SetBool("IsStaggered", false);
         }
+
     }
     private float AnimationCurve(float elapsedTime, float duration)
     {
@@ -417,7 +417,7 @@ public abstract class EntityClass : SelectClass
     {
         foreach (string s in statusEffects.Keys)
         {
-            statusEffects[s].OnBuffedEntityHit();
+            statusEffects[s].OnEntityHitHandler();
         }
         UpdateBuffs();
     }
@@ -524,6 +524,17 @@ public abstract class EntityClass : SelectClass
         combatInfo.UpdateBuffs(statusEffects);
         BuffsUpdatedEvent?.Invoke(this);
     }
+
+    //Please use the originalHandler to resubscribe when you are done :3
+    public StatusEffectDelegate SetBuffsOnHitHandler(string buff, StatusEffectDelegate handler)
+    {
+        CheckBuff(buff);
+        StatusEffectDelegate originalHandler = statusEffects[buff].OnEntityHitHandler;
+        statusEffects[buff].OnEntityHitHandler = handler;
+        Debug.Log("A buff handler is being reassigned, be careful!");
+        return originalHandler;
+    }
+
 
     public void EnableDice()
     {

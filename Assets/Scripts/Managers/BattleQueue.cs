@@ -70,7 +70,6 @@ public class BattleQueue : MonoBehaviour
             renderedCopy.transform.SetParent(bqContainer, false);
             renderedCopy.GetComponent<BattleQueueIcons>().RenderBQIcon(queue[i]);
         }
-        
     }
 
     public bool CanInsertCard(ActionClass actionClass)
@@ -328,7 +327,7 @@ public class BattleQueue : MonoBehaviour
         {
             for (int x = 0; x < array.Count; x++)
             {
-                if (array[x].IsPlayedByPlayer() && array[x].Origin == card.Origin && card.Speed == array[x].Speed)
+                if (array[x].IsPlayedByPlayer() && card.Speed == array[x].Speed) //(@Author Anrui) All players share the same speed limit now
 
                 {
                     return false; // don't insert. 
