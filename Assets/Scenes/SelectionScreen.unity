@@ -1836,14 +1836,15 @@ MonoBehaviour:
   explanationTextField: {fileID: 1101075570}
   explanationText:
   - Item1: 0
-    Item2: Focus - +1 to power per stack. Remove all stacks after each round.
+    Item2: Focus - Actions gain +1 power per stack. Remove all stacks after each
+      round.
   - Item1: 1
-    Item2: Accuracy - Increases the lower bound of power by 1 per stack. On taking
-      damage, stacks are halved (rounded down).
+    Item2: Accuracy - Lower bound of power increases by 1 per stack. On taking damage,
+      stacks are halved (rounded down).
   - Item1: 2
     Item2: Fist - Makes several small but impactful attacks.
   - Item1: 3
-    Item2: Wound - Increases damage taken by 1 per stack. Loses 1 stack after each
+    Item2: Wound - Damage taken increases by 1 per stack. Loses 1 stack after each
       round.
 --- !u!1 &1115058807 stripped
 GameObject:
