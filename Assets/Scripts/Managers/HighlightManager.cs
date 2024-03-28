@@ -43,7 +43,7 @@ public class HighlightManager : MonoBehaviour // later all entity highlighter
 
     public void OnEntityClicked(EntityClass clicked)
     {
-        if (CombatManager.Instance.GameState != GameState.SELECTION) return;
+        if (CombatManager.Instance.GameState != GameState.SELECTION || PauseMenu.IsPaused) return;
 
         if (clicked is PlayerClass clickedPlayer)
         {
@@ -66,7 +66,7 @@ public class HighlightManager : MonoBehaviour // later all entity highlighter
     }
     private void HandlePlayerClick(PlayerClass clickedPlayer)
     {
-        if (clickedPlayer != selectedPlayer)
+        if (clickedPlayer != selectedPlayer && !PauseMenu.IsPaused)
         {
             ResetCurrentHighlightedAction();
             selectedPlayer = clickedPlayer;
@@ -83,6 +83,7 @@ public class HighlightManager : MonoBehaviour // later all entity highlighter
 
     private void HandleEnemyClick(EnemyClass clickedEnemy)
     {
+        if (PauseMenu.IsPaused) return;
         if (selectedPlayer == null)
         {
             PopUpNotificationManager.Instance.DisplayWarning(PopupType.SelectPlayerFirst);
@@ -140,7 +141,7 @@ public class HighlightManager : MonoBehaviour // later all entity highlighter
 
     public static void OnActionClicked(ActionClass clicked)
     {
-        if (CombatManager.Instance.GameState != GameState.SELECTION) return;
+        if (CombatManager.Instance.GameState != GameState.SELECTION || PauseMenu.IsPaused) return;
         if (selectedPlayer != null)
         {
             if (BattleQueue.BattleQueueInstance.CanInsertCard(clicked) == false)

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class StartDequeuing : MonoBehaviour
 {
@@ -11,17 +12,26 @@ public class StartDequeuing : MonoBehaviour
 
     private void OnMouseEnter()
     {
-        spriteRenderer.sprite = buttonDown;
+        if (!PauseMenu.IsPaused)
+        {
+            spriteRenderer.sprite = buttonDown;
+        }
     }
 
     private void OnMouseExit()
     {
-        spriteRenderer.sprite = buttonUp;
+        if (!PauseMenu.IsPaused)
+        {
+            spriteRenderer.sprite = buttonUp;
+        }
     }
     // BQ reference not needed. 
 
     void OnMouseDown()
     {
-        BattleQueue.BattleQueueInstance.BeginDequeue();
+        if (!PauseMenu.IsPaused)
+        {
+            BattleQueue.BattleQueueInstance.BeginDequeue();
+        }
     }
 }

@@ -376,5 +376,4 @@ private IEnumerator ExecuteGameStart()
 
         yield return StartCoroutine(DialogueManager.Instance.StartDialogue(gameLoseDialogue));
     }
-
 }

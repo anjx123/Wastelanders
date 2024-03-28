@@ -366,7 +366,7 @@ public class CombatManager : MonoBehaviour
 
     public bool CanHighlight()
     {
-        return GameState == GameState.SELECTION;
+        return (PauseMenu.IsPaused) ? false : GameState == GameState.SELECTION;
     }
 
     public GameState GameState

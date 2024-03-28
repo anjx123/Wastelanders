@@ -104,6 +104,7 @@ public abstract class ActionClass : SelectClass
     public virtual void Awake()
     {
         Initialize();
+        PauseMenu.onPauseMenuActivate += OnMouseExit;
     }
 
     public virtual void Start()
@@ -117,6 +118,7 @@ public abstract class ActionClass : SelectClass
         {
             origin.BuffsUpdatedEvent -= UpdateBuffValue;
         }
+        PauseMenu.onPauseMenuActivate -= OnMouseExit;
     }
 
     /*
@@ -234,6 +236,7 @@ public abstract class ActionClass : SelectClass
 
     public override void OnMouseEnter()
     {
+        if (PauseMenu.IsPaused) return;
         if (cardState == CardState.NORMAL)
         {
             SetCardState(CardState.HOVER);
@@ -248,6 +251,7 @@ public abstract class ActionClass : SelectClass
 
     public override void OnMouseExit()
     {
+        if (PauseMenu.IsPaused) return;
         if (cardState == CardState.HOVER)
         {
             SetCardState(CardState.NORMAL);

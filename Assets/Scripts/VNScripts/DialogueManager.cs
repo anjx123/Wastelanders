@@ -95,6 +95,7 @@ public class DialogueManager : MonoBehaviour
 
     void Update()
     {
+        if (PauseMenu.IsPaused) return;
 
         if (Input.GetKeyDown(KeyCode.Mouse0) || Input.GetKey(KeyCode.Space))
         {
