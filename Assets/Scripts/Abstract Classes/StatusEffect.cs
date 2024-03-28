@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public abstract class StatusEffect
 {
@@ -41,6 +42,5 @@ public abstract class StatusEffect
 
     //Whenever a new Buff is created, make sure to add its Icon to Resources folder
     public abstract Sprite GetIcon();
-
 
 }

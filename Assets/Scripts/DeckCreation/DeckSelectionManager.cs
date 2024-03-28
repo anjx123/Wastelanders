@@ -22,6 +22,7 @@ public class DeckSelectionManager : MonoBehaviour
     private WeaponType weaponType;
     public WeaponAmount weaponText;
     public PointsAmount pointsText;
+    public BuffExplainer buffExplainer;
     private bool isFadingOut = false;
     public static DeckSelectionManager Instance { get; private set; }
 #nullable enable
@@ -139,6 +140,7 @@ public class DeckSelectionManager : MonoBehaviour
 
     private void WeaponDeckEdit(CardDatabase.WeaponType weaponType)
     {
+        buffExplainer.RenderExplanationForBuff(weaponType);
         this.weaponType = weaponType;
         RenderDecks(weaponType);
         DeckSelectionState = DeckSelectionState.DeckSelection;
@@ -269,7 +271,7 @@ public class DeckSelectionManager : MonoBehaviour
                     GameObject cardPrefab = instantiatedCards[index];
 
                     cardPrefab.transform.SetParent(cardArrayParent.transform);
-                    cardPrefab.transform.position = pos;
+                    cardPrefab.transform.localPosition = pos;
 
                     // Scale the instance
                     Vector3 scale = cardPrefab.transform.localScale;

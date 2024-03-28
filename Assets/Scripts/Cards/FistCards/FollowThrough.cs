@@ -45,6 +45,7 @@ public class FollowThrough : FistCards
             activeDuplicateInstance.attackAgainDelegate = attackAgainDelegate;
 
             Target.EntityTookDamage += attackAgainDelegate;
+            EntityClass.OnEntityDeath += HandleTargetDeath;
             CombatManager.OnGameStateChanged += ResetBuffHandler;
             void ResetBuffHandler(GameState gameState)
             {
@@ -59,6 +60,14 @@ public class FollowThrough : FistCards
         }
 
         base.CardIsUnstaggered();
+    }
+
+    void HandleTargetDeath(EntityClass entity)
+    {
+        if (entity == Target)
+        {
+            Target.EntityTookDamage -= attackAgainDelegate;
+        }
     }
     void MakeAnotherAttack(int damage)
     {
