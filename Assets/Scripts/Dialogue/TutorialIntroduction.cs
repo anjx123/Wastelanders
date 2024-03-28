@@ -126,6 +126,7 @@ public class TutorialIntroduction : DialogueClasses
             yield return StartCoroutine(CombatManager.Instance.FadeInLightScreen(2f));
         }
 
+        jackie.InjectDeck(jackieTutorialDeck);
         jackie.InCombat(); //Workaround for now, ill have to remove this once i manually start instantiating 
         ives.SetReturnPosition(ivesPassiveBattlePosition.position);
         StartCoroutine(ives.ResetPosition()); //Prevent Players from attacking Ives LOL
@@ -137,11 +138,13 @@ public class TutorialIntroduction : DialogueClasses
         BeginCombatTutorial();
         yield return new WaitUntil(() => CombatManager.Instance.GameState == GameState.GAME_WIN);
 
+        yield return new WaitUntil(() => !DialogueManager.Instance.IsInDialogue());
         yield return StartCoroutine(DialogueManager.Instance.StartDialogue(buffTutorial));
         
         //Ives retrieves the dead training dummy
         foreach (GameObject trainingDummy in trainingDummies)
         {
+            trainingDummy.GetComponent<SpriteRenderer>().sortingOrder -= 1;
             yield return StartCoroutine(ives.MoveToPosition(trainingDummy.transform.position, 1.2f, 0.8f));
             yield return new WaitForSeconds(0.6f);
             Destroy(trainingDummy);
@@ -155,10 +158,11 @@ public class TutorialIntroduction : DialogueClasses
 
         yield return new WaitUntil(() => !DialogueManager.Instance.IsInDialogue());
         CombatManager.Instance.GameState = GameState.SELECTION;
-
+        yield return new WaitUntil(() => !DialogueManager.Instance.IsInDialogue());
         BeginCombatIvesFight();
 
         yield return new WaitUntil(() => CombatManager.Instance.GameState == GameState.GAME_WIN);
+        CombatManager.Instance.GameState = GameState.OUT_OF_COMBAT;
 
         yield return StartCoroutine(DialogueManager.Instance.StartDialogue(ivesIsDefeated));
         yield return new WaitForSeconds(0.6f);

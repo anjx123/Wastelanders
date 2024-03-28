@@ -7,7 +7,7 @@ public class EnemyIves : EnemyClass
     public override void Start()
     {
         base.Start();
-        MaxHealth = 20;
+        MaxHealth = 25;
         Health = MaxHealth;
         myName = "Le Ives";
     }
