@@ -21,4 +21,10 @@ public class SharpenedDefence : AxeCards
     ogMaterial = renderer.material;
     OriginalPosition = transform.position;
     }
+
+    public override void CardIsUnstaggered()
+    {
+        // wound stacks. 
+        base.CardIsUnstaggered();
+    }
 }

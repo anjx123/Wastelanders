@@ -22,7 +22,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7256956916184963317, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
       propertyPath: m_Name
-      value: Whirl
+      value: Whirl Duplicate
       objectReference: {fileID: 0}
     - target: {fileID: 8284128080877360369, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
       propertyPath: m_LocalPosition.x
@@ -71,14 +71,14 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 7256956916184963317, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
       insertIndex: -1
-      addedObject: {fileID: -6137105834302938927}
+      addedObject: {fileID: 6817398973858010766}
   m_SourcePrefab: {fileID: 100100000, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
 --- !u!1 &5768262490987068101 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7256956916184963317, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
   m_PrefabInstance: {fileID: 3799102881852465712}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &-6137105834302938927
+--- !u!114 &6817398973858010766
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -87,11 +87,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 5768262490987068101}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 457d3e9160e2ea9469f99b03533f0c24, type: 3}
+  m_Script: {fileID: 11500000, guid: 979b0da3ebfdef64da3637075b99d443, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   myTransform: {fileID: 0}
-  duplicateCardInstance: {fileID: 5768262490987068101, guid: ebe33f630be6d584ba94b2daf8d40639, type: 3}
+  duplicateCardInstance: {fileID: 0}
   description: 
   icon: {fileID: 0}
   cardBack: {fileID: 0}

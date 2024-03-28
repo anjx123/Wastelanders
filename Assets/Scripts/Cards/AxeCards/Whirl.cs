@@ -19,4 +19,28 @@ public class Whirl : AxeCards
         OriginalPosition = transform.position;
         base.Initialize();
     }
+
+    // for the "deals damage" portion how will you know? there is no reference to the enemy nor the outcome of a clash. 
+    public override void CardIsUnstaggered()
+
+    {
+        if (proto && activeDupCardInstance == null)
+        {
+            activeDupCardInstance = Instantiate(duplicateCardInstance.GetComponent<WhirlDuplicate>());
+            ((WhirlDuplicate)activeDupCardInstance).proto = false;
+            ((WhirlDuplicate)activeDupCardInstance).duplicateCardInstance = null;
+            activeDupCardInstance.transform.position = new Vector3(-10, 10, 10);
+        }
+
+        if (proto)
+        {
+            PlayerClass origin = (PlayerClass)Origin;
+            activeDupCardInstance.Origin = origin;
+            activeDupCardInstance.Target = Target;
+            BattleQueue.BattleQueueInstance.InsertDupPlayerAction(activeDupCardInstance);
+        } 
+
+        base.CardIsUnstaggered();
+    }
+
 }

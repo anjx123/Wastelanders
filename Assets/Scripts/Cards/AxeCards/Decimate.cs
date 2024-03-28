@@ -19,4 +19,10 @@ public class Decimate : AxeCards
         OriginalPosition = transform.position;
         base.Initialize();
     }
+
+    public override void CardIsUnstaggered()
+    {
+        // something with wound
+        base.CardIsUnstaggered();
+    }
 }

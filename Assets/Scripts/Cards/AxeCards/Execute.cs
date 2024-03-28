@@ -17,4 +17,12 @@ public class Execute : AxeCards
         OriginalPosition = transform.position;
         base.Initialize();
     }
+
+    
+    public override void OnHit()
+    {
+        // now this is weird: you will have to modify it quite a bit, because you're basing your attack on the Wound the enemy has i.e. your
+        // duplicate card doesn't know whether or not the enemy is wounded. 
+        base.OnHit();
+    }
 }

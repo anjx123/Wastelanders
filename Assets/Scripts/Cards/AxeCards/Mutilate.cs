@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Mutilate : AxeCards
 {
+
     public override void Initialize()
     {
         lowerBound = 2;
@@ -16,5 +17,13 @@ public class Mutilate : AxeCards
         ogMaterial = renderer.material;
         OriginalPosition = transform.position;
         base.Initialize();
+    }
+
+    // this is one heck of doozy; you'll have to keep a reference to the enemy and individual cards do not know who they are targeting AND 
+    // you will have to inject code into enemy that accounts for this behaviour; deals damage is hard to discen. 
+    // also can be IsUnstaggered()
+    public override void OnHit()
+    {
+        base.OnHit();
     }
 }

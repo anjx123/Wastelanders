@@ -17,4 +17,10 @@ public class Cleave : AxeCards
         OriginalPosition = transform.position;
         base.Initialize();
     }
+
+    public override void OnHit()
+    {
+        // something with stacks. 
+        base.OnHit();
+    }
 }
