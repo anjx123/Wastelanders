@@ -1119,6 +1119,9 @@ MonoBehaviour:
   textCanvas: {fileID: 5153878671164437630}
   iconRenderer: {fileID: 1866809560200078547}
   cardBackRenderer: {fileID: -7228539631512178989}
+  damageIconRenderer: {fileID: 1105844501124222705}
+  defenseIcon: {fileID: 21300000, guid: 926dc102ee6ad62488fa7f3605a127ce, type: 3}
+  damageIcon: {fileID: 21300000, guid: 3fea2e94140c08246a0e502ee92d3761, type: 3}
   cardCost: {fileID: 8951241230337664249}
   shouldRenderCost: 0
 --- !u!1 &5342606960099249293

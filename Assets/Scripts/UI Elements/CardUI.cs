@@ -14,6 +14,9 @@ public class CardUI : MonoBehaviour
     [SerializeField] private Canvas textCanvas;
     [SerializeField] private SpriteRenderer iconRenderer;
     [SerializeField] private SpriteRenderer cardBackRenderer;
+    [SerializeField] private SpriteRenderer damageIconRenderer;
+    [SerializeField] private Sprite defenseIcon;
+    [SerializeField] private Sprite damageIcon;
     [SerializeField] private TMP_Text cardCost;    
 
 
@@ -36,6 +39,14 @@ public class CardUI : MonoBehaviour
         if (actionClass.cardBack != null)
         {
             cardBackRenderer.sprite = actionClass.cardBack;
+        }
+
+        if (actionClass.CardType == CardType.Defense)
+        {
+            damageIconRenderer.sprite = defenseIcon;
+        } else
+        {
+            damageIconRenderer.sprite = damageIcon;
         }
 
         if (shouldRenderCost)
