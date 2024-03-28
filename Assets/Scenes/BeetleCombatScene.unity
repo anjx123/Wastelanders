@@ -1553,6 +1553,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 141643689}
     m_Modifications:
     - target: {fileID: 565243660519602255, guid: ffe5e716a68f6484aa03d7e79a4dc2a7, type: 3}
+      propertyPath: combatMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 565243660519602255, guid: ffe5e716a68f6484aa03d7e79a4dc2a7, type: 3}
       propertyPath: enemyContainer
       value: 
       objectReference: {fileID: 141643688}
@@ -2707,7 +2711,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6635998426718021455, guid: b9c5e4b3c9f7e024f8fe9012e7a2e437, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.573333
+      value: -1.5777683
       objectReference: {fileID: 0}
     - target: {fileID: 6635998426718021455, guid: b9c5e4b3c9f7e024f8fe9012e7a2e437, type: 3}
       propertyPath: m_LocalPosition.y

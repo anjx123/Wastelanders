@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Haymaker : FistCards
 {
-    public override void ExecuteActionEffect()
+    public override void OnCardStagger()
     {
 
     }

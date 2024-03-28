@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics.Tracing;
 using UnityEngine;
 
-public class Crystals : EnemyClass
+public class Crystals : EnemyClass, NeutralEntityInterface
 {
     // Start is called before the first frame update
     public override void Start()
@@ -36,5 +36,12 @@ public class Crystals : EnemyClass
 
         UpdateFacing(diffInLocation, lookAtPosition);
         yield break;
+    }
+
+    // @author: andrew
+    // i NEEDED to move crystals
+    public IEnumerator CrystalMoveToPosition(Vector3 destination, float radius, float duration, Vector3? lookAtPosition = null)
+    {
+        yield return StartCoroutine(base.MoveToPosition(destination, radius, duration));
     }
 }

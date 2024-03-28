@@ -6,7 +6,7 @@ public class PistolWhip : PistolCards
 {
 
     
-    public override void ExecuteActionEffect()
+    public override void OnCardStagger()
     {
         
     }

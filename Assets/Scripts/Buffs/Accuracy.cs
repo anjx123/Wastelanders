@@ -5,6 +5,10 @@ public class Accuracy : StatusEffect
 {
     public const string buffName = "Accuracy";
 
+    public Accuracy()
+    {
+        OnEntityHitHandler = OnEntityHit;
+    }
     
     public override void ApplyStacks(ref ActionClass.CardDup dup)
     {
@@ -22,7 +26,7 @@ public class Accuracy : StatusEffect
     }
 
     //Getting hit with accuracy halves it 
-    public override void OnBuffedEntityHit()
+    void OnEntityHit()
     {
         buffStacks = Stacks / 2;
     }

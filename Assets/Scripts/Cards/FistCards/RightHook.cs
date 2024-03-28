@@ -12,7 +12,7 @@ public class RightHook : FistCards
 
     private GameObject haymaker;
 
-    public override void ExecuteActionEffect()
+    public override void OnCardStagger()
     {
 
     }

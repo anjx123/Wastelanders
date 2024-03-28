@@ -6,7 +6,7 @@ using static Unity.Collections.AllocatorManager;
 
 public class Spit : FrogAttacks
 {
-    public override void ExecuteActionEffect()
+    public override void OnCardStagger()
     {
 
     }

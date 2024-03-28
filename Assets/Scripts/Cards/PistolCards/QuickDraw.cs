@@ -6,9 +6,16 @@ public class QuickDraw : PistolCards
 {
 
     
-    public override void ExecuteActionEffect()
+    public override void OnCardStagger()
     {
-        
+        base.OnCardStagger();
+        Origin.AddStacks(Accuracy.buffName, 1);
+    }
+
+    public override void CardIsUnstaggered()
+    {
+        base.CardIsUnstaggered();
+        Origin.AddStacks(Accuracy.buffName, 1);
     }
 
     // Start is called before the first frame update
@@ -18,28 +25,19 @@ public class QuickDraw : PistolCards
         upperBound = 5;
         Speed = 5;
         myName = "Quick Draw";
-        description = "They'll Never See It Coming!";
+        description = "Make this attack, then gain 1 Accuracy";
         CardType = CardType.RangedAttack;
         Renderer renderer = GetComponent<Renderer>();
         ogMaterial = renderer.material; // og sprite of card
         OriginalPosition = transform.position;
         base.Initialize();
-
-
-
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+
 
     public override void ApplyEffect()
     {
-
         base.ApplyEffect();
-        
     }
 
 }

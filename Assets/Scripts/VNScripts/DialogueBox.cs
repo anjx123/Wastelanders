@@ -55,6 +55,11 @@ public class DialogueBox : MonoBehaviour
         }
     }
 
+    public static void ClearDialogueEvents()
+    {
+        DialogueBoxEvent = null;
+    }
+
     void SetFontStyles(DialogueText line)
     {
 

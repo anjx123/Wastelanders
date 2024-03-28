@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class FocusedStrike : StaffCards
 {
-    public override void ExecuteActionEffect()
+    public override void OnCardStagger()
     {
         Debug.Log("Executing Effect");
     }
