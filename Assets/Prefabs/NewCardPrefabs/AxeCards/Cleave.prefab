@@ -15,7 +15,7 @@ PrefabInstance:
     - target: {fileID: 1866809560200078547, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: c4f7aec21b684724f81317d1f90bb049, type: 3}
+      objectReference: {fileID: 21300000, guid: f223d3da24d412f4a80f8e932c57bfdf, type: 3}
     - target: {fileID: 1866809560200078547, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
       propertyPath: m_WasSpriteAssigned
       value: 1
@@ -107,8 +107,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myTransform: {fileID: 5066054149459818177}
-  duplicateCardInstance: {fileID: 0}
-  description: 
-  icon: {fileID: 21300000, guid: 820631014ce088c4cb748224d5467c86, type: 3}
+  icon: {fileID: 21300000, guid: f223d3da24d412f4a80f8e932c57bfdf, type: 3}
   cardBack: {fileID: 21300000, guid: 0caca1c7d6d863a44920bb3907ac21a0, type: 3}
   cardUI: {fileID: 3994343635944797062}
