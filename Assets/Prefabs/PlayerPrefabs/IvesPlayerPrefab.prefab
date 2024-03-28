@@ -253,7 +253,7 @@ MonoBehaviour:
   animator: {fileID: 4593552250662741733}
   combatInfo: {fileID: 6339711808127689635}
   boxCollider: {fileID: 3511982966876694732}
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 5873de434db4868459f61c1e2a438d6c, type: 3}
   cardPrefabs: []
 --- !u!1001 &7170019746795553961
 PrefabInstance:
