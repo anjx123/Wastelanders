@@ -16,11 +16,12 @@ public class Cleave : AxeCards
         ogMaterial = renderer.material; 
         OriginalPosition = transform.position;
         base.Initialize();
+        CardType = CardType.MeleeAttack;
     }
 
     public override void OnHit()
     {
-        Target.AddStacks(Wound.buffName, 2);
         base.OnHit();
+        Target.AddStacks(Wound.buffName, 2);
     }
 }

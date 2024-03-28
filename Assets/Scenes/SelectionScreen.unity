@@ -890,6 +890,7 @@ MonoBehaviour:
   - {fileID: 1703198200}
   lockedWeapons:
   - {fileID: 1915986179}
+  - {fileID: 1823822989}
   weaponEditBoxCollidersToDisable:
   - {fileID: 439599444}
   - {fileID: 1932402269}
@@ -2069,6 +2070,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6c30196fc261cd242bbe302d5afe871b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1823822989 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4337146901227940551, guid: 9fdc2bed37508064f93f3a7630fcaa26, type: 3}
+  m_PrefabInstance: {fileID: 529039157}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a968158a80a6e5a46b3d98ec3b462f4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1891289467

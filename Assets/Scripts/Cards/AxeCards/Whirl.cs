@@ -17,10 +17,11 @@ public class Whirl : AxeCards
         Speed = 3;
 
         myName = "Whirl";
-        description = "Make this attack, if unstaggered, apply one wound then make it again.";
+        description = "If unstaggered, make this attack again. Applies 1 wound on hit.";
         Renderer renderer = GetComponent<Renderer>();
         ogMaterial = renderer.material;
         OriginalPosition = transform.position;
+        CardType = CardType.MeleeAttack;
         base.Initialize();
     }
 
@@ -40,8 +41,13 @@ public class Whirl : AxeCards
             BattleQueue.BattleQueueInstance.InsertDupPlayerAction(activeDuplicateInstance!);
         }
 
-        Target.AddStacks(Wound.buffName, 1);
         base.CardIsUnstaggered();
+    }
+
+    public override void OnHit()
+    {
+        base.OnHit();
+        Target.AddStacks(Wound.buffName, 1);
     }
 
 }

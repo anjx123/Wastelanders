@@ -8,6 +8,8 @@ public class FollowThrough : FistCards
     private FollowThrough? activeDuplicateInstance = null;
     private bool originalCopy = true;
     CombatManager.GameStateChangedHandler? GameStateChangedHandler;
+
+    private EntityClass.DamageDelegate? attackAgainDelegate;
     private void OnDestroy()
     {
         if (GameStateChangedHandler != null)
@@ -24,10 +26,9 @@ public class FollowThrough : FistCards
         lowerBound = 1;
         upperBound = 2;
         Speed = 5;
-
+        attackAgainDelegate = MakeAnotherAttack;
         base.Initialize();
     }
-
     public override void CardIsUnstaggered()
     {
 
@@ -41,15 +42,9 @@ public class FollowThrough : FistCards
             }
             activeDuplicateInstance.Origin = Origin;
             activeDuplicateInstance.Target = Target;
-            void MakeAnotherAttack(int damage)
-            {
-                if (damage > 0)
-                {
-                    BattleQueue.BattleQueueInstance.InsertDupPlayerAction(activeDuplicateInstance!);
-                }
-            }
+            activeDuplicateInstance.attackAgainDelegate = attackAgainDelegate;
 
-            Target.EntityTookDamage += MakeAnotherAttack;
+            Target.EntityTookDamage += attackAgainDelegate;
             CombatManager.OnGameStateChanged += ResetBuffHandler;
             void ResetBuffHandler(GameState gameState)
             {
@@ -63,7 +58,30 @@ public class FollowThrough : FistCards
             GameStateChangedHandler = ResetBuffHandler;
         }
 
-
         base.CardIsUnstaggered();
     }
+    void MakeAnotherAttack(int damage)
+    {
+        if (damage > 0)
+        {
+            BattleQueue.BattleQueueInstance.InsertDupPlayerAction(activeDuplicateInstance!);
+        }
+    }
+
+    public override void OnHit()
+    {
+        Vector3 diffInLocation = Target.myTransform.position - Origin.myTransform.position;
+        Origin.UpdateFacing(diffInLocation, null);
+        if (!originalCopy)
+        {
+            Target.EntityTookDamage -= attackAgainDelegate;
+        }
+        this.Target.TakeDamage(Origin, duplicateCard.actualRoll);
+        CardIsUnstaggered();
+        if (!originalCopy)
+        {
+            Target.EntityTookDamage += attackAgainDelegate;
+        }
+    }
+
 }

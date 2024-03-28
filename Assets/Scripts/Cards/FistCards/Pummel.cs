@@ -20,6 +20,7 @@ public class Pummel : FistCards
         myName = "Pummel";
         description = "Make this attack 3 times against the target";
         OriginalPosition = transform.position;
+        CardType = CardType.MeleeAttack;
         base.Initialize();
     }
 

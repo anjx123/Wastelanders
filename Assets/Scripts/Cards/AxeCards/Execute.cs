@@ -16,6 +16,7 @@ public class Execute : AxeCards
         ogMaterial = renderer.material;
         OriginalPosition = transform.position;
         base.Initialize();
+        CardType = CardType.MeleeAttack;
     }
 
     

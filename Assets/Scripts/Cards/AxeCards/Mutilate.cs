@@ -28,6 +28,7 @@ public class Mutilate : AxeCards
         ogMaterial = renderer.material;
         OriginalPosition = transform.position;
         base.Initialize();
+        CardType = CardType.MeleeAttack;
     }
 
     //(@Author anrui) OnHit modifies how wound works fundamentally (Probably a bad idea now that I think of it...)

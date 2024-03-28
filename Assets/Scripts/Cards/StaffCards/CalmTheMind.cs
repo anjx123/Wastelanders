@@ -34,7 +34,7 @@ public class CalmTheMind : StaffCards
 
     public override void CardIsUnstaggered()
     {
-        Origin.AddStacks(Focus.buffName, 2);
+        Origin.AddStacks(Focus.buffName, 1);
         base.CardIsUnstaggered();
     }
 }

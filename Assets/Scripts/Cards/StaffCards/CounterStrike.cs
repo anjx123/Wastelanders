@@ -22,13 +22,13 @@ public class CounterStrike : StaffCards
         ogMaterial = renderer.material; // og sprite of card
         OriginalPosition = transform.position;
         base.Initialize();
-        CardType = CardType.Defense;
     }
 
     public override void ApplyEffect()
     {
         if (originalCopy)
         {
+            CardType = CardType.Defense;
             if (activeDuplicateInstance == null)
             {
                 activeDuplicateInstance = Instantiate(this.GetComponent<CounterStrike>());

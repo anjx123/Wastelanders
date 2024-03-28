@@ -18,11 +18,12 @@ public class Decimate : AxeCards
         ogMaterial = renderer.material;
         OriginalPosition = transform.position;
         base.Initialize();
+        CardType = CardType.MeleeAttack;
     }
 
-    public override void CardIsUnstaggered()
+    public override void OnHit()
     {
+        base.OnHit();
         Target.AddStacks(Wound.buffName, Target.GetBuffStacks(Wound.buffName));
-        base.CardIsUnstaggered();
     }
 }
