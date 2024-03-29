@@ -21,6 +21,7 @@ public class DeckSelectionTutorial : MonoBehaviour
 
     [SerializeField] private List<WeaponEdit> weaponEditBoxCollidersToDisable;
 
+    [SerializeField] private bool activateTutorial;
 
     private void Start()
     {
@@ -29,7 +30,7 @@ public class DeckSelectionTutorial : MonoBehaviour
 
     private IEnumerator ExecuteGameStart()
     {
-        if (GameStateManager.shouldPlayDeckSelectionTutorial == false) yield break;
+        if (GameStateManager.shouldPlayDeckSelectionTutorial == false && !activateTutorial) yield break;
 
         NormalizeTutorialDecks();
 
