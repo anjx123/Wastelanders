@@ -25,6 +25,7 @@ public static class GameStateManager
     public static readonly string LEVEL_SELECT_NAME = "LevelSelect";
 
     public static readonly string PRE_QUEEN_FIGHT = "PreQueenFightScene";
+    public static readonly string CREDITS = "Credits";
     public enum Scenes
     {
         Tutorial,

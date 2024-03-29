@@ -8,6 +8,8 @@ using Cinemachine;
 public class PostQueenBeetle : DialogueClasses
 {
     [SerializeField] private Jackie jackie;
+
+    [SerializeField] private Transform jackieListensToBroadcast;
     [SerializeField] private Transform jackieIvesTalk;
 
     [SerializeField] private EnemyIves ives;
@@ -15,16 +17,21 @@ public class PostQueenBeetle : DialogueClasses
     [SerializeField] private CinemachineVirtualCamera ivesCamera;
     [SerializeField] private Transform mainCameraIvesTalk;
 
+    [SerializeField] Sprite jackieSmileImage;
     [SerializeField] Image ivesImage;
     [SerializeField] Image jackieImage;
 
+
+    [SerializeField] private List<DialogueText> jackieOpeningDialogue;
+
+
     [SerializeField] private List<DialogueText> soldierAndResults;
+    [SerializeField] private List<DialogueText> resultsBroadcast;
     [SerializeField] private List<DialogueText> jackieResultsConfusion;
     [SerializeField] private List<DialogueText> ivesYapping;
     [SerializeField] private List<DialogueText> jackieInterjects;
     [SerializeField] private List<DialogueText> ivesFinal;
     [SerializeField] private List<DialogueText> ivesHug;
-    [SerializeField] private List<DialogueText> jackieLetter;
     protected override void GameStateChange(GameState gameState)
     {
         if (gameState == GameState.GAME_START)
@@ -41,11 +48,17 @@ public class PostQueenBeetle : DialogueClasses
         yield return new WaitForSeconds(0.8f);
 
         jackie.OutOfCombat(); ives.OutOfCombat();
-        jackie.animator.enabled = false;
 
-        yield return StartCoroutine(CombatManager.Instance.FadeInLightScreen(2f));
-        yield return new WaitForSeconds(0.8f);
+        yield return StartCoroutine(DialogueManager.Instance.StartDialogue(jackieOpeningDialogue));
+        yield return StartCoroutine(CombatManager.Instance.FadeInLightScreen(1f));
+        yield return StartCoroutine(jackie.MoveToPosition(jackieListensToBroadcast.position, 0f, 1.2f));
+        yield return new WaitForSeconds(1f);
+        jackie.animator.enabled = false;
         yield return StartCoroutine(DialogueManager.Instance.StartDialogue(soldierAndResults));
+        yield return new WaitForSeconds(0.5f);
+
+        yield return StartCoroutine(DialogueManager.Instance.StartDialogue(resultsBroadcast));
+
         yield return new WaitForSeconds(0.8f);
         CombatManager.Instance.ActivateDynamicCamera();
         jackie.FaceLeft();
@@ -60,40 +73,27 @@ public class PostQueenBeetle : DialogueClasses
         CombatManager.Instance.ActivateBaseCamera();
         yield return StartCoroutine(FadeImage(jackieImage, 1f, true));
         yield return StartCoroutine(DialogueManager.Instance.StartDialogue(jackieResultsConfusion));
-        yield return StartCoroutine(FadeImage(jackieImage, 1f, false));
-        yield return new WaitForSeconds(0.8f);
+        yield return new WaitForSeconds(0.5f);
 
-        ives.FaceRight(); ives.animator.enabled = false; yield return new WaitForSeconds(1.6f);
+        ives.FaceRight(); ives.animator.enabled = false; yield return new WaitForSeconds(1.2f);
 
         yield return StartCoroutine(FadeImage(ivesImage, 1f, true));
         yield return StartCoroutine(DialogueManager.Instance.StartDialogue(ivesYapping));
-        yield return StartCoroutine(FadeImage(ivesImage, 1f, false));
         yield return new WaitForSeconds(0.6f);
-
-        yield return StartCoroutine(FadeImage(jackieImage, 1f, true));
+        jackieImage.sprite = jackieSmileImage;
         yield return StartCoroutine(DialogueManager.Instance.StartDialogue(jackieInterjects));
-        yield return StartCoroutine(FadeImage(jackieImage, 1f, false));
         yield return new WaitForSeconds(0.6f);
-
-        yield return StartCoroutine(FadeImage(ivesImage, 1f, true));
         yield return StartCoroutine(DialogueManager.Instance.StartDialogue(ivesFinal));
-        yield return StartCoroutine(FadeImage(ivesImage, 1f, false));
         yield return new WaitForSeconds(0.6f);
 
         yield return StartCoroutine(DialogueManager.Instance.StartDialogue(ivesHug));
+        Coroutine ivesFade = StartCoroutine(FadeImage(ivesImage, 1f, false));
+        yield return StartCoroutine(FadeImage(jackieImage, 1f, false));
+        yield return ivesFade;
 
         yield return StartCoroutine(CombatManager.Instance.FadeInDarkScreen(2f));
-        yield return StartCoroutine(DialogueManager.Instance.StartDialogue(jackieLetter));
 
-        SceneManager.LoadScene("Jackie's Letter");
-
-
-
-
-
-
-
-
+        SceneManager.LoadScene(GameStateManager.CREDITS);    
     }
 
     IEnumerator FadeImage(Image image, float duration, bool fadeIn)

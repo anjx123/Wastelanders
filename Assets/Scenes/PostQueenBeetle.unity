@@ -275,16 +275,16 @@ RectTransform:
   m_GameObject: {fileID: 149459910}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.13, y: 0.13, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 596087403}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 120, y: 200}
-  m_SizeDelta: {x: 400, y: 400}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 163, y: 0}
+  m_SizeDelta: {x: 2800, y: 3058.3464}
+  m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &149459912
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -305,7 +305,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 534aff9f6dfd6c544b0144954e8ef0b0, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -576,6 +576,7 @@ Transform:
   m_Children:
   - {fileID: 142155240}
   - {fileID: 1791618493}
+  - {fileID: 838900753}
   m_Father: {fileID: 414043461}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &527363908
@@ -1039,6 +1040,37 @@ MonoBehaviour:
         m_Calls: []
   m_LegacyBlendHint: 0
   m_ComponentOwner: {fileID: 1857376879}
+--- !u!1 &838900752
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 838900753}
+  m_Layer: 0
+  m_Name: JackieStartPosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &838900753
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 838900752}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 10.58, y: -1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 508165477}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &884201475
 GameObject:
   m_ObjectHideFlags: 0
@@ -1421,6 +1453,76 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1001 &1015164454
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1264232812}
+    m_Modifications:
+    - target: {fileID: 1064820365547817184, guid: 00e4347f9eb16d94c93b4961bdbca751, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1064820365547817184, guid: 00e4347f9eb16d94c93b4961bdbca751, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1064820365547817184, guid: 00e4347f9eb16d94c93b4961bdbca751, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1064820365547817184, guid: 00e4347f9eb16d94c93b4961bdbca751, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1064820365547817184, guid: 00e4347f9eb16d94c93b4961bdbca751, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1064820365547817184, guid: 00e4347f9eb16d94c93b4961bdbca751, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1064820365547817184, guid: 00e4347f9eb16d94c93b4961bdbca751, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1064820365547817184, guid: 00e4347f9eb16d94c93b4961bdbca751, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1064820365547817184, guid: 00e4347f9eb16d94c93b4961bdbca751, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1064820365547817184, guid: 00e4347f9eb16d94c93b4961bdbca751, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1642062695111722096, guid: 00e4347f9eb16d94c93b4961bdbca751, type: 3}
+      propertyPath: backgroundMusicIntro
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1642062695111722096, guid: 00e4347f9eb16d94c93b4961bdbca751, type: 3}
+      propertyPath: backgroundMusicPrimary
+      value: 
+      objectReference: {fileID: 8300000, guid: e7ac58c21c9f87045a18f1fcfd779f2e, type: 3}
+    - target: {fileID: 7932485008459424998, guid: 00e4347f9eb16d94c93b4961bdbca751, type: 3}
+      propertyPath: m_Name
+      value: AudioManager
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 00e4347f9eb16d94c93b4961bdbca751, type: 3}
+--- !u!4 &1015164455 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1064820365547817184, guid: 00e4347f9eb16d94c93b4961bdbca751, type: 3}
+  m_PrefabInstance: {fileID: 1015164454}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1264232811
 GameObject:
   m_ObjectHideFlags: 0
@@ -1450,6 +1552,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1015164455}
   - {fileID: 527363909}
   - {fileID: 27233851}
   - {fileID: 31769308}
@@ -1950,19 +2053,23 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1389594428042878479, guid: e15485d9cf24df042b8ef1296c204647, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1389594428042878479, guid: e15485d9cf24df042b8ef1296c204647, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1389594428042878479, guid: e15485d9cf24df042b8ef1296c204647, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: -38.551567
       objectReference: {fileID: 0}
     - target: {fileID: 4728857978263358706, guid: e15485d9cf24df042b8ef1296c204647, type: 3}
       propertyPath: m_Name
       value: PicturelessDialogue
+      objectReference: {fileID: 0}
+    - target: {fileID: 4728857978263358706, guid: e15485d9cf24df042b8ef1296c204647, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7336354512828228472, guid: e15485d9cf24df042b8ef1296c204647, type: 3}
       propertyPath: m_Pivot.x
@@ -2079,7 +2186,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6635998426718021455, guid: b9c5e4b3c9f7e024f8fe9012e7a2e437, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 13.246667
+      value: -1.0133333
       objectReference: {fileID: 0}
     - target: {fileID: 6635998426718021455, guid: b9c5e4b3c9f7e024f8fe9012e7a2e437, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2191,7 +2298,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2280710332171782491, guid: 18ff4a241e9f877439ebd5fd1de51dd0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 10.58
+      value: -3.68
       objectReference: {fileID: 0}
     - target: {fileID: 2280710332171782491, guid: 18ff4a241e9f877439ebd5fd1de51dd0, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2591,12 +2698,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jackie: {fileID: 1812891602}
+  jackieListensToBroadcast: {fileID: 838900753}
   jackieIvesTalk: {fileID: 142155240}
   ives: {fileID: 2062022617}
   ivesCamera: {fileID: 811157971}
   mainCameraIvesTalk: {fileID: 1791618493}
+  jackieSmileImage: {fileID: 21300000, guid: 422f3cda08073664b8a46361afe442fb, type: 3}
   ivesImage: {fileID: 1956352442}
   jackieImage: {fileID: 149459912}
+  jackieOpeningDialogue:
+  - bodyText: Shoot, I better get going, the broadcast is starting soon.
+    speakerName: Jackie
+    displayingImage: {fileID: 0}
+    broadcastAnEvent: 0
   soldierAndResults:
   - bodyText: "So, Jackie, today\u2019s the big day again, you excited to hear your
       test scores?"
@@ -2607,20 +2721,52 @@ MonoBehaviour:
     speakerName: Jackie
     displayingImage: {fileID: 0}
     broadcastAnEvent: 0
-  - bodyText: Ho, seems like the broadcast is starting.
+  - bodyText: Well you got here just in time, seems like the broadcast is starting.
     speakerName: Mustached Soldier
     displayingImage: {fileID: 0}
     broadcastAnEvent: 0
-  - bodyText: Morning NITES, this broadcast will announce the score of the recent
+  - bodyText: '*CHZHCKK*'
+    speakerName: Broadcast
+    displayingImage: {fileID: 0}
+    broadcastAnEvent: 0
+  - bodyText: Good morning citizens of New Haven City.
+    speakerName: Broadcast
+    displayingImage: {fileID: 0}
+    broadcastAnEvent: 0
+  - bodyText: As you all know, just a couple days ago. Brave NITES candidates set
+      out for the wasteland to begin their intake exam.
+    speakerName: Broadcast
+    displayingImage: {fileID: 0}
+    broadcastAnEvent: 0
+  - bodyText: Discovering a newfound waste power source 3x stabler than what we synthesize
+      today!
+    speakerName: Broadcast
+    displayingImage: {fileID: 0}
+    broadcastAnEvent: 0
+  - bodyText: This great achievment means a safer city from the waste! Celebrate
+      these heroes when you get the chance.
+    speakerName: Broadcast
+    displayingImage: {fileID: 0}
+    broadcastAnEvent: 0
+  - bodyText: Nevertheless, this broadcast will announce the score of the recent
       NITES exam candidates and whether they passed.
     speakerName: Broadcast
     displayingImage: {fileID: 0}
     broadcastAnEvent: 0
-  - bodyText: Alec with a score of $15 000 in waste products collected.  Pass.
+  resultsBroadcast:
+  - bodyText: 'Alec with a score of $15 000 in waste products collected. '
     speakerName: Broadcast
     displayingImage: {fileID: 0}
     broadcastAnEvent: 0
-  - bodyText: Chloe with a score of $5000. Fail.
+  - bodyText: Pass.
+    speakerName: Broadcast
+    displayingImage: {fileID: 0}
+    broadcastAnEvent: 0
+  - bodyText: 'Chloe with a score of $5000. '
+    speakerName: Broadcast
+    displayingImage: {fileID: 0}
+    broadcastAnEvent: 0
+  - bodyText: Fail.
     speakerName: Broadcast
     displayingImage: {fileID: 0}
     broadcastAnEvent: 0
@@ -2628,7 +2774,7 @@ MonoBehaviour:
     speakerName: Broadcast
     displayingImage: {fileID: 0}
     broadcastAnEvent: 0
-  - bodyText: Jake with a score of $8000. Fail.
+  - bodyText: Jill with a score of $8000. Fail.
     speakerName: Broadcast
     displayingImage: {fileID: 0}
     broadcastAnEvent: 0
@@ -2654,9 +2800,9 @@ MonoBehaviour:
     speakerName: Jackie
     displayingImage: {fileID: 0}
     broadcastAnEvent: 0
-  - bodyText: "Hah, Incredible, Jackie! I think it\u2019s the highest score that
-      anyone has ever achieved in the NITES exam."
-    speakerName: Mustached Soldier
+  - bodyText: (Murmurs begin spreading through the crowd as both Soldiers and NITES
+      alike hear the unimaginable score.)
+    speakerName: 
     displayingImage: {fileID: 0}
     broadcastAnEvent: 0
   - bodyText: "Hah, Incredible, Jackie! I think it\u2019s the highest score that
@@ -2688,13 +2834,9 @@ MonoBehaviour:
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: ade9660133ca00a499bfa3ad449b87bd, type: 3}
     broadcastAnEvent: 0
-  - bodyText: These crystals emanate tremendous energy, and power and will be incredibly
-      valuable to build weapons with.
-    speakerName: Ives
-    displayingImage: {fileID: 21300000, guid: ade9660133ca00a499bfa3ad449b87bd, type: 3}
-    broadcastAnEvent: 0
   - bodyText: Seeing as you were the one who found the nest, refined our battle plan,
-      and took down the Queen Beetle, we thought you deserved the full credit.
+      and took down the Queen Beetle, we thought you deserved the full credit for
+      this discovery.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: ade9660133ca00a499bfa3ad449b87bd, type: 3}
     broadcastAnEvent: 0
@@ -2918,7 +3060,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 120, y: 200}
+  m_AnchoredPosition: {x: -150, y: 200}
   m_SizeDelta: {x: 400, y: 400}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1956352442
