@@ -1959,7 +1959,7 @@ MonoBehaviour:
     speakerName: Jackie
     displayingImage: {fileID: 0}
     broadcastAnEvent: 0
-  jumpToCombat: 1
+  jumpToCombat: 0
 --- !u!1001 &1235694744
 PrefabInstance:
   m_ObjectHideFlags: 0
