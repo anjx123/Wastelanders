@@ -30,6 +30,13 @@ public class DeckSelectionTutorial : MonoBehaviour
 
     private IEnumerator ExecuteGameStart()
     {
+        if (GameStateManager.justFinishedBeetleFight)
+        {
+            DeckSelectionManager.Instance.SetNextScene("PreQueenFightScene");
+            yield break;
+        }
+
+
         if (GameStateManager.shouldPlayDeckSelectionTutorial == false && !activateTutorial) yield break;
 
         NormalizeTutorialDecks();

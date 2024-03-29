@@ -237,7 +237,7 @@ private IEnumerator ExecuteGameStart()
         yield return new WaitForSeconds(2f);
         yield return StartCoroutine(CombatManager.Instance.FadeInDarkScreen(1.5f));
 
-        SceneManager.LoadScene("LevelSelect");
+        SceneManager.LoadScene("BeetleFightScene");
         yield break;
     }
 

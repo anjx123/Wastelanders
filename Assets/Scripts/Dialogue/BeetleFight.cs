@@ -517,7 +517,9 @@ public class BeetleFight : DialogueClasses
             yield return StartCoroutine(FadeImage(jackieVNSprite, 1.5f, false));
             yield return ivesFade;
             yield return new WaitForSeconds(MEDIUM_PAUSE);
-            SceneManager.LoadScene("LevelSelect");
+
+            GameStateManager.justFinishedBeetleFight = true;
+            SceneManager.LoadScene("SelectionScreen");
             yield break;
         }
     }
