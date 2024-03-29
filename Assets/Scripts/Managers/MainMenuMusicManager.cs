@@ -29,12 +29,12 @@ public class MainMenuMusicManager : MusicManager
 
     IEnumerator PlayStartAudio()
     {
-        BackgroundMusicPlayer.clip = BackgroundMusicIntro;
+        BackgroundMusicPlayer.clip = backgroundMusicIntro;
         BackgroundMusicPlayer.Play();
 
         yield return new WaitUntil(() => !BackgroundMusicPlayer.isPlaying);
 
-        BackgroundMusicPlayer.clip = BackgroundMusicPrimary;
+        BackgroundMusicPlayer.clip = backgroundMusicPrimary;
         BackgroundMusicPlayer.Play();
         BackgroundMusicPlayer.loop = true;
     }

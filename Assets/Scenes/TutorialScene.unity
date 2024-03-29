@@ -1846,9 +1846,17 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1642062695111722096, guid: 00e4347f9eb16d94c93b4961bdbca751, type: 3}
+      propertyPath: CombatMusicPrimary
+      value: 
+      objectReference: {fileID: 8300000, guid: fb237cdcf4ad80840b21beea3437eef2, type: 3}
+    - target: {fileID: 1642062695111722096, guid: 00e4347f9eb16d94c93b4961bdbca751, type: 3}
       propertyPath: sfxTuples.Array.size
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1642062695111722096, guid: 00e4347f9eb16d94c93b4961bdbca751, type: 3}
+      propertyPath: BackgroundMusicPrimary
+      value: 
+      objectReference: {fileID: 8300000, guid: e7ac58c21c9f87045a18f1fcfd779f2e, type: 3}
     - target: {fileID: 7932485008459424998, guid: 00e4347f9eb16d94c93b4961bdbca751, type: 3}
       propertyPath: m_Name
       value: AudioManager

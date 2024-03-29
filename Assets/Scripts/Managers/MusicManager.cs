@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class MusicManager : MonoBehaviour
@@ -11,11 +10,16 @@ public class MusicManager : MonoBehaviour
     // NOTE: All of these fields are set in the editor.
     public AudioSource SFXSoundsPlayer, BackgroundMusicPlayer, BackgroundMusicIntroPlayer;
 
-    public AudioClip BackgroundMusicPrimary;
-    public AudioClip BackgroundMusicVictory; // Actually ...Secondary ; for extensibility purposes such as you WANT to be able to alternate between two Background Musics during gameplay
-    public AudioClip BackgroundMusicIntro;
-    [SerializeField]
     private List<SerializableTuple<SFXList, AudioClip>> sfxTuples;
+#nullable enable
+    public AudioClip? backgroundMusicPrimary;
+    public AudioClip? backgroundMusicIntro;
+
+    public AudioClip? combatMusicPrimary;
+    public AudioClip? combatMusicIntro;
+
+    public AudioClip? backgroundMusicVictory; // Actually ...Secondary ; for extensibility purposes such as you WANT to be able to alternate between two Background Musics during gameplay
+    [SerializeField]
 
     public virtual void Awake()
     {
@@ -35,14 +39,76 @@ public class MusicManager : MonoBehaviour
     }
 
 
+    private void OnEnable()
+    {
+        CombatManager.OnGameStateChanged += CombatStartHandler;
+    }
+
+    private void OnDisable()
+    {
+        CombatManager.OnGameStateChanged -= CombatStartHandler;
+    }
+
+    void CombatStartHandler(GameState gameState)
+    {
+        if (gameState == GameState.SELECTION)
+        {
+            StartCoroutine(StartCombatMusic());
+            
+        }
+    }
+
+    IEnumerator StartCombatMusic()
+    {
+        yield return StartCoroutine(FadeAudioRoutine(BackgroundMusicPlayer, false, 1f));
+
+        if (combatMusicIntro != null)
+        {
+            BackgroundMusicPlayer.clip = combatMusicIntro;
+            BackgroundMusicPlayer.Play();
+            yield return new WaitUntil(() => !BackgroundMusicPlayer.isPlaying);
+        }
+        BackgroundMusicPlayer.clip = combatMusicPrimary;
+        BackgroundMusicPlayer.Play();
+    }
+
+    private IEnumerator FadeAudioRoutine(AudioSource audioSource, bool isFadingOut, float fadeTime)
+    {
+        float startVolume = audioSource.volume;
+        float endVolume = isFadingOut ? 0 : 1;
+        float time = 0;
+
+        while (time < fadeTime)
+        {
+            time += Time.deltaTime;
+            audioSource.volume = Mathf.Lerp(startVolume, endVolume, time / fadeTime);
+
+            yield return null;
+        }
+
+        if (isFadingOut)
+        {
+            audioSource.Stop();
+            audioSource.volume = startVolume;
+        } else
+        {
+            audioSource.volume = endVolume;
+        }
+    }
+
+    public void FadeOutCurrentBackgroundTrack(float duration)
+    {
+        StartCoroutine(FadeAudioRoutine(BackgroundMusicPlayer, false, duration));
+    }
+
     IEnumerator PlayStartAudio()
     {
-        BackgroundMusicPlayer.clip = BackgroundMusicIntro;
+        BackgroundMusicPlayer.clip = backgroundMusicIntro;
         BackgroundMusicPlayer.Play();
 
         yield return new WaitUntil(() => !BackgroundMusicPlayer.isPlaying);
 
-        BackgroundMusicPlayer.clip = BackgroundMusicPrimary;
+        BackgroundMusicPlayer.clip = backgroundMusicPrimary;
         BackgroundMusicPlayer.Play();
         BackgroundMusicPlayer.loop = true;
     }
@@ -70,7 +136,7 @@ public class MusicManager : MonoBehaviour
     public void PlayVictory()
     {
         BackgroundMusicPlayer.Stop();
-        BackgroundMusicPlayer.clip = BackgroundMusicVictory;
+        BackgroundMusicPlayer.clip = backgroundMusicVictory;
         BackgroundMusicPlayer.Play();
     }
 

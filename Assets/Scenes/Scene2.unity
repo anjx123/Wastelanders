@@ -2103,7 +2103,7 @@ MonoBehaviour:
     speakerName: Jackie
     displayingImage: {fileID: 0}
     broadcastAnEvent: 0
-  jumpToCombat: 1
+  jumpToCombat: 0
 --- !u!1001 &1235694744
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2994,6 +2994,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1642062695111722096, guid: 00e4347f9eb16d94c93b4961bdbca751, type: 3}
+      propertyPath: combatMusicIntro
+      value: 
+      objectReference: {fileID: 8300000, guid: 9e34b1e5cda748b41ae43d03a632a2c0, type: 3}
+    - target: {fileID: 1642062695111722096, guid: 00e4347f9eb16d94c93b4961bdbca751, type: 3}
+      propertyPath: combatMusicPrimary
+      value: 
+      objectReference: {fileID: 8300000, guid: 7a583de6ee5412e41aec35dd14581a44, type: 3}
     - target: {fileID: 1642062695111722096, guid: 00e4347f9eb16d94c93b4961bdbca751, type: 3}
       propertyPath: sfxTuples.Array.size
       value: 0

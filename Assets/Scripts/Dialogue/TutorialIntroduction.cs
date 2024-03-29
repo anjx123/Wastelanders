@@ -217,7 +217,7 @@ public class TutorialIntroduction : DialogueClasses
 
         yield return StartCoroutine(DialogueManager.Instance.StartDialogue(endingTutorialDialogue.Dialogue));
 
-
+        MusicManager.Instance.FadeOutCurrentBackgroundTrack(2f);
         StartCoroutine(CombatManager.Instance.FadeInDarkScreen(3f));
         yield return StartCoroutine(jackie.MoveToPosition(jackieEndPosition.position, 0, 4f));
 

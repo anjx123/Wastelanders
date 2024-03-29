@@ -171,6 +171,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1642062695111722096, guid: 00e4347f9eb16d94c93b4961bdbca751, type: 3}
+      propertyPath: combatMusicPrimary
+      value: 
+      objectReference: {fileID: 8300000, guid: 5b3e103336e4598408e25005604d8640, type: 3}
     - target: {fileID: 7932485008459424998, guid: 00e4347f9eb16d94c93b4961bdbca751, type: 3}
       propertyPath: m_Name
       value: AudioManager
