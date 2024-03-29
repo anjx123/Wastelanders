@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.SearchService;
-using UnityEditorInternal;
+
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -72,4 +69,17 @@ public static class GameStateManager
         GameStateManager.nameOfRestartedLevel = sceneName;
         SceneManager.LoadScene("RestartScene");
     }
+
+    public static void SavePlayerDatabase(PlayerDatabase playerDatabase)
+    {
+        string json = JsonUtility.ToJson(playerDatabase);
+        PlayerPrefs.SetString("PlayerDatabase", json);
+    }
+
+    public static PlayerDatabase LoadPlayerDatabase()
+    {
+        string json = PlayerPrefs.GetString("PlayerDatabase");
+        return JsonUtility.FromJson<PlayerDatabase>(json);
+    }
+
 }

@@ -1,15 +1,10 @@
-using System;
+
 using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.ConstrainedExecution;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using static Unity.VisualScripting.Member;
-using static UnityEngine.UI.Image;
 using System.Reflection;
 using Cinemachine;
-using UnityEditor.Build;
-using static Unity.Burst.Intrinsics.X86;
 using UnityEngine.UI;
 //@author: Andrew
 public class BeetleFight : DialogueClasses
