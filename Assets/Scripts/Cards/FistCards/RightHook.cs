@@ -12,10 +12,6 @@ public class RightHook : FistCards
 
     private GameObject haymaker;
 
-    public override void OnCardStagger()
-    {
-
-    }
 
     // Start is called before the first frame update
     public override void Initialize()
@@ -25,7 +21,7 @@ public class RightHook : FistCards
         Speed = 4;
 
         myName = "Right Hook";
-        description = "If this attack lands, use Haymaker";
+        description = "If this card is unstaggered, use Haymaker";
         CardType = CardType.MeleeAttack;
         Renderer renderer = GetComponent<Renderer>();
         ogMaterial = renderer.material; // og sprite of card
@@ -33,21 +29,21 @@ public class RightHook : FistCards
         base.Initialize();
     }
 
-    public override void OnHit()
-    {
-        base.OnHit();
-    }
-
     public override void CardIsUnstaggered()
     {
         base.CardIsUnstaggered();
-        Origin.AttackAnimation("IsMelee");
-        if (!haymaker) { haymaker = Instantiate(haymakerPrefab); haymaker.transform.position = new Vector3(-10, 10, 10); }
+        if (haymaker == null) { haymaker = Instantiate(haymakerPrefab); haymaker.transform.position = new Vector3(-10, 10, 10); }
         ActionClass ac = haymaker.GetComponent<ActionClass>();
         ac.Origin = this.Origin;
         ac.Target = this.Target;
-        BattleQueue.BattleQueueInstance.InsertDupPlayerAction(ac);
+        if (ac.Origin is PlayerClass)
+        {
+            BattleQueue.BattleQueueInstance.InsertDupPlayerAction(ac);
+        } else
+        {
 
+            BattleQueue.BattleQueueInstance.InsertDupEnemyAction(ac);
+        }
 
     }
 }

@@ -123,9 +123,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myTransform: {fileID: 0}
-  duplicateCardInstance: {fileID: 0}
-  description: 
-  icon: {fileID: 21300000, guid: 09d382d01f04d3a40be04169f9944b3c, type: 3}
+  icon: {fileID: 21300000, guid: c9b36d146ffc7e8428074608a2c976d3, type: 3}
   cardBack: {fileID: 21300000, guid: 8ac8a46b814e1b14f89b3829e430de25, type: 3}
   cardUI: {fileID: 0}
   spitPrefab: {fileID: 4172579226135636580, guid: 2215e5669ebb4ce439521ee582d25b32, type: 3}

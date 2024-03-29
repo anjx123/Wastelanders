@@ -7,11 +7,6 @@ using static UnityEngine.UI.Image;
 
 public class ChargeUp : FrogAttacks
 {
-    public override void OnCardStagger()
-    {
-
-    }
-
     // Start is called before the first frame update
     public override void Initialize()
     {
@@ -21,7 +16,7 @@ public class ChargeUp : FrogAttacks
         
         Speed = 1;
 
-        description = "If this ability is unstaggered, use 'Hurl' next turn";
+        description = "Block, if unstaggered, use 'Hurl' next turn";
 
         myName = "Charge Up";
         CardType = CardType.Defense;
@@ -36,6 +31,8 @@ public class ChargeUp : FrogAttacks
     {
         WasteFrog frog = (WasteFrog)this.Origin;
         frog.UseHurl = true;
+        Origin.AttackAnimation("IsBlocking"); // :3
+        
     }
 
 }

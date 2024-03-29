@@ -11,15 +11,10 @@ public abstract class EnemyClass : EntityClass
 
     // This is the pool, which is initialized to the deck in a random order. Then cards will be taken from here. Cards are taken from index 0.
     protected List<GameObject> pool = new List<GameObject>();
-
-    // technically not necessaary as of now, but in case we want to do stuff with used cards (or single use)
-    protected List<GameObject> discard = new List<GameObject>();    
     
     // Initialized in editor
     public List<GameObject> availableActions;
 
-    // Initializsed in editor
-    public List<GameObject> dupActions;
 
     /*  Plays a single card from the pool, removing it from the pool and refilling it if necessary.
      *  REQUIRES: Nothing
@@ -31,12 +26,12 @@ public abstract class EnemyClass : EntityClass
     {
         base.Start();
         CombatManager.Instance.AddEnemy(this);
-        InstantiatePool();
+        InstantiateDeck();
 
         Reshuffle();
     }
 
-    public virtual void InstantiatePool()
+    public virtual void InstantiateDeck()
     {
         for (int i = 0; i < availableActions.Count; i++)
         {

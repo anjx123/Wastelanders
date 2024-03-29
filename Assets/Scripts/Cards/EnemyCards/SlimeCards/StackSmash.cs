@@ -7,13 +7,10 @@ public class StackSmash : SlimeAttacks
 #nullable enable
     [SerializeField]
     private List<Sprite> animationFrame = new();
-
-    public override void OnCardStagger()
-    {
-
-    }
-
-   
+#nullable enable
+    StackSmash? activeDuplicateInstance = null;
+    bool originalCopy = true;
+      
 
     public override void Initialize()
     {
@@ -34,21 +31,19 @@ public class StackSmash : SlimeAttacks
     //@Author: Anrui. Called by ActionClass.OnHit() 
     public override void CardIsUnstaggered()
     {
-        // branhces separated for mem leaks 
-        if (proto && activeDupCardInstance == null)
+        if (originalCopy)
         {
-            activeDupCardInstance = Instantiate(duplicateCardInstance!.GetComponent<StackSmashDuplicate>()); 
-            ((StackSmashDuplicate)activeDupCardInstance).proto = false;
-            ((StackSmashDuplicate)activeDupCardInstance).duplicateCardInstance = null;
-            activeDupCardInstance.transform.position = new Vector3(-10, 10, 10);
+            if (activeDuplicateInstance == null)
+            {
+                activeDuplicateInstance = Instantiate(this.GetComponent<StackSmash>());
+                activeDuplicateInstance.originalCopy = false;
+                activeDuplicateInstance.transform.position = new Vector3(-10, 10, 10);
+            }
+            activeDuplicateInstance.Origin = Origin;
+            activeDuplicateInstance.Target = Target;
+            BattleQueue.BattleQueueInstance.InsertDupEnemyAction(activeDuplicateInstance!);
         }
-        if (proto)
-        {
-            SlimeStack origin = (SlimeStack)Origin;
-            activeDupCardInstance!.Origin = origin;
-            activeDupCardInstance.Target = Target;
-            BattleQueue.BattleQueueInstance.InsertDupEnemyAction(activeDupCardInstance);
-        }
+
         base.CardIsUnstaggered();
     }
     public override void OnHit()

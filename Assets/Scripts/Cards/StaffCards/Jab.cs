@@ -9,7 +9,7 @@ public class Jab : StaffCards
     {
         CardType = CardType.MeleeAttack;
         myName = "Jab";
-        description = "If this attack hits the opponent, gain 1 Focus";
+        description = "On hit, gain 1 Focus stack";
         lowerBound = 2;
         upperBound = 4;
         Speed = 4;

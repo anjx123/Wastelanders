@@ -8,10 +8,6 @@ public abstract class StaffCards : ActionClass
     {
         //No initialization code here
     }
-    public override void Initialize()
-    {
-        base.Initialize();
-    }
 
     public override void CardIsUnstaggered()
     {
@@ -26,7 +22,14 @@ public abstract class StaffCards : ActionClass
     }
     public override void OnHit()
     {
-        Origin.AttackAnimation("IsStaffing");
+        if (Origin.HasAnimationParameter("IsStaffing"))
+        {
+            Origin.AttackAnimation("IsStaffing");
+        }
+        else
+        {
+            Origin.AttackAnimation("MeleeAttack");
+        }
         MusicManager.Instance.PlaySFX(MusicManager.SFXList.staff);
         base.OnHit();
     }

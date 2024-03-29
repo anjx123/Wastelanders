@@ -146,7 +146,7 @@ MonoBehaviour:
   animator: {fileID: 3552047448212555760}
   combatInfo: {fileID: 9191087331242654797}
   boxCollider: {fileID: 5069809743003330988}
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 8b0076ca4c0ea1e4f905a59c580bb44a, type: 3}
   availableActions:
   - {fileID: 2376898879351982445, guid: 47b019d96704c455391a1f89ba0d1714, type: 3}
   - {fileID: 2376898879351982445, guid: 47b019d96704c455391a1f89ba0d1714, type: 3}

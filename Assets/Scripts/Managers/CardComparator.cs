@@ -99,6 +99,9 @@ public class CardComparator : MonoBehaviour
             if (cardOneGreater >= 0)
             {
                 card1.CardIsUnstaggered(); // Defensive card is unstaggered. 
+            } else
+            {
+                card1.OnCardStagger();
             }
 
             card2.ReduceRoll(card1.GetCard().actualRoll); //Possibly no damage dealt
@@ -110,11 +113,18 @@ public class CardComparator : MonoBehaviour
             if (cardOneGreater <= 0)
             {
                 card2.CardIsUnstaggered(); // Defensive card is unstaggered
-            } 
+            } else
+            {
+                card2.OnCardStagger();
+            }
 
             card1.ReduceRoll(card2.GetCard().actualRoll); //Possibly no damage dealt
             card1.OnHit();
             card2.Origin.BlockAnimation();
+        } else
+        {
+            card1.CardIsUnstaggered();
+            card2.CardIsUnstaggered();
         }
         
         yield return new WaitForSeconds(COMBAT_BUFFER_TIME);
