@@ -7,11 +7,17 @@ public class PauseMenu : MonoBehaviour
 {
     public static bool IsPaused = false;
     [SerializeField] private GameObject pauseMenuPanel;
+    [SerializeField] private Canvas pauseCanvas;
 
     public delegate void PauseMenuEventHandler();
     public static event PauseMenuEventHandler onPauseMenuActivate;   // for more complex functions that cannot use isPaused
     public static event PauseMenuEventHandler onPauseMenuDeactivate;
 
+
+    private void Start()
+    {
+        pauseCanvas.sortingLayerName = "Top";
+    }
     // Update is called once per frame
     void Update()
     {
@@ -55,7 +61,6 @@ public class PauseMenu : MonoBehaviour
     {
         IsPaused = false;
         Time.timeScale = 1f;
-        GameStateManager.SkipDialogue(SceneManager.GetActiveScene().name);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        GameStateManager.Restart(SceneManager.GetActiveScene().name);
     }
 }

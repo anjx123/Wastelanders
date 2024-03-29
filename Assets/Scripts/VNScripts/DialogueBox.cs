@@ -25,8 +25,6 @@ public class DialogueBox : MonoBehaviour
     public delegate void DialogueBoxDelegate();
     public static event DialogueBoxDelegate DialogueBoxEvent; //New event to help you coordinate cool things during dialogue
 
-    Coroutine c;
-
     public void SetLine(DialogueText line)
     {
         if (line.DisplayingImage == null)

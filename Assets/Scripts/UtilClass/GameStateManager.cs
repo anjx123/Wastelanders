@@ -61,4 +61,10 @@ public static class GameStateManager
             default: break;
         }
     }
+
+    public static void Restart(string sceneName)
+    {
+        GameStateManager.nameOfRestartedLevel = sceneName;
+        SceneManager.LoadScene("RestartScene");
+    }
 }
