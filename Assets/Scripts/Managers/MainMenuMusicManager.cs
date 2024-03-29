@@ -26,20 +26,6 @@ public class MainMenuMusicManager : MusicManager
         StartCoroutine(PlayStartAudio());
     }
 
-
-    IEnumerator PlayStartAudio()
-    {
-        BackgroundMusicPlayer.clip = backgroundMusicIntro;
-        BackgroundMusicPlayer.Play();
-
-        yield return new WaitUntil(() => !BackgroundMusicPlayer.isPlaying);
-
-        BackgroundMusicPlayer.clip = backgroundMusicPrimary;
-        BackgroundMusicPlayer.Play();
-        BackgroundMusicPlayer.loop = true;
-    }
-
-
     private void OnEnable()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
