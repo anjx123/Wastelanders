@@ -21,7 +21,7 @@ public class Mutilate : AxeCards
     {
         lowerBound = 2;
         upperBound = 6;
-        Speed = 1;
+        Speed = 3;
 
         myName = "Mutilate";
         description = "After on hit, the target gains a wound stack after being staggered for the rest of this turn.";

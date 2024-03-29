@@ -54,7 +54,13 @@ public class MainMenuMusicManager : MusicManager
     {
         if (scene.name != GameStateManager.SELECTION_SCREEN_NAME && scene.name != GameStateManager.MAIN_MENU_NAME && scene.name != GameStateManager.LEVEL_SELECT_NAME)
         {
-            Destroy(this.gameObject);
+            StartCoroutine(RunOnScreenLoaded(2f));
         }
+    }
+
+    IEnumerator RunOnScreenLoaded(float duration)
+    {
+        yield return StartCoroutine(FadeAudioRoutine(BackgroundMusicPlayer, true, duration));
+        Destroy(this.gameObject);
     }
 }

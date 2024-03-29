@@ -74,7 +74,7 @@ public abstract class ActionClass : SelectClass
     }
 
     private CardState cardState = CardState.NORMAL;
-    public int Speed { get; protected set; }
+    public int Speed { get; set; }
     protected string description;
     public string Description {  get { return description; }}
     [SerializeField] private Sprite icon;

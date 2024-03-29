@@ -486,6 +486,8 @@ public class BeetleFight : DialogueClasses
                 wave3Crystal.TakeDamage(jackie, 5);
                 yield return new WaitForSeconds(MEDIUM_PAUSE);
             }
+
+            yield return new WaitUntil(() => !DialogueManager.Instance.IsInDialogue());
             yield return StartCoroutine(DialogueManager.Instance.StartDialogue(ivesAnalyzeAfterExam));
 
             CombatManager.Instance.GameState = GameState.OUT_OF_COMBAT;
@@ -504,6 +506,7 @@ public class BeetleFight : DialogueClasses
                 StartCoroutine(MoveToRight(jackieVNSprite.gameObject.GetComponent<RectTransform>(), 400f, 0.8f));
             }
 
+            yield return new WaitUntil(() => !DialogueManager.Instance.IsInDialogue());
             yield return StartCoroutine(CombatManager.Instance.FadeInDarkScreen(2f));
             yield return StartCoroutine(FadeImage(ivesVNSprite, 1.1f, true));
             yield return StartCoroutine(DialogueManager.Instance.StartDialogue(postBattleDialogue.Dialogue));
@@ -515,7 +518,7 @@ public class BeetleFight : DialogueClasses
             yield return new WaitForSeconds(MEDIUM_PAUSE);
 
             GameStateManager.justFinishedBeetleFight = true;
-            SceneManager.LoadScene("SelectionScreen");
+            SceneManager.LoadScene(GameStateManager.SELECTION_SCREEN_NAME);
             yield break;
         }
     }

@@ -58,9 +58,10 @@ public class MusicManager : MonoBehaviour
         }
     }
 
-    IEnumerator StartCombatMusic()
+    protected IEnumerator StartCombatMusic()
     {
-        yield return StartCoroutine(FadeAudioRoutine(BackgroundMusicPlayer, false, 1f));
+        CombatManager.OnGameStateChanged -= CombatStartHandler;
+        yield return StartCoroutine(FadeAudioRoutine(BackgroundMusicPlayer, true, 1f));
 
         if (combatMusicIntro != null)
         {
@@ -72,7 +73,9 @@ public class MusicManager : MonoBehaviour
         BackgroundMusicPlayer.Play();
     }
 
-    private IEnumerator FadeAudioRoutine(AudioSource audioSource, bool isFadingOut, float fadeTime)
+
+
+    protected IEnumerator FadeAudioRoutine(AudioSource audioSource, bool isFadingOut, float fadeTime)
     {
         float startVolume = audioSource.volume;
         float endVolume = isFadingOut ? 0 : 1;
@@ -98,10 +101,10 @@ public class MusicManager : MonoBehaviour
 
     public void FadeOutCurrentBackgroundTrack(float duration)
     {
-        StartCoroutine(FadeAudioRoutine(BackgroundMusicPlayer, false, duration));
+        StartCoroutine(FadeAudioRoutine(BackgroundMusicPlayer, true, duration));
     }
 
-    IEnumerator PlayStartAudio()
+    protected IEnumerator PlayStartAudio()
     {
         BackgroundMusicPlayer.clip = backgroundMusicIntro;
         BackgroundMusicPlayer.Play();
