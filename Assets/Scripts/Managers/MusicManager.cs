@@ -17,7 +17,7 @@ public class MusicManager : MonoBehaviour
     [SerializeField]
     private List<SerializableTuple<SFXList, AudioClip>> sfxTuples;
 
-    public void Awake()
+    public virtual void Awake()
     {
         if (Instance == null)
         {

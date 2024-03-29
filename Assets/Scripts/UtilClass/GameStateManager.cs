@@ -21,6 +21,11 @@ public static class GameStateManager
 
     public static string nameOfRestartedLevel = "";
 
+
+    public static readonly string MAIN_MENU_NAME = "MainMenu";
+    public static readonly string SELECTION_SCREEN_NAME = "SelectionScreen";
+
+    public static readonly string LEVEL_SELECT_NAME = "LevelSelect";
     public enum Scenes
     {
         Tutorial,
