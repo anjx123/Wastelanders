@@ -16,6 +16,7 @@ public class FollowThrough : FistCards
         {
             CombatManager.OnGameStateChanged -= GameStateChangedHandler;
         }
+        Target.EntityTookDamage -= attackAgainDelegate;
     }
     public override void Initialize()
     {

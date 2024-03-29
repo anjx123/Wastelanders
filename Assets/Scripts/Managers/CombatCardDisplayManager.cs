@@ -47,6 +47,10 @@ public class CombatCardDisplayManager : MonoBehaviour
     private void OnDestroy()
     {
         CombatManager.OnGameStateChanging -= HideCard;
+        if (currentUser != null)
+        {
+            currentUser.TargetChanged -= DeHighlightTarget;
+        }
     }
 
     //Given an ActionClass a to display, and the SOURCE of the call, shows the card in the display.

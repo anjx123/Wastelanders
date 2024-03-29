@@ -9,12 +9,12 @@ public class HighlightManager : MonoBehaviour // later all entity highlighter
     public RectTransform handContainer;
     public Transform deckContainer;
 #nullable enable
-    public static EntityClass? currentHighlightedEnemyEntity = null;
-    public static ActionClass? currentHighlightedAction = null;
-    public static PlayerClass? selectedPlayer = null;
+    public EntityClass? currentHighlightedEnemyEntity = null;
+    public ActionClass? currentHighlightedAction = null;
+    public PlayerClass? selectedPlayer = null;
 
     public delegate void HighlightEventDelegate(EntityClass e);
-    public static event HighlightEventDelegate? EntityClicked;
+    public event HighlightEventDelegate? EntityClicked;
 
     private int CARD_WIDTH = 2;
 
@@ -71,7 +71,7 @@ public class HighlightManager : MonoBehaviour // later all entity highlighter
     }
     private void HandlePlayerClick(PlayerClass clickedPlayer)
     {
-        if (clickedPlayer != selectedPlayer && !PauseMenu.IsPaused)
+        if (clickedPlayer != selectedPlayer)
         {
             ResetCurrentHighlightedAction();
             selectedPlayer = clickedPlayer;
@@ -88,7 +88,6 @@ public class HighlightManager : MonoBehaviour // later all entity highlighter
 
     private void HandleEnemyClick(EnemyClass clickedEnemy)
     {
-        if (PauseMenu.IsPaused) return;
         if (selectedPlayer == null)
         {
             PopUpNotificationManager.Instance.DisplayWarning(PopupType.SelectPlayerFirst);
@@ -144,7 +143,7 @@ public class HighlightManager : MonoBehaviour // later all entity highlighter
         currentHighlightedAction = null;
     }
 
-    public static void OnActionClicked(ActionClass clicked)
+    public void OnActionClicked(ActionClass clicked)
     {
         if (CombatManager.Instance.GameState != GameState.SELECTION || PauseMenu.IsPaused) return;
         if (selectedPlayer != null)

@@ -113,7 +113,7 @@ public class BeetleFight : DialogueClasses
 
     private void OnDestroy()
     {
-        HighlightManager.EntityClicked -= EntityClicked;
+        HighlightManager.Instance.EntityClicked -= EntityClicked;
         CombatManager.PlayersWinEvent -= AllEntitiesDied;
         CombatManager.EnemiesWinEvent -= EnemiesWin;
 
@@ -526,7 +526,7 @@ public class BeetleFight : DialogueClasses
 
     private void Begin2PCombatTutorial()
     {
-        HighlightManager.EntityClicked += EntityClicked;
+        HighlightManager.Instance.EntityClicked += EntityClicked;
         CombatManager.PlayersWinEvent += AllEntitiesDied;
         CombatManager.EnemiesWinEvent += EnemiesWin;
     }
@@ -556,7 +556,7 @@ public class BeetleFight : DialogueClasses
     }
     private IEnumerator TwoPlayerDialogue()
     {
-        HighlightManager.EntityClicked -= EntityClicked;
+        HighlightManager.Instance.EntityClicked -= EntityClicked;
         yield return new WaitUntil(() => (!DialogueManager.Instance.IsInDialogue()));
         yield return StartCoroutine(DialogueManager.Instance.StartDialogue(ivesTutorial.Dialogue));
     }
@@ -633,7 +633,7 @@ public class BeetleFight : DialogueClasses
     {
         CombatManager.EnemiesWinEvent -= EnemiesWin;
         CombatManager.PlayersWinEvent -= AllEntitiesDied;
-        HighlightManager.EntityClicked -= EntityClicked;
+        HighlightManager.Instance.EntityClicked -= EntityClicked;
         Beetle.OnGainBuffs -= ExplainCrystals;
         Beetle.OnGainBuffs -= ExplainResonate;
         jackie.BuffsUpdatedEvent -= ExplainPlayerBuffed;

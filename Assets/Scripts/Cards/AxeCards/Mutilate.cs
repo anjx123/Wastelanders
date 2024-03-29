@@ -15,6 +15,7 @@ public class Mutilate : AxeCards
         {
             CombatManager.OnGameStateChanged -= GameStateChangedHandler;
         }
+        Target.EntityTookDamage -= AddWound;
     }
     public override void Initialize()
     {
@@ -31,17 +32,19 @@ public class Mutilate : AxeCards
         CardType = CardType.MeleeAttack;
     }
 
+    void AddWound(int damage)
+    {
+        if (damage > 0)
+        {
+            Target.AddStacks(Wound.buffName, 1); //After taking damage, target gains a stack of wound
+        }
+    }
+
     //(@Author anrui) OnHit modifies how wound works fundamentally (Probably a bad idea now that I think of it...)
     public override void OnHit()
     {
         base.OnHit();
-        void AddWound(int damage)
-        {
-            if (damage > 0)
-            {
-                Target.AddStacks(Wound.buffName, 1); //After taking damage, target gains a stack of wound
-            }
-        }
+        
 
         Target.EntityTookDamage += AddWound;
         CombatManager.OnGameStateChanged += ResetBuffHandler;
