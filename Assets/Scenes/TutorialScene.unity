@@ -2381,6 +2381,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 1877041900}
     m_Modifications:
     - target: {fileID: 2237581345811479314, guid: 5027f4741873b7e49893b1382013ba7b, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 7.41
+      objectReference: {fileID: 0}
+    - target: {fileID: 2237581345811479314, guid: 5027f4741873b7e49893b1382013ba7b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -3222,7 +3226,7 @@ MonoBehaviour:
     speakerName: Ives
     displayingImage: {fileID: 0}
     broadcastAnEvent: 0
-  jumpToCombat: 0
+  jumpToCombat: 1
 --- !u!1001 &2102825245
 PrefabInstance:
   m_ObjectHideFlags: 0

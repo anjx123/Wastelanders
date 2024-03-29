@@ -205,6 +205,7 @@ public class TutorialIntroduction : DialogueClasses
 
         yield return new WaitUntil(() => CombatManager.Instance.GameState == GameState.GAME_WIN);
         CombatManager.Instance.GameState = GameState.OUT_OF_COMBAT;
+        ives.OutOfCombat();
 
         yield return StartCoroutine(DialogueManager.Instance.StartDialogue(ivesIsDefeated));
         yield return new WaitForSeconds(0.6f);
