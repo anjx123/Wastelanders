@@ -10,7 +10,7 @@ public class MusicManager : MonoBehaviour
     // NOTE: All of these fields are set in the editor.
     public AudioSource SFXSoundsPlayer, BackgroundMusicPlayer, BackgroundMusicIntroPlayer;
 
-    private List<SerializableTuple<SFXList, AudioClip>> sfxTuples;
+    private List<SerializableTuple<SFXList, AudioClip>> sfxTuples = new();
 #nullable enable
     public AudioClip? backgroundMusicPrimary;
     public AudioClip? backgroundMusicIntro;
@@ -67,10 +67,12 @@ public class MusicManager : MonoBehaviour
         {
             BackgroundMusicPlayer.clip = combatMusicIntro;
             BackgroundMusicPlayer.Play();
+            BackgroundMusicPlayer.loop = false;
             yield return new WaitUntil(() => !BackgroundMusicPlayer.isPlaying);
         }
         BackgroundMusicPlayer.clip = combatMusicPrimary;
         BackgroundMusicPlayer.Play();
+        BackgroundMusicPlayer.loop = true;
     }
 
 
