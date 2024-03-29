@@ -4,6 +4,7 @@ public abstract class StatusEffect
 {
     protected int buffStacks = 0;
     public int Stacks { get { return buffStacks; } }
+    public delegate void StatusEffectDelegate();
     // public static string fieldName; possessed by all non-abstract children
 
     public int GetStacks()
@@ -23,7 +24,7 @@ public abstract class StatusEffect
         this.buffStacks = Mathf.Clamp(this.buffStacks - amount, 0, this.buffStacks);
     }
 
-    public virtual void OnBuffedEntityHit() { }
+    public StatusEffectDelegate OnEntityHitHandler { get; set; } = delegate(){ };
 
     public virtual void NewRound() { }
 

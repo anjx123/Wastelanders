@@ -7,7 +7,7 @@ using static UnityEngine.UI.Image;
 
 public class CounterStrike : StaffCards
 {
-    public override void ExecuteActionEffect()
+    public override void OnCardStagger()
     {
 
     }

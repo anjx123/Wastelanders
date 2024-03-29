@@ -46,7 +46,6 @@ public class Scene2 : DialogueClasses
     [SerializeField] private List<DialogueText> jackieStrategyPlan;
     // After the frog enters the scene
     [SerializeField] private List<DialogueText> jackiePreMissedShot;
-    [SerializeField] private List<DialogueText> jackieJustMissedShot;
     [SerializeField] private List<DialogueText> jackiePostMissedShot;
     [SerializeField] private List<DialogueText> jackiePreCombat;
     //Combat Dialogue
@@ -54,6 +53,8 @@ public class Scene2 : DialogueClasses
     // After the frog is defeated
     [SerializeField] private List<DialogueText> afterCombatDialogue;
     [SerializeField] private List<DialogueText> crystalExtraction;
+    [SerializeField] private List<DialogueText> beetleEntrance;
+
 
     //Game Lose Dialogue
     [SerializeField] private List<DialogueText> gameLoseDialogue;
@@ -134,21 +135,21 @@ private IEnumerator ExecuteGameStart()
             jackie.animator.enabled = false;
             yield return StartCoroutine(CombatManager.Instance.FadeInLightScreen(2f));
 
-            // layering tree  to be done l8r
+            // Frog walks in
             StartCoroutine(frog.MoveToPosition(frogInitialWalkIn.position, 0f, 2f));
             yield return new WaitForSeconds(1f);
             yield return StartCoroutine(MoveObjectInRotationDirection(jackie.gameObject, 0.3f, 0.3f));
             yield return new WaitForSeconds(BRIEF_PAUSE);
             yield return StartCoroutine(DialogueManager.Instance.StartDialogue(jackiePreMissedShot));
+
+            //Jackie Misses and frog runs away with jackie chasing it
             yield return new WaitForSeconds(1f);
             jackie.gameObject.transform.rotation = new Quaternion(0,0,0,0);
             jackie.gameObject.transform.position = treeHidingPositionJackie.position + new Vector3(0.8f, 0, 0);
             jackie.animator.enabled = true;
             jackie.GetComponent<SpriteRenderer>().sortingOrder = treeOverlay.sortingOrder + 1;
             jackie.AttackAnimation("IsShooting");
-            yield return StartCoroutine(DialogueManager.Instance.StartDialogue(jackieJustMissedShot));
-
-            //Jackie Misses and frog runs away with jackie chasing it
+            yield return StartCoroutine(MakeFrogJump(frog, 1f));
             yield return StartCoroutine(frog.MoveToPosition(frogConfrontPosition.position, 0f, 1.2f, outOfScreen.position));
             yield return StartCoroutine(DialogueManager.Instance.StartDialogue(jackiePostMissedShot));
             closeUpCamera.Priority = 0;
@@ -217,6 +218,8 @@ private IEnumerator ExecuteGameStart()
         yield return StartCoroutine(jackie.MoveToPosition(jackie.transform.position + new Vector3(12f, -1f, 0), 0f, 1.5f));
         yield return new WaitForSeconds(MEDIUM_PAUSE);
 
+        yield return StartCoroutine(DialogueManager.Instance.StartDialogue(beetleEntrance));
+        yield return new WaitForSeconds(BRIEF_PAUSE);
         //Beetle is spawned in and follows Jackie
         Vector3 bottomLeft = mainCamera.ViewportToWorldPoint(new Vector3(0, 0.6f, mainCamera.nearClipPlane));
         GameObject scoutBeetleObj = Instantiate(scoutBeetlePrefab, bottomLeft + new Vector3(-0.32f, 0, 0), Quaternion.identity);
@@ -311,6 +314,25 @@ private IEnumerator ExecuteGameStart()
 
         // Ensure the object ends up at the exact end position
         obj.transform.position = endPosition;
+    }
+
+    IEnumerator MakeFrogJump(EntityClass origin, float jumpHeight)
+    {
+        yield return new WaitForSeconds(0.10f);
+        if (origin.HasAnimationParameter("IsStaggered"))
+        {
+            origin.animator.SetBool("IsStaggered", true);
+        }
+        yield return new WaitForSeconds(0.16f);
+        Vector3 originalPosition = origin.myTransform.position;
+        origin.myTransform.position = originalPosition + new Vector3(0, jumpHeight, 0);
+        yield return new WaitForSeconds(0.28f);
+        origin.myTransform.position = originalPosition;
+        yield return new WaitForSeconds(0.20f);
+        if (origin.HasAnimationParameter("IsStaggered"))
+        {
+            origin.animator.SetBool("IsStaggered", false);
+        }
     }
 
     private void OnDialogueBoxEvent()

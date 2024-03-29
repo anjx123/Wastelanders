@@ -7,7 +7,7 @@ using static UnityEngine.UI.Image;
 
 public class Excavate : BeetleAttacks
 {
-    public override void ExecuteActionEffect()
+    public override void OnCardStagger()
     {
 
     }
@@ -16,7 +16,7 @@ public class Excavate : BeetleAttacks
     public override void Initialize()
     {
         base.Initialize();
-        lowerBound = 1;
+        lowerBound = 2;
         upperBound = 4;
         
         Speed = 2;

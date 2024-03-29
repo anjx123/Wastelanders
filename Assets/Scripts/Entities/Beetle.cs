@@ -9,7 +9,7 @@ using UnityEngine.UI;
 
 public abstract class Beetle : EnemyClass
 {
-    public delegate void GainedBuffsHandler(string buffType, int stacks); // queen should subscribe to this
+    public delegate void GainedBuffsHandler(string buffType, int stacks, Beetle beetle); // queen should subscribe to this
     public static event GainedBuffsHandler OnGainBuffs;
 
     public delegate void OnDeathHandler(Beetle victim); // so that queen knows how many beetles are alive
@@ -25,13 +25,8 @@ public abstract class Beetle : EnemyClass
     // Overrides the normal behaviour of adding buffs. Instead, broadcasts for the queen to handle
     public override void AddStacks(string buffType, int stacks)
     {
-        if (buffType == Resonate.buffName)
-        {
-            OnGainBuffs?.Invoke(buffType, stacks);
-        } else
-        {
-            base.AddStacks(buffType, stacks);
-        }
+        base.AddStacks(buffType, stacks);
+        OnGainBuffs?.Invoke(buffType, stacks, this);
     }
 
     // Adds attack(s) to the bq. Beetles are capable of directing their attacks to crystals

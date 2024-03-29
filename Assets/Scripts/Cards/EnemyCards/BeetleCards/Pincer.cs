@@ -7,7 +7,7 @@ using static UnityEngine.UI.Image;
 
 public class Pincer : BeetleAttacks
 {
-    public override void ExecuteActionEffect()
+    public override void OnCardStagger()
     {
 
     }
@@ -19,7 +19,7 @@ public class Pincer : BeetleAttacks
         lowerBound = 1;
         upperBound = 4;
         
-        Speed = 3;
+        Speed = 4;
 
         description = "Ouch!";
 

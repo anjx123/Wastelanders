@@ -8,7 +8,7 @@ public class StackSmash : SlimeAttacks
     [SerializeField]
     private List<Sprite> animationFrame = new();
 
-    public override void ExecuteActionEffect()
+    public override void OnCardStagger()
     {
 
     }

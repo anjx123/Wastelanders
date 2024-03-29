@@ -18,6 +18,7 @@ public class GameOver : MonoBehaviour
         restartButton.onClick.AddListener(OnRestartClick);
         levelSelectButton.onClick.AddListener(OnLevelSelectClick);
         canvasGroup.alpha = 0f;
+        FadeIn();
     }
     public void FadeIn()
     {

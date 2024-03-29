@@ -25,7 +25,7 @@ MonoBehaviour:
         Item2: 12
     - Item1: 0
       Item2:
-        Item1: 0
+        Item1: 10
         Item2: 10
     selectedWeapons: 0000000001000000
     playerDeck:
@@ -40,13 +40,18 @@ MonoBehaviour:
     - key: 2
       value: []
     - key: 0
-      value: []
+      value:
+      - {fileID: 1781106374890874894, guid: d2b04a73aaa3e410dbacfb117cd8fabf, type: 3}
+      - {fileID: 993729557918272865, guid: 9fd05c05ac41a46b8a9036735bd47e88, type: 3}
+      - {fileID: 8129549867484360148, guid: 96833b1ed63d040c08a43d590f8a54ec, type: 3}
+      - {fileID: 8623671996724246683, guid: 22d2d82111a0948258cf8bce73da7ca2, type: 3}
+      - {fileID: 9083684502879287757, guid: 01e98381d7acf426196a2d3249245d3b, type: 3}
   IvesData:
     name: Ives
     playerWeaponProficiency:
     - Item1: 0
       Item2:
-        Item1: 0
+        Item1: 10
         Item2: 10
     - Item1: 3
       Item2:
@@ -58,13 +63,22 @@ MonoBehaviour:
         Item2: 8
     - Item1: 2
       Item2:
-        Item1: 0
+        Item1: 8
         Item2: 12
-    selectedWeapons: 01000000
+    selectedWeapons: 0000000002000000
     playerDeck:
     - key: 0
-      value: []
+      value:
+      - {fileID: 1781106374890874894, guid: d2b04a73aaa3e410dbacfb117cd8fabf, type: 3}
+      - {fileID: 993729557918272865, guid: 9fd05c05ac41a46b8a9036735bd47e88, type: 3}
+      - {fileID: 8129549867484360148, guid: 96833b1ed63d040c08a43d590f8a54ec, type: 3}
+      - {fileID: 8623671996724246683, guid: 22d2d82111a0948258cf8bce73da7ca2, type: 3}
+      - {fileID: 9083684502879287757, guid: 01e98381d7acf426196a2d3249245d3b, type: 3}
     - key: 1
       value: []
     - key: 2
-      value: []
+      value:
+      - {fileID: 464988017113156087, guid: 0f9d35f67947f2241aac5a9ed31099d3, type: 3}
+      - {fileID: 2737186248598469598, guid: 4ceb98929208ac64ab848aa79d636595, type: 3}
+      - {fileID: 503746970214896528, guid: 4e812ef45f6aef54092f7985015b5248, type: 3}
+      - {fileID: 4656134933388792414, guid: bf18f4bcef84eab4fb058f76cb0337b5, type: 3}
