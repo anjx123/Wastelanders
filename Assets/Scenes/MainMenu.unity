@@ -878,10 +878,11 @@ MonoBehaviour:
   SFXSoundsPlayer: {fileID: 7762219745884034383}
   BackgroundMusicPlayer: {fileID: 2139620351365190929}
   BackgroundMusicIntroPlayer: {fileID: 8912160527524474216}
-  BackgroundMusicPrimary: {fileID: 8300000, guid: cec2706302f782c4aaa9f43f99544431, type: 3}
-  BackgroundMusicVictory: {fileID: 0}
-  BackgroundMusicIntro: {fileID: 8300000, guid: 0f89561e165066146893b5e61f6de469, type: 3}
-  sfxTuples: []
+  backgroundMusicPrimary: {fileID: 8300000, guid: cec2706302f782c4aaa9f43f99544431, type: 3}
+  backgroundMusicIntro: {fileID: 8300000, guid: 0f89561e165066146893b5e61f6de469, type: 3}
+  combatMusicPrimary: {fileID: 0}
+  combatMusicIntro: {fileID: 0}
+  backgroundMusicVictory: {fileID: 0}
 --- !u!1 &1619148229
 GameObject:
   m_ObjectHideFlags: 0
