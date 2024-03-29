@@ -23,6 +23,8 @@ public static class GameStateManager
     public static readonly string SELECTION_SCREEN_NAME = "SelectionScreen";
 
     public static readonly string LEVEL_SELECT_NAME = "LevelSelect";
+
+    public static readonly string PRE_QUEEN_FIGHT = "PreQueenFightScene";
     public enum Scenes
     {
         Tutorial,
