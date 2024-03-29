@@ -3226,7 +3226,7 @@ MonoBehaviour:
     speakerName: Ives
     displayingImage: {fileID: 0}
     broadcastAnEvent: 0
-  jumpToCombat: 1
+  jumpToCombat: 0
 --- !u!1001 &2102825245
 PrefabInstance:
   m_ObjectHideFlags: 0
