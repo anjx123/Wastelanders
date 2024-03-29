@@ -20,7 +20,7 @@ MonoBehaviour:
     broadcastAnEvent: 0
   - bodyText: Yes!
     speakerName: Jackie
-    displayingImage: {fileID: 0}
+    displayingImage: {fileID: 21300000, guid: 1766f7fa2aec26d4b80d30e9c84bc726, type: 3}
     broadcastAnEvent: 0
   - bodyText: 'Fighting in a team is a lot like fighting alone, but there are a couple
       of things you have to be wary about. '

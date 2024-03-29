@@ -26,8 +26,11 @@ public class Accuracy : StatusEffect
     }
 
     //Getting hit with accuracy halves it 
-    void OnEntityHit()
+    void OnEntityHit(ref int damage)
     {
-        buffStacks = Stacks / 2;
+        if (damage > 0)
+        {
+            buffStacks = Stacks / 2;
+        }
     }
 }

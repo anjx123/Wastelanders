@@ -19,7 +19,7 @@ public class Trip : StaffCards
         Speed = 2;
 
         myName = "Trip";
-        description = "If this card hits the opponent, gain 2 Focus";
+        description = "If this attack is unstaggered, gain 2 Focus";
         Renderer renderer = GetComponent<Renderer>();
         ogMaterial = renderer.material; // og sprite of card
         OriginalPosition = transform.position;

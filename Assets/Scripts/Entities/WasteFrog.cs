@@ -37,7 +37,7 @@ public class WasteFrog : EnemyClass
     }
 
     //@Author Anrui; Instantiate pool without Hurl
-    public override void InstantiatePool()
+    public override void InstantiateDeck()
     { 
         for (int i = 0; i < availableActions.Count; i++)
         {

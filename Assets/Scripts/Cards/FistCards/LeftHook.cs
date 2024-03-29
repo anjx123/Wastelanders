@@ -11,10 +11,6 @@ public class LeftHook : FistCards
     private GameObject rightHookPrefab;
 
     private GameObject righthook;
-    public override void OnCardStagger()
-    {
-
-    }
 
     // Start is called before the first frame update
     public override void Initialize()
@@ -30,11 +26,6 @@ public class LeftHook : FistCards
         ogMaterial = renderer.material; // og sprite of card
         OriginalPosition = transform.position;
         base.Initialize();
-    }
-
-    public override void OnHit()
-    {
-        base.OnHit();
     }
 
 

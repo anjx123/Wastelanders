@@ -47,9 +47,12 @@ public abstract class EntityClass : SelectClass
 
     protected List<ActionClass> actionsAvailable;
     public DeadEntities _DeathHandler { protected get;  set; }
-    public DeadEntities DeathHandler { get; private set; } 
+    public DeadEntities DeathHandler { get; private set; }
 
 #nullable enable
+
+    public delegate void DamageDelegate(int damage);
+    public event DamageDelegate? EntityTookDamage;
 
     public delegate void EntityDelegate(EntityClass player);
     public static event EntityDelegate? OnEntityDeath;
@@ -83,6 +86,8 @@ public abstract class EntityClass : SelectClass
 
     public virtual void TakeDamage(EntityClass source, int damage)
     {
+        BuffsOnDamageEvent(ref damage);
+
         Health = Mathf.Clamp(Health - damage, 0, MaxHealth);
         float percentageDone = 1; //Testing different powered knockbacks
         if (Health != 0)
@@ -92,12 +97,13 @@ public abstract class EntityClass : SelectClass
         {
             OnEntityDeath?.Invoke(this);
         }
-        if (percentageDone > 0)
-        {
-            UpdateBuffsOnDamage();
-        }
+
+        EntityTookDamage?.Invoke(damage);
         combatInfo.DisplayDamage(damage);
-        StartCoroutine(PlayHitAnimation(source, this, percentageDone));
+        if (damage > 0)
+        {
+            StartCoroutine(PlayHitAnimation(source, this, percentageDone));
+        }
     }
 
     //Plays both first the stagger entities then 
@@ -151,7 +157,6 @@ public abstract class EntityClass : SelectClass
         float elapsedTime = 0f;
 
         Vector3 diffInLocation = destination - originalPosition;
-
         if ((Vector2)diffInLocation == Vector2.zero) yield break;
 
         float distance = Mathf.Sqrt(diffInLocation.x * diffInLocation.x + diffInLocation.y * diffInLocation.y);
@@ -413,11 +418,11 @@ public abstract class EntityClass : SelectClass
     }
 
     // Updates buffs affected by player taking damage
-    protected void UpdateBuffsOnDamage()
+    protected void BuffsOnDamageEvent(ref int damage)
     {
         foreach (string s in statusEffects.Keys)
         {
-            statusEffects[s].OnEntityHitHandler();
+            statusEffects[s].OnEntityHitHandler(ref damage);
         }
         UpdateBuffs();
     }
@@ -526,13 +531,19 @@ public abstract class EntityClass : SelectClass
     }
 
     //Please use the originalHandler to resubscribe when you are done :3
-    public StatusEffectDelegate SetBuffsOnHitHandler(string buff, StatusEffectDelegate handler)
+    public StatusEffectModifyValueDelegate SetBuffsOnHitHandler(string buff, StatusEffectModifyValueDelegate handler)
     {
         CheckBuff(buff);
-        StatusEffectDelegate originalHandler = statusEffects[buff].OnEntityHitHandler;
+        StatusEffectModifyValueDelegate originalHandler = statusEffects[buff].OnEntityHitHandler;
         statusEffects[buff].OnEntityHitHandler = handler;
         Debug.Log("A buff handler is being reassigned, be careful!");
         return originalHandler;
+    }
+
+    public StatusEffectModifyValueDelegate GetBuffsOnHitHandler(string buff)
+    {
+        CheckBuff(buff);
+        return statusEffects[buff].OnEntityHitHandler;
     }
 
 

@@ -146,7 +146,7 @@ MonoBehaviour:
   animator: {fileID: 6424370051552391152}
   combatInfo: {fileID: 5598173080790413213}
   boxCollider: {fileID: 6773406975685228959}
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: ca93cb407c933584187642c2546737c4, type: 3}
   availableActions:
   - {fileID: 2376898879351982445, guid: 41158511bc5761d4386617623a2a562d, type: 3}
   - {fileID: 2376898879351982445, guid: 63bc38449d5d80242a58e343499c03ca, type: 3}
@@ -222,6 +222,14 @@ PrefabInstance:
     - target: {fileID: 8036639253418242914, guid: 941333e3be7f6f04688676f1827dbf1b, type: 3}
       propertyPath: m_Name
       value: CombatCardInfo
+      objectReference: {fileID: 0}
+    - target: {fileID: 8340342195121217539, guid: 941333e3be7f6f04688676f1827dbf1b, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8340342195121217539, guid: 941333e3be7f6f04688676f1827dbf1b, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

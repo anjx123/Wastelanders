@@ -72,7 +72,7 @@ public class CombatCardDisplayManager : MonoBehaviour
             fullCardObject.SetActive(true);
             descriptionHolder.SetActive(true);
             fullCardObject.GetComponentInChildren<CardUI>().RenderCard(a);
-            descriptionHolder.GetComponentInChildren<TextMeshPro>().text = a.description;
+            descriptionHolder.GetComponentInChildren<TextMeshPro>().text = a.Description;
             if (currentUser != null)
             {
                 DeHighlightTarget(currentUser);

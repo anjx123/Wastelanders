@@ -13,8 +13,9 @@ public class CardDatabase : ScriptableObject
 {
     public List<StaffCards> staffCards;
     public List<PistolCards> pistolCards;
-    public List<ActionClass> fistCards; //has wrong cards for now just for testing
-    
+    public List<FistCards> fistCards;
+    public List<AxeCards> axeCards;
+
     //Grabs the corresponding deck to the (@param weaponType)
     public List<ActionClass> GetCardsByType(WeaponType type)
     {
@@ -22,7 +23,7 @@ public class CardDatabase : ScriptableObject
         {
             case WeaponType.STAFF: return new List<ActionClass>(staffCards);
             case WeaponType.PISTOL: return new List<ActionClass>(pistolCards);
-            case WeaponType.AXE: return new List<ActionClass>(pistolCards); //Note that these should change once we get it
+            case WeaponType.AXE: return new List<ActionClass>(axeCards); 
             case WeaponType.FIST: return new List<ActionClass>(fistCards);
             default:
                 Debug.LogWarning("Weapon Type is currently unsupported");

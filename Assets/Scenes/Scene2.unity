@@ -896,6 +896,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1956352441}
+  - {fileID: 913853395}
   - {fileID: 1872758577}
   m_Father: {fileID: 1877041900}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1328,6 +1329,135 @@ Transform:
   m_Children: []
   m_Father: {fileID: 508165477}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &913853394
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 596087403}
+    m_Modifications:
+    - target: {fileID: 1389594428042878479, guid: e15485d9cf24df042b8ef1296c204647, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1389594428042878479, guid: e15485d9cf24df042b8ef1296c204647, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1389594428042878479, guid: e15485d9cf24df042b8ef1296c204647, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: -38.551567
+      objectReference: {fileID: 0}
+    - target: {fileID: 4728857978263358706, guid: e15485d9cf24df042b8ef1296c204647, type: 3}
+      propertyPath: m_Name
+      value: PicturelessDialogue
+      objectReference: {fileID: 0}
+    - target: {fileID: 4728857978263358706, guid: e15485d9cf24df042b8ef1296c204647, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7336354512828228472, guid: e15485d9cf24df042b8ef1296c204647, type: 3}
+      propertyPath: m_Pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7336354512828228472, guid: e15485d9cf24df042b8ef1296c204647, type: 3}
+      propertyPath: m_Pivot.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7336354512828228472, guid: e15485d9cf24df042b8ef1296c204647, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7336354512828228472, guid: e15485d9cf24df042b8ef1296c204647, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7336354512828228472, guid: e15485d9cf24df042b8ef1296c204647, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7336354512828228472, guid: e15485d9cf24df042b8ef1296c204647, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7336354512828228472, guid: e15485d9cf24df042b8ef1296c204647, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 470
+      objectReference: {fileID: 0}
+    - target: {fileID: 7336354512828228472, guid: e15485d9cf24df042b8ef1296c204647, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 140
+      objectReference: {fileID: 0}
+    - target: {fileID: 7336354512828228472, guid: e15485d9cf24df042b8ef1296c204647, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7336354512828228472, guid: e15485d9cf24df042b8ef1296c204647, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7336354512828228472, guid: e15485d9cf24df042b8ef1296c204647, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7336354512828228472, guid: e15485d9cf24df042b8ef1296c204647, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7336354512828228472, guid: e15485d9cf24df042b8ef1296c204647, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7336354512828228472, guid: e15485d9cf24df042b8ef1296c204647, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7336354512828228472, guid: e15485d9cf24df042b8ef1296c204647, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7336354512828228472, guid: e15485d9cf24df042b8ef1296c204647, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7336354512828228472, guid: e15485d9cf24df042b8ef1296c204647, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7336354512828228472, guid: e15485d9cf24df042b8ef1296c204647, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7336354512828228472, guid: e15485d9cf24df042b8ef1296c204647, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7336354512828228472, guid: e15485d9cf24df042b8ef1296c204647, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: e15485d9cf24df042b8ef1296c204647, type: 3}
+--- !u!224 &913853395 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 7336354512828228472, guid: e15485d9cf24df042b8ef1296c204647, type: 3}
+  m_PrefabInstance: {fileID: 913853394}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &913853396 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 857937859890098148, guid: e15485d9cf24df042b8ef1296c204647, type: 3}
+  m_PrefabInstance: {fileID: 913853394}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1505bdd8d630b6741936386497185c7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &923165396
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1453,6 +1583,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 026e787f6af83dc4ca1645e16e8acf98, type: 3}
+--- !u!114 &923165397 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 857937859890098148, guid: 026e787f6af83dc4ca1645e16e8acf98, type: 3}
+  m_PrefabInstance: {fileID: 923165396}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1505bdd8d630b6741936386497185c7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &939972735
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1735,7 +1876,7 @@ Transform:
   m_GameObject: {fileID: 1074057120}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.78, y: -0.41, z: 0}
+  m_LocalPosition: {x: -5.57, y: -0.41, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1864,89 +2005,89 @@ MonoBehaviour:
   - bodyText: 'Hmm let me come up with a plan, I know that the more dangerous the
       waste enemy, the higher quality the Waste Product they drop when slain.  '
     speakerName: Jackie
-    displayingImage: {fileID: 0}
+    displayingImage: {fileID: 21300000, guid: 26c95ccd71f756349881ce655e12b5cc, type: 3}
     broadcastAnEvent: 0
   - bodyText: Should I work with a team again to try and hunt down a larger waste
       monster?
     speakerName: Jackie
-    displayingImage: {fileID: 0}
+    displayingImage: {fileID: 21300000, guid: 26c95ccd71f756349881ce655e12b5cc, type: 3}
     broadcastAnEvent: 1
   - bodyText: 'No, I came back almost empty handed last year after I froze up and
       let the others do the fighting. '
     speakerName: Jackie
-    displayingImage: {fileID: 0}
+    displayingImage: {fileID: 21300000, guid: 70562f64108503147861dbc82d787ef9, type: 3}
     broadcastAnEvent: 1
   - bodyText: By the time I felt okay, there were basically no products left!
     speakerName: Jackie
-    displayingImage: {fileID: 0}
+    displayingImage: {fileID: 21300000, guid: 534aff9f6dfd6c544b0144954e8ef0b0, type: 3}
     broadcastAnEvent: 1
   - bodyText: "I can push myself and do this solo, that\u2019s what the past year
       of training was for."
     speakerName: Jackie
-    displayingImage: {fileID: 0}
+    displayingImage: {fileID: 21300000, guid: 26c95ccd71f756349881ce655e12b5cc, type: 3}
     broadcastAnEvent: 1
   - bodyText: 'This way I get the full cut of the products, and it should impress
       the examiners, I hope. '
     speakerName: Jackie
-    displayingImage: {fileID: 0}
+    displayingImage: {fileID: 21300000, guid: 1766f7fa2aec26d4b80d30e9c84bc726, type: 3}
     broadcastAnEvent: 0
   - bodyText: "Although I\u2019ll definitely have to be more sneaky and careful if
       I\u2019m hunting alone..."
     speakerName: Jackie
-    displayingImage: {fileID: 0}
+    displayingImage: {fileID: 21300000, guid: 26c95ccd71f756349881ce655e12b5cc, type: 3}
     broadcastAnEvent: 1
   jackiePreMissedShot:
   - bodyText: "Well, it\u2019s not the most dangerous monster, but I\u2019ve got
       to start collecting Waste Products. I can't fall behind."
     speakerName: Jackie
-    displayingImage: {fileID: 0}
+    displayingImage: {fileID: 21300000, guid: f612c0b5aed4f8843b04993b58670ddc, type: 3}
     broadcastAnEvent: 0
-  - bodyText: (Inhales and aims her pistol.)
-    speakerName: Jackie
+  - bodyText: (Jackie Inhales and aims her pistol.)
+    speakerName: 
     displayingImage: {fileID: 0}
     broadcastAnEvent: 0
   jackiePostMissedShot:
   - bodyText: "Tsk, stay calm, Jackie. It\u2019s just a frog. I can still take it
       down by force."
     speakerName: Jackie
-    displayingImage: {fileID: 0}
+    displayingImage: {fileID: 21300000, guid: f612c0b5aed4f8843b04993b58670ddc, type: 3}
     broadcastAnEvent: 0
   jackiePreCombat:
   - bodyText: "Uh oh, well that didn\u2019t quite work out."
     speakerName: Jackie
-    displayingImage: {fileID: 0}
+    displayingImage: {fileID: 21300000, guid: f612c0b5aed4f8843b04993b58670ddc, type: 3}
     broadcastAnEvent: 0
   startOfCombatDialogue:
   - bodyText: "Guess I got the challenge I wanted, let\u2019s see what attacks these
       guys are planning to do\u2026"
     speakerName: Jackie
-    displayingImage: {fileID: 0}
+    displayingImage: {fileID: 21300000, guid: 26c95ccd71f756349881ce655e12b5cc, type: 3}
     broadcastAnEvent: 0
   afterCombatDialogue:
   - bodyText: Whew, glad thats over and done with.
     speakerName: Jackie
-    displayingImage: {fileID: 0}
+    displayingImage: {fileID: 21300000, guid: 26c95ccd71f756349881ce655e12b5cc, type: 3}
     broadcastAnEvent: 0
   - bodyText: "Let\u2019s see what products these monsters had growing in them."
     speakerName: Jackie
-    displayingImage: {fileID: 0}
+    displayingImage: {fileID: 21300000, guid: 1766f7fa2aec26d4b80d30e9c84bc726, type: 3}
     broadcastAnEvent: 0
   crystalExtraction:
   - bodyText: 'Ew, alright. No wonder it was hacking up so much spit. '
     speakerName: Jackie
-    displayingImage: {fileID: 0}
+    displayingImage: {fileID: 21300000, guid: f612c0b5aed4f8843b04993b58670ddc, type: 3}
     broadcastAnEvent: 0
   - bodyText: 'I wonder how this crystal got in here? '
     speakerName: Jackie
-    displayingImage: {fileID: 0}
+    displayingImage: {fileID: 21300000, guid: 26c95ccd71f756349881ce655e12b5cc, type: 3}
     broadcastAnEvent: 0
   - bodyText: Heh, looks pretty valuable though. Not a bad start.
     speakerName: Jackie
-    displayingImage: {fileID: 0}
+    displayingImage: {fileID: 21300000, guid: 1766f7fa2aec26d4b80d30e9c84bc726, type: 3}
     broadcastAnEvent: 0
   - bodyText: Off to the next target!
     speakerName: Jackie
-    displayingImage: {fileID: 0}
+    displayingImage: {fileID: 21300000, guid: 1766f7fa2aec26d4b80d30e9c84bc726, type: 3}
     broadcastAnEvent: 0
   beetleEntrance:
   - bodyText: KCCRRKR?
@@ -1954,11 +2095,12 @@ MonoBehaviour:
     displayingImage: {fileID: 21300000, guid: 320fd4765facdcb488b31229396fad33, type: 3}
     broadcastAnEvent: 0
   gameLoseDialogue:
-  - bodyText: Tsk, I better get away. Maybe I'll have better luck somewhere else...
+  - bodyText: Tsk, I better get away and recover. Maybe I'll have better luck somewhere
+      else...
     speakerName: Jackie
     displayingImage: {fileID: 0}
     broadcastAnEvent: 0
-  jumpToCombat: 1
+  jumpToCombat: 0
 --- !u!1001 &1235694744
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2249,11 +2391,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1715629036518821266, guid: 2bf19bd78e328204fb34ccaa75296151, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -7.4
+      value: -7.5
       objectReference: {fileID: 0}
     - target: {fileID: 1715629036518821266, guid: 2bf19bd78e328204fb34ccaa75296151, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -0.13
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1715629036518821266, guid: 2bf19bd78e328204fb34ccaa75296151, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -2266,6 +2408,10 @@ PrefabInstance:
     - target: {fileID: 1715629036518821266, guid: 2bf19bd78e328204fb34ccaa75296151, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2101527321769255671, guid: 2bf19bd78e328204fb34ccaa75296151, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 1520415093
       objectReference: {fileID: 0}
     - target: {fileID: 5747343100457332867, guid: 2bf19bd78e328204fb34ccaa75296151, type: 3}
       propertyPath: m_PresetInfoIsWorld
@@ -3382,11 +3528,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac0b09e7857660247b1477e93731de29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &1872758576 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4728857978263358706, guid: 026e787f6af83dc4ca1645e16e8acf98, type: 3}
-  m_PrefabInstance: {fileID: 923165396}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &1872758577 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7336354512828228472, guid: 026e787f6af83dc4ca1645e16e8acf98, type: 3}
@@ -3476,8 +3617,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4669219b148a06340b6ef30bcb5d86ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogueScrim: {fileID: 0}
-  dialogueBoxObj: {fileID: 1872758576}
+  picturelessDialogueBoxComponent: {fileID: 913853396}
+  pictureDialogueBox: {fileID: 923165397}
 --- !u!1001 &1922851634
 PrefabInstance:
   m_ObjectHideFlags: 0
