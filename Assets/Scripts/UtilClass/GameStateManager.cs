@@ -15,4 +15,6 @@ public static class GameStateManager
 
     //If we just finished beetle fight, we go directly into queen fight after the back button is hit
     public static bool justFinishedBeetleFight = false;
+
+    public static string nameOfRestartedLevel = "";
 }

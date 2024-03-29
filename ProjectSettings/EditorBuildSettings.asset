@@ -26,4 +26,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/BeetleFightScene.unity
     guid: 848a8118215eb4a4597b9dc56b9ac00c
+  - enabled: 1
+    path: Assets/Scenes/RestartScene.unity
+    guid: f32bbe32082cfd34f875bd6b5ab2f7fc
   m_configObjects: {}
