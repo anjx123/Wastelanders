@@ -137,7 +137,7 @@ public class DialogueManager : MonoBehaviour
     void Update()
     {
 
-        if (Input.GetKeyDown(KeyCode.Mouse0) || Input.GetKey(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Mouse0) || Input.GetKeyDown(KeyCode.Space) || Input.GetKey(KeyCode.RightArrow))
         {
             if (inDialogue)
             {
