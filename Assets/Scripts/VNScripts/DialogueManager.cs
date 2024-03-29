@@ -6,10 +6,14 @@ using TMPro;
 public class DialogueManager : MonoBehaviour
 {
     public static DialogueManager Instance { get; private set; }
-    public GameObject dialogueScrim; //Blocks player interaction with the game while in dialogue
-    public GameObject dialogueBoxObj;
-    private DialogueBox dialogueBoxComponent;
+
+
+
+    private DialogueBox activeDialogueBox;
+    [SerializeField]
     private DialogueBox picturelessDialogueBoxComponent;
+    [SerializeField]
+    private DialogueBox pictureDialogueBox;
     private List<DialogueText> sentences = new();
 
     private bool inDialogue = false;
@@ -24,8 +28,7 @@ public class DialogueManager : MonoBehaviour
         {
             Destroy(this);
         }
-        dialogueBoxComponent = dialogueBoxObj.GetComponent<DialogueBox>();
-
+        activeDialogueBox = pictureDialogueBox;
     }
 
     //Manager is going to listen to a bunch of events that then cause it to gain new sentences and 
@@ -41,12 +44,12 @@ public class DialogueManager : MonoBehaviour
 
     public IEnumerator StartDialogue(List<DialogueText> newSentences)
     {
-        if (dialogueBoxObj.activeInHierarchy)
+        if (activeDialogueBox.gameObject.activeInHierarchy)
         {
             yield break;
         }
 
-        dialogueBoxObj.SetActive(true);
+        activeDialogueBox.gameObject.SetActive(true);
 
         sentences = newSentences;
         inDialogue = true;
@@ -57,23 +60,37 @@ public class DialogueManager : MonoBehaviour
 
     void ClearPanel()
     {
-        dialogueBoxObj.SetActive(false);
+        activeDialogueBox.gameObject.SetActive(false);
         sentences.Clear();
         inDialogue = false;
     }
 
     public void MoveBoxToBottom()
     {
-        dialogueBoxObj.GetComponent<RectTransform>().anchorMin = new Vector2(0.5f, 0);
-        dialogueBoxObj.GetComponent<RectTransform>().anchorMax = new Vector2(0.5f, 0);
-        dialogueBoxObj.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, 0);
+        pictureDialogueBox.GetComponent<RectTransform>().anchorMin = new Vector2(0.5f, 0);
+        pictureDialogueBox.GetComponent<RectTransform>().anchorMax = new Vector2(0.5f, 0);
+        pictureDialogueBox.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, 0);
+
+        if (picturelessDialogueBoxComponent != null)
+        {
+            picturelessDialogueBoxComponent.GetComponent<RectTransform>().anchorMin = new Vector2(0.5f, 0);
+            picturelessDialogueBoxComponent.GetComponent<RectTransform>().anchorMax = new Vector2(0.5f, 0);
+            picturelessDialogueBoxComponent.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, 0);
+        }
     }
 
     public void MoveBoxToTop()
     {
-        dialogueBoxObj.GetComponent<RectTransform>().anchorMin = new Vector2(0.5f, 1);
-        dialogueBoxObj.GetComponent<RectTransform>().anchorMax = new Vector2(0.5f, 1);
-        dialogueBoxObj.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -1 * dialogueBoxComponent.GetComponent<RectTransform>().rect.height);
+        pictureDialogueBox.GetComponent<RectTransform>().anchorMin = new Vector2(0.5f, 1);
+        pictureDialogueBox.GetComponent<RectTransform>().anchorMax = new Vector2(0.5f, 1);
+        pictureDialogueBox.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -1 * pictureDialogueBox.GetComponent<RectTransform>().rect.height);
+
+        if (picturelessDialogueBoxComponent != null)
+        {
+            picturelessDialogueBoxComponent.GetComponent<RectTransform>().anchorMin = new Vector2(0.5f, 1);
+            picturelessDialogueBoxComponent.GetComponent<RectTransform>().anchorMax = new Vector2(0.5f, 1);
+            picturelessDialogueBoxComponent.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -1 * picturelessDialogueBoxComponent.GetComponent<RectTransform>().rect.height);
+        }
     }
 
     void DisplayNextSentence()
@@ -88,18 +105,27 @@ public class DialogueManager : MonoBehaviour
 
         if (sentence.DisplayingImage == null && picturelessDialogueBoxComponent != null)
         {
-            picturelessDialogueBoxComponent.gameObject.SetActive(true);
-            dialogueBoxComponent.gameObject.SetActive(false);
+            SetDialogueBoxActive(picturelessDialogueBoxComponent);
             picturelessDialogueBoxComponent.SetLine(sentence);
 
         } else
         {
-            if (picturelessDialogueBoxComponent != null)
-            {
-                picturelessDialogueBoxComponent.gameObject.SetActive(false);
-            }
-            dialogueBoxComponent.gameObject.SetActive(true);
-            dialogueBoxComponent.SetLine(sentence);
+            SetDialogueBoxActive(pictureDialogueBox);
+            pictureDialogueBox.SetLine(sentence);
+        }
+    }
+
+    void SetDialogueBoxActive(DialogueBox dialogueBox)
+    {
+        if (picturelessDialogueBoxComponent != null)
+        {
+            picturelessDialogueBoxComponent.gameObject.SetActive(dialogueBox == picturelessDialogueBoxComponent);
+            pictureDialogueBox.gameObject.SetActive(dialogueBox == pictureDialogueBox);
+            activeDialogueBox = dialogueBox;
+        } else
+        {
+            pictureDialogueBox.gameObject.SetActive(true);
+            activeDialogueBox = pictureDialogueBox;
         }
     }
 
@@ -115,13 +141,13 @@ public class DialogueManager : MonoBehaviour
         {
             if (inDialogue)
             {
-                if (dialogueBoxComponent.FinishedLine())
+                if (activeDialogueBox.FinishedLine())
                 {
                     DisplayNextSentence();
                 }
                 else
                 {
-                    dialogueBoxComponent.StopScrollingText();
+                    activeDialogueBox.StopScrollingText();
                 }
             }
         }

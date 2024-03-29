@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Runtime.ConstrainedExecution;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class TutorialIntroduction : DialogueClasses
 {
@@ -14,8 +15,15 @@ public class TutorialIntroduction : DialogueClasses
     [SerializeField] private GameObject trainingDummyPrefab;
     [SerializeField] private Transform dummy1StartingPos;
     [SerializeField] private Transform jackieEndPosition;
-
     [SerializeField] private Transform ivesPassiveBattlePosition;
+
+
+
+    [SerializeField] private Sprite laidBackSprite;
+    [SerializeField] private Sprite puzzledSoldierSprite;
+    [SerializeField] private Image laidBackImageUI;
+    [SerializeField] private Image puzzeledImageUI;
+
     [SerializeField] private List<GameObject> ivesTutorialDeck;
     [SerializeField] private List<GameObject> jackieTutorialDeck;
 
@@ -65,20 +73,54 @@ public class TutorialIntroduction : DialogueClasses
         }
     }
 
+    public void OnDestroy()
+    {
+        CombatManager.ClearEvents();
+        DialogueBox.ClearDialogueEvents();
+    }
+
     private IEnumerator ExecuteGameStart()
     {
         CombatManager.Instance.GameState = GameState.OUT_OF_COMBAT;
         CombatManager.Instance.SetDarkScreen();
         yield return new WaitForSeconds(1f);
         ives.OutOfCombat();
-        jackie.OutOfCombat(); //Workaround for now, ill have to remove this once i manually start instantiating players
+        jackie.OutOfCombat();
         jackie.SetReturnPosition(jackieDefaultTransform.position);
         if (!jumpToCombat)
         {
-            //Text here handles dialogue before Jackie Ives combat
             yield return new WaitForSeconds(1f);
 
-            yield return StartCoroutine(DialogueManager.Instance.StartDialogue(openingDiscussion));
+            { 
+                int broadcastCounts = 0;
+                void CountBroadcasts()
+                {
+                    broadcastCounts++;
+                }
+
+                DialogueBox.DialogueBoxEvent += CountBroadcasts;
+
+                Coroutine dialogue = StartCoroutine(DialogueManager.Instance.StartDialogue(openingDiscussion));
+
+                //Dialogue without any expression is kinda dry, its also difficult to tell whos talking so I wont VN style this unless I want to add more movement to the guys on screen
+                /*
+                                yield return new WaitUntil(() => broadcastCounts == 1);
+                                StartCoroutine(FadeImage(laidBackImageUI, 1, true));
+                                yield return new WaitUntil(() => broadcastCounts == 2);
+                                StartCoroutine(FadeImage(puzzeledImageUI, 1, true));
+                                */
+                yield return dialogue;
+
+/*
+                Coroutine laidBackFade = StartCoroutine(FadeImage(laidBackImageUI, 1, false)); 
+                yield return StartCoroutine(FadeImage(puzzeledImageUI, 1, false));
+                yield return laidBackFade;*/
+                puzzeledImageUI.gameObject.SetActive(false);
+                laidBackImageUI.gameObject.SetActive(false);
+
+                DialogueBox.DialogueBoxEvent -= CountBroadcasts;
+                yield return new WaitForSeconds(BRIEF_PAUSE);
+            }
 
             jackie.Emphasize(); //Jackie shows up above the black background
             yield return StartCoroutine(jackie.ResetPosition()); //Jackie Runs into the scene and talks 
@@ -298,14 +340,28 @@ public class TutorialIntroduction : DialogueClasses
     }
     //------------------------------------------------------Helpers---------------------------------------------------------------------------------
 
-    private IEnumerator InstantiateDummies()
+    IEnumerator FadeImage(Image image, float duration, bool fadeIn)
     {
-        yield return StartCoroutine(ives.MoveToPosition(dummy1StartingPos.position, 1.2f, 0.8f)); //Ives goes to place a dummy down
-        yield return new WaitForSeconds(0.3f);
-        trainingDummies.Add(Instantiate(trainingDummyPrefab, dummy1StartingPos));
-        yield return StartCoroutine(ives.MoveToPosition(jackieEndPosition.position, 1.2f, 0.8f)); //Ives goes to place a dummy down
-        yield return new WaitForSeconds(0.3f);
-        trainingDummies.Add(Instantiate(trainingDummyPrefab, jackieEndPosition));
+        if (fadeIn)
+        {
+            // Fade in
+            image.color = new Color(image.color.r, image.color.g, image.color.b, 0);
+            while (image.color.a < 1.0f)
+            {
+                image.color = new Color(image.color.r, image.color.g, image.color.b, image.color.a + (Time.deltaTime / duration));
+                yield return null;
+            }
+        }
+        else
+        {
+            // Fade out
+            image.color = new Color(image.color.r, image.color.g, image.color.b, 1);
+            while (image.color.a > 0.0f)
+            {
+                image.color = new Color(image.color.r, image.color.g, image.color.b, image.color.a - (Time.deltaTime / duration));
+                yield return null;
+            }
+        }
     }
 
     //Helper to wait until dialogue is done, then start @param dialogue, then run a callback like setting up a new event. 

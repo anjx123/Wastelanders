@@ -81,6 +81,12 @@ public class Scene2 : DialogueClasses
         }
     }
 
+    public void OnDestroy()
+    {
+        CombatManager.ClearEvents();
+        DialogueBox.ClearDialogueEvents();
+    }
+
     int numberOfBroadcasts = 0;
 private IEnumerator ExecuteGameStart()
     {
