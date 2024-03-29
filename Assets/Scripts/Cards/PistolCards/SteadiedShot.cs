@@ -4,7 +4,7 @@ using static StatusEffect;
 public class SteadiedShot : PistolCards
 {
     private CombatManager.GameStateChangedHandler resetBuffHandler;
-    public void Destroy()
+    public void OnDestroy()
     {
         if (resetBuffHandler != null)
         {

@@ -102,6 +102,11 @@ public class CombatManager : MonoBehaviour
         ActionClass.CardStateChange += HandleCrosshairEnemies;
     }
 
+    private void OnDestroy()
+    {
+        ActionClass.CardStateChange -= HandleCrosshairEnemies;
+    }
+
 
     //Sets the Camera Center to the following Entity. 
     public void SetCameraCenter(EntityClass entity)
@@ -405,7 +410,7 @@ public class CombatManager : MonoBehaviour
 
     public bool CanHighlight()
     {
-        return GameState == GameState.SELECTION;
+        return (PauseMenu.IsPaused) ? false : GameState == GameState.SELECTION;
     }
 
     public GameState GameState

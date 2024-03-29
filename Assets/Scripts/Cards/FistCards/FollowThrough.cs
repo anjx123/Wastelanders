@@ -16,6 +16,7 @@ public class FollowThrough : FistCards
         {
             CombatManager.OnGameStateChanged -= GameStateChangedHandler;
         }
+        EntityClass.OnEntityDeath -= HandleTargetDeath;
     }
     public override void Initialize()
     {

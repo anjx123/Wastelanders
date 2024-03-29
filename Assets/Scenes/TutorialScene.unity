@@ -392,6 +392,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameOverPrefab
       objectReference: {fileID: 0}
+    - target: {fileID: 7166337254641088105, guid: 8b6d446295f329442acd33132a6a5c1a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -765,6 +769,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   handContainer: {fileID: 2102825246}
   deckContainer: {fileID: 644697184}
+  currentHighlightedEnemyEntity: {fileID: 0}
+  currentHighlightedAction: {fileID: 0}
+  selectedPlayer: {fileID: 0}
 --- !u!1 &638988697
 GameObject:
   m_ObjectHideFlags: 0
@@ -1839,9 +1846,25 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1642062695111722096, guid: 00e4347f9eb16d94c93b4961bdbca751, type: 3}
+      propertyPath: CombatMusicPrimary
+      value: 
+      objectReference: {fileID: 8300000, guid: fb237cdcf4ad80840b21beea3437eef2, type: 3}
+    - target: {fileID: 1642062695111722096, guid: 00e4347f9eb16d94c93b4961bdbca751, type: 3}
+      propertyPath: combatMusicPrimary
+      value: 
+      objectReference: {fileID: 8300000, guid: fb237cdcf4ad80840b21beea3437eef2, type: 3}
+    - target: {fileID: 1642062695111722096, guid: 00e4347f9eb16d94c93b4961bdbca751, type: 3}
       propertyPath: sfxTuples.Array.size
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1642062695111722096, guid: 00e4347f9eb16d94c93b4961bdbca751, type: 3}
+      propertyPath: BackgroundMusicPrimary
+      value: 
+      objectReference: {fileID: 8300000, guid: e7ac58c21c9f87045a18f1fcfd779f2e, type: 3}
+    - target: {fileID: 1642062695111722096, guid: 00e4347f9eb16d94c93b4961bdbca751, type: 3}
+      propertyPath: backgroundMusicPrimary
+      value: 
+      objectReference: {fileID: 8300000, guid: e7ac58c21c9f87045a18f1fcfd779f2e, type: 3}
     - target: {fileID: 7932485008459424998, guid: 00e4347f9eb16d94c93b4961bdbca751, type: 3}
       propertyPath: m_Name
       value: AudioManager
@@ -2937,16 +2960,16 @@ MonoBehaviour:
   - bodyText: "Well\u2026 Today\u2019s the day I\u2019ve been preparing the past
       year for."
     speakerName: Jackie
-    displayingImage: {fileID: 21300000, guid: 534aff9f6dfd6c544b0144954e8ef0b0, type: 3}
+    displayingImage: {fileID: 21300000, guid: 228f823fe8b2f4d4791ed74e46de81e1, type: 3}
     broadcastAnEvent: 0
   - bodyText: 'I can''t be afraid. I won''t fail again. '
     speakerName: Jackie
-    displayingImage: {fileID: 21300000, guid: 70562f64108503147861dbc82d787ef9, type: 3}
+    displayingImage: {fileID: 21300000, guid: 537908265661f2b44970c526d7724cfb, type: 3}
     broadcastAnEvent: 0
   - bodyText: 'I will make it on those wasteland expeditions. Mama is counting on
       me. '
     speakerName: Jackie
-    displayingImage: {fileID: 21300000, guid: 422f3cda08073664b8a46361afe442fb, type: 3}
+    displayingImage: {fileID: 21300000, guid: c719baaafa8cd7148806ffb41907add6, type: 3}
     broadcastAnEvent: 0
   soldierGreeting:
   - bodyText: Morning, Jackie!
@@ -2956,7 +2979,7 @@ MonoBehaviour:
   jackieTalksWithSolider:
   - bodyText: Good morning!
     speakerName: Jackie
-    displayingImage: {fileID: 21300000, guid: 422f3cda08073664b8a46361afe442fb, type: 3}
+    displayingImage: {fileID: 21300000, guid: 10ec818d4088de44a83a5405137230e4, type: 3}
     broadcastAnEvent: 0
   - bodyText: "So today\u2019s the day, huh. NITES exam. How are you feeling? "
     speakerName: Mustached Soldier
@@ -2964,7 +2987,7 @@ MonoBehaviour:
     broadcastAnEvent: 0
   - bodyText: I'm feeling... Fine.
     speakerName: Jackie
-    displayingImage: {fileID: 21300000, guid: 534aff9f6dfd6c544b0144954e8ef0b0, type: 3}
+    displayingImage: {fileID: 21300000, guid: 487226e5dae66424ea250466920a3086, type: 3}
     broadcastAnEvent: 0
   - bodyText: Haha, really? I guess those extra hours you put in with Ives have really
       paid off then?
@@ -2973,7 +2996,7 @@ MonoBehaviour:
     broadcastAnEvent: 0
   - bodyText: "Yeah, I guess so. I hope it\u2019s enough. "
     speakerName: Jackie
-    displayingImage: {fileID: 21300000, guid: 422f3cda08073664b8a46361afe442fb, type: 3}
+    displayingImage: {fileID: 21300000, guid: 10ec818d4088de44a83a5405137230e4, type: 3}
     broadcastAnEvent: 0
   - bodyText: Haha, don't lose heart. True strength does not come from conquering
       a challenge itself, but how you grow to overcome it.
@@ -2986,7 +3009,7 @@ MonoBehaviour:
     broadcastAnEvent: 0
   - bodyText: Thanks, Dan. I appreciate the confidence.
     speakerName: Jackie
-    displayingImage: {fileID: 21300000, guid: 422f3cda08073664b8a46361afe442fb, type: 3}
+    displayingImage: {fileID: 21300000, guid: 10ec818d4088de44a83a5405137230e4, type: 3}
     broadcastAnEvent: 0
   - bodyText: "Haha great! Just be careful out there will ya? I\u2019m not trying
       to scare you, but there\u2019s been an unusual increase in monster activity
@@ -3006,7 +3029,7 @@ MonoBehaviour:
     broadcastAnEvent: 0
   - bodyText: "Sure\u2026 I\u2019ll keep that in mind. Thanks for the concern\u2026"
     speakerName: Jackie
-    displayingImage: {fileID: 21300000, guid: 70562f64108503147861dbc82d787ef9, type: 3}
+    displayingImage: {fileID: 21300000, guid: 88a7e4552c1afa641acadc54e9b6cbac, type: 3}
     broadcastAnEvent: 0
   - bodyText: '[The soldier nods, gives a friendly salute, and leaves..]'
     speakerName: 
@@ -3048,11 +3071,11 @@ MonoBehaviour:
     broadcastAnEvent: 0
   - bodyText: You can retrieve a card back from the queue by clicking on its icon.
     speakerName: Ives
-    displayingImage: {fileID: 21300000, guid: cea5678db7ab09a48ad216800b9bda74, type: 3}
+    displayingImage: {fileID: 21300000, guid: 57baba5992d9e224988e93fcacf9f7eb, type: 3}
     broadcastAnEvent: 0
   - bodyText: Each round, you can queue up as many attacks as you'd like. However...
     speakerName: Ives
-    displayingImage: {fileID: 21300000, guid: cea5678db7ab09a48ad216800b9bda74, type: 3}
+    displayingImage: {fileID: 21300000, guid: 57baba5992d9e224988e93fcacf9f7eb, type: 3}
     broadcastAnEvent: 0
   - bodyText: 'You cannot play two actions that share the same speed. '
     speakerName: Ives
@@ -3085,7 +3108,8 @@ MonoBehaviour:
     displayingImage: {fileID: 21300000, guid: 05aec2f8237521d4f84b7c3d335550b0, type: 3}
     broadcastAnEvent: 0
   buffTutorial:
-  - bodyText: While making staff attacks, some cards will grant you 'Focus'.
+  - bodyText: While making staff attacks, some cards will have an ability that grants
+      you 'Focus'.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 820631014ce088c4cb748224d5467c86, type: 3}
     broadcastAnEvent: 0
@@ -3122,7 +3146,8 @@ MonoBehaviour:
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 82dbf38ae23fe224e90be99093d02604, type: 3}
     broadcastAnEvent: 0
-  - bodyText: 'Their action has also been placed into the queue. '
+  - bodyText: Their action has also been placed into the queue. You can [Click] on
+      that too to check it out.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: fbdbcaab28794334bb84176f7e052fb5, type: 3}
     broadcastAnEvent: 0
@@ -3214,17 +3239,25 @@ MonoBehaviour:
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: be935693778d6004d9427d82e6ce5798, type: 3}
     broadcastAnEvent: 0
-  - bodyText: Well, I learned from the best after all, I feel much better about my
-      chances now.
+  - bodyText: Well, I learned from the best after all. Thanks Ives, I feel much better
+      about the exam now.
     speakerName: Jackie
-    displayingImage: {fileID: 21300000, guid: 422f3cda08073664b8a46361afe442fb, type: 3}
+    displayingImage: {fileID: 21300000, guid: c719baaafa8cd7148806ffb41907add6, type: 3}
     broadcastAnEvent: 0
   endingTutorialDialogue: {fileID: 11400000, guid: 71bc8b72e567a434fb451296dad29b2f, type: 2}
   gameOver: {fileID: 302505533}
   gameLoseDialogue:
-  - bodyText: Hmm, what's wrong. You didn't fight like you usually do.
+  - bodyText: 'Whoops, guess I should have stayed my hand a bit. '
     speakerName: Ives
-    displayingImage: {fileID: 0}
+    displayingImage: {fileID: 21300000, guid: 084171bdb9370ac43b84a6350416b15c, type: 3}
+    broadcastAnEvent: 0
+  - bodyText: 'You were really going for it, and so I acted out of instinct there. '
+    speakerName: Ives
+    displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
+    broadcastAnEvent: 0
+  - bodyText: Here, let me help you get back up.
+    speakerName: Ives
+    displayingImage: {fileID: 21300000, guid: 87cb7c6c6588a4a3a957b707239abbf0, type: 3}
     broadcastAnEvent: 0
   jumpToCombat: 0
 --- !u!1001 &2102825245
@@ -3430,6 +3463,10 @@ PrefabInstance:
     - target: {fileID: 2933413030546177507, guid: 0ce0ee3d06315164a88fea5184a490b6, type: 3}
       propertyPath: m_LocalPosition.z
       value: -200
+      objectReference: {fileID: 0}
+    - target: {fileID: 2933413030546177507, guid: 0ce0ee3d06315164a88fea5184a490b6, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -6
       objectReference: {fileID: 0}
     - target: {fileID: 3845234593521427544, guid: 0ce0ee3d06315164a88fea5184a490b6, type: 3}
       propertyPath: m_Name

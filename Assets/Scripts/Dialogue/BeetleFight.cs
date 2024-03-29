@@ -1,15 +1,10 @@
-using System;
+
 using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.ConstrainedExecution;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using static Unity.VisualScripting.Member;
-using static UnityEngine.UI.Image;
 using System.Reflection;
 using Cinemachine;
-using UnityEditor.Build;
-using static Unity.Burst.Intrinsics.X86;
 using UnityEngine.UI;
 //@author: Andrew
 public class BeetleFight : DialogueClasses
@@ -113,7 +108,7 @@ public class BeetleFight : DialogueClasses
 
     private void OnDestroy()
     {
-        HighlightManager.EntityClicked -= EntityClicked;
+        HighlightManager.Instance.EntityClicked -= EntityClicked;
         CombatManager.PlayersWinEvent -= AllEntitiesDied;
         CombatManager.EnemiesWinEvent -= EnemiesWin;
 
@@ -491,6 +486,8 @@ public class BeetleFight : DialogueClasses
                 wave3Crystal.TakeDamage(jackie, 5);
                 yield return new WaitForSeconds(MEDIUM_PAUSE);
             }
+
+            yield return new WaitUntil(() => !DialogueManager.Instance.IsInDialogue());
             yield return StartCoroutine(DialogueManager.Instance.StartDialogue(ivesAnalyzeAfterExam));
 
             CombatManager.Instance.GameState = GameState.OUT_OF_COMBAT;
@@ -509,24 +506,26 @@ public class BeetleFight : DialogueClasses
                 StartCoroutine(MoveToRight(jackieVNSprite.gameObject.GetComponent<RectTransform>(), 400f, 0.8f));
             }
 
+            yield return new WaitUntil(() => !DialogueManager.Instance.IsInDialogue());
             yield return StartCoroutine(CombatManager.Instance.FadeInDarkScreen(2f));
             yield return StartCoroutine(FadeImage(ivesVNSprite, 1.1f, true));
             yield return StartCoroutine(DialogueManager.Instance.StartDialogue(postBattleDialogue.Dialogue));
 
             Coroutine ivesFade = StartCoroutine(FadeImage(ivesVNSprite, 1.5f, false));
+            MusicManager.Instance.FadeOutCurrentBackgroundTrack(2f);
             yield return StartCoroutine(FadeImage(jackieVNSprite, 1.5f, false));
             yield return ivesFade;
             yield return new WaitForSeconds(MEDIUM_PAUSE);
 
             GameStateManager.justFinishedBeetleFight = true;
-            SceneManager.LoadScene("SelectionScreen");
+            SceneManager.LoadScene(GameStateManager.SELECTION_SCREEN_NAME);
             yield break;
         }
     }
 
     private void Begin2PCombatTutorial()
     {
-        HighlightManager.EntityClicked += EntityClicked;
+        HighlightManager.Instance.EntityClicked += EntityClicked;
         CombatManager.PlayersWinEvent += AllEntitiesDied;
         CombatManager.EnemiesWinEvent += EnemiesWin;
     }
@@ -556,7 +555,7 @@ public class BeetleFight : DialogueClasses
     }
     private IEnumerator TwoPlayerDialogue()
     {
-        HighlightManager.EntityClicked -= EntityClicked;
+        HighlightManager.Instance.EntityClicked -= EntityClicked;
         yield return new WaitUntil(() => (!DialogueManager.Instance.IsInDialogue()));
         yield return StartCoroutine(DialogueManager.Instance.StartDialogue(ivesTutorial.Dialogue));
     }
@@ -633,7 +632,7 @@ public class BeetleFight : DialogueClasses
     {
         CombatManager.EnemiesWinEvent -= EnemiesWin;
         CombatManager.PlayersWinEvent -= AllEntitiesDied;
-        HighlightManager.EntityClicked -= EntityClicked;
+        HighlightManager.Instance.EntityClicked -= EntityClicked;
         Beetle.OnGainBuffs -= ExplainCrystals;
         Beetle.OnGainBuffs -= ExplainResonate;
         jackie.BuffsUpdatedEvent -= ExplainPlayerBuffed;

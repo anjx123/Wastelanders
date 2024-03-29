@@ -15,18 +15,18 @@ MonoBehaviour:
   dialogue:
   - bodyText: Tsk, nothing much again. No sign of another crystal.
     speakerName: Jackie
-    displayingImage: {fileID: 21300000, guid: 70562f64108503147861dbc82d787ef9, type: 3}
+    displayingImage: {fileID: 21300000, guid: 88a7e4552c1afa641acadc54e9b6cbac, type: 3}
     broadcastAnEvent: 0
   - bodyText: 'I wonder where the heck this came from... '
     speakerName: Jackie
-    displayingImage: {fileID: 21300000, guid: 26c95ccd71f756349881ce655e12b5cc, type: 3}
+    displayingImage: {fileID: 21300000, guid: 228f823fe8b2f4d4791ed74e46de81e1, type: 3}
     broadcastAnEvent: 1
   - bodyText: 'Maybe I should head deeper into the marsh. Although the sun is setting
       soon... '
     speakerName: Jackie
-    displayingImage: {fileID: 21300000, guid: 26c95ccd71f756349881ce655e12b5cc, type: 3}
+    displayingImage: {fileID: 21300000, guid: 228f823fe8b2f4d4791ed74e46de81e1, type: 3}
     broadcastAnEvent: 0
   - bodyText: Come on Jackie, you got this. You have to pass the exam for Mama.
     speakerName: Jackie
-    displayingImage: {fileID: 21300000, guid: f612c0b5aed4f8843b04993b58670ddc, type: 3}
+    displayingImage: {fileID: 21300000, guid: 537908265661f2b44970c526d7724cfb, type: 3}
     broadcastAnEvent: 0

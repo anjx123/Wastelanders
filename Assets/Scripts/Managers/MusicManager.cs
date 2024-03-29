@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class MusicManager : MonoBehaviour
@@ -9,25 +8,114 @@ public class MusicManager : MonoBehaviour
     public static MusicManager Instance;
 
     // NOTE: All of these fields are set in the editor.
-    public AudioSource SFXSoundsPlayer, BackgroundMusicPlayer;
-    public AudioClip BackgroundMusicPrimary;
-    public AudioClip BackgroundMusicVictory; // Actually ...Secondary ; for extensibility purposes such as you WANT to be able to alternate between two Background Musics during gameplay
-    [SerializeField]
-    private List<SerializableTuple<SFXList, AudioClip>> sfxTuples;
+    public AudioSource SFXSoundsPlayer, BackgroundMusicPlayer, BackgroundMusicIntroPlayer;
 
-    public void Awake()
+    private List<SerializableTuple<SFXList, AudioClip>> sfxTuples = new();
+#nullable enable
+    public AudioClip? backgroundMusicPrimary;
+    public AudioClip? backgroundMusicIntro;
+
+    public AudioClip? combatMusicPrimary;
+    public AudioClip? combatMusicIntro;
+
+    public AudioClip? backgroundMusicVictory; // Actually ...Secondary ; for extensibility purposes such as you WANT to be able to alternate between two Background Musics during gameplay
+    [SerializeField]
+
+    public virtual void Awake()
     {
         if (Instance == null)
         {
             Instance = this;
-            BackgroundMusicPlayer.clip = BackgroundMusicPrimary;
-            BackgroundMusicPlayer.Play();
-            // sfxTuples = new List<SerializableTuple<SFXList, AudioClip>>();
         }
         else if (Instance != this)
         {
             Destroy(this);
         }
+    }
+
+    private void Start()
+    {
+        StartCoroutine(PlayStartAudio());
+    }
+
+
+    private void OnEnable()
+    {
+        CombatManager.OnGameStateChanged += CombatStartHandler;
+    }
+
+    private void OnDisable()
+    {
+        CombatManager.OnGameStateChanged -= CombatStartHandler;
+    }
+
+    void CombatStartHandler(GameState gameState)
+    {
+        if (gameState == GameState.SELECTION)
+        {
+            StartCoroutine(StartCombatMusic());
+            
+        }
+    }
+
+    protected IEnumerator StartCombatMusic()
+    {
+        CombatManager.OnGameStateChanged -= CombatStartHandler;
+        yield return StartCoroutine(FadeAudioRoutine(BackgroundMusicPlayer, true, 1f));
+
+        if (combatMusicIntro != null)
+        {
+            BackgroundMusicPlayer.clip = combatMusicIntro;
+            BackgroundMusicPlayer.Play();
+            BackgroundMusicPlayer.loop = false;
+            yield return new WaitUntil(() => !BackgroundMusicPlayer.isPlaying);
+        }
+        BackgroundMusicPlayer.clip = combatMusicPrimary;
+        BackgroundMusicPlayer.Play();
+        BackgroundMusicPlayer.loop = true;
+    }
+
+
+
+    protected IEnumerator FadeAudioRoutine(AudioSource audioSource, bool isFadingOut, float fadeTime)
+    {
+        float startVolume = audioSource.volume;
+        float endVolume = isFadingOut ? 0 : 1;
+        float time = 0;
+
+        while (time < fadeTime)
+        {
+            time += Time.deltaTime;
+            audioSource.volume = Mathf.Lerp(startVolume, endVolume, time / fadeTime);
+
+            yield return null;
+        }
+
+        if (isFadingOut)
+        {
+            audioSource.Stop();
+            audioSource.volume = startVolume;
+        } else
+        {
+            audioSource.volume = endVolume;
+        }
+    }
+
+    public void FadeOutCurrentBackgroundTrack(float duration)
+    {
+        StartCoroutine(FadeAudioRoutine(BackgroundMusicPlayer, true, duration));
+    }
+
+    protected IEnumerator PlayStartAudio()
+    {
+        BackgroundMusicPlayer.clip = backgroundMusicIntro;
+        BackgroundMusicPlayer.Play();
+
+        yield return new WaitUntil(() => !BackgroundMusicPlayer.isPlaying);
+
+        BackgroundMusicPlayer.clip = backgroundMusicPrimary;
+        BackgroundMusicPlayer.Play();
+        BackgroundMusicPlayer.loop = true;
     }
 
     // Plays the sfx that is appropriate
@@ -53,7 +141,7 @@ public class MusicManager : MonoBehaviour
     public void PlayVictory()
     {
         BackgroundMusicPlayer.Stop();
-        BackgroundMusicPlayer.clip = BackgroundMusicVictory;
+        BackgroundMusicPlayer.clip = backgroundMusicVictory;
         BackgroundMusicPlayer.Play();
     }
 

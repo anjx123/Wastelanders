@@ -37,6 +37,7 @@ public class LeftHook : FistCards
         ActionClass ac = righthook.GetComponent<ActionClass>();
         ac.Origin = this.Origin;
         ac.Target = this.Target;
+        ac.Speed = this.Speed;
         BattleQueue.BattleQueueInstance.InsertDupPlayerAction(ac);
     }
 }

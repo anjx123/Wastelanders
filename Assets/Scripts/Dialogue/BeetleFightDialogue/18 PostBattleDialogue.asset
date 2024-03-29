@@ -44,7 +44,7 @@ MonoBehaviour:
   - bodyText: Um! Earlier, I encountered another one of these beetles. I was chasing
       it when it led me back to its nest.
     speakerName: Jackie
-    displayingImage: {fileID: 0}
+    displayingImage: {fileID: 21300000, guid: 228f823fe8b2f4d4791ed74e46de81e1, type: 3}
     broadcastAnEvent: 1
   - bodyText: Oh? Do you remember how to get back there? To the nest?
     speakerName: Ives
@@ -61,8 +61,8 @@ MonoBehaviour:
     broadcastAnEvent: 0
   - bodyText: All the examiners agree that it would be best to deal with the beetles
       now before they become an even larger problem.
-    speakerName: Jackie
-    displayingImage: {fileID: 0}
+    speakerName: Ives
+    displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
     broadcastAnEvent: 0
   - bodyText: 'Everyone, rest and recuperate for now. Let''s come up with a plan
       of attack to neutralize the beetle swarm. '
@@ -71,5 +71,5 @@ MonoBehaviour:
     broadcastAnEvent: 0
   - bodyText: Seems like this expedition will be more than just an exam...
     speakerName: Jackie
-    displayingImage: {fileID: 0}
+    displayingImage: {fileID: 21300000, guid: 228f823fe8b2f4d4791ed74e46de81e1, type: 3}
     broadcastAnEvent: 0

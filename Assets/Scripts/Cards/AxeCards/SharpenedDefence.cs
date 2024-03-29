@@ -12,7 +12,7 @@ public class SharpenedDefence : AxeCards
     base.Initialize(); // Implementation based on some other card // TOD0: works as intended; if not then set CardType manually in each derived class and remove equation from base
     lowerBound = 2;
     upperBound = 4;
-    Speed = 3;
+    Speed = 1;
     CardType = CardType.Defense;    
 
     myName = "SharpenedDefence";

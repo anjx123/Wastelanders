@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using Unity.VisualScripting;
 
 public class GameOver : MonoBehaviour
 {
@@ -78,8 +79,7 @@ public class GameOver : MonoBehaviour
     {
         yield return StartCoroutine(FadeCoroutine(false, 0.7f));
         Scene activeScene = SceneManager.GetActiveScene();
-        GameStateManager.nameOfRestartedLevel = activeScene.name;
-        SceneManager.LoadScene("RestartScene");
+        GameStateManager.Restart(activeScene.name);
     }
 
     private IEnumerator OnLevelSelectClick()

@@ -36,12 +36,12 @@ public class RightHook : FistCards
         ActionClass ac = haymaker.GetComponent<ActionClass>();
         ac.Origin = this.Origin;
         ac.Target = this.Target;
+        ac.Speed = this.Speed; //Workaround for multispeeded queue 
         if (ac.Origin is PlayerClass)
         {
             BattleQueue.BattleQueueInstance.InsertDupPlayerAction(ac);
         } else
         {
-
             BattleQueue.BattleQueueInstance.InsertDupEnemyAction(ac);
         }
 

@@ -313,11 +313,13 @@ public abstract class EntityClass : SelectClass
 
     public override void OnMouseEnter()
     {
+        if (PauseMenu.IsPaused) return;
         Highlight();
     }
 
     public override void OnMouseExit()
     {
+        if (PauseMenu.IsPaused) return;
         DeHighlight();
     }
 
@@ -351,6 +353,7 @@ public abstract class EntityClass : SelectClass
 
     public override void OnMouseDown()
     {
+        if (PauseMenu.IsPaused) return;
         OnEntityClicked?.Invoke(this);
     }
     //Run this to reset the entity position back to its starting position

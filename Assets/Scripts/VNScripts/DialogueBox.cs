@@ -119,7 +119,7 @@ public class DialogueBox : MonoBehaviour
 
             bodyText.text = displayedText;
 
-            yield return new WaitForSecondsRealtime(1f / rollingSpeed);
+            yield return new WaitForSeconds(1f / rollingSpeed);
         }
 
         lineIsFinished = true;

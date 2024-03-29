@@ -74,7 +74,7 @@ public abstract class ActionClass : SelectClass
     }
 
     private CardState cardState = CardState.NORMAL;
-    public int Speed { get; protected set; }
+    public int Speed { get; set; }
     protected string description;
     public string Description {  get { return description; }}
     [SerializeField] private Sprite icon;
@@ -100,6 +100,7 @@ public abstract class ActionClass : SelectClass
     public virtual void Awake()
     {
         Initialize();
+        PauseMenu.onPauseMenuActivate += OnMouseExit;
     }
 
     public virtual void Start()
@@ -113,6 +114,7 @@ public abstract class ActionClass : SelectClass
         {
             origin.BuffsUpdatedEvent -= UpdateBuffValue;
         }
+        PauseMenu.onPauseMenuActivate -= OnMouseExit;
     }
 
     //Called when this card hits the enemy, runs any on hit buffs or effects given.
@@ -221,6 +223,7 @@ public abstract class ActionClass : SelectClass
 
     public override void OnMouseEnter()
     {
+        if (PauseMenu.IsPaused) return;
         if (cardState == CardState.NORMAL)
         {
             SetCardState(CardState.HOVER);
@@ -235,6 +238,7 @@ public abstract class ActionClass : SelectClass
 
     public override void OnMouseExit()
     {
+        if (PauseMenu.IsPaused) return;
         if (cardState == CardState.HOVER)
         {
             SetCardState(CardState.NORMAL);
