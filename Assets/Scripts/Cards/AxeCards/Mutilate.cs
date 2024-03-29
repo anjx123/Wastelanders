@@ -15,7 +15,7 @@ public class Mutilate : AxeCards
         {
             CombatManager.OnGameStateChanged -= GameStateChangedHandler;
         }
-        Target.EntityTookDamage -= AddWound;
+        EntityClass.OnEntityDeath -= HandleTargetDeath;
     }
     public override void Initialize()
     {
@@ -48,6 +48,7 @@ public class Mutilate : AxeCards
 
         Target.EntityTookDamage += AddWound;
         CombatManager.OnGameStateChanged += ResetBuffHandler;
+        EntityClass.OnEntityDeath += HandleTargetDeath;
         void ResetBuffHandler(GameState gameState)
         {
             if (gameState != GameState.FIGHTING)
@@ -60,4 +61,11 @@ public class Mutilate : AxeCards
         GameStateChangedHandler = ResetBuffHandler;
     }
 
+    void HandleTargetDeath(EntityClass entity)
+    {
+        if (entity == Target)
+        {
+            Target.EntityTookDamage -= AddWound;
+        }
+    }
 }

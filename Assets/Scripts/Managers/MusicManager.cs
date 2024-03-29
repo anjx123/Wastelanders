@@ -20,14 +20,18 @@ public class MusicManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            BackgroundMusicPlayer.clip = BackgroundMusicPrimary;
-            BackgroundMusicPlayer.Play();
-            // sfxTuples = new List<SerializableTuple<SFXList, AudioClip>>();
         }
         else if (Instance != this)
         {
             Destroy(this);
         }
+    }
+
+    private void Start()
+    {
+        BackgroundMusicPlayer.clip = BackgroundMusicPrimary;
+        BackgroundMusicPlayer.Play();
+        // sfxTuples = new List<SerializableTuple<SFXList, AudioClip>>();
     }
 
     // Plays the sfx that is appropriate
