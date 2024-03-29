@@ -15,9 +15,9 @@ MonoBehaviour:
   dialogue:
   - bodyText: ...
     speakerName: Jackie
-    displayingImage: {fileID: 21300000, guid: 70562f64108503147861dbc82d787ef9, type: 3}
+    displayingImage: {fileID: 21300000, guid: 88a7e4552c1afa641acadc54e9b6cbac, type: 3}
     broadcastAnEvent: 0
   - bodyText: Nope, I'm out.
     speakerName: Jackie
-    displayingImage: {fileID: 21300000, guid: 534aff9f6dfd6c544b0144954e8ef0b0, type: 3}
+    displayingImage: {fileID: 21300000, guid: 487226e5dae66424ea250466920a3086, type: 3}
     broadcastAnEvent: 0

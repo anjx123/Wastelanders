@@ -3939,7 +3939,7 @@ MonoBehaviour:
   openingJackieQuipt:
   - bodyText: 'Phew, another one down. Seems like force is much more my style. '
     speakerName: Jackie
-    displayingImage: {fileID: 21300000, guid: 534aff9f6dfd6c544b0144954e8ef0b0, type: 3}
+    displayingImage: {fileID: 21300000, guid: 487226e5dae66424ea250466920a3086, type: 3}
     broadcastAnEvent: 0
   openingDiscussion: {fileID: 11400000, guid: f7fa0f4b78eeb4583ab772158a3e2874, type: 2}
   jackieSurprised: {fileID: 11400000, guid: ef525486e53e94fd19087011cb06dbc4, type: 2}
@@ -3948,29 +3948,29 @@ MonoBehaviour:
   - bodyText: That Beetle had so many crystals growing out of it. It's gotta be worth
       a fortune!
     speakerName: Jackie
-    displayingImage: {fileID: 21300000, guid: 422f3cda08073664b8a46361afe442fb, type: 3}
+    displayingImage: {fileID: 21300000, guid: 10ec818d4088de44a83a5405137230e4, type: 3}
     broadcastAnEvent: 0
   jackieLostAgainstBeetle:
   - bodyText: That Beetle snatched the crystal right out of my hand. I gotta grab
       that back!
     speakerName: Jackie
-    displayingImage: {fileID: 21300000, guid: 70562f64108503147861dbc82d787ef9, type: 3}
+    displayingImage: {fileID: 21300000, guid: 88a7e4552c1afa641acadc54e9b6cbac, type: 3}
     broadcastAnEvent: 0
   p2jackieWonAgainstBeetle:
   - bodyText: Alright! Let's see what we have here...
     speakerName: Jackie
-    displayingImage: {fileID: 21300000, guid: 422f3cda08073664b8a46361afe442fb, type: 3}
+    displayingImage: {fileID: 21300000, guid: 10ec818d4088de44a83a5405137230e4, type: 3}
     broadcastAnEvent: 0
   p2jackieLostAgainstBeetle:
   - bodyText: Take that you filthy thief!
     speakerName: Jackie
-    displayingImage: {fileID: 21300000, guid: 422f3cda08073664b8a46361afe442fb, type: 3}
+    displayingImage: {fileID: 21300000, guid: 10ec818d4088de44a83a5405137230e4, type: 3}
     broadcastAnEvent: 0
   jackieDeclarationOfResolve:
   - bodyText: "Huff, huff. You\u2019re not getting away that easily. I could keep
       chasing you for days."
     speakerName: Jackie
-    displayingImage: {fileID: 0}
+    displayingImage: {fileID: 21300000, guid: 88a7e4552c1afa641acadc54e9b6cbac, type: 3}
     broadcastAnEvent: 0
   jackieBeetleCamp: {fileID: 11400000, guid: e1042be5eb85c4416ad37e200410a003, type: 2}
   jackieConcernedAboutBeetles:
@@ -4002,12 +4002,12 @@ MonoBehaviour:
   afterWave3Dialogue:
   - bodyText: 'Wow, those beetles just don''t let up. '
     speakerName: Jackie
-    displayingImage: {fileID: 21300000, guid: 26c95ccd71f756349881ce655e12b5cc, type: 3}
+    displayingImage: {fileID: 21300000, guid: 228f823fe8b2f4d4791ed74e46de81e1, type: 3}
     broadcastAnEvent: 0
   outOfCombatCrystalDialogue:
   - bodyText: Hey Ives, why do you think the beetles were so fixated on these crystals.
     speakerName: Jackie
-    displayingImage: {fileID: 21300000, guid: 26c95ccd71f756349881ce655e12b5cc, type: 3}
+    displayingImage: {fileID: 21300000, guid: 228f823fe8b2f4d4791ed74e46de81e1, type: 3}
     broadcastAnEvent: 0
   - bodyText: Not too sure, but it seemed like the crystals on their back brightened
       up when they went near it. It must make them stronger somehow.
@@ -4021,16 +4021,16 @@ MonoBehaviour:
     broadcastAnEvent: 0
   - bodyText: Whatever it is, it isn't good news to keep anymore around.
     speakerName: Jackie
-    displayingImage: {fileID: 21300000, guid: 26c95ccd71f756349881ce655e12b5cc, type: 3}
+    displayingImage: {fileID: 21300000, guid: 228f823fe8b2f4d4791ed74e46de81e1, type: 3}
     broadcastAnEvent: 0
   jackieFeelsStronger:
   - bodyText: Woah, whats this feeling. I feel stronger after hitting the crystal?
     speakerName: Jackie
-    displayingImage: {fileID: 21300000, guid: 26c95ccd71f756349881ce655e12b5cc, type: 3}
+    displayingImage: {fileID: 21300000, guid: 228f823fe8b2f4d4791ed74e46de81e1, type: 3}
     broadcastAnEvent: 0
   - bodyText: It's as if I can feel the fatigue from the fight leaving me.
     speakerName: Jackie
-    displayingImage: {fileID: 21300000, guid: 26c95ccd71f756349881ce655e12b5cc, type: 3}
+    displayingImage: {fileID: 21300000, guid: 228f823fe8b2f4d4791ed74e46de81e1, type: 3}
     broadcastAnEvent: 0
   ivesFeelsStronger:
   - bodyText: Wow, I feel stronger after hitting that crystal.
@@ -4052,7 +4052,7 @@ MonoBehaviour:
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: ade9660133ca00a499bfa3ad449b87bd, type: 3}
     broadcastAnEvent: 0
-  jumpToCombat: 1
+  jumpToCombat: 0
 --- !u!1 &1277541862
 GameObject:
   m_ObjectHideFlags: 0
