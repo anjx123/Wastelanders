@@ -392,6 +392,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameOverPrefab
       objectReference: {fileID: 0}
+    - target: {fileID: 7166337254641088105, guid: 8b6d446295f329442acd33132a6a5c1a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -765,6 +769,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   handContainer: {fileID: 2102825246}
   deckContainer: {fileID: 644697184}
+  currentHighlightedEnemyEntity: {fileID: 0}
+  currentHighlightedAction: {fileID: 0}
+  selectedPlayer: {fileID: 0}
 --- !u!1 &638988697
 GameObject:
   m_ObjectHideFlags: 0

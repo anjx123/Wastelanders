@@ -9,9 +9,11 @@ public class MusicManager : MonoBehaviour
     public static MusicManager Instance;
 
     // NOTE: All of these fields are set in the editor.
-    public AudioSource SFXSoundsPlayer, BackgroundMusicPlayer;
+    public AudioSource SFXSoundsPlayer, BackgroundMusicPlayer, BackgroundMusicIntroPlayer;
+
     public AudioClip BackgroundMusicPrimary;
     public AudioClip BackgroundMusicVictory; // Actually ...Secondary ; for extensibility purposes such as you WANT to be able to alternate between two Background Musics during gameplay
+    public AudioClip BackgroundMusicIntro;
     [SerializeField]
     private List<SerializableTuple<SFXList, AudioClip>> sfxTuples;
 
@@ -29,9 +31,20 @@ public class MusicManager : MonoBehaviour
 
     private void Start()
     {
+        StartCoroutine(PlayStartAudio());
+    }
+
+
+    IEnumerator PlayStartAudio()
+    {
+        BackgroundMusicPlayer.clip = BackgroundMusicIntro;
+        BackgroundMusicPlayer.Play();
+
+        yield return new WaitUntil(() => !BackgroundMusicPlayer.isPlaying);
+
         BackgroundMusicPlayer.clip = BackgroundMusicPrimary;
         BackgroundMusicPlayer.Play();
-        // sfxTuples = new List<SerializableTuple<SFXList, AudioClip>>();
+        BackgroundMusicPlayer.loop = true;
     }
 
     // Plays the sfx that is appropriate
