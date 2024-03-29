@@ -11,10 +11,6 @@ public class LeftHook : FistCards
     private GameObject rightHookPrefab;
 
     private GameObject righthook;
-    public override void ExecuteActionEffect()
-    {
-
-    }
 
     // Start is called before the first frame update
     public override void Initialize()
@@ -32,11 +28,6 @@ public class LeftHook : FistCards
         base.Initialize();
     }
 
-    public override void OnHit()
-    {
-        base.OnHit();
-    }
-
 
     public override void CardIsUnstaggered()
     {
@@ -46,6 +37,7 @@ public class LeftHook : FistCards
         ActionClass ac = righthook.GetComponent<ActionClass>();
         ac.Origin = this.Origin;
         ac.Target = this.Target;
+        ac.Speed = this.Speed;
         BattleQueue.BattleQueueInstance.InsertDupPlayerAction(ac);
     }
 }

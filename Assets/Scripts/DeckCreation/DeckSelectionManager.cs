@@ -1,12 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Search;
 using UnityEngine;
 using static CardDatabase;
 using UnityEngine.SceneManagement;
-using System;
 using System.Linq;
-using UnityEngine.AI;
+using UnityEditor;
 
 public class DeckSelectionManager : MonoBehaviour
 {
@@ -21,6 +19,7 @@ public class DeckSelectionManager : MonoBehaviour
     private WeaponType weaponType;
     public WeaponAmount weaponText;
     public PointsAmount pointsText;
+    public BuffExplainer buffExplainer;
     private bool isFadingOut = false;
     public static DeckSelectionManager Instance { get; private set; }
 #nullable enable
@@ -95,6 +94,7 @@ public class DeckSelectionManager : MonoBehaviour
         } else if (DeckSelectionState == DeckSelectionState.DeckSelection) {
             DeckSelectionState = DeckSelectionState.WeaponSelection;
         } else if (DeckSelectionState == DeckSelectionState.CharacterSelection) {
+            GameStateManager.SavePlayerDatabase(playerDatabase);
             StartCoroutine(ExitDeckSelection());
         }
     }
@@ -103,7 +103,7 @@ public class DeckSelectionManager : MonoBehaviour
         if (!isFadingOut)
         {
             isFadingOut = true;
-            yield return StartCoroutine(fadeScreenHandler.FadeInDarkScreen(1.2f));
+            yield return StartCoroutine(fadeScreenHandler.FadeInDarkScreen(0.8f));
             SceneManager.LoadScene(nextScene);
             isFadingOut = false;
         }
@@ -137,6 +137,7 @@ public class DeckSelectionManager : MonoBehaviour
 
     private void WeaponDeckEdit(CardDatabase.WeaponType weaponType)
     {
+        buffExplainer.RenderExplanationForBuff(weaponType);
         this.weaponType = weaponType;
         RenderDecks(weaponType);
         DeckSelectionState = DeckSelectionState.DeckSelection;
@@ -267,7 +268,7 @@ public class DeckSelectionManager : MonoBehaviour
                     GameObject cardPrefab = instantiatedCards[index];
 
                     cardPrefab.transform.SetParent(cardArrayParent.transform);
-                    cardPrefab.transform.position = pos;
+                    cardPrefab.transform.localPosition = pos;
 
                     // Scale the instance
                     Vector3 scale = cardPrefab.transform.localScale;

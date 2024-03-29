@@ -5,7 +5,7 @@ using UnityEngine;
 
 public abstract class PlayerClass : EntityClass
 {
-    public List<ActionClass> cardPrefabs;
+    protected List<ActionClass> cardPrefabs; //Empty after intialization
 #nullable enable
 
     public delegate void PlayerEventDelegate(PlayerClass player);
@@ -21,15 +21,51 @@ public abstract class PlayerClass : EntityClass
     // Drawn cards move from pool to hand
     protected List<GameObject> hand = new List<GameObject>();
 
-    // technically not necessaary as of now, but in case we want to do stuff with used cards (or single use)
     protected List<GameObject> discard = new List<GameObject>();
 
     public override void Start()
     {
         CombatManager.Instance.AddPlayer(this);
+        GrabDeck();
+        InstantiatePool();
         base.Start();
     }
 
+    protected void InstantiatePool()
+    {
+        while (cardPrefabs.Count > 0)
+        {
+            int idx = UnityEngine.Random.Range(0, cardPrefabs.Count);
+            GameObject toAdd = Instantiate(cardPrefabs[idx].gameObject);
+            toAdd.GetComponent<ActionClass>().Origin = this;
+            pool.Add(toAdd);
+            toAdd.transform.position = new Vector3(-100, -100, 1);
+            cardPrefabs.RemoveAt(idx);
+        }
+    }
+    public void InjectDeck(List<GameObject> actions)
+    {
+        //Destroy previous deck
+        List<GameObject> toDestroy = new List<GameObject>(pool);
+        foreach (GameObject actionClass in toDestroy)
+        {
+            pool.Remove(actionClass);
+            hand.Remove(actionClass);
+            discard.Remove(actionClass);
+            Destroy(actionClass);
+        }
+
+        // Recreate new one
+        foreach (GameObject action in actions)
+        {
+            GameObject toAdd = Instantiate(action);
+            toAdd.GetComponent<ActionClass>().Origin = this;
+            pool.Add(toAdd);
+            toAdd.transform.position = new Vector3(-100, -100, 1);
+        }
+    }
+
+    protected abstract void GrabDeck();
     /*  Draws a single card from the pool, removing it from the pool and refilling it if necessary.
      *  REQUIRES: Nothing
      *  MODIFIES: pool, hand, maxHandSize
@@ -39,18 +75,12 @@ public abstract class PlayerClass : EntityClass
     {
         if (pool.Count == 0)
         {
-            playerReshuffleDeck?.Invoke(this);
-            maxHandSize--;
-            for (int i = 0; i < discard.Count; i++)
-            {
-                pool.Add(discard[i]);
-            }
-            discard.Clear();
+            Reshuffle();
         }
 
         if (hand.Count < maxHandSize)
         {
-            int idx = UnityEngine.Random.Range(0, pool.Count);
+            int idx = 0;
             if (pool.Count > 0)
             {
                 hand.Add(pool[idx]);
@@ -59,7 +89,21 @@ public abstract class PlayerClass : EntityClass
             else
             {
                 Debug.LogWarning(myName + "'s Pool has no cards");
+                DeathHandler(); //Kill player for now to prevent deadlock
             }
+        }
+    }
+
+    protected void Reshuffle()
+    {
+        playerReshuffleDeck?.Invoke(this);
+        maxHandSize--;
+
+        while (discard.Count > 0)
+        {
+            int idx = UnityEngine.Random.Range(0, discard.Count);
+            pool.Add(discard[idx]);
+            discard.RemoveAt(idx);
         }
     }
     /*    Called by HighlightManager whenever an action is declared i.e.selected.Deletes the used card.

@@ -37,7 +37,7 @@ public class WasteFrog : EnemyClass
     }
 
     //@Author Anrui; Instantiate pool without Hurl
-    public override void InstantiatePool()
+    public override void InstantiateDeck()
     { 
         for (int i = 0; i < availableActions.Count; i++)
         {
@@ -77,5 +77,9 @@ public class WasteFrog : EnemyClass
             base.AddAttack(players);
         }
     }
-   
+    public override void TakeDamage(EntityClass source, int damage)
+    {
+        MusicManager.Instance.PlaySFX(MusicManager.SFXList.wastefrog_damage_taken);
+        base.TakeDamage(source, damage);
+    }
 }

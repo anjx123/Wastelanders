@@ -9,12 +9,12 @@ public class HighlightManager : MonoBehaviour // later all entity highlighter
     public RectTransform handContainer;
     public Transform deckContainer;
 #nullable enable
-    public static EntityClass? currentHighlightedEnemyEntity = null;
-    public static ActionClass? currentHighlightedAction = null;
-    public static PlayerClass? selectedPlayer = null;
+    public EntityClass? currentHighlightedEnemyEntity = null;
+    public ActionClass? currentHighlightedAction = null;
+    public PlayerClass? selectedPlayer = null;
 
     public delegate void HighlightEventDelegate(EntityClass e);
-    public static event HighlightEventDelegate? EntityClicked;
+    public event HighlightEventDelegate? EntityClicked;
 
     private int CARD_WIDTH = 2;
 
@@ -47,7 +47,7 @@ public class HighlightManager : MonoBehaviour // later all entity highlighter
 
     public void OnEntityClicked(EntityClass clicked)
     {
-        if (CombatManager.Instance.GameState != GameState.SELECTION) return;
+        if (CombatManager.Instance.GameState != GameState.SELECTION || PauseMenu.IsPaused) return;
         EntityClicked?.Invoke(clicked);
 
         if (clicked is PlayerClass clickedPlayer)
@@ -143,9 +143,9 @@ public class HighlightManager : MonoBehaviour // later all entity highlighter
         currentHighlightedAction = null;
     }
 
-    public static void OnActionClicked(ActionClass clicked)
+    public void OnActionClicked(ActionClass clicked)
     {
-        if (CombatManager.Instance.GameState != GameState.SELECTION) return;
+        if (CombatManager.Instance.GameState != GameState.SELECTION || PauseMenu.IsPaused) return;
         if (selectedPlayer != null)
         {
             if (BattleQueue.BattleQueueInstance.CanInsertCard(clicked) == false)
@@ -183,7 +183,7 @@ public class HighlightManager : MonoBehaviour // later all entity highlighter
             //Untoggle card if it is still selected when entering fighting
             if (currentHighlightedAction != null)
             {
-                currentHighlightedAction.ToggleUnSelected();
+                currentHighlightedAction.ForceNormalState();
                 currentHighlightedAction = null;
                 if (currentHighlightedEnemyEntity != null)
                 {

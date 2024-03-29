@@ -47,6 +47,10 @@ public class CombatCardDisplayManager : MonoBehaviour
     private void OnDestroy()
     {
         CombatManager.OnGameStateChanging -= HideCard;
+        if (currentUser != null)
+        {
+            currentUser.TargetChanged -= DeHighlightTarget;
+        }
     }
 
     //Given an ActionClass a to display, and the SOURCE of the call, shows the card in the display.
@@ -72,7 +76,7 @@ public class CombatCardDisplayManager : MonoBehaviour
             fullCardObject.SetActive(true);
             descriptionHolder.SetActive(true);
             fullCardObject.GetComponentInChildren<CardUI>().RenderCard(a);
-            descriptionHolder.GetComponentInChildren<TextMeshPro>().text = a.description;
+            descriptionHolder.GetComponentInChildren<TextMeshPro>().text = a.Description;
             if (currentUser != null)
             {
                 DeHighlightTarget(currentUser);

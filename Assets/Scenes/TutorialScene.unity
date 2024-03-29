@@ -217,6 +217,81 @@ MonoBehaviour:
   bqContainer: {fileID: 713468929346325044}
   iconPrefab: {fileID: 7504458634070143618, guid: f9683846bad493e429dda3ece4900989, type: 3}
   clashingPrefab: {fileID: 5469894721144988013, guid: b10263b2eb9aadc41aa6c2d7606dba7a, type: 3}
+--- !u!1 &157056468
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 157056469}
+  - component: {fileID: 157056471}
+  - component: {fileID: 157056470}
+  m_Layer: 5
+  m_Name: LaidBackImage
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &157056469
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 157056468}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 4, y: 4, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 596087403}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 0}
+  m_AnchoredPosition: {x: 144, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0}
+--- !u!114 &157056470
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 157056468}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: b5d13694d44666248bd6437ab54688c3, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &157056471
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 157056468}
+  m_CullTransparentMesh: 1
 --- !u!1 &220388611
 GameObject:
   m_ObjectHideFlags: 0
@@ -261,6 +336,87 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e2698dbea6c95b40a778e126f9d36e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1001 &302505532
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1877041900}
+    m_Modifications:
+    - target: {fileID: 2143560925068880819, guid: 8b6d446295f329442acd33132a6a5c1a, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 1525248175}
+    - target: {fileID: 7031558160159054351, guid: 8b6d446295f329442acd33132a6a5c1a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7031558160159054351, guid: 8b6d446295f329442acd33132a6a5c1a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7031558160159054351, guid: 8b6d446295f329442acd33132a6a5c1a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7031558160159054351, guid: 8b6d446295f329442acd33132a6a5c1a, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7031558160159054351, guid: 8b6d446295f329442acd33132a6a5c1a, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7031558160159054351, guid: 8b6d446295f329442acd33132a6a5c1a, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7031558160159054351, guid: 8b6d446295f329442acd33132a6a5c1a, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7031558160159054351, guid: 8b6d446295f329442acd33132a6a5c1a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7031558160159054351, guid: 8b6d446295f329442acd33132a6a5c1a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7031558160159054351, guid: 8b6d446295f329442acd33132a6a5c1a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7166337254641088105, guid: 8b6d446295f329442acd33132a6a5c1a, type: 3}
+      propertyPath: m_Name
+      value: GameOverPrefab
+      objectReference: {fileID: 0}
+    - target: {fileID: 7166337254641088105, guid: 8b6d446295f329442acd33132a6a5c1a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 8b6d446295f329442acd33132a6a5c1a, type: 3}
+--- !u!114 &302505533 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3262440243184028450, guid: 8b6d446295f329442acd33132a6a5c1a, type: 3}
+  m_PrefabInstance: {fileID: 302505532}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34fb1861126e91543a3c3be8290f153b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &302505534 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7031558160159054351, guid: 8b6d446295f329442acd33132a6a5c1a, type: 3}
+  m_PrefabInstance: {fileID: 302505532}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &366650617
 GameObject:
   m_ObjectHideFlags: 0
@@ -342,7 +498,7 @@ Transform:
   m_GameObject: {fileID: 525387719}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.24, y: -1.28, z: 0}
+  m_LocalPosition: {x: -4.24, y: -0.96, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -493,6 +649,9 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1664471018}
+  - {fileID: 157056469}
+  - {fileID: 826696930}
   - {fileID: 1872758577}
   m_Father: {fileID: 1877041900}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -610,6 +769,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   handContainer: {fileID: 2102825246}
   deckContainer: {fileID: 644697184}
+  currentHighlightedEnemyEntity: {fileID: 0}
+  currentHighlightedAction: {fileID: 0}
+  selectedPlayer: {fileID: 0}
 --- !u!1 &638988697
 GameObject:
   m_ObjectHideFlags: 0
@@ -700,8 +862,8 @@ Transform:
   m_GameObject: {fileID: 674198774}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.9, y: 0.7, z: 1}
+  m_LocalPosition: {x: 3.15, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 983621105}
@@ -747,7 +909,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -1
-  m_Sprite: {fileID: 21300000, guid: c2f5b57d8f7f86940938371742f13c5c, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f83313d54d40df94c86705f9f7f49c5c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -758,6 +920,22 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!224 &826696930 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 7336354512828228472, guid: e15485d9cf24df042b8ef1296c204647, type: 3}
+  m_PrefabInstance: {fileID: 1895376834}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &826696931 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 857937859890098148, guid: e15485d9cf24df042b8ef1296c204647, type: 3}
+  m_PrefabInstance: {fileID: 1895376834}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1505bdd8d630b6741936386497185c7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &884201475
 GameObject:
   m_ObjectHideFlags: 0
@@ -800,6 +978,10 @@ PrefabInstance:
     - target: {fileID: 857937859890098148, guid: 026e787f6af83dc4ca1645e16e8acf98, type: 3}
       propertyPath: rollingSpeed
       value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 3009351223007997610, guid: 026e787f6af83dc4ca1645e16e8acf98, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -13.492699
       objectReference: {fileID: 0}
     - target: {fileID: 4728857978263358706, guid: 026e787f6af83dc4ca1645e16e8acf98, type: 3}
       propertyPath: m_Name
@@ -1042,7 +1224,7 @@ Transform:
   m_GameObject: {fileID: 946615942}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.46, y: -1.56, z: 0}
+  m_LocalPosition: {x: 2.46, y: -0.9, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1240,6 +1422,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7393747964791779722, guid: 75f09660183a2304fac17861f4ee9fc7, type: 3}
       insertIndex: -1
       addedObject: {fileID: 0}
+    - targetCorrespondingSourceObject: {fileID: 7662371904210178927, guid: 75f09660183a2304fac17861f4ee9fc7, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 75f09660183a2304fac17861f4ee9fc7, type: 3}
 --- !u!4 &1102207189 stripped
 Transform:
@@ -1318,45 +1503,9 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3367972655850899957, guid: 18ff4a241e9f877439ebd5fd1de51dd0, type: 3}
-      propertyPath: boxCollider
-      value: 
-      objectReference: {fileID: 1662895619}
-    - target: {fileID: 3367972655850899957, guid: 18ff4a241e9f877439ebd5fd1de51dd0, type: 3}
       propertyPath: handContainer
       value: 
       objectReference: {fileID: 2102825246}
-    - target: {fileID: 3367972655850899957, guid: 18ff4a241e9f877439ebd5fd1de51dd0, type: 3}
-      propertyPath: cardPrefabs.Array.size
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 3367972655850899957, guid: 18ff4a241e9f877439ebd5fd1de51dd0, type: 3}
-      propertyPath: cardPrefabs.Array.data[0]
-      value: 
-      objectReference: {fileID: 2812786860688227145, guid: eb52d226768d642a08586d76c6aec608, type: 3}
-    - target: {fileID: 3367972655850899957, guid: 18ff4a241e9f877439ebd5fd1de51dd0, type: 3}
-      propertyPath: cardPrefabs.Array.data[1]
-      value: 
-      objectReference: {fileID: 2904259167568896579, guid: 01e98381d7acf426196a2d3249245d3b, type: 3}
-    - target: {fileID: 3367972655850899957, guid: 18ff4a241e9f877439ebd5fd1de51dd0, type: 3}
-      propertyPath: cardPrefabs.Array.data[2]
-      value: 
-      objectReference: {fileID: 7392447361912710173, guid: 96833b1ed63d040c08a43d590f8a54ec, type: 3}
-    - target: {fileID: 3367972655850899957, guid: 18ff4a241e9f877439ebd5fd1de51dd0, type: 3}
-      propertyPath: cardPrefabs.Array.data[3]
-      value: 
-      objectReference: {fileID: 7486843006211322568, guid: 9fd05c05ac41a46b8a9036735bd47e88, type: 3}
-    - target: {fileID: 3367972655850899957, guid: 18ff4a241e9f877439ebd5fd1de51dd0, type: 3}
-      propertyPath: cardPrefabs.Array.data[4]
-      value: 
-      objectReference: {fileID: 6925166128267643469, guid: 862f00b36058344289c1c7c4dffccd6d, type: 3}
-    - target: {fileID: 3367972655850899957, guid: 18ff4a241e9f877439ebd5fd1de51dd0, type: 3}
-      propertyPath: cardPrefabs.Array.data[5]
-      value: 
-      objectReference: {fileID: 2330056699190291304, guid: 22d2d82111a0948258cf8bce73da7ca2, type: 3}
-    - target: {fileID: 3367972655850899957, guid: 18ff4a241e9f877439ebd5fd1de51dd0, type: 3}
-      propertyPath: cardPrefabs.Array.data[6]
-      value: 
-      objectReference: {fileID: 6038230835383967334, guid: d2b04a73aaa3e410dbacfb117cd8fabf, type: 3}
     - target: {fileID: 3606799263845106433, guid: 18ff4a241e9f877439ebd5fd1de51dd0, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -1392,6 +1541,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7393747964791779722, guid: 18ff4a241e9f877439ebd5fd1de51dd0, type: 3}
       insertIndex: -1
       addedObject: {fileID: 0}
+    - targetCorrespondingSourceObject: {fileID: 7662371904210178927, guid: 18ff4a241e9f877439ebd5fd1de51dd0, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 18ff4a241e9f877439ebd5fd1de51dd0, type: 3}
 --- !u!1 &1264232811
 GameObject:
@@ -1422,6 +1574,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1471274493}
   - {fileID: 527363909}
   - {fileID: 27233851}
   - {fileID: 31769308}
@@ -1604,6 +1757,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2101527321769255671, guid: 2bf19bd78e328204fb34ccaa75296151, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 1520415093
+      objectReference: {fileID: 0}
     - target: {fileID: 5747343100457332867, guid: 2bf19bd78e328204fb34ccaa75296151, type: 3}
       propertyPath: m_PresetInfoIsWorld
       value: 1
@@ -1639,6 +1796,88 @@ GameObject:
 Transform:
   m_CorrespondingSourceObject: {fileID: 3003710098663250916, guid: dae0c425ea64d6043bee84267d82ea32, type: 3}
   m_PrefabInstance: {fileID: 537786512}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1471274492
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1264232812}
+    m_Modifications:
+    - target: {fileID: 1064820365547817184, guid: 00e4347f9eb16d94c93b4961bdbca751, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1064820365547817184, guid: 00e4347f9eb16d94c93b4961bdbca751, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1064820365547817184, guid: 00e4347f9eb16d94c93b4961bdbca751, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1064820365547817184, guid: 00e4347f9eb16d94c93b4961bdbca751, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1064820365547817184, guid: 00e4347f9eb16d94c93b4961bdbca751, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1064820365547817184, guid: 00e4347f9eb16d94c93b4961bdbca751, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1064820365547817184, guid: 00e4347f9eb16d94c93b4961bdbca751, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1064820365547817184, guid: 00e4347f9eb16d94c93b4961bdbca751, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1064820365547817184, guid: 00e4347f9eb16d94c93b4961bdbca751, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1064820365547817184, guid: 00e4347f9eb16d94c93b4961bdbca751, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1642062695111722096, guid: 00e4347f9eb16d94c93b4961bdbca751, type: 3}
+      propertyPath: CombatMusicPrimary
+      value: 
+      objectReference: {fileID: 8300000, guid: fb237cdcf4ad80840b21beea3437eef2, type: 3}
+    - target: {fileID: 1642062695111722096, guid: 00e4347f9eb16d94c93b4961bdbca751, type: 3}
+      propertyPath: combatMusicPrimary
+      value: 
+      objectReference: {fileID: 8300000, guid: fb237cdcf4ad80840b21beea3437eef2, type: 3}
+    - target: {fileID: 1642062695111722096, guid: 00e4347f9eb16d94c93b4961bdbca751, type: 3}
+      propertyPath: sfxTuples.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1642062695111722096, guid: 00e4347f9eb16d94c93b4961bdbca751, type: 3}
+      propertyPath: BackgroundMusicPrimary
+      value: 
+      objectReference: {fileID: 8300000, guid: e7ac58c21c9f87045a18f1fcfd779f2e, type: 3}
+    - target: {fileID: 1642062695111722096, guid: 00e4347f9eb16d94c93b4961bdbca751, type: 3}
+      propertyPath: backgroundMusicPrimary
+      value: 
+      objectReference: {fileID: 8300000, guid: e7ac58c21c9f87045a18f1fcfd779f2e, type: 3}
+    - target: {fileID: 7932485008459424998, guid: 00e4347f9eb16d94c93b4961bdbca751, type: 3}
+      propertyPath: m_Name
+      value: AudioManager
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 00e4347f9eb16d94c93b4961bdbca751, type: 3}
+--- !u!4 &1471274493 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1064820365547817184, guid: 00e4347f9eb16d94c93b4961bdbca751, type: 3}
+  m_PrefabInstance: {fileID: 1471274492}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1480849945
 GameObject:
@@ -1888,7 +2127,7 @@ Transform:
   m_GameObject: {fileID: 1538394866}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.65, y: -1.6, z: 0}
+  m_LocalPosition: {x: 3.65, y: -0.96, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2049,11 +2288,81 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a87ba7eb40165b04db444a9367c32200, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!65 &1662895619 stripped
-BoxCollider:
-  m_CorrespondingSourceObject: {fileID: 6919296858530996063, guid: 18ff4a241e9f877439ebd5fd1de51dd0, type: 3}
-  m_PrefabInstance: {fileID: 1207646555}
+--- !u!1 &1664471017
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1664471018}
+  - component: {fileID: 1664471020}
+  - component: {fileID: 1664471019}
+  m_Layer: 5
+  m_Name: PuzzledImage
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1664471018
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1664471017}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 3.9, y: 3.9, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 596087403}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 0}
+  m_AnchoredPosition: {x: -134, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0}
+--- !u!114 &1664471019
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1664471017}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: cd4d67535c77ee1438d406e274cf2975, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1664471020
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1664471017}
+  m_CullTransparentMesh: 1
 --- !u!1 &1694303781
 GameObject:
   m_ObjectHideFlags: 0
@@ -2094,6 +2403,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1877041900}
     m_Modifications:
+    - target: {fileID: 2237581345811479314, guid: 5027f4741873b7e49893b1382013ba7b, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 7.41
+      objectReference: {fileID: 0}
     - target: {fileID: 2237581345811479314, guid: 5027f4741873b7e49893b1382013ba7b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -2169,16 +2482,22 @@ SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 2919222511910680948, guid: 5027f4741873b7e49893b1382013ba7b, type: 3}
   m_PrefabInstance: {fileID: 1852793025}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1872758576 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4728857978263358706, guid: 026e787f6af83dc4ca1645e16e8acf98, type: 3}
-  m_PrefabInstance: {fileID: 923165396}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &1872758577 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7336354512828228472, guid: 026e787f6af83dc4ca1645e16e8acf98, type: 3}
   m_PrefabInstance: {fileID: 923165396}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1872758578 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 857937859890098148, guid: 026e787f6af83dc4ca1645e16e8acf98, type: 3}
+  m_PrefabInstance: {fileID: 923165396}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1505bdd8d630b6741936386497185c7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1877041899
 GameObject:
   m_ObjectHideFlags: 0
@@ -2208,6 +2527,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 302505534}
   - {fileID: 1491813756}
   - {fileID: 1337277458}
   - {fileID: 2102825246}
@@ -2262,8 +2582,125 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4669219b148a06340b6ef30bcb5d86ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogueScrim: {fileID: 0}
-  dialogueBoxObj: {fileID: 1872758576}
+  picturelessDialogueBoxComponent: {fileID: 826696931}
+  pictureDialogueBox: {fileID: 1872758578}
+--- !u!1001 &1895376834
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 596087403}
+    m_Modifications:
+    - target: {fileID: 857937859890098148, guid: e15485d9cf24df042b8ef1296c204647, type: 3}
+      propertyPath: rollingSpeed
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 1389594428042878479, guid: e15485d9cf24df042b8ef1296c204647, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1389594428042878479, guid: e15485d9cf24df042b8ef1296c204647, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1389594428042878479, guid: e15485d9cf24df042b8ef1296c204647, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: -38.551567
+      objectReference: {fileID: 0}
+    - target: {fileID: 4728857978263358706, guid: e15485d9cf24df042b8ef1296c204647, type: 3}
+      propertyPath: m_Name
+      value: PicturelessDialogue
+      objectReference: {fileID: 0}
+    - target: {fileID: 4728857978263358706, guid: e15485d9cf24df042b8ef1296c204647, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7336354512828228472, guid: e15485d9cf24df042b8ef1296c204647, type: 3}
+      propertyPath: m_Pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7336354512828228472, guid: e15485d9cf24df042b8ef1296c204647, type: 3}
+      propertyPath: m_Pivot.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7336354512828228472, guid: e15485d9cf24df042b8ef1296c204647, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7336354512828228472, guid: e15485d9cf24df042b8ef1296c204647, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7336354512828228472, guid: e15485d9cf24df042b8ef1296c204647, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7336354512828228472, guid: e15485d9cf24df042b8ef1296c204647, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7336354512828228472, guid: e15485d9cf24df042b8ef1296c204647, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 470
+      objectReference: {fileID: 0}
+    - target: {fileID: 7336354512828228472, guid: e15485d9cf24df042b8ef1296c204647, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 140
+      objectReference: {fileID: 0}
+    - target: {fileID: 7336354512828228472, guid: e15485d9cf24df042b8ef1296c204647, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7336354512828228472, guid: e15485d9cf24df042b8ef1296c204647, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7336354512828228472, guid: e15485d9cf24df042b8ef1296c204647, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7336354512828228472, guid: e15485d9cf24df042b8ef1296c204647, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7336354512828228472, guid: e15485d9cf24df042b8ef1296c204647, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7336354512828228472, guid: e15485d9cf24df042b8ef1296c204647, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7336354512828228472, guid: e15485d9cf24df042b8ef1296c204647, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7336354512828228472, guid: e15485d9cf24df042b8ef1296c204647, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7336354512828228472, guid: e15485d9cf24df042b8ef1296c204647, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7336354512828228472, guid: e15485d9cf24df042b8ef1296c204647, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7336354512828228472, guid: e15485d9cf24df042b8ef1296c204647, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7336354512828228472, guid: e15485d9cf24df042b8ef1296c204647, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: e15485d9cf24df042b8ef1296c204647, type: 3}
 --- !u!1001 &1922851634
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2450,142 +2887,153 @@ MonoBehaviour:
   dummy1StartingPos: {fileID: 946615943}
   jackieEndPosition: {fileID: 1543907276}
   ivesPassiveBattlePosition: {fileID: 1644944200}
+  laidBackSprite: {fileID: 21300000, guid: 46be2fbdcaa06464baed62813a873661, type: 3}
+  puzzledSoldierSprite: {fileID: 21300000, guid: 54030bb3888339d42ad1e64c51446568, type: 3}
+  laidBackImageUI: {fileID: 157056470}
+  puzzeledImageUI: {fileID: 1664471019}
   ivesTutorialDeck:
   - {fileID: 365813191591832820, guid: 0f9d35f67947f2241aac5a9ed31099d3, type: 3}
   - {fileID: 1570116063941554911, guid: 4ceb98929208ac64ab848aa79d636595, type: 3}
   - {fileID: 6429530541201259997, guid: 4e812ef45f6aef54092f7985015b5248, type: 3}
+  jackieTutorialDeck:
+  - {fileID: 6925166128267643469, guid: 862f00b36058344289c1c7c4dffccd6d, type: 3}
+  - {fileID: 6038230835383967334, guid: d2b04a73aaa3e410dbacfb117cd8fabf, type: 3}
+  - {fileID: 2330056699190291304, guid: 22d2d82111a0948258cf8bce73da7ca2, type: 3}
+  - {fileID: 2904259167568896579, guid: 01e98381d7acf426196a2d3249245d3b, type: 3}
+  - {fileID: 7486843006211322568, guid: 9fd05c05ac41a46b8a9036735bd47e88, type: 3}
+  - {fileID: 7392447361912710173, guid: 96833b1ed63d040c08a43d590f8a54ec, type: 3}
   openingDiscussion:
-  - bodyText: ' [The City of New Haven - East Wall Boot Camp]  '
+  - bodyText: '[The City of New Haven - East Wall Boot Camp]  '
     speakerName: 
     displayingImage: {fileID: 0}
     broadcastAnEvent: 0
   - bodyText: Hey have you heard? Apparently, Jackie is trying out for the NITES
       exam again.
     speakerName: Laid-back Soldier
-    displayingImage: {fileID: 0}
-    broadcastAnEvent: 0
+    displayingImage: {fileID: 21300000, guid: b5d13694d44666248bd6437ab54688c3, type: 3}
+    broadcastAnEvent: 1
   - bodyText: What? So soon? After her performance last year, do you really think
       she is prepared to try again?
     speakerName: Puzzled Soldier
-    displayingImage: {fileID: 0}
-    broadcastAnEvent: 0
+    displayingImage: {fileID: 21300000, guid: cd4d67535c77ee1438d406e274cf2975, type: 3}
+    broadcastAnEvent: 1
   - bodyText: "Beats me. If I were her, I\u2019d take it easy and spend a couple
       more years training. "
     speakerName: Laid-back Soldier
-    displayingImage: {fileID: 0}
+    displayingImage: {fileID: 21300000, guid: b5d13694d44666248bd6437ab54688c3, type: 3}
     broadcastAnEvent: 0
   - bodyText: I've heard horror stories about what the NITES have to deal with in
       the Wasteland.
     speakerName: Laid-back Soldier
-    displayingImage: {fileID: 0}
+    displayingImage: {fileID: 21300000, guid: b5d13694d44666248bd6437ab54688c3, type: 3}
     broadcastAnEvent: 0
   - bodyText: She's still so young, maybe even the youngest to join the NITES if
       she passes?
     speakerName: Laid-back Soldier
-    displayingImage: {fileID: 0}
+    displayingImage: {fileID: 21300000, guid: b5d13694d44666248bd6437ab54688c3, type: 3}
     broadcastAnEvent: 0
   - bodyText: "No I don\u2019t think so, wasn\u2019t her mother younger than her
       when she scored top marks on that exam?"
     speakerName: Puzzled Soldier
-    displayingImage: {fileID: 0}
+    displayingImage: {fileID: 21300000, guid: cd4d67535c77ee1438d406e274cf2975, type: 3}
     broadcastAnEvent: 0
   - bodyText: "Hmm right, guess going on NITES\u2019 wasteland expeditions runs in
       the family. I think life inside the Wall is much more peaceful."
     speakerName: Puzzled Soldier
-    displayingImage: {fileID: 0}
+    displayingImage: {fileID: 21300000, guid: cd4d67535c77ee1438d406e274cf2975, type: 3}
     broadcastAnEvent: 0
   - bodyText: Of course you do. But do you really plan on being just a grunt soldier
       forever?
     speakerName: Puzzled Soldier
-    displayingImage: {fileID: 0}
+    displayingImage: {fileID: 21300000, guid: cd4d67535c77ee1438d406e274cf2975, type: 3}
     broadcastAnEvent: 0
   - bodyText: Mmm, maybe I'll give that exam a shot in a couple years.
     speakerName: Laid-back Soldier
-    displayingImage: {fileID: 0}
+    displayingImage: {fileID: 21300000, guid: b5d13694d44666248bd6437ab54688c3, type: 3}
     broadcastAnEvent: 0
   - bodyText: "Then come on, we should get to training. Pass or not, the fact is
       that she\u2019s trying to make us look like chumps."
     speakerName: Puzzled Soldier
-    displayingImage: {fileID: 0}
+    displayingImage: {fileID: 21300000, guid: cd4d67535c77ee1438d406e274cf2975, type: 3}
     broadcastAnEvent: 0
   jackieMonologue:
   - bodyText: "Well\u2026 Today\u2019s the day I\u2019ve been preparing the past
       year for."
     speakerName: Jackie
-    displayingImage: {fileID: 0}
+    displayingImage: {fileID: 21300000, guid: 228f823fe8b2f4d4791ed74e46de81e1, type: 3}
     broadcastAnEvent: 0
   - bodyText: 'I can''t be afraid. I won''t fail again. '
     speakerName: Jackie
-    displayingImage: {fileID: 0}
+    displayingImage: {fileID: 21300000, guid: 537908265661f2b44970c526d7724cfb, type: 3}
     broadcastAnEvent: 0
   - bodyText: 'I will make it on those wasteland expeditions. Mama is counting on
       me. '
     speakerName: Jackie
-    displayingImage: {fileID: 0}
+    displayingImage: {fileID: 21300000, guid: c719baaafa8cd7148806ffb41907add6, type: 3}
     broadcastAnEvent: 0
   soldierGreeting:
   - bodyText: Morning, Jackie!
     speakerName: Soldier
-    displayingImage: {fileID: 0}
+    displayingImage: {fileID: 21300000, guid: 582a5949206349142b78fb69be74a015, type: 3}
     broadcastAnEvent: 0
   jackieTalksWithSolider:
   - bodyText: Good morning!
     speakerName: Jackie
-    displayingImage: {fileID: 0}
+    displayingImage: {fileID: 21300000, guid: 10ec818d4088de44a83a5405137230e4, type: 3}
     broadcastAnEvent: 0
   - bodyText: "So today\u2019s the day, huh. NITES exam. How are you feeling? "
     speakerName: Mustached Soldier
-    displayingImage: {fileID: 0}
+    displayingImage: {fileID: 21300000, guid: 582a5949206349142b78fb69be74a015, type: 3}
     broadcastAnEvent: 0
   - bodyText: I'm feeling... Fine.
     speakerName: Jackie
-    displayingImage: {fileID: 0}
+    displayingImage: {fileID: 21300000, guid: 487226e5dae66424ea250466920a3086, type: 3}
     broadcastAnEvent: 0
   - bodyText: Haha, really? I guess those extra hours you put in with Ives have really
       paid off then?
     speakerName: Mustached Soldier
-    displayingImage: {fileID: 0}
+    displayingImage: {fileID: 21300000, guid: 582a5949206349142b78fb69be74a015, type: 3}
     broadcastAnEvent: 0
   - bodyText: "Yeah, I guess so. I hope it\u2019s enough. "
     speakerName: Jackie
-    displayingImage: {fileID: 0}
+    displayingImage: {fileID: 21300000, guid: 10ec818d4088de44a83a5405137230e4, type: 3}
     broadcastAnEvent: 0
   - bodyText: Haha, don't lose heart. True strength does not come from conquering
       a challenge itself, but how you grow to overcome it.
     speakerName: Mustached Soldier
-    displayingImage: {fileID: 0}
+    displayingImage: {fileID: 21300000, guid: 582a5949206349142b78fb69be74a015, type: 3}
     broadcastAnEvent: 0
-  - bodyText: You are strong Jackie. I've seen your immense growth with my own eyes.
+  - bodyText: You are strong Jackie. I've seen your growth with my own eyes.
     speakerName: Mustached Soldier
-    displayingImage: {fileID: 0}
+    displayingImage: {fileID: 21300000, guid: 582a5949206349142b78fb69be74a015, type: 3}
     broadcastAnEvent: 0
   - bodyText: Thanks, Dan. I appreciate the confidence.
     speakerName: Jackie
-    displayingImage: {fileID: 0}
+    displayingImage: {fileID: 21300000, guid: 10ec818d4088de44a83a5405137230e4, type: 3}
     broadcastAnEvent: 0
   - bodyText: "Haha great! Just be careful out there will ya? I\u2019m not trying
       to scare you, but there\u2019s been an unusual increase in monster activity
       in the Wasteland around the city. "
-    speakerName: Mustached Soldier
-    displayingImage: {fileID: 0}
+    speakerName: Dan
+    displayingImage: {fileID: 21300000, guid: 582a5949206349142b78fb69be74a015, type: 3}
     broadcastAnEvent: 0
   - bodyText: A recent scout reported seeing hundreds of piercing purplish eyes,
       and what sounded like piles of bones clattering in the forest.
-    speakerName: Mustached Soldier
-    displayingImage: {fileID: 0}
+    speakerName: Dan
+    displayingImage: {fileID: 21300000, guid: 582a5949206349142b78fb69be74a015, type: 3}
     broadcastAnEvent: 0
   - bodyText: You know the wasteland is not a friendly place, even your mother knew
       that. No matter how much she tried not to show it.
-    speakerName: Mustached Soldier
-    displayingImage: {fileID: 0}
+    speakerName: Dan
+    displayingImage: {fileID: 21300000, guid: 582a5949206349142b78fb69be74a015, type: 3}
     broadcastAnEvent: 0
   - bodyText: "Sure\u2026 I\u2019ll keep that in mind. Thanks for the concern\u2026"
     speakerName: Jackie
-    displayingImage: {fileID: 0}
+    displayingImage: {fileID: 21300000, guid: 88a7e4552c1afa641acadc54e9b6cbac, type: 3}
     broadcastAnEvent: 0
   - bodyText: '[The soldier nods, gives a friendly salute, and leaves..]'
     speakerName: 
-    displayingImage: {fileID: 0}
+    displayingImage: {fileID: 21300000, guid: 582a5949206349142b78fb69be74a015, type: 3}
     broadcastAnEvent: 0
   ivesChatsWithJackie: {fileID: 11400000, guid: 707ae62d407677b4883cb678c2660881, type: 2}
   youCanPlayCardsTutorial:
@@ -2603,7 +3051,7 @@ MonoBehaviour:
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 57baba5992d9e224988e93fcacf9f7eb, type: 3}
     broadcastAnEvent: 0
-  - bodyText: Power - which is a range where your damage can fall in .
+  - bodyText: Power - which is a range where your damage can be rolled into.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 3fea2e94140c08246a0e502ee92d3761, type: 3}
     broadcastAnEvent: 0
@@ -2623,11 +3071,11 @@ MonoBehaviour:
     broadcastAnEvent: 0
   - bodyText: You can retrieve a card back from the queue by clicking on its icon.
     speakerName: Ives
-    displayingImage: {fileID: 21300000, guid: cea5678db7ab09a48ad216800b9bda74, type: 3}
+    displayingImage: {fileID: 21300000, guid: 57baba5992d9e224988e93fcacf9f7eb, type: 3}
     broadcastAnEvent: 0
   - bodyText: Each round, you can queue up as many attacks as you'd like. However...
     speakerName: Ives
-    displayingImage: {fileID: 21300000, guid: cea5678db7ab09a48ad216800b9bda74, type: 3}
+    displayingImage: {fileID: 21300000, guid: 57baba5992d9e224988e93fcacf9f7eb, type: 3}
     broadcastAnEvent: 0
   - bodyText: 'You cannot play two actions that share the same speed. '
     speakerName: Ives
@@ -2660,11 +3108,12 @@ MonoBehaviour:
     displayingImage: {fileID: 21300000, guid: 05aec2f8237521d4f84b7c3d335550b0, type: 3}
     broadcastAnEvent: 0
   buffTutorial:
-  - bodyText: While making staff attacks, some cards will grant you 'Focus'.
+  - bodyText: While making staff attacks, some cards will have an ability that grants
+      you 'Focus'.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 820631014ce088c4cb748224d5467c86, type: 3}
     broadcastAnEvent: 0
-  - bodyText: Focus grants you +1 Power on your attacks, but it clears out at the
+  - bodyText: Focus grants you +1 power on your attacks, but it clears out at the
       end of every round.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 820631014ce088c4cb748224d5467c86, type: 3}
@@ -2682,24 +3131,25 @@ MonoBehaviour:
   - bodyText: Since the previous exam, your extra training should allow you to accurately
       read enemy attacks now.
     speakerName: Ives
-    displayingImage: {fileID: 21300000, guid: 305bbe4aee0eef34586b3def011ea974, type: 3}
+    displayingImage: {fileID: 21300000, guid: fbdbcaab28794334bb84176f7e052fb5, type: 3}
     broadcastAnEvent: 0
   - bodyText: Next to the enemy, you can see the attack they are declaring.
     speakerName: Ives
-    displayingImage: {fileID: 21300000, guid: 305bbe4aee0eef34586b3def011ea974, type: 3}
+    displayingImage: {fileID: 21300000, guid: fbdbcaab28794334bb84176f7e052fb5, type: 3}
     broadcastAnEvent: 0
-  - bodyText: Hovering over this icon allows you to see their target.
+  - bodyText: At the top of that icon, you can see the attack's intended target.
     speakerName: Ives
-    displayingImage: {fileID: 21300000, guid: 305bbe4aee0eef34586b3def011ea974, type: 3}
+    displayingImage: {fileID: 21300000, guid: c35542e8d8ad61c4087e817dd9aa7c15, type: 3}
     broadcastAnEvent: 0
   - bodyText: '[Clicking] on the attack allows you to see its Power and Speed and
-      any Abilities.'
+      Abilities.'
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 82dbf38ae23fe224e90be99093d02604, type: 3}
     broadcastAnEvent: 0
-  - bodyText: 'Their action has also been placed into the queue. '
+  - bodyText: Their action has also been placed into the queue. You can [Click] on
+      that too to check it out.
     speakerName: Ives
-    displayingImage: {fileID: 21300000, guid: 305bbe4aee0eef34586b3def011ea974, type: 3}
+    displayingImage: {fileID: 21300000, guid: fbdbcaab28794334bb84176f7e052fb5, type: 3}
     broadcastAnEvent: 0
   - bodyText: Come on, make an attack against me.
     speakerName: Ives
@@ -2720,6 +3170,30 @@ MonoBehaviour:
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: b0d27b9163eb2554996f368bd5b8d4e2, type: 3}
     broadcastAnEvent: 0
+  defensiveCardsTutorial:
+  - bodyText: Defensive cards are marked by the defense icon.
+    speakerName: Ives
+    displayingImage: {fileID: 21300000, guid: 926dc102ee6ad62488fa7f3605a127ce, type: 3}
+    broadcastAnEvent: 0
+  - bodyText: Even upon losing a clash, it will subtract its power from the incoming
+      damage to mitage it.
+    speakerName: Ives
+    displayingImage: {fileID: 21300000, guid: 926dc102ee6ad62488fa7f3605a127ce, type: 3}
+    broadcastAnEvent: 0
+  - bodyText: It's often a good idea to use them against clashes you might not win
+      to guarantee value.
+    speakerName: Ives
+    displayingImage: {fileID: 21300000, guid: ade9660133ca00a499bfa3ad449b87bd, type: 3}
+    broadcastAnEvent: 0
+  cardAbilitiesTutorial:
+  - bodyText: Watch out, enemy cards can also sometimes have abilities too.
+    speakerName: Ives
+    displayingImage: {fileID: 21300000, guid: 305bbe4aee0eef34586b3def011ea974, type: 3}
+    broadcastAnEvent: 0
+  - bodyText: Click on my card to check out the ability of my attack.
+    speakerName: Ives
+    displayingImage: {fileID: 21300000, guid: 305bbe4aee0eef34586b3def011ea974, type: 3}
+    broadcastAnEvent: 0
   clashingOutcomeTutorial:
   - bodyText: During a clash, both you and your opponent will both roll your attacks
       at the same time.
@@ -2727,7 +3201,7 @@ MonoBehaviour:
     displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
     broadcastAnEvent: 0
   - bodyText: The clasher who rolls the highest Power 'staggers' the opponent and
-      deals the attack's entire Power to the loser.
+      deals the attack's <i>entire</i> Power to the loser.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
     broadcastAnEvent: 0
@@ -2755,7 +3229,7 @@ MonoBehaviour:
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
     broadcastAnEvent: 0
-  - bodyText: 'Anyways, let''s continue where we left off. '
+  - bodyText: 'Anyways, let''s continue. '
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
     broadcastAnEvent: 0
@@ -2765,13 +3239,27 @@ MonoBehaviour:
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: be935693778d6004d9427d82e6ce5798, type: 3}
     broadcastAnEvent: 0
-  - bodyText: Well, I learned from the best after all, I feel much better about my
-      chances now.
+  - bodyText: Well, I learned from the best after all. Thanks Ives, I feel much better
+      about the exam now.
     speakerName: Jackie
-    displayingImage: {fileID: 0}
+    displayingImage: {fileID: 21300000, guid: c719baaafa8cd7148806ffb41907add6, type: 3}
     broadcastAnEvent: 0
   endingTutorialDialogue: {fileID: 11400000, guid: 71bc8b72e567a434fb451296dad29b2f, type: 2}
-  jumpToCombat: 1
+  gameOver: {fileID: 302505533}
+  gameLoseDialogue:
+  - bodyText: 'Whoops, guess I should have stayed my hand a bit. '
+    speakerName: Ives
+    displayingImage: {fileID: 21300000, guid: 084171bdb9370ac43b84a6350416b15c, type: 3}
+    broadcastAnEvent: 0
+  - bodyText: 'You were really going for it, and so I acted out of instinct there. '
+    speakerName: Ives
+    displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
+    broadcastAnEvent: 0
+  - bodyText: Here, let me help you get back up.
+    speakerName: Ives
+    displayingImage: {fileID: 21300000, guid: 87cb7c6c6588a4a3a957b707239abbf0, type: 3}
+    broadcastAnEvent: 0
+  jumpToCombat: 0
 --- !u!1001 &2102825245
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2975,6 +3463,10 @@ PrefabInstance:
     - target: {fileID: 2933413030546177507, guid: 0ce0ee3d06315164a88fea5184a490b6, type: 3}
       propertyPath: m_LocalPosition.z
       value: -200
+      objectReference: {fileID: 0}
+    - target: {fileID: 2933413030546177507, guid: 0ce0ee3d06315164a88fea5184a490b6, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -6
       objectReference: {fileID: 0}
     - target: {fileID: 3845234593521427544, guid: 0ce0ee3d06315164a88fea5184a490b6, type: 3}
       propertyPath: m_Name

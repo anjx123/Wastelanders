@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -18,7 +20,7 @@ public class CombatInfo : MonoBehaviour
     public GameObject buffIconPrefab;
     public HealthBar healthBar;
     public GameObject crosshair;
-
+    public TMP_Text damagePopupText;
     private float ROTATION_SPEED = 30f;
 
     public Canvas buffListCanvas;
@@ -28,12 +30,63 @@ public class CombatInfo : MonoBehaviour
         buffListCanvas = buffList.gameObject.GetComponent<Canvas>();
     }
 
+    private void OnEnable()
+    {
+        EntityClass.OnEntityDeath += RemoveCardFromTarget;
+    }
+
+    private void OnDisable()
+    {
+        EntityClass.OnEntityDeath -= RemoveCardFromTarget;
+    }
+
+    void RemoveCardFromTarget(EntityClass entity)
+    {
+        List<ActionClass> removedActions = combatCards.Where(card => card.Target == entity).ToList();
+        foreach (ActionClass action in removedActions)
+        {
+            DeactivateCombatSprite(action);
+        }
+    }
     public void Start()
     {
         diceRollText.GetComponent<MeshRenderer>().sortingOrder = diceRollSprite.GetComponent<SpriteRenderer>().sortingOrder + 1;
         buffListCanvas.overrideSorting = true;
         buffListCanvas.sortingLayerName = CombatManager.Instance.FADE_SORTING_LAYER;
         diceRollText.GetComponent<MeshRenderer>().sortingLayerName = CombatManager.Instance.FADE_SORTING_LAYER;
+        damagePopupText.GetComponent<MeshRenderer>().sortingLayerName = CombatManager.Instance.FADE_SORTING_LAYER;
+    }
+
+    public void DisplayDamage(int damage)
+    {
+        damagePopupText.text = "-" + damage.ToString();
+        damagePopupText.gameObject.SetActive(true);
+        Color originalColor = damagePopupText.color;
+        damagePopupText.color = new Color(originalColor.r, originalColor.g, originalColor.b, 1f);
+        StartCoroutine(FadeText(damagePopupText, 1f));
+    }
+
+    IEnumerator FadeText(TMP_Text textObject, float fadeDuration)
+    {
+        Color originalColor = textObject.color;
+        float elapsedTime = 0f;
+
+        float durationAtFullOpacity = 0.2f;
+        yield return new WaitForSeconds(durationAtFullOpacity);
+
+        fadeDuration = fadeDuration - durationAtFullOpacity;
+        // Loop over the duration of the fade
+        while (elapsedTime < fadeDuration)
+        {
+            elapsedTime += Time.deltaTime;
+            float normalizedTime = elapsedTime / fadeDuration;
+
+            // Use Color.Lerp to change the alpha of the text color
+            textObject.color = Color.Lerp(originalColor, new Color(originalColor.r, originalColor.g, originalColor.b, 0), normalizedTime);
+
+            yield return null;
+        }
+        damagePopupText.gameObject.SetActive(false);
     }
 
     public void Update()
@@ -74,6 +127,12 @@ public class CombatInfo : MonoBehaviour
         combatCards.Add(actionClass);
         RenderCombatIcons();
     }
+    public void DeactivateCombatSprite(ActionClass actionClass)
+    {
+        combatCards.Remove(actionClass);
+        RenderCombatIcons();
+    }
+
 
     private void RenderCombatIcons()
     {
@@ -144,12 +203,6 @@ public class CombatInfo : MonoBehaviour
         healthBar.gameObject.SetActive(false);
     }
 
-    public void DeactivateCombatSprite(ActionClass actionClass)
-    {
-        combatCards.Remove(actionClass);
-        RenderCombatIcons();
-    }
-
     public void ActivateCrosshair()
     {
         if (!crosshair.activeSelf)
@@ -168,6 +221,7 @@ public class CombatInfo : MonoBehaviour
     public void Emphasize()
     {
         EmphasizeCombatIcon();
+        damagePopupText.GetComponent<MeshRenderer>().sortingOrder = CombatManager.Instance.FADE_SORTING_ORDER + 1;
         diceRollSprite.GetComponent<SpriteRenderer>().sortingOrder = CombatManager.Instance.FADE_SORTING_ORDER + 1;
         buffListCanvas.sortingOrder = CombatManager.Instance.FADE_SORTING_ORDER + 1;
         diceRollText.GetComponent<MeshRenderer>().sortingOrder = CombatManager.Instance.FADE_SORTING_ORDER + 1;
@@ -179,6 +233,7 @@ public class CombatInfo : MonoBehaviour
         {
             child.GetComponent<CombatCardUI>().DeEmphasize();
         }
+        damagePopupText.GetComponent<MeshRenderer>().sortingOrder = CombatManager.Instance.FADE_SORTING_ORDER - 1;
         diceRollSprite.GetComponent<SpriteRenderer>().sortingOrder = CombatManager.Instance.FADE_SORTING_ORDER - 1;
         buffListCanvas.sortingOrder = CombatManager.Instance.FADE_SORTING_ORDER - 1;
         diceRollText.GetComponent<MeshRenderer>().sortingOrder = CombatManager.Instance.FADE_SORTING_ORDER - 1;
@@ -198,7 +253,7 @@ public class CombatInfo : MonoBehaviour
     public void FaceLeft()
     {
 
-       
+        FlipTransform(damagePopupText.transform, false);
         FlipTransform(diceRollText.transform, false);
         FlipTransform(healthBar.transform, false);
         foreach (Transform child in buffList.transform)
@@ -215,6 +270,7 @@ public class CombatInfo : MonoBehaviour
     //Flips the CombatInfo so that the Icon is on the LEFT of the entity
     public void FaceRight()
     {
+        FlipTransform(damagePopupText.transform, true);
         FlipTransform(diceRollText.transform, true);
         FlipTransform(healthBar.transform, true);
         foreach (Transform child in buffList.transform)

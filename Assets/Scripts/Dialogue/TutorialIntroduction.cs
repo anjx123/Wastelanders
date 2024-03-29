@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Runtime.ConstrainedExecution;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class TutorialIntroduction : DialogueClasses
 {
@@ -14,9 +15,17 @@ public class TutorialIntroduction : DialogueClasses
     [SerializeField] private GameObject trainingDummyPrefab;
     [SerializeField] private Transform dummy1StartingPos;
     [SerializeField] private Transform jackieEndPosition;
-
     [SerializeField] private Transform ivesPassiveBattlePosition;
+
+
+
+    [SerializeField] private Sprite laidBackSprite;
+    [SerializeField] private Sprite puzzledSoldierSprite;
+    [SerializeField] private Image laidBackImageUI;
+    [SerializeField] private Image puzzeledImageUI;
+
     [SerializeField] private List<GameObject> ivesTutorialDeck;
+    [SerializeField] private List<GameObject> jackieTutorialDeck;
 
     [SerializeField] private List<DialogueText> openingDiscussion;
     [SerializeField] private List<DialogueText> jackieMonologue;
@@ -34,12 +43,17 @@ public class TutorialIntroduction : DialogueClasses
     //After Ives Starts fighting
     [SerializeField] private List<DialogueText> readingOpponentTutorial;
     [SerializeField] private List<DialogueText> clashingCardsTutorial;
+    [SerializeField] private List<DialogueText> defensiveCardsTutorial;
+    [SerializeField] private List<DialogueText> cardAbilitiesTutorial;
     [SerializeField] private List<DialogueText> clashingOutcomeTutorial;
     [SerializeField] private List<DialogueText> cardsExhaustedTutorial;
 
     //After Ives is defeated
     [SerializeField] private List<DialogueText> ivesIsDefeated;
     [SerializeField] private DialogueWrapper endingTutorialDialogue;
+
+    [SerializeField] private GameOver gameOver;
+    [SerializeField] private List<DialogueText> gameLoseDialogue;
 
 
     [SerializeField] private bool jumpToCombat;
@@ -59,20 +73,54 @@ public class TutorialIntroduction : DialogueClasses
         }
     }
 
+    public void OnDestroy()
+    {
+        CombatManager.ClearEvents();
+        DialogueBox.ClearDialogueEvents();
+    }
+
     private IEnumerator ExecuteGameStart()
     {
         CombatManager.Instance.GameState = GameState.OUT_OF_COMBAT;
         CombatManager.Instance.SetDarkScreen();
         yield return new WaitForSeconds(1f);
         ives.OutOfCombat();
-        jackie.OutOfCombat(); //Workaround for now, ill have to remove this once i manually start instantiating players
+        jackie.OutOfCombat();
         jackie.SetReturnPosition(jackieDefaultTransform.position);
         if (!jumpToCombat)
         {
-            //Text here handles dialogue before Jackie Ives combat
             yield return new WaitForSeconds(1f);
 
-            yield return StartCoroutine(DialogueManager.Instance.StartDialogue(openingDiscussion));
+            { 
+                int broadcastCounts = 0;
+                void CountBroadcasts()
+                {
+                    broadcastCounts++;
+                }
+
+                DialogueBox.DialogueBoxEvent += CountBroadcasts;
+
+                Coroutine dialogue = StartCoroutine(DialogueManager.Instance.StartDialogue(openingDiscussion));
+
+                //Dialogue without any expression is kinda dry, its also difficult to tell whos talking so I wont VN style this unless I want to add more movement to the guys on screen
+                /*
+                                yield return new WaitUntil(() => broadcastCounts == 1);
+                                StartCoroutine(FadeImage(laidBackImageUI, 1, true));
+                                yield return new WaitUntil(() => broadcastCounts == 2);
+                                StartCoroutine(FadeImage(puzzeledImageUI, 1, true));
+                                */
+                yield return dialogue;
+
+/*
+                Coroutine laidBackFade = StartCoroutine(FadeImage(laidBackImageUI, 1, false)); 
+                yield return StartCoroutine(FadeImage(puzzeledImageUI, 1, false));
+                yield return laidBackFade;*/
+                puzzeledImageUI.gameObject.SetActive(false);
+                laidBackImageUI.gameObject.SetActive(false);
+
+                DialogueBox.DialogueBoxEvent -= CountBroadcasts;
+                yield return new WaitForSeconds(BRIEF_PAUSE);
+            }
 
             jackie.Emphasize(); //Jackie shows up above the black background
             yield return StartCoroutine(jackie.ResetPosition()); //Jackie Runs into the scene and talks 
@@ -97,14 +145,18 @@ public class TutorialIntroduction : DialogueClasses
 
             jackie.FaceRight(); //Jackie turns to face the person approaching her
 
-            yield return StartCoroutine(DialogueManager.Instance.StartDialogue(ivesChatsWithJackie.Dialogue));
-
+            {
+                DialogueBox.DialogueBoxEvent += JackieGoesToGetStaff;
+                void JackieGoesToGetStaff()
+                {
+                    DialogueBox.DialogueBoxEvent -= JackieGoesToGetStaff;
+                    StartCoroutine(jackie.MoveToPosition(dummy1StartingPos.position, 1.4f, 0.8f));
+                }
+                yield return StartCoroutine(DialogueManager.Instance.StartDialogue(ivesChatsWithJackie.Dialogue));
+            }
+            yield return new WaitForSeconds(BRIEF_PAUSE);
             yield return StartCoroutine(ives.MoveToPosition(dummy1StartingPos.position, 1.2f, 1.2f)); //Ives goes to place a dummy down
             trainingDummies.Add(Instantiate(trainingDummyPrefab, dummy1StartingPos)); //Ives summons Dummy
-
-
-            yield return new WaitForSeconds(1f);
-            yield return StartCoroutine(jackie.MoveToPosition(dummy1StartingPos.position, 1.4f, 0.8f));
             yield return new WaitForSeconds(1f);
         } else
         {
@@ -116,6 +168,7 @@ public class TutorialIntroduction : DialogueClasses
             yield return StartCoroutine(CombatManager.Instance.FadeInLightScreen(2f));
         }
 
+        jackie.InjectDeck(jackieTutorialDeck);
         jackie.InCombat(); //Workaround for now, ill have to remove this once i manually start instantiating 
         ives.SetReturnPosition(ivesPassiveBattlePosition.position);
         StartCoroutine(ives.ResetPosition()); //Prevent Players from attacking Ives LOL
@@ -127,11 +180,13 @@ public class TutorialIntroduction : DialogueClasses
         BeginCombatTutorial();
         yield return new WaitUntil(() => CombatManager.Instance.GameState == GameState.GAME_WIN);
 
+        yield return new WaitUntil(() => !DialogueManager.Instance.IsInDialogue());
         yield return StartCoroutine(DialogueManager.Instance.StartDialogue(buffTutorial));
         
         //Ives retrieves the dead training dummy
         foreach (GameObject trainingDummy in trainingDummies)
         {
+            trainingDummy.GetComponent<SpriteRenderer>().sortingOrder -= 1;
             yield return StartCoroutine(ives.MoveToPosition(trainingDummy.transform.position, 1.2f, 0.8f));
             yield return new WaitForSeconds(0.6f);
             Destroy(trainingDummy);
@@ -139,19 +194,18 @@ public class TutorialIntroduction : DialogueClasses
 
         // Have Ives fight and teach clashing now.
 
-        jackie.SetReturnPosition(jackie.gameObject.transform.position);
         ives.SetReturnPosition(dummy1StartingPos.position);
         ives.InjectDeck(ivesTutorialDeck);
-        CombatManager.Instance.AddEnemy(ives);
-        ives.Targetable();
-
+        CombatManager.Instance.SetEnemiesHostile(new List<EnemyClass> { ives });
 
         yield return new WaitUntil(() => !DialogueManager.Instance.IsInDialogue());
         CombatManager.Instance.GameState = GameState.SELECTION;
-
+        yield return new WaitUntil(() => !DialogueManager.Instance.IsInDialogue());
         BeginCombatIvesFight();
 
         yield return new WaitUntil(() => CombatManager.Instance.GameState == GameState.GAME_WIN);
+        CombatManager.Instance.GameState = GameState.OUT_OF_COMBAT;
+        ives.OutOfCombat();
 
         yield return StartCoroutine(DialogueManager.Instance.StartDialogue(ivesIsDefeated));
         yield return new WaitForSeconds(0.6f);
@@ -163,12 +217,12 @@ public class TutorialIntroduction : DialogueClasses
 
         yield return StartCoroutine(DialogueManager.Instance.StartDialogue(endingTutorialDialogue.Dialogue));
 
-
+        MusicManager.Instance.FadeOutCurrentBackgroundTrack(2f);
         StartCoroutine(CombatManager.Instance.FadeInDarkScreen(3f));
         yield return StartCoroutine(jackie.MoveToPosition(jackieEndPosition.position, 0, 4f));
 
         GameStateManager.shouldPlayDeckSelectionTutorial = true;
-        SceneManager.LoadScene("LevelSelect");
+        SceneManager.LoadScene("SelectionScreen");
         yield break;
     }
 
@@ -228,8 +282,10 @@ public class TutorialIntroduction : DialogueClasses
 
     private void BeginCombatIvesFight()
     {
-        EntityClass.OnEntityDeath += IvesDies; //Setup Listener to set state to Game Win
+        CombatManager.PlayersWinEvent += IvesDies; //Setup Listener to set state to Game Win
+        CombatManager.EnemiesWinEvent += EnemiesWin;
         DialogueManager.Instance.MoveBoxToBottom();
+        CombatManager.OnGameStateChanged += ExplainDefense;
         StartCoroutine(StartDialogueWithNextEvent(readingOpponentTutorial, () => { BattleQueue.playerActionInsertedEvent += OnPlayerPlayClashingCard; }));
     }
 
@@ -245,24 +301,68 @@ public class TutorialIntroduction : DialogueClasses
         yield return StartCoroutine(DialogueManager.Instance.StartDialogue(clashingOutcomeTutorial));
     }
 
-    private void IvesDies(EntityClass entity)
+    private void ExplainDefense(GameState gameState)
     {
-        if (entity is EnemyIves)
+        if (gameState == GameState.SELECTION)
         {
-            EntityClass.OnEntityDeath -= IvesDies;
-            CombatManager.Instance.GameState = GameState.GAME_WIN;
+            CombatManager.OnGameStateChanged -= ExplainDefense;
+            StartCoroutine(StartDialogueWithNextEvent(defensiveCardsTutorial, () => { CombatManager.OnGameStateChanged += ExplainAbilities; }));
         }
     }
-//------------------------------------------------------Helpers---------------------------------------------------------------------------------
 
-    private IEnumerator InstantiateDummies()
+    private void ExplainAbilities(GameState gameState)
     {
-        yield return StartCoroutine(ives.MoveToPosition(dummy1StartingPos.position, 1.2f, 0.8f)); //Ives goes to place a dummy down
-        yield return new WaitForSeconds(0.3f);
-        trainingDummies.Add(Instantiate(trainingDummyPrefab, dummy1StartingPos));
-        yield return StartCoroutine(ives.MoveToPosition(jackieEndPosition.position, 1.2f, 0.8f)); //Ives goes to place a dummy down
-        yield return new WaitForSeconds(0.3f);
-        trainingDummies.Add(Instantiate(trainingDummyPrefab, jackieEndPosition));
+        if (gameState == GameState.SELECTION)
+        {
+            CombatManager.OnGameStateChanged -= ExplainAbilities;
+            StartCoroutine(StartDialogueWithNextEvent(cardAbilitiesTutorial, () => { }));
+        }
+    }
+    private void IvesDies()
+    {
+        CombatManager.PlayersWinEvent -= IvesDies; //Setup Listener to set state to Game Win
+        CombatManager.Instance.GameState = GameState.GAME_WIN;
+    }
+
+    private void EnemiesWin()
+    {
+        StartCoroutine(GameLose());
+        CombatManager.Instance.GameState = GameState.GAME_LOSE;
+    }
+
+    private IEnumerator GameLose()
+    {
+        yield return StartCoroutine(CombatManager.Instance.FadeInDarkScreen(2f));
+
+        gameOver.gameObject.SetActive(true);
+        gameOver.FadeIn();
+
+        yield return StartCoroutine(DialogueManager.Instance.StartDialogue(gameLoseDialogue));
+    }
+    //------------------------------------------------------Helpers---------------------------------------------------------------------------------
+
+    IEnumerator FadeImage(Image image, float duration, bool fadeIn)
+    {
+        if (fadeIn)
+        {
+            // Fade in
+            image.color = new Color(image.color.r, image.color.g, image.color.b, 0);
+            while (image.color.a < 1.0f)
+            {
+                image.color = new Color(image.color.r, image.color.g, image.color.b, image.color.a + (Time.deltaTime / duration));
+                yield return null;
+            }
+        }
+        else
+        {
+            // Fade out
+            image.color = new Color(image.color.r, image.color.g, image.color.b, 1);
+            while (image.color.a > 0.0f)
+            {
+                image.color = new Color(image.color.r, image.color.g, image.color.b, image.color.a - (Time.deltaTime / duration));
+                yield return null;
+            }
+        }
     }
 
     //Helper to wait until dialogue is done, then start @param dialogue, then run a callback like setting up a new event. 

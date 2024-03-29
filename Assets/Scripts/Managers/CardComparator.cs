@@ -87,16 +87,21 @@ public class CardComparator : MonoBehaviour
 
             } else if (cardOneGreater < 0) //Card2 wins clash
             {
-                card2.OnHit(); 
+                card2.OnHit();
+                card1.OnCardStagger();
             } else if (cardOneGreater > 0) //Card1 wins clash
             {
-                card1.OnHit();  
+                card1.OnHit();
+                card2.OnCardStagger();
             }
         } else if (card1.CardType == CardType.Defense && IsAttack(card2))
         {
             if (cardOneGreater >= 0)
             {
                 card1.CardIsUnstaggered(); // Defensive card is unstaggered. 
+            } else
+            {
+                card1.OnCardStagger();
             }
 
             card2.ReduceRoll(card1.GetCard().actualRoll); //Possibly no damage dealt
@@ -108,11 +113,18 @@ public class CardComparator : MonoBehaviour
             if (cardOneGreater <= 0)
             {
                 card2.CardIsUnstaggered(); // Defensive card is unstaggered
-            } 
+            } else
+            {
+                card2.OnCardStagger();
+            }
 
             card1.ReduceRoll(card2.GetCard().actualRoll); //Possibly no damage dealt
             card1.OnHit();
             card2.Origin.BlockAnimation();
+        } else
+        {
+            card1.CardIsUnstaggered();
+            card2.CardIsUnstaggered();
         }
         
         yield return new WaitForSeconds(COMBAT_BUFFER_TIME);
@@ -208,9 +220,9 @@ public class CardComparator : MonoBehaviour
         if (playersAreRollingDiceEvent != null)
         {
             yield return StartCoroutine(playersAreRollingDiceEvent.Invoke());
-            yield return new WaitUntil(() => Input.GetMouseButtonDown(0)); //Necessary to not immediately roll the dice
+            yield return new WaitUntil(() => Input.GetMouseButtonDown(0) && !PauseMenu.IsPaused); //Necessary to not immediately roll the dice
         }
-        yield return new WaitUntil(() => Input.GetMouseButtonDown(0));
+        yield return new WaitUntil(() => Input.GetMouseButtonDown(0) && !PauseMenu.IsPaused);
     }
 
 

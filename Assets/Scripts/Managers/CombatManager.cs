@@ -87,11 +87,24 @@ public class CombatManager : MonoBehaviour
         }
     }
 
+    public static void ClearEvents()
+    {
+        OnGameStateChanged = null;
+        OnGameStateChanging = null;
+        PlayersWinEvent = null;
+        EnemiesWinEvent = null;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
         GameState = GameState.GAME_START; //Put game start code in the performGameStart method.
         ActionClass.CardStateChange += HandleCrosshairEnemies;
+    }
+
+    private void OnDestroy()
+    {
+        ActionClass.CardStateChange -= HandleCrosshairEnemies;
     }
 
 
@@ -397,7 +410,7 @@ public class CombatManager : MonoBehaviour
 
     public bool CanHighlight()
     {
-        return GameState == GameState.SELECTION;
+        return (PauseMenu.IsPaused) ? false : GameState == GameState.SELECTION;
     }
 
     public GameState GameState

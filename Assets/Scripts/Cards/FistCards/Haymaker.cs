@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Haymaker : FistCards
 {
-    public override void ExecuteActionEffect()
+    public override void OnCardStagger()
     {
 
     }
@@ -25,9 +25,4 @@ public class Haymaker : FistCards
         base.Initialize();
     }
 
-    public override void CardIsUnstaggered()
-    {
-        base.CardIsUnstaggered();
-        Origin.AttackAnimation("IsMelee");
-    }
 }

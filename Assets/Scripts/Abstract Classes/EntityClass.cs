@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using static CardComparator;
+using static StatusEffect;
 
 public abstract class EntityClass : SelectClass
 {
@@ -46,9 +47,12 @@ public abstract class EntityClass : SelectClass
 
     protected List<ActionClass> actionsAvailable;
     public DeadEntities _DeathHandler { protected get;  set; }
-    public DeadEntities DeathHandler { get; private set; } 
+    public DeadEntities DeathHandler { get; private set; }
 
 #nullable enable
+
+    public delegate void DamageDelegate(int damage);
+    public event DamageDelegate? EntityTookDamage;
 
     public delegate void EntityDelegate(EntityClass player);
     public static event EntityDelegate? OnEntityDeath;
@@ -82,6 +86,8 @@ public abstract class EntityClass : SelectClass
 
     public virtual void TakeDamage(EntityClass source, int damage)
     {
+        BuffsOnDamageEvent(ref damage);
+
         Health = Mathf.Clamp(Health - damage, 0, MaxHealth);
         float percentageDone = 1; //Testing different powered knockbacks
         if (Health != 0)
@@ -91,11 +97,13 @@ public abstract class EntityClass : SelectClass
         {
             OnEntityDeath?.Invoke(this);
         }
-        if (percentageDone > 0)
+
+        EntityTookDamage?.Invoke(damage);
+        combatInfo.DisplayDamage(damage);
+        if (damage > 0)
         {
-            UpdateBuffsOnDamage();
+            StartCoroutine(PlayHitAnimation(source, this, percentageDone));
         }
-        StartCoroutine(PlayHitAnimation(source, this, percentageDone));
     }
 
     //Plays both first the stagger entities then 
@@ -149,7 +157,6 @@ public abstract class EntityClass : SelectClass
         float elapsedTime = 0f;
 
         Vector3 diffInLocation = destination - originalPosition;
-
         if ((Vector2)diffInLocation == Vector2.zero) yield break;
 
         float distance = Mathf.Sqrt(diffInLocation.x * diffInLocation.x + diffInLocation.y * diffInLocation.y);
@@ -306,11 +313,13 @@ public abstract class EntityClass : SelectClass
 
     public override void OnMouseEnter()
     {
+        if (PauseMenu.IsPaused) return;
         Highlight();
     }
 
     public override void OnMouseExit()
     {
+        if (PauseMenu.IsPaused) return;
         DeHighlight();
     }
 
@@ -344,6 +353,7 @@ public abstract class EntityClass : SelectClass
 
     public override void OnMouseDown()
     {
+        if (PauseMenu.IsPaused) return;
         OnEntityClicked?.Invoke(this);
     }
     //Run this to reset the entity position back to its starting position
@@ -411,11 +421,11 @@ public abstract class EntityClass : SelectClass
     }
 
     // Updates buffs affected by player taking damage
-    protected void UpdateBuffsOnDamage()
+    protected void BuffsOnDamageEvent(ref int damage)
     {
         foreach (string s in statusEffects.Keys)
         {
-            statusEffects[s].OnBuffedEntityHit();
+            statusEffects[s].OnEntityHitHandler(ref damage);
         }
         UpdateBuffs();
     }
@@ -522,6 +532,23 @@ public abstract class EntityClass : SelectClass
         combatInfo.UpdateBuffs(statusEffects);
         BuffsUpdatedEvent?.Invoke(this);
     }
+
+    //Please use the originalHandler to resubscribe when you are done :3
+    public StatusEffectModifyValueDelegate SetBuffsOnHitHandler(string buff, StatusEffectModifyValueDelegate handler)
+    {
+        CheckBuff(buff);
+        StatusEffectModifyValueDelegate originalHandler = statusEffects[buff].OnEntityHitHandler;
+        statusEffects[buff].OnEntityHitHandler = handler;
+        Debug.Log("A buff handler is being reassigned, be careful!");
+        return originalHandler;
+    }
+
+    public StatusEffectModifyValueDelegate GetBuffsOnHitHandler(string buff)
+    {
+        CheckBuff(buff);
+        return statusEffects[buff].OnEntityHitHandler;
+    }
+
 
     public void EnableDice()
     {

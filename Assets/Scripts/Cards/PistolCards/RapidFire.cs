@@ -5,7 +5,7 @@ using UnityEngine;
 public class RapidFire : PistolCards
 {
 
-    public override void ExecuteActionEffect()
+    public override void OnCardStagger()
     {
 
     }

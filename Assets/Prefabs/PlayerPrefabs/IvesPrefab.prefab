@@ -125,7 +125,9 @@ MonoBehaviour:
   animator: {fileID: 2129534447924396366}
   combatInfo: {fileID: 8487347338577429512}
   boxCollider: {fileID: 1337325846832566119}
+  icon: {fileID: 21300000, guid: 5873de434db4868459f61c1e2a438d6c, type: 3}
   availableActions: []
+  dupActions: []
 --- !u!65 &1337325846832566119
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -155,10 +157,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2280710332171782491}
     m_Modifications:
+    - target: {fileID: 409415069964141907, guid: 941333e3be7f6f04688676f1827dbf1b, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -1.37
+      objectReference: {fileID: 0}
+    - target: {fileID: 409415069964141907, guid: 941333e3be7f6f04688676f1827dbf1b, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -5.09
+      objectReference: {fileID: 0}
     - target: {fileID: 3781379592661886730, guid: 941333e3be7f6f04688676f1827dbf1b, type: 3}
       propertyPath: diceAnimator
       value: 
       objectReference: {fileID: 7769636084067756352}
+    - target: {fileID: 4691229747305802767, guid: 941333e3be7f6f04688676f1827dbf1b, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: -1472579445266561125, guid: 426b9bcc7b7eb8f419f8d38f41aedc33, type: 2}
     - target: {fileID: 6018344303403229583, guid: 941333e3be7f6f04688676f1827dbf1b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

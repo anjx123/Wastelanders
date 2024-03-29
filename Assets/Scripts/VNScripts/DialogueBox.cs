@@ -55,6 +55,11 @@ public class DialogueBox : MonoBehaviour
         }
     }
 
+    public static void ClearDialogueEvents()
+    {
+        DialogueBoxEvent = null;
+    }
+
     void SetFontStyles(DialogueText line)
     {
 
@@ -114,7 +119,7 @@ public class DialogueBox : MonoBehaviour
 
             bodyText.text = displayedText;
 
-            yield return new WaitForSecondsRealtime(1f / rollingSpeed);
+            yield return new WaitForSeconds(1f / rollingSpeed);
         }
 
         lineIsFinished = true;
