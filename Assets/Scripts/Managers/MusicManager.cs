@@ -140,7 +140,8 @@ public class MusicManager : MonoBehaviour
 
     public void PlayDeath()
     {
-        FadeOutCurrentBackgroundTrack(3);
+        // FadeOutCurrentBackgroundTrack(3);
+        BackgroundMusicPlayer.Stop();
         BackgroundMusicPlayer.clip = backgroundMusicDeath;
         BackgroundMusicPlayer.Play();
     }
