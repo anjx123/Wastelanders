@@ -44,6 +44,7 @@ public class QueenBeetle : EnemyClass
         for (int i = 0; i < guardBeetles.Count; ++i)
         {
             availability[i] = guardBeetles[i];
+            beetleLocations[i] = guardBeetles[i].transform;
         }
     }
 
@@ -59,7 +60,7 @@ public class QueenBeetle : EnemyClass
         Beetle.OnDeath += HandleBeetleDied;
     }
 
-    public void OnDestroy()
+    public void OnDisable()
     {
 
         Beetle.OnGainBuffs -= HandleGainedBuffs;
