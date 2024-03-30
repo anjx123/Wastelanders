@@ -583,7 +583,6 @@ public class PreQueenFight : DialogueClasses
     {
         yield return StartCoroutine(CombatManager.Instance.FadeInDarkScreen(2f));
 
-        GameStateManager.jumpIntoFrogAndSlimeFight = true;
         //Set Jump into combat to be true
         gameOver.gameObject.SetActive(true);
         gameOver.FadeIn();

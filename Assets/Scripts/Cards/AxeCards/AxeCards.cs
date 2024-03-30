@@ -17,7 +17,7 @@ public abstract class AxeCards : ActionClass
             Origin.AttackAnimation("IsAxing"); // TODO: update
         } else
         {
-            Origin.AttackAnimation("MeleeAttack"); // TODO: update
+            Origin.AttackAnimation("IsMelee"); // TODO: update
         }
         base.CardIsUnstaggered();
     }
@@ -29,7 +29,7 @@ public abstract class AxeCards : ActionClass
         }
         else
         {
-            Origin.AttackAnimation("MeleeAttack"); // TODO: update
+            Origin.AttackAnimation("IsMelee"); // TODO: update
         }
         base.OnHit();
     }

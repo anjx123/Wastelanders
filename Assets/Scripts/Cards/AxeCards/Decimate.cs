@@ -13,7 +13,7 @@ public class Decimate : AxeCards
         Speed = 2;
 
         myName = "Decimate";
-        description = "On hit, double the amount of wounds on the target."; 
+        description = "On hit, double the amount of wounds on the target. Then add an aditional wound."; 
         Renderer renderer = GetComponent<Renderer>();
         ogMaterial = renderer.material;
         OriginalPosition = transform.position;
@@ -25,5 +25,6 @@ public class Decimate : AxeCards
     {
         base.OnHit();
         Target.AddStacks(Wound.buffName, Target.GetBuffStacks(Wound.buffName));
+        Target.AddStacks(Wound.buffName, 1);
     }
 }
