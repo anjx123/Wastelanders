@@ -18,7 +18,7 @@ public class Vitals : PistolCards
         Speed = 5;
 
         myName = "Vitals";
-        description = "Hit 'em where it hurts";
+        description = "Hit 'em where it hurts.";
         CardType = CardType.RangedAttack;
         Renderer renderer = GetComponent<Renderer>();
         ogMaterial = renderer.material; // og sprite of card

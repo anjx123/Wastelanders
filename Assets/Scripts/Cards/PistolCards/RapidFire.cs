@@ -16,7 +16,7 @@ public class RapidFire : PistolCards
         lowerBound = 2;
         upperBound = 3;
         Speed = 2;
-        description = "If unstaggered, consume 1 accuracy, then make another rapid fire attack";
+        description = "If unstaggered, consume 1 Accuracy, then attack with 'Rapid Fire' again.";
         CardType = CardType.RangedAttack;
         myName = "Rapid Fire";
         Renderer renderer = GetComponent<Renderer>();

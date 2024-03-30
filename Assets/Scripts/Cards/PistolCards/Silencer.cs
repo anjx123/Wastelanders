@@ -15,7 +15,7 @@ public class Silencer : PistolCards
         lowerBound = 1;
         upperBound = 4;
         Speed = 3;
-        description = "If this Attack hits an opponent, gain 2 accuracy after.";
+        description = "On hit, gain 2 Accuracy stacks.";
         myName = "Silencer";
         CardType = CardType.RangedAttack;
         Renderer renderer = GetComponent<Renderer>();
