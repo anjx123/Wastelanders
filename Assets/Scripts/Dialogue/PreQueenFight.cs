@@ -521,6 +521,7 @@ public class PreQueenFight : DialogueClasses
             yield return new WaitUntil(() => CombatManager.Instance.GameState == GameState.GAME_WIN);
             MusicManager.Instance.FadeOutCurrentBackgroundTrack(2f);
             yield return new WaitForSeconds(1f);
+            DialogueManager.Instance.MoveBoxToBottom();
 
             yield return StartCoroutine(CombatManager.Instance.FadeInDarkScreen(1.5f));
 

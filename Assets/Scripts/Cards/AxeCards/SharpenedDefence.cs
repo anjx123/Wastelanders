@@ -15,7 +15,7 @@ public class SharpenedDefence : AxeCards
     Speed = 1;
     CardType = CardType.Defense;    
 
-    myName = "SharpenedDefence";
+    myName = "Sharpened Defence";
     description = "If this card is unstaggered, inflict 2 wound.";
     Renderer renderer = GetComponent<Renderer>();
     ogMaterial = renderer.material;

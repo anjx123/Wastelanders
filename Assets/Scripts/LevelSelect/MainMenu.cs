@@ -7,6 +7,8 @@ using UnityEngine.UI;
 public class MainMenu : LevelSelect
 {
     [SerializeField] private GameObject wastelandersText;
+
+    [SerializeField] private Button quitButton;
     public void QuitGame()
     {
         #if UNITY_EDITOR
@@ -14,6 +16,11 @@ public class MainMenu : LevelSelect
         #endif
         Application.Quit();
 
+    }
+
+    private void Start()
+    {
+        quitButton.interactable = false;
     }
 
 

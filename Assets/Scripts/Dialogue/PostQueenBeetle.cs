@@ -75,7 +75,7 @@ public class PostQueenBeetle : DialogueClasses
         yield return StartCoroutine(DialogueManager.Instance.StartDialogue(jackieResultsConfusion));
         yield return new WaitForSeconds(0.5f);
 
-        ives.FaceRight(); ives.animator.enabled = false; yield return new WaitForSeconds(1.2f);
+        ives.FaceRight(); ives.animator.enabled = false; yield return new WaitForSeconds(0.5f);
 
         yield return StartCoroutine(FadeImage(ivesImage, 1f, true));
         yield return StartCoroutine(DialogueManager.Instance.StartDialogue(ivesYapping));

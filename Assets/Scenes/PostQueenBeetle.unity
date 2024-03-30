@@ -2707,7 +2707,7 @@ MonoBehaviour:
   ivesImage: {fileID: 1956352442}
   jackieImage: {fileID: 149459912}
   jackieOpeningDialogue:
-  - bodyText: '[New Haven City, West Checkpoint - 5 days after the NITES exam]'
+  - bodyText: '[New Haven City, East Wall Boot Camp - 5 days after the NITES exam]'
     speakerName: Jackie
     displayingImage: {fileID: 21300000, guid: 228f823fe8b2f4d4791ed74e46de81e1, type: 3}
     broadcastAnEvent: 0
@@ -2747,7 +2747,7 @@ MonoBehaviour:
     speakerName: Speaker
     displayingImage: {fileID: 0}
     broadcastAnEvent: 0
-  - bodyText: This great achievment means a safer city from the waste! Celebrate
+  - bodyText: This great achievement means a safer city from the waste! Celebrate
       these heroes when you get the chance.
     speakerName: Speaker
     displayingImage: {fileID: 0}
@@ -2829,18 +2829,17 @@ MonoBehaviour:
     displayingImage: {fileID: 21300000, guid: ade9660133ca00a499bfa3ad449b87bd, type: 3}
     broadcastAnEvent: 0
   - bodyText: After the exam, a team tried excavating the remaining crystals and
-      discovered that they were actually growing on an asteroid fragment.
+      discovered that they were actually growing on a meteor fragment.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: ade9660133ca00a499bfa3ad449b87bd, type: 3}
     broadcastAnEvent: 0
-  - bodyText: The scientists are theorizing that this was a fragment from one of
-      the original asteroids that brought the Waste to Earth and created the Wasteland.
+  - bodyText: The scientists theorize that this fragment originates from one of the
+      original meteors that brought the Waste Earth. Creating the wasteland.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: ade9660133ca00a499bfa3ad449b87bd, type: 3}
     broadcastAnEvent: 0
-  - bodyText: Seeing as you were the one who found the nest, refined our battle plan,
-      and took down the Queen Beetle, we thought you deserved the full credit for
-      this discovery.
+  - bodyText: Since you found the nest, refined our battle plan, and took down the
+      Queen Beetle, we gave you the full credit for this discovery.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: ade9660133ca00a499bfa3ad449b87bd, type: 3}
     broadcastAnEvent: 0
@@ -2863,8 +2862,11 @@ MonoBehaviour:
     displayingImage: {fileID: 21300000, guid: ade9660133ca00a499bfa3ad449b87bd, type: 3}
     broadcastAnEvent: 0
   - bodyText: "Seeing as you\u2019ve broken several expedition records, maybe evading
-      all this newfound attention would be good practice, word has begun to spread
-      after all."
+      all this newfound attention would be good practice."
+    speakerName: Ives
+    displayingImage: {fileID: 21300000, guid: ade9660133ca00a499bfa3ad449b87bd, type: 3}
+    broadcastAnEvent: 0
+  - bodyText: Word has begun to spread after all.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: ade9660133ca00a499bfa3ad449b87bd, type: 3}
     broadcastAnEvent: 0
