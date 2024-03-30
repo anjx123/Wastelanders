@@ -627,11 +627,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "<b>Team Lead and Writer</b>\nKimiko Ngo\n\n<b>Lead Artist</b>\nBonnie
-    Lu\n\n<b>Game Designer & Lead Programmer</b>\nAnrui Liu\n\n<b>Artists</b>\nKate
-    Louie\nDixie Santo\nGrace Shen\nMarian Cheung\n\n<b>Programmers</b>\nAndrew Wang
-    \nAlissa Guo\nCh Muhammad Daud Virk\nRahul Kamath\n\n<b>Composer / Sound Engineer</b>\nDaniel
-    Schatz\n"
+  m_text: "<b>Team Lead</b>\nKimiko Ngo\n\n<b>Game Designer</b>\nAnrui Liu\n\n<b>Lead
+    Artist</b>\nBonnie Lu\n\n<b>Artists</b>\nKate Louie\nDixie Santo\nGrace Shen\nMarian
+    Cheung\n\n<b>Lead Programmer</b>\nAnrui Liu\n\n<b>Programmers</b>\nAndrew Wang
+    \nAlissa Guo\nCh Muhammad Daud Virk\nRahul Kamath\n\n<b>Writer</b>\nKimiko Ngo\n\n<b>Composer
+    / Sound Engineer</b>\nDaniel Schatz\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ef98bd283b7bb734da8a833fccf0fb3e, type: 2}
   m_sharedMaterial: {fileID: -1472579445266561125, guid: ef98bd283b7bb734da8a833fccf0fb3e, type: 2}
