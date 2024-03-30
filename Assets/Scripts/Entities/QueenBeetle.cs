@@ -38,11 +38,20 @@ public class QueenBeetle : EnemyClass
             }
         }
     }
+
+    public void InheritChild(List<Beetle> guardBeetles)
+    {
+        for (int i = 0; i < guardBeetles.Count; ++i)
+        {
+            availability[i] = guardBeetles[i];
+        }
+    }
+
     // Start is called before the first frame update
     public override void Start()
     {
         base.Start();
-        MaxHealth = 30;
+        MaxHealth = 40;
         Health = MaxHealth;
         myName = "The Queen";
 
@@ -50,10 +59,15 @@ public class QueenBeetle : EnemyClass
         Beetle.OnDeath += HandleBeetleDied;
     }
 
-    public override IEnumerator Die()
+    public void OnDestroy()
     {
+
         Beetle.OnGainBuffs -= HandleGainedBuffs;
         Beetle.OnDeath -= HandleBeetleDied;
+    }
+
+    public override IEnumerator Die()
+    {
         return base.Die();
     }
 

@@ -15,7 +15,7 @@ public class Fragment : ActionClass
     {
         base.Initialize();
         lowerBound = 3;
-        upperBound = 4;
+        upperBound = 3;
         
         Speed = 5;
 

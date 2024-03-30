@@ -16,16 +16,20 @@ MonoBehaviour:
   - bodyText: CRACK!
     speakerName: 
     displayingImage: {fileID: 0}
+    broadcastAnEvent: 0
   - bodyText: '(clenches and unclenches her fists) '
     speakerName: Jackie
-    displayingImage: {fileID: 0}
+    displayingImage: {fileID: 21300000, guid: 487226e5dae66424ea250466920a3086, type: 3}
+    broadcastAnEvent: 0
   - bodyText: "Woah, I feel\u2026 stronger somehow."
     speakerName: Jackie
-    displayingImage: {fileID: 0}
-  - bodyText: Jackie is affected by Resonate. Each stack of resonate increases her
-      card's upper damage by 1.
+    displayingImage: {fileID: 21300000, guid: 487226e5dae66424ea250466920a3086, type: 3}
+    broadcastAnEvent: 0
+  - bodyText: '[Attacking crystals as players can grant you resonance as well]'
     speakerName: 
     displayingImage: {fileID: 0}
-  - bodyText: Hm, not bad. I wonder if Ailin knew about this.
+    broadcastAnEvent: 0
+  - bodyText: Hm, fascinating. Wish your mother Ailin could see this too.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 87cb7c6c6588a4a3a957b707239abbf0, type: 3}
+    broadcastAnEvent: 0

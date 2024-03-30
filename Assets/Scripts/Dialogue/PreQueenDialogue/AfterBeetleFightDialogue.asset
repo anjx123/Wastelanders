@@ -13,22 +13,23 @@ MonoBehaviour:
   m_Name: AfterBeetleFightDialogue
   m_EditorClassIdentifier: 
   dialogue:
-  - bodyText: "Huff, huff, these beetles put up quite a fight. At least we\u2019ve
-      lowered their numbers some. We\u2019ve sustained some injuries, but we can
-      definitely take out the rest of the nest now. That was some quick thinking,
-      Jackie. You\u2019re cut out to be a leader."
-    speakerName: Ives
+  - bodyText: Nice going Jackie, with your plan, everything went much smoothly
+    speakerName: Jackie
     displayingImage: {fileID: 21300000, guid: 87cb7c6c6588a4a3a957b707239abbf0, type: 3}
+    broadcastAnEvent: 0
   - bodyText: "Thanks, Ives. Though, I\u2019m finding it kind of hard to distinguish
       the beetles from the crystals. I wonder how the two are connected\u2026 Do
       you think they rely on the crystals for survival somehow?"
     speakerName: Jackie
-    displayingImage: {fileID: 0}
+    displayingImage: {fileID: 21300000, guid: 10ec818d4088de44a83a5405137230e4, type: 3}
+    broadcastAnEvent: 0
   - bodyText: "That\u2019s a possibility. Maybe their life force is embedded in the
       crystals."
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 87cb7c6c6588a4a3a957b707239abbf0, type: 3}
+    broadcastAnEvent: 0
   - bodyText: "Then, I\u2019ll start destroying the ones close to us! That\u2019ll
       make them easier to take down!"
     speakerName: Jackie
-    displayingImage: {fileID: 0}
+    displayingImage: {fileID: 21300000, guid: 228f823fe8b2f4d4791ed74e46de81e1, type: 3}
+    broadcastAnEvent: 0

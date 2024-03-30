@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 207ddad3e1c90594ba3f48e2a5a6a796, type: 3}
+  m_Name: PostFightDialogue
+  m_EditorClassIdentifier: 
+  dialogue:
+  - bodyText: '(Everyone is exhausted, but the battle is won. Many Candidates are
+      injured but none dead. The examiners are discussing amongst themselves and
+      come to a verdict.)  '
+    speakerName: 
+    displayingImage: {fileID: 0}
+    broadcastAnEvent: 0
+  - bodyText: 'Attention examinees, this marks the end of quite an unprecedented
+      exam.  '
+    speakerName: Ives
+    displayingImage: {fileID: 21300000, guid: be935693778d6004d9427d82e6ce5798, type: 3}
+    broadcastAnEvent: 0
+  - bodyText: "I\u2019d like to congratulate you all for fighting so valiantly to
+      neutralize this unknown threat.  "
+    speakerName: Ives
+    displayingImage: {fileID: 21300000, guid: be935693778d6004d9427d82e6ce5798, type: 3}
+    broadcastAnEvent: 0
+  - bodyText: 'We examiners have seen the exceptional skills that you have all displayed
+      during this battle, so look forward to the examination results in a couple
+      days. '
+    speakerName: Ives
+    displayingImage: {fileID: 21300000, guid: be935693778d6004d9427d82e6ce5798, type: 3}
+    broadcastAnEvent: 0
+  - bodyText: Now I'm gonna go take a breather...
+    speakerName: Ives
+    displayingImage: {fileID: 21300000, guid: be935693778d6004d9427d82e6ce5798, type: 3}
+    broadcastAnEvent: 0

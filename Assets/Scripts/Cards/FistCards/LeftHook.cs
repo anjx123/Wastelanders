@@ -15,7 +15,7 @@ public class LeftHook : FistCards
     // Start is called before the first frame update
     public override void Initialize()
     {
-        lowerBound = 2;
+        lowerBound = 1;
         upperBound = 3;
         Speed = 5;
 
