@@ -54,7 +54,15 @@ public class PauseMenu : MonoBehaviour
     {
         IsPaused = false;
         Time.timeScale = 1f;
-        SceneManager.LoadScene("LevelSelect");
+        SceneManager.LoadScene(GameStateManager.LEVEL_SELECT_NAME);
+    }
+
+
+    public void DeckSelectClick()
+    {
+        IsPaused = false;
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(GameStateManager.SELECTION_SCREEN_NAME);
     }
 
     public void ResetScene()
