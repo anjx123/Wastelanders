@@ -237,6 +237,7 @@ public class CombatManager : MonoBehaviour
         Debug.LogWarning("All Players are dead, You Lose...");
         baseCamera.Priority = 1;
         dynamicCamera.Priority = 0;
+        MusicManager.Instance.PlayDeath();
         PerformOutOfCombat();
     }
 

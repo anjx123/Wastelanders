@@ -10,6 +10,7 @@ public class MusicManager : MonoBehaviour
     // NOTE: All of these fields are set in the editor.
     public AudioSource SFXSoundsPlayer, BackgroundMusicPlayer, BackgroundMusicIntroPlayer;
 
+    [SerializeField]
     private List<SerializableTuple<SFXList, AudioClip>> sfxTuples = new();
 #nullable enable
     public AudioClip? backgroundMusicPrimary;
@@ -18,8 +19,7 @@ public class MusicManager : MonoBehaviour
     public AudioClip? combatMusicPrimary;
     public AudioClip? combatMusicIntro;
 
-    public AudioClip? backgroundMusicVictory; // Actually ...Secondary ; for extensibility purposes such as you WANT to be able to alternate between two Background Musics during gameplay
-    [SerializeField]
+    public AudioClip? backgroundMusicDeath;
 
     public virtual void Awake()
     {
@@ -138,10 +138,10 @@ public class MusicManager : MonoBehaviour
         BackgroundMusicPlayer.Stop();
     }
 
-    public void PlayVictory()
+    public void PlayDeath()
     {
-        BackgroundMusicPlayer.Stop();
-        BackgroundMusicPlayer.clip = backgroundMusicVictory;
+        FadeOutCurrentBackgroundTrack(3);
+        BackgroundMusicPlayer.clip = backgroundMusicDeath;
         BackgroundMusicPlayer.Play();
     }
 
