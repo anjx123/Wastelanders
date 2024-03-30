@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 207ddad3e1c90594ba3f48e2a5a6a796, type: 3}
-  m_Name: Plan1Idea
+  m_Name: 2 Plan1Idea
   m_EditorClassIdentifier: 
   dialogue:
   - bodyText: 'From the camp attack, it seems the beetles are attracted to these

@@ -10,26 +10,34 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 207ddad3e1c90594ba3f48e2a5a6a796, type: 3}
-  m_Name: AfterBeetleFightDialogue
+  m_Name: 5 AfterBeetleFightDialogue
   m_EditorClassIdentifier: 
   dialogue:
-  - bodyText: Nice going Jackie, with your plan, everything went much smoothly
-    speakerName: Jackie
-    displayingImage: {fileID: 21300000, guid: 87cb7c6c6588a4a3a957b707239abbf0, type: 3}
-    broadcastAnEvent: 0
-  - bodyText: "Thanks, Ives. Though, I\u2019m finding it kind of hard to distinguish
-      the beetles from the crystals. I wonder how the two are connected\u2026 Do
-      you think they rely on the crystals for survival somehow?"
-    speakerName: Jackie
-    displayingImage: {fileID: 21300000, guid: 10ec818d4088de44a83a5405137230e4, type: 3}
-    broadcastAnEvent: 0
-  - bodyText: "That\u2019s a possibility. Maybe their life force is embedded in the
-      crystals."
+  - bodyText: Nice going Jackie, that couldn't have gone smoother.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 87cb7c6c6588a4a3a957b707239abbf0, type: 3}
     broadcastAnEvent: 0
-  - bodyText: "Then, I\u2019ll start destroying the ones close to us! That\u2019ll
-      make them easier to take down!"
+  - bodyText: It's nothing Ives, I just made an observation and the plan naturally
+      formed.
+    speakerName: Jackie
+    displayingImage: {fileID: 21300000, guid: 10ec818d4088de44a83a5405137230e4, type: 3}
+    broadcastAnEvent: 0
+  - bodyText: Although I am curious, you have any guesses as to how these beetles
+      are connected to these crystals?
+    speakerName: Jackie
+    displayingImage: {fileID: 21300000, guid: 228f823fe8b2f4d4791ed74e46de81e1, type: 3}
+    broadcastAnEvent: 0
+  - bodyText: Hmm, from my experience, perhaps the beetles somehow need these crystals
+      to survive...
+    speakerName: Ives
+    displayingImage: {fileID: 21300000, guid: 87cb7c6c6588a4a3a957b707239abbf0, type: 3}
+    broadcastAnEvent: 0
+  - bodyText: Or even reproduce.
+    speakerName: Jackie
+    displayingImage: {fileID: 21300000, guid: 228f823fe8b2f4d4791ed74e46de81e1, type: 3}
+    broadcastAnEvent: 0
+  - bodyText: "Ah, in that case, I\u2019ll start destroying the crystals close to
+      us! That\u2019ll stop 'em from coming back."
     speakerName: Jackie
     displayingImage: {fileID: 21300000, guid: 228f823fe8b2f4d4791ed74e46de81e1, type: 3}
     broadcastAnEvent: 0
