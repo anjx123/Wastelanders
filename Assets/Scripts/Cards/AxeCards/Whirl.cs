@@ -17,7 +17,7 @@ public class Whirl : AxeCards
         Speed = 3;
 
         myName = "Whirl";
-        description = "Applies 1 wound on hit. If unstaggered, make this attack again.";
+        description = "Apply 1 wound on hit. If unstaggered, make this attack again.";
         Renderer renderer = GetComponent<Renderer>();
         ogMaterial = renderer.material;
         OriginalPosition = transform.position;

@@ -24,7 +24,7 @@ public class Mutilate : AxeCards
         Speed = 3;
 
         myName = "Mutilate";
-        description = "On hit, the target gains a wound stack when staggered for the rest of this turn. (Including this)";
+        description = "On hit, the target gains a wound stack. Then the target gains one wound each time they are staggered this turn.";
         Renderer renderer = GetComponent<Renderer>();
         ogMaterial = renderer.material;
         OriginalPosition = transform.position;
