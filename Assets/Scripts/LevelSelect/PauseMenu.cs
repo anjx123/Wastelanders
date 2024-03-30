@@ -9,9 +9,44 @@ public class PauseMenu : MonoBehaviour
     [SerializeField] private GameObject pauseMenuPanel;
     [SerializeField] private Canvas pauseCanvas;
 
+    [SerializeField] private GameObject glossary;
+    [SerializeField] private GameObject buttonparent;
+   
+
     public delegate void PauseMenuEventHandler();
     public static event PauseMenuEventHandler onPauseMenuActivate;   // for more complex functions that cannot use isPaused
     public static event PauseMenuEventHandler onPauseMenuDeactivate;
+
+    bool isGlossaryShowing = false;
+    public bool GlossaryState { get { return isGlossaryShowing; }
+        set
+        {
+            if (value == true)
+            {
+                ShowGlossary();
+            } else
+            {
+                HideGlossary();
+            }
+        }
+    }
+
+    void ShowGlossary()
+    {
+        glossary.SetActive(true);
+        buttonparent.SetActive(false);
+    }
+
+    void HideGlossary()
+    {
+        glossary.SetActive(false);
+        buttonparent.SetActive(true);
+    }
+
+    public void SetGlossary(bool isShowing)
+    {
+        GlossaryState = isShowing;
+    }
 
 
     private void Start()
@@ -31,8 +66,10 @@ public class PauseMenu : MonoBehaviour
                 PauseScene();
             }
         }
-        
     }
+
+
+
 
     public void ResumeScene()
     {

@@ -262,9 +262,6 @@ public class CombatInfo : MonoBehaviour
         }
         diceRollSprite.GetComponent<SpriteRenderer>().flipX = true;
 
-        
-        
-
         CombatManager.Instance.UpdateCameraBounds(); //Bad placement here
     }
     //Flips the CombatInfo so that the Icon is on the LEFT of the entity
