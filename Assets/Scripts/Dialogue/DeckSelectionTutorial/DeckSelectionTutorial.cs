@@ -32,7 +32,7 @@ public class DeckSelectionTutorial : MonoBehaviour
     {
         if (GameStateManager.justFinishedBeetleFight)
         {
-            DeckSelectionManager.Instance.SetNextScene("PreQueenFightScene");
+            DeckSelectionManager.Instance.SetNextScene(GameStateManager.PRE_QUEEN_FIGHT);
             yield break;
         }
 

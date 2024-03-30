@@ -193,6 +193,7 @@ AnimatorState:
   - {fileID: 7835268697450291560}
   - {fileID: 4790040960574915941}
   - {fileID: 7328997591689916232}
+  - {fileID: 1998967656674591700}
   m_StateMachineBehaviours: []
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
@@ -208,6 +209,31 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
+--- !u!1101 &1998967656674591700
+AnimatorStateTransition:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_Conditions:
+  - m_ConditionMode: 1
+    m_ConditionEvent: IsMelee
+    m_EventTreshold: 0
+  m_DstStateMachine: {fileID: 0}
+  m_DstState: {fileID: -2079614369491166669}
+  m_Solo: 0
+  m_Mute: 0
+  m_IsExit: 0
+  serializedVersion: 3
+  m_TransitionDuration: 0
+  m_TransitionOffset: 0
+  m_ExitTime: 0.75409836
+  m_HasExitTime: 0
+  m_HasFixedDuration: 0
+  m_InterruptionSource: 0
+  m_OrderedInterruption: 1
+  m_CanTransitionToSelf: 1
 --- !u!1101 &3699052399845428169
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -296,9 +322,6 @@ AnimatorStateTransition:
   - m_ConditionMode: 1
     m_ConditionEvent: IsStaffing
     m_EventTreshold: 0
-  - m_ConditionMode: 1
-    m_ConditionEvent: IsMelee
-    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -2079614369491166669}
   m_Solo: 0
@@ -361,7 +384,7 @@ AnimatorStateMachine:
     m_Position: {x: 540, y: -90, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -2079614369491166669}
-    m_Position: {x: 620, y: 10, z: 0}
+    m_Position: {x: 620, y: -10, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []

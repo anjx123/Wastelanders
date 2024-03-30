@@ -50,6 +50,9 @@ public class PreQueenFight : DialogueClasses
     private List<EntityClass> entitiesInPlanThree = new();
     [SerializeField] private DialogueWrapper planThreeDialogue;
 
+    [SerializeField] private Crystals bugCrystal1;
+    [SerializeField] private Crystals bugCrystal2;
+    [SerializeField] private Crystals bugCrystal3;
     [SerializeField] private Camera sceneCamera;
 
 
@@ -69,8 +72,8 @@ public class PreQueenFight : DialogueClasses
     [SerializeField] private List<Beetle> queenGuardBeetles;
     [SerializeField] private List<Transform> queenGuardBeetleTransforms;
 
-    [SerializeField] private GameObject background;
 
+    [SerializeField] GameOver gameOver;
     [SerializeField] private bool jumpToCombat;
 
 
@@ -84,6 +87,9 @@ public class PreQueenFight : DialogueClasses
     [SerializeField] private DialogueWrapper CrystalHitDialogue;
     [SerializeField] private DialogueWrapper PreQueenFightDialogue;
     [SerializeField] private DialogueWrapper LastBitDialogue;
+    [SerializeField] private DialogueWrapper PostFight;
+    [SerializeField] private DialogueWrapper BeetleGainedBuff;
+    [SerializeField] private DialogueWrapper gameLoseDialogue;
 
     private const float BRIEF_PAUSE = 0.2f; // For use after an animation to make it visually seem smoother
     private const float MEDIUM_PAUSE = 1f; //For use after a text box comes down and we want to add some weight to the text.
@@ -102,6 +108,7 @@ public class PreQueenFight : DialogueClasses
     {
         DialogueBox.ClearDialogueEvents();
         CombatManager.ClearEvents();
+        Beetle.OnGainBuffs -= ExplainBeetleBuff;
     }
 
     private IEnumerator ExecuteGameStart()
@@ -114,6 +121,9 @@ public class PreQueenFight : DialogueClasses
         jackie.OutOfCombat(); //Workaround for now, ill have to remove this once i manually start instantiating players
         draggerBeetle.OutOfCombat();
         jackie.SetReturnPosition(jackieDefaultTransform.position);
+
+        CombatManager.Instance.SetEnemiesPassive(new List<EnemyClass>(bigCrystals));
+
         foreach (Crystals c in crystals)
         {
             c.OutOfCombat();
@@ -366,6 +376,13 @@ public class PreQueenFight : DialogueClasses
                     coroutines.Add(coroutine);
                 }
 
+                foreach (Crystals entity in crystals)
+                {
+                    entity.Emphasize();
+                    Coroutine coroutine = StartCoroutine(FadeSprite(entity.gameObject.GetComponent<SpriteRenderer>(), 0f, 1f, 0.8f));
+                    coroutines.Add(coroutine);
+                }
+
                 // Wait for all coroutines to finish
                 foreach (var cor in coroutines)
                 {
@@ -377,58 +394,108 @@ public class PreQueenFight : DialogueClasses
                 DialogueManager.Instance.MoveBoxToTop();
 
                 yield return StartCoroutine(DialogueManager.Instance.StartDialogue(planThreeDialogue.Dialogue));
-                yield return StartCoroutine(CombatManager.Instance.FadeInLightScreen(1f));
+                yield return StartCoroutine(CombatManager.Instance.FadeInLightScreen(0.5f));
 
                 ives.SetReturnPosition(ivesDefaultTransform.position);
                 StartCoroutine(ives.ResetPosition());
                 yield return StartCoroutine(jackie.ResetPosition()); //Jackie Runs into the scene
                 yield return new WaitForSeconds(MEDIUM_PAUSE);
-
-                //yield return StartCoroutine(BeetleDragCrystal(draggerBeetle, draggedCrystal, draggerBeetleTransform.position, 2f));
-                /*
-                            yield return StartCoroutine(draggerBeetle.Die());
-                */
-
                 Coroutine jackieClash = StartCoroutine(NoCombatClash(jackie, campBeetles[3], false));
-                yield return new WaitForSeconds(BRIEF_PAUSE);
-                Coroutine ivesClash = StartCoroutine(NoCombatClash(ives, campBeetles[0], false));
-                yield return new WaitForSeconds(BRIEF_PAUSE);
 
-                yield return new WaitForSeconds(MEDIUM_PAUSE);//TODO: layering
-
-                StartCoroutine(NoCombatClash(jackie, campBeetles[2], false));
                 yield return new WaitForSeconds(BRIEF_PAUSE);
-                yield return StartCoroutine(NoCombatClash(ives, campBeetles[1], false));
+                yield return StartCoroutine(NoCombatClash(ives, campBeetles[0], false));
+
+                yield return new WaitForSeconds(BRIEF_PAUSE);
+                StartCoroutine(NoCombatClash(ives, campBeetles[2], false));
+
+                yield return new WaitForSeconds(BRIEF_PAUSE);
+                yield return StartCoroutine(NoCombatClash(jackie, campBeetles[1], false));
 
                 yield return new WaitForSeconds(MEDIUM_PAUSE);
 
-                jackie.DeEmphasize();
-                ives.DeEmphasize();
+                //Clean up props used this scene
+                foreach (EntityClass entity in entitiesInPlanThree)
+                {
+                    Coroutine coroutine = StartCoroutine(FadeSprite(entity.gameObject.GetComponent<SpriteRenderer>(), 1f, 0f, 0.8f));
+                    coroutines.Add(coroutine);
+                }
+                // Wait for all coroutines to finish
+                foreach (var cor in coroutines)
+                {
+                    yield return cor;
+                }
+                coroutines.Clear();
+
+                foreach (EntityClass entity in entitiesInPlanThree)
+                {
+                    DieInScene(entity);
+                    Destroy(entity.gameObject);
+                }
             }
 
-            yield return StartCoroutine(DialogueManager.Instance.StartDialogue(AfterBeetleFightDialogue.Dialogue));
-
-            yield return StartCoroutine(jackie.MoveToPosition(bigCrystal.transform.position, 1f, 0.5f));
-
-            jackie.AttackAnimation("IsStaffing");
-            yield return new WaitForSeconds(BRIEF_PAUSE);
-            foreach (Crystals c in bigCrystals)
             {
-                StartCoroutine(c.Die());
+                //At this point, 7 items of crystals are all here, 3 left, 3 right, 1 big
+                foreach (Crystals crystal in crystals)
+                {
+                    crystal.DeEmphasize();
+                }
+                yield return StartCoroutine(DialogueManager.Instance.StartDialogue(AfterBeetleFightDialogue.Dialogue));
+                yield return StartCoroutine(jackie.MoveToPosition(bigCrystal.transform.position, 2f, 0.5f));
+
+                jackie.AttackAnimation("IsStaffing");
+                jackie.AddStacks(Resonate.buffName, 1);
+                yield return new WaitForSeconds(BRIEF_PAUSE);
+
+                yield return StartCoroutine(DialogueManager.Instance.StartDialogue(CrystalHitDialogue.Dialogue));
             }
-            yield return new WaitForSeconds(MEDIUM_PAUSE);
+        }
+        else
+        {
 
-            yield return StartCoroutine(DialogueManager.Instance.StartDialogue(CrystalHitDialogue.Dialogue));
+            jackie.AddStacks(Resonate.buffName, 1);
+            CleanUpScene1();
+            CleanUpScene2();
+            CleanUpScene3();
 
-            //TODO: shake?
-            StartCoroutine(jackie.MoveToPosition(jackieDefaultTransform.position, 0f, 1.5f));
-            yield return StartCoroutine(ives.MoveToPosition(ivesDefaultTransform.position, 0f, 1.5f));
-            jackie.FaceRight();
-            ives.FaceRight();
+            yield return StartCoroutine(CombatManager.Instance.FadeInLightScreen(0.5f));
+        }
+        {
+            //Bugs spawn from the crystals
+            queenGuardBeetles[0].transform.position = bugCrystal1.transform.position;
+            queenGuardBeetles[1].transform.position = bugCrystal2.transform.position;
+            queenGuardBeetles[2].transform.position = bugCrystal3.transform.position;
+            crystals.Remove(bugCrystal1);
+            crystals.Remove(bugCrystal2);
+            crystals.Remove(bugCrystal3);
+            DieInScene(bugCrystal1);
+            DieInScene(bugCrystal2);
+            DieInScene(bugCrystal3);
+            Destroy(bugCrystal1.gameObject);
+            Destroy(bugCrystal2.gameObject);
+            Destroy(bugCrystal3.gameObject);
 
+            queenGuardBeetles[0].OutOfCombat();
+            queenGuardBeetles[1].OutOfCombat();
+            queenGuardBeetles[2].OutOfCombat();
+
+            //Big Crystals and side crystals are now removed. Only crystals in the actual combat remain
+            for (int i = 0; i < bigCrystals.Count; i++)
+            {
+                crystals.Remove(bigCrystals[i]);
+            }
+            //Shake here TODO
             yield return StartCoroutine(DialogueManager.Instance.StartDialogue(PreQueenFightDialogue.Dialogue));
+        }
 
+        {
+            StartCoroutine(jackie.MoveToPosition(jackieDefaultTransform.position, 0f, 1.3f));
+            yield return StartCoroutine(ives.MoveToPosition(ivesDefaultTransform.position, 0f, 1.5f));
+            jackie.SetReturnPosition(jackie.transform.position);
+            jackie.FaceRight();
+            ives.SetReturnPosition(ives.transform.position);
+            ives.FaceRight();
             theQueen.OutOfCombat();
+            theQueen.Emphasize();
             for (int i = 0; i < queenGuardBeetles.Count; i++)
             {
                 queenGuardBeetles[i].OutOfCombat();
@@ -437,35 +504,92 @@ public class PreQueenFight : DialogueClasses
                     queenGuardBeetles[i].transform.position.y, -1);
                 StartCoroutine(queenGuardBeetles[i].MoveToPosition(queenGuardBeetleTransforms[i].position, 0f, 1.5f));
             }
-            theQueen.Emphasize();
             yield return StartCoroutine(theQueen.MoveToPosition(queenTransform.position, 0f, 1.5f));
-
             yield return StartCoroutine(DialogueManager.Instance.StartDialogue(LastBitDialogue.Dialogue));
+
+
             jackie.DeEmphasize();
+            ives.DeEmphasize();
             theQueen.DeEmphasize();
+
+            ives.InCombat();
+            jackie.InCombat();
+            theQueen.InCombat();
+            theQueen.SetReturnPosition(theQueen.transform.position);
+            theQueen.InheritChild(queenGuardBeetles);
+            for (int i = 0; i < queenGuardBeetles.Count; i++)
+            {
+                queenGuardBeetles[i].InCombat();
+                queenGuardBeetles[i].SetReturnPosition(queenGuardBeetles[i].transform.position);
+            }
+            foreach (Crystals crystal in crystals)
+            {
+                crystal.InCombat();
+            }
+
+            CombatManager.Instance.GameState = GameState.SELECTION;
+            BeginQueenCombat();
+            yield return new WaitUntil(() => CombatManager.Instance.GameState == GameState.GAME_WIN);
+            MusicManager.Instance.FadeOutCurrentBackgroundTrack(2f);
+            yield return new WaitForSeconds(1f);
 
             yield return StartCoroutine(CombatManager.Instance.FadeInDarkScreen(1.5f));
 
-        }
+            yield return StartCoroutine(DialogueManager.Instance.StartDialogue(PostFight.Dialogue));
 
-        SceneManager.LoadScene("BeetleCombatScene");
+            SceneManager.LoadScene(GameStateManager.POST_QUEEN_FIGHT);
+        }
         
     }
 
-    private void EntityDied(EntityClass e)
+    void BeginQueenCombat()
     {
-        if (e.GetType().IsSubclassOf(typeof(Beetle)))
+        CombatManager.PlayersWinEvent += PlayersWin;
+        CombatManager.EnemiesWinEvent += EnemiesWin;
+        Beetle.OnGainBuffs += ExplainBeetleBuff;
+    }
+
+    private void ExplainBeetleBuff(string buffType, int stacks, Beetle beetle)
+    {
+        StartCoroutine(ExplainQueen(buffType, stacks, beetle));
+    }
+
+    private IEnumerator ExplainQueen(string buffType, int stacks, Beetle beetle)
+    {
+        if (buffType == Resonate.buffName && stacks > 0)
         {
-            beetles_alive--;
-            if (beetles_alive < 1)
-            {
-                CombatManager.Instance.GameState = GameState.GAME_WIN;
-                EntityClass.OnEntityDeath -= EntityDied;
-            }
+            yield return new WaitUntil(() => CombatManager.Instance.GameState != GameState.FIGHTING);
+            Beetle.OnGainBuffs -= ExplainBeetleBuff;
+            StartCoroutine(DialogueManager.Instance.StartDialogue(BeetleGainedBuff.Dialogue));
         }
     }
 
 
+    private void PlayersWin()
+    {
+        CombatManager.EnemiesWinEvent -= EnemiesWin;
+        CombatManager.PlayersWinEvent -= PlayersWin;
+        CombatManager.Instance.GameState = GameState.GAME_WIN;
+    }
+
+    private void EnemiesWin()
+    {
+        CombatManager.EnemiesWinEvent -= EnemiesWin;
+        CombatManager.PlayersWinEvent -= PlayersWin;
+        StartCoroutine(GameLose());
+        CombatManager.Instance.GameState = GameState.GAME_LOSE;
+    }
+    private IEnumerator GameLose()
+    {
+        yield return StartCoroutine(CombatManager.Instance.FadeInDarkScreen(2f));
+
+        GameStateManager.jumpIntoFrogAndSlimeFight = true;
+        //Set Jump into combat to be true
+        gameOver.gameObject.SetActive(true);
+        gameOver.FadeIn();
+
+        yield return StartCoroutine(DialogueManager.Instance.StartDialogue(gameLoseDialogue.Dialogue));
+    }
     //------helpers------
 
     // "clashes" both entities, without rolling dice. bool parameter decides who gets staggered
@@ -548,5 +672,32 @@ public class PreQueenFight : DialogueClasses
         enemyEntity.UnTargetable();
         enemyEntity.combatInfo.gameObject.SetActive(false);
         enemyEntity.transform.rotation = Quaternion.Euler(0, 0, 75);
+    }
+
+    void CleanUpScene2()
+    {
+        foreach (EntityClass entity in entitiesInPlanTwo)
+        {
+            DieInScene(entity);
+            Destroy(entity.gameObject);
+        }
+    }
+
+    void CleanUpScene1()
+    {
+        foreach (EntityClass entity in entitiesInPlanOne)
+        {
+            DieInScene(entity);
+            Destroy(entity.gameObject);
+        }
+    }
+
+    void CleanUpScene3()
+    {
+        foreach (EntityClass entity in entitiesInPlanThree)
+        {
+            DieInScene(entity);
+            Destroy(entity.gameObject);
+        }
     }
 }
