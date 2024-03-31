@@ -20,7 +20,7 @@ public class Headshot : PistolCards
         Speed = 2;
 
         myName = "Headshot";
-        description = "If This Card Staggers The Opponent, Deal +1 Damage For Each Stack Of Accuracy";
+        description = "On hit, deal +1 damage for each stack of Accuracy.";
         CardType = CardType.RangedAttack;
         Renderer renderer = GetComponent<Renderer>();
         ogMaterial = renderer.material; // og sprite of card

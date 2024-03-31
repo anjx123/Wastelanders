@@ -774,17 +774,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 617082415006753302, guid: 276880eff6e9b4907a1ea5430761a162, type: 3}
   m_PrefabInstance: {fileID: 1129312547}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &281515391 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6950428195291563312, guid: 276880eff6e9b4907a1ea5430761a162, type: 3}
-  m_PrefabInstance: {fileID: 1129312547}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 45cb95d5a6a7644349931d373abd746e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &282712797
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1333,17 +1322,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7638263227755287879, guid: 55dd1017896a4294ebc48577819d6683, type: 3}
   m_PrefabInstance: {fileID: 1696300839}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &460078809 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: -3618748775260971989, guid: 55dd1017896a4294ebc48577819d6683, type: 3}
-  m_PrefabInstance: {fileID: 1696300839}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7233ff0cadad3784dbdeba856f026aec, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &466674210
 GameObject:
   m_ObjectHideFlags: 0
@@ -3594,14 +3572,12 @@ MonoBehaviour:
   mainCamera: {fileID: 1525248179}
   jackie: {fileID: 1790411082}
   jackieDefaultTransform: {fileID: 2041699582}
-  jackieTalkingTransform: {fileID: 824088326}
   ives: {fileID: 605471067}
   ivesDefaultTransform: {fileID: 1895702309}
   crystal1: {fileID: 654924578}
   crystal2: {fileID: 518689635}
   crystal3: {fileID: 705891380}
   plan1Parent: {fileID: 24404139}
-  planOneDialogue: {fileID: 11400000, guid: b3b33f8c6e5019947af9a624dfce19f7, type: 2}
   scout1: {fileID: 1887015853}
   worker1: {fileID: 24186166}
   worker2: {fileID: 1780721127}
@@ -3616,16 +3592,10 @@ MonoBehaviour:
   planTwoJackie: {fileID: 525038065}
   planTwoIves: {fileID: 1181709657}
   plan2Parent: {fileID: 1034705022}
-  planTwoDialogue: {fileID: 11400000, guid: ce3c83dea88d125429799d89ca58b08d, type: 2}
   plan3Parent: {fileID: 872091193}
-  planThreeDialogue: {fileID: 11400000, guid: 4b2d2fd9c03de94468daef6dfa38a399, type: 2}
   bugCrystal1: {fileID: 1165907944}
   bugCrystal2: {fileID: 1182704575}
   bugCrystal3: {fileID: 2070865028}
-  sceneCamera: {fileID: 0}
-  draggerBeetle: {fileID: 281515391}
-  draggerBeetleTransform: {fileID: 1965198846}
-  draggedCrystal: {fileID: 460078809}
   campBeetles:
   - {fileID: 873744480}
   - {fileID: 1582787204}
@@ -3658,8 +3628,9 @@ MonoBehaviour:
   gameOver: {fileID: 1871834064}
   jumpToCombat: 0
   initialPlanByJackie: {fileID: 11400000, guid: 676fbdb59dc05df4485f6797ab239b84, type: 2}
-  IntroDialogue: {fileID: 11400000, guid: 5fdec75b151e64afa925aa47f1f51179, type: 2}
-  MakingPlanDialogue: {fileID: 11400000, guid: 30e16747302de43048d05e2c0f028000, type: 2}
+  planOneDialogue: {fileID: 11400000, guid: b3b33f8c6e5019947af9a624dfce19f7, type: 2}
+  planTwoDialogue: {fileID: 11400000, guid: ce3c83dea88d125429799d89ca58b08d, type: 2}
+  planThreeDialogue: {fileID: 11400000, guid: 4b2d2fd9c03de94468daef6dfa38a399, type: 2}
   AfterBeetleFightDialogue: {fileID: 11400000, guid: 71f3662f57d9b437f9bb33f140334a8f, type: 2}
   CrystalHitDialogue: {fileID: 11400000, guid: 2d1ca4dd96f5346089448956a7733c18, type: 2}
   PreQueenFightDialogue: {fileID: 11400000, guid: 818b75a2acc324bafa25832c21f63f07, type: 2}
@@ -6865,7 +6836,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2933413030546177507, guid: 0ce0ee3d06315164a88fea5184a490b6, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -76
+      value: -115
+      objectReference: {fileID: 0}
+    - target: {fileID: 2933413030546177507, guid: 0ce0ee3d06315164a88fea5184a490b6, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -9
       objectReference: {fileID: 0}
     - target: {fileID: 3845234593521427544, guid: 0ce0ee3d06315164a88fea5184a490b6, type: 3}
       propertyPath: m_Name

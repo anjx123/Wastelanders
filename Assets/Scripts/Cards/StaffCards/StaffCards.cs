@@ -16,7 +16,7 @@ public abstract class StaffCards : ActionClass
             Origin.AttackAnimation("IsStaffing");
         } else
         {
-            Origin.AttackAnimation("MeleeAttack");
+            Origin.AttackAnimation("IsMelee");
         }
         base.CardIsUnstaggered();
     }
@@ -28,9 +28,9 @@ public abstract class StaffCards : ActionClass
         }
         else
         {
-            Origin.AttackAnimation("MeleeAttack");
+            Origin.AttackAnimation("IsMelee");
         }
-        MusicManager.Instance.PlaySFX(MusicManager.SFXList.staff);
+        MusicManager.Instance?.PlaySFX(MusicManager.SFXList.staff);
         base.OnHit();
     }
 }

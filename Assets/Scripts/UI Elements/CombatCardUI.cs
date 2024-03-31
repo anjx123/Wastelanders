@@ -1,9 +1,11 @@
-﻿using UnityEngine;
+﻿using TMPro;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class CombatCardUI : DisplayableClass
 {
     [SerializeField] SpriteRenderer targetRenderer;
+    [SerializeField] TextMeshPro rangeText;
     private void OnMouseOver()
     {
         // Increase the size of the Combat UI to indicate it's clickable
@@ -35,7 +37,14 @@ public class CombatCardUI : DisplayableClass
         if (ActionClass != null)
         {
             ActionClass.TargetChanged -= SetTargetIcon;
+            ActionClass.CardValuesUpdating += UpdateRangeText;
         }
+    }
+
+    private void OnEnable()
+    {
+        rangeText.GetComponent<MeshRenderer>().sortingLayerName = targetRenderer.sortingLayerName;
+        rangeText.GetComponent<MeshRenderer>().sortingOrder = targetRenderer.sortingOrder;
     }
 
 
@@ -45,22 +54,41 @@ public class CombatCardUI : DisplayableClass
         if (ActionClass != null)
         {
             ActionClass.TargetChanged -= SetTargetIcon;
+            ActionClass.CardValuesUpdating -= UpdateRangeText;
         }
         ActionClass = actionClass;
         ActionClass.TargetChanged += SetTargetIcon;
-        targetRenderer.sprite = actionClass.Target.icon;
+        ActionClass.CardValuesUpdating += UpdateRangeText;
+        SetTargetIcon(ActionClass);
+        UpdateRangeText(ActionClass);
         GetComponent<SpriteRenderer>().sprite = actionClass.GetIcon();
+
+    }
+
+    void UpdateRangeText(ActionClass actionClass)
+    {
+        rangeText.text = actionClass.GetCard().rollFloor + "-" + actionClass.GetCard().rollCeiling;
+        if (ActionClass.Origin is EnemyClass)
+        {
+            rangeText.color = Color.red;
+        }
+        else
+        {
+            rangeText.color = Color.green;
+        }
     }
 
     public void Emphasize()
     {
         GetComponent<SpriteRenderer>().sortingOrder = CombatManager.Instance.FADE_SORTING_ORDER + 1;
+        rangeText.GetComponent<MeshRenderer>().sortingOrder = CombatManager.Instance.FADE_SORTING_ORDER + 2;
         targetRenderer.GetComponent<SpriteRenderer>().sortingOrder = CombatManager.Instance.FADE_SORTING_ORDER + 2;
     }
 
     public void DeEmphasize()
     {
         GetComponent<SpriteRenderer>().sortingOrder = CombatManager.Instance.FADE_SORTING_ORDER - 2;
+        rangeText.GetComponent<MeshRenderer>().sortingOrder = CombatManager.Instance.FADE_SORTING_ORDER - 1;
         targetRenderer.GetComponent<SpriteRenderer>().sortingOrder = CombatManager.Instance.FADE_SORTING_ORDER - 1;
     }
 

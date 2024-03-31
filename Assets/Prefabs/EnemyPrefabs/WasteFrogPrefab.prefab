@@ -55,9 +55,9 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: 65cbe66e8e31c2e4d81b455d4c8f868f, type: 3}
   availableActions:
   - {fileID: 2376898879351982445, guid: 763a690f87eae40e2ba78421da934720, type: 3}
+  - {fileID: 2376898879351982445, guid: 763a690f87eae40e2ba78421da934720, type: 3}
   - {fileID: 5586820537936588944, guid: d7ed528b3d5934a809e97a1ef133cdd0, type: 3}
   - {fileID: 2376898879351982445, guid: 8e1f3cbdadd7f894aa929faf762c174e, type: 3}
-  dupActions: []
 --- !u!95 &3297183234373819581
 Animator:
   serializedVersion: 5

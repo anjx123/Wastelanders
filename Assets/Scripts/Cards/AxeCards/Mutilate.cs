@@ -24,7 +24,7 @@ public class Mutilate : AxeCards
         Speed = 3;
 
         myName = "Mutilate";
-        description = "After on hit, the target gains a wound stack after being staggered for the rest of this turn.";
+        description = "On hit, the target gains a wound stack. Then the target gains one wound each time they take damage this turn.";
         Renderer renderer = GetComponent<Renderer>();
         ogMaterial = renderer.material;
         OriginalPosition = transform.position;
@@ -43,9 +43,6 @@ public class Mutilate : AxeCards
     //(@Author anrui) OnHit modifies how wound works fundamentally (Probably a bad idea now that I think of it...)
     public override void OnHit()
     {
-        base.OnHit();
-        
-
         Target.EntityTookDamage += AddWound;
         CombatManager.OnGameStateChanged += ResetBuffHandler;
         EntityClass.OnEntityDeath += HandleTargetDeath;
@@ -59,6 +56,7 @@ public class Mutilate : AxeCards
         }
 
         GameStateChangedHandler = ResetBuffHandler;
+        base.OnHit();
     }
 
     void HandleTargetDeath(EntityClass entity)

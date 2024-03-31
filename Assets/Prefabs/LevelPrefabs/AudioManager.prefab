@@ -306,18 +306,12 @@ MonoBehaviour:
   SFXSoundsPlayer: {fileID: 7762219747329995850}
   BackgroundMusicPlayer: {fileID: 2139620353096365076}
   BackgroundMusicIntroPlayer: {fileID: 8912160525799525485}
-  BackgroundMusicPrimary: {fileID: 8300000, guid: 6f3df3ec532940047937486685b7960e, type: 3}
-  BackgroundMusicVictory: {fileID: 0}
-  BackgroundMusicIntro: {fileID: 0}
-  sfxTuples:
-  - Item1: 0
-    Item2: {fileID: 8300000, guid: 3c6f2bc04442a724589bbe954730f998, type: 3}
-  - Item1: 0
-    Item2: {fileID: 0}
-  - Item1: 2
-    Item2: {fileID: 8300000, guid: 1f01deee0b9c25c4f865c84973dc5db1, type: 3}
-  - Item1: 3
-    Item2: {fileID: 8300000, guid: f5f6403acb36b594ebebf7a272a125a0, type: 3}
+  sfxTuples: []
+  backgroundMusicPrimary: {fileID: 0}
+  backgroundMusicIntro: {fileID: 0}
+  combatMusicPrimary: {fileID: 0}
+  combatMusicIntro: {fileID: 0}
+  backgroundMusicDeath: {fileID: 8300000, guid: 6aaf4e9c838f6b64395d94159969a955, type: 3}
 --- !u!1 &8471473453774046622
 GameObject:
   m_ObjectHideFlags: 0

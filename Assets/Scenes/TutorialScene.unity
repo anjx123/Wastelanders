@@ -1545,6 +1545,112 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 18ff4a241e9f877439ebd5fd1de51dd0, type: 3}
+--- !u!1001 &1223221741
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1877041900}
+    m_Modifications:
+    - target: {fileID: 5522002409995569706, guid: 8d25b64c33c41434ca2ffa92437ea568, type: 3}
+      propertyPath: m_Pivot.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5522002409995569706, guid: 8d25b64c33c41434ca2ffa92437ea568, type: 3}
+      propertyPath: m_Pivot.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5522002409995569706, guid: 8d25b64c33c41434ca2ffa92437ea568, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5522002409995569706, guid: 8d25b64c33c41434ca2ffa92437ea568, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5522002409995569706, guid: 8d25b64c33c41434ca2ffa92437ea568, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5522002409995569706, guid: 8d25b64c33c41434ca2ffa92437ea568, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5522002409995569706, guid: 8d25b64c33c41434ca2ffa92437ea568, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5522002409995569706, guid: 8d25b64c33c41434ca2ffa92437ea568, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5522002409995569706, guid: 8d25b64c33c41434ca2ffa92437ea568, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5522002409995569706, guid: 8d25b64c33c41434ca2ffa92437ea568, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5522002409995569706, guid: 8d25b64c33c41434ca2ffa92437ea568, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5522002409995569706, guid: 8d25b64c33c41434ca2ffa92437ea568, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5522002409995569706, guid: 8d25b64c33c41434ca2ffa92437ea568, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5522002409995569706, guid: 8d25b64c33c41434ca2ffa92437ea568, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5522002409995569706, guid: 8d25b64c33c41434ca2ffa92437ea568, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5522002409995569706, guid: 8d25b64c33c41434ca2ffa92437ea568, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5522002409995569706, guid: 8d25b64c33c41434ca2ffa92437ea568, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5522002409995569706, guid: 8d25b64c33c41434ca2ffa92437ea568, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5522002409995569706, guid: 8d25b64c33c41434ca2ffa92437ea568, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5522002409995569706, guid: 8d25b64c33c41434ca2ffa92437ea568, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5658175525564596529, guid: 8d25b64c33c41434ca2ffa92437ea568, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 1525248175}
+    - target: {fileID: 8591503019450182587, guid: 8d25b64c33c41434ca2ffa92437ea568, type: 3}
+      propertyPath: m_Name
+      value: PauseCanvas
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 8d25b64c33c41434ca2ffa92437ea568, type: 3}
+--- !u!224 &1223221742 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 5522002409995569706, guid: 8d25b64c33c41434ca2ffa92437ea568, type: 3}
+  m_PrefabInstance: {fileID: 1223221741}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1264232811
 GameObject:
   m_ObjectHideFlags: 0
@@ -2534,6 +2640,7 @@ Transform:
   - {fileID: 1286108454}
   - {fileID: 1852793026}
   - {fileID: 939972736}
+  - {fileID: 1223221742}
   - {fileID: 596087403}
   - {fileID: 644697184}
   m_Father: {fileID: 0}
@@ -2910,52 +3017,52 @@ MonoBehaviour:
   - bodyText: Hey have you heard? Apparently, Jackie is trying out for the NITES
       exam again.
     speakerName: Laid-back Soldier
-    displayingImage: {fileID: 21300000, guid: b5d13694d44666248bd6437ab54688c3, type: 3}
+    displayingImage: {fileID: 0}
     broadcastAnEvent: 1
   - bodyText: What? So soon? After her performance last year, do you really think
       she is prepared to try again?
     speakerName: Puzzled Soldier
-    displayingImage: {fileID: 21300000, guid: cd4d67535c77ee1438d406e274cf2975, type: 3}
+    displayingImage: {fileID: 0}
     broadcastAnEvent: 1
   - bodyText: "Beats me. If I were her, I\u2019d take it easy and spend a couple
       more years training. "
     speakerName: Laid-back Soldier
-    displayingImage: {fileID: 21300000, guid: b5d13694d44666248bd6437ab54688c3, type: 3}
-    broadcastAnEvent: 0
+    displayingImage: {fileID: 0}
+    broadcastAnEvent: 1
   - bodyText: I've heard horror stories about what the NITES have to deal with in
       the Wasteland.
     speakerName: Laid-back Soldier
-    displayingImage: {fileID: 21300000, guid: b5d13694d44666248bd6437ab54688c3, type: 3}
+    displayingImage: {fileID: 0}
     broadcastAnEvent: 0
   - bodyText: She's still so young, maybe even the youngest to join the NITES if
       she passes?
     speakerName: Laid-back Soldier
-    displayingImage: {fileID: 21300000, guid: b5d13694d44666248bd6437ab54688c3, type: 3}
+    displayingImage: {fileID: 0}
     broadcastAnEvent: 0
   - bodyText: "No I don\u2019t think so, wasn\u2019t her mother younger than her
       when she scored top marks on that exam?"
     speakerName: Puzzled Soldier
-    displayingImage: {fileID: 21300000, guid: cd4d67535c77ee1438d406e274cf2975, type: 3}
-    broadcastAnEvent: 0
+    displayingImage: {fileID: 0}
+    broadcastAnEvent: 1
   - bodyText: "Hmm right, guess going on NITES\u2019 wasteland expeditions runs in
       the family. I think life inside the Wall is much more peaceful."
-    speakerName: Puzzled Soldier
-    displayingImage: {fileID: 21300000, guid: cd4d67535c77ee1438d406e274cf2975, type: 3}
-    broadcastAnEvent: 0
+    speakerName: Laid-back Soldier
+    displayingImage: {fileID: 0}
+    broadcastAnEvent: 1
   - bodyText: Of course you do. But do you really plan on being just a grunt soldier
       forever?
     speakerName: Puzzled Soldier
-    displayingImage: {fileID: 21300000, guid: cd4d67535c77ee1438d406e274cf2975, type: 3}
-    broadcastAnEvent: 0
+    displayingImage: {fileID: 0}
+    broadcastAnEvent: 1
   - bodyText: Mmm, maybe I'll give that exam a shot in a couple years.
     speakerName: Laid-back Soldier
-    displayingImage: {fileID: 21300000, guid: b5d13694d44666248bd6437ab54688c3, type: 3}
-    broadcastAnEvent: 0
+    displayingImage: {fileID: 0}
+    broadcastAnEvent: 1
   - bodyText: "Then come on, we should get to training. Pass or not, the fact is
       that she\u2019s trying to make us look like chumps."
     speakerName: Puzzled Soldier
-    displayingImage: {fileID: 21300000, guid: cd4d67535c77ee1438d406e274cf2975, type: 3}
-    broadcastAnEvent: 0
+    displayingImage: {fileID: 0}
+    broadcastAnEvent: 1
   jackieMonologue:
   - bodyText: "Well\u2026 Today\u2019s the day I\u2019ve been preparing the past
       year for."
@@ -3051,16 +3158,15 @@ MonoBehaviour:
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 57baba5992d9e224988e93fcacf9f7eb, type: 3}
     broadcastAnEvent: 0
-  - bodyText: Power - which is a range where your damage can be rolled into.
+  - bodyText: Power - Which is a range that your damage can be rolled into.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 3fea2e94140c08246a0e502ee92d3761, type: 3}
     broadcastAnEvent: 0
-  - bodyText: "And Speed - which dictates the order that you and your opponent\u2019s
-      attacks come out."
+  - bodyText: And Speed - Which determines the order attacks come out.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 61a3ecbde544e124ba8f329d0e4f6fb2, type: 3}
     broadcastAnEvent: 0
-  - bodyText: "Let\u2019s select a card and target an enemy!"
+  - bodyText: "Let\u2019s select a card and target the enemy!"
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 84d19d73f4fee204d8d42cc16de51cf7, type: 3}
     broadcastAnEvent: 0
@@ -3068,6 +3174,10 @@ MonoBehaviour:
   - bodyText: Targeting an enemy will queue up the action to attack in the queue.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 84d19d73f4fee204d8d42cc16de51cf7, type: 3}
+    broadcastAnEvent: 0
+  - bodyText: The queue will be sorted by speed with the fastest attack on the left.
+    speakerName: Ives
+    displayingImage: {fileID: 21300000, guid: fb608aaef631251489ed4ef86a15e639, type: 3}
     broadcastAnEvent: 0
   - bodyText: You can retrieve a card back from the queue by clicking on its icon.
     speakerName: Ives
@@ -3097,8 +3207,13 @@ MonoBehaviour:
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
     broadcastAnEvent: 0
+  - bodyText: You can see the range of power for your attack next to the attack's
+      icon.
+    speakerName: Ives
+    displayingImage: {fileID: 21300000, guid: eab0b79378538464899c1a47f809758c, type: 3}
+    broadcastAnEvent: 0
   - bodyText: "Since the dummy isn\u2019t fighting back, your action will directly
-      deal its power in damage."
+      deal its power in damage once rolled."
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 3fea2e94140c08246a0e502ee92d3761, type: 3}
     broadcastAnEvent: 0
@@ -3108,19 +3223,23 @@ MonoBehaviour:
     displayingImage: {fileID: 21300000, guid: 05aec2f8237521d4f84b7c3d335550b0, type: 3}
     broadcastAnEvent: 0
   buffTutorial:
-  - bodyText: While making staff attacks, some cards will have an ability that grants
-      you 'Focus'.
+  - bodyText: While making staff attacks, you will frequently see the term 'Flow'.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 820631014ce088c4cb748224d5467c86, type: 3}
     broadcastAnEvent: 0
-  - bodyText: Focus grants you +1 power on your attacks, but it clears out at the
-      end of every round.
+  - bodyText: Flow grants +1 to the upper and lower bound of power for your next
+      attack. But then its consumed.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 820631014ce088c4cb748224d5467c86, type: 3}
     broadcastAnEvent: 0
   - bodyText: Each different weapon has it's unique fighting style, make sure to
       capitalize on them and take out your opponents.
     speakerName: Ives
+    displayingImage: {fileID: 21300000, guid: 820631014ce088c4cb748224d5467c86, type: 3}
+    broadcastAnEvent: 0
+  - bodyText: (If you forget what 'Flow' does, you can access buff information in
+      the Glossary on the pause menu by pressing [esc.])
+    speakerName: 
     displayingImage: {fileID: 21300000, guid: 820631014ce088c4cb748224d5467c86, type: 3}
     broadcastAnEvent: 0
   readingOpponentTutorial:
@@ -3137,12 +3256,13 @@ MonoBehaviour:
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: fbdbcaab28794334bb84176f7e052fb5, type: 3}
     broadcastAnEvent: 0
-  - bodyText: At the top of that icon, you can see the attack's intended target.
+  - bodyText: At the top of that icon, you can see the attack's intended target and
+      damage range.
     speakerName: Ives
-    displayingImage: {fileID: 21300000, guid: c35542e8d8ad61c4087e817dd9aa7c15, type: 3}
+    displayingImage: {fileID: 21300000, guid: edb0bc1d86401ce4aadfe4358f987ea3, type: 3}
     broadcastAnEvent: 0
-  - bodyText: '[Clicking] on the attack allows you to see its Power and Speed and
-      Abilities.'
+  - bodyText: '[Clicking] on the attack icon also allows you to see its Speed and
+      any Abilities.'
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 82dbf38ae23fe224e90be99093d02604, type: 3}
     broadcastAnEvent: 0
@@ -3156,12 +3276,12 @@ MonoBehaviour:
     displayingImage: {fileID: 21300000, guid: ade9660133ca00a499bfa3ad449b87bd, type: 3}
     broadcastAnEvent: 0
   clashingCardsTutorial:
-  - bodyText: "When you target an enemy with an attack, that attack will clash with
-      the opponent\u2019s fastest attack."
+  - bodyText: "When you target an enemy with an attack, that attack will \"clash\"
+      with the opponent\u2019s fastest attack."
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: b0d27b9163eb2554996f368bd5b8d4e2, type: 3}
     broadcastAnEvent: 0
-  - bodyText: Promoting both attack's speeds to be the fastest between the two.
+  - bodyText: 'Promoting both attack''s speeds to be the fastest between the two. '
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: b0d27b9163eb2554996f368bd5b8d4e2, type: 3}
     broadcastAnEvent: 0
@@ -3205,8 +3325,12 @@ MonoBehaviour:
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
     broadcastAnEvent: 0
-  - bodyText: Being staggered means you lose your entire attack, so choose the attacks
-      that clash wisely. Being staggered is unforgiving.
+  - bodyText: Being staggered means the attack will not deal any damage, and its
+      ab.
+    speakerName: Ives
+    displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
+    broadcastAnEvent: 0
+  - bodyText: So choose the attacks that clash wisely. Being staggered is unforgiving.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
     broadcastAnEvent: 0
@@ -3216,7 +3340,7 @@ MonoBehaviour:
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
     broadcastAnEvent: 0
-  - bodyText: When you run out of cards in your Action Deck, it will be reshuffled.
+  - bodyText: When you run out of cards in your action deck, it will be reshuffled.
       However...
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}

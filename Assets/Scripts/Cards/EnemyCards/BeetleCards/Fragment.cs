@@ -19,7 +19,7 @@ public class Fragment : ActionClass
         
         Speed = 5;
 
-        description = "If this card hits a player, gain +1 resonate";
+        description = "If this attack hits a player, gain +1 resonate";
 
         myName = "Fragment";
         CardType = CardType.RangedAttack;

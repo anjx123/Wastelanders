@@ -19,7 +19,7 @@ public class CheapStrike : StaffCards
 
 
         myName = "Cheap Strike";
-        description = "On Hit, gain 1 Focus next turn";
+        description = "On hit, gain 3 Flow.";
         Renderer renderer = GetComponent<Renderer>();
         ogMaterial = renderer.material; // og sprite of card
         OriginalPosition = transform.position;
@@ -32,14 +32,6 @@ public class CheapStrike : StaffCards
     public override void OnHit()
     {
         base.OnHit();
-        CombatManager.OnGameStateChanged += AddFocus;
-        void AddFocus(GameState gameState)
-        {
-            if (gameState == GameState.SELECTION)
-            {
-                CombatManager.OnGameStateChanged -= AddFocus;
-                Origin.AddStacks(Focus.buffName, 1);
-            }
-        }
+        Origin.AddStacks(Flow.buffName, 3);
     }
 }

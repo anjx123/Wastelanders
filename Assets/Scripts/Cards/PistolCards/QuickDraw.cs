@@ -25,7 +25,7 @@ public class QuickDraw : PistolCards
         upperBound = 5;
         Speed = 5;
         myName = "Quick Draw";
-        description = "Make this attack, then gain 1 Accuracy";
+        description = "Make this attack, then gain 1 Accuracy.";
         CardType = CardType.RangedAttack;
         Renderer renderer = GetComponent<Renderer>();
         ogMaterial = renderer.material; // og sprite of card
@@ -34,10 +34,5 @@ public class QuickDraw : PistolCards
     }
 
 
-
-    public override void ApplyEffect()
-    {
-        base.ApplyEffect();
-    }
 
 }

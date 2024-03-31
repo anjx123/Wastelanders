@@ -14,7 +14,6 @@ public class PreQueenFight : DialogueClasses
 
     [SerializeField] private Jackie jackie;
     [SerializeField] private Transform jackieDefaultTransform;
-    [SerializeField] private Transform jackieTalkingTransform;
     [SerializeField] private Ives ives;
     [SerializeField] private Transform ivesDefaultTransform;
 
@@ -25,7 +24,6 @@ public class PreQueenFight : DialogueClasses
     [SerializeField] private GameObject crystal3;
     [SerializeField] private GameObject plan1Parent;
     private List<EntityClass> entitiesInPlanOne = new();
-    [SerializeField] private DialogueWrapper planOneDialogue;
     [SerializeField] private Beetle scout1;
     [SerializeField] private Beetle worker1;
     [SerializeField] private Beetle worker2;
@@ -43,24 +41,15 @@ public class PreQueenFight : DialogueClasses
     [SerializeField] private Ives planTwoIves;
     [SerializeField] private GameObject plan2Parent;
     private List<EntityClass> entitiesInPlanTwo = new();
-    [SerializeField] private DialogueWrapper planTwoDialogue;
 
     //Plan 3 Parent
     [SerializeField] private GameObject plan3Parent;
     private List<EntityClass> entitiesInPlanThree = new();
-    [SerializeField] private DialogueWrapper planThreeDialogue;
-
     [SerializeField] private Crystals bugCrystal1;
     [SerializeField] private Crystals bugCrystal2;
     [SerializeField] private Crystals bugCrystal3;
-    [SerializeField] private Camera sceneCamera;
 
 
-
-
-    [SerializeField] private Beetle draggerBeetle;
-    [SerializeField] private Transform draggerBeetleTransform;
-    [SerializeField] private Crystals draggedCrystal;
     [SerializeField] private List<Beetle> campBeetles;
     [SerializeField] private List<Crystals> crystals;
     [SerializeField] private Crystals bigCrystal;
@@ -81,8 +70,9 @@ public class PreQueenFight : DialogueClasses
 
 
     [SerializeField] private DialogueWrapper initialPlanByJackie;
-    [SerializeField] private DialogueWrapper IntroDialogue;
-    [SerializeField] private DialogueWrapper MakingPlanDialogue;
+    [SerializeField] private DialogueWrapper planOneDialogue;
+    [SerializeField] private DialogueWrapper planTwoDialogue;
+    [SerializeField] private DialogueWrapper planThreeDialogue;
     [SerializeField] private DialogueWrapper AfterBeetleFightDialogue;
     [SerializeField] private DialogueWrapper CrystalHitDialogue;
     [SerializeField] private DialogueWrapper PreQueenFightDialogue;
@@ -119,7 +109,6 @@ public class PreQueenFight : DialogueClasses
         yield return new WaitForSeconds(0.5f);
         ives.OutOfCombat();
         jackie.OutOfCombat(); //Workaround for now, ill have to remove this once i manually start instantiating players
-        draggerBeetle.OutOfCombat();
         jackie.SetReturnPosition(jackieDefaultTransform.position);
 
         CombatManager.Instance.SetEnemiesPassive(new List<EnemyClass>(bigCrystals));
@@ -444,6 +433,9 @@ public class PreQueenFight : DialogueClasses
 
                 jackie.AttackAnimation("IsStaffing");
                 jackie.AddStacks(Resonate.buffName, 1);
+
+
+                DialogueManager.Instance.MoveBoxToBottom();
                 yield return new WaitForSeconds(BRIEF_PAUSE);
 
                 yield return StartCoroutine(DialogueManager.Instance.StartDialogue(CrystalHitDialogue.Dialogue));
@@ -532,6 +524,7 @@ public class PreQueenFight : DialogueClasses
             yield return new WaitUntil(() => CombatManager.Instance.GameState == GameState.GAME_WIN);
             MusicManager.Instance.FadeOutCurrentBackgroundTrack(2f);
             yield return new WaitForSeconds(1f);
+            DialogueManager.Instance.MoveBoxToBottom();
 
             yield return StartCoroutine(CombatManager.Instance.FadeInDarkScreen(1.5f));
 
@@ -583,7 +576,6 @@ public class PreQueenFight : DialogueClasses
     {
         yield return StartCoroutine(CombatManager.Instance.FadeInDarkScreen(2f));
 
-        GameStateManager.jumpIntoFrogAndSlimeFight = true;
         //Set Jump into combat to be true
         gameOver.gameObject.SetActive(true);
         gameOver.FadeIn();

@@ -9,7 +9,7 @@ public class Jab : StaffCards
     {
         CardType = CardType.MeleeAttack;
         myName = "Jab";
-        description = "On hit, gain 1 Focus stack";
+        description = "On hit, gain 2 Flow.";
         lowerBound = 2;
         upperBound = 4;
         Speed = 4;
@@ -20,6 +20,6 @@ public class Jab : StaffCards
     public override void OnHit()
     {
         base.OnHit();
-        Origin.AddStacks(Focus.buffName, 1);
+        Origin.AddStacks(Flow.buffName, 2);
     }
 }

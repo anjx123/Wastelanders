@@ -20,23 +20,16 @@ public class IronSights : PistolCards
 
         CardType = CardType.RangedAttack;
         myName = "Iron Sights";
-        description = "Gain One Accuracy, then attack";
+        description = "Gain one Accuracy, then attack.";
         Renderer renderer = GetComponent<Renderer>();
         ogMaterial = renderer.material; // og sprite of card
         OriginalPosition = transform.position;
         base.Initialize();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     public override void ApplyEffect()
     {
-        
-
         Origin.AddStacks(Accuracy.buffName, 1);
         base.ApplyEffect();
     }

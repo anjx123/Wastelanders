@@ -17,10 +17,10 @@ public class LeftHook : FistCards
     {
         lowerBound = 1;
         upperBound = 3;
-        Speed = 5;
+        Speed = 3;
 
         myName = "Left Hook";
-        description = "If this card lands, use Right Hook";
+        description = "If this attack is unstaggered, use 'Right Hook'.";
         CardType = CardType.MeleeAttack;
         Renderer renderer = GetComponent<Renderer>();
         ogMaterial = renderer.material; // og sprite of card

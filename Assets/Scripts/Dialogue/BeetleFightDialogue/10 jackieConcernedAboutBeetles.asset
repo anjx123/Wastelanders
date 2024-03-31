@@ -18,8 +18,8 @@ MonoBehaviour:
     speakerName: Jackie
     displayingImage: {fileID: 0}
     broadcastAnEvent: 0
-  - bodyText: "Tsk, probably better if I go back and let the examiners know. Whatever
-      they are doing with those crystals, it can\u2019t be good."
+  - bodyText: "Tsk, its probably for the best if I go back and let the examiners
+      know. Whatever they are doing with those crystals, it can\u2019t be good."
     speakerName: Jackie
     displayingImage: {fileID: 0}
     broadcastAnEvent: 0

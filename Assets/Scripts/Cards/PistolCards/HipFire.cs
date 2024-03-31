@@ -35,7 +35,7 @@ public class HipFire : PistolCards
         lowerBound = 1;
         upperBound = 5;
         Speed = 1;
-        description = "Make This Attack Once, If Unstaggered, Make It Again";
+        description = "Make this attack once, if unstaggered, make it once again.";
         CardType = CardType.RangedAttack;
         myName = "Hip Fire";
 

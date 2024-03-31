@@ -97,24 +97,42 @@ public class TutorialIntroduction : DialogueClasses
                 {
                     broadcastCounts++;
                 }
+                void SetSpeaker(Image speaker, Image nonSpeaker)
+                {
+                    speaker.color = Color.white;
+                    nonSpeaker.color = Color.gray;
+                }
+
 
                 DialogueBox.DialogueBoxEvent += CountBroadcasts;
 
                 Coroutine dialogue = StartCoroutine(DialogueManager.Instance.StartDialogue(openingDiscussion));
 
                 //Dialogue without any expression is kinda dry, its also difficult to tell whos talking so I wont VN style this unless I want to add more movement to the guys on screen
-                /*
-                                yield return new WaitUntil(() => broadcastCounts == 1);
-                                StartCoroutine(FadeImage(laidBackImageUI, 1, true));
-                                yield return new WaitUntil(() => broadcastCounts == 2);
-                                StartCoroutine(FadeImage(puzzeledImageUI, 1, true));
-                                */
+
+                yield return new WaitUntil(() => broadcastCounts == 1);
+                StartCoroutine(FadeImage(laidBackImageUI, 1, true));
+                yield return new WaitUntil(() => broadcastCounts == 2);
+                StartCoroutine(FadeImage(puzzeledImageUI, 1, true)); //puzzled active
+                laidBackImageUI.color = Color.gray;
+                yield return new WaitUntil(() => broadcastCounts == 3);
+                SetSpeaker(laidBackImageUI, puzzeledImageUI);
+                yield return new WaitUntil(() => broadcastCounts == 4);
+                SetSpeaker(puzzeledImageUI, laidBackImageUI);
+                yield return new WaitUntil(() => broadcastCounts == 5);
+                SetSpeaker(laidBackImageUI, puzzeledImageUI);
+                yield return new WaitUntil(() => broadcastCounts == 6);
+                SetSpeaker(puzzeledImageUI, laidBackImageUI);
+                yield return new WaitUntil(() => broadcastCounts == 7);
+                SetSpeaker(laidBackImageUI, puzzeledImageUI);
+                yield return new WaitUntil(() => broadcastCounts == 8);
+                SetSpeaker(puzzeledImageUI, laidBackImageUI);
                 yield return dialogue;
 
-/*
-                Coroutine laidBackFade = StartCoroutine(FadeImage(laidBackImageUI, 1, false)); 
+
+                Coroutine laidBackFade = StartCoroutine(FadeImage(laidBackImageUI, 1, false));
                 yield return StartCoroutine(FadeImage(puzzeledImageUI, 1, false));
-                yield return laidBackFade;*/
+                yield return laidBackFade;
                 puzzeledImageUI.gameObject.SetActive(false);
                 laidBackImageUI.gameObject.SetActive(false);
 

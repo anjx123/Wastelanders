@@ -252,7 +252,7 @@ public class CombatInfo : MonoBehaviour
     //Flips the CombatInfo so that the Icon is on the Right of the entity
     public void FaceLeft()
     {
-
+        FlipTransform(cardIconRendering.transform, false);
         FlipTransform(damagePopupText.transform, false);
         FlipTransform(diceRollText.transform, false);
         FlipTransform(healthBar.transform, false);
@@ -262,14 +262,12 @@ public class CombatInfo : MonoBehaviour
         }
         diceRollSprite.GetComponent<SpriteRenderer>().flipX = true;
 
-        
-        
-
         CombatManager.Instance.UpdateCameraBounds(); //Bad placement here
     }
     //Flips the CombatInfo so that the Icon is on the LEFT of the entity
     public void FaceRight()
     {
+        FlipTransform(cardIconRendering.transform, true);
         FlipTransform(damagePopupText.transform, true);
         FlipTransform(diceRollText.transform, true);
         FlipTransform(healthBar.transform, true);

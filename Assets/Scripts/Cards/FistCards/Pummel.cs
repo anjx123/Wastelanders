@@ -18,7 +18,7 @@ public class Pummel : FistCards
         Speed = 4;
 
         myName = "Pummel";
-        description = "Make this attack 3 times against the target";
+        description = "Make this attack 3 times against the target.";
         OriginalPosition = transform.position;
         CardType = CardType.MeleeAttack;
         base.Initialize();

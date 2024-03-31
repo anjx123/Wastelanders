@@ -18,7 +18,7 @@ public class BuffExplainer : MonoBehaviour
         switch (weaponType)
         {
             case CardDatabase.WeaponType.STAFF:
-                currentEffect = new Focus();
+                currentEffect = new Flow();
                 break;
             case CardDatabase.WeaponType.PISTOL:
                 currentEffect = new Accuracy();

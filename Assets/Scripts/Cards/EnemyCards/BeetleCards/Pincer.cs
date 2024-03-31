@@ -17,7 +17,7 @@ public class Pincer : BeetleAttacks
     {
         base.Initialize();
         lowerBound = 1;
-        upperBound = 4;
+        upperBound = 3;
         
         Speed = 4;
 

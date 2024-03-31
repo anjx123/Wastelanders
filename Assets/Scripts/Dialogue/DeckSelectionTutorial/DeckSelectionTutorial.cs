@@ -28,6 +28,14 @@ public class DeckSelectionTutorial : MonoBehaviour
         StartCoroutine(ExecuteGameStart());
     }
 
+    private void OnDestroy()
+    {
+        WeaponSelect.WeaponSelectEvent -= HandleWeaponSelected;
+        CharacterSelect.CharacterSelectedEvent -= HandleCharacterSelected;
+        WeaponEdit.WeaponEditEvent -= HandleWeaponEdited;
+        DeckSelectionManager.Instance.PlayerActionDeckModifiedEvent -= HandleRunOutOfPoints;
+    }
+
     private IEnumerator ExecuteGameStart()
     {
         if (GameStateManager.justFinishedBeetleFight)

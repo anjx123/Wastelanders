@@ -2,15 +2,16 @@ using Unity.VisualScripting;
 using UnityEngine;
 
 
-public class Focus : StatusEffect
+public class Flow : StatusEffect
 {
     public const string buffName = "Flow";
 
     
-    public override void ApplyStacks(ref ActionClass.CardDup dup)
+    public override void ApplySingleUseEffects(ref ActionClass.CardDup dup)
     {
         dup.rollFloor += this.buffStacks;
         dup.rollCeiling += this.buffStacks;
+        ClearBuff();
     }
 
     public override Sprite GetIcon()
@@ -21,10 +22,5 @@ public class Focus : StatusEffect
             Debug.LogWarning("Buff Sprite is missing");
         }
         return buffSprite;
-    }
-
-    public override void NewRound()
-    {
-        ClearBuff();
     }
 }

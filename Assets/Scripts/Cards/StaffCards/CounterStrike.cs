@@ -12,12 +12,12 @@ public class CounterStrike : StaffCards
     private bool originalCopy = true;
     public override void Initialize()
     {
-        lowerBound = 1;
-        upperBound = 3;
+        lowerBound = 2;
+        upperBound = 4;
         Speed = 4;
 
         myName = "Counter Strike";
-        description = "Block with this card, then make an attack with this card";
+        description = "Block, then make an attack with this card. Each unstaggered action grants 1 Flow.";
         Renderer renderer = GetComponent<Renderer>();
         ogMaterial = renderer.material; // og sprite of card
         OriginalPosition = transform.position;
@@ -41,6 +41,13 @@ public class CounterStrike : StaffCards
             BattleQueue.BattleQueueInstance.InsertDupPlayerAction(activeDuplicateInstance!);
         }
         base.ApplyEffect();
+    }
+
+    public override void CardIsUnstaggered()
+    {
+        Origin.AddStacks(Flow.buffName, 1);
+        base.CardIsUnstaggered();
+
     }
 
 }

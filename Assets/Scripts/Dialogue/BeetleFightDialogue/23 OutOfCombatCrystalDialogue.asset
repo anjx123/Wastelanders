@@ -22,8 +22,8 @@ MonoBehaviour:
     speakerName: Ives
     displayingImage: {fileID: 0}
     broadcastAnEvent: 0
-  - bodyText: ' [Crystals give +1 resonate to the atacker who reduces its health
-      below each third of its health] '
+  - bodyText: '[Crystals grant the attacker a resonate stack when dropping below
+      10, 5, 0 hp]'
     speakerName: 
     displayingImage: {fileID: 0}
     broadcastAnEvent: 0

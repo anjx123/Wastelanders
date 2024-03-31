@@ -20,7 +20,7 @@ public class SteadiedShot : PistolCards
         Speed = 4;
 
         myName = "Steadied Shot";
-        description = "When played, do not lose accuracy when you get hit this round.";
+        description = "When played, do not lose Accuracy when you get hit this round.";
         Renderer renderer = GetComponent<Renderer>();
         ogMaterial = renderer.material; // og sprite of card
         OriginalPosition = transform.position;
@@ -41,5 +41,6 @@ public class SteadiedShot : PistolCards
                 Origin.SetBuffsOnHitHandler(Accuracy.buffName, originalHandler);
             }
         }
+        base.ApplyEffect();
     }
 }

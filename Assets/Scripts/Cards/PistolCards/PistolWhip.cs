@@ -17,7 +17,7 @@ public class PistolWhip : PistolCards
         lowerBound = 3;
         upperBound = 5;
         Speed = 1;
-        description = "Good Ol' reliable CQC!";
+        description = "A good ol' reliable melee attack!";
         myName = "Pistol Whip";
         Renderer renderer = GetComponent<Renderer>();
         ogMaterial = renderer.material; // og sprite of card
@@ -31,12 +31,6 @@ public class PistolWhip : PistolCards
     {
         
     }
-
-    public override void ApplyEffect()
-    {
-        base.ApplyEffect();
-    }
-
 
 
 }
