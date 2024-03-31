@@ -27,6 +27,7 @@ public class RapidFire : PistolCards
 
     public override void CardIsUnstaggered()
     {
+        Origin.AttackAnimation("IsShooting");
         if (Origin.GetBuffStacks(Accuracy.buffName) > 0)
         {
             Origin.ReduceStacks(Accuracy.buffName, 1);
@@ -36,7 +37,6 @@ public class RapidFire : PistolCards
 
     public override void OnHit()
     {
-        Origin.AttackAnimation("IsShooting");
         Vector3 diffInLocation = Target.myTransform.position - Origin.myTransform.position;
         Origin.UpdateFacing(diffInLocation, null);
         this.Target.TakeDamage(Origin, duplicateCard.actualRoll);

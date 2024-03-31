@@ -25,20 +25,10 @@ public class DiscreteStrike : StaffCards
         base.Initialize();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     public override void ApplyEffect()
     {
-        Origin.AddStacks(Focus.buffName, 2);
+        Origin.AddStacks(Flow.buffName, 2);
         base.ApplyEffect();
     }
 
-    public override void OnHit()
-    {
-        base.OnHit();
-    }
 }

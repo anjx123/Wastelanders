@@ -411,6 +411,16 @@ public abstract class EntityClass : SelectClass
         }
     }
 
+    public void ApplySingleUseEffects(ref ActionClass.CardDup duplicateCard)
+    {
+        foreach (string buff in statusEffects.Keys)
+        {
+            statusEffects[buff].ApplySingleUseEffects(ref duplicateCard);
+        }
+        //Single application will not be rendered in the hand but at runtime, so do not call the BuffUpdatedEvent 
+        combatInfo.UpdateBuffs(statusEffects); 
+    }
+
     public int GetBuffStacks(string s)
     {
         if (statusEffects.ContainsKey(s))

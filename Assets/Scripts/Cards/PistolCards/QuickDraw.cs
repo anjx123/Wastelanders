@@ -35,9 +35,4 @@ public class QuickDraw : PistolCards
 
 
 
-    public override void ApplyEffect()
-    {
-        base.ApplyEffect();
-    }
-
 }

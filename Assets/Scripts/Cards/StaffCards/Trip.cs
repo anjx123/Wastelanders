@@ -7,19 +7,20 @@ public class Trip : StaffCards
 {
     public override void OnCardStagger()
     {
-
+        base.OnCardStagger();
+        Origin.AddStacks(Flow.buffName, 1);
     }
 
     // Start is called before the first frame update
     public override void Initialize()
     {
-        lowerBound = 1;
-        upperBound = 3;
+        lowerBound = 2;
+        upperBound = 4;
 
         Speed = 2;
 
-        myName = "Trip";
-        description = "If this attack is unstaggered, gain 2 Focus";
+        myName = "Sweep";
+        description = "Attack, then gain 1 Flow.";
         Renderer renderer = GetComponent<Renderer>();
         ogMaterial = renderer.material; // og sprite of card
         OriginalPosition = transform.position;
@@ -27,18 +28,9 @@ public class Trip : StaffCards
         base.Initialize();
     }
 
-
     public override void CardIsUnstaggered()
     {
         base.CardIsUnstaggered();
-        Origin.AddStacks(Focus.buffName, 2);
-    }
-
-    public override void OnHit()
-    {
-        Vector3 diffInLocation = Target.myTransform.position - Origin.myTransform.position;
-        Origin.UpdateFacing(diffInLocation, null);
-        this.Target.TakeDamage(Origin, duplicateCard.actualRoll);
-        CardIsUnstaggered();
+        Origin.AddStacks(Flow.buffName, 1);
     }
 }

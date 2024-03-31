@@ -26,19 +26,6 @@ public class Silencer : PistolCards
 
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
-    public override void ApplyEffect()
-    {
-
-        base.ApplyEffect();
-
-    }
-
     public override void OnHit()
     {
         base.OnHit();

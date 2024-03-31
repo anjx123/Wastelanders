@@ -7,23 +7,17 @@ using static UnityEngine.UI.Image;
 
 public class CalmTheMind : StaffCards
 {
-    public override void OnCardStagger()
-    {
-
-        Origin.AddStacks(Focus.buffName, 1);
-        base.OnCardStagger();
-    }
 
     // Start is called before the first frame update
     public override void Initialize()
     {
         lowerBound = 2;
-        upperBound = 3;
+        upperBound = 4;
 
         Speed = 5;
         
         myName = "Calm The Mind";
-        description = "Block, then gain 1 stack of focus.";
+        description = "Block, if unstaggered then gain 2 stack of Flow.";
         
         Renderer renderer = GetComponent<Renderer>();
         ogMaterial = renderer.material; // og sprite of card
@@ -34,7 +28,7 @@ public class CalmTheMind : StaffCards
 
     public override void CardIsUnstaggered()
     {
-        Origin.AddStacks(Focus.buffName, 1);
         base.CardIsUnstaggered();
+        Origin.AddStacks(Flow.buffName, 2);
     }
 }

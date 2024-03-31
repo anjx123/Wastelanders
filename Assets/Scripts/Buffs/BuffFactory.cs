@@ -12,8 +12,8 @@ public class BuffFactory : MonoBehaviour
             case Accuracy.buffName:
                 return new Accuracy();
 
-            case Focus.buffName:
-                return new Focus();
+            case Flow.buffName:
+                return new Flow();
 
             case Resonate.buffName:
                 return new Resonate();

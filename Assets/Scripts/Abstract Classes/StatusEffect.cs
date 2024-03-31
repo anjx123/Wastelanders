@@ -37,6 +37,13 @@ public abstract class StatusEffect
 
     }
 
+    // adds buffStacks to the struct card limits
+    public virtual void ApplySingleUseEffects(ref ActionClass.CardDup dup)
+    {
+
+    }
+
+
     // clears buffStacks
     public void ClearBuff() { buffStacks = 0; }
 

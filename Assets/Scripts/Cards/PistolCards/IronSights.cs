@@ -27,16 +27,9 @@ public class IronSights : PistolCards
         base.Initialize();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     public override void ApplyEffect()
     {
-        
-
         Origin.AddStacks(Accuracy.buffName, 1);
         base.ApplyEffect();
     }

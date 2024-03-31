@@ -2039,8 +2039,8 @@ MonoBehaviour:
   explanationTextField: {fileID: 1101075570}
   explanationText:
   - Item1: 0
-    Item2: Focus - Actions gain +1 power per stack. Remove all stacks after each
-      round.
+    Item2: Flow - The next attack gains +1 to its upper and lower bounds for each
+      stack of flow. Then consume all flow.
   - Item1: 1
     Item2: Accuracy - Lower bound of power increases by 1 per stack. On taking damage,
       stacks are halved (rounded down).

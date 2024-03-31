@@ -33,10 +33,11 @@ public class FocusedDefense : StaffCards
 
     public override void CardIsUnstaggered()
     {
-        Origin.AddStacks(Focus.buffName, 1);
+        Origin.AddStacks(Flow.buffName, 1);
     }
     public override void ApplyEffect()
     {
-        Origin.AddStacks(Focus.buffName, 1);
+        Origin.AddStacks(Flow.buffName, 1);
+        base.ApplyEffect();
     }
 }

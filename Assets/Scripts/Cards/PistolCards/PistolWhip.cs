@@ -32,11 +32,5 @@ public class PistolWhip : PistolCards
         
     }
 
-    public override void ApplyEffect()
-    {
-        base.ApplyEffect();
-    }
-
-
 
 }

@@ -12,7 +12,7 @@ public class Vitals : PistolCards
     // Start is called before the first frame update
     public override void Initialize()
     {
-        lowerBound = 1;
+        lowerBound = 2;
         upperBound = 7;
 
         Speed = 5;
@@ -28,16 +28,4 @@ public class Vitals : PistolCards
 
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
-    public override void ApplyEffect()
-    {
-
-        base.ApplyEffect();
-
-    }
 }

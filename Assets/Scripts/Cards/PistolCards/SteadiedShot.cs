@@ -41,5 +41,6 @@ public class SteadiedShot : PistolCards
                 Origin.SetBuffsOnHitHandler(Accuracy.buffName, originalHandler);
             }
         }
+        base.ApplyEffect();
     }
 }

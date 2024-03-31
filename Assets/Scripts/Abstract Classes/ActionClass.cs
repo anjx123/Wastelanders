@@ -92,6 +92,8 @@ public abstract class ActionClass : SelectClass
     public static event CardEventDelegate? CardHighlightedEvent;
     public static event CardStateDelegate? CardStateChange;
 
+    public event CardEventDelegate? CardValuesUpdating;
+
     public virtual void OnCardStagger()
     {
 
@@ -180,6 +182,8 @@ public abstract class ActionClass : SelectClass
     public virtual void ApplyEffect()
     {
         UpdateDup();
+        Origin?.ApplySingleUseEffects(ref duplicateCard);
+        UpdateText();
     }
 
     // Calculates Actual Damage/Block After Applying Buffs
@@ -205,6 +209,7 @@ public abstract class ActionClass : SelectClass
     private void UpdateText()
     {
         cardUI?.RenderCard(this);
+        CardValuesUpdating?.Invoke(this);
     }
     public override void OnMouseDown()
     {

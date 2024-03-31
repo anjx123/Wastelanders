@@ -528,7 +528,7 @@ GameObject:
   - component: {fileID: 3314076538672836457}
   - component: {fileID: 1572769889877238758}
   m_Layer: 5
-  m_Name: Focus
+  m_Name: Flow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -865,8 +865,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Focus - Lower and Upper bounds of attack increases by 1 per stack. Remove
-    all stacks after each round.
+  m_text: "Flow - For the next attack, increase the upper and lower bounds of power
+    by +1 for each\r stack of flow."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1692,7 +1692,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: On Hit - This attack deals 0 damage or more to the opponent.
+  m_text: On Hit - This attack deals at least 1 damage to the opponent.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
