@@ -28,11 +28,11 @@ MonoBehaviour:
   - bodyText: '[Crystals grant the attacker a resonate stack when dropping below
       10, 5, 0 hp]'
     speakerName: Ives
-    displayingImage: {fileID: 21300000, guid: 87cb7c6c6588a4a3a957b707239abbf0, type: 3}
+    displayingImage: {fileID: 21300000, guid: 1d59623b22cafd84cb32164685717017, type: 3}
     broadcastAnEvent: 0
   - bodyText: '[Attacking crystals as players can grant you resonance as well.]'
     speakerName: 
-    displayingImage: {fileID: 0}
+    displayingImage: {fileID: 21300000, guid: 7af708b3e1c4e4b0497edc422888df7c, type: 3}
     broadcastAnEvent: 0
   - bodyText: Hey Jackie, would you mind keeping the noise down, you might attract
       more bugs.
