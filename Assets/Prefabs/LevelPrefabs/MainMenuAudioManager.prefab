@@ -44,7 +44,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.5
+  m_Volume: 0.3
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -178,11 +178,12 @@ MonoBehaviour:
   SFXSoundsPlayer: {fileID: 7268225162040940906}
   BackgroundMusicPlayer: {fileID: 3580034980929419632}
   BackgroundMusicIntroPlayer: {fileID: 6628172681432840347}
+  sfxTuples: []
   backgroundMusicPrimary: {fileID: 8300000, guid: cec2706302f782c4aaa9f43f99544431, type: 3}
   backgroundMusicIntro: {fileID: 8300000, guid: 0f89561e165066146893b5e61f6de469, type: 3}
   combatMusicPrimary: {fileID: 0}
   combatMusicIntro: {fileID: 0}
-  backgroundMusicVictory: {fileID: 0}
+  backgroundMusicDeath: {fileID: 0}
 --- !u!1 &6590529223067102861
 GameObject:
   m_ObjectHideFlags: 0
