@@ -28,11 +28,6 @@ MonoBehaviour:
     speakerName: 
     displayingImage: {fileID: 0}
     broadcastAnEvent: 0
-  - bodyText: '[Weapon Proficiency determines how many techniques from a weapon a
-      character can select.]'
-    speakerName: 
-    displayingImage: {fileID: 0}
-    broadcastAnEvent: 0
   - bodyText: 'I should make sure to select a good balance of actions with different
       speeds. '
     speakerName: Jackie
