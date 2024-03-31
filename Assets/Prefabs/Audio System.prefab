@@ -46,6 +46,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SFXSoundsPlayer: {fileID: 0}
   BackgroundMusicPlayer: {fileID: 0}
-  BackgroundMusicPrimary: {fileID: 0}
-  BackgroundMusicVictory: {fileID: 0}
+  BackgroundMusicIntroPlayer: {fileID: 0}
   sfxTuples: []
+  backgroundMusicPrimary: {fileID: 0}
+  backgroundMusicIntro: {fileID: 0}
+  combatMusicPrimary: {fileID: 0}
+  combatMusicIntro: {fileID: 0}
+  backgroundMusicDeath: {fileID: 0}

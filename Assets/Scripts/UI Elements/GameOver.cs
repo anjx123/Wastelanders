@@ -22,6 +22,8 @@ public class GameOver : MonoBehaviour
         deckSelectButton.onClick.AddListener(() => StartCoroutine(OnDeckSelectClick()));
         canvasGroup.alpha = 0f;
         FadeIn();
+        // if this pops up then the game is over AND this takes care of the fade thing too.
+        MusicManager.Instance.PlayDeath();
     }
     void OnDisable()
     {
