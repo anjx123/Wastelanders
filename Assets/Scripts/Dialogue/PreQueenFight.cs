@@ -433,6 +433,9 @@ public class PreQueenFight : DialogueClasses
 
                 jackie.AttackAnimation("IsStaffing");
                 jackie.AddStacks(Resonate.buffName, 1);
+
+
+                DialogueManager.Instance.MoveBoxToBottom();
                 yield return new WaitForSeconds(BRIEF_PAUSE);
 
                 yield return StartCoroutine(DialogueManager.Instance.StartDialogue(CrystalHitDialogue.Dialogue));

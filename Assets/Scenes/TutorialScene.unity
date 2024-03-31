@@ -3051,16 +3051,15 @@ MonoBehaviour:
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 57baba5992d9e224988e93fcacf9f7eb, type: 3}
     broadcastAnEvent: 0
-  - bodyText: Power - which is a range where your damage can be rolled into.
+  - bodyText: Power - Which is a range that your damage can be rolled into.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 3fea2e94140c08246a0e502ee92d3761, type: 3}
     broadcastAnEvent: 0
-  - bodyText: "And Speed - which dictates the order that you and your opponent\u2019s
-      attacks come out."
+  - bodyText: And Speed - Which determines the order attacks come out.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 61a3ecbde544e124ba8f329d0e4f6fb2, type: 3}
     broadcastAnEvent: 0
-  - bodyText: "Let\u2019s select a card and target an enemy!"
+  - bodyText: "Let\u2019s select a card and target the enemy!"
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 84d19d73f4fee204d8d42cc16de51cf7, type: 3}
     broadcastAnEvent: 0
@@ -3068,6 +3067,10 @@ MonoBehaviour:
   - bodyText: Targeting an enemy will queue up the action to attack in the queue.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 84d19d73f4fee204d8d42cc16de51cf7, type: 3}
+    broadcastAnEvent: 0
+  - bodyText: The queue will be sorted by speed with the fastest attack on the left.
+    speakerName: Ives
+    displayingImage: {fileID: 21300000, guid: fb608aaef631251489ed4ef86a15e639, type: 3}
     broadcastAnEvent: 0
   - bodyText: You can retrieve a card back from the queue by clicking on its icon.
     speakerName: Ives
@@ -3097,8 +3100,13 @@ MonoBehaviour:
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
     broadcastAnEvent: 0
+  - bodyText: You can see the range of power for your attack next to the attack's
+      icon.
+    speakerName: Ives
+    displayingImage: {fileID: 21300000, guid: eab0b79378538464899c1a47f809758c, type: 3}
+    broadcastAnEvent: 0
   - bodyText: "Since the dummy isn\u2019t fighting back, your action will directly
-      deal its power in damage."
+      deal its power in damage once rolled."
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 3fea2e94140c08246a0e502ee92d3761, type: 3}
     broadcastAnEvent: 0
@@ -3108,19 +3116,23 @@ MonoBehaviour:
     displayingImage: {fileID: 21300000, guid: 05aec2f8237521d4f84b7c3d335550b0, type: 3}
     broadcastAnEvent: 0
   buffTutorial:
-  - bodyText: While making staff attacks, some cards will have an ability that grants
-      you 'Focus'.
+  - bodyText: While making staff attacks, you will frequently see the term 'Flow'.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 820631014ce088c4cb748224d5467c86, type: 3}
     broadcastAnEvent: 0
-  - bodyText: Focus grants you +1 power on your attacks, but it clears out at the
-      end of every round.
+  - bodyText: Flow grants +1 to the upper and lower bound of power for your next
+      attack. Bu then its consumed.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 820631014ce088c4cb748224d5467c86, type: 3}
     broadcastAnEvent: 0
   - bodyText: Each different weapon has it's unique fighting style, make sure to
       capitalize on them and take out your opponents.
     speakerName: Ives
+    displayingImage: {fileID: 21300000, guid: 820631014ce088c4cb748224d5467c86, type: 3}
+    broadcastAnEvent: 0
+  - bodyText: (If you forget what 'Flow' does, you can access the [Glossary] in the
+      pause menu by pressing [esc.])
+    speakerName: 
     displayingImage: {fileID: 21300000, guid: 820631014ce088c4cb748224d5467c86, type: 3}
     broadcastAnEvent: 0
   readingOpponentTutorial:
@@ -3137,12 +3149,13 @@ MonoBehaviour:
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: fbdbcaab28794334bb84176f7e052fb5, type: 3}
     broadcastAnEvent: 0
-  - bodyText: At the top of that icon, you can see the attack's intended target.
+  - bodyText: At the top of that icon, you can see the attack's intended target and
+      damage range.
     speakerName: Ives
-    displayingImage: {fileID: 21300000, guid: c35542e8d8ad61c4087e817dd9aa7c15, type: 3}
+    displayingImage: {fileID: 21300000, guid: edb0bc1d86401ce4aadfe4358f987ea3, type: 3}
     broadcastAnEvent: 0
-  - bodyText: '[Clicking] on the attack allows you to see its Power and Speed and
-      Abilities.'
+  - bodyText: '[Clicking] on the attack icon also allows you to see its Speed and
+      any Abilities.'
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 82dbf38ae23fe224e90be99093d02604, type: 3}
     broadcastAnEvent: 0
@@ -3156,12 +3169,12 @@ MonoBehaviour:
     displayingImage: {fileID: 21300000, guid: ade9660133ca00a499bfa3ad449b87bd, type: 3}
     broadcastAnEvent: 0
   clashingCardsTutorial:
-  - bodyText: "When you target an enemy with an attack, that attack will clash with
-      the opponent\u2019s fastest attack."
+  - bodyText: "When you target an enemy with an attack, that attack will \"clash\"
+      with the opponent\u2019s fastest attack."
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: b0d27b9163eb2554996f368bd5b8d4e2, type: 3}
     broadcastAnEvent: 0
-  - bodyText: Promoting both attack's speeds to be the fastest between the two.
+  - bodyText: 'Promoting both attack''s speeds to be the fastest between the two. '
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: b0d27b9163eb2554996f368bd5b8d4e2, type: 3}
     broadcastAnEvent: 0
@@ -3205,8 +3218,12 @@ MonoBehaviour:
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
     broadcastAnEvent: 0
-  - bodyText: Being staggered means you lose your entire attack, so choose the attacks
-      that clash wisely. Being staggered is unforgiving.
+  - bodyText: Being staggered means the attack will not deal any damage, and its
+      ab.
+    speakerName: Ives
+    displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
+    broadcastAnEvent: 0
+  - bodyText: So choose the attacks that clash wisely. Being staggered is unforgiving.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
     broadcastAnEvent: 0
@@ -3216,7 +3233,7 @@ MonoBehaviour:
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
     broadcastAnEvent: 0
-  - bodyText: When you run out of cards in your Action Deck, it will be reshuffled.
+  - bodyText: When you run out of cards in your action deck, it will be reshuffled.
       However...
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
