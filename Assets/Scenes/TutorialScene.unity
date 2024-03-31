@@ -3238,7 +3238,7 @@ MonoBehaviour:
     displayingImage: {fileID: 21300000, guid: 820631014ce088c4cb748224d5467c86, type: 3}
     broadcastAnEvent: 0
   - bodyText: (If you forget what 'Flow' does, you can access buff information in
-      the Glossary on the pause menu by pressing [esc.])
+      the Glossary or the Dialogue History on the pause menu by pressing [esc.])
     speakerName: 
     displayingImage: {fileID: 21300000, guid: 820631014ce088c4cb748224d5467c86, type: 3}
     broadcastAnEvent: 0
