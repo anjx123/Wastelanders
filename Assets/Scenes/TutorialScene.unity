@@ -3017,52 +3017,52 @@ MonoBehaviour:
   - bodyText: Hey have you heard? Apparently, Jackie is trying out for the NITES
       exam again.
     speakerName: Laid-back Soldier
-    displayingImage: {fileID: 21300000, guid: b5d13694d44666248bd6437ab54688c3, type: 3}
+    displayingImage: {fileID: 0}
     broadcastAnEvent: 1
   - bodyText: What? So soon? After her performance last year, do you really think
       she is prepared to try again?
     speakerName: Puzzled Soldier
-    displayingImage: {fileID: 21300000, guid: cd4d67535c77ee1438d406e274cf2975, type: 3}
+    displayingImage: {fileID: 0}
     broadcastAnEvent: 1
   - bodyText: "Beats me. If I were her, I\u2019d take it easy and spend a couple
       more years training. "
     speakerName: Laid-back Soldier
-    displayingImage: {fileID: 21300000, guid: b5d13694d44666248bd6437ab54688c3, type: 3}
-    broadcastAnEvent: 0
+    displayingImage: {fileID: 0}
+    broadcastAnEvent: 1
   - bodyText: I've heard horror stories about what the NITES have to deal with in
       the Wasteland.
     speakerName: Laid-back Soldier
-    displayingImage: {fileID: 21300000, guid: b5d13694d44666248bd6437ab54688c3, type: 3}
+    displayingImage: {fileID: 0}
     broadcastAnEvent: 0
   - bodyText: She's still so young, maybe even the youngest to join the NITES if
       she passes?
     speakerName: Laid-back Soldier
-    displayingImage: {fileID: 21300000, guid: b5d13694d44666248bd6437ab54688c3, type: 3}
+    displayingImage: {fileID: 0}
     broadcastAnEvent: 0
   - bodyText: "No I don\u2019t think so, wasn\u2019t her mother younger than her
       when she scored top marks on that exam?"
     speakerName: Puzzled Soldier
-    displayingImage: {fileID: 21300000, guid: cd4d67535c77ee1438d406e274cf2975, type: 3}
-    broadcastAnEvent: 0
+    displayingImage: {fileID: 0}
+    broadcastAnEvent: 1
   - bodyText: "Hmm right, guess going on NITES\u2019 wasteland expeditions runs in
       the family. I think life inside the Wall is much more peaceful."
-    speakerName: Puzzled Soldier
-    displayingImage: {fileID: 21300000, guid: b5d13694d44666248bd6437ab54688c3, type: 3}
-    broadcastAnEvent: 0
+    speakerName: Laid-back Soldier
+    displayingImage: {fileID: 0}
+    broadcastAnEvent: 1
   - bodyText: Of course you do. But do you really plan on being just a grunt soldier
       forever?
     speakerName: Puzzled Soldier
-    displayingImage: {fileID: 21300000, guid: cd4d67535c77ee1438d406e274cf2975, type: 3}
-    broadcastAnEvent: 0
+    displayingImage: {fileID: 0}
+    broadcastAnEvent: 1
   - bodyText: Mmm, maybe I'll give that exam a shot in a couple years.
     speakerName: Laid-back Soldier
-    displayingImage: {fileID: 21300000, guid: b5d13694d44666248bd6437ab54688c3, type: 3}
-    broadcastAnEvent: 0
+    displayingImage: {fileID: 0}
+    broadcastAnEvent: 1
   - bodyText: "Then come on, we should get to training. Pass or not, the fact is
       that she\u2019s trying to make us look like chumps."
     speakerName: Puzzled Soldier
-    displayingImage: {fileID: 21300000, guid: cd4d67535c77ee1438d406e274cf2975, type: 3}
-    broadcastAnEvent: 0
+    displayingImage: {fileID: 0}
+    broadcastAnEvent: 1
   jackieMonologue:
   - bodyText: "Well\u2026 Today\u2019s the day I\u2019ve been preparing the past
       year for."
@@ -3228,7 +3228,7 @@ MonoBehaviour:
     displayingImage: {fileID: 21300000, guid: 820631014ce088c4cb748224d5467c86, type: 3}
     broadcastAnEvent: 0
   - bodyText: Flow grants +1 to the upper and lower bound of power for your next
-      attack. Bu then its consumed.
+      attack. But then its consumed.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 820631014ce088c4cb748224d5467c86, type: 3}
     broadcastAnEvent: 0
@@ -3237,8 +3237,8 @@ MonoBehaviour:
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 820631014ce088c4cb748224d5467c86, type: 3}
     broadcastAnEvent: 0
-  - bodyText: (If you forget what 'Flow' does, you can access the [Glossary] in the
-      pause menu by pressing [esc.])
+  - bodyText: (If you forget what 'Flow' does, you can access buff information in
+      the Glossary on the pause menu by pressing [esc.])
     speakerName: 
     displayingImage: {fileID: 21300000, guid: 820631014ce088c4cb748224d5467c86, type: 3}
     broadcastAnEvent: 0
