@@ -14,7 +14,7 @@ public class QueenBeetle : EnemyClass
     public GameObject enemyContainer;
 
     // spawn locations for the beetles
-    [SerializeField] private Transform[] beetleLocations;
+    [SerializeField] private Vector3[] beetleLocations;
 
     private const float BEETLE_SCALING = 0.6f;
 
@@ -33,7 +33,7 @@ public class QueenBeetle : EnemyClass
                 GameObject beetle = Instantiate(beetlePrefabs[i]);
                 beetle.transform.SetParent(enemyContainer.transform);
                 beetle.transform.localScale *= BEETLE_SCALING;
-                beetle.transform.position = beetleLocations[i].position;
+                beetle.transform.position = beetleLocations[i];
                 availability[i] = beetle.GetComponent<Beetle>();
             }
         }
@@ -44,7 +44,7 @@ public class QueenBeetle : EnemyClass
         for (int i = 0; i < guardBeetles.Count; ++i)
         {
             availability[i] = guardBeetles[i];
-            beetleLocations[i] = guardBeetles[i].transform;
+            beetleLocations[i] = guardBeetles[i].transform.position;
         }
     }
 
@@ -52,7 +52,7 @@ public class QueenBeetle : EnemyClass
     public override void Start()
     {
         base.Start();
-        MaxHealth = 40;
+        MaxHealth = 50;
         Health = MaxHealth;
         myName = "The Queen";
 
@@ -157,7 +157,7 @@ public class QueenBeetle : EnemyClass
         GameObject beetle = Instantiate(beetlePrefabs[Random.Range(0, beetlePrefabs.Length)]);
         beetle.transform.SetParent(enemyContainer.transform);
         beetle.transform.localScale *= BEETLE_SCALING;
-        beetle.transform.position = beetleLocations[slot].position;
+        beetle.transform.position = beetleLocations[slot];
         availability[slot] = beetle.GetComponent<Beetle>();
     }
 
