@@ -2253,7 +2253,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6635998426718021455, guid: b9c5e4b3c9f7e024f8fe9012e7a2e437, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -9.632854
+      value: -10.135043
       objectReference: {fileID: 0}
     - target: {fileID: 6635998426718021455, guid: b9c5e4b3c9f7e024f8fe9012e7a2e437, type: 3}
       propertyPath: m_LocalPosition.y
@@ -3276,7 +3276,7 @@ MonoBehaviour:
     displayingImage: {fileID: 21300000, guid: ade9660133ca00a499bfa3ad449b87bd, type: 3}
     broadcastAnEvent: 0
   clashingCardsTutorial:
-  - bodyText: "When you target an enemy with an attack, that attack will \"clash\"
+  - bodyText: "When you target an enemy with an attack, that attack will form a \"clash\"
       with the opponent\u2019s fastest attack."
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: b0d27b9163eb2554996f368bd5b8d4e2, type: 3}
@@ -3285,10 +3285,22 @@ MonoBehaviour:
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: b0d27b9163eb2554996f368bd5b8d4e2, type: 3}
     broadcastAnEvent: 0
-  - bodyText: Experiment with this wisely to manipulate the order of attacks. Come
-      at me once you are ready.
+  - bodyText: 'Experiment with this wisely to manipulate the order of attacks. '
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: b0d27b9163eb2554996f368bd5b8d4e2, type: 3}
+    broadcastAnEvent: 0
+  - bodyText: "These \u2018clashing' attacks will then compete against each other
+      later in the fight. "
+    speakerName: Ives
+    displayingImage: {fileID: 21300000, guid: b0d27b9163eb2554996f368bd5b8d4e2, type: 3}
+    broadcastAnEvent: 0
+  - bodyText: 'The winner being the one who rolls the highest power. '
+    speakerName: Ives
+    displayingImage: {fileID: 21300000, guid: 3fea2e94140c08246a0e502ee92d3761, type: 3}
+    broadcastAnEvent: 0
+  - bodyText: I'll explain more once that clash starts. Come at me once you are ready.
+    speakerName: Ives
+    displayingImage: {fileID: 21300000, guid: 87cb7c6c6588a4a3a957b707239abbf0, type: 3}
     broadcastAnEvent: 0
   defensiveCardsTutorial:
   - bodyText: Defensive cards are marked by the defense icon.
@@ -3320,17 +3332,21 @@ MonoBehaviour:
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
     broadcastAnEvent: 0
-  - bodyText: The clasher who rolls the highest Power 'staggers' the opponent and
-      deals the attack's <i>entire</i> Power to the loser.
+  - bodyText: The attack that rolls the highest Power wins and 'staggers' the opponent,
+      dealing its <i>entire</i> Power to the loser.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
     broadcastAnEvent: 0
-  - bodyText: Being staggered means the attack will not deal any damage, and its
-      ab.
+  - bodyText: Rolling low and losing the clash will stagger the attack, and it will
+      not deal any damage at all.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
     broadcastAnEvent: 0
   - bodyText: So choose the attacks that clash wisely. Being staggered is unforgiving.
+    speakerName: Ives
+    displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
+    broadcastAnEvent: 0
+  - bodyText: But staggering the opponent can prevent a lot of damage.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
     broadcastAnEvent: 0
