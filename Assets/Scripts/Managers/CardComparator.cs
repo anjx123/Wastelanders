@@ -181,7 +181,7 @@ public class CardComparator : MonoBehaviour
         //Reset the Scene
         if (PlayEntityDeaths != null)
         {
-            yield return PlayEntityDeaths();
+            yield return StartCoroutine(PlayEntityDeaths());
             PlayEntityDeaths = null;
         }
         DeEmphasizeClashers(actionClass.Origin, actionClass.Target);
