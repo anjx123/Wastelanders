@@ -602,7 +602,6 @@ public class PreQueenFight : DialogueClasses
         yield return StartCoroutine(target?.MoveToPosition(HorizontalProjector(centeredDistance, target.myTransform.position, xBuffer), bufferedRadius, duration, centeredDistance));
         if (e1GetsHit)
         {
-            e1.TakeDamage(e2, 10);
         }
         else
         {

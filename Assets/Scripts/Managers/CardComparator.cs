@@ -130,7 +130,7 @@ public class CardComparator : MonoBehaviour
         yield return new WaitForSeconds(COMBAT_BUFFER_TIME);
         if (PlayEntityDeaths != null)
         {
-            yield return PlayEntityDeaths();
+            yield return StartCoroutine(PlayEntityDeaths());
             PlayEntityDeaths = null;
         }
         DeEmphasizeClashers(card1.Origin, card1.Target);
