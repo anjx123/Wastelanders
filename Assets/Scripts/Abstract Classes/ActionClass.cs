@@ -33,7 +33,10 @@ public abstract class ActionClass : SelectClass
                 origin.BuffsUpdatedEvent -= UpdateBuffValue;
             }
             origin = value;
-            origin.BuffsUpdatedEvent += UpdateBuffValue;
+            if (origin != null)
+            {
+                origin.BuffsUpdatedEvent += UpdateBuffValue;
+            }
             UpdateDup();
         }
     }

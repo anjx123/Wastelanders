@@ -74,7 +74,7 @@ public static class GameStateManager
     public static void Restart(string sceneName)
     {
         GameStateManager.nameOfRestartedLevel = sceneName;
-        SceneManager.LoadScene("RestartScene");
+        SceneManager.LoadScene(sceneName);
     }
 
     public static void SavePlayerDatabase(PlayerDatabase playerDatabase)

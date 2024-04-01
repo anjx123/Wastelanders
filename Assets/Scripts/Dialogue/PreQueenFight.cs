@@ -123,7 +123,6 @@ public class PreQueenFight : DialogueClasses
                 b.FaceLeft();
             }
         }
-
         foreach (Transform entity in plan1Parent.transform)
         {
             EntityClass entityItem = entity.GetComponent<EntityClass>();
