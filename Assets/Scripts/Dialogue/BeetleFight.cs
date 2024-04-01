@@ -119,6 +119,7 @@ public class BeetleFight : DialogueClasses
 
         Beetle.OnGainBuffs -= ExplainResonate;
 
+
         CombatManager.ClearEvents();
         DialogueBox.ClearDialogueEvents();
     }
