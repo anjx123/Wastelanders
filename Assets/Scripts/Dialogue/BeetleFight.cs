@@ -187,7 +187,7 @@ public class BeetleFight : DialogueClasses
         yield return new WaitForSeconds(0.2f);
         SetUpEnemyLists();
         SetUpCombatStatus();
-        if (!jumpToCombat)
+        if (!jumpToCombat && !GameStateManager.jumpIntoBeetleFight)
         {
             sceneCamera.Priority = 2;
             yield return new WaitForSeconds(1f);
@@ -368,6 +368,7 @@ public class BeetleFight : DialogueClasses
         }
         else // setup scene
         {
+            GameStateManager.jumpIntoBeetleFight = false;
             RemoveEnemyFromScene(frog);
             RemoveEnemyFromScene(frogThatRunsAway);
             RemoveEnemyFromScene(ambushBeetle);
@@ -403,6 +404,8 @@ public class BeetleFight : DialogueClasses
             jackie.Targetable();
             ives.Targetable();
             DialogueManager.Instance.MoveBoxToTop();
+
+            yield return new WaitForSeconds(0.2f);
             CombatManager.Instance.GameState = GameState.SELECTION;
             yield return StartCoroutine(DialogueManager.Instance.StartDialogue(twoPlayerCombatTutorial.Dialogue));
             Begin2PCombatTutorial();
@@ -645,7 +648,7 @@ public class BeetleFight : DialogueClasses
         yield return StartCoroutine(CombatManager.Instance.FadeInDarkScreen(2f));
 
         DialogueManager.Instance.MoveBoxToBottom();
-        GameStateManager.jumpIntoFrogAndSlimeFight = true;
+        GameStateManager.jumpIntoBeetleFight = true;
         gameOver.gameObject.SetActive(true);
         gameOver.FadeIn();
 

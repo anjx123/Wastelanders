@@ -24,6 +24,9 @@ public static class GameStateManager
 
     public static readonly string LEVEL_SELECT_NAME = "LevelSelect";
 
+
+    public static readonly string FROG_SLIME_FIGHT = "Scene2";
+    public static readonly string BEETLE_FIGHT = "BeetleFightScene";
     public static readonly string PRE_QUEEN_FIGHT = "PreQueenFightScene";
     public static readonly string POST_QUEEN_FIGHT = "PostQueenBeetle";
     public static readonly string CREDITS = "Credits";

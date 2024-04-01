@@ -77,6 +77,9 @@ public class TutorialIntroduction : DialogueClasses
     {
         CombatManager.ClearEvents();
         DialogueBox.ClearDialogueEvents();
+        PlayerClass.playerReshuffleDeck -= PlayerLostOneMaxHandSize;
+        ActionClass.CardHighlightedEvent -= OnPlayerFirstHighlightCard;
+        EntityClass.OnEntityDeath -= FirstDummyDies;
     }
 
     private IEnumerator ExecuteGameStart()
@@ -240,7 +243,7 @@ public class TutorialIntroduction : DialogueClasses
         yield return StartCoroutine(jackie.MoveToPosition(jackieEndPosition.position, 0, 4f));
 
         GameStateManager.shouldPlayDeckSelectionTutorial = true;
-        SceneManager.LoadScene("SelectionScreen");
+        SceneManager.LoadScene(GameStateManager.SELECTION_SCREEN_NAME);
         yield break;
     }
 
@@ -270,20 +273,20 @@ public class TutorialIntroduction : DialogueClasses
     private void OnPlayerFirstHighlightCard(ActionClass card)
     {
         ActionClass.CardHighlightedEvent -= OnPlayerFirstHighlightCard;
-        StartCoroutine(StartDialogueWithNextEvent(cardFieldsTutorial, () => { BattleQueue.playerActionInsertedEvent += OnPlayerFirstInsertCard; }));
+        StartCoroutine(StartDialogueWithNextEvent(cardFieldsTutorial, () => { BattleQueue.BattleQueueInstance.playerActionInsertedEvent += OnPlayerFirstInsertCard; }));
     }
 
     //Once a player targets an enemy, we talk about the queue
     private void OnPlayerFirstInsertCard(ActionClass card)
     {
         DialogueManager.Instance.MoveBoxToBottom();
-        BattleQueue.playerActionInsertedEvent -= OnPlayerFirstInsertCard;
-        StartCoroutine(StartDialogueWithNextEvent(queueUpActionsTutorial, () => { CardComparator.playersAreRollingDiceEvent += OnPlayerFightsDummy; }));
+        BattleQueue.BattleQueueInstance.playerActionInsertedEvent -= OnPlayerFirstInsertCard;
+        StartCoroutine(StartDialogueWithNextEvent(queueUpActionsTutorial, () => { CardComparator.Instance.playersAreRollingDiceEvent += OnPlayerFightsDummy; }));
     }
 
     private IEnumerator OnPlayerFightsDummy()
     {
-        CardComparator.playersAreRollingDiceEvent -= OnPlayerFightsDummy;
+        CardComparator.Instance.playersAreRollingDiceEvent -= OnPlayerFightsDummy;
         yield return StartCoroutine(DialogueManager.Instance.StartDialogue(rollingDiceTutorial));
     }
 
@@ -304,18 +307,18 @@ public class TutorialIntroduction : DialogueClasses
         CombatManager.EnemiesWinEvent += EnemiesWin;
         DialogueManager.Instance.MoveBoxToBottom();
         CombatManager.OnGameStateChanged += ExplainDefense;
-        StartCoroutine(StartDialogueWithNextEvent(readingOpponentTutorial, () => { BattleQueue.playerActionInsertedEvent += OnPlayerPlayClashingCard; }));
+        StartCoroutine(StartDialogueWithNextEvent(readingOpponentTutorial, () => { BattleQueue.BattleQueueInstance.playerActionInsertedEvent += OnPlayerPlayClashingCard; }));
     }
 
     private void OnPlayerPlayClashingCard(ActionClass actionClass)
     {
-        BattleQueue.playerActionInsertedEvent -= OnPlayerPlayClashingCard;
-        StartCoroutine(StartDialogueWithNextEvent(clashingCardsTutorial, () => { CardComparator.playersAreRollingDiceEvent += OnPlayerClashingWithIves; }));
+        BattleQueue.BattleQueueInstance.playerActionInsertedEvent -= OnPlayerPlayClashingCard;
+        StartCoroutine(StartDialogueWithNextEvent(clashingCardsTutorial, () => { CardComparator.Instance.playersAreRollingDiceEvent += OnPlayerClashingWithIves; }));
     }
 
     private IEnumerator OnPlayerClashingWithIves()
     {
-        CardComparator.playersAreRollingDiceEvent -= OnPlayerClashingWithIves;
+        CardComparator.Instance.playersAreRollingDiceEvent -= OnPlayerClashingWithIves;
         yield return StartCoroutine(DialogueManager.Instance.StartDialogue(clashingOutcomeTutorial));
     }
 

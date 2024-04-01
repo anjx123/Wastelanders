@@ -12,10 +12,10 @@ public class CardComparator : MonoBehaviour
 #nullable enable
     public static readonly float COMBAT_BUFFER_TIME = 1f;
     public delegate IEnumerator DeadEntities();
-    private static event DeadEntities? PlayEntityDeaths;
+    private event DeadEntities? PlayEntityDeaths;
 
     public delegate IEnumerator ClashersAreReadyToRoll();
-    public static event ClashersAreReadyToRoll? playersAreRollingDiceEvent;
+    public event ClashersAreReadyToRoll? playersAreRollingDiceEvent;
 
     // Awake is called when the script instance is being loaded
     void Awake()
