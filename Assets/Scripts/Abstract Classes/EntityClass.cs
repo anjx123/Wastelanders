@@ -71,10 +71,13 @@ public abstract class EntityClass : SelectClass
 
         _DeathHandler = Die;
         DeathHandler = delegate { return _DeathHandler(); };
-        CombatManager.OnGameStateChanging += UpdateBuffsNewRound;
     }
 
-    private void OnDestroy()
+    private void OnEnable()
+    {
+        CombatManager.OnGameStateChanging += UpdateBuffsNewRound;
+    }
+    private void OnDisable()
     {
         CombatManager.OnGameStateChanging -= UpdateBuffsNewRound;
     }

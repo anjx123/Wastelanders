@@ -105,7 +105,6 @@ public abstract class ActionClass : SelectClass
     public virtual void Awake()
     {
         Initialize();
-        PauseMenu.onPauseMenuActivate += OnMouseExit;
     }
 
     public virtual void Start()
@@ -113,7 +112,12 @@ public abstract class ActionClass : SelectClass
         
     }
 
-    private void OnDestroy()
+    private void OnEnable()
+    {
+        PauseMenu.onPauseMenuActivate += OnMouseExit;
+    }
+
+    private void OnDisable()
     {
         if (origin != null)
         {
