@@ -20,7 +20,7 @@ public class Headshot : PistolCards
         Speed = 2;
 
         myName = "Headshot";
-        description = "On hit, deal +1 damage for each stack of Accuracy.";
+        description = "On hit, deal +1 damage for each stack of Accuracy and gain one accuracy.";
         CardType = CardType.RangedAttack;
         Renderer renderer = GetComponent<Renderer>();
         ogMaterial = renderer.material; // og sprite of card
@@ -32,5 +32,6 @@ public class Headshot : PistolCards
     {
         IncrementRoll(Origin.GetBuffStacks(Accuracy.buffName));
         base.OnHit();
+        Origin.AddStacks(Accuracy.buffName, 1);
     }
 }
