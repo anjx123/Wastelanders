@@ -23,7 +23,7 @@ public class BattleQueue : MonoBehaviour
 
     #nullable enable //Turns on pedantic null checks, use exclamation mark (!) operator to assert non null and supress warnings.
     public delegate void ActionAddedDelegate(ActionClass card);
-    public static event ActionAddedDelegate? playerActionInsertedEvent;
+    public event ActionAddedDelegate? playerActionInsertedEvent;
 
     void Awake()
     {

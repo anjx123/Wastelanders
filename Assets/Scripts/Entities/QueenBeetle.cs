@@ -117,13 +117,15 @@ public class QueenBeetle : EnemyClass
     //     attacks after that.
     public override void AddAttack(List<PlayerClass> players)
     {
+        bool usedSpawnThisRound = false;
         for (int i = 0; i < 2; i++)
         {
-            if (GetBuffStacks(Resonate.buffName) >= 2 && FindFirstOpenSlot() != -1)
+            if (GetBuffStacks(Resonate.buffName) >= 2 && FindFirstOpenSlot() != -1 && (!usedSpawnThisRound || NumberOfAvailableSlots() > 1)) //Last condition fixes a bug where the queen can try to spawn 2 beetles but then hit the max spawn cap
             {
                 AddAttackFromPool(players, 0); // hatchery
                 ReduceStacks(Resonate.buffName, 2);
                 UpdateBuffs();
+                usedSpawnThisRound = true;
             }
             else
             {
@@ -132,6 +134,19 @@ public class QueenBeetle : EnemyClass
         }
     }
 
+    int NumberOfAvailableSlots()
+    {
+        int number = 0;
+        for (int i = 0; i < availability.Length; i++)
+        {
+            if (availability[i] == null)
+            {
+                ++number;
+            }
+        }
+        Debug.Log(number);
+        return number;
+    }
     // helper function for AddAttack
     private void AddAttackFromPool(List<PlayerClass> players, int idx)
     {

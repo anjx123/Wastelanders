@@ -4,8 +4,6 @@ using System.Collections.Generic;
 using System.Runtime.ConstrainedExecution;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using static Unity.VisualScripting.Member;
-using static UnityEngine.EventSystems.EventTrigger;
 
 //@author: Andrew
 public class PreQueenFight : DialogueClasses
@@ -125,7 +123,6 @@ public class PreQueenFight : DialogueClasses
                 b.FaceLeft();
             }
         }
-
         foreach (Transform entity in plan1Parent.transform)
         {
             EntityClass entityItem = entity.GetComponent<EntityClass>();
@@ -167,7 +164,7 @@ public class PreQueenFight : DialogueClasses
 
 
 
-        if (!jumpToCombat)
+        if (!jumpToCombat && !GameStateManager.jumpIntoQueenFight)
         {
             yield return StartCoroutine(DialogueManager.Instance.StartDialogue(initialPlanByJackie.Dialogue));
 
@@ -444,6 +441,7 @@ public class PreQueenFight : DialogueClasses
         else
         {
 
+            GameStateManager.jumpIntoQueenFight = false;
             jackie.AddStacks(Resonate.buffName, 1);
             CleanUpScene1();
             CleanUpScene2();
@@ -577,6 +575,8 @@ public class PreQueenFight : DialogueClasses
         yield return StartCoroutine(CombatManager.Instance.FadeInDarkScreen(2f));
 
         //Set Jump into combat to be true
+
+        GameStateManager.jumpIntoQueenFight = true;
         gameOver.gameObject.SetActive(true);
         gameOver.FadeIn();
 
@@ -602,7 +602,6 @@ public class PreQueenFight : DialogueClasses
         yield return StartCoroutine(target?.MoveToPosition(HorizontalProjector(centeredDistance, target.myTransform.position, xBuffer), bufferedRadius, duration, centeredDistance));
         if (e1GetsHit)
         {
-            e1.TakeDamage(e2, 10);
         }
         else
         {

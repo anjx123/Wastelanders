@@ -18,6 +18,8 @@ public class DialogueManager : MonoBehaviour
 
     private bool inDialogue = false;
 
+    List<DialogueText> dialogueHistory = new();
+
     void Awake()
     {
         if (Instance == null)
@@ -58,7 +60,19 @@ public class DialogueManager : MonoBehaviour
         yield return new WaitUntil(() => !inDialogue);
     }
 
-    void ClearPanel()
+
+    void AddLineToHistory(DialogueText text)
+    {
+        dialogueHistory.Add(text);
+    }
+
+    public List<DialogueText> GetHistory()
+    {
+        return dialogueHistory;
+    }
+
+
+void ClearPanel()
     {
         activeDialogueBox.gameObject.SetActive(false);
         sentences.Clear();
@@ -102,6 +116,8 @@ public class DialogueManager : MonoBehaviour
         }
         DialogueText sentence = sentences[0];
         sentences.RemoveAt(0); //Uses a list instead of a Queue so we can see it in the Unity Editor
+
+        AddLineToHistory(sentence);
 
         if (sentence.DisplayingImage == null && picturelessDialogueBoxComponent != null)
         {

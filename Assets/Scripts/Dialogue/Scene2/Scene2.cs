@@ -1,4 +1,5 @@
 using Cinemachine;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
@@ -79,12 +80,14 @@ public class Scene2 : DialogueClasses
         {
             StartCoroutine(ExecuteGameStart());
         }
+        
     }
 
     public void OnDestroy()
     {
         CombatManager.ClearEvents();
         DialogueBox.ClearDialogueEvents();
+        EntityClass.OnEntityDeath -= EnsureFrogDeath;
     }
 
     int numberOfBroadcasts = 0;
@@ -239,7 +242,7 @@ private IEnumerator ExecuteGameStart()
         yield return new WaitForSeconds(2f);
         yield return StartCoroutine(CombatManager.Instance.FadeInDarkScreen(1.5f));
 
-        SceneManager.LoadScene("BeetleFightScene");
+        SceneManager.LoadScene(GameStateManager.BEETLE_FIGHT);
         yield break;
     }
 
@@ -369,6 +372,7 @@ private IEnumerator ExecuteGameStart()
 
                 wasteFrog._DeathHandler = DieInScene;
                 lastKilledFrog = wasteFrog;
+                EntityClass.OnEntityDeath -= EnsureFrogDeath;
             }
             playDeadFrog = true; //Only change death animation of the second frog
         }

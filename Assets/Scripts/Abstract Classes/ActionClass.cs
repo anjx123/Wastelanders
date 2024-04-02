@@ -33,7 +33,10 @@ public abstract class ActionClass : SelectClass
                 origin.BuffsUpdatedEvent -= UpdateBuffValue;
             }
             origin = value;
-            origin.BuffsUpdatedEvent += UpdateBuffValue;
+            if (origin != null)
+            {
+                origin.BuffsUpdatedEvent += UpdateBuffValue;
+            }
             UpdateDup();
         }
     }
@@ -102,7 +105,6 @@ public abstract class ActionClass : SelectClass
     public virtual void Awake()
     {
         Initialize();
-        PauseMenu.onPauseMenuActivate += OnMouseExit;
     }
 
     public virtual void Start()
@@ -110,7 +112,12 @@ public abstract class ActionClass : SelectClass
         
     }
 
-    private void OnDestroy()
+    private void OnEnable()
+    {
+        PauseMenu.onPauseMenuActivate += OnMouseExit;
+    }
+
+    private void OnDisable()
     {
         if (origin != null)
         {
@@ -299,6 +306,7 @@ public abstract class ActionClass : SelectClass
                 if (previousState == CardState.HOVER)
                 {
                     positionChange = new Vector3(-0.04f, -0.4f, 0);
+                    ExtendBoxCollider(gameObject.GetComponent<BoxCollider>(), -1.6f);
                 }
                 break;
             case CardState.HOVER:
@@ -306,6 +314,7 @@ public abstract class ActionClass : SelectClass
                 if (previousState == CardState.NORMAL)
                 {
                     positionChange = new Vector3(0.04f, 0.4f, 0);
+                    ExtendBoxCollider(gameObject.GetComponent<BoxCollider>(), 1.6f);
                 }
                 break;
             case CardState.CANT_PLAY:
@@ -335,6 +344,20 @@ public abstract class ActionClass : SelectClass
             spriteRenderer.color = newColor;
         }
         CardStateChange?.Invoke(previousState, nextState);
+    }
+
+    //extends the boxcollider downwards
+    void ExtendBoxCollider(BoxCollider boxCollider, float extendAmount)
+    {
+        // Store the original size and center
+        Vector3 originalSize = boxCollider.size;
+        Vector3 originalCenter = boxCollider.center;
+
+        // Extend the size of the BoxCollider along the y-axis
+        boxCollider.size = new Vector3(originalSize.x, originalSize.y + extendAmount, originalSize.z);
+
+        // Adjust the center of the BoxCollider to keep the bottom end at the same place
+        boxCollider.center = new Vector3(originalCenter.x, originalCenter.y - extendAmount / 2, originalCenter.z);
     }
 
 

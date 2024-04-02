@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -10,12 +11,63 @@ public class PauseMenu : MonoBehaviour
     [SerializeField] private Canvas pauseCanvas;
 
     [SerializeField] private GameObject glossary;
+    [SerializeField] private GameObject history;
     [SerializeField] private GameObject buttonparent;
-   
+
+
+    [SerializeField] private TextMeshProUGUI historyText;
+
 
     public delegate void PauseMenuEventHandler();
     public static event PauseMenuEventHandler onPauseMenuActivate;   // for more complex functions that cannot use isPaused
     public static event PauseMenuEventHandler onPauseMenuDeactivate;
+
+
+    bool isDialogueHistoryShowing = false;
+    public bool DialogueHistoryState
+    {
+        get { return isDialogueHistoryShowing; }
+        set
+        {
+            if (value == true)
+            {
+                ShowHistory();
+            }
+            else
+            {
+                HideHistory();
+            }
+            isDialogueHistoryShowing = value;
+        }
+    }
+
+    void ShowHistory()
+    {
+        RenderHistory();
+        history.SetActive(true);
+        buttonparent.SetActive(false);
+    }
+
+    void HideHistory()
+    {
+        history.SetActive(false);   
+        buttonparent.SetActive(true);
+    }
+
+    void RenderHistory()
+    {
+        List<DialogueText> list = DialogueManager.Instance?.GetHistory();
+        historyText.text = "";
+        foreach (DialogueText dialogue in list)
+        {
+            historyText.text += "<b>" + dialogue.SpeakerName + "</b>" + "\n" + dialogue.BodyText + "\n\n";
+        }
+    }
+
+    public void SetHistoryState(bool state)
+    {
+        DialogueHistoryState = state;
+    }
 
     bool isGlossaryShowing = false;
     public bool GlossaryState { get { return isGlossaryShowing; }
@@ -28,6 +80,7 @@ public class PauseMenu : MonoBehaviour
             {
                 HideGlossary();
             }
+            isGlossaryShowing = value;
         }
     }
 
@@ -56,7 +109,7 @@ public class PauseMenu : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Tab))
         {
             if (IsPaused)
             {
@@ -85,6 +138,11 @@ public class PauseMenu : MonoBehaviour
         onPauseMenuActivate?.Invoke();
         Time.timeScale = 0f;
         IsPaused = true;
+
+        if (isDialogueHistoryShowing)
+        {
+            RenderHistory();
+        }
     }
 
     public void LevelSelectScene()

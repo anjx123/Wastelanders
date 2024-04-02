@@ -12,10 +12,10 @@ public class CardComparator : MonoBehaviour
 #nullable enable
     public static readonly float COMBAT_BUFFER_TIME = 1f;
     public delegate IEnumerator DeadEntities();
-    private static event DeadEntities? PlayEntityDeaths;
+    private event DeadEntities? PlayEntityDeaths;
 
     public delegate IEnumerator ClashersAreReadyToRoll();
-    public static event ClashersAreReadyToRoll? playersAreRollingDiceEvent;
+    public event ClashersAreReadyToRoll? playersAreRollingDiceEvent;
 
     // Awake is called when the script instance is being loaded
     void Awake()
@@ -130,7 +130,7 @@ public class CardComparator : MonoBehaviour
         yield return new WaitForSeconds(COMBAT_BUFFER_TIME);
         if (PlayEntityDeaths != null)
         {
-            yield return PlayEntityDeaths();
+            yield return StartCoroutine(PlayEntityDeaths());
             PlayEntityDeaths = null;
         }
         DeEmphasizeClashers(card1.Origin, card1.Target);
@@ -181,7 +181,7 @@ public class CardComparator : MonoBehaviour
         //Reset the Scene
         if (PlayEntityDeaths != null)
         {
-            yield return PlayEntityDeaths();
+            yield return StartCoroutine(PlayEntityDeaths());
             PlayEntityDeaths = null;
         }
         DeEmphasizeClashers(actionClass.Origin, actionClass.Target);

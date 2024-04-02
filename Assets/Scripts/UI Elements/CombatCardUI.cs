@@ -37,7 +37,7 @@ public class CombatCardUI : DisplayableClass
         if (ActionClass != null)
         {
             ActionClass.TargetChanged -= SetTargetIcon;
-            ActionClass.CardValuesUpdating += UpdateRangeText;
+            ActionClass.CardValuesUpdating -= UpdateRangeText;
         }
     }
 

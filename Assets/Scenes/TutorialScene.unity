@@ -1553,6 +1553,26 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1877041900}
     m_Modifications:
+    - target: {fileID: 3177060411310957935, guid: 8d25b64c33c41434ca2ffa92437ea568, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3177060411310957935, guid: 8d25b64c33c41434ca2ffa92437ea568, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3177060411310957935, guid: 8d25b64c33c41434ca2ffa92437ea568, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3720533911124734458, guid: 8d25b64c33c41434ca2ffa92437ea568, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3720533911124734458, guid: 8d25b64c33c41434ca2ffa92437ea568, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -0.00018655758
+      objectReference: {fileID: 0}
     - target: {fileID: 5522002409995569706, guid: 8d25b64c33c41434ca2ffa92437ea568, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -1637,6 +1657,18 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 1525248175}
+    - target: {fileID: 7869142912907888162, guid: 8d25b64c33c41434ca2ffa92437ea568, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7869142912907888162, guid: 8d25b64c33c41434ca2ffa92437ea568, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7869142912907888162, guid: 8d25b64c33c41434ca2ffa92437ea568, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8591503019450182587, guid: 8d25b64c33c41434ca2ffa92437ea568, type: 3}
       propertyPath: m_Name
       value: PauseCanvas
@@ -2253,7 +2285,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6635998426718021455, guid: b9c5e4b3c9f7e024f8fe9012e7a2e437, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -10.133333
+      value: -10.13216
       objectReference: {fileID: 0}
     - target: {fileID: 6635998426718021455, guid: b9c5e4b3c9f7e024f8fe9012e7a2e437, type: 3}
       propertyPath: m_LocalPosition.y
@@ -3238,7 +3270,7 @@ MonoBehaviour:
     displayingImage: {fileID: 21300000, guid: 820631014ce088c4cb748224d5467c86, type: 3}
     broadcastAnEvent: 0
   - bodyText: (If you forget what 'Flow' does, you can access buff information in
-      the Glossary on the pause menu by pressing [esc.])
+      the Glossary or the Dialogue History on the pause menu by pressing [Tab])
     speakerName: 
     displayingImage: {fileID: 21300000, guid: 820631014ce088c4cb748224d5467c86, type: 3}
     broadcastAnEvent: 0
@@ -3276,19 +3308,32 @@ MonoBehaviour:
     displayingImage: {fileID: 21300000, guid: ade9660133ca00a499bfa3ad449b87bd, type: 3}
     broadcastAnEvent: 0
   clashingCardsTutorial:
-  - bodyText: "When you target an enemy with an attack, that attack will \"clash\"
+  - bodyText: "When you target an enemy with an attack, that attack will form a \"clash\"
       with the opponent\u2019s fastest attack."
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: b0d27b9163eb2554996f368bd5b8d4e2, type: 3}
     broadcastAnEvent: 0
-  - bodyText: 'Promoting both attack''s speeds to be the fastest between the two. '
+  - bodyText: "These \u2018clashing' attacks are locked in and will then compete
+      against each other later in the fight. "
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: b0d27b9163eb2554996f368bd5b8d4e2, type: 3}
     broadcastAnEvent: 0
-  - bodyText: Experiment with this wisely to manipulate the order of attacks. Come
-      at me once you are ready.
+  - bodyText: 'The winner being the one who rolls the highest power. '
+    speakerName: Ives
+    displayingImage: {fileID: 21300000, guid: 3fea2e94140c08246a0e502ee92d3761, type: 3}
+    broadcastAnEvent: 0
+  - bodyText: 'Note that clashing promotes both attack''s speeds to be the fastest
+      between the two. '
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: b0d27b9163eb2554996f368bd5b8d4e2, type: 3}
+    broadcastAnEvent: 0
+  - bodyText: 'Experiment with this wisely to manipulate the order of attacks. '
+    speakerName: Ives
+    displayingImage: {fileID: 21300000, guid: b0d27b9163eb2554996f368bd5b8d4e2, type: 3}
+    broadcastAnEvent: 0
+  - bodyText: I'll explain more once that clash starts. Come at me once you are ready.
+    speakerName: Ives
+    displayingImage: {fileID: 21300000, guid: 87cb7c6c6588a4a3a957b707239abbf0, type: 3}
     broadcastAnEvent: 0
   defensiveCardsTutorial:
   - bodyText: Defensive cards are marked by the defense icon.
@@ -3320,17 +3365,21 @@ MonoBehaviour:
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
     broadcastAnEvent: 0
-  - bodyText: The clasher who rolls the highest Power 'staggers' the opponent and
-      deals the attack's <i>entire</i> Power to the loser.
+  - bodyText: The attack that rolls the highest Power wins and 'staggers' the opponent,
+      dealing its <i>entire</i> Power to the loser.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
     broadcastAnEvent: 0
-  - bodyText: Being staggered means the attack will not deal any damage, and its
-      ab.
+  - bodyText: Rolling low and losing the clash will stagger the attack, and it will
+      not deal any damage at all.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
     broadcastAnEvent: 0
   - bodyText: So choose the attacks that clash wisely. Being staggered is unforgiving.
+    speakerName: Ives
+    displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
+    broadcastAnEvent: 0
+  - bodyText: But staggering the opponent can prevent a lot of damage.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
     broadcastAnEvent: 0
@@ -3462,7 +3511,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6236433946665406741, guid: ffdf6c0e873fb734ca3cd40ff3507571, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -4
+      value: -3.76
       objectReference: {fileID: 0}
     - target: {fileID: 6236433946665406741, guid: ffdf6c0e873fb734ca3cd40ff3507571, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

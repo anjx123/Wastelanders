@@ -17,7 +17,7 @@ MonoBehaviour:
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 084171bdb9370ac43b84a6350416b15c, type: 3}
     broadcastAnEvent: 0
-  - bodyText: Jackie, let's back off and wait for reinforcements.
+  - bodyText: Jackie, let's back off, re-equipt, and wait for reinforcements.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 084171bdb9370ac43b84a6350416b15c, type: 3}
     broadcastAnEvent: 0
