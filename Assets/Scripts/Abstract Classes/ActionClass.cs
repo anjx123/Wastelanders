@@ -16,6 +16,7 @@ public abstract class ActionClass : SelectClass
         get { return target; }
         set
         {
+            TargetChanging?.Invoke(this);
             target = value;
             TargetChanged?.Invoke(this);
         }
@@ -23,6 +24,7 @@ public abstract class ActionClass : SelectClass
     private EntityClass origin;
     public delegate void ActionClassDelegate(ActionClass target);
     public event ActionClassDelegate TargetChanged;
+    public event ActionClassDelegate TargetChanging;
     public EntityClass Origin
     {
         get { return origin; }

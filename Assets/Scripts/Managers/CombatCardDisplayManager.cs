@@ -49,7 +49,7 @@ public class CombatCardDisplayManager : MonoBehaviour
         CombatManager.OnGameStateChanging -= HideCard;
         if (currentUser != null)
         {
-            currentUser.TargetChanged -= DeHighlightTarget;
+            currentUser.TargetChanging -= DeHighlightTarget;
         }
     }
 
@@ -114,13 +114,13 @@ public class CombatCardDisplayManager : MonoBehaviour
             actionClass.Target.CrossHair();
         }
         targetHighlighted = true;
-        actionClass.TargetChanged += DeHighlightTarget;
+        actionClass.TargetChanging += DeHighlightTarget;
     }
 
     // Deighlights the target of a
     private void DeHighlightTarget(ActionClass actionClass)
     {
-        actionClass.TargetChanged -= DeHighlightTarget;
+        actionClass.TargetChanging -= DeHighlightTarget;
         if (targetHighlighted)
         {
             actionClass.Target.UnCrossHair();
