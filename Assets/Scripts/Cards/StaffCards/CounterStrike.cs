@@ -17,7 +17,7 @@ public class CounterStrike : StaffCards
         Speed = 4;
 
         myName = "Counter Strike";
-        description = "Block, then make an attack with this card. Each unstaggered action grants 1 Flow.";
+        description = "Block, then make an attack with this card. Each unstaggered defense/attack grants 1 Flow.";
         Renderer renderer = GetComponent<Renderer>();
         ogMaterial = renderer.material; // og sprite of card
         OriginalPosition = transform.position;

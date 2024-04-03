@@ -17,7 +17,7 @@ public class CalmTheMind : StaffCards
         Speed = 5;
         
         myName = "Calm The Mind";
-        description = "Block, if unstaggered then gain 2 stack of Flow.";
+        description = "Block, then gain 2 stack of Flow.";
         
         Renderer renderer = GetComponent<Renderer>();
         ogMaterial = renderer.material; // og sprite of card
@@ -29,6 +29,12 @@ public class CalmTheMind : StaffCards
     public override void CardIsUnstaggered()
     {
         base.CardIsUnstaggered();
+        Origin.AddStacks(Flow.buffName, 2);
+    }
+
+    public override void OnCardStagger()
+    {
+        base.OnCardStagger();
         Origin.AddStacks(Flow.buffName, 2);
     }
 }

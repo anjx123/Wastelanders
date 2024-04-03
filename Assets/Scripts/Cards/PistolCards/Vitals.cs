@@ -12,7 +12,7 @@ public class Vitals : PistolCards
     // Start is called before the first frame update
     public override void Initialize()
     {
-        lowerBound = 2;
+        lowerBound = 1;
         upperBound = 7;
 
         Speed = 5;
@@ -24,8 +24,6 @@ public class Vitals : PistolCards
         ogMaterial = renderer.material; // og sprite of card
         OriginalPosition = transform.position;
         base.Initialize();
-
-
     }
 
 }
