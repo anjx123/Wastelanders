@@ -2285,7 +2285,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6635998426718021455, guid: b9c5e4b3c9f7e024f8fe9012e7a2e437, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -10.136279
+      value: -10.135366
       objectReference: {fileID: 0}
     - target: {fileID: 6635998426718021455, guid: b9c5e4b3c9f7e024f8fe9012e7a2e437, type: 3}
       propertyPath: m_LocalPosition.y
@@ -3031,7 +3031,7 @@ MonoBehaviour:
   laidBackImageUI: {fileID: 157056470}
   puzzeledImageUI: {fileID: 1664471019}
   ivesTutorialDeck:
-  - {fileID: 365813191591832820, guid: 0f9d35f67947f2241aac5a9ed31099d3, type: 3}
+  - {fileID: 365813191591832820, guid: 29b90323f9f58f947a62ba6d9c11d4a0, type: 3}
   - {fileID: 1570116063941554911, guid: 4ceb98929208ac64ab848aa79d636595, type: 3}
   - {fileID: 6429530541201259997, guid: 4e812ef45f6aef54092f7985015b5248, type: 3}
   jackieTutorialDeck:
@@ -3194,8 +3194,8 @@ MonoBehaviour:
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 3fea2e94140c08246a0e502ee92d3761, type: 3}
     broadcastAnEvent: 0
-  - bodyText: And Speed - Which determines the order actions come out. Where higher
-      numbers are faster.
+  - bodyText: And Speed - Which determines the order actions are played in. Higher
+      speeds are played first.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 61a3ecbde544e124ba8f329d0e4f6fb2, type: 3}
     broadcastAnEvent: 0
@@ -3212,8 +3212,11 @@ MonoBehaviour:
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: fb608aaef631251489ed4ef86a15e639, type: 3}
     broadcastAnEvent: 0
-  - bodyText: You can retrieve a card back from the queue by [Right Clicking] on
-      its icon.
+  - bodyText: You can [Left Click] on a played card's icon to view the card's stats.
+    speakerName: Ives
+    displayingImage: {fileID: 21300000, guid: 57baba5992d9e224988e93fcacf9f7eb, type: 3}
+    broadcastAnEvent: 0
+  - bodyText: Or retrieve it back into your hand by [Right Clicking] on its icon.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 57baba5992d9e224988e93fcacf9f7eb, type: 3}
     broadcastAnEvent: 0
@@ -3271,8 +3274,8 @@ MonoBehaviour:
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 820631014ce088c4cb748224d5467c86, type: 3}
     broadcastAnEvent: 0
-  - bodyText: (If you forget what 'Flow' does, you can access buff information in
-      the Glossary or the Dialogue History on the pause menu by pressing [Tab])
+  - bodyText: (If you forget what 'Flow' does, you can check the Glossary or the
+      Dialogue History on the pause menu by pressing [Tab])
     speakerName: 
     displayingImage: {fileID: 21300000, guid: 820631014ce088c4cb748224d5467c86, type: 3}
     broadcastAnEvent: 0
@@ -3295,13 +3298,13 @@ MonoBehaviour:
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: edb0bc1d86401ce4aadfe4358f987ea3, type: 3}
     broadcastAnEvent: 0
-  - bodyText: '[Clicking] on the attack icon also allows you to see its Speed and
-      any Abilities.'
+  - bodyText: '[Left Clicking] on the attack icon also allows you to see its Speed
+      and any Abilities.'
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 82dbf38ae23fe224e90be99093d02604, type: 3}
     broadcastAnEvent: 0
-  - bodyText: Their action has also been placed into the queue. You can [Click] on
-      that too to check it out.
+  - bodyText: Their action has also been placed into the queue where you can [Left
+      Click] to check it out.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: fbdbcaab28794334bb84176f7e052fb5, type: 3}
     broadcastAnEvent: 0
@@ -3329,8 +3332,8 @@ MonoBehaviour:
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 87cb7c6c6588a4a3a957b707239abbf0, type: 3}
     broadcastAnEvent: 0
-  - bodyText: The first card played will always form the clash, even if the following
-      cards you play may be faster than it.
+  - bodyText: The first card played will always form the clash, even if the next
+      card played may be faster.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 87cb7c6c6588a4a3a957b707239abbf0, type: 3}
     broadcastAnEvent: 0
@@ -3339,7 +3342,7 @@ MonoBehaviour:
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: b0d27b9163eb2554996f368bd5b8d4e2, type: 3}
     broadcastAnEvent: 0
-  - bodyText: Experiment with this wisely to manipulate the order of attacks.  Come
+  - bodyText: Experiment with this wisely to manipulate the order of attacks. Come
       at me when you are ready.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: b0d27b9163eb2554996f368bd5b8d4e2, type: 3}
