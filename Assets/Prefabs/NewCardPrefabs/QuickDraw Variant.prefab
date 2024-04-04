@@ -118,8 +118,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myTransform: {fileID: 7244407257569631039}
-  duplicateCardInstance: {fileID: 0}
-  description: 
   icon: {fileID: 21300000, guid: 12f88eb21954c35419da9788c00451eb, type: 3}
-  cardBack: {fileID: 0}
+  cardBack: {fileID: 21300000, guid: 39082e00c2d70460993a929910d40e67, type: 3}
   cardUI: {fileID: 1560973580468346488}

@@ -2285,7 +2285,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6635998426718021455, guid: b9c5e4b3c9f7e024f8fe9012e7a2e437, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -10.13216
+      value: -10.136279
       objectReference: {fileID: 0}
     - target: {fileID: 6635998426718021455, guid: b9c5e4b3c9f7e024f8fe9012e7a2e437, type: 3}
       propertyPath: m_LocalPosition.y
@@ -3194,7 +3194,8 @@ MonoBehaviour:
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 3fea2e94140c08246a0e502ee92d3761, type: 3}
     broadcastAnEvent: 0
-  - bodyText: And Speed - Which determines the order attacks come out.
+  - bodyText: And Speed - Which determines the order actions come out. Where higher
+      numbers are faster.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 61a3ecbde544e124ba8f329d0e4f6fb2, type: 3}
     broadcastAnEvent: 0
@@ -3211,7 +3212,8 @@ MonoBehaviour:
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: fb608aaef631251489ed4ef86a15e639, type: 3}
     broadcastAnEvent: 0
-  - bodyText: You can retrieve a card back from the queue by clicking on its icon.
+  - bodyText: You can retrieve a card back from the queue by [Right Clicking] on
+      its icon.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 57baba5992d9e224988e93fcacf9f7eb, type: 3}
     broadcastAnEvent: 0
@@ -3308,32 +3310,39 @@ MonoBehaviour:
     displayingImage: {fileID: 21300000, guid: ade9660133ca00a499bfa3ad449b87bd, type: 3}
     broadcastAnEvent: 0
   clashingCardsTutorial:
-  - bodyText: "When you target an enemy with an attack, that attack will form a \"clash\"
-      with the opponent\u2019s fastest attack."
+  - bodyText: The first action you play against the enemy will form a 'clash' with
+      their action.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: b0d27b9163eb2554996f368bd5b8d4e2, type: 3}
     broadcastAnEvent: 0
-  - bodyText: "These \u2018clashing' attacks are locked in and will then compete
-      against each other later in the fight. "
+  - bodyText: Promoting both action's speeds to be the fastest between the two.
     speakerName: Ives
-    displayingImage: {fileID: 21300000, guid: b0d27b9163eb2554996f368bd5b8d4e2, type: 3}
+    displayingImage: {fileID: 21300000, guid: 61a3ecbde544e124ba8f329d0e4f6fb2, type: 3}
     broadcastAnEvent: 0
-  - bodyText: 'The winner being the one who rolls the highest power. '
+  - bodyText: "These \u2018clashing' actions will then compete against each other
+      later in the fight to see who rolls the highest power."
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 3fea2e94140c08246a0e502ee92d3761, type: 3}
     broadcastAnEvent: 0
-  - bodyText: 'Note that clashing promotes both attack''s speeds to be the fastest
-      between the two. '
-    speakerName: Ives
-    displayingImage: {fileID: 21300000, guid: b0d27b9163eb2554996f368bd5b8d4e2, type: 3}
-    broadcastAnEvent: 0
-  - bodyText: 'Experiment with this wisely to manipulate the order of attacks. '
-    speakerName: Ives
-    displayingImage: {fileID: 21300000, guid: b0d27b9163eb2554996f368bd5b8d4e2, type: 3}
-    broadcastAnEvent: 0
-  - bodyText: I'll explain more once that clash starts. Come at me once you are ready.
+  - bodyText: Note that the order in which cards are played matters when forming
+      clashes.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 87cb7c6c6588a4a3a957b707239abbf0, type: 3}
+    broadcastAnEvent: 0
+  - bodyText: The first card played will always form the clash, even if the following
+      cards you play may be faster than it.
+    speakerName: Ives
+    displayingImage: {fileID: 21300000, guid: 87cb7c6c6588a4a3a957b707239abbf0, type: 3}
+    broadcastAnEvent: 0
+  - bodyText: Think of it as suppressing an opponent's attack, and thus creating
+      an opening for yourself.
+    speakerName: Ives
+    displayingImage: {fileID: 21300000, guid: b0d27b9163eb2554996f368bd5b8d4e2, type: 3}
+    broadcastAnEvent: 0
+  - bodyText: Experiment with this wisely to manipulate the order of attacks.  Come
+      at me when you are ready.
+    speakerName: Ives
+    displayingImage: {fileID: 21300000, guid: b0d27b9163eb2554996f368bd5b8d4e2, type: 3}
     broadcastAnEvent: 0
   defensiveCardsTutorial:
   - bodyText: Defensive cards are marked by the defense icon.

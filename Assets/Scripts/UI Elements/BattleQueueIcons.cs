@@ -8,13 +8,17 @@ public class BattleQueueIcons : DisplayableClass
 
     public override void OnMouseDown()
     {
-        if (ActionClass.Origin is PlayerClass) {
+        if (CombatManager.Instance.CanHighlight())
+        {
+            ShowCard();
+        }
+    }
+
+    public void Update()
+    {
+        if (Input.GetMouseButtonDown(1)  && ActionClass.Origin is PlayerClass)
+        {
             DeleteFromBQ();
-        } else {
-            if (CombatManager.Instance.CanHighlight())
-            {
-                ShowCard();
-            }
         }
     }
 
