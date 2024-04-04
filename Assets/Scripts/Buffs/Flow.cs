@@ -11,6 +11,7 @@ public class Flow : StatusEffect
     {
         dup.rollFloor += this.buffStacks;
         dup.rollCeiling += this.buffStacks;
+        dup.oneTimeBuffs = (buffName, buffStacks, buffStacks);
         ClearBuff();
     }
 

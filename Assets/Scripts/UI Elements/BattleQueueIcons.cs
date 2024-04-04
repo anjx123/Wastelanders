@@ -14,9 +14,9 @@ public class BattleQueueIcons : DisplayableClass
         }
     }
 
-    public void Update()
+    public void OnMouseOver()
     {
-        if (Input.GetMouseButtonDown(1)  && ActionClass.Origin is PlayerClass)
+        if (Input.GetMouseButtonDown(1) && ActionClass.Origin is PlayerClass && CombatManager.Instance.CanHighlight())
         {
             DeleteFromBQ();
         }

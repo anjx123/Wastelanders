@@ -89,7 +89,7 @@ public abstract class PlayerClass : EntityClass
             else
             {
                 Debug.LogWarning(myName + "'s Pool has no cards");
-                DeathHandler(); //Kill player for now to prevent deadlock
+
             }
         }
     }
