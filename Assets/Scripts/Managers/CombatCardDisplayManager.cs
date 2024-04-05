@@ -10,6 +10,9 @@ public class CombatCardDisplayManager : MonoBehaviour
     private GameObject fullCardObject; // keep ref to object to destroy
     [SerializeField] private GameObject descriptionHolderPrefab;
     private GameObject descriptionHolder;
+
+    [SerializeField] private Camera mainCamera;
+
 #nullable enable
     public bool IsDisplaying { get; set; } = false;
     private ActionClass? currentUser;
@@ -31,6 +34,7 @@ public class CombatCardDisplayManager : MonoBehaviour
     private void Start()
     {
         CombatManager.OnGameStateChanging += HideCard;
+
         fullCardObject = Instantiate(cardTemplatePrefab);
         fullCardObject.transform.SetParent(cardDisplay.transform, false);
         fullCardObject.transform.localPosition = new Vector3(0, 0, 0);
