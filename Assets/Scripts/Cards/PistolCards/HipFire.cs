@@ -41,7 +41,4 @@ public class HipFire : PistolCards
 
         base.Initialize();
     }
-
-
-
 }

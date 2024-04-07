@@ -52,7 +52,7 @@ MonoBehaviour:
     broadcastAnEvent: 0
   - bodyText: Yeah, I made a mental note of it.
     speakerName: Jackie
-    displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
+    displayingImage: {fileID: 21300000, guid: c719baaafa8cd7148806ffb41907add6, type: 3}
     broadcastAnEvent: 0
   - bodyText: "Excellent. Since the beetles seem to be attracted to Waste Products,
       the city\u2019s collection of Products could spell trouble. "

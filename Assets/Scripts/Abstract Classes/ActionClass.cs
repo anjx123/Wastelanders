@@ -16,6 +16,7 @@ public abstract class ActionClass : SelectClass
         get { return target; }
         set
         {
+            TargetChanging?.Invoke(this);
             target = value;
             TargetChanged?.Invoke(this);
         }
@@ -23,6 +24,7 @@ public abstract class ActionClass : SelectClass
     private EntityClass origin;
     public delegate void ActionClassDelegate(ActionClass target);
     public event ActionClassDelegate TargetChanged;
+    public event ActionClassDelegate TargetChanging;
     public EntityClass Origin
     {
         get { return origin; }
@@ -67,6 +69,8 @@ public abstract class ActionClass : SelectClass
         public int rollFloor;
         public int rollCeiling;
         public int actualRoll;
+        //We want to render these one time buffs so we keep track of its name, lower and upper bound buffs to this card.
+        public (string, int, int) oneTimeBuffs; //Left int represents lower bound increased by buff. Right int represents the upper bound
     }
     public enum CardState
     {
@@ -167,6 +171,7 @@ public abstract class ActionClass : SelectClass
         duplicateCard.rollFloor = lowerBound;
         duplicateCard.rollCeiling = upperBound;
         duplicateCard.actualRoll = oldDup.actualRoll;
+        duplicateCard.oneTimeBuffs = ("", 0, 0);
     }
 
     public void ReduceRoll(int byValue)

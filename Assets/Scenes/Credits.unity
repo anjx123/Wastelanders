@@ -437,7 +437,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 367}
+  m_AnchoredPosition: {x: 0, y: 479}
   m_SizeDelta: {x: 1682, y: 678}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1149136565
@@ -604,7 +604,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 9}
+  m_AnchoredPosition: {x: 0, y: 120.9999}
   m_SizeDelta: {x: 700, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1410350894
@@ -630,8 +630,8 @@ MonoBehaviour:
   m_text: "<b>Team Lead</b>\nKimiko Ngo\n\n<b>Game Designer</b>\nAnrui Liu\n\n<b>Lead
     Artist</b>\nBonnie Lu\n\n<b>Artists</b>\nKate Louie\nDixie Santo\nGrace Shen\nMarian
     Cheung\n\n<b>Lead Programmer</b>\nAnrui Liu\n\n<b>Programmers</b>\nAndrew Wang
-    \nAlissa Guo\nCh Muhammad Daud Virk\nRahul Kamath\n\n<b>Writer</b>\nKimiko Ngo\n\n<b>Composer
-    / Sound Engineer</b>\nDaniel Schatz\n"
+    \nAlissa Guo\nCh Muhammad Daud Virk\nRahul Kamath\n\n<b>Writer</b>\nKimiko Ngo\n\n<b>Editor</b>\nAnrui
+    Liu\n\n<b>Composer / Sound Engineer</b>\nDaniel Schatz\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ef98bd283b7bb734da8a833fccf0fb3e, type: 2}
   m_sharedMaterial: {fileID: -1472579445266561125, guid: ef98bd283b7bb734da8a833fccf0fb3e, type: 2}

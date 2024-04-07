@@ -94,10 +94,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myTransform: {fileID: 0}
-  duplicateCardInstance: {fileID: 0}
-  description: 
   icon: {fileID: 21300000, guid: 9c4f1024dbdc1c44db0ccd7f58d3d59b, type: 3}
-  cardBack: {fileID: 0}
+  cardBack: {fileID: 21300000, guid: 39082e00c2d70460993a929910d40e67, type: 3}
   cardUI: {fileID: 6249553612096619278}
 --- !u!114 &6249553612096619278 stripped
 MonoBehaviour:

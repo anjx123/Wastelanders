@@ -15,9 +15,9 @@ public class PistolWhip : PistolCards
     public override void Initialize()
     {
         lowerBound = 3;
-        upperBound = 5;
+        upperBound = 3;
         Speed = 1;
-        description = "A good ol' reliable melee attack!";
+        description = "On hit, gain 1 Accuracy stack";
         myName = "Pistol Whip";
         Renderer renderer = GetComponent<Renderer>();
         ogMaterial = renderer.material; // og sprite of card
@@ -26,10 +26,10 @@ public class PistolWhip : PistolCards
         CardType = CardType.MeleeAttack; //Has to be after otherwise it will get overwritten by superclass
     }
 
-    // Update is called once per frame
-    void Update()
+    public override void OnHit()
     {
-        
+        base.OnHit();
+        Origin.AddStacks(Accuracy.buffName, 1);
     }
 
 

@@ -8,7 +8,7 @@ public class Ives : PlayerClass
     // i copy pasted jackie's code. it may not work completely, this is just for testing purposes.
     public override void Start()
     {
-        MaxHealth = 30;
+        MaxHealth = 35;
         Health = MaxHealth;
         myName = "Ives";
         base.Start();

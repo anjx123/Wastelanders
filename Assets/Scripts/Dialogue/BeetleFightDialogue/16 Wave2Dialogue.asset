@@ -17,11 +17,17 @@ MonoBehaviour:
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
     broadcastAnEvent: 0
-  - bodyText: 'Make sure to conserve your cards and play wisely. '
+  - bodyText: 'Let''s make good use of our abilities and buffs. My [Wound] stacks
+      should soften them up. '
     speakerName: Ives
-    displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
+    displayingImage: {fileID: 21300000, guid: e3aa195cbddbdc746a9b7d4b661ecc77, type: 3}
     broadcastAnEvent: 0
-  - bodyText: Remember, reshuffling means losing one max hand card size.
+  - bodyText: Wound - Increase damage taken by +1 per stack of wound on this character.
+    speakerName: 
+    displayingImage: {fileID: 21300000, guid: e3aa195cbddbdc746a9b7d4b661ecc77, type: 3}
+    broadcastAnEvent: 0
+  - bodyText: Remember not to overkill, exhausting your deck and reshuffling means
+      losing one max hand size.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
     broadcastAnEvent: 0

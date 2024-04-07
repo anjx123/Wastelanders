@@ -5,10 +5,6 @@ using UnityEngine;
 public class RapidFire : PistolCards
 {
 
-    public override void OnCardStagger()
-    {
-
-    }
 
     // Start is called before the first frame update
     public override void Initialize()
@@ -16,7 +12,7 @@ public class RapidFire : PistolCards
         lowerBound = 2;
         upperBound = 3;
         Speed = 2;
-        description = "If unstaggered, consume 1 Accuracy, then attack with 'Rapid Fire' again.";
+        description = "Consume 1 Accuracy, then attack with 'Rapid Fire' again.";
         CardType = CardType.RangedAttack;
         myName = "Rapid Fire";
         Renderer renderer = GetComponent<Renderer>();
@@ -28,6 +24,15 @@ public class RapidFire : PistolCards
     public override void CardIsUnstaggered()
     {
         Origin.AttackAnimation("IsShooting");
+        if (Origin.GetBuffStacks(Accuracy.buffName) > 0)
+        {
+            Origin.ReduceStacks(Accuracy.buffName, 1);
+            BattleQueue.BattleQueueInstance.AddPlayerAction(this);
+        }
+    }
+
+    public override void OnCardStagger()
+    {
         if (Origin.GetBuffStacks(Accuracy.buffName) > 0)
         {
             Origin.ReduceStacks(Accuracy.buffName, 1);

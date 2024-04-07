@@ -22,17 +22,15 @@ public class QuickDraw : PistolCards
     public override void Initialize()
     {
         lowerBound = 1; // MAKE SURE BOUNDS ARE SET BEFORE CALLING SUPERCLASS START
-        upperBound = 5;
+        upperBound = 4;
         Speed = 5;
         myName = "Quick Draw";
-        description = "Make this attack, then gain 1 Accuracy.";
+        description = "Make this attack, then gain 1 Accuracy even if staggered.";
         CardType = CardType.RangedAttack;
         Renderer renderer = GetComponent<Renderer>();
         ogMaterial = renderer.material; // og sprite of card
         OriginalPosition = transform.position;
         base.Initialize();
     }
-
-
 
 }

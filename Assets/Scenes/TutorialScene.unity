@@ -170,6 +170,7 @@ MonoBehaviour:
   cardDisplay: {fileID: 1491813755}
   cardTemplatePrefab: {fileID: 7256956916184963317, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
   descriptionHolderPrefab: {fileID: 5469409781915009156, guid: 995c69dd05e0fce438d836d1937f6bc5, type: 3}
+  mainCamera: {fileID: 0}
 --- !u!1 &31769307
 GameObject:
   m_ObjectHideFlags: 0
@@ -1162,7 +1163,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6450769393732187263, guid: f1a1a6ed2ee5880478871c8cd4237396, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 7.2
+      value: 6.64
       objectReference: {fileID: 0}
     - target: {fileID: 6450769393732187263, guid: f1a1a6ed2ee5880478871c8cd4237396, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -1803,13 +1804,61 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1877041900}
     m_Modifications:
+    - target: {fileID: 126611839779714974, guid: 2bf19bd78e328204fb34ccaa75296151, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 1525248175}
+    - target: {fileID: 126611839779714974, guid: 2bf19bd78e328204fb34ccaa75296151, type: 3}
+      propertyPath: m_RenderMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 126611839779714974, guid: 2bf19bd78e328204fb34ccaa75296151, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 1520415093
+      objectReference: {fileID: 0}
+    - target: {fileID: 398063478892782208, guid: 2bf19bd78e328204fb34ccaa75296151, type: 3}
+      propertyPath: m_Pivot.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 398063478892782208, guid: 2bf19bd78e328204fb34ccaa75296151, type: 3}
+      propertyPath: m_Pivot.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 398063478892782208, guid: 2bf19bd78e328204fb34ccaa75296151, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 398063478892782208, guid: 2bf19bd78e328204fb34ccaa75296151, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 398063478892782208, guid: 2bf19bd78e328204fb34ccaa75296151, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 398063478892782208, guid: 2bf19bd78e328204fb34ccaa75296151, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 398063478892782208, guid: 2bf19bd78e328204fb34ccaa75296151, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 190
+      objectReference: {fileID: 0}
+    - target: {fileID: 398063478892782208, guid: 2bf19bd78e328204fb34ccaa75296151, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 110
+      objectReference: {fileID: 0}
+    - target: {fileID: 398063478892782208, guid: 2bf19bd78e328204fb34ccaa75296151, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 134
+      objectReference: {fileID: 0}
     - target: {fileID: 1715629036518821266, guid: 2bf19bd78e328204fb34ccaa75296151, type: 3}
       propertyPath: m_Pivot.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1715629036518821266, guid: 2bf19bd78e328204fb34ccaa75296151, type: 3}
       propertyPath: m_Pivot.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1715629036518821266, guid: 2bf19bd78e328204fb34ccaa75296151, type: 3}
       propertyPath: m_AnchorMax.x
@@ -1829,23 +1878,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1715629036518821266, guid: 2bf19bd78e328204fb34ccaa75296151, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 10
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1715629036518821266, guid: 2bf19bd78e328204fb34ccaa75296151, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 100
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1715629036518821266, guid: 2bf19bd78e328204fb34ccaa75296151, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.0185
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1715629036518821266, guid: 2bf19bd78e328204fb34ccaa75296151, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.0185
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1715629036518821266, guid: 2bf19bd78e328204fb34ccaa75296151, type: 3}
       propertyPath: m_LocalScale.z
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1715629036518821266, guid: 2bf19bd78e328204fb34ccaa75296151, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1865,23 +1914,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1715629036518821266, guid: 2bf19bd78e328204fb34ccaa75296151, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1715629036518821266, guid: 2bf19bd78e328204fb34ccaa75296151, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1715629036518821266, guid: 2bf19bd78e328204fb34ccaa75296151, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1715629036518821266, guid: 2bf19bd78e328204fb34ccaa75296151, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -7.1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1715629036518821266, guid: 2bf19bd78e328204fb34ccaa75296151, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1715629036518821266, guid: 2bf19bd78e328204fb34ccaa75296151, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1901,7 +1950,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5747343100457332867, guid: 2bf19bd78e328204fb34ccaa75296151, type: 3}
       propertyPath: m_PresetInfoIsWorld
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6647468808881570309, guid: 2bf19bd78e328204fb34ccaa75296151, type: 3}
       propertyPath: m_Name
@@ -1915,9 +1964,20 @@ PrefabInstance:
       propertyPath: popUpCanFade
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8390982589170783003, guid: 2bf19bd78e328204fb34ccaa75296151, type: 3}
+      propertyPath: m_UiScaleMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8390982589170783003, guid: 2bf19bd78e328204fb34ccaa75296151, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 1715629036518821266, guid: 2bf19bd78e328204fb34ccaa75296151, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1491813756}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2bf19bd78e328204fb34ccaa75296151, type: 3}
 --- !u!224 &1337277458 stripped
@@ -2285,7 +2345,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6635998426718021455, guid: b9c5e4b3c9f7e024f8fe9012e7a2e437, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -10.13216
+      value: -10.134283
       objectReference: {fileID: 0}
     - target: {fileID: 6635998426718021455, guid: b9c5e4b3c9f7e024f8fe9012e7a2e437, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2666,7 +2726,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 302505534}
-  - {fileID: 1491813756}
   - {fileID: 1337277458}
   - {fileID: 2102825246}
   - {fileID: 1286108454}
@@ -2846,42 +2905,50 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 1877041900}
+    m_TransformParent: {fileID: 1337277458}
     m_Modifications:
     - target: {fileID: 1103099261963961459, guid: 5b9370b1c559d0c4f95c6370dd8a2c6d, type: 3}
       propertyPath: m_Pivot.x
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1103099261963961459, guid: 5b9370b1c559d0c4f95c6370dd8a2c6d, type: 3}
       propertyPath: m_Pivot.y
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1103099261963961459, guid: 5b9370b1c559d0c4f95c6370dd8a2c6d, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1103099261963961459, guid: 5b9370b1c559d0c4f95c6370dd8a2c6d, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1103099261963961459, guid: 5b9370b1c559d0c4f95c6370dd8a2c6d, type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1103099261963961459, guid: 5b9370b1c559d0c4f95c6370dd8a2c6d, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1103099261963961459, guid: 5b9370b1c559d0c4f95c6370dd8a2c6d, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 4
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1103099261963961459, guid: 5b9370b1c559d0c4f95c6370dd8a2c6d, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 5
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1103099261963961459, guid: 5b9370b1c559d0c4f95c6370dd8a2c6d, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 1103099261963961459, guid: 5b9370b1c559d0c4f95c6370dd8a2c6d, type: 3}
       propertyPath: m_LocalScale.y
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 1103099261963961459, guid: 5b9370b1c559d0c4f95c6370dd8a2c6d, type: 3}
+      propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1103099261963961459, guid: 5b9370b1c559d0c4f95c6370dd8a2c6d, type: 3}
@@ -2914,11 +2981,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1103099261963961459, guid: 5b9370b1c559d0c4f95c6370dd8a2c6d, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 6.5
+      value: -90
       objectReference: {fileID: 0}
     - target: {fileID: 1103099261963961459, guid: 5b9370b1c559d0c4f95c6370dd8a2c6d, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 2.8
+      value: -90
       objectReference: {fileID: 0}
     - target: {fileID: 1103099261963961459, guid: 5b9370b1c559d0c4f95c6370dd8a2c6d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -3031,7 +3098,7 @@ MonoBehaviour:
   laidBackImageUI: {fileID: 157056470}
   puzzeledImageUI: {fileID: 1664471019}
   ivesTutorialDeck:
-  - {fileID: 365813191591832820, guid: 0f9d35f67947f2241aac5a9ed31099d3, type: 3}
+  - {fileID: 365813191591832820, guid: 29b90323f9f58f947a62ba6d9c11d4a0, type: 3}
   - {fileID: 1570116063941554911, guid: 4ceb98929208ac64ab848aa79d636595, type: 3}
   - {fileID: 6429530541201259997, guid: 4e812ef45f6aef54092f7985015b5248, type: 3}
   jackieTutorialDeck:
@@ -3194,7 +3261,8 @@ MonoBehaviour:
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 3fea2e94140c08246a0e502ee92d3761, type: 3}
     broadcastAnEvent: 0
-  - bodyText: And Speed - Which determines the order attacks come out.
+  - bodyText: And Speed - Which determines the order actions are played in. Higher
+      speeds are played first.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 61a3ecbde544e124ba8f329d0e4f6fb2, type: 3}
     broadcastAnEvent: 0
@@ -3211,7 +3279,11 @@ MonoBehaviour:
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: fb608aaef631251489ed4ef86a15e639, type: 3}
     broadcastAnEvent: 0
-  - bodyText: You can retrieve a card back from the queue by clicking on its icon.
+  - bodyText: You can [Left Click] on a played card's icon to view the card's stats.
+    speakerName: Ives
+    displayingImage: {fileID: 21300000, guid: 57baba5992d9e224988e93fcacf9f7eb, type: 3}
+    broadcastAnEvent: 0
+  - bodyText: Or retrieve it back into your hand by [Right Clicking] on its icon.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 57baba5992d9e224988e93fcacf9f7eb, type: 3}
     broadcastAnEvent: 0
@@ -3269,8 +3341,8 @@ MonoBehaviour:
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 820631014ce088c4cb748224d5467c86, type: 3}
     broadcastAnEvent: 0
-  - bodyText: (If you forget what 'Flow' does, you can access buff information in
-      the Glossary or the Dialogue History on the pause menu by pressing [Tab])
+  - bodyText: (If you forget what 'Flow' does, you can check the Glossary or the
+      Dialogue History on the pause menu by pressing [Tab])
     speakerName: 
     displayingImage: {fileID: 21300000, guid: 820631014ce088c4cb748224d5467c86, type: 3}
     broadcastAnEvent: 0
@@ -3293,13 +3365,13 @@ MonoBehaviour:
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: edb0bc1d86401ce4aadfe4358f987ea3, type: 3}
     broadcastAnEvent: 0
-  - bodyText: '[Clicking] on the attack icon also allows you to see its Speed and
-      any Abilities.'
+  - bodyText: '[Left Clicking] on the attack icon also allows you to see its Speed
+      and any Abilities.'
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 82dbf38ae23fe224e90be99093d02604, type: 3}
     broadcastAnEvent: 0
-  - bodyText: Their action has also been placed into the queue. You can [Click] on
-      that too to check it out.
+  - bodyText: Their action has also been placed into the queue where you can [Left
+      Click] to check it out.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: fbdbcaab28794334bb84176f7e052fb5, type: 3}
     broadcastAnEvent: 0
@@ -3308,32 +3380,39 @@ MonoBehaviour:
     displayingImage: {fileID: 21300000, guid: ade9660133ca00a499bfa3ad449b87bd, type: 3}
     broadcastAnEvent: 0
   clashingCardsTutorial:
-  - bodyText: "When you target an enemy with an attack, that attack will form a \"clash\"
-      with the opponent\u2019s fastest attack."
+  - bodyText: The first action you play against the enemy will form a 'clash' with
+      their action.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: b0d27b9163eb2554996f368bd5b8d4e2, type: 3}
     broadcastAnEvent: 0
-  - bodyText: "These \u2018clashing' attacks are locked in and will then compete
-      against each other later in the fight. "
+  - bodyText: Promoting both action's speeds to be the fastest between the two.
     speakerName: Ives
-    displayingImage: {fileID: 21300000, guid: b0d27b9163eb2554996f368bd5b8d4e2, type: 3}
+    displayingImage: {fileID: 21300000, guid: 61a3ecbde544e124ba8f329d0e4f6fb2, type: 3}
     broadcastAnEvent: 0
-  - bodyText: 'The winner being the one who rolls the highest power. '
+  - bodyText: "These \u2018clashing' actions will then compete against each other
+      later in the fight to see who rolls the highest power."
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 3fea2e94140c08246a0e502ee92d3761, type: 3}
     broadcastAnEvent: 0
-  - bodyText: 'Note that clashing promotes both attack''s speeds to be the fastest
-      between the two. '
-    speakerName: Ives
-    displayingImage: {fileID: 21300000, guid: b0d27b9163eb2554996f368bd5b8d4e2, type: 3}
-    broadcastAnEvent: 0
-  - bodyText: 'Experiment with this wisely to manipulate the order of attacks. '
-    speakerName: Ives
-    displayingImage: {fileID: 21300000, guid: b0d27b9163eb2554996f368bd5b8d4e2, type: 3}
-    broadcastAnEvent: 0
-  - bodyText: I'll explain more once that clash starts. Come at me once you are ready.
+  - bodyText: Note that the order in which cards are played matters when forming
+      clashes.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 87cb7c6c6588a4a3a957b707239abbf0, type: 3}
+    broadcastAnEvent: 0
+  - bodyText: The first card played will always form the clash, even if the next
+      card played may be faster.
+    speakerName: Ives
+    displayingImage: {fileID: 21300000, guid: 87cb7c6c6588a4a3a957b707239abbf0, type: 3}
+    broadcastAnEvent: 0
+  - bodyText: Think of it as suppressing an opponent's attack, and thus creating
+      an opening for yourself.
+    speakerName: Ives
+    displayingImage: {fileID: 21300000, guid: b0d27b9163eb2554996f368bd5b8d4e2, type: 3}
+    broadcastAnEvent: 0
+  - bodyText: Experiment with this wisely to manipulate the order of attacks. Come
+      at me when you are ready.
+    speakerName: Ives
+    displayingImage: {fileID: 21300000, guid: b0d27b9163eb2554996f368bd5b8d4e2, type: 3}
     broadcastAnEvent: 0
   defensiveCardsTutorial:
   - bodyText: Defensive cards are marked by the defense icon.
@@ -3507,7 +3586,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6236433946665406741, guid: ffdf6c0e873fb734ca3cd40ff3507571, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 0.29
       objectReference: {fileID: 0}
     - target: {fileID: 6236433946665406741, guid: ffdf6c0e873fb734ca3cd40ff3507571, type: 3}
       propertyPath: m_AnchoredPosition.y
