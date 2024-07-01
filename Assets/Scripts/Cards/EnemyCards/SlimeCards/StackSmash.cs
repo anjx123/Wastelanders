@@ -41,7 +41,7 @@ public class StackSmash : SlimeAttacks
             }
             activeDuplicateInstance.Origin = Origin;
             activeDuplicateInstance.Target = Target;
-            BattleQueue.BattleQueueInstance.InsertDupEnemyAction(activeDuplicateInstance!);
+            BattleQueue.BattleQueueInstance.AddAction(activeDuplicateInstance!);
         }
 
         base.CardIsUnstaggered();

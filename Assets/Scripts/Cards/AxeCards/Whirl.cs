@@ -38,7 +38,7 @@ public class Whirl : AxeCards
             }
             activeDuplicateInstance.Origin = Origin;
             activeDuplicateInstance.Target = Target;
-            BattleQueue.BattleQueueInstance.InsertDupPlayerAction(activeDuplicateInstance!);
+            BattleQueue.BattleQueueInstance.AddAction(activeDuplicateInstance!);
         }
 
         base.CardIsUnstaggered();

@@ -35,13 +35,7 @@ public class Brace : FistCards
             }
             activeDuplicateInstance.Origin = Origin;
             activeDuplicateInstance.Target = Target;
-            if (activeDuplicateInstance.Origin is PlayerClass)
-            { 
-                BattleQueue.BattleQueueInstance.InsertDupPlayerAction(activeDuplicateInstance!); //Gonna need a rewrite on this
-            } else
-            {
-                BattleQueue.BattleQueueInstance.InsertDupEnemyAction(activeDuplicateInstance!);
-            }
+            BattleQueue.BattleQueueInstance.AddAction(activeDuplicateInstance);
         }
         base.ApplyEffect();
     }

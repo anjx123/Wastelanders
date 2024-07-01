@@ -124,19 +124,15 @@ public class HighlightManager : MonoBehaviour // later all entity highlighter
     private void ProcessActionOnEnemy()
     {
         currentHighlightedAction!.Target = currentHighlightedEnemyEntity;
-        bool wasAdded = BattleQueue.BattleQueueInstance.AddAction(currentHighlightedAction);
+        BattleQueue.BattleQueueInstance.AddAction(currentHighlightedAction);
 
         currentHighlightedEnemyEntity!.DeHighlight();
         currentHighlightedAction.DeHighlight();
 
-        if (selectedPlayer != null && wasAdded)
+        if (selectedPlayer != null)
         {
             currentHighlightedAction.ForceNormalState();
             selectedPlayer.HandleUseCard(currentHighlightedAction);
-        }
-        else
-        {
-            PopUpNotificationManager.Instance.DisplayWarning(PopupType.SameSpeed);
         }
 
         currentHighlightedEnemyEntity = null;
@@ -148,7 +144,7 @@ public class HighlightManager : MonoBehaviour // later all entity highlighter
         if (CombatManager.Instance.GameState != GameState.SELECTION || PauseMenu.IsPaused) return;
         if (selectedPlayer != null)
         {
-            if (BattleQueue.BattleQueueInstance.CanInsertCard(clicked) == false)
+            if (BattleQueue.BattleQueueInstance.CanInsertPlayerCard(clicked) == false)
             {
                 PopUpNotificationManager.Instance.DisplayWarning(PopupType.SameSpeed);
                 return;
@@ -232,7 +228,7 @@ public class HighlightManager : MonoBehaviour // later all entity highlighter
             Vector3 v = new Vector3(x-distanceToLeft, y, -i);
             handItem.transform.position = v;
             handItem.transform.rotation = Quaternion.Euler(0, 0, -5);
-            insertingAction.SetCanPlay(BattleQueue.BattleQueueInstance.CanInsertCard(insertingAction));
+            insertingAction.SetCanPlay(BattleQueue.BattleQueueInstance.CanInsertPlayerCard(insertingAction));
         }
         RenderText(hand);
     }

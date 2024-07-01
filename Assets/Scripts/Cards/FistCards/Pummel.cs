@@ -36,7 +36,7 @@ public class Pummel : FistCards
             }
             activeDuplicateInstance.Origin = Origin;
             activeDuplicateInstance.Target = Target;
-            BattleQueue.BattleQueueInstance.InsertDupPlayerAction(activeDuplicateInstance!);
+            BattleQueue.BattleQueueInstance.AddAction(activeDuplicateInstance!);
         }
 
         if (cardVersion == 2)
@@ -49,7 +49,7 @@ public class Pummel : FistCards
             }
             activeDuplicateInstance.Origin = Origin;
             activeDuplicateInstance.Target = Target;
-            BattleQueue.BattleQueueInstance.InsertDupPlayerAction(activeDuplicateInstance!);
+            BattleQueue.BattleQueueInstance.AddAction(activeDuplicateInstance!);
         }
         base.ApplyEffect();
     }

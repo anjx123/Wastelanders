@@ -39,10 +39,10 @@ public class RightHook : FistCards
         ac.Speed = this.Speed; //Workaround for multispeeded queue 
         if (ac.Origin is PlayerClass)
         {
-            BattleQueue.BattleQueueInstance.InsertDupPlayerAction(ac);
+            BattleQueue.BattleQueueInstance.AddAction(ac);
         } else
         {
-            BattleQueue.BattleQueueInstance.InsertDupEnemyAction(ac);
+            BattleQueue.BattleQueueInstance.AddAction(ac);
         }
 
     }
