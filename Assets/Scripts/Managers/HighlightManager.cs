@@ -124,7 +124,7 @@ public class HighlightManager : MonoBehaviour // later all entity highlighter
     private void ProcessActionOnEnemy()
     {
         currentHighlightedAction!.Target = currentHighlightedEnemyEntity;
-        bool wasAdded = BattleQueue.BattleQueueInstance.AddPlayerAction(currentHighlightedAction);
+        bool wasAdded = BattleQueue.BattleQueueInstance.AddAction(currentHighlightedAction);
 
         currentHighlightedEnemyEntity!.DeHighlight();
         currentHighlightedAction.DeHighlight();

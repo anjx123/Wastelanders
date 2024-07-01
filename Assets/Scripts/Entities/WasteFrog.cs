@@ -69,8 +69,9 @@ public class WasteFrog : EnemyClass
             if (players.Count == 0) return;
             
             ActionClass temporaryHurl = hurlCard.GetComponent<ActionClass>();
+            temporaryHurl.Origin = this;
             temporaryHurl.Target = players[Random.Range(0, players.Count - 1)];
-            BattleQueue.BattleQueueInstance.AddEnemyAction(temporaryHurl, this);
+            BattleQueue.BattleQueueInstance.AddAction(temporaryHurl);
             combatInfo.AddCombatSprite(temporaryHurl);
         } else
         {
