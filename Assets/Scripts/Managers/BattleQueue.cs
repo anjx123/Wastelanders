@@ -30,6 +30,7 @@ public class BattleQueue : MonoBehaviour
         RenderBQ();
     }
 
+    // Retrieves the deletedCard from the action queue and gives it back to the player who played it.
     public void DeletePlayerAction(ActionClass deletedCard)
     {
         actionQueue.RemoveWrapperWithActionClass(deletedCard);
@@ -172,8 +173,8 @@ public class BattleQueue : MonoBehaviour
             }
         }
 
-        //Removes and returns Wrapper that contains (@param removedCard), null if it cant be found
-        //If the removed ActionClass is clashing, then reinsert the other Clashing Card.
+        // Removes and returns Wrapper that contains (@param removedCard), null if it cant be found
+        // If the removed ActionClass was clashing, then reinsert the other Clashing Card.
         public ActionWrapper? RemoveWrapperWithActionClass(ActionClass removedCard)
         {
             foreach (ActionWrapper existingWrapper in array)
@@ -183,7 +184,7 @@ public class BattleQueue : MonoBehaviour
                     array.Remove(existingWrapper);
                     if (existingWrapper.IsClashing())
                     {
-                        // Restores the targetting if the card was cancelled
+                        // Restores the targetting of the enemy card if the card was retrieved by the player
                         if (existingWrapper.WasRetargetted())
                         {
                             existingWrapper.EnemyAction!.Target = existingWrapper.OriginalEnemysTarget;
@@ -215,7 +216,7 @@ public class BattleQueue : MonoBehaviour
         private int LocationToInsertWrapper(ActionWrapper wrapper)
         {
             int firstPosition = 0;
-            WrapperType newWrapperType = GetWrapperType(wrapper);
+            WrapperType insertingWrapperType = GetWrapperType(wrapper);
 
             foreach (ActionWrapper existingWrapper in array)
             {
@@ -227,13 +228,13 @@ public class BattleQueue : MonoBehaviour
                 }
                 else if (wrapper.ClashingSpeed == existingWrapper.ClashingSpeed)
                 {
-                    if (newWrapperType <= existingWrapperType) //Compares if the newWrapperEnum is declared higher up in the enum than existingWrapper type
+                    if (insertingWrapperType <= existingWrapperType) // Compares their enum ordinal values
                     {
-                        break; //If so, then it should be inserted in front of it
+                        break; // If insertingWrapperType is higher up on the enum, it takes priority and we stop here.
                     }
                     else
                     {
-                        firstPosition++; //If not keep going down
+                        firstPosition++; //If not keep going down the queue.
                     }
                 }
             }
@@ -281,8 +282,8 @@ public class BattleQueue : MonoBehaviour
         {
             if (IsClashing()) return false;
 
+            // If the PlayerAction's speed is greater than the enemy Action's speed it can redirect the enemy's attack and clash. Enemies cannot redirect player attacks. 
             bool playerWrapperClashesWithEnemyAction = PlayerAction != null && (PlayerAction.Origin == clashingAction.Target || PlayerAction.Speed >= clashingAction.Speed) && PlayerAction.Target == clashingAction.Origin;
-            // If the clashingAction's speed is greater than the enemy Action's speed it can still clash and cause a redirect. 
             bool enemyWrapperClashesWithPlayerAction = EnemyAction != null && EnemyAction.Origin == clashingAction.Target && (EnemyAction.Target == clashingAction.Origin || clashingAction.Speed >= EnemyAction.Speed);
 
             if (clashingAction.IsPlayedByPlayer())
@@ -294,12 +295,13 @@ public class BattleQueue : MonoBehaviour
             }
         }
 
-        //Requires: That (@oaram clashingAction) can clash with an Action within this wrapper (Call ClashesWithAction first)
+        // Modifies: this to become a clashing wrapper.
+        // Requires: That (@param clashingAction) can clash with an Action within this wrapper (Call ClashesWithAction first)
         public void SetClashingAction(ActionClass clashingAction)
         {
             if (!CanClashWithAction(clashingAction))
             {
-                Debug.LogWarning("You tried to set clashingAction with a wrapper that didnt actually clash" +
+                Debug.LogWarning("You called SetClashingAction with a wrapper that didnt actually clash. " +
                     "Here is my info: Action played by player " + PlayerAction?.GetName() + "Action played by enemy"+ EnemyAction?.GetName());
                 return;
             }
@@ -319,7 +321,8 @@ public class BattleQueue : MonoBehaviour
         // Requires: This wrapper to not be clashing
         public ActionClass GetTheOnlyExistingAction()
         {
-            if (IsClashing()) Debug.LogWarning("You called GetNonClashingChild on a wrapper that clashes, behaviour may be unexpected as I am returning the player child");
+            if (IsClashing()) Debug.LogWarning("You called GetNonClashingChild on a wrapper that clashes, behaviour may be unexpected as I am returning the player action. " +
+                "Here is my info: Action played by player " + PlayerAction?.GetName() + "Action played by enemy" + EnemyAction?.GetName());
             if (HasPlayerAction()) return PlayerAction!;
             return EnemyAction!;
         }
