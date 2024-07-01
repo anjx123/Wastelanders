@@ -15,6 +15,8 @@ public class HighlightManager : MonoBehaviour // later all entity highlighter
 
     public delegate void HighlightEventDelegate(EntityClass e);
     public event HighlightEventDelegate? EntityClicked;
+    public delegate void ActionAddedDelegate(ActionClass card);
+    public event ActionAddedDelegate? PlayerManuallyInsertedAction;
 
     private int CARD_WIDTH = 2;
 
@@ -42,6 +44,9 @@ public class HighlightManager : MonoBehaviour // later all entity highlighter
         CombatManager.OnGameStateChanged -= ResetSelection;
         EntityClass.OnEntityClicked -= OnEntityClicked;
         ActionClass.CardClickedEvent -= OnActionClicked;
+
+        EntityClicked = null;
+        PlayerManuallyInsertedAction = null;
     }
 
 
@@ -125,16 +130,13 @@ public class HighlightManager : MonoBehaviour // later all entity highlighter
     {
         currentHighlightedAction!.Target = currentHighlightedEnemyEntity;
         BattleQueue.BattleQueueInstance.AddAction(currentHighlightedAction);
+        PlayerManuallyInsertedAction?.Invoke(currentHighlightedAction);
+        selectedPlayer!.HandleUseCard(currentHighlightedAction);
+
 
         currentHighlightedEnemyEntity!.DeHighlight();
         currentHighlightedAction.DeHighlight();
-
-        if (selectedPlayer != null)
-        {
-            currentHighlightedAction.ForceNormalState();
-            selectedPlayer.HandleUseCard(currentHighlightedAction);
-        }
-
+        currentHighlightedAction.ForceNormalState();
         currentHighlightedEnemyEntity = null;
         currentHighlightedAction = null;
     }

@@ -273,14 +273,14 @@ public class TutorialIntroduction : DialogueClasses
     private void OnPlayerFirstHighlightCard(ActionClass card)
     {
         ActionClass.CardHighlightedEvent -= OnPlayerFirstHighlightCard;
-        StartCoroutine(StartDialogueWithNextEvent(cardFieldsTutorial, () => { BattleQueue.BattleQueueInstance.playerActionInsertedEvent += OnPlayerFirstInsertCard; }));
+        StartCoroutine(StartDialogueWithNextEvent(cardFieldsTutorial, () => { HighlightManager.Instance.PlayerManuallyInsertedAction += OnPlayerFirstInsertCard; }));
     }
 
     //Once a player targets an enemy, we talk about the queue
     private void OnPlayerFirstInsertCard(ActionClass card)
     {
         DialogueManager.Instance.MoveBoxToBottom();
-        BattleQueue.BattleQueueInstance.playerActionInsertedEvent -= OnPlayerFirstInsertCard;
+        HighlightManager.Instance.PlayerManuallyInsertedAction -= OnPlayerFirstInsertCard;
         StartCoroutine(StartDialogueWithNextEvent(queueUpActionsTutorial, () => { CardComparator.Instance.playersAreRollingDiceEvent += OnPlayerFightsDummy; }));
     }
 
@@ -307,12 +307,12 @@ public class TutorialIntroduction : DialogueClasses
         CombatManager.EnemiesWinEvent += EnemiesWin;
         DialogueManager.Instance.MoveBoxToBottom();
         CombatManager.OnGameStateChanged += ExplainDefense;
-        StartCoroutine(StartDialogueWithNextEvent(readingOpponentTutorial, () => { BattleQueue.BattleQueueInstance.playerActionInsertedEvent += OnPlayerPlayClashingCard; }));
+        StartCoroutine(StartDialogueWithNextEvent(readingOpponentTutorial, () => { HighlightManager.Instance.PlayerManuallyInsertedAction += OnPlayerPlayClashingCard; }));
     }
 
     private void OnPlayerPlayClashingCard(ActionClass actionClass)
     {
-        BattleQueue.BattleQueueInstance.playerActionInsertedEvent -= OnPlayerPlayClashingCard;
+        HighlightManager.Instance.PlayerManuallyInsertedAction -= OnPlayerPlayClashingCard;
         StartCoroutine(StartDialogueWithNextEvent(clashingCardsTutorial, () => { CardComparator.Instance.playersAreRollingDiceEvent += OnPlayerClashingWithIves; }));
     }
 

@@ -1,10 +1,6 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-
-
 
 public class BattleQueue : MonoBehaviour
 {
@@ -15,6 +11,7 @@ public class BattleQueue : MonoBehaviour
     public GameObject clashingPrefab;
 
 #nullable enable
+
     void Awake()
     {
         if (BattleQueueInstance == null)
@@ -70,15 +67,15 @@ public class BattleQueue : MonoBehaviour
             if (battlingWrapper.IsClashing())
             {
                 GameObject clashingRenderedCopy = Instantiate(clashingPrefab, new Vector3(100, 100, -10), Quaternion.identity);
-                ActionClass leftClashItem = battlingWrapper.PlayerAction!; //Non null because its clashing
-                ActionClass rightClashItem = battlingWrapper.EnemyAction!; //Non null because its clashing
+                ActionClass leftClashItem = battlingWrapper.PlayerAction!;
+                ActionClass rightClashItem = battlingWrapper.EnemyAction!;
                 clashingRenderedCopy.GetComponent<ClashingBattleQueueIcon>().renderClashingIcons(leftClashItem, rightClashItem);
                 clashingRenderedCopy.transform.SetParent(bqContainer, false);
             } else
             {
                 GameObject renderedCopy = Instantiate(iconPrefab, new Vector3(100, 100, -10), Quaternion.identity);
                 renderedCopy.transform.SetParent(bqContainer, false);
-                renderedCopy.GetComponent<BattleQueueIcons>().RenderBQIcon(battlingWrapper.GetNonClashingAction());
+                renderedCopy.GetComponent<BattleQueueIcons>().RenderBQIcon(battlingWrapper.GetTheOnlyExistingAction());
             }
         }
     }
@@ -106,7 +103,7 @@ public class BattleQueue : MonoBehaviour
                 yield return StartCoroutine(CardComparator.Instance.ClashCards(actionWrapper.PlayerAction!, actionWrapper.EnemyAction!));
             } else
             {
-                yield return StartCoroutine(CardComparator.Instance.OneSidedAttack(actionWrapper.GetNonClashingAction()));
+                yield return StartCoroutine(CardComparator.Instance.OneSidedAttack(actionWrapper.GetTheOnlyExistingAction()));
             }
             array.Remove(actionWrapper); // this utilises the default method for lists 
             RenderBQ();
@@ -152,7 +149,6 @@ public class BattleQueue : MonoBehaviour
             {
                 if (existingWrapper.ClashesWithAction(actionCard))
                 {
-                    Debug.Log("It clashes with the wrapper with:" + existingWrapper);
                     existingWrapper.SetClashingAction(actionCard);
                     array.Remove(existingWrapper);
                     return existingWrapper;
@@ -274,7 +270,7 @@ public class BattleQueue : MonoBehaviour
         //Returns: whether (@param clashingAction) will clash with any action that this wrapper wraps.
         public bool ClashesWithAction(ActionClass clashingAction)
         {
-            if (HasEnemyAction() && HasPlayerAction()) return false;
+            if (IsClashing()) return false;
 
             bool isTargettedByPlayer = PlayerAction != null && this.PlayerAction.Target == clashingAction.Origin && clashingAction.Target == PlayerAction.Origin;
             bool isTargettedByEnemy = EnemyAction != null && this.EnemyAction.Target == clashingAction.Origin && clashingAction.Target == EnemyAction.Origin;
@@ -309,7 +305,7 @@ public class BattleQueue : MonoBehaviour
 
         // Helper to return the only action that exists in this non clashing wrapper
         // Requires: This wrapper to not be clashing
-        public ActionClass GetNonClashingAction()
+        public ActionClass GetTheOnlyExistingAction()
         {
             if (IsClashing()) Debug.LogWarning("You called GetNonClashingChild on a wrapper that clashes, behaviour may be unexpected as I am returning the player child");
             if (HasPlayerAction()) return PlayerAction!;
