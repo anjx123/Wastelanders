@@ -74,7 +74,7 @@ public class FollowThrough : FistCards
     {
         if (damage > 0)
         {
-            BattleQueue.BattleQueueInstance.InsertDupPlayerAction(activeDuplicateInstance!);
+            BattleQueue.BattleQueueInstance.AddAction(activeDuplicateInstance!);
         }
     }
 

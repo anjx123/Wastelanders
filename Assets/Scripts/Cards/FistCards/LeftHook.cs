@@ -38,6 +38,6 @@ public class LeftHook : FistCards
         ac.Origin = this.Origin;
         ac.Target = this.Target;
         ac.Speed = this.Speed;
-        BattleQueue.BattleQueueInstance.InsertDupPlayerAction(ac);
+        BattleQueue.BattleQueueInstance.AddAction(ac);
     }
 }

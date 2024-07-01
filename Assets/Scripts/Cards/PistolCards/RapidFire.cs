@@ -27,7 +27,7 @@ public class RapidFire : PistolCards
         if (Origin.GetBuffStacks(Accuracy.buffName) > 0)
         {
             Origin.ReduceStacks(Accuracy.buffName, 1);
-            BattleQueue.BattleQueueInstance.AddPlayerAction(this);
+            BattleQueue.BattleQueueInstance.AddAction(this);
         }
     }
 
@@ -36,7 +36,7 @@ public class RapidFire : PistolCards
         if (Origin.GetBuffStacks(Accuracy.buffName) > 0)
         {
             Origin.ReduceStacks(Accuracy.buffName, 1);
-            BattleQueue.BattleQueueInstance.AddPlayerAction(this);
+            BattleQueue.BattleQueueInstance.AddAction(this);
         }
     }
 

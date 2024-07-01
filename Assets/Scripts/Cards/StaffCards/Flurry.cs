@@ -36,7 +36,7 @@ public class Flurry : StaffCards
             }
             activeDuplicateInstance.Origin = Origin;
             activeDuplicateInstance.Target = Target;
-            BattleQueue.BattleQueueInstance.InsertDupPlayerAction(activeDuplicateInstance!);
+            BattleQueue.BattleQueueInstance.AddAction(activeDuplicateInstance!);
         }
         base.ApplyEffect();
     }

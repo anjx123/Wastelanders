@@ -165,7 +165,6 @@ public class CombatManager : MonoBehaviour
                 HighlightManager.Instance.SetActivePlayer(players[0]);
             }
         }
-        BattleQueue.BattleQueueInstance.TheBeginning(); //Nasty but necessary for rendering the current implementation of BQ
     }
 
     private void Activate(GameObject gameObject)

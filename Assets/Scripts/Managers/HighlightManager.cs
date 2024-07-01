@@ -15,6 +15,8 @@ public class HighlightManager : MonoBehaviour // later all entity highlighter
 
     public delegate void HighlightEventDelegate(EntityClass e);
     public event HighlightEventDelegate? EntityClicked;
+    public delegate void ActionAddedDelegate(ActionClass card);
+    public event ActionAddedDelegate? PlayerManuallyInsertedAction;
 
     private int CARD_WIDTH = 2;
 
@@ -42,6 +44,9 @@ public class HighlightManager : MonoBehaviour // later all entity highlighter
         CombatManager.OnGameStateChanged -= ResetSelection;
         EntityClass.OnEntityClicked -= OnEntityClicked;
         ActionClass.CardClickedEvent -= OnActionClicked;
+
+        EntityClicked = null;
+        PlayerManuallyInsertedAction = null;
     }
 
 
@@ -124,21 +129,14 @@ public class HighlightManager : MonoBehaviour // later all entity highlighter
     private void ProcessActionOnEnemy()
     {
         currentHighlightedAction!.Target = currentHighlightedEnemyEntity;
-        bool wasAdded = BattleQueue.BattleQueueInstance.AddPlayerAction(currentHighlightedAction);
+        BattleQueue.BattleQueueInstance.AddAction(currentHighlightedAction);
+        PlayerManuallyInsertedAction?.Invoke(currentHighlightedAction);
+        selectedPlayer!.HandleUseCard(currentHighlightedAction);
+
 
         currentHighlightedEnemyEntity!.DeHighlight();
         currentHighlightedAction.DeHighlight();
-
-        if (selectedPlayer != null && wasAdded)
-        {
-            currentHighlightedAction.ForceNormalState();
-            selectedPlayer.HandleUseCard(currentHighlightedAction);
-        }
-        else
-        {
-            PopUpNotificationManager.Instance.DisplayWarning(PopupType.SameSpeed);
-        }
-
+        currentHighlightedAction.ForceNormalState();
         currentHighlightedEnemyEntity = null;
         currentHighlightedAction = null;
     }
@@ -148,7 +146,7 @@ public class HighlightManager : MonoBehaviour // later all entity highlighter
         if (CombatManager.Instance.GameState != GameState.SELECTION || PauseMenu.IsPaused) return;
         if (selectedPlayer != null)
         {
-            if (BattleQueue.BattleQueueInstance.CanInsertCard(clicked) == false)
+            if (BattleQueue.BattleQueueInstance.CanInsertPlayerCard(clicked) == false)
             {
                 PopUpNotificationManager.Instance.DisplayWarning(PopupType.SameSpeed);
                 return;
@@ -232,7 +230,7 @@ public class HighlightManager : MonoBehaviour // later all entity highlighter
             Vector3 v = new Vector3(x-distanceToLeft, y, -i);
             handItem.transform.position = v;
             handItem.transform.rotation = Quaternion.Euler(0, 0, -5);
-            insertingAction.SetCanPlay(BattleQueue.BattleQueueInstance.CanInsertCard(insertingAction));
+            insertingAction.SetCanPlay(BattleQueue.BattleQueueInstance.CanInsertPlayerCard(insertingAction));
         }
         RenderText(hand);
     }

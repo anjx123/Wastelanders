@@ -151,7 +151,8 @@ public class QueenBeetle : EnemyClass
     private void AddAttackFromPool(List<PlayerClass> players, int idx)
     {
         pool[idx].GetComponent<ActionClass>().Target = players[Random.Range(0, players.Count)];
-        BattleQueue.BattleQueueInstance.AddEnemyAction(pool[idx].GetComponent<ActionClass>(), this);
+        pool[idx].GetComponent<ActionClass>().Origin = this;
+        BattleQueue.BattleQueueInstance.AddAction(pool[idx].GetComponent<ActionClass>());
         combatInfo.AddCombatSprite(pool[idx].GetComponent<ActionClass>());
     }
 

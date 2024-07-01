@@ -59,7 +59,8 @@ public abstract class EnemyClass : EntityClass
         if (players.Count == 0) return;
         if (pool.Count == 0) return;
         pool[0].GetComponent<ActionClass>().Target = players[Random.Range(0, players.Count)]; // excludes the last value 
-        BattleQueue.BattleQueueInstance.AddEnemyAction(pool[0].GetComponent<ActionClass>(), this);
+        pool[0].GetComponent<ActionClass>().Origin = this;
+        BattleQueue.BattleQueueInstance.AddAction(pool[0].GetComponent<ActionClass>());
         combatInfo.AddCombatSprite(pool[0].GetComponent<ActionClass>());
         pool.RemoveAt(0);
         if (pool.Count < 1)
