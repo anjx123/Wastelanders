@@ -5,6 +5,7 @@ using static CardDatabase;
 using UnityEngine.SceneManagement;
 using System.Linq;
 using UnityEditor;
+using Systems.Persistence;
 
 public class DeckSelectionManager : MonoBehaviour
 {
@@ -289,6 +290,8 @@ public class DeckSelectionManager : MonoBehaviour
                 break;
             }
         }
+        SaveLoadSystem.Instance.LoadCardEvolutionProgress();
+
         SerializableTuple<WeaponType, SerializableTuple<int, int>> tuple = playerData.playerWeaponProficiency.FirstOrDefault(entry => entry.Item1 == weaponType);
         int availablePoints = 0;
         if (tuple != null) {

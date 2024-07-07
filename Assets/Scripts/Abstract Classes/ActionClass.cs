@@ -5,9 +5,15 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
 using System;
+using Systems.Persistence;
 
-public abstract class ActionClass : SelectClass
+public abstract class ActionClass : SelectClass, IBind<ActionData>
 {
+    //Fields for persistence
+    [field: SerializeField] public SerializableGuid Id { get; set; } = SerializableGuid.NewGuid();
+    [SerializeField] ActionData data;
+    private int CurrentEvolutionProgress { get; set; }
+    private int MaxEvolutionProgress { get; set; }
 
     //The following are 'properties' in C# that make quick getters and setters for private fields. ac.Target for access
     private EntityClass target;
@@ -22,9 +28,7 @@ public abstract class ActionClass : SelectClass
         }
     }
     private EntityClass origin;
-    public delegate void ActionClassDelegate(ActionClass target);
-    public event ActionClassDelegate TargetChanged;
-    public event ActionClassDelegate TargetChanging;
+
     public EntityClass Origin
     {
         get { return origin; }
@@ -41,11 +45,6 @@ public abstract class ActionClass : SelectClass
             }
             UpdateDup();
         }
-    }
-
-    private void UpdateBuffValue(EntityClass origin)
-    {
-        UpdateDup();
     }
 
     public int CostToAddToDeck { get; set; } = 2;
@@ -83,7 +82,7 @@ public abstract class ActionClass : SelectClass
     private CardState cardState = CardState.NORMAL;
     public int Speed { get; set; }
     protected string description;
-    public string Description {  get { return description; }}
+    public string Description { get { return description; }}
     [SerializeField] private Sprite icon;
     public Sprite cardBack;
     [SerializeField] private CardUI cardUI;
@@ -93,6 +92,9 @@ public abstract class ActionClass : SelectClass
     protected Vector3 OriginalPosition;
 
 #nullable enable
+    public delegate void ActionClassDelegate(ActionClass target);
+    public event ActionClassDelegate? TargetChanged;
+    public event ActionClassDelegate? TargetChanging;
     public delegate void CardStateDelegate(CardState previousState, CardState currentState);
     public delegate void CardEventDelegate(ActionClass card);
     public static event CardEventDelegate? CardClickedEvent;
@@ -128,6 +130,11 @@ public abstract class ActionClass : SelectClass
             origin.BuffsUpdatedEvent -= UpdateBuffValue;
         }
         PauseMenu.onPauseMenuActivate -= OnMouseExit;
+    }
+
+    private void UpdateBuffValue(EntityClass origin)
+    {
+        UpdateDup();
     }
 
     //Called when this card hits the enemy, runs any on hit buffs or effects given.
@@ -365,10 +372,6 @@ public abstract class ActionClass : SelectClass
         boxCollider.center = new Vector3(originalCenter.x, originalCenter.y - extendAmount / 2, originalCenter.z);
     }
 
-
-
-
-
     //Will activate the checkmark on card UI for indication that it is in the player's deck
     public void SetSelectedForDeck(bool isSelectedForDeck)
     {
@@ -379,4 +382,19 @@ public abstract class ActionClass : SelectClass
     {
         cardUI.shouldRenderCost = renderCost;
     }
+
+    public void Bind(ActionData data)
+    {
+        this.data = data;
+        this.data.Id = Id;
+        this.CurrentEvolutionProgress = data.CurrentProgress;
+        this.MaxEvolutionProgress = data.MaxProgress;
+    }
+}
+
+public class ActionData : ISaveable
+{
+    [field: SerializeField] public SerializableGuid Id { get; set; }
+    public int CurrentProgress { get; set; } 
+    public int MaxProgress { get; set; }
 }
