@@ -11,9 +11,13 @@ public abstract class ActionClass : SelectClass, IBind<ActionData>
 {
     //Fields for persistence
     [field: SerializeField] public SerializableGuid Id { get; set; } = SerializableGuid.NewGuid();
-    [SerializeField] ActionData data;
-    private int CurrentEvolutionProgress { get; set; }
-    private int MaxEvolutionProgress { get; set; }
+    [SerializeField] protected ActionData data;
+    protected int CurrentEvolutionProgress
+    {
+        get { return data.CurrentProgress; }
+        set => data.CurrentProgress = value;
+    }
+    protected int MaxEvolutionProgress { get; set; }
 
     //The following are 'properties' in C# that make quick getters and setters for private fields. ac.Target for access
     private EntityClass target;
@@ -387,14 +391,12 @@ public abstract class ActionClass : SelectClass, IBind<ActionData>
     {
         this.data = data;
         this.data.Id = Id;
-        this.CurrentEvolutionProgress = data.CurrentProgress;
-        this.MaxEvolutionProgress = data.MaxProgress;
     }
 }
 
+[Serializable]
 public class ActionData : ISaveable
 {
     [field: SerializeField] public SerializableGuid Id { get; set; }
-    public int CurrentProgress { get; set; } 
-    public int MaxProgress { get; set; }
+    public int CurrentProgress { get; set; }
 }
