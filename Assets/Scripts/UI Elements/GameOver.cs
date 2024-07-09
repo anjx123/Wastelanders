@@ -80,8 +80,7 @@ public class GameOver : MonoBehaviour
     private IEnumerator OnRestartClick()
     {
         yield return StartCoroutine(FadeCoroutine(false, 0.7f));
-        Scene activeScene = SceneManager.GetActiveScene();
-        GameStateManager.Restart(activeScene.name);
+        GameStateManager.Instance.Restart();
     }
 
     private IEnumerator OnLevelSelectClick()

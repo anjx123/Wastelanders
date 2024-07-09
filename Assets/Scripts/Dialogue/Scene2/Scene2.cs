@@ -108,7 +108,7 @@ private IEnumerator ExecuteGameStart()
         slime.SetReturnPosition(slimeBattle.position);
 
         frog.UnTargetable(); frog2.UnTargetable(); slime.UnTargetable();
-        if (!jumpToCombat && !GameStateManager.jumpIntoFrogAndSlimeFight)
+        if (!jumpToCombat && !GameStateManager.Instance.JumpIntoFrogAndSlimeFight)
         {
 
             //Narrate the scene
@@ -174,7 +174,7 @@ private IEnumerator ExecuteGameStart()
             yield return StartCoroutine(DialogueManager.Instance.StartDialogue(jackiePreCombat));
         } else
         {
-            GameStateManager.jumpIntoFrogAndSlimeFight = false;
+            GameStateManager.Instance.JumpIntoFrogAndSlimeFight = false;
         }
 
        // start frog fight
@@ -402,7 +402,7 @@ private IEnumerator ExecuteGameStart()
     {
         yield return StartCoroutine(CombatManager.Instance.FadeInDarkScreen(2f));
 
-        GameStateManager.jumpIntoFrogAndSlimeFight = true;
+        GameStateManager.Instance.JumpIntoFrogAndSlimeFight = true;
         //Set Jump into combat to be true
         ivesImage.gameObject.SetActive(false);
         gameOver.gameObject.SetActive(true);

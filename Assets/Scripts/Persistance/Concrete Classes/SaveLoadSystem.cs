@@ -10,6 +10,8 @@ namespace Systems.Persistence
     {
         public string Name;
         public List<ActionData> ActionData;
+        public PlayerDatabase playerData;
+        public GameStateData gameStateData;
     }
 
     public interface ISaveable
@@ -25,7 +27,7 @@ namespace Systems.Persistence
 
     // Singleton that shows up in unity
     public class SaveLoadSystem : PersistentSingleton<SaveLoadSystem> {
-        [SerializeField] public GameData GameData { get; private set; }
+        [SerializeField] public GameData gameData;
 
         IDataService dataService;
 
@@ -33,11 +35,15 @@ namespace Systems.Persistence
         {
             base.Awake();
             dataService = new FileDataService(new JSonSerializer());
+            if (gameData == null)
+            {
+                NewGame();
+            }
         }
 
         public void LoadCardEvolutionProgress()
         {
-            Bind<ActionClass, ActionData>(GameData.ActionData);
+            Bind<ActionClass, ActionData>(gameData.ActionData);
         }
 
         void Bind<T, TData>(List<TData> datas) where T: MonoBehaviour, IBind<TData> where TData : ISaveable, new() {
@@ -71,20 +77,21 @@ namespace Systems.Persistence
 
         public void NewGame()
         {
-            GameData = new GameData
+            gameData = new GameData
             {
                 Name = "Wastelanders Save File",
+                gameStateData = new GameStateData()
             };
         }
 
         public void SaveGame()
         {
-            dataService.Save(GameData);
+            dataService.Save(gameData);
         }
 
         public void LoadGame(string gameName)
         {
-            GameData = dataService.Load(gameName);
+            gameData = dataService.Load(gameName);
         }
     }
 }
