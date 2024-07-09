@@ -87,12 +87,12 @@ public class GameOver : MonoBehaviour
     private IEnumerator OnLevelSelectClick()
     {
         yield return StartCoroutine(FadeCoroutine(false, 1f));
-        SceneManager.LoadScene("LevelSelect");
+        SceneManager.LoadScene(GameStateManager.LEVEL_SELECT_NAME);
     }
 
     private IEnumerator OnDeckSelectClick()
     {
         yield return StartCoroutine(FadeCoroutine(false, 1f));
-        SceneManager.LoadScene("SelectionScreen");
+        SceneManager.LoadScene(GameStateManager.SELECTION_SCREEN_NAME);
     }
 }
