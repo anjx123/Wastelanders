@@ -65,6 +65,8 @@ public class GameStateManager : PersistentSingleton<GameStateManager>, IBind<Gam
     public const string CREDITS = "Credits";
 }
 
+
+[System.Serializable]
 public class GameStateData : ISaveable
 {
     public SerializableGuid Id { get; set; }

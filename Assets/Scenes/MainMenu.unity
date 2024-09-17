@@ -898,6 +898,7 @@ MonoBehaviour:
     Name: 
     ActionData: []
     playerData: {fileID: 0}
+  defaultPlayerDatabase: {fileID: 11400000, guid: 8727bc367ba518d4496483da96ba1cf0, type: 2}
 --- !u!4 &1013216798
 Transform:
   m_ObjectHideFlags: 0

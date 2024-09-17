@@ -1,8 +1,11 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using static PlayerDatabase;
 
 namespace Systems.Persistence
 {
@@ -10,8 +13,8 @@ namespace Systems.Persistence
     {
         public string Name;
         public List<ActionData> ActionData;
-        public PlayerDatabase playerData;
         public GameStateData gameStateData;
+        public PlayerInformation playerInformation;
     }
 
     public interface ISaveable
@@ -25,9 +28,14 @@ namespace Systems.Persistence
         void Bind(TData data);
     }
 
+
+
     // Singleton that shows up in unity
-    public class SaveLoadSystem : PersistentSingleton<SaveLoadSystem> {
+    public class SaveLoadSystem : PersistentSingleton<SaveLoadSystem>
+    {
+        private const string SAVE_FILE_NAME = "Wastelanders Save File";
         [SerializeField] public GameData gameData;
+        [SerializeField] private PlayerDatabase defaultPlayerDatabase;
 
         IDataService dataService;
 
@@ -35,15 +43,27 @@ namespace Systems.Persistence
         {
             base.Awake();
             dataService = new FileDataService(new JSonSerializer());
-            if (gameData == null)
+            try
             {
+                LoadGame(SAVE_FILE_NAME);
+            } catch (IOException e)
+            {
+                Debug.Log(e.Message + " Starting a new game.");
                 NewGame();
+                SaveGame();
             }
+            LoadPlayerInformation();
         }
 
         public void LoadCardEvolutionProgress()
         {
             Bind<ActionClass, ActionData>(gameData.ActionData);
+        }
+
+        // Scriptable objects are not saved and loaded like MonoBehaviours are. 
+        private void LoadPlayerInformation()
+        {
+            defaultPlayerDatabase.Bind(gameData.playerInformation);
         }
 
         void Bind<T, TData>(List<TData> datas) where T: MonoBehaviour, IBind<TData> where TData : ISaveable, new() {
@@ -75,17 +95,21 @@ namespace Systems.Persistence
             }
         }
 
+
         public void NewGame()
         {
             gameData = new GameData
             {
-                Name = "Wastelanders Save File",
-                gameStateData = new GameStateData()
+                Name = SAVE_FILE_NAME,
+                gameStateData = new GameStateData(),
+                ActionData = new List<ActionData>(),
+                playerInformation = new PlayerInformation(defaultPlayerDatabase.JackieData, defaultPlayerDatabase.IvesData) // Initialize with default scriptableObject values
             };
         }
 
         public void SaveGame()
         {
+            Debug.Log("Saving the game!");
             dataService.Save(gameData);
         }
 

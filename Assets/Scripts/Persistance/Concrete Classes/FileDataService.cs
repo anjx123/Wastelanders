@@ -12,6 +12,7 @@ namespace Systems.Persistence
 
         public FileDataService(ISerializer serializer)
         {
+            // Application.persistentDataPath = C:\Users\YOUR_USER_NAME\AppData\LocalLow\S2dio\WastelandersGame
             this.dataPath = Application.persistentDataPath;
             this.fileExtension = "json";
             this.serializer = serializer;

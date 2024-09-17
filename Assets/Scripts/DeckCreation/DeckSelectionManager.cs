@@ -104,6 +104,7 @@ public class DeckSelectionManager : MonoBehaviour
         if (!isFadingOut)
         {
             isFadingOut = true;
+            SaveLoadSystem.Instance.SaveGame();
             yield return StartCoroutine(fadeScreenHandler.FadeInDarkScreen(0.8f));
             SceneManager.LoadScene(nextScene);
             isFadingOut = false;
