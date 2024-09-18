@@ -1,4 +1,4 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using Systems.Persistence;
 using UnityEngine;
@@ -28,7 +28,7 @@ public class PlayerDatabase : ScriptableObject, IBind<PlayerInformation>
         }
     }
 
-    public List<ActionClass> GetDeckByPlayerName(PlayerName player)
+    public List<string> GetDeckByPlayerName(PlayerName player)
     {
         switch (player)
         {
@@ -57,9 +57,9 @@ public class PlayerDatabase : ScriptableObject, IBind<PlayerInformation>
 
 
         //Gets the combination of both smaller decks
-        public List<ActionClass> GetCombinedDeck()
+        public List<string> GetCombinedDeck()
         {
-            List<ActionClass> combinedDeck = new List<ActionClass>();
+            List<string> combinedDeck = new();
 
             foreach (var entry in playerDeck)
             {
@@ -73,7 +73,7 @@ public class PlayerDatabase : ScriptableObject, IBind<PlayerInformation>
         }
 
         //Like a dictionary, gets the player deck by the weapon type, if not contained, return a empty list
-        public List<ActionClass> GetDeckByWeaponType(CardDatabase.WeaponType weaponType)
+        public List<string> GetDeckByWeaponType(CardDatabase.WeaponType weaponType)
         {
             foreach (var entry in playerDeck)
             {
@@ -83,7 +83,7 @@ public class PlayerDatabase : ScriptableObject, IBind<PlayerInformation>
                 }
             }
 
-            return new List<ActionClass>();
+            return new List<string>();
         }
     }
 
@@ -98,7 +98,7 @@ public class PlayerDatabase : ScriptableObject, IBind<PlayerInformation>
 [System.Serializable]
 public class PlayerInformation : ISaveable
 {
-    [field: SerializeField] public SerializableGuid Id { get; set; }
+    [field: SerializeField] public SerializableGuid Id { get; set; } = SerializableGuid.NewGuid();
     [field: SerializeField] public PlayerData JackieData { get; set; }
     [field: SerializeField] public PlayerData IvesData { get; set; }    
 

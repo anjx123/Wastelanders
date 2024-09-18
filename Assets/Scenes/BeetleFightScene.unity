@@ -934,6 +934,7 @@ MonoBehaviour:
   battleQueueParent: {fileID: 370424664}
   fadeScreen: {fileID: 1852793027}
   playerDatabase: {fileID: 11400000, guid: 8727bc367ba518d4496483da96ba1cf0, type: 2}
+  cardDatabase: {fileID: 11400000, guid: 4ee9950b3d655254fb0def1cd879db6a, type: 2}
 --- !u!1 &370424664 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7622365840802787573, guid: 0ce0ee3d06315164a88fea5184a490b6, type: 3}
@@ -5311,7 +5312,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6635998426718021455, guid: b9c5e4b3c9f7e024f8fe9012e7a2e437, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 25.53027
+      value: 25.797094
       objectReference: {fileID: 0}
     - target: {fileID: 6635998426718021455, guid: b9c5e4b3c9f7e024f8fe9012e7a2e437, type: 3}
       propertyPath: m_LocalPosition.y
@@ -6976,6 +6977,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myTransform: {fileID: 1371300107}
+  <Id>k__BackingField:
+    Part1: 3113433922
+    Part2: 1311857164
+    Part3: 960895360
+    Part4: 3376284754
+  data:
+    <Id>k__BackingField:
+      Part1: 0
+      Part2: 0
+      Part3: 0
+      Part4: 0
   icon: {fileID: 21300000, guid: 57baba5992d9e224988e93fcacf9f7eb, type: 3}
   cardBack: {fileID: 21300000, guid: b9d9ffafd54db4d16be447f80c7ef42d, type: 3}
   cardUI: {fileID: 1360995282}

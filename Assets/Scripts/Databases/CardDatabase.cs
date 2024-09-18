@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System;
 using TMPro;
 
 
@@ -30,6 +31,30 @@ public class CardDatabase : ScriptableObject
                 return null;
         }
     }
+
+    public List<ActionClass> GetAllCards()
+    {
+        List<ActionClass> allCards = new();
+        foreach (WeaponType type in Enum.GetValues(typeof(WeaponType)))
+        {
+            allCards.AddRange(GetCardsByType(type));
+        }
+        return allCards;
+    }
+
+
+    // Converts a list of Action Class types to the actual prefab contained in this database. 
+    public List<ActionClass> ConvertStringsToCards(List<string> types)
+    {
+        return GetAllCards().FindAll(actionClass => types.Contains(actionClass.GetType().Name));
+    }
+
+    // For performance reasons, use this if you know the type
+    public List<ActionClass> ConvertStringsToCards(WeaponType type, List<string> types)
+    {
+        return GetCardsByType(type).FindAll(actionClass => types.Contains(actionClass.GetType().Name));
+    }
+
 
     public enum WeaponType
     {

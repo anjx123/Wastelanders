@@ -28,10 +28,11 @@ public class CombatManager : MonoBehaviour
     bool fadeActive = false;
 
     [SerializeField] private PlayerDatabase playerDatabase;
+    [SerializeField] private CardDatabase cardDatabase;
 
     public List<ActionClass> GetDeck(PlayerDatabase.PlayerName playerName)
     {
-        return playerDatabase.GetDeckByPlayerName(playerName);  
+        return cardDatabase.ConvertStringsToCards(playerDatabase.GetDeckByPlayerName(playerName));  
     }
 
 #nullable enable
