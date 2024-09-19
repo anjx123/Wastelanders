@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 using System.Reflection;
 using Cinemachine;
 using UnityEngine.UI;
+using Systems.Persistence;
 //@author: Andrew
 public class BeetleFight : DialogueClasses
 {
@@ -183,6 +184,7 @@ public class BeetleFight : DialogueClasses
 
     private IEnumerator ExecuteGameStart()
     {
+        SaveLoadSystem.Instance.LoadGame();
         CombatManager.Instance.GameState = GameState.OUT_OF_COMBAT;
         CombatManager.Instance.SetDarkScreen();
         yield return new WaitForSeconds(0.2f);
@@ -326,11 +328,12 @@ public class BeetleFight : DialogueClasses
                 yield return StartCoroutine(jackie.MoveToPosition(ambushBeetle.transform.position, 1.2f, 1f));
                 yield return new WaitForSeconds(BRIEF_PAUSE);
 
-                StartCoroutine(beetleDraggingCrystal.MoveToPosition(beetleDraggingCrystal.transform.position + new Vector3(-8, 0, 0), 0, 10f, rightEntrance.position));
+                Coroutine dragJob = StartCoroutine(beetleDraggingCrystal.MoveToPosition(beetleDraggingCrystal.transform.position + new Vector3(-8, 0, 0), 0, 10f, rightEntrance.position));
                 yield return StartCoroutine(ShiftObjectCoroutine(sceneCamera.gameObject, 8f, 2f));
                 yield return StartCoroutine(DialogueManager.Instance.StartDialogue(jackieBeetleCamp.Dialogue));
                 yield return StartCoroutine(jackie.MoveToPosition(rightEntrance.transform.position, 1.2f, 1f));
                 yield return StartCoroutine(CombatManager.Instance.FadeInDarkScreen(0.6f));
+                StopCoroutine(dragJob);
                 jackie.Heal(5);
             }
 

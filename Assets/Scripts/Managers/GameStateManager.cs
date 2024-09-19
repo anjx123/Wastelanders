@@ -3,42 +3,51 @@ using Systems.Persistence;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-//Static Class that keeps track of static values representing general Game states
+//Singleton Class that keeps track of values representing general Game states
 public class GameStateManager : PersistentSingleton<GameStateManager>, IBind<GameStateData>
 {
     //Fields for persistence
     [field: SerializeField] public SerializableGuid Id { get; set; } = SerializableGuid.NewGuid();
-    [SerializeField] GameStateData data;
+    [SerializeField] private GameStateData data;
+    private GameStateData Data 
+    { 
+        get
+        {
+            if (data == null) SaveLoadSystem.Instance.LoadGameStateInformation();
+            return data;
+        }
+        set => data = value;
+    }
 
     public bool ShouldPlayDeckSelectionTutorial 
     {
-        get { return data.ShouldPlayDeckSelectionTutorial; } 
-        set => data.ShouldPlayDeckSelectionTutorial = value; 
+        get { return Data.ShouldPlayDeckSelectionTutorial; } 
+        set => Data.ShouldPlayDeckSelectionTutorial = value; 
     }
 
     public bool JumpIntoFrogAndSlimeFight 
     {
-        get { return data.JumpIntoFrogAndSlimeFight; }
-        set => data.JumpIntoFrogAndSlimeFight = value;
+        get { return Data.JumpIntoFrogAndSlimeFight; }
+        set => Data.JumpIntoFrogAndSlimeFight = value;
     }
 
     public bool JumpIntoBeetleFight
     {
-        get { return data.JumpIntoBeetleFight; }
-        set => data.JumpIntoBeetleFight = value;
+        get { return Data.JumpIntoBeetleFight; }
+        set => Data.JumpIntoBeetleFight = value;
     }
 
     public bool JumpIntoQueenFight
     {
-        get { return data.JumpIntoQueenFight; }
-        set => data.JumpIntoQueenFight = value;
+        get { return Data.JumpIntoQueenFight; }
+        set => Data.JumpIntoQueenFight = value;
     }
 
     //If we just finished beetle fight, we go directly into queen fight after the back button is hit
     public bool JustFinishedBeetleFight
     {
-        get { return data.JustFinishedBeetleFight; }
-        set => data.JustFinishedBeetleFight = value;
+        get { return Data.JustFinishedBeetleFight; }
+        set => Data.JustFinishedBeetleFight = value;
     }
     public void Restart()
     {
@@ -48,8 +57,8 @@ public class GameStateManager : PersistentSingleton<GameStateManager>, IBind<Gam
 
     public void Bind(GameStateData data)
     {
-        this.data = data;
-        this.data.Id = data.Id;
+        this.Data = data;
+        this.Data.Id = data.Id;
     }
 
     public const string MAIN_MENU_NAME = "MainMenu";

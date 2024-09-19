@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using Cinemachine;
+using Systems.Persistence;
 
 public class PostQueenBeetle : DialogueClasses
 {
@@ -42,6 +43,7 @@ public class PostQueenBeetle : DialogueClasses
 
     private IEnumerator ExecuteGameStart()
     {
+        SaveLoadSystem.Instance.LoadGame();
         CombatManager.Instance.GameState = GameState.OUT_OF_COMBAT;
         CombatManager.Instance.SetDarkScreen();
         ives.FaceLeft();

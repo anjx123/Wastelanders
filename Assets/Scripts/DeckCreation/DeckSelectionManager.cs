@@ -96,7 +96,7 @@ public class DeckSelectionManager : MonoBehaviour
         } else if (DeckSelectionState == DeckSelectionState.DeckSelection) {
             DeckSelectionState = DeckSelectionState.WeaponSelection;
         } else if (DeckSelectionState == DeckSelectionState.CharacterSelection) {
-            // Save user data here
+            // Save user Data here
             StartCoroutine(ExitDeckSelection());
         }
     }

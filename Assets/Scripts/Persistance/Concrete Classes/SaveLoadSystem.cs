@@ -2,10 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using static PlayerDatabase;
 
 namespace Systems.Persistence
 {
@@ -28,14 +25,12 @@ namespace Systems.Persistence
         void Bind(TData data);
     }
 
-
-
-    // Singleton that shows up in unity
+    // Singleton save load manager that shows up in unity
     public class SaveLoadSystem : PersistentSingleton<SaveLoadSystem>
     {
         private const string SAVE_FILE_NAME = "Wastelanders Save File";
         [SerializeField] public GameData gameData;
-        [SerializeField] private PlayerDatabase defaultPlayerDatabase;
+        private PlayerDatabase defaultPlayerDatabase;
 
         IDataService dataService;
 
@@ -43,9 +38,10 @@ namespace Systems.Persistence
         {
             base.Awake();
             dataService = new FileDataService(new JSonSerializer());
+            defaultPlayerDatabase = Resources.LoadAll<PlayerDatabase>("").First(); // Could consider loading by name for better performance
             try
             {
-                LoadGame(SAVE_FILE_NAME);
+                LoadGame();
             } catch (IOException e)
             {
                 Debug.Log(e.Message + " Starting a new game.");
@@ -53,6 +49,7 @@ namespace Systems.Persistence
                 SaveGame();
             }
             LoadPlayerInformation();
+            LoadGameStateInformation();
         }
 
         public void LoadCardEvolutionProgress()
@@ -64,6 +61,11 @@ namespace Systems.Persistence
         private void LoadPlayerInformation()
         {
             defaultPlayerDatabase.Bind(gameData.playerInformation);
+        }
+
+        public void LoadGameStateInformation()
+        {
+            Bind<GameStateManager, GameStateData>(gameData.gameStateData);
         }
 
         void Bind<T, TData>(List<TData> datas) where T: MonoBehaviour, IBind<TData> where TData : ISaveable, new() {
@@ -113,9 +115,9 @@ namespace Systems.Persistence
             dataService.Save(gameData);
         }
 
-        public void LoadGame(string gameName)
+        public void LoadGame()
         {
-            gameData = dataService.Load(gameName);
+            gameData = dataService.Load(SAVE_FILE_NAME);
         }
     }
 }

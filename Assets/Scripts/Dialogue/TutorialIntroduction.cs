@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.ConstrainedExecution;
+using Systems.Persistence;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -84,6 +85,7 @@ public class TutorialIntroduction : DialogueClasses
 
     private IEnumerator ExecuteGameStart()
     {
+        SaveLoadSystem.Instance.LoadGame();
         CombatManager.Instance.GameState = GameState.OUT_OF_COMBAT;
         CombatManager.Instance.SetDarkScreen();
         yield return new WaitForSeconds(1f);

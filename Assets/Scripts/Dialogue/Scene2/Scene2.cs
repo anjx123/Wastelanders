@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using Systems.Persistence;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -93,6 +94,7 @@ public class Scene2 : DialogueClasses
     int numberOfBroadcasts = 0;
 private IEnumerator ExecuteGameStart()
     {
+        SaveLoadSystem.Instance.LoadGame();
         CombatManager.Instance.GameState = GameState.OUT_OF_COMBAT;
         CombatManager.Instance.SetDarkScreen();
         yield return new WaitForSeconds(0.8f);
