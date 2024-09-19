@@ -1,4 +1,5 @@
 
+using System.Runtime.CompilerServices;
 using Systems.Persistence;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -8,15 +9,18 @@ public class GameStateManager : PersistentSingleton<GameStateManager>, IBind<Gam
 {
     //Fields for persistence
     [field: SerializeField] public SerializableGuid Id { get; set; } = SerializableGuid.NewGuid();
-    [SerializeField] private GameStateData data;
-    private GameStateData Data 
+    private GameStateData data;
+    public GameStateData Data 
     { 
         get
         {
             if (data == null) SaveLoadSystem.Instance.LoadGameStateInformation();
             return data;
         }
-        set => data = value;
+        set
+        {
+            data = value;
+        }
     }
 
     public bool ShouldPlayDeckSelectionTutorial 
@@ -55,10 +59,11 @@ public class GameStateManager : PersistentSingleton<GameStateManager>, IBind<Gam
         SceneManager.LoadScene(activeScene.name);
     }
 
-    public void Bind(GameStateData data)
+    public void Bind(GameStateData bindedData)
     {
-        this.Data = data;
-        this.Data.Id = data.Id;
+
+        this.Data = bindedData;
+        this.Data.Id = bindedData.Id;
     }
 
     public const string MAIN_MENU_NAME = "MainMenu";
@@ -78,15 +83,26 @@ public class GameStateManager : PersistentSingleton<GameStateManager>, IBind<Gam
 [System.Serializable]
 public class GameStateData : ISaveable
 {
-    public SerializableGuid Id { get; set; }
+    [field: SerializeField] public SerializableGuid Id { get; set; }
 
-    public bool ShouldPlayDeckSelectionTutorial { get; set; } = false;
+    [field: SerializeField] public bool ShouldPlayDeckSelectionTutorial { get; set; } = false;
 
-    public bool JumpIntoFrogAndSlimeFight { get; set; } = false;
+    [field: SerializeField] public bool JumpIntoFrogAndSlimeFight { get; set; } = false;
 
-    public bool JumpIntoBeetleFight { get; set; } = false;
+    [field: SerializeField] public bool JumpIntoBeetleFight { get; set; } = false;
 
-    public bool JumpIntoQueenFight { get; set; } = false;
+    [field: SerializeField] public bool JumpIntoQueenFight { get; set; } = false;
 
-    public bool JustFinishedBeetleFight { get; set; } = false;
+    [field: SerializeField] public bool JustFinishedBeetleFight { get; set; } = false;
+
+    public override string ToString()
+    {
+        return "Id: " + Id +
+            " Hexcode: " + RuntimeHelpers.GetHashCode(this) +
+            " ShouldPlayDeckSelectionTutorial: " + ShouldPlayDeckSelectionTutorial +
+            " JumpIntoFrogAndSlimeFight: " + JumpIntoFrogAndSlimeFight +
+            " JumpIntoBeetleFight: " + JumpIntoBeetleFight +
+            " JumpIntoQueenFight: " + JumpIntoQueenFight +
+            " JustFinishedBeetleFight: " + JustFinishedBeetleFight;
+    }
 }

@@ -94,7 +94,6 @@ public class Scene2 : DialogueClasses
     int numberOfBroadcasts = 0;
 private IEnumerator ExecuteGameStart()
     {
-        SaveLoadSystem.Instance.LoadGame();
         CombatManager.Instance.GameState = GameState.OUT_OF_COMBAT;
         CombatManager.Instance.SetDarkScreen();
         yield return new WaitForSeconds(0.8f);

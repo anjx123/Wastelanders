@@ -85,7 +85,6 @@ public class TutorialIntroduction : DialogueClasses
 
     private IEnumerator ExecuteGameStart()
     {
-        SaveLoadSystem.Instance.LoadGame();
         CombatManager.Instance.GameState = GameState.OUT_OF_COMBAT;
         CombatManager.Instance.SetDarkScreen();
         yield return new WaitForSeconds(1f);

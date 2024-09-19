@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 namespace Systems.Persistence
@@ -115,8 +116,9 @@ namespace Systems.Persistence
             dataService.Save(gameData);
         }
 
-        public void LoadGame()
+        private void LoadGame()
         {
+            Debug.Log("Loading the game!");
             gameData = dataService.Load(SAVE_FILE_NAME);
         }
     }
