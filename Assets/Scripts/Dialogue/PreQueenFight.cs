@@ -648,22 +648,24 @@ public class PreQueenFight : DialogueClasses
 
     }
 
-    void DieInScene(EntityClass enemyEntity)
+    void DieInScene(EntityClass entityClass)
     {
-        BattleQueue.BattleQueueInstance.RemoveAllInstancesOfEntity(enemyEntity);
-        if (enemyEntity is EnemyClass enemy)
+        BattleQueue.BattleQueueInstance.RemoveAllInstancesOfEntity(entityClass);
+        if (entityClass is EnemyClass enemy)
         {
             CombatManager.Instance.RemoveEnemy(enemy);
-        } else if (enemyEntity is PlayerClass player)
+            enemy.DestroyDeck();
+        } else if (entityClass is PlayerClass player)
         {
             CombatManager.Instance.RemovePlayer(player);
+            player.DestroyDeck();
         }
-        enemyEntity.animator.enabled = false;
-        enemyEntity.GetComponent<SpriteRenderer>().sortingOrder -= 1;
-        enemyEntity.OutOfCombat();
-        enemyEntity.UnTargetable();
-        enemyEntity.combatInfo.gameObject.SetActive(false);
-        enemyEntity.transform.rotation = Quaternion.Euler(0, 0, 75);
+        entityClass.animator.enabled = false;
+        entityClass.GetComponent<SpriteRenderer>().sortingOrder -= 1;
+        entityClass.OutOfCombat();
+        entityClass.UnTargetable();
+        entityClass.combatInfo.gameObject.SetActive(false);
+        entityClass.transform.rotation = Quaternion.Euler(0, 0, 75);
     }
 
     void CleanUpScene2()

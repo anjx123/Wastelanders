@@ -46,15 +46,7 @@ public abstract class PlayerClass : EntityClass
     }
     public void InjectDeck(List<GameObject> actions)
     {
-        //Destroy previous deck
-        List<GameObject> toDestroy = new List<GameObject>(pool);
-        foreach (GameObject actionClass in toDestroy)
-        {
-            pool.Remove(actionClass);
-            hand.Remove(actionClass);
-            discard.Remove(actionClass);
-            Destroy(actionClass);
-        }
+        DestroyDeck();
 
         // Recreate new one
         foreach (GameObject action in actions)
@@ -63,6 +55,18 @@ public abstract class PlayerClass : EntityClass
             toAdd.GetComponent<ActionClass>().Origin = this;
             pool.Add(toAdd);
             toAdd.transform.position = new Vector3(-100, -100, 1);
+        }
+    }
+
+    public void DestroyDeck()
+    {
+        List<GameObject> toDestroy = new List<GameObject>(pool);
+        foreach (GameObject actionClass in toDestroy)
+        {
+            pool.Remove(actionClass);
+            hand.Remove(actionClass);
+            discard.Remove(actionClass);
+            Destroy(actionClass);
         }
     }
 
