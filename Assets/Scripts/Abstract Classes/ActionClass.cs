@@ -11,13 +11,7 @@ public abstract class ActionClass : SelectClass, IBind<ActionData>
 {
     //Fields for persistence
     [field: SerializeField] public SerializableGuid Id { get; set; } = SerializableGuid.NewGuid();
-    [SerializeField] protected ActionData data;
-    protected int CurrentEvolutionProgress
-    {
-        get { return data.CurrentProgress; }
-        set => data.CurrentProgress = value;
-    }
-    protected int MaxEvolutionProgress { get; set; }
+
 
     //The following are 'properties' in C# that make quick getters and setters for private fields. ac.Target for access
     private EntityClass target;
@@ -87,6 +81,7 @@ public abstract class ActionClass : SelectClass, IBind<ActionData>
     public int Speed { get; set; }
     protected string description;
     public string Description { get { return description; }}
+    public string evolutionDescription { get; protected set; }
     [SerializeField] private Sprite icon;
     public Sprite cardBack;
     [SerializeField] private CardUI cardUI;
@@ -96,6 +91,14 @@ public abstract class ActionClass : SelectClass, IBind<ActionData>
     protected Vector3 OriginalPosition;
 
 #nullable enable
+    [SerializeField] protected ActionData? data;
+    protected int CurrentEvolutionProgress
+    {
+        get { return data?.CurrentProgress ?? 0; }
+        set { if (data != null) data.CurrentProgress = Math.Min(value, MaxEvolutionProgress); }
+    }
+    protected int MaxEvolutionProgress { get; set; }
+
     public delegate void ActionClassDelegate(ActionClass target);
     public event ActionClassDelegate? TargetChanged;
     public event ActionClassDelegate? TargetChanging;
@@ -397,6 +400,7 @@ public abstract class ActionClass : SelectClass, IBind<ActionData>
 [Serializable]
 public class ActionData : ISaveable
 {
-    [field: SerializeField] public SerializableGuid Id { get; set; }
-    public int CurrentProgress { get; set; }
+    public SerializableGuid Id { get; set; } = SerializableGuid.NewGuid();
+    [field: SerializeField] public string ActionClassName { get; set; } = "";
+    [field: SerializeField] public int CurrentProgress { get; set; } = 0;
 }

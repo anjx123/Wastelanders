@@ -10,7 +10,7 @@ namespace Systems.Persistence
     [Serializable] public class GameData
     {
         public string Name;
-        public List<ActionData> ActionData;
+        public List<ActionData> actionData;
         public GameStateData gameStateData;
         public PlayerInformation playerInformation;
     }
@@ -32,6 +32,7 @@ namespace Systems.Persistence
         private const string SAVE_FILE_NAME = "Wastelanders Save File";
         [SerializeField] public GameData gameData;
         private PlayerDatabase defaultPlayerDatabase;
+        private CardDatabase defaultCardDatabase;
 
         IDataService dataService;
 
@@ -39,6 +40,7 @@ namespace Systems.Persistence
         {
             base.Awake();
             dataService = new FileDataService(new JSonSerializer());
+            defaultCardDatabase = Resources.LoadAll<CardDatabase>("").First();
             defaultPlayerDatabase = Resources.LoadAll<PlayerDatabase>("").First(); // Could consider loading by name for better performance
             try
             {
@@ -55,7 +57,13 @@ namespace Systems.Persistence
 
         public void LoadCardEvolutionProgress()
         {
-            Bind<ActionClass, ActionData>(gameData.ActionData);
+            ActionClass[] actions= FindObjectsByType<ActionClass>(FindObjectsSortMode.None);
+
+            foreach (ActionClass actionClass in actions)
+            {
+                ActionData data = gameData.actionData.FirstOrDefault(it => it.ActionClassName == actionClass.GetType().Name);
+                if (data != null) actionClass.Bind(data);
+            }
         }
 
         // Scriptable objects are not saved and loaded like MonoBehaviours are. 
@@ -105,7 +113,7 @@ namespace Systems.Persistence
             {
                 Name = SAVE_FILE_NAME,
                 gameStateData = new GameStateData(),
-                ActionData = new List<ActionData>(),
+                actionData = defaultCardDatabase.GetDefaultActionDatas(),
                 playerInformation = new PlayerInformation(defaultPlayerDatabase.JackieData, defaultPlayerDatabase.IvesData) // Initialize with default scriptableObject values
             };
         }

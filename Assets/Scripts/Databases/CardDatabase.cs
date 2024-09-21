@@ -42,6 +42,21 @@ public class CardDatabase : ScriptableObject
         return allCards;
     }
 
+    public List<ActionData> GetDefaultActionDatas()
+    {
+        List<ActionData> allData = new();
+        foreach (WeaponType type in Enum.GetValues(typeof(WeaponType)))
+        {
+            foreach (ActionClass action in GetCardsByType(type))
+            {
+                ActionData actionData = new ActionData();
+                actionData.ActionClassName = action.GetType().Name;
+                allData.Add(actionData);
+            }
+        }
+        return allData;
+    }
+
 
     // Converts a list of Action Class types to the actual prefab contained in this database. 
     public List<ActionClass> ConvertStringsToCards(List<string> types)

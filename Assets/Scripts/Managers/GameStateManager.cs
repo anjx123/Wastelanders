@@ -83,7 +83,7 @@ public class GameStateManager : PersistentSingleton<GameStateManager>, IBind<Gam
 [System.Serializable]
 public class GameStateData : ISaveable
 {
-    [field: SerializeField] public SerializableGuid Id { get; set; }
+    [field: SerializeField] public SerializableGuid Id { get; set; } = SerializableGuid.NewGuid();
 
     [field: SerializeField] public bool ShouldPlayDeckSelectionTutorial { get; set; } = false;
 
