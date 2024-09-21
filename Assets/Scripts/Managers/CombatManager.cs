@@ -5,6 +5,7 @@ using UnityEngine;
 using System.Linq;
 using static UnityEngine.EventSystems.EventTrigger;
 using System.Security.Cryptography;
+using Systems.Persistence;
 
 public class CombatManager : MonoBehaviour
 {
@@ -141,6 +142,7 @@ public class CombatManager : MonoBehaviour
         baseCamera.Priority = 1;
         dynamicCamera.Priority = 0;
         StartCoroutine(FadeCombatBackground(false));
+        SaveLoadSystem.Instance.LoadCardEvolutionProgress(); // Most universal place to put this is here, but tagged for performance optimizations
 
         // Each enemy declares an attack. players is passed to AddAttack so the enemy can choose a target.
         foreach (EnemyClass enemy in enemies)
@@ -238,6 +240,8 @@ public class CombatManager : MonoBehaviour
         baseCamera.Priority = 1;
         dynamicCamera.Priority = 0;
         PerformOutOfCombat();
+        //Save game after loss too.
+        SaveLoadSystem.Instance.SaveGame();
     }
 
     private void PerformWin()
@@ -246,6 +250,8 @@ public class CombatManager : MonoBehaviour
         Debug.LogWarning("All enemies are dead, You Win!");
         baseCamera.Priority = 1;
         dynamicCamera.Priority = 0;
+        // Save game after each win (including wiping out a wave) 
+        SaveLoadSystem.Instance.SaveGame();
     }
 
 
