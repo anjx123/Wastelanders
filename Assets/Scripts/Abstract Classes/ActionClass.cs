@@ -98,6 +98,7 @@ public abstract class ActionClass : SelectClass, IBind<ActionData>
         set { if (data != null) data.CurrentProgress = Math.Min(value, MaxEvolutionProgress); }
     }
     protected int MaxEvolutionProgress { get; set; }
+    protected bool IsEvolved { get; set; } = false;
 
     public delegate void ActionClassDelegate(ActionClass target);
     public event ActionClassDelegate? TargetChanged;
