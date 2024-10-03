@@ -57,14 +57,14 @@ public class QueenBeetle : EnemyClass
         myName = "The Queen";
 
         Beetle.OnGainBuffs += HandleGainedBuffs;
-        Beetle.OnDeath += HandleBeetleDied;
+        OnDeathEvent += HandleBeetleDied;
     }
 
     public void OnDisable()
     {
 
         Beetle.OnGainBuffs -= HandleGainedBuffs;
-        Beetle.OnDeath -= HandleBeetleDied;
+        OnDeathEvent -= HandleBeetleDied;
     }
 
     public override IEnumerator Die()
@@ -84,7 +84,7 @@ public class QueenBeetle : EnemyClass
         }
     }
 
-    private void HandleBeetleDied(Beetle victim)
+    private void HandleBeetleDied(EnemyClass victim)
     {
         for (int i = 0; i < availability.Length; i++)
         {

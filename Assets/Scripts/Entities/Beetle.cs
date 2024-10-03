@@ -12,9 +12,6 @@ public abstract class Beetle : EnemyClass
     public delegate void GainedBuffsHandler(string buffType, int stacks, Beetle beetle); // queen should subscribe to this
     public static event GainedBuffsHandler OnGainBuffs;
 
-    public delegate void OnDeathHandler(Beetle victim); // so that queen knows how many beetles are alive
-    public static event OnDeathHandler OnDeath;
-
     // Start is called before the first frame update
     public override void Start()
     {
@@ -49,12 +46,5 @@ public abstract class Beetle : EnemyClass
         {
             Reshuffle();
         }
-    }
-
-    // notifies of death
-    public override IEnumerator Die()
-    {
-        OnDeath?.Invoke(this);
-        return base.Die();
     }
 }

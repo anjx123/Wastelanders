@@ -5,6 +5,8 @@ using UnityEngine;
 
 public abstract class EnemyClass : EntityClass
 {
+    public delegate void OnDeath(EnemyClass enemy);
+    public static event OnDeath OnDeathEvent;
 
     // This is the deck of the enemy, which does not change as they reshuffle/play cards.
     protected List<GameObject> deck = new List<GameObject>();
@@ -93,6 +95,7 @@ public abstract class EnemyClass : EntityClass
     //Removes entity cards and self from BQ and combat manager. Kills itself
     public override IEnumerator Die()
     {
+        OnDeathEvent?.Invoke(this);
         int runDistance = 10;
         BattleQueue.BattleQueueInstance.RemoveAllInstancesOfEntity(this);
         CombatManager.Instance.RemoveEnemy(this);
