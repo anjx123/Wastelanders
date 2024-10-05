@@ -55,6 +55,7 @@ namespace Entities
             var hurl = pool[2];
 
             var playable = new List<GameObject>();
+            const int attacks = 2;
 
             /* If any spawn is alive, "Bless" is playable. If this has 2 or more
                stacks of Resonate, "Burp" is playable. "Hurl" is always playable. */
@@ -62,16 +63,20 @@ namespace Entities
             if (GetBuffStacks(Resonate.buffName) >= 2) playable.Add(burp);
             if (playable.Count == 0) playable.Add(hurl);
 
-            var prefab = playable[Random.Range(0, playable.Count)];
-            var card = Instantiate(prefab);
-            var action = card.GetComponent<ActionClass>();
+            for (var i = 0; i < attacks; i++)
+            {
+                var prefab = playable[Random.Range(0, playable.Count)];
+                var card = Instantiate(prefab);
+                var action = card.GetComponent<ActionClass>();
 
-            action.Target = players[Random.Range(0, players.Count)];
-            action.Origin = this;
-            BattleQueue.BattleQueueInstance.AddAction(action);
-            combatInfo.AddCombatSprite(action);
+                action.Target = players[Random.Range(0, players.Count)];
+                action.Origin = this;
+                BattleQueue.BattleQueueInstance.AddAction(action);
+                combatInfo.AddCombatSprite(action);
 
-            if (prefab == burp) ReduceStacks(Resonate.buffName, 2);
+                // TODO: Move this to CardIsUnstaggered of Burp
+                if (prefab == burp) ReduceStacks(Resonate.buffName, 2);
+            }
         }
 
         public void SpawnNext(GameObject prefab)
