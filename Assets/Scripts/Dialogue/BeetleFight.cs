@@ -454,7 +454,6 @@ public class BeetleFight : DialogueClasses
             yield return StartCoroutine(DialogueManager.Instance.StartDialogue(wave3Dialogue.Dialogue));
             BeginWave3();
             yield return new WaitUntil(() => CombatManager.Instance.GameState == GameState.GAME_WIN);
-
         }
 
         //End of Scene
@@ -724,7 +723,7 @@ public class BeetleFight : DialogueClasses
     {
         BattleQueue.BattleQueueInstance.RemoveAllInstancesOfEntity(e);
         CombatManager.Instance.RemoveEnemy(e);
-        StartCoroutine(e.Die());
+        DieInScene(e);
         e.gameObject.SetActive(false);
     }
     IEnumerator MakeFrogJump(EntityClass origin, float jumpHeight)
@@ -751,6 +750,7 @@ public class BeetleFight : DialogueClasses
         int runDistance = -10;
         CombatManager.Instance.RemoveEnemy(wasteFrog);
         yield return StartCoroutine(wasteFrog.MoveToPosition(wasteFrog.transform.position + new Vector3(runDistance, 0, 0), 0, 1.2f));
+        DieInScene(wasteFrog);
         wasteFrog.gameObject.SetActive(false);
     }
     void DieInScene(EnemyClass enemyEntity)
@@ -767,5 +767,6 @@ public class BeetleFight : DialogueClasses
         enemyEntity.UnTargetable();
         enemyEntity.combatInfo.gameObject.SetActive(false);
         enemyEntity.transform.rotation = Quaternion.Euler(0, 0, 75);
+        enemyEntity.DestroyDeck();
     }
 }

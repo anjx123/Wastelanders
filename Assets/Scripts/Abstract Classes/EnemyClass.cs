@@ -96,9 +96,20 @@ public abstract class EnemyClass : EntityClass
         int runDistance = 10;
         BattleQueue.BattleQueueInstance.RemoveAllInstancesOfEntity(this);
         CombatManager.Instance.RemoveEnemy(this);
+        DestroyDeck();
         yield return StartCoroutine(MoveToPosition(myTransform.position + new Vector3(runDistance, 0, 0), 0, 0.8f));
         isDead = true;
         this.gameObject.SetActive(false);
+    }
+
+    public virtual void DestroyDeck()
+    {
+        foreach (GameObject card in deck)
+        {
+            Destroy(card);
+        }
+        deck.Clear();
+        pool.Clear();
     }
 
     public override IEnumerator ResetPosition()
