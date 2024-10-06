@@ -9,11 +9,12 @@ namespace SceneBuilder
         [SerializeField] private GameObject[] players;
         [SerializeField] private Vector3 princessFrogPosition;
         [SerializeField] private Vector3 playersPosition;
+
         [SerializeField] private GameObject entityContainer;
 
         private GameObject _frog;
 
-        public void Start()
+        private void Start()
         {
             /* Can't happen in Awake() due to an initialization order fiasco. */
             _frog?.GetComponent<EntityClass>().FaceLeft();

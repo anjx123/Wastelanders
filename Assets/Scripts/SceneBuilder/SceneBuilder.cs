@@ -4,7 +4,7 @@ namespace SceneBuilder
 {
     public abstract class SceneBuilder : MonoBehaviour
     {
-        public void Awake() => Build();
+        private void Awake() => Build();
 
         protected abstract void Build();
     }
