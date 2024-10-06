@@ -170,6 +170,7 @@ MonoBehaviour:
   cardDisplay: {fileID: 1491813755}
   cardTemplatePrefab: {fileID: 7256956916184963317, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
   descriptionHolderPrefab: {fileID: 5469409781915009156, guid: 995c69dd05e0fce438d836d1937f6bc5, type: 3}
+  mainCamera: {fileID: 0}
 --- !u!1 &31769307
 GameObject:
   m_ObjectHideFlags: 0
@@ -311,6 +312,8 @@ MonoBehaviour:
   startDequeue: {fileID: 939972737}
   battleQueueParent: {fileID: 370424664}
   fadeScreen: {fileID: 1852793027}
+  playerDatabase: {fileID: 11400000, guid: 8727bc367ba518d4496483da96ba1cf0, type: 2}
+  cardDatabase: {fileID: 11400000, guid: 4ee9950b3d655254fb0def1cd879db6a, type: 2}
 --- !u!1 &370424664 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7622365840802787573, guid: 0ce0ee3d06315164a88fea5184a490b6, type: 3}
@@ -578,6 +581,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   handContainer: {fileID: 2102825246}
   deckContainer: {fileID: 674746841}
+  currentHighlightedEnemyEntity: {fileID: 0}
+  currentHighlightedAction: {fileID: 0}
+  selectedPlayer: {fileID: 0}
 --- !u!1 &638988697
 GameObject:
   m_ObjectHideFlags: 0
@@ -1694,11 +1700,6 @@ SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 2919222511910680948, guid: 5027f4741873b7e49893b1382013ba7b, type: 3}
   m_PrefabInstance: {fileID: 1852793025}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1872758576 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4728857978263358706, guid: 026e787f6af83dc4ca1645e16e8acf98, type: 3}
-  m_PrefabInstance: {fileID: 923165396}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &1872758577 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7336354512828228472, guid: 026e787f6af83dc4ca1645e16e8acf98, type: 3}
@@ -1787,8 +1788,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4669219b148a06340b6ef30bcb5d86ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogueScrim: {fileID: 0}
-  dialogueBoxObj: {fileID: 1872758576}
+  picturelessDialogueBoxComponent: {fileID: 0}
+  pictureDialogueBox: {fileID: 0}
 --- !u!1001 &1922851634
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using Cinemachine;
+using Systems.Persistence;
 
 public class PostQueenBeetle : DialogueClasses
 {

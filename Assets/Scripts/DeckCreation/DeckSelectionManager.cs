@@ -4,7 +4,9 @@ using UnityEngine;
 using static CardDatabase;
 using UnityEngine.SceneManagement;
 using System.Linq;
+using System;
 using UnityEditor;
+using Systems.Persistence;
 
 public class DeckSelectionManager : MonoBehaviour
 {
@@ -94,7 +96,7 @@ public class DeckSelectionManager : MonoBehaviour
         } else if (DeckSelectionState == DeckSelectionState.DeckSelection) {
             DeckSelectionState = DeckSelectionState.WeaponSelection;
         } else if (DeckSelectionState == DeckSelectionState.CharacterSelection) {
-            GameStateManager.SavePlayerDatabase(playerDatabase);
+            // Save user Data here
             StartCoroutine(ExitDeckSelection());
         }
     }
@@ -103,6 +105,8 @@ public class DeckSelectionManager : MonoBehaviour
         if (!isFadingOut)
         {
             isFadingOut = true;
+            SaveLoadSystem.Instance.SaveGame();
+            //EditorUtility.SetDirty(playerDatabase); // For easily resetting the default value of playerDatabase
             yield return StartCoroutine(fadeScreenHandler.FadeInDarkScreen(0.8f));
             SceneManager.LoadScene(nextScene);
             isFadingOut = false;
@@ -145,38 +149,45 @@ public class DeckSelectionManager : MonoBehaviour
 
     private void ActionSelected(ActionClass ac)
     {
-        List<SerializableWeaponListEntry> playerDeck = playerData.playerDeck;
-        ActionClass pref = cardDatabase.GetCardsByType(weaponType).FirstOrDefault(action => action.GetType() == ac.GetType());
-        SerializableWeaponListEntry entry = playerDeck.FirstOrDefault(entry => entry.key == weaponType);
-        SerializableTuple<WeaponType, SerializableTuple<int, int>> proficiencyPointsTuple = playerData.playerWeaponProficiency.FirstOrDefault(entry => entry.Item1 == weaponType);
+        SerializableWeaponListEntry playerWeaponDeck = playerData.playerDeck.FirstOrDefault(entry => entry.key == weaponType);
         
-        if (entry == null)
+        if (playerWeaponDeck == null)
         {
-            entry = new SerializableWeaponListEntry()
+            playerWeaponDeck = new SerializableWeaponListEntry()
             {
                 key = weaponType,
-                value = new List<ActionClass>()
+                value = new List<string>()
             };
-            playerDeck.Add(entry);
+            playerData.playerDeck.Add(playerWeaponDeck);
         }
 
-        if (proficiencyPointsTuple == null) {
+
+        var proficiencyPointsTuple = playerData.playerWeaponProficiency.FirstOrDefault(entry => entry.Item1 == weaponType);
+        SerializableTuple<int, int> weaponPointTuple = proficiencyPointsTuple.Item2; // Left int represents currentPoints, right represents Max Points allowed
+        
+        if (proficiencyPointsTuple == null)
+        {
             proficiencyPointsTuple = new(weaponType, new(0, 0));
             playerData.playerWeaponProficiency.Add(proficiencyPointsTuple);
         }
 
-        SerializableTuple<int, int> weaponPointTuple = proficiencyPointsTuple.Item2; //Left int represents currentPoints, right represents Max Points allowed
-        ActionClass actionFound = entry.value.FirstOrDefault(action => action.GetType() == ac.GetType());
-        if (actionFound != null) {
+
+        string actionFound = playerWeaponDeck.value.FirstOrDefault(action => action == ac.GetType().Name);
+
+        if (actionFound != null) 
+        {
             weaponPointTuple.Item1 -= ac.CostToAddToDeck;          
             ac.SetSelectedForDeck(false);
-            entry.value.Remove(actionFound);
-        } else {
-            if (weaponPointTuple.Item1 + ac.CostToAddToDeck <= weaponPointTuple.Item2) {
+            playerWeaponDeck.value.Remove(actionFound);
+        } else 
+        {
+            if (weaponPointTuple.Item1 + ac.CostToAddToDeck <= weaponPointTuple.Item2) 
+            {
                 weaponPointTuple.Item1 += ac.CostToAddToDeck;
                 ac.SetSelectedForDeck(true);
-                entry.value.Add(pref);
-            } else {
+                playerWeaponDeck.value.Add(ac.GetType().Name);
+            } else 
+            {
                 Debug.LogWarning("Insufficient experience points");
             }
         }
@@ -233,7 +244,7 @@ public class DeckSelectionManager : MonoBehaviour
 
         UnrenderDecks();
 
-        List<ActionClass> chosenCardList = playerData.GetDeckByWeaponType(weaponType);
+        List<ActionClass> chosenCardList = cardDatabase.ConvertStringsToCards(weaponType, playerData.GetDeckByWeaponType(weaponType));
         List<ActionClass> cardsToRender = cardDatabase.GetCardsByType(weaponType);
 
         List<GameObject> instantiatedCards = new List<GameObject>();
@@ -289,6 +300,8 @@ public class DeckSelectionManager : MonoBehaviour
                 break;
             }
         }
+        SaveLoadSystem.Instance.LoadCardEvolutionProgress();
+
         SerializableTuple<WeaponType, SerializableTuple<int, int>> tuple = playerData.playerWeaponProficiency.FirstOrDefault(entry => entry.Item1 == weaponType);
         int availablePoints = 0;
         if (tuple != null) {

@@ -164,6 +164,6 @@ public class PauseMenu : MonoBehaviour
     {
         IsPaused = false;
         Time.timeScale = 1f;
-        GameStateManager.Restart(SceneManager.GetActiveScene().name);
+        GameStateManager.Instance.Restart();
     }
 }

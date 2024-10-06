@@ -13,7 +13,10 @@ public class Decimate : AxeCards
         Speed = 2;
 
         myName = "Decimate";
-        description = "On hit, double the amount of wounds on the target. Then add an aditional wound."; 
+        description = "On hit, double the amount of wounds on the target. Then add an aditional wound.";
+        evolutionDescription = "Double 10 wounds.";
+        MaxEvolutionProgress = 10;
+
         Renderer renderer = GetComponent<Renderer>();
         ogMaterial = renderer.material;
         OriginalPosition = transform.position;
@@ -24,6 +27,8 @@ public class Decimate : AxeCards
     public override void OnHit()
     {
         base.OnHit();
+        CurrentEvolutionProgress += Target.GetBuffStacks(Wound.buffName);
+        Debug.Log("My current evolution progress is: " + CurrentEvolutionProgress + " out of " + MaxEvolutionProgress);
         Target.AddStacks(Wound.buffName, Target.GetBuffStacks(Wound.buffName));
         Target.AddStacks(Wound.buffName, 1);
     }

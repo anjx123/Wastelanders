@@ -1,5 +1,6 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
+using Systems.Persistence;
 using UnityEngine;
 using static PlayerDatabase;
 
@@ -7,10 +8,12 @@ using static PlayerDatabase;
  * Class that holds the information of all players like level, weapon proficiency, decks. Can be edited in the unity editor
  *  */
 [CreateAssetMenu(fileName = "New Player Database", menuName = "Player Database")]
-public class PlayerDatabase : ScriptableObject
+public class PlayerDatabase : ScriptableObject, IBind<PlayerInformation>
 {
     public PlayerData JackieData;
     public PlayerData IvesData;
+
+    public SerializableGuid Id { get; set;}
 
     public PlayerData GetDataByPlayerName(PlayerName player)
     {
@@ -25,7 +28,7 @@ public class PlayerDatabase : ScriptableObject
         }
     }
 
-    public List<ActionClass> GetDeckByPlayerName(PlayerName player)
+    public List<string> GetDeckByPlayerName(PlayerName player)
     {
         switch (player)
         {
@@ -38,6 +41,12 @@ public class PlayerDatabase : ScriptableObject
         }
     }
 
+    public void Bind(PlayerInformation data)
+    {
+        JackieData = data.JackieData;
+        IvesData = data.IvesData;
+    }
+
     [System.Serializable]
     public class PlayerData
     {
@@ -48,9 +57,9 @@ public class PlayerDatabase : ScriptableObject
 
 
         //Gets the combination of both smaller decks
-        public List<ActionClass> GetCombinedDeck()
+        public List<string> GetCombinedDeck()
         {
-            List<ActionClass> combinedDeck = new List<ActionClass>();
+            List<string> combinedDeck = new();
 
             foreach (var entry in playerDeck)
             {
@@ -64,7 +73,7 @@ public class PlayerDatabase : ScriptableObject
         }
 
         //Like a dictionary, gets the player deck by the weapon type, if not contained, return a empty list
-        public List<ActionClass> GetDeckByWeaponType(CardDatabase.WeaponType weaponType)
+        public List<string> GetDeckByWeaponType(CardDatabase.WeaponType weaponType)
         {
             foreach (var entry in playerDeck)
             {
@@ -74,7 +83,7 @@ public class PlayerDatabase : ScriptableObject
                 }
             }
 
-            return new List<ActionClass>();
+            return new List<string>();
         }
     }
 
@@ -82,6 +91,21 @@ public class PlayerDatabase : ScriptableObject
     {
         JACKIE,
         IVES,
+    }
+}
+
+
+[System.Serializable]
+public class PlayerInformation : ISaveable
+{
+    [field: SerializeField] public SerializableGuid Id { get; set; } = SerializableGuid.NewGuid();
+    [field: SerializeField] public PlayerData JackieData { get; set; }
+    [field: SerializeField] public PlayerData IvesData { get; set; }    
+
+    public PlayerInformation(PlayerData jackieData, PlayerData ivesData)
+    {
+        JackieData = jackieData;
+        IvesData = ivesData;
     }
 }
 

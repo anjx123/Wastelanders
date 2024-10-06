@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.ConstrainedExecution;
+using Systems.Persistence;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -164,7 +165,7 @@ public class PreQueenFight : DialogueClasses
 
 
 
-        if (!jumpToCombat && !GameStateManager.jumpIntoQueenFight)
+        if (!jumpToCombat && !GameStateManager.Instance.JumpIntoQueenFight)
         {
             yield return StartCoroutine(DialogueManager.Instance.StartDialogue(initialPlanByJackie.Dialogue));
 
@@ -441,7 +442,7 @@ public class PreQueenFight : DialogueClasses
         else
         {
 
-            GameStateManager.jumpIntoQueenFight = false;
+            GameStateManager.Instance.JumpIntoQueenFight = false;
             jackie.AddStacks(Resonate.buffName, 1);
             CleanUpScene1();
             CleanUpScene2();
@@ -576,7 +577,7 @@ public class PreQueenFight : DialogueClasses
 
         //Set Jump into combat to be true
 
-        GameStateManager.jumpIntoQueenFight = true;
+        GameStateManager.Instance.JumpIntoQueenFight = true;
         gameOver.gameObject.SetActive(true);
         gameOver.FadeIn();
 

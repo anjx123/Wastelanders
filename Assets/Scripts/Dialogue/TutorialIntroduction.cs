@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.ConstrainedExecution;
+using Systems.Persistence;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -242,7 +243,7 @@ public class TutorialIntroduction : DialogueClasses
         StartCoroutine(CombatManager.Instance.FadeInDarkScreen(3f));
         yield return StartCoroutine(jackie.MoveToPosition(jackieEndPosition.position, 0, 4f));
 
-        GameStateManager.shouldPlayDeckSelectionTutorial = true;
+        GameStateManager.Instance.ShouldPlayDeckSelectionTutorial = true;
         SceneManager.LoadScene(GameStateManager.SELECTION_SCREEN_NAME);
         yield break;
     }

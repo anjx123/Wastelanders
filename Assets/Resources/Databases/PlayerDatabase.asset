@@ -1,0 +1,94 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9051792ce0afed41ba7de5bd8497446, type: 3}
+  m_Name: PlayerDatabase
+  m_EditorClassIdentifier: 
+  JackieData:
+    name: Jackie
+    playerWeaponProficiency:
+    - Item1: 2
+      Item2:
+        Item1: 0
+        Item2: 10
+    - Item1: 1
+      Item2:
+        Item1: 12
+        Item2: 12
+    - Item1: 0
+      Item2:
+        Item1: 12
+        Item2: 12
+    - Item1: 3
+      Item2:
+        Item1: 0
+        Item2: 10
+    selectedWeapons: 0000000001000000
+    playerDeck:
+    - key: 1
+      value:
+      - HipFire
+      - PistolWhip
+      - Headshot
+      - RapidFire
+      - Silencer
+      - IronSights
+    - key: 2
+      value: []
+    - key: 0
+      value:
+      - CheapStrike
+      - FocusedStrike
+      - Trip
+      - Flurry
+      - CounterStrike
+      - Jab
+  IvesData:
+    name: Ives
+    playerWeaponProficiency:
+    - Item1: 0
+      Item2:
+        Item1: 0
+        Item2: 14
+    - Item1: 3
+      Item2:
+        Item1: 12
+        Item2: 14
+    - Item1: 1
+      Item2:
+        Item1: 0
+        Item2: 14
+    - Item1: 2
+      Item2:
+        Item1: 12
+        Item2: 14
+    selectedWeapons: 0200000003000000
+    playerDeck:
+    - key: 0
+      value: []
+    - key: 1
+      value: []
+    - key: 2
+      value:
+      - Brace
+      - LeftHook
+      - Pummel
+      - RightHook
+      - Haymaker
+      - FollowThrough
+    - key: 3
+      value:
+      - Execute
+      - SharpenedDefence
+      - Cleave
+      - Decimate
+      - Mutilate
+      - Whirl

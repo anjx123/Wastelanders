@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 using System.Reflection;
 using Cinemachine;
 using UnityEngine.UI;
+using Systems.Persistence;
 //@author: Andrew
 public class BeetleFight : DialogueClasses
 {
@@ -188,7 +189,7 @@ public class BeetleFight : DialogueClasses
         yield return new WaitForSeconds(0.2f);
         SetUpEnemyLists();
         SetUpCombatStatus();
-        if (!jumpToCombat && !GameStateManager.jumpIntoBeetleFight)
+        if (!jumpToCombat && !GameStateManager.Instance.JumpIntoBeetleFight)
         {
             sceneCamera.Priority = 2;
             yield return new WaitForSeconds(1f);
@@ -326,11 +327,12 @@ public class BeetleFight : DialogueClasses
                 yield return StartCoroutine(jackie.MoveToPosition(ambushBeetle.transform.position, 1.2f, 1f));
                 yield return new WaitForSeconds(BRIEF_PAUSE);
 
-                StartCoroutine(beetleDraggingCrystal.MoveToPosition(beetleDraggingCrystal.transform.position + new Vector3(-8, 0, 0), 0, 10f, rightEntrance.position));
+                Coroutine dragJob = StartCoroutine(beetleDraggingCrystal.MoveToPosition(beetleDraggingCrystal.transform.position + new Vector3(-8, 0, 0), 0, 10f, rightEntrance.position));
                 yield return StartCoroutine(ShiftObjectCoroutine(sceneCamera.gameObject, 8f, 2f));
                 yield return StartCoroutine(DialogueManager.Instance.StartDialogue(jackieBeetleCamp.Dialogue));
                 yield return StartCoroutine(jackie.MoveToPosition(rightEntrance.transform.position, 1.2f, 1f));
                 yield return StartCoroutine(CombatManager.Instance.FadeInDarkScreen(0.6f));
+                StopCoroutine(dragJob);
                 jackie.Heal(5);
             }
 
@@ -369,7 +371,7 @@ public class BeetleFight : DialogueClasses
         }
         else // setup scene
         {
-            GameStateManager.jumpIntoBeetleFight = false;
+            GameStateManager.Instance.JumpIntoBeetleFight = false;
             RemoveEnemyFromScene(frog);
             RemoveEnemyFromScene(frogThatRunsAway);
             RemoveEnemyFromScene(ambushBeetle);
@@ -521,7 +523,7 @@ public class BeetleFight : DialogueClasses
             yield return ivesFade;
             yield return new WaitForSeconds(MEDIUM_PAUSE);
 
-            GameStateManager.justFinishedBeetleFight = true;
+            GameStateManager.Instance.JustFinishedBeetleFight = true;
             SceneManager.LoadScene(GameStateManager.SELECTION_SCREEN_NAME);
             yield break;
         }
@@ -649,7 +651,7 @@ public class BeetleFight : DialogueClasses
         yield return StartCoroutine(CombatManager.Instance.FadeInDarkScreen(2f));
 
         DialogueManager.Instance.MoveBoxToBottom();
-        GameStateManager.jumpIntoBeetleFight = true;
+        GameStateManager.Instance.JumpIntoBeetleFight = true;
         gameOver.gameObject.SetActive(true);
         gameOver.FadeIn();
 

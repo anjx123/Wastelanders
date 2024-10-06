@@ -38,14 +38,14 @@ public class DeckSelectionTutorial : MonoBehaviour
 
     private IEnumerator ExecuteGameStart()
     {
-        if (GameStateManager.justFinishedBeetleFight)
+        if (GameStateManager.Instance.JustFinishedBeetleFight)
         {
             DeckSelectionManager.Instance.SetNextScene(GameStateManager.PRE_QUEEN_FIGHT);
             yield break;
         }
 
 
-        if (GameStateManager.shouldPlayDeckSelectionTutorial == false && !activateTutorial) yield break;
+        if (GameStateManager.Instance.ShouldPlayDeckSelectionTutorial == false && !activateTutorial) yield break;
 
         NormalizeTutorialDecks();
 
@@ -86,8 +86,8 @@ public class DeckSelectionTutorial : MonoBehaviour
     private void HandleWeaponEdited(CardDatabase.WeaponType type)
     {
         WeaponEdit.WeaponEditEvent -= HandleWeaponEdited;
-        GameStateManager.shouldPlayDeckSelectionTutorial = false;
-        DeckSelectionManager.Instance.SetNextScene("Scene2");
+        GameStateManager.Instance.ShouldPlayDeckSelectionTutorial = false;
+        DeckSelectionManager.Instance.SetNextScene(GameStateManager.FROG_SLIME_FIGHT);
         StartCoroutine(StartDialogueWithNextEvent(selectYourActions.Dialogue, () => { DeckSelectionManager.Instance.PlayerActionDeckModifiedEvent += HandleRunOutOfPoints; }));
     }
     private void HandleRunOutOfPoints(int points)
@@ -107,7 +107,7 @@ public class DeckSelectionTutorial : MonoBehaviour
     {
         playerDatabase.JackieData.selectedWeapons.Remove(CardDatabase.WeaponType.PISTOL);
         SerializableWeaponListEntry pistolDeck = playerDatabase.JackieData.playerDeck.FirstOrDefault(deck => deck.key == CardDatabase.WeaponType.PISTOL);
-        pistolDeck.value = new List<ActionClass>();
+        pistolDeck.value = new List<string>();
         SerializableTuple<CardDatabase.WeaponType, SerializableTuple<int, int>> pointsAvailableForPistol = playerDatabase.JackieData.playerWeaponProficiency.FirstOrDefault(proficiency => proficiency.Item1 == CardDatabase.WeaponType.PISTOL);
         pointsAvailableForPistol.Item2.Item1 = 0;
     }
