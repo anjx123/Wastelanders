@@ -50,11 +50,4 @@ public abstract class Beetle : EnemyClass
             Reshuffle();
         }
     }
-
-    // notifies of death
-    public override IEnumerator Die()
-    {
-        OnDeath?.Invoke(this);
-        return base.Die();
-    }
 }

@@ -5,7 +5,6 @@ using UnityEngine;
 
 public abstract class EnemyClass : EntityClass
 {
-
     // This is the deck of the enemy, which does not change as they reshuffle/play cards.
     protected List<GameObject> deck = new List<GameObject>();
 
