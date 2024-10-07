@@ -10,13 +10,13 @@ namespace Entities
         [SerializeField] private GameObject[] spawnPrefabs;
         [SerializeField] private Vector3[] spawnPositions;
 
-        private EnemyClass[] _spawnSlots;
+        private EntityClass[] _spawnSlots;
 
         public void Awake()
         {
             /* Each position is a slot for a spawn. If there are fewer prefabs than
                positions, then just cycle through the prefabs to fill the positions. */
-            _spawnSlots = new EnemyClass[spawnPositions.Length];
+            _spawnSlots = new EntityClass[spawnPositions.Length];
 
             for (var i = 0; i < _spawnSlots.Length; i++)
             {
@@ -38,13 +38,13 @@ namespace Entities
         public void OnEnable()
         {
             EntityTookDamage += HandleDamage;
-            OnDeathEvent += HandleSpawnDeath;
+            OnEntityDeath += HandleSpawnDeath;
         }
 
         public void OnDisable()
         {
             EntityTookDamage -= HandleDamage;
-            OnDeathEvent -= HandleSpawnDeath;
+            OnEntityDeath -= HandleSpawnDeath;
         }
 
         public override void AddAttack(List<PlayerClass> players)
@@ -97,9 +97,9 @@ namespace Entities
             ReduceStacks(Resonate.buffName, 1);
         }
 
-        private void HandleSpawnDeath(EnemyClass enemy)
+        private void HandleSpawnDeath(EntityClass spawn)
         {
-            var slot = Array.IndexOf(_spawnSlots, enemy);
+            var slot = Array.IndexOf(_spawnSlots, spawn);
             if (slot == -1) return;
 
             _spawnSlots[slot] = null;
