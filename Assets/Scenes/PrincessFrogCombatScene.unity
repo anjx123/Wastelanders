@@ -1071,7 +1071,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   princessFrog:
-  - {fileID: 8680915202774343895, guid: 6395bbe6ca801ac4d97dd23203674434, type: 3}
+  - {fileID: 8680915202774343895, guid: 3727fe42f1ca7415fb600d193eb41d2d, type: 3}
   players:
   - {fileID: 5836655443787502691, guid: 18ff4a241e9f877439ebd5fd1de51dd0, type: 3}
   - {fileID: 8272483667302085576, guid: ab7d30ad1a6d943e786f1b7a8dc2258f, type: 3}
@@ -2166,6 +2166,37 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 7884138834369009128, guid: f1a1a6ed2ee5880478871c8cd4237396, type: 3}
   m_PrefabInstance: {fileID: 1389111232}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1518539075
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1518539076}
+  m_Layer: 0
+  m_Name: ContractProvider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1518539076
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1518539075}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 7.142278, y: 1.9932234, z: -0.22425842}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1622564258
 GameObject:
   m_ObjectHideFlags: 0
@@ -2636,6 +2667,7 @@ SceneRoots:
   - {fileID: 2017375078}
   - {fileID: 233878010}
   - {fileID: 1253301140}
+  - {fileID: 1518539076}
   - {fileID: 840943849}
   - {fileID: 1622564259}
   - {fileID: 1263667431}
