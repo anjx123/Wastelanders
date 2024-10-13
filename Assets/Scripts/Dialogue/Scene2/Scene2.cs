@@ -368,6 +368,7 @@ private IEnumerator ExecuteGameStart()
                     wasteFrog.UnTargetable();
                     wasteFrog.combatInfo.gameObject.SetActive(false);
                     wasteFrog.transform.rotation = Quaternion.Euler(0, 0, 75);
+                    wasteFrog.DestroyDeck();
                     yield break;
                 }
 

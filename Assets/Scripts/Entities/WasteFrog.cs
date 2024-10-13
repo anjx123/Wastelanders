@@ -58,6 +58,13 @@ public class WasteFrog : EnemyClass
             Debug.LogWarning("Hurl Card Not Instantiated");
         }
     }
+
+    public override void DestroyDeck()
+    {
+        base.DestroyDeck();
+        Destroy(hurlCard);
+    }
+
     // @Author Muhammad; excerpt from Andrew
     // if UseHurl then add Hurl this time around otherwise add actions normally.
     // this doesn't have to deal with the "new" conundrum because... follow logic; emphasis on played next turn and don't discard
