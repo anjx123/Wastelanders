@@ -520,6 +520,9 @@ public class PreQueenFight : DialogueClasses
             BeginQueenCombat();
             yield return new WaitUntil(() => CombatManager.Instance.GameState == GameState.GAME_WIN);
             AudioManager.Instance.FadeOutCurrentBackgroundTrack(2f);
+
+            GameStateManager.Instance.CompletedQueenFight = true;
+            
             yield return new WaitForSeconds(1f);
             DialogueManager.Instance.MoveBoxToBottom();
 
@@ -527,7 +530,7 @@ public class PreQueenFight : DialogueClasses
 
             yield return StartCoroutine(DialogueManager.Instance.StartDialogue(PostFight.Dialogue));
 
-            SceneManager.LoadScene(GameStateManager.POST_QUEEN_FIGHT);
+            GameStateManager.Instance.LoadScene(GameStateManager.POST_QUEEN_FIGHT);
         }
         
     }

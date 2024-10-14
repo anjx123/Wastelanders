@@ -10,6 +10,7 @@ public class GameStateManager : PersistentSingleton<GameStateManager>, IBind<Gam
     //Fields for persistence
     [field: SerializeField] public SerializableGuid Id { get; set; } = SerializableGuid.NewGuid();
     private GameStateData data;
+
     public GameStateData Data 
     { 
         get
@@ -53,6 +54,26 @@ public class GameStateManager : PersistentSingleton<GameStateManager>, IBind<Gam
         get { return Data.JustFinishedBeetleFight; }
         set => Data.JustFinishedBeetleFight = value;
     }
+
+    //CC/Bounty system
+    public bool CompletedFrogAndSlimeFight
+    {
+        get { return Data.CompletedFrogAndSlimeFight; }
+        set => Data.CompletedFrogAndSlimeFight = value;
+    }
+
+    public bool CompletedBeetleFight
+    {
+        get { return Data.CompletedBeetleFight; }
+        set => Data.CompletedBeetleFight = value;
+    }
+    
+    public bool CompletedQueenFight
+    {
+        get { return Data.CompletedQueenFight; }
+        set => Data.CompletedQueenFight = value;
+    }
+    
     public void Restart()
     {
         Scene activeScene = SceneManager.GetActiveScene();
@@ -61,9 +82,14 @@ public class GameStateManager : PersistentSingleton<GameStateManager>, IBind<Gam
 
     public void Bind(GameStateData bindedData)
     {
-
         this.Data = bindedData;
         this.Data.Id = bindedData.Id;
+    }
+
+    public void LoadScene(string scene) 
+    {
+        SceneManager.LoadScene(scene);
+        SaveLoadSystem.Instance.SaveGame();
     }
 
     public const string MAIN_MENU_NAME = "MainMenu";
@@ -95,6 +121,11 @@ public class GameStateData : ISaveable
 
     [field: SerializeField] public bool JustFinishedBeetleFight { get; set; } = false;
 
+    [field: SerializeField] public bool CompletedFrogAndSlimeFight { get; set; } = false;
+
+    [field: SerializeField] public bool CompletedBeetleFight { get; set; } = false;
+    
+    [field: SerializeField] public bool CompletedQueenFight { get; set; } = false;
     public override string ToString()
     {
         return "Id: " + Id +
@@ -103,6 +134,9 @@ public class GameStateData : ISaveable
             " JumpIntoFrogAndSlimeFight: " + JumpIntoFrogAndSlimeFight +
             " JumpIntoBeetleFight: " + JumpIntoBeetleFight +
             " JumpIntoQueenFight: " + JumpIntoQueenFight +
-            " JustFinishedBeetleFight: " + JustFinishedBeetleFight;
+            " JustFinishedBeetleFight: " + JustFinishedBeetleFight +
+            " CompletedFrogAndSlimeFight: " + CompletedFrogAndSlimeFight +
+            " CompletedBeetleFight: " + CompletedBeetleFight +
+            " CompletedQueenFight " + CompletedQueenFight;
     }
 }

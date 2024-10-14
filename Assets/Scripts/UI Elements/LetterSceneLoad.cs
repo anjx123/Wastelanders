@@ -12,7 +12,7 @@ public class SceneLoad : MonoBehaviour
     {
         if (anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 1)
         {
-            SceneManager.LoadScene("LevelSelect");
+            GameStateManager.Instance.LoadScene("LevelSelect");
         }
     }
 }
