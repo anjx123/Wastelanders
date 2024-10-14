@@ -9,8 +9,6 @@ using UnityEngine.SceneManagement;
 //@author: Andrew
 public class PreQueenFight : DialogueClasses
 {
-    [SerializeField] private ScreenShake mainCamera;
-
     [SerializeField] private Jackie jackie;
     [SerializeField] private Transform jackieDefaultTransform;
     [SerializeField] private Ives ives;
