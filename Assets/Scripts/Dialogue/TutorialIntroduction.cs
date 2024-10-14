@@ -244,7 +244,7 @@ public class TutorialIntroduction : DialogueClasses
         yield return StartCoroutine(jackie.MoveToPosition(jackieEndPosition.position, 0, 4f));
 
         GameStateManager.Instance.ShouldPlayDeckSelectionTutorial = true;
-        SceneManager.LoadScene(GameStateManager.SELECTION_SCREEN_NAME);
+        GameStateManager.Instance.LoadScene(GameStateManager.SELECTION_SCREEN_NAME);
         yield break;
     }
 

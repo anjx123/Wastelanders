@@ -523,7 +523,8 @@ public class BeetleFight : DialogueClasses
             yield return new WaitForSeconds(MEDIUM_PAUSE);
 
             GameStateManager.Instance.JustFinishedBeetleFight = true;
-            SceneManager.LoadScene(GameStateManager.SELECTION_SCREEN_NAME);
+            GameStateManager.Instance.CompletedBeetleFight = true;
+            GameStateManager.Instance.LoadScene(GameStateManager.SELECTION_SCREEN_NAME);
             yield break;
         }
     }

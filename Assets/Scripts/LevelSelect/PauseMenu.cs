@@ -149,7 +149,7 @@ public class PauseMenu : MonoBehaviour
     {
         IsPaused = false;
         Time.timeScale = 1f;
-        SceneManager.LoadScene(GameStateManager.LEVEL_SELECT_NAME);
+        GameStateManager.Instance.LoadScene(GameStateManager.LEVEL_SELECT_NAME);
     }
 
 
@@ -157,7 +157,7 @@ public class PauseMenu : MonoBehaviour
     {
         IsPaused = false;
         Time.timeScale = 1f;
-        SceneManager.LoadScene(GameStateManager.SELECTION_SCREEN_NAME);
+        GameStateManager.Instance.LoadScene(GameStateManager.SELECTION_SCREEN_NAME);
     }
 
     public void ResetScene()
