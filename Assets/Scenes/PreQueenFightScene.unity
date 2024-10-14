@@ -3571,7 +3571,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9d2a7fcaa5514b7d837e7f792d4e358, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainCamera: {fileID: 1525248179}
   jackie: {fileID: 1790411082}
   jackieDefaultTransform: {fileID: 2041699582}
   ives: {fileID: 605471067}
@@ -3612,7 +3611,7 @@ MonoBehaviour:
   - {fileID: 886364515}
   - {fileID: 1896323143}
   - {fileID: 915931433}
-  bigCrystal: {fileID: 1896323143}
+  middleBigCrystal: {fileID: 1896323143}
   bigCrystals:
   - {fileID: 886364515}
   - {fileID: 1896323143}
@@ -4237,6 +4236,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6aa41b926b29e4283b2720e94db2cf4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shakeEnabled: 1
 --- !u!1 &1480849945
 GameObject:
   m_ObjectHideFlags: 0
@@ -4579,6 +4579,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6aa41b926b29e4283b2720e94db2cf4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shakeEnabled: 1
 --- !u!1001 &1542478168
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6160,6 +6161,10 @@ PrefabInstance:
     - target: {fileID: 7714963440385623990, guid: 55dd1017896a4294ebc48577819d6683, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8366521506237882045, guid: 55dd1017896a4294ebc48577819d6683, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

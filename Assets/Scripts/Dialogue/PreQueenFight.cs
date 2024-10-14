@@ -49,7 +49,7 @@ public class PreQueenFight : DialogueClasses
 
     [SerializeField] private List<Beetle> campBeetles;
     [SerializeField] private List<Crystals> crystals;
-    [SerializeField] private Crystals bigCrystal;
+    [SerializeField] private Crystals middleBigCrystal;
     [SerializeField] private List<Crystals> bigCrystals;
 
 
@@ -109,6 +109,13 @@ public class PreQueenFight : DialogueClasses
         jackie.SetReturnPosition(jackieDefaultTransform.position);
 
         CombatManager.Instance.SetEnemiesPassive(new List<EnemyClass>(bigCrystals));
+        foreach (Crystals c in bigCrystals)
+        {
+            if (!c.Equals(middleBigCrystal))
+            {
+                c.GetComponent<SpriteRenderer>().sortingOrder = CombatManager.Instance.FADE_SORTING_ORDER - 2;
+            }
+        }
 
         foreach (Crystals c in crystals)
         {
@@ -425,7 +432,7 @@ public class PreQueenFight : DialogueClasses
                     crystal.DeEmphasize();
                 }
                 yield return StartCoroutine(DialogueManager.Instance.StartDialogue(AfterBeetleFightDialogue.Dialogue));
-                yield return StartCoroutine(jackie.MoveToPosition(bigCrystal.transform.position, 2f, 0.5f));
+                yield return StartCoroutine(jackie.MoveToPosition(middleBigCrystal.transform.position, 2f, 0.5f));
 
                 jackie.AttackAnimation("IsStaffing");
                 jackie.AddStacks(Resonate.buffName, 1);

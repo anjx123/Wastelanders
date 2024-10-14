@@ -31,7 +31,8 @@ public class ScreenShakeHandler : MonoBehaviour
             StartCoroutine(TiltEffect(percentageMax));
         }
     }
-
+    
+    //(@param percentageMax) is a float [0, 1]
     private IEnumerator ShakeCamera(float percentageMax)
     {
         float time = Mathf.Min(0.3f, percentageMax);
@@ -47,12 +48,13 @@ public class ScreenShakeHandler : MonoBehaviour
         virtualCameraNoise.m_FrequencyGain = 0f;
     }
 
-    private IEnumerator ZoomEffect(float zoomIn)
+    //(@param percentageMax) is a float [0, 1]
+    private IEnumerator ZoomEffect(float percentageMax)
     {
-        Debug.Log("My zoom in intensity is" + zoomIn);
+        Debug.Log("My zoom in intensity is" + percentageMax);
         float startFOV = DynamicCamera.m_Lens.OrthographicSize;
-        float endFOV = Mathf.Max(2.80f, startFOV - zoomIn);
-        Debug.Log("My startFOV in intensity is" + startFOV);
+        float endFOV = startFOV - percentageMax;
+        Debug.Log("My startFOV in intensity is" + startFOV + "My end FOV is " + endFOV);
         yield return StartCoroutine(ZoomCamera(startFOV, endFOV));
         yield return new WaitForSeconds(0.4f);
         yield return StartCoroutine(ZoomCamera(endFOV, startFOV));
