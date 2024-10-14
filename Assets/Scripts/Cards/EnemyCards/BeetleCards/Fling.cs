@@ -8,12 +8,7 @@ using static UnityEngine.UI.Image;
 public class Fling : BeetleAttacks
 {
     [SerializeField] private ProjectileBehaviour projectileBehaviour;
-
-
-    public override void OnCardStagger()
-    {
-
-    }
+    [SerializeField] private AudioClip flingSfx;
 
     // Start is called before the first frame update
     public override void Initialize()
@@ -41,9 +36,15 @@ public class Fling : BeetleAttacks
         {
             Origin.AttackAnimation("IsShooting");
         }
-        StartCoroutine(projectileBehaviour.ProjectileAnimation(base.OnHit, Origin, Target));
+        StartCoroutine(projectileBehaviour.ProjectileAnimation(OnProjectileHit, Origin, Target));
         if (Target is PlayerClass) {
             Origin.AddStacks(Resonate.buffName, 1);
         }
+    }
+
+    private void OnProjectileHit()
+    {
+        MusicManager.Instance.PlaySFX(flingSfx);
+        base.OnHit();
     }
 }

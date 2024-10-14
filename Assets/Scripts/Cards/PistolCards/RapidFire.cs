@@ -42,9 +42,11 @@ public class RapidFire : PistolCards
 
     public override void OnHit()
     {
+        MusicManager.Instance?.PlaySFX(MusicManager.SFXList.PISTOL);
         Vector3 diffInLocation = Target.myTransform.position - Origin.myTransform.position;
         Origin.UpdateFacing(diffInLocation, null);
         this.Target.TakeDamage(Origin, duplicateCard.actualRoll);
         CardIsUnstaggered();
+        
     }
 }

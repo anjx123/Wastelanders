@@ -12,24 +12,25 @@ public abstract class AxeCards : ActionClass
 
     public override void CardIsUnstaggered()
     {
-        if (Origin.HasAnimationParameter("IsAxing")) // TODO: update
+        if (Origin.HasAnimationParameter("IsAxing")) 
         {
-            Origin.AttackAnimation("IsAxing"); // TODO: update
+            Origin.AttackAnimation("IsAxing"); 
         } else
         {
-            Origin.AttackAnimation("IsMelee"); // TODO: update
+            Origin.AttackAnimation("IsMelee");
         }
         base.CardIsUnstaggered();
     }
     public override void OnHit()
     {
-        if (Origin.HasAnimationParameter("IsAxing")) // TODO: update
+        MusicManager.Instance.PlaySFX(MusicManager.SFXList.AXE);
+        if (Origin.HasAnimationParameter("IsAxing"))
         {
-            Origin.AttackAnimation("IsAxing"); // TODO: update
+            Origin.AttackAnimation("IsAxing"); 
         }
         else
         {
-            Origin.AttackAnimation("IsMelee"); // TODO: update
+            Origin.AttackAnimation("IsMelee");
         }
         base.OnHit();
     }

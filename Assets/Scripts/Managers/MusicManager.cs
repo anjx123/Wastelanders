@@ -118,20 +118,28 @@ public class MusicManager : MonoBehaviour
         BackgroundMusicPlayer.loop = true;
     }
 
-    // Plays the sfx that is appropriate
-    // REQUIRES: the value provided is valid. 
     public void PlaySFX(SFXList effect)
     {
         foreach (SerializableTuple<SFXList, AudioClip> entry in sfxTuples) 
         {
             if (entry.Item1 == effect)
             {
+                RandomizePitch();
                 SFXSoundsPlayer.PlayOneShot(entry.Item2);
             }            
         }
     }
 
+    public void PlaySFX(AudioClip audioClip)
+    {
+        RandomizePitch();
+        SFXSoundsPlayer.PlayOneShot(audioClip);
+    }    
 
+    private void RandomizePitch()
+    {
+        SFXSoundsPlayer.pitch = Random.Range(0.90f, 1.1f);
+    }
 
     public void StopMusic()
     {
@@ -150,26 +158,18 @@ public class MusicManager : MonoBehaviour
         BackgroundMusicPlayer.Play();
     }
 
-    // You *could* want this, I suppose.
-    public void SwapMusic()
-    {
-
-    }
-
-    // this may be extended upon; it is NOT extended upon because I could not conceive in about 10 minutes why any event would change the music (exclusing victory of course)
     public enum BackgroundMusicList
     {
         None,
     }
 
-    // enumeration of all possible sound effects playable; this serves for documentation purposes and because I couldn't find an alternate owing to paucity. 
-    // each member correponds EXACTLY to a string. so pistol => "pistol". 
-    // plausible solution involves a tandem list but that just seems redundant...
+
     public enum SFXList
     {
-        pistol,
-        staff,
-        wastefrog_damage_taken,
-        slime_damage_taken
+        PISTOL,
+        STAFF,
+        AXE,
+        FIST,
+        CLASH_TIE
     }
 }

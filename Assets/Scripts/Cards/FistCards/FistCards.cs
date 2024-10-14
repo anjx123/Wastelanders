@@ -13,6 +13,7 @@ public abstract class FistCards : ActionClass
 
     public override void OnHit()
     {
+        MusicManager.Instance?.PlaySFX(MusicManager.SFXList.FIST);
         Origin.AttackAnimation("IsMelee");
         base.OnHit();
     }

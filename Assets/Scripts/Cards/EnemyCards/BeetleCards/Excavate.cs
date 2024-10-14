@@ -7,10 +7,8 @@ using static UnityEngine.UI.Image;
 
 public class Excavate : BeetleAttacks
 {
-    public override void OnCardStagger()
-    {
+    [SerializeField] private AudioClip excavateSFX;
 
-    }
 
     // Start is called before the first frame update
     public override void Initialize()
@@ -42,6 +40,7 @@ public class Excavate : BeetleAttacks
     // does 2x damage if target is crystal
     public override void OnHit()
     {
+        MusicManager.Instance.PlaySFX(excavateSFX);
         if (Target is Crystals)
         {
             if (Origin.HasAnimationParameter("IsAttacking"))
