@@ -4,11 +4,6 @@ using UnityEngine;
 
 public class Haymaker : FistCards
 {
-    public override void OnCardStagger()
-    {
-
-    }
-
     // Start is called before the first frame update
     public override void Initialize()
     {

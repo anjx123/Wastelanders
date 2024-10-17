@@ -7,10 +7,6 @@ using static UnityEngine.UI.Image;
 
 public class Headshot : PistolCards
 {
-    public override void OnCardStagger()
-    {
-
-    }
 
     // Start is called before the first frame update
     public override void Initialize()
