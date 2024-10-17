@@ -37,13 +37,13 @@ public class ScreenShakeHandler : MonoBehaviour
     {
         float time = Mathf.Min(0.3f, percentageMax);
         float shakeAmplitude = 1f + percentageMax / 2f;
-        float shakeFrequency = 1f + percentageMax;
+        float shakeFrequency = 1f + percentageMax * 3f / 4f;
         Debug.Log("My shaking intensity is" + shakeFrequency);
         Debug.Log("My shaking amplitude is" + shakeAmplitude);
         CinemachineBasicMultiChannelPerlin virtualCameraNoise = DynamicCamera.GetCinemachineComponent<Cinemachine.CinemachineBasicMultiChannelPerlin>();
         virtualCameraNoise.m_AmplitudeGain = shakeAmplitude;
         virtualCameraNoise.m_FrequencyGain = shakeFrequency;
-        yield return new WaitForSeconds(time + percentageMax / 10f);
+        yield return new WaitForSeconds(time + percentageMax / 20f);
         virtualCameraNoise.m_AmplitudeGain = 0f;
         virtualCameraNoise.m_FrequencyGain = 0f;
     }
