@@ -158,6 +158,7 @@ public abstract class EntityClass : SelectClass
     public virtual IEnumerator MoveToPosition(Vector3 destination, float radius, float duration, Vector3? lookAtPosition = null)
     {
         Vector3 originalPosition = myTransform.position;
+        destination = new Vector3(destination.x, destination.y, destination.z + ZOffset(destination.y));
         float elapsedTime = 0f;
 
         Vector3 diffInLocation = destination - originalPosition;
@@ -507,11 +508,19 @@ public abstract class EntityClass : SelectClass
     public void DeEmphasize()
     {
         Vector3 largeTransform = transform.position;
-        largeTransform.z = CombatManager.Instance.FADE_SORTING_ORDER - 1;
+        largeTransform.z = CombatManager.Instance.FADE_SORTING_ORDER - 1 + ZOffset(largeTransform.y);
         transform.position = largeTransform;
         GetComponent<SpriteRenderer>().sortingOrder = CombatManager.Instance.FADE_SORTING_ORDER - 1;
         combatInfo.DeEmphasize();
-        
+    }
+
+    // Workaround to prevent z clipping for entities
+    // The furthur 'down' a entity is, the more in the foreground it is. 
+    // Thus, apply a small offset that is greater for entites farther down in the scene so they appear in front.
+    private float ZOffset(float yPosition)
+    {
+        float delta = 0.001f;
+        return yPosition * delta;
     }
 
     public void OutOfCombat()
