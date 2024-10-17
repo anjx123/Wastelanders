@@ -23,7 +23,7 @@ public abstract class AxeCards : ActionClass
     }
     public override void OnHit()
     {
-        MusicManager.Instance.PlaySFX(MusicManager.SFXList.AXE);
+        AudioManager.Instance.PlaySFX(AudioManager.SFXList.AXE);
         if (Origin.HasAnimationParameter("IsAxing"))
         {
             Origin.AttackAnimation("IsAxing"); 

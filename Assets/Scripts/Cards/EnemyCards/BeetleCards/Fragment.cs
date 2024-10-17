@@ -41,7 +41,7 @@ public class Fragment : ActionClass
 
     private void OnProjectileHit()
     {
-        MusicManager.Instance.PlaySFX(fragmentSfx);
+        AudioManager.Instance.PlaySFX(fragmentSfx);
         base.OnHit();
     }
 }

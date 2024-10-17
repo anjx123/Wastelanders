@@ -28,7 +28,7 @@ public abstract class PistolCards : ActionClass
     }
     public override void OnHit()
     {
-        MusicManager.Instance?.PlaySFX(MusicManager.SFXList.PISTOL);
+        AudioManager.Instance?.PlaySFX(AudioManager.SFXList.PISTOL);
         Origin.AttackAnimation("IsShooting");
         base.OnHit();
     }

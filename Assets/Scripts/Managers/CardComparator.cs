@@ -84,7 +84,7 @@ public class CardComparator : MonoBehaviour
             {
                 card1.CardIsUnstaggered();
                 card2.CardIsUnstaggered();
-                MusicManager.Instance.PlaySFX(MusicManager.SFXList.CLASH_TIE);
+                AudioManager.Instance.PlaySFX(AudioManager.SFXList.CLASH_TIE);
 
             } else if (cardOneGreater < 0) //Card2 wins clash
             {

@@ -44,7 +44,7 @@ public class Fling : BeetleAttacks
 
     private void OnProjectileHit()
     {
-        MusicManager.Instance.PlaySFX(flingSfx);
+        AudioManager.Instance.PlaySFX(flingSfx);
         base.OnHit();
     }
 }

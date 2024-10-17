@@ -29,7 +29,7 @@ public class Pincer : BeetleAttacks
 
     public override void OnHit()
     {
-        MusicManager.Instance.PlaySFX(pincerSFX);
+        AudioManager.Instance.PlaySFX(pincerSFX);
         base.OnHit();
     }
 

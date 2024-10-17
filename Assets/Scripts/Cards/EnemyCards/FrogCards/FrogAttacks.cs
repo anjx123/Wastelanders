@@ -24,7 +24,7 @@ public abstract class FrogAttacks : ActionClass
 
     private void OnProjectileHit()
     {
-        MusicManager.Instance.PlaySFX(frogAttackSfx);
+        AudioManager.Instance.PlaySFX(frogAttackSfx);
         base.OnHit();
     }
 }

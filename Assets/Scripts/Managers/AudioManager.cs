@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MusicManager : MonoBehaviour
+public class AudioManager : MonoBehaviour
 {
 
-    public static MusicManager Instance;
+    public static AudioManager Instance;
 
     // NOTE: All of these fields are set in the editor.
     public AudioSource SFXSoundsPlayer, BackgroundMusicPlayer, BackgroundMusicIntroPlayer;

@@ -40,7 +40,7 @@ public class Excavate : BeetleAttacks
     // does 2x damage if target is crystal
     public override void OnHit()
     {
-        MusicManager.Instance.PlaySFX(excavateSFX);
+        AudioManager.Instance.PlaySFX(excavateSFX);
         if (Target is Crystals)
         {
             if (Origin.HasAnimationParameter("IsAttacking"))

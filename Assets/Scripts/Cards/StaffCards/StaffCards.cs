@@ -22,7 +22,7 @@ public abstract class StaffCards : ActionClass
     }
     public override void OnHit()
     {
-        MusicManager.Instance?.PlaySFX(MusicManager.SFXList.STAFF);
+        AudioManager.Instance?.PlaySFX(AudioManager.SFXList.STAFF);
         if (Origin.HasAnimationParameter("IsStaffing"))
         {
             Origin.AttackAnimation("IsStaffing");
