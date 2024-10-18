@@ -32,7 +32,7 @@ namespace Entities
             myName = "Princess Frog";
             Health = MaxHealth = 100;
 
-            AddStacks(Resonate.buffName, 25);
+            AddStacks(Resonate.buffName, 10);
         }
 
         public void OnEnable()
@@ -53,17 +53,18 @@ namespace Entities
             var bless = pool[0];
             var burp = pool[1];
             var hurl = pool[2];
+            var gobble = pool[3];
 
-            var playable = new List<GameObject>();
-            const int attacks = 2;
+            // TODO: Add some actual AI to this.
+            var playable = new List<GameObject>
+            {
+                bless,
+                burp,
+                hurl,
+                gobble
+            };
 
-            /* If any spawn is alive, "Bless" is playable. If this has 2 or more
-               stacks of Resonate, "Burp" is playable. "Hurl" is always playable. */
-            if (Array.Exists(_spawnSlots, it => it)) playable.Add(bless);
-            if (GetBuffStacks(Resonate.buffName) >= 2) playable.Add(burp);
-            if (playable.Count == 0) playable.Add(hurl);
-
-            for (var i = 0; i < attacks; i++)
+            for (var i = 0; i < 2; i++)
             {
                 var prefab = playable[Random.Range(0, playable.Count)];
                 var card = Instantiate(prefab);
@@ -73,19 +74,20 @@ namespace Entities
                 action.Origin = this;
                 BattleQueue.BattleQueueInstance.AddAction(action);
                 combatInfo.AddCombatSprite(action);
-
-                // TODO: Move this to CardIsUnstaggered of Burp
-                if (prefab == burp) ReduceStacks(Resonate.buffName, 2);
             }
         }
 
-        public void SpawnNext(GameObject prefab)
+        public void SpawnNext(GameObject prefab = null)
         {
             var slot = Array.IndexOf(_spawnSlots, null);
             if (slot == -1) return;
-            var spawn = Instantiate(prefab, spawnPositions[slot], Quaternion.identity, transform.parent);
 
-            spawn.transform.localScale *= 0.5f;
+            // TODO: Maybe use the scene builder for this.
+            var enemy = prefab ?? spawnPrefabs[Random.Range(0, spawnPrefabs.Length)];
+            var p = transform.position + spawnPositions[slot];
+            var spawn = Instantiate(enemy, p, Quaternion.identity, transform.parent);
+
+            spawn.transform.localScale = Vector3.one * 0.75f;
             _spawnSlots[slot] = spawn.GetComponent<EnemyClass>();
         }
 
