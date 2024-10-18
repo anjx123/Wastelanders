@@ -23,7 +23,7 @@ public class GameOver : MonoBehaviour
         canvasGroup.alpha = 0f;
         FadeIn();
         // if this pops up then the game is over AND this takes care of the fade thing too.
-        MusicManager.Instance.PlayDeath();
+        AudioManager.Instance.PlayDeath();
     }
     void OnDisable()
     {

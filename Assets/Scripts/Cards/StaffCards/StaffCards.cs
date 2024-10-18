@@ -22,6 +22,7 @@ public abstract class StaffCards : ActionClass
     }
     public override void OnHit()
     {
+        AudioManager.Instance?.PlaySFX(AudioManager.SFXList.STAFF);
         if (Origin.HasAnimationParameter("IsStaffing"))
         {
             Origin.AttackAnimation("IsStaffing");
@@ -30,7 +31,6 @@ public abstract class StaffCards : ActionClass
         {
             Origin.AttackAnimation("IsMelee");
         }
-        MusicManager.Instance?.PlaySFX(MusicManager.SFXList.staff);
         base.OnHit();
     }
 }

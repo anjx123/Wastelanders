@@ -239,7 +239,7 @@ private IEnumerator ExecuteGameStart()
         yield return new WaitForSeconds(2f);
         StartCoroutine(scoutBeetle.MoveToPosition(jackie.transform.position, 0f, 2.5f));
 
-        MusicManager.Instance.FadeOutCurrentBackgroundTrack(2f);
+        AudioManager.Instance.FadeOutCurrentBackgroundTrack(2f);
         yield return new WaitForSeconds(2f);
         yield return StartCoroutine(CombatManager.Instance.FadeInDarkScreen(1.5f));
 

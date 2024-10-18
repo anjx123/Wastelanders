@@ -517,7 +517,7 @@ public class BeetleFight : DialogueClasses
             yield return StartCoroutine(DialogueManager.Instance.StartDialogue(postBattleDialogue.Dialogue));
 
             Coroutine ivesFade = StartCoroutine(FadeImage(ivesVNSprite, 1.5f, false));
-            MusicManager.Instance.FadeOutCurrentBackgroundTrack(2f);
+            AudioManager.Instance.FadeOutCurrentBackgroundTrack(2f);
             yield return StartCoroutine(FadeImage(jackieVNSprite, 1.5f, false));
             yield return ivesFade;
             yield return new WaitForSeconds(MEDIUM_PAUSE);

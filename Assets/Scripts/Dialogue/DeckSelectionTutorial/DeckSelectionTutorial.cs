@@ -102,7 +102,7 @@ public class DeckSelectionTutorial : MonoBehaviour
 
 
 
-    //Completely removes the pistol deck from jackie
+    //Completely removes the PISTOL deck from jackie
     private void NormalizeTutorialDecks()
     {
         playerDatabase.JackieData.selectedWeapons.Remove(CardDatabase.WeaponType.PISTOL);

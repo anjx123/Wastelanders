@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Xml.Linq;
 using UnityEngine;
 
-// REQUIRES TESTING TODO (Haven't done this yet owing to the dearth of staff user presumably Ives.
+// REQUIRES TESTING TODO (Haven't done this yet owing to the dearth of STAFF user presumably Ives.
 public class Flurry : StaffCards
 {
 #nullable enable

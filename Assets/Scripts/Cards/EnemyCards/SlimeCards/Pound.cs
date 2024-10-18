@@ -10,11 +10,6 @@ public class Pound : SlimeAttacks
 #nullable enable
     [SerializeField]
     private List<Sprite> animationFrame = new();
-    public override void OnCardStagger()
-    {
-
-    }
-
 
     public override void Initialize()
     {

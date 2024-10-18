@@ -9,8 +9,6 @@ using UnityEngine.SceneManagement;
 //@author: Andrew
 public class PreQueenFight : DialogueClasses
 {
-    [SerializeField] private ScreenShake mainCamera;
-
     [SerializeField] private Jackie jackie;
     [SerializeField] private Transform jackieDefaultTransform;
     [SerializeField] private Ives ives;
@@ -51,7 +49,7 @@ public class PreQueenFight : DialogueClasses
 
     [SerializeField] private List<Beetle> campBeetles;
     [SerializeField] private List<Crystals> crystals;
-    [SerializeField] private Crystals bigCrystal;
+    [SerializeField] private Crystals middleBigCrystal;
     [SerializeField] private List<Crystals> bigCrystals;
 
 
@@ -111,6 +109,13 @@ public class PreQueenFight : DialogueClasses
         jackie.SetReturnPosition(jackieDefaultTransform.position);
 
         CombatManager.Instance.SetEnemiesPassive(new List<EnemyClass>(bigCrystals));
+        foreach (Crystals c in bigCrystals)
+        {
+            if (!c.Equals(middleBigCrystal))
+            {
+                c.GetComponent<SpriteRenderer>().sortingOrder = CombatManager.Instance.FADE_SORTING_ORDER - 2;
+            }
+        }
 
         foreach (Crystals c in crystals)
         {
@@ -427,7 +432,7 @@ public class PreQueenFight : DialogueClasses
                     crystal.DeEmphasize();
                 }
                 yield return StartCoroutine(DialogueManager.Instance.StartDialogue(AfterBeetleFightDialogue.Dialogue));
-                yield return StartCoroutine(jackie.MoveToPosition(bigCrystal.transform.position, 2f, 0.5f));
+                yield return StartCoroutine(jackie.MoveToPosition(middleBigCrystal.transform.position, 2f, 0.5f));
 
                 jackie.AttackAnimation("IsStaffing");
                 jackie.AddStacks(Resonate.buffName, 1);
@@ -521,7 +526,7 @@ public class PreQueenFight : DialogueClasses
             CombatManager.Instance.GameState = GameState.SELECTION;
             BeginQueenCombat();
             yield return new WaitUntil(() => CombatManager.Instance.GameState == GameState.GAME_WIN);
-            MusicManager.Instance.FadeOutCurrentBackgroundTrack(2f);
+            AudioManager.Instance.FadeOutCurrentBackgroundTrack(2f);
             yield return new WaitForSeconds(1f);
             DialogueManager.Instance.MoveBoxToBottom();
 
