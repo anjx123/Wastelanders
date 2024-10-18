@@ -9,9 +9,13 @@ public class Execute : AxeCards
         lowerBound = 2;
         upperBound = 6;
         Speed = 1;
+        CostToAddToDeck = IsEvolved ? 3 : 2;
 
         myName = "Execute";
         description = "On hit, deal an extra +1 damage for each wound on the target.";
+        evolutionCriteria = "Deal 10+ damage in one strike.";
+        evolutionDescription = "Increase cost to 3. Each wound on the enemy increases this card's final power by 1.";
+        MaxEvolutionProgress = 10;
         Renderer renderer = GetComponent<Renderer>();
         ogMaterial = renderer.material;
         OriginalPosition = transform.position;
@@ -24,5 +28,7 @@ public class Execute : AxeCards
     {
         IncrementRoll(Target.GetBuffStacks(Wound.buffName));
         base.OnHit();
+        CurrentEvolutionProgress = getRolledDamage();
+        // CurrentEvolutionProgress = min(getRolledDamage(), 10);
     }
 }
