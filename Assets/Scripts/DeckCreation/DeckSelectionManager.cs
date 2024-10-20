@@ -108,7 +108,7 @@ public class DeckSelectionManager : MonoBehaviour
             SaveLoadSystem.Instance.SaveGame();
             //EditorUtility.SetDirty(playerDatabase); // For easily resetting the default value of playerDatabase
             yield return StartCoroutine(fadeScreenHandler.FadeInDarkScreen(0.8f));
-            SceneManager.LoadScene(nextScene);
+            GameStateManager.Instance.LoadScene(nextScene);
             isFadingOut = false;
         }
     }
