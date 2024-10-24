@@ -80,13 +80,14 @@ public class FollowThrough : FistCards
 
     public override void OnHit()
     {
-        AudioManager.Instance?.PlaySFX(AudioManager.SFXList.FIST);
+        AudioManager.Instance?.PlaySFX(FIST_SOUND_FX_NAME);
         Vector3 diffInLocation = Target.myTransform.position - Origin.myTransform.position;
         Origin.UpdateFacing(diffInLocation, null);
         if (!originalCopy)
         {
             Target.EntityTookDamage -= attackAgainDelegate;
         }
+        // Have to swap the order of cardIsUnstaggered and TakeDamage here to prevent infinity chain.
         this.Target.TakeDamage(Origin, duplicateCard.actualRoll);
         CardIsUnstaggered();
         if (!originalCopy)

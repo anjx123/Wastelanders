@@ -158,7 +158,7 @@ public abstract class EntityClass : SelectClass
     public virtual IEnumerator MoveToPosition(Vector3 destination, float radius, float duration, Vector3? lookAtPosition = null)
     {
         Vector3 originalPosition = myTransform.position;
-        destination = new Vector3(destination.x, destination.y, destination.z + ZOffset(destination.y));
+        destination = new Vector3(destination.x, destination.y, destination.z + ZOffset(destination.y + (GetComponent<SpriteRenderer>()?.bounds.min.y ?? 0f)));
         float elapsedTime = 0f;
 
         Vector3 diffInLocation = destination - originalPosition;
@@ -497,20 +497,22 @@ public abstract class EntityClass : SelectClass
     //Increases this Entity Class' sorting layer (negative number is higher up)
     public void Emphasize()
     {
+        SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
         Vector3 largeTransform = transform.position;
-        largeTransform.z = CombatManager.Instance.FADE_SORTING_ORDER - 3;
+        largeTransform.z = CombatManager.Instance.FADE_SORTING_ORDER - 3 + ZOffset(spriteRenderer.bounds.min.y);
         transform.position = largeTransform;
-        GetComponent<SpriteRenderer>().sortingOrder = CombatManager.Instance.FADE_SORTING_ORDER + 1;
+        spriteRenderer.sortingOrder = CombatManager.Instance.FADE_SORTING_ORDER + 1;
         combatInfo.Emphasize();
     }
 
     //Decreases this Entity Class' sorting layer. (Standardizes Sorting Layers for entities)
     public void DeEmphasize()
     {
+        SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
         Vector3 largeTransform = transform.position;
-        largeTransform.z = CombatManager.Instance.FADE_SORTING_ORDER - 1 + ZOffset(largeTransform.y);
+        largeTransform.z = CombatManager.Instance.FADE_SORTING_ORDER - 1 + ZOffset(spriteRenderer.bounds.min.y);
         transform.position = largeTransform;
-        GetComponent<SpriteRenderer>().sortingOrder = CombatManager.Instance.FADE_SORTING_ORDER - 1;
+        spriteRenderer.sortingOrder = CombatManager.Instance.FADE_SORTING_ORDER - 1;
         combatInfo.DeEmphasize();
     }
 

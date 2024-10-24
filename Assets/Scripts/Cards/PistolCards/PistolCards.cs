@@ -4,6 +4,8 @@ using UnityEngine;
 
 public abstract class PistolCards : ActionClass
 {
+    public const string PISTOL_ANIMATION_NAME = "IsShooting";
+    public const string PISTOL_SOUND_FX_NAME = "Gun Shot";
     public override sealed void Start()
     {
         //No initialization code here
@@ -17,9 +19,9 @@ public abstract class PistolCards : ActionClass
 
     public override void CardIsUnstaggered()
     {
-        if (Origin.HasAnimationParameter("IsShooting"))
+        if (Origin.HasAnimationParameter(PISTOL_ANIMATION_NAME))
         {
-            Origin.AttackAnimation("IsShooting");
+            Origin.AttackAnimation(PISTOL_ANIMATION_NAME);
         } else
         {
             Origin.AttackAnimation("RangedAttack");
@@ -28,8 +30,7 @@ public abstract class PistolCards : ActionClass
     }
     public override void OnHit()
     {
-        AudioManager.Instance?.PlaySFX(AudioManager.SFXList.PISTOL);
-        Origin.AttackAnimation("IsShooting");
+        AudioManager.Instance?.PlaySFX(PISTOL_SOUND_FX_NAME);
         base.OnHit();
     }
 }

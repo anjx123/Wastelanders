@@ -5,7 +5,7 @@ public class Fragment : ActionClass
 {
     [SerializeField] private ProjectileBehaviour projectileBehaviour;
 
-    [SerializeField] private AudioClip fragmentSfx;
+    public const string FRAGMENT_SOUND_EFFECT_NAME = "Queen Pierce";
 
     // Start is called before the first frame update
     public override void Initialize()
@@ -41,7 +41,7 @@ public class Fragment : ActionClass
 
     private void OnProjectileHit()
     {
-        AudioManager.Instance.PlaySFX(fragmentSfx);
+        AudioManager.Instance.PlaySFX(FRAGMENT_SOUND_EFFECT_NAME);
         base.OnHit();
     }
 }

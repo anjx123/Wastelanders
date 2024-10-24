@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class AudioManager : MonoBehaviour
@@ -9,9 +10,7 @@ public class AudioManager : MonoBehaviour
 
     // NOTE: All of these fields are set in the editor.
     public AudioSource SFXSoundsPlayer, BackgroundMusicPlayer, BackgroundMusicIntroPlayer;
-
-    [SerializeField]
-    private List<SerializableTuple<SFXList, AudioClip>> sfxTuples = new();
+    private SoundEffectsDatabase soundEffectsDatabase;
 #nullable enable
     public AudioClip? backgroundMusicPrimary;
     public AudioClip? backgroundMusicIntro;
@@ -31,6 +30,7 @@ public class AudioManager : MonoBehaviour
         {
             Destroy(this);
         }
+        soundEffectsDatabase = Resources.LoadAll<SoundEffectsDatabase>("").First();
     }
 
     private void Start()
@@ -118,23 +118,11 @@ public class AudioManager : MonoBehaviour
         BackgroundMusicPlayer.loop = true;
     }
 
-    public void PlaySFX(SFXList effect)
-    {
-        foreach (SerializableTuple<SFXList, AudioClip> entry in sfxTuples) 
-        {
-            if (entry.Item1 == effect)
-            {
-                RandomizePitch();
-                SFXSoundsPlayer.PlayOneShot(entry.Item2);
-            }            
-        }
-    }
-
-    public void PlaySFX(AudioClip audioClip)
+    public void PlaySFX(string effect)
     {
         RandomizePitch();
-        SFXSoundsPlayer.PlayOneShot(audioClip);
-    }    
+        SFXSoundsPlayer.PlayOneShot(soundEffectsDatabase.GetClipByName(effect));
+    }
 
     private void RandomizePitch()
     {
@@ -156,20 +144,5 @@ public class AudioManager : MonoBehaviour
         yield return StartCoroutine(FadeAudioRoutine(BackgroundMusicPlayer, true, 2f));
         BackgroundMusicPlayer.clip = backgroundMusicDeath;
         BackgroundMusicPlayer.Play();
-    }
-
-    public enum BackgroundMusicList
-    {
-        None,
-    }
-
-
-    public enum SFXList
-    {
-        PISTOL,
-        STAFF,
-        AXE,
-        FIST,
-        CLASH_TIE
     }
 }

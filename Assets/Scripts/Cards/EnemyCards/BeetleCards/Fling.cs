@@ -8,7 +8,6 @@ using static UnityEngine.UI.Image;
 public class Fling : BeetleAttacks
 {
     [SerializeField] private ProjectileBehaviour projectileBehaviour;
-    [SerializeField] private AudioClip flingSfx;
 
     // Start is called before the first frame update
     public override void Initialize()
@@ -44,7 +43,7 @@ public class Fling : BeetleAttacks
 
     private void OnProjectileHit()
     {
-        AudioManager.Instance.PlaySFX(flingSfx);
+        AudioManager.Instance.PlaySFX(Fragment.FRAGMENT_SOUND_EFFECT_NAME);
         base.OnHit();
     }
 }

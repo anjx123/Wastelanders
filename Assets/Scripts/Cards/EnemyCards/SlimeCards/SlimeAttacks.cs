@@ -5,7 +5,7 @@ using static UnityEngine.UI.Image;
 
 public abstract class SlimeAttacks : ActionClass
 {
-    [SerializeField] private AudioClip slimeAttackSfx;
+    public const string SLIME_SOUND_EFFECT_NAME = "Slime Hit";
 #nullable enable
     protected bool onHitWasCalled = false;
     protected delegate void AttackCallback();
@@ -21,7 +21,7 @@ public abstract class SlimeAttacks : ActionClass
 
     public override void OnHit()
     {
-        AudioManager.Instance.PlaySFX(slimeAttackSfx);
+        AudioManager.Instance.PlaySFX(SLIME_SOUND_EFFECT_NAME);
         base.OnHit();
     }
 

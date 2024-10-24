@@ -7,7 +7,7 @@ using static UnityEngine.UI.Image;
 
 public class Pincer : BeetleAttacks
 {
-    [SerializeField] private AudioClip pincerSFX;
+    public const string PINCER_SOUND_EFFECT_NAME = "Pincer Cut";
 
     // Start is called before the first frame update
     public override void Initialize()
@@ -29,7 +29,7 @@ public class Pincer : BeetleAttacks
 
     public override void OnHit()
     {
-        AudioManager.Instance.PlaySFX(pincerSFX);
+        AudioManager.Instance.PlaySFX(PINCER_SOUND_EFFECT_NAME);
         base.OnHit();
     }
 

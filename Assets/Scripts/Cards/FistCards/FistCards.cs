@@ -5,17 +5,18 @@ using UnityEngine;
 
 public abstract class FistCards : ActionClass
 {
-    protected const string ANIMATION_NAME = "IsPunching";
+    public const string FIST_ANIMATION_NAME = "IsPunching";
+    public const string FIST_SOUND_FX_NAME = "Fist Hit";
     public override void CardIsUnstaggered()
     {
-        Origin.AttackAnimation(ANIMATION_NAME);
+        Origin.AttackAnimation(FIST_ANIMATION_NAME);
         base.CardIsUnstaggered();
     }
 
     public override void OnHit()
     {
-        AudioManager.Instance?.PlaySFX(AudioManager.SFXList.FIST);
-        Origin.AttackAnimation(ANIMATION_NAME);
+        AudioManager.Instance?.PlaySFX(FIST_SOUND_FX_NAME);
+        Origin.AttackAnimation(FIST_ANIMATION_NAME);
         base.OnHit();
     }
 }

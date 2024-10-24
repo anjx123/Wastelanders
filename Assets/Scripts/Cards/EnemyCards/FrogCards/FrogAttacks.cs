@@ -4,7 +4,7 @@ using UnityEngine;
 using static UnityEngine.UI.Image;
 public abstract class FrogAttacks : ActionClass
 {
-    [SerializeField] private AudioClip frogAttackSfx;
+    public const string SPIT_SOUND_EFFECT_NAME = "Frog Hit";
     [SerializeField] private ProjectileBehaviour projectileBehaviour;
 
     public override void Initialize()
@@ -24,7 +24,7 @@ public abstract class FrogAttacks : ActionClass
 
     private void OnProjectileHit()
     {
-        AudioManager.Instance.PlaySFX(frogAttackSfx);
+        AudioManager.Instance.PlaySFX(SPIT_SOUND_EFFECT_NAME);
         base.OnHit();
     }
 }

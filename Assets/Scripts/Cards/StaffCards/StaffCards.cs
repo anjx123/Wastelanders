@@ -4,6 +4,8 @@ using UnityEngine;
 
 public abstract class StaffCards : ActionClass
 {
+    public const string STAFF_ANIMATION_NAME = "IsStaffing";
+    public const string STAFF_SOUND_FX_NAME = "Staff Hit";
     public override sealed void Start()
     {
         //No initialization code here
@@ -11,9 +13,9 @@ public abstract class StaffCards : ActionClass
 
     public override void CardIsUnstaggered()
     {
-        if (Origin.HasAnimationParameter("IsStaffing"))
+        if (Origin.HasAnimationParameter(STAFF_ANIMATION_NAME))
         {
-            Origin.AttackAnimation("IsStaffing");
+            Origin.AttackAnimation(STAFF_ANIMATION_NAME);
         } else
         {
             Origin.AttackAnimation("IsMelee");
@@ -22,15 +24,7 @@ public abstract class StaffCards : ActionClass
     }
     public override void OnHit()
     {
-        AudioManager.Instance?.PlaySFX(AudioManager.SFXList.STAFF);
-        if (Origin.HasAnimationParameter("IsStaffing"))
-        {
-            Origin.AttackAnimation("IsStaffing");
-        }
-        else
-        {
-            Origin.AttackAnimation("IsMelee");
-        }
+        AudioManager.Instance?.PlaySFX(STAFF_SOUND_FX_NAME);
         base.OnHit();
     }
 }
