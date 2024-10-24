@@ -531,6 +531,7 @@ public abstract class EntityClass : SelectClass
     public void OutOfCombat()
     {
         DisableHealthBar();
+        DisableDice();
         statusEffects.Clear();
         UpdateBuffs();
     }

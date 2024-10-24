@@ -178,7 +178,8 @@ private IEnumerator ExecuteGameStart()
             GameStateManager.Instance.JumpIntoFrogAndSlimeFight = false;
         }
 
-       // start frog fight
+        // start frog fight
+        treeOverlay.enabled = false;
         StartCoroutine(jackie.ResetPosition());
         StartCoroutine(frog2.ResetPosition());
         StartCoroutine(slime.ResetPosition());
