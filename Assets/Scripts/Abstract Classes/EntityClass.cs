@@ -157,8 +157,10 @@ public abstract class EntityClass : SelectClass
      */
     public virtual IEnumerator MoveToPosition(Vector3 destination, float radius, float duration, Vector3? lookAtPosition = null)
     {
+        SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
+        float bottomOfCharacterZ = spriteRenderer.bounds.min.y - spriteRenderer.bounds.center.y;
         Vector3 originalPosition = myTransform.position;
-        destination = new Vector3(destination.x, destination.y, destination.z + ZOffset(destination.y + (GetComponent<SpriteRenderer>()?.bounds.min.y ?? 0f)));
+        destination = new Vector3(destination.x, destination.y, destination.z + ZOffset(destination.y + bottomOfCharacterZ));
         float elapsedTime = 0f;
 
         Vector3 diffInLocation = destination - originalPosition;
@@ -521,7 +523,8 @@ public abstract class EntityClass : SelectClass
     // Thus, apply a small offset that is greater for entites farther down in the scene so they appear in front.
     private float ZOffset(float yPosition)
     {
-        float delta = 0.001f;
+        // Small delta values may still clip during screen shakes :(
+        float delta = 0.1f; 
         return yPosition * delta;
     }
 
