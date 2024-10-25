@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8686784205400784684}
   - component: {fileID: 3212035558133251139}
   - component: {fileID: 580483329220656974}
+  - component: {fileID: 8316328255958057437}
   m_Layer: 0
   m_Name: Spit
   m_TagString: Untagged
@@ -123,7 +124,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myTransform: {fileID: 0}
+  <Id>k__BackingField:
+    Part1: 2255455577
+    Part2: 1089357662
+    Part3: 1378931385
+    Part4: 1997214576
   icon: {fileID: 21300000, guid: c9b36d146ffc7e8428074608a2c976d3, type: 3}
   cardBack: {fileID: 21300000, guid: 8ac8a46b814e1b14f89b3829e430de25, type: 3}
   cardUI: {fileID: 0}
-  spitPrefab: {fileID: 4172579226135636580, guid: 2215e5669ebb4ce439521ee582d25b32, type: 3}
+  data:
+    <ActionClassName>k__BackingField: 
+    <CurrentProgress>k__BackingField: 0
+  frogAttackSfx: {fileID: 8300000, guid: ddb3ed20f82ae794b85c8108634f43a1, type: 3}
+  projectileBehaviour: {fileID: 8316328255958057437}
+--- !u!114 &8316328255958057437
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2376898879351982445}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b04b8593f1087af499738bfdd52d8150, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectilePrefab: {fileID: 4172579226135636580, guid: 2215e5669ebb4ce439521ee582d25b32, type: 3}

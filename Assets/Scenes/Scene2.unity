@@ -2964,7 +2964,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6635998426718021455, guid: b9c5e4b3c9f7e024f8fe9012e7a2e437, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -8.622905
+      value: -8.889287
       objectReference: {fileID: 0}
     - target: {fileID: 6635998426718021455, guid: b9c5e4b3c9f7e024f8fe9012e7a2e437, type: 3}
       propertyPath: m_LocalPosition.y
@@ -3084,37 +3084,9 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8300000, guid: 7a583de6ee5412e41aec35dd14581a44, type: 3}
     - target: {fileID: 1642062695111722096, guid: 00e4347f9eb16d94c93b4961bdbca751, type: 3}
-      propertyPath: sfxTuples.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1642062695111722096, guid: 00e4347f9eb16d94c93b4961bdbca751, type: 3}
       propertyPath: backgroundMusicPrimary
       value: 
       objectReference: {fileID: 8300000, guid: 8b6db91d68cf8cb4e8cc86f3dd5b035c, type: 3}
-    - target: {fileID: 1642062695111722096, guid: 00e4347f9eb16d94c93b4961bdbca751, type: 3}
-      propertyPath: sfxTuples.Array.data[0].Item1
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1642062695111722096, guid: 00e4347f9eb16d94c93b4961bdbca751, type: 3}
-      propertyPath: sfxTuples.Array.data[0].Item2
-      value: 
-      objectReference: {fileID: 8300000, guid: e1afe1b152218d6479beb04c74047897, type: 3}
-    - target: {fileID: 1642062695111722096, guid: 00e4347f9eb16d94c93b4961bdbca751, type: 3}
-      propertyPath: sfxTuples.Array.data[1].Item1
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1642062695111722096, guid: 00e4347f9eb16d94c93b4961bdbca751, type: 3}
-      propertyPath: sfxTuples.Array.data[1].Item2
-      value: 
-      objectReference: {fileID: 8300000, guid: 1f01deee0b9c25c4f865c84973dc5db1, type: 3}
-    - target: {fileID: 1642062695111722096, guid: 00e4347f9eb16d94c93b4961bdbca751, type: 3}
-      propertyPath: sfxTuples.Array.data[2].Item1
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 1642062695111722096, guid: 00e4347f9eb16d94c93b4961bdbca751, type: 3}
-      propertyPath: sfxTuples.Array.data[2].Item2
-      value: 
-      objectReference: {fileID: 8300000, guid: f5f6403acb36b594ebebf7a272a125a0, type: 3}
     - target: {fileID: 7932485008459424998, guid: 00e4347f9eb16d94c93b4961bdbca751, type: 3}
       propertyPath: m_Name
       value: AudioManager

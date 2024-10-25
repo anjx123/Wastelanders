@@ -72,12 +72,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myTransform: {fileID: 2731077104277925276}
-  duplicateCardInstance: {fileID: 0}
-  description: 
+  <Id>k__BackingField:
+    Part1: 1254521199
+    Part2: 1144097769
+    Part3: 4170540982
+    Part4: 4291571646
   icon: {fileID: 21300000, guid: 5c59be28949fc4359bdc7f1c11394014, type: 3}
   cardBack: {fileID: 21300000, guid: 8ac8a46b814e1b14f89b3829e430de25, type: 3}
   cardUI: {fileID: 0}
+  data:
+    <ActionClassName>k__BackingField: 
+    <CurrentProgress>k__BackingField: 0
   projectileBehaviour: {fileID: 8994314891672276294}
+  fragmentSfx: {fileID: 8300000, guid: 1cf5a61decaf1d6458c0769bf50f4d4e, type: 3}
 --- !u!114 &8994314891672276294
 MonoBehaviour:
   m_ObjectHideFlags: 0

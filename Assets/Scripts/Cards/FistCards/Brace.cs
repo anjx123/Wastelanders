@@ -10,7 +10,7 @@ public class Brace : FistCards
     // Start is called before the first frame update
     public override void Initialize()
     {
-        lowerBound = 1;
+        lowerBound = 2;
         upperBound = 2;
         Speed = 3;
 

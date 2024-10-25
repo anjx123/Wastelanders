@@ -32,7 +32,6 @@ public class LeftHook : FistCards
     public override void CardIsUnstaggered()
     {
         base.CardIsUnstaggered();
-        Origin.AttackAnimation("IsMelee");
         if (!righthook) { righthook = Instantiate(rightHookPrefab); righthook.transform.position = new Vector3(-10, 10, 10); }
         ActionClass ac = righthook.GetComponent<ActionClass>();
         ac.Origin = this.Origin;

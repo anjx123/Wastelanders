@@ -5,13 +5,6 @@ using UnityEngine;
 public class IronSights : PistolCards
 {
 
-    
-    public override void OnCardStagger()
-    {
-        
-    }
-
-
     public override void Initialize()
     {
         lowerBound = 1;

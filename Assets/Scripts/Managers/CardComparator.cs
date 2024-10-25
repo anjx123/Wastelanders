@@ -8,6 +8,7 @@ using static UnityEngine.UI.Image;
 
 public class CardComparator : MonoBehaviour
 {
+    public const string CLASH_TIE_SOUND_FX_NAME = "ClashTie";
     public static CardComparator Instance { get; private set; }
 #nullable enable
     public static readonly float COMBAT_BUFFER_TIME = 1f;
@@ -84,6 +85,7 @@ public class CardComparator : MonoBehaviour
             {
                 card1.CardIsUnstaggered();
                 card2.CardIsUnstaggered();
+                AudioManager.Instance.PlaySFX(CLASH_TIE_SOUND_FX_NAME);
 
             } else if (cardOneGreater < 0) //Card2 wins clash
             {

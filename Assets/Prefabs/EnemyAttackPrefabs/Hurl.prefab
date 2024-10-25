@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2731077104277925276}
   - component: {fileID: 8686784205400784684}
   - component: {fileID: 4029360066181026997}
+  - component: {fileID: 3045044407534217872}
   - component: {fileID: 1011641279369870752}
   m_Layer: 0
   m_Name: Hurl
@@ -71,10 +72,32 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myTransform: {fileID: 0}
+  <Id>k__BackingField:
+    Part1: 884324379
+    Part2: 1313453960
+    Part3: 3003784364
+    Part4: 2771955960
   icon: {fileID: 21300000, guid: 7a1c3b944f2428a48a85a433c111081d, type: 3}
   cardBack: {fileID: 21300000, guid: 8ac8a46b814e1b14f89b3829e430de25, type: 3}
   cardUI: {fileID: 0}
-  spitPrefab: {fileID: 4172579226135636580, guid: 2215e5669ebb4ce439521ee582d25b32, type: 3}
+  data:
+    <ActionClassName>k__BackingField: 
+    <CurrentProgress>k__BackingField: 0
+  frogAttackSfx: {fileID: 8300000, guid: ddb3ed20f82ae794b85c8108634f43a1, type: 3}
+  projectileBehaviour: {fileID: 3045044407534217872}
+--- !u!114 &3045044407534217872
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2376898879351982445}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b04b8593f1087af499738bfdd52d8150, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectilePrefab: {fileID: 4172579226135636580, guid: 2215e5669ebb4ce439521ee582d25b32, type: 3}
 --- !u!212 &1011641279369870752
 SpriteRenderer:
   m_ObjectHideFlags: 0

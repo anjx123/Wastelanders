@@ -16,6 +16,7 @@ public class CombatManager : MonoBehaviour
 
     public CinemachineVirtualCamera baseCamera;
     public CinemachineVirtualCamera dynamicCamera;
+    private ScreenShakeHandler screenShakeHandler;
 
     private List<PlayerClass> players = new();
     private List<EnemyClass> enemies = new();
@@ -101,6 +102,8 @@ public class CombatManager : MonoBehaviour
     void Start()
     {
         GameState = GameState.GAME_START; //Put game start code in the performGameStart method.
+        screenShakeHandler = gameObject.AddComponent<ScreenShakeHandler>();
+        screenShakeHandler.DynamicCamera = dynamicCamera;
         ActionClass.CardStateChange += HandleCrosshairEnemies;
     }
 
@@ -275,6 +278,11 @@ public class CombatManager : MonoBehaviour
     {
         baseCamera.Priority = 1;
         dynamicCamera.Priority = 0;
+    }
+
+    public void AttackCameraEffect(float percentageMax)
+    {
+        screenShakeHandler.AttackCameraEffect(percentageMax);
     }
 
     private void PerformGameStart()

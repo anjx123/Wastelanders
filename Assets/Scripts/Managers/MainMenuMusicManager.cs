@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class MainMenuMusicManager : MusicManager
+public class MainMenuMusicManager : AudioManager
 {
 
-    public static MusicManager MainMenuMusicInstance;
+    public static AudioManager MainMenuMusicInstance;
 
     public override void Awake()
     {

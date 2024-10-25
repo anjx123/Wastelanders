@@ -1,17 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
-public class MusicManager : MonoBehaviour
+public class AudioManager : MonoBehaviour
 {
 
-    public static MusicManager Instance;
+    public static AudioManager Instance;
 
     // NOTE: All of these fields are set in the editor.
     public AudioSource SFXSoundsPlayer, BackgroundMusicPlayer, BackgroundMusicIntroPlayer;
-
-    [SerializeField]
-    private List<SerializableTuple<SFXList, AudioClip>> sfxTuples = new();
+    private SoundEffectsDatabase soundEffectsDatabase;
 #nullable enable
     public AudioClip? backgroundMusicPrimary;
     public AudioClip? backgroundMusicIntro;
@@ -31,6 +30,7 @@ public class MusicManager : MonoBehaviour
         {
             Destroy(this);
         }
+        soundEffectsDatabase = Resources.LoadAll<SoundEffectsDatabase>("").First();
     }
 
     private void Start()
@@ -118,20 +118,16 @@ public class MusicManager : MonoBehaviour
         BackgroundMusicPlayer.loop = true;
     }
 
-    // Plays the sfx that is appropriate
-    // REQUIRES: the value provided is valid. 
-    public void PlaySFX(SFXList effect)
+    public void PlaySFX(string effect)
     {
-        foreach (SerializableTuple<SFXList, AudioClip> entry in sfxTuples) 
-        {
-            if (entry.Item1 == effect)
-            {
-                SFXSoundsPlayer.PlayOneShot(entry.Item2);
-            }            
-        }
+        RandomizePitch();
+        SFXSoundsPlayer.PlayOneShot(soundEffectsDatabase.GetClipByName(effect));
     }
 
-
+    private void RandomizePitch()
+    {
+        SFXSoundsPlayer.pitch = Random.Range(0.90f, 1.1f);
+    }
 
     public void StopMusic()
     {
@@ -148,28 +144,5 @@ public class MusicManager : MonoBehaviour
         yield return StartCoroutine(FadeAudioRoutine(BackgroundMusicPlayer, true, 2f));
         BackgroundMusicPlayer.clip = backgroundMusicDeath;
         BackgroundMusicPlayer.Play();
-    }
-
-    // You *could* want this, I suppose.
-    public void SwapMusic()
-    {
-
-    }
-
-    // this may be extended upon; it is NOT extended upon because I could not conceive in about 10 minutes why any event would change the music (exclusing victory of course)
-    public enum BackgroundMusicList
-    {
-        None,
-    }
-
-    // enumeration of all possible sound effects playable; this serves for documentation purposes and because I couldn't find an alternate owing to paucity. 
-    // each member correponds EXACTLY to a string. so pistol => "pistol". 
-    // plausible solution involves a tandem list but that just seems redundant...
-    public enum SFXList
-    {
-        pistol,
-        staff,
-        wastefrog_damage_taken,
-        slime_damage_taken
     }
 }

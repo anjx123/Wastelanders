@@ -6,6 +6,12 @@ public class BattleQueueIcons : DisplayableClass
 {
     [SerializeField] SpriteRenderer targetRenderer;
 
+
+    public void Start()
+    {
+        GetComponent<SpriteRenderer>().sortingOrder = CombatManager.Instance.FADE_SORTING_ORDER + 4;
+        targetRenderer.sortingOrder = CombatManager.Instance.FADE_SORTING_ORDER + 5;
+    }
     public override void OnMouseDown()
     {
         if (CombatManager.Instance.CanHighlight())

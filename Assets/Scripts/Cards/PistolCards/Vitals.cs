@@ -4,11 +4,6 @@ using UnityEngine;
 
 public class Vitals : PistolCards
 {
-    public override void OnCardStagger()
-    {
-
-    }
-
     // Start is called before the first frame update
     public override void Initialize()
     {

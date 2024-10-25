@@ -5,12 +5,6 @@ using UnityEngine;
 public class PistolWhip : PistolCards
 {
 
-    
-    public override void OnCardStagger()
-    {
-        
-    }
-
     // Start is called before the first frame update
     public override void Initialize()
     {
