@@ -107,7 +107,7 @@ public class DeckSelectionTutorial : MonoBehaviour
     {
         playerDatabase.JackieData.selectedWeapons.Remove(CardDatabase.WeaponType.PISTOL);
         SerializableWeaponListEntry pistolDeck = playerDatabase.JackieData.playerDeck.FirstOrDefault(deck => deck.key == CardDatabase.WeaponType.PISTOL);
-        pistolDeck.value = new List<string>();
+        pistolDeck.value = new List<SerializableTuple<string, bool>>();
         SerializableTuple<CardDatabase.WeaponType, SerializableTuple<int, int>> pointsAvailableForPistol = playerDatabase.JackieData.playerWeaponProficiency.FirstOrDefault(proficiency => proficiency.Item1 == CardDatabase.WeaponType.PISTOL);
         pointsAvailableForPistol.Item2.Item1 = 0;
     }

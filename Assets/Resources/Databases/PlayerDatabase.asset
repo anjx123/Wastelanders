@@ -21,36 +21,26 @@ MonoBehaviour:
         Item2: 10
     - Item1: 1
       Item2:
-        Item1: 12
+        Item1: 0
         Item2: 12
     - Item1: 0
       Item2:
-        Item1: 12
+        Item1: 0
         Item2: 12
     - Item1: 3
       Item2:
         Item1: 0
         Item2: 10
-    selectedWeapons: 0000000001000000
+    selectedWeapons: 0300000001000000
     playerDeck:
     - key: 1
-      value:
-      - HipFire
-      - PistolWhip
-      - Headshot
-      - RapidFire
-      - Silencer
-      - IronSights
+      value: []
     - key: 2
       value: []
     - key: 0
-      value:
-      - CheapStrike
-      - FocusedStrike
-      - Trip
-      - Flurry
-      - CounterStrike
-      - Jab
+      value: []
+    - key: 3
+      value: []
   IvesData:
     name: Ives
     playerWeaponProficiency:
@@ -78,17 +68,29 @@ MonoBehaviour:
       value: []
     - key: 2
       value:
-      - Brace
-      - LeftHook
-      - Pummel
-      - RightHook
-      - Haymaker
-      - FollowThrough
+      - Item1: 
+        Item2: 0
+      - Item1: 
+        Item2: 0
+      - Item1: 
+        Item2: 0
+      - Item1: 
+        Item2: 0
+      - Item1: 
+        Item2: 0
+      - Item1: 
+        Item2: 0
     - key: 3
       value:
-      - Execute
-      - SharpenedDefence
-      - Cleave
-      - Decimate
-      - Mutilate
-      - Whirl
+      - Item1: 
+        Item2: 0
+      - Item1: 
+        Item2: 0
+      - Item1: 
+        Item2: 0
+      - Item1: 
+        Item2: 0
+      - Item1: 
+        Item2: 0
+      - Item1: 
+        Item2: 0

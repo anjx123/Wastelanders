@@ -50,8 +50,8 @@ public abstract class ActionClass : SelectClass, IBind<ActionData>
     protected int lowerBound;
     protected int upperBound;
 
-    public int LowerBound { get { return lowerBound; }}
-    public int UpperBound { get { return upperBound; }}
+    public int LowerBound { get { return lowerBound; } }
+    public int UpperBound { get { return upperBound; } }
 
     protected CardDup duplicateCard = new CardDup();
 
@@ -80,11 +80,12 @@ public abstract class ActionClass : SelectClass, IBind<ActionData>
     private CardState cardState = CardState.NORMAL;
     public int Speed { get; set; }
     protected string description;
-    public string Description { get { return description; }}
+    public string Description { get { return description; } }
     public string evolutionDescription { get; protected set; }
     [SerializeField] private Sprite icon;
     public Sprite cardBack;
-    [SerializeField] private CardUI cardUI;
+    public Sprite evolvedCardBack;
+    public CardUI cardUI;
 
     public CardType CardType { get; protected set; }
 
@@ -97,8 +98,9 @@ public abstract class ActionClass : SelectClass, IBind<ActionData>
         get { return data?.CurrentProgress ?? 0; }
         set { if (data != null) data.CurrentProgress = Math.Min(value, MaxEvolutionProgress); }
     }
+    public bool IsEvolved = false; // Stores whether the user has decided to select the evolved version of the card or not
+    public bool IsFlipped { get; set; } = false; // Should we display the card as flipped?
     protected int MaxEvolutionProgress { get; set; }
-    protected bool IsEvolved { get; set; } = false;
 
     public delegate void ActionClassDelegate(ActionClass target);
     public event ActionClassDelegate? TargetChanged;
@@ -106,6 +108,7 @@ public abstract class ActionClass : SelectClass, IBind<ActionData>
     public delegate void CardStateDelegate(CardState previousState, CardState currentState);
     public delegate void CardEventDelegate(ActionClass card);
     public static event CardEventDelegate? CardClickedEvent;
+    public static event CardEventDelegate? CardRightClickedEvent;
     public static event CardEventDelegate? CardHighlightedEvent;
     public static event CardStateDelegate? CardStateChange;
 
@@ -123,7 +126,7 @@ public abstract class ActionClass : SelectClass, IBind<ActionData>
 
     public virtual void Start()
     {
-        
+
     }
 
     private void OnEnable()
@@ -182,7 +185,7 @@ public abstract class ActionClass : SelectClass, IBind<ActionData>
     private void DupInit()
     {
         CardDup oldDup = duplicateCard;
-        duplicateCard = new CardDup();   
+        duplicateCard = new CardDup();
         duplicateCard.rollFloor = lowerBound;
         duplicateCard.rollCeiling = upperBound;
         duplicateCard.actualRoll = oldDup.actualRoll;
@@ -217,8 +220,8 @@ public abstract class ActionClass : SelectClass, IBind<ActionData>
     public virtual void RollDice()
     {
         duplicateCard.actualRoll = UnityEngine.Random.Range(duplicateCard.rollFloor, duplicateCard.rollCeiling + 1);
-        
-        Origin.SetDice(duplicateCard.actualRoll); 
+
+        Origin.SetDice(duplicateCard.actualRoll);
     }
 
     public Sprite? GetIcon()
@@ -226,7 +229,8 @@ public abstract class ActionClass : SelectClass, IBind<ActionData>
         if (icon)
         {
             return icon;
-        } else
+        }
+        else
         {
             Debug.LogWarning("ActionClass icon is Missing for " + name);
             return null;
@@ -241,6 +245,21 @@ public abstract class ActionClass : SelectClass, IBind<ActionData>
     public override void OnMouseDown()
     {
         CardClickedEvent?.Invoke(this);
+    }
+
+    // To handle right click detection for the Deck Selection scene
+    public void OnMouseOver()
+    {
+        if (Input.GetMouseButtonDown(1))
+        {
+            CardRightClickedEvent?.Invoke(this);
+        }
+    }
+
+    // Can we evolve this card?
+    public bool CanEvolve()
+    {
+        return CurrentEvolutionProgress >= MaxEvolutionProgress;
     }
 
     public void ToggleSelected()
@@ -261,9 +280,17 @@ public abstract class ActionClass : SelectClass, IBind<ActionData>
             SetCardState(CardState.HOVER);
         }
 
-        if (description != null)
+        PopUpNotificationManager.Instance.RemoveDescription();
+        if (description != null && !IsFlipped)
         {
             PopUpNotificationManager.Instance.DisplayText(description);
+        }
+        else if (evolutionDescription != null && IsFlipped)
+        {
+            string tempDescription = evolutionDescription;
+            if (!CanEvolve())
+                tempDescription = "LOCKED: " + evolutionDescription;
+            PopUpNotificationManager.Instance.DisplayText(tempDescription);
         }
         CardHighlightedEvent?.Invoke(this);
     }
@@ -289,7 +316,7 @@ public abstract class ActionClass : SelectClass, IBind<ActionData>
         {
             SetCardState(CardState.CANT_PLAY);
         }
-    } 
+    }
 
     public void ForceNormalState()
     {
@@ -302,13 +329,13 @@ public abstract class ActionClass : SelectClass, IBind<ActionData>
     private void SetCardState(CardState nextState)
     {
         CardState previousState = cardState;
-        
+
         //Transition Diagram
         // CANT_PLAY <-> NORMAL <-> HOVER <-> CLICKED_STATE
 
         //Bounces all the bad state transitions
         if ((previousState == CardState.CANT_PLAY && nextState != CardState.NORMAL) ||
-            (previousState == CardState.NORMAL && (nextState != CardState.CANT_PLAY && nextState != CardState.HOVER)) || 
+            (previousState == CardState.NORMAL && (nextState != CardState.CANT_PLAY && nextState != CardState.HOVER)) ||
             (previousState == CardState.HOVER && (nextState != CardState.NORMAL && nextState != CardState.CLICKED_STATE)) ||
             (previousState == CardState.CLICKED_STATE && (nextState != CardState.HOVER)))
         {

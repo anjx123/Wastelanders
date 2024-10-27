@@ -8,5 +8,6 @@ using UnityEngine;
 public class SerializableWeaponListEntry
 {
     public CardDatabase.WeaponType key;
-    public List<string> value;
+    // string represents weapon name, bool represents whether its evolved or not
+    public List<SerializableTuple<string, bool>> value;
 }

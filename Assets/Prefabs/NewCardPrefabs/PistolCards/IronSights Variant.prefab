@@ -8,21 +8,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: -7228539631512178989, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 0caca1c7d6d863a44920bb3907ac21a0, type: 3}
     - target: {fileID: 1866809560200078547, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: aa5bdc0ae0bd90746b95a9c7ced59777, type: 3}
+      objectReference: {fileID: 21300000, guid: c4f7aec21b684724f81317d1f90bb049, type: 3}
     - target: {fileID: 1866809560200078547, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
       propertyPath: m_WasSpriteAssigned
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7256956916184963317, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
       propertyPath: m_Name
-      value: Decimate
+      value: IronSights Variant
       objectReference: {fileID: 0}
     - target: {fileID: 8284128080877360369, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
       propertyPath: m_LocalPosition.x
@@ -71,7 +67,7 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 7256956916184963317, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
       insertIndex: -1
-      addedObject: {fileID: -5116239531436598588}
+      addedObject: {fileID: 2494557783371585323}
   m_SourcePrefab: {fileID: 100100000, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
 --- !u!114 &3994343635944797062 stripped
 MonoBehaviour:
@@ -84,12 +80,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 834784dfb02aeaf438f42ae334048e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &5066054149459818177 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8284128080877360369, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
+  m_PrefabInstance: {fileID: 3799102881852465712}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &5768262490987068101 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7256956916184963317, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
   m_PrefabInstance: {fileID: 3799102881852465712}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &-5116239531436598588
+--- !u!114 &2494557783371585323
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -98,18 +99,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 5768262490987068101}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 65040dc076b4f3544b241a9c33324ece, type: 3}
+  m_Script: {fileID: 11500000, guid: f1ffdd7177d8e43708b5f3d515791e3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myTransform: {fileID: 0}
+  myTransform: {fileID: 5066054149459818177}
   <Id>k__BackingField:
-    Part1: 1012318725
-    Part2: 1179583197
-    Part3: 1635717814
-    Part4: 3941682173
-  icon: {fileID: 21300000, guid: aa5bdc0ae0bd90746b95a9c7ced59777, type: 3}
-  cardBack: {fileID: 21300000, guid: 0caca1c7d6d863a44920bb3907ac21a0, type: 3}
-  evolvedCardBack: {fileID: 21300000, guid: dcb4759f0a3bfc84181a62dbd57fe346, type: 3}
+    Part1: 3304126142
+    Part2: 1178526284
+    Part3: 3100635564
+    Part4: 4243527226
+  icon: {fileID: 21300000, guid: c4f7aec21b684724f81317d1f90bb049, type: 3}
+  cardBack: {fileID: 21300000, guid: 39082e00c2d70460993a929910d40e67, type: 3}
+  evolvedCardBack: {fileID: 21300000, guid: f23b0b3bd412f8343946c477609e5e70, type: 3}
   cardUI: {fileID: 3994343635944797062}
   data:
     <ActionClassName>k__BackingField: 

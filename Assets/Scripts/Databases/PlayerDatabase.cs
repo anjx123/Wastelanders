@@ -28,7 +28,7 @@ public class PlayerDatabase : ScriptableObject, IBind<PlayerInformation>
         }
     }
 
-    public List<string> GetDeckByPlayerName(PlayerName player)
+    public List<SerializableTuple<string, bool>> GetDeckByPlayerName(PlayerName player)
     {
         switch (player)
         {
@@ -57,9 +57,9 @@ public class PlayerDatabase : ScriptableObject, IBind<PlayerInformation>
 
 
         //Gets the combination of both smaller decks
-        public List<string> GetCombinedDeck()
+        public List<SerializableTuple<string, bool>> GetCombinedDeck()
         {
-            List<string> combinedDeck = new();
+            List<SerializableTuple<string, bool>> combinedDeck = new();
 
             foreach (var entry in playerDeck)
             {
@@ -73,7 +73,7 @@ public class PlayerDatabase : ScriptableObject, IBind<PlayerInformation>
         }
 
         //Like a dictionary, gets the player deck by the weapon type, if not contained, return a empty list
-        public List<string> GetDeckByWeaponType(CardDatabase.WeaponType weaponType)
+        public List<SerializableTuple<string, bool>> GetDeckByWeaponType(CardDatabase.WeaponType weaponType)
         {
             foreach (var entry in playerDeck)
             {
@@ -83,7 +83,7 @@ public class PlayerDatabase : ScriptableObject, IBind<PlayerInformation>
                 }
             }
 
-            return new List<string>();
+            return new List<SerializableTuple<string, bool>>();
         }
     }
 
