@@ -96,6 +96,7 @@ public class GameStateManager : PersistentSingleton<GameStateManager>, IBind<Gam
     public const string SELECTION_SCREEN_NAME = "SelectionScreen";
 
     public const string LEVEL_SELECT_NAME = "LevelSelect";
+    public const string CONTRACT_SELECT_NAME = "ContractSelect";
 
     public const string TUTORIAL_FIGHT = "TutorialScene";
     public const string FROG_SLIME_FIGHT = "Scene2";

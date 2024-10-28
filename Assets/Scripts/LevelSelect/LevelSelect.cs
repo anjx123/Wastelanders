@@ -1,4 +1,6 @@
+using System;
 using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -8,11 +10,13 @@ public class LevelSelect : MonoBehaviour
 {
     public Button[] buttons;
     public GameObject levelButtons;
+    public GameObject contractButtons;
     [SerializeField] private FadeScreenHandler fadeScreen;
 
     protected virtual void Awake()
     {
         ButtonArray();
+        CheckContracts();
         fadeScreen.SetDarkScreen();
         StartCoroutine(fadeScreen.FadeInLightScreen(1f));
     }
@@ -20,6 +24,12 @@ public class LevelSelect : MonoBehaviour
     public void OpenScene(string s)
     {
         StartCoroutine(FadeLevelIn(s));
+    }
+
+    public void OpenContracts(string selectedLevel)
+    {
+        ContractManager.Instance.selectedLevel = selectedLevel;
+        StartCoroutine(FadeLevelIn(GameStateManager.CONTRACT_SELECT_NAME));
     }
 
     IEnumerator FadeLevelIn(string levelName)
@@ -34,7 +44,38 @@ public class LevelSelect : MonoBehaviour
         buttons = new Button[children];
         for (int i = 0; i < children; i++)
         {
-            buttons[i] = levelButtons.transform.GetChild(i).gameObject.GetComponent<Button>();
+            GameObject gameObject = levelButtons.transform.GetChild(i).gameObject;
+            buttons[i] = gameObject.GetComponent<Button>();
+        }
+    }
+
+    // temporary solution to finding contract buttons and enabling them
+    private readonly Dictionary<string, int> TempMap = new Dictionary<string, int>() {
+        {GameStateManager.FROG_SLIME_FIGHT, 1},
+        {GameStateManager.BEETLE_FIGHT, 2},
+        {GameStateManager.PRE_QUEEN_FIGHT, 3},
+    };
+    public void CheckContracts() {
+        GameStateManager.Instance.CompletedQueenFight = true;
+        GameStateManager.Instance.CompletedBeetleFight = true;
+        GameStateManager.Instance.CompletedFrogAndSlimeFight = true;
+
+        void Disable(GameObject contractButton) {
+            // can't make inactive, need to unrender so the positions remain
+            contractButton.GetComponent<Button>().enabled = false;
+            contractButton.GetComponent<CanvasRenderer>().SetAlpha(0);
+            contractButton.transform.GetChild(0).GetComponent<CanvasRenderer>().SetAlpha(0);
+        }
+
+        // temporary hard code solution
+        if (!GameStateManager.Instance.CompletedFrogAndSlimeFight) {
+            Disable(contractButtons.transform.GetChild(TempMap[GameStateManager.FROG_SLIME_FIGHT]).gameObject);
+        }
+        if (!GameStateManager.Instance.CompletedBeetleFight) {
+            Disable(contractButtons.transform.GetChild(TempMap[GameStateManager.BEETLE_FIGHT]).gameObject);
+        }
+        if (!GameStateManager.Instance.CompletedQueenFight) {
+            Disable(contractButtons.transform.GetChild(TempMap[GameStateManager.PRE_QUEEN_FIGHT]).gameObject);
         }
     }
 }
