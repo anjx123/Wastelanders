@@ -56,8 +56,8 @@ MonoBehaviour:
   availableActions:
   - {fileID: 2376898879351982445, guid: ba70a26a5c92548e48fa5e83e65734b6, type: 3}
   - {fileID: 2376898879351982445, guid: 85bd711732ab044c98f77ebe38bd870d, type: 3}
-  - {fileID: 2376898879351982445, guid: e07f0aec029f647ed8f2d61db2fd2989, type: 3}
   - {fileID: 2376898879351982445, guid: c98c1ef84a12f4790b6f8cd9e0051511, type: 3}
+  - {fileID: 2376898879351982445, guid: e07f0aec029f647ed8f2d61db2fd2989, type: 3}
   spawnPrefabs:
   - {fileID: 8044949296705636452, guid: 276880eff6e9b4907a1ea5430761a162, type: 3}
   - {fileID: 8044949296705636452, guid: 692030d7a70f84e1e9949eb9b07ebce5, type: 3}

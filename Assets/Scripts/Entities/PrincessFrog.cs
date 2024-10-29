@@ -1,5 +1,5 @@
-using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -7,23 +7,8 @@ namespace Entities
 {
     public class PrincessFrog : EnemyClass
     {
-        [SerializeField] private GameObject[] spawnPrefabs;
-        [SerializeField] private Vector3[] spawnPositions;
-
-        private EntityClass[] _spawnSlots;
-
-        public void Awake()
-        {
-            /* Each position is a slot for a spawn. If there are fewer prefabs than
-               positions, then just cycle through the prefabs to fill the positions. */
-            _spawnSlots = new EntityClass[spawnPositions.Length];
-
-            for (var i = 0; i < _spawnSlots.Length; i++)
-            {
-                /* Start with fixed spawns. */
-                SpawnNext(spawnPrefabs[i % spawnPrefabs.Length]);
-            }
-        }
+        /* This enemy triggers changes in the scene layout by spawning enemies. */
+        private SceneBuilder.SceneBuilder _sceneBuilder;
 
         public override void Start()
         {
@@ -38,57 +23,80 @@ namespace Entities
         public void OnEnable()
         {
             EntityTookDamage += HandleDamage;
-            OnEntityDeath += HandleSpawnDeath;
         }
 
         public void OnDisable()
         {
             EntityTookDamage -= HandleDamage;
-            OnEntityDeath -= HandleSpawnDeath;
+        }
+
+        public void SetSceneBuilder(SceneBuilder.SceneBuilder sceneBuilder)
+        {
+            _sceneBuilder = sceneBuilder;
+        }
+
+        public void OnBurp()
+        {
+            _sceneBuilder.SpawnAdditionalEnemy();
         }
 
         public override void AddAttack(List<PlayerClass> players)
         {
-            /* Required in this order, specifically... TODO: FIX THIS */
+            /* Required in this order, specifically... */
             var bless = pool[0];
             var burp = pool[1];
-            var hurl = pool[2];
-            var gobble = pool[3];
+            var gobble = pool[2];
+            var hurl = pool[3];
 
-            // TODO: Add some actual AI to this.
-            var playable = new List<GameObject>
+            var enemyCount = CombatManager.Instance
+                .GetEnemies()
+                .Count(e => e is not NeutralEntityInterface) - 1;
+
+            var crystals = CombatManager.Instance
+                .GetEnemies()
+                .Where(e => e is Crystals).ToArray();
+
+            var stacks = GetBuffStacks(Resonate.buffName);
+            var chance = enemyCount switch
             {
-                bless,
-                burp,
-                hurl,
-                gobble
+                4 => 1.0f,
+                3 => 0.7f,
+                2 => 0.5f,
+                1 => 0.2f,
+                _ => 0
             };
 
-            for (var i = 0; i < 2; i++)
+            switch (stacks)
             {
-                var prefab = playable[Random.Range(0, playable.Count)];
-                var card = Instantiate(prefab);
-                var action = card.GetComponent<ActionClass>();
-
-                action.Target = players[Random.Range(0, players.Count)];
-                action.Origin = this;
-                BattleQueue.BattleQueueInstance.AddAction(action);
-                combatInfo.AddCombatSprite(action);
+                case > 6:
+                    AttackWith(Random.Range(0f, 1f) > chance ? burp : bless, players[Random.Range(0, players.Count)]);
+                    AttackWith(Random.Range(0f, 1f) > chance ? burp : bless, players[Random.Range(0, players.Count)]);
+                    break;
+                case < 3 when crystals.Length > 0:
+                    AttackWith(gobble, crystals[Random.Range(0, crystals.Length)]);
+                    AttackWith(gobble, crystals[Random.Range(0, crystals.Length)]);
+                    break;
+                case < 3:
+                    AttackWith(hurl, players[Random.Range(0, players.Count)]);
+                    AttackWith(hurl, players[Random.Range(0, players.Count)]);
+                    break;
+                default:
+                    if (crystals.Length > 0) AttackWith(gobble, crystals[Random.Range(0, crystals.Length)]);
+                    else AttackWith(hurl, players[Random.Range(0, players.Count)]);
+                    AttackWith(Random.Range(0f, 1f) > chance ? burp : bless, players[Random.Range(0, players.Count)]);
+                    break;
             }
         }
 
-        public void SpawnNext(GameObject prefab = null)
+        private void AttackWith(GameObject prefab, EntityClass target)
         {
-            var slot = Array.IndexOf(_spawnSlots, null);
-            if (slot == -1) return;
+            var card = Instantiate(prefab);
+            var action = card.GetComponent<ActionClass>();
 
-            // TODO: Maybe use the scene builder for this.
-            var enemy = prefab ?? spawnPrefabs[Random.Range(0, spawnPrefabs.Length)];
-            var p = transform.position + spawnPositions[slot];
-            var spawn = Instantiate(enemy, p, Quaternion.identity, transform.parent);
-
-            spawn.transform.localScale = Vector3.one * 0.75f;
-            _spawnSlots[slot] = spawn.GetComponent<EnemyClass>();
+            action.Target = target;
+            action.Origin = this;
+            combatInfo.AddCombatSprite(action);
+            BattleQueue.BattleQueueInstance.AddAction(action);
         }
 
         private void HandleDamage(int amount)
@@ -97,14 +105,6 @@ namespace Entities
 
             /* Lose stacks when taking (non-zero) damage. */
             ReduceStacks(Resonate.buffName, 1);
-        }
-
-        private void HandleSpawnDeath(EntityClass spawn)
-        {
-            var slot = Array.IndexOf(_spawnSlots, spawn);
-            if (slot == -1) return;
-
-            _spawnSlots[slot] = null;
         }
     }
 }

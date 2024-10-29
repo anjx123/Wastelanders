@@ -30,12 +30,15 @@ namespace Cards.EnemyCards.FrogCards
             base.OnHit();
 
             var crystal = Target as Crystals;
-            if (!crystal) return;
-
-            var prior = Origin.GetBuffStacks(Resonate.buffName);
-            crystal.TakeDamage(Origin, crystal.Health);
-            /* Silly hack to always grant 5 stacks. */
-            Origin.AddStacks(Resonate.buffName, 5 + prior - Origin.GetBuffStacks(Resonate.buffName));
+            if (crystal)
+            {
+                var prior = Origin.GetBuffStacks(Resonate.buffName);
+                crystal.TakeDamage(Origin, crystal.Health);
+                /* Silly hack to always grant 5 stacks. */
+                Origin.AddStacks(Resonate.buffName, 5 + prior - Origin.GetBuffStacks(Resonate.buffName));
+            }
+            /* FrogAttacks doesn't call this in OnHit except via a projectile...? */
+            else Target.TakeDamage(Origin, duplicateCard.actualRoll);
         }
     }
 }

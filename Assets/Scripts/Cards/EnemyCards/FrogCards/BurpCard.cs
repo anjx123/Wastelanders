@@ -28,8 +28,8 @@ namespace Cards.EnemyCards.FrogCards
             Origin.AttackAnimation("OnSmile");
             Origin.ReduceStacks(Resonate.buffName, 2);
 
-            var enemy = Origin as PrincessFrog;
-            enemy?.SpawnNext(); // TODO: Any way to do this without casting?
+            var princessFrog = Origin as PrincessFrog;
+            princessFrog?.OnBurp(); // TODO: Any way to do this without casting?
         }
     }
 }

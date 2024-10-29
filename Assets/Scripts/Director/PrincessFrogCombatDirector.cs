@@ -18,18 +18,20 @@ namespace Director
 
         private IEnumerator OnStart()
         {
-            yield return StartCoroutine(CombatManager.Instance.FadeInLightScreen(0.5f));
+            CombatManager.Instance.SetDarkScreen();
 
             var entities = entityContainer.GetComponentsInChildren<EntityClass>();
             foreach (var entity in entities)
             {
-                entity.InCombat();
-                entity.SetReturnPosition(entity.transform.position);
+                var enemy = entity as EnemyClass;
+                enemy?.FaceLeft();
             }
 
             CombatManager.Instance.GameState = GameState.SELECTION;
             CombatManager.PlayersWinEvent += PlayersWin;
             CombatManager.EnemiesWinEvent += EnemiesWin;
+
+            yield return StartCoroutine(CombatManager.Instance.FadeInLightScreen(0.5f));
 
             yield return new WaitUntil(() => CombatManager.Instance.GameState == GameState.GAME_WIN);
             MusicManager.Instance.FadeOutCurrentBackgroundTrack(2f);
