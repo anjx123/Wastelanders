@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4029360066181026997}
   - component: {fileID: 1011641279369870752}
   m_Layer: 0
-  m_Name: Burp
+  m_Name: PrincessFrogBurp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -76,7 +76,7 @@ MonoBehaviour:
     Part2: 1232252036
     Part3: 448303496
     Part4: 1424057810
-  icon: {fileID: 21300000, guid: 7a1c3b944f2428a48a85a433c111081d, type: 3}
+  icon: {fileID: 21300000, guid: 632e7074e80854b2ba594e6fdaaf2562, type: 3}
   cardBack: {fileID: 21300000, guid: 8ac8a46b814e1b14f89b3829e430de25, type: 3}
   cardUI: {fileID: 0}
   data:
