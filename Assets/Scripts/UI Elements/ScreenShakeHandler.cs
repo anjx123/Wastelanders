@@ -5,7 +5,7 @@ using UnityEngine;
 public class ScreenShakeHandler : MonoBehaviour
 {
     private CinemachineVirtualCamera dynamicCamera;
-    public bool shakeEnabled = true;
+
     public CinemachineVirtualCamera DynamicCamera
     {
         get { return dynamicCamera; }
@@ -13,7 +13,7 @@ public class ScreenShakeHandler : MonoBehaviour
     }
     public void AttackCameraEffect(float percentageMax)
     {
-        if (!shakeEnabled) return;
+        if (!PauseMenu.ScreenShake) return;
         if (percentageMax < 0.25f)
         {
             StartCoroutine(ShakeCamera(percentageMax));
