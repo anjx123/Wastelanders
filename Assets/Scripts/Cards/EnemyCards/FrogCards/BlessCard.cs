@@ -26,7 +26,7 @@ namespace Cards.EnemyCards.FrogCards
             var stacks = Origin.GetBuffStacks(Resonate.buffName);
             if (stacks < 1) return;
 
-            Origin.AttackAnimation("OnSmile");
+            Origin.AttackAnimation("IsBlocking");
             Origin.ReduceStacks(Resonate.buffName, 1);
 
             var enemies = Origin.transform.parent.GetComponentsInChildren<EnemyClass>();

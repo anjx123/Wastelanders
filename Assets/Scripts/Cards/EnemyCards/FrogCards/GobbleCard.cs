@@ -22,7 +22,7 @@ namespace Cards.EnemyCards.FrogCards
 
         public override void CardIsUnstaggered()
         {
-            Origin.AttackAnimation("OnSpit");
+            Origin.AttackAnimation("IsShooting");
         }
 
         public override void OnHit()

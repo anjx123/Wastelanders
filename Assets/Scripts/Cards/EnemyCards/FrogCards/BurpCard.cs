@@ -29,7 +29,7 @@ namespace Cards.EnemyCards.FrogCards
             var stacks = Origin.GetBuffStacks(Resonate.buffName);
             if (stacks < 2) return;
 
-            Origin.AttackAnimation("OnSpit");
+            Origin.AttackAnimation("IsShooting");
             Origin.ReduceStacks(Resonate.buffName, 2);
 
             var projectileDirection = Vector3.down + (Origin.IsFacingRight() ? Vector3.right : Vector3.left);
