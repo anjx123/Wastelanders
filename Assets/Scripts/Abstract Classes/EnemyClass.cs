@@ -24,8 +24,8 @@ public abstract class EnemyClass : EntityClass
 
     public override void Start()
     {
-        base.Start();
         CombatManager.Instance.AddEnemy(this);
+        base.Start();
         InstantiateDeck();
 
         Reshuffle();

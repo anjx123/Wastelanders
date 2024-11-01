@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Linq;
 using Cards.EnemyCards.FrogCards;
 using UnityEngine;
@@ -47,13 +46,8 @@ namespace SceneBuilder
             entity.transform.localScale = Vector3.one * (entity is Beetle ? 0.75f : 1);
         }
 
-        private IEnumerator UpdateEnemyLayout()
+        private void UpdateEnemyLayout()
         {
-            /* The combat manager enemy list is at least one frame behind.
-               This also fixes an issue where a newly spawned enemy would
-               set return position in Start(), clobbering the given value. */
-            yield return null;
-
             /* The combat manager doesn't remove enemies from its list until the end of the
                current turn. This method can be called during a turn which means we need to
                explicitly filter out any enemies who are dead but have not been removed yet. */
@@ -72,7 +66,7 @@ namespace SceneBuilder
         {
             if (entity is not EnemyClass) return;
 
-            StartCoroutine(UpdateEnemyLayout());
+            UpdateEnemyLayout();
         }
 
         private static Vector3[] PositionsFrom(Vector2 centerCoordinate, int count)
