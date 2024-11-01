@@ -6,7 +6,5 @@ namespace SceneBuilder
     {
         private void Awake() => Build();
         protected abstract void Build();
-    
-        public abstract void SpawnAdditionalEnemy();
     }
 }

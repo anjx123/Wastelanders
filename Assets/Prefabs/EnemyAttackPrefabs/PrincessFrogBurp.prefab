@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8686784205400784684}
   - component: {fileID: 4029360066181026997}
   - component: {fileID: 1011641279369870752}
+  - component: {fileID: 1259333813139468876}
   m_Layer: 0
   m_Name: PrincessFrogBurp
   m_TagString: Untagged
@@ -83,6 +84,7 @@ MonoBehaviour:
     <ActionClassName>k__BackingField: 
     <CurrentProgress>k__BackingField: 0
   spitPrefab: {fileID: 0}
+  projectileBehaviour: {fileID: 1259333813139468876}
 --- !u!212 &1011641279369870752
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -135,3 +137,16 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1259333813139468876
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2376898879351982445}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b04b8593f1087af499738bfdd52d8150, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectilePrefab: {fileID: 4172579226135636580, guid: 6ceeac82b22c34fd5b959daf4c2c3a61, type: 3}

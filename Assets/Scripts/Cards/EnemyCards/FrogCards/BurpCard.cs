@@ -1,10 +1,14 @@
-using Entities;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Cards.EnemyCards.FrogCards
 {
     public class BurpCard : FrogAttacks
     {
+        public static readonly List<GameObject> SpawnableEnemies = new List<GameObject>();
+
+        [SerializeField] private ProjectileBehaviour projectileBehaviour;
+
         public override void Initialize()
         {
             base.Initialize();
@@ -28,8 +32,21 @@ namespace Cards.EnemyCards.FrogCards
             Origin.AttackAnimation("OnSmile");
             Origin.ReduceStacks(Resonate.buffName, 2);
 
-            var princessFrog = Origin as PrincessFrog;
-            princessFrog?.OnBurp(); // TODO: Any way to do this without casting?
+            var projectileDirection = Vector3.down + (Origin.IsFacingRight() ? Vector3.right : Vector3.left);
+            var position = Origin.transform.position + projectileDirection;
+
+            StartCoroutine(projectileBehaviour.ProjectileAnimation(OnProjectileHit, Origin, position));
+            return;
+
+            void OnProjectileHit()
+            {
+                var prefab = SpawnableEnemies[Random.Range(0, SpawnableEnemies.Count)];
+                var parent = Origin.transform.parent;
+                var spawn = Instantiate(prefab, position, Quaternion.identity, parent);
+                var entity = spawn.GetComponent<EntityClass>();
+
+                entity.transform.localScale = Vector3.one * (entity is Beetle ? 0.75f : 1);
+            }
         }
     }
 }

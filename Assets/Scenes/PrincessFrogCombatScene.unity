@@ -1229,7 +1229,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playersPosition: {x: -5, y: 0, z: 0}
-  enemiesPosition: {x: 4, y: -0.5, z: 0}
+  enemiesPosition: {x: 5, y: 0, z: 0}
   players:
   - {fileID: 5836655443787502691, guid: 18ff4a241e9f877439ebd5fd1de51dd0, type: 3}
   - {fileID: 8272483667302085576, guid: ab7d30ad1a6d943e786f1b7a8dc2258f, type: 3}
@@ -1240,7 +1240,6 @@ MonoBehaviour:
   additionalEnemies:
   - {fileID: 8044949296705636452, guid: 276880eff6e9b4907a1ea5430761a162, type: 3}
   - {fileID: 8044949296705636452, guid: 692030d7a70f84e1e9949eb9b07ebce5, type: 3}
-  - {fileID: 8044949296705636452, guid: fa2244f9c89fb2c42ae45cb8f73816be, type: 3}
   entityContainer: {fileID: 856732782}
 --- !u!4 &245795668 stripped
 Transform:
@@ -1340,7 +1339,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6635998426718021455, guid: b9c5e4b3c9f7e024f8fe9012e7a2e437, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.570588
+      value: 2.5823529
       objectReference: {fileID: 0}
     - target: {fileID: 6635998426718021455, guid: b9c5e4b3c9f7e024f8fe9012e7a2e437, type: 3}
       propertyPath: m_LocalPosition.y
