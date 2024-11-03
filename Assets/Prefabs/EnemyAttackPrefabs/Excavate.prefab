@@ -123,8 +123,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myTransform: {fileID: 0}
-  duplicateCardInstance: {fileID: 0}
-  description: 
+  <Id>k__BackingField:
+    Part1: 1282736917
+    Part2: 1197540021
+    Part3: 3547221676
+    Part4: 3061920010
   icon: {fileID: 21300000, guid: 36b9e98bae3164dddbbc666c7a912e1d, type: 3}
   cardBack: {fileID: 21300000, guid: 8ac8a46b814e1b14f89b3829e430de25, type: 3}
   cardUI: {fileID: 0}
+  data:
+    <ActionClassName>k__BackingField: 
+    <CurrentProgress>k__BackingField: 0
+  excavateSFX: {fileID: 8300000, guid: b318d24ada2dc8644bc88180013d6f71, type: 3}

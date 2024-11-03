@@ -34,7 +34,7 @@ namespace Director
             yield return StartCoroutine(CombatManager.Instance.FadeInLightScreen(0.5f));
 
             yield return new WaitUntil(() => CombatManager.Instance.GameState == GameState.GAME_WIN);
-            MusicManager.Instance.FadeOutCurrentBackgroundTrack(2f);
+            AudioManager.Instance.FadeOutCurrentBackgroundTrack(2f);
             yield return new WaitForSeconds(1f);
             yield return StartCoroutine(CombatManager.Instance.FadeInDarkScreen(1.5f));
         }

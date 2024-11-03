@@ -139,6 +139,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   leftClashingAction: {fileID: 7174745963015938159}
   rightClashingAction: {fileID: 4683123950711438762}
+  swordsIcon: {fileID: 4889160484734648282}
 --- !u!114 &6069768141182838962
 MonoBehaviour:
   m_ObjectHideFlags: 0

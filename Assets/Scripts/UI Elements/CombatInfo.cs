@@ -224,8 +224,8 @@ public class CombatInfo : MonoBehaviour
         EmphasizeCombatIcon();
         damagePopupText.GetComponent<MeshRenderer>().sortingOrder = CombatManager.Instance.FADE_SORTING_ORDER + 1;
         diceRollSprite.GetComponent<SpriteRenderer>().sortingOrder = CombatManager.Instance.FADE_SORTING_ORDER + 1;
-        buffListCanvas.sortingOrder = CombatManager.Instance.FADE_SORTING_ORDER + 1;
-        diceRollText.GetComponent<MeshRenderer>().sortingOrder = CombatManager.Instance.FADE_SORTING_ORDER + 1;
+        buffListCanvas.sortingOrder = CombatManager.Instance.FADE_SORTING_ORDER + 2;
+        diceRollText.GetComponent<MeshRenderer>().sortingOrder = diceRollSprite.GetComponent<SpriteRenderer>().sortingOrder + 1;
         healthBar.Emphasize();
     }
     public void DeEmphasize()
@@ -236,7 +236,7 @@ public class CombatInfo : MonoBehaviour
         }
         damagePopupText.GetComponent<MeshRenderer>().sortingOrder = CombatManager.Instance.FADE_SORTING_ORDER - 1;
         diceRollSprite.GetComponent<SpriteRenderer>().sortingOrder = CombatManager.Instance.FADE_SORTING_ORDER - 1;
-        buffListCanvas.sortingOrder = CombatManager.Instance.FADE_SORTING_ORDER - 2; //Buffs should show under target icon
+        buffListCanvas.sortingOrder = CombatManager.Instance.FADE_SORTING_ORDER - 1;
         diceRollText.GetComponent<MeshRenderer>().sortingOrder = CombatManager.Instance.FADE_SORTING_ORDER - 1;
         healthBar.DeEmphasize();
     }

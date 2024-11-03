@@ -123,11 +123,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myTransform: {fileID: 0}
-  duplicateCardInstance: {fileID: 8032408625995450409, guid: 070567522da493546af6e1a3cc24a1f2, type: 3}
-  description: 
+  <Id>k__BackingField:
+    Part1: 1281532095
+    Part2: 1222602569
+    Part3: 1802643333
+    Part4: 1020763507
   icon: {fileID: 21300000, guid: dd8cc9f22fab37347beba8ec3b041c9f, type: 3}
   cardBack: {fileID: 21300000, guid: 8ac8a46b814e1b14f89b3829e430de25, type: 3}
   cardUI: {fileID: 0}
+  data:
+    <ActionClassName>k__BackingField: 
+    <CurrentProgress>k__BackingField: 0
+  slimeAttackSfx: {fileID: 8300000, guid: 90fc164dbd72a2041a7eaca8d637ac70, type: 3}
   animationFrame:
   - {fileID: 21300000, guid: 73e2ceabc110c8041b3ef9253af2bdf5, type: 3}
   - {fileID: 21300000, guid: e8c8be0959b81c84ba9002cbd84675d7, type: 3}
