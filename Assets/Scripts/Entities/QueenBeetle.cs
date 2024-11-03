@@ -55,13 +55,19 @@ public class QueenBeetle : EnemyClass
         MaxHealth = 50;
         Health = MaxHealth;
         myName = "The Queen";
+    }
+
+    protected override void OnEnable()
+    {
+        base.OnEnable();
 
         Beetle.OnGainBuffs += HandleGainedBuffs;
         Beetle.OnDeath += HandleBeetleDied;
     }
 
-    public void OnDisable()
+    protected override void OnDisable()
     {
+        base.OnDisable();
 
         Beetle.OnGainBuffs -= HandleGainedBuffs;
         Beetle.OnDeath -= HandleBeetleDied;

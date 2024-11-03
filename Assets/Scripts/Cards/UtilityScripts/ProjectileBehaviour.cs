@@ -11,25 +11,29 @@ public class ProjectileBehaviour : MonoBehaviour
 
     public IEnumerator ProjectileAnimation(OnHitDelegate onHitCallback, EntityClass origin, EntityClass target)
     {
-        yield return StartCoroutine(StartProjectileAnimation(origin, target));
+        return ProjectileAnimation(onHitCallback, origin, target.myTransform.position);
+    }
+
+    public IEnumerator ProjectileAnimation(OnHitDelegate onHitCallback, EntityClass origin, Vector3 targetPosition)
+    {
+        yield return StartCoroutine(StartProjectileAnimationWithPosition(origin, targetPosition));
         onHitCallback();
     }
 
-    private IEnumerator StartProjectileAnimation(EntityClass origin, EntityClass target)
+    private IEnumerator StartProjectileAnimationWithPosition(EntityClass origin, Vector3 targetPosition)
     {
         if (projectilePrefab == null) yield break;
         Vector3 originalPosition = origin.myTransform.position;
-        Vector3 destination = target.myTransform.position;
         float elapsedTime = 0f;
 
-        Vector3 diffInLocation = destination - originalPosition;
+        Vector3 diffInLocation = targetPosition - originalPosition;
 
         if ((Vector2)diffInLocation == Vector2.zero) yield break;
 
         float distance = Mathf.Sqrt(diffInLocation.x * diffInLocation.x + diffInLocation.y * diffInLocation.y);
 
         //UpdateFacing(diffInLocation, destination);
-        GameObject spitProjectile = Instantiate(projectilePrefab, originalPosition, UpdateAngle(origin, target));
+        GameObject spitProjectile = Instantiate(projectilePrefab, originalPosition, UpdateAngleWithPosition(origin, targetPosition));
         SpriteRenderer spitSpriteRenderer = spitProjectile.GetComponent<SpriteRenderer>();
         spitSpriteRenderer.sortingOrder = CombatManager.Instance.FADE_SORTING_ORDER;
         spitSpriteRenderer.sortingLayerName = CombatManager.Instance.FADE_SORTING_LAYER;
@@ -39,7 +43,7 @@ public class ProjectileBehaviour : MonoBehaviour
 
         while (elapsedTime < spitDuration)
         {
-            spitProjectile.GetComponent<Transform>().position = Vector3.Lerp(originalPosition, destination, elapsedTime / spitDuration);
+            spitProjectile.GetComponent<Transform>().position = Vector3.Lerp(originalPosition, targetPosition, elapsedTime / spitDuration);
             elapsedTime += Time.deltaTime;
             flipTimer += Time.deltaTime;
 
@@ -54,9 +58,9 @@ public class ProjectileBehaviour : MonoBehaviour
         Destroy(spitProjectile);
     }
 
-    private Quaternion UpdateAngle(EntityClass origin, EntityClass target)
+    private Quaternion UpdateAngleWithPosition(EntityClass origin, Vector3 targetPosition)
     {
-        Vector3 direction = target.myTransform.position - origin.myTransform.position;
+        Vector3 direction = targetPosition - origin.myTransform.position;
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         return Quaternion.Euler(new Vector3(0, 0, angle));
     }
