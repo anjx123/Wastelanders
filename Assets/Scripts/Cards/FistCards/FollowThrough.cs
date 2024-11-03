@@ -16,7 +16,7 @@ public class FollowThrough : FistCards
         {
             CombatManager.OnGameStateChanged -= GameStateChangedHandler;
         }
-        EntityClass.OnEntityDeath -= HandleTargetDeath;
+        EntityClass.OnEntityDeath -= HandleTargetOrOriginDeath;
     }
     public override void Initialize()
     {
@@ -46,7 +46,7 @@ public class FollowThrough : FistCards
             activeDuplicateInstance.attackAgainDelegate = attackAgainDelegate;
 
             Target.EntityTookDamage += attackAgainDelegate;
-            EntityClass.OnEntityDeath += HandleTargetDeath;
+            EntityClass.OnEntityDeath += HandleTargetOrOriginDeath;
             CombatManager.OnGameStateChanged += ResetBuffHandler;
             void ResetBuffHandler(GameState gameState)
             {
@@ -63,9 +63,9 @@ public class FollowThrough : FistCards
         base.CardIsUnstaggered();
     }
 
-    void HandleTargetDeath(EntityClass entity)
+    void HandleTargetOrOriginDeath(EntityClass entity)
     {
-        if (entity == Target)
+        if (entity == Target || entity == Origin)
         {
             Target.EntityTookDamage -= attackAgainDelegate;
         }

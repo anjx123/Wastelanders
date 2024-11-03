@@ -11,7 +11,7 @@ using UnityEngine;
 public class SoundEffectsDatabase : ScriptableObject
 {
     [SerializeField] private List<AudioClip> clipList;
-    private Dictionary<string, AudioClip> clipDictionary; //
+    private Dictionary<string, AudioClip> clipDictionary; 
 
     public AudioClip GetClipByName(string effectName)
     {

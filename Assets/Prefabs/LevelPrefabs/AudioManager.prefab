@@ -306,17 +306,6 @@ MonoBehaviour:
   SFXSoundsPlayer: {fileID: 7762219747329995850}
   BackgroundMusicPlayer: {fileID: 2139620353096365076}
   BackgroundMusicIntroPlayer: {fileID: 8912160525799525485}
-  sfxTuples:
-  - Item1: 2
-    Item2: {fileID: 8300000, guid: 2216874157ed9cc4896ac3a1f1f4daac, type: 3}
-  - Item1: 0
-    Item2: {fileID: 8300000, guid: 27cd69ddb25466947b74bece3f1f7cd0, type: 3}
-  - Item1: 3
-    Item2: {fileID: 8300000, guid: fc0ec51c395bb5342977af0ce5a5b57a, type: 3}
-  - Item1: 1
-    Item2: {fileID: 8300000, guid: 6f6f784b4102f264880a9c9d24589b73, type: 3}
-  - Item1: 4
-    Item2: {fileID: 8300000, guid: c0611b065b7a9734a8e3b41ec002f365, type: 3}
   backgroundMusicPrimary: {fileID: 0}
   backgroundMusicIntro: {fileID: 0}
   combatMusicPrimary: {fileID: 0}

@@ -19,10 +19,17 @@ public abstract class FrogAttacks : ActionClass
         {
             Origin.AttackAnimation("IsShooting");
         }
-        StartCoroutine(projectileBehaviour.ProjectileAnimation(OnProjectileHit, Origin, Target));
+        if (projectileBehaviour != null)
+        {
+            StartCoroutine(projectileBehaviour.ProjectileAnimation(OnProjectileHit, Origin, Target));
+        } else
+        {
+            AudioManager.Instance.PlaySFX(SPIT_SOUND_EFFECT_NAME); // temp sound effect.
+            base.OnHit();
+        }
     }
 
-    private void OnProjectileHit()
+    protected virtual void OnProjectileHit()
     {
         AudioManager.Instance.PlaySFX(SPIT_SOUND_EFFECT_NAME);
         base.OnHit();
