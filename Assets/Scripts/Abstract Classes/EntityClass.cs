@@ -55,6 +55,7 @@ public abstract class EntityClass : SelectClass
     public event DamageDelegate? EntityTookDamage;
 
     public delegate void EntityDelegate(EntityClass player);
+    public static event EntityDelegate? OnEntitySpawn;
     public static event EntityDelegate? OnEntityDeath;
     public static event EntityDelegate? OnEntityClicked;
     public event EntityDelegate? BuffsUpdatedEvent;
@@ -71,13 +72,16 @@ public abstract class EntityClass : SelectClass
 
         _DeathHandler = Die;
         DeathHandler = delegate { return _DeathHandler(); };
+
+        OnEntitySpawn?.Invoke(this);
     }
 
-    private void OnEnable()
+    protected virtual void OnEnable()
     {
         CombatManager.OnGameStateChanging += UpdateBuffsNewRound;
     }
-    private void OnDisable()
+
+    protected virtual void OnDisable()
     {
         CombatManager.OnGameStateChanging -= UpdateBuffsNewRound;
     }
@@ -98,6 +102,7 @@ public abstract class EntityClass : SelectClass
             percentageDone = Mathf.Clamp(damage / (float)Health, 0f, 1f);
         } else
         {
+            IsDead = true;
             OnEntityDeath?.Invoke(this);
         }
 
