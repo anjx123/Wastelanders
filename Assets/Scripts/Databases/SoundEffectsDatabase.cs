@@ -26,7 +26,6 @@ public class SoundEffectsDatabase : ScriptableObject
         foreach (AudioClip clip in clipList)
         {
             clipDictionary[clip.name] = clip;
-            Debug.Log("The clip name being created is called " + clip.name);
         }
     }
 }

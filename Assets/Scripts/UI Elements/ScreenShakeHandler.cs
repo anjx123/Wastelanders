@@ -38,8 +38,6 @@ public class ScreenShakeHandler : MonoBehaviour
         float time = Mathf.Min(0.3f, percentageMax);
         float shakeAmplitude = 1f + percentageMax / 2f;
         float shakeFrequency = 1f + percentageMax * 3f / 4f;
-        Debug.Log("My shaking intensity is" + shakeFrequency);
-        Debug.Log("My shaking amplitude is" + shakeAmplitude);
         CinemachineBasicMultiChannelPerlin virtualCameraNoise = DynamicCamera.GetCinemachineComponent<Cinemachine.CinemachineBasicMultiChannelPerlin>();
         virtualCameraNoise.m_AmplitudeGain = shakeAmplitude;
         virtualCameraNoise.m_FrequencyGain = shakeFrequency;
@@ -51,10 +49,8 @@ public class ScreenShakeHandler : MonoBehaviour
     //(@param percentageMax) is a float [0, 1]
     private IEnumerator ZoomEffect(float percentageMax)
     {
-        Debug.Log("My zoom in intensity is" + percentageMax);
         float startFOV = DynamicCamera.m_Lens.OrthographicSize;
         float endFOV = startFOV - percentageMax;
-        Debug.Log("My startFOV in intensity is" + startFOV + "My end FOV is " + endFOV);
         yield return StartCoroutine(ZoomCamera(startFOV, endFOV));
         yield return new WaitForSeconds(0.4f);
         yield return StartCoroutine(ZoomCamera(endFOV, startFOV));

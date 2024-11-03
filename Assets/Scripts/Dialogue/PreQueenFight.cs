@@ -619,17 +619,6 @@ public class PreQueenFight : DialogueClasses
             currentPosition + vectorToCenter + new Vector3(xBuffer, 0f, 0f);
     }
 
-    // assumes the crystal is in the right spot lol to begin with
-    private IEnumerator BeetleDragCrystal(Beetle b, Crystals c, Vector3 destination, float duration)
-    {
-        float distance = b.transform.position.x - c.transform.position.x;
-        Vector3 crystalDestination = new(destination.x - distance, destination.y, destination.z);
-
-        StartCoroutine(b.MoveToPosition(destination, 0, duration));
-        yield return StartCoroutine(c.CrystalMoveToPosition(crystalDestination, 0, duration));
-        yield return null;
-    }
-
     //Helpers
     //-----------------------------------------
     //Fade Background that gives you more control over the level of fade
