@@ -11,7 +11,7 @@ public class ContractSelect : MonoBehaviour
 
     protected virtual void Awake()
     {
-        switch (ContractManager.Instance.selectedLevel) 
+        switch (ContractManager.Instance.SelectedLevel) 
         {
             case GameStateManager.FROG_SLIME_FIGHT:
                 frogButtons.SetActive(true);
@@ -29,17 +29,16 @@ public class ContractSelect : MonoBehaviour
 
     public void OpenScene(string s) 
     {
-        if (s != ContractManager.Instance.selectedLevel) {
-            ContractManager.Instance.selectedLevel = ""; // "disengage contracts", temp fix
+        if (s != ContractManager.Instance.SelectedLevel) {
+            ContractManager.Instance.SelectedLevel = ""; // "disengage contracts", semantic solution
         }
-
 
         StartCoroutine(FadeLevelIn(s));
     }
 
     public void StartLevel() 
     {
-        OpenScene(ContractManager.Instance.selectedLevel);
+        OpenScene(ContractManager.Instance.SelectedLevel);
     }
 
     IEnumerator FadeLevelIn(string levelName)

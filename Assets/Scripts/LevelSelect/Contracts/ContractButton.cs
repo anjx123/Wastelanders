@@ -1,10 +1,14 @@
 using System;
 using UnityEngine;
 using UnityEngine.UI;
+using static Contracts;
+using static Challenges;
 
+// Originally was used to toggle specific contracts, repurposed to toggle specific challenges
 public class ContractButton : MonoBehaviour
 {
-    // the level, 0 being tutorial, 3 being queen
+    // The level 0-based index, 0 being tutorial, 3 being queen
+    // Temp solution to distinguish and enable button layouts
     public int level;
     public string contract;
     private bool selected;
@@ -15,21 +19,6 @@ public class ContractButton : MonoBehaviour
 
     protected virtual void Awake()
     {
-        switch (level) {
-            case 0:
-                Debug.LogError("No Tutorial Contracts!");
-                break;
-            case 1:
-                selected = ContractManager.Instance.GetContract(StringToContract<FrogContracts>(contract));
-                break;
-            case 2:
-                selected = ContractManager.Instance.GetContract(StringToContract<BeetleContracts>(contract));
-                break;
-            case 3:
-                selected = ContractManager.Instance.GetContract(StringToContract<QueenContracts>(contract));
-                break;
-        }
-
         // hmmmm uhh hmmm, prolly a better way to do this through unity and not just script
         activeColors = GetComponent<Button>().colors;
         inactiveColors = activeColors;
@@ -50,28 +39,32 @@ public class ContractButton : MonoBehaviour
                 Debug.LogError("No Tutorial Contracts!");
                 break;
             case 1:
-                ToggleContract(StringToContract<FrogContracts>(contract));
+                ToggleChallenge(StringToChallenge<FrogChallenges>(contract));
                 break;
             case 2:
-                ToggleContract(StringToContract<BeetleContracts>(contract));
+                ToggleChallenge(StringToChallenge<BeetleChallenges>(contract));
                 break;
             case 3:
-                ToggleContract(StringToContract<QueenContracts>(contract));
+                ToggleChallenge(StringToChallenge<QueenChallenges>(contract));
                 break;
         }
 
         GetComponent<Button>().colors = selected ? activeColors : inactiveColors;
     }
 
-    T StringToContract<T>(string contract) where T : Enum
+    T StringToChallenge<T>(string challenge) where T : Enum
     {
-        return (T) Enum.Parse(typeof(T), contract);
+        return (T) Enum.Parse(typeof(T), challenge);
     }
 
-    void ToggleContract<T>(T contract) where T : Enum 
+    void ToggleChallenge(Enum challenge) 
     {
-        bool newVal = !ContractManager.Instance.GetContract(contract);
-        ContractManager.Instance.SetSelected(contract, newVal);
+        if (selected) {
+            string flavourText = ContractManager.Instance.SetActiveChallenge(challenge);
+            Debug.Log(flavourText);
+        } else {
+            ContractManager.Instance.SetActiveChallenge(null);
+        }
     }
 
 }

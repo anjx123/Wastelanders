@@ -1,7 +1,5 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -28,7 +26,7 @@ public class LevelSelect : MonoBehaviour
 
     public void OpenContracts(string selectedLevel)
     {
-        ContractManager.Instance.selectedLevel = selectedLevel;
+        ContractManager.Instance.SelectedLevel = selectedLevel;
         StartCoroutine(FadeLevelIn(GameStateManager.CONTRACT_SELECT_NAME));
     }
 
@@ -50,12 +48,13 @@ public class LevelSelect : MonoBehaviour
     }
 
     // temporary solution to finding contract buttons and enabling them
-    private readonly Dictionary<string, int> TempMap = new Dictionary<string, int>() {
+    private readonly Dictionary<string, int> ButtonMap = new Dictionary<string, int>() {
         {GameStateManager.FROG_SLIME_FIGHT, 1},
         {GameStateManager.BEETLE_FIGHT, 2},
         {GameStateManager.PRE_QUEEN_FIGHT, 3},
     };
     public void CheckContracts() {
+        // temp for testing
         GameStateManager.Instance.CompletedQueenFight = true;
         GameStateManager.Instance.CompletedBeetleFight = true;
         GameStateManager.Instance.CompletedFrogAndSlimeFight = true;
@@ -69,13 +68,13 @@ public class LevelSelect : MonoBehaviour
 
         // temporary hard code solution
         if (!GameStateManager.Instance.CompletedFrogAndSlimeFight) {
-            Disable(contractButtons.transform.GetChild(TempMap[GameStateManager.FROG_SLIME_FIGHT]).gameObject);
+            Disable(contractButtons.transform.GetChild(ButtonMap[GameStateManager.FROG_SLIME_FIGHT]).gameObject);
         }
         if (!GameStateManager.Instance.CompletedBeetleFight) {
-            Disable(contractButtons.transform.GetChild(TempMap[GameStateManager.BEETLE_FIGHT]).gameObject);
+            Disable(contractButtons.transform.GetChild(ButtonMap[GameStateManager.BEETLE_FIGHT]).gameObject);
         }
         if (!GameStateManager.Instance.CompletedQueenFight) {
-            Disable(contractButtons.transform.GetChild(TempMap[GameStateManager.PRE_QUEEN_FIGHT]).gameObject);
+            Disable(contractButtons.transform.GetChild(ButtonMap[GameStateManager.PRE_QUEEN_FIGHT]).gameObject);
         }
     }
 }
