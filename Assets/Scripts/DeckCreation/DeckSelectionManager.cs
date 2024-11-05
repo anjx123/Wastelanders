@@ -375,13 +375,8 @@ public class DeckSelectionManager : MonoBehaviour
         }
         SaveLoadSystem.Instance.LoadCardEvolutionProgress();
 
-        SerializableTuple<WeaponType, SerializableTuple<int, int>> tuple = playerData.playerWeaponProficiency.FirstOrDefault(entry => entry.Item1 == weaponType);
-        int availablePoints = 0;
-        if (tuple != null)
-        {
-            availablePoints = tuple.Item2.Item2 - tuple.Item2.Item1;
-        }
-
+        SerializableTuple<WeaponType, SerializableTuple<int, int>> tuple = GetProficiencyPointsTuple(weaponType);
+        int availablePoints = tuple.Item2.Item2 - tuple.Item2.Item1;
         pointsText.TextUpdate("Select Your Cards:\nAvailable Points: " + availablePoints);
     }
 
