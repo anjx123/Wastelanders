@@ -6,7 +6,7 @@ using UnityEngine;
 
 public abstract class PlayerClass : EntityClass
 {
-    protected List<ActionClass> cardPrefabs; //Empty after intialization
+    protected List<InstantiableActionClassInfo> cardPrefabs; //Empty after intialization
 #nullable enable
 
     public delegate void PlayerEventDelegate(PlayerClass player);
@@ -37,13 +37,27 @@ public abstract class PlayerClass : EntityClass
         while (cardPrefabs.Count > 0)
         {
             int idx = UnityEngine.Random.Range(0, cardPrefabs.Count);
-            GameObject toAdd = Instantiate(cardPrefabs[idx].gameObject);
-            toAdd.GetComponent<ActionClass>().Origin = this;
+            GameObject toAdd = InstantiateCardPrefab(cardPrefabs[idx]);
             pool.Add(toAdd);
             toAdd.transform.position = new Vector3(-100, -100, 1);
             cardPrefabs.RemoveAt(idx);
         }
     }
+
+    private GameObject InstantiateCardPrefab(InstantiableActionClassInfo cardInfo)
+    {
+        GameObject toAdd = Instantiate(cardInfo.ActionClass.gameObject);
+        ActionClass card = toAdd.GetComponent<ActionClass>();
+        InitializeCard(card, cardInfo);
+        return toAdd;
+    }
+
+    private void InitializeCard(ActionClass card, InstantiableActionClassInfo cardInfo)
+    {
+        card.Origin = this;
+        card.IsEvolved = cardInfo.IsEvolved;
+    }
+
     public void InjectDeck(List<GameObject> actions)
     {
         DestroyDeck();

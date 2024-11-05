@@ -2,6 +2,8 @@ using UnityEngine;
 using System.Collections.Generic;
 using System;
 using TMPro;
+using Unity.Collections.LowLevel.Unsafe;
+using System.Linq;
 
 
 /*
@@ -59,9 +61,13 @@ public class CardDatabase : ScriptableObject
 
 
     // Converts a list of Action Class types to the actual prefab contained in this database. 
-    public List<ActionClass> ConvertStringsToCards(List<string> types)
+    public List<InstantiableActionClassInfo> GetPrefabInfoForDeck(List<SerializableTuple<string, bool>> tuples)
     {
-        return GetAllCards().FindAll(actionClass => types.Contains(actionClass.GetType().Name));
+        var instantiableCardInfos = tuples.Select(tuple => new InstantiableActionClassInfo(
+            GetAllCards().Find(actionClass => actionClass.GetType().Name == tuple.Item1),
+            tuple.Item2)
+        ).ToList();
+        return instantiableCardInfos;
     }
 
     // For performance reasons, use this if you know the type
@@ -79,3 +85,20 @@ public class CardDatabase : ScriptableObject
         AXE,
     }
 }
+
+// Struct that holds information that may be useful for an ActionClass when instantiating one. 
+public struct InstantiableActionClassInfo
+{
+    //Holds a reference to an ActionClass Prefab
+    public ActionClass ActionClass { get; private set; } 
+    public bool IsEvolved { get; private set; }
+
+    public InstantiableActionClassInfo(ActionClass actionClass, bool isEvolved)
+    {
+        this.ActionClass = actionClass;
+        this.IsEvolved = isEvolved;
+    }
+}
+
+
+

@@ -32,15 +32,9 @@ public class CombatManager : MonoBehaviour
     [SerializeField] private PlayerDatabase playerDatabase;
     [SerializeField] private CardDatabase cardDatabase;
 
-    public List<ActionClass> GetDeck(PlayerDatabase.PlayerName playerName)
+    public List<InstantiableActionClassInfo> GetDeck(PlayerDatabase.PlayerName playerName)
     {
-        List<SerializableTuple<string, bool>> playerCards = playerDatabase.GetDeckByPlayerName(playerName).ToList();
-        List<ActionClass> cards = cardDatabase.ConvertStringsToCards(playerCards.Select(p => p.Item1).ToList());
-        // PERF: There might be a better way to do this in ConvertStringsToCards, but IDK...
-        cards.ForEach(c => {
-            c.IsEvolved = playerCards.Find(i => i.Item1 == c.GetType().Name).Item2;
-        });
-        return cards;  
+        return cardDatabase.GetPrefabInfoForDeck(playerDatabase.GetDeckByPlayerName(playerName));
     }
 
 #nullable enable
