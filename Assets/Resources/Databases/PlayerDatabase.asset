@@ -21,26 +21,46 @@ MonoBehaviour:
         Item2: 10
     - Item1: 1
       Item2:
-        Item1: 0
+        Item1: 12
         Item2: 12
     - Item1: 0
       Item2:
-        Item1: 0
+        Item1: 12
         Item2: 12
     - Item1: 3
       Item2:
         Item1: 0
         Item2: 10
-    selectedWeapons: 0300000001000000
+    selectedWeapons: 0000000001000000
     playerDeck:
-    - key: 1
-      value: []
-    - key: 2
-      value: []
     - key: 0
-      value: []
-    - key: 3
-      value: []
+      value:
+      - Item1: CheapStrike
+        Item2: 0
+      - Item1: FocusedStrike
+        Item2: 0
+      - Item1: Trip
+        Item2: 0
+      - Item1: Flurry
+        Item2: 0
+      - Item1: CounterStrike
+        Item2: 0
+      - Item1: Jab
+        Item2: 0
+    - key: 1
+      value:
+      - Item1: HipFire
+        Item2: 0
+      - Item1: PistolWhip
+        Item2: 0
+      - Item1: Headshot
+        Item2: 0
+      - Item1: Silencer
+        Item2: 0
+      - Item1: IronSights
+        Item2: 0
+      - Item1: QuickDraw
+        Item2: 0
   IvesData:
     name: Ives
     playerWeaponProficiency:
@@ -62,35 +82,31 @@ MonoBehaviour:
         Item2: 14
     selectedWeapons: 0200000003000000
     playerDeck:
-    - key: 0
-      value: []
-    - key: 1
-      value: []
     - key: 2
       value:
-      - Item1: 
+      - Item1: Brace
         Item2: 0
-      - Item1: 
+      - Item1: LeftHook
         Item2: 0
-      - Item1: 
+      - Item1: RightHook
         Item2: 0
-      - Item1: 
+      - Item1: Pummel
         Item2: 0
-      - Item1: 
+      - Item1: Haymaker
         Item2: 0
-      - Item1: 
+      - Item1: FollowThrough
         Item2: 0
     - key: 3
       value:
-      - Item1: 
+      - Item1: Execute
         Item2: 0
-      - Item1: 
+      - Item1: SharpenedDefence
         Item2: 0
-      - Item1: 
+      - Item1: Cleave
         Item2: 0
-      - Item1: 
+      - Item1: Decimate
         Item2: 0
-      - Item1: 
+      - Item1: Mutilate
         Item2: 0
-      - Item1: 
+      - Item1: Whirl
         Item2: 0
