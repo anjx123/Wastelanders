@@ -10,6 +10,8 @@ using Systems.Persistence;
 //@author: Andrew
 public class BeetleFight : DialogueClasses
 {
+    [SerializeField] private List<GameObject> testDeck;
+
     [SerializeField] private Jackie jackie;
     [SerializeField] private Transform jackieDefaultTransform;
     [SerializeField] private Transform jackieChasingTransform;
@@ -170,6 +172,8 @@ public class BeetleFight : DialogueClasses
         draggedCrystal.OutOfCombat();
         beetleNest.SetActive(false);
         theCampWithBeetles.SetActive(false);
+        jackie.InjectDeck(testDeck);
+        jackie.InjectCard(testDeck[0]);
         ives.OutOfCombat();
         jackie.OutOfCombat(); //Workaround for now, ill have to remove this once i manually start instantiating players
         frog.OutOfCombat();

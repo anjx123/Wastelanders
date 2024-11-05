@@ -18,6 +18,7 @@ public class Spit : FrogAttacks
         lowerBound = 1;
         upperBound = 4;
         Speed = 4;
+        CostToAddToDeck = 1;
 
         myName = "Spit";
         description = "Gross!";
