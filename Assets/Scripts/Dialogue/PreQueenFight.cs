@@ -9,8 +9,6 @@ using UnityEngine.SceneManagement;
 //@author: Andrew
 public class PreQueenFight : DialogueClasses
 {
-    [SerializeField] private ScreenShake mainCamera;
-
     [SerializeField] private Jackie jackie;
     [SerializeField] private Transform jackieDefaultTransform;
     [SerializeField] private Ives ives;
@@ -51,7 +49,7 @@ public class PreQueenFight : DialogueClasses
 
     [SerializeField] private List<Beetle> campBeetles;
     [SerializeField] private List<Crystals> crystals;
-    [SerializeField] private Crystals bigCrystal;
+    [SerializeField] private Crystals middleBigCrystal;
     [SerializeField] private List<Crystals> bigCrystals;
 
 
@@ -218,10 +216,10 @@ public class PreQueenFight : DialogueClasses
                 yield return new WaitForSeconds(0.2f);
 
 
-                planOneJackie.AttackAnimation("IsStaffing");
+                planOneJackie.AttackAnimation(StaffCards.STAFF_ANIMATION_NAME);
                 Coroutine runBeetle = StartCoroutine(worker1.StaggerEntities(planOneJackie, worker2, 0.3f));
                 yield return new WaitForSeconds(0.2f);
-                planOneIves.AttackAnimation("IsMelee");
+                planOneIves.AttackAnimation(FistCards.FIST_ANIMATION_NAME);
                 yield return StartCoroutine(worker2.StaggerEntities(planOneIves, worker1, 0.3f));
                 yield return runBeetle;
                 DieInScene(worker1);
@@ -231,7 +229,7 @@ public class PreQueenFight : DialogueClasses
                 yield return new WaitForSeconds(0.8f);
                 yield return StartCoroutine(planOneJackie.MoveToPosition(jackieShotPosition.position, 0f, 0.5f));
                 StopCoroutine(beetleTriesToRun);
-                planOneJackie.AttackAnimation("IsShooting");
+                planOneJackie.AttackAnimation(PistolCards.PISTOL_ANIMATION_NAME);
                 yield return StartCoroutine(scout1.StaggerEntities(planOneJackie, scout1, 0.3f));
                 DieInScene(scout1);
                 entitiesInPlanOne.Remove(scout1);
@@ -315,10 +313,10 @@ public class PreQueenFight : DialogueClasses
                 yield return new WaitForSeconds(0.2f);
 
 
-                planTwoJackie.AttackAnimation("IsStaffing");
+                planTwoJackie.AttackAnimation(StaffCards.STAFF_ANIMATION_NAME);
                 Coroutine runBeetle = StartCoroutine(drone2.StaggerEntities(planTwoJackie, drone2, 0.3f));
                 yield return new WaitForSeconds(0.2f);
-                planTwoIves.AttackAnimation("IsAxing");
+                planTwoIves.AttackAnimation(AxeCards.AXE_ANIMATION_NAME);
                 yield return StartCoroutine(drone1.StaggerEntities(planTwoIves, drone1, 0.3f));
                 yield return runBeetle;
                 DieInScene(drone1);
@@ -427,9 +425,9 @@ public class PreQueenFight : DialogueClasses
                     crystal.DeEmphasize();
                 }
                 yield return StartCoroutine(DialogueManager.Instance.StartDialogue(AfterBeetleFightDialogue.Dialogue));
-                yield return StartCoroutine(jackie.MoveToPosition(bigCrystal.transform.position, 2f, 0.5f));
+                yield return StartCoroutine(jackie.MoveToPosition(middleBigCrystal.transform.position, 2f, 0.5f));
 
-                jackie.AttackAnimation("IsStaffing");
+                jackie.AttackAnimation(StaffCards.STAFF_ANIMATION_NAME);
                 jackie.AddStacks(Resonate.buffName, 1);
 
 
@@ -521,7 +519,7 @@ public class PreQueenFight : DialogueClasses
             CombatManager.Instance.GameState = GameState.SELECTION;
             BeginQueenCombat();
             yield return new WaitUntil(() => CombatManager.Instance.GameState == GameState.GAME_WIN);
-            MusicManager.Instance.FadeOutCurrentBackgroundTrack(2f);
+            AudioManager.Instance.FadeOutCurrentBackgroundTrack(2f);
             yield return new WaitForSeconds(1f);
             DialogueManager.Instance.MoveBoxToBottom();
 
@@ -619,17 +617,6 @@ public class PreQueenFight : DialogueClasses
         return vectorToCenter.x > 0 ?
             currentPosition + vectorToCenter - new Vector3(xBuffer, 0f, 0f) :
             currentPosition + vectorToCenter + new Vector3(xBuffer, 0f, 0f);
-    }
-
-    // assumes the crystal is in the right spot lol to begin with
-    private IEnumerator BeetleDragCrystal(Beetle b, Crystals c, Vector3 destination, float duration)
-    {
-        float distance = b.transform.position.x - c.transform.position.x;
-        Vector3 crystalDestination = new(destination.x - distance, destination.y, destination.z);
-
-        StartCoroutine(b.MoveToPosition(destination, 0, duration));
-        yield return StartCoroutine(c.CrystalMoveToPosition(crystalDestination, 0, duration));
-        yield return null;
     }
 
     //Helpers

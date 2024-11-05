@@ -5,10 +5,7 @@ public class Fragment : ActionClass
 {
     [SerializeField] private ProjectileBehaviour projectileBehaviour;
 
-    public override void OnCardStagger()
-    {
-
-    }
+    public const string FRAGMENT_SOUND_EFFECT_NAME = "Queen Pierce";
 
     // Start is called before the first frame update
     public override void Initialize()
@@ -36,9 +33,15 @@ public class Fragment : ActionClass
         {
             Origin.AttackAnimation("IsShooting");
         }
-        StartCoroutine(projectileBehaviour.ProjectileAnimation(base.OnHit, Origin, Target));
+        StartCoroutine(projectileBehaviour.ProjectileAnimation(OnProjectileHit, Origin, Target));
         if (Target is PlayerClass) {
             Origin.AddStacks(Resonate.buffName, 1);
         }
+    }
+
+    private void OnProjectileHit()
+    {
+        AudioManager.Instance.PlaySFX(FRAGMENT_SOUND_EFFECT_NAME);
+        base.OnHit();
     }
 }

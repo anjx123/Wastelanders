@@ -55,6 +55,7 @@ public abstract class EntityClass : SelectClass
     public event DamageDelegate? EntityTookDamage;
 
     public delegate void EntityDelegate(EntityClass player);
+    public static event EntityDelegate? OnEntitySpawn;
     public static event EntityDelegate? OnEntityDeath;
     public static event EntityDelegate? OnEntityClicked;
     public event EntityDelegate? BuffsUpdatedEvent;
@@ -71,13 +72,16 @@ public abstract class EntityClass : SelectClass
 
         _DeathHandler = Die;
         DeathHandler = delegate { return _DeathHandler(); };
+
+        OnEntitySpawn?.Invoke(this);
     }
 
-    private void OnEnable()
+    protected virtual void OnEnable()
     {
         CombatManager.OnGameStateChanging += UpdateBuffsNewRound;
     }
-    private void OnDisable()
+
+    protected virtual void OnDisable()
     {
         CombatManager.OnGameStateChanging -= UpdateBuffsNewRound;
     }
@@ -98,6 +102,7 @@ public abstract class EntityClass : SelectClass
             percentageDone = Mathf.Clamp(damage / (float)Health, 0f, 1f);
         } else
         {
+            IsDead = true;
             OnEntityDeath?.Invoke(this);
         }
 
@@ -113,6 +118,7 @@ public abstract class EntityClass : SelectClass
     //Requires: Entities are not dead
     private IEnumerator PlayHitAnimation(EntityClass origin, EntityClass target, float percentageDone)
     {
+        CombatManager.Instance.AttackCameraEffect(percentageDone);
         yield return StartCoroutine(StaggerEntities(origin, target, percentageDone));
     }
 
@@ -156,7 +162,10 @@ public abstract class EntityClass : SelectClass
      */
     public virtual IEnumerator MoveToPosition(Vector3 destination, float radius, float duration, Vector3? lookAtPosition = null)
     {
+        SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
+        float bottomOfCharacterZ = spriteRenderer.bounds.min.y - spriteRenderer.bounds.center.y;
         Vector3 originalPosition = myTransform.position;
+        destination = new Vector3(destination.x, destination.y, destination.z + ZOffset(destination.y + bottomOfCharacterZ));
         float elapsedTime = 0f;
 
         Vector3 diffInLocation = destination - originalPosition;
@@ -495,27 +504,39 @@ public abstract class EntityClass : SelectClass
     //Increases this Entity Class' sorting layer (negative number is higher up)
     public void Emphasize()
     {
+        SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
         Vector3 largeTransform = transform.position;
-        largeTransform.z = CombatManager.Instance.FADE_SORTING_ORDER - 3;
+        largeTransform.z = CombatManager.Instance.FADE_SORTING_ORDER - 3 + ZOffset(spriteRenderer.bounds.min.y);
         transform.position = largeTransform;
-        GetComponent<SpriteRenderer>().sortingOrder = CombatManager.Instance.FADE_SORTING_ORDER + 1;
+        spriteRenderer.sortingOrder = CombatManager.Instance.FADE_SORTING_ORDER + 1;
         combatInfo.Emphasize();
     }
 
     //Decreases this Entity Class' sorting layer. (Standardizes Sorting Layers for entities)
     public void DeEmphasize()
     {
+        SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
         Vector3 largeTransform = transform.position;
-        largeTransform.z = CombatManager.Instance.FADE_SORTING_ORDER - 1;
+        largeTransform.z = CombatManager.Instance.FADE_SORTING_ORDER - 1 + ZOffset(spriteRenderer.bounds.min.y);
         transform.position = largeTransform;
-        GetComponent<SpriteRenderer>().sortingOrder = CombatManager.Instance.FADE_SORTING_ORDER - 1;
+        spriteRenderer.sortingOrder = CombatManager.Instance.FADE_SORTING_ORDER - 1;
         combatInfo.DeEmphasize();
-        
+    }
+
+    // Workaround to prevent z clipping for entities
+    // The furthur 'down' a entity is, the more in the foreground it is. 
+    // Thus, apply a small offset that is greater for entites farther down in the scene so they appear in front.
+    private float ZOffset(float yPosition)
+    {
+        // Small delta values may still clip during screen shakes :(
+        float delta = 0.1f; 
+        return yPosition * delta;
     }
 
     public void OutOfCombat()
     {
         DisableHealthBar();
+        DisableDice();
         statusEffects.Clear();
         UpdateBuffs();
     }

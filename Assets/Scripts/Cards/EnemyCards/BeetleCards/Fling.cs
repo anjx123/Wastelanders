@@ -9,12 +9,6 @@ public class Fling : BeetleAttacks
 {
     [SerializeField] private ProjectileBehaviour projectileBehaviour;
 
-
-    public override void OnCardStagger()
-    {
-
-    }
-
     // Start is called before the first frame update
     public override void Initialize()
     {
@@ -41,9 +35,15 @@ public class Fling : BeetleAttacks
         {
             Origin.AttackAnimation("IsShooting");
         }
-        StartCoroutine(projectileBehaviour.ProjectileAnimation(base.OnHit, Origin, Target));
+        StartCoroutine(projectileBehaviour.ProjectileAnimation(OnProjectileHit, Origin, Target));
         if (Target is PlayerClass) {
             Origin.AddStacks(Resonate.buffName, 1);
         }
+    }
+
+    private void OnProjectileHit()
+    {
+        AudioManager.Instance.PlaySFX(Fragment.FRAGMENT_SOUND_EFFECT_NAME);
+        base.OnHit();
     }
 }
