@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using WeaponDeckSerialization;
 
 public class DeckSelectionTutorial : MonoBehaviour
 {
@@ -99,17 +100,14 @@ public class DeckSelectionTutorial : MonoBehaviour
         }
     }
 
-
-
-
-    //Completely removes the PISTOL deck from jackie
+    //Completely removes the PISTOL weaponDeck from jackie
     private void NormalizeTutorialDecks()
     {
         playerDatabase.JackieData.selectedWeapons.Remove(CardDatabase.WeaponType.PISTOL);
-        SerializableWeaponListEntry pistolDeck = playerDatabase.JackieData.playerDeck.FirstOrDefault(deck => deck.key == CardDatabase.WeaponType.PISTOL);
-        pistolDeck.value = new List<SerializableTuple<string, bool>>();
-        SerializableTuple<CardDatabase.WeaponType, SerializableTuple<int, int>> pointsAvailableForPistol = playerDatabase.JackieData.playerWeaponProficiency.FirstOrDefault(proficiency => proficiency.Item1 == CardDatabase.WeaponType.PISTOL);
-        pointsAvailableForPistol.Item2.Item1 = 0;
+        SerializableWeaponListEntry pistolDeck = playerDatabase.JackieData.playerDeck.FirstOrDefault(deck => deck.weapon == CardDatabase.WeaponType.PISTOL);
+        pistolDeck.weaponDeck = new List<SerializableActionClassInfo>();
+        WeaponProficiency pointsAvailableForPistol = playerDatabase.JackieData.playerWeaponProficiency.FirstOrDefault(proficiency => proficiency.WeaponType == CardDatabase.WeaponType.PISTOL);
+        pointsAvailableForPistol.CurrentPoints = 0;
     }
 
 

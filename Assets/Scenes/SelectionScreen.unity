@@ -2210,17 +2210,17 @@ MonoBehaviour:
   buffIcon: {fileID: 1058601267}
   explanationTextField: {fileID: 1101075570}
   explanationText:
-  - Item1: 0
-    Item2: Flow - The next attack gains +1 to its upper and lower bounds for each
-      stack of flow. Then consume all flow.
-  - Item1: 1
-    Item2: Accuracy - Lower bound of power increases by 1 per stack. On taking damage,
-      stacks are halved (rounded down).
-  - Item1: 2
-    Item2: Fist - Makes several small but impactful attacks.
-  - Item1: 3
-    Item2: Wound - Damage taken increases by 1 per stack. Loses 1 stack after each
-      round.
+  - <WeaponType>k__BackingField: 0
+    <ExplanationText>k__BackingField: Flow - The next attack gains +1 to its upper
+      and lower bounds for each stack of flow. Then consume all flow.
+  - <WeaponType>k__BackingField: 1
+    <ExplanationText>k__BackingField: Accuracy - Lower bound of power increases by
+      1 per stack. On taking damage, stacks are halved (rounded down).
+  - <WeaponType>k__BackingField: 2
+    <ExplanationText>k__BackingField: Fist - Makes several small but impactful attacks.
+  - <WeaponType>k__BackingField: 3
+    <ExplanationText>k__BackingField: Wound - Damage taken increases by 1 per stack.
+      Loses 1 stack after each round
 --- !u!1 &1115058807 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6647468808881570309, guid: 2bf19bd78e328204fb34ccaa75296151, type: 3}

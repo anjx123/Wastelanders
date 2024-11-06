@@ -6,6 +6,7 @@ using System.Linq;
 using static UnityEngine.EventSystems.EventTrigger;
 using System.Security.Cryptography;
 using Systems.Persistence;
+using WeaponDeckSerialization;
 
 public class CombatManager : MonoBehaviour
 {

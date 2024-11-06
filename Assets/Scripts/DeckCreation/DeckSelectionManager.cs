@@ -7,6 +7,8 @@ using System.Linq;
 using Systems.Persistence;
 using Unity.VisualScripting;
 using System;
+using WeaponDeckSerialization;
+using UnityEditor;
 
 public class DeckSelectionManager : MonoBehaviour
 {
@@ -112,7 +114,7 @@ public class DeckSelectionManager : MonoBehaviour
         {
             isFadingOut = true;
             SaveLoadSystem.Instance.SaveGame();
-            //EditorUtility.SetDirty(playerDatabase); // For easily resetting the default value of playerDatabase
+            EditorUtility.SetDirty(playerDatabase); // For easily resetting the default weaponDeck of playerDatabase
             yield return StartCoroutine(fadeScreenHandler.FadeInDarkScreen(0.8f));
             SceneManager.LoadScene(nextScene);
             isFadingOut = false;
@@ -159,14 +161,14 @@ public class DeckSelectionManager : MonoBehaviour
 
     private SerializableWeaponListEntry GetPlayerWeaponDeck(WeaponType weaponType)
     {
-        SerializableWeaponListEntry playerWeaponDeck = playerData.playerDeck.FirstOrDefault(entry => entry.key == weaponType);
+        SerializableWeaponListEntry playerWeaponDeck = playerData.playerDeck.FirstOrDefault(entry => entry.weapon == weaponType);
 
         if (playerWeaponDeck == null)
         {
             playerWeaponDeck = new SerializableWeaponListEntry()
             {
-                key = weaponType,
-                value = new List<SerializableTuple<string, bool>>()
+                weapon = weaponType,
+                weaponDeck = new List<SerializableActionClassInfo>()
             };
             playerData.playerDeck.Add(playerWeaponDeck);
         }
@@ -174,31 +176,25 @@ public class DeckSelectionManager : MonoBehaviour
         return playerWeaponDeck;
     }
 
-    private SerializableTuple<WeaponType, SerializableTuple<int, int>> GetProficiencyPointsTuple(WeaponType weaponType)
+    private WeaponProficiency GetProficiencyPointsTuple(WeaponType weaponType)
     {
-        var proficiencyPointsTuple = playerData.playerWeaponProficiency.FirstOrDefault(entry => entry.Item1 == weaponType);
+        var proficiencyPointsTuple = playerData.playerWeaponProficiency.FirstOrDefault(entry => entry.WeaponType == weaponType);
         if (proficiencyPointsTuple == null)
         {
-            proficiencyPointsTuple = new(weaponType, new(0, 0));
+            proficiencyPointsTuple = new WeaponProficiency(weaponType, 0, 0);
             playerData.playerWeaponProficiency.Add(proficiencyPointsTuple);
         }
         return proficiencyPointsTuple;
     }
 
-    // Left int represents currentPoints, right represents Max Points allowed
-    private SerializableTuple<int, int> GetWeaponPointTuple(WeaponType weaponType)
-    {
-        return GetProficiencyPointsTuple(weaponType).Item2;
-    }
-
     private bool DeckContainsCard(ActionClass ac)
     {
-        return GetPlayerWeaponDeck(weaponType).value.FirstOrDefault(action => action.Item1 == ac.GetType().Name) != null;
+        return GetPlayerWeaponDeck(weaponType).weaponDeck.FirstOrDefault(action => action.ActionClassName == ac.GetType().Name) != null;
     }
 
-    private void OnUpdateDeck(SerializableTuple<int, int> weaponPointTuple)
+    private void OnUpdateDeck(WeaponProficiency weaponPointTuple)
     {
-        int availablePoints = weaponPointTuple.Item2 - weaponPointTuple.Item1;
+        int availablePoints = weaponPointTuple.MaxPoints - weaponPointTuple.CurrentPoints;
         pointsText.TextUpdate("Select Your Cards:\nAvailable Points: " + availablePoints.ToString());
 
         PlayerActionDeckModifiedEvent?.Invoke(availablePoints);
@@ -208,33 +204,29 @@ public class DeckSelectionManager : MonoBehaviour
     private void DeselectFromDeck(ActionClass ac, bool performChecks = true)
     {
         SerializableWeaponListEntry playerWeaponDeck = GetPlayerWeaponDeck(weaponType);
-        var weaponPointTuple = GetWeaponPointTuple(weaponType);
+        WeaponProficiency weaponPointTuple = GetProficiencyPointsTuple(weaponType);
 
         if (!performChecks || DeckContainsCard(ac))
         {
-            weaponPointTuple.Item1 -= ac.CostToAddToDeck;
+            weaponPointTuple.CurrentPoints -= ac.CostToAddToDeck;
             ac.SetSelectedForDeck(false);
-            var actionFound = playerWeaponDeck.value.FirstOrDefault(action => action.Item1 == ac.GetType().Name);
-            playerWeaponDeck.value.Remove(actionFound);
+            var actionFound = playerWeaponDeck.weaponDeck.FirstOrDefault(action => action.ActionClassName == ac.GetType().Name);
+            playerWeaponDeck.weaponDeck.Remove(actionFound);
             OnUpdateDeck(weaponPointTuple);
-        }
-        else
-        {
-            Debug.LogWarning("Attempted to remove card from deck but didn't find anything.");
         }
     }
 
     private void AddToDeck(ActionClass ac, bool performChecks = true)
     {
         SerializableWeaponListEntry playerWeaponDeck = GetPlayerWeaponDeck(weaponType);
-        var weaponPointTuple = GetWeaponPointTuple(weaponType);
+        WeaponProficiency weaponPointTuple = GetProficiencyPointsTuple(weaponType);
 
         // Do we have sufficient points? If so, are we trying to add the evolved form? If so, is the evolution progress sufficient?
-        if ((!performChecks || weaponPointTuple.Item1 + ac.CostToAddToDeck <= weaponPointTuple.Item2) && (!ac.IsFlipped || (ac.IsFlipped && ac.CanEvolve())))
+        if ((!performChecks || weaponPointTuple.CurrentPoints + ac.CostToAddToDeck <= weaponPointTuple.MaxPoints) && (!ac.IsFlipped || (ac.IsFlipped && ac.CanEvolve())))
         {
-            weaponPointTuple.Item1 += ac.CostToAddToDeck;
+            weaponPointTuple.CurrentPoints += ac.CostToAddToDeck;
             ac.SetSelectedForDeck(true);
-            playerWeaponDeck.value.Add(new (ac.GetType().Name, ac.IsFlipped && ac.CanEvolve()));
+            playerWeaponDeck.weaponDeck.Add(new (ac.GetType().Name, ac.IsFlipped && ac.CanEvolve()));
             OnUpdateDeck(weaponPointTuple);
         }
         else
@@ -303,7 +295,7 @@ public class DeckSelectionManager : MonoBehaviour
     }
 
 
-    //Renders the deck corresponding to (@param weaponType)
+    //Renders the weaponDeck corresponding to (@param weaponType)
     public void RenderDecks(CardDatabase.WeaponType weaponType)
     {
         int width = 6; // The width of the grid in # of cards 
@@ -316,7 +308,7 @@ public class DeckSelectionManager : MonoBehaviour
 
         UnrenderDecks();
 
-        List<ActionClass> chosenCardList = cardDatabase.ConvertStringsToCards(weaponType, playerData.GetDeckByWeaponType(weaponType).Select(p => p.Item1).ToList());
+        List<ActionClass> chosenCardList = cardDatabase.ConvertStringsToCards(weaponType, playerData.GetDeckByWeaponType(weaponType).Select(p => p.ActionClassName).ToList());
         List<ActionClass> cardsToRender = cardDatabase.GetCardsByType(weaponType);
 
         List<GameObject> instantiatedCards = new List<GameObject>();
@@ -375,8 +367,8 @@ public class DeckSelectionManager : MonoBehaviour
         }
         SaveLoadSystem.Instance.LoadCardEvolutionProgress();
 
-        SerializableTuple<WeaponType, SerializableTuple<int, int>> tuple = GetProficiencyPointsTuple(weaponType);
-        int availablePoints = tuple.Item2.Item2 - tuple.Item2.Item1;
+        WeaponProficiency weaponPointTuple = GetProficiencyPointsTuple(weaponType);
+        int availablePoints = weaponPointTuple.MaxPoints - weaponPointTuple.CurrentPoints;
         pointsText.TextUpdate("Select Your Cards:\nAvailable Points: " + availablePoints);
     }
 

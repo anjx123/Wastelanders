@@ -30,7 +30,7 @@ namespace Systems.Persistence
     public class SaveLoadSystem : PersistentSingleton<SaveLoadSystem>
     {
         private const string SAVE_FILE_NAME = "Wastelanders Save File";
-        [SerializeField] public GameData gameData;
+        [SerializeField] private GameData gameData;
         private PlayerDatabase defaultPlayerDatabase;
         private CardDatabase defaultCardDatabase;
 

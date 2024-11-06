@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Systems.Persistence;
 using UnityEngine;
+using WeaponDeckSerialization;
 
 public abstract class PlayerClass : EntityClass
 {

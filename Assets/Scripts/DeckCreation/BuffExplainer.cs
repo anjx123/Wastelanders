@@ -8,13 +8,13 @@ public class BuffExplainer : MonoBehaviour
 {
     [SerializeField] SpriteRenderer buffIcon;
     [SerializeField] TextMeshPro explanationTextField;
-    [SerializeField] List<SerializableTuple<CardDatabase.WeaponType, string>> explanationText;
+    [SerializeField] List<WeaponExplanation> explanationText;
 #nullable enable
     private StatusEffect? currentEffect;
 
     public void RenderExplanationForBuff(CardDatabase.WeaponType weaponType)
     {
-        explanationTextField.text = explanationText.FirstOrDefault(tuple => tuple.Item1 == weaponType).Item2;
+        explanationTextField.text = explanationText.FirstOrDefault(tuple => tuple.WeaponType == weaponType).ExplanationText;
         switch (weaponType)
         {
             case CardDatabase.WeaponType.STAFF:
@@ -32,5 +32,13 @@ public class BuffExplainer : MonoBehaviour
         }
 
         buffIcon.sprite = currentEffect?.GetIcon();
+    }
+
+
+    [System.Serializable]
+    private class WeaponExplanation
+    {
+        [field: SerializeField] public CardDatabase.WeaponType WeaponType { get; set; }
+        [field: SerializeField] public string ExplanationText { get; set; } = "";
     }
 }

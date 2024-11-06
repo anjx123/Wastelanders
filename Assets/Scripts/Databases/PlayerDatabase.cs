@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Systems.Persistence;
 using UnityEngine;
+using WeaponDeckSerialization;
 using static PlayerDatabase;
 
 /*
@@ -28,7 +29,7 @@ public class PlayerDatabase : ScriptableObject, IBind<PlayerInformation>
         }
     }
 
-    public List<SerializableTuple<string, bool>> GetDeckByPlayerName(PlayerName player)
+    public List<SerializableActionClassInfo> GetDeckByPlayerName(PlayerName player)
     {
         switch (player)
         {
@@ -51,39 +52,39 @@ public class PlayerDatabase : ScriptableObject, IBind<PlayerInformation>
     public class PlayerData
     {
         public string name = ""; 
-        public List<SerializableTuple<CardDatabase.WeaponType, SerializableTuple<int, int>>> playerWeaponProficiency = new(); //left int is current points taken up, right is MAX proficiency points
+        public List<WeaponProficiency> playerWeaponProficiency = new();
         public List<CardDatabase.WeaponType> selectedWeapons = new();
         public List<SerializableWeaponListEntry> playerDeck = new();
 
 
         //Gets the combination of both smaller decks
-        public List<SerializableTuple<string, bool>> GetCombinedDeck()
+        public List<SerializableActionClassInfo> GetCombinedDeck()
         {
-            List<SerializableTuple<string, bool>> combinedDeck = new();
+            List<SerializableActionClassInfo> combinedDeck = new();
 
             foreach (var entry in playerDeck)
             {
-                if (selectedWeapons.Contains(entry.key))
+                if (selectedWeapons.Contains(entry.weapon))
                 {
-                    combinedDeck.AddRange(entry.value);
+                    combinedDeck.AddRange(entry.weaponDeck);
                 }
             }
 
             return combinedDeck;
         }
 
-        //Like a dictionary, gets the player deck by the weapon type, if not contained, return a empty list
-        public List<SerializableTuple<string, bool>> GetDeckByWeaponType(CardDatabase.WeaponType weaponType)
+        //Like a dictionary, gets the player weaponDeck by the weapon type, if not contained, return a empty list
+        public List<SerializableActionClassInfo> GetDeckByWeaponType(CardDatabase.WeaponType weaponType)
         {
             foreach (var entry in playerDeck)
             {
-                if (entry.key == weaponType)
+                if (entry.weapon == weaponType)
                 {
-                    return entry.value;
+                    return entry.weaponDeck;
                 }
             }
 
-            return new List<SerializableTuple<string, bool>>();
+            return new List<SerializableActionClassInfo>();
         }
     }
 

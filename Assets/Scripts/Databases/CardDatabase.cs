@@ -4,6 +4,7 @@ using System;
 using TMPro;
 using Unity.Collections.LowLevel.Unsafe;
 using System.Linq;
+using WeaponDeckSerialization;
 
 
 /*
@@ -19,7 +20,7 @@ public class CardDatabase : ScriptableObject
     public List<FistCards> fistCards;
     public List<AxeCards> axeCards;
 
-    //Grabs the corresponding deck to the (@param weaponType)
+    //Grabs the corresponding weaponDeck to the (@param weaponType)
     public List<ActionClass> GetCardsByType(WeaponType type)
     {
         switch (type)
@@ -61,11 +62,11 @@ public class CardDatabase : ScriptableObject
 
 
     // Converts a list of Action Class types to the actual prefab contained in this database. 
-    public List<InstantiableActionClassInfo> GetPrefabInfoForDeck(List<SerializableTuple<string, bool>> tuples)
+    public List<InstantiableActionClassInfo> GetPrefabInfoForDeck(List<SerializableActionClassInfo> tuples)
     {
         var instantiableCardInfos = tuples.Select(tuple => new InstantiableActionClassInfo(
-            GetAllCards().Find(actionClass => actionClass.GetType().Name == tuple.Item1),
-            tuple.Item2)
+            actionClass: GetAllCards().Find(actionClass => actionClass.GetType().Name == tuple.ActionClassName),
+            isEvolved: tuple.IsEvolved)
         ).ToList();
         return instantiableCardInfos;
     }
@@ -85,20 +86,4 @@ public class CardDatabase : ScriptableObject
         AXE,
     }
 }
-
-// Struct that holds information that may be useful for an ActionClass when instantiating one. 
-public struct InstantiableActionClassInfo
-{
-    //Holds a reference to an ActionClass Prefab
-    public ActionClass ActionClass { get; private set; } 
-    public bool IsEvolved { get; private set; }
-
-    public InstantiableActionClassInfo(ActionClass actionClass, bool isEvolved)
-    {
-        this.ActionClass = actionClass;
-        this.IsEvolved = isEvolved;
-    }
-}
-
-
 
