@@ -145,4 +145,26 @@ public class AudioManager : MonoBehaviour
         BackgroundMusicPlayer.clip = backgroundMusicDeath;
         BackgroundMusicPlayer.Play();
     }
+
+    public void ToggleSFX()
+    {
+        SFXSoundsPlayer.mute = !SFXSoundsPlayer.mute;
+    }
+
+    public void ToggleMusic()
+    {
+        BackgroundMusicIntroPlayer.mute = !BackgroundMusicIntroPlayer.mute;
+        BackgroundMusicPlayer.mute = !BackgroundMusicPlayer.mute;
+    }
+
+    public void SFXVolume(float volume)
+    {
+        SFXSoundsPlayer.volume = volume;
+    }
+
+    public void MusicVolume(float volume)
+    {
+        BackgroundMusicIntroPlayer.volume = volume;
+        BackgroundMusicPlayer.volume = volume;
+    }
 }
