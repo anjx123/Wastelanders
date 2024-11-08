@@ -4,10 +4,6 @@ using UnityEngine;
 
 public class CheapStrike : StaffCards
 {
-    public override void OnCardStagger()
-    {
-
-    }
 
     // Start is called before the first frame update
     public override void Initialize()

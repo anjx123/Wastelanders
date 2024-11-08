@@ -13,11 +13,4 @@ public class SlimeStack : EnemyClass
         Health = MaxHealth;
         myName = "Le Slime Stack";
     }
-
-    public override void TakeDamage(EntityClass source, int damage)
-    {
-        MusicManager.Instance.PlaySFX(MusicManager.SFXList.slime_damage_taken);
-        base.TakeDamage(source, damage);
-    }
-
 }

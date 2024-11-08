@@ -306,7 +306,6 @@ MonoBehaviour:
   SFXSoundsPlayer: {fileID: 7762219747329995850}
   BackgroundMusicPlayer: {fileID: 2139620353096365076}
   BackgroundMusicIntroPlayer: {fileID: 8912160525799525485}
-  sfxTuples: []
   backgroundMusicPrimary: {fileID: 0}
   backgroundMusicIntro: {fileID: 0}
   combatMusicPrimary: {fileID: 0}

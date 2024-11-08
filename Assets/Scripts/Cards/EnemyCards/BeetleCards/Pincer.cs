@@ -7,10 +7,7 @@ using static UnityEngine.UI.Image;
 
 public class Pincer : BeetleAttacks
 {
-    public override void OnCardStagger()
-    {
-
-    }
+    public const string PINCER_SOUND_EFFECT_NAME = "Pincer Cut";
 
     // Start is called before the first frame update
     public override void Initialize()
@@ -28,6 +25,12 @@ public class Pincer : BeetleAttacks
         Renderer renderer = GetComponent<Renderer>();
         ogMaterial = renderer.material; // og sprite of card
         OriginalPosition = transform.position;
+    }
+
+    public override void OnHit()
+    {
+        AudioManager.Instance.PlaySFX(PINCER_SOUND_EFFECT_NAME);
+        base.OnHit();
     }
 
     public override void CardIsUnstaggered()

@@ -18,7 +18,6 @@ public class TrainingDummy : EnemyClass
     {
         BattleQueue.BattleQueueInstance.RemoveAllInstancesOfEntity(this);
         CombatManager.Instance.RemoveEnemy(this);
-        isDead = true;
         yield break;
     }
 

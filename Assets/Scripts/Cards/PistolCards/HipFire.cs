@@ -26,6 +26,7 @@ public class HipFire : PistolCards
             activeDuplicateInstance.Target = Target;
             BattleQueue.BattleQueueInstance.AddAction(activeDuplicateInstance!);
         }
+        base.CardIsUnstaggered();
     }
 
 

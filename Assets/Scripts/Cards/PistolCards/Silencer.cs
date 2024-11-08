@@ -4,10 +4,6 @@ using UnityEngine;
 
 public class Silencer : PistolCards
 {
-    public override void OnCardStagger()
-    {
-
-    }
 
     // Start is called before the first frame update
     public override void Initialize()
