@@ -31,8 +31,8 @@ public class FocusedStrike : StaffCards
     {
         base.OnHit();
         Origin.AddStacks(Flow.buffName, 1);
-        if (Origin.getRolledDamage() >= 8) {
-            currentEvolutionProgress++;
+        if (getRolledDamage() >= 8) {
+            CurrentEvolutionProgress++;
         }
     }
 

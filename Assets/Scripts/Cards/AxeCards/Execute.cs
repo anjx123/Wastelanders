@@ -28,7 +28,6 @@ public class Execute : AxeCards
     {
         IncrementRoll(Target.GetBuffStacks(Wound.buffName));
         base.OnHit();
-        CurrentEvolutionProgress = getRolledDamage();
-        // CurrentEvolutionProgress = min(getRolledDamage(), 10);
+        CurrentEvolutionProgress = Mathf.Max(getRolledDamage(), CurrentEvolutionProgress);
     }
 }
