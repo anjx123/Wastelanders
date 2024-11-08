@@ -10,11 +10,12 @@ public class Decimate : AxeCards
     {
         lowerBound = 2;
         upperBound = 6;
-        Speed = 2;
+        Speed = IsEvolved ? 4 : 2;
 
         myName = "Decimate";
         description = "On hit, double the amount of wounds on the target. Then add an aditional wound.";
-        evolutionDescription = "Double 10 wounds.";
+        evolutionCriteria = "Double 10 wounds.";
+        evolutionDescription = "Change this card's speed to 4.";
         MaxEvolutionProgress = 10;
 
         Renderer renderer = GetComponent<Renderer>();

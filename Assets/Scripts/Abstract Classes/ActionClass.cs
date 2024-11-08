@@ -82,6 +82,7 @@ public abstract class ActionClass : SelectClass, IBind<ActionData>
     protected string description;
     public string Description { get { return description; }}
     public string evolutionDescription { get; protected set; }
+    public string evolutionCriteria{ get; protected set; }
     [SerializeField] private Sprite icon;
     public Sprite cardBack;
     [SerializeField] private CardUI cardUI;
@@ -396,6 +397,17 @@ public abstract class ActionClass : SelectClass, IBind<ActionData>
         this.data = data;
         this.data.Id = Id;
     }
+
+    public virtual void ClashWon() {
+        Origin.combatInfo.setDiceColor(Color.green);
+    }
+    public virtual void ClashTied() {
+        Origin.combatInfo.setDiceColor(Color.white);
+    }
+    public virtual void ClashLost() {
+        Origin.combatInfo.setDiceColor(Color.red);
+    }
+
 }
 
 [Serializable]

@@ -64,18 +64,18 @@ public class CardComparator : MonoBehaviour
 
         if (cardOneGreater < 0)
         {
-            card1.Origin.combatInfo.setDiceColor(Color.red);
-            card2.Origin.combatInfo.setDiceColor(Color.green);
+            card1.ClashLost();
+            card2.ClashWon();
         }
         else if (cardOneGreater == 0)
         {
-            card1.Origin.combatInfo.setDiceColor(Color.white);
-            card2.Origin.combatInfo.setDiceColor(Color.white);
+            card1.ClashTied();
+            card2.ClashTied();
         }
         else
         {
-            card2.Origin.combatInfo.setDiceColor(Color.red);
-            card1.Origin.combatInfo.setDiceColor(Color.green);
+            card2.ClashLost();
+            card1.ClashWon();
         }
 
         if (IsAttack(card1) && IsAttack(card2))

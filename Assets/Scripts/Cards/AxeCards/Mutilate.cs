@@ -21,10 +21,13 @@ public class Mutilate : AxeCards
     {
         lowerBound = 2;
         upperBound = 6;
-        Speed = 3;
+        Speed = IsEvolved ? 5 : 3;
 
         myName = "Mutilate";
         description = "On hit, the target gains a wound stack. Then the target gains one wound each time they take damage this turn.";
+        evolutionCriteria = "Generate an extra 8+ wound with this card.";
+        evolutionDescription = "Speed is increased to 5.";
+        MaxEvolutionProgress = 8;
         Renderer renderer = GetComponent<Renderer>();
         ogMaterial = renderer.material;
         OriginalPosition = transform.position;
@@ -37,6 +40,7 @@ public class Mutilate : AxeCards
         if (damage > 0)
         {
             Target.AddStacks(Wound.buffName, 1); //After taking damage, target gains a stack of wound
+            CurrentEvolutionProgress++;
         }
     }
 

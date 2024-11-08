@@ -145,6 +145,8 @@ public class CombatManager : MonoBehaviour
         baseCamera.Priority = 1;
         dynamicCamera.Priority = 0;
         StartCoroutine(FadeCombatBackground(false));
+
+        // Might not capture newly spawned instances of cards, somehow they need to attract their evolved state and data binding. 
         SaveLoadSystem.Instance.LoadCardEvolutionProgress(); // Most universal place to put this is here, but tagged for performance optimizations
 
         // Each enemy declares an attack. players is passed to AddAttack so the enemy can choose a target.
