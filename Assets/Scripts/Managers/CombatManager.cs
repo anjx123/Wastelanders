@@ -255,8 +255,6 @@ public class CombatManager : MonoBehaviour
         dynamicCamera.Priority = 0;
         // Save game after each win (including wiping out a wave) 
         SaveLoadSystem.Instance.SaveGame();
-        // Notify contract manager of any active contracts of completion
-        ContractManager.Instance.NotifyWin();
     }
 
 

@@ -26,7 +26,7 @@ public class LevelSelect : MonoBehaviour
 
     public void OpenContracts(string selectedLevel)
     {
-        ContractManager.Instance.SelectedLevel = selectedLevel;
+        BountyManager.Instance.SelectedBounty = selectedLevel;
         StartCoroutine(FadeLevelIn(GameStateManager.CONTRACT_SELECT_NAME));
     }
 

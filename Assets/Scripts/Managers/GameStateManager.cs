@@ -1,4 +1,5 @@
 
+using BountySystem;
 using System.Runtime.CompilerServices;
 using Systems.Persistence;
 using UnityEngine;
@@ -104,6 +105,9 @@ public class GameStateManager : PersistentSingleton<GameStateManager>, IBind<Gam
     public const string PRE_QUEEN_FIGHT = "PreQueenFightScene";
     public const string POST_QUEEN_FIGHT = "PostQueenBeetle";
     public const string CREDITS = "Credits";
+
+    // static allows you to run this typeof check at runtime
+    public static readonly string PRINCESS_FROG_BOUNTY = typeof(PrincessFrogBounties).Name;
 }
 
 
