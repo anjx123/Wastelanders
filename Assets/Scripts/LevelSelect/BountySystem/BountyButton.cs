@@ -14,9 +14,6 @@ public class BountyButton : MonoBehaviour
     
     // late init !!
     private IBounties? bounty = null;
-    public delegate void BountyButtonDelegate();
-    public static event BountyButtonDelegate? OnButtonSelected;
-
     private ColorBlock activeColors;
     private ColorBlock inactiveColors;
     private const float INACTIVE_ALPHA = 0.5f;
@@ -37,7 +34,7 @@ public class BountyButton : MonoBehaviour
     public void OnSelect() 
     {
         selected = !selected;
-        OnButtonSelected?.Invoke();
+        BountyManager.Instance.ActiveBounty = bounty;
         GetComponent<Button>().colors = selected ? activeColors : inactiveColors;
     }
 

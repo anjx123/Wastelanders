@@ -6,17 +6,19 @@ using System.Linq;
 using BountySystem;
 
 # nullable enable
-
-// ContractManager should be the only interface any other place interacts with contract related data
+// A class that persists the current bounty information of the player
 public class BountyManager : PersistentSingleton<BountyManager>, IBind<BountyStateData>
 {
     [field: SerializeField] public SerializableGuid Id { get; set; } = SerializableGuid.NewGuid();
     private BountyStateData? ContractStateData;
-    private IBounties? ActiveBounty { get; set; } = null;
-    // The bounty stage in question, all ActiveBounty should be of actual type BountyTypes 
-    public string? SelectedBounty { get; set; } = null;
 
-    // Clears active contracts, sets them as completed
+    //The literal type name of the concrete IBounties class that is selected. (You can't specify types in the Unity editor, so we use the class name instead) 
+    public string? SelectedBountyTypeName { get; set; } = null;
+
+    // All ActiveBounty should be of actual type SelectedBountyTypeName 
+    public IBounties? ActiveBounty { get; set; } = null;
+
+
     public void NotifyWin()
     {
         if (ActiveBounty != null) ContractStateData?.SetChallengeComplete(ActiveBounty);

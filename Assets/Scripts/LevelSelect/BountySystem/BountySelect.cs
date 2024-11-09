@@ -25,7 +25,7 @@ public class BountySelect : MonoBehaviour
 
     private void CreateButtonForBounty(IBounties bounty)
     {
-        if (bounty.GetType().Name == BountyManager.Instance.SelectedBounty)
+        if (bounty.GetType().Name == BountyManager.Instance.SelectedBountyTypeName)
         {
             BountyButton bountyButton = Instantiate(bountyButtonPrefab);
             bountyButton.Initialize(bounty);
@@ -40,7 +40,7 @@ public class BountySelect : MonoBehaviour
 
     public void StartLevel()
     {
-        OpenScene(BountyManager.Instance.SelectedBounty);
+        OpenScene(BountyManager.Instance.ActiveBounty.SceneName);
     }
 
     IEnumerator FadeLevelIn(string levelName)

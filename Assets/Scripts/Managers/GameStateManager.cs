@@ -16,7 +16,12 @@ public class GameStateManager : PersistentSingleton<GameStateManager>, IBind<Gam
     { 
         get
         {
-            if (data == null) SaveLoadSystem.Instance.LoadGameStateInformation();
+            if (data == null)
+            {
+                Debug.LogWarning("The data for game state data was null, if you see this note it down.");
+                SaveLoadSystem.Instance.LoadGameStateInformation();
+            }
+
             return data;
         }
         set
@@ -106,8 +111,7 @@ public class GameStateManager : PersistentSingleton<GameStateManager>, IBind<Gam
     public const string POST_QUEEN_FIGHT = "PostQueenBeetle";
     public const string CREDITS = "Credits";
 
-    // static allows you to run this typeof check at runtime
-    public static readonly string PRINCESS_FROG_BOUNTY = typeof(PrincessFrogBounties).Name;
+    public const string PRINCESS_FROG_BOUNTY = "PrincessFrogCombatScene";
 }
 
 

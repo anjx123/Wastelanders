@@ -37,6 +37,8 @@ public class PrincessFrogBounties : IBounties
     public string FlavourText { get; }
     public string ChallengeName { get; }
 
+    public string SceneName => GameStateManager.PRINCESS_FROG_BOUNTY;
+
     public PrincessFrogBounties(HashSet<IContracts> bountySet, string challengeName, string flavourText)
     {
         BountySet = bountySet;
