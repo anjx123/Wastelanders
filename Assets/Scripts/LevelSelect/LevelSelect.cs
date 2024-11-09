@@ -14,7 +14,7 @@ public class LevelSelect : MonoBehaviour
     protected virtual void Awake()
     {
         ButtonArray();
-        CheckContracts();
+        CheckAvailability();
         fadeScreen.SetDarkScreen();
         StartCoroutine(fadeScreen.FadeInLightScreen(1f));
     }
@@ -53,11 +53,11 @@ public class LevelSelect : MonoBehaviour
         {GameStateManager.BEETLE_FIGHT, 2},
         {GameStateManager.PRE_QUEEN_FIGHT, 3},
     };
-    public void CheckContracts() {
+    public void CheckAvailability() {
         // temp for testing
-        GameStateManager.Instance.CompletedQueenFight = true;
-        GameStateManager.Instance.CompletedBeetleFight = true;
-        GameStateManager.Instance.CompletedFrogAndSlimeFight = true;
+        // GameStateManager.Instance.CompletedQueenFight = true;
+        // GameStateManager.Instance.CompletedBeetleFight = true;
+        // GameStateManager.Instance.CompletedFrogAndSlimeFight = true;
 
         void Disable(GameObject contractButton) {
             // can't make inactive, need to unrender so the positions remain

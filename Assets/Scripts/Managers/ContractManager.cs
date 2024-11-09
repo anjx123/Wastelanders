@@ -123,11 +123,11 @@ public static class Challenges
         {
             ContractValues[contract] = false;
         }
-        foreach (BeetleContracts contract in Enum.GetValues(typeof(FrogContracts)))
+        foreach (BeetleContracts contract in Enum.GetValues(typeof(BeetleContracts)))
         {
             ContractValues[contract] = false;
         }
-        foreach (QueenContracts contract in Enum.GetValues(typeof(FrogContracts)))
+        foreach (QueenContracts contract in Enum.GetValues(typeof(QueenContracts)))
         {
             ContractValues[contract] = false;
         }
@@ -206,7 +206,7 @@ public class ContractManager : PersistentSingleton<ContractManager>, IBind<Contr
         ActiveChallenge = challenge;
         ActiveContracts = ChallengeContracts[challenge];
 
-        DebugLogActiveContracts();
+        // DebugLogActiveContracts();
 
         return ChallengeFlavourText[challenge];
     }
