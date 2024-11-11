@@ -15,80 +15,90 @@ MonoBehaviour:
   JackieData:
     name: Jackie
     playerWeaponProficiency:
-    - Item1: 2
-      Item2:
-        Item1: 0
-        Item2: 10
-    - Item1: 1
-      Item2:
-        Item1: 12
-        Item2: 12
-    - Item1: 0
-      Item2:
-        Item1: 12
-        Item2: 12
-    - Item1: 3
-      Item2:
-        Item1: 0
-        Item2: 10
+    - <WeaponType>k__BackingField: 0
+      <CurrentPoints>k__BackingField: 12
+      <MaxPoints>k__BackingField: 12
+    - <WeaponType>k__BackingField: 1
+      <CurrentPoints>k__BackingField: 12
+      <MaxPoints>k__BackingField: 12
+    - <WeaponType>k__BackingField: 2
+      <CurrentPoints>k__BackingField: 0
+      <MaxPoints>k__BackingField: 10
+    - <WeaponType>k__BackingField: 3
+      <CurrentPoints>k__BackingField: 0
+      <MaxPoints>k__BackingField: 10
     selectedWeapons: 0000000001000000
     playerDeck:
-    - key: 1
-      value:
-      - HipFire
-      - PistolWhip
-      - Headshot
-      - RapidFire
-      - Silencer
-      - IronSights
-    - key: 2
-      value: []
-    - key: 0
-      value:
-      - CheapStrike
-      - FocusedStrike
-      - Trip
-      - Flurry
-      - CounterStrike
-      - Jab
+    - weapon: 0
+      weaponDeck:
+      - _actionClassName: CheapStrike
+        <IsEvolved>k__BackingField: 0
+      - _actionClassName: FocusedStrike
+        <IsEvolved>k__BackingField: 0
+      - _actionClassName: Trip
+        <IsEvolved>k__BackingField: 0
+      - _actionClassName: Flurry
+        <IsEvolved>k__BackingField: 0
+      - _actionClassName: CounterStrike
+        <IsEvolved>k__BackingField: 0
+      - _actionClassName: Jab
+        <IsEvolved>k__BackingField: 0
+    - weapon: 1
+      weaponDeck:
+      - _actionClassName: HipFire
+        <IsEvolved>k__BackingField: 0
+      - _actionClassName: PistolWhip
+        <IsEvolved>k__BackingField: 0
+      - _actionClassName: Headshot
+        <IsEvolved>k__BackingField: 0
+      - _actionClassName: Silencer
+        <IsEvolved>k__BackingField: 0
+      - _actionClassName: IronSights
+        <IsEvolved>k__BackingField: 0
+      - _actionClassName: QuickDraw
+        <IsEvolved>k__BackingField: 0
   IvesData:
     name: Ives
     playerWeaponProficiency:
-    - Item1: 0
-      Item2:
-        Item1: 0
-        Item2: 14
-    - Item1: 3
-      Item2:
-        Item1: 12
-        Item2: 14
-    - Item1: 1
-      Item2:
-        Item1: 0
-        Item2: 14
-    - Item1: 2
-      Item2:
-        Item1: 12
-        Item2: 14
-    selectedWeapons: 0200000003000000
+    - <WeaponType>k__BackingField: 0
+      <CurrentPoints>k__BackingField: 0
+      <MaxPoints>k__BackingField: 12
+    - <WeaponType>k__BackingField: 1
+      <CurrentPoints>k__BackingField: 0
+      <MaxPoints>k__BackingField: 12
+    - <WeaponType>k__BackingField: 2
+      <CurrentPoints>k__BackingField: 12
+      <MaxPoints>k__BackingField: 12
+    - <WeaponType>k__BackingField: 3
+      <CurrentPoints>k__BackingField: 12
+      <MaxPoints>k__BackingField: 12
+    selectedWeapons: 0300000002000000
     playerDeck:
-    - key: 0
-      value: []
-    - key: 1
-      value: []
-    - key: 2
-      value:
-      - Brace
-      - LeftHook
-      - Pummel
-      - RightHook
-      - Haymaker
-      - FollowThrough
-    - key: 3
-      value:
-      - Execute
-      - SharpenedDefence
-      - Cleave
-      - Decimate
-      - Mutilate
-      - Whirl
+    - weapon: 2
+      weaponDeck:
+      - _actionClassName: Brace
+        <IsEvolved>k__BackingField: 0
+      - _actionClassName: LeftHook
+        <IsEvolved>k__BackingField: 0
+      - _actionClassName: RightHook
+        <IsEvolved>k__BackingField: 0
+      - _actionClassName: Pummel
+        <IsEvolved>k__BackingField: 0
+      - _actionClassName: Haymaker
+        <IsEvolved>k__BackingField: 0
+      - _actionClassName: FollowThrough
+        <IsEvolved>k__BackingField: 0
+    - weapon: 3
+      weaponDeck:
+      - _actionClassName: Execute
+        <IsEvolved>k__BackingField: 0
+      - _actionClassName: SharpenedDefence
+        <IsEvolved>k__BackingField: 0
+      - _actionClassName: Cleave
+        <IsEvolved>k__BackingField: 0
+      - _actionClassName: Decimate
+        <IsEvolved>k__BackingField: 0
+      - _actionClassName: Mutilate
+        <IsEvolved>k__BackingField: 0
+      - _actionClassName: Whirl
+        <IsEvolved>k__BackingField: 0

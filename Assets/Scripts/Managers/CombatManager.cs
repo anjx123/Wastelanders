@@ -6,6 +6,7 @@ using System.Linq;
 using static UnityEngine.EventSystems.EventTrigger;
 using System.Security.Cryptography;
 using Systems.Persistence;
+using WeaponDeckSerialization;
 
 public class CombatManager : MonoBehaviour
 {
@@ -32,9 +33,9 @@ public class CombatManager : MonoBehaviour
     [SerializeField] private PlayerDatabase playerDatabase;
     [SerializeField] private CardDatabase cardDatabase;
 
-    public List<ActionClass> GetDeck(PlayerDatabase.PlayerName playerName)
+    public List<InstantiableActionClassInfo> GetDeck(PlayerDatabase.PlayerName playerName)
     {
-        return cardDatabase.ConvertStringsToCards(playerDatabase.GetDeckByPlayerName(playerName));  
+        return cardDatabase.GetPrefabInfoForDeck(playerDatabase.GetDeckByPlayerName(playerName));
     }
 
 #nullable enable
