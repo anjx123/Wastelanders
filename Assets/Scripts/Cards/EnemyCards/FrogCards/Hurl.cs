@@ -23,6 +23,8 @@ public class Hurl : FrogAttacks
         
         Speed = 5;
 
+        CostToAddToDeck = 2;
+
         myName = "Hurl";
         description = "Watch out!";
         Renderer renderer = GetComponent<Renderer>();

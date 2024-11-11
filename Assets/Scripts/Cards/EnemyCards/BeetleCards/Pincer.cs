@@ -8,6 +8,9 @@ using static UnityEngine.UI.Image;
 public class Pincer : BeetleAttacks
 {
     public const string PINCER_SOUND_EFFECT_NAME = "Pincer Cut";
+#nullable enable
+    Pincer? activeDuplicateInstance = null;
+    bool originalCopy = true;
 
     // Start is called before the first frame update
     public override void Initialize()
@@ -35,6 +38,18 @@ public class Pincer : BeetleAttacks
 
     public override void CardIsUnstaggered()
     {
+        if (originalCopy)
+        {
+            if (activeDuplicateInstance == null)
+            {
+                activeDuplicateInstance = Instantiate(this.GetComponent<Pincer>());
+                activeDuplicateInstance.originalCopy = false;
+                activeDuplicateInstance.transform.position = new Vector3(-10, 10, 10);
+            }
+            activeDuplicateInstance.Origin = Origin;
+            activeDuplicateInstance.Target = Target;
+            BattleQueue.BattleQueueInstance.AddAction(activeDuplicateInstance!);
+        }
         if (Origin.HasAnimationParameter("IsAttacking"))
         {
             Origin.AttackAnimation("IsAttacking");

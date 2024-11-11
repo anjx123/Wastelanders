@@ -19,6 +19,8 @@ public class Excavate : BeetleAttacks
         
         Speed = 2;
 
+        CostToAddToDeck = 1;
+
         description = "Deals 2x damage to crystals.";
 
         myName = "Excavate";
