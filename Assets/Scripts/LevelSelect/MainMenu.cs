@@ -44,4 +44,14 @@ public class MainMenu : LevelSelect
         float translateChange = verticalOffset - previousOffset;
         wastelandersText.transform.position = new Vector3(wastelandersText.transform.position.x, wastelandersText.transform.position.y + translateChange, wastelandersText.transform.position.z);
     }
+
+    public void StartGame()
+    {
+        OpenScene(GameStateManager.TUTORIAL_FIGHT);
+    }
+
+    public void LevelSelect()
+    {
+        OpenScene(GameStateManager.LEVEL_SELECT_NAME);
+    }
 }

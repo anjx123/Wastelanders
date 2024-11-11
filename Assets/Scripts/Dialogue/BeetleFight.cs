@@ -7,6 +7,8 @@ using System.Reflection;
 using Cinemachine;
 using UnityEngine.UI;
 using Systems.Persistence;
+using System;
+using LevelSelectInformation;
 //@author: Andrew
 public class BeetleFight : DialogueClasses
 {
@@ -523,7 +525,7 @@ public class BeetleFight : DialogueClasses
             yield return new WaitForSeconds(MEDIUM_PAUSE);
 
             GameStateManager.Instance.JustFinishedBeetleFight = true;
-            GameStateManager.Instance.CompletedBeetleFight = true;
+            GameStateManager.Instance.CurrentLevelProgress = Math.Max(GameStateManager.Instance.CurrentLevelProgress, StageInformation.BEETLE_STAGE.LevelID + 1f);
             GameStateManager.Instance.LoadScene(GameStateManager.SELECTION_SCREEN_NAME);
             yield break;
         }

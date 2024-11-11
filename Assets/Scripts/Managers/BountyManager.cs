@@ -12,8 +12,8 @@ public class BountyManager : PersistentSingleton<BountyManager>, IBind<BountySta
     [field: SerializeField] public SerializableGuid Id { get; set; } = SerializableGuid.NewGuid();
     private BountyStateData? ContractStateData;
 
-    //The literal type name of the concrete IBounties class that is selected. (You can't specify types in the Unity editor, so we use the class name instead) 
-    public string? SelectedBountyTypeName { get; set; } = null;
+    //The literal type of the concrete IBounties class that is selected. 
+    public Type? SelectedBountyType { get; set; } = null;
 
     // All ActiveBounty should be of actual type SelectedBountyTypeName 
     public IBounties? ActiveBounty { get; set; } = null;

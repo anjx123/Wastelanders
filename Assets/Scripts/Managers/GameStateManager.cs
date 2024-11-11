@@ -8,6 +8,8 @@ using UnityEngine.SceneManagement;
 //Singleton Class that keeps track of values representing general Game states
 public class GameStateManager : PersistentSingleton<GameStateManager>, IBind<GameStateData>
 {
+    public static readonly bool IS_DEVELOPMENT = false;
+
     //Fields for persistence
     [field: SerializeField] public SerializableGuid Id { get; set; } = SerializableGuid.NewGuid();
     private GameStateData data;
@@ -61,24 +63,12 @@ public class GameStateManager : PersistentSingleton<GameStateManager>, IBind<Gam
         set => Data.JustFinishedBeetleFight = value;
     }
 
-    //CC/Bounty system
-    public bool CompletedFrogAndSlimeFight
+    public float CurrentLevelProgress
     {
-        get { return Data.CompletedFrogAndSlimeFight; }
-        set => Data.CompletedFrogAndSlimeFight = value;
+        get { return (IS_DEVELOPMENT) ? 100f : Data.CurrentLevelProgress; }
+        set => Data.CurrentLevelProgress = value;
     }
 
-    public bool CompletedBeetleFight
-    {
-        get { return Data.CompletedBeetleFight; }
-        set => Data.CompletedBeetleFight = value;
-    }
-    
-    public bool CompletedQueenFight
-    {
-        get { return Data.CompletedQueenFight; }
-        set => Data.CompletedQueenFight = value;
-    }
     
     public void Restart()
     {
@@ -105,7 +95,7 @@ public class GameStateManager : PersistentSingleton<GameStateManager>, IBind<Gam
     public const string CONTRACT_SELECT_NAME = "ContractSelect";
 
     public const string TUTORIAL_FIGHT = "TutorialScene";
-    public const string FROG_SLIME_FIGHT = "Scene2";
+    public const string FROG_SLIME_FIGHT = "FrogSlimeFight";
     public const string BEETLE_FIGHT = "BeetleFightScene";
     public const string PRE_QUEEN_FIGHT = "PreQueenFightScene";
     public const string POST_QUEEN_FIGHT = "PostQueenBeetle";
@@ -130,11 +120,7 @@ public class GameStateData : ISaveable
 
     [field: SerializeField] public bool JustFinishedBeetleFight { get; set; } = false;
 
-    [field: SerializeField] public bool CompletedFrogAndSlimeFight { get; set; } = false;
-
-    [field: SerializeField] public bool CompletedBeetleFight { get; set; } = false;
-    
-    [field: SerializeField] public bool CompletedQueenFight { get; set; } = false;
+    [field: SerializeField] public float CurrentLevelProgress { get; set; } = 0f;  
     public override string ToString()
     {
         return "Id: " + Id +
@@ -144,8 +130,6 @@ public class GameStateData : ISaveable
             " JumpIntoBeetleFight: " + JumpIntoBeetleFight +
             " JumpIntoQueenFight: " + JumpIntoQueenFight +
             " JustFinishedBeetleFight: " + JustFinishedBeetleFight +
-            " CompletedFrogAndSlimeFight: " + CompletedFrogAndSlimeFight +
-            " CompletedBeetleFight: " + CompletedBeetleFight +
-            " CompletedQueenFight " + CompletedQueenFight;
+            " Current player level progress: " + CurrentLevelProgress;
     }
 }

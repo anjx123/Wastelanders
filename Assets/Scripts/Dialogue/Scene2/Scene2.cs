@@ -1,4 +1,5 @@
 using Cinemachine;
+using LevelSelectInformation;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -244,7 +245,7 @@ private IEnumerator ExecuteGameStart()
         yield return new WaitForSeconds(2f);
         yield return StartCoroutine(CombatManager.Instance.FadeInDarkScreen(1.5f));
 
-        GameStateManager.Instance.CompletedFrogAndSlimeFight = true;
+        GameStateManager.Instance.CurrentLevelProgress = Math.Max(GameStateManager.Instance.CurrentLevelProgress, StageInformation.FROG_SLIME_STAGE.LevelID + 1f);
 
         GameStateManager.Instance.LoadScene(GameStateManager.BEETLE_FIGHT);
         yield break;

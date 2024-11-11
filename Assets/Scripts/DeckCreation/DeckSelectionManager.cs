@@ -28,7 +28,7 @@ public class DeckSelectionManager : MonoBehaviour
     public delegate void PlayerActionDeckDelegate(int points);
     public event PlayerActionDeckDelegate? PlayerActionDeckModifiedEvent;
 
-    private string nextScene = "LevelSelect";
+    private string nextScene = GameStateManager.LEVEL_SELECT_NAME;
     
     private DeckSelectionState deckSelectionState;
     private DeckSelectionState DeckSelectionState //Might want to swap out this state machine for an event driven changing phases.

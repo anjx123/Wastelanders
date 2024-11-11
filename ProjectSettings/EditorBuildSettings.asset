@@ -18,7 +18,7 @@ EditorBuildSettings:
     path: Assets/Scenes/TutorialScene.unity
     guid: b71821f2dc91647488c0f36149b56d88
   - enabled: 1
-    path: Assets/Scenes/Scene2.unity
+    path: Assets/Scenes/FrogSlimeFight.unity
     guid: 21c0fffe00ac8f4449c8c7c9192036d6
   - enabled: 1
     path: Assets/Scenes/BeetleFightScene.unity

@@ -409,9 +409,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1645370205}
-        m_TargetAssemblyTypeName: LevelSelect, Assembly-CSharp
-        m_MethodName: OpenScene
-        m_Mode: 5
+        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
+        m_MethodName: LevelSelect
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -815,9 +815,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1645370205}
-        m_TargetAssemblyTypeName: LevelSelect, Assembly-CSharp
-        m_MethodName: OpenScene
-        m_Mode: 5
+        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
+        m_MethodName: StartGame
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -896,9 +896,45 @@ MonoBehaviour:
   UnparentOnAwake: 1
   gameData:
     Name: 
-    ActionData: []
-    playerData: {fileID: 0}
-  defaultPlayerDatabase: {fileID: 11400000, guid: 8727bc367ba518d4496483da96ba1cf0, type: 2}
+    actionData: []
+    gameStateData:
+      <Id>k__BackingField:
+        Part1: 331652258
+        Part2: 1101383412
+        Part3: 2979251084
+        Part4: 414869923
+      <ShouldPlayDeckSelectionTutorial>k__BackingField: 0
+      <JumpIntoFrogAndSlimeFight>k__BackingField: 0
+      <JumpIntoBeetleFight>k__BackingField: 0
+      <JumpIntoQueenFight>k__BackingField: 0
+      <JustFinishedBeetleFight>k__BackingField: 0
+      <CurrentLevelProgress>k__BackingField: 0
+    playerInformation:
+      <Id>k__BackingField:
+        Part1: 0
+        Part2: 0
+        Part3: 0
+        Part4: 0
+      <JackieData>k__BackingField:
+        name: 
+        playerWeaponProficiency: []
+        selectedWeapons: 
+        playerDeck: []
+      <IvesData>k__BackingField:
+        name: 
+        playerWeaponProficiency: []
+        selectedWeapons: 
+        playerDeck: []
+    bountyStateData:
+      <Id>k__BackingField:
+        Part1: 700776554
+        Part2: 1127278128
+        Part3: 1674882
+        Part4: 4284400831
+      <BountyCompletionData>k__BackingField:
+      - <Completed>k__BackingField: 0
+      - <Completed>k__BackingField: 0
+      - <Completed>k__BackingField: 0
 --- !u!4 &1013216798
 Transform:
   m_ObjectHideFlags: 0
@@ -1149,7 +1185,6 @@ GameObject:
   - component: {fileID: 1645370204}
   - component: {fileID: 1645370203}
   - component: {fileID: 1645370205}
-  - component: {fileID: 1645370206}
   m_Layer: 5
   m_Name: ButtonPanel
   m_TagString: Untagged
@@ -1229,22 +1264,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buttons: []
   levelButtons: {fileID: 197481983}
-  fadeScreen: {fileID: 1645370206}
+  fadeScreen: {fileID: 1619148232}
   wastelandersText: {fileID: 69893570}
   quitButton: {fileID: 618564705}
---- !u!114 &1645370206
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1645370201}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 002d1cdf87a671640a52471d83e272fc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fadeScreen: {fileID: 1619148231}
 --- !u!1 &2015769949
 GameObject:
   m_ObjectHideFlags: 0

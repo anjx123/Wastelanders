@@ -11,6 +11,7 @@ public class BountySelect : MonoBehaviour
     [SerializeField] private RectTransform bountyGrid;
     [SerializeField] private BountyButton bountyButtonPrefab;
 
+#nullable enable
     protected virtual void Awake()
     {
         ConstructBountyButtons();
@@ -25,7 +26,7 @@ public class BountySelect : MonoBehaviour
 
     private void CreateButtonForBounty(IBounties bounty)
     {
-        if (bounty.GetType().Name == BountyManager.Instance.SelectedBountyTypeName)
+        if (bounty.GetType() == BountyManager.Instance.SelectedBountyType)
         {
             BountyButton bountyButton = Instantiate(bountyButtonPrefab);
             bountyButton.Initialize(bounty);
@@ -40,7 +41,13 @@ public class BountySelect : MonoBehaviour
 
     public void StartLevel()
     {
-        OpenScene(BountyManager.Instance.ActiveBounty.SceneName);
+        if (BountyManager.Instance.ActiveBounty != null)
+        {
+            OpenScene(BountyManager.Instance.ActiveBounty.SceneName);
+        } else
+        {
+            // TODO: Say select a bounty first !
+        }
     }
 
     IEnumerator FadeLevelIn(string levelName)
