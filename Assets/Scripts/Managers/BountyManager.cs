@@ -37,9 +37,9 @@ public class BountyStateData : ISaveable
     [field: SerializeField] public SerializableGuid Id { get; set; } = SerializableGuid.NewGuid();
     [field: SerializeField] public List<ChallengeCompletionState> BountyCompletionData { get; set; } = new();
 
-    public void SetChallengeComplete(IBounties contract)
+    public void SetChallengeComplete(IBounties bounty)
     {
-        var challengeCompletionState = BountyCompletionData.Find(data => data.ContractName == contract.ChallengeName);
+        var challengeCompletionState = BountyCompletionData.Find(data => data.BountyName == bounty.BountyName);
         challengeCompletionState.Completed = true;
     }
 
@@ -51,19 +51,19 @@ public class BountyStateData : ISaveable
     private void Initialize()
     {
         BountyCompletionData.Clear();
-        IBounties.MapOnValues(bounty => BountyCompletionData.Add(new ChallengeCompletionState(bounty.ChallengeName, false)));
+        IBounties.MapOnValues(bounty => BountyCompletionData.Add(new ChallengeCompletionState(bounty.BountyName, false)));
     }
 
     [Serializable]
     public class ChallengeCompletionState
     {
         [field: SerializeField] public bool Completed { get; set; }
-        [field: SerializeField] public string ContractName { get; }
+        [field: SerializeField] public string BountyName { get; }
         
-        public ChallengeCompletionState(string contractName, bool completed)
+        public ChallengeCompletionState(string bountyName, bool completed)
         {
             Completed = completed;
-            ContractName = contractName;
+            BountyName = bountyName;
         }
     }
 }

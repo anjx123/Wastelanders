@@ -46,6 +46,6 @@ public class BountyButton : MonoBehaviour
 
     private void Redraw()
     {
-        _textMeshPro.text = bounty?.ChallengeName;
+        _textMeshPro.text = bounty?.BountyName;
     }
 }

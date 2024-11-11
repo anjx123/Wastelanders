@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-// Class that handles the rendering and scene management of contract selection
+// Class that handles the rendering and scene management of bounty selection
 public class BountySelect : MonoBehaviour
 {
     [SerializeField] private FadeScreenHandler fadeScreen;

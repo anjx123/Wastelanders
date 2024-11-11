@@ -35,7 +35,7 @@ public class PrincessFrogBounties : IBounties
     }
     public HashSet<IContracts> BountySet { get; }
     public string FlavourText { get; }
-    public string ChallengeName { get; }
+    public string BountyName { get; }
 
     public string SceneName => GameStateManager.PRINCESS_FROG_BOUNTY;
 
@@ -43,6 +43,6 @@ public class PrincessFrogBounties : IBounties
     {
         BountySet = bountySet;
         FlavourText = flavourText;
-        ChallengeName = challengeName;
+        BountyName = challengeName;
     }
 }

@@ -29,7 +29,7 @@ namespace BountySystem
     {
         public HashSet<IContracts> BountySet { get; }
         public string FlavourText { get; }
-        public string ChallengeName { get; }
+        public string BountyName { get; }
         public string SceneName { get; }
 
         // Update this if a new class implements me please, I don't want to use reflection.
