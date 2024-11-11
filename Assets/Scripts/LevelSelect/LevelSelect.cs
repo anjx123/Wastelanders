@@ -36,9 +36,9 @@ public class LevelSelect : MonoBehaviour
         StartCoroutine(FadeLevelIn(s));
     }
 
-    private void OpenBountyByTypeName(Type type)
+    private void OpenBountyByTypeName(BountyInformation bountyInformation)
     {
-        BountyManager.Instance.SelectedBountyType = type;
+        BountyManager.Instance.SelectedBountyInformation = bountyInformation;
         StartCoroutine(FadeLevelIn(GameStateManager.CONTRACT_SELECT_NAME));
     }
 

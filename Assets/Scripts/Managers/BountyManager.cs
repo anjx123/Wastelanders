@@ -4,18 +4,17 @@ using Systems.Persistence;
 using System.Collections.Generic;
 using System.Linq;
 using BountySystem;
+using LevelSelectInformation;
 
 # nullable enable
-// A class that persists the current bounty information of the player
+// A class that persists the current bounty information during level selecting
 public class BountyManager : PersistentSingleton<BountyManager>, IBind<BountyStateData>
 {
     [field: SerializeField] public SerializableGuid Id { get; set; } = SerializableGuid.NewGuid();
-    private BountyStateData? ContractStateData;
+    private BountyStateData? ContractStateData; 
+    public BountyInformation? SelectedBountyInformation { get; set; } = null;
 
-    //The literal type of the concrete IBounties class that is selected. 
-    public Type? SelectedBountyType { get; set; } = null;
-
-    // All ActiveBounty should be of actual type SelectedBountyTypeName 
+    // All ActiveBounty should be contained within BountyInformation's Bounty Collection
     public IBounties? ActiveBounty { get; set; } = null;
 
 
@@ -31,6 +30,7 @@ public class BountyManager : PersistentSingleton<BountyManager>, IBind<BountySta
     }
 }
 
+// The serialized 
 [System.Serializable]
 public class BountyStateData : ISaveable
 {
@@ -39,8 +39,10 @@ public class BountyStateData : ISaveable
 
     public void SetChallengeComplete(IBounties bounty)
     {
-        var challengeCompletionState = BountyCompletionData.Find(data => data.BountyName == bounty.BountyName);
-        challengeCompletionState.Completed = true;
+        ChallengeCompletionState? challengeCompletionState = BountyCompletionData.Find(data => data.BountyName == bounty.BountyName);
+        
+        if (challengeCompletionState == null) BountyCompletionData.Add(new(bounty.BountyName, true));
+        else challengeCompletionState.Completed = true;
     }
 
     public BountyStateData()

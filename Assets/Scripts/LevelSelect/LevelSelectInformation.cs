@@ -15,23 +15,25 @@ namespace LevelSelectInformation
         PrincessFrogFight,
         PrincessFrogBounty,
     }
+
     public interface ILevelSelectInformation
     {
         public float LevelID { get; set; }
 
-        public void OpenScene();
+        public void UponSelectedEvent();
 
         public static readonly Dictionary<Level, ILevelSelectInformation> LEVEL_INFORMATION = new()
-    {
-        { Level.Tutorial, StageInformation.TUTORIAL_STAGE },
-        { Level.FrogSlimeFight, StageInformation.FROG_SLIME_STAGE },
-        { Level.BeetleFight, StageInformation.BEETLE_STAGE },
-        { Level.QueenFight, StageInformation.QUEEN_BEETLE_STAGE },
-        { Level.PrincessFrogFight, StageInformation.PRINCESS_FROG_FIGHT },
-        { Level.PrincessFrogBounty, BountyInformation.PRINCESS_FROG_BOUNTY },
-    };
+        {
+            { Level.Tutorial, StageInformation.TUTORIAL_STAGE },
+            { Level.FrogSlimeFight, StageInformation.FROG_SLIME_STAGE },
+            { Level.BeetleFight, StageInformation.BEETLE_STAGE },
+            { Level.QueenFight, StageInformation.QUEEN_BEETLE_STAGE },
+            { Level.PrincessFrogFight, StageInformation.PRINCESS_FROG_FIGHT },
+            { Level.PrincessFrogBounty, BountyInformation.PRINCESS_FROG_BOUNTY },
+        };
     }
 
+    // Represents the information needed to load a specfic stage during level select
     public class StageInformation : ILevelSelectInformation
     {
         public static readonly StageInformation TUTORIAL_STAGE = new(sceneName: GameStateManager.TUTORIAL_FIGHT, levelId: 0);
@@ -51,32 +53,32 @@ namespace LevelSelectInformation
             LevelID = levelId;
         }
 
-        public void OpenScene()
+        public void UponSelectedEvent()
         {
             StageInformationEvent?.Invoke(SceneName);
         }
     }
 
+    // Represents the information needed to load a specific bounty stage during level select
     public class BountyInformation : ILevelSelectInformation
     {
-        public static readonly BountyInformation PRINCESS_FROG_BOUNTY = new(typeof(PrincessFrogBounties), levelId: 4.5f);
-        public Type BountyType { get; set; }
-        //Bounties are encoded with .5f 
+        public static readonly BountyInformation PRINCESS_FROG_BOUNTY = new(PrincessFrogBounties.Values, levelId: 4.5f);
+        public IEnumerable<IBounties> BountyCollection { get; set; }
+        //Bounties are encoded with .5f level id ending
         public float LevelID { get; set; }
 
-        public delegate void BountyInformationDelegate(Type BountyType);
+        public delegate void BountyInformationDelegate(BountyInformation BountyType);
         public static event BountyInformationDelegate BountyInformationEvent;
-        public BountyInformation(Type type, float levelId)
+        public BountyInformation(IEnumerable<IBounties> bounties, float levelId)
         {
-            if (!typeof(IBounties).IsAssignableFrom(type)) throw new ArgumentException("Type must implement IBounties interface.", nameof(type));
 
             LevelID = levelId;
-            BountyType = type;
+            BountyCollection = bounties;
         }
 
-        public void OpenScene()
+        public void UponSelectedEvent()
         {
-            BountyInformationEvent?.Invoke(BountyType);
+            BountyInformationEvent?.Invoke(this);
         }
     }
 }

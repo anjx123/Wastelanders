@@ -1,5 +1,8 @@
 using BountySystem;
 using System.Collections;
+using System.Linq;
+using System.Runtime.InteropServices.WindowsRuntime;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -21,17 +24,20 @@ public class BountySelect : MonoBehaviour
 
     public void ConstructBountyButtons()
     {
-        IBounties.MapOnValues(bounty => CreateButtonForBounty(bounty));
+        var bountyCollection = BountyManager.Instance.SelectedBountyInformation?.BountyCollection;
+        if (bountyCollection == null) return;
+
+        foreach (var bounty in bountyCollection)
+        {
+            CreateButtonForBounty(bounty);
+        }
     }
 
     private void CreateButtonForBounty(IBounties bounty)
     {
-        if (bounty.GetType() == BountyManager.Instance.SelectedBountyType)
-        {
-            BountyButton bountyButton = Instantiate(bountyButtonPrefab);
-            bountyButton.Initialize(bounty);
-            bountyButton.transform.SetParent(bountyGrid, false);
-        }
+        BountyButton bountyButton = Instantiate(bountyButtonPrefab);
+        bountyButton.Initialize(bounty);
+        bountyButton.transform.SetParent(bountyGrid, false);
     }
 
     public void OpenScene(string s)
