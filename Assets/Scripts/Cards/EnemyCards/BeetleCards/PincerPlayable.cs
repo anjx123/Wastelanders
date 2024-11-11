@@ -1,13 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Xml.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
-using static Unity.Collections.AllocatorManager;
 using static UnityEngine.UI.Image;
 
-public class Pincer : BeetleAttacks
+public class PincerPlayable : BeetleAttacks
 {
     public const string PINCER_SOUND_EFFECT_NAME = "Pincer Cut";
+#nullable enable
+    PincerPlayable? activeDuplicateInstance = null;
+    bool originalCopy = true;
 
     // Start is called before the first frame update
     public override void Initialize()
@@ -15,8 +18,10 @@ public class Pincer : BeetleAttacks
         base.Initialize();
         lowerBound = 1;
         upperBound = 3;
-        
+
         Speed = 4;
+
+        CostToAddToDeck = 1;
 
         description = "Ouch!";
 
@@ -35,6 +40,18 @@ public class Pincer : BeetleAttacks
 
     public override void CardIsUnstaggered()
     {
+        if (originalCopy)
+        {
+            if (activeDuplicateInstance == null)
+            {
+                activeDuplicateInstance = Instantiate(this.GetComponent<PincerPlayable>());
+                activeDuplicateInstance.originalCopy = false;
+                activeDuplicateInstance.transform.position = new Vector3(-10, 10, 10);
+            }
+            activeDuplicateInstance.Origin = Origin;
+            activeDuplicateInstance.Target = Target;
+            BattleQueue.BattleQueueInstance.AddAction(activeDuplicateInstance!);
+        }
         if (Origin.HasAnimationParameter("IsAttacking"))
         {
             Origin.AttackAnimation("IsAttacking");
@@ -42,7 +59,8 @@ public class Pincer : BeetleAttacks
         if (Origin.IsFacingRight())
         {
             StartCoroutine(MoveBasedOnDirection(/* isFacingRight = */true));
-        } else
+        }
+        else
         {
             StartCoroutine(MoveBasedOnDirection(/* isFacingRight = */ false));
         }
@@ -52,7 +70,7 @@ public class Pincer : BeetleAttacks
     {
         Vector3 moveRight = new Vector3(0.3f, 0, 0);
         float moveTime = 0.6f;
-        
+
 
         if (isFacingRight)
         {
@@ -69,5 +87,4 @@ public class Pincer : BeetleAttacks
             Origin.myTransform.position = originalPosition;
         }
     }
-
 }
