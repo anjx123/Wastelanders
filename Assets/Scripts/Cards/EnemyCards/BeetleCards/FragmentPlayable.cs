@@ -47,10 +47,7 @@ public class FragmentPlayable : BeetleAttacks
             AudioManager.Instance.PlaySFX(FRAGMENT_SOUND_EFFECT_NAME);
             base.OnHit();
         }
-        if (Target is EnemyClass)
-        {
-            Origin.AddStacks(Resonate.buffName, 1);
-        }
+        Origin.AddStacks(Resonate.buffName, 1);
     }
 
     private void OnProjectileHit()

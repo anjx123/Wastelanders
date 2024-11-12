@@ -45,10 +45,7 @@ public class FlingPlayable : BeetleAttacks
             AudioManager.Instance.PlaySFX(Fragment.FRAGMENT_SOUND_EFFECT_NAME);
             base.OnHit();
         }
-        if (Target is EnemyClass)
-        {
-            Origin.AddStacks(Resonate.buffName, 1);
-        }
+        Origin.AddStacks(Resonate.buffName, 1);
     }
 
     private void OnProjectileHit()
