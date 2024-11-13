@@ -6,6 +6,7 @@ using System.Linq;
 using static UnityEngine.EventSystems.EventTrigger;
 using System.Security.Cryptography;
 using Systems.Persistence;
+using WeaponDeckSerialization;
 
 public class CombatManager : MonoBehaviour
 {
@@ -32,9 +33,9 @@ public class CombatManager : MonoBehaviour
     [SerializeField] private PlayerDatabase playerDatabase;
     [SerializeField] private CardDatabase cardDatabase;
 
-    public List<ActionClass> GetDeck(PlayerDatabase.PlayerName playerName)
+    public List<InstantiableActionClassInfo> GetDeck(PlayerDatabase.PlayerName playerName)
     {
-        return cardDatabase.ConvertStringsToCards(playerDatabase.GetDeckByPlayerName(playerName));  
+        return cardDatabase.GetPrefabInfoForDeck(playerDatabase.GetDeckByPlayerName(playerName));
     }
 
 #nullable enable
@@ -145,6 +146,8 @@ public class CombatManager : MonoBehaviour
         baseCamera.Priority = 1;
         dynamicCamera.Priority = 0;
         StartCoroutine(FadeCombatBackground(false));
+
+        // Might not capture newly spawned instances of cards, somehow they need to attract their evolved state and data binding. 
         SaveLoadSystem.Instance.LoadCardEvolutionProgress(); // Most universal place to put this is here, but tagged for performance optimizations
 
         // Each enemy declares an attack. players is passed to AddAttack so the enemy can choose a target.

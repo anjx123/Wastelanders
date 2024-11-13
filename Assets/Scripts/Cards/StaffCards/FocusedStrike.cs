@@ -13,6 +13,10 @@ public class FocusedStrike : StaffCards
         lowerBound = 2;
         upperBound = 2;
         Speed = 2;
+        CostToAddToDeck = IsEvolved ? 4 : 2;
+        evolutionCriteria = "Strike for a power of 8+ with this card three times.";
+        evolutionDescription = "Double your flow then make this attack, this card does not consume flow";
+        MaxEvolutionProgress = 3;
        
        base.Initialize();
     }
@@ -27,6 +31,9 @@ public class FocusedStrike : StaffCards
     {
         base.OnHit();
         Origin.AddStacks(Flow.buffName, 1);
+        if (getRolledDamage() >= 8) {
+            CurrentEvolutionProgress++;
+        }
     }
 
 }

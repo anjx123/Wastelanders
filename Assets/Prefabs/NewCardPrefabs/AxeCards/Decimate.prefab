@@ -102,6 +102,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myTransform: {fileID: 0}
+  <Id>k__BackingField:
+    Part1: 1012318725
+    Part2: 1179583197
+    Part3: 1635717814
+    Part4: 3941682173
   icon: {fileID: 21300000, guid: aa5bdc0ae0bd90746b95a9c7ced59777, type: 3}
   cardBack: {fileID: 21300000, guid: 0caca1c7d6d863a44920bb3907ac21a0, type: 3}
+  evolvedCardBack: {fileID: 21300000, guid: dcb4759f0a3bfc84181a62dbd57fe346, type: 3}
   cardUI: {fileID: 3994343635944797062}
+  data:
+    <ActionClassName>k__BackingField: 
+    <CurrentProgress>k__BackingField: 0

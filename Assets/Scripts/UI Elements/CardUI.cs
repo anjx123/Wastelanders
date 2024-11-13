@@ -15,6 +15,7 @@ public class CardUI : MonoBehaviour
     [SerializeField] private SpriteRenderer iconRenderer;
     [SerializeField] private SpriteRenderer cardBackRenderer;
     [SerializeField] private SpriteRenderer damageIconRenderer;
+    [SerializeField] private SpriteRenderer lockRenderer;
     [SerializeField] private Sprite defenseIcon;
     [SerializeField] private Sprite damageIcon;
     [SerializeField] private TMP_Text cardCost;    
@@ -36,10 +37,11 @@ public class CardUI : MonoBehaviour
         upperBoundText.text = duplicateCard.rollCeiling.ToString();
         SpeedText.text = actionClass.Speed.ToString();
         iconRenderer.sprite = actionClass.GetIcon();
-        if (actionClass.cardBack != null)
-        {
-            cardBackRenderer.sprite = actionClass.cardBack;
-        }
+
+        // Render the card's back depending on the evolution state
+        bool displayFlipped = actionClass.IsFlipped || (actionClass.IsEvolved && actionClass.CanEvolve());
+        cardBackRenderer.sprite = displayFlipped ? actionClass.evolvedCardBack : actionClass.cardBack;
+        lockRenderer.enabled = !actionClass.CanEvolve() && (actionClass.IsFlipped || actionClass.IsEvolved);
 
         if (actionClass.CardType == CardType.Defense)
         {
@@ -92,5 +94,6 @@ public class CardUI : MonoBehaviour
             upperBoundText.color = Color.black;
         }
 
+        lockRenderer.enabled = actionClass.IsFlipped && !actionClass.CanEvolve();
     }
 }

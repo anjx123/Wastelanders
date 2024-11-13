@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PauseMenu : MonoBehaviour
 {
     public static bool IsPaused = false;
+    public static bool ScreenShake = true;
     [SerializeField] private GameObject pauseMenuPanel;
     [SerializeField] private Canvas pauseCanvas;
 
@@ -16,6 +18,9 @@ public class PauseMenu : MonoBehaviour
 
 
     [SerializeField] private TextMeshProUGUI historyText;
+
+    [SerializeField]
+    private Slider musicSlider, sfxSlider; 
 
 
     public delegate void PauseMenuEventHandler();
@@ -104,6 +109,10 @@ public class PauseMenu : MonoBehaviour
 
     private void Start()
     {
+        musicSlider.value = 0.7f;
+        sfxSlider.value = 0.7f;
+        AudioManager.Instance.MusicVolume(musicSlider.value);
+        AudioManager.Instance.SFXVolume(sfxSlider.value);
         pauseCanvas.sortingLayerName = "Top";
     }
     // Update is called once per frame
@@ -165,5 +174,30 @@ public class PauseMenu : MonoBehaviour
         IsPaused = false;
         Time.timeScale = 1f;
         GameStateManager.Instance.Restart();
+    }
+
+    public void ToggleMusic()
+    {
+        AudioManager.Instance.ToggleMusic();
+    }
+
+    public void ToggleSFX()
+    {
+        AudioManager.Instance.ToggleSFX();
+    }
+
+    public void MusicVolume()
+    {
+        AudioManager.Instance.MusicVolume(musicSlider.value);
+    }
+
+    public void SFXVolume()
+    {
+        AudioManager.Instance.SFXVolume(sfxSlider.value);
+    }
+
+    public void ToggleScreenShake()
+    {
+        PauseMenu.ScreenShake = !PauseMenu.ScreenShake;
     }
 }
