@@ -114,7 +114,7 @@ public class DeckSelectionManager : MonoBehaviour
         {
             isFadingOut = true;
             SaveLoadSystem.Instance.SaveGame();
-            EditorUtility.SetDirty(playerDatabase); // For easily resetting the default weaponDeck of playerDatabase
+            //EditorUtility.SetDirty(playerDatabase); // For easily resetting the default weaponDeck of playerDatabase
             yield return StartCoroutine(fadeScreenHandler.FadeInDarkScreen(0.8f));
             GameStateManager.Instance.LoadScene(nextScene);
             isFadingOut = false;
@@ -159,33 +159,9 @@ public class DeckSelectionManager : MonoBehaviour
         DeckSelectionState = DeckSelectionState.DeckSelection;
     }
 
-    private SerializableWeaponListEntry GetPlayerWeaponDeck(WeaponType weaponType)
-    {
-        SerializableWeaponListEntry playerWeaponDeck = playerData.playerDeck.FirstOrDefault(entry => entry.weapon == weaponType);
-
-        if (playerWeaponDeck == null)
-        {
-            playerWeaponDeck = new SerializableWeaponListEntry(weapon: weaponType, weaponDeck: new());
-            playerData.playerDeck.Add(playerWeaponDeck);
-        }
-
-        return playerWeaponDeck;
-    }
-
-    private WeaponProficiency GetProficiencyPointsTuple(WeaponType weaponType)
-    {
-        var proficiencyPointsTuple = playerData.playerWeaponProficiency.FirstOrDefault(entry => entry.WeaponType == weaponType);
-        if (proficiencyPointsTuple == null)
-        {
-            proficiencyPointsTuple = new WeaponProficiency(weaponType, 0, 0);
-            playerData.playerWeaponProficiency.Add(proficiencyPointsTuple);
-        }
-        return proficiencyPointsTuple;
-    }
-
     private bool DeckContainsCard(ActionClass ac)
     {
-        return GetPlayerWeaponDeck(weaponType).weaponDeck.FirstOrDefault(action => action.ActionClassName == ac.GetType().Name) != null;
+        return playerData.GetPlayerWeaponDeck(weaponType).weaponDeck.FirstOrDefault(action => action.ActionClassName == ac.GetType().Name) != null;
     }
 
     private void OnUpdateDeck(WeaponProficiency weaponPointTuple)
@@ -199,8 +175,8 @@ public class DeckSelectionManager : MonoBehaviour
     // PERF: DeckContainsCard finds an actionFound but in doesn't return it, which is searched for again here.
     private void DeselectFromDeck(ActionClass ac, bool performChecks = true)
     {
-        SerializableWeaponListEntry playerWeaponDeck = GetPlayerWeaponDeck(weaponType);
-        WeaponProficiency weaponPointTuple = GetProficiencyPointsTuple(weaponType);
+        SerializableWeaponListEntry playerWeaponDeck = playerData.GetPlayerWeaponDeck(weaponType);
+        WeaponProficiency weaponPointTuple = playerData.GetProficiencyPointsTuple(weaponType);
 
         if (!performChecks || DeckContainsCard(ac))
         {
@@ -214,8 +190,8 @@ public class DeckSelectionManager : MonoBehaviour
 
     private void AddToDeck(ActionClass ac, bool performChecks = true)
     {
-        SerializableWeaponListEntry playerWeaponDeck = GetPlayerWeaponDeck(weaponType);
-        WeaponProficiency weaponPointTuple = GetProficiencyPointsTuple(weaponType);
+        SerializableWeaponListEntry playerWeaponDeck = playerData.GetPlayerWeaponDeck(weaponType);
+        WeaponProficiency weaponPointTuple = playerData.GetProficiencyPointsTuple(weaponType);
 
         // Do we have sufficient points? If so, are we trying to add the evolved form? If so, is the evolution progress sufficient?
         if ((!performChecks || weaponPointTuple.CurrentPoints + ac.CostToAddToDeck <= weaponPointTuple.MaxPoints) && (!ac.IsFlipped || (ac.IsFlipped && ac.CanEvolve())))
@@ -363,7 +339,7 @@ public class DeckSelectionManager : MonoBehaviour
         }
         SaveLoadSystem.Instance.LoadCardEvolutionProgress();
 
-        WeaponProficiency weaponPointTuple = GetProficiencyPointsTuple(weaponType);
+        WeaponProficiency weaponPointTuple = playerData.GetProficiencyPointsTuple(weaponType);
         int availablePoints = weaponPointTuple.MaxPoints - weaponPointTuple.CurrentPoints;
         pointsText.TextUpdate("Select Your Cards:\nAvailable Points: " + availablePoints);
     }

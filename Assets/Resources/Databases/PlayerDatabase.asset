@@ -15,34 +15,90 @@ MonoBehaviour:
   JackieData:
     name: Jackie
     playerWeaponProficiency:
-    - <WeaponType>k__BackingField: 0
-      <CurrentPoints>k__BackingField: 0
-      <MaxPoints>k__BackingField: 12
     - <WeaponType>k__BackingField: 1
-      <CurrentPoints>k__BackingField: 0
+      <CurrentPoints>k__BackingField: 12
       <MaxPoints>k__BackingField: 12
-    - <WeaponType>k__BackingField: 2
+    - <WeaponType>k__BackingField: 0
+      <CurrentPoints>k__BackingField: 12
+      <MaxPoints>k__BackingField: 12
+    - <WeaponType>k__BackingField: 3
       <CurrentPoints>k__BackingField: 0
       <MaxPoints>k__BackingField: 10
-    - <WeaponType>k__BackingField: 3
+    - <WeaponType>k__BackingField: 2
       <CurrentPoints>k__BackingField: 0
       <MaxPoints>k__BackingField: 10
     selectedWeapons: 0000000001000000
-    playerDeck: []
+    playerDeck:
+    - weapon: 1
+      weaponDeck:
+      - _actionClassName: IronSights
+        <IsEvolved>k__BackingField: 0
+      - _actionClassName: Silencer
+        <IsEvolved>k__BackingField: 0
+      - _actionClassName: QuickDraw
+        <IsEvolved>k__BackingField: 0
+      - _actionClassName: PistolWhip
+        <IsEvolved>k__BackingField: 0
+      - _actionClassName: HipFire
+        <IsEvolved>k__BackingField: 0
+      - _actionClassName: RapidFire
+        <IsEvolved>k__BackingField: 0
+    - weapon: 0
+      weaponDeck:
+      - _actionClassName: CheapStrike
+        <IsEvolved>k__BackingField: 0
+      - _actionClassName: FocusedStrike
+        <IsEvolved>k__BackingField: 0
+      - _actionClassName: Trip
+        <IsEvolved>k__BackingField: 0
+      - _actionClassName: Flurry
+        <IsEvolved>k__BackingField: 0
+      - _actionClassName: Jab
+        <IsEvolved>k__BackingField: 0
+      - _actionClassName: CounterStrike
+        <IsEvolved>k__BackingField: 0
   IvesData:
     name: Ives
     playerWeaponProficiency:
-    - <WeaponType>k__BackingField: 0
-      <CurrentPoints>k__BackingField: 0
-      <MaxPoints>k__BackingField: 10
     - <WeaponType>k__BackingField: 1
       <CurrentPoints>k__BackingField: 0
       <MaxPoints>k__BackingField: 10
-    - <WeaponType>k__BackingField: 2
+    - <WeaponType>k__BackingField: 0
       <CurrentPoints>k__BackingField: 0
-      <MaxPoints>k__BackingField: 12
+      <MaxPoints>k__BackingField: 10
     - <WeaponType>k__BackingField: 3
-      <CurrentPoints>k__BackingField: 0
+      <CurrentPoints>k__BackingField: 12
+      <MaxPoints>k__BackingField: 12
+    - <WeaponType>k__BackingField: 2
+      <CurrentPoints>k__BackingField: 12
       <MaxPoints>k__BackingField: 12
     selectedWeapons: 0300000002000000
-    playerDeck: []
+    playerDeck:
+    - weapon: 3
+      weaponDeck:
+      - _actionClassName: Execute
+        <IsEvolved>k__BackingField: 0
+      - _actionClassName: SharpenedDefence
+        <IsEvolved>k__BackingField: 0
+      - _actionClassName: Cleave
+        <IsEvolved>k__BackingField: 0
+      - _actionClassName: Decimate
+        <IsEvolved>k__BackingField: 0
+      - _actionClassName: Mutilate
+        <IsEvolved>k__BackingField: 0
+      - _actionClassName: Whirl
+        <IsEvolved>k__BackingField: 0
+    - weapon: 2
+      weaponDeck:
+      - _actionClassName: Brace
+        <IsEvolved>k__BackingField: 0
+      - _actionClassName: LeftHook
+        <IsEvolved>k__BackingField: 0
+      - _actionClassName: RightHook
+        <IsEvolved>k__BackingField: 0
+      - _actionClassName: Pummel
+        <IsEvolved>k__BackingField: 0
+      - _actionClassName: Haymaker
+        <IsEvolved>k__BackingField: 0
+      - _actionClassName: FollowThrough
+        <IsEvolved>k__BackingField: 0
