@@ -11,18 +11,44 @@ using LevelSelectInformation;
 public class BountyManager : PersistentSingleton<BountyManager>, IBind<BountyStateData>
 {
     [field: SerializeField] public SerializableGuid Id { get; set; } = SerializableGuid.NewGuid();
-    private BountyStateData? ContractStateData; 
+
+    private BountyStateData? data;
+
+    public BountyStateData ContractStateData
+    {
+        get
+        {
+            // This can be null when this manager is created after SaveLoadManager is created. For example, when you start the game in certain scenes.
+            if (data == null) SaveLoadSystem.Instance.LoadBountyStateInformation();
+            
+            return data!;
+        }
+        set
+        {
+            data = value;
+        }
+    }
+
+
     public BountyInformation? SelectedBountyInformation { get; set; } = null;
 
     // All ActiveBounty should be contained within BountyInformation's Bounty Collection
     public IBounties? ActiveBounty { get; set; } = null;
 
+    public bool IsBountyCompleted(IBounties? bounty)
+    {
+        if (bounty == null) return false;
+
+        return ContractStateData?.IsBountyCompleted(bounty) ?? false;
+    }
 
     public void NotifyWin()
     {
         if (ActiveBounty != null) ContractStateData?.SetChallengeComplete(ActiveBounty);
         ActiveBounty = null;
+        SelectedBountyInformation = null;
     }
+
     void IBind<BountyStateData>.Bind(BountyStateData data)
     {
         ContractStateData = data;
@@ -35,7 +61,7 @@ public class BountyManager : PersistentSingleton<BountyManager>, IBind<BountySta
 public class BountyStateData : ISaveable
 {
     [field: SerializeField] public SerializableGuid Id { get; set; } = SerializableGuid.NewGuid();
-    [field: SerializeField] public List<ChallengeCompletionState> BountyCompletionData { get; set; } = new();
+    [field: SerializeField] private List<ChallengeCompletionState> BountyCompletionData { get; set; } = new();
 
     public void SetChallengeComplete(IBounties bounty)
     {
@@ -43,6 +69,13 @@ public class BountyStateData : ISaveable
         
         if (challengeCompletionState == null) BountyCompletionData.Add(new(bounty.BountyName, true));
         else challengeCompletionState.Completed = true;
+    }
+
+    public bool IsBountyCompleted(IBounties bounty)
+    {
+        ChallengeCompletionState? challengeCompletionState = BountyCompletionData.Find(data => data.BountyName == bounty.BountyName);
+
+        return challengeCompletionState?.Completed ?? false;
     }
 
     public BountyStateData()
@@ -59,8 +92,8 @@ public class BountyStateData : ISaveable
     [Serializable]
     public class ChallengeCompletionState
     {
+        [field: SerializeField] public string BountyName { get; set; }
         [field: SerializeField] public bool Completed { get; set; }
-        [field: SerializeField] public string BountyName { get; }
         
         public ChallengeCompletionState(string bountyName, bool completed)
         {

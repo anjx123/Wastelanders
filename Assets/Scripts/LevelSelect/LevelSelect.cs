@@ -9,13 +9,11 @@ using UnityEngine.UI;
 
 public class LevelSelect : MonoBehaviour
 {
-    public LevelSelectButton[] buttons;
     public GameObject levelButtons;
     [SerializeField] private FadeScreenHandler fadeScreen;
 
     protected void Awake()
     {
-        ButtonArray();
         fadeScreen.SetDarkScreen();
         StartCoroutine(fadeScreen.FadeInLightScreen(1f));
     }
@@ -51,15 +49,5 @@ public class LevelSelect : MonoBehaviour
     {
         yield return StartCoroutine(fadeScreen.FadeInDarkScreen(0.8f));
         GameStateManager.Instance.LoadScene(levelName);
-    }
-
-    void ButtonArray()
-    {
-        int children = levelButtons.transform.childCount;
-        buttons = new LevelSelectButton[children];
-        for (int i = 0; i < children; i++)
-        {
-            buttons[i] = levelButtons.transform.GetChild(i).gameObject.GetComponent<LevelSelectButton>();
-        }
     }
 }
