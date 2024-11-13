@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using static CardDatabase;
 
 namespace WeaponDeckSerialization
 {
@@ -14,6 +15,7 @@ namespace WeaponDeckSerialization
 
         public WeaponProficiency(CardDatabase.WeaponType weaponType, int currentPoints, int maxPoints)
         {
+            WeaponType = weaponType;
             CurrentPoints = currentPoints;
             MaxPoints = maxPoints;
         }
@@ -24,20 +26,26 @@ namespace WeaponDeckSerialization
     {
         public CardDatabase.WeaponType weapon;
         public List<SerializableActionClassInfo> weaponDeck;
+
+        public SerializableWeaponListEntry(WeaponType weapon, List<SerializableActionClassInfo> weaponDeck)
+        {
+            this.weapon = weapon;
+            this.weaponDeck = weaponDeck;
+        }
     }
 
     // If we want to remember any specific ActionClass information add it here
     public interface ActionClassInfo
     {
-        public bool IsEvolved { get; }
+        public bool IsEvolved { get; set;  }
     }
 
     // holds information that may be useful for an ActionClass when instantiating one. 
     public class InstantiableActionClassInfo : ActionClassInfo
     {
         // Holds a reference to an ActionClass Prefab
-        public ActionClass ActionClass { get; }
-        public bool IsEvolved { get; }
+        public ActionClass ActionClass { get; set; }
+        public bool IsEvolved { get; set; }
 
         public InstantiableActionClassInfo(ActionClass actionClass, bool isEvolved)
         {
@@ -65,7 +73,7 @@ namespace WeaponDeckSerialization
             }
         }
 
-        public SerializableActionClassInfo(string actionClassName, bool isEvolved)
+        public SerializableActionClassInfo(string actionClassName, bool isEvolved = false)
         {
             _actionClassName = actionClassName;
             IsEvolved = isEvolved;

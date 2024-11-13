@@ -85,7 +85,7 @@ namespace Systems.Persistence
             Bind<GameStateManager, GameStateData>(gameData.gameStateData);
         }
 
-        private void LoadBountyStateInformation()
+        public void LoadBountyStateInformation()
         {
             Bind<BountyManager, BountyStateData>(gameData.bountyStateData);
         }
@@ -128,7 +128,7 @@ namespace Systems.Persistence
                 gameStateData = new GameStateData(),
                 bountyStateData = new BountyStateData(),
                 actionData = defaultCardDatabase.GetDefaultActionDatas(),
-                playerInformation = new PlayerInformation(defaultPlayerDatabase.JackieData, defaultPlayerDatabase.IvesData) // Initialize with default scriptableObject values
+                playerInformation = new PlayerInformation(PlayerDatabase.PlayerData.JACKIE_DEFAULT, PlayerDatabase.PlayerData.IVES_DEFAULT)
             };
         }
 

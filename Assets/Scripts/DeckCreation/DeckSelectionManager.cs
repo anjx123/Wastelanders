@@ -165,11 +165,7 @@ public class DeckSelectionManager : MonoBehaviour
 
         if (playerWeaponDeck == null)
         {
-            playerWeaponDeck = new SerializableWeaponListEntry()
-            {
-                weapon = weaponType,
-                weaponDeck = new List<SerializableActionClassInfo>()
-            };
+            playerWeaponDeck = new SerializableWeaponListEntry(weapon: weaponType, weaponDeck: new());
             playerData.playerDeck.Add(playerWeaponDeck);
         }
 
