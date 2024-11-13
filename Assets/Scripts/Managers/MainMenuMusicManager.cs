@@ -48,5 +48,6 @@ public class MainMenuMusicManager : AudioManager
     {
         yield return StartCoroutine(FadeAudioRoutine(BackgroundMusicPlayer, true, duration));
         Destroy(this.gameObject);
+        StopAllCoroutines();
     }
 }
