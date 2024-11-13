@@ -1230,16 +1230,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playersPosition: {x: -5, y: 0, z: 0}
   enemiesPosition: {x: 5, y: 0, z: 0}
-  players:
-  - {fileID: 5836655443787502691, guid: 18ff4a241e9f877439ebd5fd1de51dd0, type: 3}
-  - {fileID: 8272483667302085576, guid: ab7d30ad1a6d943e786f1b7a8dc2258f, type: 3}
-  enemies:
-  - {fileID: 8044949296705636452, guid: fa2244f9c89fb2c42ae45cb8f73816be, type: 3}
-  - {fileID: 8680915202774343895, guid: 3727fe42f1ca7415fb600d193eb41d2d, type: 3}
-  - {fileID: 8044949296705636452, guid: fa2244f9c89fb2c42ae45cb8f73816be, type: 3}
-  additionalEnemies:
-  - {fileID: 8044949296705636452, guid: 276880eff6e9b4907a1ea5430761a162, type: 3}
-  - {fileID: 8044949296705636452, guid: 692030d7a70f84e1e9949eb9b07ebce5, type: 3}
+  jackiePrefab: {fileID: 3367972655850899957, guid: 18ff4a241e9f877439ebd5fd1de51dd0, type: 3}
+  ivesPrefab: {fileID: 7888813795749597336, guid: ab7d30ad1a6d943e786f1b7a8dc2258f, type: 3}
+  princessFrogPrefab: {fileID: 9159394439057369962, guid: 3727fe42f1ca7415fb600d193eb41d2d, type: 3}
+  queenBeetlePrefab: {fileID: 565243660519602255, guid: ffe5e716a68f6484aa03d7e79a4dc2a7, type: 3}
+  beetlePrefabs:
+  - {fileID: 6950428195291563312, guid: 276880eff6e9b4907a1ea5430761a162, type: 3}
+  - {fileID: 5232295061604255744, guid: fa2244f9c89fb2c42ae45cb8f73816be, type: 3}
+  - {fileID: 4445560835001526495, guid: 692030d7a70f84e1e9949eb9b07ebce5, type: 3}
+  frogPrefab: {fileID: 7740565208951490800, guid: 6395bbe6ca801ac4d97dd23203674434, type: 3}
+  slimePrefab: {fileID: 4042660394930622279, guid: 318d7b6a8a4429e40bec8a1cf14c73bd, type: 3}
   entityContainer: {fileID: 856732782}
 --- !u!4 &245795668 stripped
 Transform:
@@ -1339,7 +1339,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6635998426718021455, guid: b9c5e4b3c9f7e024f8fe9012e7a2e437, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.577575
+      value: 5.6827335
       objectReference: {fileID: 0}
     - target: {fileID: 6635998426718021455, guid: b9c5e4b3c9f7e024f8fe9012e7a2e437, type: 3}
       propertyPath: m_LocalPosition.y

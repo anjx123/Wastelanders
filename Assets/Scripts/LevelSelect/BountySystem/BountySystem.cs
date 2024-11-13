@@ -12,17 +12,24 @@ namespace BountySystem
     // Organizing Player Challenges into its own set, although might be better to just put all contracts in one place
     public class PlayerContracts : IContracts
     {
-        public static readonly PlayerContracts SOLO_JACKIE = new PlayerContracts();
+        public static readonly PlayerContracts SOLO_JACKIE = new();
+        public static readonly PlayerContracts DECREASED_HAND_SIZE = new();
+    }
+
+    public class EnemySpawningContracts: IContracts
+    {
+        public static readonly EnemySpawningContracts QUEEN_BEETLE_SPAWN = new();
+        public static readonly EnemySpawningContracts SLIME_SPAWN = new();
+        public static readonly EnemySpawningContracts FROG_SPAWN = new();
+    }
 
 
-        // Update this every time you add a new contract please, I don't want to implement reflection.
-        public static IEnumerable<PlayerContracts> Values
-        {
-            get
-            {
-                yield return SOLO_JACKIE;
-            }
-        }
+    public class PrincessFrogContracts : IContracts
+    {
+        public static readonly PrincessFrogContracts ADDITIONAL_ATTACK = new();
+        public static readonly PrincessFrogContracts EXTRA_HP = new();
+        public static readonly PrincessFrogContracts AGGRESIVE_AI = new();
+        public static readonly PrincessFrogContracts HIGHER_ENEMIES_CAP = new();
     }
 
     public interface IBounties
