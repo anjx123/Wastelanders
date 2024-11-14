@@ -10,7 +10,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using static Beetle;
 
-public class Scene2 : DialogueClasses
+public class FrogSlimeFightDialogue : DialogueClasses
 {
     [SerializeField] private Jackie jackie;
     [SerializeField] private Transform jackieDefaultTransform;

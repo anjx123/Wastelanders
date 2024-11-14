@@ -25,15 +25,22 @@ public class BountyButton : MonoBehaviour
 
     protected virtual void Awake()
     {
-        // hmmmm uhh hmmm, prolly a better way to do this through unity and not just script
-        activeColors = GetComponent<Button>().colors;
+        ApplyColouring();
+    }
+
+    private void ApplyColouring()
+    {
+        Button button = GetComponent<Button>();
+        activeColors = button.colors;
+
         inactiveColors = activeColors;
-        var inactiveNormalColor = inactiveColors.normalColor;
+        Color inactiveNormalColor = inactiveColors.normalColor;
         inactiveNormalColor.a = INACTIVE_ALPHA;
         inactiveColors.normalColor = inactiveNormalColor;
         inactiveColors.selectedColor = inactiveNormalColor;
 
-        GetComponent<Button>().colors = selected ? activeColors : inactiveColors;
+
+        button.colors = selected ? activeColors : inactiveColors;
     }
 
     public void OnEnable()

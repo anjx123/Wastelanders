@@ -6,6 +6,7 @@ using UnityEngine;
 
 namespace LevelSelectInformation
 {
+    // For use in the editor as a serialized placeholder for a level, that is then mapped to an actual static object.  
     public enum Level
     {
         Tutorial,
@@ -22,6 +23,7 @@ namespace LevelSelectInformation
 
         public void UponSelectedEvent();
 
+        // Please update me if you add any new entries in the Level enum
         public static readonly Dictionary<Level, ILevelSelectInformation> LEVEL_INFORMATION = new()
         {
             { Level.Tutorial, StageInformation.TUTORIAL_STAGE },
@@ -69,6 +71,7 @@ namespace LevelSelectInformation
 
         public delegate void BountyInformationDelegate(BountyInformation BountyType);
         public static event BountyInformationDelegate BountyInformationEvent;
+
         public BountyInformation(IEnumerable<IBounties> bounties, float levelId)
         {
 

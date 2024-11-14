@@ -56,10 +56,11 @@ public class BountyManager : PersistentSingleton<BountyManager>, IBind<BountySta
     }
 }
 
-// The serialized 
+// The serialized data for bounties that gets stored in the JSON
 [System.Serializable]
 public class BountyStateData : ISaveable
 {
+    
     [field: SerializeField] public SerializableGuid Id { get; set; } = SerializableGuid.NewGuid();
     [field: SerializeField] private List<ChallengeCompletionState> BountyCompletionData { get; set; } = new();
 
