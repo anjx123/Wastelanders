@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,10 +9,9 @@ public abstract class EntityClass : SelectClass
 {
     private float PLAY_RUNNING_ANIMATION_DELTA = 0.03f; //Represents how little change in position we should at least see before playing running animation
     protected int MAX_HEALTH;
-    [SerializeField]
     protected int MaxHealth
     {
-        get { return MAX_HEALTH; }
+        get => MAX_HEALTH;
         set
         {
             MAX_HEALTH = value;
@@ -19,35 +19,35 @@ public abstract class EntityClass : SelectClass
         }
     }
 
-
     private int health;
-    public Animator animator;
-    public CombatInfo combatInfo;
-
-    [SerializeField] protected BoxCollider boxCollider;
-    protected bool isDead = false;
-    public bool IsDead { get { return isDead; } set { isDead = value; } }
-    private bool crosshairStaysActive = false;
-
-
-    protected Vector3 initialPosition;
     public int Health
     {
-        get { return health; }
+        get => health;
         protected set
         {
             health = value;
             combatInfo.SetHealth(health);
         }
     }
+    public EntityTeam Team { get; set; }
+    public enum EntityTeam
+    {
+        PlayerTeam,
+        NeutralTeam,
+        EnemyTeam,
+    }
+    public bool IsDead { get; set; }
+    protected Vector3 initialPosition;
+    private bool crosshairStaysActive = false;
+    public DeadEntities DeathHandler { get; set; }
+    protected readonly Dictionary<string, StatusEffect> statusEffects = new();
 
-    protected readonly Dictionary<string, StatusEffect> statusEffects = new Dictionary<string, StatusEffect>();
-
-
-
-    protected List<ActionClass> actionsAvailable;
-    public DeadEntities _DeathHandler { protected get;  set; }
-    public DeadEntities DeathHandler { get; private set; }
+    // Set in the editor
+    public Sprite icon;
+    public Animator animator;
+    public CombatInfo combatInfo;
+    [SerializeField] 
+    protected BoxCollider boxCollider;
 
 #nullable enable
 
@@ -60,18 +60,15 @@ public abstract class EntityClass : SelectClass
     public static event EntityDelegate? OnEntityClicked;
     public event EntityDelegate? BuffsUpdatedEvent;
 
-    public Sprite? icon;
-
     public virtual void Start()
     {
         initialPosition = myTransform.position;
 
         DeEmphasize();
         DisableDice();
+        AssignTeam();
         GetComponent<SpriteRenderer>().sortingLayerName = CombatManager.Instance.FADE_SORTING_LAYER;
-
-        _DeathHandler = Die;
-        DeathHandler = delegate { return _DeathHandler(); };
+        DeathHandler = Die;
 
         OnEntitySpawn?.Invoke(this);
     }
@@ -323,13 +320,13 @@ public abstract class EntityClass : SelectClass
         }
     }
 
-    public override void OnMouseEnter()
+    public void OnMouseEnter()
     {
         if (PauseMenu.IsPaused) return;
         Highlight();
     }
 
-    public override void OnMouseExit()
+    public void OnMouseExit()
     {
         if (PauseMenu.IsPaused) return;
         DeHighlight();
@@ -347,7 +344,7 @@ public abstract class EntityClass : SelectClass
         DeHighlight();
     }
 
-    public override void Highlight()
+    public void Highlight()
     {
         if (CombatManager.Instance.CanHighlight())
         {
@@ -355,7 +352,7 @@ public abstract class EntityClass : SelectClass
         }
     }
 
-    public override void DeHighlight()
+    public void DeHighlight()
     {
         if (!crosshairStaysActive)
         {
@@ -363,7 +360,7 @@ public abstract class EntityClass : SelectClass
         }
     }
 
-    public override void OnMouseDown()
+    public void OnMouseDown()
     {
         if (PauseMenu.IsPaused) return;
         OnEntityClicked?.Invoke(this);
@@ -373,15 +370,19 @@ public abstract class EntityClass : SelectClass
 
     //Removes entity cards and self from BQ and combat manager. Kills itself
     public abstract IEnumerator Die();
-    /*
-    // Constructor
-    public EntityClass(int health)
-    {
-        this.health = health;
-        this.MAX_HEALTH = health;
-    } */
+    public abstract void PerformSelection(List<EntityClass> playerTeam, List<EntityClass> neutralTeam, List<EntityClass> enemyTeam);
 
-    // Checks if a Given Buff exists, instantiates it if not
+    private void AssignTeam()
+    {
+        Action action = Team switch
+        {
+            EntityTeam.PlayerTeam => delegate { },
+            EntityTeam.EnemyTeam=> delegate { },
+            EntityTeam.NeutralTeam => delegate { },
+            _ => throw new ArgumentOutOfRangeException()
+        };
+    }
+
     private void CheckBuff(string buffType)
     {
         if (!statusEffects.ContainsKey(buffType))
@@ -408,14 +409,14 @@ public abstract class EntityClass : SelectClass
     }
 
     // Applies the Stacks of the Specified Buff to the Card Roll Limits
-    private void ApplyBuffsToCard(ref ActionClass.CardDup dup, string buffType)
+    private void ApplyBuffsToCard(ref ActionClass.RolledStats dup, string buffType)
     {
         CheckBuff(buffType);
         statusEffects[buffType].ApplyStacks(ref dup);
     }
 
     // Applies the Stacks of all Buffs to the Card Roll Limits
-    public void ApplyAllBuffsToCard(ref ActionClass.CardDup dup)
+    public void ApplyAllBuffsToCard(ref ActionClass.RolledStats dup)
     {
         foreach (string buff in  statusEffects.Keys)
         {
@@ -423,7 +424,7 @@ public abstract class EntityClass : SelectClass
         }
     }
 
-    public void ApplySingleUseEffects(ref ActionClass.CardDup duplicateCard)
+    public void ApplySingleUseEffects(ref ActionClass.RolledStats duplicateCard)
     {
         foreach (string buff in statusEffects.Keys)
         {
@@ -435,11 +436,7 @@ public abstract class EntityClass : SelectClass
 
     public int GetBuffStacks(string s)
     {
-        if (statusEffects.ContainsKey(s))
-        {
-            return statusEffects[s].Stacks;
-        }
-        return 0;
+        return statusEffects.TryGetValue(s, out var effect) ? effect.Stacks : 0;
     }
 
     // Updates buffs affected by player taking damage
@@ -478,6 +475,7 @@ public abstract class EntityClass : SelectClass
         //Todo
         //Implement Block Animation
     }
+
 
     public bool HasAnimationParameter(string paramName, Animator? paramAnimator = null)
     {
@@ -577,13 +575,6 @@ public abstract class EntityClass : SelectClass
         return originalHandler;
     }
 
-    public StatusEffectModifyValueDelegate GetBuffsOnHitHandler(string buff)
-    {
-        CheckBuff(buff);
-        return statusEffects[buff].OnEntityHitHandler;
-    }
-
-
     public void EnableDice()
     {
         combatInfo.EnableDice();
@@ -602,7 +593,6 @@ public abstract class EntityClass : SelectClass
         combatInfo.DisableHealthBar();
     }
 
-    //@Author: Anrui
     //Sets the location an entity returns to after fighting ends.
     public void SetReturnPosition(Vector3 newReturningPosition)
     {

@@ -1,5 +1,4 @@
 using Entities;
-using UnityEngine;
 
 namespace Cards.EnemyCards.FrogCards
 {
@@ -15,9 +14,6 @@ namespace Cards.EnemyCards.FrogCards
             lowerBound = upperBound = 2;
             Speed = 3;
             CardType = CardType.MeleeAttack;
-
-            ogMaterial = GetComponent<Renderer>().material;
-            OriginalPosition = transform.position;
         }
 
         public override void CardIsUnstaggered()
@@ -38,7 +34,7 @@ namespace Cards.EnemyCards.FrogCards
                 Origin.AddStacks(Resonate.buffName, 5 + prior - Origin.GetBuffStacks(Resonate.buffName));
             }
             /* FrogAttacks doesn't call this in OnHit except via a projectile...? */
-            else Target.TakeDamage(Origin, duplicateCard.actualRoll);
+            else Target.TakeDamage(Origin, rolledCardStats.actualRoll);
         }
     }
 }

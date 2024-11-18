@@ -16,8 +16,6 @@ public class Vitals : PistolCards
         description = "Hit 'em where it hurts.";
         CardType = CardType.RangedAttack;
         Renderer renderer = GetComponent<Renderer>();
-        ogMaterial = renderer.material; // og sprite of card
-        OriginalPosition = transform.position;
         base.Initialize();
     }
 

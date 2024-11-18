@@ -29,8 +29,6 @@ public class Mutilate : AxeCards
         evolutionDescription = "Speed is increased to 5.";
         MaxEvolutionProgress = 8;
         Renderer renderer = GetComponent<Renderer>();
-        ogMaterial = renderer.material;
-        OriginalPosition = transform.position;
         base.Initialize();
         CardType = CardType.MeleeAttack;
     }

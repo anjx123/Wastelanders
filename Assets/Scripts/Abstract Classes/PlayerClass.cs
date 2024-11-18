@@ -151,6 +151,11 @@ public abstract class PlayerClass : EntityClass
         HighlightManager.Instance.RenderHandIfAppropriate(this);
     }
 
+    public override void PerformSelection(List<EntityClass> playerTeam, List<EntityClass> neutralTeam, List<EntityClass> enemyTeam)
+    {
+        
+    }
+
     public override IEnumerator ResetPosition()
     {
         yield return StartCoroutine(MoveToPosition(initialPosition, 0f, 0.8f));

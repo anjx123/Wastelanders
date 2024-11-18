@@ -19,8 +19,6 @@ public class Cleave : AxeCards
         MaxEvolutionProgress = 10;
 
         Renderer renderer = GetComponent<Renderer>();
-        ogMaterial = renderer.material; 
-        OriginalPosition = transform.position;
         base.Initialize();
         CardType = CardType.MeleeAttack;
     }

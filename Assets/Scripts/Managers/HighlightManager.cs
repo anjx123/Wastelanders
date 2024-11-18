@@ -135,7 +135,6 @@ public class HighlightManager : MonoBehaviour // later all entity highlighter
 
 
         currentHighlightedEnemyEntity!.DeHighlight();
-        currentHighlightedAction.DeHighlight();
         currentHighlightedAction.ForceNormalState();
         currentHighlightedEnemyEntity = null;
         currentHighlightedAction = null;

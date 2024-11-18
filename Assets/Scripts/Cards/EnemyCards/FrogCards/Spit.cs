@@ -22,8 +22,6 @@ public class Spit : FrogAttacks
         myName = "Spit";
         description = "Gross!";
         Renderer renderer = GetComponent<Renderer>();
-        ogMaterial = renderer.material; // og sprite of card
-        OriginalPosition = transform.position;
     }
 
 

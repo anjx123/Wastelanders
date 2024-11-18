@@ -1,4 +1,3 @@
-using UnityEngine;
 using Random = UnityEngine.Random;
 
 namespace Cards.EnemyCards.FrogCards
@@ -16,9 +15,6 @@ namespace Cards.EnemyCards.FrogCards
             lowerBound = upperBound = 1;
             Speed = 1;
             CardType = CardType.Defense;
-
-            ogMaterial = GetComponent<Renderer>().material;
-            OriginalPosition = transform.position;
         }
 
         public override void CardIsUnstaggered()

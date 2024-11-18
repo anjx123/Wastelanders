@@ -88,7 +88,7 @@ public class FollowThrough : FistCards
             Target.EntityTookDamage -= attackAgainDelegate;
         }
         // Have to swap the order of cardIsUnstaggered and TakeDamage here to prevent infinity chain.
-        this.Target.TakeDamage(Origin, duplicateCard.actualRoll);
+        this.Target.TakeDamage(Origin, rolledCardStats.actualRoll);
         CardIsUnstaggered();
         if (!originalCopy)
         {

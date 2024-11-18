@@ -23,8 +23,6 @@ public class LeftHook : FistCards
         description = "If this attack is unstaggered, use 'Right Hook'.";
         CardType = CardType.MeleeAttack;
         Renderer renderer = GetComponent<Renderer>();
-        ogMaterial = renderer.material; // og sprite of card
-        OriginalPosition = transform.position;
         base.Initialize();
     }
 

@@ -31,7 +31,7 @@ public class CardUI : MonoBehaviour
     public void RenderCard(ActionClass actionClass)
     {
         textCanvas.overrideSorting = true; //Added so it overrides the layer of its parent canvas
-        ActionClass.CardDup duplicateCard = actionClass.GetCard();
+        ActionClass.RolledStats duplicateCard = actionClass.GetRolledStats();
         NameText.text = actionClass.GetName();
         lowerBoundText.text = duplicateCard.rollFloor.ToString();
         upperBoundText.text = duplicateCard.rollCeiling.ToString();

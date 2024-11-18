@@ -25,8 +25,6 @@ public class FocusedDefense : StaffCards
         myName = "Focused Defense";
         description = "Gain 1 Focus, If this card is unstaggerd, Gain another Focus";
         Renderer renderer = GetComponent<Renderer>();
-        ogMaterial = renderer.material; // og sprite of card
-        OriginalPosition = transform.position;
         base.Initialize();
         CardType = CardType.Defense;
     }

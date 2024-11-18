@@ -20,8 +20,6 @@ public class CheapStrike : StaffCards
         evolutionDescription = "3 cost. This card now has 3 - 3 power, gain 3 flow on hit.";
         MaxEvolutionProgress = 10;
         Renderer renderer = GetComponent<Renderer>();
-        ogMaterial = renderer.material; // og sprite of card
-        OriginalPosition = transform.position;
         CardType = CardType.MeleeAttack;
         base.Initialize();
 

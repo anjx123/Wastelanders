@@ -24,8 +24,6 @@ public class Excavate : BeetleAttacks
         myName = "Excavate";
         CardType = CardType.MeleeAttack;
         Renderer renderer = GetComponent<Renderer>();
-        ogMaterial = renderer.material; // og sprite of card
-        OriginalPosition = transform.position;
     }
 
     public override void CardIsUnstaggered()
@@ -49,7 +47,7 @@ public class Excavate : BeetleAttacks
             }
             Vector3 diffInLocation = Target.myTransform.position - Origin.myTransform.position;
             Origin.UpdateFacing(diffInLocation, null);
-            this.Target.TakeDamage(Origin, 2 * duplicateCard.actualRoll);
+            this.Target.TakeDamage(Origin, 2 * rolledCardStats.actualRoll);
         }
         else
         {

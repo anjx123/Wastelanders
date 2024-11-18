@@ -20,8 +20,6 @@ public class CalmTheMind : StaffCards
         description = "Block, then gain 2 stack of Flow.";
         
         Renderer renderer = GetComponent<Renderer>();
-        ogMaterial = renderer.material; // og sprite of card
-        OriginalPosition = transform.position;
         base.Initialize();
         CardType = CardType.Defense;
     }

@@ -14,8 +14,6 @@ public class PistolWhip : PistolCards
         description = "On hit, gain 1 Accuracy stack";
         myName = "Pistol Whip";
         Renderer renderer = GetComponent<Renderer>();
-        ogMaterial = renderer.material; // og sprite of card
-        OriginalPosition = transform.position;
         base.Initialize();
         CardType = CardType.MeleeAttack; //Has to be after otherwise it will get overwritten by superclass
     }

@@ -376,7 +376,7 @@ private IEnumerator ExecuteGameStart()
                     yield break;
                 }
 
-                wasteFrog._DeathHandler = DieInScene;
+                wasteFrog.DeathHandler = DieInScene;
                 lastKilledFrog = wasteFrog;
                 EntityClass.OnEntityDeath -= EnsureFrogDeath;
             }

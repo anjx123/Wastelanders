@@ -22,8 +22,6 @@ public class SteadiedShot : PistolCards
         myName = "Steadied Shot";
         description = "When played, do not lose Accuracy when you get hit this round.";
         Renderer renderer = GetComponent<Renderer>();
-        ogMaterial = renderer.material; // og sprite of card
-        OriginalPosition = transform.position;
         base.Initialize();
         CardType = CardType.Defense;
     }

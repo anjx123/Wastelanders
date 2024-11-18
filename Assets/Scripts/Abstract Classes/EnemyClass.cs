@@ -5,7 +5,6 @@ using UnityEngine;
 
 public abstract class EnemyClass : EntityClass
 {
-
     // This is the deck of the enemy, which does not change as they reshuffle/play cards.
     protected List<GameObject> deck = new List<GameObject>();
 
@@ -14,13 +13,6 @@ public abstract class EnemyClass : EntityClass
     
     // Initialized in editor
     public List<GameObject> availableActions;
-
-
-    /*  Plays a single card from the pool, removing it from the pool and refilling it if necessary.
-     *  REQUIRES: Nothing
-     *  MODIFIES: pool
-     *  
-     */
 
     public override void Start()
     {
@@ -43,17 +35,6 @@ public abstract class EnemyClass : EntityClass
         }
     }
 
-    /*  Given a list of players, the enemy chooses appropriately a target/targets and adds an attack that it chooses to the bq.
-     *  It is up to the subclass HOW to implement this method, as certain enemies may prefer to attack certain players. 
-     *  
-     *  Subclasses should document this method as follows:
-     *  
-     *  By default, assume the target is a completely random player. If this is not the case (for example, the enemy might prefer
-     *  to attack some specific character), the method documentation should note this.
-     *  
-     *  Potentially? We might want to list the attacks available to the enemy at the beginning of combat for ease of balancing and
-     *  tweaking difficulty later on.
-     */
     public virtual void AddAttack(List<PlayerClass> players)
     {
         if (players.Count == 0) return;
@@ -69,11 +50,6 @@ public abstract class EnemyClass : EntityClass
         }
     }
 
-    /*  Reshuffles the deck. Should be called on start (so the enemy can display its first attack), and whenever the enemy runs out of
-     *  attacks.
-     *  REQUIRES: pool should be empty! But it shouldn't break anything, just mess up the enemy's order of attacks
-     *  MODIFIES: pool 
-     */
     protected virtual void Reshuffle()
     {
         List<GameObject> temp = new List<GameObject>();
@@ -90,7 +66,6 @@ public abstract class EnemyClass : EntityClass
         }
     }
 
-    //Removes entity cards and self from BQ and combat manager. Kills itself
     public override IEnumerator Die()
     {
         int runDistance = 10;
@@ -115,5 +90,10 @@ public abstract class EnemyClass : EntityClass
     {
         yield return StartCoroutine(MoveToPosition(initialPosition, 0f, 0.8f));
         FaceLeft();
+    }
+
+    public override void PerformSelection(List<EntityClass> playerTeam, List<EntityClass> neutralTeam, List<EntityClass> enemyTeam)
+    {
+
     }
 }
