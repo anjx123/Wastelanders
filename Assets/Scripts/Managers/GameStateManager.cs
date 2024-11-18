@@ -18,9 +18,9 @@ public class GameStateManager : PersistentSingleton<GameStateManager>, IBind<Gam
     { 
         get
         {
+            // Data should only be nullable during development where you can open a scene from any place
             if (data == null)
             {
-                Debug.LogWarning("The data for game state data was null, if you see this note it down.");
                 SaveLoadSystem.Instance.LoadGameStateInformation();
             }
 
