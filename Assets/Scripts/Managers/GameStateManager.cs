@@ -20,7 +20,6 @@ public class GameStateManager : PersistentSingleton<GameStateManager>, IBind<Gam
         {
             if (data == null)
             {
-                Debug.LogWarning("The data for game state data was null, if you see this note it down.");
                 SaveLoadSystem.Instance.LoadGameStateInformation();
             }
 
