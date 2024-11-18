@@ -1,3 +1,4 @@
+using LevelSelectInformation;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -80,8 +81,6 @@ public class PreQueenFight : DialogueClasses
 
     private const float BRIEF_PAUSE = 0.2f; // For use after an animation to make it visually seem smoother
     private const float MEDIUM_PAUSE = 1f; //For use after a text box comes down and we want to add some weight to the text.
-
-    private int beetles_alive;
 
     protected override void GameStateChange(GameState gameState)
     {
@@ -520,6 +519,9 @@ public class PreQueenFight : DialogueClasses
             BeginQueenCombat();
             yield return new WaitUntil(() => CombatManager.Instance.GameState == GameState.GAME_WIN);
             AudioManager.Instance.FadeOutCurrentBackgroundTrack(2f);
+
+            GameStateManager.Instance.CurrentLevelProgress = Math.Max(GameStateManager.Instance.CurrentLevelProgress, StageInformation.QUEEN_BEETLE_STAGE.LevelID + 1f);
+            
             yield return new WaitForSeconds(1f);
             DialogueManager.Instance.MoveBoxToBottom();
 
@@ -527,7 +529,7 @@ public class PreQueenFight : DialogueClasses
 
             yield return StartCoroutine(DialogueManager.Instance.StartDialogue(PostFight.Dialogue));
 
-            SceneManager.LoadScene(GameStateManager.POST_QUEEN_FIGHT);
+            GameStateManager.Instance.LoadScene(GameStateManager.POST_QUEEN_FIGHT);
         }
         
     }

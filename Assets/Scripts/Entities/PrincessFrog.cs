@@ -16,6 +16,10 @@ namespace Entities
             AddStacks(Resonate.buffName, 10);
         }
 
+        public void SetMaxHealth(int maxHealth)
+        {
+            Health = MaxHealth = maxHealth;
+        }
         protected override void OnEnable()
         {
             base.OnEnable();

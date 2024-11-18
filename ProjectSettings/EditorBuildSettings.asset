@@ -18,7 +18,7 @@ EditorBuildSettings:
     path: Assets/Scenes/TutorialScene.unity
     guid: b71821f2dc91647488c0f36149b56d88
   - enabled: 1
-    path: Assets/Scenes/Scene2.unity
+    path: Assets/Scenes/FrogSlimeFight.unity
     guid: 21c0fffe00ac8f4449c8c7c9192036d6
   - enabled: 1
     path: Assets/Scenes/BeetleFightScene.unity
@@ -41,4 +41,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Credits.unity
     guid: 21c5d603c058f415d86f715c990d6bcf
+  - enabled: 1
+    path: Assets/Scenes/ContractSelect.unity
+    guid: 277339fd7aad00948a3e91786f9eba68
+  - enabled: 1
+    path: Assets/Scenes/PrincessFrogCombatScene.unity
+    guid: 933538f20c2fb42a0bbff8f5eeb883c7
   m_configObjects: {}

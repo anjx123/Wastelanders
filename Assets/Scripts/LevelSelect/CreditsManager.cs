@@ -25,7 +25,7 @@ public class CreditsManager : MonoBehaviour
         yield return StartCoroutine(FadeImage(fadeImage, 2f, false));
         yield return new WaitUntil(() => animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.99f);
         yield return StartCoroutine(FadeImage(fadeImage, 1.5f, true));
-        SceneManager.LoadScene(GameStateManager.MAIN_MENU_NAME);
+        GameStateManager.Instance.LoadScene(GameStateManager.MAIN_MENU_NAME);
     }
 
     IEnumerator FadeImage(Image image, float duration, bool fadeIn)

@@ -24,6 +24,7 @@ public class DeckSelectionTutorial : MonoBehaviour
 
     [SerializeField] private bool activateTutorial;
 
+#nullable enable
     private void Start()
     {
         StartCoroutine(ExecuteGameStart());
@@ -104,9 +105,9 @@ public class DeckSelectionTutorial : MonoBehaviour
     private void NormalizeTutorialDecks()
     {
         playerDatabase.JackieData.selectedWeapons.Remove(CardDatabase.WeaponType.PISTOL);
-        SerializableWeaponListEntry pistolDeck = playerDatabase.JackieData.playerDeck.FirstOrDefault(deck => deck.weapon == CardDatabase.WeaponType.PISTOL);
-        pistolDeck.weaponDeck = new List<SerializableActionClassInfo>();
-        WeaponProficiency pointsAvailableForPistol = playerDatabase.JackieData.playerWeaponProficiency.FirstOrDefault(proficiency => proficiency.WeaponType == CardDatabase.WeaponType.PISTOL);
+        SerializableWeaponListEntry pistolDeck = playerDatabase.JackieData.GetPlayerWeaponDeck(CardDatabase.WeaponType.PISTOL);
+        pistolDeck.weaponDeck.Clear();
+        WeaponProficiency pointsAvailableForPistol = playerDatabase.JackieData.GetProficiencyPointsTuple(CardDatabase.WeaponType.PISTOL);
         pointsAvailableForPistol.CurrentPoints = 0;
     }
 
