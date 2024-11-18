@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public class PrincessFrogBounties : IBounties
 {
     public static readonly PrincessFrogBounties PRINCESS_FROG_CHALLENGE = new PrincessFrogBounties(
-        bountySet: new HashSet<IContracts> 
+        contractSet: new HashSet<IContracts> 
         { 
             PrincessFrogContracts.EXTRA_HP, 
             PrincessFrogContracts.ADDITIONAL_ATTACK, 
@@ -17,31 +17,31 @@ public class PrincessFrogBounties : IBounties
         );
 
     public static readonly PrincessFrogBounties QUEEN_CHALLENGE = new PrincessFrogBounties(
-        bountySet: new HashSet<IContracts> { EnemySpawningContracts.QUEEN_BEETLE_SPAWN },
+        contractSet: new HashSet<IContracts> { EnemySpawningContracts.QUEEN_BEETLE_SPAWN },
         challengeName: "The Queen Challenge",
         flavourText: "FlavourText"
         );
 
     public static readonly PrincessFrogBounties SLIME_CHALLENGE = new PrincessFrogBounties(
-        bountySet: new HashSet<IContracts> { EnemySpawningContracts.SLIME_SPAWN },
+        contractSet: new HashSet<IContracts> { EnemySpawningContracts.SLIME_SPAWN },
         challengeName: "The Slime Challenge",
         flavourText: "FlavourText"
         );
 
     public static readonly PrincessFrogBounties FROG_CHALLENGE = new PrincessFrogBounties(
-        bountySet: new HashSet<IContracts> { EnemySpawningContracts.FROG_SPAWN },
+        contractSet: new HashSet<IContracts> { EnemySpawningContracts.FROG_SPAWN },
         challengeName: "The Frog Challenge",
         flavourText: "FlavourText"
         );
 
     public static readonly PrincessFrogBounties SOLO_JACKIE = new PrincessFrogBounties(
-        bountySet: new HashSet<IContracts> { PlayerContracts.SOLO_JACKIE },
+        contractSet: new HashSet<IContracts> { PlayerContracts.SOLO_JACKIE },
         challengeName: "The Solo Challenge",
         flavourText: "FlavourText"
         );
 
     public static readonly PrincessFrogBounties DECREASED_HAND_SIZE = new PrincessFrogBounties(
-        bountySet: new HashSet<IContracts> { PlayerContracts.DECREASED_HAND_SIZE },
+        contractSet: new HashSet<IContracts> { PlayerContracts.DECREASED_HAND_SIZE },
         challengeName: "The Exhausted Challenge",
         flavourText: "FlavourText"
         );
@@ -59,15 +59,15 @@ public class PrincessFrogBounties : IBounties
             yield return DECREASED_HAND_SIZE;
         }
     }
-    public HashSet<IContracts> BountySet { get; }
+    public HashSet<IContracts> ContractSet { get; }
     public string FlavourText { get; }
     public string BountyName { get; }
 
     public string SceneName => GameStateManager.PRINCESS_FROG_BOUNTY;
 
-    public PrincessFrogBounties(HashSet<IContracts> bountySet, string challengeName, string flavourText)
+    public PrincessFrogBounties(HashSet<IContracts> contractSet, string challengeName, string flavourText)
     {
-        BountySet = bountySet;
+        ContractSet = contractSet;
         FlavourText = flavourText;
         BountyName = challengeName;
     }

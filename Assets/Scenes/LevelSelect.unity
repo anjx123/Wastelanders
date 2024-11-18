@@ -1363,7 +1363,7 @@ GameObject:
   - component: {fileID: 786314280}
   - component: {fileID: 786314281}
   m_Layer: 5
-  m_Name: ContractGrid
+  m_Name: BountyGrid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1780,7 +1780,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f51c3a65e33b370488dbc3a6c7dc54f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buttons: []
   levelButtons: {fileID: 470869349}
   fadeScreen: {fileID: 1645370206}
 --- !u!114 &1645370206
@@ -2018,7 +2017,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Contracts
+  m_text: 'Bounties
+
+'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ef98bd283b7bb734da8a833fccf0fb3e, type: 2}
   m_sharedMaterial: {fileID: -1472579445266561125, guid: ef98bd283b7bb734da8a833fccf0fb3e, type: 2}

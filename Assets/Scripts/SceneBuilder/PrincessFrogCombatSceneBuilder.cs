@@ -59,11 +59,11 @@ namespace SceneBuilder
         {
             List<GameObject> list = new();
 
-            if (bounty?.BountySet.Contains(EnemySpawningContracts.FROG_SPAWN) == true)
+            if (bounty?.ContractSet.Contains(EnemySpawningContracts.FROG_SPAWN) == true)
             {
                 list.Add(frogPrefab.gameObject);
             } 
-            else if (bounty?.BountySet.Contains(EnemySpawningContracts.SLIME_SPAWN) == true)
+            else if (bounty?.ContractSet.Contains(EnemySpawningContracts.SLIME_SPAWN) == true)
             {
                 list.Add(slimePrefab.gameObject);
             }
@@ -79,7 +79,7 @@ namespace SceneBuilder
         {
             List<GameObject> list = new();
 
-            if (bounty?.BountySet.Contains(PlayerContracts.SOLO_JACKIE) == true)
+            if (bounty?.ContractSet.Contains(PlayerContracts.SOLO_JACKIE) == true)
             {
                 list.Add(jackiePrefab.gameObject);
             } 
@@ -96,19 +96,19 @@ namespace SceneBuilder
         {
             List<GameObject> list = new();
 
-            if (bounty?.BountySet.Contains(EnemySpawningContracts.FROG_SPAWN) == true)
+            if (bounty?.ContractSet.Contains(EnemySpawningContracts.FROG_SPAWN) == true)
             {
                 list.Add(frogPrefab.gameObject);
                 list.Add(frogPrefab.gameObject);
                 list.Add(frogPrefab.gameObject);
             }
-            else if (bounty?.BountySet.Contains(EnemySpawningContracts.SLIME_SPAWN) == true)
+            else if (bounty?.ContractSet.Contains(EnemySpawningContracts.SLIME_SPAWN) == true)
             {
                 list.Add(slimePrefab.gameObject);
                 list.Add(slimePrefab.gameObject);
                 list.Add(slimePrefab.gameObject);
             }
-            else if (bounty?.BountySet.Contains(EnemySpawningContracts.QUEEN_BEETLE_SPAWN) == true)
+            else if (bounty?.ContractSet.Contains(EnemySpawningContracts.QUEEN_BEETLE_SPAWN) == true)
             {
                 list.Add(queenBeetlePrefab.gameObject);
             }
@@ -127,22 +127,22 @@ namespace SceneBuilder
             if (bounty == null) return;
 
             // TODO: Implement Swappable AI
-            if (bounty.BountySet.Contains(PrincessFrogContracts.ADDITIONAL_ATTACK))
+            if (bounty.ContractSet.Contains(PrincessFrogContracts.ADDITIONAL_ATTACK))
             {
 
             }
 
-            if (bounty.BountySet.Contains(PrincessFrogContracts.AGGRESIVE_AI))
+            if (bounty.ContractSet.Contains(PrincessFrogContracts.AGGRESIVE_AI))
             {
 
             }
 
-            if (bounty.BountySet.Contains(PrincessFrogContracts.EXTRA_HP))
+            if (bounty.ContractSet.Contains(PrincessFrogContracts.EXTRA_HP))
             {
                 princessFrog.SetMaxHealth(150);
             }
 
-            if (bounty.BountySet.Contains(PrincessFrogContracts.HIGHER_ENEMIES_CAP))
+            if (bounty.ContractSet.Contains(PrincessFrogContracts.HIGHER_ENEMIES_CAP))
             {
 
             }
@@ -150,7 +150,7 @@ namespace SceneBuilder
 
         private void AdjustPlayerClass(PlayerClass playerClass)
         {
-            if (bounty?.BountySet.Contains(PlayerContracts.DECREASED_HAND_SIZE) == true)
+            if (bounty?.ContractSet.Contains(PlayerContracts.DECREASED_HAND_SIZE) == true)
             {
                 // Implement Decreasable hand size
             }
