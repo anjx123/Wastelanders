@@ -7,6 +7,7 @@ using UnityEngine;
 public class BuffExplainer : MonoBehaviour
 {
     [SerializeField] SpriteRenderer buffIcon;
+    [SerializeField] TextMeshPro explanationTitleField;
     [SerializeField] TextMeshPro explanationTextField;
     [SerializeField] List<WeaponExplanation> explanationText;
 #nullable enable
@@ -15,6 +16,7 @@ public class BuffExplainer : MonoBehaviour
     public void RenderExplanationForBuff(CardDatabase.WeaponType weaponType)
     {
         explanationTextField.text = explanationText.FirstOrDefault(tuple => tuple.WeaponType == weaponType).ExplanationText;
+        explanationTitleField.text = explanationText.FirstOrDefault(tuple => tuple.WeaponType == weaponType).ExplanationTitle;
         switch (weaponType)
         {
             case CardDatabase.WeaponType.STAFF:
@@ -39,6 +41,7 @@ public class BuffExplainer : MonoBehaviour
     private class WeaponExplanation
     {
         [field: SerializeField] public CardDatabase.WeaponType WeaponType { get; set; }
+        [field: SerializeField] public string ExplanationTitle { get; set; } = "";
         [field: SerializeField] public string ExplanationText { get; set; } = "";
     }
 }

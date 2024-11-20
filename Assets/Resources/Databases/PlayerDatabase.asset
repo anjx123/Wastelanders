@@ -31,24 +31,20 @@ MonoBehaviour:
     playerDeck:
     - weapon: 0
       weaponDeck:
-      - _actionClassName: CheapStrike
-        <IsEvolved>k__BackingField: 0
       - _actionClassName: FocusedStrike
-        <IsEvolved>k__BackingField: 0
+        <IsEvolved>k__BackingField: 1
       - _actionClassName: Trip
-        <IsEvolved>k__BackingField: 0
+        <IsEvolved>k__BackingField: 1
+      - _actionClassName: CheapStrike
+        <IsEvolved>k__BackingField: 1
       - _actionClassName: Flurry
-        <IsEvolved>k__BackingField: 0
+        <IsEvolved>k__BackingField: 1
       - _actionClassName: CounterStrike
-        <IsEvolved>k__BackingField: 0
+        <IsEvolved>k__BackingField: 1
       - _actionClassName: Jab
-        <IsEvolved>k__BackingField: 0
+        <IsEvolved>k__BackingField: 1
     - weapon: 1
       weaponDeck:
-      - _actionClassName: HipFire
-        <IsEvolved>k__BackingField: 0
-      - _actionClassName: PistolWhip
-        <IsEvolved>k__BackingField: 0
       - _actionClassName: Headshot
         <IsEvolved>k__BackingField: 0
       - _actionClassName: Silencer
@@ -57,6 +53,10 @@ MonoBehaviour:
         <IsEvolved>k__BackingField: 0
       - _actionClassName: QuickDraw
         <IsEvolved>k__BackingField: 0
+      - _actionClassName: HipFire
+        <IsEvolved>k__BackingField: 1
+      - _actionClassName: PistolWhip
+        <IsEvolved>k__BackingField: 1
   IvesData:
     name: Ives
     playerWeaponProficiency:

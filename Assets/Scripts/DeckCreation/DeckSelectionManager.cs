@@ -5,10 +5,9 @@ using static CardDatabase;
 using UnityEngine.SceneManagement;
 using System.Linq;
 using Systems.Persistence;
-using Unity.VisualScripting;
-using System;
 using WeaponDeckSerialization;
 using UnityEditor;
+using System;
 
 public class DeckSelectionManager : MonoBehaviour
 {
@@ -195,7 +194,7 @@ public class DeckSelectionManager : MonoBehaviour
     private void OnUpdateDeck(WeaponProficiency weaponPointTuple)
     {
         int availablePoints = weaponPointTuple.MaxPoints - weaponPointTuple.CurrentPoints;
-        pointsText.TextUpdate("Select Your Cards:\nAvailable Points: " + availablePoints.ToString());
+        pointsText.TextUpdate("Select Your Cards\nAvailable Points: <color=#FFD700>" + availablePoints.ToString() + "</color>");
 
         PlayerActionDeckModifiedEvent?.Invoke(availablePoints);
     }
@@ -226,7 +225,7 @@ public class DeckSelectionManager : MonoBehaviour
         {
             weaponPointTuple.CurrentPoints += ac.CostToAddToDeck;
             ac.SetSelectedForDeck(true);
-            playerWeaponDeck.weaponDeck.Add(new (ac.GetType().Name, ac.IsFlipped && ac.CanEvolve()));
+            playerWeaponDeck.weaponDeck.Add(new(ac.GetType().Name, ac.IsFlipped && ac.CanEvolve()));
             OnUpdateDeck(weaponPointTuple);
         }
         else
@@ -235,7 +234,8 @@ public class DeckSelectionManager : MonoBehaviour
         }
     }
 
-    private void FlipCard(ActionClass ac) {
+    private void FlipCard(ActionClass ac)
+    {
         ac.IsFlipped = !ac.IsFlipped; // Invert IsFlipped status
         ac.cardUI.RenderCard(ac); // Re-render the card based on the new flipped state
     }
@@ -298,20 +298,19 @@ public class DeckSelectionManager : MonoBehaviour
     //Renders the weaponDeck corresponding to (@param weaponType)
     public void RenderDecks(CardDatabase.WeaponType weaponType)
     {
-        int width = 6; // The width of the grid in # of cards 
-        int height = 6; // The height of the grid in # of cards 
-        float xSpacing = 2.3f;
-        float ySpacing = -3.3f;
-        float xOffset = -6f; //initial x Offset
-        float yOffset = 1f; //initial y Offset
-        float cardScaling = 0.8f;
-
         UnrenderDecks();
 
         List<ActionClass> chosenCardList = cardDatabase.ConvertStringsToCards(weaponType, playerData.GetDeckByWeaponType(weaponType).Select(p => p.ActionClassName).ToList());
         List<ActionClass> cardsToRender = cardDatabase.GetCardsByType(weaponType);
-
         List<GameObject> instantiatedCards = new List<GameObject>();
+
+        bool longerRow = cardsToRender.Count > 8;
+        int numPerRow = longerRow ? 5 : 4;
+        float xSpacing = longerRow ? 1.8f : 2.125f;
+        float ySpacing = longerRow ? -2.5f : -3f;
+        float xOffset = longerRow ? -7f : -6.5f; //initial x Offset
+        float yOffset = longerRow ? 2.175f : 1+1.4f; //initial y Offset
+        float cardScaling = longerRow ? 0.675f : 0.7825f;
 
         //In order to sort, the cards must be instantiated and initialized first :pensive:
         foreach (ActionClass card in cardsToRender)
@@ -330,46 +329,38 @@ public class DeckSelectionManager : MonoBehaviour
 
         instantiatedCards.Sort((card1, card2) => card1.GetComponent<ActionClass>().Speed.CompareTo(card2.GetComponent<ActionClass>().Speed));
 
-
-        int index = 0;
-
-        for (int y = 0; y < height; y++)
+        int y = -1;
+        for (int i = 0; i < cardsToRender.Count; i++)
         {
-            for (int x = 0; x < width; x++)
+            if (i % numPerRow == 0) y++;
+            int x = i % numPerRow;
+            Vector3 pos = new Vector3(x * xSpacing + xOffset, y * ySpacing + yOffset);
+            if (i < instantiatedCards.Count)
             {
-                Vector3 pos = new Vector3(x * xSpacing + xOffset, y * ySpacing + yOffset, 0);
+                GameObject cardPrefab = instantiatedCards[i];
 
-                if (index < instantiatedCards.Count)
-                {
-                    GameObject cardPrefab = instantiatedCards[index];
+                cardPrefab.transform.SetParent(cardArrayParent.transform);
+                cardPrefab.transform.localPosition = pos;
 
-                    cardPrefab.transform.SetParent(cardArrayParent.transform);
-                    cardPrefab.transform.localPosition = pos;
-
-                    // Scale the instance
-                    Vector3 scale = cardPrefab.transform.localScale;
-                    scale.x *= cardScaling;
-                    scale.y *= cardScaling;
-                    cardPrefab.transform.localScale = scale;
-
-                    index++;
-                }
-                else
-                {
-                    break;
-                }
+                // Scale the instance
+                Vector3 scale = cardPrefab.transform.localScale;
+                scale.x *= cardScaling;
+                scale.y *= cardScaling;
+                cardPrefab.transform.localScale = scale;
             }
-
-            if (index >= instantiatedCards.Count)
+            else
             {
                 break;
             }
         }
+
         SaveLoadSystem.Instance.LoadCardEvolutionProgress();
 
         WeaponProficiency weaponPointTuple = GetProficiencyPointsTuple(weaponType);
-        int availablePoints = weaponPointTuple.MaxPoints - weaponPointTuple.CurrentPoints;
-        pointsText.TextUpdate("Select Your Cards:\nAvailable Points: " + availablePoints);
+        // int availablePoints = weaponPointTuple.MaxPoints - weaponPointTuple.CurrentPoints;
+        // pointsText.TextUpdate("Select Your Cards\nAvailable Points: <color=#FFD700>" + availablePoints + "</color>");
+
+        OnUpdateDeck(weaponPointTuple);
     }
 
     private void UnrenderDecks()
