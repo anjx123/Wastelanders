@@ -8,6 +8,7 @@ using Systems.Persistence;
 using WeaponDeckSerialization;
 using UnityEditor;
 using System;
+using TMPro;
 
 public class DeckSelectionManager : MonoBehaviour
 {
@@ -18,6 +19,7 @@ public class DeckSelectionManager : MonoBehaviour
     [SerializeField] private CardDatabase cardDatabase;
     [SerializeField] private PlayerDatabase playerDatabase;
     [SerializeField] private FadeScreenHandler fadeScreenHandler;
+    [SerializeField] private TMP_Text cardDescriptorTextField;
     private PlayerDatabase.PlayerData playerData;
     private WeaponType weaponType;
     public WeaponAmount weaponText;
@@ -74,17 +76,20 @@ public class DeckSelectionManager : MonoBehaviour
     {
         ActionClass.CardClickedEvent += ActionSelected;
         ActionClass.CardRightClickedEvent += CardRightClicked;
+        ActionClass.CardHighlightedEvent += RenderCardDescription;
+        ActionClass.CardUnhighlightedEvent += RemoveCardDescription;
         CharacterSelect.CharacterSelectedEvent += CharacterChosen;
         WeaponSelect.WeaponSelectEvent += WeaponSelected;
         WeaponEdit.WeaponEditEvent += WeaponDeckEdit;
         DeckSelectionArrow.DeckSelectionArrowEvent += PrevState;
-
     }
 
     void OnDestroy()
     {
         ActionClass.CardClickedEvent -= ActionSelected;
         ActionClass.CardRightClickedEvent -= CardRightClicked;
+        ActionClass.CardHighlightedEvent -= RenderCardDescription;
+        ActionClass.CardUnhighlightedEvent -= RemoveCardDescription;
         CharacterSelect.CharacterSelectedEvent -= CharacterChosen;
         WeaponSelect.WeaponSelectEvent -= WeaponSelected;
         WeaponEdit.WeaponEditEvent -= WeaponDeckEdit;
@@ -294,6 +299,16 @@ public class DeckSelectionManager : MonoBehaviour
         deckSelectionUi.SetActive(true);
     }
 
+    private void RenderCardDescription(ActionClass card)
+    {
+        cardDescriptorTextField.text = card.GenerateCardDescription();
+    }
+
+    private void RemoveCardDescription(ActionClass card)
+    {
+        cardDescriptorTextField.text = "";
+    }
+
 
     //Renders the weaponDeck corresponding to (@param weaponType)
     public void RenderDecks(CardDatabase.WeaponType weaponType)
@@ -309,7 +324,7 @@ public class DeckSelectionManager : MonoBehaviour
         float xSpacing = longerRow ? 1.8f : 2.125f;
         float ySpacing = longerRow ? -2.5f : -3f;
         float xOffset = longerRow ? -7f : -6.5f; //initial x Offset
-        float yOffset = longerRow ? 2.175f : 1+1.4f; //initial y Offset
+        float yOffset = longerRow ? 2.175f : 1 + 1.4f; //initial y Offset
         float cardScaling = longerRow ? 0.675f : 0.7825f;
 
         //In order to sort, the cards must be instantiated and initialized first :pensive:
