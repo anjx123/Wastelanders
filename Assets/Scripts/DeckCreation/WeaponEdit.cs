@@ -58,15 +58,7 @@ public class WeaponEdit : MonoBehaviour
 
     public void SetLocked(bool isLocked)
     {
-        if (isLocked)
-        {
-            this.isLocked = true;
-            GetComponent<SpriteRenderer>().color = Color.grey;
-        }
-        else
-        {
-            this.isLocked = false;
-            GetComponent<SpriteRenderer>().color = Color.white;
-        }
+        this.isLocked = isLocked;
+        SetText(isLocked ? "LOCKED" : "EDIT DECK");
     }
 }

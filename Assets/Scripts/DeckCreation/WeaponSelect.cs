@@ -7,6 +7,8 @@ public class WeaponSelect : MonoBehaviour
     public CardDatabase.WeaponType type;
     [SerializeField] private GameObject checkmark;
     [SerializeField] private WeaponEdit weaponEdit;
+    [SerializeField] private SpriteRenderer cardBodySprite;
+    [SerializeField] private GameObject lockedIndicator;
 #nullable enable
     public delegate void WeaponSelectDelegate(WeaponSelect weaponSelect, CardDatabase.WeaponType type);
     public static event WeaponSelectDelegate? WeaponSelectEvent;
@@ -57,25 +59,14 @@ public class WeaponSelect : MonoBehaviour
 
     public void SetColor(Color newColor)
     {
-        GetComponent<SpriteRenderer>().color = newColor;
+        cardBodySprite.color = newColor;
     }
 
     public void SetLockedState(bool isLocked)
     {
-        if (isLocked)
-        {
-            this.isLocked = true;
-            SetColor(Color.grey);
-            weaponEdit.SetLocked(true);
-            weaponEdit.SetText("Locked");
-        }
-        else
-        {
-            this.isLocked = false;
-            SetColor(Color.grey);
-            weaponEdit.SetLocked(false);
-            weaponEdit.SetText("Edit");
-        }
+        this.isLocked = isLocked;
+        weaponEdit.SetLocked(isLocked);
+        lockedIndicator.SetActive(isLocked);
     }
 
 }

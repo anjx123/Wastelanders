@@ -29,27 +29,23 @@ MonoBehaviour:
       <MaxPoints>k__BackingField: 10
     selectedWeapons: 0000000001000000
     playerDeck:
-    - weapon: 1
-      weaponDeck:
-      - _actionClassName: IronSights
-        <IsEvolved>k__BackingField: 0
-      - _actionClassName: Silencer
-        <IsEvolved>k__BackingField: 0
-      - _actionClassName: QuickDraw
-        <IsEvolved>k__BackingField: 0
-      - _actionClassName: PistolWhip
-        <IsEvolved>k__BackingField: 0
-      - _actionClassName: HipFire
-        <IsEvolved>k__BackingField: 0
-      - _actionClassName: RapidFire
-        <IsEvolved>k__BackingField: 0
     - weapon: 0
       weaponDeck:
-      - _actionClassName: CheapStrike
-        <IsEvolved>k__BackingField: 0
       - _actionClassName: FocusedStrike
-        <IsEvolved>k__BackingField: 0
+        <IsEvolved>k__BackingField: 1
       - _actionClassName: Trip
+        <IsEvolved>k__BackingField: 1
+      - _actionClassName: CheapStrike
+        <IsEvolved>k__BackingField: 1
+      - _actionClassName: Flurry
+        <IsEvolved>k__BackingField: 1
+      - _actionClassName: CounterStrike
+        <IsEvolved>k__BackingField: 1
+      - _actionClassName: Jab
+        <IsEvolved>k__BackingField: 1
+    - weapon: 1
+      weaponDeck:
+      - _actionClassName: Headshot
         <IsEvolved>k__BackingField: 0
       - _actionClassName: Flurry
         <IsEvolved>k__BackingField: 0
@@ -57,6 +53,10 @@ MonoBehaviour:
         <IsEvolved>k__BackingField: 0
       - _actionClassName: CounterStrike
         <IsEvolved>k__BackingField: 0
+      - _actionClassName: HipFire
+        <IsEvolved>k__BackingField: 1
+      - _actionClassName: PistolWhip
+        <IsEvolved>k__BackingField: 1
   IvesData:
     name: Ives
     playerWeaponProficiency:
