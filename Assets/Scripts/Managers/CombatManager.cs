@@ -7,6 +7,8 @@ using static UnityEngine.EventSystems.EventTrigger;
 using System.Security.Cryptography;
 using Systems.Persistence;
 using WeaponDeckSerialization;
+using System;
+using static EntityClass;
 
 public class CombatManager : MonoBehaviour
 {
@@ -19,8 +21,9 @@ public class CombatManager : MonoBehaviour
     public CinemachineVirtualCamera dynamicCamera;
     private ScreenShakeHandler screenShakeHandler;
 
-    private List<PlayerClass> players = new();
-    private List<EnemyClass> enemies = new();
+    private List<EntityClass> playerTeam = new();
+    private List<EntityClass> enemyTeam = new();
+    private List<EntityClass> neutralTeam = new();
 
     public GameObject handContainer;
     public GameObject startDequeue;
@@ -150,30 +153,30 @@ public class CombatManager : MonoBehaviour
         // Might not capture newly spawned instances of cards, somehow they need to attract their evolved state and data binding. 
         SaveLoadSystem.Instance.LoadCardEvolutionProgress(); // Most universal place to put this is here, but tagged for performance optimizations
 
-        // Each enemy declares an attack. players is passed to AddAttack so the enemy can choose a target.
-        foreach (EnemyClass enemy in enemies)
+        foreach (EntityClass entity in GrabAllEntities())
         {
-            enemy.AddAttack(players);
-            StartCoroutine(enemy.ResetPosition());
+            entity.PerformSelection();
         }
 
-        foreach (PlayerClass player in players)
+        Jackie? jackie = playerTeam.OfType<Jackie>().FirstOrDefault();
+        if (jackie != null)
         {
-            player.DrawToMax();
-            StartCoroutine(player.ResetPosition());
+            HighlightManager.Instance.SetActivePlayer(jackie);
         }
+        else
+        {
+            PlayerClass? firstPlayer = playerTeam.OfType<PlayerClass>().FirstOrDefault();
+            HighlightManager.Instance.SetActivePlayer(firstPlayer);
+        }
+    }
 
-        if (players.Count > 0)
-        {
-            PlayerClass? jackie = players.FirstOrDefault(player => player is Jackie);
-            if (jackie != null)
-            {
-                HighlightManager.Instance.SetActivePlayer(jackie);
-            } else
-            {
-                HighlightManager.Instance.SetActivePlayer(players[0]);
-            }
-        }
+    private List<EntityClass> GrabAllEntities()
+    {
+        List<EntityClass> allEntities = new();
+        allEntities.AddRange(playerTeam);
+        allEntities.AddRange(enemyTeam);
+        allEntities.AddRange(neutralTeam);
+        return allEntities;
     }
 
     private void Activate(GameObject gameObject)
@@ -198,44 +201,57 @@ public class CombatManager : MonoBehaviour
         gameObject.GetComponent<Transform>().position = position;
     }
 
-    public void AddPlayer(PlayerClass player)
+    public void AddPlayer(EntityClass player)
     {
-        players.Add(player);
+        playerTeam.Add(player);
     }
-    
-    //Purpose: Call this when a player is removed or killed
-    public void RemovePlayer(PlayerClass player)
+
+    public void AddEnemy(EntityClass enemy)
     {
-        players.Remove(player);
-        if (dynamicCamera.Follow?.GetComponent<PlayerClass>() == player)
+        enemyTeam.Add(enemy);
+    }
+
+    public void AddNeutral(EntityClass neutral)
+    {
+        neutralTeam.Add(neutral);
+    }
+
+    //Purpose: Call this when a player is removed or killed
+    public void RemovePlayer(EntityClass player)
+    {
+        playerTeam.Remove(player);
+        if (dynamicCamera.Follow?.GetComponent<EntityClass>() == player)
         {
             dynamicCamera.Follow = null;
         }
 
-        if (players.Count == 0)
+        if (playerTeam.Count == 0)
         {
             EnemiesWinEvent?.Invoke();
         }
     }
-    
-    public void AddEnemy(EnemyClass enemy)
-    {
-        enemies.Add(enemy);
-    }
 
     //Purpose: Call this when an enemy is removed or killed
-    public void RemoveEnemy(EnemyClass enemy)
+    public void RemoveEnemy(EntityClass enemy)
     {
-        enemies.Remove(enemy);
-        if (dynamicCamera.Follow?.GetComponent<EnemyClass>() == enemy)
+        enemyTeam.Remove(enemy);
+        if (dynamicCamera.Follow?.GetComponent<EntityClass>() == enemy)
         {
             dynamicCamera.Follow = null;
         }
 
-        bool allAreNeutral = enemies.OfType<NeutralEntityInterface>().Count() == enemies.Count;
-        if (enemies.Count == 0 || allAreNeutral)
+        if (enemyTeam.Count == 0)
         {
             PlayersWinEvent?.Invoke();
+        }
+    }
+
+    public void RemoveNeutral(EntityClass neutral)
+    {
+        neutralTeam.Remove(neutral);
+        if (dynamicCamera.Follow?.GetComponent<EntityClass>() == neutral)
+        {
+            dynamicCamera.Follow = null;
         }
     }
 
@@ -313,37 +329,33 @@ public class CombatManager : MonoBehaviour
         Deactivate(startDequeue);
         battleQueueParent.SetActive(false);
 
-        foreach (PlayerClass player in players)
+        foreach (EntityClass entity in GrabAllEntities())
         {
-            player.OutOfCombat();
-            player.UnTargetable();
-        }
-
-        foreach (EnemyClass enemy in enemies)
-        {
-            enemy.OutOfCombat();
-            enemy.UnTargetable();
+            entity.OutOfCombat();
+            entity.UnTargetable();
         }
     }
 
     private void PerformInCombat()
     {
-        foreach (PlayerClass player in players)
-        {
-            player.InCombat();
-            player.Targetable();
-        }
 
-        foreach (EnemyClass enemy in enemies)
+        foreach (EntityClass entity in GrabAllEntities())
         {
-            enemy.InCombat();
-            enemy.Targetable();
+            entity.InCombat();
+            entity.Targetable();
         }
     }
 
     public void SetEnemiesPassive(List<EnemyClass> passiveEnemies)
     {
-        enemies.RemoveAll(enemy => passiveEnemies.Contains(enemy));
+        passiveEnemies.ForEach(enemy =>
+        {
+            if (enemy.Team == EntityTeam.EnemyTeam)
+                enemyTeam.Remove(enemy);
+            else if (enemy.Team == EntityTeam.NeutralTeam)
+                neutralTeam.Remove(enemy);
+        });
+
         foreach (EnemyClass enemy in passiveEnemies)
         {
             enemy.OutOfCombat();
@@ -351,9 +363,17 @@ public class CombatManager : MonoBehaviour
         }
     }
 
+
     public void SetEnemiesHostile(List<EnemyClass> hostileEnemies)
     {
-        enemies.AddRange(hostileEnemies);
+        hostileEnemies.ForEach(enemy =>
+        {
+            if (enemy.Team == EntityTeam.EnemyTeam)
+                enemyTeam.Add(enemy);
+            else if (enemy.Team == EntityTeam.NeutralTeam)
+                neutralTeam.Add(enemy);
+        });
+
         foreach (EnemyClass enemy in hostileEnemies)
         {
             enemy.InCombat();
@@ -399,7 +419,7 @@ public class CombatManager : MonoBehaviour
     }
     private void CrosshairAllEnemies()
     {
-        foreach (EnemyClass enemy in enemies)
+        foreach (var enemy in enemyTeam)
         {
             enemy.CrossHair();
         }
@@ -407,7 +427,7 @@ public class CombatManager : MonoBehaviour
 
     private void UncrosshairAllEnemies()
     {
-        foreach (EnemyClass enemy in enemies)
+        foreach (var enemy in enemyTeam)
         {
             enemy.UnCrossHair();
         }
@@ -427,7 +447,7 @@ public class CombatManager : MonoBehaviour
 
     public bool CanHighlight()
     {
-        return (PauseMenu.IsPaused) ? false : GameState == GameState.SELECTION;
+        return (!PauseMenu.IsPaused) && GameState == GameState.SELECTION;
     }
 
     public GameState GameState
@@ -464,14 +484,19 @@ public class CombatManager : MonoBehaviour
         }
     }
 
-    public List<PlayerClass> GetPlayers()
+    public List<EntityClass> GetPlayers()
     {
-        return new List<PlayerClass>(players);
+        return new List<EntityClass>(playerTeam);
     }
 
-    public List<EnemyClass> GetEnemies() 
+    public List<EntityClass> GetEnemies() 
+    { 
+        return new List<EntityClass>(enemyTeam);
+    }
+
+    public List<EntityClass> GetNeutral()
     {
-     return new List<EnemyClass>(enemies);
+        return new List<EntityClass>(neutralTeam);
     }
 
 }

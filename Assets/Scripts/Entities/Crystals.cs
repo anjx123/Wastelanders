@@ -8,6 +8,7 @@ public class Crystals : EnemyClass, NeutralEntityInterface
     // Start is called before the first frame update
     public override void Start()
     {
+        if (Team == EntityTeam.NoTeam) Team = EntityTeam.NeutralTeam;
         base.Start();
         MaxHealth = 15;
         Health = MaxHealth;
@@ -24,7 +25,7 @@ public class Crystals : EnemyClass, NeutralEntityInterface
         source.AddStacks(Resonate.buffName, numThresholds);
     }
 
-    public override void AddAttack(List<PlayerClass> players) {}
+    public override void AddAttack(List<EntityClass> players) {}
 
     public override IEnumerator MoveToPosition(Vector3 destination, float radius, float duration, Vector3? lookAtPosition = null)
     {

@@ -29,9 +29,11 @@ public abstract class EntityClass : SelectClass
             combatInfo.SetHealth(health);
         }
     }
-    public EntityTeam Team { get; set; }
+
+    public EntityTeam Team { get; set; } = EntityTeam.NoTeam;
     public enum EntityTeam
     {
+        NoTeam,
         PlayerTeam,
         NeutralTeam,
         EnemyTeam,
@@ -100,6 +102,7 @@ public abstract class EntityClass : SelectClass
         } else
         {
             IsDead = true;
+            RemoveEntityFromCombat();
             OnEntityDeath?.Invoke(this);
         }
 
@@ -370,18 +373,47 @@ public abstract class EntityClass : SelectClass
 
     //Removes entity cards and self from BQ and combat manager. Kills itself
     public abstract IEnumerator Die();
-    public abstract void PerformSelection(List<EntityClass> playerTeam, List<EntityClass> neutralTeam, List<EntityClass> enemyTeam);
+    public abstract void PerformSelection();
 
     private void AssignTeam()
     {
-        Action action = Team switch
+        Action<EntityClass> action = Team switch
         {
-            EntityTeam.PlayerTeam => delegate { },
-            EntityTeam.EnemyTeam=> delegate { },
-            EntityTeam.NeutralTeam => delegate { },
+            EntityTeam.PlayerTeam => CombatManager.Instance.AddPlayer,
+            EntityTeam.EnemyTeam=> CombatManager.Instance.AddEnemy,
+            EntityTeam.NeutralTeam => CombatManager.Instance.AddNeutral,
             _ => throw new ArgumentOutOfRangeException()
         };
+
+        action(this);
     }
+    public void RemoveEntityFromCombat()
+    {
+        Action<EntityClass> action = Team switch
+        {
+            EntityTeam.PlayerTeam => CombatManager.Instance.RemovePlayer,
+            EntityTeam.EnemyTeam => CombatManager.Instance.RemoveEnemy,
+            EntityTeam.NeutralTeam => CombatManager.Instance.RemoveNeutral,
+            _ => throw new ArgumentOutOfRangeException()
+        };
+
+        action(this);
+    }
+
+
+    protected void FaceOpponent()
+    {
+        Action faceAction = Team switch
+        {
+            EntityTeam.PlayerTeam => FaceRight,
+            EntityTeam.EnemyTeam => FaceLeft,
+            EntityTeam.NeutralTeam => FaceLeft,
+            _ => throw new ArgumentOutOfRangeException()
+        };
+
+        faceAction();
+    }
+
 
     private void CheckBuff(string buffType)
     {

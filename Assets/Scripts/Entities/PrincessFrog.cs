@@ -34,7 +34,7 @@ namespace Entities
             EntityTookDamage -= HandleDamage;
         }
 
-        public override void AddAttack(List<PlayerClass> players)
+        public override void AddAttack(List<EntityClass> players)
         {
             /* Required in this order, specifically... */
             var bless = deck[0];
@@ -42,13 +42,9 @@ namespace Entities
             var gobble = deck[2];
             var hurl = deck[3];
 
-            var enemyCount = CombatManager.Instance
-                .GetEnemies()
-                .Count(e => e is not NeutralEntityInterface) - 1;
+            var enemyCount = CombatManager.Instance.GetEnemies().Count;
 
-            var crystals = CombatManager.Instance
-                .GetEnemies()
-                .Where(e => e is Crystals).ToArray();
+            var crystals = CombatManager.Instance.GetNeutral();
 
             var stacks = GetBuffStacks(Resonate.buffName);
             var chance = enemyCount switch
@@ -66,16 +62,16 @@ namespace Entities
                     AttackWith(Random.Range(0f, 1f) > chance ? burp : bless, players[Random.Range(0, players.Count)]);
                     AttackWith(Random.Range(0f, 1f) > chance ? burp : bless, players[Random.Range(0, players.Count)]);
                     break;
-                case < 3 when crystals.Length > 0:
-                    AttackWith(gobble, crystals[Random.Range(0, crystals.Length)]);
-                    AttackWith(gobble, crystals[Random.Range(0, crystals.Length)]);
+                case < 3 when crystals.Count > 0:
+                    AttackWith(gobble, crystals[Random.Range(0, crystals.Count)]);
+                    AttackWith(gobble, crystals[Random.Range(0, crystals.Count)]);
                     break;
                 case < 3:
                     AttackWith(hurl, players[Random.Range(0, players.Count)]);
                     AttackWith(hurl, players[Random.Range(0, players.Count)]);
                     break;
                 default:
-                    if (crystals.Length > 0) AttackWith(gobble, crystals[Random.Range(0, crystals.Length)]);
+                    if (crystals.Count > 0) AttackWith(gobble, crystals[Random.Range(0, crystals.Count)]);
                     else AttackWith(hurl, players[Random.Range(0, players.Count)]);
 
                     AttackWith(Random.Range(0f, 1f) > chance ? burp : bless, players[Random.Range(0, players.Count)]);

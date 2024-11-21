@@ -365,7 +365,7 @@ private IEnumerator ExecuteGameStart()
                 IEnumerator DieInScene()
                 {
                     BattleQueue.BattleQueueInstance.RemoveAllInstancesOfEntity(wasteFrog);
-                    CombatManager.Instance.RemoveEnemy(wasteFrog);
+                    wasteFrog.RemoveEntityFromCombat();
                     wasteFrog.animator.enabled = false;
                     wasteFrog.GetComponent<SpriteRenderer>().sprite = frogDeathSprite;
                     wasteFrog.OutOfCombat();

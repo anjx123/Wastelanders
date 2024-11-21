@@ -62,7 +62,7 @@ public class QueenBeetle : EnemyClass
         base.OnEnable();
 
         Beetle.OnGainBuffs += HandleGainedBuffs;
-        Beetle.OnDeath += HandleBeetleDied;
+        OnEntityDeath += HandleBeetleDied;
     }
 
     protected override void OnDisable()
@@ -70,12 +70,7 @@ public class QueenBeetle : EnemyClass
         base.OnDisable();
 
         Beetle.OnGainBuffs -= HandleGainedBuffs;
-        Beetle.OnDeath -= HandleBeetleDied;
-    }
-
-    public override IEnumerator Die()
-    {
-        return base.Die();
+        OnEntityDeath -= HandleBeetleDied;
     }
 
     // event handler for Beetle.OnGainBuffs. This is called whenever a beetle tries to
@@ -90,7 +85,7 @@ public class QueenBeetle : EnemyClass
         }
     }
 
-    private void HandleBeetleDied(Beetle victim)
+    private void HandleBeetleDied(EntityClass victim)
     {
         for (int i = 0; i < availability.Length; i++)
         {
@@ -121,7 +116,7 @@ public class QueenBeetle : EnemyClass
     //  3. The queen repeats this process twice, attacking twice in one turn.
     //  In the inspector, assign Hatchery to index 0 of the Queen's deck, and any other
     //     attacks after that.
-    public override void AddAttack(List<PlayerClass> players)
+    public override void AddAttack(List<EntityClass> players)
     {
         bool usedSpawnThisRound = false;
         for (int i = 0; i < 2; i++)
@@ -154,7 +149,7 @@ public class QueenBeetle : EnemyClass
         return number;
     }
     // helper function for AddAttack
-    private void AddAttackFromPool(List<PlayerClass> players, int idx)
+    private void AddAttackFromPool(List<EntityClass> players, int idx)
     {
         pool[idx].GetComponent<ActionClass>().Target = players[Random.Range(0, players.Count)];
         pool[idx].GetComponent<ActionClass>().Origin = this;

@@ -608,6 +608,7 @@ public class PreQueenFight : DialogueClasses
         {
             e1.AttackAnimation("IsMelee");
             yield return StartCoroutine(e2.StaggerEntities(e1, e2, 0.3f));
+            e2.RemoveEntityFromCombat();
             yield return StartCoroutine(e2.Die());
         }
     }
@@ -642,7 +643,7 @@ public class PreQueenFight : DialogueClasses
         BattleQueue.BattleQueueInstance.RemoveAllInstancesOfEntity(entityClass);
         if (entityClass is EnemyClass enemy)
         {
-            CombatManager.Instance.RemoveEnemy(enemy);
+            enemy.RemoveEntityFromCombat();
             enemy.DestroyDeck();
         } else if (entityClass is PlayerClass player)
         {

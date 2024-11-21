@@ -193,15 +193,10 @@ namespace SceneBuilder
 
         private void UpdateEnemyLayout()
         {
-            /* The combat manager doesn't remove enemies from its list until the end of the
-               current turn. This method can be called during a turn which means we need to
-               explicitly filter out any enemies who are dead but have not been removed yet. */
-            var spawns = CombatManager.Instance
-                .GetEnemies()
-                .Where(e => e is not NeutralEntityInterface && !e.IsDead).ToArray();
+            List<EntityClass> spawns = CombatManager.Instance.GetEnemies();
 
-            var positions = PositionsFrom(enemiesPosition, spawns.Length);
-            for (var i = 0; i < spawns.Length; i++)
+            var positions = PositionsFrom(enemiesPosition, spawns.Count);
+            for (var i = 0; i < spawns.Count; i++)
             {
                 spawns[i].SetReturnPosition(entityContainer.transform.position + positions[i]);
             }

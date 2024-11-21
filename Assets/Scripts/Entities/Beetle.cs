@@ -12,9 +12,6 @@ public abstract class Beetle : EnemyClass
     public delegate void GainedBuffsHandler(string buffType, int stacks, Beetle beetle); // queen should subscribe to this
     public static event GainedBuffsHandler OnGainBuffs;
 
-    public delegate void OnDeathHandler(Beetle victim); // so that queen knows how many beetles are alive
-    public static event OnDeathHandler OnDeath;
-
     // Start is called before the first frame update
     public override void Start()
     {
@@ -29,32 +26,12 @@ public abstract class Beetle : EnemyClass
         OnGainBuffs?.Invoke(buffType, stacks, this);
     }
 
-    // Adds attack(s) to the bq. Beetles are capable of directing their attacks to crystals
-    //  on top of players. Individual beetle subclasses may further override this method to
-    //  favour targeting on crystals/players.
-    public override void AddAttack(List<PlayerClass> players) {
-        if (players.Count == 0) return; // if there are no players, no need to attack crystals
-        // add crystals to list of potential targets
-        List<EntityClass> targets = players.Cast<EntityClass>().ToList();
-        List<EntityClass> crystals = CombatManager.Instance.GetEnemies().OfType<Crystals>().ToList().Cast<EntityClass>().ToList();
+    public override void AddAttack(List<EntityClass> players) {
+        if (players.Count == 0) return;
+        List<EntityClass> targets = players;
+        List<EntityClass> crystals = CombatManager.Instance.GetNeutral();
         targets.AddRange(crystals);
 
-        // rest is the same
-        pool[0].GetComponent<ActionClass>().Origin = this;
-        pool[0].GetComponent<ActionClass>().Target = targets[Random.Range(0, targets.Count)];
-        BattleQueue.BattleQueueInstance.AddAction(pool[0].GetComponent<ActionClass>());
-        combatInfo.AddCombatSprite(pool[0].GetComponent<ActionClass>());
-        pool.RemoveAt(0);
-        if (pool.Count < 1)
-        {
-            Reshuffle();
-        }
-    }
-
-    // notifies of death
-    public override IEnumerator Die()
-    {
-        OnDeath?.Invoke(this);
-        return base.Die();
+        base.AddAttack(targets);
     }
 }

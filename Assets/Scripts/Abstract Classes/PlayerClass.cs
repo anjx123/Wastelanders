@@ -15,22 +15,23 @@ public abstract class PlayerClass : EntityClass
 
     protected int maxHandSize = 4;
 
-    // This is the pool, which is initialized to the deck. Then draws will remove cards from the pool.
-    protected List<GameObject> pool = new List<GameObject>();
 
     public List<GameObject> Hand { get { return new List<GameObject>(hand); } }
 
     // Drawn cards move from pool to hand
-    protected List<GameObject> hand = new List<GameObject>();
+    protected List<GameObject> hand = new();
+    
+    // This is the pool, which is initialized to the deck. Then draws will remove cards from the pool.
+    protected List<GameObject> pool = new();
 
-    protected List<GameObject> discard = new List<GameObject>();
+    protected List<GameObject> discard = new();
 
     public override void Start()
     {
-        CombatManager.Instance.AddPlayer(this);
+        if (Team == EntityTeam.NoTeam) Team = EntityTeam.PlayerTeam;
+        base.Start();
         GrabDeck();
         InstantiatePool();
-        base.Start();
     }
 
     protected void InstantiatePool()
@@ -151,22 +152,22 @@ public abstract class PlayerClass : EntityClass
         HighlightManager.Instance.RenderHandIfAppropriate(this);
     }
 
-    public override void PerformSelection(List<EntityClass> playerTeam, List<EntityClass> neutralTeam, List<EntityClass> enemyTeam)
+    public override void PerformSelection()
     {
-        
+        DrawToMax();
+        StartCoroutine(ResetPosition());
     }
 
     public override IEnumerator ResetPosition()
     {
         yield return StartCoroutine(MoveToPosition(initialPosition, 0f, 0.8f));
-        FaceRight();
+        FaceOpponent();
     }
     //Removes entity cards and self from BQ and combat manager. Kills itself
     public override IEnumerator Die()
     {
         int runDistance = 10;
         BattleQueue.BattleQueueInstance.RemoveAllInstancesOfEntity(this);
-        CombatManager.Instance.RemovePlayer(this);
         yield return StartCoroutine(MoveToPosition(myTransform.position + new Vector3(-runDistance, 0, 0), 0, 0.8f));
 
         this.gameObject.SetActive(false);

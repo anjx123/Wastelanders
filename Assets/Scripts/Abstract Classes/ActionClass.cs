@@ -9,9 +9,9 @@ using Systems.Persistence;
 
 public abstract class ActionClass : SelectClass, IBind<ActionData>
 {
-    [field: SerializeField]
-    public SerializableGuid Id { get; set; } = SerializableGuid.NewGuid();
+    [field: SerializeField] public SerializableGuid Id { get; set; } = SerializableGuid.NewGuid();
     private EntityClass target;
+
     public EntityClass Target
     {
         get { return target; }
@@ -22,6 +22,7 @@ public abstract class ActionClass : SelectClass, IBind<ActionData>
             TargetChanged?.Invoke(this);
         }
     }
+
     private EntityClass origin;
 
     public EntityClass Origin
@@ -33,11 +34,13 @@ public abstract class ActionClass : SelectClass, IBind<ActionData>
             {
                 origin.BuffsUpdatedEvent -= UpdateBuffValue;
             }
+
             origin = value;
             if (origin != null)
             {
                 origin.BuffsUpdatedEvent += UpdateBuffValue;
             }
+
             UpdateDup();
         }
     }
@@ -46,8 +49,10 @@ public abstract class ActionClass : SelectClass, IBind<ActionData>
 
     protected int lowerBound;
     protected int upperBound;
-    public int LowerBound { get { return lowerBound; } }
-    public int UpperBound { get { return upperBound; } }
+
+    public int LowerBound => lowerBound;
+
+    public int UpperBound => upperBound;
 
     protected RolledStats rolledCardStats = new();
 
@@ -65,6 +70,7 @@ public abstract class ActionClass : SelectClass, IBind<ActionData>
         //We want to render these one time buffs so we keep track of its name, lower and upper bound buffs to this card.
         public (string, int, int) oneTimeBuffs; //Left int represents lower bound increased by buff. Right int represents the upper bound
     }
+
     public enum CardState
     {
         NORMAL,
@@ -73,9 +79,12 @@ public abstract class ActionClass : SelectClass, IBind<ActionData>
         CLICKED_STATE,
     }
 
+
     private CardState cardState = CardState.NORMAL;
-    public CardType { get; protected set; }
-    public int Speed { get; set; }
+    public CardType CardType { get; protected set; }
+
+
+public int Speed { get; set; }
     public string description;
     public string Description { get { return description; } }
     public string evolutionDescription { get; protected set; }

@@ -1,6 +1,6 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public abstract class EnemyClass : EntityClass
@@ -16,7 +16,7 @@ public abstract class EnemyClass : EntityClass
 
     public override void Start()
     {
-        CombatManager.Instance.AddEnemy(this);
+        if (Team == EntityTeam.NoTeam) Team = EntityTeam.EnemyTeam;
         base.Start();
         InstantiateDeck();
 
@@ -35,20 +35,25 @@ public abstract class EnemyClass : EntityClass
         }
     }
 
-    public virtual void AddAttack(List<PlayerClass> players)
+    public virtual void AddAttack(List<EntityClass> players)
     {
-        if (players.Count == 0) return;
-        if (pool.Count == 0) return;
-        pool[0].GetComponent<ActionClass>().Target = players[Random.Range(0, players.Count)]; // excludes the last value 
-        pool[0].GetComponent<ActionClass>().Origin = this;
-        BattleQueue.BattleQueueInstance.AddAction(pool[0].GetComponent<ActionClass>());
-        combatInfo.AddCombatSprite(pool[0].GetComponent<ActionClass>());
+        if (players.Count == 0 || pool.Count == 0) return;
+
+        var action = pool[0].GetComponent<ActionClass>();
+        action.Target = players[UnityEngine.Random.Range(0, players.Count)];
+        action.Origin = this;
+
+        BattleQueue.BattleQueueInstance.AddAction(action);
+        combatInfo.AddCombatSprite(action);
+
         pool.RemoveAt(0);
-        if (pool.Count < 1)
+
+        if (pool.Count == 0)
         {
             Reshuffle();
         }
     }
+
 
     protected virtual void Reshuffle()
     {
@@ -60,7 +65,7 @@ public abstract class EnemyClass : EntityClass
 
         while (temp.Count > 0)
         {
-            int idx = Random.Range(0, temp.Count);
+            int idx = UnityEngine.Random.Range(0, temp.Count);
             pool.Add(temp[idx]);
             temp.RemoveAt(idx);
         }
@@ -70,7 +75,6 @@ public abstract class EnemyClass : EntityClass
     {
         int runDistance = 10;
         BattleQueue.BattleQueueInstance.RemoveAllInstancesOfEntity(this);
-        CombatManager.Instance.RemoveEnemy(this);
         DestroyDeck();
         yield return StartCoroutine(MoveToPosition(myTransform.position + new Vector3(runDistance, 0, 0), 0, 0.8f));
         this.gameObject.SetActive(false);
@@ -89,11 +93,23 @@ public abstract class EnemyClass : EntityClass
     public override IEnumerator ResetPosition()
     {
         yield return StartCoroutine(MoveToPosition(initialPosition, 0f, 0.8f));
-        FaceLeft();
+        FaceOpponent();
     }
 
-    public override void PerformSelection(List<EntityClass> playerTeam, List<EntityClass> neutralTeam, List<EntityClass> enemyTeam)
+    public override void PerformSelection()
     {
+        AddAttack(GetOpponents());
+        StartCoroutine(ResetPosition());
+    }
 
+    protected virtual List<EntityClass> GetOpponents()
+    {
+        return Team switch
+        {
+            EntityTeam.PlayerTeam => new List<EntityClass>(CombatManager.Instance.GetEnemies()),
+            EntityTeam.EnemyTeam => new List<EntityClass>(CombatManager.Instance.GetPlayers()),
+            EntityTeam.NeutralTeam => new(),
+            _ => throw new ArgumentOutOfRangeException()
+        };
     }
 }

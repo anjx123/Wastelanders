@@ -19,7 +19,7 @@ public class ScoutBeetle : Beetle
     }
 
     // Scout attacks twice in a turn
-    public override void AddAttack(List<PlayerClass> players)
+    public override void AddAttack(List<EntityClass> players)
     {
         base.AddAttack(players);
         base.AddAttack(players);

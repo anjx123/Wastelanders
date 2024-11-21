@@ -770,7 +770,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -568, y: -9.999741}
+  m_AnchoredPosition: {x: -568, y: -9.999756}
   m_SizeDelta: {x: 2800, y: 3058.3464}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &324691200
@@ -837,7 +837,7 @@ Transform:
   m_GameObject: {fileID: 355728263}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 15, y: 0, z: 0}
+  m_LocalPosition: {x: 15, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1824,7 +1824,7 @@ Transform:
   m_GameObject: {fileID: 628119128}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4, y: -1, z: 0}
+  m_LocalPosition: {x: -4, y: -1, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5312,7 +5312,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6635998426718021455, guid: b9c5e4b3c9f7e024f8fe9012e7a2e437, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 25.858162
+      value: 25.795822
       objectReference: {fileID: 0}
     - target: {fileID: 6635998426718021455, guid: b9c5e4b3c9f7e024f8fe9012e7a2e437, type: 3}
       propertyPath: m_LocalPosition.y
@@ -6982,8 +6982,11 @@ MonoBehaviour:
     Part2: 1311857164
     Part3: 960895360
     Part4: 3376284754
+  description: 
+  IsEvolved: 0
   icon: {fileID: 21300000, guid: 57baba5992d9e224988e93fcacf9f7eb, type: 3}
   cardBack: {fileID: 21300000, guid: b9d9ffafd54db4d16be447f80c7ef42d, type: 3}
+  evolvedCardBack: {fileID: 0}
   cardUI: {fileID: 1360995282}
   data:
     <ActionClassName>k__BackingField: 
