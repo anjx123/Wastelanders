@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public abstract class EnemyClass : EntityClass
 {
@@ -13,6 +14,10 @@ public abstract class EnemyClass : EntityClass
     
     // Initialized in editor
     public List<GameObject> availableActions;
+
+    public delegate EntityClass AttackTargetDelegate(List<EntityClass> targets);
+
+    public AttackTargetDelegate AttackTargetCalculator { get; set; } = GetAttackTarget;
 
     public override void Start()
     {
@@ -35,23 +40,33 @@ public abstract class EnemyClass : EntityClass
         }
     }
 
-    public virtual void AddAttack(List<EntityClass> players)
+    //An attack that pops the top card on the pool and plays it. use this when you attack with pool.
+    public virtual void AddAttack(List<EntityClass> targets)
     {
-        if (players.Count == 0 || pool.Count == 0) return;
+        if (targets.Count == 0 || pool.Count == 0) return;
 
-        var action = pool[0].GetComponent<ActionClass>();
-        action.Target = players[UnityEngine.Random.Range(0, players.Count)];
-        action.Origin = this;
-
-        BattleQueue.BattleQueueInstance.AddAction(action);
-        combatInfo.AddCombatSprite(action);
-
+        AttackWith(pool[0], AttackTargetCalculator(targets));
         pool.RemoveAt(0);
 
         if (pool.Count == 0)
         {
             Reshuffle();
         }
+    }
+
+    // Use this if you would like to directly attack using deck
+    public void AttackWith(GameObject attack, EntityClass target)
+    {
+        var action = attack.GetComponent<ActionClass>();
+        action.Target = target;
+        action.Origin = this;
+        combatInfo.AddCombatSprite(action);
+        BattleQueue.BattleQueueInstance.AddAction(action);
+    }
+
+    private static EntityClass GetAttackTarget(List<EntityClass> targets)
+    {
+        return targets[UnityEngine.Random.Range(0, targets.Count)];
     }
 
 

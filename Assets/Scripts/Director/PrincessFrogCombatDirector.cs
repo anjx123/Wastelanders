@@ -1,4 +1,6 @@
+using System;
 using System.Collections;
+using LevelSelectInformation;
 using UnityEngine;
 
 namespace Director
@@ -36,8 +38,10 @@ namespace Director
             yield return new WaitUntil(() => CombatManager.Instance.GameState == GameState.GAME_WIN);
             AudioManager.Instance.FadeOutCurrentBackgroundTrack(2f);
             BountyManager.Instance.NotifyWin();
+            GameStateManager.Instance.CurrentLevelProgress = GameStateManager.Instance.CurrentLevelProgress = Math.Max(GameStateManager.Instance.CurrentLevelProgress, StageInformation.PRINCESS_FROG_FIGHT.LevelID + 1f);
             yield return new WaitForSeconds(1f);
             yield return StartCoroutine(CombatManager.Instance.FadeInDarkScreen(1.5f));
+            GameStateManager.Instance.LoadScene(GameStateManager.LEVEL_SELECT_NAME);
         }
 
         private void PlayersWin()

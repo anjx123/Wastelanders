@@ -34,7 +34,7 @@ namespace Entities
             EntityTookDamage -= HandleDamage;
         }
 
-        public override void AddAttack(List<EntityClass> players)
+        public override void AddAttack(List<EntityClass> targets)
         {
             /* Required in this order, specifically... */
             var bless = deck[0];
@@ -59,36 +59,27 @@ namespace Entities
             switch (stacks)
             {
                 case > 6:
-                    AttackWith(Random.Range(0f, 1f) > chance ? burp : bless, players[Random.Range(0, players.Count)]);
-                    AttackWith(Random.Range(0f, 1f) > chance ? burp : bless, players[Random.Range(0, players.Count)]);
+                    AttackWith(Random.Range(0f, 1f) > chance ? burp : bless, AttackTargetCalculator(targets));
+                    AttackWith(Random.Range(0f, 1f) > chance ? burp : bless, AttackTargetCalculator(targets));
                     break;
                 case < 3 when crystals.Count > 0:
-                    AttackWith(gobble, crystals[Random.Range(0, crystals.Count)]);
-                    AttackWith(gobble, crystals[Random.Range(0, crystals.Count)]);
+                    AttackWith(gobble, AttackTargetCalculator(crystals));
+                    AttackWith(gobble, AttackTargetCalculator(crystals));
                     break;
                 case < 3:
-                    AttackWith(hurl, players[Random.Range(0, players.Count)]);
-                    AttackWith(hurl, players[Random.Range(0, players.Count)]);
+                    AttackWith(hurl, AttackTargetCalculator(targets));
+                    AttackWith(hurl, AttackTargetCalculator(targets));
                     break;
                 default:
-                    if (crystals.Count > 0) AttackWith(gobble, crystals[Random.Range(0, crystals.Count)]);
-                    else AttackWith(hurl, players[Random.Range(0, players.Count)]);
+                    if (crystals.Count > 0) AttackWith(gobble, AttackTargetCalculator(crystals));
+                    else AttackWith(hurl, AttackTargetCalculator(targets));
 
-                    AttackWith(Random.Range(0f, 1f) > chance ? burp : bless, players[Random.Range(0, players.Count)]);
+                    AttackWith(Random.Range(0f, 1f) > chance ? burp : bless, AttackTargetCalculator(targets));
                     break;
             }
         }
 
-        private void AttackWith(GameObject prefab, EntityClass target)
-        {
-            var card = Instantiate(prefab);
-            var action = card.GetComponent<ActionClass>();
-
-            action.Target = target;
-            action.Origin = this;
-            combatInfo.AddCombatSprite(action);
-            BattleQueue.BattleQueueInstance.AddAction(action);
-        }
+       
 
         private void HandleDamage(int amount)
         {

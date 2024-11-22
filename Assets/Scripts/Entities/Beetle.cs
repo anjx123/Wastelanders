@@ -26,9 +26,9 @@ public abstract class Beetle : EnemyClass
         OnGainBuffs?.Invoke(buffType, stacks, this);
     }
 
-    public override void AddAttack(List<EntityClass> players) {
-        if (players.Count == 0) return;
-        List<EntityClass> targets = players;
+    public override void AddAttack(List<EntityClass> targets) {
+        if (targets.Count == 0) return;
+        targets = new List<EntityClass>(targets);
         List<EntityClass> crystals = CombatManager.Instance.GetNeutral();
         targets.AddRange(crystals);
 

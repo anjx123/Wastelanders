@@ -25,7 +25,10 @@ public class Crystals : EnemyClass, NeutralEntityInterface
         source.AddStacks(Resonate.buffName, numThresholds);
     }
 
-    public override void AddAttack(List<EntityClass> players) {}
+    public override void AddAttack(List<EntityClass> targets)
+    {
+        base.AddAttack(new());
+    }
 
     public override IEnumerator MoveToPosition(Vector3 destination, float radius, float duration, Vector3? lookAtPosition = null)
     {

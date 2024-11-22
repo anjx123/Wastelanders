@@ -4236,7 +4236,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6aa41b926b29e4283b2720e94db2cf4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shakeEnabled: 1
 --- !u!1 &1480849945
 GameObject:
   m_ObjectHideFlags: 0
@@ -4579,7 +4578,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6aa41b926b29e4283b2720e94db2cf4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shakeEnabled: 1
 --- !u!1001 &1542478168
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4598,7 +4596,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6635998426718021455, guid: b9c5e4b3c9f7e024f8fe9012e7a2e437, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -8.751838
+      value: -8.814177
       objectReference: {fileID: 0}
     - target: {fileID: 6635998426718021455, guid: b9c5e4b3c9f7e024f8fe9012e7a2e437, type: 3}
       propertyPath: m_LocalPosition.y
@@ -6708,17 +6706,9 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 884201475}
     - target: {fileID: 565243660519602255, guid: ffe5e716a68f6484aa03d7e79a4dc2a7, type: 3}
-      propertyPath: beetlePrefabs.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 565243660519602255, guid: ffe5e716a68f6484aa03d7e79a4dc2a7, type: 3}
       propertyPath: beetleLocations.Array.size
       value: 4
       objectReference: {fileID: 0}
-    - target: {fileID: 565243660519602255, guid: ffe5e716a68f6484aa03d7e79a4dc2a7, type: 3}
-      propertyPath: beetlePrefabs.Array.data[3]
-      value: 
-      objectReference: {fileID: 8044949296705636452, guid: 692030d7a70f84e1e9949eb9b07ebce5, type: 3}
     - target: {fileID: 565243660519602255, guid: ffe5e716a68f6484aa03d7e79a4dc2a7, type: 3}
       propertyPath: beetleLocations.Array.data[0]
       value: 
@@ -6738,14 +6728,6 @@ PrefabInstance:
     - target: {fileID: 2002373752629993316, guid: ffe5e716a68f6484aa03d7e79a4dc2a7, type: 3}
       propertyPath: m_Name
       value: QueenPrefab
-      objectReference: {fileID: 0}
-    - target: {fileID: 2558249372607357620, guid: ffe5e716a68f6484aa03d7e79a4dc2a7, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.35
-      objectReference: {fileID: 0}
-    - target: {fileID: 2558249372607357620, guid: ffe5e716a68f6484aa03d7e79a4dc2a7, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.35
       objectReference: {fileID: 0}
     - target: {fileID: 2558249372607357620, guid: ffe5e716a68f6484aa03d7e79a4dc2a7, type: 3}
       propertyPath: m_LocalPosition.x
