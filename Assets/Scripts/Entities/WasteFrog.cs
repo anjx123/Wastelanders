@@ -73,7 +73,7 @@ public class WasteFrog : EnemyClass
         if (UseHurl && hurlCard != null)
         {
             UseHurl = false;
-            AttackWith(hurlCard, AttackTargetCalculator(targets));
+            AttackWith(hurlCard, CalculateAttackTarget(targets));
         }
         else
         {

@@ -41,10 +41,14 @@ namespace Entities
             var burp = deck[1];
             var gobble = deck[2];
             var hurl = deck[3];
+            // Required so retargeting one card does not retarget both.
+            var bless2 = deck[4];
+            var burp2 = deck[5];
 
             var enemyCount = CombatManager.Instance.GetEnemies().Count;
 
-            var crystals = CombatManager.Instance.GetNeutral();
+            var opponents = targets.Where(entity => entity.Team == EntityTeam.PlayerTeam).ToList();
+            var neutral = targets.Where(entity => entity.Team == EntityTeam.NeutralTeam).ToList();
 
             var stacks = GetBuffStacks(Resonate.buffName);
             var chance = enemyCount switch
@@ -59,22 +63,22 @@ namespace Entities
             switch (stacks)
             {
                 case > 6:
-                    AttackWith(Random.Range(0f, 1f) > chance ? burp : bless, AttackTargetCalculator(targets));
-                    AttackWith(Random.Range(0f, 1f) > chance ? burp : bless, AttackTargetCalculator(targets));
+                    AttackWith(Random.Range(0f, 1f) > chance ? burp : bless, CalculateAttackTarget(opponents));
+                    AttackWith(Random.Range(0f, 1f) > chance ? burp2 : bless2, CalculateAttackTarget(opponents));
                     break;
-                case < 3 when crystals.Count > 0:
-                    AttackWith(gobble, AttackTargetCalculator(crystals));
-                    AttackWith(gobble, AttackTargetCalculator(crystals));
+                case < 3 when neutral.Count > 0:
+                    AttackWith(gobble, CalculateAttackTarget(neutral));
+                    AttackWith(gobble, CalculateAttackTarget(neutral));
                     break;
                 case < 3:
-                    AttackWith(hurl, AttackTargetCalculator(targets));
-                    AttackWith(hurl, AttackTargetCalculator(targets));
+                    AttackWith(hurl, CalculateAttackTarget(opponents));
+                    AttackWith(hurl, CalculateAttackTarget(opponents));
                     break;
                 default:
-                    if (crystals.Count > 0) AttackWith(gobble, AttackTargetCalculator(crystals));
-                    else AttackWith(hurl, AttackTargetCalculator(targets));
+                    if (neutral.Count > 0) AttackWith(gobble, CalculateAttackTarget(neutral));
+                    else AttackWith(hurl, CalculateAttackTarget(opponents));
 
-                    AttackWith(Random.Range(0f, 1f) > chance ? burp : bless, AttackTargetCalculator(targets));
+                    AttackWith(Random.Range(0f, 1f) > chance ? burp : bless, CalculateAttackTarget(opponents));
                     break;
             }
         }

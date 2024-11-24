@@ -158,7 +158,15 @@ namespace SceneBuilder
 
         private void AdjustEnemyClass(EnemyClass enemyClass)
         {
-            // TODO: Adjust enemy targeting AI here
+            enemyClass.TargetingWeights = delegate(EntityClass entity)
+            {
+                return entity.Team switch
+                {
+                    EntityClass.EntityTeam.PlayerTeam => 100,
+                    EntityClass.EntityTeam.NeutralTeam => 20,
+                    _ => 0
+                };
+            };
         }
 
         private void SpawnAll(GameObject[] prefabs, Vector3 position)

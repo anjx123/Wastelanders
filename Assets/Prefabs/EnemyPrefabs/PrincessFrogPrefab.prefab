@@ -49,15 +49,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myTransform: {fileID: 7946142163233550150}
+  icon: {fileID: 21300000, guid: 831d1a607000644c58c6b9bdaf95a0b2, type: 3}
   animator: {fileID: 3297183234373819581}
   combatInfo: {fileID: 5598173080790413213}
   boxCollider: {fileID: 6773406975685228959}
-  icon: {fileID: 21300000, guid: 831d1a607000644c58c6b9bdaf95a0b2, type: 3}
   availableActions:
   - {fileID: 2376898879351982445, guid: ba70a26a5c92548e48fa5e83e65734b6, type: 3}
   - {fileID: 2376898879351982445, guid: 85bd711732ab044c98f77ebe38bd870d, type: 3}
   - {fileID: 2376898879351982445, guid: c98c1ef84a12f4790b6f8cd9e0051511, type: 3}
   - {fileID: 2376898879351982445, guid: e07f0aec029f647ed8f2d61db2fd2989, type: 3}
+  - {fileID: 2376898879351982445, guid: ba70a26a5c92548e48fa5e83e65734b6, type: 3}
+  - {fileID: 2376898879351982445, guid: 85bd711732ab044c98f77ebe38bd870d, type: 3}
 --- !u!95 &3297183234373819581
 Animator:
   serializedVersion: 5

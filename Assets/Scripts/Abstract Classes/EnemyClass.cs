@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using static UnityEditor.Experimental.GraphView.GraphView;
 
@@ -15,9 +16,10 @@ public abstract class EnemyClass : EntityClass
     // Initialized in editor
     public List<GameObject> availableActions;
 
-    public delegate EntityClass AttackTargetDelegate(List<EntityClass> targets);
+    public delegate int AttackTargetDelegate(EntityClass targets);
 
-    public AttackTargetDelegate AttackTargetCalculator { get; set; } = GetAttackTarget;
+    // Default Attack weight for all opponents gives equal chance for all oppoenents to be picked
+    public AttackTargetDelegate TargetingWeights{ get; set; } = delegate { return 100; };
 
     public override void Start()
     {
@@ -45,7 +47,7 @@ public abstract class EnemyClass : EntityClass
     {
         if (targets.Count == 0 || pool.Count == 0) return;
 
-        AttackWith(pool[0], AttackTargetCalculator(targets));
+        AttackWith(pool[0], CalculateAttackTarget(targets));
         pool.RemoveAt(0);
 
         if (pool.Count == 0)
@@ -64,11 +66,20 @@ public abstract class EnemyClass : EntityClass
         BattleQueue.BattleQueueInstance.AddAction(action);
     }
 
-    private static EntityClass GetAttackTarget(List<EntityClass> targets)
+    protected EntityClass CalculateAttackTarget(List<EntityClass> potentialTargets)
     {
-        return targets[UnityEngine.Random.Range(0, targets.Count)];
-    }
+        int totalWeight = potentialTargets.Sum(target => TargetingWeights(target));
+        int randomValue = UnityEngine.Random.Range(0, totalWeight);
 
+        int cumulativeWeight = 0;
+        var selectedTarget = potentialTargets.First(target =>
+        {
+            cumulativeWeight += TargetingWeights(target);
+            return cumulativeWeight > randomValue;
+        });
+
+        return selectedTarget;
+    }
 
     protected virtual void Reshuffle()
     {
@@ -121,10 +132,10 @@ public abstract class EnemyClass : EntityClass
     {
         return Team switch
         {
-            EntityTeam.PlayerTeam => new List<EntityClass>(CombatManager.Instance.GetEnemies()),
-            EntityTeam.EnemyTeam => new List<EntityClass>(CombatManager.Instance.GetPlayers()),
+            EntityTeam.PlayerTeam => new List<EntityClass>(CombatManager.Instance.GetEnemies().Concat(CombatManager.Instance.GetNeutral())),
+            EntityTeam.EnemyTeam => new List<EntityClass>(CombatManager.Instance.GetPlayers().Concat(CombatManager.Instance.GetNeutral())),
             EntityTeam.NeutralTeam => new(),
-            _ => throw new ArgumentOutOfRangeException()
+            _ => throw new ArgumentOutOfRangeException("Team possibly not initialized, this is my team: " + Team)
         };
     }
 }

@@ -114,6 +114,7 @@ public class CombatManager : MonoBehaviour
     private void OnDestroy()
     {
         ActionClass.CardStateChange -= HandleCrosshairEnemies;
+        ClearEvents();
     }
 
 

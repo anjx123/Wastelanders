@@ -41,6 +41,7 @@ public class QueenBeetle : EnemyClass
         MaxHealth = 50;
         Health = MaxHealth;
         myName = "The Queen";
+        TargetingWeights = (entity => entity.Team == EntityTeam.PlayerTeam ? 100 : 0);
     }
 
     protected override void OnEnable()
@@ -110,14 +111,15 @@ public class QueenBeetle : EnemyClass
         {
             if (GetBuffStacks(Resonate.buffName) >= 2 && FindFirstOpenSlot() != -1 && (!usedSpawnThisRound || NumberOfAvailableSlots() > 1)) //Last condition fixes a bug where the queen can try to spawn 2 beetles but then hit the max spawn cap
             {
-                AttackWith(hatchery, AttackTargetCalculator(targets));
+                AttackWith(hatchery, CalculateAttackTarget(targets));
                 ReduceStacks(Resonate.buffName, 2);
                 UpdateBuffs();
                 usedSpawnThisRound = true;
             }
             else
             {
-                AttackWith(deck[Random.Range(1, deck.Count)], AttackTargetCalculator(targets));
+                // Deck[1] and deck[2] are both fragments. They must be different otherwise retargeting one will retarget both.
+                AttackWith(deck[i + 1], CalculateAttackTarget(targets));
             }
         }
     }

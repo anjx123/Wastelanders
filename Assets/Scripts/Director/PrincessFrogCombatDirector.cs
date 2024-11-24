@@ -18,6 +18,12 @@ namespace Director
             StartCoroutine(OnStart());
         }
 
+        public void OnDisable()
+        {
+            CombatManager.PlayersWinEvent -= PlayersWin;
+            CombatManager.EnemiesWinEvent -= EnemiesWin;
+        }
+
         private IEnumerator OnStart()
         {
             CombatManager.Instance.SetDarkScreen();
