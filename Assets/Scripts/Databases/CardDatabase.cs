@@ -84,6 +84,9 @@ public class CardDatabase : ScriptableObject
         PISTOL,
         FIST,
         AXE,
+        ENEMY_1,
+        ENEMY_2,
+        ENEMY_3,
     }
 }
 

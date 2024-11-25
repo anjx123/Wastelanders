@@ -9,7 +9,7 @@ public class BuffExplainer : MonoBehaviour
     [SerializeField] SpriteRenderer buffIcon;
     [SerializeField] TextMeshPro explanationTitleField;
     [SerializeField] TextMeshPro explanationTextField;
-    [SerializeField] List<WeaponExplanation> explanationText;
+    [SerializeField] public List<WeaponExplanation> explanationText;
 #nullable enable
     private StatusEffect? currentEffect;
 
@@ -38,7 +38,7 @@ public class BuffExplainer : MonoBehaviour
 
 
     [System.Serializable]
-    private class WeaponExplanation
+    public class WeaponExplanation
     {
         [field: SerializeField] public CardDatabase.WeaponType WeaponType { get; set; }
         [field: SerializeField] public string ExplanationTitle { get; set; } = "";

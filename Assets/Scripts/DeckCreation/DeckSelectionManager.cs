@@ -20,6 +20,11 @@ public class DeckSelectionManager : MonoBehaviour
     [SerializeField] private PlayerDatabase playerDatabase;
     [SerializeField] private FadeScreenHandler fadeScreenHandler;
     [SerializeField] private TMP_Text cardDescriptorTextField;
+    [SerializeField] private Transform[] enemyCardLayout;
+    [SerializeField] private Transform[] fourRowCardLayout;
+    [SerializeField] private Transform[] fiveRowCardLayout;
+    [SerializeField] private Transform enemyEditParent;
+    [SerializeField] private GameObject enemyEditButtonPrefab;
     private PlayerDatabase.PlayerData playerData;
     private WeaponType weaponType;
     public WeaponAmount weaponText;
@@ -159,8 +164,8 @@ public class DeckSelectionManager : MonoBehaviour
     {
         buffExplainer.RenderExplanationForBuff(weaponType);
         this.weaponType = weaponType;
-        RenderDecks(weaponType);
         DeckSelectionState = DeckSelectionState.DeckSelection;
+        RenderDecks(weaponType);
     }
 
     private SerializableWeaponListEntry GetPlayerWeaponDeck(WeaponType weaponType)
@@ -309,6 +314,31 @@ public class DeckSelectionManager : MonoBehaviour
         cardDescriptorTextField.text = "";
     }
 
+    private WeaponType[] GetEnemyWeaponTypes()
+    {
+        return new WeaponType[] { WeaponType.ENEMY_1, WeaponType.ENEMY_2, WeaponType.ENEMY_3 };
+    }
+
+    private bool IsEnemyCardType(WeaponType weaponType)
+    {
+        return GetEnemyWeaponTypes().Contains(weaponType);
+    }
+
+    private void GenerateEnemyButtons()
+    {
+        WeaponType[] weaponTypes = GetEnemyWeaponTypes();
+        List<BuffExplainer.WeaponExplanation> explanations = buffExplainer.explanationText.FindAll((e) => weaponTypes.Contains(e.WeaponType));
+
+        float y = 0f;
+        float delta = -1f;
+        foreach (BuffExplainer.WeaponExplanation explanation in explanations)
+        {
+            GameObject button = Instantiate(enemyEditButtonPrefab);
+            button.transform.SetParent(enemyEditParent);
+            button.transform.position = new Vector3(0, y, 0);
+            y += delta;
+        }
+    }
 
     //Renders the weaponDeck corresponding to (@param weaponType)
     public void RenderDecks(CardDatabase.WeaponType weaponType)
@@ -318,14 +348,17 @@ public class DeckSelectionManager : MonoBehaviour
         List<ActionClass> chosenCardList = cardDatabase.ConvertStringsToCards(weaponType, playerData.GetDeckByWeaponType(weaponType).Select(p => p.ActionClassName).ToList());
         List<ActionClass> cardsToRender = cardDatabase.GetCardsByType(weaponType);
         List<GameObject> instantiatedCards = new List<GameObject>();
+        Transform[] layout;
 
-        bool longerRow = cardsToRender.Count > 8;
-        int numPerRow = longerRow ? 5 : 4;
-        float xSpacing = longerRow ? 1.8f : 2.125f;
-        float ySpacing = longerRow ? -2.5f : -3f;
-        float xOffset = longerRow ? -7f : -6.5f; //initial x Offset
-        float yOffset = longerRow ? 2.175f : 1 + 1.4f; //initial y Offset
-        float cardScaling = longerRow ? 0.675f : 0.7825f;
+        if (IsEnemyCardType(weaponType))
+        {
+            layout = enemyCardLayout;
+            GenerateEnemyButtons();
+        }
+        else
+        {
+            layout = cardsToRender.Count > 8 ? fiveRowCardLayout : fourRowCardLayout;
+        }
 
         //In order to sort, the cards must be instantiated and initialized first :pensive:
         foreach (ActionClass card in cardsToRender)
@@ -344,29 +377,12 @@ public class DeckSelectionManager : MonoBehaviour
 
         instantiatedCards.Sort((card1, card2) => card1.GetComponent<ActionClass>().Speed.CompareTo(card2.GetComponent<ActionClass>().Speed));
 
-        int y = -1;
-        for (int i = 0; i < cardsToRender.Count; i++)
+        for (int i = 0; i < instantiatedCards.Count; i++)
         {
-            if (i % numPerRow == 0) y++;
-            int x = i % numPerRow;
-            Vector3 pos = new Vector3(x * xSpacing + xOffset, y * ySpacing + yOffset);
-            if (i < instantiatedCards.Count)
-            {
-                GameObject cardPrefab = instantiatedCards[i];
-
-                cardPrefab.transform.SetParent(cardArrayParent.transform);
-                cardPrefab.transform.localPosition = pos;
-
-                // Scale the instance
-                Vector3 scale = cardPrefab.transform.localScale;
-                scale.x *= cardScaling;
-                scale.y *= cardScaling;
-                cardPrefab.transform.localScale = scale;
-            }
-            else
-            {
-                break;
-            }
+            GameObject cardPrefab = instantiatedCards[i];
+            cardPrefab.transform.SetParent(cardArrayParent.transform);
+            cardPrefab.transform.localPosition = layout[i].localPosition;
+            cardPrefab.transform.localScale = layout[i].localScale;
         }
 
         SaveLoadSystem.Instance.LoadCardEvolutionProgress();
@@ -381,6 +397,11 @@ public class DeckSelectionManager : MonoBehaviour
     private void UnrenderDecks()
     {
         foreach (Transform child in cardArrayParent.transform)
+        {
+            Destroy(child.gameObject);
+        }
+
+        foreach (Transform child in enemyEditParent)
         {
             Destroy(child.gameObject);
         }

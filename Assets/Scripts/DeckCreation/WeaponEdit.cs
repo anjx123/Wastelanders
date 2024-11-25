@@ -6,7 +6,9 @@ using UnityEngine;
 
 public class WeaponEdit : MonoBehaviour
 {
-    private CardDatabase.WeaponType type;
+    [SerializeField] private CardDatabase.WeaponType type;
+    [SerializeField] private Color defaultColor = new Color(1f, 1f, 1f, 1f);
+    [SerializeField] private Color hoverColor = new Color(0.6f, 0.6f, 0.6f, 1f);
     private bool isMouseDown = false;
     public TMP_Text editText;
     private bool isLocked = false;
@@ -23,7 +25,7 @@ public class WeaponEdit : MonoBehaviour
     public void OnMouseDown()
     {
         if (isLocked) return;
-        GetComponent<SpriteRenderer>().color = new Color(0.4f, 0.4f, 0.4f);
+        GetComponent<SpriteRenderer>().color = hoverColor;
         isMouseDown = true;
     }
 
@@ -32,7 +34,7 @@ public class WeaponEdit : MonoBehaviour
         if (isLocked) return;
         if (isMouseDown)
         {
-            GetComponent<SpriteRenderer>().color = Color.white;
+            GetComponent<SpriteRenderer>().color = defaultColor;
             WeaponEditEvent?.Invoke(type);
         }
         isMouseDown = false;
@@ -41,13 +43,13 @@ public class WeaponEdit : MonoBehaviour
     public void OnMouseEnter()
     {
         if (isLocked) return;
-        GetComponent<SpriteRenderer>().color = new Color(0.6f, 0.6f, 0.6f);
+        GetComponent<SpriteRenderer>().color = hoverColor;
     }
 
     public void OnMouseExit()
     {
         if (isLocked) return;
-        GetComponent<SpriteRenderer>().color = Color.white;
+        GetComponent<SpriteRenderer>().color = defaultColor;
         isMouseDown = false;
     }
 
