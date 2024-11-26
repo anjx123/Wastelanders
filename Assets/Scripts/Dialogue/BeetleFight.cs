@@ -418,6 +418,7 @@ public class BeetleFight : DialogueClasses
             yield return new WaitForSeconds(0.2f);
             Debug.Log("test");
             //yield return StartCoroutine(testPopup.GetComponent<EvolveInfo>().ShowEvolve(testSprite, testText));
+            PopUpNotificationManager.Instance.CreateNotification(testSprite);
             CombatManager.Instance.GameState = GameState.SELECTION;
             yield return StartCoroutine(DialogueManager.Instance.StartDialogue(twoPlayerCombatTutorial.Dialogue));
             Begin2PCombatTutorial();

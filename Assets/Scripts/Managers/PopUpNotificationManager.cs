@@ -22,6 +22,8 @@ public class PopUpNotificationManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        GetComponent<Canvas>().worldCamera = Camera.main;
+        GetComponent<Canvas>().sortingLayerName = "CardUILayer";
     }
 
     private void Start()
