@@ -93,10 +93,13 @@ public class EvolveInfo : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
                 float disappearSpeed = 1f;
                 Color textColor = warningText.color;
                 Color imageColor = popupImage.color;
+                Color cardColor = cardImage.color;
                 textColor.a -= disappearSpeed * Time.deltaTime;
                 imageColor.a -= disappearSpeed * Time.deltaTime;
+                cardColor.a -= disappearSpeed * Time.deltaTime;
                 warningText.color = textColor;
                 popupImage.color = imageColor;
+                cardImage.color = cardColor;
                 if (textColor.a < 0)
                 {
                     PopUpNotificationManager.Instance.isRunning = false; //Should probably be an event broadcast instead.

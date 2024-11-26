@@ -38,6 +38,7 @@ public class CombatCardDisplayManager : MonoBehaviour
         fullCardObject = Instantiate(cardTemplatePrefab);
         fullCardObject.transform.SetParent(cardDisplay.transform, false);
         fullCardObject.transform.localPosition = new Vector3(0, 0, 0);
+        fullCardObject.AddComponent<CardInfoDisable>();
         fullCardObject.SetActive(false);
 
         descriptionHolder = Instantiate(descriptionHolderPrefab);
@@ -87,6 +88,17 @@ public class CombatCardDisplayManager : MonoBehaviour
             }
             currentUser = a;
             HighlightTarget(a);
+        }
+    }
+
+    public void HideCardOnClick()
+    {
+        if (currentUser != null)
+        {
+            fullCardObject.SetActive(false);
+            descriptionHolder.SetActive(false);
+            DeHighlightTarget(currentUser);
+            currentUser = null;
         }
     }
 
