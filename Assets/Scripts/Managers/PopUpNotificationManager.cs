@@ -7,6 +7,7 @@ public class PopUpNotificationManager : MonoBehaviour
     public static PopUpNotificationManager Instance { get; private set; }
 
     public GameObject warningObject;
+    public GameObject evolveObject;
 
     public bool isRunning = false;
 
@@ -26,12 +27,14 @@ public class PopUpNotificationManager : MonoBehaviour
     private void Start()
     {
         CombatManager.OnGameStateChanged += DismissDescription;
+        ActionClass.CardEvolvedNotifEvent += CreateNotification;
         RemoveDescription();
     }
 
     private void OnDestroy()
     {
         CombatManager.OnGameStateChanged -= DismissDescription;
+        ActionClass.CardEvolvedNotifEvent -= CreateNotification;
     }
 
     public void DisplayWarning(PopupType popupType, GameObject obj = null)
@@ -63,6 +66,11 @@ public class PopUpNotificationManager : MonoBehaviour
     {
         WarningInfo info = warningObject.GetComponent<WarningInfo>();
         info.ShowWarning(message);
+    }
+
+    public void CreateNotification(Sprite spr)
+    {
+        StartCoroutine(evolveObject.GetComponent<EvolveInfo>().ShowEvolve(spr, "Card Has Evolved!"));
     }
 
     public void DisplayText(string description)

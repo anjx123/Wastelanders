@@ -102,6 +102,11 @@ public class BeetleFight : DialogueClasses
     List<EnemyClass> wave2 = new();
     List<EnemyClass> wave3 = new();
 
+    public Sprite testSprite;
+    public Image testImage;
+    public string testText = "hi hello";
+    public GameObject testPopup;
+    public List<GameObject> testDeck;
 
 
     private const float BRIEF_PAUSE = 0.2f; // For use after an animation to make it visually seem smoother
@@ -170,6 +175,8 @@ public class BeetleFight : DialogueClasses
         draggedCrystal.OutOfCombat();
         beetleNest.SetActive(false);
         theCampWithBeetles.SetActive(false);
+        jackie.InjectDeck(testDeck);
+        ives.InjectDeck(testDeck);
         ives.OutOfCombat();
         jackie.OutOfCombat(); //Workaround for now, ill have to remove this once i manually start instantiating players
         frog.OutOfCombat();
@@ -409,6 +416,8 @@ public class BeetleFight : DialogueClasses
             DialogueManager.Instance.MoveBoxToTop();
 
             yield return new WaitForSeconds(0.2f);
+            Debug.Log("test");
+            //yield return StartCoroutine(testPopup.GetComponent<EvolveInfo>().ShowEvolve(testSprite, testText));
             CombatManager.Instance.GameState = GameState.SELECTION;
             yield return StartCoroutine(DialogueManager.Instance.StartDialogue(twoPlayerCombatTutorial.Dialogue));
             Begin2PCombatTutorial();
@@ -431,6 +440,7 @@ public class BeetleFight : DialogueClasses
             yield return ShiftObjectCoroutine(CombatManager.Instance.baseCamera.gameObject, -7.5f, 3f);
             yield return new WaitForSeconds(0.5f);
             CombatManager.Instance.GameState = GameState.SELECTION;
+            //yield return StartCoroutine(testPopup.GetComponent<EvolveInfo>().ShowEvolve(testSprite, testText));
             yield return StartCoroutine(DialogueManager.Instance.StartDialogue(wave2Dialogue.Dialogue));
             BeginWave2();
             yield return new WaitUntil(() => CombatManager.Instance.GameState == GameState.GAME_WIN);

@@ -115,6 +115,10 @@ public abstract class ActionClass : SelectClass, IBind<ActionData>
 
     public event CardEventDelegate? CardValuesUpdating;
 
+    public delegate void CardEvolvedNotifDelegate(Sprite spr);
+    public static event CardEvolvedNotifDelegate? CardEvolvedNotifEvent;
+    // invoke when a card has evolved to display relevant notification
+
     public virtual void OnCardStagger()
     {
 
