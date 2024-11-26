@@ -12,8 +12,8 @@ public class EvolveInfo : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
     public UnityEngine.UI.Image cardImage;
     public bool popUpCanFade = false; //controls whether should fade
     public float secondTimer = 4f;
-    private Vector2 initialPosition = new Vector2(120, 120);
-    private Vector2 finalPosition = new Vector2(120, -80);
+    private Vector2 initialPosition = new Vector2(190, 120);
+    private Vector2 finalPosition = new Vector2(190, -80);
     private float slideDuration = 1.5f;
 
     public RectTransform rectTransform;
@@ -23,16 +23,16 @@ public class EvolveInfo : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
     void Start()
     {
         SetPopUpInactive();
-        Canvas[] canvases = GetComponentsInChildren<Canvas>();
-        foreach (Canvas canvas in canvases)
-        {
-            if (canvas != GetComponent<Canvas>())
-            {
-                rectTransform = canvas.GetComponent<RectTransform>();
-                Debug.Log("Inner Canvas RectTransform assigned.");
-                break;
-            }
-        }
+        //Canvas[] canvases = GetComponentsInChildren<Canvas>();
+        //foreach (Canvas canvas in canvases)
+        //{
+        //    if (canvas != GetComponent<Canvas>())
+        //    {
+        //        rectTransform = canvas.GetComponent<RectTransform>();
+        //        Debug.Log("Inner Canvas RectTransform assigned.");
+        //        break;
+        //    }
+        //}
     }
 
     public IEnumerator ShowEvolve(Sprite spr,  string text)
