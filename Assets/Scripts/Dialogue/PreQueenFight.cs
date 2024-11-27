@@ -504,7 +504,7 @@ public class PreQueenFight : DialogueClasses
             jackie.InCombat();
             theQueen.InCombat();
             theQueen.SetReturnPosition(theQueen.transform.position);
-            theQueen.InheritChild(queenGuardBeetles);
+            theQueen.IntializeChildBeetles(queenGuardBeetles);
             for (int i = 0; i < queenGuardBeetles.Count; i++)
             {
                 queenGuardBeetles[i].InCombat();

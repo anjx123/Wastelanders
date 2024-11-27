@@ -3,10 +3,8 @@ using UnityEngine;
 
 public class Hatchery : ActionClass
 {
-    public override void OnCardStagger()
-    {
-
-    }
+    public GameObject[] beetlePrefabs;
+    private const float BEETLE_SCALING = 0.6f;
 
     // Start is called before the first frame update
     public override void Initialize()
@@ -21,7 +19,6 @@ public class Hatchery : ActionClass
 
         myName = "Hatchery";
         CardType = CardType.Defense;
-        Renderer renderer = GetComponent<Renderer>();
     }
 
 
@@ -29,10 +26,11 @@ public class Hatchery : ActionClass
     public override void CardIsUnstaggered()
     {
         base.CardIsUnstaggered();
-        if (Origin.GetType() == typeof(QueenBeetle))
-        {
-            ((QueenBeetle)Origin).SummonBeetle();
-        }
+
+        GameObject beetle = Instantiate(beetlePrefabs[Random.Range(0, beetlePrefabs.Length)]);
+        beetle.transform.SetParent(Origin.transform.parent);
+        beetle.transform.localScale *= BEETLE_SCALING;
+        beetle.GetComponent<EntityClass>().Team = Origin.Team;
     }
 
 }
