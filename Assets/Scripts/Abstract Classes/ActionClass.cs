@@ -97,7 +97,14 @@ public abstract class ActionClass : SelectClass, IBind<ActionData>
     protected int CurrentEvolutionProgress
     {
         get { return data?.CurrentProgress ?? 0; }
-        set { if (data != null) data.CurrentProgress = Math.Min(value, MaxEvolutionProgress); }
+        set { if (data != null) {
+                if (data.CurrentProgress < MaxEvolutionProgress && value >= MaxEvolutionProgress)
+                {
+                    ActionClass.CardEvolvedNotifEvent?.Invoke(icon);
+                }
+                data.CurrentProgress = Math.Min(value, MaxEvolutionProgress); 
+            }
+        }
     }
     public bool IsEvolved = false; // Stores whether the user has decided to select the evolved version of the card or not
     public bool IsFlipped { get; set; } = false; // Should we display the card as flipped?
