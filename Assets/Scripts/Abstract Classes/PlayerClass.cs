@@ -74,6 +74,15 @@ public abstract class PlayerClass : EntityClass
         }
     }
 
+    // Adds card to player hand
+    public void InjectCard(GameObject card)
+    {
+        GameObject toAdd = Instantiate(card);
+        toAdd.GetComponent<ActionClass>().Origin = this;
+        hand.Add(toAdd);
+        toAdd.transform.position = new Vector3(-100, -100, 1);
+    }
+
     public void DestroyDeck()
     {
         List<GameObject> toDestroy = new List<GameObject>(pool);

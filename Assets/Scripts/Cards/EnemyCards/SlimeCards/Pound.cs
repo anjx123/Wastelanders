@@ -17,6 +17,7 @@ public class Pound : SlimeAttacks
         lowerBound = 2;
         upperBound = 5;
         Speed = 2;
+        CostToAddToDeck = 1;
 
         myName = "Pound";
         description = "I wouldn't stand still if I were you";

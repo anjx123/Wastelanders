@@ -18,6 +18,7 @@ public class StackSmash : SlimeAttacks
         lowerBound = 2;
         upperBound = 4;
         Speed = 2;
+        CostToAddToDeck = 1;
 
         myName = "Stack Smash";
         description = "If this attack is unstaggered, attack again";
