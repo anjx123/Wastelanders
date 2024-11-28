@@ -1,11 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Xml.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
-using static Unity.Collections.AllocatorManager;
 using static UnityEngine.UI.Image;
 
-public class Fling : BeetleAttacks
+public class FlingPlayable : BeetleAttacks
 {
     [SerializeField] private ProjectileBehaviour projectileBehaviour;
 
@@ -15,10 +15,11 @@ public class Fling : BeetleAttacks
         base.Initialize();
         lowerBound = 1;
         upperBound = 4;
-        
         Speed = 3;
 
-        description = "If this card hits a player, gain +1 resonate.";
+        CostToAddToDeck = 2;
+
+        description = "If this card hits an enemy, gain +1 resonate.";
 
         myName = "Fling";
         CardType = CardType.RangedAttack;
@@ -34,11 +35,17 @@ public class Fling : BeetleAttacks
         if (Origin.HasAnimationParameter("IsShooting"))
         {
             Origin.AttackAnimation("IsShooting");
-        } 
-        StartCoroutine(projectileBehaviour.ProjectileAnimation(OnProjectileHit, Origin, Target));
-        if (Target is PlayerClass) {
-            Origin.AddStacks(Resonate.buffName, 1);
         }
+        if (projectileBehaviour != null)
+        {
+            StartCoroutine(projectileBehaviour.ProjectileAnimation(OnProjectileHit, Origin, Target));
+        }
+        else
+        {
+            AudioManager.Instance.PlaySFX(Fragment.FRAGMENT_SOUND_EFFECT_NAME);
+            base.OnHit();
+        }
+        Origin.AddStacks(Resonate.buffName, 1);
     }
 
     private void OnProjectileHit()
