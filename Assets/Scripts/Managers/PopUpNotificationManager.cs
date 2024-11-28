@@ -59,6 +59,7 @@ public class PopUpNotificationManager : MonoBehaviour
                 createWarning("Select a player first!");
                 break;
             case PopupType.CardEvolved:
+                if (obj == null) break;
                 CreateNotification(obj.GetComponent<ActionClass>().GetIcon());
                 break;
             default:
@@ -75,6 +76,7 @@ public class PopUpNotificationManager : MonoBehaviour
 
     public void CreateNotification(Sprite spr)
     {
+        if (spr == null) return;
         StartCoroutine(evolveObject.GetComponent<EvolveInfo>().ShowEvolve(spr, "Card Has Evolved!"));
     }
 
