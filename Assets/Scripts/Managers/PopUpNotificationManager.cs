@@ -29,14 +29,14 @@ public class PopUpNotificationManager : MonoBehaviour
     private void Start()
     {
         CombatManager.OnGameStateChanged += DismissDescription;
-        ActionClass.CardEvolvedNotifEvent += CreateNotification;
+        ActionClass.CardEvolvedNotifEvent += DisplayWarning;
         RemoveDescription();
     }
 
     private void OnDestroy()
     {
         CombatManager.OnGameStateChanged -= DismissDescription;
-        ActionClass.CardEvolvedNotifEvent -= CreateNotification;
+        ActionClass.CardEvolvedNotifEvent -= DisplayWarning;
     }
 
     public void DisplayWarning(PopupType popupType, GameObject obj = null)
@@ -57,6 +57,9 @@ public class PopUpNotificationManager : MonoBehaviour
                 break;
             case PopupType.SelectPlayerFirst:
                 createWarning("Select a player first!");
+                break;
+            case PopupType.CardEvolved:
+                CreateNotification(obj.GetComponent<ActionClass>().GetIcon());
                 break;
             default:
                 break;

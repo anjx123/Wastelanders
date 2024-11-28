@@ -100,7 +100,7 @@ public abstract class ActionClass : SelectClass, IBind<ActionData>
         set { if (data != null) {
                 if (data.CurrentProgress < MaxEvolutionProgress && value >= MaxEvolutionProgress)
                 {
-                    ActionClass.CardEvolvedNotifEvent?.Invoke(icon);
+                    ActionClass.CardEvolvedNotifEvent?.Invoke(PopupType.CardEvolved, this.gameObject);
                 }
                 data.CurrentProgress = Math.Min(value, MaxEvolutionProgress); 
             }
@@ -122,7 +122,7 @@ public abstract class ActionClass : SelectClass, IBind<ActionData>
 
     public event CardEventDelegate? CardValuesUpdating;
 
-    public delegate void CardEvolvedNotifDelegate(Sprite spr);
+    public delegate void CardEvolvedNotifDelegate(PopupType popupType, GameObject obj);
     public static event CardEvolvedNotifDelegate? CardEvolvedNotifEvent;
     // invoke when a card has evolved to display relevant notification
 

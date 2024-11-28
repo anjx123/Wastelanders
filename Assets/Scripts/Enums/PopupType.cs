@@ -8,5 +8,6 @@ public enum PopupType
     EnemyKilled,
     DeckReshuffled,
     SelectActionFirst,
-    SelectPlayerFirst
+    SelectPlayerFirst,
+    CardEvolved
 }
