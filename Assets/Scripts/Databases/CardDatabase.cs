@@ -19,6 +19,9 @@ public class CardDatabase : ScriptableObject
     public List<PistolCards> pistolCards;
     public List<FistCards> fistCards;
     public List<AxeCards> axeCards;
+    public List<BeetleAttacks> beetleCards;
+    public List<FrogAttacks> frogCards;
+    public List<SlimeAttacks> slimeCards;
 
     //Grabs the corresponding weaponDeck to the (@param weaponType)
     public List<ActionClass> GetCardsByType(WeaponType type)
@@ -29,6 +32,9 @@ public class CardDatabase : ScriptableObject
             case WeaponType.PISTOL: return new List<ActionClass>(pistolCards);
             case WeaponType.AXE: return new List<ActionClass>(axeCards); 
             case WeaponType.FIST: return new List<ActionClass>(fistCards);
+            case WeaponType.BEETLE: return new List<ActionClass>(beetleCards);
+            case WeaponType.FROG: return new List<ActionClass>(frogCards);
+            case WeaponType.SLIME: return new List<ActionClass>(slimeCards);
             default:
                 Debug.LogWarning("Weapon Type is currently unsupported");
                 return null;
@@ -84,9 +90,9 @@ public class CardDatabase : ScriptableObject
         PISTOL,
         FIST,
         AXE,
-        ENEMY_1,
-        ENEMY_2,
-        ENEMY_3,
+        FROG,
+        BEETLE,
+        SLIME,
     }
 }
 

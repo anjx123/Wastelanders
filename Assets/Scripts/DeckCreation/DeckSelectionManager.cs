@@ -316,7 +316,7 @@ public class DeckSelectionManager : MonoBehaviour
 
     private WeaponType[] GetEnemyWeaponTypes()
     {
-        return new WeaponType[] { WeaponType.ENEMY_1, WeaponType.ENEMY_2, WeaponType.ENEMY_3 };
+        return new WeaponType[] { WeaponType.FROG, WeaponType.BEETLE, WeaponType.SLIME };
     }
 
     private bool IsEnemyCardType(WeaponType weaponType)
@@ -335,8 +335,12 @@ public class DeckSelectionManager : MonoBehaviour
         {
             GameObject button = Instantiate(enemyEditButtonPrefab);
             button.transform.SetParent(enemyEditParent);
-            button.transform.position = new Vector3(0, y, 0);
+            button.transform.localPosition = new Vector3(0, y, 0);
             y += delta;
+
+            WeaponEdit weaponEdit = button.GetComponentInChildren<WeaponEdit>();
+            weaponEdit.editText.SetText(explanation.ExplanationTitle);
+            weaponEdit.SetType(explanation.WeaponType);
         }
     }
 

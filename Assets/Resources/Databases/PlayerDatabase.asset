@@ -27,6 +27,15 @@ MonoBehaviour:
     - <WeaponType>k__BackingField: 3
       <CurrentPoints>k__BackingField: 0
       <MaxPoints>k__BackingField: 10
+    - <WeaponType>k__BackingField: 4
+      <CurrentPoints>k__BackingField: 0
+      <MaxPoints>k__BackingField: 10
+    - <WeaponType>k__BackingField: 5
+      <CurrentPoints>k__BackingField: 0
+      <MaxPoints>k__BackingField: 10
+    - <WeaponType>k__BackingField: 6
+      <CurrentPoints>k__BackingField: 0
+      <MaxPoints>k__BackingField: 10
     selectedWeapons: 0000000001000000
     playerDeck:
     - weapon: 0

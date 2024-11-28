@@ -226,14 +226,14 @@ MonoBehaviour:
     <ExplanationText>k__BackingField: Damage taken increases by 1 per stack. Loses
       1 stack after each round
   - <WeaponType>k__BackingField: 4
-    <ExplanationTitle>k__BackingField: PLACEHOLDER
-    <ExplanationText>k__BackingField: PLACEHOLDER
+    <ExplanationTitle>k__BackingField: FROG
+    <ExplanationText>k__BackingField: FROG - PLACEHOLDER
   - <WeaponType>k__BackingField: 5
-    <ExplanationTitle>k__BackingField: PLACEHOLDER
-    <ExplanationText>k__BackingField: PLACEHOLDER
+    <ExplanationTitle>k__BackingField: BEETLE
+    <ExplanationText>k__BackingField: BEETLE - PLACEHOLDER
   - <WeaponType>k__BackingField: 6
-    <ExplanationTitle>k__BackingField: PLACEHOLDER
-    <ExplanationText>k__BackingField: PLACEHOLDER
+    <ExplanationTitle>k__BackingField: SLIME
+    <ExplanationText>k__BackingField: SLIME - PLACEHOLDER
 --- !u!1 &126026804
 GameObject:
   m_ObjectHideFlags: 0
