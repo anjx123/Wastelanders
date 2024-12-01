@@ -27,6 +27,7 @@ public class DeckSelectionManager : MonoBehaviour
     [SerializeField] private GameObject enemyEditButtonPrefab;
     private PlayerDatabase.PlayerData playerData;
     private WeaponType weaponType;
+    private PlayableEnemyWeaponType? playableEnemyWeaponType;
     public WeaponAmount weaponText;
     public PointsAmount pointsText;
     public BuffExplainer buffExplainer;
@@ -160,12 +161,13 @@ public class DeckSelectionManager : MonoBehaviour
         }
     }
 
-    private void WeaponDeckEdit(CardDatabase.WeaponType weaponType)
+    private void WeaponDeckEdit(WeaponType weaponType, PlayableEnemyWeaponType enemyType)
     {
         buffExplainer.RenderExplanationForBuff(weaponType);
         this.weaponType = weaponType;
+        playableEnemyWeaponType = enemyType;
         DeckSelectionState = DeckSelectionState.DeckSelection;
-        RenderDecks(weaponType);
+        RenderDecks(weaponType, enemyType);
     }
 
     private bool DeckContainsCard(ActionClass ac)
@@ -286,24 +288,11 @@ public class DeckSelectionManager : MonoBehaviour
         cardDescriptorTextField.text = "";
     }
 
-    private WeaponType[] GetEnemyWeaponTypes()
-    {
-        return new WeaponType[] { WeaponType.FROG, WeaponType.BEETLE, WeaponType.SLIME };
-    }
-
-    private bool IsEnemyCardType(WeaponType weaponType)
-    {
-        return GetEnemyWeaponTypes().Contains(weaponType);
-    }
-
     private void GenerateEnemyButtons()
     {
-        WeaponType[] weaponTypes = GetEnemyWeaponTypes();
-        List<BuffExplainer.WeaponExplanation> explanations = buffExplainer.explanationText.FindAll((e) => weaponTypes.Contains(e.WeaponType));
-
         float y = 0f;
         float delta = -1f;
-        foreach (BuffExplainer.WeaponExplanation explanation in explanations)
+        foreach (PlayableEnemyWeaponType c in Enum.GetValues(typeof(PlayableEnemyWeaponType)))
         {
             GameObject button = Instantiate(enemyEditButtonPrefab);
             button.transform.SetParent(enemyEditParent);
@@ -311,13 +300,14 @@ public class DeckSelectionManager : MonoBehaviour
             y += delta;
 
             WeaponEdit weaponEdit = button.GetComponentInChildren<WeaponEdit>();
-            weaponEdit.editText.SetText(explanation.ExplanationTitle);
-            weaponEdit.SetType(explanation.WeaponType);
+            weaponEdit.editText.SetText(c.ToString());
+            weaponEdit.SetType(WeaponType.ENEMY);
+            weaponEdit.SetPlayableEnemyWeaponType(c);
         }
     }
 
     //Renders the weaponDeck corresponding to (@param weaponType)
-    public void RenderDecks(CardDatabase.WeaponType weaponType)
+    public void RenderDecks(CardDatabase.WeaponType weaponType, CardDatabase.PlayableEnemyWeaponType playableEnemyWeaponType = PlayableEnemyWeaponType.BEETLE)
     {
         UnrenderDecks();
 
@@ -326,9 +316,10 @@ public class DeckSelectionManager : MonoBehaviour
         List<GameObject> instantiatedCards = new List<GameObject>();
         Transform[] layout;
 
-        if (IsEnemyCardType(weaponType))
+        if (weaponType == WeaponType.ENEMY)
         {
             layout = enemyCardLayout;
+            cardsToRender = cardDatabase.GetEnemyCards(playableEnemyWeaponType);
             GenerateEnemyButtons();
         }
         else

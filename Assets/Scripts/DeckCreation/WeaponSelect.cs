@@ -9,6 +9,8 @@ public class WeaponSelect : MonoBehaviour
     [SerializeField] private WeaponEdit weaponEdit;
     [SerializeField] private SpriteRenderer cardBodySprite;
     [SerializeField] private GameObject lockedIndicator;
+    [SerializeField] private Color baseColor = Color.white;
+    [SerializeField] private Color hoverColor = new Color(0.6f, 0.6f, 0.6f);
 #nullable enable
     public delegate void WeaponSelectDelegate(WeaponSelect weaponSelect, CardDatabase.WeaponType type);
     public static event WeaponSelectDelegate? WeaponSelectEvent;
@@ -29,7 +31,7 @@ public class WeaponSelect : MonoBehaviour
     public void OnMouseDown()
     {
         if (isLocked) return;
-        SetColor(new Color(0.4f, 0.4f, 0.4f));
+        SetColor(baseColor);
         isMouseDown = true;
     }
 
@@ -38,7 +40,7 @@ public class WeaponSelect : MonoBehaviour
         if (isLocked) return;
         if (isMouseDown)
         {
-            SetColor(Color.white);
+            SetColor(baseColor);
             WeaponSelectEvent?.Invoke(this, type);
         }
         isMouseDown = false;
@@ -47,13 +49,13 @@ public class WeaponSelect : MonoBehaviour
     public void OnMouseEnter()
     {
         if (isLocked) return;
-        SetColor(new Color(0.6f, 0.6f, 0.6f));
+        SetColor(hoverColor);
     }
 
     public void OnMouseExit()
     {
         if (isLocked) return;
-        SetColor(Color.white);
+        SetColor(baseColor);
         isMouseDown = false;
     }
 
