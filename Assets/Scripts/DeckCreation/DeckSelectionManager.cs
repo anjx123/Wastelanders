@@ -333,7 +333,7 @@ public class DeckSelectionManager : MonoBehaviour
             GameObject go = Instantiate(card.gameObject);
             instantiatedCards.Add(go);
             ActionClass ac = go.GetComponent<ActionClass>();
-            ActionClass pref = chosenCardList.FirstOrDefault(action => action.GetType() == card.GetType());
+            ActionClass? pref = chosenCardList.FirstOrDefault(action => action.GetType() == card.GetType());
             if (pref != null)
             {
                 ac.SetSelectedForDeck(true);
@@ -354,7 +354,7 @@ public class DeckSelectionManager : MonoBehaviour
 
         SaveLoadSystem.Instance.LoadCardEvolutionProgress();
 
-        WeaponProficiency weaponPointTuple = GetProficiencyPointsTuple(weaponType);
+        WeaponProficiency weaponPointTuple = playerData.GetProficiencyPointsTuple(weaponType);
         OnUpdateDeck(weaponPointTuple);
     }
 
