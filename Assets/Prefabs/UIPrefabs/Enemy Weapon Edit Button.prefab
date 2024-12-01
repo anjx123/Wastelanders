@@ -144,7 +144,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 0
-  defaultColor: {r: 0.6431373, g: 0.5137255, b: 0.69411767, a: 1}
+  playableEnemyWeaponType: 0
+  baseColor: {r: 0.6431373, g: 0.5137255, b: 0.69411767, a: 1}
   hoverColor: {r: 0.5286763, g: 0.40988785, b: 0.5754717, a: 1}
   editText: {fileID: 8350996183715871557}
 --- !u!1 &6733033288923754474
@@ -328,7 +329,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1154197570232761971}
   m_Layer: 0
-  m_Name: Weapon Edit Button
+  m_Name: Enemy Weapon Edit Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -19,9 +19,10 @@ public class CardDatabase : ScriptableObject
     public List<PistolCards> pistolCards;
     public List<FistCards> fistCards;
     public List<AxeCards> axeCards;
-    public List<BeetleAttacks> beetleCards;
-    public List<FrogAttacks> frogCards;
-    public List<SlimeAttacks> slimeCards;
+    [Header("Enemy Playable Cards")]
+    public List<ActionClass> beetleCards;
+    public List<ActionClass> frogCards;
+    public List<ActionClass> slimeCards;
 
     //Grabs the corresponding weaponDeck to the (@param weaponType)
     public List<ActionClass> GetCardsByType(WeaponType type)
@@ -30,15 +31,35 @@ public class CardDatabase : ScriptableObject
         {
             case WeaponType.STAFF: return new List<ActionClass>(staffCards);
             case WeaponType.PISTOL: return new List<ActionClass>(pistolCards);
-            case WeaponType.AXE: return new List<ActionClass>(axeCards); 
+            case WeaponType.AXE: return new List<ActionClass>(axeCards);
             case WeaponType.FIST: return new List<ActionClass>(fistCards);
-            case WeaponType.BEETLE: return new List<ActionClass>(beetleCards);
-            case WeaponType.FROG: return new List<ActionClass>(frogCards);
-            case WeaponType.SLIME: return new List<ActionClass>(slimeCards);
+            case WeaponType.ENEMY: return GetAllEnemyPlayableCards();
             default:
                 Debug.LogWarning("Weapon Type is currently unsupported");
                 return null;
         }
+    }
+
+    public List<ActionClass> GetEnemyCards(PlayableEnemyWeaponType type)
+    {
+        switch (type)
+        {
+            case PlayableEnemyWeaponType.BEETLE: return new List<ActionClass>(beetleCards);
+            case PlayableEnemyWeaponType.FROG: return new List<ActionClass>(frogCards);
+            case PlayableEnemyWeaponType.SLIME: return new List<ActionClass>(slimeCards);
+            default:
+                return null;
+        }
+    }
+
+    public List<ActionClass> GetAllEnemyPlayableCards()
+    {
+        List<ActionClass> allCards = new();
+        foreach (PlayableEnemyWeaponType type in Enum.GetValues(typeof(PlayableEnemyWeaponType)))
+        {
+            allCards.AddRange(GetEnemyCards(type));
+        }
+        return allCards;
     }
 
     public List<ActionClass> GetAllCards()
@@ -90,9 +111,14 @@ public class CardDatabase : ScriptableObject
         PISTOL,
         FIST,
         AXE,
-        FROG,
+        ENEMY
+    }
+
+    public enum PlayableEnemyWeaponType
+    {
         BEETLE,
-        SLIME,
+        FROG,
+        SLIME
     }
 }
 

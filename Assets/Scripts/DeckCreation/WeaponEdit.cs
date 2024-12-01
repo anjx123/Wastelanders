@@ -7,14 +7,15 @@ using UnityEngine;
 public class WeaponEdit : MonoBehaviour
 {
     [SerializeField] private CardDatabase.WeaponType type;
-    [SerializeField] private Color defaultColor = new Color(1f, 1f, 1f, 1f);
+    [SerializeField] private CardDatabase.PlayableEnemyWeaponType playableEnemyWeaponType;
+    [SerializeField] private Color baseColor = new Color(1f, 1f, 1f, 1f);
     [SerializeField] private Color hoverColor = new Color(0.6f, 0.6f, 0.6f, 1f);
     private bool isMouseDown = false;
     public TMP_Text editText;
     private bool isLocked = false;
 
 #nullable enable
-    public delegate void WeaponEditDelegate(CardDatabase.WeaponType type);
+    public delegate void WeaponEditDelegate(CardDatabase.WeaponType type, CardDatabase.PlayableEnemyWeaponType enemyWeaponType);
     public static event WeaponEditDelegate? WeaponEditEvent;
 
 
@@ -22,6 +23,12 @@ public class WeaponEdit : MonoBehaviour
     {
         this.type = type;
     }
+
+    public void SetPlayableEnemyWeaponType(CardDatabase.PlayableEnemyWeaponType playableEnemyWeaponType)
+    {
+        this.playableEnemyWeaponType = playableEnemyWeaponType;
+    }
+
     public void OnMouseDown()
     {
         if (isLocked) return;
@@ -34,8 +41,8 @@ public class WeaponEdit : MonoBehaviour
         if (isLocked) return;
         if (isMouseDown)
         {
-            GetComponent<SpriteRenderer>().color = defaultColor;
-            WeaponEditEvent?.Invoke(type);
+            GetComponent<SpriteRenderer>().color = baseColor;
+            WeaponEditEvent?.Invoke(type, playableEnemyWeaponType);
         }
         isMouseDown = false;
     }
@@ -49,7 +56,7 @@ public class WeaponEdit : MonoBehaviour
     public void OnMouseExit()
     {
         if (isLocked) return;
-        GetComponent<SpriteRenderer>().color = defaultColor;
+        GetComponent<SpriteRenderer>().color = baseColor;
         isMouseDown = false;
     }
 

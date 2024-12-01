@@ -226,14 +226,8 @@ MonoBehaviour:
     <ExplanationText>k__BackingField: Damage taken increases by 1 per stack. Loses
       1 stack after each round
   - <WeaponType>k__BackingField: 4
-    <ExplanationTitle>k__BackingField: FROG
-    <ExplanationText>k__BackingField: FROG - PLACEHOLDER
-  - <WeaponType>k__BackingField: 5
-    <ExplanationTitle>k__BackingField: BEETLE
-    <ExplanationText>k__BackingField: BEETLE - PLACEHOLDER
-  - <WeaponType>k__BackingField: 6
-    <ExplanationTitle>k__BackingField: SLIME
-    <ExplanationText>k__BackingField: SLIME - PLACEHOLDER
+    <ExplanationTitle>k__BackingField: 
+    <ExplanationText>k__BackingField: 
 --- !u!1 &126026804
 GameObject:
   m_ObjectHideFlags: 0
@@ -1257,6 +1251,18 @@ PrefabInstance:
     - target: {fileID: 6777109110366936912, guid: 45259cd223a7bd941b08d08990f299fb, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7450410183807741237, guid: 45259cd223a7bd941b08d08990f299fb, type: 3}
+      propertyPath: defaultColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7450410183807741237, guid: 45259cd223a7bd941b08d08990f299fb, type: 3}
+      propertyPath: defaultColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7450410183807741237, guid: 45259cd223a7bd941b08d08990f299fb, type: 3}
+      propertyPath: defaultColor.r
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 5297245159359428593, guid: 45259cd223a7bd941b08d08990f299fb, type: 3}
@@ -3179,6 +3185,30 @@ PrefabInstance:
       propertyPath: type
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 4337146901227940551, guid: 9fdc2bed37508064f93f3a7630fcaa26, type: 3}
+      propertyPath: baseColor.b
+      value: 0.69411767
+      objectReference: {fileID: 0}
+    - target: {fileID: 4337146901227940551, guid: 9fdc2bed37508064f93f3a7630fcaa26, type: 3}
+      propertyPath: baseColor.g
+      value: 0.5137255
+      objectReference: {fileID: 0}
+    - target: {fileID: 4337146901227940551, guid: 9fdc2bed37508064f93f3a7630fcaa26, type: 3}
+      propertyPath: baseColor.r
+      value: 0.6431373
+      objectReference: {fileID: 0}
+    - target: {fileID: 4337146901227940551, guid: 9fdc2bed37508064f93f3a7630fcaa26, type: 3}
+      propertyPath: hoverColor.b
+      value: 0.6037736
+      objectReference: {fileID: 0}
+    - target: {fileID: 4337146901227940551, guid: 9fdc2bed37508064f93f3a7630fcaa26, type: 3}
+      propertyPath: hoverColor.g
+      value: 0.44713423
+      objectReference: {fileID: 0}
+    - target: {fileID: 4337146901227940551, guid: 9fdc2bed37508064f93f3a7630fcaa26, type: 3}
+      propertyPath: hoverColor.r
+      value: 0.559506
+      objectReference: {fileID: 0}
     - target: {fileID: 4444013198921956181, guid: 9fdc2bed37508064f93f3a7630fcaa26, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -3195,9 +3225,37 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 0.6431373
       objectReference: {fileID: 0}
+    - target: {fileID: 4524392175829782259, guid: 9fdc2bed37508064f93f3a7630fcaa26, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4524392175829782259, guid: 9fdc2bed37508064f93f3a7630fcaa26, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4524392175829782259, guid: 9fdc2bed37508064f93f3a7630fcaa26, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6497695129960782984, guid: 9fdc2bed37508064f93f3a7630fcaa26, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7541915652205309210, guid: 9fdc2bed37508064f93f3a7630fcaa26, type: 3}
+      propertyPath: type
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7541915652205309210, guid: 9fdc2bed37508064f93f3a7630fcaa26, type: 3}
+      propertyPath: defaultColor.b
+      value: 0.69411767
+      objectReference: {fileID: 0}
+    - target: {fileID: 7541915652205309210, guid: 9fdc2bed37508064f93f3a7630fcaa26, type: 3}
+      propertyPath: defaultColor.g
+      value: 0.5137255
+      objectReference: {fileID: 0}
+    - target: {fileID: 7541915652205309210, guid: 9fdc2bed37508064f93f3a7630fcaa26, type: 3}
+      propertyPath: defaultColor.r
+      value: 0.6431373
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -84,7 +84,7 @@ public class DeckSelectionTutorial : MonoBehaviour
             WeaponEdit.WeaponEditEvent += HandleWeaponEdited; }));
     }
 
-    private void HandleWeaponEdited(CardDatabase.WeaponType type)
+    private void HandleWeaponEdited(CardDatabase.WeaponType type, CardDatabase.PlayableEnemyWeaponType playableEnemyWeaponType)
     {
         WeaponEdit.WeaponEditEvent -= HandleWeaponEdited;
         GameStateManager.Instance.ShouldPlayDeckSelectionTutorial = false;
