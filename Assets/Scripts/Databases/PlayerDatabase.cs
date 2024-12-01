@@ -1,8 +1,9 @@
-using System;
 using System.Collections.Generic;
+using System.Linq;
 using Systems.Persistence;
 using UnityEngine;
 using WeaponDeckSerialization;
+using static CardDatabase;
 using static PlayerDatabase;
 
 /*
@@ -13,33 +14,28 @@ public class PlayerDatabase : ScriptableObject, IBind<PlayerInformation>
 {
     public PlayerData JackieData;
     public PlayerData IvesData;
+#nullable enable
 
-    public SerializableGuid Id { get; set;}
+    public SerializableGuid Id { get; set; }
 
     public PlayerData GetDataByPlayerName(PlayerName player)
     {
-        switch (player)
+        return player switch
         {
-            case PlayerName.JACKIE:
-                return JackieData;
-            case PlayerName.IVES:
-                return IvesData;
-            default:
-                throw new System.Exception("No Valid Database for that player name" + player);
-        }
+            PlayerName.JACKIE => JackieData,
+            PlayerName.IVES => IvesData,
+            _ => throw new System.Exception("No Valid Database for that player name" + player),
+        };
     }
 
     public List<SerializableActionClassInfo> GetDeckByPlayerName(PlayerName player)
     {
-        switch (player)
+        return player switch
         {
-            case PlayerName.JACKIE:
-                return JackieData.GetCombinedDeck();
-            case PlayerName.IVES:
-                return IvesData.GetCombinedDeck();
-            default:
-                throw new System.Exception("No Valid Database for that player name" + player);
-        }
+            PlayerName.JACKIE => JackieData.GetCombinedDeck(),
+            PlayerName.IVES => IvesData.GetCombinedDeck(),
+            _ => throw new System.Exception("No Valid Database for that player name" + player),
+        };
     }
 
     public void Bind(PlayerInformation data)
@@ -51,10 +47,111 @@ public class PlayerDatabase : ScriptableObject, IBind<PlayerInformation>
     [System.Serializable]
     public class PlayerData
     {
-        public string name = ""; 
-        public List<WeaponProficiency> playerWeaponProficiency = new();
-        public List<CardDatabase.WeaponType> selectedWeapons = new();
-        public List<SerializableWeaponListEntry> playerDeck = new();
+        public static readonly PlayerData JACKIE_DEFAULT = new
+            (
+            name: typeof(Jackie).Name,
+            playerWeaponProficiency: new() {
+                new WeaponProficiency(WeaponType.PISTOL, 12, 12),
+                new WeaponProficiency(WeaponType.STAFF, 12, 12),
+                new WeaponProficiency(WeaponType.AXE, 0, 10),
+                new WeaponProficiency(WeaponType.FIST, 0, 10)
+            },
+            selectedWeapons: new() { WeaponType.STAFF, WeaponType.PISTOL },
+            playerDeck: new()
+            {
+                new SerializableWeaponListEntry
+                (
+                    WeaponType.PISTOL,
+                    new()
+                    {
+                        new(typeof(IronSights).Name), new(typeof(Silencer).Name),
+                        new(typeof(QuickDraw).Name), new(typeof(PistolWhip).Name),
+                        new(typeof(HipFire).Name), new(typeof(RapidFire).Name)
+                    }
+                ),
+                new SerializableWeaponListEntry
+                (
+                    WeaponType.STAFF,
+                    new()
+                    {
+                        new(typeof(CheapStrike).Name), new(typeof(FocusedStrike).Name),
+                        new(typeof(Trip).Name), new(typeof(Flurry).Name),
+                        new(typeof(Jab).Name), new(typeof(CounterStrike).Name)
+                    }
+                )
+            }
+            );
+
+        public static readonly PlayerData IVES_DEFAULT = new(
+            name: typeof(Ives).Name,
+            playerWeaponProficiency: new() {
+                new WeaponProficiency(WeaponType.PISTOL, 0, 10),
+                new WeaponProficiency(WeaponType.STAFF, 0, 10),
+                new WeaponProficiency(WeaponType.AXE, 12, 12),
+                new WeaponProficiency(WeaponType.FIST, 12, 12)
+            },
+            selectedWeapons: new() { WeaponType.AXE, WeaponType.FIST },
+            playerDeck: new()
+            {
+                new SerializableWeaponListEntry
+                (
+                    WeaponType.AXE,
+                    new() 
+                    { 
+                        new(typeof(Execute).Name), new(typeof(SharpenedDefence).Name),
+                        new(typeof(Cleave).Name), new(typeof(Decimate).Name),
+                        new(typeof(Mutilate).Name), new(typeof(Whirl).Name)
+                    }
+                ),
+                new SerializableWeaponListEntry
+                (
+                    WeaponType.FIST, 
+                    new() 
+                    { 
+                        new(typeof(Brace).Name), new(typeof(LeftHook).Name), 
+                        new(typeof(RightHook).Name), new(typeof(Pummel).Name), 
+                        new(typeof(Haymaker).Name), new(typeof(FollowThrough).Name)
+                    }
+                 )
+            }
+            );
+
+        [SerializeField] private string name = "";
+        [SerializeField] private List<WeaponProficiency> playerWeaponProficiency = new();
+        [SerializeField] public List<WeaponType> selectedWeapons = new();
+        [SerializeField] private List<SerializableWeaponListEntry> playerDeck = new();
+
+        public PlayerData(string name, List<WeaponProficiency> playerWeaponProficiency, List<WeaponType> selectedWeapons, List<SerializableWeaponListEntry> playerDeck)
+        {
+            this.name = name;
+            this.playerWeaponProficiency = playerWeaponProficiency;
+            this.selectedWeapons = selectedWeapons;
+            this.playerDeck = playerDeck;
+        }
+
+        public SerializableWeaponListEntry GetPlayerWeaponDeck(WeaponType weaponType)
+        {
+            SerializableWeaponListEntry playerWeaponDeck = playerDeck.FirstOrDefault(entry => entry.weapon == weaponType);
+
+            if (playerWeaponDeck == null)
+            {
+                playerWeaponDeck = new SerializableWeaponListEntry(weapon: weaponType, weaponDeck: new());
+                playerDeck.Add(playerWeaponDeck);
+            }
+
+            return playerWeaponDeck;
+        }
+
+        public WeaponProficiency GetProficiencyPointsTuple(WeaponType weaponType)
+        {
+            var proficiencyPointsTuple = playerWeaponProficiency.FirstOrDefault(entry => entry.WeaponType == weaponType);
+            if (proficiencyPointsTuple == null)
+            {
+                proficiencyPointsTuple = new WeaponProficiency(weaponType, 0, 0);
+                playerWeaponProficiency.Add(proficiencyPointsTuple);
+            }
+            return proficiencyPointsTuple;
+        }
 
 
         //Gets the combination of both smaller decks
@@ -74,7 +171,7 @@ public class PlayerDatabase : ScriptableObject, IBind<PlayerInformation>
         }
 
         //Like a dictionary, gets the player weaponDeck by the weapon type, if not contained, return a empty list
-        public List<SerializableActionClassInfo> GetDeckByWeaponType(CardDatabase.WeaponType weaponType)
+        public List<SerializableActionClassInfo> GetDeckByWeaponType(WeaponType weaponType)
         {
             foreach (var entry in playerDeck)
             {
@@ -101,7 +198,7 @@ public class PlayerInformation : ISaveable
 {
     [field: SerializeField] public SerializableGuid Id { get; set; } = SerializableGuid.NewGuid();
     [field: SerializeField] public PlayerData JackieData { get; set; }
-    [field: SerializeField] public PlayerData IvesData { get; set; }    
+    [field: SerializeField] public PlayerData IvesData { get; set; }
 
     public PlayerInformation(PlayerData jackieData, PlayerData ivesData)
     {

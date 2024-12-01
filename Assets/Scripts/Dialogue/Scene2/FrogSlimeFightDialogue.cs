@@ -1,4 +1,5 @@
 using Cinemachine;
+using LevelSelectInformation;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -9,7 +10,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using static Beetle;
 
-public class Scene2 : DialogueClasses
+public class FrogSlimeFightDialogue : DialogueClasses
 {
     [SerializeField] private Jackie jackie;
     [SerializeField] private Transform jackieDefaultTransform;
@@ -244,7 +245,9 @@ private IEnumerator ExecuteGameStart()
         yield return new WaitForSeconds(2f);
         yield return StartCoroutine(CombatManager.Instance.FadeInDarkScreen(1.5f));
 
-        SceneManager.LoadScene(GameStateManager.BEETLE_FIGHT);
+        GameStateManager.Instance.CurrentLevelProgress = Math.Max(GameStateManager.Instance.CurrentLevelProgress, StageInformation.FROG_SLIME_STAGE.LevelID + 1f);
+
+        GameStateManager.Instance.LoadScene(GameStateManager.BEETLE_FIGHT);
         yield break;
     }
 

@@ -1,5 +1,9 @@
+using System;
+using System.Collections.Generic;
 using System.Linq;
+using BountySystem;
 using Cards.EnemyCards.FrogCards;
+using Entities;
 using UnityEngine;
 
 namespace SceneBuilder
@@ -9,24 +13,152 @@ namespace SceneBuilder
         [SerializeField] private Vector3 playersPosition;
         [SerializeField] private Vector3 enemiesPosition;
 
-        [SerializeField] private GameObject[] players;
-        [SerializeField] private GameObject[] enemies;
-        [SerializeField] private GameObject[] additionalEnemies;
+        [SerializeField] private Jackie jackiePrefab;
+        [SerializeField] private Ives ivesPrefab;
+
+        [SerializeField] private PrincessFrog princessFrogPrefab;
+        [SerializeField] private QueenBeetle queenBeetlePrefab;
+        [SerializeField] private Beetle[] beetlePrefabs;
+        [SerializeField] private WasteFrog frogPrefab;
+        [SerializeField] private SlimeStack slimePrefab;
 
         [SerializeField] private GameObject entityContainer;
 
+#nullable enable
+        private IBounties? bounty = null;
+
         protected override void Build()
         {
-            // TODO: Check for various challenges.
+            bounty = BountyManager.Instance.ActiveBounty;
+            AdjustBurpCard(); 
 
-            // TODO: Un-fuck this.
-            BurpCard.SpawnableEnemies.AddRange(additionalEnemies);
+            SpawnAll(DeterminePlayers(), playersPosition);
+            SpawnAll(DetermineEnemies(), enemiesPosition);
+        }
 
-            SpawnAll(players, playersPosition);
-            SpawnAll(enemies, enemiesPosition);
-
+        public void OnEnable()
+        {
             EntityClass.OnEntitySpawn += HandleEntityChange;
             EntityClass.OnEntityDeath += HandleEntityChange;
+        }
+
+        public void OnDisable()
+        {
+            EntityClass.OnEntitySpawn -= HandleEntityChange;
+            EntityClass.OnEntityDeath -= HandleEntityChange;
+        }
+
+        private void AdjustBurpCard()
+        {
+            BurpCard.SpawnableEnemies.Clear();
+            BurpCard.SpawnableEnemies.AddRange(DetermineBurpSpawnable());
+            //TODO: Adjust the AI targeting for enemies spawened by burp card here too 
+        }
+
+        private IEnumerable<GameObject> DetermineBurpSpawnable()
+        {
+            List<GameObject> list = new();
+
+            if (bounty?.ContractSet.Contains(EnemySpawningContracts.FROG_SPAWN) == true)
+            {
+                list.Add(frogPrefab.gameObject);
+            } 
+            else if (bounty?.ContractSet.Contains(EnemySpawningContracts.SLIME_SPAWN) == true)
+            {
+                list.Add(slimePrefab.gameObject);
+            }
+            else
+            {
+                list.AddRange(beetlePrefabs.Select(beetle => beetle.gameObject));
+            }
+
+            return list;
+        }
+
+        private GameObject[] DeterminePlayers()
+        {
+            List<GameObject> list = new();
+
+            if (bounty?.ContractSet.Contains(PlayerContracts.SOLO_JACKIE) == true)
+            {
+                list.Add(jackiePrefab.gameObject);
+            } 
+            else
+            {
+                list.Add(jackiePrefab.gameObject);
+                list.Add(ivesPrefab.gameObject);
+            }
+
+            return list.ToArray();
+        }
+
+        private GameObject[] DetermineEnemies()
+        {
+            List<GameObject> list = new();
+
+            if (bounty?.ContractSet.Contains(EnemySpawningContracts.FROG_SPAWN) == true)
+            {
+                list.Add(frogPrefab.gameObject);
+                list.Add(frogPrefab.gameObject);
+                list.Add(frogPrefab.gameObject);
+            }
+            else if (bounty?.ContractSet.Contains(EnemySpawningContracts.SLIME_SPAWN) == true)
+            {
+                list.Add(slimePrefab.gameObject);
+                list.Add(slimePrefab.gameObject);
+                list.Add(slimePrefab.gameObject);
+            }
+            else if (bounty?.ContractSet.Contains(EnemySpawningContracts.QUEEN_BEETLE_SPAWN) == true)
+            {
+                list.Add(queenBeetlePrefab.gameObject);
+            }
+            else
+            {
+                list.AddRange(beetlePrefabs.Select(beetle => beetle.gameObject));
+            }
+
+            list.Add(princessFrogPrefab.gameObject);
+
+            return list.ToArray();
+        }
+
+        private void AdjustPrincessFrog(PrincessFrog princessFrog)
+        {
+            if (bounty == null) return;
+
+            // TODO: Implement Swappable AI
+            if (bounty.ContractSet.Contains(PrincessFrogContracts.ADDITIONAL_ATTACK))
+            {
+
+            }
+
+            if (bounty.ContractSet.Contains(PrincessFrogContracts.AGGRESIVE_AI))
+            {
+
+            }
+
+            if (bounty.ContractSet.Contains(PrincessFrogContracts.EXTRA_HP))
+            {
+                princessFrog.SetMaxHealth(150);
+            }
+
+            if (bounty.ContractSet.Contains(PrincessFrogContracts.HIGHER_ENEMIES_CAP))
+            {
+
+            }
+        }
+
+        private void AdjustPlayerClass(PlayerClass playerClass)
+        {
+            if (bounty?.ContractSet.Contains(PlayerContracts.DECREASED_HAND_SIZE) == true)
+            {
+                // Implement Decreasable hand size
+            }
+        }
+
+        private void AdjustEnemyClass(EnemyClass enemyClass)
+        {
+            // TODO: Adjust enemy targeting AI here
         }
 
         private void SpawnAll(GameObject[] prefabs, Vector3 position)
@@ -44,6 +176,19 @@ namespace SceneBuilder
             var entity = spawn.GetComponent<EntityClass>();
 
             entity.transform.localScale = Vector3.one * (entity is Beetle ? 0.75f : 1);
+            
+            if (entity is PrincessFrog princessFrog)
+            {
+                AdjustPrincessFrog(princessFrog);
+            }
+            else if (entity is EnemyClass enemyClass)
+            {
+                AdjustEnemyClass(enemyClass);
+            }
+            else if (entity is PlayerClass playerClass)
+            {
+                AdjustPlayerClass(playerClass);
+            }
         }
 
         private void UpdateEnemyLayout()

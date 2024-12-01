@@ -13,6 +13,7 @@ namespace Systems.Persistence
         public List<ActionData> actionData;
         public GameStateData gameStateData;
         public PlayerInformation playerInformation;
+        public BountyStateData bountyStateData;
     }
 
     public interface ISaveable
@@ -51,8 +52,14 @@ namespace Systems.Persistence
                 NewGame();
                 SaveGame();
             }
+            LoadAllInformation();
+        }
+
+        private void LoadAllInformation()
+        {
             LoadPlayerInformation();
             LoadGameStateInformation();
+            LoadBountyStateInformation();
         }
 
         public void LoadCardEvolutionProgress()
@@ -76,6 +83,11 @@ namespace Systems.Persistence
         public void LoadGameStateInformation()
         {
             Bind<GameStateManager, GameStateData>(gameData.gameStateData);
+        }
+
+        public void LoadBountyStateInformation()
+        {
+            Bind<BountyManager, BountyStateData>(gameData.bountyStateData);
         }
 
         void Bind<T, TData>(List<TData> datas) where T: MonoBehaviour, IBind<TData> where TData : ISaveable, new() {
@@ -114,8 +126,9 @@ namespace Systems.Persistence
             {
                 Name = SAVE_FILE_NAME,
                 gameStateData = new GameStateData(),
+                bountyStateData = new BountyStateData(),
                 actionData = defaultCardDatabase.GetDefaultActionDatas(),
-                playerInformation = new PlayerInformation(defaultPlayerDatabase.JackieData, defaultPlayerDatabase.IvesData) // Initialize with default scriptableObject values
+                playerInformation = new PlayerInformation(PlayerDatabase.PlayerData.JACKIE_DEFAULT, PlayerDatabase.PlayerData.IVES_DEFAULT)
             };
         }
 

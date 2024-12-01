@@ -1,3 +1,4 @@
+using LevelSelectInformation;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -244,7 +245,8 @@ public class TutorialIntroduction : DialogueClasses
         yield return StartCoroutine(jackie.MoveToPosition(jackieEndPosition.position, 0, 4f));
 
         GameStateManager.Instance.ShouldPlayDeckSelectionTutorial = true;
-        SceneManager.LoadScene(GameStateManager.SELECTION_SCREEN_NAME);
+        GameStateManager.Instance.CurrentLevelProgress = Math.Max(GameStateManager.Instance.CurrentLevelProgress, StageInformation.TUTORIAL_STAGE.LevelID + 1f);
+        GameStateManager.Instance.LoadScene(GameStateManager.SELECTION_SCREEN_NAME);
         yield break;
     }
 

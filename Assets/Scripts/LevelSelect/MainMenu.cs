@@ -24,8 +24,8 @@ public class MainMenu : LevelSelect
     }
 
 
-    private float cycleScaling = 2f; // Higher the number, the faster one phase is 
-    private float bobbingAmount = 0.1f; //Amplitude
+    private readonly float cycleScaling = 2f; // Higher the number, the faster one phase is 
+    private readonly float bobbingAmount = 0.1f; //Amplitude
     private float timer = 0;
     private float verticalOffset = 0;
 
@@ -43,5 +43,15 @@ public class MainMenu : LevelSelect
         verticalOffset = waveslice * bobbingAmount;
         float translateChange = verticalOffset - previousOffset;
         wastelandersText.transform.position = new Vector3(wastelandersText.transform.position.x, wastelandersText.transform.position.y + translateChange, wastelandersText.transform.position.z);
+    }
+
+    public void StartGame()
+    {
+        OpenScene(GameStateManager.TUTORIAL_FIGHT);
+    }
+
+    public void LevelSelect()
+    {
+        OpenScene(GameStateManager.LEVEL_SELECT_NAME);
     }
 }
