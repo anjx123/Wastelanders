@@ -1,8 +1,5 @@
-
-using static ISubWeaponType;
 using System.Collections.Generic;
 using System.Linq;
-using static WeaponEditInformation;
 
 public interface ISubWeaponType
 {

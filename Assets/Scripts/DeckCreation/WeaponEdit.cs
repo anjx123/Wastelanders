@@ -21,9 +21,9 @@ public class WeaponEdit : MonoBehaviour
     public static event WeaponEditDelegate? WeaponEditEvent;
 
 
-    public void InitializeWeaponEdit(WeaponType type, bool showSubFolders, GetRenderableCards getCards)
+    public void InitializeWeaponEdit(WeaponType type, bool hasSubFolders, GetRenderableCards getCards)
     {
-        WeaponEditInformation = new WeaponEditInformation(type, showSubFolders, getCards);
+        WeaponEditInformation = new WeaponEditInformation(type, hasSubFolders, getCards);
     }
 
     public void OnMouseDown()
@@ -69,18 +69,6 @@ public class WeaponEdit : MonoBehaviour
     }
 }
 
-public record WeaponEditInformation
-{
-    public WeaponType WeaponType { get; }
-    public bool ShowSubFolders { get; }
-    public GetRenderableCards GetCards { get; }
+public delegate List<ActionClass> GetRenderableCards(CardDatabase cardDatabase);
+public record WeaponEditInformation(WeaponType WeaponType, bool ShowSubFolders, GetRenderableCards GetCards);
 
-    public delegate List<ActionClass> GetRenderableCards(CardDatabase cardDatabase);
-
-    public WeaponEditInformation(CardDatabase.WeaponType weaponType, bool showSubFolders, GetRenderableCards getCards)
-    {
-        WeaponType = weaponType;
-        ShowSubFolders = showSubFolders;
-        GetCards = getCards;
-    }
-}
