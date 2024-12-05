@@ -315,7 +315,7 @@ public class DeckSelectionManager : MonoBehaviour
         List<GameObject> instantiatedCards = new List<GameObject>();
         Transform[] layout;
 
-        if (weaponEditInformation.HasSubFolders)
+        if (weaponEditInformation.ShowSubFolders)
         {
             layout = subFolderLayout;
             GenerateSubFolders(weaponType);
