@@ -12,11 +12,11 @@ public interface ISubWeaponType
 
 public class PlayableEnemyWeapon : ISubWeaponType
 {
-    public static readonly PlayableEnemyWeapon beetleWeapons = new PlayableEnemyWeapon(name: "Beetle Cards", getSubWeaponCards: (db => db.enemyCards.FindAll(card => card is IPlayableBeetleCard).ToList()));
-    public static readonly PlayableEnemyWeapon frogWeapons = new PlayableEnemyWeapon(name: "Frog Cards", getSubWeaponCards: (db => db.enemyCards.FindAll(card => card is IPlayableFrogCard).ToList()));
-    public static readonly PlayableEnemyWeapon slimeWeapons = new PlayableEnemyWeapon(name: "Slime Cards", getSubWeaponCards: (db => db.enemyCards.FindAll(card => card is IPlayableSlimeCard).ToList()));
-    public static readonly PlayableEnemyWeapon queenBeetleWeapons = new PlayableEnemyWeapon(name: "Queen Beetle Cards", getSubWeaponCards: (db => db.enemyCards.FindAll(card => card is IPlayableQueenCard).ToList()));
-    public static readonly PlayableEnemyWeapon princessFrogWeapons = new PlayableEnemyWeapon(name: "Princess Frog Cards", getSubWeaponCards: (db => db.enemyCards.FindAll(card => card is IPlayablePrincessFrogCard).ToList()));
+    public static readonly PlayableEnemyWeapon beetleWeapons = new PlayableEnemyWeapon(name: "Beetle Cards", getSubWeaponCards: (db => db.GetCardsByType(CardDatabase.WeaponType.ENEMY).FindAll(card => card is IPlayableBeetleCard).ToList()));
+    public static readonly PlayableEnemyWeapon frogWeapons = new PlayableEnemyWeapon(name: "Frog Cards", getSubWeaponCards: (db => db.GetCardsByType(CardDatabase.WeaponType.ENEMY).FindAll(card => card is IPlayableFrogCard).ToList()));
+    public static readonly PlayableEnemyWeapon slimeWeapons = new PlayableEnemyWeapon(name: "Slime Cards", getSubWeaponCards: (db => db.GetCardsByType(CardDatabase.WeaponType.ENEMY).FindAll(card => card is IPlayableSlimeCard).ToList()));
+    public static readonly PlayableEnemyWeapon queenBeetleWeapons = new PlayableEnemyWeapon(name: "Queen Beetle Cards", getSubWeaponCards: (db => db.GetCardsByType(CardDatabase.WeaponType.ENEMY).FindAll(card => card is IPlayableQueenCard).ToList()));
+    public static readonly PlayableEnemyWeapon princessFrogWeapons = new PlayableEnemyWeapon(name: "Princess Frog Cards", getSubWeaponCards: (db => db.GetCardsByType(CardDatabase.WeaponType.ENEMY).FindAll(card => card is IPlayablePrincessFrogCard).ToList()));
 
     public static List<ISubWeaponType> values = new()
     {
