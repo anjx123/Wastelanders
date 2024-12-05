@@ -5,7 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using static UnityEngine.UI.Image;
 
-public class PincerPlayable : BeetleAttacks
+public class PincerPlayable : BeetleAttacks, IPlayableBeetleCard
 {
     public const string PINCER_SOUND_EFFECT_NAME = "Pincer Cut";
 #nullable enable

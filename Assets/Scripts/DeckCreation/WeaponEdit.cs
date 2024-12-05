@@ -3,30 +3,27 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using static CardDatabase;
+using static ISubWeaponType;
+using static WeaponEditInformation;
 
 public class WeaponEdit : MonoBehaviour
 {
-    [SerializeField] private CardDatabase.WeaponType type;
-    [SerializeField] private CardDatabase.PlayableEnemyWeaponType playableEnemyWeaponType;
     [SerializeField] private Color baseColor = new Color(1f, 1f, 1f, 1f);
     [SerializeField] private Color hoverColor = new Color(0.6f, 0.6f, 0.6f, 1f);
     private bool isMouseDown = false;
     public TMP_Text editText;
     private bool isLocked = false;
+    private WeaponEditInformation WeaponEditInformation { get; set; }
 
 #nullable enable
-    public delegate void WeaponEditDelegate(CardDatabase.WeaponType type, CardDatabase.PlayableEnemyWeaponType enemyWeaponType);
+    public delegate void WeaponEditDelegate(WeaponEditInformation weaponEditInformation);
     public static event WeaponEditDelegate? WeaponEditEvent;
 
 
-    public void SetType(CardDatabase.WeaponType type)
+    public void InitializeWeaponEdit(WeaponType type, bool hasSubFolders, GetRenderableCards getCards)
     {
-        this.type = type;
-    }
-
-    public void SetPlayableEnemyWeaponType(CardDatabase.PlayableEnemyWeaponType playableEnemyWeaponType)
-    {
-        this.playableEnemyWeaponType = playableEnemyWeaponType;
+        WeaponEditInformation = new WeaponEditInformation(type, hasSubFolders, getCards);
     }
 
     public void OnMouseDown()
@@ -42,7 +39,7 @@ public class WeaponEdit : MonoBehaviour
         if (isMouseDown)
         {
             GetComponent<SpriteRenderer>().color = baseColor;
-            WeaponEditEvent?.Invoke(type, playableEnemyWeaponType);
+            WeaponEditEvent?.Invoke(WeaponEditInformation);
         }
         isMouseDown = false;
     }
@@ -69,5 +66,21 @@ public class WeaponEdit : MonoBehaviour
     {
         this.isLocked = isLocked;
         SetText(isLocked ? "LOCKED" : "EDIT DECK");
+    }
+}
+
+public record WeaponEditInformation
+{
+    public WeaponType WeaponType { get; }
+    public bool HasSubFolders { get; }
+    public GetRenderableCards GetCards { get; }
+
+    public delegate List<ActionClass> GetRenderableCards(CardDatabase cardDatabase);
+
+    public WeaponEditInformation(CardDatabase.WeaponType weaponType, bool hasSubFolders, GetRenderableCards getCards)
+    {
+        WeaponType = weaponType;
+        HasSubFolders = hasSubFolders;
+        GetCards = getCards;
     }
 }

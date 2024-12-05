@@ -5,7 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using static UnityEngine.UI.Image;
 
-public class FragmentPlayable : BeetleAttacks
+public class FragmentPlayable : ActionClass, IPlayableQueenCard
 {
     [SerializeField] private ProjectileBehaviour projectileBehaviour;
 

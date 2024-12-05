@@ -5,14 +5,10 @@ using UnityEngine;
 using static Unity.Collections.AllocatorManager;
 using static UnityEngine.UI.Image;
 
-public class Hurl : FrogAttacks
+public class Hurl : FrogAttacks, IPlayableFrogCard
 {
 
     public static string HURL_NAME = "Hurl";
-    public override void OnCardStagger()
-    {
-
-    }
 
     // Start is called before the first frame update
     public override void Initialize()

@@ -5,7 +5,7 @@ using UnityEngine;
 using static Unity.Collections.AllocatorManager;
 using static UnityEngine.UI.Image;
 
-public class Excavate : BeetleAttacks
+public class Excavate : BeetleAttacks, IPlayableBeetleCard
 {
     public const string EXCAVATE_SOUND_EFFECT_NAME = "Excavate Cut";
 

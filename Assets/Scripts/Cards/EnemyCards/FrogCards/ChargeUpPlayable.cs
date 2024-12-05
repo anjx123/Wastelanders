@@ -5,7 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using static UnityEngine.UI.Image;
 
-public class ChargeUpPlayable : FrogAttacks
+public class ChargeUpPlayable : FrogAttacks, IPlayableFrogCard
 {
     [SerializeField]
     private GameObject hurlPrefab;

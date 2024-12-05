@@ -20,14 +20,13 @@ public class DeckSelectionManager : MonoBehaviour
     [SerializeField] private PlayerDatabase playerDatabase;
     [SerializeField] private FadeScreenHandler fadeScreenHandler;
     [SerializeField] private TMP_Text cardDescriptorTextField;
-    [SerializeField] private Transform[] enemyCardLayout;
+    [SerializeField] private Transform[] subFolderLayout;
     [SerializeField] private Transform[] fourRowCardLayout;
     [SerializeField] private Transform[] fiveRowCardLayout;
     [SerializeField] private Transform enemyEditParent;
     [SerializeField] private GameObject enemyEditButtonPrefab;
     private PlayerDatabase.PlayerData playerData;
     private WeaponType weaponType;
-    private PlayableEnemyWeaponType? playableEnemyWeaponType;
     public WeaponAmount weaponText;
     public PointsAmount pointsText;
     public BuffExplainer buffExplainer;
@@ -161,13 +160,13 @@ public class DeckSelectionManager : MonoBehaviour
         }
     }
 
-    private void WeaponDeckEdit(WeaponType weaponType, PlayableEnemyWeaponType enemyType)
+    private void WeaponDeckEdit(WeaponEditInformation weaponEditInformation)
     {
+        this.weaponType = weaponEditInformation.WeaponType;
         buffExplainer.RenderExplanationForBuff(weaponType);
-        this.weaponType = weaponType;
-        playableEnemyWeaponType = enemyType;
         DeckSelectionState = DeckSelectionState.DeckSelection;
-        RenderDecks(weaponType, enemyType);
+        RenderDecks(weaponEditInformation);
+        OnUpdateDeck(playerData.GetProficiencyPointsTuple(weaponType));
     }
 
     private bool DeckContainsCard(ActionClass ac)
@@ -288,11 +287,11 @@ public class DeckSelectionManager : MonoBehaviour
         cardDescriptorTextField.text = "";
     }
 
-    private void GenerateEnemyButtons()
+    private void GenerateSubFolders(WeaponType weaponType)
     {
         float y = 0f;
         float delta = -1f;
-        foreach (PlayableEnemyWeaponType c in Enum.GetValues(typeof(PlayableEnemyWeaponType)))
+        foreach (ISubWeaponType subWeapon in cardDatabase.GetSubFoldersFor(weaponType))
         {
             GameObject button = Instantiate(enemyEditButtonPrefab);
             button.transform.SetParent(enemyEditParent);
@@ -300,27 +299,27 @@ public class DeckSelectionManager : MonoBehaviour
             y += delta;
 
             WeaponEdit weaponEdit = button.GetComponentInChildren<WeaponEdit>();
-            weaponEdit.editText.SetText(c.ToString());
-            weaponEdit.SetType(WeaponType.ENEMY);
-            weaponEdit.SetPlayableEnemyWeaponType(c);
+            weaponEdit.editText.SetText(subWeapon.Name);
+            weaponEdit.InitializeWeaponEdit(WeaponType.ENEMY, true, cardDatabase => subWeapon.GetSubWeaponCards(cardDatabase));
         }
     }
 
     //Renders the weaponDeck corresponding to (@param weaponType)
-    public void RenderDecks(CardDatabase.WeaponType weaponType, CardDatabase.PlayableEnemyWeaponType playableEnemyWeaponType = PlayableEnemyWeaponType.BEETLE)
+    public void RenderDecks(WeaponEditInformation weaponEditInformation)
     {
         UnrenderDecks();
 
+        WeaponType weaponType = weaponEditInformation.WeaponType;
         List<ActionClass> chosenCardList = cardDatabase.ConvertStringsToCards(weaponType, playerData.GetDeckByWeaponType(weaponType).Select(p => p.ActionClassName).ToList());
-        List<ActionClass> cardsToRender = cardDatabase.GetCardsByType(weaponType);
+        List<ActionClass> cardsToRender = weaponEditInformation.GetCards(cardDatabase);
+        Debug.Log("How many items to render  " + cardsToRender.Count);
         List<GameObject> instantiatedCards = new List<GameObject>();
         Transform[] layout;
 
-        if (weaponType == WeaponType.ENEMY)
+        if (weaponEditInformation.HasSubFolders)
         {
-            layout = enemyCardLayout;
-            cardsToRender = cardDatabase.GetEnemyCards(playableEnemyWeaponType);
-            GenerateEnemyButtons();
+            layout = subFolderLayout;
+            GenerateSubFolders(weaponType);
         }
         else
         {
@@ -353,9 +352,6 @@ public class DeckSelectionManager : MonoBehaviour
         }
 
         SaveLoadSystem.Instance.LoadCardEvolutionProgress();
-
-        WeaponProficiency weaponPointTuple = playerData.GetProficiencyPointsTuple(weaponType);
-        OnUpdateDeck(weaponPointTuple);
     }
 
     private void UnrenderDecks()
