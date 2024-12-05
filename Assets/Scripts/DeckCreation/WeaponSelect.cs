@@ -22,11 +22,13 @@ public class WeaponSelect : MonoBehaviour
 
     private void Start()
     {
-        if (hasSubFolders)
-            weaponEdit.InitializeWeaponEdit(type, hasSubFolders, (db => db.GetDefaultSubFolderData(type)));
-        else
-            weaponEdit.InitializeWeaponEdit(type, hasSubFolders, (db => db.GetCardsByType(type)));
+        weaponEdit.InitializeWeaponEdit(
+            type,
+            hasSubFolders,
+            db => hasSubFolders ? db.GetDefaultSubFolderData(type) : db.GetCardsByType(type)
+        );
     }
+
 
     public void SetSelected(bool isSelected)
     {

@@ -300,7 +300,7 @@ public class DeckSelectionManager : MonoBehaviour
 
             WeaponEdit weaponEdit = button.GetComponentInChildren<WeaponEdit>();
             weaponEdit.editText.SetText(subWeapon.Name);
-            weaponEdit.InitializeWeaponEdit(WeaponType.ENEMY, true, cardDatabase => subWeapon.GetSubWeaponCards(cardDatabase));
+            weaponEdit.InitializeWeaponEdit(WeaponType.ENEMY, true, subWeapon.GetSubWeaponCards);
         }
     }
 

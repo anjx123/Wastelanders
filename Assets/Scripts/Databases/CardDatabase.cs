@@ -1,11 +1,8 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System;
-using TMPro;
-using Unity.Collections.LowLevel.Unsafe;
 using System.Linq;
 using WeaponDeckSerialization;
-using System.Security.Cryptography.X509Certificates;
 using static ISubWeaponType;
 
 
@@ -104,48 +101,6 @@ public class CardDatabase : ScriptableObject
         FIST,
         AXE,
         ENEMY
-    }
-}
-
-public interface IPlayableEnemyCard { }
-public interface IPlayableBeetleCard : IPlayableEnemyCard { }
-public interface IPlayableFrogCard : IPlayableEnemyCard{ }
-public interface IPlayableSlimeCard : IPlayableEnemyCard { }
-public interface IPlayableQueenCard : IPlayableEnemyCard { }
-public interface IPlayablePrincessFrogCard : IPlayableEnemyCard { }
-
-public interface ISubWeaponType
-{
-    public string Name { get; set; }
-    public GetSubweaponCards GetSubWeaponCards { get; set; }
-
-    public delegate List<ActionClass> GetSubweaponCards(CardDatabase cardDatabase);
-}
-
-public class PlayableEnemyWeapon : ISubWeaponType
-{
-    public static readonly PlayableEnemyWeapon beetleWeapons = new PlayableEnemyWeapon(name: "Beetle Cards", getSubWeaponCards: (db => db.enemyCards.FindAll(card => card is IPlayableBeetleCard).ToList()));
-    public static readonly PlayableEnemyWeapon frogWeapons = new PlayableEnemyWeapon(name: "Frog Cards", getSubWeaponCards: (db => db.enemyCards.FindAll(card => card is IPlayableFrogCard).ToList()));
-    public static readonly PlayableEnemyWeapon slimeWeapons = new PlayableEnemyWeapon(name: "Slime Cards", getSubWeaponCards: (db => db.enemyCards.FindAll(card => card is IPlayableSlimeCard).ToList()));
-    public static readonly PlayableEnemyWeapon queenBeetleWeapons = new PlayableEnemyWeapon(name: "Queen Beetle Cards", getSubWeaponCards: (db => db.enemyCards.FindAll(card => card is IPlayableQueenCard).ToList()));
-    public static readonly PlayableEnemyWeapon princessFrogWeapons = new PlayableEnemyWeapon(name: "Princess Frog Cards", getSubWeaponCards: (db => db.enemyCards.FindAll(card => card is IPlayablePrincessFrogCard).ToList()));
-
-    public static List<ISubWeaponType> values = new()
-    {
-        beetleWeapons,
-        frogWeapons,
-        slimeWeapons,
-        queenBeetleWeapons,
-        princessFrogWeapons
-    };
-
-    public string Name { get; set; }
-    public GetSubweaponCards GetSubWeaponCards { get; set; }
-
-    public PlayableEnemyWeapon(string name, GetSubweaponCards getSubWeaponCards)
-    {
-        Name = name;
-        this.GetSubWeaponCards = getSubWeaponCards;
     }
 }
 
