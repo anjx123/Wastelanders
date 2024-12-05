@@ -300,7 +300,7 @@ public class DeckSelectionManager : MonoBehaviour
 
             WeaponEdit weaponEdit = button.GetComponentInChildren<WeaponEdit>();
             weaponEdit.editText.SetText(subWeapon.Name);
-            weaponEdit.InitializeWeaponEdit(WeaponType.ENEMY, true, subWeapon.GetSubWeaponCards);
+            weaponEdit.InitializeWeaponEdit(weaponType, true, subWeapon.GetSubWeaponCards);
         }
     }
 
@@ -312,7 +312,6 @@ public class DeckSelectionManager : MonoBehaviour
         WeaponType weaponType = weaponEditInformation.WeaponType;
         List<ActionClass> chosenCardList = cardDatabase.ConvertStringsToCards(weaponType, playerData.GetDeckByWeaponType(weaponType).Select(p => p.ActionClassName).ToList());
         List<ActionClass> cardsToRender = weaponEditInformation.GetCards(cardDatabase);
-        Debug.Log("How many items to render  " + cardsToRender.Count);
         List<GameObject> instantiatedCards = new List<GameObject>();
         Transform[] layout;
 
