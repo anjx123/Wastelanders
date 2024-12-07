@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StackSmash : SlimeAttacks
+public class StackSmash : SlimeAttacks, IPlayableSlimeCard
 {
 #nullable enable
     [SerializeField]
@@ -18,6 +18,7 @@ public class StackSmash : SlimeAttacks
         lowerBound = 2;
         upperBound = 4;
         Speed = 2;
+        CostToAddToDeck = 1;
 
         myName = "Stack Smash";
         description = "If this attack is unstaggered, attack again";

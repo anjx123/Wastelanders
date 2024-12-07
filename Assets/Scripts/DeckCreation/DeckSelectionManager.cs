@@ -5,10 +5,10 @@ using static CardDatabase;
 using UnityEngine.SceneManagement;
 using System.Linq;
 using Systems.Persistence;
-using Unity.VisualScripting;
-using System;
 using WeaponDeckSerialization;
 using UnityEditor;
+using System;
+using TMPro;
 
 public class DeckSelectionManager : MonoBehaviour
 {
@@ -19,6 +19,12 @@ public class DeckSelectionManager : MonoBehaviour
     [SerializeField] private CardDatabase cardDatabase;
     [SerializeField] private PlayerDatabase playerDatabase;
     [SerializeField] private FadeScreenHandler fadeScreenHandler;
+    [SerializeField] private TMP_Text cardDescriptorTextField;
+    [SerializeField] private Transform[] subFolderLayout;
+    [SerializeField] private Transform[] fourRowCardLayout;
+    [SerializeField] private Transform[] fiveRowCardLayout;
+    [SerializeField] private Transform enemyEditParent;
+    [SerializeField] private GameObject enemyEditButtonPrefab;
     private PlayerDatabase.PlayerData playerData;
     private WeaponType weaponType;
     public WeaponAmount weaponText;
@@ -75,17 +81,20 @@ public class DeckSelectionManager : MonoBehaviour
     {
         ActionClass.CardClickedEvent += ActionSelected;
         ActionClass.CardRightClickedEvent += CardRightClicked;
+        ActionClass.CardHighlightedEvent += RenderCardDescription;
+        ActionClass.CardUnhighlightedEvent += RemoveCardDescription;
         CharacterSelect.CharacterSelectedEvent += CharacterChosen;
         WeaponSelect.WeaponSelectEvent += WeaponSelected;
         WeaponEdit.WeaponEditEvent += WeaponDeckEdit;
         DeckSelectionArrow.DeckSelectionArrowEvent += PrevState;
-
     }
 
     void OnDestroy()
     {
         ActionClass.CardClickedEvent -= ActionSelected;
         ActionClass.CardRightClickedEvent -= CardRightClicked;
+        ActionClass.CardHighlightedEvent -= RenderCardDescription;
+        ActionClass.CardUnhighlightedEvent -= RemoveCardDescription;
         CharacterSelect.CharacterSelectedEvent -= CharacterChosen;
         WeaponSelect.WeaponSelectEvent -= WeaponSelected;
         WeaponEdit.WeaponEditEvent -= WeaponDeckEdit;
@@ -151,12 +160,13 @@ public class DeckSelectionManager : MonoBehaviour
         }
     }
 
-    private void WeaponDeckEdit(CardDatabase.WeaponType weaponType)
+    private void WeaponDeckEdit(WeaponEditInformation weaponEditInformation)
     {
+        this.weaponType = weaponEditInformation.WeaponType;
         buffExplainer.RenderExplanationForBuff(weaponType);
-        this.weaponType = weaponType;
-        RenderDecks(weaponType);
         DeckSelectionState = DeckSelectionState.DeckSelection;
+        RenderDecks(weaponEditInformation);
+        OnUpdateDeck(playerData.GetProficiencyPointsTuple(weaponType));
     }
 
     private bool DeckContainsCard(ActionClass ac)
@@ -167,7 +177,7 @@ public class DeckSelectionManager : MonoBehaviour
     private void OnUpdateDeck(WeaponProficiency weaponPointTuple)
     {
         int availablePoints = weaponPointTuple.MaxPoints - weaponPointTuple.CurrentPoints;
-        pointsText.TextUpdate("Select Your Cards:\nAvailable Points: " + availablePoints.ToString());
+        pointsText.TextUpdate("Select Your Cards\nAvailable Points: <color=#FFD700>" + availablePoints.ToString() + "</color>");
 
         PlayerActionDeckModifiedEvent?.Invoke(availablePoints);
     }
@@ -198,7 +208,7 @@ public class DeckSelectionManager : MonoBehaviour
         {
             weaponPointTuple.CurrentPoints += ac.CostToAddToDeck;
             ac.SetSelectedForDeck(true);
-            playerWeaponDeck.weaponDeck.Add(new (ac.GetType().Name, ac.IsFlipped && ac.CanEvolve()));
+            playerWeaponDeck.weaponDeck.Add(new(ac.GetType().Name, ac.IsFlipped && ac.CanEvolve()));
             OnUpdateDeck(weaponPointTuple);
         }
         else
@@ -207,7 +217,8 @@ public class DeckSelectionManager : MonoBehaviour
         }
     }
 
-    private void FlipCard(ActionClass ac) {
+    private void FlipCard(ActionClass ac)
+    {
         ac.IsFlipped = !ac.IsFlipped; // Invert IsFlipped status
         ac.cardUI.RenderCard(ac); // Re-render the card based on the new flipped state
     }
@@ -266,24 +277,53 @@ public class DeckSelectionManager : MonoBehaviour
         deckSelectionUi.SetActive(true);
     }
 
+    private void RenderCardDescription(ActionClass card)
+    {
+        cardDescriptorTextField.text = card.GenerateCardDescription();
+    }
+
+    private void RemoveCardDescription(ActionClass card)
+    {
+        cardDescriptorTextField.text = "";
+    }
+
+    private void GenerateSubFolders(WeaponType weaponType)
+    {
+        float y = 0f;
+        float delta = -1f;
+        foreach (ISubWeaponType subWeapon in cardDatabase.GetSubFoldersFor(weaponType))
+        {
+            GameObject button = Instantiate(enemyEditButtonPrefab);
+            button.transform.SetParent(enemyEditParent);
+            button.transform.localPosition = new Vector3(0, y, 0);
+            y += delta;
+
+            WeaponEdit weaponEdit = button.GetComponentInChildren<WeaponEdit>();
+            weaponEdit.editText.SetText(subWeapon.Name);
+            weaponEdit.InitializeWeaponEdit(weaponType, true, subWeapon.GetSubWeaponCards);
+        }
+    }
 
     //Renders the weaponDeck corresponding to (@param weaponType)
-    public void RenderDecks(CardDatabase.WeaponType weaponType)
+    public void RenderDecks(WeaponEditInformation weaponEditInformation)
     {
-        int width = 6; // The width of the grid in # of cards 
-        int height = 6; // The height of the grid in # of cards 
-        float xSpacing = 2.3f;
-        float ySpacing = -3.3f;
-        float xOffset = -6f; //initial x Offset
-        float yOffset = 1f; //initial y Offset
-        float cardScaling = 0.8f;
-
         UnrenderDecks();
 
+        WeaponType weaponType = weaponEditInformation.WeaponType;
         List<ActionClass> chosenCardList = cardDatabase.ConvertStringsToCards(weaponType, playerData.GetDeckByWeaponType(weaponType).Select(p => p.ActionClassName).ToList());
-        List<ActionClass> cardsToRender = cardDatabase.GetCardsByType(weaponType);
-
+        List<ActionClass> cardsToRender = weaponEditInformation.GetCards(cardDatabase);
         List<GameObject> instantiatedCards = new List<GameObject>();
+        Transform[] layout;
+
+        if (weaponEditInformation.ShowSubFolders)
+        {
+            layout = subFolderLayout;
+            GenerateSubFolders(weaponType);
+        }
+        else
+        {
+            layout = cardsToRender.Count > 8 ? fiveRowCardLayout : fourRowCardLayout;
+        }
 
         //In order to sort, the cards must be instantiated and initialized first :pensive:
         foreach (ActionClass card in cardsToRender)
@@ -291,7 +331,7 @@ public class DeckSelectionManager : MonoBehaviour
             GameObject go = Instantiate(card.gameObject);
             instantiatedCards.Add(go);
             ActionClass ac = go.GetComponent<ActionClass>();
-            ActionClass pref = chosenCardList.FirstOrDefault(action => action.GetType() == card.GetType());
+            ActionClass? pref = chosenCardList.FirstOrDefault(action => action.GetType() == card.GetType());
             if (pref != null)
             {
                 ac.SetSelectedForDeck(true);
@@ -302,51 +342,25 @@ public class DeckSelectionManager : MonoBehaviour
 
         instantiatedCards.Sort((card1, card2) => card1.GetComponent<ActionClass>().Speed.CompareTo(card2.GetComponent<ActionClass>().Speed));
 
-
-        int index = 0;
-
-        for (int y = 0; y < height; y++)
+        for (int i = 0; i < instantiatedCards.Count; i++)
         {
-            for (int x = 0; x < width; x++)
-            {
-                Vector3 pos = new Vector3(x * xSpacing + xOffset, y * ySpacing + yOffset, 0);
-
-                if (index < instantiatedCards.Count)
-                {
-                    GameObject cardPrefab = instantiatedCards[index];
-
-                    cardPrefab.transform.SetParent(cardArrayParent.transform);
-                    cardPrefab.transform.localPosition = pos;
-
-                    // Scale the instance
-                    Vector3 scale = cardPrefab.transform.localScale;
-                    scale.x *= cardScaling;
-                    scale.y *= cardScaling;
-                    cardPrefab.transform.localScale = scale;
-
-                    index++;
-                }
-                else
-                {
-                    break;
-                }
-            }
-
-            if (index >= instantiatedCards.Count)
-            {
-                break;
-            }
+            GameObject cardPrefab = instantiatedCards[i];
+            cardPrefab.transform.SetParent(cardArrayParent.transform);
+            cardPrefab.transform.localPosition = layout[i].localPosition;
+            cardPrefab.transform.localScale = layout[i].localScale;
         }
-        SaveLoadSystem.Instance.LoadCardEvolutionProgress();
 
-        WeaponProficiency weaponPointTuple = playerData.GetProficiencyPointsTuple(weaponType);
-        int availablePoints = weaponPointTuple.MaxPoints - weaponPointTuple.CurrentPoints;
-        pointsText.TextUpdate("Select Your Cards:\nAvailable Points: " + availablePoints);
+        SaveLoadSystem.Instance.LoadCardEvolutionProgress();
     }
 
     private void UnrenderDecks()
     {
         foreach (Transform child in cardArrayParent.transform)
+        {
+            Destroy(child.gameObject);
+        }
+
+        foreach (Transform child in enemyEditParent)
         {
             Destroy(child.gameObject);
         }

@@ -34,7 +34,7 @@ public class Fling : BeetleAttacks
         if (Origin.HasAnimationParameter("IsShooting"))
         {
             Origin.AttackAnimation("IsShooting");
-        }
+        } 
         StartCoroutine(projectileBehaviour.ProjectileAnimation(OnProjectileHit, Origin, Target));
         if (Target is PlayerClass) {
             Origin.AddStacks(Resonate.buffName, 1);

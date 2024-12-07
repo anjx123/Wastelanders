@@ -5,7 +5,7 @@ using UnityEngine;
 using static Unity.Collections.AllocatorManager;
 using static UnityEngine.UI.Image;
 
-public class Pound : SlimeAttacks
+public class Pound : SlimeAttacks, IPlayableSlimeCard
 {
 #nullable enable
     [SerializeField]
@@ -17,6 +17,7 @@ public class Pound : SlimeAttacks
         lowerBound = 2;
         upperBound = 5;
         Speed = 2;
+        CostToAddToDeck = 1;
 
         myName = "Pound";
         description = "I wouldn't stand still if I were you";

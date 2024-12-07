@@ -77,12 +77,12 @@ public abstract class ActionClass : SelectClass, IBind<ActionData>
         CLICKED_STATE,
     }
 
-    private CardState cardState = CardState.NORMAL;
+    public CardState cardState = CardState.NORMAL;
     public int Speed { get; set; }
-    protected string description;
+    public string description;
     public string Description { get { return description; } }
     public string evolutionDescription { get; protected set; }
-    public string evolutionCriteria{ get; protected set; }
+    public string evolutionCriteria { get; protected set; }
     [SerializeField] private Sprite icon;
     public Sprite cardBack;
     public Sprite evolvedCardBack;
@@ -111,6 +111,7 @@ public abstract class ActionClass : SelectClass, IBind<ActionData>
     public static event CardEventDelegate? CardClickedEvent;
     public static event CardEventDelegate? CardRightClickedEvent;
     public static event CardEventDelegate? CardHighlightedEvent;
+    public static event CardEventDelegate? CardUnhighlightedEvent;
     public static event CardStateDelegate? CardStateChange;
 
     public event CardEventDelegate? CardValuesUpdating;
@@ -281,18 +282,6 @@ public abstract class ActionClass : SelectClass, IBind<ActionData>
             SetCardState(CardState.HOVER);
         }
 
-        PopUpNotificationManager.Instance.RemoveDescription();
-        if (description != null && !IsFlipped)
-        {
-            PopUpNotificationManager.Instance.DisplayText(description);
-        }
-        else if (evolutionDescription != null && IsFlipped)
-        {
-            string tempDescription = evolutionDescription;
-            if (!CanEvolve())
-                tempDescription = "LOCKED: " + evolutionDescription;
-            PopUpNotificationManager.Instance.DisplayText(tempDescription);
-        }
         CardHighlightedEvent?.Invoke(this);
     }
 
@@ -304,7 +293,7 @@ public abstract class ActionClass : SelectClass, IBind<ActionData>
             SetCardState(CardState.NORMAL);
         }
 
-        PopUpNotificationManager.Instance.RemoveDescription();
+        CardUnhighlightedEvent?.Invoke(this);
     }
 
     public void SetCanPlay(bool canPlay)
@@ -327,7 +316,7 @@ public abstract class ActionClass : SelectClass, IBind<ActionData>
             SetCardState(CardState.NORMAL);
         }
     }
-    private void SetCardState(CardState nextState)
+    public void SetCardState(CardState nextState)
     {
         CardState previousState = cardState;
 
@@ -425,13 +414,33 @@ public abstract class ActionClass : SelectClass, IBind<ActionData>
         this.data.Id = Id;
     }
 
-    public virtual void ClashWon() {
+    // Returns a description based on whether the card is flipped and evolved or not
+    public string GenerateCardDescription()
+    {
+        if (description != null && !IsFlipped)
+        {
+            return description;
+        }
+        else if (evolutionDescription != null && IsFlipped)
+        {
+            string tempDescription = evolutionDescription;
+            if (!CanEvolve())
+                tempDescription = "LOCKED: " + evolutionDescription;
+            return tempDescription;
+        }
+        return "";
+    }
+
+    public virtual void ClashWon()
+    {
         Origin.combatInfo.setDiceColor(Color.green);
     }
-    public virtual void ClashTied() {
+    public virtual void ClashTied()
+    {
         Origin.combatInfo.setDiceColor(Color.white);
     }
-    public virtual void ClashLost() {
+    public virtual void ClashLost()
+    {
         Origin.combatInfo.setDiceColor(Color.red);
     }
 

@@ -92,6 +92,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: FistDeck
       objectReference: {fileID: 0}
+    - target: {fileID: 8249331277627009003, guid: f4e3c39036a0e964ca15018d4479d8e4, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 305bbe4aee0eef34586b3def011ea974, type: 3}
+    - target: {fileID: 8249331277627009003, guid: f4e3c39036a0e964ca15018d4479d8e4, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8351759767076173433, guid: f4e3c39036a0e964ca15018d4479d8e4, type: 3}
       propertyPath: type
       value: 2

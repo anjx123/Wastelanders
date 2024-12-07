@@ -3,22 +3,25 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using TMPro;
+using System.Linq;
 
 public class CharacterSelect : MonoBehaviour
 {
+    [SerializeField] private SpriteRenderer characterPortrait;
+    [SerializeField] private GameObject hover;
+    [SerializeField] private GameObject lockIndicator;
     public PlayerDatabase.PlayerName playerName;
     private bool isMouseDown = false;
-    public TMP_Text editText;
 #nullable enable
     public delegate void CharacterSelectDelegate(PlayerDatabase.PlayerName playerName);
     public static event CharacterSelectDelegate? CharacterSelectedEvent;
-   
+
     private bool isLocked = false;
+
 
     public void OnMouseDown()
     {
         if (isLocked) return;
-        SetColor(new Color(0.4f, 0.4f, 0.4f));
         isMouseDown = true;
     }
 
@@ -27,7 +30,6 @@ public class CharacterSelect : MonoBehaviour
         if (isLocked) return;
         if (isMouseDown)
         {
-            SetColor(Color.white);
             CharacterSelectedEvent?.Invoke(playerName);
         }
         isMouseDown = false;
@@ -36,39 +38,29 @@ public class CharacterSelect : MonoBehaviour
     public void OnMouseEnter()
     {
         if (isLocked) return;
-        SetColor(new Color(0.6f, 0.6f, 0.6f));
+        hover.SetActive(true);
+        SetSpriteTransparency(characterPortrait, 1f);
     }
 
     public void OnMouseExit()
     {
         if (isLocked) return;
-        SetColor(Color.white);
         isMouseDown = false;
+        hover.SetActive(false);
+        SetSpriteTransparency(characterPortrait, 0.75f);
     }
 
-    public void SetColor(Color newColor)
+    public void SetSpriteTransparency(SpriteRenderer r, float newTransparency)
     {
-        GetComponent<SpriteRenderer>().color = newColor;
-        SpriteRenderer[] childSpriteRenderers = GetComponentsInChildren<SpriteRenderer>();
-        foreach (SpriteRenderer spriteRenderer in childSpriteRenderers)
-        {
-            spriteRenderer.color = newColor;
-        }
+        Color c = r.color;
+        c.a = newTransparency;
+        r.color = c;
     }
 
-    public void SetLockedState(bool isLocked) {
-        if (isLocked)
-        {
-            this.isLocked = true;
-            SetColor(Color.grey);
-            editText.text = "Locked";
-        } else
-        {
-            this.isLocked = false;
-            SetColor(Color.grey);
-            editText.text = "Edit";
-        }
+    public void SetLockedState(bool isLocked)
+    {
+        this.isLocked = isLocked;
+        lockIndicator.SetActive(isLocked);
     }
-
 
 }
