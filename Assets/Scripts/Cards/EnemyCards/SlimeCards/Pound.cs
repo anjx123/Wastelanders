@@ -5,7 +5,7 @@ using UnityEngine;
 using static Unity.Collections.AllocatorManager;
 using static UnityEngine.UI.Image;
 
-public class Pound : SlimeAttacks
+public class Pound : SlimeAttacks, IPlayableSlimeCard
 {
 #nullable enable
     [SerializeField]

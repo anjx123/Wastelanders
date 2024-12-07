@@ -5,7 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using static UnityEngine.UI.Image;
 
-public class FlingPlayable : BeetleAttacks
+public class FlingPlayable : BeetleAttacks, IPlayableBeetleCard
 {
     [SerializeField] private ProjectileBehaviour projectileBehaviour;
 

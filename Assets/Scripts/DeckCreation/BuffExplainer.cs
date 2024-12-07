@@ -15,23 +15,16 @@ public class BuffExplainer : MonoBehaviour
 
     public void RenderExplanationForBuff(CardDatabase.WeaponType weaponType)
     {
-        explanationTextField.text = explanationText.FirstOrDefault(tuple => tuple.WeaponType == weaponType).ExplanationText;
-        explanationTitleField.text = explanationText.FirstOrDefault(tuple => tuple.WeaponType == weaponType).ExplanationTitle;
-        switch (weaponType)
+        explanationTextField.text = explanationText.FirstOrDefault(tuple => tuple.WeaponType == weaponType)?.ExplanationText;
+        explanationTitleField.text = explanationText.FirstOrDefault(tuple => tuple.WeaponType == weaponType)?.ExplanationTitle;
+        currentEffect = weaponType switch
         {
-            case CardDatabase.WeaponType.STAFF:
-                currentEffect = new Flow();
-                break;
-            case CardDatabase.WeaponType.PISTOL:
-                currentEffect = new Accuracy();
-                break;
-            case CardDatabase.WeaponType.FIST:
-                currentEffect = null;
-                break;
-            case CardDatabase.WeaponType.AXE:
-                currentEffect = new Wound();
-                break;
-        }
+            CardDatabase.WeaponType.STAFF => new Flow(),
+            CardDatabase.WeaponType.PISTOL => new Accuracy(),
+            CardDatabase.WeaponType.FIST => null,
+            CardDatabase.WeaponType.AXE => new Wound(),
+            _ => null
+        };
 
         buffIcon.sprite = currentEffect?.GetIcon();
     }

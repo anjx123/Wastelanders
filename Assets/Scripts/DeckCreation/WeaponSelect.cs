@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static CardDatabase;
 
 public class WeaponSelect : MonoBehaviour
 {
     public CardDatabase.WeaponType type;
+    [SerializeField] private bool hasSubFolders;
     [SerializeField] private GameObject checkmark;
     [SerializeField] private WeaponEdit weaponEdit;
     [SerializeField] private SpriteRenderer cardBodySprite;
@@ -20,8 +22,13 @@ public class WeaponSelect : MonoBehaviour
 
     private void Start()
     {
-        weaponEdit.SetType(type);
+        weaponEdit.InitializeWeaponEdit(
+            type,
+            hasSubFolders,
+            db => hasSubFolders ? db.GetDefaultSubFolderData(type) : db.GetCardsByType(type)
+        );
     }
+
 
     public void SetSelected(bool isSelected)
     {

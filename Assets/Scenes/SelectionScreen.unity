@@ -2032,7 +2032,7 @@ MonoBehaviour:
   playerDatabase: {fileID: 11400000, guid: 8727bc367ba518d4496483da96ba1cf0, type: 2}
   fadeScreenHandler: {fileID: 1261007668}
   cardDescriptorTextField: {fileID: 7109150431580681162}
-  enemyCardLayout:
+  subFolderLayout:
   - {fileID: 1973216921}
   - {fileID: 1858753701}
   - {fileID: 1079546413}
@@ -3131,7 +3131,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 175053986471808367, guid: 9fdc2bed37508064f93f3a7630fcaa26, type: 3}
       propertyPath: m_Name
-      value: EnemyDeck PLACEHOLDER
+      value: EnemyDeck
       objectReference: {fileID: 0}
     - target: {fileID: 385242908909672610, guid: 9fdc2bed37508064f93f3a7630fcaa26, type: 3}
       propertyPath: m_LocalScale.x
@@ -3208,6 +3208,10 @@ PrefabInstance:
     - target: {fileID: 4337146901227940551, guid: 9fdc2bed37508064f93f3a7630fcaa26, type: 3}
       propertyPath: hoverColor.r
       value: 0.559506
+      objectReference: {fileID: 0}
+    - target: {fileID: 4337146901227940551, guid: 9fdc2bed37508064f93f3a7630fcaa26, type: 3}
+      propertyPath: hasSubFolders
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4444013198921956181, guid: 9fdc2bed37508064f93f3a7630fcaa26, type: 3}
       propertyPath: m_Sprite
@@ -3368,17 +3372,13 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1042440413600462137, guid: 187fbc93202bc88469d62711b6550524, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: a44207e4ea7323546ba01bf9ee2d657b, type: 3}
     - target: {fileID: 2426369365477233427, guid: 187fbc93202bc88469d62711b6550524, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.35
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 2426369365477233427, guid: 187fbc93202bc88469d62711b6550524, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.35
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 2426369365477233427, guid: 187fbc93202bc88469d62711b6550524, type: 3}
       propertyPath: m_LocalPosition.x

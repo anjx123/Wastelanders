@@ -54,7 +54,8 @@ public class PlayerDatabase : ScriptableObject, IBind<PlayerInformation>
                 new WeaponProficiency(WeaponType.PISTOL, 12, 12),
                 new WeaponProficiency(WeaponType.STAFF, 12, 12),
                 new WeaponProficiency(WeaponType.AXE, 0, 10),
-                new WeaponProficiency(WeaponType.FIST, 0, 10)
+                new WeaponProficiency(WeaponType.FIST, 0, 10),
+                new WeaponProficiency(WeaponType.ENEMY, 0, 10)
             },
             selectedWeapons: new() { WeaponType.STAFF, WeaponType.PISTOL },
             playerDeck: new()
@@ -88,7 +89,8 @@ public class PlayerDatabase : ScriptableObject, IBind<PlayerInformation>
                 new WeaponProficiency(WeaponType.PISTOL, 0, 10),
                 new WeaponProficiency(WeaponType.STAFF, 0, 10),
                 new WeaponProficiency(WeaponType.AXE, 12, 12),
-                new WeaponProficiency(WeaponType.FIST, 12, 12)
+                new WeaponProficiency(WeaponType.FIST, 12, 12),
+                new WeaponProficiency(WeaponType.ENEMY, 0, 10)
             },
             selectedWeapons: new() { WeaponType.AXE, WeaponType.FIST },
             playerDeck: new()
