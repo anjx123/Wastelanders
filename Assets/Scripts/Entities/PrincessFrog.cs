@@ -12,7 +12,7 @@ namespace Entities
             base.Start();
 
             myName = "Princess Frog";
-            Health = MaxHealth = 100;
+            Health = MaxHealth = 75;
             AddStacks(Resonate.buffName, 10);
         }
 
@@ -44,6 +44,9 @@ namespace Entities
             // Required so retargeting one card does not retarget both.
             var bless2 = deck[4];
             var burp2 = deck[5];
+            var gobble2 = deck[6];
+            var hurl2 = deck[7];
+
 
             var enemyCount = CombatManager.Instance.GetEnemies().Count;
 
@@ -68,11 +71,11 @@ namespace Entities
                     break;
                 case < 3 when neutral.Count > 0:
                     AttackWith(gobble, CalculateAttackTarget(neutral));
-                    AttackWith(gobble, CalculateAttackTarget(neutral));
+                    AttackWith(gobble2, CalculateAttackTarget(neutral));
                     break;
                 case < 3:
                     AttackWith(hurl, CalculateAttackTarget(opponents));
-                    AttackWith(hurl, CalculateAttackTarget(opponents));
+                    AttackWith(hurl2, CalculateAttackTarget(opponents));
                     break;
                 default:
                     if (neutral.Count > 0) AttackWith(gobble, CalculateAttackTarget(neutral));

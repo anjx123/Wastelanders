@@ -8,6 +8,7 @@ using System.Linq;
 public class CharacterSelect : MonoBehaviour
 {
     [SerializeField] private SpriteRenderer characterPortrait;
+    [SerializeField] private Animator characterAnimation;
     [SerializeField] private GameObject hover;
     [SerializeField] private GameObject lockIndicator;
     public PlayerDatabase.PlayerName playerName;
@@ -29,24 +30,37 @@ public class CharacterSelect : MonoBehaviour
         if (isLocked) return;
         if (isMouseDown)
         {
+            SetUnHovered();
             CharacterSelectedEvent?.Invoke(playerName);
         }
         isMouseDown = false;
     }
 
+    private void SetHovered()
+    {
+        hover.SetActive(true);
+        SetSpriteTransparency(characterPortrait, 1f);
+        characterAnimation.SetBool("IsHovered", true);
+    }
+
+    private void SetUnHovered()
+    {
+        isMouseDown = false;
+        hover.SetActive(false);
+        SetSpriteTransparency(characterPortrait, 0.75f);
+        characterAnimation.SetBool("IsHovered", false);
+    }
+
     public void OnMouseEnter()
     {
         if (isLocked) return;
-        hover.SetActive(true);
-        SetSpriteTransparency(characterPortrait, 1f);
+        SetHovered();
     }
 
     public void OnMouseExit()
     {
         if (isLocked) return;
-        isMouseDown = false;
-        hover.SetActive(false);
-        SetSpriteTransparency(characterPortrait, 0.75f);
+        SetUnHovered();
     }
 
     public void SetSpriteTransparency(SpriteRenderer r, float newTransparency)
