@@ -9,12 +9,9 @@ using Systems.Persistence;
 
 public abstract class ActionClass : SelectClass, IBind<ActionData>
 {
-    //Fields for persistence
     [field: SerializeField] public SerializableGuid Id { get; set; } = SerializableGuid.NewGuid();
-
-
-    //The following are 'properties' in C# that make quick getters and setters for private fields. ac.Target for access
     private EntityClass target;
+
     public EntityClass Target
     {
         get { return target; }
@@ -25,6 +22,7 @@ public abstract class ActionClass : SelectClass, IBind<ActionData>
             TargetChanged?.Invoke(this);
         }
     }
+
     private EntityClass origin;
 
     public EntityClass Origin
@@ -36,11 +34,13 @@ public abstract class ActionClass : SelectClass, IBind<ActionData>
             {
                 origin.BuffsUpdatedEvent -= UpdateBuffValue;
             }
+
             origin = value;
             if (origin != null)
             {
                 origin.BuffsUpdatedEvent += UpdateBuffValue;
             }
+
             UpdateDup();
         }
     }
@@ -50,18 +50,19 @@ public abstract class ActionClass : SelectClass, IBind<ActionData>
     protected int lowerBound;
     protected int upperBound;
 
-    public int LowerBound { get { return lowerBound; } }
-    public int UpperBound { get { return upperBound; } }
+    public int LowerBound => lowerBound;
 
-    protected CardDup duplicateCard = new CardDup();
+    public int UpperBound => upperBound;
 
-    public CardDup GetCard()
+    protected RolledStats rolledCardStats = new();
+
+    public RolledStats GetRolledStats()
     {
-        return duplicateCard;
+        return rolledCardStats;
     }
 
     // Struct to Apply Buffs to so as to avoid modifying the cards
-    public struct CardDup
+    public struct RolledStats
     {
         public int rollFloor;
         public int rollCeiling;
@@ -69,6 +70,7 @@ public abstract class ActionClass : SelectClass, IBind<ActionData>
         //We want to render these one time buffs so we keep track of its name, lower and upper bound buffs to this card.
         public (string, int, int) oneTimeBuffs; //Left int represents lower bound increased by buff. Right int represents the upper bound
     }
+
     public enum CardState
     {
         NORMAL,
@@ -77,20 +79,23 @@ public abstract class ActionClass : SelectClass, IBind<ActionData>
         CLICKED_STATE,
     }
 
-    public CardState cardState = CardState.NORMAL;
-    public int Speed { get; set; }
+    private CardState cardState = CardState.NORMAL;
+    public CardType CardType { get; protected set; }
+
+
+public int Speed { get; set; }
     public string description;
     public string Description { get { return description; } }
     public string evolutionDescription { get; protected set; }
-    public string evolutionCriteria { get; protected set; }
-    [SerializeField] private Sprite icon;
+    public string evolutionCriteria{ get; protected set; }
+
+    public bool IsEvolved = false; // Stores whether the user has decided to select the evolved version of the card or not
+    public bool IsFlipped { get; set; } = false; // Should we display the card as flipped?
+    [SerializeField]
+    private Sprite icon;
     public Sprite cardBack;
     public Sprite evolvedCardBack;
     public CardUI cardUI;
-
-    public CardType CardType { get; protected set; }
-
-    protected Vector3 OriginalPosition;
 
 #nullable enable
     [SerializeField] protected ActionData? data;
@@ -99,22 +104,19 @@ public abstract class ActionClass : SelectClass, IBind<ActionData>
         get { return data?.CurrentProgress ?? 0; }
         set { if (data != null) data.CurrentProgress = Math.Min(value, MaxEvolutionProgress); }
     }
-    public bool IsEvolved = false; // Stores whether the user has decided to select the evolved version of the card or not
-    public bool IsFlipped { get; set; } = false; // Should we display the card as flipped?
     protected int MaxEvolutionProgress { get; set; }
 
     public delegate void ActionClassDelegate(ActionClass target);
     public event ActionClassDelegate? TargetChanged;
     public event ActionClassDelegate? TargetChanging;
+    public event ActionClassDelegate? CardValuesUpdating;
+    public static event ActionClassDelegate? CardClickedEvent;
+    public static event ActionClassDelegate? CardRightClickedEvent;
+    public static event ActionClassDelegate? CardHighlightedEvent;
+    public static event ActionClassDelegate? CardUnhighlightedEvent;
     public delegate void CardStateDelegate(CardState previousState, CardState currentState);
-    public delegate void CardEventDelegate(ActionClass card);
-    public static event CardEventDelegate? CardClickedEvent;
-    public static event CardEventDelegate? CardRightClickedEvent;
-    public static event CardEventDelegate? CardHighlightedEvent;
-    public static event CardEventDelegate? CardUnhighlightedEvent;
     public static event CardStateDelegate? CardStateChange;
 
-    public event CardEventDelegate? CardValuesUpdating;
 
     public virtual void OnCardStagger()
     {
@@ -159,7 +161,7 @@ public abstract class ActionClass : SelectClass, IBind<ActionData>
         Vector3 diffInLocation = Target.myTransform.position - Origin.myTransform.position;
         Origin.UpdateFacing(diffInLocation, null);
         CardIsUnstaggered();
-        this.Target.TakeDamage(Origin, duplicateCard.actualRoll);
+        this.Target.TakeDamage(Origin, rolledCardStats.actualRoll);
     }
 
     public virtual void CardIsUnstaggered()
@@ -179,51 +181,51 @@ public abstract class ActionClass : SelectClass, IBind<ActionData>
 
     public int getRolledDamage()
     {
-        return duplicateCard.actualRoll;
+        return rolledCardStats.actualRoll;
     }
 
     // Initializes a CardDup struct with the given stats of the Card to 
     // modify further based on buffs
     private void DupInit()
     {
-        CardDup oldDup = duplicateCard;
-        duplicateCard = new CardDup();
-        duplicateCard.rollFloor = lowerBound;
-        duplicateCard.rollCeiling = upperBound;
-        duplicateCard.actualRoll = oldDup.actualRoll;
-        duplicateCard.oneTimeBuffs = ("", 0, 0);
+        RolledStats oldDup = rolledCardStats;
+        rolledCardStats = new RolledStats();
+        rolledCardStats.rollFloor = lowerBound;
+        rolledCardStats.rollCeiling = upperBound;
+        rolledCardStats.actualRoll = oldDup.actualRoll;
+        rolledCardStats.oneTimeBuffs = ("", 0, 0);
     }
 
     public void ReduceRoll(int byValue)
     {
-        duplicateCard.actualRoll = Mathf.Clamp(duplicateCard.actualRoll - byValue, 0, duplicateCard.actualRoll);
+        rolledCardStats.actualRoll = Mathf.Clamp(rolledCardStats.actualRoll - byValue, 0, rolledCardStats.actualRoll);
     }
 
     public void IncrementRoll(int byValue)
     {
-        duplicateCard.actualRoll += byValue;
+        rolledCardStats.actualRoll += byValue;
     }
 
     public void UpdateDup()
     {
         DupInit();
-        Origin?.ApplyAllBuffsToCard(ref duplicateCard);
+        Origin?.ApplyAllBuffsToCard(ref rolledCardStats);
         UpdateText();
     }
 
     public virtual void ApplyEffect()
     {
         UpdateDup();
-        Origin?.ApplySingleUseEffects(ref duplicateCard);
+        Origin?.ApplySingleUseEffects(ref rolledCardStats);
         UpdateText();
     }
 
     // Calculates Actual Damage/Block After Applying Buffs
     public virtual void RollDice()
     {
-        duplicateCard.actualRoll = UnityEngine.Random.Range(duplicateCard.rollFloor, duplicateCard.rollCeiling + 1);
+        rolledCardStats.actualRoll = UnityEngine.Random.Range(rolledCardStats.rollFloor, rolledCardStats.rollCeiling + 1);
 
-        Origin.SetDice(duplicateCard.actualRoll);
+        Origin.SetDice(rolledCardStats.actualRoll);
     }
 
     public Sprite? GetIcon()
@@ -244,7 +246,7 @@ public abstract class ActionClass : SelectClass, IBind<ActionData>
         cardUI?.RenderCard(this);
         CardValuesUpdating?.Invoke(this);
     }
-    public override void OnMouseDown()
+    public void OnMouseDown()
     {
         CardClickedEvent?.Invoke(this);
     }
@@ -274,7 +276,7 @@ public abstract class ActionClass : SelectClass, IBind<ActionData>
         SetCardState(CardState.HOVER);
     }
 
-    public override void OnMouseEnter()
+    public void OnMouseEnter()
     {
         if (PauseMenu.IsPaused) return;
         if (cardState == CardState.NORMAL)
@@ -285,7 +287,7 @@ public abstract class ActionClass : SelectClass, IBind<ActionData>
         CardHighlightedEvent?.Invoke(this);
     }
 
-    public override void OnMouseExit()
+    public void OnMouseExit()
     {
         if (PauseMenu.IsPaused) return;
         if (cardState == CardState.HOVER)

@@ -24,8 +24,6 @@ public class RightHook : FistCards
         description = "If this card is unstaggered, use 'Haymaker'.";
         CardType = CardType.MeleeAttack;
         Renderer renderer = GetComponent<Renderer>();
-        ogMaterial = renderer.material; // og sprite of card
-        OriginalPosition = transform.position;
         base.Initialize();
     }
 

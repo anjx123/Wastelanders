@@ -7,7 +7,7 @@ public class Flow : StatusEffect
     public const string buffName = "Flow";
 
     
-    public override void ApplySingleUseEffects(ref ActionClass.CardDup dup)
+    public override void ApplySingleUseEffects(ref ActionClass.RolledStats dup)
     {
         dup.rollFloor += this.buffStacks;
         dup.rollCeiling += this.buffStacks;

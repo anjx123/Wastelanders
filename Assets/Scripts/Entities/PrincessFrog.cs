@@ -12,7 +12,7 @@ namespace Entities
             base.Start();
 
             myName = "Princess Frog";
-            Health = MaxHealth = 100;
+            Health = MaxHealth = 75;
             AddStacks(Resonate.buffName, 10);
         }
 
@@ -34,21 +34,24 @@ namespace Entities
             EntityTookDamage -= HandleDamage;
         }
 
-        public override void AddAttack(List<PlayerClass> players)
+        public override void AddAttack(List<EntityClass> targets)
         {
             /* Required in this order, specifically... */
             var bless = deck[0];
             var burp = deck[1];
             var gobble = deck[2];
             var hurl = deck[3];
+            // Required so retargeting one card does not retarget both.
+            var bless2 = deck[4];
+            var burp2 = deck[5];
+            var gobble2 = deck[6];
+            var hurl2 = deck[7];
 
-            var enemyCount = CombatManager.Instance
-                .GetEnemies()
-                .Count(e => e is not NeutralEntityInterface) - 1;
 
-            var crystals = CombatManager.Instance
-                .GetEnemies()
-                .Where(e => e is Crystals).ToArray();
+            var enemyCount = CombatManager.Instance.GetEnemies().Count;
+
+            var opponents = targets.Where(entity => entity.Team == EntityTeam.PlayerTeam).ToList();
+            var neutral = targets.Where(entity => entity.Team == EntityTeam.NeutralTeam).ToList();
 
             var stacks = GetBuffStacks(Resonate.buffName);
             var chance = enemyCount switch
@@ -63,36 +66,27 @@ namespace Entities
             switch (stacks)
             {
                 case > 6:
-                    AttackWith(Random.Range(0f, 1f) > chance ? burp : bless, players[Random.Range(0, players.Count)]);
-                    AttackWith(Random.Range(0f, 1f) > chance ? burp : bless, players[Random.Range(0, players.Count)]);
+                    AttackWith(Random.Range(0f, 1f) > chance ? burp : bless, CalculateAttackTarget(opponents));
+                    AttackWith(Random.Range(0f, 1f) > chance ? burp2 : bless2, CalculateAttackTarget(opponents));
                     break;
-                case < 3 when crystals.Length > 0:
-                    AttackWith(gobble, crystals[Random.Range(0, crystals.Length)]);
-                    AttackWith(gobble, crystals[Random.Range(0, crystals.Length)]);
+                case < 3 when neutral.Count > 0:
+                    AttackWith(gobble, CalculateAttackTarget(neutral));
+                    AttackWith(gobble2, CalculateAttackTarget(neutral));
                     break;
                 case < 3:
-                    AttackWith(hurl, players[Random.Range(0, players.Count)]);
-                    AttackWith(hurl, players[Random.Range(0, players.Count)]);
+                    AttackWith(hurl, CalculateAttackTarget(opponents));
+                    AttackWith(hurl2, CalculateAttackTarget(opponents));
                     break;
                 default:
-                    if (crystals.Length > 0) AttackWith(gobble, crystals[Random.Range(0, crystals.Length)]);
-                    else AttackWith(hurl, players[Random.Range(0, players.Count)]);
+                    if (neutral.Count > 0) AttackWith(gobble, CalculateAttackTarget(neutral));
+                    else AttackWith(hurl, CalculateAttackTarget(opponents));
 
-                    AttackWith(Random.Range(0f, 1f) > chance ? burp : bless, players[Random.Range(0, players.Count)]);
+                    AttackWith(Random.Range(0f, 1f) > chance ? burp : bless, CalculateAttackTarget(opponents));
                     break;
             }
         }
 
-        private void AttackWith(GameObject prefab, EntityClass target)
-        {
-            var card = Instantiate(prefab);
-            var action = card.GetComponent<ActionClass>();
-
-            action.Target = target;
-            action.Origin = this;
-            combatInfo.AddCombatSprite(action);
-            BattleQueue.BattleQueueInstance.AddAction(action);
-        }
+       
 
         private void HandleDamage(int amount)
         {

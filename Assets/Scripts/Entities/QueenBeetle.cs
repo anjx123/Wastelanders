@@ -1,3 +1,4 @@
+using Cards.EnemyCards.FrogCards;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,13 +9,9 @@ public class QueenBeetle : EnemyClass
     [SerializeField]
     private GameObject[] beetlePrefabs = new GameObject[3];
     private Beetle[] availability;
-    [SerializeField] bool combatMode;
-
-    [SerializeField]
-    public GameObject enemyContainer;
 
     // spawn locations for the beetles
-    [SerializeField] private Vector3[] beetleLocations;
+    private Vector3[] beetleLocations = new Vector3[4];
 
     private const float BEETLE_SCALING = 0.6f;
 
@@ -25,17 +22,6 @@ public class QueenBeetle : EnemyClass
         for (int i = 0; i < availability.Length; i++)
         {
             availability[i] = null;
-        }
-        if (combatMode)
-        {
-            for (int i = 0; i < beetlePrefabs.Length; ++i)
-            {
-                GameObject beetle = Instantiate(beetlePrefabs[i]);
-                beetle.transform.SetParent(enemyContainer.transform);
-                beetle.transform.localScale *= BEETLE_SCALING;
-                beetle.transform.position = beetleLocations[i];
-                availability[i] = beetle.GetComponent<Beetle>();
-            }
         }
     }
 
@@ -55,6 +41,7 @@ public class QueenBeetle : EnemyClass
         MaxHealth = 50;
         Health = MaxHealth;
         myName = "The Queen";
+        TargetingWeights = (entity => entity.Team == EntityTeam.PlayerTeam ? 100 : 0);
     }
 
     protected override void OnEnable()
@@ -62,7 +49,7 @@ public class QueenBeetle : EnemyClass
         base.OnEnable();
 
         Beetle.OnGainBuffs += HandleGainedBuffs;
-        Beetle.OnDeath += HandleBeetleDied;
+        OnEntityDeath += HandleBeetleDied;
     }
 
     protected override void OnDisable()
@@ -70,12 +57,7 @@ public class QueenBeetle : EnemyClass
         base.OnDisable();
 
         Beetle.OnGainBuffs -= HandleGainedBuffs;
-        Beetle.OnDeath -= HandleBeetleDied;
-    }
-
-    public override IEnumerator Die()
-    {
-        return base.Die();
+        OnEntityDeath -= HandleBeetleDied;
     }
 
     // event handler for Beetle.OnGainBuffs. This is called whenever a beetle tries to
@@ -90,7 +72,7 @@ public class QueenBeetle : EnemyClass
         }
     }
 
-    private void HandleBeetleDied(Beetle victim)
+    private void HandleBeetleDied(EntityClass victim)
     {
         for (int i = 0; i < availability.Length; i++)
         {
@@ -121,21 +103,23 @@ public class QueenBeetle : EnemyClass
     //  3. The queen repeats this process twice, attacking twice in one turn.
     //  In the inspector, assign Hatchery to index 0 of the Queen's deck, and any other
     //     attacks after that.
-    public override void AddAttack(List<PlayerClass> players)
+    public override void AddAttack(List<EntityClass> targets)
     {
         bool usedSpawnThisRound = false;
+        var hatchery = deck[0];
         for (int i = 0; i < 2; i++)
         {
             if (GetBuffStacks(Resonate.buffName) >= 2 && FindFirstOpenSlot() != -1 && (!usedSpawnThisRound || NumberOfAvailableSlots() > 1)) //Last condition fixes a bug where the queen can try to spawn 2 beetles but then hit the max spawn cap
             {
-                AddAttackFromPool(players, 0); // hatchery
+                AttackWith(hatchery, CalculateAttackTarget(targets));
                 ReduceStacks(Resonate.buffName, 2);
                 UpdateBuffs();
                 usedSpawnThisRound = true;
             }
             else
             {
-                AddAttackFromPool(players, Random.Range(1, pool.Count));
+                // Deck[1] and deck[2] are both fragments. They must be different otherwise retargeting one will retarget both.
+                AttackWith(deck[i + 1], CalculateAttackTarget(targets));
             }
         }
     }
@@ -153,14 +137,6 @@ public class QueenBeetle : EnemyClass
         Debug.Log(number);
         return number;
     }
-    // helper function for AddAttack
-    private void AddAttackFromPool(List<PlayerClass> players, int idx)
-    {
-        pool[idx].GetComponent<ActionClass>().Target = players[Random.Range(0, players.Count)];
-        pool[idx].GetComponent<ActionClass>().Origin = this;
-        BattleQueue.BattleQueueInstance.AddAction(pool[idx].GetComponent<ActionClass>());
-        combatInfo.AddCombatSprite(pool[idx].GetComponent<ActionClass>());
-    }
 
     // Summons a beetle at random. Called by Hatchery on-hit.
     public void SummonBeetle()
@@ -171,29 +147,13 @@ public class QueenBeetle : EnemyClass
             Debug.Log("BEETLE OVERLOAD!!! (too many beetles)");
             return;
         }
-        if (enemyContainer == null)
-        {
-            Debug.Log("you forgot to assign enemyContainer in queen");
-            return;
-        }
         GameObject beetle = Instantiate(beetlePrefabs[Random.Range(0, beetlePrefabs.Length)]);
-        beetle.transform.SetParent(enemyContainer.transform);
+        beetle.transform.SetParent(transform.parent);
         beetle.transform.localScale *= BEETLE_SCALING;
         beetle.transform.position = beetleLocations[slot];
         availability[slot] = beetle.GetComponent<Beetle>();
     }
 
-    protected override void Reshuffle()
-    {
-        List<GameObject> temp = new List<GameObject>();
-        for (int i = 0; i < deck.Count; i++)
-        {
-            temp.Add(deck[i]);
-        }
-
-        pool = temp;
-        return;
-    }
     private float cycleScaling = 2f; // Higher the number, the faster one phase is 
     private float bobbingAmount = 0.1f; //Amplitude
     private float timer = 0;

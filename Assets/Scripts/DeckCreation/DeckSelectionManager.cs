@@ -25,6 +25,7 @@ public class DeckSelectionManager : MonoBehaviour
     [SerializeField] private Transform[] fiveRowCardLayout;
     [SerializeField] private Transform enemyEditParent;
     [SerializeField] private GameObject enemyEditButtonPrefab;
+
     private PlayerDatabase.PlayerData playerData;
     private WeaponType weaponType;
     public WeaponAmount weaponText;
@@ -324,6 +325,14 @@ public class DeckSelectionManager : MonoBehaviour
         {
             layout = cardsToRender.Count > 8 ? fiveRowCardLayout : fourRowCardLayout;
         }
+
+        bool longerRow = cardsToRender.Count > 8;
+        int numPerRow = longerRow ? 5 : 4;
+        float xSpacing = longerRow ? 1.8f : 2.125f;
+        float ySpacing = longerRow ? -2.5f : -3f;
+        float xOffset = longerRow ? -7f : -6.5f; //initial x Offset
+        float yOffset = longerRow ? 2.175f : 1 + 1.4f; //initial y Offset
+        float cardScaling = longerRow ? 0.675f : 0.7825f;
 
         //In order to sort, the cards must be instantiated and initialized first :pensive:
         foreach (ActionClass card in cardsToRender)

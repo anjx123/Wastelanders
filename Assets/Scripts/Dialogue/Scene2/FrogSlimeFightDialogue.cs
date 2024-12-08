@@ -365,7 +365,7 @@ private IEnumerator ExecuteGameStart()
                 IEnumerator DieInScene()
                 {
                     BattleQueue.BattleQueueInstance.RemoveAllInstancesOfEntity(wasteFrog);
-                    CombatManager.Instance.RemoveEnemy(wasteFrog);
+                    wasteFrog.RemoveEntityFromCombat();
                     wasteFrog.animator.enabled = false;
                     wasteFrog.GetComponent<SpriteRenderer>().sprite = frogDeathSprite;
                     wasteFrog.OutOfCombat();
@@ -376,7 +376,7 @@ private IEnumerator ExecuteGameStart()
                     yield break;
                 }
 
-                wasteFrog._DeathHandler = DieInScene;
+                wasteFrog.DeathHandler = DieInScene;
                 lastKilledFrog = wasteFrog;
                 EntityClass.OnEntityDeath -= EnsureFrogDeath;
             }

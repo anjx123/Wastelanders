@@ -70,7 +70,7 @@ public class CombatCardUI : DisplayableClass
         FlipTransform(buffFlipPreserver.transform, false);*/
     }
 
-    public void SetBuffIcon(ActionClass.CardDup cardDup)
+    public void SetBuffIcon(ActionClass.RolledStats cardDup)
     {
         (string buffName, int lowerBound, int upperBound) = cardDup.oneTimeBuffs;
         if (lowerBound > 0 || upperBound > 0)
@@ -102,8 +102,8 @@ public class CombatCardUI : DisplayableClass
 
     void UpdateRangeText(ActionClass actionClass)
     {
-        (string buffName, int buffLowerBound, int buffUpperBound) = actionClass.GetCard().oneTimeBuffs;
-        rangeText.text = (actionClass.GetCard().rollFloor - buffLowerBound) + "-" + (actionClass.GetCard().rollCeiling - buffUpperBound);
+        (string buffName, int buffLowerBound, int buffUpperBound) = actionClass.GetRolledStats().oneTimeBuffs;
+        rangeText.text = (actionClass.GetRolledStats().rollFloor - buffLowerBound) + "-" + (actionClass.GetRolledStats().rollCeiling - buffUpperBound);
         if (ActionClass.Origin is EnemyClass)
         {
             rangeText.color = Color.red;
@@ -113,7 +113,7 @@ public class CombatCardUI : DisplayableClass
             rangeText.color = Color.green;
         }
 
-        SetBuffIcon(actionClass.GetCard());
+        SetBuffIcon(actionClass.GetRolledStats());
     }
 
     public void Emphasize()

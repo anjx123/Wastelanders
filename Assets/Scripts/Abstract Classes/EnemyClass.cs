@@ -1,11 +1,12 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
+using System.Linq;
 using UnityEngine;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public abstract class EnemyClass : EntityClass
 {
-
     // This is the deck of the enemy, which does not change as they reshuffle/play cards.
     protected List<GameObject> deck = new List<GameObject>();
 
@@ -15,16 +16,14 @@ public abstract class EnemyClass : EntityClass
     // Initialized in editor
     public List<GameObject> availableActions;
 
+    public delegate int AttackTargetDelegate(EntityClass targets);
 
-    /*  Plays a single card from the pool, removing it from the pool and refilling it if necessary.
-     *  REQUIRES: Nothing
-     *  MODIFIES: pool
-     *  
-     */
+    // Default Attack weight for all opponents gives equal chance for all oppoenents to be picked
+    public AttackTargetDelegate TargetingWeights{ get; set; } = delegate { return 100; };
 
     public override void Start()
     {
-        CombatManager.Instance.AddEnemy(this);
+        if (Team == EntityTeam.NoTeam) Team = EntityTeam.EnemyTeam;
         base.Start();
         InstantiateDeck();
 
@@ -43,37 +42,45 @@ public abstract class EnemyClass : EntityClass
         }
     }
 
-    /*  Given a list of players, the enemy chooses appropriately a target/targets and adds an attack that it chooses to the bq.
-     *  It is up to the subclass HOW to implement this method, as certain enemies may prefer to attack certain players. 
-     *  
-     *  Subclasses should document this method as follows:
-     *  
-     *  By default, assume the target is a completely random player. If this is not the case (for example, the enemy might prefer
-     *  to attack some specific character), the method documentation should note this.
-     *  
-     *  Potentially? We might want to list the attacks available to the enemy at the beginning of combat for ease of balancing and
-     *  tweaking difficulty later on.
-     */
-    public virtual void AddAttack(List<PlayerClass> players)
+    //An attack that pops the top card on the pool and plays it. use this when you attack with pool.
+    public virtual void AddAttack(List<EntityClass> targets)
     {
-        if (players.Count == 0) return;
-        if (pool.Count == 0) return;
-        pool[0].GetComponent<ActionClass>().Target = players[Random.Range(0, players.Count)]; // excludes the last value 
-        pool[0].GetComponent<ActionClass>().Origin = this;
-        BattleQueue.BattleQueueInstance.AddAction(pool[0].GetComponent<ActionClass>());
-        combatInfo.AddCombatSprite(pool[0].GetComponent<ActionClass>());
+        if (targets.Count == 0 || pool.Count == 0) return;
+
+        AttackWith(pool[0], CalculateAttackTarget(targets));
         pool.RemoveAt(0);
-        if (pool.Count < 1)
+
+        if (pool.Count == 0)
         {
             Reshuffle();
         }
     }
 
-    /*  Reshuffles the deck. Should be called on start (so the enemy can display its first attack), and whenever the enemy runs out of
-     *  attacks.
-     *  REQUIRES: pool should be empty! But it shouldn't break anything, just mess up the enemy's order of attacks
-     *  MODIFIES: pool 
-     */
+    // Use this if you would like to directly attack using deck
+    public void AttackWith(GameObject attack, EntityClass target)
+    {
+        var action = attack.GetComponent<ActionClass>();
+        action.Target = target;
+        action.Origin = this;
+        combatInfo.AddCombatSprite(action);
+        BattleQueue.BattleQueueInstance.AddAction(action);
+    }
+
+    protected EntityClass CalculateAttackTarget(List<EntityClass> potentialTargets)
+    {
+        int totalWeight = potentialTargets.Sum(target => TargetingWeights(target));
+        int randomValue = UnityEngine.Random.Range(0, totalWeight);
+
+        int cumulativeWeight = 0;
+        var selectedTarget = potentialTargets.First(target =>
+        {
+            cumulativeWeight += TargetingWeights(target);
+            return cumulativeWeight > randomValue;
+        });
+
+        return selectedTarget;
+    }
+
     protected virtual void Reshuffle()
     {
         List<GameObject> temp = new List<GameObject>();
@@ -84,18 +91,16 @@ public abstract class EnemyClass : EntityClass
 
         while (temp.Count > 0)
         {
-            int idx = Random.Range(0, temp.Count);
+            int idx = UnityEngine.Random.Range(0, temp.Count);
             pool.Add(temp[idx]);
             temp.RemoveAt(idx);
         }
     }
 
-    //Removes entity cards and self from BQ and combat manager. Kills itself
     public override IEnumerator Die()
     {
         int runDistance = 10;
         BattleQueue.BattleQueueInstance.RemoveAllInstancesOfEntity(this);
-        CombatManager.Instance.RemoveEnemy(this);
         DestroyDeck();
         yield return StartCoroutine(MoveToPosition(myTransform.position + new Vector3(runDistance, 0, 0), 0, 0.8f));
         this.gameObject.SetActive(false);
@@ -114,6 +119,23 @@ public abstract class EnemyClass : EntityClass
     public override IEnumerator ResetPosition()
     {
         yield return StartCoroutine(MoveToPosition(initialPosition, 0f, 0.8f));
-        FaceLeft();
+        FaceOpponent();
+    }
+
+    public override void PerformSelection()
+    {
+        AddAttack(GetOpponents());
+        StartCoroutine(ResetPosition());
+    }
+
+    protected virtual List<EntityClass> GetOpponents()
+    {
+        return Team switch
+        {
+            EntityTeam.PlayerTeam => new List<EntityClass>(CombatManager.Instance.GetEnemies().Concat(CombatManager.Instance.GetNeutral())),
+            EntityTeam.EnemyTeam => new List<EntityClass>(CombatManager.Instance.GetPlayers().Concat(CombatManager.Instance.GetNeutral())),
+            EntityTeam.NeutralTeam => new(),
+            _ => throw new ArgumentOutOfRangeException("Team possibly not initialized, this is my team: " + Team)
+        };
     }
 }

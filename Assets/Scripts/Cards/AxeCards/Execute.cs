@@ -17,8 +17,6 @@ public class Execute : AxeCards
         evolutionDescription = "Increase cost to 3. Each wound on the enemy increases this card's final power by 1.";
         MaxEvolutionProgress = 10;
         Renderer renderer = GetComponent<Renderer>();
-        ogMaterial = renderer.material;
-        OriginalPosition = transform.position;
         base.Initialize();
         CardType = CardType.MeleeAttack;
     }

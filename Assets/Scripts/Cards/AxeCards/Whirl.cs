@@ -22,8 +22,6 @@ public class Whirl : AxeCards
         evolutionDescription = "Cost increased to 3. Make this attack three times, applying 1 wound on hit.";
         MaxEvolutionProgress = 10;
         Renderer renderer = GetComponent<Renderer>();
-        ogMaterial = renderer.material;
-        OriginalPosition = transform.position;
         CardType = CardType.MeleeAttack;
         base.Initialize();
     }

@@ -15,8 +15,6 @@ public class IronSights : PistolCards
         myName = "Iron Sights";
         description = "Gain one Accuracy, then attack.";
         Renderer renderer = GetComponent<Renderer>();
-        ogMaterial = renderer.material; // og sprite of card
-        OriginalPosition = transform.position;
         base.Initialize();
     }
 

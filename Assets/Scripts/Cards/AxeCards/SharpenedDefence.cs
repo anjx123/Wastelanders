@@ -18,8 +18,6 @@ public class SharpenedDefence : AxeCards
     myName = "Sharpened Defence";
     description = "If this card is unstaggered, inflict 2 wound.";
     Renderer renderer = GetComponent<Renderer>();
-    ogMaterial = renderer.material;
-    OriginalPosition = transform.position;
     }
 
     public override void CardIsUnstaggered()

@@ -19,8 +19,6 @@ public class DiscreteStrike : StaffCards
         myName = "Discrete Strike";
         description = "Gain 2 focus, then strike";
         Renderer renderer = GetComponent<Renderer>();
-        ogMaterial = renderer.material; // og sprite of card
-        OriginalPosition = transform.position;
         CardType = CardType.MeleeAttack;
         base.Initialize();
     }

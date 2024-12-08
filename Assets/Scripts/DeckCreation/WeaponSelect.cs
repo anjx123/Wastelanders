@@ -11,8 +11,9 @@ public class WeaponSelect : MonoBehaviour
     [SerializeField] private WeaponEdit weaponEdit;
     [SerializeField] private SpriteRenderer cardBodySprite;
     [SerializeField] private GameObject lockedIndicator;
-    [SerializeField] private Color baseColor = Color.white;
-    [SerializeField] private Color hoverColor = new Color(0.6f, 0.6f, 0.6f);
+    private Color baseColor = Color.white;
+    private Color hoverColor = new Color(0.6f, 0.6f, 0.6f);
+
 #nullable enable
     public delegate void WeaponSelectDelegate(WeaponSelect weaponSelect, CardDatabase.WeaponType type);
     public static event WeaponSelectDelegate? WeaponSelectEvent;

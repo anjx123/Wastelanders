@@ -106,7 +106,7 @@ public class CardComparator : MonoBehaviour
                 card1.OnCardStagger();
             }
 
-            card2.ReduceRoll(card1.GetCard().actualRoll); //Possibly no damage dealt
+            card2.ReduceRoll(card1.GetRolledStats().actualRoll); //Possibly no damage dealt
             card2.OnHit();
             card1.Origin.BlockAnimation(); //Blocked stuff animation here not implemented properly
 
@@ -120,7 +120,7 @@ public class CardComparator : MonoBehaviour
                 card2.OnCardStagger();
             }
 
-            card1.ReduceRoll(card2.GetCard().actualRoll); //Possibly no damage dealt
+            card1.ReduceRoll(card2.GetRolledStats().actualRoll); //Possibly no damage dealt
             card1.OnHit();
             card2.Origin.BlockAnimation();
         } else
@@ -270,7 +270,9 @@ public class CardComparator : MonoBehaviour
     }
     private void SubscribeEntityDeath(EntityClass entity)
     {
-        PlayEntityDeaths += entity.DeathHandler;
+        // Used to ensure most updated death handler from entity is capture, instead of the one used upon subscription
+        IEnumerator DeathHandler() => entity.DeathHandler();
+        PlayEntityDeaths += DeathHandler;
     }
 
     private void ActivateInfo(params ActionClass[] cards)

@@ -18,9 +18,6 @@ namespace Cards.EnemyCards.FrogCards
             lowerBound = upperBound = 1;
             Speed = 2;
             CardType = CardType.RangedAttack;
-
-            ogMaterial = GetComponent<Renderer>().material;
-            OriginalPosition = transform.position;
         }
 
         protected override void OnProjectileHit()

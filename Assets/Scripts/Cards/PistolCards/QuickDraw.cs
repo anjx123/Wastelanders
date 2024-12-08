@@ -28,8 +28,6 @@ public class QuickDraw : PistolCards
         description = "Make this attack, then gain 1 Accuracy even if staggered.";
         CardType = CardType.RangedAttack;
         Renderer renderer = GetComponent<Renderer>();
-        ogMaterial = renderer.material; // og sprite of card
-        OriginalPosition = transform.position;
         base.Initialize();
     }
 

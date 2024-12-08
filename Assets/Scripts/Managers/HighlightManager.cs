@@ -65,14 +65,14 @@ public class HighlightManager : MonoBehaviour // later all entity highlighter
         }
     }
 
-    public void SetActivePlayer(PlayerClass forcedPlayer)
+    public void SetActivePlayer(PlayerClass? forcedPlayer)
     {
         if (forcedPlayer != selectedPlayer)
         {
             ResetCurrentHighlightedAction();
         }
         selectedPlayer = forcedPlayer;
-        RenderHand(forcedPlayer.Hand);
+        if (forcedPlayer != null) RenderHand(forcedPlayer.Hand);
     }
     private void HandlePlayerClick(PlayerClass clickedPlayer)
     {
@@ -135,7 +135,6 @@ public class HighlightManager : MonoBehaviour // later all entity highlighter
 
 
         currentHighlightedEnemyEntity!.DeHighlight();
-        currentHighlightedAction.DeHighlight();
         currentHighlightedAction.ForceNormalState();
         currentHighlightedEnemyEntity = null;
         currentHighlightedAction = null;

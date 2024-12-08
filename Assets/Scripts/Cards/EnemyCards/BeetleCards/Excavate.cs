@@ -26,8 +26,6 @@ public class Excavate : BeetleAttacks, IPlayableBeetleCard
         myName = "Excavate";
         CardType = CardType.MeleeAttack;
         Renderer renderer = GetComponent<Renderer>();
-        ogMaterial = renderer.material; // og sprite of card
-        OriginalPosition = transform.position;
     }
 
     public override void CardIsUnstaggered()
@@ -43,19 +41,8 @@ public class Excavate : BeetleAttacks, IPlayableBeetleCard
     public override void OnHit()
     {
         AudioManager.Instance.PlaySFX(EXCAVATE_SOUND_EFFECT_NAME);
-        if (Target is Crystals)
-        {
-            if (Origin.HasAnimationParameter("IsAttacking"))
-            {
-                Origin.AttackAnimation("IsAttacking");
-            }
-            Vector3 diffInLocation = Target.myTransform.position - Origin.myTransform.position;
-            Origin.UpdateFacing(diffInLocation, null);
-            this.Target.TakeDamage(Origin, 2 * duplicateCard.actualRoll);
-        }
-        else
-        {
-            base.OnHit();
-        }
+ 
+        if (Target is Crystals) rolledCardStats.actualRoll = 2 * rolledCardStats.actualRoll;
+        base.OnHit();
     }
 }

@@ -17,7 +17,6 @@ public class TrainingDummy : EnemyClass
     public override IEnumerator Die()
     {
         BattleQueue.BattleQueueInstance.RemoveAllInstancesOfEntity(this);
-        CombatManager.Instance.RemoveEnemy(this);
         yield break;
     }
 

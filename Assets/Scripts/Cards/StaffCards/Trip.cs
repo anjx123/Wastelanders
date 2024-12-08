@@ -22,8 +22,6 @@ public class Trip : StaffCards
         myName = "Sweep";
         description = "Attack, then gain 1 Flow.";
         Renderer renderer = GetComponent<Renderer>();
-        ogMaterial = renderer.material; // og sprite of card
-        OriginalPosition = transform.position;
         CardType = CardType.MeleeAttack;
         base.Initialize();
     }

@@ -11,6 +11,7 @@ public class EnemyIves : EnemyClass
         Health = MaxHealth;
         myName = "Le Ives";
     }
+
     public void InjectDeck(List<GameObject> actions)
     {
         foreach (GameObject action in actions)
@@ -28,7 +29,6 @@ public class EnemyIves : EnemyClass
     public override IEnumerator Die()
     {
         BattleQueue.BattleQueueInstance.RemoveAllInstancesOfEntity(this);
-        CombatManager.Instance.RemoveEnemy(this);
         if (HasAnimationParameter("IsStaggered"))
         {
             animator.SetBool("IsStaggered", true);

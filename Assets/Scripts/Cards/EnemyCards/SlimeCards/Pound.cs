@@ -23,8 +23,6 @@ public class Pound : SlimeAttacks, IPlayableSlimeCard
         description = "I wouldn't stand still if I were you";
         CardType = CardType.MeleeAttack;
         Renderer renderer = GetComponent<Renderer>();
-        ogMaterial = renderer.material; // og sprite of card
-        OriginalPosition = transform.position;
     }
 
 

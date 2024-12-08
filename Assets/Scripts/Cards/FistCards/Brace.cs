@@ -18,8 +18,6 @@ public class Brace : FistCards
         description = "Block once, then block again!";
         CardType = CardType.Defense;
         Renderer renderer = GetComponent<Renderer>();
-        ogMaterial = renderer.material; // og sprite of card
-        OriginalPosition = transform.position;
         base.Initialize();
     }
 

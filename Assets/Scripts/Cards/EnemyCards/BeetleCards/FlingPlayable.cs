@@ -23,9 +23,6 @@ public class FlingPlayable : BeetleAttacks, IPlayableBeetleCard
 
         myName = "Fling";
         CardType = CardType.RangedAttack;
-        Renderer renderer = GetComponent<Renderer>();
-        ogMaterial = renderer.material; // og sprite of card
-        OriginalPosition = transform.position;
     }
 
 

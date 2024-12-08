@@ -24,8 +24,6 @@ public class StackSmash : SlimeAttacks, IPlayableSlimeCard
         description = "If this attack is unstaggered, attack again";
         CardType = CardType.MeleeAttack;
         Renderer renderer = GetComponent<Renderer>();
-        ogMaterial = renderer.material; // og sprite of card
-        OriginalPosition = transform.position;
     }
 
 

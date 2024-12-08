@@ -68,21 +68,16 @@ public class WasteFrog : EnemyClass
     // @Author Muhammad; excerpt from Andrew
     // if UseHurl then add Hurl this time around otherwise add actions normally.
     // this doesn't have to deal with the "new" conundrum because... follow logic; emphasis on played next turn and don't discard
-    public override void AddAttack(List<PlayerClass> players)
+    public override void AddAttack(List<EntityClass> targets)
     {
         if (UseHurl && hurlCard != null)
         {
             UseHurl = false;
-            if (players.Count == 0) return;
-            
-            ActionClass temporaryHurl = hurlCard.GetComponent<ActionClass>();
-            temporaryHurl.Origin = this;
-            temporaryHurl.Target = players[Random.Range(0, players.Count - 1)];
-            BattleQueue.BattleQueueInstance.AddAction(temporaryHurl);
-            combatInfo.AddCombatSprite(temporaryHurl);
-        } else
+            AttackWith(hurlCard, CalculateAttackTarget(targets));
+        }
+        else
         {
-            base.AddAttack(players);
+            base.AddAttack(targets);
         }
     }
 }

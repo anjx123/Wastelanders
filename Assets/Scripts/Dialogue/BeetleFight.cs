@@ -726,7 +726,7 @@ public class BeetleFight : DialogueClasses
     private void RemoveEnemyFromScene(EnemyClass e)
     {
         BattleQueue.BattleQueueInstance.RemoveAllInstancesOfEntity(e);
-        CombatManager.Instance.RemoveEnemy(e);
+        e.RemoveEntityFromCombat();
         DieInScene(e);
         e.gameObject.SetActive(false);
     }
@@ -752,7 +752,7 @@ public class BeetleFight : DialogueClasses
     IEnumerator KillFrog(WasteFrog wasteFrog)
     {
         int runDistance = -10;
-        CombatManager.Instance.RemoveEnemy(wasteFrog);
+        wasteFrog.RemoveEntityFromCombat();
         yield return StartCoroutine(wasteFrog.MoveToPosition(wasteFrog.transform.position + new Vector3(runDistance, 0, 0), 0, 1.2f));
         DieInScene(wasteFrog);
         wasteFrog.gameObject.SetActive(false);
@@ -760,7 +760,7 @@ public class BeetleFight : DialogueClasses
     void DieInScene(EnemyClass enemyEntity)
     {
         BattleQueue.BattleQueueInstance.RemoveAllInstancesOfEntity(enemyEntity);
-        CombatManager.Instance.RemoveEnemy(enemyEntity);
+        enemyEntity.RemoveEntityFromCombat();
         enemyEntity.animator.enabled = false;
         if (enemyEntity is WasteFrog)
         {
