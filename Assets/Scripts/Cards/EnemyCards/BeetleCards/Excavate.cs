@@ -41,19 +41,8 @@ public class Excavate : BeetleAttacks, IPlayableBeetleCard
     public override void OnHit()
     {
         AudioManager.Instance.PlaySFX(EXCAVATE_SOUND_EFFECT_NAME);
-        if (Target is Crystals)
-        {
-            if (Origin.HasAnimationParameter("IsAttacking"))
-            {
-                Origin.AttackAnimation("IsAttacking");
-            }
-            Vector3 diffInLocation = Target.myTransform.position - Origin.myTransform.position;
-            Origin.UpdateFacing(diffInLocation, null);
-            this.Target.TakeDamage(Origin, 2 * rolledCardStats.actualRoll);
-        }
-        else
-        {
-            base.OnHit();
-        }
+ 
+        if (Target is Crystals) rolledCardStats.actualRoll = 2 * rolledCardStats.actualRoll;
+        base.OnHit();
     }
 }

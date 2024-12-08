@@ -132,7 +132,7 @@ public abstract class EntityClass : SelectClass
     public IEnumerator StaggerEntities(EntityClass origin, EntityClass target, float percentageDone)
     {
         Vector3 directionVector = target.myTransform.position - origin.myTransform.position;
-
+        
         Vector3 normalizedDirection = directionVector.normalized;
         float staggerPower = StaggerPowerCalculation(percentageDone);
         yield return StartCoroutine(target.StaggerBack(target.myTransform.position + normalizedDirection * staggerPower));
@@ -273,7 +273,7 @@ public abstract class EntityClass : SelectClass
      * Modifies: this.myTransform.position
      * Requires: Entity is not dead
      */
-    public IEnumerator StaggerBack(Vector3 staggeredPosition)
+    public virtual IEnumerator StaggerBack(Vector3 staggeredPosition)
     {
         Vector3 originalPosition = myTransform.position;
         float elapsedTime = 0f;
