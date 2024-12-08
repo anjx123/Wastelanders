@@ -25,9 +25,6 @@ public class FragmentPlayable : ActionClass, IPlayableQueenCard
 
         myName = "Fragment";
         CardType = CardType.RangedAttack;
-        Renderer renderer = GetComponent<Renderer>();
-        ogMaterial = renderer.material; // og sprite of card
-        OriginalPosition = transform.position;
     }
 
 

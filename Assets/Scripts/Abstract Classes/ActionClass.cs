@@ -97,8 +97,6 @@ public int Speed { get; set; }
     public Sprite evolvedCardBack;
     public CardUI cardUI;
 
-    protected Vector3 OriginalPosition;
-
 #nullable enable
     [SerializeField] protected ActionData? data;
     protected int CurrentEvolutionProgress

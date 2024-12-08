@@ -27,9 +27,6 @@ public class PincerPlayable : BeetleAttacks, IPlayableBeetleCard
 
         myName = "Pincer";
         CardType = CardType.MeleeAttack;
-        Renderer renderer = GetComponent<Renderer>();
-        ogMaterial = renderer.material; // og sprite of card
-        OriginalPosition = transform.position;
     }
 
     public override void OnHit()

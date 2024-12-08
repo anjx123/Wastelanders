@@ -17,9 +17,6 @@ public class BlessCardPlayable : BlessCard, IPlayablePrincessFrogCard
         Speed = 1;
         CardType = CardType.Defense;
         CostToAddToDeck = 2;
-
-        ogMaterial = GetComponent<Renderer>().material;
-        OriginalPosition = transform.position;
     }
 
     public override void CardIsUnstaggered()
