@@ -79,7 +79,6 @@ public abstract class ActionClass : SelectClass, IBind<ActionData>
         CLICKED_STATE,
     }
 
-
     private CardState cardState = CardState.NORMAL;
     public CardType CardType { get; protected set; }
 

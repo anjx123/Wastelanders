@@ -7,6 +7,9 @@ using System.Linq;
 
 public class CharacterSelect : MonoBehaviour
 {
+    [SerializeField] private SpriteRenderer characterPortrait;
+    [SerializeField] private GameObject hover;
+    [SerializeField] private GameObject lockIndicator;
     public PlayerDatabase.PlayerName playerName;
     private bool isMouseDown = false;
 #nullable enable
@@ -14,11 +17,6 @@ public class CharacterSelect : MonoBehaviour
     public static event CharacterSelectDelegate? CharacterSelectedEvent;
 
     private bool isLocked = false;
-
-    [SerializeField] private SpriteRenderer characterPortrait;
-
-    [SerializeField] private GameObject hover;
-    [SerializeField] private GameObject lockIndicator;
 
     public void OnMouseDown()
     {

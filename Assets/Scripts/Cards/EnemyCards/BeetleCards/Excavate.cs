@@ -5,7 +5,7 @@ using UnityEngine;
 using static Unity.Collections.AllocatorManager;
 using static UnityEngine.UI.Image;
 
-public class Excavate : BeetleAttacks
+public class Excavate : BeetleAttacks, IPlayableBeetleCard
 {
     public const string EXCAVATE_SOUND_EFFECT_NAME = "Excavate Cut";
 
@@ -18,6 +18,8 @@ public class Excavate : BeetleAttacks
         upperBound = 4;
         
         Speed = 2;
+
+        CostToAddToDeck = 1;
 
         description = "Deals 2x damage to crystals.";
 

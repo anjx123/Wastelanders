@@ -27,7 +27,10 @@ MonoBehaviour:
     - <WeaponType>k__BackingField: 2
       <CurrentPoints>k__BackingField: 0
       <MaxPoints>k__BackingField: 10
-    selectedWeapons: 0000000001000000
+    - <WeaponType>k__BackingField: 4
+      <CurrentPoints>k__BackingField: 0
+      <MaxPoints>k__BackingField: 10
+    selectedWeapons: 0000000002000000
     playerDeck:
     - weapon: 0
       weaponDeck:
@@ -47,16 +50,28 @@ MonoBehaviour:
       weaponDeck:
       - _actionClassName: Headshot
         <IsEvolved>k__BackingField: 0
-      - _actionClassName: Flurry
+      - _actionClassName: Silencer
         <IsEvolved>k__BackingField: 0
-      - _actionClassName: Jab
+      - _actionClassName: IronSights
         <IsEvolved>k__BackingField: 0
-      - _actionClassName: CounterStrike
+      - _actionClassName: QuickDraw
         <IsEvolved>k__BackingField: 0
       - _actionClassName: HipFire
         <IsEvolved>k__BackingField: 1
       - _actionClassName: PistolWhip
         <IsEvolved>k__BackingField: 1
+    - weapon: 2
+      weaponDeck:
+      - _actionClassName: Brace
+        <IsEvolved>k__BackingField: 0
+      - _actionClassName: LeftHook
+        <IsEvolved>k__BackingField: 0
+      - _actionClassName: RightHook
+        <IsEvolved>k__BackingField: 0
+      - _actionClassName: Pummel
+        <IsEvolved>k__BackingField: 0
+      - _actionClassName: FollowThrough
+        <IsEvolved>k__BackingField: 0
   IvesData:
     name: Ives
     playerWeaponProficiency:

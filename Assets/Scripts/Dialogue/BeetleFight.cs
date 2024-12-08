@@ -12,6 +12,7 @@ using LevelSelectInformation;
 //@author: Andrew
 public class BeetleFight : DialogueClasses
 {
+
     [SerializeField] private Jackie jackie;
     [SerializeField] private Transform jackieDefaultTransform;
     [SerializeField] private Transform jackieChasingTransform;

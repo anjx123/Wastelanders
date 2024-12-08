@@ -3,27 +3,33 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using static CardDatabase;
+using static ISubWeaponType;
+using static WeaponEditInformation;
 
 public class WeaponEdit : MonoBehaviour
 {
-    private CardDatabase.WeaponType type;
+    [SerializeField] private Color baseColor = new Color(1f, 1f, 1f, 1f);
+    [SerializeField] private Color hoverColor = new Color(0.6f, 0.6f, 0.6f, 1f);
     private bool isMouseDown = false;
     public TMP_Text editText;
     private bool isLocked = false;
+    private WeaponEditInformation WeaponEditInformation { get; set; }
 
 #nullable enable
-    public delegate void WeaponEditDelegate(CardDatabase.WeaponType type);
+    public delegate void WeaponEditDelegate(WeaponEditInformation weaponEditInformation);
     public static event WeaponEditDelegate? WeaponEditEvent;
 
 
-    public void SetType(CardDatabase.WeaponType type)
+    public void InitializeWeaponEdit(WeaponType type, bool hasSubFolders, GetRenderableCards getCards)
     {
-        this.type = type;
+        WeaponEditInformation = new WeaponEditInformation(type, hasSubFolders, getCards);
     }
+
     public void OnMouseDown()
     {
         if (isLocked) return;
-        GetComponent<SpriteRenderer>().color = new Color(0.4f, 0.4f, 0.4f);
+        GetComponent<SpriteRenderer>().color = hoverColor;
         isMouseDown = true;
     }
 
@@ -32,8 +38,8 @@ public class WeaponEdit : MonoBehaviour
         if (isLocked) return;
         if (isMouseDown)
         {
-            GetComponent<SpriteRenderer>().color = Color.white;
-            WeaponEditEvent?.Invoke(type);
+            GetComponent<SpriteRenderer>().color = baseColor;
+            WeaponEditEvent?.Invoke(WeaponEditInformation);
         }
         isMouseDown = false;
     }
@@ -41,13 +47,13 @@ public class WeaponEdit : MonoBehaviour
     public void OnMouseEnter()
     {
         if (isLocked) return;
-        GetComponent<SpriteRenderer>().color = new Color(0.6f, 0.6f, 0.6f);
+        GetComponent<SpriteRenderer>().color = hoverColor;
     }
 
     public void OnMouseExit()
     {
         if (isLocked) return;
-        GetComponent<SpriteRenderer>().color = Color.white;
+        GetComponent<SpriteRenderer>().color = baseColor;
         isMouseDown = false;
     }
 
@@ -62,3 +68,7 @@ public class WeaponEdit : MonoBehaviour
         SetText(isLocked ? "LOCKED" : "EDIT DECK");
     }
 }
+
+public delegate List<ActionClass> GetRenderableCards(CardDatabase cardDatabase);
+public record WeaponEditInformation(WeaponType WeaponType, bool ShowSubFolders, GetRenderableCards GetCards);
+
