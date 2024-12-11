@@ -46,6 +46,7 @@ public class CombatCardDisplayManager : MonoBehaviour
         descriptionHolder.transform.localPosition = new Vector3(0, -2.5f, 0);
         descriptionHolder.GetComponentInChildren<MeshRenderer>().sortingLayerName = descriptionHolder.GetComponent<SpriteRenderer>().sortingLayerName;
         descriptionHolder.GetComponentInChildren<MeshRenderer>().sortingOrder = descriptionHolder.GetComponent<SpriteRenderer>().sortingOrder + 1;
+        descriptionHolder.AddComponent<CardInfoDisable>();
         descriptionHolder.SetActive(false);
     }
 
