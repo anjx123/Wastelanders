@@ -38,6 +38,18 @@ public abstract class EntityClass : SelectClass
         NeutralTeam,
         EnemyTeam,
     }
+    public static EntityTeam OppositeTeam(this EntityTeam entityTeam)
+    {
+        return entityTeam switch
+        {
+            EntityTeam.PlayerTeam => EntityTeam.EnemyTeam,
+            EntityTeam.EnemyTeam => EntityTeam.PlayerTeam,
+            EntityTeam.NeutralTeam => EntityTeam.NeutralTeam,
+            _ => EntityTeam.NoTeam
+        };
+    }
+
+
     public bool IsDead { get; set; }
     protected Vector3 initialPosition;
     private bool crosshairStaysActive = false;

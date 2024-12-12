@@ -4,8 +4,9 @@ using UnityEngine.UIElements;
 
 namespace Cards.EnemyCards.FrogCards
 {
-    public class BurpCard : FrogAttacks
+    public class BurpCard : FrogAttacks, IPlayablePrincessFrogCard
     {
+        [SerializeField] private List<GameObject> SerializedSpawnableEnemies = new List<GameObject>();
         public static readonly List<GameObject> SpawnableEnemies = new List<GameObject>();
 
         public override void Initialize()
@@ -15,6 +16,7 @@ namespace Cards.EnemyCards.FrogCards
             myName = "Burp";
             description = "On Hit: Lose 2 Resonate, if so, spawn a random monster.";
 
+            CostToAddToDeck = 2;
             lowerBound = upperBound = 1;
             Speed = 2;
             CardType = CardType.RangedAttack;
@@ -31,12 +33,18 @@ namespace Cards.EnemyCards.FrogCards
             var position = Target.transform.position + projectileDirection;
 
 
-            var prefab = SpawnableEnemies[Random.Range(0, SpawnableEnemies.Count)];
+            var prefab = GetAppropriateSpawningList()[Random.Range(0, GetAppropriateSpawningList().Count)];
             var parent = Origin.transform.parent;
             var spawn = Instantiate(prefab, position, Quaternion.identity, parent);
             var entity = spawn.GetComponent<EntityClass>();
+            entity.Team = Origin.Team;
 
-            entity.transform.localScale = Vector3.one * (entity is Beetle ? 0.75f : 1);
+            entity.transform.localScale = Vector3.one * (entity is Beetle ? Beetle.BEETLE_SCALING : 1);
+        }
+
+        private List<GameObject> GetAppropriateSpawningList()
+        {
+            return SerializedSpawnableEnemies.Count != 0 ? SerializedSpawnableEnemies : SpawnableEnemies;
         }
     }
 }

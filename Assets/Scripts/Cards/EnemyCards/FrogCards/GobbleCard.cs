@@ -2,7 +2,7 @@ using Entities;
 
 namespace Cards.EnemyCards.FrogCards
 {
-    public class GobbleCard : FrogAttacks
+    public class GobbleCard : ActionClass, IPlayablePrincessFrogCard
     {
         public override void Initialize()
         {
@@ -12,6 +12,7 @@ namespace Cards.EnemyCards.FrogCards
             description = "If attacking a crystal: Instantly destroys it, then this monster gains 5 Resonate.";
 
             lowerBound = upperBound = 2;
+            CostToAddToDeck = 2;
             Speed = 3;
             CardType = CardType.MeleeAttack;
         }

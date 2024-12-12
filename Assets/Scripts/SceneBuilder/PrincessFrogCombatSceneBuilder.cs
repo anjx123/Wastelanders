@@ -210,10 +210,21 @@ namespace SceneBuilder
             }
         }
 
+        private void UpdatePlayerLayout()
+        {
+            List<EntityClass> players = CombatManager.Instance.GetPlayers();
+
+
+            var positions = PositionsFrom(playersPosition, players.Count);
+            for (var i = 0; i < players.Count; i++)
+            {
+                players[i].SetReturnPosition(entityContainer.transform.position + positions[i]);
+            }
+        }
+
         private void HandleEntityChange(EntityClass entity)
         {
-            if (entity is not EnemyClass) return;
-
+            UpdatePlayerLayout();
             UpdateEnemyLayout();
         }
 
