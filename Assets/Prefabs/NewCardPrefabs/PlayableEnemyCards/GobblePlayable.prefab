@@ -112,7 +112,7 @@ MonoBehaviour:
   IsEvolved: 0
   icon: {fileID: 21300000, guid: 7641ab4ad1d1e40939e9be17591e6a4e, type: 3}
   cardBack: {fileID: 21300000, guid: 0a827eeec6ce44b03a2e1fef7d2fad4c, type: 3}
-  evolvedCardBack: {fileID: 0}
+  evolvedCardBack: {fileID: 21300000, guid: 6ff7012b6a06cfc44befdd4974ee6cc5, type: 3}
   cardUI: {fileID: 6744338300813824953}
   data:
     <ActionClassName>k__BackingField: 

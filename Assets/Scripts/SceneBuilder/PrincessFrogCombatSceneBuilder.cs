@@ -162,8 +162,8 @@ namespace SceneBuilder
             {
                 return entity.Team switch
                 {
-                    EntityClass.EntityTeam.PlayerTeam => 100,
-                    EntityClass.EntityTeam.NeutralTeam => 20,
+                    EntityTeam.PlayerTeam => 100,
+                    EntityTeam.NeutralTeam => 20,
                     _ => 0
                 };
             };

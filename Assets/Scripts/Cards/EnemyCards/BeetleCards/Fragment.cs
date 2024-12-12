@@ -1,7 +1,8 @@
+using System.Collections;
 using UnityEngine;
 
 
-public class Fragment : ActionClass
+public class Fragment : ActionClass, IPlayableQueenCard
 {
     [SerializeField] private ProjectileBehaviour projectileBehaviour;
 
@@ -16,11 +17,11 @@ public class Fragment : ActionClass
         
         Speed = 5;
 
-        description = "If this attack hits a player, gain +1 resonate";
+        description = "If this attack hits an opponent, gain +1 resonate";
 
         myName = "Fragment";
         CardType = CardType.RangedAttack;
-        Renderer renderer = GetComponent<Renderer>();
+        CostToAddToDeck = 2;
     }
 
 
@@ -31,10 +32,16 @@ public class Fragment : ActionClass
         {
             Origin.AttackAnimation("IsShooting");
         }
-        StartCoroutine(projectileBehaviour.ProjectileAnimation(OnProjectileHit, Origin, Target));
+        StartCoroutine(HandleProjectile());
         if (Target is PlayerClass) {
             Origin.AddStacks(Resonate.buffName, 1);
         }
+    }
+
+    private IEnumerator HandleProjectile()
+    {
+        yield return projectileBehaviour.ProjectileAnimation(Origin, Target);
+        OnProjectileHit();
     }
 
     private void OnProjectileHit()

@@ -1,11 +1,7 @@
 using System.Collections;
-using System.Collections.Generic;
-using System.Xml.Linq;
 using UnityEngine;
-using static Unity.Collections.AllocatorManager;
-using static UnityEngine.UI.Image;
 
-public class Pincer : BeetleAttacks
+public class Pincer : BeetleAttacks, IPlayableBeetleCard
 {
     public const string PINCER_SOUND_EFFECT_NAME = "Pincer Cut";
 
@@ -22,7 +18,7 @@ public class Pincer : BeetleAttacks
 
         myName = "Pincer";
         CardType = CardType.MeleeAttack;
-        Renderer renderer = GetComponent<Renderer>();
+        CostToAddToDeck = 1;
     }
 
     public override void OnHit()

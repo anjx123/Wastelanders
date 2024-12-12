@@ -5,7 +5,7 @@ using UnityEngine;
 using static Unity.Collections.AllocatorManager;
 using static UnityEngine.UI.Image;
 
-public class Fling : BeetleAttacks
+public class Fling : BeetleAttacks, IPlayableBeetleCard
 {
     [SerializeField] private ProjectileBehaviour projectileBehaviour;
 
@@ -18,14 +18,12 @@ public class Fling : BeetleAttacks
         
         Speed = 3;
 
-        description = "If this card hits a player, gain +1 resonate.";
+        description = "If this card hits an opponent, gain +1 resonate.";
 
         myName = "Fling";
         CardType = CardType.RangedAttack;
-        Renderer renderer = GetComponent<Renderer>();
+        CostToAddToDeck = 2;
     }
-
-
 
     public override void OnHit()
     {
@@ -33,10 +31,16 @@ public class Fling : BeetleAttacks
         {
             Origin.AttackAnimation("IsShooting");
         } 
-        StartCoroutine(projectileBehaviour.ProjectileAnimation(OnProjectileHit, Origin, Target));
-        if (Target is PlayerClass) {
+        StartCoroutine(HandleProjectile());
+        if (Target.Team == Origin.Team.OppositeTeam()) {
             Origin.AddStacks(Resonate.buffName, 1);
         }
+    }
+
+    private IEnumerator HandleProjectile()
+    {
+        yield return projectileBehaviour.ProjectileAnimation(Origin, Target);
+        OnProjectileHit();
     }
 
     private void OnProjectileHit()

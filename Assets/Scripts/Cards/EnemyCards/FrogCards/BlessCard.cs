@@ -2,7 +2,7 @@ using Random = UnityEngine.Random;
 
 namespace Cards.EnemyCards.FrogCards
 {
-    public class BlessCard : FrogAttacks
+    public class BlessCard : ActionClass, IPlayablePrincessFrogCard
     {
         public override void Initialize()
         {
@@ -10,8 +10,9 @@ namespace Cards.EnemyCards.FrogCards
 
             myName = "Bless";
             description =
-                "If not staggered: Gives all monsters a random positive buff, then this monster loses 1 Resonate.";
+                "If not staggered: Gives all teammates a random positive buff, then I lose 1 Resonate.";
 
+            CostToAddToDeck = 2;
             lowerBound = upperBound = 1;
             Speed = 1;
             CardType = CardType.Defense;
@@ -25,9 +26,9 @@ namespace Cards.EnemyCards.FrogCards
             Origin.AttackAnimation("IsBlocking");
             Origin.ReduceStacks(Resonate.buffName, 1);
 
-            var enemies = Origin.transform.parent.GetComponentsInChildren<EnemyClass>();
+            var teamMates = Origin.Team.GetTeamMates();
             var buffs = new[] { Accuracy.buffName, Flow.buffName, Resonate.buffName };
-            foreach (var enemy in enemies)
+            foreach (var enemy in teamMates)
             {
                 enemy.AddStacks(buffs[Random.Range(0, buffs.Length)], 1);
             }

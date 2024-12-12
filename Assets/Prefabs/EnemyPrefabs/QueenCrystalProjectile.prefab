@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 635731027817270323}
   - component: {fileID: 8179133756290410631}
+  - component: {fileID: -1648877773900949324}
   m_Layer: 0
   m_Name: QueenCrystalProjectile
   m_TagString: Untagged
@@ -84,3 +85,16 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &-1648877773900949324
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1476519990824763769}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b04b8593f1087af499738bfdd52d8150, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectilePrefab: {fileID: 1476519990824763769}

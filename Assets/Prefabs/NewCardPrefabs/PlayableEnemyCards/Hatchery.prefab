@@ -34,7 +34,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7256956916184963317, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
       propertyPath: m_Name
-      value: Spawn
+      value: Hatchery
       objectReference: {fileID: 0}
     - target: {fileID: 7256956916184963317, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
       propertyPath: m_IsActive
@@ -119,7 +119,7 @@ MonoBehaviour:
   IsEvolved: 0
   icon: {fileID: 21300000, guid: 5c42f22b680694218be05c960a2e3400, type: 3}
   cardBack: {fileID: 21300000, guid: 0a827eeec6ce44b03a2e1fef7d2fad4c, type: 3}
-  evolvedCardBack: {fileID: 0}
+  evolvedCardBack: {fileID: 21300000, guid: 6ff7012b6a06cfc44befdd4974ee6cc5, type: 3}
   cardUI: {fileID: 7205946125008355181}
   data:
     <ActionClassName>k__BackingField: 
