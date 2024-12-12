@@ -31,25 +31,6 @@ public abstract class EntityClass : SelectClass
     }
 
     public EntityTeam Team { get; set; } = EntityTeam.NoTeam;
-    public enum EntityTeam
-    {
-        NoTeam,
-        PlayerTeam,
-        NeutralTeam,
-        EnemyTeam,
-    }
-    public static EntityTeam OppositeTeam(this EntityTeam entityTeam)
-    {
-        return entityTeam switch
-        {
-            EntityTeam.PlayerTeam => EntityTeam.EnemyTeam,
-            EntityTeam.EnemyTeam => EntityTeam.PlayerTeam,
-            EntityTeam.NeutralTeam => EntityTeam.NeutralTeam,
-            _ => EntityTeam.NoTeam
-        };
-    }
-
-
     public bool IsDead { get; set; }
     protected Vector3 initialPosition;
     private bool crosshairStaysActive = false;
@@ -207,6 +188,19 @@ public abstract class EntityClass : SelectClass
             animator.SetBool("IsMoving", false);
         }
     }
+
+    //Removes entity cards and self from BQ and combat manager. Kills itself
+    public virtual IEnumerator Die()
+    {
+        int runDistance = (Team == EntityTeam.PlayerTeam) ? -10 : 10;
+
+        BattleQueue.BattleQueueInstance.RemoveAllInstancesOfEntity(this);
+        DestroyDeck();
+
+        yield return StartCoroutine(MoveToPosition(myTransform.position + new Vector3(runDistance, 0, 0), 0, 0.8f));
+        this.gameObject.SetActive(false);
+    }
+
     public void FaceRight()
     {
         FlipTransform(this.transform, true);
@@ -382,9 +376,7 @@ public abstract class EntityClass : SelectClass
     }
     //Run this to reset the entity position back to its starting position
     public abstract IEnumerator ResetPosition();
-
-    //Removes entity cards and self from BQ and combat manager. Kills itself
-    public abstract IEnumerator Die();
+    public abstract void DestroyDeck();
     public abstract void PerformSelection();
 
     private void AssignTeam()
@@ -411,7 +403,6 @@ public abstract class EntityClass : SelectClass
 
         action(this);
     }
-
 
     protected void FaceOpponent()
     {

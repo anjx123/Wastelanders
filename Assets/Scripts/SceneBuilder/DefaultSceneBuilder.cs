@@ -40,7 +40,7 @@ namespace Director
 
         public void HandleSpawns(EntityClass entityClass)
         {
-            if (entityClass.Team == EntityClass.EntityTeam.PlayerTeam)
+            if (entityClass.Team == EntityTeam.PlayerTeam)
             {
 
             }

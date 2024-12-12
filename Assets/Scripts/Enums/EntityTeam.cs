@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public enum EntityTeam
@@ -23,4 +25,14 @@ public static class EntityTeamExtensions
         };
     }
 
+    public static List<EntityClass> GetTeamMates(this EntityTeam entityTeam)
+    {
+        return entityTeam switch
+        {
+            EntityTeam.PlayerTeam => CombatManager.Instance.GetPlayers(),
+            EntityTeam.EnemyTeam => CombatManager.Instance.GetEnemies(),
+            EntityTeam.NeutralTeam => CombatManager.Instance.GetNeutral(),
+            _ => new()
+        };
+    }
 }
