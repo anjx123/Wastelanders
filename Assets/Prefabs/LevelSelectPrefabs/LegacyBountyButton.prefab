@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 5208275937466854684}
   - component: {fileID: 2347539814468709989}
   m_Layer: 5
-  m_Name: BountyButton
+  m_Name: LegacyBountyButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

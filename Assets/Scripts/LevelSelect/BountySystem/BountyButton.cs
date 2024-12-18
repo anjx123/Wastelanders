@@ -1,6 +1,7 @@
 using BountySystem;
 using System;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -8,49 +9,65 @@ using UnityEngine.UI;
 // A Specific Bounty Button Component
 public class BountyButton : MonoBehaviour
 {
-    [SerializeField] private TMP_Text _textMeshPro;
-    [SerializeField] private Image checkMark;
+    [SerializeField] private TMP_Text bountyTitle;
+    [SerializeField] private SpriteRenderer bountyBackRenderer;
+    [SerializeField] private SpriteRenderer rewardIconRenderer;
+    [SerializeField] private SpriteRenderer selectedRenderer;
+    [SerializeField] private Sprite completed;
+    [SerializeField] private Sprite incomplete;
 
+    [Range(0, 1)]
+    [SerializeField] private float hoverAlpha; // transparency level of selectedSprite when mouse is over
 
     // late init !!
     private IBounties bounty;
 #nullable enable
     private bool selected = false;
-    private ColorBlock activeColors;
-    private ColorBlock inactiveColors;
-    private const float INACTIVE_ALPHA = 0.5f;
+    private bool mouseOver = false;
 
     public delegate void BountyButtonDelegate(IBounties bounty);
     public static event BountyButtonDelegate? BountyOnSelectEvent;
+    public static event BountyButtonDelegate? BountyOnHoverEvent; // Needed for updating popup board
+    public static event BountyButtonDelegate? BountyOnHoverEndEvent;  // Needed for updating popup board
 
-    protected virtual void Awake()
-    {
-        ApplyColouring();
+    public void SetRewardIcon(Sprite s) {
+        rewardIconRenderer.sprite = s;
     }
 
-    private void ApplyColouring()
-    {
-        Button button = GetComponent<Button>();
-        activeColors = button.colors;
-
-        inactiveColors = activeColors;
-        Color inactiveNormalColor = inactiveColors.normalColor;
-        inactiveNormalColor.a = INACTIVE_ALPHA;
-        inactiveColors.normalColor = inactiveNormalColor;
-        inactiveColors.selectedColor = inactiveNormalColor;
-
-
-        button.colors = selected ? activeColors : inactiveColors;
-    }
-
-    public void OnEnable()
+    void OnEnable()
     {
         BountyOnSelectEvent += HandleOtherBountySelectedEvent;
     }
 
-    public void OnDisable()
+    void OnDisable()
     {
         BountyOnSelectEvent -= HandleOtherBountySelectedEvent;
+    }
+
+    void OnMouseOver()
+    {
+        mouseOver = true;
+        if (Input.GetMouseButtonDown(0))
+        {
+            OnPress();
+        }
+    }
+
+    void OnMouseEnter()
+    {
+        BountyOnHoverEvent?.Invoke(bounty);
+        if (selected) return;
+        selectedRenderer.gameObject.SetActive(true);
+        UpdateSelectedAlpha(hoverAlpha);
+    }
+
+    void OnMouseExit()
+    {
+        BountyOnHoverEndEvent?.Invoke(bounty);
+        mouseOver = false;
+        if (selected) return;
+        selectedRenderer.gameObject.SetActive(false);
+        UpdateSelectedAlpha(1f);
     }
 
     private void HandleOtherBountySelectedEvent(IBounties bounty)
@@ -58,13 +75,14 @@ public class BountyButton : MonoBehaviour
         if (bounty != this.bounty) Deselected();
     }
 
-    public void OnPress() 
+    public void OnPress()
     {
         selected = !selected;
         if (selected)
         {
             Selected();
-        } else
+        }
+        else
         {
             Deselected();
         }
@@ -75,13 +93,15 @@ public class BountyButton : MonoBehaviour
         selected = true;
         BountyManager.Instance.ActiveBounty = bounty;
         BountyOnSelectEvent?.Invoke(bounty);
-        GetComponent<Button>().colors = activeColors;
+        selectedRenderer.gameObject.SetActive(true);
+        UpdateSelectedAlpha(1f);
     }
 
     private void Deselected()
     {
         selected = false;
-        GetComponent<Button>().colors = inactiveColors;
+        if (!mouseOver) selectedRenderer.gameObject.SetActive(false);
+        else UpdateSelectedAlpha(hoverAlpha);
     }
 
     public void Initialize(IBounties bounty)
@@ -92,7 +112,14 @@ public class BountyButton : MonoBehaviour
 
     private void Redraw()
     {
-        _textMeshPro.text = bounty?.BountyName;
-        checkMark.enabled = BountyManager.Instance.IsBountyCompleted(bounty);
+        // bountyTitle.text = bounty?.BountyName;
+        bountyBackRenderer.sprite = BountyManager.Instance.IsBountyCompleted(bounty) ? completed : incomplete;
+    }
+
+    private void UpdateSelectedAlpha(float alpha)
+    {
+        Color c = selectedRenderer.color;
+        c.a = alpha;
+        selectedRenderer.color = c;
     }
 }
