@@ -963,14 +963,14 @@ RectTransform:
   m_GameObject: {fileID: 725345511}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalScale: {x: 0.4, y: 0.4, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1645370202}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -14, y: -31.600006}
+  m_AnchoredPosition: {x: -21.5, y: -41.875}
   m_SizeDelta: {x: 319, y: 69}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &725345513
@@ -1690,7 +1690,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1818431061}
   - component: {fileID: 1818431064}
-  - component: {fileID: 1818431063}
+  - component: {fileID: 1818431065}
   - component: {fileID: 1818431062}
   m_Layer: 0
   m_Name: StartLevel
@@ -1708,15 +1708,15 @@ RectTransform:
   m_GameObject: {fileID: 1818431060}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.6327226, y: 0.6327226, z: 0.6327226}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1645370202}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -29.400024, y: 21}
-  m_SizeDelta: {x: 319, y: 69}
+  m_AnchoredPosition: {x: -14, y: 20}
+  m_SizeDelta: {x: 342, y: 158}
   m_Pivot: {x: 1, y: 0}
 --- !u!114 &1818431062
 MonoBehaviour:
@@ -1758,12 +1758,12 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 1818431063}
+  m_TargetGraphic: {fileID: 1818431065}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: ContractSelect, Assembly-CSharp
+      - m_Target: {fileID: 175945930}
+        m_TargetAssemblyTypeName: BountySelect, Assembly-CSharp
         m_MethodName: StartLevel
         m_Mode: 1
         m_Arguments:
@@ -1774,7 +1774,15 @@ MonoBehaviour:
           m_StringArgument: SelectionScreen
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &1818431063
+--- !u!222 &1818431064
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1818431060}
+  m_CullTransparentMesh: 1
+--- !u!114 &1818431065
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1794,7 +1802,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 1751e33bf51a77a40b3b9511678fee78, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a521f5d737a37594a9b90f3c4c633656, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1804,14 +1812,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!222 &1818431064
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1818431060}
-  m_CullTransparentMesh: 1
 --- !u!1 &1918667121
 GameObject:
   m_ObjectHideFlags: 0

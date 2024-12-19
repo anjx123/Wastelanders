@@ -30,7 +30,8 @@ public class BountyButton : MonoBehaviour
     public static event BountyButtonDelegate? BountyOnHoverEvent; // Needed for updating popup board
     public static event BountyButtonDelegate? BountyOnHoverEndEvent;  // Needed for updating popup board
 
-    public void SetRewardIcon(Sprite s) {
+    public void SetRewardIcon(Sprite s)
+    {
         rewardIconRenderer.sprite = s;
     }
 
@@ -100,6 +101,7 @@ public class BountyButton : MonoBehaviour
     private void Deselected()
     {
         selected = false;
+        if (BountyManager.Instance.ActiveBounty == bounty) BountyManager.Instance.ActiveBounty = null;
         if (!mouseOver) selectedRenderer.gameObject.SetActive(false);
         else UpdateSelectedAlpha(hoverAlpha);
     }
