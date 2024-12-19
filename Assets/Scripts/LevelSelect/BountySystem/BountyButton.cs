@@ -114,7 +114,7 @@ public class BountyButton : MonoBehaviour
 
     private void Redraw()
     {
-        // bountyTitle.text = bounty?.BountyName;
+        bountyTitle.text = bounty?.BountyName;
         bountyBackRenderer.sprite = BountyManager.Instance.IsBountyCompleted(bounty) ? completed : incomplete;
     }
 
