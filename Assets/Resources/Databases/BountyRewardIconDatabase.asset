@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 042593001fe65bc44bc7bc9c7a8e6521, type: 3}
+  m_Name: BountyRewardIconDatabase
+  m_EditorClassIdentifier: 
+  pairs:
+  - <BountyName>k__BackingField: SlimeFest
+    <Icon>k__BackingField: {fileID: 21300000, guid: dd8cc9f22fab37347beba8ec3b041c9f, type: 3}
+  - <BountyName>k__BackingField: FrogFest
+    <Icon>k__BackingField: {fileID: 21300000, guid: 09d382d01f04d3a40be04169f9944b3c, type: 3}
+  - <BountyName>k__BackingField: Solo Mission
+    <Icon>k__BackingField: {fileID: 21300000, guid: 37bbc3e0e4af26b43ab745918185fc6e, type: 3}
+  - <BountyName>k__BackingField: Queen and Princess
+    <Icon>k__BackingField: {fileID: 21300000, guid: 5c59be28949fc4359bdc7f1c11394014, type: 3}
+  - <BountyName>k__BackingField: Buffed Princess
+    <Icon>k__BackingField: {fileID: 21300000, guid: 02a7e04bb189642038f3da2a9764308f, type: 3}
+  - <BountyName>k__BackingField: Exhausting Mission
+    <Icon>k__BackingField: {fileID: 0}
