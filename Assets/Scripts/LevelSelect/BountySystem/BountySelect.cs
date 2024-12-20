@@ -72,10 +72,6 @@ public class BountySelect : MonoBehaviour
         {
             OpenScene(BountyManager.Instance.ActiveBounty.SceneName);
         }
-        else
-        {
-            // TODO: Say select a bounty first !
-        }
     }
 
     IEnumerator FadeLevelIn(string levelName)
