@@ -32,9 +32,6 @@ public class Fling : BeetleAttacks, IPlayableBeetleCard
             Origin.AttackAnimation("IsShooting");
         } 
         StartCoroutine(HandleProjectile());
-        if (Target.Team == Origin.Team.OppositeTeam()) {
-            Origin.AddStacks(Resonate.buffName, 1);
-        }
     }
 
     private IEnumerator HandleProjectile()
@@ -45,6 +42,11 @@ public class Fling : BeetleAttacks, IPlayableBeetleCard
 
     private void OnProjectileHit()
     {
+
+        if (Target.Team == Origin.Team.OppositeTeam())
+        {
+            Origin.AddStacks(Resonate.buffName, 1);
+        }
         AudioManager.Instance.PlaySFX(Fragment.FRAGMENT_SOUND_EFFECT_NAME);
         base.OnHit();
     }
