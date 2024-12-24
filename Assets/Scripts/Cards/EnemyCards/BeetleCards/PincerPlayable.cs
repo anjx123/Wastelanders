@@ -1,27 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Xml.Linq;
 using UnityEngine;
 
-// REQUIRES TESTING TODO (Haven't done this yet owing to the dearth of STAFF user presumably Ives.
-public class Flurry : StaffCards
+public class PincerPlayable : Pincer, IPlayableBeetleCard
 {
 #nullable enable
-    Flurry? activeDuplicateInstance = null;
+    PincerPlayable? activeDuplicateInstance = null;
     bool originalCopy = true;
 
-    // Start is called before the first frame update
     public override void Initialize()
     {
-        
-        CardType = CardType.MeleeAttack;
-        myName = "Flurry";
-        description = "Make this attack once, then make it attack again. Each attack on hit grants 1 Flow.";
-        lowerBound = 2;
-        upperBound = 4;
-        Speed = 3;
-
         base.Initialize();
+        CostToAddToDeck = 1;
+        description = "Pincer, then Pincer again!";
     }
 
     public override void ApplyEffect()
@@ -30,7 +21,7 @@ public class Flurry : StaffCards
         {
             if (activeDuplicateInstance == null)
             {
-                activeDuplicateInstance = Instantiate(this.GetComponent<Flurry>());
+                activeDuplicateInstance = Instantiate(this.GetComponent<PincerPlayable>());
                 activeDuplicateInstance.originalCopy = false;
                 activeDuplicateInstance.transform.position = new Vector3(-10, 10, 10);
             }
@@ -39,11 +30,5 @@ public class Flurry : StaffCards
             BattleQueue.BattleQueueInstance.AddAction(activeDuplicateInstance!);
         }
         base.ApplyEffect();
-    }
-
-    public override void OnHit()
-    {
-        base.OnHit();
-        Origin.AddStacks(Flow.buffName, 1);
     }
 }

@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class Pincer : BeetleAttacks, IPlayableBeetleCard
+public class Pincer : BeetleAttacks
 {
     public const string PINCER_SOUND_EFFECT_NAME = "Pincer Cut";
 
@@ -18,7 +18,6 @@ public class Pincer : BeetleAttacks, IPlayableBeetleCard
 
         myName = "Pincer";
         CardType = CardType.MeleeAttack;
-        CostToAddToDeck = 1;
     }
 
     public override void OnHit()
@@ -42,7 +41,7 @@ public class Pincer : BeetleAttacks, IPlayableBeetleCard
         }
     }
 
-    IEnumerator MoveBasedOnDirection(bool isFacingRight)
+    protected IEnumerator MoveBasedOnDirection(bool isFacingRight)
     {
         Vector3 moveRight = new Vector3(0.3f, 0, 0);
         float moveTime = 0.6f;
