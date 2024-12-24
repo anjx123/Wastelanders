@@ -39,6 +39,8 @@ namespace BountySystem
         public string BountyName { get; }
         public string Rewards { get; }
         public string SceneName { get; }
+        public GetBountyAssetsDelegate GetBountyAssets { get; }
+        public delegate BountyAssets GetBountyAssetsDelegate(BountyAssetDatabase database);
 
         // Update this if a new class implements me please, I don't want to use reflection.
         public static IEnumerable<IEnumerable<IBounties>> Values

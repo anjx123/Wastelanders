@@ -14,7 +14,7 @@ public class BountySelect : MonoBehaviour
     [SerializeField] private FadeScreenHandler fadeScreen;
     [SerializeField] private Transform[] bountyGrid;
     [SerializeField] private BountyButton bountyButtonPrefab;
-    [SerializeField] private BountyRewardIconDatabase bountyRewardIconDatabase;
+    [SerializeField] private BountyAssetDatabase bountyRewardIconDatabase;
 
 
     [SerializeField] private TMP_Text bountyTitle;
@@ -27,6 +27,7 @@ public class BountySelect : MonoBehaviour
     {
         BountyButton.BountyOnHoverEvent += OnBountyHover;
         BountyButton.BountyOnHoverEndEvent += OnBountyHoverEnd;
+        DeckSelectionArrow.DeckSelectionArrowEvent += OnBackPressed;
         ConstructBountyButtons();
         fadeScreen.SetDarkScreen();
         StartCoroutine(fadeScreen.FadeInLightScreen(1f));
@@ -36,11 +37,12 @@ public class BountySelect : MonoBehaviour
     {
         BountyButton.BountyOnHoverEvent -= OnBountyHover;
         BountyButton.BountyOnHoverEndEvent -= OnBountyHoverEnd;
+        DeckSelectionArrow.DeckSelectionArrowEvent -= OnBackPressed;
     }
 
     public void ConstructBountyButtons()
     {
-        var bountyCollection = IBounties.Values.SelectMany(innerList => innerList).ToList();
+        var bountyCollection = BountyManager.Instance.SelectedBountyInformation?.BountyCollection;
         if (bountyCollection == null) return;
 
         int ind = 0;
@@ -49,15 +51,13 @@ public class BountySelect : MonoBehaviour
             BountyButton b = CreateButtonForBounty(bounty);
             b.transform.SetParent(bountyGrid[ind++]);
             b.transform.localPosition = Vector3.zero;
-            Sprite s = bountyRewardIconDatabase.pairs.Find((match) => match.BountyName == bounty.BountyName).Icon;
-            b.SetRewardIcon(s);
         }
     }
 
     private BountyButton CreateButtonForBounty(IBounties bounty)
     {
         BountyButton bountyButton = Instantiate(bountyButtonPrefab);
-        bountyButton.Initialize(bounty);
+        bountyButton.Initialize(bounty, bountyRewardIconDatabase);
         return bountyButton;
     }
 
@@ -123,4 +123,8 @@ public class BountySelect : MonoBehaviour
         SetPopupText(BountyManager.Instance.ActiveBounty);
     }
 
+    private void OnBackPressed()
+    {
+        GameStateManager.Instance.LoadScene(GameStateManager.LEVEL_SELECT_NAME);
+    }
 }

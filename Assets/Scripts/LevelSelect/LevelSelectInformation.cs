@@ -74,7 +74,6 @@ namespace LevelSelectInformation
 
         public BountyInformation(IEnumerable<IBounties> bounties, float levelId)
         {
-
             LevelID = levelId;
             BountyCollection = bounties;
         }

@@ -21,6 +21,7 @@ public class BountyButton : MonoBehaviour
 
     // late init !!
     private IBounties bounty;
+    private BountyAssetDatabase bountyAssetDatabase;
 #nullable enable
     private bool selected = false;
     private bool mouseOver = false;
@@ -29,11 +30,6 @@ public class BountyButton : MonoBehaviour
     public static event BountyButtonDelegate? BountyOnSelectEvent;
     public static event BountyButtonDelegate? BountyOnHoverEvent; // Needed for updating popup board
     public static event BountyButtonDelegate? BountyOnHoverEndEvent;  // Needed for updating popup board
-
-    public void SetRewardIcon(Sprite s)
-    {
-        rewardIconRenderer.sprite = s;
-    }
 
     void OnEnable()
     {
@@ -106,14 +102,16 @@ public class BountyButton : MonoBehaviour
         else UpdateSelectedAlpha(hoverAlpha);
     }
 
-    public void Initialize(IBounties bounty)
+    public void Initialize(IBounties bounty, BountyAssetDatabase database)
     {
         this.bounty = bounty;
+        this.bountyAssetDatabase = database;
         Redraw();
     }
 
     private void Redraw()
     {
+        rewardIconRenderer.sprite = bounty?.GetBountyAssets(bountyAssetDatabase).Sprite;
         bountyTitle.text = bounty?.BountyName;
         bountyBackRenderer.sprite = BountyManager.Instance.IsBountyCompleted(bounty) ? completed : incomplete;
     }
