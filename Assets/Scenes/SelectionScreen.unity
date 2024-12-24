@@ -679,6 +679,10 @@ PrefabInstance:
       propertyPath: m_text
       value: IVES
       objectReference: {fileID: 0}
+    - target: {fileID: 5911968755026736062, guid: 9fa0880b5a45a1e4da7fca3f70cd874a, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 3ccf4a38027d9db428dee233d51c28af, type: 2}
     - target: {fileID: 6925715889704249777, guid: 9fa0880b5a45a1e4da7fca3f70cd874a, type: 3}
       propertyPath: m_Name
       value: Ives Portrait
@@ -875,10 +879,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2016508819}
     m_Modifications:
-    - target: {fileID: 2571950759499679109, guid: 9f5b6b4e42a9a5e44aea3cf8872c4f20, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 305bbe4aee0eef34586b3def011ea974, type: 3}
     - target: {fileID: 1808863300182831546, guid: f4e3c39036a0e964ca15018d4479d8e4, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -955,6 +955,10 @@ PrefabInstance:
       propertyPath: type
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 2571950759499679109, guid: 9f5b6b4e42a9a5e44aea3cf8872c4f20, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 305bbe4aee0eef34586b3def011ea974, type: 3}
     m_RemovedComponents:
     - {fileID: 6999416380711509476, guid: 9f5b6b4e42a9a5e44aea3cf8872c4f20, type: 3}
     m_RemovedGameObjects: []

@@ -16,7 +16,7 @@ namespace BountySystem
         public static readonly PlayerContracts DECREASED_HAND_SIZE = new();
     }
 
-    public class EnemySpawningContracts: IContracts
+    public class EnemySpawningContracts : IContracts
     {
         public static readonly EnemySpawningContracts QUEEN_BEETLE_SPAWN = new();
         public static readonly EnemySpawningContracts SLIME_SPAWN = new();
@@ -37,7 +37,10 @@ namespace BountySystem
         public HashSet<IContracts> ContractSet { get; }
         public string FlavourText { get; }
         public string BountyName { get; }
+        public string Rewards { get; }
         public string SceneName { get; }
+        public GetBountyAssetsDelegate GetBountyAssets { get; }
+        public delegate BountyAssets GetBountyAssetsDelegate(BountyAssetDatabase database);
 
         // Update this if a new class implements me please, I don't want to use reflection.
         public static IEnumerable<IEnumerable<IBounties>> Values
