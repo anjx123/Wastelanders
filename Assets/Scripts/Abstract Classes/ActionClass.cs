@@ -171,7 +171,7 @@ public int Speed { get; set; }
 
     public bool IsPlayedByPlayer()
     {
-        return Origin.GetType().IsSubclassOf(typeof(PlayerClass));
+        return Origin.Team == EntityTeam.PlayerTeam;
     }
 
     public virtual void Initialize()
