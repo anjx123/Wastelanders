@@ -183,6 +183,9 @@ public abstract class EntityClass : SelectClass
             elapsedTime += Time.deltaTime;
             yield return null;
         }
+
+        if (radius == 0) myTransform.position = destination; // Ensure the final position is set exactly.
+
         if (HasAnimationParameter("IsMoving"))
         {
             animator.SetBool("IsMoving", false);

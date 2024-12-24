@@ -26,21 +26,25 @@ namespace SceneBuilder
 
         public void OnEnable()
         {
-            EntityClass.OnEntitySpawn += HandleSpawns;
+            EntityClass.OnEntitySpawn += HandleEntityChange;
+            EntityClass.OnEntityDeath += HandleEntityChange;
         }
 
         public void OnDisable()
         {
 
-            EntityClass.OnEntitySpawn -= HandleSpawns;
+            EntityClass.OnEntitySpawn -= HandleEntityChange;
+            EntityClass.OnEntityDeath -= HandleEntityChange;
         }
 
-        public void HandleSpawns(EntityClass entityClass)
+        private void HandleEntityChange(EntityClass entityClass)
         {
             UpdatePlayerLayout();
         }
+
         private void UpdatePlayerLayout()
         {
+            if (PlayersPosition == null) return;
             List<EntityClass> players = CombatManager.Instance.GetPlayers();
 
             var positions = PositionsFrom(PlayersPosition.transform.position, players.Count);

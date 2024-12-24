@@ -1,4 +1,5 @@
 using LevelSelectInformation;
+using SceneBuilder;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -11,9 +12,8 @@ using UnityEngine.SceneManagement;
 public class PreQueenFight : DialogueClasses
 {
     [SerializeField] private Jackie jackie;
-    [SerializeField] private Transform jackieDefaultTransform;
     [SerializeField] private Ives ives;
-    [SerializeField] private Transform ivesDefaultTransform;
+    [SerializeField] private Transform playerCombatTransform;
 
 
     //Plan One Parent
@@ -62,7 +62,7 @@ public class PreQueenFight : DialogueClasses
 
     [SerializeField] GameOver gameOver;
     [SerializeField] private bool jumpToCombat;
-
+    private DefaultSceneBuilder defaultSceneBuilder;
 
 
 
@@ -105,7 +105,8 @@ public class PreQueenFight : DialogueClasses
         yield return new WaitForSeconds(0.5f);
         ives.OutOfCombat();
         jackie.OutOfCombat(); //Workaround for now, ill have to remove this once i manually start instantiating players
-        jackie.SetReturnPosition(jackieDefaultTransform.position);
+        defaultSceneBuilder = DefaultSceneBuilder.Construct();
+        defaultSceneBuilder.PlayersPosition = playerCombatTransform;
 
         CombatManager.Instance.SetEnemiesPassive(new List<EnemyClass>(bigCrystals));
 
@@ -380,7 +381,6 @@ public class PreQueenFight : DialogueClasses
                 yield return StartCoroutine(DialogueManager.Instance.StartDialogue(planThreeDialogue.Dialogue));
                 yield return StartCoroutine(CombatManager.Instance.FadeInLightScreen(0.5f));
 
-                ives.SetReturnPosition(ivesDefaultTransform.position);
                 StartCoroutine(ives.ResetPosition());
                 yield return StartCoroutine(jackie.ResetPosition()); //Jackie Runs into the scene
                 yield return new WaitForSeconds(MEDIUM_PAUSE);
@@ -476,11 +476,11 @@ public class PreQueenFight : DialogueClasses
         }
 
         {
-            StartCoroutine(jackie.MoveToPosition(jackieDefaultTransform.position, 0f, 1.3f));
-            yield return StartCoroutine(ives.MoveToPosition(ivesDefaultTransform.position, 0f, 1.5f));
-            jackie.SetReturnPosition(jackie.transform.position);
+            defaultSceneBuilder.PlayersPosition = playerCombatTransform;
+            StartCoroutine(jackie.ResetPosition());
+            yield return StartCoroutine(ives.ResetPosition());
+
             jackie.FaceRight();
-            ives.SetReturnPosition(ives.transform.position);
             ives.FaceRight();
             theQueen.OutOfCombat();
             theQueen.Emphasize();
