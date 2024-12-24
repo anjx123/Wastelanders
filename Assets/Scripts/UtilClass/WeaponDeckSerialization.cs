@@ -51,6 +51,15 @@ namespace WeaponDeckSerialization
         {
             ActionClass = actionClass;
             IsEvolved = isEvolved;
+            CheckIntegrity();
+        }
+
+        private void CheckIntegrity()
+        {
+            if (ActionClass == null)
+            {
+                Debug.LogWarning("Warning, there may be data corruption due to saving: " + ActionClass);
+            }
         }
     }
 
