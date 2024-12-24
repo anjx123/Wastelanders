@@ -8,23 +8,20 @@ namespace SceneBuilder
 {
     public class DefaultSceneBuilder : SceneBuilder
     {
-        protected override void Build()
-        {
-            DefaultDirector.Build();
-
+        private Transform _playerPosition;
+        public Transform PlayersPosition { 
+            get => _playerPosition;
+            set 
+            {
+                _playerPosition = value;    
+                UpdatePlayerLayout();
+            } 
         }
-    }
-}
-namespace Director
-{
-    public interface Director { }
+        protected override void Build() { }
 
-    public class DefaultDirector : MonoBehaviour, Director
-    {
-        public static DefaultDirector Build()
-        {
-            GameObject director = new GameObject(typeof(DefaultDirector).Name);
-            return director.AddComponent<DefaultDirector>();
+        public static DefaultSceneBuilder Construct() {
+            GameObject gameObject = new GameObject(typeof(DefaultSceneBuilder).Name);
+            return gameObject.AddComponent<DefaultSceneBuilder>();
         }
 
         public void OnEnable()
@@ -40,10 +37,33 @@ namespace Director
 
         public void HandleSpawns(EntityClass entityClass)
         {
-            if (entityClass.Team == EntityTeam.PlayerTeam)
-            {
+            UpdatePlayerLayout();
+        }
+        private void UpdatePlayerLayout()
+        {
+            List<EntityClass> players = CombatManager.Instance.GetPlayers();
 
+            var positions = PositionsFrom(PlayersPosition.transform.position, players.Count);
+            for (var i = 0; i < players.Count; i++)
+            {
+                players[i].SetReturnPosition(positions[i]);
             }
+        }
+        private static Vector3[] PositionsFrom(Vector2 centerCoordinate, int count)
+        {
+            var dx = -1f * Mathf.Sign(centerCoordinate.x);
+            const float dy = 1f;
+
+            var height = (count - 1) * dy;
+            var top = centerCoordinate.y + height / 2f;
+
+            var positions = new Vector3[count];
+            for (var i = 0; i < count; i++)
+            {
+                positions[i] = new Vector3(centerCoordinate.x + (i % 2 == 0 ? 1f : -1f) * dx, top - i * dy);
+            }
+
+            return positions;
         }
     }
 }

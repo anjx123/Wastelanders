@@ -32,14 +32,13 @@ namespace Cards.EnemyCards.FrogCards
             var projectileDirection = Vector3.down + (Origin.IsFacingRight() ? Vector3.left : Vector3.right);
             var position = Target.transform.position + projectileDirection;
 
-
             var prefab = GetAppropriateSpawningList()[Random.Range(0, GetAppropriateSpawningList().Count)];
             var parent = Origin.transform.parent;
             var spawn = Instantiate(prefab, position, Quaternion.identity, parent);
             var entity = spawn.GetComponent<EntityClass>();
             entity.Team = Origin.Team;
 
-            entity.transform.localScale = Vector3.one * (entity is Beetle ? Beetle.BEETLE_SCALING : 1);
+            entity.transform.localScale *= (entity is Beetle ? Beetle.BEETLE_SCALING : 1f);
         }
 
         private List<GameObject> GetAppropriateSpawningList()

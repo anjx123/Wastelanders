@@ -30,6 +30,23 @@ public class BattleQueue : MonoBehaviour
         RenderBQ();
     }
 
+    public void OnEnable()
+    {
+        CombatManager.PlayersWinEvent += ClearBattleQueue;
+        CombatManager.EnemiesWinEvent += ClearBattleQueue;
+    }
+
+    public void OnDisable()
+    {
+        CombatManager.PlayersWinEvent -= ClearBattleQueue;
+        CombatManager.EnemiesWinEvent -= ClearBattleQueue;
+    }
+
+    private void ClearBattleQueue()
+    {
+        actionQueue.Clear();
+    }
+
     // Retrieves the deletedCard from the action queue and gives it back to the player who played it.
     public void DeletePlayerAction(ActionClass deletedCard)
     {
@@ -121,6 +138,10 @@ public class BattleQueue : MonoBehaviour
     {
         private readonly List<ActionWrapper> array = new List<ActionWrapper>();
 
+        public void Clear()
+        {
+            array.Clear();
+        }
         public void Insert(ActionClass actionCard)
         {
             ActionWrapper insertingWrapper = CreateClashingWrapper(actionCard);

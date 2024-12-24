@@ -345,12 +345,15 @@ public class TutorialIntroduction : DialogueClasses
     private void IvesDies()
     {
         CombatManager.PlayersWinEvent -= IvesDies; //Setup Listener to set state to Game Win
+        CombatManager.EnemiesWinEvent -= EnemiesWin;
         CombatManager.Instance.GameState = GameState.GAME_WIN;
     }
 
     private void EnemiesWin()
     {
         StartCoroutine(GameLose());
+        CombatManager.PlayersWinEvent -= IvesDies;
+        CombatManager.EnemiesWinEvent -= EnemiesWin;
         CombatManager.Instance.GameState = GameState.GAME_LOSE;
     }
 

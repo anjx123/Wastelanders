@@ -33,7 +33,7 @@ public class Fragment : ActionClass, IPlayableQueenCard
             Origin.AttackAnimation("IsShooting");
         }
         StartCoroutine(HandleProjectile());
-        if (Target is PlayerClass) {
+        if (Target.Team == Origin.Team.OppositeTeam()) {
             Origin.AddStacks(Resonate.buffName, 1);
         }
     }

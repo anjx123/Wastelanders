@@ -13,7 +13,7 @@ public class Hatchery : ActionClass, IPlayableQueenCard
         upperBound = 4;
         
         Speed = 1;
-
+        
         description = "Spend +2 resonate to play this card. If this card is unstaggered, spawn 1 random beetle.";
 
         CostToAddToDeck = 2;
@@ -29,6 +29,7 @@ public class Hatchery : ActionClass, IPlayableQueenCard
 
         GameObject beetle = Instantiate(beetlePrefabs[Random.Range(0, beetlePrefabs.Length)]);
         beetle.transform.SetParent(Origin.transform.parent);
+        beetle.transform.transform.position = Origin.transform.position - new Vector3(0, 2, 0);
         beetle.transform.localScale *= Beetle.BEETLE_SCALING;
         beetle.GetComponent<EntityClass>().Team = Origin.Team;
     }
