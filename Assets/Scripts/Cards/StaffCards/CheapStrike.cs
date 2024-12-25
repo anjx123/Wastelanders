@@ -8,8 +8,8 @@ public class CheapStrike : StaffCards
     // Start is called before the first frame update
     public override void Initialize()
     {
-        lowerBound = IsEvolved ? 3 : 1;
-        upperBound = IsEvolved ? 3 : 1;
+        lowerBound = IsEvolved ? 3 : 2;
+        upperBound = IsEvolved ? 3 : 2;
         CostToAddToDeck = IsEvolved ? 3 : 2;
         Speed = 1;
 
@@ -22,8 +22,6 @@ public class CheapStrike : StaffCards
         Renderer renderer = GetComponent<Renderer>();
         CardType = CardType.MeleeAttack;
         base.Initialize();
-
-
     }
 
     public override void OnHit()

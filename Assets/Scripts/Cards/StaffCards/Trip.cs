@@ -5,12 +5,6 @@ using UnityEngine;
 
 public class Trip : StaffCards
 {
-    public override void OnCardStagger()
-    {
-        base.OnCardStagger();
-        Origin.AddStacks(Flow.buffName, 1);
-    }
-
     // Start is called before the first frame update
     public override void Initialize()
     {
@@ -20,15 +14,15 @@ public class Trip : StaffCards
         Speed = 2;
 
         myName = "Sweep";
-        description = "Attack, then gain 1 Flow.";
-        Renderer renderer = GetComponent<Renderer>();
+        description = "Attack, this card does not consume flow.";
         CardType = CardType.MeleeAttack;
         base.Initialize();
     }
 
-    public override void CardIsUnstaggered()
+    public override void ApplyEffect()
     {
-        base.CardIsUnstaggered();
-        Origin.AddStacks(Flow.buffName, 1);
+        int stacks = Origin.GetBuffStacks(Flow.buffName);
+        base.ApplyEffect();
+        Origin.AddStacks(Flow.buffName, stacks);
     }
 }

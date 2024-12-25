@@ -34,7 +34,7 @@ public class HipFire : PistolCards
     public override void Initialize()
     {
         lowerBound = 1;
-        upperBound = 5;
+        upperBound = 4;
         Speed = 1;
         description = "Make this attack once, if unstaggered, make it once again.";
         CardType = CardType.RangedAttack;

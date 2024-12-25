@@ -9,7 +9,7 @@ namespace Cards.EnemyCards.FrogCards
             base.Initialize();
 
             myName = "Gobble";
-            description = "If attacking a crystal: Instantly destroys it, then this monster gains 3 Resonate.";
+            description = "If attacking a crystal: Instantly destroy it.";
 
             lowerBound = upperBound = 2;
             CostToAddToDeck = 2;
@@ -24,18 +24,10 @@ namespace Cards.EnemyCards.FrogCards
 
         public override void OnHit()
         {
-            base.OnHit();
+            AudioManager.Instance.PlaySFX(Excavate.EXCAVATE_SOUND_EFFECT_NAME);
 
-            var crystal = Target as Crystals;
-            if (crystal)
-            {
-                var prior = Origin.GetBuffStacks(Resonate.buffName);
-                crystal.TakeDamage(Origin, crystal.Health);
-                /* Silly hack to always grant 3 stacks. */
-                Origin.AddStacks(Resonate.buffName, 3 + prior - Origin.GetBuffStacks(Resonate.buffName));
-            }
-            /* FrogAttacks doesn't call this in OnHit except via a projectile...? */
-            else Target.TakeDamage(Origin, rolledCardStats.actualRoll);
+            if (Target is Crystals) rolledCardStats.actualRoll = Target.Health;
+            base.OnHit();
         }
     }
 }

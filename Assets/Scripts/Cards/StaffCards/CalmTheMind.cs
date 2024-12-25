@@ -17,11 +17,17 @@ public class CalmTheMind : StaffCards
         Speed = 5;
         
         myName = "Calm The Mind";
-        description = "Block, then gain 2 stack of Flow.";
+        description = "Block, then gain 2 stack of Flow. This card does not consume flow.";
         
-        Renderer renderer = GetComponent<Renderer>();
         base.Initialize();
         CardType = CardType.Defense;
+    }
+
+    public override void ApplyEffect()
+    {
+        int stacks = Origin.GetBuffStacks(Flow.buffName);
+        base.ApplyEffect();
+        Origin.AddStacks(Flow.buffName, stacks);
     }
 
     public override void CardIsUnstaggered()

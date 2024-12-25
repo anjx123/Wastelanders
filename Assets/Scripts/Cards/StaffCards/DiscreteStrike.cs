@@ -4,11 +4,6 @@ using UnityEngine;
 
 public class DiscreteStrike : StaffCards
 {
-    public override void OnCardStagger()
-    {
-
-    }
-
     // Start is called before the first frame update
     public override void Initialize()
     {
@@ -18,7 +13,6 @@ public class DiscreteStrike : StaffCards
 
         myName = "Discrete Strike";
         description = "Gain 2 focus, then strike";
-        Renderer renderer = GetComponent<Renderer>();
         CardType = CardType.MeleeAttack;
         base.Initialize();
     }
@@ -28,5 +22,4 @@ public class DiscreteStrike : StaffCards
         Origin.AddStacks(Flow.buffName, 2);
         base.ApplyEffect();
     }
-
 }

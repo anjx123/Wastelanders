@@ -92,7 +92,8 @@ public abstract class EntityClass : SelectClass
         if (Health != 0)
         {
             percentageDone = Mathf.Clamp(damage / (float)Health, 0f, 1f);
-        } else
+        } 
+        else
         {
             IsDead = true;
             RemoveEntityFromCombat();
