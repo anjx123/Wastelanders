@@ -101,8 +101,6 @@ public class QueenBeetle : EnemyClass
             if (GetBuffStacks(Resonate.buffName) >= 2 && FindFirstOpenSlot() != -1 && (!usedSpawnThisRound || NumberOfAvailableSlots() > 1)) //Last condition fixes a bug where the queen can try to spawn 2 beetles but then hit the max spawn cap
             {
                 AttackWith(hatchery, CalculateAttackTarget(targets));
-                ReduceStacks(Resonate.buffName, 2);
-                UpdateBuffs();
                 usedSpawnThisRound = true;
             }
             else

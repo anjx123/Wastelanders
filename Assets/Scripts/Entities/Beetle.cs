@@ -9,7 +9,6 @@ using UnityEngine.UI;
 
 public abstract class Beetle : EnemyClass
 {
-    public const float BEETLE_SCALING = 0.6f;
     public delegate void GainedBuffsHandler(string buffType, int stacks, Beetle beetle); // queen should subscribe to this
     public static event GainedBuffsHandler OnGainBuffs;
 

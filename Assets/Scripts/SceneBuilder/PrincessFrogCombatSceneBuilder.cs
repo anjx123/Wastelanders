@@ -183,8 +183,6 @@ namespace SceneBuilder
             var spawn = Instantiate(prefab, position, Quaternion.identity, entityContainer.transform);
             var entity = spawn.GetComponent<EntityClass>();
 
-            entity.transform.localScale = Vector3.one * (entity is Beetle ? 0.75f : 1);
-            
             if (entity is PrincessFrog princessFrog)
             {
                 AdjustPrincessFrog(princessFrog);

@@ -26,6 +26,7 @@ public class BattleQueue : MonoBehaviour
 
     public void AddAction(ActionClass action)
     {
+        action.OnQueue();
         actionQueue.Insert(action);
         RenderBQ();
     }
@@ -50,6 +51,7 @@ public class BattleQueue : MonoBehaviour
     // Retrieves the deletedCard from the action queue and gives it back to the player who played it.
     public void DeletePlayerAction(ActionClass deletedCard)
     {
+        deletedCard.OnRetrieveFromQueue();
         actionQueue.RemoveWrapperWithActionClass(deletedCard);
         RenderBQ();
         PlayerClass player = (PlayerClass) deletedCard.Origin;
@@ -58,7 +60,7 @@ public class BattleQueue : MonoBehaviour
 
     public bool CanInsertPlayerCard(ActionClass actionClass)
     {
-        return actionQueue.CanInsertCard(actionClass);
+        return actionQueue.IsUniqueSpeed(actionClass);
     }
 
     //Remove all cards with (@param entity) as the target and origin
@@ -149,7 +151,7 @@ public class BattleQueue : MonoBehaviour
         }
 
         // Returns false if the player cannot insert a card into the queue due to duplicate speed.
-        public bool CanInsertCard(ActionClass actionCard)
+        public bool IsUniqueSpeed(ActionClass actionCard)
         {
             foreach (ActionWrapper existingWrapper in array)
             {

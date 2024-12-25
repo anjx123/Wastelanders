@@ -1,3 +1,4 @@
+using Cards.EnemyCards.FrogCards;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -56,13 +57,14 @@ namespace Entities
             var stacks = GetBuffStacks(Resonate.buffName);
             var chance = enemyCount switch
             {
-                4 => 1.0f,
-                3 => 0.7f,
-                2 => 0.5f,
-                1 => 0.2f,
-                _ => 0
+                4 => 0.8f,
+                3 => 0.5f,
+                2 => 0.2f,
+                1 => 0f,
+                0 => 0f,
+                _ => 1.0f
             };
-
+            
             switch (stacks)
             {
                 case > 6:
@@ -77,7 +79,7 @@ namespace Entities
                     AttackWith(hurl, CalculateAttackTarget(opponents));
                     AttackWith(hurl2, CalculateAttackTarget(opponents));
                     break;
-                default:
+                default: // 3 < case <= 6
                     if (neutral.Count > 0) AttackWith(gobble, CalculateAttackTarget(neutral));
                     else AttackWith(hurl, CalculateAttackTarget(opponents));
 
@@ -92,8 +94,8 @@ namespace Entities
         {
             if (amount == 0) return;
 
-            /* Lose stacks when taking (non-zero) damage. */
-            ReduceStacks(Resonate.buffName, 1);
+            /* Lose stacks when taking (non-zero) damage. Commented out for balance for now*/
+            //ReduceStacks(Resonate.buffName, 1);
         }
     }
 }

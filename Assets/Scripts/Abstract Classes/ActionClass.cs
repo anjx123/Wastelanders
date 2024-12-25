@@ -1,11 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.ConstrainedExecution;
-using UnityEngine;
-using TMPro;
-using UnityEngine.SceneManagement;
 using System;
 using Systems.Persistence;
+using UnityEngine;
 
 public abstract class ActionClass : SelectClass, IBind<ActionData>
 {
@@ -118,20 +113,21 @@ public int Speed { get; set; }
     public static event CardStateDelegate? CardStateChange;
 
 
-    public virtual void OnCardStagger()
-    {
-
-    }
+    public virtual void OnQueue() { }
+    public virtual void OnRetrieveFromQueue() { }
+    public virtual void OnCardStagger() { }
+    public virtual void CardIsUnstaggered() { }
+    public virtual void ClashWon() => Origin.combatInfo.setDiceColor(Color.green);
+    public virtual void ClashTied() => Origin.combatInfo.setDiceColor(Color.white);
+    public virtual void ClashLost() => Origin.combatInfo.setDiceColor(Color.red);
+    
 
     public virtual void Awake()
     {
         Initialize();
     }
 
-    public virtual void Start()
-    {
-
-    }
+    public virtual void Start() { }
 
     private void OnEnable()
     {
@@ -164,9 +160,11 @@ public int Speed { get; set; }
         this.Target.TakeDamage(Origin, rolledCardStats.actualRoll);
     }
 
-    public virtual void CardIsUnstaggered()
+    public virtual bool IsPlayableByPlayer(out PopupType popupType)
     {
-
+        bool canInsert = BattleQueue.BattleQueueInstance.CanInsertPlayerCard(this);
+        popupType = canInsert ? PopupType.None : PopupType.SameSpeed;
+        return canInsert;
     }
 
     public bool IsPlayedByPlayer()
@@ -432,20 +430,6 @@ public int Speed { get; set; }
         }
         return "";
     }
-
-    public virtual void ClashWon()
-    {
-        Origin.combatInfo.setDiceColor(Color.green);
-    }
-    public virtual void ClashTied()
-    {
-        Origin.combatInfo.setDiceColor(Color.white);
-    }
-    public virtual void ClashLost()
-    {
-        Origin.combatInfo.setDiceColor(Color.red);
-    }
-
 }
 
 [Serializable]

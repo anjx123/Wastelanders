@@ -4,13 +4,15 @@ namespace Cards.EnemyCards.FrogCards
 {
     public class BlessCard : ActionClass, IPlayablePrincessFrogCard
     {
+        private const int BLESS_COST = 1;
+
         public override void Initialize()
         {
             base.Initialize();
 
             myName = "Bless";
             description =
-                "If not staggered: Gives all teammates a random positive buff, then I lose 1 Resonate.";
+                $"Spend +{BLESS_COST} Resonate to play. If not staggered: Gain 1 Resonate and give all teammates a random positive buff.";
 
             CostToAddToDeck = 2;
             lowerBound = upperBound = 1;
@@ -18,13 +20,30 @@ namespace Cards.EnemyCards.FrogCards
             CardType = CardType.Defense;
         }
 
+        public override void OnQueue()
+        {
+            Origin.ReduceStacks(Resonate.buffName, BLESS_COST);
+        }
+
+        public override void OnRetrieveFromQueue()
+        {
+            Origin.AddStacks(Resonate.buffName, BLESS_COST);
+        }
+
+        public override bool IsPlayableByPlayer(out PopupType popupType)
+        {
+            bool isPlayable = base.IsPlayableByPlayer(out popupType);
+            bool enoughStacks = Origin.GetBuffStacks(Resonate.buffName) >= BLESS_COST;
+
+            popupType = enoughStacks ? popupType : PopupType.InsufficientResources;
+
+            return isPlayable && enoughStacks;
+        }
+
         public override void CardIsUnstaggered()
         {
-            var stacks = Origin.GetBuffStacks(Resonate.buffName);
-            if (stacks < 1) return;
-
             Origin.AttackAnimation("IsBlocking");
-            Origin.ReduceStacks(Resonate.buffName, 1);
+            Origin.AddStacks(Resonate.buffName, BLESS_COST);
 
             var teamMates = Origin.Team.GetTeamMates();
             var buffs = new[] { Accuracy.buffName, Flow.buffName, Resonate.buffName };

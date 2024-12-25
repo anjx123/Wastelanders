@@ -145,11 +145,12 @@ public class HighlightManager : MonoBehaviour // later all entity highlighter
         if (CombatManager.Instance.GameState != GameState.SELECTION || PauseMenu.IsPaused) return;
         if (selectedPlayer != null)
         {
-            if (BattleQueue.BattleQueueInstance.CanInsertPlayerCard(clicked) == false)
+            if (clicked.IsPlayableByPlayer(out PopupType popupType) == false)
             {
-                PopUpNotificationManager.Instance.DisplayWarning(PopupType.SameSpeed);
+                PopUpNotificationManager.Instance.DisplayWarning(popupType);
                 return;
             }
+
             if (currentHighlightedAction == null)
             {
                 clicked.ToggleSelected();
@@ -229,7 +230,8 @@ public class HighlightManager : MonoBehaviour // later all entity highlighter
             Vector3 v = new Vector3(x-distanceToLeft, y, -i);
             handItem.transform.position = v;
             handItem.transform.rotation = Quaternion.Euler(0, 0, -5);
-            insertingAction.SetCanPlay(BattleQueue.BattleQueueInstance.CanInsertPlayerCard(insertingAction));
+
+            insertingAction.SetCanPlay(insertingAction.IsPlayableByPlayer(out _));
         }
         RenderText(hand);
     }
