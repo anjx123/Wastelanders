@@ -10,10 +10,9 @@ public class RapidFire : PistolCards
         lowerBound = 1;
         upperBound = 4;
         Speed = 2;
-        description = "Attack, then consumes 1 Accuracy to replay Rapid Fire. On kill, gain 1 accuracy.";
+        description = "Attack, then continuously consumes 1 Accuracy to use Rapid Fire again. On kill, gain 1 accuracy.";
         CardType = CardType.RangedAttack;
         myName = "Rapid Fire";
-        Renderer renderer = GetComponent<Renderer>();
         base.Initialize();
     }
 

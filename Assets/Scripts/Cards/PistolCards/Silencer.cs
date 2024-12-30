@@ -14,10 +14,7 @@ public class Silencer : PistolCards
         description = "On hit, gain 2 Accuracy stacks.";
         myName = "Silencer";
         CardType = CardType.RangedAttack;
-        Renderer renderer = GetComponent<Renderer>();
         base.Initialize();
-
-
     }
 
     public override void OnHit()

@@ -11,8 +11,19 @@ public class HipFire : PistolCards
     HipFire? activeDuplicateInstance = null;
     bool originalCopy = true;
 
-    // @Author Muhammad
     public override void CardIsUnstaggered()
+    {
+        base.CardIsUnstaggered();
+        InsertDuplicate();
+    }
+
+    public override void OnCardStagger()
+    {
+        base.OnCardStagger();
+        InsertDuplicate();
+    }
+
+    private void InsertDuplicate()
     {
         if (originalCopy)
         {
@@ -26,7 +37,6 @@ public class HipFire : PistolCards
             activeDuplicateInstance.Target = Target;
             BattleQueue.BattleQueueInstance.AddAction(activeDuplicateInstance!);
         }
-        base.CardIsUnstaggered();
     }
 
 
@@ -36,7 +46,7 @@ public class HipFire : PistolCards
         lowerBound = 1;
         upperBound = 4;
         Speed = 3;
-        description = "Make this attack once, if unstaggered, make it once again.";
+        description = "Make this attack once, then make it again.";
         CardType = CardType.RangedAttack;
         myName = "Hip Fire";
 

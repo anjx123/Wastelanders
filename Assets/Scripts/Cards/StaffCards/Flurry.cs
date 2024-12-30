@@ -16,7 +16,7 @@ public class Flurry : StaffCards
         
         CardType = CardType.MeleeAttack;
         myName = "Flurry";
-        description = "Make this attack once, then make it attack again. Each attack on hit grants 1 Flow.";
+        description = "Make this attack once, then make it again. Each attack on hit grants 1 Flow.";
         lowerBound = 2;
         upperBound = 4;
         Speed = 3;
@@ -24,7 +24,19 @@ public class Flurry : StaffCards
         base.Initialize();
     }
 
-    public override void ApplyEffect()
+    public override void CardIsUnstaggered()
+    {
+        base.CardIsUnstaggered();
+        InsertDuplicate();
+    }
+
+    public override void OnCardStagger()
+    {
+        base.OnCardStagger();
+        InsertDuplicate();
+    }
+
+    private void InsertDuplicate()
     {
         if (originalCopy)
         {
@@ -38,7 +50,6 @@ public class Flurry : StaffCards
             activeDuplicateInstance.Target = Target;
             BattleQueue.BattleQueueInstance.AddAction(activeDuplicateInstance!);
         }
-        base.ApplyEffect();
     }
 
     public override void OnHit()
