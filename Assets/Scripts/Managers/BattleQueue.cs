@@ -134,6 +134,12 @@ public class BattleQueue : MonoBehaviour
         }
     }
 
+    // Provide immutable copy of array
+    internal List<ActionWrapper> ProvideArray()
+    {
+        return new(actionQueue.GetList());
+    }
+
     // A sorted array implementation for ActionWrapper No duplicate speed invariants inherently added for flexibility in the future.
     // However, please call CanInsertCard if you want to prevent the player from inserting cards with dupicate speeds
     internal class SortedArray
