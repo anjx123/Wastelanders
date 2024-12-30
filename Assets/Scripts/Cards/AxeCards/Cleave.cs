@@ -18,7 +18,6 @@ public class Cleave : AxeCards
         evolutionDescription = "Reduce cost to 1.";
         MaxEvolutionProgress = 10;
 
-        Renderer renderer = GetComponent<Renderer>();
         base.Initialize();
         CardType = CardType.MeleeAttack;
     }
