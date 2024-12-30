@@ -106,9 +106,8 @@ public class CardComparator : MonoBehaviour
                 card1.OnCardStagger();
             }
 
-            card2.ReduceRoll(card1.GetRolledStats().actualRoll); //Possibly no damage dealt
+            card1.OnDefendClash(card2); // Card 1 may modify card2
             card2.OnHit();
-            card1.Origin.BlockAnimation(); //Blocked stuff animation here not implemented properly
 
         } else if (IsAttack(card1) && card2.CardType == CardType.Defense)
         {
@@ -120,9 +119,8 @@ public class CardComparator : MonoBehaviour
                 card2.OnCardStagger();
             }
 
-            card1.ReduceRoll(card2.GetRolledStats().actualRoll); //Possibly no damage dealt
+            card2.OnDefendClash(card1);
             card1.OnHit();
-            card2.Origin.BlockAnimation();
         } else
         {
             card1.CardIsUnstaggered();

@@ -10,22 +10,13 @@ public class RapidFire : PistolCards
         lowerBound = 1;
         upperBound = 4;
         Speed = 2;
-        description = "Consume 1 Accuracy, then attack with 'Rapid Fire' again. On kill, gain 1 accuracy.";
+        description = "Attack, then consumes 1 Accuracy to replay Rapid Fire. On kill, gain 1 accuracy.";
         CardType = CardType.RangedAttack;
         myName = "Rapid Fire";
         Renderer renderer = GetComponent<Renderer>();
         base.Initialize();
     }
 
-    public override void ApplyEffect()
-    {
-        base.ApplyEffect();
-        if (Origin.GetBuffStacks(Accuracy.buffName) > 0)
-        {
-            Origin.ReduceStacks(Accuracy.buffName, 1);
-            BattleQueue.BattleQueueInstance.AddAction(this);
-        }
-    }
 
     public override void OnHit()
     {
@@ -39,6 +30,16 @@ public class RapidFire : PistolCards
     public override void OnCardStagger()
     {
         base.OnCardStagger();
+        if (Origin.GetBuffStacks(Accuracy.buffName) > 0)
+        {
+            Origin.ReduceStacks(Accuracy.buffName, 1);
+            BattleQueue.BattleQueueInstance.AddAction(this);
+        }
+    }
+
+    public override void CardIsUnstaggered()
+    {
+        base.CardIsUnstaggered();
         if (Origin.GetBuffStacks(Accuracy.buffName) > 0)
         {
             Origin.ReduceStacks(Accuracy.buffName, 1);

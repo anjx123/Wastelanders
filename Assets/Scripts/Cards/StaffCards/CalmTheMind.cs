@@ -7,7 +7,7 @@ using static UnityEngine.UI.Image;
 
 public class CalmTheMind : StaffCards
 {
-
+    int stacksConsumed = 0;
     // Start is called before the first frame update
     public override void Initialize()
     {
@@ -17,7 +17,7 @@ public class CalmTheMind : StaffCards
         Speed = 5;
         
         myName = "Calm The Mind";
-        description = "Block, then gain 2 stack of Flow. This card does not consume flow.";
+        description = "Block, then gain Flow equal to 2 + Flow consumed.";
         
         base.Initialize();
         CardType = CardType.Defense;
@@ -25,20 +25,21 @@ public class CalmTheMind : StaffCards
 
     public override void ApplyEffect()
     {
-        int stacks = Origin.GetBuffStacks(Flow.buffName);
+        stacksConsumed = Origin.GetBuffStacks(Flow.buffName);
         base.ApplyEffect();
-        Origin.AddStacks(Flow.buffName, stacks);
     }
 
     public override void CardIsUnstaggered()
     {
         base.CardIsUnstaggered();
-        Origin.AddStacks(Flow.buffName, 2);
+        Origin.AddStacks(Flow.buffName, 2 + stacksConsumed);
+        stacksConsumed = 0;
     }
 
     public override void OnCardStagger()
     {
         base.OnCardStagger();
-        Origin.AddStacks(Flow.buffName, 2);
+        Origin.AddStacks(Flow.buffName, 2 + stacksConsumed);
+        stacksConsumed = 0;
     }
 }

@@ -29,10 +29,10 @@ namespace Director
             CombatManager.Instance.SetDarkScreen();
             CombatManager.PlayersWinEvent += PlayersWin;
             CombatManager.EnemiesWinEvent += EnemiesWin;
-            yield return new WaitForEndOfFrame(); // Necessary for associated initialization code to run 
-
+            yield return new WaitForEndOfFrame(); // Necessary for associated initialization code to run (to assign teams)
 
             CombatManager.Instance.GameState = GameState.SELECTION;
+            yield return StartCoroutine(CombatManager.Instance.FadeInLightScreen(1f));
 
             yield return new WaitUntil(() => CombatManager.Instance.GameState == GameState.GAME_WIN);
             AudioManager.Instance.FadeOutCurrentBackgroundTrack(2f);

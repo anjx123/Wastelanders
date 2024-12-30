@@ -10,14 +10,13 @@ public class Brace : FistCards
     // Start is called before the first frame update
     public override void Initialize()
     {
-        lowerBound = 2;
-        upperBound = 2;
+        lowerBound = 3;
+        upperBound = 3;
         Speed = 3;
 
         myName = "Brace";
         description = "Block once, then block again!";
         CardType = CardType.Defense;
-        Renderer renderer = GetComponent<Renderer>();
         base.Initialize();
     }
 

@@ -16,7 +16,7 @@ public class Headshot : PistolCards
         Speed = 2;
 
         myName = "Headshot";
-        description = "On hit, deal +1 damage for each stack of Accuracy and gain 2 accuracy on kill.";
+        description = "On hit, deal +1 damage for each stack of Accuracy and gain 1 accuracy on kill.";
         CardType = CardType.RangedAttack;
         base.Initialize();
     }
@@ -28,7 +28,7 @@ public class Headshot : PistolCards
 
         if (Target.IsDead)
         {
-            Origin.AddStacks(Accuracy.buffName, 2);
+            Origin.AddStacks(Accuracy.buffName, 1);
         }
     }
 }

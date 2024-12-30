@@ -8,11 +8,6 @@ using static UnityEngine.UI.Image;
 
 public class FocusedDefense : StaffCards
 {
-    public override void OnCardStagger()
-    {
-
-    }
-
     // Start is called before the first frame update
     public override void Initialize()
     {

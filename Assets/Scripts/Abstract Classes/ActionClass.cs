@@ -160,6 +160,13 @@ public int Speed { get; set; }
         this.Target.TakeDamage(Origin, rolledCardStats.actualRoll);
     }
 
+    //Only called in a clash
+    public virtual void OnDefendClash(ActionClass opposingCard)
+    {
+        Origin.BlockAnimation(); //Blocked stuff animation here not implemented properly
+        opposingCard.ReduceRoll(GetRolledStats().actualRoll);
+    }
+
     public virtual bool IsPlayableByPlayer(out PopupType popupType)
     {
         bool canInsert = BattleQueue.BattleQueueInstance.CanInsertPlayerCard(this);
