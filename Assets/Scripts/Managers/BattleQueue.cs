@@ -26,13 +26,32 @@ public class BattleQueue : MonoBehaviour
 
     public void AddAction(ActionClass action)
     {
+        action.OnQueue();
         actionQueue.Insert(action);
         RenderBQ();
+    }
+
+    public void OnEnable()
+    {
+        CombatManager.PlayersWinEvent += ClearBattleQueue;
+        CombatManager.EnemiesWinEvent += ClearBattleQueue;
+    }
+
+    public void OnDisable()
+    {
+        CombatManager.PlayersWinEvent -= ClearBattleQueue;
+        CombatManager.EnemiesWinEvent -= ClearBattleQueue;
+    }
+
+    private void ClearBattleQueue()
+    {
+        actionQueue.Clear();
     }
 
     // Retrieves the deletedCard from the action queue and gives it back to the player who played it.
     public void DeletePlayerAction(ActionClass deletedCard)
     {
+        deletedCard.OnRetrieveFromQueue();
         actionQueue.RemoveWrapperWithActionClass(deletedCard);
         RenderBQ();
         PlayerClass player = (PlayerClass) deletedCard.Origin;
@@ -41,7 +60,7 @@ public class BattleQueue : MonoBehaviour
 
     public bool CanInsertPlayerCard(ActionClass actionClass)
     {
-        return actionQueue.CanInsertCard(actionClass);
+        return actionQueue.IsUniqueSpeed(actionClass);
     }
 
     //Remove all cards with (@param entity) as the target and origin
@@ -115,12 +134,22 @@ public class BattleQueue : MonoBehaviour
         }
     }
 
+    // Provide immutable copy of array
+    internal List<ActionWrapper> ProvideArray()
+    {
+        return new(actionQueue.GetList());
+    }
+
     // A sorted array implementation for ActionWrapper No duplicate speed invariants inherently added for flexibility in the future.
     // However, please call CanInsertCard if you want to prevent the player from inserting cards with dupicate speeds
     internal class SortedArray
     {
         private readonly List<ActionWrapper> array = new List<ActionWrapper>();
 
+        public void Clear()
+        {
+            array.Clear();
+        }
         public void Insert(ActionClass actionCard)
         {
             ActionWrapper insertingWrapper = CreateClashingWrapper(actionCard);
@@ -128,11 +157,12 @@ public class BattleQueue : MonoBehaviour
         }
 
         // Returns false if the player cannot insert a card into the queue due to duplicate speed.
-        public bool CanInsertCard(ActionClass actionCard)
+        public bool IsUniqueSpeed(ActionClass actionCard)
         {
             foreach (ActionWrapper existingWrapper in array)
             {
                 if (existingWrapper.HasPlayerAction() &&
+                    existingWrapper.PlayerAction!.Origin is PlayerClass &&  // Restrict overlap to only apply to players, otherwise spawnables suck.
                     actionCard.Speed == existingWrapper.PlayerAction!.Speed)
                 {
                     return false;

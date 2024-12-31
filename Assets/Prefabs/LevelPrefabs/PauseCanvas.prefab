@@ -4062,8 +4062,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Wound - Damage taken increases by 1 per stack. Loses 1 stack after each
-    round.
+  m_text: Wound - Damage taken increases by 1 per stack. Stacks are halved after
+    each round (rounded down).
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 78def0a644b6e9240b0a07bd92cfbeea, type: 2}
   m_sharedMaterial: {fileID: 1569851632624244390, guid: 78def0a644b6e9240b0a07bd92cfbeea, type: 2}

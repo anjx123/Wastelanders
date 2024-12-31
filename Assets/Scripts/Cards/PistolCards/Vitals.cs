@@ -10,13 +10,21 @@ public class Vitals : PistolCards
         lowerBound = 1;
         upperBound = 7;
 
-        Speed = 5;
-
+        Speed = 4;
+        
         myName = "Vitals";
-        description = "Hit 'em where it hurts.";
+        description = "On kill, gain 1 accuracy.";
         CardType = CardType.RangedAttack;
-        Renderer renderer = GetComponent<Renderer>();
         base.Initialize();
+    }
+
+    public override void OnHit()
+    {
+        base.OnHit();
+        if (Target.IsDead)
+        {
+            Origin.AddStacks(Accuracy.buffName, 1);
+        }
     }
 
 }

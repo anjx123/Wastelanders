@@ -9,15 +9,14 @@ public class ProjectileBehaviour : MonoBehaviour
     [SerializeField]
     private GameObject? projectilePrefab;
 
-    public IEnumerator ProjectileAnimation(OnHitDelegate onHitCallback, EntityClass origin, EntityClass target)
+    public IEnumerator ProjectileAnimation(EntityClass origin, EntityClass target)
     {
-        return ProjectileAnimation(onHitCallback, origin, target.myTransform.position);
+        return ProjectileAnimation(origin, target.myTransform.position);
     }
 
-    public IEnumerator ProjectileAnimation(OnHitDelegate onHitCallback, EntityClass origin, Vector3 targetPosition)
+    public IEnumerator ProjectileAnimation(EntityClass origin, Vector3 targetPosition)
     {
-        yield return StartCoroutine(StartProjectileAnimationWithPosition(origin, targetPosition));
-        onHitCallback();
+        return StartProjectileAnimationWithPosition(origin, targetPosition);
     }
 
     private IEnumerator StartProjectileAnimationWithPosition(EntityClass origin, Vector3 targetPosition)

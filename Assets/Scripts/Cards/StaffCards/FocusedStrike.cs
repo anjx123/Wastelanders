@@ -9,16 +9,16 @@ public class FocusedStrike : StaffCards
     {
         CardType = CardType.MeleeAttack;
         myName = "Focused Strike";
-        description = "Double your Flow then make this attack. On hit, gain 1 Flow.";
-        lowerBound = 2;
-        upperBound = 2;
-        Speed = 2;
+        description = "Double your Flow then make this attack.";
+        lowerBound = 1;
+        upperBound = 1;
+        Speed = 4;
         CostToAddToDeck = IsEvolved ? 4 : 2;
         evolutionCriteria = "Strike for a power of 8+ with this card three times.";
         evolutionDescription = "Double your flow then make this attack, this card does not consume flow";
         MaxEvolutionProgress = 3;
        
-       base.Initialize();
+        base.Initialize();
     }
 
     public override void ApplyEffect()
@@ -30,7 +30,7 @@ public class FocusedStrike : StaffCards
     public override void OnHit()
     {
         base.OnHit();
-        Origin.AddStacks(Flow.buffName, 1);
+
         if (getRolledDamage() >= 8) {
             CurrentEvolutionProgress++;
         }

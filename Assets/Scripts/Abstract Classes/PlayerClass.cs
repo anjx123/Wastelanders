@@ -13,7 +13,7 @@ public abstract class PlayerClass : EntityClass
     public delegate void PlayerEventDelegate(PlayerClass player);
     public static event PlayerEventDelegate? playerReshuffleDeck;
 
-    protected int maxHandSize = 4;
+    public int maxHandSize = 4;
 
 
     public List<GameObject> Hand { get { return new List<GameObject>(hand); } }
@@ -83,7 +83,7 @@ public abstract class PlayerClass : EntityClass
         toAdd.transform.position = new Vector3(-100, -100, 1);
     }
 
-    public void DestroyDeck()
+    public override void DestroyDeck()
     {
         List<GameObject> toDestroy = new List<GameObject>(pool);
         foreach (GameObject actionClass in toDestroy)
@@ -171,15 +171,6 @@ public abstract class PlayerClass : EntityClass
     {
         yield return StartCoroutine(MoveToPosition(initialPosition, 0f, 0.8f));
         FaceOpponent();
-    }
-    //Removes entity cards and self from BQ and combat manager. Kills itself
-    public override IEnumerator Die()
-    {
-        int runDistance = 10;
-        BattleQueue.BattleQueueInstance.RemoveAllInstancesOfEntity(this);
-        yield return StartCoroutine(MoveToPosition(myTransform.position + new Vector3(-runDistance, 0, 0), 0, 0.8f));
-
-        this.gameObject.SetActive(false);
     }
 
     public void DrawToMax()

@@ -51,30 +51,24 @@ public class PopUpNotificationManager : MonoBehaviour
 
     public void DisplayWarning(PopupType popupType, GameObject obj = null)
     {
-        switch (popupType)
+        string message = popupType switch
         {
-            case PopupType.SameSpeed:
-                createWarning("Multiple Cards with Same Speed Selected");
-                break;
-            case PopupType.EnemyKilled:
-                createWarning("Enemy Killed!");
-                break;
-            case PopupType.DeckReshuffled:
-                createWarning("Deck Reshuffled");
-                break;
-            case PopupType.SelectActionFirst:
-                createWarning("Select a card first!");
-                break;
-            case PopupType.SelectPlayerFirst:
-                createWarning("Select a player first!");
-                break;
-            default:
-                break;
-        }
+            PopupType.SameSpeed => "Multiple Cards with Same Speed Selected",
+            PopupType.EnemyKilled => "Enemy Killed!",
+            PopupType.DeckReshuffled => "Deck Reshuffled",
+            PopupType.SelectActionFirst => "Select a card first!",
+            PopupType.SelectPlayerFirst => "Select a player first!",
+            PopupType.InsufficientResources => "Insufficient resources!",
+            _ => string.Empty
+        };
 
+        if (!string.IsNullOrEmpty(message))
+        {
+            CreateWarning(message);
+        }
     }
 
-    public void createWarning(string message)
+    private void CreateWarning(string message)
     {
         WarningInfo info = warningObject.GetComponent<WarningInfo>();
         info.ShowWarning(message);

@@ -27,19 +27,12 @@ namespace Director
         private IEnumerator OnStart()
         {
             CombatManager.Instance.SetDarkScreen();
-
-            var entities = entityContainer.GetComponentsInChildren<EntityClass>();
-            foreach (var entity in entities)
-            {
-                var enemy = entity as EnemyClass;
-                enemy?.FaceLeft();
-            }
-
-            CombatManager.Instance.GameState = GameState.SELECTION;
             CombatManager.PlayersWinEvent += PlayersWin;
             CombatManager.EnemiesWinEvent += EnemiesWin;
+            yield return new WaitForEndOfFrame(); // Necessary for associated initialization code to run (to assign teams)
 
-            yield return StartCoroutine(CombatManager.Instance.FadeInLightScreen(0.5f));
+            CombatManager.Instance.GameState = GameState.SELECTION;
+            yield return StartCoroutine(CombatManager.Instance.FadeInLightScreen(1f));
 
             yield return new WaitUntil(() => CombatManager.Instance.GameState == GameState.GAME_WIN);
             AudioManager.Instance.FadeOutCurrentBackgroundTrack(2f);

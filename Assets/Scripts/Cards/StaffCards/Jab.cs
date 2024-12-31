@@ -9,26 +9,27 @@ public class Jab : StaffCards
     {
         CardType = CardType.MeleeAttack;
         myName = "Jab";
-        description = "On hit, gain 2 Flow.";
+        description = "Attack, then gain 2 Flow.";
         evolutionCriteria = "Win clashes 10 times.";
         evolutionDescription = "Cost 2. Gain 2 flow, then attack.";
         MaxEvolutionProgress = 10;
         lowerBound = 2;
         upperBound = 4;
-        Speed = 4;
+        Speed = 2;
 
         base.Initialize();
     }
 
-    public override void OnHit()
+    public override void OnCardStagger()
     {
-        if (IsEvolved) {
-            Origin.AddStacks(Flow.buffName, 2);
-        }
-        base.OnHit();
-        if (!IsEvolved) {
-            Origin.AddStacks(Flow.buffName, 2);
-        }
+        base.OnCardStagger();
+        Origin.AddStacks(Flow.buffName, 2);
+    }
+
+    public override void CardIsUnstaggered()
+    {
+        base.CardIsUnstaggered();
+        Origin.AddStacks(Flow.buffName, 2);
     }
 
     public override void ClashWon() {

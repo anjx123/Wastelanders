@@ -65,12 +65,12 @@ public class PrincessFrogBounties : IBounties
     {
         get
         {
+            yield return FROG_CHALLENGE;
+            yield return SLIME_CHALLENGE;
+            yield return DECREASED_HAND_SIZE;
             yield return PRINCESS_FROG_CHALLENGE;
             yield return QUEEN_CHALLENGE;
-            yield return SLIME_CHALLENGE;
-            yield return FROG_CHALLENGE;
             yield return SOLO_JACKIE;
-            yield return DECREASED_HAND_SIZE;
         }
     }
     public HashSet<IContracts> ContractSet { get; }

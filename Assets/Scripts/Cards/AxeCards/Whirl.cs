@@ -14,14 +14,13 @@ public class Whirl : AxeCards
     {
         lowerBound = 2;
         upperBound = 4;
-        Speed = 3;
+        Speed = 2;
 
         myName = "Whirl";
-        description = "Apply 1 wound on hit. If unstaggered, make this attack again.";
+        description = "Apply 1 wound on hit. If not staggered, make this attack once again.";
         evolutionCriteria = "Make this attack 10 times.";
         evolutionDescription = "Cost increased to 3. Make this attack three times, applying 1 wound on hit.";
         MaxEvolutionProgress = 10;
-        Renderer renderer = GetComponent<Renderer>();
         CardType = CardType.MeleeAttack;
         base.Initialize();
     }

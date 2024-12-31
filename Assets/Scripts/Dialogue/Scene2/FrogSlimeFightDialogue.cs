@@ -1,5 +1,6 @@
 using Cinemachine;
 using LevelSelectInformation;
+using SceneBuilder;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -69,6 +70,7 @@ public class FrogSlimeFightDialogue : DialogueClasses
 
     private bool playDeadFrog = false;
     private WasteFrog lastKilledFrog;
+    private DefaultSceneBuilder sceneBuilder;
 
 
 
@@ -91,25 +93,27 @@ public class FrogSlimeFightDialogue : DialogueClasses
         DialogueBox.ClearDialogueEvents();
         EntityClass.OnEntityDeath -= EnsureFrogDeath;
     }
+    private void SetUpCombatStatus()
+    {
+        sceneBuilder = DefaultSceneBuilder.Construct();
+        sceneBuilder.PlayersPosition = jackieDefaultTransform;
 
-    int numberOfBroadcasts = 0;
-private IEnumerator ExecuteGameStart()
+        frog.SetReturnPosition(frogFightPosition.position);
+        frog2.SetReturnPosition(frog2Battle.position);
+        slime.SetReturnPosition(slimeBattle.position);
+
+        jackie.OutOfCombat(); frog.OutOfCombat(); frog2.OutOfCombat(); slime.OutOfCombat();
+        frog.UnTargetable(); frog2.UnTargetable(); slime.UnTargetable();
+    }
+
+        int numberOfBroadcasts = 0;
+    private IEnumerator ExecuteGameStart()
     {
         CombatManager.Instance.GameState = GameState.OUT_OF_COMBAT;
         CombatManager.Instance.SetDarkScreen();
         yield return new WaitForSeconds(0.8f);
 
-        jackie.OutOfCombat();
-        frog.OutOfCombat();
-        frog2.OutOfCombat();
-        slime.OutOfCombat();
-        
-        jackie.SetReturnPosition(jackieDefaultTransform.position);
-        frog.SetReturnPosition(frogFightPosition.position);
-        frog2.SetReturnPosition(frog2Battle.position);
-        slime.SetReturnPosition(slimeBattle.position);
-
-        frog.UnTargetable(); frog2.UnTargetable(); slime.UnTargetable();
+        SetUpCombatStatus();
         if (!jumpToCombat && !GameStateManager.Instance.JumpIntoFrogAndSlimeFight)
         {
 
@@ -201,6 +205,7 @@ private IEnumerator ExecuteGameStart()
         yield return StartCoroutine(DialogueManager.Instance.StartDialogue(startOfCombatDialogue));
         yield return new WaitUntil(() => CombatManager.Instance.GameState == GameState.GAME_WIN);
         CombatManager.Instance.GameState = GameState.OUT_OF_COMBAT;
+        ReviveJackie();
         yield return new WaitForSeconds(MEDIUM_PAUSE);
 
         //After Combat
@@ -249,6 +254,17 @@ private IEnumerator ExecuteGameStart()
 
         GameStateManager.Instance.LoadScene(GameStateManager.BEETLE_FIGHT);
         yield break;
+    }
+    // In case players decide to bring spawnable enemies and they are the last ones alive.
+    private void ReviveJackie()
+    {
+        if (jackie.IsDead)
+        {
+            jackie.gameObject.SetActive(true);
+            jackie.OutOfCombat();
+            sceneBuilder.PlayersPosition = jackieDefaultTransform;
+            StartCoroutine(jackie.ResetPosition());
+        }
     }
 
     private IEnumerator WalkWhileScreenFades()

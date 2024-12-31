@@ -21,9 +21,12 @@ public abstract class EnemyClass : EntityClass
     // Default Attack weight for all opponents gives equal chance for all oppoenents to be picked
     public AttackTargetDelegate TargetingWeights{ get; set; } = delegate { return 100; };
 
-    public override void Start()
+    public virtual void Awake()
     {
         if (Team == EntityTeam.NoTeam) Team = EntityTeam.EnemyTeam;
+    }
+    public override void Start()
+    {
         base.Start();
         InstantiateDeck();
 
@@ -97,16 +100,7 @@ public abstract class EnemyClass : EntityClass
         }
     }
 
-    public override IEnumerator Die()
-    {
-        int runDistance = 10;
-        BattleQueue.BattleQueueInstance.RemoveAllInstancesOfEntity(this);
-        DestroyDeck();
-        yield return StartCoroutine(MoveToPosition(myTransform.position + new Vector3(runDistance, 0, 0), 0, 0.8f));
-        this.gameObject.SetActive(false);
-    }
-
-    public virtual void DestroyDeck()
+    public override void DestroyDeck()
     {
         foreach (GameObject card in deck)
         {
