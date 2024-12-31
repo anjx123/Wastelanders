@@ -162,6 +162,7 @@ public class BattleQueue : MonoBehaviour
             foreach (ActionWrapper existingWrapper in array)
             {
                 if (existingWrapper.HasPlayerAction() &&
+                    existingWrapper.PlayerAction!.Origin is PlayerClass &&  // Restrict overlap to only apply to players, otherwise spawnables suck.
                     actionCard.Speed == existingWrapper.PlayerAction!.Speed)
                 {
                     return false;
