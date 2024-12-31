@@ -15,8 +15,21 @@ public class PincerPlayable : Pincer, IPlayableBeetleCard
         description = "Pincer, then Pincer again!";
     }
 
-    public override void ApplyEffect()
+    public override void CardIsUnstaggered()
     {
+        base.CardIsUnstaggered();
+        InsertDuplicate();
+    }
+
+    public override void OnCardStagger()
+    {
+        base.OnCardStagger();
+        InsertDuplicate();
+    }
+
+    private void InsertDuplicate()
+    {
+
         if (originalCopy)
         {
             if (activeDuplicateInstance == null)
@@ -29,6 +42,5 @@ public class PincerPlayable : Pincer, IPlayableBeetleCard
             activeDuplicateInstance.Target = Target;
             BattleQueue.BattleQueueInstance.AddAction(activeDuplicateInstance!);
         }
-        base.ApplyEffect();
     }
 }
