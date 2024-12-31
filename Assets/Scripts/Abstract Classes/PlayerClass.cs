@@ -13,7 +13,7 @@ public abstract class PlayerClass : EntityClass
     public delegate void PlayerEventDelegate(PlayerClass player);
     public static event PlayerEventDelegate? playerReshuffleDeck;
 
-    protected int maxHandSize = 4;
+    public int maxHandSize = 4;
 
 
     public List<GameObject> Hand { get { return new List<GameObject>(hand); } }

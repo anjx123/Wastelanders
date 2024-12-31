@@ -18,7 +18,6 @@ public class Decimate : AxeCards
         evolutionDescription = "Change this card's speed to 4.";
         MaxEvolutionProgress = 10;
 
-        Renderer renderer = GetComponent<Renderer>();
         base.Initialize();
         CardType = CardType.MeleeAttack;
     }
