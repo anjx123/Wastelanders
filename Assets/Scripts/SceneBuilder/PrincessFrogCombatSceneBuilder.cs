@@ -113,12 +113,14 @@ namespace SceneBuilder
             return list.ToArray();
         }
 
+        //These adjustments are made one frame before Start runs on princess frog.
         private void AdjustPrincessFrog(PrincessFrog princessFrog)
         {
-            if (bounty == null) return;
-
             princessFrog.Spawnables.Clear();
             princessFrog.Spawnables.AddRange(DetermineBurpSpawnable());
+
+            //Bounty is null during regular fights 
+            if (bounty == null) return;
 
             if (bounty.ContractSet.Contains(PrincessFrogContracts.ADDITIONAL_ATTACK))
             {
@@ -139,11 +141,6 @@ namespace SceneBuilder
                             0 => 0f,
                             _ => 1.0f
                         };
-            }
-
-            if (bounty.ContractSet.Contains(PrincessFrogContracts.EXTRA_HP))
-            {
-                princessFrog.SetMaxHealth(100);
             }
 
             if (bounty.ContractSet.Contains(PrincessFrogContracts.EXTRA_RESONANCE))

@@ -9,7 +9,6 @@ public class PrincessFrogBounties : IBounties
     public static readonly PrincessFrogBounties PRINCESS_FROG_CHALLENGE = new PrincessFrogBounties(
         contractSet: new HashSet<IContracts> 
         { 
-            PrincessFrogContracts.EXTRA_HP, 
             PrincessFrogContracts.ADDITIONAL_ATTACK, 
             PrincessFrogContracts.AGGRESIVE_AI,
             PrincessFrogContracts.EXTRA_RESONANCE
