@@ -45,25 +45,11 @@ public abstract class ActionClass : SelectClass, IBind<ActionData>
     protected int lowerBound;
     protected int upperBound;
 
-    public int LowerBound => lowerBound;
-
-    public int UpperBound => upperBound;
-
-    protected RolledStats rolledCardStats = new();
+    protected RolledStats rolledCardStats = new (0, 0);
 
     public RolledStats GetRolledStats()
     {
         return rolledCardStats;
-    }
-
-    // Struct to Apply Buffs to so as to avoid modifying the cards
-    public struct RolledStats
-    {
-        public int rollFloor;
-        public int rollCeiling;
-        public int actualRoll;
-        //We want to render these one time buffs so we keep track of its name, lower and upper bound buffs to this card.
-        public (string, int, int) oneTimeBuffs; //Left int represents lower bound increased by buff. Right int represents the upper bound
     }
 
     public enum CardState
@@ -78,7 +64,7 @@ public abstract class ActionClass : SelectClass, IBind<ActionData>
     public CardType CardType { get; protected set; }
 
 
-public int Speed { get; set; }
+    public int Speed { get; set; }
     public string description;
     public string Description { get { return description; } }
     public string evolutionDescription { get; protected set; }
@@ -157,14 +143,14 @@ public int Speed { get; set; }
         Vector3 diffInLocation = Target.myTransform.position - Origin.myTransform.position;
         Origin.UpdateFacing(diffInLocation, null);
         CardIsUnstaggered();
-        this.Target.TakeDamage(Origin, rolledCardStats.actualRoll);
+        this.Target.TakeDamage(Origin, rolledCardStats.ActualRoll);
     }
 
     //Only called in a clash
     public virtual void OnDefendClash(ActionClass opposingCard)
     {
         Origin.BlockAnimation(); //Blocked stuff animation here not implemented properly
-        opposingCard.ReduceRoll(GetRolledStats().actualRoll);
+        opposingCard.ReduceRoll(GetRolledStats().ActualRoll);
     }
 
     public virtual bool IsPlayableByPlayer(out PopupType popupType)
@@ -186,7 +172,7 @@ public int Speed { get; set; }
 
     public int getRolledDamage()
     {
-        return rolledCardStats.actualRoll;
+        return rolledCardStats.ActualRoll;
     }
 
     // Initializes a CardDup struct with the given stats of the Card to 
@@ -194,43 +180,40 @@ public int Speed { get; set; }
     private void DupInit()
     {
         RolledStats oldDup = rolledCardStats;
-        rolledCardStats = new RolledStats();
-        rolledCardStats.rollFloor = lowerBound;
-        rolledCardStats.rollCeiling = upperBound;
-        rolledCardStats.actualRoll = oldDup.actualRoll;
-        rolledCardStats.oneTimeBuffs = ("", 0, 0);
+        rolledCardStats = new RolledStats(lowerBound, upperBound);
+        rolledCardStats.ActualRoll = oldDup.ActualRoll;
     }
 
     public void ReduceRoll(int byValue)
     {
-        rolledCardStats.actualRoll = Mathf.Clamp(rolledCardStats.actualRoll - byValue, 0, rolledCardStats.actualRoll);
+        rolledCardStats.ActualRoll = Mathf.Clamp(rolledCardStats.ActualRoll - byValue, 0, rolledCardStats.ActualRoll);
     }
 
     public void IncrementRoll(int byValue)
     {
-        rolledCardStats.actualRoll += byValue;
+        rolledCardStats.ActualRoll += byValue;
     }
 
     public void UpdateDup()
     {
         DupInit();
-        Origin?.ApplyAllBuffsToCard(ref rolledCardStats);
+        Origin?.ApplyAllBuffsToCard(rolledCardStats);
         UpdateText();
     }
 
     public virtual void ApplyEffect()
     {
         UpdateDup();
-        Origin?.ApplySingleUseEffects(ref rolledCardStats);
+        Origin?.ApplySingleUseEffects(rolledCardStats);
         UpdateText();
     }
 
     // Calculates Actual Damage/Block After Applying Buffs
     public virtual void RollDice()
     {
-        rolledCardStats.actualRoll = UnityEngine.Random.Range(rolledCardStats.rollFloor, rolledCardStats.rollCeiling + 1);
+        rolledCardStats.ActualRoll = UnityEngine.Random.Range(rolledCardStats.RollFloor, rolledCardStats.RollCeiling + 1);
 
-        Origin.SetDice(rolledCardStats.actualRoll);
+        Origin.SetDice(rolledCardStats.ActualRoll);
     }
 
     public Sprite? GetIcon()
@@ -437,6 +420,28 @@ public int Speed { get; set; }
         }
         return "";
     }
+
+
+    // class to Apply Buffs to so as to avoid modifying the cards
+    public class RolledStats
+    {
+        private readonly int baseRollFloor;
+        private readonly int baseRollCeiling;
+        public int ActualRoll { get; set; } = 0;
+        public int FloorBuffs { get; set; } = 0;
+        public int CeilingBuffs { get; set; } = 0;
+        public int RollFloor => Math.Clamp(value: baseRollFloor + FloorBuffs, min: 0 , max: RollCeiling);
+        public int RollCeiling => baseRollCeiling + CeilingBuffs;
+
+        //We want to render these one time buffs so we keep track of its name, lower and upper bound buffs to this card.
+        public (StatusEffect?, int floorBuff, int ceilingBuff) OneTimeBuffs { get; set; } = (null, 0, 0); 
+        public RolledStats(int rollFloor, int rollCeiling)
+        {
+            this.baseRollFloor = rollFloor;
+            this.baseRollCeiling = rollCeiling;
+        }
+    }
+
 }
 
 [Serializable]

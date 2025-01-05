@@ -33,8 +33,8 @@ public class CardUI : MonoBehaviour
         textCanvas.overrideSorting = true; //Added so it overrides the layer of its parent canvas
         ActionClass.RolledStats duplicateCard = actionClass.GetRolledStats();
         NameText.text = actionClass.GetName();
-        lowerBoundText.text = duplicateCard.rollFloor.ToString();
-        upperBoundText.text = duplicateCard.rollCeiling.ToString();
+        lowerBoundText.text = duplicateCard.RollFloor.ToString();
+        upperBoundText.text = duplicateCard.RollCeiling.ToString();
         SpeedText.text = actionClass.Speed.ToString();
         iconRenderer.sprite = actionClass.GetIcon();
 
@@ -62,37 +62,20 @@ public class CardUI : MonoBehaviour
             cardCost.text = "";
             cardCost.gameObject.SetActive(false);
         }
-
         // Now update colors
-        if (duplicateCard.rollFloor > actionClass.LowerBound)
+        lowerBoundText.color = duplicateCard.FloorBuffs switch
         {
-            lowerBoundText.color = Color.green;
-        }
+            > 0 => Color.green,
+            < 0 => Color.red,
+            _ => Color.black
+        };
 
-        if (duplicateCard.rollCeiling > actionClass.UpperBound)
+        upperBoundText.color = duplicateCard.CeilingBuffs switch
         {
-            upperBoundText.color = Color.green;
-        }
-
-        if (duplicateCard.rollFloor < actionClass.LowerBound)
-        {
-            lowerBoundText.color = Color.red;
-        }
-
-        if (duplicateCard.rollCeiling < actionClass.UpperBound)
-        {
-            upperBoundText.color = Color.red;
-        }
-
-        if (duplicateCard.rollFloor == actionClass.LowerBound)
-        {
-            lowerBoundText.color = Color.black;
-        }
-
-        if (duplicateCard.rollCeiling == actionClass.UpperBound)
-        {
-            upperBoundText.color = Color.black;
-        }
+            > 0 => Color.green,
+            < 0 => Color.red,
+            _ => Color.black
+        };
 
         lockRenderer.enabled = actionClass.IsFlipped && !actionClass.CanEvolve();
     }

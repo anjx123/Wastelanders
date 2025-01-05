@@ -42,7 +42,7 @@ public class CounterStrike : StaffCards
 
     public override void OnDefendClash(ActionClass opposingCard)
     {
-        int blockedDamage = Mathf.Min(opposingCard.GetRolledStats().actualRoll, GetRolledStats().actualRoll);
+        int blockedDamage = Mathf.Min(opposingCard.GetRolledStats().ActualRoll, GetRolledStats().ActualRoll);
         Origin.AddStacks(Flow.buffName, blockedDamage);
         base.OnDefendClash(opposingCard);
     }

@@ -448,26 +448,26 @@ public abstract class EntityClass : SelectClass
     }
 
     // Applies the Stacks of the Specified Buff to the Card Roll Limits
-    private void ApplyBuffsToCard(ref ActionClass.RolledStats dup, string buffType)
+    private void ApplyBuffsToCard(ActionClass.RolledStats dup, string buffType)
     {
         CheckBuff(buffType);
-        statusEffects[buffType].ApplyStacks(ref dup);
+        statusEffects[buffType].ApplyStacks(dup);
     }
 
     // Applies the Stacks of all Buffs to the Card Roll Limits
-    public void ApplyAllBuffsToCard(ref ActionClass.RolledStats dup)
+    public void ApplyAllBuffsToCard(ActionClass.RolledStats dup)
     {
         foreach (string buff in  statusEffects.Keys)
         {
-            ApplyBuffsToCard(ref dup, buff);
+            ApplyBuffsToCard(dup, buff);
         }
     }
 
-    public void ApplySingleUseEffects(ref ActionClass.RolledStats duplicateCard)
+    public void ApplySingleUseEffects(ActionClass.RolledStats duplicateCard)
     {
         foreach (string buff in statusEffects.Keys)
         {
-            statusEffects[buff].ApplySingleUseEffects(ref duplicateCard);
+            statusEffects[buff].ApplySingleUseEffects(duplicateCard);
         }
         //Single application will not be rendered in the hand but at runtime, so do not call the BuffUpdatedEvent 
         combatInfo.UpdateBuffs(statusEffects); 

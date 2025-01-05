@@ -26,7 +26,7 @@ namespace Cards.EnemyCards.FrogCards
         {
             AudioManager.Instance.PlaySFX(Excavate.EXCAVATE_SOUND_EFFECT_NAME);
 
-            if (Target is Crystals) rolledCardStats.actualRoll = Target.Health;
+            if (Target is Crystals) rolledCardStats.ActualRoll = Target.Health;
             base.OnHit();
         }
     }
