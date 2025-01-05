@@ -4,7 +4,7 @@ namespace Cards.EnemyCards.FrogCards
 {
     public class BlessCard : ActionClass, IPlayablePrincessFrogCard
     {
-        private const int BLESS_COST = 1;
+        public const int BLESS_COST = 1;
 
         public override void Initialize()
         {

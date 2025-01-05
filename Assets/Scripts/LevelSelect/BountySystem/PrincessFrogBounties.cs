@@ -12,7 +12,7 @@ public class PrincessFrogBounties : IBounties
             PrincessFrogContracts.EXTRA_HP, 
             PrincessFrogContracts.ADDITIONAL_ATTACK, 
             PrincessFrogContracts.AGGRESIVE_AI,
-            PrincessFrogContracts.HIGHER_ENEMIES_CAP
+            PrincessFrogContracts.EXTRA_RESONANCE
         },
         challengeName: "Buffed Princess",
         flavourText: "The Princess is back, and she doesn’t intend to lose this time.",

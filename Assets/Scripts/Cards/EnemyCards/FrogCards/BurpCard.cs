@@ -6,8 +6,7 @@ namespace Cards.EnemyCards.FrogCards
 {
     public class BurpCard : FrogAttacks, IPlayablePrincessFrogCard
     {
-        [SerializeField] private List<GameObject> SerializedSpawnableEnemies = new List<GameObject>();
-        public static readonly List<GameObject> SpawnableEnemies = new List<GameObject>();
+        [SerializeField] public List<GameObject> SerializedSpawnableEnemies = new();
         public const int BURP_COST = 2;
         public override void Initialize()
         {
@@ -50,16 +49,11 @@ namespace Cards.EnemyCards.FrogCards
             var projectileDirection = Vector3.down + (Origin.IsFacingRight() ? Vector3.left : Vector3.right);
             var position = Target.transform.position + projectileDirection;
 
-            var prefab = GetAppropriateSpawningList()[Random.Range(0, GetAppropriateSpawningList().Count)];
+            var prefab = SerializedSpawnableEnemies[Random.Range(0, SerializedSpawnableEnemies.Count)];
             var parent = Origin.transform.parent;
             var spawn = Instantiate(prefab, position, Quaternion.identity, parent);
             var entity = spawn.GetComponent<EntityClass>();
             entity.Team = Origin.Team;
-        }
-
-        private List<GameObject> GetAppropriateSpawningList()
-        {
-            return SerializedSpawnableEnemies.Count != 0 ? SerializedSpawnableEnemies : SpawnableEnemies;
         }
     }
 }

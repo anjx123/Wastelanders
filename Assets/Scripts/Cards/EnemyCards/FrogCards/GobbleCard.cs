@@ -11,8 +11,8 @@ namespace Cards.EnemyCards.FrogCards
             myName = "Gobble";
             description = "If attacking a crystal: Instantly destroy it.";
 
-            lowerBound = upperBound = 2;
-            CostToAddToDeck = 2;
+            lowerBound = upperBound = 1;
+            CostToAddToDeck = 1;
             Speed = 3;
             CardType = CardType.MeleeAttack;
         }

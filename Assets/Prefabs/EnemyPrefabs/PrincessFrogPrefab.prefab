@@ -58,10 +58,7 @@ MonoBehaviour:
   - {fileID: 2376898879351982445, guid: 85bd711732ab044c98f77ebe38bd870d, type: 3}
   - {fileID: 2376898879351982445, guid: c98c1ef84a12f4790b6f8cd9e0051511, type: 3}
   - {fileID: 2376898879351982445, guid: e07f0aec029f647ed8f2d61db2fd2989, type: 3}
-  - {fileID: 2376898879351982445, guid: ba70a26a5c92548e48fa5e83e65734b6, type: 3}
-  - {fileID: 2376898879351982445, guid: 85bd711732ab044c98f77ebe38bd870d, type: 3}
-  - {fileID: 2376898879351982445, guid: c98c1ef84a12f4790b6f8cd9e0051511, type: 3}
-  - {fileID: 2376898879351982445, guid: e07f0aec029f647ed8f2d61db2fd2989, type: 3}
+  numberOfAttacks: 2
 --- !u!95 &3297183234373819581
 Animator:
   serializedVersion: 5

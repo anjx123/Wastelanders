@@ -30,7 +30,6 @@ namespace SceneBuilder
         protected override void Build()
         {
             bounty = BountyManager.Instance.ActiveBounty;
-            AdjustBurpCard(); 
             
             SpawnAll(DeterminePlayers(), playersPosition);
             SpawnAll(DetermineEnemies(), enemiesPosition);
@@ -47,15 +46,7 @@ namespace SceneBuilder
             EntityClass.OnEntitySpawn -= HandleEntityChange;
             EntityClass.OnEntityDeath -= HandleEntityChange;
         }
-
-        private void AdjustBurpCard()
-        {
-            BurpCard.SpawnableEnemies.Clear();
-            BurpCard.SpawnableEnemies.AddRange(DetermineBurpSpawnable());
-            //TODO: Adjust the AI targeting for enemies spawened by burp card here too 
-        }
-
-        private IEnumerable<GameObject> DetermineBurpSpawnable()
+        private List<GameObject> DetermineBurpSpawnable()
         {
             List<GameObject> list = new();
 
@@ -126,25 +117,38 @@ namespace SceneBuilder
         {
             if (bounty == null) return;
 
-            // TODO: Implement Swappable AI
+            princessFrog.Spawnables.Clear();
+            princessFrog.Spawnables.AddRange(DetermineBurpSpawnable());
+
             if (bounty.ContractSet.Contains(PrincessFrogContracts.ADDITIONAL_ATTACK))
             {
-
+                princessFrog.NumberOfAttacks = 3;
             }
 
             if (bounty.ContractSet.Contains(PrincessFrogContracts.AGGRESIVE_AI))
             {
-
+                princessFrog.AttackDecider =
+                    (int currentEnemyCount) =>
+                        UnityEngine.Random.Range(0f, 1f) > currentEnemyCount switch
+                        {
+                            5 => 1f,
+                            4 => 0.7f,
+                            3 => 0.5f,
+                            2 => 0.2f,
+                            1 => 0f,
+                            0 => 0f,
+                            _ => 1.0f
+                        };
             }
 
             if (bounty.ContractSet.Contains(PrincessFrogContracts.EXTRA_HP))
             {
-                princessFrog.SetMaxHealth(150);
+                princessFrog.SetMaxHealth(100);
             }
 
-            if (bounty.ContractSet.Contains(PrincessFrogContracts.HIGHER_ENEMIES_CAP))
+            if (bounty.ContractSet.Contains(PrincessFrogContracts.EXTRA_RESONANCE))
             {
-
+                princessFrog.AddStacks(Resonate.buffName, 2);
             }
         }
 

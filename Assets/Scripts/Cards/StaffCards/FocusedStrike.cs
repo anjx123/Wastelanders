@@ -10,8 +10,8 @@ public class FocusedStrike : StaffCards
         CardType = CardType.MeleeAttack;
         myName = "Focused Strike";
         description = "Double your Flow then make this attack.";
-        lowerBound = 1;
-        upperBound = 1;
+        lowerBound = 2;
+        upperBound = 2;
         Speed = 4;
         CostToAddToDeck = IsEvolved ? 4 : 2;
         evolutionCriteria = "Strike for a power of 8+ with this card three times.";
