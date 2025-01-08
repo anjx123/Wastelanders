@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Data.Common;
 using UnityEngine;
 using static CardDatabase;
 
@@ -11,6 +12,7 @@ public class WeaponSelect : MonoBehaviour
     [SerializeField] private WeaponEdit weaponEdit;
     [SerializeField] private SpriteRenderer cardBodySprite;
     [SerializeField] private GameObject lockedIndicator;
+    [SerializeField] private CardDatabase cardDatabase; // Nullable. Used to lock the weapon select. A bit scuffed.
     private Color baseColor = Color.white;
     private Color hoverColor = new Color(0.6f, 0.6f, 0.6f);
 
@@ -28,6 +30,9 @@ public class WeaponSelect : MonoBehaviour
             hasSubFolders,
             db => hasSubFolders ? db.GetDefaultSubFolderData(type) : db.GetCardsByType(type)
         );
+
+        // Let's lock the deck if: we have subfolders and there is not a single unlocked weapon
+        SetLockedState(hasSubFolders && cardDatabase.GetDefaultSubFolderData(type).Count < 1);
     }
 
 
