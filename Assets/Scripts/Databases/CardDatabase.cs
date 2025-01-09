@@ -35,7 +35,7 @@ public class CardDatabase : ScriptableObject
         }
     }
 
-    public List<ISubWeaponType> GetSubFoldersFor(WeaponType weaponType)
+    public static List<ISubWeaponType> GetUnlockedSubFoldersFor(WeaponType weaponType)
     {
         return weaponType switch
         {
@@ -47,8 +47,8 @@ public class CardDatabase : ScriptableObject
     // Necessary to set the initial page that is loaded when we enter a subfolder
     public List<ActionClass> GetDefaultSubFolderData(WeaponType weaponType)
     {
-        List<ISubWeaponType> subfolders = GetSubFoldersFor(weaponType);
-        return subfolders.Count > 0 ? GetSubFoldersFor(weaponType)[0].GetSubWeaponCards(this) : new();
+        List<ISubWeaponType> subfolders = GetUnlockedSubFoldersFor(weaponType);
+        return subfolders.Count > 0 ? GetUnlockedSubFoldersFor(weaponType)[0].GetSubWeaponCards(this) : new();
     }
 
     public List<ActionClass> GetAllCards()

@@ -32,7 +32,7 @@ public class WeaponSelect : MonoBehaviour
         );
 
         // Let's lock the deck if: we have subfolders and there is not a single unlocked weapon
-        SetLockedState(hasSubFolders && cardDatabase.GetDefaultSubFolderData(type).Count < 1);
+        SetLockedState(hasSubFolders && CardDatabase.GetUnlockedSubFoldersFor(type).Count < 1);
     }
 
 

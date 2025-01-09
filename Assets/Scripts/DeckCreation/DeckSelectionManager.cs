@@ -311,9 +311,9 @@ public class DeckSelectionManager : MonoBehaviour
     {
         float y = 0f;
         float delta = -1f;
-        foreach (ISubWeaponType subWeapon in cardDatabase.GetSubFoldersFor(weaponType))
+        foreach (ISubWeaponType subWeapon in GetUnlockedSubFoldersFor(weaponType))
         {
-            if (!subWeapon.IsUnlocked()) return;
+            if (!subWeapon.IsUnlocked()) continue;
 
             GameObject button = Instantiate(enemyEditButtonPrefab);
             button.transform.SetParent(enemyEditParent);
