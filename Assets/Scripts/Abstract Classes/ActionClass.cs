@@ -149,7 +149,6 @@ public abstract class ActionClass : SelectClass, IBind<ActionData>
     //Only called in a clash
     public virtual void OnDefendClash(ActionClass opposingCard)
     {
-        Origin.BlockAnimation(); //Blocked stuff animation here not implemented properly
         opposingCard.ReduceRoll(GetRolledStats().ActualRoll);
     }
 

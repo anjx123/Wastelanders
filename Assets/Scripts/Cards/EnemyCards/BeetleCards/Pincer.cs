@@ -4,6 +4,7 @@ using UnityEngine;
 public class Pincer : BeetleAttacks
 {
     public const string PINCER_SOUND_EFFECT_NAME = "Pincer Cut";
+    public const string PINCER_ANIMATION_NAME = "IsPincer";
 
     // Start is called before the first frame update
     public override void Initialize()
@@ -28,10 +29,7 @@ public class Pincer : BeetleAttacks
 
     public override void CardIsUnstaggered()
     {
-        if (Origin.HasAnimationParameter("IsAttacking"))
-        {
-            Origin.AttackAnimation("IsAttacking");
-        }
+        Origin.AttackAnimation(PINCER_ANIMATION_NAME);
         if (Origin.IsFacingRight())
         {
             StartCoroutine(MoveBasedOnDirection(/* isFacingRight = */true));

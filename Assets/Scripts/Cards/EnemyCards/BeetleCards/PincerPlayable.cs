@@ -5,6 +5,7 @@ using UnityEngine;
 public class PincerPlayable : Pincer, IPlayableBeetleCard
 {
 #nullable enable
+    [SerializeField] private AnimationClip? pincerClip;
     PincerPlayable? activeDuplicateInstance = null;
     bool originalCopy = true;
 
@@ -18,6 +19,7 @@ public class PincerPlayable : Pincer, IPlayableBeetleCard
     public override void CardIsUnstaggered()
     {
         base.CardIsUnstaggered();
+        IPlayableEnemyCard.ApplyForeignAttackAnimation(Origin, pincerClip, PINCER_ANIMATION_NAME);
         InsertDuplicate();
     }
 

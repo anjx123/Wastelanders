@@ -25,6 +25,11 @@ public class SteadiedShot : PistolCards
         CardType = CardType.Defense;
     }
 
+    public override void CardIsUnstaggered()
+    {
+        Origin.AttackAnimation(EntityClass.BLOCK_ANIMATION_NAME); // Override Block Animations
+    }
+
     public override void ApplyEffect()
     {
         StatusEffectModifyValueDelegate originalHandler = Origin.SetBuffsOnHitHandler(Accuracy.buffName, (ref int damage) => { });
