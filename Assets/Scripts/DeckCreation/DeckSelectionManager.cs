@@ -26,6 +26,16 @@ public class DeckSelectionManager : MonoBehaviour
     [SerializeField] private Transform enemyEditParent;
     [SerializeField] private GameObject enemyEditButtonPrefab;
 
+    [Serializable]
+    private struct CharacterSpritePair
+    {
+        public PlayerDatabase.PlayerName playerName;
+        public Sprite sprite;
+    }
+
+    [SerializeField] private SpriteRenderer selectedCharacterIndicator;
+    [SerializeField] private CharacterSpritePair[] characterSpriteIndicators; // Used for the top right corner selected character indicater
+
     private PlayerDatabase.PlayerData playerData;
     private WeaponType weaponType;
     public WeaponAmount weaponText;
@@ -38,7 +48,7 @@ public class DeckSelectionManager : MonoBehaviour
     public event PlayerActionDeckDelegate? PlayerActionDeckModifiedEvent;
 
     private string nextScene = GameStateManager.LEVEL_SELECT_NAME;
-  
+
     private DeckSelectionState deckSelectionState;
     private DeckSelectionState DeckSelectionState //Might want to swap out this state machine for an event driven changing phases.
     {
@@ -118,6 +128,12 @@ public class DeckSelectionManager : MonoBehaviour
             StartCoroutine(ExitDeckSelection());
         }
     }
+
+    public void OnHomeButtonClicked()
+    {
+        StartCoroutine(ExitDeckSelection());
+    }
+
     private IEnumerator ExitDeckSelection()
     {
         if (!isFadingOut)
@@ -139,6 +155,8 @@ public class DeckSelectionManager : MonoBehaviour
     {
         playerData = playerDatabase.GetDataByPlayerName(playerName);
         DeckSelectionState = DeckSelectionState.WeaponSelection;
+        selectedCharacterIndicator.sprite = characterSpriteIndicators.First((s) => s.playerName == playerName).sprite;
+        selectedCharacterIndicator.gameObject.SetActive(true);
     }
 
     private void WeaponSelected(WeaponSelect c, CardDatabase.WeaponType weaponType)
@@ -253,6 +271,7 @@ public class DeckSelectionManager : MonoBehaviour
         characterSelectionUi.SetActive(true);
         weaponSelectionUi.SetActive(false);
         deckSelectionUi.SetActive(false);
+        selectedCharacterIndicator.gameObject.SetActive(false);
     }
 
     private void PerformWeaponSelection()
@@ -292,8 +311,10 @@ public class DeckSelectionManager : MonoBehaviour
     {
         float y = 0f;
         float delta = -1f;
-        foreach (ISubWeaponType subWeapon in cardDatabase.GetSubFoldersFor(weaponType))
+        foreach (ISubWeaponType subWeapon in GetUnlockedSubFoldersFor(weaponType))
         {
+            if (!subWeapon.IsUnlocked()) continue;
+
             GameObject button = Instantiate(enemyEditButtonPrefab);
             button.transform.SetParent(enemyEditParent);
             button.transform.localPosition = new Vector3(0, y, 0);
@@ -325,14 +346,6 @@ public class DeckSelectionManager : MonoBehaviour
         {
             layout = cardsToRender.Count > 8 ? fiveRowCardLayout : fourRowCardLayout;
         }
-
-        bool longerRow = cardsToRender.Count > 8;
-        int numPerRow = longerRow ? 5 : 4;
-        float xSpacing = longerRow ? 1.8f : 2.125f;
-        float ySpacing = longerRow ? -2.5f : -3f;
-        float xOffset = longerRow ? -7f : -6.5f; //initial x Offset
-        float yOffset = longerRow ? 2.175f : 1 + 1.4f; //initial y Offset
-        float cardScaling = longerRow ? 0.675f : 0.7825f;
 
         //In order to sort, the cards must be instantiated and initialized first :pensive:
         foreach (ActionClass card in cardsToRender)

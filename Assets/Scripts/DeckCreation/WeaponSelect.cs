@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using static CardDatabase;
 
 public class WeaponSelect : MonoBehaviour
 {
@@ -28,6 +25,9 @@ public class WeaponSelect : MonoBehaviour
             hasSubFolders,
             db => hasSubFolders ? db.GetDefaultSubFolderData(type) : db.GetCardsByType(type)
         );
+
+        // Let's lock the deck if: we have subfolders and there is not a single unlocked weapon
+        SetLockedState(hasSubFolders && CardDatabase.GetUnlockedSubFoldersFor(type).Count < 1);
     }
 
 
