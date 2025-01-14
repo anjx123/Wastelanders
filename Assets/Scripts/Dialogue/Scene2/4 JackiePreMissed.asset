@@ -18,7 +18,7 @@ MonoBehaviour:
     speakerName: Jackie
     displayingImage: {fileID: 0}
     broadcastAnEvent: 0
-  - bodyText: (Inhales and aims her pistol.)
+  - bodyText: (Jackie inhales and aims her pistol.)
     speakerName: Jackie
     displayingImage: {fileID: 0}
     broadcastAnEvent: 0

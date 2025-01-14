@@ -17,7 +17,7 @@ MonoBehaviour:
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
     broadcastAnEvent: 0
-  - bodyText: Let's reconsider the equiptment we are bringing to this fight.
+  - bodyText: Let's reconsider the equipment we are bringing to this fight.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
     broadcastAnEvent: 0

@@ -18,8 +18,8 @@ MonoBehaviour:
     speakerName: Ives
     displayingImage: {fileID: 0}
     broadcastAnEvent: 0
-  - bodyText: For now, lets store the fragments in a safe place where the beetles
-      can't find.
+  - bodyText: " For now, let\u2019s store the fragments in a safe place where the
+      beetles can't find them. "
     speakerName: Ives
     displayingImage: {fileID: 0}
     broadcastAnEvent: 0

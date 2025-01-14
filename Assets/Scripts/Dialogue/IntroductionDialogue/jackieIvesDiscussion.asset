@@ -26,18 +26,18 @@ MonoBehaviour:
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
     broadcastAnEvent: 0
-  - bodyText: "You\u2019ll be coming with us? You better see me pass this exam with
-      flying colors."
+  - bodyText: "You\u2019ll be coming with us? You better be watching when I pass
+      this exam with flying colors."
     speakerName: Jackie
     displayingImage: {fileID: 21300000, guid: c719baaafa8cd7148806ffb41907add6, type: 3}
     broadcastAnEvent: 0
-  - bodyText: "Hah, don\u2019t worry. I won\u2019t be the only one watching you leave
+  - bodyText: "Hah, don\u2019t worry, I won\u2019t be the only one watching you leave
       everyone in the dust."
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
     broadcastAnEvent: 0
-  - bodyText: Just remember that the exam is going to simulate a real NITES expedition
-      into the wasteland. There have been casualties before.
+  - bodyText: 'Just remember that the exam is going to simulate a real NITES expedition
+      into the Wasteland. There have been casualties before. '
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
     broadcastAnEvent: 0
@@ -53,7 +53,7 @@ MonoBehaviour:
     speakerName: Jackie
     displayingImage: {fileID: 21300000, guid: c719baaafa8cd7148806ffb41907add6, type: 3}
     broadcastAnEvent: 0
-  - bodyText: Haha sure kid, there's always room to improve the fundamentals.
+  - bodyText: "Haha\u2026 sure, kid. There's always room to improve the fundamentals. "
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
     broadcastAnEvent: 0
@@ -61,7 +61,7 @@ MonoBehaviour:
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
     broadcastAnEvent: 0
-  - bodyText: Come help me set up this dummy then would you?
+  - bodyText: Come help me set up this dummy then, would you?
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
     broadcastAnEvent: 1

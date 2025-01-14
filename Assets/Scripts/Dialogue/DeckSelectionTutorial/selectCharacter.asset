@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: selectCharacter
   m_EditorClassIdentifier: 
   dialogue:
-  - bodyText: '"Welcome to the armory Candidates, prepare yourself for the expedition
-      ahead of us. We are set out to leave in 30 minutes."'
+  - bodyText: '[Welcome to the Armory, Candidates. Prepare yourself for the expedition
+      ahead of us. We are set out to leave in 30 minutes.]'
     speakerName: Loudspeaker
     displayingImage: {fileID: 0}
     broadcastAnEvent: 0
