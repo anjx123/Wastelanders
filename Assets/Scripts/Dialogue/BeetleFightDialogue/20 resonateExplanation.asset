@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: 20 resonateExplanation
   m_EditorClassIdentifier: 
   dialogue:
-  - bodyText: Woah do you see that Ives? The crystal on the green beetle's back is
-      glowing.
+  - bodyText: Woah, do you see that, Ives? The crystal on the green beetle's back
+      is glowing.
     speakerName: Jackie
     displayingImage: {fileID: 21300000, guid: c56dc41c6108e104199992d99ba9c53a, type: 3}
     broadcastAnEvent: 0

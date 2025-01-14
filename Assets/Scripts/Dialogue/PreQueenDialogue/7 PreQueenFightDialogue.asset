@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 7 PreQueenFightDialogue
   m_EditorClassIdentifier: 
   dialogue:
-  - bodyText: Eeeeeeeekekeke
+  - bodyText: EEEEEEKKEKEEEEKE
     speakerName: ???
     displayingImage: {fileID: 0}
     broadcastAnEvent: 0

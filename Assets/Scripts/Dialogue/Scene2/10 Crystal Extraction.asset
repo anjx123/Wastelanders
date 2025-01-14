@@ -13,15 +13,12 @@ MonoBehaviour:
   m_Name: 10 Crystal Extraction
   m_EditorClassIdentifier: 
   dialogue:
-  - bodyText: 'Ew, alright. No wonder it was hacking up so much spit. '
+  - bodyText: "No wonder it was hacking up so much spit. I probably would\u2019ve
+      done the same if I had this stuck in my throat."
     speakerName: Jackie
     displayingImage: {fileID: 0}
     broadcastAnEvent: 0
   - bodyText: 'I wonder how this crystal got in here? '
-    speakerName: Jackie
-    displayingImage: {fileID: 0}
-    broadcastAnEvent: 0
-  - bodyText: Heh, looks pretty valuable though. Not a bad start.
     speakerName: Jackie
     displayingImage: {fileID: 0}
     broadcastAnEvent: 0

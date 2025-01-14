@@ -2346,7 +2346,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6635998426718021455, guid: b9c5e4b3c9f7e024f8fe9012e7a2e437, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -10.132905
+      value: -11.6297035
       objectReference: {fileID: 0}
     - target: {fileID: 6635998426718021455, guid: b9c5e4b3c9f7e024f8fe9012e7a2e437, type: 3}
       propertyPath: m_LocalPosition.y
@@ -3114,7 +3114,7 @@ MonoBehaviour:
     speakerName: 
     displayingImage: {fileID: 0}
     broadcastAnEvent: 0
-  - bodyText: Hey have you heard? Apparently, Jackie is trying out for the NITES
+  - bodyText: Hey, have you heard? Apparently, Jackie is trying out for the NITES
       exam again.
     speakerName: Laid-back Soldier
     displayingImage: {fileID: 0}
@@ -3139,18 +3139,19 @@ MonoBehaviour:
     speakerName: Laid-back Soldier
     displayingImage: {fileID: 0}
     broadcastAnEvent: 0
-  - bodyText: "No I don\u2019t think so, wasn\u2019t her mother younger than her
+  - bodyText: "No, I don\u2019t think so. Wasn\u2019t her mother younger than her
       when she scored top marks on that exam?"
     speakerName: Puzzled Soldier
     displayingImage: {fileID: 0}
     broadcastAnEvent: 1
-  - bodyText: "Hmm right, guess going on NITES\u2019 wasteland expeditions runs in
-      the family. I think life inside the Wall is much more peaceful."
+  - bodyText: Right, Captain Ailin, the legendary NITES hero. I guess going on NITES
+      Wasteland expeditions runs in the family. I think life inside the Wall is much
+      more peaceful.
     speakerName: Laid-back Soldier
     displayingImage: {fileID: 0}
     broadcastAnEvent: 1
-  - bodyText: Of course you do. But do you really plan on being just a grunt soldier
-      forever?
+  - bodyText: "Of course you do\u2026 But do you really plan on being just a grunt
+      forever?"
     speakerName: Puzzled Soldier
     displayingImage: {fileID: 0}
     broadcastAnEvent: 1
@@ -3164,16 +3165,15 @@ MonoBehaviour:
     displayingImage: {fileID: 0}
     broadcastAnEvent: 1
   jackieMonologue:
-  - bodyText: "Well\u2026 Today\u2019s the day I\u2019ve been preparing the past
-      year for."
+  - bodyText: "Well\u2026 Today\u2019s the day I\u2019ve been preparing for..  "
     speakerName: Jackie
     displayingImage: {fileID: 21300000, guid: 228f823fe8b2f4d4791ed74e46de81e1, type: 3}
     broadcastAnEvent: 0
-  - bodyText: 'I can''t be afraid. I won''t fail again. '
+  - bodyText: "It\u2019s been a year. I won't fail this again."
     speakerName: Jackie
     displayingImage: {fileID: 21300000, guid: 537908265661f2b44970c526d7724cfb, type: 3}
     broadcastAnEvent: 0
-  - bodyText: 'I will make it on those wasteland expeditions. Mama is counting on
+  - bodyText: 'I will make it to those Wasteland expeditions. Mama is counting on
       me. '
     speakerName: Jackie
     displayingImage: {fileID: 21300000, guid: c719baaafa8cd7148806ffb41907add6, type: 3}
@@ -3244,7 +3244,7 @@ MonoBehaviour:
     broadcastAnEvent: 0
   ivesChatsWithJackie: {fileID: 11400000, guid: 707ae62d407677b4883cb678c2660881, type: 2}
   youCanPlayCardsTutorial:
-  - bodyText: Every round, you draw actions into your hand that you can play against
+  - bodyText: Every round, you draw Actions into your hand that you can play against
       the enemy.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 129371176f9cef24792b6226a17f2eae, type: 3}
@@ -3254,16 +3254,16 @@ MonoBehaviour:
     displayingImage: {fileID: 21300000, guid: 57baba5992d9e224988e93fcacf9f7eb, type: 3}
     broadcastAnEvent: 0
   cardFieldsTutorial:
-  - bodyText: Each action has two stats.
+  - bodyText: Each Action has two stats.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 57baba5992d9e224988e93fcacf9f7eb, type: 3}
     broadcastAnEvent: 0
-  - bodyText: Power - Which is a range that your damage can be rolled into.
+  - bodyText: Power - a range that the damage you do can be rolled into.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 3fea2e94140c08246a0e502ee92d3761, type: 3}
     broadcastAnEvent: 0
-  - bodyText: And Speed - Which determines the order actions are played in. Higher
-      speeds are played first.
+  - bodyText: And Speed - determines the order Actions are played in. Higher speeds
+      are played first.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 61a3ecbde544e124ba8f329d0e4f6fb2, type: 3}
     broadcastAnEvent: 0
@@ -3276,7 +3276,8 @@ MonoBehaviour:
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 84d19d73f4fee204d8d42cc16de51cf7, type: 3}
     broadcastAnEvent: 0
-  - bodyText: The queue will be sorted by speed with the fastest attack on the left.
+  - bodyText: The queue will be sorted by speed, with the fastest attacker on the
+      left.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: fb608aaef631251489ed4ef86a15e639, type: 3}
     broadcastAnEvent: 0
@@ -3292,7 +3293,7 @@ MonoBehaviour:
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 57baba5992d9e224988e93fcacf9f7eb, type: 3}
     broadcastAnEvent: 0
-  - bodyText: 'You cannot play two actions that share the same speed. '
+  - bodyText: 'You cannot play two Actions that share the same speed. '
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 61a3ecbde544e124ba8f329d0e4f6fb2, type: 3}
     broadcastAnEvent: 0
@@ -3307,8 +3308,8 @@ MonoBehaviour:
     displayingImage: {fileID: 21300000, guid: 10381d6e797f9674c8a1b171612f09bd, type: 3}
     broadcastAnEvent: 0
   rollingDiceTutorial:
-  - bodyText: The outcome of a clash is unpredictable, remember how power falls in
-      a range?
+  - bodyText: 'The outcome of a clash is unpredictable. Remember how Power falls
+      in a range? '
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
     broadcastAnEvent: 0
@@ -3332,12 +3333,12 @@ MonoBehaviour:
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 820631014ce088c4cb748224d5467c86, type: 3}
     broadcastAnEvent: 0
-  - bodyText: Flow grants +1 to the upper and lower bound of power for your next
-      attack. But then its consumed.
+  - bodyText: Flow grants +1 to the upper and lower boundary of Power for your next
+      attack, but it clears out at the end of every round.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 820631014ce088c4cb748224d5467c86, type: 3}
     broadcastAnEvent: 0
-  - bodyText: Each different weapon has it's unique fighting style, make sure to
+  - bodyText: Each different weapon has its unique fighting style, so make sure to
       capitalize on them and take out your opponents.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 820631014ce088c4cb748224d5467c86, type: 3}
@@ -3371,7 +3372,7 @@ MonoBehaviour:
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 82dbf38ae23fe224e90be99093d02604, type: 3}
     broadcastAnEvent: 0
-  - bodyText: Their action has also been placed into the queue where you can [Left
+  - bodyText: Their Action has also been placed into the queue where you can [Left
       Click] to check it out.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: fbdbcaab28794334bb84176f7e052fb5, type: 3}
@@ -3381,17 +3382,17 @@ MonoBehaviour:
     displayingImage: {fileID: 21300000, guid: ade9660133ca00a499bfa3ad449b87bd, type: 3}
     broadcastAnEvent: 0
   clashingCardsTutorial:
-  - bodyText: The first action you play against the enemy will form a 'clash' with
-      their action.
+  - bodyText: The first Action you play against the enemy will form a 'clash' with
+      their Action...
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: b0d27b9163eb2554996f368bd5b8d4e2, type: 3}
     broadcastAnEvent: 0
-  - bodyText: Promoting both action's speeds to be the fastest between the two.
+  - bodyText: promoting both action's speeds to be the fastest between the two.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 61a3ecbde544e124ba8f329d0e4f6fb2, type: 3}
     broadcastAnEvent: 0
-  - bodyText: "These \u2018clashing' actions will then compete against each other
-      later in the fight to see who rolls the highest power."
+  - bodyText: These Actions will then compete against each other later in the fight
+      to see who rolls the highest Power.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 3fea2e94140c08246a0e502ee92d3761, type: 3}
     broadcastAnEvent: 0
@@ -3416,12 +3417,12 @@ MonoBehaviour:
     displayingImage: {fileID: 21300000, guid: b0d27b9163eb2554996f368bd5b8d4e2, type: 3}
     broadcastAnEvent: 0
   defensiveCardsTutorial:
-  - bodyText: Defensive cards are marked by the defense icon.
+  - bodyText: 'Defensive cards are marked by the Defense icon. '
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 926dc102ee6ad62488fa7f3605a127ce, type: 3}
     broadcastAnEvent: 0
-  - bodyText: Even upon losing a clash, it will subtract its power from the incoming
-      damage to mitage it.
+  - bodyText: Even upon losing a clash, it will subtract its Power from the incoming
+      damage to mitigate it.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 926dc102ee6ad62488fa7f3605a127ce, type: 3}
     broadcastAnEvent: 0
@@ -3431,7 +3432,7 @@ MonoBehaviour:
     displayingImage: {fileID: 21300000, guid: ade9660133ca00a499bfa3ad449b87bd, type: 3}
     broadcastAnEvent: 0
   cardAbilitiesTutorial:
-  - bodyText: Watch out, enemy cards can also sometimes have abilities too.
+  - bodyText: Watch out, enemy cards can have abilities too.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 305bbe4aee0eef34586b3def011ea974, type: 3}
     broadcastAnEvent: 0
@@ -3440,8 +3441,8 @@ MonoBehaviour:
     displayingImage: {fileID: 21300000, guid: 305bbe4aee0eef34586b3def011ea974, type: 3}
     broadcastAnEvent: 0
   clashingOutcomeTutorial:
-  - bodyText: During a clash, both you and your opponent will both roll your attacks
-      at the same time.
+  - bodyText: During a clash, both you and your opponent will roll your attacks at
+      the same time.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
     broadcastAnEvent: 0
@@ -3455,7 +3456,7 @@ MonoBehaviour:
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
     broadcastAnEvent: 0
-  - bodyText: So choose the attacks that clash wisely. Being staggered is unforgiving.
+  - bodyText: 'So, choose the attacks that clash wisely. Being staggered is unforgiving. '
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
     broadcastAnEvent: 0
@@ -3464,8 +3465,8 @@ MonoBehaviour:
     displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
     broadcastAnEvent: 0
   cardsExhaustedTutorial:
-  - bodyText: Also, be wary of exhausting yourself during a fight in the wasteland
-      Jackie.
+  - bodyText: 'Also, be wary of exhausting yourself during a fight in the Wasteland,
+      Jackie. '
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
     broadcastAnEvent: 0
@@ -3478,7 +3479,7 @@ MonoBehaviour:
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
     broadcastAnEvent: 0
-  - bodyText: So stay sharp and try to use every action to its highest potential.
+  - bodyText: So, stay sharp and try to use every Action to its highest potential.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
     broadcastAnEvent: 0
@@ -3487,7 +3488,7 @@ MonoBehaviour:
     displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
     broadcastAnEvent: 0
   ivesIsDefeated:
-  - bodyText: "Phew, you\u2019ve improved so quickly. Hardly could tell you were
+  - bodyText: "Phew, you\u2019ve improved so quickly. Could hardly tell you were
       the same gal as last year. "
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: be935693778d6004d9427d82e6ce5798, type: 3}
