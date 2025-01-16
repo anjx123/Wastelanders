@@ -37,6 +37,7 @@ namespace BountySystem
         public HashSet<IContracts> ContractSet { get; }
         public string FlavourText { get; }
         public string BountyName { get; }
+        public string SubText { get; }
         public string Rewards { get; }
         public string SceneName { get; }
         public GetBountyAssetsDelegate GetBountyAssets { get; }
