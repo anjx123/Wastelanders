@@ -1,12 +1,15 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Animations;
 using UnityEngine;
 using static CardComparator;
 using static StatusEffect;
 
 public abstract class EntityClass : SelectClass
 {
+    public const string STAGGERED_ANIMATION_NAME = "IsStaggered";
+    public const string BLOCK_ANIMATION_NAME = "IsBlocking";
     private float PLAY_RUNNING_ANIMATION_DELTA = 0.03f; //Represents how little change in position we should at least see before playing running animation
     protected int MAX_HEALTH;
     protected int MaxHealth
@@ -45,6 +48,9 @@ public abstract class EntityClass : SelectClass
     protected BoxCollider boxCollider;
 
 #nullable enable
+    // Used to support handling arbitrary foreign animations 
+    [field: SerializeField] 
+    public AnimatorController? AnimatorController { get; private set; }
 
     public delegate void DamageDelegate(int damage);
     public event DamageDelegate? EntityTookDamage;
@@ -378,6 +384,7 @@ public abstract class EntityClass : SelectClass
         if (PauseMenu.IsPaused) return;
         OnEntityClicked?.Invoke(this);
     }
+
     //Run this to reset the entity position back to its starting position
     public abstract IEnumerator ResetPosition();
     public abstract void DestroyDeck();
@@ -508,13 +515,6 @@ public abstract class EntityClass : SelectClass
             animator.SetTrigger(animationName);
         }
     }
-
-    public virtual void BlockAnimation()
-    {
-        //Todo
-        //Implement Block Animation
-    }
-
 
     public bool HasAnimationParameter(string paramName, Animator? paramAnimator = null)
     {
