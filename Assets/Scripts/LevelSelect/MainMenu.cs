@@ -20,7 +20,9 @@ public class MainMenu : LevelSelect
 
     private void Start()
     {
-        quitButton.interactable = false;
+        #if UNITY_WEBGL
+            quitButton.gameObject.SetActive(false);
+        #endif
     }
 
 

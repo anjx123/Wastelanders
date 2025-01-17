@@ -11,4 +11,5 @@ public class BountyAssetDatabase : ScriptableObject
 [System.Serializable]
 public class BountyAssets {
     public Sprite Sprite;
+    public Sprite Background;
 }

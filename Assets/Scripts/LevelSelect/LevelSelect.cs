@@ -9,7 +9,6 @@ using UnityEngine.UI;
 
 public class LevelSelect : MonoBehaviour
 {
-    public GameObject levelButtons;
     [SerializeField] private FadeScreenHandler fadeScreen;
 
     protected void Awake()
@@ -29,7 +28,7 @@ public class LevelSelect : MonoBehaviour
         BountyInformation.BountyInformationEvent -= OpenBountyByTypeName;
     }
 
-    protected void OpenScene(string s)
+    public void OpenScene(string s)
     {
         StartCoroutine(FadeLevelIn(s));
     }
@@ -43,6 +42,10 @@ public class LevelSelect : MonoBehaviour
     public void DeckSelect()
     {
         OpenScene(GameStateManager.SELECTION_SCREEN_NAME);
+    }
+
+    public void PrincessFrogBounties() {
+        OpenBountyByTypeName(BountyInformation.PRINCESS_FROG_BOUNTY);
     }
 
     IEnumerator FadeLevelIn(string levelName)
