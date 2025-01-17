@@ -1,8 +1,7 @@
 # Welcome to Wastelanders!
 Itch.io Link: https://anjx101.itch.io/wastelanders
-Wastelanders is a 2-D turnbased story RPG set in the wastelands... where... 
-Carefully manage your moves to counter your opponents and uncover the truth behind the dangerous and alien Waste.
 
+Wastelanders is a 2-D Strategy Card Game set in a desolate world ravaged by an alien substance known as the Waste, step into the shoes of Jackie, an aspiring NITES soldier whose mother went missing under mysterious circumstances. Utilize the weapon and skill cards in your arsenal to overwhelm the mutated creatures of the Waste. Exploit Clashes to turn the tides of battle in your favour. Quick witted strategy and swift card selection will be the key to surviving the Wasteland and uncovering the secrets of the NITES.
 ![image](https://github.com/anjx123/Wastelanders/assets/137996848/59349ec1-d1f7-4ad6-b2ca-33b6eeeda2e3)
 
 # Gameplay Loop
