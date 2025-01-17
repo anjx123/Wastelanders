@@ -1,4 +1,5 @@
 # Welcome to Wastelanders!
+Itch.io Link: https://anjx101.itch.io/wastelanders
 Wastelanders is a 2-D turnbased story RPG set in the wastelands... where... 
 Carefully manage your moves to counter your opponents and uncover the truth behind the dangerous and alien Waste.
 
