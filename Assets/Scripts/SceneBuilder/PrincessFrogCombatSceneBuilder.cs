@@ -30,8 +30,7 @@ namespace SceneBuilder
         protected override void Build()
         {
             bounty = BountyManager.Instance.ActiveBounty;
-            AdjustBurpCard(); 
-
+            
             SpawnAll(DeterminePlayers(), playersPosition);
             SpawnAll(DetermineEnemies(), enemiesPosition);
         }
@@ -47,15 +46,7 @@ namespace SceneBuilder
             EntityClass.OnEntitySpawn -= HandleEntityChange;
             EntityClass.OnEntityDeath -= HandleEntityChange;
         }
-
-        private void AdjustBurpCard()
-        {
-            BurpCard.SpawnableEnemies.Clear();
-            BurpCard.SpawnableEnemies.AddRange(DetermineBurpSpawnable());
-            //TODO: Adjust the AI targeting for enemies spawened by burp card here too 
-        }
-
-        private IEnumerable<GameObject> DetermineBurpSpawnable()
+        private List<GameObject> DetermineBurpSpawnable()
         {
             List<GameObject> list = new();
 
@@ -122,29 +113,39 @@ namespace SceneBuilder
             return list.ToArray();
         }
 
+        //These adjustments are made one frame before Start runs on princess frog.
         private void AdjustPrincessFrog(PrincessFrog princessFrog)
         {
+            princessFrog.Spawnables.Clear();
+            princessFrog.Spawnables.AddRange(DetermineBurpSpawnable());
+
+            //Bounty is null during regular fights 
             if (bounty == null) return;
 
-            // TODO: Implement Swappable AI
             if (bounty.ContractSet.Contains(PrincessFrogContracts.ADDITIONAL_ATTACK))
             {
-
+                princessFrog.NumberOfAttacks = 3;
             }
 
             if (bounty.ContractSet.Contains(PrincessFrogContracts.AGGRESIVE_AI))
             {
-
+                princessFrog.AttackDecider =
+                    (int currentEnemyCount) =>
+                        UnityEngine.Random.Range(0f, 1f) > currentEnemyCount switch
+                        {
+                            5 => 1f,
+                            4 => 0.7f,
+                            3 => 0.5f,
+                            2 => 0.2f,
+                            1 => 0f,
+                            0 => 0f,
+                            _ => 1.0f
+                        };
             }
 
-            if (bounty.ContractSet.Contains(PrincessFrogContracts.EXTRA_HP))
+            if (bounty.ContractSet.Contains(PrincessFrogContracts.EXTRA_RESONANCE))
             {
-                princessFrog.SetMaxHealth(150);
-            }
-
-            if (bounty.ContractSet.Contains(PrincessFrogContracts.HIGHER_ENEMIES_CAP))
-            {
-
+                princessFrog.AddStacks(Resonate.buffName, 2);
             }
         }
 
@@ -152,7 +153,7 @@ namespace SceneBuilder
         {
             if (bounty?.ContractSet.Contains(PlayerContracts.DECREASED_HAND_SIZE) == true)
             {
-                // Implement Decreasable hand size
+                playerClass.maxHandSize = 3;
             }
         }
 
@@ -162,8 +163,8 @@ namespace SceneBuilder
             {
                 return entity.Team switch
                 {
-                    EntityClass.EntityTeam.PlayerTeam => 100,
-                    EntityClass.EntityTeam.NeutralTeam => 20,
+                    EntityTeam.PlayerTeam => 100,
+                    EntityTeam.NeutralTeam => 20,
                     _ => 0
                 };
             };
@@ -183,11 +184,13 @@ namespace SceneBuilder
             var spawn = Instantiate(prefab, position, Quaternion.identity, entityContainer.transform);
             var entity = spawn.GetComponent<EntityClass>();
 
-            entity.transform.localScale = Vector3.one * (entity is Beetle ? 0.75f : 1);
-            
             if (entity is PrincessFrog princessFrog)
             {
                 AdjustPrincessFrog(princessFrog);
+            } 
+            else if (entity is QueenBeetle queen)
+            {
+                queen.IntializeChildBeetles(new());
             }
             else if (entity is EnemyClass enemyClass)
             {
@@ -210,17 +213,28 @@ namespace SceneBuilder
             }
         }
 
+        private void UpdatePlayerLayout()
+        {
+            List<EntityClass> players = CombatManager.Instance.GetPlayers();
+
+
+            var positions = PositionsFrom(playersPosition, players.Count);
+            for (var i = 0; i < players.Count; i++)
+            {
+                players[i].SetReturnPosition(entityContainer.transform.position + positions[i]);
+            }
+        }
+
         private void HandleEntityChange(EntityClass entity)
         {
-            if (entity is not EnemyClass) return;
-
+            UpdatePlayerLayout();
             UpdateEnemyLayout();
         }
 
-        private static Vector3[] PositionsFrom(Vector2 centerCoordinate, int count)
+        private Vector3[] PositionsFrom(Vector2 centerCoordinate, int count)
         {
             var dx = -1f * Mathf.Sign(centerCoordinate.x);
-            const float dy = 1f;
+            var dy = ContractExists(EnemySpawningContracts.QUEEN_BEETLE_SPAWN) ? 1.5f : 1f;
 
             var height = (count - 1) * dy;
             var top = centerCoordinate.y + height / 2f;
@@ -232,6 +246,11 @@ namespace SceneBuilder
             }
 
             return positions;
+        }
+
+        private bool ContractExists(IContracts contract)
+        {
+            return bounty?.ContractSet.Contains(contract) == true;
         }
     }
 }

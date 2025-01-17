@@ -16,7 +16,6 @@ public class Execute : AxeCards
         evolutionCriteria = "Deal 10+ damage in one strike.";
         evolutionDescription = "Increase cost to 3. Each wound on the enemy increases this card's final power by 1.";
         MaxEvolutionProgress = 10;
-        Renderer renderer = GetComponent<Renderer>();
         base.Initialize();
         CardType = CardType.MeleeAttack;
     }

@@ -1,11 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.ConstrainedExecution;
-using UnityEngine;
-using TMPro;
-using UnityEngine.SceneManagement;
 using System;
 using Systems.Persistence;
+using UnityEngine;
 
 public abstract class ActionClass : SelectClass, IBind<ActionData>
 {
@@ -50,25 +45,11 @@ public abstract class ActionClass : SelectClass, IBind<ActionData>
     protected int lowerBound;
     protected int upperBound;
 
-    public int LowerBound => lowerBound;
-
-    public int UpperBound => upperBound;
-
-    protected RolledStats rolledCardStats = new();
+    protected RolledStats rolledCardStats = new (0, 0);
 
     public RolledStats GetRolledStats()
     {
         return rolledCardStats;
-    }
-
-    // Struct to Apply Buffs to so as to avoid modifying the cards
-    public struct RolledStats
-    {
-        public int rollFloor;
-        public int rollCeiling;
-        public int actualRoll;
-        //We want to render these one time buffs so we keep track of its name, lower and upper bound buffs to this card.
-        public (string, int, int) oneTimeBuffs; //Left int represents lower bound increased by buff. Right int represents the upper bound
     }
 
     public enum CardState
@@ -83,7 +64,7 @@ public abstract class ActionClass : SelectClass, IBind<ActionData>
     public CardType CardType { get; protected set; }
 
 
-public int Speed { get; set; }
+    public int Speed { get; set; }
     public string description;
     public string Description { get { return description; } }
     public string evolutionDescription { get; protected set; }
@@ -118,20 +99,21 @@ public int Speed { get; set; }
     public static event CardStateDelegate? CardStateChange;
 
 
-    public virtual void OnCardStagger()
-    {
-
-    }
+    public virtual void OnQueue() { }
+    public virtual void OnRetrieveFromQueue() { }
+    public virtual void OnCardStagger() { }
+    public virtual void CardIsUnstaggered() { }
+    public virtual void ClashWon() => Origin.combatInfo.setDiceColor(Color.green);
+    public virtual void ClashTied() => Origin.combatInfo.setDiceColor(Color.white);
+    public virtual void ClashLost() => Origin.combatInfo.setDiceColor(Color.red);
+    
 
     public virtual void Awake()
     {
         Initialize();
     }
 
-    public virtual void Start()
-    {
-
-    }
+    public virtual void Start() { }
 
     private void OnEnable()
     {
@@ -161,17 +143,26 @@ public int Speed { get; set; }
         Vector3 diffInLocation = Target.myTransform.position - Origin.myTransform.position;
         Origin.UpdateFacing(diffInLocation, null);
         CardIsUnstaggered();
-        this.Target.TakeDamage(Origin, rolledCardStats.actualRoll);
+        this.Target.TakeDamage(Origin, rolledCardStats.ActualRoll);
     }
 
-    public virtual void CardIsUnstaggered()
+    //Only called in a clash
+    public virtual void OnDefendClash(ActionClass opposingCard)
     {
+        Origin.BlockAnimation(); //Blocked stuff animation here not implemented properly
+        opposingCard.ReduceRoll(GetRolledStats().ActualRoll);
+    }
 
+    public virtual bool IsPlayableByPlayer(out PopupType popupType)
+    {
+        bool canInsert = BattleQueue.BattleQueueInstance.CanInsertPlayerCard(this);
+        popupType = canInsert ? PopupType.None : PopupType.SameSpeed;
+        return canInsert;
     }
 
     public bool IsPlayedByPlayer()
     {
-        return Origin.GetType().IsSubclassOf(typeof(PlayerClass));
+        return Origin.Team == EntityTeam.PlayerTeam;
     }
 
     public virtual void Initialize()
@@ -181,7 +172,7 @@ public int Speed { get; set; }
 
     public int getRolledDamage()
     {
-        return rolledCardStats.actualRoll;
+        return rolledCardStats.ActualRoll;
     }
 
     // Initializes a CardDup struct with the given stats of the Card to 
@@ -189,43 +180,40 @@ public int Speed { get; set; }
     private void DupInit()
     {
         RolledStats oldDup = rolledCardStats;
-        rolledCardStats = new RolledStats();
-        rolledCardStats.rollFloor = lowerBound;
-        rolledCardStats.rollCeiling = upperBound;
-        rolledCardStats.actualRoll = oldDup.actualRoll;
-        rolledCardStats.oneTimeBuffs = ("", 0, 0);
+        rolledCardStats = new RolledStats(lowerBound, upperBound);
+        rolledCardStats.ActualRoll = oldDup.ActualRoll;
     }
 
     public void ReduceRoll(int byValue)
     {
-        rolledCardStats.actualRoll = Mathf.Clamp(rolledCardStats.actualRoll - byValue, 0, rolledCardStats.actualRoll);
+        rolledCardStats.ActualRoll = Mathf.Clamp(rolledCardStats.ActualRoll - byValue, 0, rolledCardStats.ActualRoll);
     }
 
     public void IncrementRoll(int byValue)
     {
-        rolledCardStats.actualRoll += byValue;
+        rolledCardStats.ActualRoll += byValue;
     }
 
     public void UpdateDup()
     {
         DupInit();
-        Origin?.ApplyAllBuffsToCard(ref rolledCardStats);
+        Origin?.ApplyAllBuffsToCard(rolledCardStats);
         UpdateText();
     }
 
     public virtual void ApplyEffect()
     {
         UpdateDup();
-        Origin?.ApplySingleUseEffects(ref rolledCardStats);
+        Origin?.ApplySingleUseEffects(rolledCardStats);
         UpdateText();
     }
 
     // Calculates Actual Damage/Block After Applying Buffs
     public virtual void RollDice()
     {
-        rolledCardStats.actualRoll = UnityEngine.Random.Range(rolledCardStats.rollFloor, rolledCardStats.rollCeiling + 1);
+        rolledCardStats.ActualRoll = UnityEngine.Random.Range(rolledCardStats.RollFloor, rolledCardStats.RollCeiling + 1);
 
-        Origin.SetDice(rolledCardStats.actualRoll);
+        Origin.SetDice(rolledCardStats.ActualRoll);
     }
 
     public Sprite? GetIcon()
@@ -433,17 +421,25 @@ public int Speed { get; set; }
         return "";
     }
 
-    public virtual void ClashWon()
+
+    // class to Apply Buffs to so as to avoid modifying the cards
+    public class RolledStats
     {
-        Origin.combatInfo.setDiceColor(Color.green);
-    }
-    public virtual void ClashTied()
-    {
-        Origin.combatInfo.setDiceColor(Color.white);
-    }
-    public virtual void ClashLost()
-    {
-        Origin.combatInfo.setDiceColor(Color.red);
+        private readonly int baseRollFloor;
+        private readonly int baseRollCeiling;
+        public int ActualRoll { get; set; } = 0;
+        public int FloorBuffs { get; set; } = 0;
+        public int CeilingBuffs { get; set; } = 0;
+        public int RollFloor => Math.Clamp(value: baseRollFloor + FloorBuffs, min: 0 , max: RollCeiling);
+        public int RollCeiling => baseRollCeiling + CeilingBuffs;
+
+        //We want to render these one time buffs so we keep track of its name, lower and upper bound buffs to this card.
+        public (StatusEffect?, int floorBuff, int ceilingBuff) OneTimeBuffs { get; set; } = (null, 0, 0); 
+        public RolledStats(int rollFloor, int rollCeiling)
+        {
+            this.baseRollFloor = rollFloor;
+            this.baseRollCeiling = rollCeiling;
+        }
     }
 
 }

@@ -32,13 +32,13 @@ public abstract class StatusEffect
     public virtual void NewRound() { }
 
     // adds buffStacks to the struct card limits
-    public virtual void ApplyStacks(ref ActionClass.RolledStats dup)
+    public virtual void ApplyStacks(ActionClass.RolledStats dup)
     {
 
     }
 
     // adds buffStacks to the struct card limits
-    public virtual void ApplySingleUseEffects(ref ActionClass.RolledStats dup)
+    public virtual void ApplySingleUseEffects(ActionClass.RolledStats dup)
     {
 
     }
