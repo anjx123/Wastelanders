@@ -16,7 +16,7 @@ public class Flurry : StaffCards
         
         CardType = CardType.MeleeAttack;
         myName = "Flurry";
-        description = "Make this attack once, then make it attack again. Each attack on hit grants 1 Flow.";
+        description = "Make this attack once, then make it again. Each attack on hit grants 1 Flow.";
         lowerBound = 2;
         upperBound = 4;
         Speed = 3;
@@ -24,7 +24,19 @@ public class Flurry : StaffCards
         base.Initialize();
     }
 
-    public override void ApplyEffect()
+    public override void CardIsUnstaggered()
+    {
+        base.CardIsUnstaggered();
+        InsertDuplicate();
+    }
+
+    public override void OnCardStagger()
+    {
+        base.OnCardStagger();
+        InsertDuplicate();
+    }
+
+    private void InsertDuplicate()
     {
         if (originalCopy)
         {
@@ -38,7 +50,6 @@ public class Flurry : StaffCards
             activeDuplicateInstance.Target = Target;
             BattleQueue.BattleQueueInstance.AddAction(activeDuplicateInstance!);
         }
-        base.ApplyEffect();
     }
 
     public override void OnHit()
@@ -47,41 +58,3 @@ public class Flurry : StaffCards
         Origin.AddStacks(Flow.buffName, 1);
     }
 }
-
-
-/*
- * 
- *"Consume all Flow stacks, make an extra attack for each Flow consumed code
- *
- * public override void ApplyEffect()
-    {
-        flowConsumed = Origin.GetBuffStacks(Flow.buffName);
-        Origin.ReduceStacks(Flow.buffName, flowConsumed);
-
-        if (originalCopy)
-        {
-            if (activeDuplicateInstance == null)
-            {
-                activeDuplicateInstance = Instantiate(this.GetComponent<Flurry>());
-                activeDuplicateInstance.originalCopy = false;
-                activeDuplicateInstance.transform.position = new Vector3(-10, 10, 10);
-            }
-            activeDuplicateInstance.flowConsumed = this.flowConsumed;
-            activeDuplicateInstance.Origin = Origin;
-            activeDuplicateInstance.Target = Target;
-            if (activeDuplicateInstance.flowConsumed > 0)
-            {
-                BattleQueue.BattleQueueInstance.InsertDupPlayerAction(activeDuplicateInstance!);
-                activeDuplicateInstance.flowConsumed -= 1;
-            }
-        } else
-        {
-            if (flowConsumed > 0)
-            {
-                BattleQueue.BattleQueueInstance.InsertDupPlayerAction(this!);
-                flowConsumed -= 1;
-            }
-        }
-        base.ApplyEffect();
-    }
- */

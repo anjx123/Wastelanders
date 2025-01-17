@@ -7,9 +7,9 @@ public class Resonate : StatusEffect
 {
     public const string buffName = "Resonate";
 
-    public override void ApplyStacks(ref ActionClass.RolledStats dup)
+    public override void ApplyStacks(ActionClass.RolledStats dup)
     {
-        dup.rollCeiling += this.buffStacks;
+        dup.CeilingBuffs += this.buffStacks;
     }
 
     public override Sprite GetIcon()

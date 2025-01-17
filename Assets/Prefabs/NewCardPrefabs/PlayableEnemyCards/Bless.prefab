@@ -86,14 +86,14 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 7256956916184963317, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 360891411360332075}
+      addedObject: {fileID: 1493190780058965666}
   m_SourcePrefab: {fileID: 100100000, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
 --- !u!1 &243924049096554030 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7256956916184963317, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
   m_PrefabInstance: {fileID: 7482577384392617691}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &360891411360332075
+--- !u!114 &1493190780058965666
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -102,22 +102,24 @@ MonoBehaviour:
   m_GameObject: {fileID: 243924049096554030}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dce5406b4baccea449213530b9713372, type: 3}
+  m_Script: {fileID: 11500000, guid: 7169d7bb7f8c4ccaa5559f76f78965be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   myTransform: {fileID: 1522312218679409194}
   <Id>k__BackingField:
-    Part1: 2364140267
-    Part2: 1303118895
-    Part3: 1191123120
-    Part4: 850313660
+    Part1: 638363217
+    Part2: 1225812490
+    Part3: 1627668391
+    Part4: 1824789631
+  description: 
+  IsEvolved: 0
   icon: {fileID: 21300000, guid: 02a7e04bb189642038f3da2a9764308f, type: 3}
   cardBack: {fileID: 21300000, guid: 0a827eeec6ce44b03a2e1fef7d2fad4c, type: 3}
+  evolvedCardBack: {fileID: 21300000, guid: 6ff7012b6a06cfc44befdd4974ee6cc5, type: 3}
   cardUI: {fileID: 7205946125008355181}
   data:
     <ActionClassName>k__BackingField: 
     <CurrentProgress>k__BackingField: 0
-  projectileBehaviour: {fileID: 0}
 --- !u!4 &1522312218679409194 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8284128080877360369, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}

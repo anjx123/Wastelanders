@@ -30,7 +30,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.25, y: 0.25, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1312308472458396301}
@@ -122,12 +122,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myTransform: {fileID: 2280710332171782491}
+  icon: {fileID: 21300000, guid: 5873de434db4868459f61c1e2a438d6c, type: 3}
   animator: {fileID: 2129534447924396366}
   combatInfo: {fileID: 8487347338577429512}
   boxCollider: {fileID: 1337325846832566119}
-  icon: {fileID: 21300000, guid: 5873de434db4868459f61c1e2a438d6c, type: 3}
   availableActions: []
-  dupActions: []
 --- !u!65 &1337325846832566119
 BoxCollider:
   m_ObjectHideFlags: 0

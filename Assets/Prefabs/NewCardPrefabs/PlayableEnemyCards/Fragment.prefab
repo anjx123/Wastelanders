@@ -86,14 +86,14 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 7256956916184963317, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 3002390838044720770}
+      addedObject: {fileID: 565397107911554527}
   m_SourcePrefab: {fileID: 100100000, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
 --- !u!1 &243924049096554030 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7256956916184963317, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
   m_PrefabInstance: {fileID: 7482577384392617691}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &3002390838044720770
+--- !u!114 &565397107911554527
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -102,22 +102,25 @@ MonoBehaviour:
   m_GameObject: {fileID: 243924049096554030}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b159d56765adc2b45bad35a2b56c5807, type: 3}
+  m_Script: {fileID: 11500000, guid: 73e44258672624d958e3457e3552c8f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   myTransform: {fileID: 1522312218679409194}
   <Id>k__BackingField:
-    Part1: 4160172313
-    Part2: 1298469381
-    Part3: 2050414484
-    Part4: 2451755407
+    Part1: 2219742005
+    Part2: 1252405779
+    Part3: 3210500287
+    Part4: 2649628896
+  description: 
+  IsEvolved: 0
   icon: {fileID: 21300000, guid: 5c59be28949fc4359bdc7f1c11394014, type: 3}
   cardBack: {fileID: 21300000, guid: 0a827eeec6ce44b03a2e1fef7d2fad4c, type: 3}
+  evolvedCardBack: {fileID: 21300000, guid: 6ff7012b6a06cfc44befdd4974ee6cc5, type: 3}
   cardUI: {fileID: 7205946125008355181}
   data:
     <ActionClassName>k__BackingField: 
     <CurrentProgress>k__BackingField: 0
-  projectileBehaviour: {fileID: 0}
+  projectileBehaviour: {fileID: -1648877773900949324, guid: 833f433c00a05874ca6b6047933a2f22, type: 3}
 --- !u!4 &1522312218679409194 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8284128080877360369, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}

@@ -4,9 +4,11 @@ using UnityEngine;
 
 public enum PopupType
 {
+    None,
     SameSpeed,
     EnemyKilled,
     DeckReshuffled,
     SelectActionFirst,
-    SelectPlayerFirst
+    SelectPlayerFirst,
+    InsufficientResources,
 }

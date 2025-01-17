@@ -27,9 +27,8 @@ namespace BountySystem
     public class PrincessFrogContracts : IContracts
     {
         public static readonly PrincessFrogContracts ADDITIONAL_ATTACK = new();
-        public static readonly PrincessFrogContracts EXTRA_HP = new();
         public static readonly PrincessFrogContracts AGGRESIVE_AI = new();
-        public static readonly PrincessFrogContracts HIGHER_ENEMIES_CAP = new();
+        public static readonly PrincessFrogContracts EXTRA_RESONANCE = new();
     }
 
     public interface IBounties
