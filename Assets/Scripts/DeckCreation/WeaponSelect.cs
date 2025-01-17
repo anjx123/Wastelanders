@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Data.Common;
 using UnityEngine;
-using static CardDatabase;
 
 public class WeaponSelect : MonoBehaviour
 {
