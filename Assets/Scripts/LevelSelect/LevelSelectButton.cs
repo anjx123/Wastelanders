@@ -41,7 +41,10 @@ public class LevelSelectButton : MonoBehaviour
     {
         _textMeshPro.text = "LOCKED";
         button.enabled = false;
-        lockedIndicator.SetActive(!(lockedIndicator == gameObject)); // Show the lock indicator, but if it's a reference to this, then hide this button
+        // Show the lock indicator, but if it's a reference to this, then hide this button
+        // Some buttons will have a locked indicator, while other buttons will disappear when locked
+        // Used for hiding the bounty button when prerequiste levels aren't completed
+        lockedIndicator.SetActive(!(lockedIndicator == gameObject));
     }
 
     public void SetHover(bool state) {
