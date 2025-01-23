@@ -7,11 +7,11 @@ public class Flow : StatusEffect
     public const string buffName = "Flow";
 
     
-    public override void ApplySingleUseEffects(ref ActionClass.RolledStats dup)
+    public override void ApplySingleUseEffects(ActionClass.RolledStats dup)
     {
-        dup.rollFloor += this.buffStacks;
-        dup.rollCeiling += this.buffStacks;
-        dup.oneTimeBuffs = (buffName, buffStacks, buffStacks);
+        dup.FloorBuffs += this.buffStacks;
+        dup.CeilingBuffs += this.buffStacks;
+        dup.OneTimeBuffs = (this, buffStacks, buffStacks);
         ClearBuff();
     }
 

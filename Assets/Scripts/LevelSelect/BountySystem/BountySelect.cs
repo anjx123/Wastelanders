@@ -146,6 +146,7 @@ public class BountySelect : MonoBehaviour
 
     private void OnBackPressed()
     {
+        BountyManager.Instance.ActiveBounty = null;
         GameStateManager.Instance.LoadScene(GameStateManager.LEVEL_SELECT_NAME);
     }
 

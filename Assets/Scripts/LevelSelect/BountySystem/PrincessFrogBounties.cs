@@ -7,12 +7,11 @@ using static BountySystem.IBounties;
 public class PrincessFrogBounties : IBounties
 {
     public static readonly PrincessFrogBounties PRINCESS_FROG_CHALLENGE = new PrincessFrogBounties(
-        contractSet: new HashSet<IContracts>
-        {
-            PrincessFrogContracts.EXTRA_HP,
-            PrincessFrogContracts.ADDITIONAL_ATTACK,
+        contractSet: new HashSet<IContracts> 
+        { 
+            PrincessFrogContracts.ADDITIONAL_ATTACK, 
             PrincessFrogContracts.AGGRESIVE_AI,
-            PrincessFrogContracts.HIGHER_ENEMIES_CAP
+            PrincessFrogContracts.EXTRA_RESONANCE
         },
         challengeName: "Buffed Princess",
         subtext: "Challenge for Level 5. Extras",
@@ -71,12 +70,12 @@ public class PrincessFrogBounties : IBounties
     {
         get
         {
+            yield return FROG_CHALLENGE;
+            yield return SLIME_CHALLENGE;
+            yield return DECREASED_HAND_SIZE;
             yield return PRINCESS_FROG_CHALLENGE;
             yield return QUEEN_CHALLENGE;
-            yield return SLIME_CHALLENGE;
-            yield return FROG_CHALLENGE;
             yield return SOLO_JACKIE;
-            yield return DECREASED_HAND_SIZE;
         }
     }
     public HashSet<IContracts> ContractSet { get; }

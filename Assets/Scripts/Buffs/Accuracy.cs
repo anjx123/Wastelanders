@@ -10,9 +10,9 @@ public class Accuracy : StatusEffect
         OnEntityHitHandler = OnEntityHit;
     }
     
-    public override void ApplyStacks(ref ActionClass.RolledStats dup)
+    public override void ApplyStacks(ActionClass.RolledStats dup)
     {
-        dup.rollFloor = Mathf.Clamp(dup.rollFloor + this.buffStacks, 0, dup.rollCeiling);
+        dup.FloorBuffs += buffStacks;
     }
 
     public override Sprite GetIcon()
