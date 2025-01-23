@@ -28,7 +28,7 @@ public class LevelSelect : MonoBehaviour
         BountyInformation.BountyInformationEvent -= OpenBountyByTypeName;
     }
 
-    public void OpenScene(string s)
+    protected void OpenScene(string s)
     {
         StartCoroutine(FadeLevelIn(s));
     }
@@ -44,7 +44,23 @@ public class LevelSelect : MonoBehaviour
         OpenScene(GameStateManager.SELECTION_SCREEN_NAME);
     }
 
-    public void PrincessFrogBounties() {
+    public void MainMenu()
+    {
+        OpenScene(GameStateManager.MAIN_MENU_NAME);
+    }
+
+    public void Tutorial()
+    {
+        OpenScene(GameStateManager.TUTORIAL_FIGHT);
+    }
+
+    public void LevelSelectScene()
+    {
+        OpenScene(GameStateManager.LEVEL_SELECT_NAME);
+    }
+
+    public void PrincessFrogBounties()
+    {
         OpenBountyByTypeName(BountyInformation.PRINCESS_FROG_BOUNTY);
     }
 
