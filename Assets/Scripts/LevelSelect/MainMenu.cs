@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class MainMenu : LevelSelect
+public class MainMenu : MonoBehaviour
 {
     [SerializeField] private GameObject wastelandersText;
 
@@ -15,12 +15,13 @@ public class MainMenu : LevelSelect
         UnityEditor.EditorApplication.isPlaying = false;
         #endif
         Application.Quit();
-
     }
 
     private void Start()
     {
-        quitButton.interactable = false;
+        #if UNITY_WEBGL
+            quitButton.gameObject.SetActive(false);
+        #endif
     }
 
 
@@ -43,15 +44,5 @@ public class MainMenu : LevelSelect
         verticalOffset = waveslice * bobbingAmount;
         float translateChange = verticalOffset - previousOffset;
         wastelandersText.transform.position = new Vector3(wastelandersText.transform.position.x, wastelandersText.transform.position.y + translateChange, wastelandersText.transform.position.z);
-    }
-
-    public void StartGame()
-    {
-        OpenScene(GameStateManager.TUTORIAL_FIGHT);
-    }
-
-    public void LevelSelect()
-    {
-        OpenScene(GameStateManager.LEVEL_SELECT_NAME);
     }
 }
