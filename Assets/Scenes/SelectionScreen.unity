@@ -209,25 +209,6 @@ MonoBehaviour:
   buffIcon: {fileID: 499906160}
   explanationTitleField: {fileID: 1385288657}
   explanationTextField: {fileID: 578838252}
-  explanationText:
-  - <WeaponType>k__BackingField: 0
-    <ExplanationTitle>k__BackingField: FLOW
-    <ExplanationText>k__BackingField: The next attack gains +1 to its upper and lower
-      bounds for each stack of flow. Then consume all flow.
-  - <WeaponType>k__BackingField: 1
-    <ExplanationTitle>k__BackingField: ACCURACY
-    <ExplanationText>k__BackingField: Lower bound of power increases by 1 per stack.
-      On taking damage, stacks are halved (rounded down).
-  - <WeaponType>k__BackingField: 2
-    <ExplanationTitle>k__BackingField: FIST
-    <ExplanationText>k__BackingField: Makes several small but impactful attacks.
-  - <WeaponType>k__BackingField: 3
-    <ExplanationTitle>k__BackingField: WOUND
-    <ExplanationText>k__BackingField: Damage taken increases by 1 per stack. Loses
-      1 stack after each round
-  - <WeaponType>k__BackingField: 4
-    <ExplanationTitle>k__BackingField: 
-    <ExplanationText>k__BackingField: 
 --- !u!1 &126026804
 GameObject:
   m_ObjectHideFlags: 0
@@ -1065,7 +1046,10 @@ PrefabInstance:
     - {fileID: 6999416380711509476, guid: 9f5b6b4e42a9a5e44aea3cf8872c4f20, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5005827590477641961, guid: f4e3c39036a0e964ca15018d4479d8e4, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: f4e3c39036a0e964ca15018d4479d8e4, type: 3}
 --- !u!4 &455316568 stripped
 Transform:
@@ -1315,7 +1299,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5005827590477641961, guid: f4e3c39036a0e964ca15018d4479d8e4, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: f4e3c39036a0e964ca15018d4479d8e4, type: 3}
 --- !u!4 &529039158 stripped
 Transform:
@@ -1422,7 +1409,10 @@ PrefabInstance:
     - {fileID: 5297245159359428593, guid: 45259cd223a7bd941b08d08990f299fb, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5005827590477641961, guid: f4e3c39036a0e964ca15018d4479d8e4, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: f4e3c39036a0e964ca15018d4479d8e4, type: 3}
 --- !u!4 &548949321 stripped
 Transform:
@@ -3776,7 +3766,7 @@ PrefabInstance:
     - target: {fileID: 8249331277627009003, guid: f4e3c39036a0e964ca15018d4479d8e4, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 5c59be28949fc4359bdc7f1c11394014, type: 3}
+      objectReference: {fileID: 21300000, guid: 61efcf8280735914a8489d37027c035f, type: 3}
     - target: {fileID: 8249331277627009003, guid: f4e3c39036a0e964ca15018d4479d8e4, type: 3}
       propertyPath: m_WasSpriteAssigned
       value: 1
@@ -3820,7 +3810,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5005827590477641961, guid: f4e3c39036a0e964ca15018d4479d8e4, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: f4e3c39036a0e964ca15018d4479d8e4, type: 3}
 --- !u!4 &1276908440 stripped
 Transform:
@@ -4251,7 +4244,10 @@ PrefabInstance:
     - {fileID: 5871846780257991603, guid: 11797fb1537b0c14ca7953804d655285, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5005827590477641961, guid: f4e3c39036a0e964ca15018d4479d8e4, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: f4e3c39036a0e964ca15018d4479d8e4, type: 3}
 --- !u!4 &1493004623 stripped
 Transform:

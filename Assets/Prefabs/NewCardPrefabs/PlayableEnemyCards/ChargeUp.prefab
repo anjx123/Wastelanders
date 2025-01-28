@@ -23,7 +23,7 @@ PrefabInstance:
     - target: {fileID: 1866809560200078547, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: c70585d4c31eee94b90c5dd041af013a, type: 3}
+      objectReference: {fileID: 21300000, guid: 790e1a74d4e7a7c40bd35457e28b79d9, type: 3}
     - target: {fileID: 1866809560200078547, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
       propertyPath: m_WasSpriteAssigned
       value: 1
@@ -31,6 +31,14 @@ PrefabInstance:
     - target: {fileID: 2459814067889663477, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3154665990143383919, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3154665990143383919, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.48
       objectReference: {fileID: 0}
     - target: {fileID: 7256956916184963317, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
       propertyPath: m_Name
@@ -113,14 +121,13 @@ MonoBehaviour:
     Part4: 2433932725
   description: 
   IsEvolved: 0
-  icon: {fileID: 21300000, guid: c70585d4c31eee94b90c5dd041af013a, type: 3}
+  icon: {fileID: 21300000, guid: 790e1a74d4e7a7c40bd35457e28b79d9, type: 3}
   cardBack: {fileID: 21300000, guid: 0a827eeec6ce44b03a2e1fef7d2fad4c, type: 3}
   evolvedCardBack: {fileID: 21300000, guid: 6ff7012b6a06cfc44befdd4974ee6cc5, type: 3}
   cardUI: {fileID: 7205946125008355181}
   data:
     <ActionClassName>k__BackingField: 
     <CurrentProgress>k__BackingField: 0
-  projectileBehaviour: {fileID: 0}
   hurlPrefab: {fileID: 243924049096554030, guid: f35b26817620af0448af7c7b2c4a0b92, type: 3}
 --- !u!4 &1522312218679409194 stripped
 Transform:
