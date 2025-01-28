@@ -79,7 +79,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: fb0f203951ba47a4db1b9b4c407b1cf8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 1
+  m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 10.24, y: 10.24}
@@ -122,22 +122,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myTransform: {fileID: 2558249372607357620}
+  icon: {fileID: 21300000, guid: ca625dba0eaa53f42a1938fee07af18d, type: 3}
   animator: {fileID: 376453256025329576}
   combatInfo: {fileID: 7792622227987785679}
   boxCollider: {fileID: 1283216969389521226}
-  icon: {fileID: 21300000, guid: ca625dba0eaa53f42a1938fee07af18d, type: 3}
+  <AnimatorController>k__BackingField: {fileID: 9100000, guid: 1f9b8433c4aaa4a83b302cde41d14966, type: 2}
   availableActions:
   - {fileID: 2376898879351982445, guid: d9b234b17f5614282a831238d30604be, type: 3}
   - {fileID: 2376898879351982445, guid: 2d2d7caa1fc6840a6a62172b5b70f553, type: 3}
   - {fileID: 2376898879351982445, guid: 2d2d7caa1fc6840a6a62172b5b70f553, type: 3}
-  dupActions: []
-  beetlePrefabs:
-  - {fileID: 8044949296705636452, guid: 276880eff6e9b4907a1ea5430761a162, type: 3}
-  - {fileID: 8044949296705636452, guid: fa2244f9c89fb2c42ae45cb8f73816be, type: 3}
-  - {fileID: 8044949296705636452, guid: 692030d7a70f84e1e9949eb9b07ebce5, type: 3}
-  combatMode: 0
-  enemyContainer: {fileID: 0}
-  beetleLocations: []
+  availability: []
 --- !u!95 &376453256025329576
 Animator:
   serializedVersion: 5

@@ -8,6 +8,8 @@ using static UnityEngine.UI.Image;
 public class Excavate : BeetleAttacks, IPlayableBeetleCard
 {
     public const string EXCAVATE_SOUND_EFFECT_NAME = "Excavate Cut";
+    public const string EXCAVATE_ANIMATION_NAME = "IsExcavate";
+    [SerializeField] private AnimationClip excavateClip;
 
 
     // Start is called before the first frame update
@@ -25,16 +27,12 @@ public class Excavate : BeetleAttacks, IPlayableBeetleCard
 
         myName = "Excavate";
         CardType = CardType.MeleeAttack;
-        Renderer renderer = GetComponent<Renderer>();
     }
 
     public override void CardIsUnstaggered()
     {
         base.CardIsUnstaggered();
-        if (Origin.HasAnimationParameter("IsAttacking"))
-        {
-            Origin.AttackAnimation("IsAttacking");
-        }
+        IPlayableEnemyCard.ApplyForeignAttackAnimation(Origin, excavateClip, EXCAVATE_ANIMATION_NAME);
     }
 
     // does 2x damage if target is crystal

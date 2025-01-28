@@ -8,6 +8,8 @@ using static UnityEngine.UI.Image;
 public class Fling : BeetleAttacks, IPlayableBeetleCard
 {
     [SerializeField] private ProjectileBehaviour projectileBehaviour;
+    public const string FLING_ANIMATION_NAME = "IsFling";
+    [SerializeField] private AnimationClip flingClip;
 
     // Start is called before the first frame update
     public override void Initialize()
@@ -27,10 +29,7 @@ public class Fling : BeetleAttacks, IPlayableBeetleCard
 
     public override void OnHit()
     {
-        if (Origin.HasAnimationParameter("IsShooting"))
-        {
-            Origin.AttackAnimation("IsShooting");
-        } 
+        IPlayableEnemyCard.ApplyForeignAttackAnimation(Origin, flingClip, FLING_ANIMATION_NAME);
         StartCoroutine(HandleProjectile());
     }
 

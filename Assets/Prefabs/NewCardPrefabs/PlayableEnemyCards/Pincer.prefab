@@ -23,13 +23,17 @@ PrefabInstance:
     - target: {fileID: 1866809560200078547, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 37bbc3e0e4af26b43ab745918185fc6e, type: 3}
+      objectReference: {fileID: 21300000, guid: 2135f38b4770c4048831c6d5453addc2, type: 3}
     - target: {fileID: 1866809560200078547, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
       propertyPath: m_WasSpriteAssigned
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2459814067889663477, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
       propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3154665990143383919, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
+      propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7256956916184963317, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
@@ -113,13 +117,14 @@ MonoBehaviour:
     Part4: 3747398763
   description: 
   IsEvolved: 0
-  icon: {fileID: 21300000, guid: 37bbc3e0e4af26b43ab745918185fc6e, type: 3}
+  icon: {fileID: 21300000, guid: 2135f38b4770c4048831c6d5453addc2, type: 3}
   cardBack: {fileID: 21300000, guid: 0a827eeec6ce44b03a2e1fef7d2fad4c, type: 3}
   evolvedCardBack: {fileID: 21300000, guid: 6ff7012b6a06cfc44befdd4974ee6cc5, type: 3}
   cardUI: {fileID: 7205946125008355181}
   data:
     <ActionClassName>k__BackingField: 
     <CurrentProgress>k__BackingField: 0
+  pincerClip: {fileID: 0}
 --- !u!4 &1522312218679409194 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8284128080877360369, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}

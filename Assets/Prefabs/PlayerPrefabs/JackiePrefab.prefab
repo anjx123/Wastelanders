@@ -126,6 +126,8 @@ MonoBehaviour:
   animator: {fileID: 2764313202347658331}
   combatInfo: {fileID: 8487347338577429512}
   boxCollider: {fileID: 6919296858530996063}
+  <AnimatorController>k__BackingField: {fileID: 9100000, guid: fbbe274d0a66105478595e39b3e77090, type: 2}
+  maxHandSize: 4
 --- !u!65 &6919296858530996063
 BoxCollider:
   m_ObjectHideFlags: 0

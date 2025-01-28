@@ -1,3 +1,4 @@
+using UnityEngine;
 using Random = UnityEngine.Random;
 
 namespace Cards.EnemyCards.FrogCards
@@ -5,7 +6,8 @@ namespace Cards.EnemyCards.FrogCards
     public class BlessCard : ActionClass, IPlayablePrincessFrogCard
     {
         public const int BLESS_COST = 1;
-
+        public const string BLESS_ANIMATION = "IsBlessing";
+        [SerializeField] private AnimationClip animationClip;
         public override void Initialize()
         {
             base.Initialize();
@@ -42,7 +44,7 @@ namespace Cards.EnemyCards.FrogCards
 
         public override void CardIsUnstaggered()
         {
-            Origin.AttackAnimation("IsBlocking");
+            IPlayableEnemyCard.ApplyForeignAttackAnimation(Origin, animationClip, BLESS_ANIMATION);
             Origin.AddStacks(Resonate.buffName, BLESS_COST);
 
             var teamMates = Origin.Team.GetTeamMates();

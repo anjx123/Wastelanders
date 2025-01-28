@@ -22,7 +22,7 @@ public class Brace : FistCards
 
     public override void CardIsUnstaggered()
     {
-        base.CardIsUnstaggered();
+        Origin.AttackAnimation(EntityClass.BLOCK_ANIMATION_NAME);
         BlockNextAttack();
     }
 
