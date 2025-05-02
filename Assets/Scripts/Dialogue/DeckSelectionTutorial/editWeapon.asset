@@ -13,10 +13,12 @@ MonoBehaviour:
   m_Name: editWeapon
   m_EditorClassIdentifier: 
   dialogue:
-  - bodyText: Awesome now I gotta focus, which techniques should I prepare for the
+  - bodyText: Awesome. Now I gotta focus. Which Actions should I prepare for the
       exam?
     speakerName: Jackie
     displayingImage: {fileID: 0}
+    broadcastAnEvent: 0
   - bodyText: '[''Click'' on the Edit button to edit the Action Deck of each weapon.]'
     speakerName: Jackie
     displayingImage: {fileID: 0}
+    broadcastAnEvent: 0

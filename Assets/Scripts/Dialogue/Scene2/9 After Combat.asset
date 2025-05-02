@@ -13,11 +13,8 @@ MonoBehaviour:
   m_Name: 9 After Combat
   m_EditorClassIdentifier: 
   dialogue:
-  - bodyText: Whew, glad thats over and done with.
-    speakerName: Jackie
-    displayingImage: {fileID: 0}
-    broadcastAnEvent: 0
-  - bodyText: "Let\u2019s see what products these monsters had growing in them."
+  - bodyText: "Whew, alright. That\u2019s a good start. Let\u2019s see what I can
+      extract."
     speakerName: Jackie
     displayingImage: {fileID: 0}
     broadcastAnEvent: 0

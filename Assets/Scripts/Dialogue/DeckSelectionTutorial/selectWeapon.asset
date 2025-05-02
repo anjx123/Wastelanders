@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: selectWeapon
   m_EditorClassIdentifier: 
   dialogue:
-  - bodyText: 'Hmm, I should be able to carry and use 2 weapons in a fight. '
+  - bodyText: "Hmm\u2026 I should be able to handle 2 weapons in a fight."
     speakerName: Jackie
     displayingImage: {fileID: 0}
     broadcastAnEvent: 0
-  - bodyText: One will be my staff.
+  - bodyText: I already have my staff with me.
     speakerName: Jackie
     displayingImage: {fileID: 21300000, guid: a34c4d771cecc3e40814a015e6e3b31d, type: 3}
     broadcastAnEvent: 0
@@ -26,8 +26,7 @@ MonoBehaviour:
     speakerName: Jackie
     displayingImage: {fileID: 21300000, guid: 601769b83c413394f9dcef8bf9a4ef38, type: 3}
     broadcastAnEvent: 0
-  - bodyText: '[''Click'' on the weapon to select and bring it into combat. You can
-      only select up to two.]'
+  - bodyText: '[Click] on the weapon to select it and to bring it into combat.'
     speakerName: Jackie
     displayingImage: {fileID: 21300000, guid: 601769b83c413394f9dcef8bf9a4ef38, type: 3}
     broadcastAnEvent: 0

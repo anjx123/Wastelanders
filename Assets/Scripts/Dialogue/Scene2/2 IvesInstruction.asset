@@ -17,22 +17,22 @@ MonoBehaviour:
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
     broadcastAnEvent: 0
-  - bodyText: This exam will emulate a real NITES wasteland expedition.
+  - bodyText: This exam will emulate a real NITES Wasteland expedition.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
     broadcastAnEvent: 0
-  - bodyText: The purpose of these expeditions are to extract as much valuable Waste
-      Products that cultivate inside mutated creatures as we can.
+  - bodyText: The purpose of these expeditions are to extract as many valuable Waste
+      Products from mutated creatures as we can.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
     broadcastAnEvent: 0
-  - bodyText: 'These Products are essential to combat the further spread of the waste
+  - bodyText: 'These Products are essential to combat further spread of the Waste
       as they help us produce weapons and energy. '
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
     broadcastAnEvent: 0
-  - bodyText: 'As such, this exam will test your ability to exploit and extract as
-      much valuable Waste Products from the local flora and fauna as you can. '
+  - bodyText: 'As such, this exam will test your ability to exploit and extract Waste
+      Products from the local ecosystem. '
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
     broadcastAnEvent: 0
