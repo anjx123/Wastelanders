@@ -14,10 +14,10 @@ public class CounterStrike : StaffCards
     {
         lowerBound = 2;
         upperBound = 4;
-        Speed = 4;
+        Speed = 2;
 
         myName = "Counter Strike";
-        description = "Block, then make an attack with this card. Each unstaggered defense/attack grants 1 Flow.";
+        description = "Block and gain Flow equal to damage blocked. Then make an attack and gain 1 Flow on hit.";
         base.Initialize();
     }
 
@@ -40,11 +40,19 @@ public class CounterStrike : StaffCards
         base.ApplyEffect();
     }
 
-    public override void CardIsUnstaggered()
+    public override void OnDefendClash(ActionClass opposingCard)
     {
-        Origin.AddStacks(Flow.buffName, 1);
-        base.CardIsUnstaggered();
-
+        int blockedDamage = Mathf.Min(opposingCard.GetRolledStats().ActualRoll, GetRolledStats().ActualRoll);
+        Origin.AddStacks(Flow.buffName, blockedDamage);
+        base.OnDefendClash(opposingCard);
     }
 
+    public override void OnHit()
+    {
+        base.OnHit(); 
+        if (CardType == CardType.MeleeAttack)
+        {
+            Origin.AddStacks(Flow.buffName, 1);
+        }
+    }
 }

@@ -9,12 +9,12 @@ public class PrincessFrogBounties : IBounties
     public static readonly PrincessFrogBounties PRINCESS_FROG_CHALLENGE = new PrincessFrogBounties(
         contractSet: new HashSet<IContracts> 
         { 
-            PrincessFrogContracts.EXTRA_HP, 
             PrincessFrogContracts.ADDITIONAL_ATTACK, 
             PrincessFrogContracts.AGGRESIVE_AI,
-            PrincessFrogContracts.HIGHER_ENEMIES_CAP
+            PrincessFrogContracts.EXTRA_RESONANCE
         },
         challengeName: "Buffed Princess",
+        subtext: "Challenge for Level 5. Extras",
         flavourText: "The Princess is back, and she doesn’t intend to lose this time.",
         rewards: "Princess Frog Cards",
         bountyAssetDelegate: (database) => database.PrincessFrogAssets.PrincessFrogChallengeAsset
@@ -23,6 +23,7 @@ public class PrincessFrogBounties : IBounties
     public static readonly PrincessFrogBounties QUEEN_CHALLENGE = new PrincessFrogBounties(
         contractSet: new HashSet<IContracts> { EnemySpawningContracts.QUEEN_BEETLE_SPAWN },
         challengeName: "Queen and Princess",
+        subtext: "Challenge for Level 5. Extras",
         flavourText: "Get ready for a royal bloodbath.",
         rewards: "Queen Beetle Cards",
         bountyAssetDelegate: (database) => database.PrincessFrogAssets.QueenChallengeAsset
@@ -31,6 +32,7 @@ public class PrincessFrogBounties : IBounties
     public static readonly PrincessFrogBounties SLIME_CHALLENGE = new PrincessFrogBounties(
         contractSet: new HashSet<IContracts> { EnemySpawningContracts.SLIME_SPAWN },
         challengeName: "SlimeFest",
+        subtext: "Challenge for Level 5. Extras",
         flavourText: "Test your skills in this slimy situation!",
         rewards: "Slime Cards",
         bountyAssetDelegate: (database) => database.PrincessFrogAssets.SlimeChallengeAsset
@@ -39,6 +41,7 @@ public class PrincessFrogBounties : IBounties
     public static readonly PrincessFrogBounties FROG_CHALLENGE = new PrincessFrogBounties(
         contractSet: new HashSet<IContracts> { EnemySpawningContracts.FROG_SPAWN },
         challengeName: "FrogFest",
+        subtext: "Challenge for Level 5. Extras",
         flavourText: "These frogs have gone wild, so hop to it!",
         rewards: "Frog Cards",
         bountyAssetDelegate: (database) => database.PrincessFrogAssets.FrogChallengeAsset
@@ -47,6 +50,7 @@ public class PrincessFrogBounties : IBounties
     public static readonly PrincessFrogBounties SOLO_JACKIE = new PrincessFrogBounties(
         contractSet: new HashSet<IContracts> { PlayerContracts.SOLO_JACKIE },
         challengeName: "Solo Mission",
+        subtext: "Challenge for Level 5. Extras",
         flavourText: "Take on the Princess Beetle alone.",
         rewards: "Beetle Cards",
         bountyAssetDelegate: (database) => database.PrincessFrogAssets.SoloChallengeAsset
@@ -55,6 +59,7 @@ public class PrincessFrogBounties : IBounties
     public static readonly PrincessFrogBounties DECREASED_HAND_SIZE = new PrincessFrogBounties(
         contractSet: new HashSet<IContracts> { PlayerContracts.DECREASED_HAND_SIZE },
         challengeName: "Exhausting Mission",
+        subtext: "Challenge for Level 5. Extras",
         flavourText: "Fight the Princess Beetle with a restricting hand size.",
         rewards: "TBD",
         bountyAssetDelegate: (database) => database.PrincessFrogAssets.ExhaustedChallengeAsset
@@ -65,28 +70,30 @@ public class PrincessFrogBounties : IBounties
     {
         get
         {
+            yield return FROG_CHALLENGE;
+            yield return SLIME_CHALLENGE;
+            yield return DECREASED_HAND_SIZE;
             yield return PRINCESS_FROG_CHALLENGE;
             yield return QUEEN_CHALLENGE;
-            yield return SLIME_CHALLENGE;
-            yield return FROG_CHALLENGE;
             yield return SOLO_JACKIE;
-            yield return DECREASED_HAND_SIZE;
         }
     }
     public HashSet<IContracts> ContractSet { get; }
-    public string FlavourText { get; }
     public string BountyName { get; }
+    public string FlavourText { get; }
+    public string SubText { get; }
     public string Rewards { get; }
     public GetBountyAssetsDelegate GetBountyAssets { get; }
     public string SceneName => GameStateManager.PRINCESS_FROG_BOUNTY;
 
-    public PrincessFrogBounties(HashSet<IContracts> contractSet, string challengeName, string flavourText, string rewards, GetBountyAssetsDelegate bountyAssetDelegate)
+    public PrincessFrogBounties(HashSet<IContracts> contractSet, string challengeName, string subtext, string flavourText, string rewards, GetBountyAssetsDelegate bountyAssetDelegate)
     {
         ContractSet = contractSet;
         FlavourText = flavourText;
         BountyName = challengeName;
         Rewards = rewards;
         GetBountyAssets = bountyAssetDelegate;
+        SubText = subtext;
     }
 }
 

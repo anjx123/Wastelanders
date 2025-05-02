@@ -45,7 +45,7 @@ public class WasteFrog : EnemyClass
             ActionClass addedClass = toAdd.GetComponent<ActionClass>();
             addedClass.Origin = this;
 
-            if (addedClass.GetName() == Hurl.HURL_NAME)
+            if (addedClass is Hurl)
             {
                 hurlCard = toAdd;   
             } else

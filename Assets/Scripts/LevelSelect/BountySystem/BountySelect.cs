@@ -1,4 +1,5 @@
 using BountySystem;
+using LevelSelectInformation;
 using System.Collections;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -14,13 +15,19 @@ public class BountySelect : MonoBehaviour
     [SerializeField] private FadeScreenHandler fadeScreen;
     [SerializeField] private Transform[] bountyGrid;
     [SerializeField] private BountyButton bountyButtonPrefab;
-    [SerializeField] private BountyAssetDatabase bountyRewardIconDatabase;
+    [SerializeField] private BountyAssetDatabase bountyAssetDatabase;
 
 
     [SerializeField] private TMP_Text bountyTitle;
+    [SerializeField] private TMP_Text bountySubtext;
     [SerializeField] private TMP_Text bountyDescription;
     [SerializeField] private TMP_Text bountyRewards;
     [SerializeField] private TMP_Text chooseBountyText;
+    private Coroutine currentCrossFade;
+    [SerializeField] private Image frontBackground; // Used for background and fading in
+    [SerializeField] private Image backBackground; // Used for fading out
+    [SerializeField] private Sprite defaultBackground;
+    [SerializeField] private float crossFadeDuration = 1f;
 
 #nullable enable
     protected virtual void Awake()
@@ -57,7 +64,7 @@ public class BountySelect : MonoBehaviour
     private BountyButton CreateButtonForBounty(IBounties bounty)
     {
         BountyButton bountyButton = Instantiate(bountyButtonPrefab);
-        bountyButton.Initialize(bounty, bountyRewardIconDatabase);
+        bountyButton.Initialize(bounty, bountyAssetDatabase);
         return bountyButton;
     }
 
@@ -83,6 +90,7 @@ public class BountySelect : MonoBehaviour
     private void ClearPopupText()
     {
         bountyTitle.gameObject.SetActive(false);
+        bountySubtext.gameObject.SetActive(false);
         bountyDescription.gameObject.SetActive(false);
         bountyRewards.gameObject.SetActive(false);
 
@@ -97,13 +105,24 @@ public class BountySelect : MonoBehaviour
             return;
         }
 
+        bool completed = BountyManager.Instance.IsBountyCompleted(bounty);
+
         bountyTitle.SetText(bounty.BountyName);
         bountyTitle.gameObject.SetActive(true);
+
+        bountySubtext.SetText(bounty.SubText);
+        bountySubtext.gameObject.SetActive(true);
 
         bountyDescription.SetText(bounty.FlavourText);
         bountyDescription.gameObject.SetActive(true);
 
-        bountyRewards.SetText($"<color=#FF0>Rewards:</color>\n{bounty.Rewards}");
+        bountyRewards.SetText(
+            completed ?
+            $"<color=#66AB51><size=150%>Bounty completed!</size>\nObtained </color>{bounty.Rewards}"
+            :
+            $"<color=#FC7B8C><size=150%>Rewards:</size></color>\n{bounty.Rewards}"
+        );
+
         bountyRewards.gameObject.SetActive(true);
 
         chooseBountyText.gameObject.SetActive(false);
@@ -114,6 +133,7 @@ public class BountySelect : MonoBehaviour
     private void OnBountyHover(IBounties bounty)
     {
         SetPopupText(bounty);
+        StartCrossFadeBackground(bounty, crossFadeDuration);
     }
 
     // We need to remove the popup text, and replace it with the selected bounty text if 
@@ -121,10 +141,49 @@ public class BountySelect : MonoBehaviour
     private void OnBountyHoverEnd(IBounties bounty)
     {
         SetPopupText(BountyManager.Instance.ActiveBounty);
+        StartCrossFadeBackground(BountyManager.Instance.ActiveBounty, crossFadeDuration);
     }
 
     private void OnBackPressed()
     {
+        BountyManager.Instance.ActiveBounty = null;
         GameStateManager.Instance.LoadScene(GameStateManager.LEVEL_SELECT_NAME);
+    }
+
+    private void AbortCrossFade()
+    {
+        if (currentCrossFade != null) StopCoroutine(currentCrossFade);
+    }
+
+    private void StartCrossFadeBackground(IBounties? bounty, float duration)
+    {
+        AbortCrossFade(); // Abort if cross fade is currently animating
+        Sprite s = bounty != null ? bounty.GetBountyAssets(bountyAssetDatabase).Background : defaultBackground;
+        currentCrossFade = StartCoroutine(CrossFadeBackground(s, duration));
+    }
+
+    private IEnumerator CrossFadeBackground(Sprite comingIn, float duration)
+    {
+        if (comingIn == null) comingIn = defaultBackground;
+        if (comingIn == frontBackground.sprite) yield break;
+        float prevAlpha = backBackground.color.a;
+
+        backBackground.sprite = frontBackground.sprite;
+        frontBackground.sprite = comingIn;
+
+        float elapsedTime = prevAlpha;
+
+        while (elapsedTime < duration)
+        {
+            float percentage = elapsedTime / duration;
+            frontBackground.color = new Color(1, 1, 1, percentage);
+            backBackground.color = new Color(1, 1, 1, 1 - percentage);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        frontBackground.color = new Color(1, 1, 1, 1);
+        backBackground.color = new Color(1, 1, 1, 0);
+        currentCrossFade = null;
     }
 }

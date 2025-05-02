@@ -42,7 +42,7 @@ public class Excavate : BeetleAttacks, IPlayableBeetleCard
     {
         AudioManager.Instance.PlaySFX(EXCAVATE_SOUND_EFFECT_NAME);
  
-        if (Target is Crystals) rolledCardStats.actualRoll = 2 * rolledCardStats.actualRoll;
+        if (Target is Crystals) rolledCardStats.ActualRoll = 2 * rolledCardStats.ActualRoll;
         base.OnHit();
     }
 }

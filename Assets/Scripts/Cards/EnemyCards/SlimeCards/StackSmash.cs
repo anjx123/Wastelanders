@@ -23,12 +23,23 @@ public class StackSmash : SlimeAttacks, IPlayableSlimeCard
         myName = "Stack Smash";
         description = "If this attack is unstaggered, attack again";
         CardType = CardType.MeleeAttack;
-        Renderer renderer = GetComponent<Renderer>();
     }
 
 
     //@Author: Anrui. Called by ActionClass.OnHit() 
     public override void CardIsUnstaggered()
+    {
+        if (!onHitWasCalled) InsertDuplicate();
+        base.CardIsUnstaggered();
+    }
+    public override void OnHit()
+    {
+        onHitWasCalled = true;
+        InsertDuplicate();
+        StartCoroutine(AttackAnimation(base.OnHit));
+    }
+
+    private void InsertDuplicate()
     {
         if (originalCopy)
         {
@@ -42,13 +53,6 @@ public class StackSmash : SlimeAttacks, IPlayableSlimeCard
             activeDuplicateInstance.Target = Target;
             BattleQueue.BattleQueueInstance.AddAction(activeDuplicateInstance!);
         }
-
-        base.CardIsUnstaggered();
-    }
-    public override void OnHit()
-    {
-        onHitWasCalled = true;
-        StartCoroutine(AttackAnimation(base.OnHit));
     }
 
     protected override IEnumerator AttackAnimation(AttackCallback? attackCallback)

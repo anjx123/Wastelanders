@@ -5,10 +5,14 @@ using UnityEngine;
 
 public class Crystals : EnemyClass, NeutralEntityInterface
 {
+    public override void Awake()
+    {
+        if (Team == EntityTeam.NoTeam) Team = EntityTeam.NeutralTeam;
+    }
+
     // Start is called before the first frame update
     public override void Start()
     {
-        if (Team == EntityTeam.NoTeam) Team = EntityTeam.NeutralTeam;
         base.Start();
         MaxHealth = 15;
         Health = MaxHealth;

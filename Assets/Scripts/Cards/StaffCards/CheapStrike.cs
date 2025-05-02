@@ -19,11 +19,8 @@ public class CheapStrike : StaffCards
         evolutionCriteria = "Generate 10+ flow with this card";
         evolutionDescription = "3 cost. This card now has 3 - 3 power, gain 3 flow on hit.";
         MaxEvolutionProgress = 10;
-        Renderer renderer = GetComponent<Renderer>();
         CardType = CardType.MeleeAttack;
         base.Initialize();
-
-
     }
 
     public override void OnHit()

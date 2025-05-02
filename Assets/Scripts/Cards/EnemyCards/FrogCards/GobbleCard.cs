@@ -2,16 +2,17 @@ using Entities;
 
 namespace Cards.EnemyCards.FrogCards
 {
-    public class GobbleCard : FrogAttacks
+    public class GobbleCard : ActionClass, IPlayablePrincessFrogCard
     {
         public override void Initialize()
         {
             base.Initialize();
 
             myName = "Gobble";
-            description = "If attacking a crystal: Instantly destroys it, then this monster gains 5 Resonate.";
+            description = "If attacking a crystal: Instantly destroy it.";
 
-            lowerBound = upperBound = 2;
+            lowerBound = upperBound = 1;
+            CostToAddToDeck = 1;
             Speed = 3;
             CardType = CardType.MeleeAttack;
         }
@@ -23,18 +24,10 @@ namespace Cards.EnemyCards.FrogCards
 
         public override void OnHit()
         {
-            base.OnHit();
+            AudioManager.Instance.PlaySFX(Excavate.EXCAVATE_SOUND_EFFECT_NAME);
 
-            var crystal = Target as Crystals;
-            if (crystal)
-            {
-                var prior = Origin.GetBuffStacks(Resonate.buffName);
-                crystal.TakeDamage(Origin, crystal.Health);
-                /* Silly hack to always grant 5 stacks. */
-                Origin.AddStacks(Resonate.buffName, 5 + prior - Origin.GetBuffStacks(Resonate.buffName));
-            }
-            /* FrogAttacks doesn't call this in OnHit except via a projectile...? */
-            else Target.TakeDamage(Origin, rolledCardStats.actualRoll);
+            if (Target is Crystals) rolledCardStats.ActualRoll = Target.Health;
+            base.OnHit();
         }
     }
 }

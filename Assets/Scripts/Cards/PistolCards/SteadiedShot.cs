@@ -15,13 +15,12 @@ public class SteadiedShot : PistolCards
     // Start is called before the first frame update
     public override void Initialize()
     {
-        lowerBound = 1;
+        lowerBound = 3;
         upperBound = 3;
-        Speed = 4;
+        Speed = 5;
 
         myName = "Steadied Shot";
-        description = "When played, do not lose Accuracy when you get hit this round.";
-        Renderer renderer = GetComponent<Renderer>();
+        description = "Block, then do not lose Accuracy when you get hit this round.";
         base.Initialize();
         CardType = CardType.Defense;
     }

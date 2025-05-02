@@ -14,6 +14,7 @@ public class CombatCardUI : DisplayableClass
 
     [SerializeField] GameObject oneTimeBuffObj;
     [SerializeField] GameObject buffFlipPreserver;
+#nullable enable
     private void OnMouseOver()
     {
         // Increase the size of the Combat UI to indicate it's clickable
@@ -36,7 +37,6 @@ public class CombatCardUI : DisplayableClass
         // If the card is not currently displaying, show it
         if (CombatManager.Instance.CanHighlight())
         {
-            
             ShowCard();
         }
     }
@@ -72,11 +72,11 @@ public class CombatCardUI : DisplayableClass
 
     public void SetBuffIcon(ActionClass.RolledStats cardDup)
     {
-        (string buffName, int lowerBound, int upperBound) = cardDup.oneTimeBuffs;
+        (StatusEffect? buff, int lowerBound, int upperBound) = cardDup.OneTimeBuffs;
         if (lowerBound > 0 || upperBound > 0)
         {
             buffIncreaseText.text = "+" + lowerBound + "-" + upperBound;
-            oneTimeUseBuff.sprite = Resources.Load<Sprite>("StatusIcon/" + buffName);
+            oneTimeUseBuff.sprite = buff?.GetIcon();
         } else
         {
             buffIncreaseText.text = "";
@@ -102,9 +102,9 @@ public class CombatCardUI : DisplayableClass
 
     void UpdateRangeText(ActionClass actionClass)
     {
-        (string buffName, int buffLowerBound, int buffUpperBound) = actionClass.GetRolledStats().oneTimeBuffs;
-        rangeText.text = (actionClass.GetRolledStats().rollFloor - buffLowerBound) + "-" + (actionClass.GetRolledStats().rollCeiling - buffUpperBound);
-        if (ActionClass.Origin is EnemyClass)
+        (_, int buffLowerBound, int buffUpperBound) = actionClass.GetRolledStats().OneTimeBuffs;
+        rangeText.text = (actionClass.GetRolledStats().RollFloor - buffLowerBound) + "-" + (actionClass.GetRolledStats().RollCeiling - buffUpperBound);
+        if (actionClass.Origin is EnemyClass)
         {
             rangeText.color = Color.red;
         }

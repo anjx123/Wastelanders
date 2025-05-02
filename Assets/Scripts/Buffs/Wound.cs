@@ -29,7 +29,7 @@ public class Wound : StatusEffect
 
     public override void NewRound() 
     {
-        LoseStacks(1);
+        buffStacks = Stacks / 2;
     }
 
 
