@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: editWeapon
   m_EditorClassIdentifier: 
   dialogue:
-  - bodyText: Awesome. Now I gotta focus. Which special techniques should I prepare
-      for the exam?
+  - bodyText: Awesome. Now I gotta focus. Which Actions should I prepare for the
+      exam?
     speakerName: Jackie
     displayingImage: {fileID: 0}
     broadcastAnEvent: 0

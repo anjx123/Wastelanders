@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: selectActions
   m_EditorClassIdentifier: 
   dialogue:
-  - bodyText: I only have the stamina to use a couple of techniques. I should choose
+  - bodyText: I only have the stamina to use a couple of Actions. I should choose
       them wisely.
     speakerName: Jackie
     displayingImage: {fileID: 0}
