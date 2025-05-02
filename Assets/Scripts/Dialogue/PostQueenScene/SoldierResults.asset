@@ -49,8 +49,8 @@ MonoBehaviour:
     speakerName: Broadcast
     displayingImage: {fileID: 0}
     broadcastAnEvent: 0
-  - bodyText: Nevertheless, this broadcast will announce the score of the recent
-      NITES exam candidates and whether they passed.
+  - bodyText: Nevertheless, this broadcast will announce the score of the NITES exam
+      candidates in energy units collected, and whether they passed.
     speakerName: Broadcast
     displayingImage: {fileID: 0}
     broadcastAnEvent: 0

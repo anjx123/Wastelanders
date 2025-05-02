@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: broadCastResults
   m_EditorClassIdentifier: 
   dialogue:
-  - bodyText: 'Alec with a score of $15 000 in waste products collected. '
+  - bodyText: Alec with a score of 1500 U.  in Waste products collected.
     speakerName: Broadcast
     displayingImage: {fileID: 0}
     broadcastAnEvent: 0
@@ -21,7 +21,7 @@ MonoBehaviour:
     speakerName: Broadcast
     displayingImage: {fileID: 0}
     broadcastAnEvent: 0
-  - bodyText: 'Chloe with a score of $5000. '
+  - bodyText: Chloe with a score of 500 U.
     speakerName: Broadcast
     displayingImage: {fileID: 0}
     broadcastAnEvent: 0
@@ -29,17 +29,17 @@ MonoBehaviour:
     speakerName: Broadcast
     displayingImage: {fileID: 0}
     broadcastAnEvent: 0
-  - bodyText: Andrew with a score of $12 000. Pass.
+  - bodyText: 'Andrew with a score of 1200 U. Pass. '
     speakerName: Broadcast
     displayingImage: {fileID: 0}
     broadcastAnEvent: 0
-  - bodyText: Jill with a score of $8000. Fail.
+  - bodyText: 'Jill with a score of 900 U. Fail. '
     speakerName: Broadcast
     displayingImage: {fileID: 0}
     broadcastAnEvent: 0
-  - bodyText: "Shoot, as much as $8000 was a fail this year. Excluding the crystal,
-      I think I only secured just about that much, I hope it was enough to push me
-      over\u2026"
+  - bodyText: "Shoot, as much as 900 was a fail this year. Excluding the crystal,
+      I think I only secured just about that much. I hope it was enough to push me
+      over\u2026 "
     speakerName: Jackie
     displayingImage: {fileID: 0}
     broadcastAnEvent: 0
@@ -47,7 +47,7 @@ MonoBehaviour:
     speakerName: Broadcast
     displayingImage: {fileID: 0}
     broadcastAnEvent: 0
-  - bodyText: $15 000 000 in waste products collected.
+  - bodyText: ' 150 000 U. in Waste products collected.'
     speakerName: Broadcast
     displayingImage: {fileID: 0}
     broadcastAnEvent: 0
