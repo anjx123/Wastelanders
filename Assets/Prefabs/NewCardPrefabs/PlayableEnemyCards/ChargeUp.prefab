@@ -129,6 +129,7 @@ MonoBehaviour:
     <ActionClassName>k__BackingField: 
     <CurrentProgress>k__BackingField: 0
   hurlPrefab: {fileID: 243924049096554030, guid: f35b26817620af0448af7c7b2c4a0b92, type: 3}
+  animationClip: {fileID: 7400000, guid: f1d0f815eb3ece449bead774e9a9bfaa, type: 2}
 --- !u!4 &1522312218679409194 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8284128080877360369, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}

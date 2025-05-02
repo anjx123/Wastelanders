@@ -120,7 +120,7 @@ MonoBehaviour:
   data:
     <ActionClassName>k__BackingField: 
     <CurrentProgress>k__BackingField: 0
-  excavateClip: {fileID: 0}
+  excavateClip: {fileID: 7400000, guid: acf8c91f0f4a64a4c87fdeaed8b16252, type: 2}
 --- !u!4 &1522312218679409194 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8284128080877360369, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}

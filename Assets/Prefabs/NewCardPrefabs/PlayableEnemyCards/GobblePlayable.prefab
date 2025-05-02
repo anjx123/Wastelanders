@@ -125,6 +125,7 @@ MonoBehaviour:
   data:
     <ActionClassName>k__BackingField: 
     <CurrentProgress>k__BackingField: 0
+  animationClip: {fileID: 7400000, guid: 5eed0c790094143e1b1d9b7487591aca, type: 2}
 --- !u!114 &6744338300813824953 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 276933645572133302, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}

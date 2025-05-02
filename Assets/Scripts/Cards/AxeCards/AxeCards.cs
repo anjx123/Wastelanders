@@ -17,9 +17,6 @@ public abstract class AxeCards : ActionClass
         if (Origin.HasAnimationParameter(AXE_ANIMATION_NAME)) 
         {
             Origin.AttackAnimation(AXE_ANIMATION_NAME); 
-        } else
-        {
-            Origin.AttackAnimation("IsMelee");
         }
         base.CardIsUnstaggered();
     }
@@ -29,10 +26,6 @@ public abstract class AxeCards : ActionClass
         if (Origin.HasAnimationParameter(AXE_ANIMATION_NAME))
         {
             Origin.AttackAnimation(AXE_ANIMATION_NAME); 
-        }
-        else
-        {
-            Origin.AttackAnimation("IsMelee");
         }
         base.OnHit();
     }

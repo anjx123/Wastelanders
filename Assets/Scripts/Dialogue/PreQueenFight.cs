@@ -601,12 +601,9 @@ public class PreQueenFight : DialogueClasses
 
         StartCoroutine(origin?.MoveToPosition(HorizontalProjector(centeredDistance, origin.myTransform.position, xBuffer), bufferedRadius, duration, centeredDistance));
         yield return StartCoroutine(target?.MoveToPosition(HorizontalProjector(centeredDistance, target.myTransform.position, xBuffer), bufferedRadius, duration, centeredDistance));
-        if (e1GetsHit)
+        if (!e1GetsHit)
         {
-        }
-        else
-        {
-            e1.AttackAnimation("IsMelee");
+            e1.AttackAnimation(Pincer.PINCER_ANIMATION_NAME);
             yield return StartCoroutine(e2.StaggerEntities(e1, e2, 0.3f));
             e2.RemoveEntityFromCombat();
             yield return StartCoroutine(e2.Die());

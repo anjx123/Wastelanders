@@ -124,7 +124,7 @@ MonoBehaviour:
   data:
     <ActionClassName>k__BackingField: 
     <CurrentProgress>k__BackingField: 0
-  pincerClip: {fileID: 0}
+  pincerClip: {fileID: 7400000, guid: 7df2002feb5e2d340997c72a89a1a2a5, type: 2}
 --- !u!4 &1522312218679409194 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8284128080877360369, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}

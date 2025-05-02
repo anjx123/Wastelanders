@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEngine.UI.Image;
+
 public abstract class FrogAttacks : ActionClass
 {
     public const string SPIT_SOUND_EFFECT_NAME = "Frog Hit";

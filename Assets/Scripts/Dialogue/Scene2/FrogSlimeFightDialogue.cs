@@ -163,7 +163,7 @@ public class FrogSlimeFightDialogue : DialogueClasses
             jackie.gameObject.transform.position = treeHidingPositionJackie.position + new Vector3(0.8f, 0, 0);
             jackie.animator.enabled = true;
             jackie.GetComponent<SpriteRenderer>().sortingOrder = treeOverlay.sortingOrder + 1;
-            jackie.AttackAnimation("IsShooting");
+            jackie.AttackAnimation(PistolCards.PISTOL_ANIMATION_NAME);
             yield return StartCoroutine(MakeFrogJump(frog, 1f));
             yield return StartCoroutine(frog.MoveToPosition(frogConfrontPosition.position, 0f, 1.2f, outOfScreen.position));
             yield return StartCoroutine(DialogueManager.Instance.StartDialogue(jackiePostMissedShot));

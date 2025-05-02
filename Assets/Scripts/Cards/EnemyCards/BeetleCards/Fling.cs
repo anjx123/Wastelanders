@@ -6,7 +6,7 @@ using UnityEngine;
 public class Fling : BeetleAttacks, IPlayableBeetleCard
 {
     [SerializeField] private ProjectileBehaviour projectileBehaviour;
-    public const string FLING_ANIMATION_NAME = "IsFling";
+    public const string FLING_ANIMATION_NAME = "IsFlinging";
     [SerializeField] private AnimationClip flingClip;
 
     // Start is called before the first frame update

@@ -125,7 +125,7 @@ MonoBehaviour:
     <ActionClassName>k__BackingField: 
     <CurrentProgress>k__BackingField: 0
   projectileBehaviour: {fileID: 6570645926309376784, guid: 0f32e03762dbd6a4cb121b4cd03613c2, type: 3}
-  flingClip: {fileID: 0}
+  flingClip: {fileID: 7400000, guid: f55492bc04b1b6d4a9046000d45af471, type: 2}
 --- !u!4 &1522312218679409194 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8284128080877360369, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}

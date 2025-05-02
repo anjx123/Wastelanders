@@ -4,7 +4,6 @@ public class ChargeUpPlayable : ActionClass, IPlayableFrogCard
 {
     [SerializeField]
     private GameObject hurlPrefab;
-    public const string CHARGE_UP_ANIMATION_NAME = "IsCharging";
     [SerializeField] private AnimationClip animationClip;
 
     public override void Initialize()
@@ -25,7 +24,7 @@ public class ChargeUpPlayable : ActionClass, IPlayableFrogCard
     {
         PlayerClass player = (PlayerClass)this.Origin;
         player.InjectCard(hurlPrefab);
-        IPlayableEnemyCard.ApplyForeignAttackAnimation(player, animationClip, CHARGE_UP_ANIMATION_NAME);
-        Origin.AttackAnimation(CHARGE_UP_ANIMATION_NAME);
+        IPlayableEnemyCard.ApplyForeignAttackAnimation(player, animationClip, ChargeUp.CHARGE_UP_ANIMATION_NAME);
+        Origin.AttackAnimation(ChargeUp.CHARGE_UP_ANIMATION_NAME);
     }
 }

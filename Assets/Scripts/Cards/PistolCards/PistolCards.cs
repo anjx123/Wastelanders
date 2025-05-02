@@ -22,10 +22,8 @@ public abstract class PistolCards : ActionClass
         if (Origin.HasAnimationParameter(PISTOL_ANIMATION_NAME))
         {
             Origin.AttackAnimation(PISTOL_ANIMATION_NAME);
-        } else
-        {
-            Origin.AttackAnimation("RangedAttack");
         }
+
         base.CardIsUnstaggered();
     }
     public override void OnHit()
