@@ -18,7 +18,6 @@ public interface IPlayableEnemyCard
         if (animatorController == null || animationClip == null)
         {
             Debug.LogWarning("AnimatorController or AnimationClip is null. AnimatorController must not be null to support foreign animations.");
-            entityClass.AttackAnimation(triggerName);
             return;
         }
 
@@ -39,7 +38,6 @@ public interface IPlayableEnemyCard
         if (existingState.state != null)
         {
             Debug.LogWarning($"State {animationClip.name} already exists. Skipping addition.");
-            entityClass.AttackAnimation(triggerName);
             return;
         }
 
@@ -66,18 +64,11 @@ public interface IPlayableEnemyCard
         toDefaultTransition.hasExitTime = true;
         toDefaultTransition.exitTime = 1f;
         toDefaultTransition.duration = 0f;
-
-        entityClass.StartCoroutine(CallAttackAnimationNextFrame(entityClass, triggerName));
         Debug.Log("Attack Animation state and transitions added successfully and called.");
     }
     private static bool ParameterExists(AnimatorController controller, string paramName)
     {
         return controller.parameters.Any(p => p.name == paramName);
-    }
-    private static IEnumerator CallAttackAnimationNextFrame(EntityClass entityClass, string triggerName)
-    {
-        yield return new WaitForEndOfFrame(); 
-        entityClass.AttackAnimation(triggerName);
     }
 }
 public interface IPlayableBeetleCard : IPlayableEnemyCard { }

@@ -45,6 +45,7 @@ namespace Cards.EnemyCards.FrogCards
         public override void CardIsUnstaggered()
         {
             IPlayableEnemyCard.ApplyForeignAttackAnimation(Origin, animationClip, BLESS_ANIMATION);
+            Origin.AttackAnimation(BLESS_ANIMATION);
             Origin.AddStacks(Resonate.buffName, BLESS_COST);
 
             var teamMates = Origin.Team.GetTeamMates();

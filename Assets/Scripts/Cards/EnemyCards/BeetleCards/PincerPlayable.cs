@@ -20,6 +20,7 @@ public class PincerPlayable : Pincer, IPlayableBeetleCard
     {
         base.CardIsUnstaggered();
         IPlayableEnemyCard.ApplyForeignAttackAnimation(Origin, pincerClip, PINCER_ANIMATION_NAME);
+        Origin.AttackAnimation(PINCER_ANIMATION_NAME);
         InsertDuplicate();
     }
 

@@ -33,6 +33,7 @@ public class Excavate : BeetleAttacks, IPlayableBeetleCard
     {
         base.CardIsUnstaggered();
         IPlayableEnemyCard.ApplyForeignAttackAnimation(Origin, excavateClip, EXCAVATE_ANIMATION_NAME);
+        Origin.AttackAnimation(EXCAVATE_ANIMATION_NAME);
     }
 
     // does 2x damage if target is crystal
