@@ -3865,7 +3865,7 @@ MonoBehaviour:
     displayingImage: {fileID: 21300000, guid: 228f823fe8b2f4d4791ed74e46de81e1, type: 3}
     broadcastAnEvent: 0
   outOfCombatCrystalDialogue:
-  - bodyText: Hey Ives, why do you think the beetles were so fixated on these crystals.
+  - bodyText: Hey Ives, why do you think the beetles were so fixated on these crystals?
     speakerName: Jackie
     displayingImage: {fileID: 21300000, guid: 228f823fe8b2f4d4791ed74e46de81e1, type: 3}
     broadcastAnEvent: 0
@@ -3879,12 +3879,12 @@ MonoBehaviour:
     speakerName: 
     displayingImage: {fileID: 21300000, guid: 1d59623b22cafd84cb32164685717017, type: 3}
     broadcastAnEvent: 0
-  - bodyText: Whatever it is, it isn't good news to keep anymore around.
+  - bodyText: Whatever it is, it isn't good news to keep around.
     speakerName: Jackie
     displayingImage: {fileID: 21300000, guid: 228f823fe8b2f4d4791ed74e46de81e1, type: 3}
     broadcastAnEvent: 0
   jackieFeelsStronger:
-  - bodyText: Woah, whats this feeling. I feel stronger after hitting the crystal?
+  - bodyText: Woah, what's this feeling? I feel stronger after hitting the crystal.
     speakerName: Jackie
     displayingImage: {fileID: 21300000, guid: 228f823fe8b2f4d4791ed74e46de81e1, type: 3}
     broadcastAnEvent: 0
@@ -3907,7 +3907,7 @@ MonoBehaviour:
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: ade9660133ca00a499bfa3ad449b87bd, type: 3}
     broadcastAnEvent: 0
-  - bodyText: For now, lets store the fragments in a safe place where the beetles
+  - bodyText: For now, let's store the fragments in a safe place where the beetles
       can't find.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: ade9660133ca00a499bfa3ad449b87bd, type: 3}

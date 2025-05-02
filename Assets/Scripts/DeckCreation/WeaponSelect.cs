@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 
 public class WeaponSelect : MonoBehaviour
@@ -8,6 +9,8 @@ public class WeaponSelect : MonoBehaviour
     [SerializeField] private WeaponEdit weaponEdit;
     [SerializeField] private SpriteRenderer cardBodySprite;
     [SerializeField] private GameObject lockedIndicator;
+    [SerializeField] private GameObject hoverIndicator;
+    [SerializeField] private TMP_Text hoverIndicatorText;
     private Color baseColor = Color.white;
     private Color hoverColor = new Color(0.6f, 0.6f, 0.6f);
 
@@ -26,14 +29,15 @@ public class WeaponSelect : MonoBehaviour
             db => hasSubFolders ? db.GetDefaultSubFolderData(type) : db.GetCardsByType(type)
         );
 
-        // Let's lock the deck if: we have subfolders and there is not a single unlocked weapon
-        SetLockedState(hasSubFolders && CardDatabase.GetUnlockedSubFoldersFor(type).Count < 1);
+        // Let's lock the deck if: we have subfolders and there is not a single unlocked weapon. But do not touch locked state if not. (for tutorial)
+        if (hasSubFolders && CardDatabase.GetUnlockedSubFoldersFor(type).Count < 1) SetLockedState(true);
     }
 
 
     public void SetSelected(bool isSelected)
     {
         checkmark.SetActive(isSelected);
+        hoverIndicatorText.SetText(isSelected ? "Deselect" : "Select");
     }
 
     public void OnMouseDown()
@@ -58,6 +62,7 @@ public class WeaponSelect : MonoBehaviour
     {
         if (isLocked) return;
         SetColor(hoverColor);
+        hoverIndicator.SetActive(true);
     }
 
     public void OnMouseExit()
@@ -65,6 +70,7 @@ public class WeaponSelect : MonoBehaviour
         if (isLocked) return;
         SetColor(baseColor);
         isMouseDown = false;
+        hoverIndicator.SetActive(false);
     }
 
     public void SetColor(Color newColor)

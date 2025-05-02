@@ -2188,7 +2188,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6635998426718021455, guid: b9c5e4b3c9f7e024f8fe9012e7a2e437, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.0129049
+      value: -1.0142591
       objectReference: {fileID: 0}
     - target: {fileID: 6635998426718021455, guid: b9c5e4b3c9f7e024f8fe9012e7a2e437, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2717,109 +2717,8 @@ MonoBehaviour:
     speakerName: Jackie
     displayingImage: {fileID: 21300000, guid: 228f823fe8b2f4d4791ed74e46de81e1, type: 3}
     broadcastAnEvent: 0
-  soldierAndResults:
-  - bodyText: "So, Jackie, today\u2019s the big day again, you excited to hear your
-      test scores?"
-    speakerName: Mustached Soldier
-    displayingImage: {fileID: 21300000, guid: 01abf656002dc52488bb7a70d993c55d, type: 3}
-    broadcastAnEvent: 0
-  - bodyText: "As ready as I\u2019ll be. I\u2019ve been waiting ages for today."
-    speakerName: Jackie
-    displayingImage: {fileID: 21300000, guid: 228f823fe8b2f4d4791ed74e46de81e1, type: 3}
-    broadcastAnEvent: 0
-  - bodyText: Well you got here just in time, seems like the broadcast is starting.
-    speakerName: Mustached Soldier
-    displayingImage: {fileID: 21300000, guid: 01abf656002dc52488bb7a70d993c55d, type: 3}
-    broadcastAnEvent: 0
-  - bodyText: '*CHZHCKK*'
-    speakerName: Speaker
-    displayingImage: {fileID: 0}
-    broadcastAnEvent: 0
-  - bodyText: Good morning citizens of New Haven City.
-    speakerName: Speaker
-    displayingImage: {fileID: 0}
-    broadcastAnEvent: 0
-  - bodyText: As you all know, just a couple days ago. Brave NITES candidates set
-      out for the wasteland to begin their intake exam.
-    speakerName: Speaker
-    displayingImage: {fileID: 0}
-    broadcastAnEvent: 0
-  - bodyText: Discovering a newfound waste power source three times stabler than
-      what we synthesize today!
-    speakerName: Speaker
-    displayingImage: {fileID: 0}
-    broadcastAnEvent: 0
-  - bodyText: This great achievement means a safer city from the waste! Celebrate
-      these heroes when you get the chance.
-    speakerName: Speaker
-    displayingImage: {fileID: 0}
-    broadcastAnEvent: 0
-  - bodyText: Nevertheless, this broadcast will announce the score of the recent
-      NITES exam candidates and whether they passed.
-    speakerName: Speaker
-    displayingImage: {fileID: 0}
-    broadcastAnEvent: 0
-  resultsBroadcast:
-  - bodyText: 'Alec with a score of 1 500 in waste products collected. '
-    speakerName: Speaker
-    displayingImage: {fileID: 0}
-    broadcastAnEvent: 0
-  - bodyText: Pass.
-    speakerName: Speaker
-    displayingImage: {fileID: 0}
-    broadcastAnEvent: 0
-  - bodyText: 'Chloe with a score of 500. '
-    speakerName: Speaker
-    displayingImage: {fileID: 0}
-    broadcastAnEvent: 0
-  - bodyText: Fail.
-    speakerName: Speaker
-    displayingImage: {fileID: 0}
-    broadcastAnEvent: 0
-  - bodyText: Andrew with a score of 1 200. Pass.
-    speakerName: Speaker
-    displayingImage: {fileID: 0}
-    broadcastAnEvent: 0
-  - bodyText: Jill with a score of 900... Fail.
-    speakerName: Broadcast
-    displayingImage: {fileID: 0}
-    broadcastAnEvent: 0
-  - bodyText: "Shoot, as much as 900 was a fail this year. Excluding the crystal,
-      I think I only secured just about that much, I hope it was enough to push me
-      over\u2026"
-    speakerName: Jackie
-    displayingImage: {fileID: 0}
-    broadcastAnEvent: 0
-  - bodyText: "Jackie Page with a score of\u2026"
-    speakerName: Broadcast
-    displayingImage: {fileID: 0}
-    broadcastAnEvent: 0
-  - bodyText: 150 000 points of waste products collected.
-    speakerName: Speaker
-    displayingImage: {fileID: 0}
-    broadcastAnEvent: 0
-  - bodyText: Pass.
-    speakerName: Speaker
-    displayingImage: {fileID: 0}
-    broadcastAnEvent: 0
-  - bodyText: W H A T.
-    speakerName: Jackie
-    displayingImage: {fileID: 21300000, guid: 1766f7fa2aec26d4b80d30e9c84bc726, type: 3}
-    broadcastAnEvent: 0
-  - bodyText: (Murmurs begin spreading through the crowd as both Soldiers and NITES
-      alike hear the unimaginable score.)
-    speakerName: 
-    displayingImage: {fileID: 0}
-    broadcastAnEvent: 0
-  - bodyText: "Hah, Incredible, Jackie! I think it\u2019s the highest score that
-      anyone has ever achieved in the NITES exam."
-    speakerName: Mustached Soldier
-    displayingImage: {fileID: 21300000, guid: 01abf656002dc52488bb7a70d993c55d, type: 3}
-    broadcastAnEvent: 0
-  - bodyText: "Wow, T-thank you, I can\u2019t believe it."
-    speakerName: Jackie
-    displayingImage: {fileID: 21300000, guid: 228f823fe8b2f4d4791ed74e46de81e1, type: 3}
-    broadcastAnEvent: 0
+  soldierAndResults: {fileID: 11400000, guid: a81445fa61ac9be4bb0e57c72fb3e255, type: 2}
+  resultsBroadcast: {fileID: 11400000, guid: b4db56075f810ec4083bbdb63be6d9f6, type: 2}
   jackieResultsConfusion:
   - bodyText: "Ives! The results! What\u2026?"
     speakerName: Jackie
@@ -2836,12 +2735,12 @@ MonoBehaviour:
     displayingImage: {fileID: 21300000, guid: ade9660133ca00a499bfa3ad449b87bd, type: 3}
     broadcastAnEvent: 0
   - bodyText: The scientists theorize that this fragment originates from one of the
-      original meteors that brought the Waste to Earth. Creating the wasteland.
+      asteroids that first brought the Waste to Earth and created the Wasteland.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: ade9660133ca00a499bfa3ad449b87bd, type: 3}
     broadcastAnEvent: 0
-  - bodyText: Since you found the nest, refined our battle plan, and took down the
-      Queen Beetle, we gave you the full credit for this discovery.
+  - bodyText: 'Since you found the nest, refined our battle plan, and took down the
+      Queen Beetle, we gave you full credit for this discovery. '
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: ade9660133ca00a499bfa3ad449b87bd, type: 3}
     broadcastAnEvent: 0
@@ -2853,12 +2752,12 @@ MonoBehaviour:
     broadcastAnEvent: 0
   jackieInterjects:
   - bodyText: "Thanks, Ives. But now that I can go on these Wasteland expeditions,
-      I\u2019ll tell it to \u2018ma myself!"
+      I\u2019ll tell Mama myself!"
     speakerName: Jackie
     displayingImage: {fileID: 21300000, guid: 10ec818d4088de44a83a5405137230e4, type: 3}
     broadcastAnEvent: 0
   ivesFinal:
-  - bodyText: Haha of course, but you might want to brush on that stealth of yours
+  - bodyText: Haha of course, but you might want to brush up on that stealth of yours
       first.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: ade9660133ca00a499bfa3ad449b87bd, type: 3}
@@ -2877,7 +2776,7 @@ MonoBehaviour:
     speakerName: 
     displayingImage: {fileID: 0}
     broadcastAnEvent: 0
-  - bodyText: "Com \u2018ere, Jackie. Welcome to the NITES."
+  - bodyText: "C\u2019mere, Jackie. Welcome to the NITES."
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: ade9660133ca00a499bfa3ad449b87bd, type: 3}
     broadcastAnEvent: 0

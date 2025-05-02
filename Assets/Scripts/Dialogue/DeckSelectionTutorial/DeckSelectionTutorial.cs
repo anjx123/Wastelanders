@@ -76,6 +76,7 @@ public class DeckSelectionTutorial : MonoBehaviour
 
     private void HandleWeaponSelected(WeaponSelect weaponSelect, CardDatabase.WeaponType type)
     {
+        if (type != CardDatabase.WeaponType.PISTOL) return;
         WeaponSelect.WeaponSelectEvent -= HandleWeaponSelected;
         StartCoroutine(StartDialogueWithNextEvent(editYourWeapon.Dialogue, () => {
             foreach (WeaponEdit boxCollider in weaponEditBoxCollidersToDisable)
@@ -87,6 +88,7 @@ public class DeckSelectionTutorial : MonoBehaviour
 
     private void HandleWeaponEdited(WeaponEditInformation weaponEditInformation)
     {
+        if (weaponEditInformation.WeaponType != CardDatabase.WeaponType.PISTOL) return;
         WeaponEdit.WeaponEditEvent -= HandleWeaponEdited;
         GameStateManager.Instance.ShouldPlayDeckSelectionTutorial = false;
         DeckSelectionManager.Instance.SetNextScene(GameStateManager.FROG_SLIME_FIGHT);

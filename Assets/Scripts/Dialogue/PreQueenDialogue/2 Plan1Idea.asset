@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogue:
   - bodyText: 'From the camp attack, it seems the beetles are attracted to these
-      waste crystals.  '
+      Waste crystals. '
     speakerName: Jackie
     displayingImage: {fileID: 21300000, guid: 487226e5dae66424ea250466920a3086, type: 3}
     broadcastAnEvent: 0
@@ -23,8 +23,8 @@ MonoBehaviour:
     speakerName: Jackie
     displayingImage: {fileID: 21300000, guid: 88a7e4552c1afa641acadc54e9b6cbac, type: 3}
     broadcastAnEvent: 1
-  - bodyText: So I was thinking, what if we took some of these waste products and
-      used them as bait to lure the beetles in.
+  - bodyText: So I was thinking, what if we took some of these Waste products and
+      used them as bait to lure the beetles in?
     speakerName: Jackie
     displayingImage: {fileID: 21300000, guid: 487226e5dae66424ea250466920a3086, type: 3}
     broadcastAnEvent: 1

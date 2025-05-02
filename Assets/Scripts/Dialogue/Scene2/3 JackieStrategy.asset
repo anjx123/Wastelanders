@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: 3 JackieStrategy
   m_EditorClassIdentifier: 
   dialogue:
-  - bodyText: 'Hmm let me come up with a plan, I know that the more dangerous the
-      waste enemy, the higher quality the Waste Product they drop when slain.  '
+  - bodyText: "Hmm\u2026 let me come up with a plan. I know that the more dangerous
+      the Waste enemy, the higher quality the Waste Product they drop when slain. "
     speakerName: Jackie
     displayingImage: {fileID: 21300000, guid: 26c95ccd71f756349881ce655e12b5cc, type: 3}
     broadcastAnEvent: 0
-  - bodyText: Should I work with a team again to try and hunt down a larger waste
+  - bodyText: Should I work with a team again and try to hunt down a larger Waste
       monster?
     speakerName: Jackie
     displayingImage: {fileID: 21300000, guid: 26c95ccd71f756349881ce655e12b5cc, type: 3}
