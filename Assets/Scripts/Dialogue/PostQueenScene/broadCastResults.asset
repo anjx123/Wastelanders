@@ -38,7 +38,7 @@ MonoBehaviour:
     displayingImage: {fileID: 0}
     broadcastAnEvent: 0
   - bodyText: "Shoot, as much as 900 was a fail this year. Excluding the crystal,
-      I think I only secured just about that much. I hope it was enough to push me
+      I think I only secured just about that much, I hope it was enough to push me
       over\u2026 "
     speakerName: Jackie
     displayingImage: {fileID: 0}
