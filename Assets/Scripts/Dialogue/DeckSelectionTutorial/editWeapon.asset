@@ -18,7 +18,7 @@ MonoBehaviour:
     speakerName: Jackie
     displayingImage: {fileID: 0}
     broadcastAnEvent: 0
-  - bodyText: '[''Click'' on the Edit button to edit the Action Deck of each weapon.]'
+  - bodyText: '[Click ''Edit Deck'' to change the Action Deck of each weapon.]'
     speakerName: Jackie
     displayingImage: {fileID: 0}
     broadcastAnEvent: 0
