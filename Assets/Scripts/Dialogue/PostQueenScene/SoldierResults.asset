@@ -22,7 +22,7 @@ MonoBehaviour:
     speakerName: Jackie
     displayingImage: {fileID: 0}
     broadcastAnEvent: 0
-  - bodyText: Well you got here just in time, seems like the broadcast is starting.
+  - bodyText: Well, you got here just in time, seems like the broadcast is starting.
     speakerName: Mustached Soldier
     displayingImage: {fileID: 0}
     broadcastAnEvent: 0
@@ -34,23 +34,23 @@ MonoBehaviour:
     speakerName: Broadcast
     displayingImage: {fileID: 0}
     broadcastAnEvent: 0
-  - bodyText: As you all know, just a couple days ago. Brave NITES candidates set
-      out for the wasteland to begin their intake exam.
+  - bodyText: As you all know, just a couple days ago, brave NITES candidates set      
+      out for the Wasteland to begin their intake exam.
     speakerName: Broadcast
     displayingImage: {fileID: 0}
     broadcastAnEvent: 0
-  - bodyText: Discovering a newfound waste power source 3x stabler than what we synthesize
-      today!
+  - bodyText: They discovered a newfound Waste power source three times more stable
+      than what we synthesize today!
     speakerName: Broadcast
     displayingImage: {fileID: 0}
     broadcastAnEvent: 0
-  - bodyText: This great achievment means a safer city from the waste! Celebrate
-      these heroes when you get the chance.
+  - bodyText: This great achievement means a safer city! Celebrate these heroes you
+      get the chance.
     speakerName: Broadcast
     displayingImage: {fileID: 0}
     broadcastAnEvent: 0
-  - bodyText: Nevertheless, this broadcast will announce the score of the recent
-      NITES exam candidates and whether they passed.
+  - bodyText: Nevertheless, this broadcast will announce the score of the NITES exam
+      candidates in energy units collected, and whether they passed.
     speakerName: Broadcast
     displayingImage: {fileID: 0}
     broadcastAnEvent: 0

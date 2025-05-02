@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: selectActions
   m_EditorClassIdentifier: 
   dialogue:
-  - bodyText: I only have the stamina to use only a couple of techniques so I should
-      choose them wisely.
+  - bodyText: I only have the stamina to use a couple of Actions. I should choose
+      them wisely.
     speakerName: Jackie
     displayingImage: {fileID: 0}
     broadcastAnEvent: 0
@@ -26,15 +26,5 @@ MonoBehaviour:
   - bodyText: '[Weapon Proficiency determines how many techniques from a weapon a
       character can select.]'
     speakerName: 
-    displayingImage: {fileID: 0}
-    broadcastAnEvent: 0
-  - bodyText: 'I should make sure to select a good balance of actions with different
-      speeds. '
-    speakerName: Jackie
-    displayingImage: {fileID: 0}
-    broadcastAnEvent: 0
-  - bodyText: That way I will have many options during a fight, I can't be in two
-      places at once afterall.
-    speakerName: Jackie
     displayingImage: {fileID: 0}
     broadcastAnEvent: 0

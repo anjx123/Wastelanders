@@ -26,8 +26,8 @@ public class PostQueenBeetle : DialogueClasses
     [SerializeField] private List<DialogueText> jackieOpeningDialogue;
 
 
-    [SerializeField] private List<DialogueText> soldierAndResults;
-    [SerializeField] private List<DialogueText> resultsBroadcast;
+    [SerializeField] private DialogueWrapper soldierAndResults;
+    [SerializeField] private DialogueWrapper resultsBroadcast;
     [SerializeField] private List<DialogueText> jackieResultsConfusion;
     [SerializeField] private List<DialogueText> ivesYapping;
     [SerializeField] private List<DialogueText> jackieInterjects;
@@ -55,10 +55,10 @@ public class PostQueenBeetle : DialogueClasses
         yield return StartCoroutine(jackie.MoveToPosition(jackieListensToBroadcast.position, 0f, 1.2f));
         yield return new WaitForSeconds(1f);
         jackie.animator.enabled = false;
-        yield return StartCoroutine(DialogueManager.Instance.StartDialogue(soldierAndResults));
+        yield return StartCoroutine(DialogueManager.Instance.StartDialogue(soldierAndResults.Dialogue));
         yield return new WaitForSeconds(0.5f);
 
-        yield return StartCoroutine(DialogueManager.Instance.StartDialogue(resultsBroadcast));
+        yield return StartCoroutine(DialogueManager.Instance.StartDialogue(resultsBroadcast.Dialogue));
 
         yield return new WaitForSeconds(0.8f);
         CombatManager.Instance.ActivateDynamicCamera();
