@@ -31,13 +31,6 @@ public abstract class EntityClass : SelectClass
     }
 
     public EntityTeam Team { get; set; } = EntityTeam.NoTeam;
-    public enum EntityTeam
-    {
-        NoTeam,
-        PlayerTeam,
-        NeutralTeam,
-        EnemyTeam,
-    }
     public bool IsDead { get; set; }
     protected Vector3 initialPosition;
     private bool crosshairStaysActive = false;
@@ -99,7 +92,8 @@ public abstract class EntityClass : SelectClass
         if (Health != 0)
         {
             percentageDone = Mathf.Clamp(damage / (float)Health, 0f, 1f);
-        } else
+        } 
+        else
         {
             IsDead = true;
             RemoveEntityFromCombat();
@@ -190,11 +184,27 @@ public abstract class EntityClass : SelectClass
             elapsedTime += Time.deltaTime;
             yield return null;
         }
+
+        if (radius == 0) myTransform.position = destination; // Ensure the final position is set exactly.
+
         if (HasAnimationParameter("IsMoving"))
         {
             animator.SetBool("IsMoving", false);
         }
     }
+
+    //Removes entity cards and self from BQ and combat manager. Kills itself
+    public virtual IEnumerator Die()
+    {
+        int runDistance = (Team == EntityTeam.PlayerTeam) ? -10 : 10;
+
+        BattleQueue.BattleQueueInstance.RemoveAllInstancesOfEntity(this);
+        DestroyDeck();
+
+        yield return StartCoroutine(MoveToPosition(myTransform.position + new Vector3(runDistance, 0, 0), 0, 0.8f));
+        this.gameObject.SetActive(false);
+    }
+
     public void FaceRight()
     {
         FlipTransform(this.transform, true);
@@ -370,9 +380,7 @@ public abstract class EntityClass : SelectClass
     }
     //Run this to reset the entity position back to its starting position
     public abstract IEnumerator ResetPosition();
-
-    //Removes entity cards and self from BQ and combat manager. Kills itself
-    public abstract IEnumerator Die();
+    public abstract void DestroyDeck();
     public abstract void PerformSelection();
 
     private void AssignTeam()
@@ -399,7 +407,6 @@ public abstract class EntityClass : SelectClass
 
         action(this);
     }
-
 
     protected void FaceOpponent()
     {
@@ -441,26 +448,26 @@ public abstract class EntityClass : SelectClass
     }
 
     // Applies the Stacks of the Specified Buff to the Card Roll Limits
-    private void ApplyBuffsToCard(ref ActionClass.RolledStats dup, string buffType)
+    private void ApplyBuffsToCard(ActionClass.RolledStats dup, string buffType)
     {
         CheckBuff(buffType);
-        statusEffects[buffType].ApplyStacks(ref dup);
+        statusEffects[buffType].ApplyStacks(dup);
     }
 
     // Applies the Stacks of all Buffs to the Card Roll Limits
-    public void ApplyAllBuffsToCard(ref ActionClass.RolledStats dup)
+    public void ApplyAllBuffsToCard(ActionClass.RolledStats dup)
     {
         foreach (string buff in  statusEffects.Keys)
         {
-            ApplyBuffsToCard(ref dup, buff);
+            ApplyBuffsToCard(dup, buff);
         }
     }
 
-    public void ApplySingleUseEffects(ref ActionClass.RolledStats duplicateCard)
+    public void ApplySingleUseEffects(ActionClass.RolledStats duplicateCard)
     {
         foreach (string buff in statusEffects.Keys)
         {
-            statusEffects[buff].ApplySingleUseEffects(ref duplicateCard);
+            statusEffects[buff].ApplySingleUseEffects(duplicateCard);
         }
         //Single application will not be rendered in the hand but at runtime, so do not call the BuffUpdatedEvent 
         combatInfo.UpdateBuffs(statusEffects); 

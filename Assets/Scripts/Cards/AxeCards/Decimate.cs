@@ -10,15 +10,14 @@ public class Decimate : AxeCards
     {
         lowerBound = 2;
         upperBound = 6;
-        Speed = IsEvolved ? 4 : 2;
+        Speed = IsEvolved ? 4 : 1;
 
         myName = "Decimate";
-        description = "On hit, double the amount of wounds on the target. Then add an aditional wound.";
+        description = "On hit, double the amount of wounds on the target.";
         evolutionCriteria = "Double 10 wounds.";
         evolutionDescription = "Change this card's speed to 4.";
         MaxEvolutionProgress = 10;
 
-        Renderer renderer = GetComponent<Renderer>();
         base.Initialize();
         CardType = CardType.MeleeAttack;
     }
@@ -27,8 +26,6 @@ public class Decimate : AxeCards
     {
         base.OnHit();
         CurrentEvolutionProgress += Target.GetBuffStacks(Wound.buffName);
-        Debug.Log("My current evolution progress is: " + CurrentEvolutionProgress + " out of " + MaxEvolutionProgress);
         Target.AddStacks(Wound.buffName, Target.GetBuffStacks(Wound.buffName));
-        Target.AddStacks(Wound.buffName, 1);
     }
 }

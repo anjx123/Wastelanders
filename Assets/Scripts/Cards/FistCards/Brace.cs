@@ -10,18 +10,30 @@ public class Brace : FistCards
     // Start is called before the first frame update
     public override void Initialize()
     {
-        lowerBound = 2;
-        upperBound = 2;
+        lowerBound = 3;
+        upperBound = 3;
         Speed = 3;
 
         myName = "Brace";
-        description = "Block once, then block again!";
+        description = "Block, then block the next unclashed attack currently targeting this character.";
         CardType = CardType.Defense;
-        Renderer renderer = GetComponent<Renderer>();
         base.Initialize();
     }
 
-    public override void ApplyEffect()
+    public override void CardIsUnstaggered()
+    {
+        base.CardIsUnstaggered();
+        BlockNextAttack();
+    }
+
+    public override void OnCardStagger()
+    {
+        base.OnCardStagger();
+        BlockNextAttack();
+    }
+
+    // Note there is an edge case where a new enemy card is created only after you lose a future clash and since this only checks the queue at the time of instantiation.
+    private void BlockNextAttack()
     {
         if (originalCopy)
         {
@@ -31,10 +43,31 @@ public class Brace : FistCards
                 activeDuplicateInstance.originalCopy = false;
                 activeDuplicateInstance.transform.position = new Vector3(-10, 10, 10);
             }
+            var target = FindUnclashedAttackOrigin();
+            if (target == null) return;
             activeDuplicateInstance.Origin = Origin;
-            activeDuplicateInstance.Target = Target;
+            activeDuplicateInstance.Target = target;
             BattleQueue.BattleQueueInstance.AddAction(activeDuplicateInstance);
         }
-        base.ApplyEffect();
     }
+
+    private EntityClass? FindUnclashedAttackOrigin()
+    {
+        var array = BattleQueue.BattleQueueInstance.ProvideArray();
+
+        foreach (var item in array)
+        {
+            if (!item.IsClashing())
+            {
+                var action = item.GetTheOnlyExistingAction();
+                if (action.Target == Origin)
+                {
+                    return action.Origin;
+                }
+            }
+        }
+
+        return null;
+    }
+
 }

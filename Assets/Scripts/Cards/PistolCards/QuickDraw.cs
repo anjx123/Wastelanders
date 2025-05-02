@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class QuickDraw : PistolCards
 {
-
-    
     public override void OnCardStagger()
     {
         base.OnCardStagger();
@@ -27,7 +25,6 @@ public class QuickDraw : PistolCards
         myName = "Quick Draw";
         description = "Make this attack, then gain 1 Accuracy even if staggered.";
         CardType = CardType.RangedAttack;
-        Renderer renderer = GetComponent<Renderer>();
         base.Initialize();
     }
 

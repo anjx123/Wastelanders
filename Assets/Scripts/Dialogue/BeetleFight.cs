@@ -9,10 +9,10 @@ using UnityEngine.UI;
 using Systems.Persistence;
 using System;
 using LevelSelectInformation;
+using SceneBuilder;
 //@author: Andrew
 public class BeetleFight : DialogueClasses
 {
-
     [SerializeField] private Jackie jackie;
     [SerializeField] private Transform jackieDefaultTransform;
     [SerializeField] private Transform jackieChasingTransform;
@@ -26,12 +26,9 @@ public class BeetleFight : DialogueClasses
 
     [SerializeField] private Ives ives;
     [SerializeField] private Transform ivesDefaultTransform;
-    [SerializeField] private Transform ivesCombatTransform;
-    [SerializeField] private Transform jackieCombatTransform;
-    [SerializeField] private Transform ivesCombat2Transform;
-    [SerializeField] private Transform jackieCombat2Transform;
-    [SerializeField] private Transform ivesCombat3Transform;
-    [SerializeField] private Transform jackieCombat3Transform;
+    [SerializeField] private Transform playerWave1CombatPosition;
+    [SerializeField] private Transform playerWave2CombatPosition;
+    [SerializeField] private Transform playerWave3CombatPosition;
 
     [SerializeField] private WasteFrog frog;
     [SerializeField] private WasteFrog frogThatRunsAway;
@@ -105,13 +102,13 @@ public class BeetleFight : DialogueClasses
     List<EnemyClass> wave2 = new();
     List<EnemyClass> wave3 = new();
 
-
+    private DefaultSceneBuilder sceneBuilder;
 
     private const float BRIEF_PAUSE = 0.2f; // For use after an animation to make it visually seem smoother
     private const float MEDIUM_PAUSE = 1f; //For use after a text box comes down and we want to add some weight to the text.
 
     private void OnDestroy()
-    {
+    { 
         HighlightManager.Instance.EntityClicked -= EntityClicked;
         CombatManager.PlayersWinEvent -= AllEntitiesDied;
         CombatManager.EnemiesWinEvent -= EnemiesWin;
@@ -122,7 +119,6 @@ public class BeetleFight : DialogueClasses
         ives.BuffsUpdatedEvent -= ExplainPlayerBuffed;
 
         Beetle.OnGainBuffs -= ExplainResonate;
-
 
         CombatManager.ClearEvents();
         DialogueBox.ClearDialogueEvents();
@@ -170,6 +166,8 @@ public class BeetleFight : DialogueClasses
 
     private void SetUpCombatStatus()
     {
+        sceneBuilder = DefaultSceneBuilder.Construct();
+        sceneBuilder.PlayersPosition = playerWave1CombatPosition;
         draggedCrystal.OutOfCombat();
         beetleNest.SetActive(false);
         theCampWithBeetles.SetActive(false);
@@ -181,8 +179,6 @@ public class BeetleFight : DialogueClasses
         frogThatRunsAway.FaceLeft();
         ambushBeetle.OutOfCombat();
         wrangledBeetle.OutOfCombat();
-        jackie.SetReturnPosition(jackieCombatTransform.position);
-        ives.SetReturnPosition(ivesCombatTransform.position);
     }
 
     private IEnumerator ExecuteGameStart()
@@ -378,7 +374,7 @@ public class BeetleFight : DialogueClasses
             RemoveEnemyFromScene(frog);
             RemoveEnemyFromScene(frogThatRunsAway);
             RemoveEnemyFromScene(ambushBeetle);
-            ives.transform.position = ivesCombatTransform.position + new Vector3(-4, 0, 0);
+            ives.transform.position = playerWave1CombatPosition.position + new Vector3(-4, 0, 0);
             Coroutine fade = StartCoroutine(CombatManager.Instance.FadeInLightScreen(2f));
         }
 
@@ -422,15 +418,8 @@ public class BeetleFight : DialogueClasses
         {
             wave2Fight.SetActive(true);
             CombatManager.Instance.SetEnemiesHostile(wave2);
-            
-            if (!jackie.IsDead)
-            {
-                jackie.SetReturnPosition(jackieCombat2Transform.position);
-            }
-            if (!ives.IsDead)
-            {
-                ives.SetReturnPosition(ivesCombat2Transform.position);
-            }
+
+            sceneBuilder.PlayersPosition = playerWave2CombatPosition;
             yield return ShiftObjectCoroutine(CombatManager.Instance.baseCamera.gameObject, -7.5f, 3f);
             yield return new WaitForSeconds(0.5f);
             CombatManager.Instance.GameState = GameState.SELECTION;
@@ -443,14 +432,8 @@ public class BeetleFight : DialogueClasses
         {
             wave3Fight.SetActive(true);
             CombatManager.Instance.SetEnemiesHostile(wave3);
-            if (!jackie.IsDead)
-            {
-                jackie.SetReturnPosition(jackieCombat3Transform.position);
-            }
-            if (!ives.IsDead)
-            {
-                ives.SetReturnPosition(ivesCombat3Transform.position);
-            }
+            sceneBuilder.PlayersPosition = playerWave3CombatPosition;
+
             yield return ShiftObjectCoroutine(CombatManager.Instance.baseCamera.gameObject, -9.5f, 3f);
             yield return new WaitForSeconds(0.5f);
             CombatManager.Instance.GameState = GameState.SELECTION;
@@ -466,7 +449,7 @@ public class BeetleFight : DialogueClasses
             {
                 ives.gameObject.SetActive(true);
                 ives.OutOfCombat();
-                ives.SetReturnPosition(ivesCombat3Transform.transform.position);
+                sceneBuilder.PlayersPosition = playerWave3CombatPosition;
                 StartCoroutine(ives.ResetPosition());
             }
 
@@ -474,7 +457,7 @@ public class BeetleFight : DialogueClasses
             {
                 jackie.gameObject.SetActive(true);
                 jackie.OutOfCombat();
-                jackie.SetReturnPosition(jackieCombat3Transform.transform.position);
+                sceneBuilder.PlayersPosition = playerWave3CombatPosition;
                 StartCoroutine(jackie.ResetPosition());
             }
             DialogueManager.Instance.MoveBoxToBottom();

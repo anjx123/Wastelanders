@@ -1,11 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Xml.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
-using static UnityEngine.UI.Image;
 
-public class ChargeUpPlayable : FrogAttacks, IPlayableFrogCard
+public class ChargeUpPlayable : ActionClass, IPlayableFrogCard
 {
     [SerializeField]
     private GameObject hurlPrefab;
@@ -22,8 +17,6 @@ public class ChargeUpPlayable : FrogAttacks, IPlayableFrogCard
         myName = "Charge Up";
         CardType = CardType.Defense;
     }
-
-
 
     public override void CardIsUnstaggered()
     {

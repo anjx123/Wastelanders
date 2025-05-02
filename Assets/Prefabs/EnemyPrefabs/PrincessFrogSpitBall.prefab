@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 694525999474203449}
   - component: {fileID: 8562761452879119452}
+  - component: {fileID: 6638851633745885448}
   m_Layer: 0
   m_Name: PrincessFrogSpitBall
   m_TagString: Untagged
@@ -84,3 +85,16 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &6638851633745885448
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4172579226135636580}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b04b8593f1087af499738bfdd52d8150, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectilePrefab: {fileID: 4172579226135636580}
