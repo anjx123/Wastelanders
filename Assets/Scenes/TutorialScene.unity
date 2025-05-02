@@ -2346,7 +2346,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6635998426718021455, guid: b9c5e4b3c9f7e024f8fe9012e7a2e437, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -11.6297035
+      value: -10.134259
       objectReference: {fileID: 0}
     - target: {fileID: 6635998426718021455, guid: b9c5e4b3c9f7e024f8fe9012e7a2e437, type: 3}
       propertyPath: m_LocalPosition.y
@@ -3334,7 +3334,7 @@ MonoBehaviour:
     displayingImage: {fileID: 21300000, guid: 820631014ce088c4cb748224d5467c86, type: 3}
     broadcastAnEvent: 0
   - bodyText: Flow grants +1 to the upper and lower boundary of Power for your next
-      attack, but it clears out at the end of every round.
+      attack, but it clears out after the attack.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 820631014ce088c4cb748224d5467c86, type: 3}
     broadcastAnEvent: 0
@@ -3387,37 +3387,38 @@ MonoBehaviour:
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: b0d27b9163eb2554996f368bd5b8d4e2, type: 3}
     broadcastAnEvent: 0
-  - bodyText: promoting both action's speeds to be the fastest between the two.
+  - bodyText: promoting the speed of the slower action to match that of the faster
+      one.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 61a3ecbde544e124ba8f329d0e4f6fb2, type: 3}
     broadcastAnEvent: 0
-  - bodyText: These Actions will then compete against each other later in the fight
+  - bodyText: Then, these Actions will compete against each other later in the fight
       to see who rolls the highest Power.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 3fea2e94140c08246a0e502ee92d3761, type: 3}
     broadcastAnEvent: 0
-  - bodyText: Note that the order in which cards are played matters when forming
+  - bodyText: Note that the order in which Actions are played matters when forming
       clashes.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 87cb7c6c6588a4a3a957b707239abbf0, type: 3}
     broadcastAnEvent: 0
-  - bodyText: The first card played will always form the clash, even if the next
-      card played may be faster.
+  - bodyText: The first Action played will always form the clash, even if the next
+      Action played against them may be faster.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 87cb7c6c6588a4a3a957b707239abbf0, type: 3}
     broadcastAnEvent: 0
-  - bodyText: Think of it as suppressing an opponent's attack, and thus creating
-      an opening for yourself.
+  - bodyText: Think of it as suppressing an opponent's attack, allowing you to set
+      the pace.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: b0d27b9163eb2554996f368bd5b8d4e2, type: 3}
     broadcastAnEvent: 0
-  - bodyText: Experiment with this wisely to manipulate the order of attacks. Come
+  - bodyText: Experiment with this wisely to create an opening for yourself. Come
       at me when you are ready.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: b0d27b9163eb2554996f368bd5b8d4e2, type: 3}
     broadcastAnEvent: 0
   defensiveCardsTutorial:
-  - bodyText: 'Defensive cards are marked by the Defense icon. '
+  - bodyText: 'Defensive Actions are marked by the Defense icon. '
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 926dc102ee6ad62488fa7f3605a127ce, type: 3}
     broadcastAnEvent: 0
@@ -3432,11 +3433,11 @@ MonoBehaviour:
     displayingImage: {fileID: 21300000, guid: ade9660133ca00a499bfa3ad449b87bd, type: 3}
     broadcastAnEvent: 0
   cardAbilitiesTutorial:
-  - bodyText: Watch out, enemy cards can have abilities too.
+  - bodyText: Watch out, enemy Actions can have abilities too.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 305bbe4aee0eef34586b3def011ea974, type: 3}
     broadcastAnEvent: 0
-  - bodyText: Click on my card to check out the ability of my attack.
+  - bodyText: Click on my Action to check out the ability of my attack.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 305bbe4aee0eef34586b3def011ea974, type: 3}
     broadcastAnEvent: 0
@@ -3456,11 +3457,11 @@ MonoBehaviour:
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
     broadcastAnEvent: 0
-  - bodyText: 'So, choose the attacks that clash wisely. Being staggered is unforgiving. '
+  - bodyText: 'So, choose the attacks that clash wisely. Losing an attack is unforgiving. '
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
     broadcastAnEvent: 0
-  - bodyText: But staggering the opponent can prevent a lot of damage.
+  - bodyText: But staggering the opponent's attack can also prevent a lot of damage.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
     broadcastAnEvent: 0
