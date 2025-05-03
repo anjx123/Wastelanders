@@ -121,6 +121,7 @@ MonoBehaviour:
     <ActionClassName>k__BackingField: 
     <CurrentProgress>k__BackingField: 0
   projectileBehaviour: {fileID: 4634358394300283550, guid: 2215e5669ebb4ce439521ee582d25b32, type: 3}
+  animationClip: {fileID: 7400000, guid: 47b0e7c80791ed34da529c6386017d82, type: 2}
 --- !u!4 &1522312218679409194 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8284128080877360369, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
