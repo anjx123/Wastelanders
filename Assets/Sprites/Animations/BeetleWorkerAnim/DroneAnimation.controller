@@ -9,7 +9,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: IsShooting
+    m_ConditionEvent: IsFlinging
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 5409509456286747080}
@@ -83,7 +83,7 @@ AnimatorController:
   m_Name: DroneAnimation
   serializedVersion: 5
   m_AnimatorParameters:
-  - m_Name: IsShooting
+  - m_Name: IsFlinging
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0

@@ -164,6 +164,8 @@ public class FrogSlimeFightDialogue : DialogueClasses
             jackie.animator.enabled = true;
             jackie.GetComponent<SpriteRenderer>().sortingOrder = treeOverlay.sortingOrder + 1;
             jackie.AttackAnimation(PistolCards.PISTOL_ANIMATION_NAME);
+            AudioManager.Instance?.PlaySFX(PistolCards.PISTOL_SOUND_FX_NAME);
+
             yield return StartCoroutine(MakeFrogJump(frog, 1f));
             yield return StartCoroutine(frog.MoveToPosition(frogConfrontPosition.position, 0f, 1.2f, outOfScreen.position));
             yield return StartCoroutine(DialogueManager.Instance.StartDialogue(jackiePostMissedShot));
@@ -209,6 +211,7 @@ public class FrogSlimeFightDialogue : DialogueClasses
         yield return new WaitForSeconds(MEDIUM_PAUSE);
 
         //After Combat
+        AudioManager.Instance.FadeOutCurrentBackgroundTrack(2f);
         yield return StartCoroutine(DialogueManager.Instance.StartDialogue(afterCombatDialogue));
         yield return new WaitForSeconds(BRIEF_PAUSE);
         CombatManager.Instance.ActivateDynamicCamera();
@@ -246,7 +249,6 @@ public class FrogSlimeFightDialogue : DialogueClasses
         yield return new WaitForSeconds(2f);
         StartCoroutine(scoutBeetle.MoveToPosition(jackie.transform.position, 0f, 2.5f));
 
-        AudioManager.Instance.FadeOutCurrentBackgroundTrack(2f);
         yield return new WaitForSeconds(2f);
         yield return StartCoroutine(CombatManager.Instance.FadeInDarkScreen(1.5f));
 
