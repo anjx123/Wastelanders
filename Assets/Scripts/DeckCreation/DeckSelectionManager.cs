@@ -252,11 +252,11 @@ public class DeckSelectionManager : MonoBehaviour
     private void CardRightClicked(ActionClass ac)
     {
         // Deselect the card as to not allow duplicate selecting
-        DeselectFromDeck(ac);
+        // DeselectFromDeck(ac);
         // Flip the card itself
-        FlipCard(ac);
+        // FlipCard(ac);
         // Re-call OnMouseEnter so that we re-render the card description popup
-        ac.OnMouseEnter();
+        // ac.OnMouseEnter();
     }
 
     // Handles when a card is clicked event
