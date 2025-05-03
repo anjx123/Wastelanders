@@ -1,12 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Xml.Linq;
 using UnityEngine;
-using static Unity.Collections.AllocatorManager;
-using static UnityEngine.UI.Image;
 
 public class ChargeUp : FrogAttacks
 {
+    public const string CHARGE_UP_ANIMATION_NAME = "IsCharging";
     // Start is called before the first frame update
     public override void Initialize()
     {
@@ -29,7 +25,7 @@ public class ChargeUp : FrogAttacks
     {
         WasteFrog frog = (WasteFrog)this.Origin;
         frog.UseHurl = true;
-        Origin.AttackAnimation("IsBlocking"); // :3
+        Origin.AttackAnimation(CHARGE_UP_ANIMATION_NAME);
         
     }
 

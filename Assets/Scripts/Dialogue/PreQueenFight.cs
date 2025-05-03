@@ -529,6 +529,7 @@ public class PreQueenFight : DialogueClasses
 
             yield return StartCoroutine(DialogueManager.Instance.StartDialogue(PostFight.Dialogue));
 
+            GameStateManager.Instance.JustFinishedBeetleFight = false;
             GameStateManager.Instance.LoadScene(GameStateManager.POST_QUEEN_FIGHT);
         }
         
@@ -601,10 +602,7 @@ public class PreQueenFight : DialogueClasses
 
         StartCoroutine(origin?.MoveToPosition(HorizontalProjector(centeredDistance, origin.myTransform.position, xBuffer), bufferedRadius, duration, centeredDistance));
         yield return StartCoroutine(target?.MoveToPosition(HorizontalProjector(centeredDistance, target.myTransform.position, xBuffer), bufferedRadius, duration, centeredDistance));
-        if (e1GetsHit)
-        {
-        }
-        else
+        if (!e1GetsHit)
         {
             e1.AttackAnimation("IsMelee");
             yield return StartCoroutine(e2.StaggerEntities(e1, e2, 0.3f));

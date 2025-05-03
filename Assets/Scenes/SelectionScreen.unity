@@ -209,25 +209,6 @@ MonoBehaviour:
   buffIcon: {fileID: 499906160}
   explanationTitleField: {fileID: 1385288657}
   explanationTextField: {fileID: 578838252}
-  explanationText:
-  - <WeaponType>k__BackingField: 0
-    <ExplanationTitle>k__BackingField: FLOW
-    <ExplanationText>k__BackingField: The next attack gains +1 to its upper and lower
-      bounds for each stack of flow. Then consume all flow.
-  - <WeaponType>k__BackingField: 1
-    <ExplanationTitle>k__BackingField: ACCURACY
-    <ExplanationText>k__BackingField: Lower bound of power increases by 1 per stack.
-      On taking damage, stacks are halved (rounded down).
-  - <WeaponType>k__BackingField: 2
-    <ExplanationTitle>k__BackingField: FIST
-    <ExplanationText>k__BackingField: Makes several small but impactful attacks.
-  - <WeaponType>k__BackingField: 3
-    <ExplanationTitle>k__BackingField: WOUND
-    <ExplanationText>k__BackingField: Damage taken increases by 1 per stack. Loses
-      1 stack after each round
-  - <WeaponType>k__BackingField: 4
-    <ExplanationTitle>k__BackingField: 
-    <ExplanationText>k__BackingField: 
 --- !u!1 &126026804
 GameObject:
   m_ObjectHideFlags: 0
@@ -2124,7 +2105,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aafe4e3e544ae4343834d854ec714165, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fadeHandler: {fileID: 1261007668}
   playerDatabase: {fileID: 11400000, guid: 8727bc367ba518d4496483da96ba1cf0, type: 2}
   jackieSelect: {fileID: 579151558}
   selectYourCharacter: {fileID: 11400000, guid: a84e804fe223e4b45bdf24e3dda56017, type: 2}
@@ -2139,9 +2119,8 @@ MonoBehaviour:
   - {fileID: 1823822989}
   weaponEditBoxCollidersToDisable:
   - {fileID: 439599444}
-  - {fileID: 1932402269}
   - {fileID: 1446819734}
-  activateTutorial: 1
+  activateTutorial: 0
 --- !u!1 &772457602
 GameObject:
   m_ObjectHideFlags: 0
@@ -3806,7 +3785,7 @@ PrefabInstance:
     - target: {fileID: 8249331277627009003, guid: f4e3c39036a0e964ca15018d4479d8e4, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 5c59be28949fc4359bdc7f1c11394014, type: 3}
+      objectReference: {fileID: 21300000, guid: 61efcf8280735914a8489d37027c035f, type: 3}
     - target: {fileID: 8249331277627009003, guid: f4e3c39036a0e964ca15018d4479d8e4, type: 3}
       propertyPath: m_WasSpriteAssigned
       value: 1
@@ -4901,17 +4880,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 481673017}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1932402269 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2845581384058024356, guid: f4e3c39036a0e964ca15018d4479d8e4, type: 3}
-  m_PrefabInstance: {fileID: 455316567}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bcae931aa9453784c89af658e893bb90, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1973216920
 GameObject:
   m_ObjectHideFlags: 0

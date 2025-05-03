@@ -147,6 +147,12 @@ public class BountySelect : MonoBehaviour
     private void OnBackPressed()
     {
         BountyManager.Instance.ActiveBounty = null;
+        StartCoroutine(ExitBounty());
+    }
+
+    private IEnumerator ExitBounty()
+    {
+        yield return StartCoroutine(fadeScreen.FadeInDarkScreen(0.8f));
         GameStateManager.Instance.LoadScene(GameStateManager.LEVEL_SELECT_NAME);
     }
 
@@ -157,6 +163,8 @@ public class BountySelect : MonoBehaviour
 
     private void StartCrossFadeBackground(IBounties? bounty, float duration)
     {
+        //Bugfix: Check is necessary so we don't abort cross fade after we select a bounty then move our mouse off
+        if (bounty != null && bounty == BountyManager.Instance.ActiveBounty) return;
         AbortCrossFade(); // Abort if cross fade is currently animating
         Sprite s = bounty != null ? bounty.GetBountyAssets(bountyAssetDatabase).Background : defaultBackground;
         currentCrossFade = StartCoroutine(CrossFadeBackground(s, duration));

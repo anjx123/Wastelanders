@@ -4,7 +4,7 @@ using UnityEngine;
 public class Pincer : BeetleAttacks
 {
     public const string PINCER_SOUND_EFFECT_NAME = "Pincer Cut";
-    public const string PINCER_ANIMATION_NAME = "IsPincer";
+    public const string PINCER_ANIMATION_NAME = "IsPincering";
 
     // Start is called before the first frame update
     public override void Initialize()

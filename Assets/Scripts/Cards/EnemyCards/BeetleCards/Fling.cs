@@ -2,13 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Xml.Linq;
 using UnityEngine;
-using static Unity.Collections.AllocatorManager;
-using static UnityEngine.UI.Image;
 
 public class Fling : BeetleAttacks, IPlayableBeetleCard
 {
     [SerializeField] private ProjectileBehaviour projectileBehaviour;
-    public const string FLING_ANIMATION_NAME = "IsFling";
+    public const string FLING_ANIMATION_NAME = "IsFlinging";
     [SerializeField] private AnimationClip flingClip;
 
     // Start is called before the first frame update
@@ -30,6 +28,7 @@ public class Fling : BeetleAttacks, IPlayableBeetleCard
     public override void OnHit()
     {
         IPlayableEnemyCard.ApplyForeignAttackAnimation(Origin, flingClip, FLING_ANIMATION_NAME);
+        Origin.AttackAnimation(FLING_ANIMATION_NAME);
         StartCoroutine(HandleProjectile());
     }
 

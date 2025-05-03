@@ -19,6 +19,7 @@ namespace Cards.EnemyCards.FrogCards
             lowerBound = upperBound = 1;
             Speed = 2;
             CardType = CardType.RangedAttack;
+            frogAttackAnimationName = PRINCESS_FROG_ATTACK_NAME;
         }
 
         public override void OnQueue()

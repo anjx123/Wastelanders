@@ -18,7 +18,6 @@ public interface IPlayableEnemyCard
         if (animatorController == null || animationClip == null)
         {
             Debug.LogWarning("AnimatorController or AnimationClip is null. AnimatorController must not be null to support foreign animations.");
-            entityClass.AttackAnimation(triggerName);
             return;
         }
 
@@ -39,7 +38,6 @@ public interface IPlayableEnemyCard
         if (existingState.state != null)
         {
             Debug.LogWarning($"State {animationClip.name} already exists. Skipping addition.");
-            entityClass.AttackAnimation(triggerName);
             return;
         }
 
@@ -74,9 +72,10 @@ public interface IPlayableEnemyCard
     {
         return controller.parameters.Any(p => p.name == paramName);
     }
+
     private static IEnumerator CallAttackAnimationNextFrame(EntityClass entityClass, string triggerName)
     {
-        yield return new WaitForEndOfFrame(); 
+        yield return new WaitForEndOfFrame();
         entityClass.AttackAnimation(triggerName);
     }
 }

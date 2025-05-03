@@ -48,7 +48,8 @@ public class Hatchery : ActionClass, IPlayableQueenCard
     {
         base.CardIsUnstaggered();
 
-        IPlayableEnemyCard.ApplyForeignAttackAnimation(Origin, animationClip, HATCHERY_ANIMATION);
+        IPlayableEnemyCard.ApplyForeignAttackAnimation(Origin, animationClip, HATCHERY_ANIMATION); 
+        Origin.AttackAnimation(HATCHERY_ANIMATION);
         GameObject beetle = Instantiate(beetlePrefabs[Random.Range(0, beetlePrefabs.Length)]);
         beetle.transform.SetParent(Origin.transform.parent);
         beetle.transform.transform.position = Origin.transform.position - new Vector3(0, 2, 0);

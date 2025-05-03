@@ -5,8 +5,10 @@ using UnityEngine;
 public class Fragment : ActionClass, IPlayableQueenCard
 {
     [SerializeField] private ProjectileBehaviour projectileBehaviour;
+    [SerializeField] private AnimationClip animationClip;
 
     public const string FRAGMENT_SOUND_EFFECT_NAME = "Queen Pierce";
+    public const string FRAGMENT_ANIMATION_NAME = "IsFragmenting";
 
     // Start is called before the first frame update
     public override void Initialize()
@@ -28,9 +30,10 @@ public class Fragment : ActionClass, IPlayableQueenCard
 
     public override void OnHit()
     {
-        if (Origin.HasAnimationParameter("IsShooting"))
+        IPlayableEnemyCard.ApplyForeignAttackAnimation(Origin, animationClip, FRAGMENT_ANIMATION_NAME);
+        if (Origin.HasAnimationParameter(FRAGMENT_ANIMATION_NAME))
         {
-            Origin.AttackAnimation("IsShooting");
+            Origin.AttackAnimation(FRAGMENT_ANIMATION_NAME);
         }
         StartCoroutine(HandleProjectile());
         if (Target.Team == Origin.Team.OppositeTeam()) {

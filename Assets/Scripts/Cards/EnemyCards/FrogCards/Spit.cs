@@ -1,12 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Xml.Linq;
+
 using UnityEngine;
-using static Unity.Collections.AllocatorManager;
 
 public class Spit : FrogAttacks, IPlayableFrogCard
 {
-
+    [SerializeField] private AnimationClip animationClip;
     // Start is called before the first frame update
     public override void Initialize()
     {
@@ -18,8 +15,10 @@ public class Spit : FrogAttacks, IPlayableFrogCard
 
         myName = "Spit";
         description = "Gross!";
-        Renderer renderer = GetComponent<Renderer>();
     }
-
-
+    public override void OnHit()
+    {
+        IPlayableEnemyCard.ApplyForeignAttackAnimation(Origin, animationClip, FROG_ATTACK_NAME);
+        base.OnHit();
+    }
 }

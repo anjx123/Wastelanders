@@ -23,7 +23,7 @@ PrefabInstance:
     - target: {fileID: 1866809560200078547, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 36b9e98bae3164dddbbc666c7a912e1d, type: 3}
+      objectReference: {fileID: 21300000, guid: 25fa5e8519c05a447912ffc5d9387dfa, type: 3}
     - target: {fileID: 1866809560200078547, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
       propertyPath: m_WasSpriteAssigned
       value: 1
@@ -113,13 +113,14 @@ MonoBehaviour:
     Part4: 3771533962
   description: 
   IsEvolved: 0
-  icon: {fileID: 21300000, guid: 36b9e98bae3164dddbbc666c7a912e1d, type: 3}
+  icon: {fileID: 21300000, guid: 25fa5e8519c05a447912ffc5d9387dfa, type: 3}
   cardBack: {fileID: 21300000, guid: 0a827eeec6ce44b03a2e1fef7d2fad4c, type: 3}
   evolvedCardBack: {fileID: 21300000, guid: 6ff7012b6a06cfc44befdd4974ee6cc5, type: 3}
   cardUI: {fileID: 7205946125008355181}
   data:
     <ActionClassName>k__BackingField: 
     <CurrentProgress>k__BackingField: 0
+  excavateClip: {fileID: 7400000, guid: acf8c91f0f4a64a4c87fdeaed8b16252, type: 2}
 --- !u!4 &1522312218679409194 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8284128080877360369, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}

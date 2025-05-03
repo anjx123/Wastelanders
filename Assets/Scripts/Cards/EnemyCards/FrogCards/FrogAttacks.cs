@@ -1,11 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEngine.UI.Image;
+
 public abstract class FrogAttacks : ActionClass
 {
     public const string SPIT_SOUND_EFFECT_NAME = "Frog Hit";
+    public const string FROG_ATTACK_NAME = "IsFrogging";
+    public const string PRINCESS_FROG_ATTACK_NAME = "IsPrincessing";
+
+    protected string frogAttackAnimationName = FROG_ATTACK_NAME;
+
     [SerializeField] private ProjectileBehaviour projectileBehaviour;
+
 
     public override void Initialize()
     {
@@ -15,9 +21,9 @@ public abstract class FrogAttacks : ActionClass
 
     public override void OnHit()
     {
-        if (Origin.HasAnimationParameter("IsShooting"))
+        if (Origin.HasAnimationParameter(frogAttackAnimationName))
         {
-            Origin.AttackAnimation("IsShooting");
+            Origin.AttackAnimation(frogAttackAnimationName);
         }
         if (projectileBehaviour != null)
         {

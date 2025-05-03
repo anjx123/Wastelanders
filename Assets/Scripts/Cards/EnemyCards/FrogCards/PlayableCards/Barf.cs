@@ -17,6 +17,7 @@ public class Barf : FrogAttacks, IPlayablePrincessFrogCard
 
         myName = "Barf";
         description = "On kill, gain 2 Resonate.";
+        frogAttackAnimationName = PRINCESS_FROG_ATTACK_NAME;
     }
 
     public override void OnHit()

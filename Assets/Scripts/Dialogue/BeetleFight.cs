@@ -212,7 +212,9 @@ public class BeetleFight : DialogueClasses
 
             //Jackie takes down a wild frog
             {
-                jackie.AttackAnimation("IsShooting");
+                jackie.AttackAnimation(PistolCards.PISTOL_ANIMATION_NAME);
+
+                AudioManager.Instance?.PlaySFX(PistolCards.PISTOL_SOUND_FX_NAME);
                 yield return StartCoroutine(frog.StaggerEntities(jackie, frog, 0.2f));
                 CombatManager.Instance.ActivateDynamicCamera();
                 sceneCamera.Priority = 0;
@@ -220,7 +222,8 @@ public class BeetleFight : DialogueClasses
                 yield return new WaitForSeconds(BRIEF_PAUSE);
                 yield return StartCoroutine(jackie.MoveToPosition(frog.transform.position, 1f, 1f));
                 StopCoroutine(frogTriesToRun);
-                jackie.AttackAnimation("IsStaffing");
+                jackie.AttackAnimation(StaffCards.STAFF_ANIMATION_NAME);
+                AudioManager.Instance?.PlaySFX(StaffCards.STAFF_SOUND_FX_NAME);
                 yield return StartCoroutine(frog.StaggerEntities(jackie, frog, 0.3f));
                 DieInScene(frog);
                 yield return StartCoroutine(DialogueManager.Instance.StartDialogue(openingJackieQuipt));
@@ -248,11 +251,7 @@ public class BeetleFight : DialogueClasses
                 beetleAction.Origin = ambushBeetle;
                 jackieAction.Target = ambushBeetle;
                 jackieAction.Origin = jackie;
-
-                //Using reflection to set speed because speed because its a protected setter
-                PropertyInfo cardPropInfo = typeof(ActionClass).GetProperty(nameof(jackieAction.Speed), BindingFlags.Public | BindingFlags.Instance);
-                MethodInfo setMethod = cardPropInfo.GetSetMethod(true);
-                setMethod.Invoke(jackieAction, new object[] { /* jackieAction.Speed = */ 1 });
+                jackieAction.Speed = 1;
 
                 yield return StartCoroutine(ambushBeetle.MoveToPosition(ambushBeetleTransform.position, 0, 0.4f));
                 jackie.FaceLeft();
@@ -309,7 +308,8 @@ public class BeetleFight : DialogueClasses
                 yield return new WaitForSeconds(0.7f);
                 yield return StartCoroutine(jackie.MoveToPosition(jackieSecondShot.position, 0f, 1f));
                 yield return new WaitForSeconds(BRIEF_PAUSE);
-                jackie.AttackAnimation("IsShooting");
+                jackie.AttackAnimation(PistolCards.PISTOL_ANIMATION_NAME);
+                AudioManager.Instance?.PlaySFX(PistolCards.PISTOL_SOUND_FX_NAME);   
                 StopCoroutine(beetleRunsIn);
                 yield return StartCoroutine(ambushBeetle.StaggerEntities(jackie, ambushBeetle, 0.3f));
                 DieInScene(ambushBeetle);
@@ -473,7 +473,7 @@ public class BeetleFight : DialogueClasses
             yield return StartCoroutine(OutOfCombatCrystalDialogue());
             if (!wave3Crystal.IsDead)
             {
-                jackie.AttackAnimation("IsStaffing");
+                jackie.AttackAnimation(StaffCards.STAFF_ANIMATION_NAME);
                 wave3Crystal.TakeDamage(jackie, 5);
                 yield return new WaitForSeconds(MEDIUM_PAUSE);
             }

@@ -1,9 +1,11 @@
 using Entities;
+using UnityEngine;
 
 namespace Cards.EnemyCards.FrogCards
 {
     public class GobbleCard : ActionClass, IPlayablePrincessFrogCard
     {
+        [SerializeField] public AnimationClip animationClip;
         public override void Initialize()
         {
             base.Initialize();
@@ -19,7 +21,8 @@ namespace Cards.EnemyCards.FrogCards
 
         public override void CardIsUnstaggered()
         {
-            Origin.AttackAnimation("IsShooting");
+            IPlayableEnemyCard.ApplyForeignAttackAnimation(Origin, animationClip, FrogAttacks.PRINCESS_FROG_ATTACK_NAME);
+            Origin.AttackAnimation(FrogAttacks.PRINCESS_FROG_ATTACK_NAME);
         }
 
         public override void OnHit()

@@ -7,7 +7,6 @@ using WeaponDeckSerialization;
 
 public class DeckSelectionTutorial : MonoBehaviour
 {
-    [SerializeField] private FadeScreenHandler fadeHandler;
     [SerializeField] private PlayerDatabase playerDatabase;
     [SerializeField] private CharacterSelect jackieSelect;
 
@@ -40,6 +39,7 @@ public class DeckSelectionTutorial : MonoBehaviour
 
     private IEnumerator ExecuteGameStart()
     {
+        Debug.Log($"is it true: {GameStateManager.Instance.JustFinishedBeetleFight}");
         if (GameStateManager.Instance.JustFinishedBeetleFight)
         {
             DeckSelectionManager.Instance.SetNextScene(GameStateManager.PRE_QUEEN_FIGHT);
@@ -56,7 +56,6 @@ public class DeckSelectionTutorial : MonoBehaviour
             boxCollider.GetComponent<BoxCollider2D>().enabled = false;
         }
         jackieSelect.GetComponent<BoxCollider2D>().enabled = false;
-        fadeHandler.SetDarkScreen();
         foreach (CharacterSelect character in lockedCharacters) {
             character.SetLockedState(true);
         }
@@ -64,7 +63,8 @@ public class DeckSelectionTutorial : MonoBehaviour
         {
             weapon.SetLockedState(true);
         }
-        yield return StartCoroutine(fadeHandler.FadeInLightScreen(2f));
+        // Wait for fade screen to come in
+        yield return new WaitForSeconds(1.5f);
         yield return StartCoroutine(StartDialogueWithNextEvent(selectYourCharacter.Dialogue, () => { jackieSelect.GetComponent<BoxCollider2D>().enabled = true; CharacterSelect.CharacterSelectedEvent += HandleCharacterSelected; } ));
     }
 

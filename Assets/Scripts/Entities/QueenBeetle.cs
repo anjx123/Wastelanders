@@ -55,7 +55,7 @@ public class QueenBeetle : EnemyClass
     // Adds the stacks that were directed to the beetle to the Queen instead.
     private void HandleGainedBuffs(string buffType, int stacks, Beetle beetle)
     {
-        if (buffType == Resonate.buffName)
+        if (buffType == Resonate.buffName && beetle.Team == Team)
         {
             AddStacks(buffType, stacks);
             beetle.ReduceStacks(buffType, stacks);

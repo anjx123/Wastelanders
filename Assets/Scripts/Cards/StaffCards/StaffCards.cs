@@ -16,9 +16,6 @@ public abstract class StaffCards : ActionClass
         if (Origin.HasAnimationParameter(STAFF_ANIMATION_NAME))
         {
             Origin.AttackAnimation(STAFF_ANIMATION_NAME);
-        } else
-        {
-            Origin.AttackAnimation("IsMelee");
         }
         base.CardIsUnstaggered();
     }
