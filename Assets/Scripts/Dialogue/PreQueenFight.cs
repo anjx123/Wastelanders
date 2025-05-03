@@ -529,6 +529,7 @@ public class PreQueenFight : DialogueClasses
 
             yield return StartCoroutine(DialogueManager.Instance.StartDialogue(PostFight.Dialogue));
 
+            GameStateManager.Instance.JustFinishedBeetleFight = false;
             GameStateManager.Instance.LoadScene(GameStateManager.POST_QUEEN_FIGHT);
         }
         

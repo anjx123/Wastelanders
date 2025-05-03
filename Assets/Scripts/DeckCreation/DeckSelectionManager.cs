@@ -98,6 +98,13 @@ public class DeckSelectionManager : MonoBehaviour
         WeaponSelect.WeaponSelectEvent += WeaponSelected;
         WeaponEdit.WeaponEditEvent += WeaponDeckEdit;
         DeckSelectionArrow.DeckSelectionArrowEvent += PrevState;
+        EnterDeckSelection();
+    }
+
+    private void EnterDeckSelection()
+    {
+        fadeScreenHandler.SetDarkScreen();
+        StartCoroutine(fadeScreenHandler.FadeInLightScreen(2f));
     }
 
     void OnDestroy()

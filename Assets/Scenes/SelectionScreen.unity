@@ -2105,7 +2105,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aafe4e3e544ae4343834d854ec714165, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fadeHandler: {fileID: 1261007668}
   playerDatabase: {fileID: 11400000, guid: 8727bc367ba518d4496483da96ba1cf0, type: 2}
   jackieSelect: {fileID: 579151558}
   selectYourCharacter: {fileID: 11400000, guid: a84e804fe223e4b45bdf24e3dda56017, type: 2}
@@ -2120,7 +2119,6 @@ MonoBehaviour:
   - {fileID: 1823822989}
   weaponEditBoxCollidersToDisable:
   - {fileID: 439599444}
-  - {fileID: 1932402269}
   - {fileID: 1446819734}
   activateTutorial: 0
 --- !u!1 &772457602
@@ -4882,17 +4880,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 481673017}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1932402269 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2845581384058024356, guid: f4e3c39036a0e964ca15018d4479d8e4, type: 3}
-  m_PrefabInstance: {fileID: 455316567}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bcae931aa9453784c89af658e893bb90, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1973216920
 GameObject:
   m_ObjectHideFlags: 0
