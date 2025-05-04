@@ -1,4 +1,6 @@
+#if UNITY_EDITOR    
 using UnityEditor.Animations;
+#endif
 using UnityEngine;
 using System.Linq;
 using System.Collections;
@@ -13,6 +15,7 @@ public interface IPlayableEnemyCard
         AnimationClip? animationClip,
         string triggerName)
     {
+        #if UNITY_EDITOR
         AnimatorController? animatorController = entityClass.AnimatorController;
 
         if (animatorController == null || animationClip == null)
@@ -67,18 +70,20 @@ public interface IPlayableEnemyCard
 
         entityClass.StartCoroutine(CallAttackAnimationNextFrame(entityClass, triggerName));
         Debug.Log("Attack Animation state and transitions added successfully and called.");
-    }
-    private static bool ParameterExists(AnimatorController controller, string paramName)
-    {
-        return controller.parameters.Any(p => p.name == paramName);
-    }
+        bool ParameterExists(AnimatorController controller, string paramName)
+        {
+            return controller.parameters.Any(p => p.name == paramName);
+        }
 
-    private static IEnumerator CallAttackAnimationNextFrame(EntityClass entityClass, string triggerName)
-    {
-        yield return new WaitForEndOfFrame();
-        entityClass.AttackAnimation(triggerName);
+        IEnumerator CallAttackAnimationNextFrame(EntityClass entityClass, string triggerName)
+        {
+            yield return new WaitForEndOfFrame();
+            entityClass.AttackAnimation(triggerName);
+        }
+        #endif
     }
 }
+
 public interface IPlayableBeetleCard : IPlayableEnemyCard { }
 public interface IPlayableFrogCard : IPlayableEnemyCard { }
 public interface IPlayableSlimeCard : IPlayableEnemyCard { }

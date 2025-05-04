@@ -66,7 +66,7 @@ public class LevelSelect : MonoBehaviour
 
     IEnumerator FadeLevelIn(string levelName)
     {
-        yield return StartCoroutine(fadeScreen.FadeInDarkScreen(0.8f));
+        yield return StartCoroutine(fadeScreen.FadeInDarkScreen(0.6f));
         GameStateManager.Instance.LoadScene(levelName);
     }
 }

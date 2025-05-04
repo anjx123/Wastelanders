@@ -15,19 +15,19 @@ MonoBehaviour:
   PrincessFrogAssets:
     PrincessFrogChallengeAsset:
       Sprite: {fileID: 21300000, guid: 831d1a607000644c58c6b9bdaf95a0b2, type: 3}
-      Background: {fileID: 21300000, guid: 42b8fd702274d1340b9939f40f8fde90, type: 3}
+      Background: {fileID: 21300000, guid: 3828ccb2a0701854c960e47645c67db0, type: 3}
     QueenChallengeAsset:
       Sprite: {fileID: 21300000, guid: ca625dba0eaa53f42a1938fee07af18d, type: 3}
-      Background: {fileID: 21300000, guid: 42b8fd702274d1340b9939f40f8fde90, type: 3}
+      Background: {fileID: 21300000, guid: 3828ccb2a0701854c960e47645c67db0, type: 3}
     SlimeChallengeAsset:
       Sprite: {fileID: 21300000, guid: ca93cb407c933584187642c2546737c4, type: 3}
-      Background: {fileID: 21300000, guid: 42b8fd702274d1340b9939f40f8fde90, type: 3}
+      Background: {fileID: 21300000, guid: 3828ccb2a0701854c960e47645c67db0, type: 3}
     FrogChallengeAsset:
       Sprite: {fileID: 21300000, guid: 65cbe66e8e31c2e4d81b455d4c8f868f, type: 3}
-      Background: {fileID: 21300000, guid: 42b8fd702274d1340b9939f40f8fde90, type: 3}
+      Background: {fileID: 21300000, guid: 3828ccb2a0701854c960e47645c67db0, type: 3}
     SoloChallengeAsset:
       Sprite: {fileID: 21300000, guid: 8b0076ca4c0ea1e4f905a59c580bb44a, type: 3}
-      Background: {fileID: 21300000, guid: 42b8fd702274d1340b9939f40f8fde90, type: 3}
+      Background: {fileID: 21300000, guid: 3828ccb2a0701854c960e47645c67db0, type: 3}
     ExhaustedChallengeAsset:
       Sprite: {fileID: 21300000, guid: 3f2a5be9c498ec3449d8ad93defff34a, type: 3}
-      Background: {fileID: 21300000, guid: 42b8fd702274d1340b9939f40f8fde90, type: 3}
+      Background: {fileID: 21300000, guid: 3828ccb2a0701854c960e47645c67db0, type: 3}
