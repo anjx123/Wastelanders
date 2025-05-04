@@ -1,10 +1,12 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Animations;
 using UnityEngine;
 using static CardComparator;
 using static StatusEffect;
+#if UNITY_EDITOR
+using UnityEditor.Animations;
+#endif
 
 public abstract class EntityClass : SelectClass
 {
@@ -48,10 +50,12 @@ public abstract class EntityClass : SelectClass
     protected BoxCollider boxCollider;
 
 #nullable enable
-    // Used to support handling arbitrary foreign animations 
-    [field: SerializeField] 
-    public AnimatorController? AnimatorController { get; private set; }
 
+    #if UNITY_EDITOR
+    // Used to support handling arbitrary foreign animations 
+    [field: SerializeField]
+    public AnimatorController? AnimatorController { get; private set; }
+    #endif
     public delegate void DamageDelegate(int damage);
     public event DamageDelegate? EntityTookDamage;
 
