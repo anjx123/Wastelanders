@@ -1339,7 +1339,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6635998426718021455, guid: b9c5e4b3c9f7e024f8fe9012e7a2e437, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.6658769
+      value: 2.66637
       objectReference: {fileID: 0}
     - target: {fileID: 6635998426718021455, guid: b9c5e4b3c9f7e024f8fe9012e7a2e437, type: 3}
       propertyPath: m_LocalPosition.y
@@ -3050,11 +3050,11 @@ PrefabInstance:
     - target: {fileID: 1642062695111722096, guid: 00e4347f9eb16d94c93b4961bdbca751, type: 3}
       propertyPath: combatMusicIntro
       value: 
-      objectReference: {fileID: 8300000, guid: bccbb4839a8d4a24ab6cfece4dfc587e, type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 1642062695111722096, guid: 00e4347f9eb16d94c93b4961bdbca751, type: 3}
       propertyPath: combatMusicPrimary
       value: 
-      objectReference: {fileID: 8300000, guid: e4d6acf41658dee43bb8bae8608a78f9, type: 3}
+      objectReference: {fileID: 8300000, guid: f7d78169f4dbd734eae797926ecffca2, type: 3}
     - target: {fileID: 1642062695111722096, guid: 00e4347f9eb16d94c93b4961bdbca751, type: 3}
       propertyPath: backgroundMusicIntro
       value: 

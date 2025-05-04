@@ -310,7 +310,7 @@ MonoBehaviour:
   backgroundMusicIntro: {fileID: 0}
   combatMusicPrimary: {fileID: 0}
   combatMusicIntro: {fileID: 0}
-  backgroundMusicDeath: {fileID: 8300000, guid: 6aaf4e9c838f6b64395d94159969a955, type: 3}
+  backgroundMusicDeath: {fileID: 8300000, guid: ad2a470944acfc048b53294c89a0945e, type: 3}
 --- !u!1 &8471473453774046622
 GameObject:
   m_ObjectHideFlags: 0
