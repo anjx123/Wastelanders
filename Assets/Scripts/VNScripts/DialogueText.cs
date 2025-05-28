@@ -14,6 +14,7 @@ public class DialogueText
     private bool bold;
     public bool broadcastAnEvent = false;
 
+    private string? sfx;
 
     public bool Italics { get { return italics; } set { italics = value; } }
     public bool Bold { get { return bold; } set { bold = value; } }
@@ -30,4 +31,9 @@ public class DialogueText
         this.displayingImage = givenImage;
     }
 
+    public void playSound(string effect) {
+        if (sfx != null) {
+            AudioManager.Instance.PlaySFX(sfx);
+        }
+    }
 }

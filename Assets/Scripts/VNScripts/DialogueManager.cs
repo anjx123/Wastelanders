@@ -129,6 +129,8 @@ void ClearPanel()
             SetDialogueBoxActive(pictureDialogueBox);
             pictureDialogueBox.SetLine(sentence);
         }
+
+        AudioManager.Instance.PlaySFX("ClashTie");
     }
 
     void SetDialogueBoxActive(DialogueBox dialogueBox)
