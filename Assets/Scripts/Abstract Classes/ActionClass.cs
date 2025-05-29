@@ -331,7 +331,7 @@ public abstract class ActionClass : SelectClass, IBind<ActionData>
                 newColor = Color.white;
                 if (previousState == CardState.HOVER)
                 {
-                    positionChange = new Vector3(-0.04f, -0.4f, 0);
+                    positionChange = new Vector3(0f, -0.4f, 0);
                     ExtendBoxCollider(gameObject.GetComponent<BoxCollider>(), -1.6f);
                 }
                 break;
@@ -339,7 +339,7 @@ public abstract class ActionClass : SelectClass, IBind<ActionData>
                 newColor = new Color(0.6f, 0.6f, 0.6f, 1);
                 if (previousState == CardState.NORMAL)
                 {
-                    positionChange = new Vector3(0.04f, 0.4f, 0);
+                    positionChange = new Vector3(0f, 0.4f, 0);
                     ExtendBoxCollider(gameObject.GetComponent<BoxCollider>(), 1.6f);
                 }
                 break;
@@ -347,7 +347,7 @@ public abstract class ActionClass : SelectClass, IBind<ActionData>
                 newColor = new Color(1f, 200f / 255f, 200f / 255f, 1);
                 if (cardState == CardState.HOVER)
                 {
-                    positionChange = new Vector3(-0.04f, -0.4f, 0); //This state cant happen?
+                    positionChange = new Vector3(0f, -0.4f, 0); // This state can't happen?
                 }
                 break;
             case CardState.CLICKED_STATE:
