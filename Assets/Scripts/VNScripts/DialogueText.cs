@@ -31,7 +31,7 @@ public class DialogueText
         this.displayingImage = givenImage;
     }
 
-    public void playSound(string effect) {
+    public void playSound() {
         if (sfx != null) {
             AudioManager.Instance.PlaySFX(sfx);
         }
