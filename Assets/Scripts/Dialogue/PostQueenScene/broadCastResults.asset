@@ -47,7 +47,7 @@ MonoBehaviour:
     speakerName: Broadcast
     displayingImage: {fileID: 0}
     broadcastAnEvent: 0
-  - bodyText: ' 150 000 U. in Waste products collected.'
+  - bodyText: ' 150000 U. in Waste products collected.'
     speakerName: Broadcast
     displayingImage: {fileID: 0}
     broadcastAnEvent: 0
