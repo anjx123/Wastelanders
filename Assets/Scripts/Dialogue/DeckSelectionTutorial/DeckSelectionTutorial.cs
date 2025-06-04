@@ -39,9 +39,9 @@ public class DeckSelectionTutorial : MonoBehaviour
 
     private IEnumerator ExecuteGameStart()
     {
-        Debug.Log($"is it true: {GameStateManager.Instance.JustFinishedBeetleFight}");
         if (GameStateManager.Instance.JustFinishedBeetleFight)
         {
+            GameStateManager.Instance.JustFinishedBeetleFight = false;
             DeckSelectionManager.Instance.SetNextScene(GameStateManager.PRE_QUEEN_FIGHT);
             yield break;
         }
