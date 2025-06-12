@@ -95,6 +95,7 @@ public class BeetleFight : DialogueClasses
 
 
     [SerializeField] private bool jumpToCombat;
+    [SerializeField] private WaveIndicator waveIndicator;
 
     private List<EnemyClass> campBeetlesAndCrystals = new();
     private List<EnemyClass> nitesCampBeetles = new();
@@ -411,11 +412,13 @@ public class BeetleFight : DialogueClasses
             CombatManager.Instance.GameState = GameState.SELECTION;
             yield return StartCoroutine(DialogueManager.Instance.StartDialogue(twoPlayerCombatTutorial.Dialogue));
             Begin2PCombatTutorial();
+            waveIndicator.SetWave(1);
             yield return new WaitUntil(() => CombatManager.Instance.GameState == GameState.GAME_WIN);
         }
 
         //Start wave 2
         {
+            waveIndicator.gameObject.SetActive(false);
             wave2Fight.SetActive(true);
             CombatManager.Instance.SetEnemiesHostile(wave2);
 
@@ -425,11 +428,13 @@ public class BeetleFight : DialogueClasses
             CombatManager.Instance.GameState = GameState.SELECTION;
             yield return StartCoroutine(DialogueManager.Instance.StartDialogue(wave2Dialogue.Dialogue));
             BeginWave2();
+            waveIndicator.SetWave(2);
             yield return new WaitUntil(() => CombatManager.Instance.GameState == GameState.GAME_WIN);
         }
 
         //Start wave 3
         {
+            waveIndicator.gameObject.SetActive(false);
             wave3Fight.SetActive(true);
             CombatManager.Instance.SetEnemiesHostile(wave3);
             sceneBuilder.PlayersPosition = playerWave3CombatPosition;
@@ -439,11 +444,13 @@ public class BeetleFight : DialogueClasses
             CombatManager.Instance.GameState = GameState.SELECTION;
             yield return StartCoroutine(DialogueManager.Instance.StartDialogue(wave3Dialogue.Dialogue));
             BeginWave3();
+            waveIndicator.SetWave(3);
             yield return new WaitUntil(() => CombatManager.Instance.GameState == GameState.GAME_WIN);
         }
 
         //End of Scene
         {
+            waveIndicator.gameObject.SetActive(false);
             yield return new WaitForSeconds(2);
             if (ives.IsDead)
             {
