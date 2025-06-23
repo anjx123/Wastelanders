@@ -420,6 +420,7 @@ MonoBehaviour:
   handContainer: {fileID: 2102825247}
   startDequeue: {fileID: 939972737}
   battleQueueParent: {fileID: 370424664}
+  deckRemainderView: {fileID: 545280485}
   fadeScreen: {fileID: 1852793027}
   playerDatabase: {fileID: 11400000, guid: 8727bc367ba518d4496483da96ba1cf0, type: 2}
   cardDatabase: {fileID: 11400000, guid: 4ee9950b3d655254fb0def1cd879db6a, type: 2}
@@ -835,6 +836,88 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45e653bab7fb20e499bda25e1b646fea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1001 &545280483
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1877041900}
+    m_Modifications:
+    - target: {fileID: 2002534234812645365, guid: 628d637daa4ed4a119d6329b217f0137, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 1525248175}
+    - target: {fileID: 3427431315528881295, guid: 628d637daa4ed4a119d6329b217f0137, type: 3}
+      propertyPath: m_Name
+      value: DeckRemainderView
+      objectReference: {fileID: 0}
+    - target: {fileID: 5320384677745365286, guid: 628d637daa4ed4a119d6329b217f0137, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5320384677745365286, guid: 628d637daa4ed4a119d6329b217f0137, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5320384677745365286, guid: 628d637daa4ed4a119d6329b217f0137, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5320384677745365286, guid: 628d637daa4ed4a119d6329b217f0137, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5320384677745365286, guid: 628d637daa4ed4a119d6329b217f0137, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5320384677745365286, guid: 628d637daa4ed4a119d6329b217f0137, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5320384677745365286, guid: 628d637daa4ed4a119d6329b217f0137, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5320384677745365286, guid: 628d637daa4ed4a119d6329b217f0137, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5320384677745365286, guid: 628d637daa4ed4a119d6329b217f0137, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5320384677745365286, guid: 628d637daa4ed4a119d6329b217f0137, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 628d637daa4ed4a119d6329b217f0137, type: 3}
+--- !u!4 &545280484 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5320384677745365286, guid: 628d637daa4ed4a119d6329b217f0137, type: 3}
+  m_PrefabInstance: {fileID: 545280483}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &545280485 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3427431315528881295, guid: 628d637daa4ed4a119d6329b217f0137, type: 3}
+  m_PrefabInstance: {fileID: 545280483}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &545280486 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3069431550606291600, guid: 628d637daa4ed4a119d6329b217f0137, type: 3}
+  m_PrefabInstance: {fileID: 545280483}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 545280485}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4bfb7cc6e4a74de4afa43eef40649c05, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &561866395
 GameObject:
   m_ObjectHideFlags: 0
@@ -1016,6 +1099,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   handContainer: {fileID: 2102825246}
   deckContainer: {fileID: 1841894060}
+  deckRemainderViewController: {fileID: 545280486}
   currentHighlightedEnemyEntity: {fileID: 0}
   currentHighlightedAction: {fileID: 0}
   selectedPlayer: {fileID: 0}
@@ -3493,6 +3577,7 @@ Transform:
   - {fileID: 596087403}
   - {fileID: 1841894060}
   - {fileID: 322489276}
+  - {fileID: 545280484}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1894012316

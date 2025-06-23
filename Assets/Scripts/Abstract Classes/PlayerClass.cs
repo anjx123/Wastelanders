@@ -16,7 +16,8 @@ public abstract class PlayerClass : EntityClass
     public int maxHandSize = 4;
 
 
-    public List<GameObject> Hand { get { return new List<GameObject>(hand); } }
+    public List<GameObject> Hand => new(hand);
+    public List<GameObject> Pool => new(pool);
 
     // Drawn cards move from pool to hand
     protected List<GameObject> hand = new();

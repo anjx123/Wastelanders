@@ -1217,6 +1217,84 @@ MonoBehaviour:
   cardDisplay: {fileID: 412913820}
   cardTemplatePrefab: {fileID: 7256956916184963317, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
   descriptionHolderPrefab: {fileID: 5469409781915009156, guid: 995c69dd05e0fce438d836d1937f6bc5, type: 3}
+  mainCamera: {fileID: 0}
+--- !u!1001 &914395803
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2002534234812645365, guid: 628d637daa4ed4a119d6329b217f0137, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 519420031}
+    - target: {fileID: 3427431315528881295, guid: 628d637daa4ed4a119d6329b217f0137, type: 3}
+      propertyPath: m_Name
+      value: DeckRemainderView
+      objectReference: {fileID: 0}
+    - target: {fileID: 5320384677745365286, guid: 628d637daa4ed4a119d6329b217f0137, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5320384677745365286, guid: 628d637daa4ed4a119d6329b217f0137, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5320384677745365286, guid: 628d637daa4ed4a119d6329b217f0137, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5320384677745365286, guid: 628d637daa4ed4a119d6329b217f0137, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5320384677745365286, guid: 628d637daa4ed4a119d6329b217f0137, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5320384677745365286, guid: 628d637daa4ed4a119d6329b217f0137, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5320384677745365286, guid: 628d637daa4ed4a119d6329b217f0137, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5320384677745365286, guid: 628d637daa4ed4a119d6329b217f0137, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5320384677745365286, guid: 628d637daa4ed4a119d6329b217f0137, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5320384677745365286, guid: 628d637daa4ed4a119d6329b217f0137, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 628d637daa4ed4a119d6329b217f0137, type: 3}
+--- !u!1 &914395804 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3427431315528881295, guid: 628d637daa4ed4a119d6329b217f0137, type: 3}
+  m_PrefabInstance: {fileID: 914395803}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &914395805 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3069431550606291600, guid: 628d637daa4ed4a119d6329b217f0137, type: 3}
+  m_PrefabInstance: {fileID: 914395803}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 914395804}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4bfb7cc6e4a74de4afa43eef40649c05, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &924634659
 GameObject:
   m_ObjectHideFlags: 0
@@ -1850,6 +1928,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   handContainer: {fileID: 552403359}
   deckContainer: {fileID: 1599019524}
+  deckRemainderViewController: {fileID: 914395805}
+  currentHighlightedEnemyEntity: {fileID: 0}
+  currentHighlightedAction: {fileID: 0}
+  selectedPlayer: {fileID: 0}
 --- !u!1 &1437198682
 GameObject:
   m_ObjectHideFlags: 0
@@ -2119,8 +2201,10 @@ MonoBehaviour:
   handContainer: {fileID: 1437198682}
   startDequeue: {fileID: 1155507268}
   battleQueueParent: {fileID: 668152617}
+  deckRemainderView: {fileID: 914395804}
   fadeScreen: {fileID: 453682244}
   playerDatabase: {fileID: 0}
+  cardDatabase: {fileID: 0}
 --- !u!4 &1629544401
 Transform:
   m_ObjectHideFlags: 0
@@ -3052,7 +3136,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6635998426718021455, guid: b9c5e4b3c9f7e024f8fe9012e7a2e437, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.573333
+      value: -1.4506631
       objectReference: {fileID: 0}
     - target: {fileID: 6635998426718021455, guid: b9c5e4b3c9f7e024f8fe9012e7a2e437, type: 3}
       propertyPath: m_LocalPosition.y
@@ -3274,3 +3358,4 @@ SceneRoots:
   - {fileID: 1935462229}
   - {fileID: 1277257595176587689}
   - {fileID: 714533895}
+  - {fileID: 914395803}
