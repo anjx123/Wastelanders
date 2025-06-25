@@ -94,7 +94,6 @@ public class TutorialIntroduction : DialogueClasses
         jackie.OutOfCombat();
         jackie.SetReturnPosition(jackieDefaultTransform.position);
         battleIntro = Instantiate(battleIntro);
-        battleIntro.gameObject.SetActive(false);
         if (!jumpToCombat)
         {
             yield return new WaitForSeconds(1f);
@@ -258,7 +257,6 @@ public class TutorialIntroduction : DialogueClasses
     {
         EntityClass.OnEntityDeath += FirstDummyDies; //Setup Listener to set state to Game Win
         PlayerClass.playerReshuffleDeck += PlayerLostOneMaxHandSize;
-        battleIntro.gameObject.SetActive(true);
         battleIntro.PlayAnimation(Get<TutorialIntro>());
     StartCoroutine(StartDialogueWithNextEvent(youCanPlayCardsTutorial, () => { ActionClass.CardHighlightedEvent += OnPlayerFirstHighlightCard; }));
     }

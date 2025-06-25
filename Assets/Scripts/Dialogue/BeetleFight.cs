@@ -10,6 +10,7 @@ using Systems.Persistence;
 using System;
 using LevelSelectInformation;
 using SceneBuilder;
+using static BattleIntroEnum;
 //@author: Andrew
 public class BeetleFight : DialogueClasses
 {
@@ -62,6 +63,7 @@ public class BeetleFight : DialogueClasses
     [SerializeField] private Sprite frogDeathSprite;
     [SerializeField] private Sprite jackieCrystalSprite;
     [SerializeField] private GameOver gameOver;
+    [SerializeField] private BattleIntro battleIntro;
 
     [SerializeField] private List<DialogueText> openingJackieQuipt;
     [SerializeField] private DialogueWrapper openingDiscussion;
@@ -186,6 +188,7 @@ public class BeetleFight : DialogueClasses
     {
         CombatManager.Instance.GameState = GameState.OUT_OF_COMBAT;
         CombatManager.Instance.SetDarkScreen();
+        battleIntro = Instantiate(battleIntro);
         yield return new WaitForSeconds(0.2f);
         SetUpEnemyLists();
         SetUpCombatStatus();
@@ -399,6 +402,7 @@ public class BeetleFight : DialogueClasses
 
         //Start wave 1 
         {
+            battleIntro.PlayAnimation(Get<ClashIntro>());
             wave2Fight.SetActive(false);
             wave3Fight.SetActive(false);
             CombatManager.Instance.SetEnemiesHostile(wave1);

@@ -3628,6 +3628,7 @@ MonoBehaviour:
   - {fileID: 2041861088}
   gameOver: {fileID: 1871834064}
   jumpToCombat: 0
+  battleIntro: {fileID: 5210625753511003606, guid: a1b9dbfd8373c7347bbeaace2539e9b7, type: 3}
   initialPlanByJackie: {fileID: 11400000, guid: 676fbdb59dc05df4485f6797ab239b84, type: 2}
   planOneDialogue: {fileID: 11400000, guid: b3b33f8c6e5019947af9a624dfce19f7, type: 2}
   planTwoDialogue: {fileID: 11400000, guid: ce3c83dea88d125429799d89ca58b08d, type: 2}
@@ -4594,7 +4595,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6635998426718021455, guid: b9c5e4b3c9f7e024f8fe9012e7a2e437, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -8.892107
+      value: -8.812684
       objectReference: {fileID: 0}
     - target: {fileID: 6635998426718021455, guid: b9c5e4b3c9f7e024f8fe9012e7a2e437, type: 3}
       propertyPath: m_LocalPosition.y
