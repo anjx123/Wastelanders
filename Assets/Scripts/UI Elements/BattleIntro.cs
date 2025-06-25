@@ -1,0 +1,31 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class BattleIntro : MonoBehaviour
+{
+    [SerializeField] private Animator animator;
+    
+    public virtual void PlayAnimation(BattleIntroEnum animationEnum)
+    {
+        animator.SetTrigger(animationEnum.animationName);
+    }
+}
+
+public abstract class BattleIntroEnum : Enum<BattleIntroEnum>
+{
+    public abstract string animationName { get; }
+
+    public class ClashIntro : BattleIntroEnum
+    {
+        public override string animationName => "ClashIntro";
+    }
+
+    public class TutorialIntro : BattleIntroEnum
+    {
+       public override string animationName => "TutorialIntro";
+    }
+
+    public static BattleIntroEnum Get<T>() where T : BattleIntroEnum => ParseFromType(typeof(T));
+}

@@ -7,6 +7,7 @@ using Systems.Persistence;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using static BattleIntroEnum;
 
 public class TutorialIntroduction : DialogueClasses
 {
@@ -56,7 +57,7 @@ public class TutorialIntroduction : DialogueClasses
 
     [SerializeField] private GameOver gameOver;
     [SerializeField] private List<DialogueText> gameLoseDialogue;
-
+    [SerializeField] private BattleIntro battleIntro;
 
     [SerializeField] private bool jumpToCombat;
 
@@ -92,6 +93,8 @@ public class TutorialIntroduction : DialogueClasses
         ives.OutOfCombat();
         jackie.OutOfCombat();
         jackie.SetReturnPosition(jackieDefaultTransform.position);
+        battleIntro = Instantiate(battleIntro);
+        battleIntro.gameObject.SetActive(false);
         if (!jumpToCombat)
         {
             yield return new WaitForSeconds(1f);
@@ -255,7 +258,9 @@ public class TutorialIntroduction : DialogueClasses
     {
         EntityClass.OnEntityDeath += FirstDummyDies; //Setup Listener to set state to Game Win
         PlayerClass.playerReshuffleDeck += PlayerLostOneMaxHandSize;
-        StartCoroutine(StartDialogueWithNextEvent(youCanPlayCardsTutorial, () => { ActionClass.CardHighlightedEvent += OnPlayerFirstHighlightCard; }));
+        battleIntro.gameObject.SetActive(true);
+        battleIntro.PlayAnimation(Get<TutorialIntro>());
+    StartCoroutine(StartDialogueWithNextEvent(youCanPlayCardsTutorial, () => { ActionClass.CardHighlightedEvent += OnPlayerFirstHighlightCard; }));
     }
 
     private void PlayerLostOneMaxHandSize(PlayerClass player)

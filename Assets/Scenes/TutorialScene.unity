@@ -1349,6 +1349,80 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1001 &1058523280
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1694303782}
+    m_Modifications:
+    - target: {fileID: 2608273322488375624, guid: a1b9dbfd8373c7347bbeaace2539e9b7, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2608273322488375624, guid: a1b9dbfd8373c7347bbeaace2539e9b7, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2608273322488375624, guid: a1b9dbfd8373c7347bbeaace2539e9b7, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2608273322488375624, guid: a1b9dbfd8373c7347bbeaace2539e9b7, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2608273322488375624, guid: a1b9dbfd8373c7347bbeaace2539e9b7, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2608273322488375624, guid: a1b9dbfd8373c7347bbeaace2539e9b7, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2608273322488375624, guid: a1b9dbfd8373c7347bbeaace2539e9b7, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2608273322488375624, guid: a1b9dbfd8373c7347bbeaace2539e9b7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2608273322488375624, guid: a1b9dbfd8373c7347bbeaace2539e9b7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2608273322488375624, guid: a1b9dbfd8373c7347bbeaace2539e9b7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6666557653424351842, guid: a1b9dbfd8373c7347bbeaace2539e9b7, type: 3}
+      propertyPath: m_Size.x
+      value: 1.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6666557653424351842, guid: a1b9dbfd8373c7347bbeaace2539e9b7, type: 3}
+      propertyPath: m_Size.y
+      value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 6666557653424351842, guid: a1b9dbfd8373c7347bbeaace2539e9b7, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8912937222231307676, guid: a1b9dbfd8373c7347bbeaace2539e9b7, type: 3}
+      propertyPath: m_Name
+      value: BattleIntroAnimation
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a1b9dbfd8373c7347bbeaace2539e9b7, type: 3}
+--- !u!4 &1058523281 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2608273322488375624, guid: a1b9dbfd8373c7347bbeaace2539e9b7, type: 3}
+  m_PrefabInstance: {fileID: 1058523280}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1102207188
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2346,7 +2420,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6635998426718021455, guid: b9c5e4b3c9f7e024f8fe9012e7a2e437, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -10.400882
+      value: -10.584421
       objectReference: {fileID: 0}
     - target: {fileID: 6635998426718021455, guid: b9c5e4b3c9f7e024f8fe9012e7a2e437, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2591,6 +2665,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1058523281}
   - {fileID: 2054760237}
   m_Father: {fileID: 2011333043}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3514,6 +3589,7 @@ MonoBehaviour:
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 87cb7c6c6588a4a3a957b707239abbf0, type: 3}
     broadcastAnEvent: 0
+  battleIntro: {fileID: 5210625753511003606, guid: a1b9dbfd8373c7347bbeaace2539e9b7, type: 3}
   jumpToCombat: 0
 --- !u!1001 &2102825245
 PrefabInstance:
