@@ -32,7 +32,7 @@ public class DialogueText
     }
 
     public void playSound() {
-        if (!string.isNullOrWhiteSpace(sfx)) {
+        if (sfx != null && sfx != "") {
             AudioManager.Instance.PlaySFX(sfx);
         }
     }
