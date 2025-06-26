@@ -9,7 +9,7 @@ public class DialogueText
     [SerializeField] private string bodyText;
     [SerializeField] private string speakerName;
     [SerializeField] private Sprite displayingImage;
-    [SerializeField] private string? sfx;
+    [SerializeField] private string sfx;
 
     private bool italics;
     private bool bold;
@@ -32,7 +32,7 @@ public class DialogueText
     }
 
     public void playSound() {
-        if (sfx != null) {
+        if (!string.isNullOrWhiteSpace(sfx)) {
             AudioManager.Instance.PlaySFX(sfx);
         }
     }
