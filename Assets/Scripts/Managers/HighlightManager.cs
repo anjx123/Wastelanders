@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Xml.Linq;
+using UI_Elements;
 using UnityEngine;
 
 public class HighlightManager : MonoBehaviour // later all entity highlighter
@@ -8,6 +9,7 @@ public class HighlightManager : MonoBehaviour // later all entity highlighter
     public static HighlightManager Instance { get; private set; }
     public RectTransform handContainer;
     public Transform deckContainer;
+    public DeckRemainderViewController deckRemainderViewController;
 #nullable enable
     public EntityClass? currentHighlightedEnemyEntity = null;
     public ActionClass? currentHighlightedAction = null;
@@ -72,7 +74,7 @@ public class HighlightManager : MonoBehaviour // later all entity highlighter
             ResetCurrentHighlightedAction();
         }
         selectedPlayer = forcedPlayer;
-        if (forcedPlayer != null) RenderHand(forcedPlayer.Hand);
+        if (forcedPlayer != null) RenderHand(forcedPlayer.Hand, forcedPlayer.Pool);
     }
     private void HandlePlayerClick(PlayerClass clickedPlayer)
     {
@@ -80,7 +82,7 @@ public class HighlightManager : MonoBehaviour // later all entity highlighter
         {
             ResetCurrentHighlightedAction();
             selectedPlayer = clickedPlayer;
-            RenderHand(clickedPlayer.Hand);
+            RenderHand(clickedPlayer.Hand, clickedPlayer.Pool);
         }
     }
 
@@ -204,7 +206,7 @@ public class HighlightManager : MonoBehaviour // later all entity highlighter
 
         UnRenderHand();
         selectedPlayer = player; 
-        RenderHand(player.Hand);
+        RenderHand(player.Hand, player.Pool);
     }
 
     /*  Renders the cards in List<GameObject> hand to the screen, as children of the handContainer.
@@ -213,7 +215,7 @@ public class HighlightManager : MonoBehaviour // later all entity highlighter
     *  MODIFIES: Nothing
     * 
     */
-    private void RenderHand(List<GameObject> hand)
+    private void RenderHand(List<GameObject> hand, List<GameObject> pool)
     {
         for (int i = 0; i < hand.Count; i++)
         {
@@ -234,6 +236,7 @@ public class HighlightManager : MonoBehaviour // later all entity highlighter
             insertingAction.SetCanPlay(insertingAction.IsPlayableByPlayer(out _));
         }
         RenderText(hand);
+        deckRemainderViewController.Notify(pool);
     }
 
     // Renders the information (text) of each card inside the player's hand. 
