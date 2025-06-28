@@ -34,7 +34,7 @@ MonoBehaviour:
     speakerName: Broadcast
     displayingImage: {fileID: 0}
     broadcastAnEvent: 0
-  - bodyText: As you all know, just a couple days ago, brave NITES candidates set      
+  - bodyText: As you all know, just a couple days ago, brave NITES candidates set
       out for the Wasteland to begin their intake exam.
     speakerName: Broadcast
     displayingImage: {fileID: 0}

@@ -24,6 +24,12 @@ public class FadeScreenHandler : MonoBehaviour
         }
     }
 
+    public void SetFadeScreen(SpriteRenderer spriteRenderer)
+    {
+        this.fadeScreen = spriteRenderer;
+    }
+
+
     public void SetDarkScreen()
     {
         StopCurrentFadeAnimation(); 
@@ -36,6 +42,12 @@ public class FadeScreenHandler : MonoBehaviour
         StopCurrentFadeAnimation();
         SetAlpha(0f);
         _intendedAlpha = 0f;
+    }
+
+    public IEnumerator FadeInAlpha(float alphaScreen, float duration)
+    {
+        RequestFade(alphaScreen, duration);
+        return WaitForCurrentFadeCompletion();
     }
 
     public IEnumerator FadeInLightScreen(float duration)
