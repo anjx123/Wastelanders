@@ -129,6 +129,9 @@ void ClearPanel()
             SetDialogueBoxActive(pictureDialogueBox);
             pictureDialogueBox.SetLine(sentence);
         }
+
+        AudioManager.Instance.PlaySFX("Page Flip");
+        sentence.playSound();
     }
 
     void SetDialogueBoxActive(DialogueBox dialogueBox)
