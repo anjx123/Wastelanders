@@ -130,7 +130,7 @@ void ClearPanel()
             pictureDialogueBox.SetLine(sentence);
         }
 
-        AudioManager.Instance.PlaySFX("ClashTie");
+        AudioManager.Instance.PlaySFX("Page Flip");
         sentence.playSound();
     }
 
