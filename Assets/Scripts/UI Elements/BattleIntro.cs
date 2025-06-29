@@ -6,10 +6,13 @@ using UnityEngine;
 public class BattleIntro : MonoBehaviour
 {
     [SerializeField] private Animator animator;
-    
+    [SerializeField] private Animator backgroundAnimator;
+    private const string backgroundAnimation = "BackgroundIntro";
+
     public virtual void PlayAnimation(BattleIntroEnum animationEnum)
     {
         animator.SetTrigger(animationEnum.animationName);
+        backgroundAnimator.SetTrigger(backgroundAnimation);
     }
 }
 
