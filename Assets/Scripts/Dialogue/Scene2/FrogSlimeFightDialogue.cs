@@ -9,6 +9,7 @@ using Systems.Persistence;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using static BattleIntroEnum;
 using static Beetle;
 
 public class FrogSlimeFightDialogue : DialogueClasses
@@ -36,6 +37,7 @@ public class FrogSlimeFightDialogue : DialogueClasses
     [SerializeField] private Transform slimeWalkIn;
 
     [SerializeField] private GameOver gameOver;
+    [SerializeField] private BattleIntro battleIntro;
 
     [SerializeField] private Camera mainCamera;
     [SerializeField] private GameObject scoutBeetlePrefab;
@@ -111,6 +113,7 @@ public class FrogSlimeFightDialogue : DialogueClasses
     {
         CombatManager.Instance.GameState = GameState.OUT_OF_COMBAT;
         CombatManager.Instance.SetDarkScreen();
+        battleIntro = Instantiate(battleIntro);
         yield return new WaitForSeconds(0.8f);
 
         SetUpCombatStatus();
@@ -186,6 +189,7 @@ public class FrogSlimeFightDialogue : DialogueClasses
         }
 
         // start frog fight
+        battleIntro.PlayAnimation(Get<ClashIntro>());
         treeOverlay.enabled = false;
         StartCoroutine(jackie.ResetPosition());
         StartCoroutine(frog2.ResetPosition());

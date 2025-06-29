@@ -1954,6 +1954,7 @@ MonoBehaviour:
   slimeBattle: {fileID: 1422898870}
   slimeWalkIn: {fileID: 808288517}
   gameOver: {fileID: 322489277}
+  battleIntro: {fileID: 5210625753511003606, guid: a1b9dbfd8373c7347bbeaace2539e9b7, type: 3}
   mainCamera: {fileID: 1525248175}
   scoutBeetlePrefab: {fileID: 8044949296705636452, guid: 692030d7a70f84e1e9949eb9b07ebce5, type: 3}
   closeUpCamera: {fileID: 811157971}
@@ -2964,7 +2965,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6635998426718021455, guid: b9c5e4b3c9f7e024f8fe9012e7a2e437, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -8.624177
+      value: -8.6226845
       objectReference: {fileID: 0}
     - target: {fileID: 6635998426718021455, guid: b9c5e4b3c9f7e024f8fe9012e7a2e437, type: 3}
       propertyPath: m_LocalPosition.y
