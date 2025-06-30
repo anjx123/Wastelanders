@@ -33,8 +33,6 @@ public class CombatManager : MonoBehaviour
     private SpriteRenderer fadeScreen;
     private FadeScreenHandler fadeScreenHandler;
 
-    bool fadeActive = false;
-
     [SerializeField] private PlayerDatabase playerDatabase;
     [SerializeField] private CardDatabase cardDatabase;
 

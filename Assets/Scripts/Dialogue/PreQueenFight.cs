@@ -7,6 +7,7 @@ using System.Runtime.ConstrainedExecution;
 using Systems.Persistence;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using static BattleIntroEnum;
 
 //@author: Andrew
 public class PreQueenFight : DialogueClasses
@@ -62,6 +63,7 @@ public class PreQueenFight : DialogueClasses
 
     [SerializeField] GameOver gameOver;
     [SerializeField] private bool jumpToCombat;
+    [SerializeField] private BattleIntro battleIntro;
     private DefaultSceneBuilder defaultSceneBuilder;
 
 
@@ -101,7 +103,7 @@ public class PreQueenFight : DialogueClasses
     {
         CombatManager.Instance.GameState = GameState.OUT_OF_COMBAT;
         CombatManager.Instance.SetDarkScreen();
-
+        battleIntro = Instantiate(battleIntro);
         yield return new WaitForSeconds(0.5f);
         ives.OutOfCombat();
         jackie.OutOfCombat(); //Workaround for now, ill have to remove this once i manually start instantiating players
@@ -476,6 +478,7 @@ public class PreQueenFight : DialogueClasses
         }
 
         {
+            battleIntro.PlayAnimation(Get<ClashIntro>());
             defaultSceneBuilder.PlayersPosition = playerCombatTransform;
             StartCoroutine(jackie.ResetPosition());
             yield return StartCoroutine(ives.ResetPosition());
