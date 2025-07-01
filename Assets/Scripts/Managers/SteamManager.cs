@@ -174,6 +174,26 @@ namespace Managers {
     		// Run Steam client callbacks
     		SteamAPI.RunCallbacks();
     	}
+
+	    public static void UnlockAchievement(string achievementId)
+	    {
+		    if (!Initialized)
+		    {
+			    Debug.LogWarning("Cannot unlock achievement: Steam is not initialized.");
+			    return;
+		    }
+
+		    bool success = SteamUserStats.SetAchievement(achievementId);
+		    if (!success)
+		    {
+			    Debug.LogError($"Failed to set achievement: {achievementId}");
+			    return;
+		    }
+
+		    SteamUserStats.StoreStats();
+		    Debug.Log($"Achievement unlocked: {achievementId}");
+	    }
+	    
     #else
     	public static bool Initialized {
     		get {
