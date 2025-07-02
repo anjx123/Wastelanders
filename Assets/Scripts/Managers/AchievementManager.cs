@@ -2,18 +2,12 @@ using UnityEngine;
 
 namespace Steamworks {
 
-    public class AchievementManager : MonoBehaviour {
+    public class AchievementManager : PersistentSingleton<AchievementManager> {
         private int enemiesKilled = 0;
 
-        private void OnEnable() {
-            EntityClass.OnEntityDeath += HandleEntityDeath;
-        }
+        protected override void Awake() {
+            base.Awake(); // Handles singleton instance + DontDestroyOnLoad
 
-        private void OnDisable() {
-            EntityClass.OnEntityDeath -= HandleEntityDeath;
-        }
-
-        private void Start() {
             if (!SteamManager.Initialized) return;
 
             // Load current kill count from Steam stats on start
@@ -22,6 +16,14 @@ namespace Steamworks {
 
             // In case player already reached milestones before starting the game, sync achievements
             CheckKillAchievements();
+        }
+
+        private void OnEnable() {
+            EntityClass.OnEntityDeath += HandleEntityDeath;
+        }
+
+        private void OnDisable() {
+            EntityClass.OnEntityDeath -= HandleEntityDeath;
         }
 
         private void HandleEntityDeath(EntityClass entity) {
@@ -46,7 +48,7 @@ namespace Steamworks {
                 SteamManager.UnlockAchievement("WARMING_UP");
             }
 
-            // Add more milestones here, e.g.
+            // Add more milestones here
             // if (enemiesKilled >= 10) SteamManager.UnlockAchievement("HUNTER");
         }
     }
