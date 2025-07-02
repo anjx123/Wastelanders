@@ -50,8 +50,10 @@ public class LevelSelectButton : MonoBehaviour
     public void SetHover(bool state) {
         if (!button.enabled) return;
         hover.SetActive(state);
-        outline.effectDistance = state ? hoverOutline : defaultOutline;
-        outline.effectColor = state ? hoverOutlineColor : defaultOutlineColor;
         _textMeshPro.color = state ? hoverTextColor : defaultTextColor;
+        if (outline != null) {
+            outline.effectDistance = state ? hoverOutline : defaultOutline;
+            outline.effectColor = state ? hoverOutlineColor : defaultOutlineColor;
+        }
     }
 }
