@@ -24,7 +24,7 @@ public class DialogueText
     public string SpeakerName { get {  return speakerName; } set {  speakerName = value; } }
     public Sprite DisplayingImage { get { return displayingImage; } set { displayingImage = value; } }
 
-    DialogueText(string bodyText, string speakerName, Sprite givenImage)
+    public DialogueText(string bodyText, string speakerName, Sprite givenImage)
     {
         this.bodyText = bodyText;
         this.speakerName = speakerName;
