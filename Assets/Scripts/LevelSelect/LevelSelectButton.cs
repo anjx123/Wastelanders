@@ -4,13 +4,13 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 // Represents a level select component that the player can click on to redirect them to a level 
 public class LevelSelectButton : MonoBehaviour
 {
     [field: SerializeField] public Level Level { get; set; }
     [SerializeField] private TMP_Text _textMeshPro;
-    [SerializeField] private Button button;
     [SerializeField] private Outline outline;
     [SerializeField] private Vector2 defaultOutline;
     [SerializeField] private Vector2 hoverOutline;
@@ -20,16 +20,15 @@ public class LevelSelectButton : MonoBehaviour
     [SerializeField] private Color hoverTextColor;
     [SerializeField] private GameObject hover;
     [SerializeField] private GameObject lockedIndicator;
+    [SerializeField] private GameObject notificationPrefab;
 #nullable enable
     private ILevelSelectInformation? LevelInformation { get => ILevelSelectInformation.LEVEL_INFORMATION.GetValueOrDefault(Level); }
 
+    private bool isLocked = false;
+    
     public void Start()
     {
         Initialize();
-    }
-    public void OpenScene()
-    {
-        LevelInformation?.UponSelectedEvent();
     }
 
     private void Initialize()
@@ -40,7 +39,7 @@ public class LevelSelectButton : MonoBehaviour
     private void Lock()
     {
         _textMeshPro.text = "LOCKED";
-        button.enabled = false;
+        isLocked = true;
         // Show the lock indicator, but if it's a reference to this, then hide this button
         // Some buttons will have a locked indicator, while other buttons will disappear when locked
         // Used for hiding the bounty button when prerequiste levels aren't completed
@@ -48,12 +47,29 @@ public class LevelSelectButton : MonoBehaviour
     }
 
     public void SetHover(bool state) {
-        if (!button.enabled) return;
+        if (isLocked) return;
         hover.SetActive(state);
         _textMeshPro.color = state ? hoverTextColor : defaultTextColor;
         if (outline != null) {
             outline.effectDistance = state ? hoverOutline : defaultOutline;
             outline.effectColor = state ? hoverOutlineColor : defaultOutlineColor;
+        }
+    }
+
+    public void OnClick(BaseEventData BaseEventData)
+    {
+        PointerEventData pointerData = BaseEventData as PointerEventData;
+
+        if (isLocked)
+        {
+            // Summon locked notifications
+            FloatingNotification notification = Instantiate(notificationPrefab).GetComponent<FloatingNotification>();
+            Vector3 worldPos = Camera.main.ScreenToWorldPoint(pointerData.position);
+            notification.Initialize(worldPos, "Level Locked");
+        } else
+        {
+            // Open scene otherwise
+            LevelInformation?.UponSelectedEvent();
         }
     }
 }
