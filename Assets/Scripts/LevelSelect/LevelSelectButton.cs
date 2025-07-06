@@ -21,8 +21,13 @@ public class LevelSelectButton : MonoBehaviour
     [SerializeField] private GameObject hover;
     [SerializeField] private GameObject lockedIndicator;
     [SerializeField] private GameObject notificationPrefab;
+    [SerializeField] private string levelTitle;
+    [SerializeField] private bool vanishWhenLocked = false;
 #nullable enable
     private ILevelSelectInformation? LevelInformation { get => ILevelSelectInformation.LEVEL_INFORMATION.GetValueOrDefault(Level); }
+
+    private const string LOCKED_TEXT = "LOCKED";
+    private const string LOCKED_NOTIFICATION_TEXT = "Content Locked";
 
     private bool isLocked = false;
     
@@ -33,17 +38,27 @@ public class LevelSelectButton : MonoBehaviour
 
     private void Initialize()
     {
+        _textMeshPro.text = levelTitle;
         if (LevelInformation?.LevelID > GameStateManager.Instance.CurrentLevelProgress) Lock();
     }
 
     private void Lock()
     {
-        _textMeshPro.text = "LOCKED";
+        _textMeshPro.text = LOCKED_TEXT;
         isLocked = true;
         // Show the lock indicator, but if it's a reference to this, then hide this button
         // Some buttons will have a locked indicator, while other buttons will disappear when locked
         // Used for hiding the bounty button when prerequiste levels aren't completed
-        lockedIndicator.SetActive(!(lockedIndicator == gameObject));
+        lockedIndicator.SetActive(false);
+        if (vanishWhenLocked) gameObject.SetActive(false);
+    }
+
+    private void Unlock()
+    {
+        _textMeshPro.text = levelTitle;
+        isLocked = false;
+        lockedIndicator.SetActive(false);
+        if (vanishWhenLocked) gameObject.SetActive(true);
     }
 
     public void SetHover(bool state) {
@@ -65,7 +80,7 @@ public class LevelSelectButton : MonoBehaviour
             // Summon locked notifications
             FloatingNotification notification = Instantiate(notificationPrefab).GetComponent<FloatingNotification>();
             Vector3 worldPos = Camera.main.ScreenToWorldPoint(pointerData.position);
-            notification.Initialize(worldPos, "Level Locked");
+            notification.Initialize(worldPos, LOCKED_NOTIFICATION_TEXT);
         } else
         {
             // Open scene otherwise

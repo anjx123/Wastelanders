@@ -1054,7 +1054,9 @@ MonoBehaviour:
   hoverTextColor: {r: 1, g: 0.8593597, b: 0.32549024, a: 1}
   hover: {fileID: 1691514553}
   lockedIndicator: {fileID: 987039187}
-  notificationPrefab: {fileID: 0}
+  notificationPrefab: {fileID: 6855015397013534079, guid: 53e75de59d0354991a3c9c24f3f10e72, type: 3}
+  levelTitle: BOUNTY BOARD
+  vanishWhenLocked: 1
 --- !u!114 &725345517
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1092,6 +1094,22 @@ MonoBehaviour:
           m_TargetAssemblyTypeName: LevelSelectButton, Assembly-CSharp
           m_MethodName: SetHover
           m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 4
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 725345516}
+          m_TargetAssemblyTypeName: LevelSelectButton, Assembly-CSharp
+          m_MethodName: OnClick
+          m_Mode: 0
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1244,6 +1262,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 02cdd03eb5e82dc44bdfacc5368e3711, type: 3}
+    - target: {fileID: 8769258020987959747, guid: 4ebd1ee5e5e34ea418076d78ba66dbf7, type: 3}
+      propertyPath: levelTitle
+      value: 2. THE EXAM BEGINS!
+      objectReference: {fileID: 0}
     - target: {fileID: 8769258020987959747, guid: 4ebd1ee5e5e34ea418076d78ba66dbf7, type: 3}
       propertyPath: <Level>k__BackingField
       value: 1
@@ -1548,6 +1570,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: 7aba0034e0ad3724aa15571e7d3a5d7a, type: 3}
     - target: {fileID: 8769258020987959747, guid: 4ebd1ee5e5e34ea418076d78ba66dbf7, type: 3}
+      propertyPath: levelTitle
+      value: 3. HOARDERS
+      objectReference: {fileID: 0}
+    - target: {fileID: 8769258020987959747, guid: 4ebd1ee5e5e34ea418076d78ba66dbf7, type: 3}
       propertyPath: <Level>k__BackingField
       value: 2
       objectReference: {fileID: 0}
@@ -1723,6 +1749,14 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 2df4e810ecf6cf84abcee4a4c4fd64af, type: 3}
+    - target: {fileID: 8769258020987959747, guid: 4ebd1ee5e5e34ea418076d78ba66dbf7, type: 3}
+      propertyPath: levelTitle
+      value: EX. CORONATION
+      objectReference: {fileID: 0}
+    - target: {fileID: 8769258020987959747, guid: 4ebd1ee5e5e34ea418076d78ba66dbf7, type: 3}
+      propertyPath: vanishWhenLocked
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8769258020987959747, guid: 4ebd1ee5e5e34ea418076d78ba66dbf7, type: 3}
       propertyPath: <Level>k__BackingField
       value: 4
@@ -2189,7 +2223,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 697530316340953098, guid: 4ebd1ee5e5e34ea418076d78ba66dbf7, type: 3}
       propertyPath: m_text
-      value: 4. THE QUEENS NEST
+      value: 4. THE QUEEN'S NEST
       objectReference: {fileID: 0}
     - target: {fileID: 6258826207863482620, guid: 4ebd1ee5e5e34ea418076d78ba66dbf7, type: 3}
       propertyPath: m_Pivot.x
@@ -2279,6 +2313,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 09df4af78a7407e4dbd925ed82459e2e, type: 3}
+    - target: {fileID: 8769258020987959747, guid: 4ebd1ee5e5e34ea418076d78ba66dbf7, type: 3}
+      propertyPath: levelTitle
+      value: 4. THE QUEEN'S NEST
+      objectReference: {fileID: 0}
     - target: {fileID: 8769258020987959747, guid: 4ebd1ee5e5e34ea418076d78ba66dbf7, type: 3}
       propertyPath: <Level>k__BackingField
       value: 3
@@ -2769,6 +2807,10 @@ PrefabInstance:
     - target: {fileID: 8286070020019102233, guid: 4ebd1ee5e5e34ea418076d78ba66dbf7, type: 3}
       propertyPath: m_Name
       value: Tutorial
+      objectReference: {fileID: 0}
+    - target: {fileID: 8769258020987959747, guid: 4ebd1ee5e5e34ea418076d78ba66dbf7, type: 3}
+      propertyPath: levelTitle
+      value: 1. TUTORIAL
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
