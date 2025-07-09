@@ -157,8 +157,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 20, y: -15.470001}
-  m_SizeDelta: {x: 225.14, y: 33.19}
+  m_AnchoredPosition: {x: 22, y: -31.599998}
+  m_SizeDelta: {x: 223.14, y: 33.19}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &42863120
 MonoBehaviour:
@@ -961,8 +961,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 20, y: 30}
-  m_SizeDelta: {x: 225.14, y: 48.7}
+  m_AnchoredPosition: {x: 22, y: 33.04}
+  m_SizeDelta: {x: 223.14, y: 45.66}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &590808695
 MonoBehaviour:
@@ -1160,7 +1160,7 @@ RectTransform:
   m_GameObject: {fileID: 664791171}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.14, y: 1.14, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 42863119}
@@ -1195,7 +1195,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: e9ac71536d996da46adc28a80ea06c73, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 4dda60578ae09214695bc634c43ad200, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1513,8 +1513,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 20, y: -75.3}
-  m_SizeDelta: {x: 225.14, y: 90}
+  m_AnchoredPosition: {x: 22, y: -97.98001}
+  m_SizeDelta: {x: 223.14, y: 52.38}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1090741877
 MonoBehaviour:
@@ -1704,8 +1704,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 20, y: -44.9}
-  m_SizeDelta: {x: 225.14, y: 33.19}
+  m_AnchoredPosition: {x: 22, y: -64.79001}
+  m_SizeDelta: {x: 223.14, y: 33.19}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1144772519
 MonoBehaviour:
