@@ -6,12 +6,8 @@ namespace Steamworks {
     //
     // Version: 1.0.12
 
-#if !(UNITY_STANDALONE_WIN || UNITY_STANDALONE_LINUX || UNITY_STANDALONE_OSX || STEAMWORKS_WIN || STEAMWORKS_LIN_OSX)
-    #define DISABLESTEAMWORKS
-#endif
-
     using UnityEngine;
-#if !DISABLESTEAMWORKS
+#if STEAMWORKS_NET // Found in Player Settings > Other Settings > Scripting Define Symbols
     using System.Collections;
     using Steamworks;
 #endif
@@ -22,7 +18,7 @@ namespace Steamworks {
     //
     [DisallowMultipleComponent]
     public class SteamManager : MonoBehaviour {
-#if !DISABLESTEAMWORKS
+#if STEAMWORKS_NET
         protected static bool s_EverInitialized = false;
 
         protected static SteamManager s_instance;
@@ -213,6 +209,6 @@ namespace Steamworks {
     			return false;
     		}
     	}
-#endif // !DISABLESTEAMWORKS
+#endif // STEAMWORKS_NET
     }
 }

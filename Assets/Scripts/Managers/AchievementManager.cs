@@ -1,4 +1,6 @@
+#if STEAMWORKS_NET
 using UnityEngine;
+
 
 namespace Steamworks {
 
@@ -53,3 +55,4 @@ namespace Steamworks {
         }
     }
 }
+#endif // STEAMWORKS_NET
