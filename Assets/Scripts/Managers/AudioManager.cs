@@ -57,7 +57,7 @@ public class AudioManager : PersistentSingleton<AudioManager>
         // This check allows us to have certain audio traacks persist across scenes 
         // E.x. MainMenu -> Level Select while also allowing audio to play on cold start
         if (sceneAudio != incomingAudio)
-        {
+        {   //Has issues with restarts 
             sceneAudio = incomingAudio;
             StartCoroutine(PlayStartAudio());
         }

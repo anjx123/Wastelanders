@@ -41,42 +41,49 @@ public abstract class SceneData : Enum<SceneData>
     {
         public override string SceneName => "Credits";
         public override SceneAudio GetAudio(AudioDatabase database) => database.Credits;
+        public override Type[] RequiredManagerTypes => new[] { typeof(AudioManager) };
     }
 
     public class TutorialFight : SceneData
     {
         public override string SceneName => "TutorialScene";
         public override SceneAudio GetAudio(AudioDatabase database) => database.TutorialFight;
+        public override Type[] RequiredManagerTypes => new[] { typeof(AudioManager) };
     }
 
     public class FrogSlimeFight : SceneData
     {
         public override string SceneName => "FrogSlimeFight";
-        public override SceneAudio GetAudio(AudioDatabase database) => database.FrogSlimeFight;
+        public override SceneAudio GetAudio(AudioDatabase database) => database.FrogSlimeFight; 
+        public override Type[] RequiredManagerTypes => new[] { typeof(AudioManager) };
     }
 
     public class BeetleFight : SceneData
     {
         public override string SceneName => "BeetleFightScene";
         public override SceneAudio GetAudio(AudioDatabase database) => database.BeetleFight;
+        public override Type[] RequiredManagerTypes => new[] { typeof(AudioManager) };
     }
 
     public class PreQueenFight : SceneData
     {
         public override string SceneName => "PreQueenFightScene";
         public override SceneAudio GetAudio(AudioDatabase database) => database.PreQueenFight;
+        public override Type[] RequiredManagerTypes => new[] { typeof(AudioManager) };
     }
 
     public class PostQueenFight : SceneData
     {
         public override string SceneName => "PostQueenBeetle";
         public override SceneAudio GetAudio(AudioDatabase database) => database.PostQueenFight;
+        public override Type[] RequiredManagerTypes => new[] { typeof(AudioManager) };
     }
 
     public class PrincessFrogBounty : SceneData
     {
         public override string SceneName => "PrincessFrogCombatScene";
         public override SceneAudio GetAudio(AudioDatabase database) => database.PrincessFrogBounty;
+        public override Type[] RequiredManagerTypes => new[] { typeof(AudioManager) };
     }
 
     private static readonly Dictionary<string, SceneData> _sceneLookup = new();
