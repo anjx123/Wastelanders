@@ -2,52 +2,70 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public class AudioManager : MonoBehaviour
+public class AudioManager : PersistentSingleton<AudioManager>
 {
+    public new static AudioManager Instance
+    {
+        get
+        {
+            if (instance == null)
+            {
+                instance = FindFirstObjectByType<AudioManager>();
+                if (instance == null)
+                {
+                    if (SceneInitializer.Instance == null)
+                    {
+                        Debug.LogError("AudioManager.Instance could not be created because SceneInitializer.Instance is null. " +
+                                       "Ensure a SceneInitializer exists in your first scene.");
+                        return null;
+                    }
+                    
+                    instance = Instantiate(SceneInitializer.Instance.audioManagerPrefab);
+                }
+            }
 
-    public static AudioManager Instance;
+            return instance;
+        }
+    }
 
-    // NOTE: All of these fields are set in the editor.
-    public AudioSource SFXSoundsPlayer, BackgroundMusicPlayer, BackgroundMusicIntroPlayer;
-    private SoundEffectsDatabase soundEffectsDatabase;
+    [SerializeField] private AudioSource SFXSoundsPlayer, BackgroundMusicPlayer, BackgroundMusicIntroPlayer;
+    [SerializeField] private SoundEffectsDatabase soundEffectsDatabase;
+    [SerializeField] private AudioDatabase sceneAudioDatabase;
 #nullable enable
+    [SerializeField] private SceneAudio sceneAudio = null!;
+
     public AudioClip? backgroundMusicPrimary;
     public AudioClip? backgroundMusicIntro;
-
     public AudioClip? combatMusicPrimary;
     public AudioClip? combatMusicIntro;
-
     public AudioClip? backgroundMusicDeath;
-
-    public virtual void Awake()
-    {
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-        else if (Instance != this)
-        {
-            Destroy(this);
-        }
-        soundEffectsDatabase = Resources.LoadAll<SoundEffectsDatabase>("").First();
-    }
-
-    private void Start()
-    {
-        StartCoroutine(PlayStartAudio());
-    }
-
 
     private void OnEnable()
     {
         CombatManager.OnGameStateChanged += CombatStartHandler;
+        SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
     private void OnDisable()
     {
         CombatManager.OnGameStateChanged -= CombatStartHandler;
+        SceneManager.sceneLoaded -= OnSceneLoaded;
     }
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        SceneAudio incomingAudio = SceneData.FromSceneName(scene.name).GetAudio(sceneAudioDatabase);
+        
+        // This check allows us to have certain audio traacks persist across scenes 
+        // E.x. MainMenu -> Level Select while also allowing audio to play on cold start
+        if (sceneAudio != incomingAudio)
+        {
+            sceneAudio = incomingAudio;
+            StartCoroutine(PlayStartAudio());
+        }
+    }
+
 
     void CombatStartHandler(GameState gameState)
     {
