@@ -33,49 +33,31 @@ public class AudioManager : PersistentSingleton<AudioManager>
     [SerializeField] private AudioDatabase sceneAudioDatabase;
 #nullable enable
     private SceneAudio sceneAudio = null!;
-    public AudioClip? backgroundMusicPrimary;
-    public AudioClip? backgroundMusicIntro;
-    public AudioClip? combatMusicPrimary;
-    public AudioClip? combatMusicIntro;
-    public AudioClip? backgroundMusicDeath;
 
     private void OnEnable()
     {
-        CombatManager.OnGameStateChanged += CombatStartHandler;
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
     private void OnDisable()
     {
-        CombatManager.OnGameStateChanged -= CombatStartHandler;
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
+
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         SceneAudio incomingAudio = SceneData.FromSceneName(scene.name).GetAudio(sceneAudioDatabase);
-        
+
         // This check allows us to have certain audio traacks persist across scenes 
         // E.x. MainMenu -> Level Select while also allowing audio to play on cold start
-        if (sceneAudio != incomingAudio)
-        {   //Has issues with restarts 
-            sceneAudio = incomingAudio;
-            StartCoroutine(PlayStartAudio());
-        }
+        if (sceneAudio == incomingAudio && incomingAudio.isPersisting) return;
+        sceneAudio = incomingAudio;
+
+        StartCoroutine(PlayStartAudio());
     }
 
-
-    void CombatStartHandler(GameState gameState)
+    public IEnumerator StartCombatMusic()
     {
-        if (gameState == GameState.SELECTION)
-        {
-            StartCoroutine(StartCombatMusic());
-            
-        }
-    }
-
-    protected IEnumerator StartCombatMusic()
-    {
-        CombatManager.OnGameStateChanged -= CombatStartHandler;
         yield return StartCoroutine(FadeAudioRoutine(BackgroundMusicPlayer, true, 1f));
 
         if (sceneAudio.combatMusicIntro != null)
@@ -125,6 +107,7 @@ public class AudioManager : PersistentSingleton<AudioManager>
     {
         BackgroundMusicPlayer.clip = sceneAudio.backgroundMusicIntro;
         BackgroundMusicPlayer.Play();
+        BackgroundMusicPlayer.loop = false;
 
         yield return new WaitUntil(() => !BackgroundMusicPlayer.isPlaying);
 

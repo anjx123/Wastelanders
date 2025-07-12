@@ -17,3 +17,4 @@ MonoBehaviour:
   combatMusicPrimary: {fileID: 0}
   combatMusicIntro: {fileID: 0}
   backgroundMusicDeath: {fileID: 0}
+  isPersisting: 1

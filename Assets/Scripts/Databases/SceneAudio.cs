@@ -10,4 +10,5 @@ public class SceneAudio : ScriptableObject
     public AudioClip? combatMusicPrimary;
     public AudioClip? combatMusicIntro;
     public AudioClip? backgroundMusicDeath;
+    public bool isPersisting; 
 }

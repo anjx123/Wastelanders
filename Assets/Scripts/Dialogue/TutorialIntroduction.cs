@@ -200,7 +200,7 @@ public class TutorialIntroduction : DialogueClasses
         CombatManager.Instance.SetEnemiesPassive(new List<EnemyClass> { ives });
 
         DialogueManager.Instance.MoveBoxToTop();
-        CombatManager.Instance.GameState = GameState.SELECTION;
+        CombatManager.Instance.BeginCombat();
         
         BeginCombatTutorial();
         yield return new WaitUntil(() => CombatManager.Instance.GameState == GameState.GAME_WIN);
@@ -258,7 +258,7 @@ public class TutorialIntroduction : DialogueClasses
         EntityClass.OnEntityDeath += FirstDummyDies; //Setup Listener to set state to Game Win
         PlayerClass.playerReshuffleDeck += PlayerLostOneMaxHandSize;
         battleIntro.PlayAnimation(Get<TutorialIntro>());
-    StartCoroutine(StartDialogueWithNextEvent(youCanPlayCardsTutorial, () => { ActionClass.CardHighlightedEvent += OnPlayerFirstHighlightCard; }));
+        StartCoroutine(StartDialogueWithNextEvent(youCanPlayCardsTutorial, () => { ActionClass.CardHighlightedEvent += OnPlayerFirstHighlightCard; }));
     }
 
     private void PlayerLostOneMaxHandSize(PlayerClass player)
