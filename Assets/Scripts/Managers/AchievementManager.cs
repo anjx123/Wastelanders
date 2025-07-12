@@ -1,10 +1,11 @@
-#if STEAMWORKS_NET
+
 using UnityEngine;
 
 
 namespace Steamworks {
 
     public class AchievementManager : PersistentSingleton<AchievementManager> {
+#if STEAMWORKS_NET
         private int enemiesKilled = 0;
 
         protected override void Awake() {
@@ -53,6 +54,6 @@ namespace Steamworks {
             // Add more milestones here
             // if (enemiesKilled >= 10) SteamManager.UnlockAchievement("HUNTER");
         }
+#endif // STEAMWORKS_NET
     }
 }
-#endif // STEAMWORKS_NET
