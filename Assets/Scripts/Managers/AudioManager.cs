@@ -1,6 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -22,7 +20,7 @@ public class AudioManager : PersistentSingleton<AudioManager>
                         return null;
                     }
                     
-                    instance = Instantiate(SceneInitializer.Instance.audioManagerPrefab);
+                    instance = Instantiate(SceneInitializer.Instance.GetPrefab<AudioManager>());
                 }
             }
 
@@ -34,8 +32,7 @@ public class AudioManager : PersistentSingleton<AudioManager>
     [SerializeField] private SoundEffectsDatabase soundEffectsDatabase;
     [SerializeField] private AudioDatabase sceneAudioDatabase;
 #nullable enable
-    [SerializeField] private SceneAudio sceneAudio = null!;
-
+    private SceneAudio sceneAudio = null!;
     public AudioClip? backgroundMusicPrimary;
     public AudioClip? backgroundMusicIntro;
     public AudioClip? combatMusicPrimary;
@@ -81,14 +78,14 @@ public class AudioManager : PersistentSingleton<AudioManager>
         CombatManager.OnGameStateChanged -= CombatStartHandler;
         yield return StartCoroutine(FadeAudioRoutine(BackgroundMusicPlayer, true, 1f));
 
-        if (combatMusicIntro != null)
+        if (sceneAudio.combatMusicIntro != null)
         {
-            BackgroundMusicPlayer.clip = combatMusicIntro;
+            BackgroundMusicPlayer.clip = sceneAudio.combatMusicIntro;
             BackgroundMusicPlayer.Play();
             BackgroundMusicPlayer.loop = false;
             yield return new WaitUntil(() => !BackgroundMusicPlayer.isPlaying);
         }
-        BackgroundMusicPlayer.clip = combatMusicPrimary;
+        BackgroundMusicPlayer.clip = sceneAudio.combatMusicPrimary;
         BackgroundMusicPlayer.Play();
         BackgroundMusicPlayer.loop = true;
     }
@@ -126,12 +123,12 @@ public class AudioManager : PersistentSingleton<AudioManager>
 
     protected IEnumerator PlayStartAudio()
     {
-        BackgroundMusicPlayer.clip = backgroundMusicIntro;
+        BackgroundMusicPlayer.clip = sceneAudio.backgroundMusicIntro;
         BackgroundMusicPlayer.Play();
 
         yield return new WaitUntil(() => !BackgroundMusicPlayer.isPlaying);
 
-        BackgroundMusicPlayer.clip = backgroundMusicPrimary;
+        BackgroundMusicPlayer.clip = sceneAudio.backgroundMusicPrimary;
         BackgroundMusicPlayer.Play();
         BackgroundMusicPlayer.loop = true;
     }
@@ -160,7 +157,7 @@ public class AudioManager : PersistentSingleton<AudioManager>
     IEnumerator PlayDeathMusic()
     {
         yield return StartCoroutine(FadeAudioRoutine(BackgroundMusicPlayer, true, 2f));
-        BackgroundMusicPlayer.clip = backgroundMusicDeath;
+        BackgroundMusicPlayer.clip = sceneAudio.backgroundMusicDeath;
         BackgroundMusicPlayer.Play();
     }
 

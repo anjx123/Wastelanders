@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,29 +7,34 @@ public abstract class SceneData : Enum<SceneData>
 {
     public abstract string SceneName { get; }
     public abstract SceneAudio GetAudio(AudioDatabase database);
+    public virtual Type[] RequiredManagerTypes => Array.Empty<Type>();
 
     public class MainMenu : SceneData
     {
         public override string SceneName => "MainMenu";
         public override SceneAudio GetAudio(AudioDatabase database) => database.MainMenu;
+        public override Type[] RequiredManagerTypes => new[] { typeof(AudioManager) };
     }
 
     public class SelectionScreen : SceneData
     {
         public override string SceneName => "SelectionScreen";
         public override SceneAudio GetAudio(AudioDatabase database) => database.MainMenu;
+        public override Type[] RequiredManagerTypes => new[] { typeof(AudioManager) };
     }
 
     public class LevelSelect : SceneData
     {
         public override string SceneName => "LevelSelect";
         public override SceneAudio GetAudio(AudioDatabase database) => database.MainMenu;
+        public override Type[] RequiredManagerTypes => new[] { typeof(AudioManager) };
     }
 
     public class ContractSelect : SceneData
     {
         public override string SceneName => "ContractSelect";
         public override SceneAudio GetAudio(AudioDatabase database) => database.MainMenu;
+        public override Type[] RequiredManagerTypes => new[] { typeof(AudioManager) };
     }
 
     public class Credits : SceneData
