@@ -478,7 +478,6 @@ public class PreQueenFight : DialogueClasses
         }
 
         {
-            battleIntro.PlayAnimation(Get<ClashIntro>());
             defaultSceneBuilder.PlayersPosition = playerCombatTransform;
             StartCoroutine(jackie.ResetPosition());
             yield return StartCoroutine(ives.ResetPosition());
@@ -518,7 +517,8 @@ public class PreQueenFight : DialogueClasses
                 crystal.InCombat();
             }
 
-            CombatManager.Instance.GameState = GameState.SELECTION;
+            CombatManager.Instance.BeginCombat();
+            battleIntro.PlayAnimation(Get<ClashIntro>());
             BeginQueenCombat();
             yield return new WaitUntil(() => CombatManager.Instance.GameState == GameState.GAME_WIN);
             AudioManager.Instance.FadeOutCurrentBackgroundTrack(2f);

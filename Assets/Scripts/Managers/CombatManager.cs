@@ -279,8 +279,6 @@ public class CombatManager : MonoBehaviour
         SaveLoadSystem.Instance.SaveGame();
     }
 
-
-
     private void PerformFighting()
     {
         Deactivate(startDequeue);
@@ -288,6 +286,14 @@ public class CombatManager : MonoBehaviour
         baseCamera.Priority = 0;
         dynamicCamera.Priority = 1;
         StartCoroutine(FadeCombatBackground(true));
+    }
+
+    public void BeginCombat()
+    {
+        if (GameState == GameState.SELECTION || GameState == GameState.FIGHTING) return;
+
+        StartCoroutine(AudioManager.Instance.StartCombatMusic());
+        GameState = GameState.SELECTION;
     }
 
     public void ActivateDynamicCamera()

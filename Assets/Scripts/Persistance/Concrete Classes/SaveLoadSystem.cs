@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using Steamworks;
 using UnityEngine;
 
 namespace Systems.Persistence
@@ -40,7 +41,14 @@ namespace Systems.Persistence
         protected override void Awake()
         {
             base.Awake();
-            dataService = new FileDataService(new JSonSerializer());
+            if (SteamManager.Initialized) {
+                dataService = new SteamCloudDataService(new JSonSerializer());
+                Debug.Log("[SaveLoadSystem] Using Steam Cloud for saves.");
+            }
+            else {
+                dataService = new FileDataService(new JSonSerializer());
+                Debug.Log("[SaveLoadSystem] Steam Manager not initialized, using local file for saves.");
+            }
             defaultCardDatabase = Resources.LoadAll<CardDatabase>("").First();
             defaultPlayerDatabase = Resources.LoadAll<PlayerDatabase>("").First(); // Could consider loading by name for better performance
             try

@@ -23,15 +23,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/BeetleFightScene.unity
     guid: 848a8118215eb4a4597b9dc56b9ac00c
-  - enabled: 0
-    path: Assets/Scenes/CombatScene.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
-  - enabled: 0
-    path: Assets/Scenes/BeetleCombatScene.unity
-    guid: 73c98f4d0b055437f91532d79fb70e0e
-  - enabled: 0
-    path: Assets/Scenes/Jackie's Letter.unity
-    guid: 4ba50ff3ff6653e46bb7276e979af597
   - enabled: 1
     path: Assets/Scenes/PreQueenFightScene.unity
     guid: 5a33db8050f5f4fcfbee6253d5691bb1

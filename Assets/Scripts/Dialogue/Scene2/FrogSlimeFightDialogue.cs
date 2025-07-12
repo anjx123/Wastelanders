@@ -4,13 +4,9 @@ using SceneBuilder;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using Systems.Persistence;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using static BattleIntroEnum;
-using static Beetle;
 
 public class FrogSlimeFightDialogue : DialogueClasses
 {
@@ -204,7 +200,7 @@ public class FrogSlimeFightDialogue : DialogueClasses
         CombatManager.EnemiesWinEvent += EnemiesWin;
         EntityClass.OnEntityDeath += EnsureFrogDeath;
 
-        CombatManager.Instance.GameState = GameState.SELECTION;
+        CombatManager.Instance.BeginCombat();
         
         //Starting Combat
         yield return new WaitForSeconds(1f);

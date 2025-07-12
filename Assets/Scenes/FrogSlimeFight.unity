@@ -1967,148 +1967,178 @@ MonoBehaviour:
       Marsh, this year\u2019s exam destination."
     speakerName: 
     displayingImage: {fileID: 0}
+    sfx: 
     broadcastAnEvent: 0
   - bodyText: They spend the night setting up base camp. Tension fills the camp,
       and Candidates are restless throughout the night.
     speakerName: 
     displayingImage: {fileID: 0}
+    sfx: 
     broadcastAnEvent: 0
   - bodyText: Finally, the morning of the exam arrives.
     speakerName: 
     displayingImage: {fileID: 0}
+    sfx: 
     broadcastAnEvent: 0
   ivesInstruction:
   - bodyText: Good morning, Candidates. As you all know...
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
+    sfx: 
     broadcastAnEvent: 0
   - bodyText: This exam will emulate a real NITES wasteland expedition.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
+    sfx: 
     broadcastAnEvent: 0
   - bodyText: The purpose of these expeditions are to extract as much valuable Waste
       Products that cultivate inside mutated creatures as we can.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
+    sfx: 
     broadcastAnEvent: 0
   - bodyText: 'These Products are essential to combat the further spread of the waste
       as they help us produce weapons and energy. '
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
+    sfx: 
     broadcastAnEvent: 0
   - bodyText: 'As such, this exam will test your ability to exploit and extract as
       much valuable Waste Products from the local flora and fauna as you can. '
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
+    sfx: 
     broadcastAnEvent: 0
   - bodyText: 'The examiners will be discreetly evaluating you, and will not interfere
       with the exam unless there is a serious emergency. '
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
+    sfx: 
     broadcastAnEvent: 0
   - bodyText: You have until noon tomorrow to collect as many valuable Waste Products
       as you can. Good luck, your time starts now.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
+    sfx: 
     broadcastAnEvent: 0
   jackieStrategyPlan:
   - bodyText: 'Hmm let me come up with a plan, I know that the more dangerous the
       waste enemy, the higher quality the Waste Product they drop when slain.  '
     speakerName: Jackie
     displayingImage: {fileID: 21300000, guid: 228f823fe8b2f4d4791ed74e46de81e1, type: 3}
+    sfx: 
     broadcastAnEvent: 0
   - bodyText: Should I work with a team again to try and hunt down a larger waste
       monster?
     speakerName: Jackie
     displayingImage: {fileID: 21300000, guid: 228f823fe8b2f4d4791ed74e46de81e1, type: 3}
+    sfx: 
     broadcastAnEvent: 1
   - bodyText: 'No, I came back almost empty handed last year after I froze up and
       let the others do the fighting. '
     speakerName: Jackie
     displayingImage: {fileID: 21300000, guid: 537908265661f2b44970c526d7724cfb, type: 3}
+    sfx: 
     broadcastAnEvent: 1
   - bodyText: By the time I felt okay, there were basically no products left!
     speakerName: Jackie
     displayingImage: {fileID: 21300000, guid: 487226e5dae66424ea250466920a3086, type: 3}
+    sfx: 
     broadcastAnEvent: 1
   - bodyText: "I can push myself and do this solo, that\u2019s what the past year
       of training was for."
     speakerName: Jackie
     displayingImage: {fileID: 21300000, guid: 228f823fe8b2f4d4791ed74e46de81e1, type: 3}
+    sfx: 
     broadcastAnEvent: 1
   - bodyText: 'This way I get the full cut of the products, and it should impress
       the examiners, I hope. '
     speakerName: Jackie
     displayingImage: {fileID: 21300000, guid: c719baaafa8cd7148806ffb41907add6, type: 3}
+    sfx: 
     broadcastAnEvent: 0
   - bodyText: "Although I\u2019ll definitely have to be more sneaky and careful if
       I\u2019m hunting alone..."
     speakerName: Jackie
     displayingImage: {fileID: 21300000, guid: 228f823fe8b2f4d4791ed74e46de81e1, type: 3}
+    sfx: 
     broadcastAnEvent: 1
   jackiePreMissedShot:
   - bodyText: "Well, it\u2019s not the most dangerous monster, but I\u2019ve got
       to start collecting Waste Products. I can't fall behind."
     speakerName: Jackie
     displayingImage: {fileID: 21300000, guid: 537908265661f2b44970c526d7724cfb, type: 3}
+    sfx: 
     broadcastAnEvent: 0
   - bodyText: (Jackie Inhales and aims her pistol.)
     speakerName: 
     displayingImage: {fileID: 0}
+    sfx: 
     broadcastAnEvent: 0
   jackiePostMissedShot:
   - bodyText: "Tsk, stay calm, Jackie. It\u2019s just a frog. I can still take it
       down by force."
     speakerName: Jackie
     displayingImage: {fileID: 21300000, guid: 537908265661f2b44970c526d7724cfb, type: 3}
+    sfx: 
     broadcastAnEvent: 0
   jackiePreCombat:
   - bodyText: "Uh oh, well that didn\u2019t quite work out."
     speakerName: Jackie
     displayingImage: {fileID: 21300000, guid: 537908265661f2b44970c526d7724cfb, type: 3}
+    sfx: 
     broadcastAnEvent: 0
   startOfCombatDialogue:
   - bodyText: "Guess I got the challenge I wanted, let\u2019s see what attacks these
       guys are planning to do\u2026"
     speakerName: Jackie
     displayingImage: {fileID: 21300000, guid: 228f823fe8b2f4d4791ed74e46de81e1, type: 3}
+    sfx: 
     broadcastAnEvent: 0
   afterCombatDialogue:
   - bodyText: Whew, glad thats over and done with.
     speakerName: Jackie
     displayingImage: {fileID: 21300000, guid: 228f823fe8b2f4d4791ed74e46de81e1, type: 3}
+    sfx: 
     broadcastAnEvent: 0
   - bodyText: "Let\u2019s see what products these monsters had growing in them."
     speakerName: Jackie
     displayingImage: {fileID: 21300000, guid: c719baaafa8cd7148806ffb41907add6, type: 3}
+    sfx: 
     broadcastAnEvent: 0
   crystalExtraction:
   - bodyText: 'Ew, alright. No wonder it was hacking up so much spit. '
     speakerName: Jackie
     displayingImage: {fileID: 21300000, guid: 537908265661f2b44970c526d7724cfb, type: 3}
+    sfx: 
     broadcastAnEvent: 0
   - bodyText: 'I wonder how this crystal got in here? '
     speakerName: Jackie
     displayingImage: {fileID: 21300000, guid: 228f823fe8b2f4d4791ed74e46de81e1, type: 3}
+    sfx: 
     broadcastAnEvent: 0
   - bodyText: Heh, looks pretty valuable though. Not a bad start.
     speakerName: Jackie
     displayingImage: {fileID: 21300000, guid: c719baaafa8cd7148806ffb41907add6, type: 3}
+    sfx: 
     broadcastAnEvent: 0
   - bodyText: Off to the next target!
     speakerName: Jackie
     displayingImage: {fileID: 21300000, guid: c719baaafa8cd7148806ffb41907add6, type: 3}
+    sfx: 
     broadcastAnEvent: 0
   beetleEntrance:
   - bodyText: KCCRRKR?
     speakerName: ???
     displayingImage: {fileID: 21300000, guid: 320fd4765facdcb488b31229396fad33, type: 3}
+    sfx: 
     broadcastAnEvent: 0
   gameLoseDialogue:
   - bodyText: Tsk, I better get away and recover. Maybe I'll have better luck somewhere
       else...
     speakerName: Jackie
     displayingImage: {fileID: 0}
+    sfx: 
     broadcastAnEvent: 0
   jumpToCombat: 0
 --- !u!1001 &1235694744
@@ -2242,7 +2272,6 @@ Transform:
   - {fileID: 634474806}
   - {fileID: 220388612}
   - {fileID: 1894012317}
-  - {fileID: 1663789822}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!224 &1286108454 stripped
@@ -2965,7 +2994,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6635998426718021455, guid: b9c5e4b3c9f7e024f8fe9012e7a2e437, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -8.6226845
+      value: -8.122854
       objectReference: {fileID: 0}
     - target: {fileID: 6635998426718021455, guid: b9c5e4b3c9f7e024f8fe9012e7a2e437, type: 3}
       propertyPath: m_LocalPosition.y
@@ -3027,80 +3056,6 @@ MonoBehaviour:
 Transform:
   m_CorrespondingSourceObject: {fileID: 6635998426718021455, guid: b9c5e4b3c9f7e024f8fe9012e7a2e437, type: 3}
   m_PrefabInstance: {fileID: 1542478168}
-  m_PrefabAsset: {fileID: 0}
---- !u!1001 &1663789821
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 1264232812}
-    m_Modifications:
-    - target: {fileID: 1064820365547817184, guid: 00e4347f9eb16d94c93b4961bdbca751, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1064820365547817184, guid: 00e4347f9eb16d94c93b4961bdbca751, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1064820365547817184, guid: 00e4347f9eb16d94c93b4961bdbca751, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1064820365547817184, guid: 00e4347f9eb16d94c93b4961bdbca751, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1064820365547817184, guid: 00e4347f9eb16d94c93b4961bdbca751, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1064820365547817184, guid: 00e4347f9eb16d94c93b4961bdbca751, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1064820365547817184, guid: 00e4347f9eb16d94c93b4961bdbca751, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1064820365547817184, guid: 00e4347f9eb16d94c93b4961bdbca751, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1064820365547817184, guid: 00e4347f9eb16d94c93b4961bdbca751, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1064820365547817184, guid: 00e4347f9eb16d94c93b4961bdbca751, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1642062695111722096, guid: 00e4347f9eb16d94c93b4961bdbca751, type: 3}
-      propertyPath: combatMusicIntro
-      value: 
-      objectReference: {fileID: 8300000, guid: 9e34b1e5cda748b41ae43d03a632a2c0, type: 3}
-    - target: {fileID: 1642062695111722096, guid: 00e4347f9eb16d94c93b4961bdbca751, type: 3}
-      propertyPath: combatMusicPrimary
-      value: 
-      objectReference: {fileID: 8300000, guid: 7a583de6ee5412e41aec35dd14581a44, type: 3}
-    - target: {fileID: 1642062695111722096, guid: 00e4347f9eb16d94c93b4961bdbca751, type: 3}
-      propertyPath: backgroundMusicPrimary
-      value: 
-      objectReference: {fileID: 8300000, guid: 8b6db91d68cf8cb4e8cc86f3dd5b035c, type: 3}
-    - target: {fileID: 7932485008459424998, guid: 00e4347f9eb16d94c93b4961bdbca751, type: 3}
-      propertyPath: m_Name
-      value: AudioManager
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 00e4347f9eb16d94c93b4961bdbca751, type: 3}
---- !u!4 &1663789822 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1064820365547817184, guid: 00e4347f9eb16d94c93b4961bdbca751, type: 3}
-  m_PrefabInstance: {fileID: 1663789821}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1812891600
 PrefabInstance:
@@ -3756,6 +3711,63 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1956352440}
   m_CullTransparentMesh: 1
+--- !u!1001 &2024208592
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5368313208205223074, guid: 5be4a210a8591f54da75e0dc0c7f46f0, type: 3}
+      propertyPath: m_Name
+      value: SceneInitializer
+      objectReference: {fileID: 0}
+    - target: {fileID: 6668841376964174751, guid: 5be4a210a8591f54da75e0dc0c7f46f0, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6668841376964174751, guid: 5be4a210a8591f54da75e0dc0c7f46f0, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6668841376964174751, guid: 5be4a210a8591f54da75e0dc0c7f46f0, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6668841376964174751, guid: 5be4a210a8591f54da75e0dc0c7f46f0, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6668841376964174751, guid: 5be4a210a8591f54da75e0dc0c7f46f0, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6668841376964174751, guid: 5be4a210a8591f54da75e0dc0c7f46f0, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6668841376964174751, guid: 5be4a210a8591f54da75e0dc0c7f46f0, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6668841376964174751, guid: 5be4a210a8591f54da75e0dc0c7f46f0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6668841376964174751, guid: 5be4a210a8591f54da75e0dc0c7f46f0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6668841376964174751, guid: 5be4a210a8591f54da75e0dc0c7f46f0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 5be4a210a8591f54da75e0dc0c7f46f0, type: 3}
 --- !u!1001 &2026599492
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4319,3 +4331,4 @@ SceneRoots:
   - {fileID: 1877041900}
   - {fileID: 1312421352}
   - {fileID: 414043461}
+  - {fileID: 2024208592}
