@@ -666,6 +666,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canvasGroup: {fileID: 6361015055530545876}
   restartButton: {fileID: 7682429585058371380}
+  shouldJumpToCombatWhenRestart: 1
   levelSelectButton: {fileID: 466798355764960788}
   deckSelectButton: {fileID: 509379208630894461}
   gameOverText: {fileID: 3177571334794247354}

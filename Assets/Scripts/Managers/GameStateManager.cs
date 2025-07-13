@@ -32,36 +32,23 @@ public class GameStateManager : PersistentSingleton<GameStateManager>, IBind<Gam
         }
     }
 
-    public bool ShouldPlayDeckSelectionTutorial 
-    {
-        get { return Data.ShouldPlayDeckSelectionTutorial; } 
-        set => Data.ShouldPlayDeckSelectionTutorial = value; 
-    }
+    /*
+     * If we just finished beetle fight, we go directly into queen fight after the back button is hit
+     * This is a temporary flag that is set to check this state to directly transition
+     */
+    public bool JustFinishedBeetleFight = false;
+    
+    /*
+     * Another temporary state that determines whether the tutorial should be played
+     */
+    public bool ShouldPlayDeckSelectionTutorial = false;
 
-    public bool JumpIntoFrogAndSlimeFight 
-    {
-        get { return Data.JumpIntoFrogAndSlimeFight; }
-        set => Data.JumpIntoFrogAndSlimeFight = value;
-    }
-
-    public bool JumpIntoBeetleFight
-    {
-        get { return Data.JumpIntoBeetleFight; }
-        set => Data.JumpIntoBeetleFight = value;
-    }
-
-    public bool JumpIntoQueenFight
-    {
-        get { return Data.JumpIntoQueenFight; }
-        set => Data.JumpIntoQueenFight = value;
-    }
-
-    //If we just finished beetle fight, we go directly into queen fight after the back button is hit
-    public bool JustFinishedBeetleFight
-    {
-        get { return Data.JustFinishedBeetleFight; }
-        set => Data.JustFinishedBeetleFight = value;
-    }
+    /*
+     * Temporary flag to be set and read by end of combat scene, when the player restarts and should skip dialogue
+     * Is set by GameOver prefab upon restart, and read by dialogue classes
+     * Dialogue classes should reset this value when read, such that it does not cause unexpected behaviour in upcoming scenes
+     */
+    public bool JumpToCombat = false;
 
     public float CurrentLevelProgress
     {
@@ -69,7 +56,6 @@ public class GameStateManager : PersistentSingleton<GameStateManager>, IBind<Gam
         set => Data.CurrentLevelProgress = value;
     }
 
-    
     public void Restart()
     {
         Scene activeScene = SceneManager.GetActiveScene();
@@ -110,26 +96,26 @@ public class GameStateData : ISaveable
 {
     [field: SerializeField] public SerializableGuid Id { get; set; } = SerializableGuid.NewGuid();
 
-    [field: SerializeField] public bool ShouldPlayDeckSelectionTutorial { get; set; } = false;
+    /*
+     * This is the last level progress the player was on
+     * It's current application is to give a relative start to it's current state
+     *  such that we can deduce what is newly seen by the player and what isn't
+     * Currently, it's synched to CurrentLevelProgress upon loading the game
+     */
+    [field: SerializeField] public float LastLevelProgress { get; set; } = 0f;
 
-    [field: SerializeField] public bool JumpIntoFrogAndSlimeFight { get; set; } = false;
+    /*
+     * This is the current state that the player is at
+     * The associated values for this should be from [LevelSelectInformation.levelId]
+     */
+    [field: SerializeField] public float CurrentLevelProgress { get; set; } = 0f;
 
-    [field: SerializeField] public bool JumpIntoBeetleFight { get; set; } = false;
 
-    [field: SerializeField] public bool JumpIntoQueenFight { get; set; } = false;
-
-    [field: SerializeField] public bool JustFinishedBeetleFight { get; set; } = false;
-
-    [field: SerializeField] public float CurrentLevelProgress { get; set; } = 0f;  
     public override string ToString()
     {
         return "Id: " + Id +
             " Hexcode: " + RuntimeHelpers.GetHashCode(this) +
-            " ShouldPlayDeckSelectionTutorial: " + ShouldPlayDeckSelectionTutorial +
-            " JumpIntoFrogAndSlimeFight: " + JumpIntoFrogAndSlimeFight +
-            " JumpIntoBeetleFight: " + JumpIntoBeetleFight +
-            " JumpIntoQueenFight: " + JumpIntoQueenFight +
-            " JustFinishedBeetleFight: " + JustFinishedBeetleFight +
+            " Last player level progress: " + LastLevelProgress +
             " Current player level progress: " + CurrentLevelProgress;
     }
 }
