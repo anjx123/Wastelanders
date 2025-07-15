@@ -113,7 +113,7 @@ TextureImporter:
       name: Frog-Walk-gremlinversion_0
       rect:
         serializedVersion: 2
-        x: 6
+        x: 3
         y: 32
         width: 23
         height: 30
@@ -134,7 +134,7 @@ TextureImporter:
       name: Frog-Walk-gremlinversion_1
       rect:
         serializedVersion: 2
-        x: 38
+        x: 35
         y: 32
         width: 23
         height: 28
@@ -155,7 +155,7 @@ TextureImporter:
       name: Frog-Walk-gremlinversion_2
       rect:
         serializedVersion: 2
-        x: 6
+        x: 3
         y: 0
         width: 23
         height: 30
@@ -176,7 +176,7 @@ TextureImporter:
       name: Frog-Walk-gremlinversion_3
       rect:
         serializedVersion: 2
-        x: 38
+        x: 35
         y: 0
         width: 23
         height: 28

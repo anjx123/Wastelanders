@@ -113,7 +113,7 @@ TextureImporter:
       name: Frog-Spit_0
       rect:
         serializedVersion: 2
-        x: 4
+        x: 2
         y: 32
         width: 26
         height: 30
@@ -134,7 +134,7 @@ TextureImporter:
       name: Frog-Spit_1
       rect:
         serializedVersion: 2
-        x: 36
+        x: 35
         y: 32
         width: 25
         height: 30
@@ -155,7 +155,7 @@ TextureImporter:
       name: Frog-Spit_2
       rect:
         serializedVersion: 2
-        x: 69
+        x: 67
         y: 32
         width: 24
         height: 30
@@ -176,7 +176,7 @@ TextureImporter:
       name: Frog-Spit_3
       rect:
         serializedVersion: 2
-        x: 98
+        x: 99
         y: 32
         width: 27
         height: 30
@@ -197,7 +197,7 @@ TextureImporter:
       name: Frog-Spit_4
       rect:
         serializedVersion: 2
-        x: 3
+        x: 2
         y: 0
         width: 27
         height: 30
@@ -218,7 +218,7 @@ TextureImporter:
       name: Frog-Spit_5
       rect:
         serializedVersion: 2
-        x: 36
+        x: 35
         y: 0
         width: 25
         height: 30

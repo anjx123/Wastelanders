@@ -113,7 +113,7 @@ TextureImporter:
       name: Frawg-idle_0
       rect:
         serializedVersion: 2
-        x: 4
+        x: 2
         y: 32
         width: 26
         height: 30
@@ -134,7 +134,7 @@ TextureImporter:
       name: Frawg-idle_1
       rect:
         serializedVersion: 2
-        x: 35
+        x: 34
         y: 32
         width: 27
         height: 29
@@ -155,7 +155,7 @@ TextureImporter:
       name: Frawg-idle_2
       rect:
         serializedVersion: 2
-        x: 3
+        x: 2
         y: 0
         width: 27
         height: 28
@@ -176,7 +176,7 @@ TextureImporter:
       name: Frawg-idle_3
       rect:
         serializedVersion: 2
-        x: 35
+        x: 34
         y: 0
         width: 27
         height: 29
