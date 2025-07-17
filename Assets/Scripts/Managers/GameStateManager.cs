@@ -4,6 +4,7 @@ using System.Runtime.CompilerServices;
 using Systems.Persistence;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Collections.Generic;
 
 //Singleton Class that keeps track of values representing general Game states
 public class GameStateManager : PersistentSingleton<GameStateManager>, IBind<GameStateData>
@@ -97,14 +98,6 @@ public class GameStateData : ISaveable
     [field: SerializeField] public SerializableGuid Id { get; set; } = SerializableGuid.NewGuid();
 
     /*
-     * This is the last level progress the player was on
-     * It's current application is to give a relative start to it's current state
-     *  such that we can deduce what is newly seen by the player and what isn't
-     * Currently, it's synched to CurrentLevelProgress upon loading the game
-     */
-    [field: SerializeField] public float LastLevelProgress { get; set; } = 0f;
-
-    /*
      * This is the current state that the player is at
      * The associated values for this should be from [LevelSelectInformation.levelId]
      */
@@ -113,9 +106,12 @@ public class GameStateData : ISaveable
 
     public override string ToString()
     {
-        return "Id: " + Id +
-            " Hexcode: " + RuntimeHelpers.GetHashCode(this) +
-            " Last player level progress: " + LastLevelProgress +
-            " Current player level progress: " + CurrentLevelProgress;
+        var items = new List<string>
+        {
+            "Id: " + Id,
+            "Hexcode: " + RuntimeHelpers.GetHashCode(this),
+            "Current player level progress: " + CurrentLevelProgress
+        };
+        return string.Join(",", items);
     }
 }
