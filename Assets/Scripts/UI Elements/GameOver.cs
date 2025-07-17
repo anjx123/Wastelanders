@@ -10,6 +10,7 @@ public class GameOver : MonoBehaviour
 {
     [SerializeField] CanvasGroup canvasGroup;
     [SerializeField] Button restartButton;
+    [SerializeField] bool shouldJumpToCombatWhenRestart = true;
     [SerializeField] Button levelSelectButton;
     [SerializeField] Button deckSelectButton;
     [SerializeField] GameObject gameOverText;
@@ -80,6 +81,7 @@ public class GameOver : MonoBehaviour
     private IEnumerator OnRestartClick()
     {
         yield return StartCoroutine(FadeCoroutine(false, 0.7f));
+        GameStateManager.Instance.JumpToCombat = shouldJumpToCombatWhenRestart;
         GameStateManager.Instance.Restart();
     }
 
