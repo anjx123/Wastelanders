@@ -213,9 +213,9 @@ public class CardComparator : MonoBehaviour
         if (playersAreRollingDiceEvent != null)
         {
             yield return StartCoroutine(playersAreRollingDiceEvent.Invoke());
-            yield return new WaitUntil(() => Input.GetMouseButtonDown(0) && !PauseMenu.IsPaused); //Necessary to not immediately roll the dice
+            yield return new WaitUntil(() => Input.GetMouseButtonDown(0) && !PauseMenuV2.IsPaused); //Necessary to not immediately roll the dice
         }
-        yield return new WaitUntil(() => Input.GetMouseButtonDown(0) && !PauseMenu.IsPaused);
+        yield return new WaitUntil(() => Input.GetMouseButtonDown(0) && !PauseMenuV2.IsPaused);
     }
 
 
