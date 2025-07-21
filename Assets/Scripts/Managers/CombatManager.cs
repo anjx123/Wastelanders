@@ -28,7 +28,8 @@ public class CombatManager : MonoBehaviour
     public GameObject handContainer;
     public GameObject startDequeue;
     public GameObject battleQueueParent;
-    
+    public GameObject deckRemainderView;
+
     [SerializeField]
     private SpriteRenderer fadeScreen;
     private FadeScreenHandler fadeScreenHandler;
@@ -149,6 +150,7 @@ public class CombatManager : MonoBehaviour
         Activate(startDequeue);
         Activate(handContainer);
         battleQueueParent.SetActive(true);
+        deckRemainderView.SetActive(true);
         baseCamera.Priority = 1;
         dynamicCamera.Priority = 0;
         StartCoroutine(FadeCombatBackground(false));
@@ -285,6 +287,7 @@ public class CombatManager : MonoBehaviour
     {
         Deactivate(startDequeue);
         Deactivate(handContainer);
+        deckRemainderView.SetActive(false);
         baseCamera.Priority = 0;
         dynamicCamera.Priority = 1;
         StartCoroutine(FadeCombatBackground(true));
@@ -332,6 +335,7 @@ public class CombatManager : MonoBehaviour
         Deactivate(handContainer);
         Deactivate(startDequeue);
         battleQueueParent.SetActive(false);
+        deckRemainderView.SetActive(false);
 
         foreach (EntityClass entity in GrabAllEntities())
         {
