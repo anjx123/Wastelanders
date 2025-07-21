@@ -179,19 +179,22 @@ public class TutorialIntroduction : DialogueClasses
                 }
                 yield return StartCoroutine(DialogueManager.Instance.StartDialogue(ivesChatsWithJackie.Dialogue));
             }
-            yield return new WaitForSeconds(BRIEF_PAUSE);
-            yield return StartCoroutine(ives.MoveToPosition(dummy1StartingPos.position, 1.2f, 1.2f)); //Ives goes to place a dummy down
+            yield return StartCoroutine(ives.MoveToPosition(dummy1StartingPos.position, 1.2f, 0.8f)); //Ives goes to place a dummy down
             trainingDummies.Add(Instantiate(trainingDummyPrefab, dummy1StartingPos)); //Ives summons Dummy
-            yield return new WaitForSeconds(1f);
         } else
         {
             //Set up the scene for a combat Jump in.
             ives.SetReturnPosition(ivesDefaultTransform.position);
-            StartCoroutine(ives.MoveToPosition(ivesDefaultTransform.position, 0, 0.1f)); //Ives comes into the scene
-            StartCoroutine(ives.MoveToPosition(dummy1StartingPos.position, 1.2f, 0.1f)); //Ives goes to place a dummy down
+            StartCoroutine(CombatManager.Instance.FadeInLightScreen(2f));
+            yield return StartCoroutine(ives.MoveToPosition(dummy1StartingPos.position, 1.2f, 0.8f)); //Ives goes to place a dummy down
+            yield return new WaitForSeconds(BRIEF_PAUSE);
             trainingDummies.Add(Instantiate(trainingDummyPrefab, dummy1StartingPos));
-            yield return StartCoroutine(CombatManager.Instance.FadeInLightScreen(2f));
+            
         }
+
+        yield return new WaitForSeconds(BRIEF_PAUSE);
+        battleIntro.PlayAnimation(Get<TutorialIntro>());
+        yield return new WaitForSeconds(1f);
 
         jackie.InjectDeck(jackieTutorialDeck);
         jackie.InCombat(); //Workaround for now, ill have to remove this once i manually start instantiating 
@@ -257,7 +260,6 @@ public class TutorialIntroduction : DialogueClasses
     {
         EntityClass.OnEntityDeath += FirstDummyDies; //Setup Listener to set state to Game Win
         PlayerClass.playerReshuffleDeck += PlayerLostOneMaxHandSize;
-        battleIntro.PlayAnimation(Get<TutorialIntro>());
     StartCoroutine(StartDialogueWithNextEvent(youCanPlayCardsTutorial, () => { ActionClass.CardHighlightedEvent += OnPlayerFirstHighlightCard; }));
     }
 
