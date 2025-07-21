@@ -48,7 +48,7 @@ namespace Systems.Persistence {
 
             int read = SteamRemoteStorage.FileRead(path, buffer, size);
             string json = System.Text.Encoding.UTF8.GetString(buffer, 0, read);
-            gamedData = serializer.Deserialize<GameData>(json)
+            gamedData = serializer.Deserialize<GameData>(json);
 #endif
             return gamedData;
         }
