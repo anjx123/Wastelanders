@@ -411,7 +411,7 @@ public class BeetleFight : DialogueClasses
             DialogueManager.Instance.MoveBoxToTop();
 
             yield return new WaitForSeconds(0.2f);
-            CombatManager.Instance.GameState = GameState.SELECTION;
+            CombatManager.Instance.BeginCombat();
             yield return StartCoroutine(DialogueManager.Instance.StartDialogue(twoPlayerCombatTutorial.Dialogue));
             Begin2PCombatTutorial();
             waveIndicator.SetWave(1);
