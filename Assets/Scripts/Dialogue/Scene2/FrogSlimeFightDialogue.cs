@@ -242,8 +242,7 @@ public class FrogSlimeFightDialogue : DialogueClasses
         yield return new WaitForSeconds(2f);
         yield return StartCoroutine(CombatManager.Instance.FadeInDarkScreen(1.5f));
 
-        GameStateManager.Instance.CurrentLevelProgress = Math.Max(GameStateManager.Instance.CurrentLevelProgress, StageInformation.FROG_SLIME_STAGE.LevelID + 1f);
-
+        GameStateManager.Instance.UpdateLevelProgress(StageInformation.BEETLE_STAGE);
         GameStateManager.Instance.LoadScene(GameStateManager.BEETLE_FIGHT);
         yield break;
     }

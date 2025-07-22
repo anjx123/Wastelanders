@@ -1,10 +1,9 @@
-
-using BountySystem;
+using LevelSelectInformation;
+using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using Systems.Persistence;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using System.Collections.Generic;
 
 //Singleton Class that keeps track of values representing general Game states
 public class GameStateManager : PersistentSingleton<GameStateManager>, IBind<GameStateData>
@@ -34,22 +33,16 @@ public class GameStateManager : PersistentSingleton<GameStateManager>, IBind<Gam
     }
 
     /*
-     * If we just finished beetle fight, we go directly into queen fight after the back button is hit
-     * This is a temporary flag that is set to check this state to directly transition
-     */
-    public bool JustFinishedBeetleFight = false;
-    
-    /*
-     * Another temporary state that determines whether the tutorial should be played
-     */
-    public bool ShouldPlayDeckSelectionTutorial = false;
-
-    /*
      * Temporary flag to be set and read by end of combat scene, when the player restarts and should skip dialogue
      * Is set by GameOver prefab upon restart, and read by dialogue classes
      * Dialogue classes should reset this value when read, such that it does not cause unexpected behaviour in upcoming scenes
      */
     public bool JumpToCombat = false;
+
+    public void UpdateLevelProgress(ILevelSelectInformation level)
+    {
+        CurrentLevelProgress = Mathf.Max(CurrentLevelProgress, level.LevelID);
+    }
 
     public float CurrentLevelProgress
     {

@@ -517,8 +517,7 @@ public class BeetleFight : DialogueClasses
             yield return ivesFade;
             yield return new WaitForSeconds(MEDIUM_PAUSE);
 
-            GameStateManager.Instance.JustFinishedBeetleFight = true;
-            GameStateManager.Instance.CurrentLevelProgress = Math.Max(GameStateManager.Instance.CurrentLevelProgress, StageInformation.BEETLE_STAGE.LevelID + 1f);
+            GameStateManager.Instance.UpdateLevelProgress(StageInformation.QUEEN_PREPARATION_STAGE);
             GameStateManager.Instance.LoadScene(GameStateManager.SELECTION_SCREEN_NAME);
             yield break;
         }

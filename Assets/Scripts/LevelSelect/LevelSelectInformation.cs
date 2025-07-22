@@ -39,8 +39,10 @@ namespace LevelSelectInformation
     public class StageInformation : ILevelSelectInformation
     {
         public static readonly StageInformation TUTORIAL_STAGE = new(sceneName: GameStateManager.TUTORIAL_FIGHT, levelId: 0);
+        public static readonly StageInformation DECK_SELECTION_TUTORIAL = new(sceneName: GameStateManager.SELECTION_SCREEN_NAME, levelId: 0.5f);
         public static readonly StageInformation FROG_SLIME_STAGE = new(sceneName: GameStateManager.FROG_SLIME_FIGHT, levelId: 1f);
         public static readonly StageInformation BEETLE_STAGE = new(sceneName: GameStateManager.BEETLE_FIGHT, levelId: 2f);
+        public static readonly StageInformation QUEEN_PREPARATION_STAGE = new(sceneName: GameStateManager.SELECTION_SCREEN_NAME, levelId: 2.5f);
         public static readonly StageInformation QUEEN_BEETLE_STAGE = new(sceneName: GameStateManager.PRE_QUEEN_FIGHT, levelId: 3f);
         public static readonly StageInformation PRINCESS_FROG_FIGHT = new(sceneName: GameStateManager.PRINCESS_FROG_BOUNTY, levelId: 4f);
         public string SceneName { get; set; }
