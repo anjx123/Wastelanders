@@ -4,13 +4,9 @@ using SceneBuilder;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using Systems.Persistence;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using static BattleIntroEnum;
-using static Beetle;
 
 public class FrogSlimeFightDialogue : DialogueClasses
 {
@@ -61,20 +57,12 @@ public class FrogSlimeFightDialogue : DialogueClasses
     [SerializeField] private List<DialogueText> crystalExtraction;
     [SerializeField] private List<DialogueText> beetleEntrance;
 
-
     //Game Lose Dialogue
     [SerializeField] private List<DialogueText> gameLoseDialogue;
-
-
-    [SerializeField] private bool jumpToCombat;
-
-
 
     private bool playDeadFrog = false;
     private WasteFrog lastKilledFrog;
     private DefaultSceneBuilder sceneBuilder;
-
-
 
     private const float BRIEF_PAUSE = 0.2f; // For use after an animation to make it visually seem smoother
     private const float MEDIUM_PAUSE = 1f; //For use after a text box comes down and we want to add some weight to the text.
@@ -117,9 +105,8 @@ public class FrogSlimeFightDialogue : DialogueClasses
         yield return new WaitForSeconds(0.8f);
 
         SetUpCombatStatus();
-        if (!jumpToCombat && !GameStateManager.Instance.JumpIntoFrogAndSlimeFight)
+        if (!GameStateManager.Instance.JumpToCombat)
         {
-
             //Narrate the scene
             yield return StartCoroutine(DialogueManager.Instance.StartDialogue(sceneNarration));
             yield return new WaitForSeconds(BRIEF_PAUSE);
@@ -183,9 +170,8 @@ public class FrogSlimeFightDialogue : DialogueClasses
             yield return new WaitForSeconds(MEDIUM_PAUSE);
             
             yield return StartCoroutine(DialogueManager.Instance.StartDialogue(jackiePreCombat));
-        } else
-        {
-            GameStateManager.Instance.JumpIntoFrogAndSlimeFight = false;
+        } else {
+            GameStateManager.Instance.JumpToCombat = false;
         }
 
         // start frog fight
@@ -204,7 +190,7 @@ public class FrogSlimeFightDialogue : DialogueClasses
         CombatManager.EnemiesWinEvent += EnemiesWin;
         EntityClass.OnEntityDeath += EnsureFrogDeath;
 
-        CombatManager.Instance.GameState = GameState.SELECTION;
+        CombatManager.Instance.BeginCombat();
         
         //Starting Combat
         yield return new WaitForSeconds(1f);
@@ -406,12 +392,6 @@ public class FrogSlimeFightDialogue : DialogueClasses
         }
     }
 
-
-
-
-    
-
-
     private void PlayersWin()
     {
         CombatManager.EnemiesWinEvent -= EnemiesWin;
@@ -430,7 +410,6 @@ public class FrogSlimeFightDialogue : DialogueClasses
     {
         yield return StartCoroutine(CombatManager.Instance.FadeInDarkScreen(2f));
 
-        GameStateManager.Instance.JumpIntoFrogAndSlimeFight = true;
         //Set Jump into combat to be true
         ivesImage.gameObject.SetActive(false);
         gameOver.gameObject.SetActive(true);

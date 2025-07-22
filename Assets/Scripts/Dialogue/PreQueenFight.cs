@@ -165,7 +165,7 @@ public class PreQueenFight : DialogueClasses
 
 
 
-        if (!jumpToCombat && !GameStateManager.Instance.JumpIntoQueenFight)
+        if (!GameStateManager.Instance.JumpToCombat)
         {
             yield return StartCoroutine(DialogueManager.Instance.StartDialogue(initialPlanByJackie.Dialogue));
 
@@ -440,8 +440,7 @@ public class PreQueenFight : DialogueClasses
         }
         else
         {
-
-            GameStateManager.Instance.JumpIntoQueenFight = false;
+            GameStateManager.Instance.JumpToCombat = false;
             jackie.AddStacks(Resonate.buffName, 1);
             CleanUpScene1();
             CleanUpScene2();
@@ -478,7 +477,6 @@ public class PreQueenFight : DialogueClasses
         }
 
         {
-            battleIntro.PlayAnimation(Get<ClashIntro>());
             defaultSceneBuilder.PlayersPosition = playerCombatTransform;
             StartCoroutine(jackie.ResetPosition());
             yield return StartCoroutine(ives.ResetPosition());
@@ -518,7 +516,8 @@ public class PreQueenFight : DialogueClasses
                 crystal.InCombat();
             }
 
-            CombatManager.Instance.GameState = GameState.SELECTION;
+            CombatManager.Instance.BeginCombat();
+            battleIntro.PlayAnimation(Get<ClashIntro>());
             BeginQueenCombat();
             yield return new WaitUntil(() => CombatManager.Instance.GameState == GameState.GAME_WIN);
             AudioManager.Instance.FadeOutCurrentBackgroundTrack(2f);
@@ -579,8 +578,6 @@ public class PreQueenFight : DialogueClasses
         yield return StartCoroutine(CombatManager.Instance.FadeInDarkScreen(2f));
 
         //Set Jump into combat to be true
-
-        GameStateManager.Instance.JumpIntoQueenFight = true;
         gameOver.gameObject.SetActive(true);
         gameOver.FadeIn();
 

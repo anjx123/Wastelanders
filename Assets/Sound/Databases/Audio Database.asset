@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ae02ecc8bf1d8d4091675dd181bb09b, type: 3}
+  m_Name: Audio Database
+  m_EditorClassIdentifier: 
+  Empty: {fileID: 11400000, guid: b6266b7157f36dd4591961f2ae797295, type: 2}
+  MainMenu: {fileID: 11400000, guid: fa3ed7458f22c854e907b186fa6820f5, type: 2}
+  Credits: {fileID: 11400000, guid: 5b6db0b9d8cd3f54f9f07f8c5b0fe7b8, type: 2}
+  TutorialFight: {fileID: 11400000, guid: f9f513e0c539e254d9d4944f03b68fbe, type: 2}
+  FrogSlimeFight: {fileID: 11400000, guid: dc23145c51ca0c84c9f3d1766deb8ec6, type: 2}
+  BeetleFight: {fileID: 11400000, guid: 28b5be29df735f74a90d00927d3e1ed7, type: 2}
+  PreQueenFight: {fileID: 11400000, guid: 98d5da874bc3aaa4d8aa13fb657714bb, type: 2}
+  PostQueenFight: {fileID: 11400000, guid: 5f27792be48fa444980879b30454cf7a, type: 2}
+  PrincessFrogBounty: {fileID: 11400000, guid: db7db3a7d2f999b4d8d0e9fb05150a71, type: 2}

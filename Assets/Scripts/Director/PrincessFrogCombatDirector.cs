@@ -35,7 +35,7 @@ namespace Director
 
             yield return new WaitForEndOfFrame(); // Necessary for associated initialization code to run (to assign teams)
 
-            CombatManager.Instance.GameState = GameState.SELECTION;
+            CombatManager.Instance.BeginCombat();
             yield return StartCoroutine(CombatManager.Instance.FadeInLightScreen(1.5f));
             battleIntro.PlayAnimation(Get<ClashIntro>());
             yield return new WaitUntil(() => CombatManager.Instance.GameState == GameState.GAME_WIN);
