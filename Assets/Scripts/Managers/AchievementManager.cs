@@ -32,8 +32,16 @@ namespace Steamworks {
         private void HandleEntityDeath(EntityClass entity) {
             if (entity is EnemyClass) {
                 // blacklist certain types of enemies here.
-                if (entity is TrainingDummy or EnemyIves) {
+                if (entity is TrainingDummy) {
                     return;
+                }
+                
+                if (entity is EnemyIves) {
+                    SteamManager.UnlockAchievement("DEFEAT_IVES");
+                }
+
+                if (entity is QueenBeetle) {
+                    SteamManager.UnlockAchievement("DEFEAT_QUEEN");
                 }
                 enemiesKilled++;
                 Debug.Log($"[AchievementManager] Enemy killed! Total kills: {enemiesKilled}");
@@ -53,6 +61,10 @@ namespace Steamworks {
 
             if (enemiesKilled >= 5) {
                 SteamManager.UnlockAchievement("WARMING_UP");
+            }
+
+            if (enemiesKilled >= 15) {
+                SteamManager.UnlockAchievement("KILLING_SPREE");
             }
 
             // Add more milestones here
