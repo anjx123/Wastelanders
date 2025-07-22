@@ -51,6 +51,8 @@ namespace Steamworks {
 
                 // Check if any achievements should be unlocked based on new kill count
                 CheckKillAchievements();
+            } else if (entity is PlayerClass) {
+                
             }
         }
 
