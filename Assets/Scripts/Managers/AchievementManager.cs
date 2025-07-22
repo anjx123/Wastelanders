@@ -31,6 +31,10 @@ namespace Steamworks {
 
         private void HandleEntityDeath(EntityClass entity) {
             if (entity is EnemyClass) {
+                // blacklist certain types of enemies here.
+                if (entity is TrainingDummy or EnemyIves) {
+                    return;
+                }
                 enemiesKilled++;
                 Debug.Log($"[AchievementManager] Enemy killed! Total kills: {enemiesKilled}");
 
