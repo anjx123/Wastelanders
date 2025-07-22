@@ -95,8 +95,6 @@ public class BeetleFight : DialogueClasses
     [SerializeField] private List<DialogueText> ivesFeelsStronger;
     [SerializeField] private List<DialogueText> ivesAnalyzeAfterExam;
 
-
-    [SerializeField] private bool jumpToCombat;
     [SerializeField] private WaveIndicator waveIndicator;
 
     private List<EnemyClass> campBeetlesAndCrystals = new();
@@ -192,7 +190,7 @@ public class BeetleFight : DialogueClasses
         yield return new WaitForSeconds(0.2f);
         SetUpEnemyLists();
         SetUpCombatStatus();
-        if (!jumpToCombat && !GameStateManager.Instance.JumpIntoBeetleFight)
+        if (!GameStateManager.Instance.JumpToCombat)
         {
             sceneCamera.Priority = 2;
             yield return new WaitForSeconds(1f);
@@ -374,7 +372,7 @@ public class BeetleFight : DialogueClasses
         }
         else // setup scene
         {
-            GameStateManager.Instance.JumpIntoBeetleFight = false;
+            GameStateManager.Instance.JumpToCombat = false;
             RemoveEnemyFromScene(frog);
             RemoveEnemyFromScene(frogThatRunsAway);
             RemoveEnemyFromScene(ambushBeetle);
@@ -648,7 +646,6 @@ public class BeetleFight : DialogueClasses
         yield return StartCoroutine(CombatManager.Instance.FadeInDarkScreen(2f));
 
         DialogueManager.Instance.MoveBoxToBottom();
-        GameStateManager.Instance.JumpIntoBeetleFight = true;
         gameOver.gameObject.SetActive(true);
         gameOver.FadeIn();
 
