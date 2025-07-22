@@ -128,16 +128,18 @@ MonoBehaviour:
     Part2: 1078753968
     Part3: 2566377644
     Part4: 2681231501
+  description: 
+  IsEvolved: 0
   icon: {fileID: 21300000, guid: f1beeeecd60affa479e72d3ac2b2f5be, type: 3}
   cardBack: {fileID: 21300000, guid: 8ac8a46b814e1b14f89b3829e430de25, type: 3}
+  evolvedCardBack: {fileID: 0}
   cardUI: {fileID: 0}
   data:
     <ActionClassName>k__BackingField: 
     <CurrentProgress>k__BackingField: 0
-  slimeAttackSfx: {fileID: 8300000, guid: 90fc164dbd72a2041a7eaca8d637ac70, type: 3}
   animationFrame:
-  - {fileID: 21300000, guid: 14b9c1233565939449320c62c5eebb90, type: 3}
-  - {fileID: 21300000, guid: f12aabdc956ae4141bc86017601e5c2a, type: 3}
-  - {fileID: 21300000, guid: 6b1747fa32cb7af44a23bf6ce6f5791c, type: 3}
-  - {fileID: 21300000, guid: 98cd199e3b38b2a4d9701fedcee18980, type: 3}
-  - {fileID: 21300000, guid: 14b9c1233565939449320c62c5eebb90, type: 3}
+  - {fileID: 1689928808, guid: 58f9f0d7ee091f448916b5216addec5c, type: 3}
+  - {fileID: -1866715844, guid: 58f9f0d7ee091f448916b5216addec5c, type: 3}
+  - {fileID: -1302597104, guid: 58f9f0d7ee091f448916b5216addec5c, type: 3}
+  - {fileID: 29961136, guid: 58f9f0d7ee091f448916b5216addec5c, type: 3}
+  - {fileID: 1689928808, guid: 58f9f0d7ee091f448916b5216addec5c, type: 3}

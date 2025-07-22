@@ -147,6 +147,7 @@ MonoBehaviour:
   animator: {fileID: 6424370051552391152}
   combatInfo: {fileID: 5598173080790413213}
   boxCollider: {fileID: 6773406975685228959}
+  <AnimatorController>k__BackingField: {fileID: 0}
   availableActions:
   - {fileID: 2376898879351982445, guid: 41158511bc5761d4386617623a2a562d, type: 3}
   - {fileID: 2376898879351982445, guid: 63bc38449d5d80242a58e343499c03ca, type: 3}
