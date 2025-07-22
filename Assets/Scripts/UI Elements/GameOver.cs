@@ -14,6 +14,7 @@ public class GameOver : MonoBehaviour
     [SerializeField] Button levelSelectButton;
     [SerializeField] Button deckSelectButton;
     [SerializeField] GameObject gameOverText;
+    public const float FADE_IN_TIME = 1f;
 
     void OnEnable()
     {
@@ -37,7 +38,7 @@ public class GameOver : MonoBehaviour
 
     public void FadeIn()
     {
-        StartCoroutine(FadeCoroutine(true, 1f));
+        StartCoroutine(FadeCoroutine(true, FADE_IN_TIME));
     }
 
 
