@@ -41,12 +41,12 @@ public class LevelSelect : MonoBehaviour
 
     public void DeckSelect()
     {
-        OpenScene(GameStateManager.SELECTION_SCREEN_NAME);
+        OpenScene(SceneData.Get<SceneData.SelectionScreen>().SceneName);
     }
 
     public void MainMenu()
     {
-        OpenScene(GameStateManager.MAIN_MENU_NAME);
+        OpenScene(SceneData.Get<SceneData.MainMenu>().SceneName);
     }
 
     public void Tutorial()

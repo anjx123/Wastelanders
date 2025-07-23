@@ -68,7 +68,6 @@ public class GameStateManager : PersistentSingleton<GameStateManager>, IBind<Gam
         SaveLoadSystem.Instance.SaveGame();
     }
 
-    public const string MAIN_MENU_NAME = "MainMenu";
     public const string SELECTION_SCREEN_NAME = "SelectionScreen";
 
     public const string LEVEL_SELECT_NAME = "LevelSelect";
