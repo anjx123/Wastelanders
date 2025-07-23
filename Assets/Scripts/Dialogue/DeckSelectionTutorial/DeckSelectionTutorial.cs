@@ -43,7 +43,7 @@ public class DeckSelectionTutorial : MonoBehaviour
         if (Mathf.Approximately(GameStateManager.Instance.CurrentLevelProgress, StageInformation.QUEEN_PREPARATION_STAGE.LevelID))
         {
             GameStateManager.Instance.UpdateLevelProgress(StageInformation.QUEEN_BEETLE_STAGE);
-            DeckSelectionManager.Instance.SetNextScene(GameStateManager.PRE_QUEEN_FIGHT);
+            DeckSelectionManager.Instance.SetNextScene(SceneData.Get<SceneData.PreQueenFight>().SceneName);
             yield break;
         }
 
@@ -94,7 +94,7 @@ public class DeckSelectionTutorial : MonoBehaviour
         if (weaponEditInformation.WeaponType != CardDatabase.WeaponType.PISTOL) return;
         WeaponEdit.WeaponEditEvent -= HandleWeaponEdited;
         GameStateManager.Instance.UpdateLevelProgress(StageInformation.FROG_SLIME_STAGE);
-        DeckSelectionManager.Instance.SetNextScene(GameStateManager.FROG_SLIME_FIGHT);
+        DeckSelectionManager.Instance.SetNextScene(SceneData.Get<SceneData.FrogSlimeFight>().SceneName);
         StartCoroutine(StartDialogueWithNextEvent(selectYourActions.Dialogue, () => { DeckSelectionManager.Instance.PlayerActionDeckModifiedEvent += HandleRunOutOfPoints; }));
     }
     private void HandleRunOutOfPoints(int points)

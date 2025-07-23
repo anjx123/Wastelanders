@@ -243,7 +243,7 @@ public class FrogSlimeFightDialogue : DialogueClasses
         yield return StartCoroutine(CombatManager.Instance.FadeInDarkScreen(1.5f));
 
         GameStateManager.Instance.UpdateLevelProgress(StageInformation.BEETLE_STAGE);
-        GameStateManager.Instance.LoadScene(GameStateManager.BEETLE_FIGHT);
+        GameStateManager.Instance.LoadScene(SceneData.Get<SceneData.BeetleFight>().SceneName);
         yield break;
     }
     // In case players decide to bring spawnable enemies and they are the last ones alive.

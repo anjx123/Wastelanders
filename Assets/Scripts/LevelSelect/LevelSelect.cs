@@ -36,7 +36,7 @@ public class LevelSelect : MonoBehaviour
     private void OpenBountyByTypeName(BountyInformation bountyInformation)
     {
         BountyManager.Instance.SelectedBountyInformation = bountyInformation;
-        StartCoroutine(FadeLevelIn(GameStateManager.CONTRACT_SELECT_NAME));
+        StartCoroutine(FadeLevelIn(SceneData.Get<SceneData.ContractSelect>().SceneName));
     }
 
     public void DeckSelect()
@@ -51,12 +51,12 @@ public class LevelSelect : MonoBehaviour
 
     public void Tutorial()
     {
-        OpenScene(GameStateManager.TUTORIAL_FIGHT);
+        OpenScene(SceneData.Get<SceneData.TutorialFight>().SceneName);
     }
 
     public void LevelSelectScene()
     {
-        OpenScene(GameStateManager.LEVEL_SELECT_NAME);
+        OpenScene(SceneData.Get<SceneData.LevelSelect>().SceneName);
     }
 
     public void PrincessFrogBounties()
