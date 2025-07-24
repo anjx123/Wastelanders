@@ -72,6 +72,10 @@ namespace Steamworks {
             // Add more milestones here
             // if (enemiesKilled >= 10) SteamManager.UnlockAchievement("HUNTER");
         }
+
+        public void HandlePlayerHitCritical() {
+            SteamManager.UnlockAchievement("CRITICAL");
+        }
 #endif // STEAMWORKS_NET
     }
 }

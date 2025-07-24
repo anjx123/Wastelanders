@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Steamworks;
 using UnityEngine;
 using static Cinemachine.CinemachineTargetGroup;
 using static UnityEngine.GraphicsBuffer;
@@ -56,9 +57,14 @@ public class CardComparator : MonoBehaviour
         card2.ApplyEffect();
         yield return StartCoroutine(ClashBothEntities(card1, card2)); // for animation purposes 
 
-        card1.RollDice();
-        card2.RollDice();
+        int roll1 = card1.RollDice();
+        int roll2 = card2.RollDice();
         DeactivateInfo(card1, card2);
+
+        // jank way to check if this is a player roll. LMK if you have a better idea
+        if ((roll1 >= 10 && card1.Target is EnemyClass) || (roll2 >= 10 && card2.Target is EnemyClass)) {
+            AchievementManager.Instance.HandlePlayerHitCritical();
+        }
 
         cardOneGreater = ClashCompare(card1, card2);
 
@@ -157,7 +163,12 @@ public class CardComparator : MonoBehaviour
         EnableDice(actionClass.Origin);
         actionClass.ApplyEffect();
         yield return StartCoroutine(ClashBothEntities(actionClass, actionClass));
-        actionClass.RollDice();
+        int roll = actionClass.RollDice();
+        
+        if (roll >= 10 && actionClass.Target is EnemyClass) {
+            AchievementManager.Instance.HandlePlayerHitCritical();
+        }
+        
         DeactivateInfo(actionClass);
 
         //Hit and feel effects

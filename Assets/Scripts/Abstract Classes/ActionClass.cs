@@ -208,11 +208,13 @@ public abstract class ActionClass : SelectClass, IBind<ActionData>
     }
 
     // Calculates Actual Damage/Block After Applying Buffs
-    public virtual void RollDice()
+    public virtual int RollDice()
     {
         rolledCardStats.ActualRoll = UnityEngine.Random.Range(rolledCardStats.RollFloor, rolledCardStats.RollCeiling + 1);
 
         Origin.SetDice(rolledCardStats.ActualRoll);
+        
+        return rolledCardStats.ActualRoll;
     }
 
     public Sprite? GetIcon()
