@@ -87,6 +87,7 @@ public abstract class SceneData : Enum<SceneData>
     }
 
     private static readonly Dictionary<string, SceneData> _sceneLookup = new();
+    
     static SceneData()
     {
         foreach (var sceneDataItem in Values)

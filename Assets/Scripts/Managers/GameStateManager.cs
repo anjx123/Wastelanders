@@ -37,7 +37,7 @@ public class GameStateManager : PersistentSingleton<GameStateManager>, IBind<Gam
      * Is set by GameOver prefab upon restart, and read by dialogue classes
      * Dialogue classes should reset this value when read, such that it does not cause unexpected behaviour in upcoming scenes
      */
-    public bool JumpToCombat = false;
+    public bool JumpToCombat = true;
 
     public void UpdateLevelProgress(ILevelSelectInformation level)
     {
@@ -67,21 +67,6 @@ public class GameStateManager : PersistentSingleton<GameStateManager>, IBind<Gam
         SceneManager.LoadScene(scene);
         SaveLoadSystem.Instance.SaveGame();
     }
-
-    public const string MAIN_MENU_NAME = "MainMenu";
-    public const string SELECTION_SCREEN_NAME = "SelectionScreen";
-
-    public const string LEVEL_SELECT_NAME = "LevelSelect";
-    public const string CONTRACT_SELECT_NAME = "ContractSelect";
-
-    public const string TUTORIAL_FIGHT = "TutorialScene";
-    public const string FROG_SLIME_FIGHT = "FrogSlimeFight";
-    public const string BEETLE_FIGHT = "BeetleFightScene";
-    public const string PRE_QUEEN_FIGHT = "PreQueenFightScene";
-    public const string POST_QUEEN_FIGHT = "PostQueenBeetle";
-    public const string CREDITS = "Credits";
-
-    public const string PRINCESS_FROG_BOUNTY = "PrincessFrogCombatScene";
 }
 
 
