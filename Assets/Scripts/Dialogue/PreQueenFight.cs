@@ -531,7 +531,7 @@ public class PreQueenFight : DialogueClasses
 
             yield return StartCoroutine(DialogueManager.Instance.StartDialogue(PostFight.Dialogue));
 
-            GameStateManager.Instance.LoadScene(GameStateManager.POST_QUEEN_FIGHT);
+            GameStateManager.Instance.LoadScene(SceneData.Get<SceneData.PostQueenFight>().SceneName);
         }
         
     }

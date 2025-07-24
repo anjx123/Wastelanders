@@ -95,7 +95,7 @@ public class PostQueenBeetle : DialogueClasses
 
         yield return StartCoroutine(CombatManager.Instance.FadeInDarkScreen(2f));
 
-        GameStateManager.Instance.LoadScene(GameStateManager.CREDITS);    
+        GameStateManager.Instance.LoadScene(SceneData.Get<SceneData.Credits>().SceneName);    
     }
 
     IEnumerator FadeImage(Image image, float duration, bool fadeIn)
