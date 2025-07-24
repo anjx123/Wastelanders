@@ -41,6 +41,8 @@ public abstract class EntityClass : SelectClass
     private bool crosshairStaysActive = false;
     public DeadEntities DeathHandler { get; set; }
     protected readonly Dictionary<string, StatusEffect> statusEffects = new();
+    public int ResonateStacks => statusEffects.TryGetValue("resonate", out var effect) ? effect.Stacks : 0;
+
 
     // Set in the editor
     public Sprite icon;

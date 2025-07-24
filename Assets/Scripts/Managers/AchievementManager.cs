@@ -13,6 +13,8 @@ namespace Steamworks {
         // reset whenever a scene changes.
         private bool onePlayerDead = false;
 
+        private PlayerClass[] players;
+
         protected override void Awake() {
             base.Awake(); // Handles singleton instance + DontDestroyOnLoad
 
@@ -24,18 +26,28 @@ namespace Steamworks {
 
             // In case player already reached milestones before starting the game, sync achievements
             CheckKillAchievements();
+            
+            players = FindObjectsOfType<PlayerClass>();
         }
 
         private void OnEnable() {
             EntityClass.OnEntityDeath += HandleEntityDeath;
             SceneManager.activeSceneChanged += OnSceneChanged;
             CombatManager.PlayersWinEvent += OnPlayersWin;
+
+            foreach (PlayerClass player in players) {
+                player.BuffsUpdatedEvent += HandlePlayerBuffsUpdated;
+            }
         }
 
         private void OnDisable() {
             EntityClass.OnEntityDeath -= HandleEntityDeath;
             SceneManager.activeSceneChanged -= OnSceneChanged;
             CombatManager.PlayersWinEvent -= OnPlayersWin;
+            
+            foreach (PlayerClass player in players) {
+                player.BuffsUpdatedEvent -= HandlePlayerBuffsUpdated;
+            }
         }
 
         private void HandleEntityDeath(EntityClass entity) {
@@ -93,6 +105,14 @@ namespace Steamworks {
         private void OnPlayersWin() {
             if (onePlayerDead) {
                 SteamManager.UnlockAchievement("REVENGE");
+            }
+        }
+
+        private void HandlePlayerBuffsUpdated(EntityClass player) {
+            if (player is not PlayerClass) return;
+
+            if (player.ResonateStacks >= 5) {
+                SteamManager.UnlockAchievement("THE_RESONATOR");
             }
         }
         
