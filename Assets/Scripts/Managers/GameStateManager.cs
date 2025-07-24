@@ -37,7 +37,7 @@ public class GameStateManager : PersistentSingleton<GameStateManager>, IBind<Gam
      * Is set by GameOver prefab upon restart, and read by dialogue classes
      * Dialogue classes should reset this value when read, such that it does not cause unexpected behaviour in upcoming scenes
      */
-    public bool JumpToCombat = false;
+    public bool JumpToCombat = true;
 
     public void UpdateLevelProgress(ILevelSelectInformation level)
     {
