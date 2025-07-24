@@ -1,5 +1,6 @@
 
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 
 namespace Steamworks {
@@ -7,6 +8,10 @@ namespace Steamworks {
     public class AchievementManager : PersistentSingleton<AchievementManager> {
 #if STEAMWORKS_NET
         private int enemiesKilled = 0;
+
+        // boolean flag to track whether one player has died in the current combat.
+        // reset whenever a scene changes.
+        private bool onePlayerDead = false;
 
         protected override void Awake() {
             base.Awake(); // Handles singleton instance + DontDestroyOnLoad
@@ -23,10 +28,14 @@ namespace Steamworks {
 
         private void OnEnable() {
             EntityClass.OnEntityDeath += HandleEntityDeath;
+            SceneManager.activeSceneChanged += OnSceneChanged;
+            CombatManager.PlayersWinEvent += OnPlayersWin;
         }
 
         private void OnDisable() {
             EntityClass.OnEntityDeath -= HandleEntityDeath;
+            SceneManager.activeSceneChanged -= OnSceneChanged;
+            CombatManager.PlayersWinEvent -= OnPlayersWin;
         }
 
         private void HandleEntityDeath(EntityClass entity) {
@@ -52,7 +61,7 @@ namespace Steamworks {
                 // Check if any achievements should be unlocked based on new kill count
                 CheckKillAchievements();
             } else if (entity is PlayerClass) {
-                
+                onePlayerDead = true;
             }
         }
 
@@ -76,6 +85,17 @@ namespace Steamworks {
         public void HandlePlayerHitCritical() {
             SteamManager.UnlockAchievement("CRITICAL");
         }
+
+        private void OnSceneChanged(Scene arg0, Scene arg1) {
+            onePlayerDead = false;
+        }
+
+        private void OnPlayersWin() {
+            if (onePlayerDead) {
+                SteamManager.UnlockAchievement("REVENGE");
+            }
+        }
+        
 #endif // STEAMWORKS_NET
     }
 }
