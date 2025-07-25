@@ -45,33 +45,26 @@ public class SceneInitializer : MonoBehaviour
             return;
         }
 
-        // 3. Get the list of required managers from the blueprint.
         var requiredManagers = sceneData.RequiredManagerTypes;
         if (requiredManagers == null || !requiredManagers.Any()) return;
 
-        // 4. Find or create a parent object for organization.
         var managersParent = GameObject.Find("[Managers]");
         if (managersParent == null)
         {
             managersParent = new GameObject("[Managers]");
         }
 
-        // 5. Instantiate each required manager if it doesn't already exist.
         foreach (var managerType in requiredManagers)
         {
-            // Check if a persistent instance of this manager already exists.
             if (FindObjectOfType(managerType) != null)
             {
-                // Instance already exists (likely from a previous scene), so we skip it.
                 continue;
             }
 
-            // Find the corresponding prefab from our registry.
             if (_managerPrefabMap.TryGetValue(managerType, out var managerPrefab))
             {
-                // Instantiate the prefab under the [Managers] parent.
                 var newManagerInstance = Instantiate(managerPrefab, managersParent.transform);
-                newManagerInstance.name = managerPrefab.name; // Keep the prefab's name.
+                newManagerInstance.name = managerPrefab.name;
             }
             else
             {
