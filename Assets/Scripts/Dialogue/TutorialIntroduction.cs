@@ -93,8 +93,8 @@ public class TutorialIntroduction : DialogueClasses
         ives.OutOfCombat();
         jackie.OutOfCombat();
         jackie.SetReturnPosition(jackieDefaultTransform.position);
-        battleIntro = Instantiate(battleIntro);
-        if (!jumpToCombat)
+        battleIntro = BattleIntro.Build(Camera.main);
+        if (!jumpToCombat && !GameStateManager.Instance.JumpToCombat)
         {
             yield return new WaitForSeconds(1f);
 
@@ -183,6 +183,7 @@ public class TutorialIntroduction : DialogueClasses
             trainingDummies.Add(Instantiate(trainingDummyPrefab, dummy1StartingPos)); //Ives summons Dummy
         } else
         {
+            GameStateManager.Instance.JumpToCombat = false;
             //Set up the scene for a combat Jump in.
             ives.SetReturnPosition(ivesDefaultTransform.position);
             StartCoroutine(CombatManager.Instance.FadeInLightScreen(2f));

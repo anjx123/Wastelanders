@@ -46,3 +46,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   initializablePrefabs:
     audioManager: {fileID: 1642062695111722096, guid: 00e4347f9eb16d94c93b4961bdbca751, type: 3}
+    battleIntro: {fileID: 5210625753511003606, guid: a1b9dbfd8373c7347bbeaace2539e9b7, type: 3}

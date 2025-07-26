@@ -67,6 +67,9 @@ public class GameStateManager : PersistentSingleton<GameStateManager>, IBind<Gam
         SceneManager.LoadScene(scene);
         SaveLoadSystem.Instance.SaveGame();
     }
+
+    public const string SORTING_LAYER_TOP = "Top";
+
 }
 
 

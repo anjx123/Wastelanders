@@ -31,7 +31,7 @@ namespace Director
             CombatManager.Instance.SetDarkScreen();
             CombatManager.PlayersWinEvent += PlayersWin;
             CombatManager.EnemiesWinEvent += EnemiesWin;
-            battleIntro = Instantiate(battleIntro);
+            battleIntro = BattleIntro.Build(Camera.main);
 
             yield return new WaitForEndOfFrame(); // Necessary for associated initialization code to run (to assign teams)
 

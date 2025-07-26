@@ -101,7 +101,7 @@ public class FrogSlimeFightDialogue : DialogueClasses
     {
         CombatManager.Instance.GameState = GameState.OUT_OF_COMBAT;
         CombatManager.Instance.SetDarkScreen();
-        battleIntro = Instantiate(battleIntro);
+        battleIntro = BattleIntro.Build(Camera.main);
         yield return new WaitForSeconds(0.8f);
 
         SetUpCombatStatus();

@@ -5,11 +5,14 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using System;
 
+#nullable enable
 public class SceneInitializer : MonoBehaviour
 {
-    public static SceneInitializer Instance { get; private set; }
-    [SerializeField] private SceneInitializerPrefabs initializablePrefabs;
+    public static SceneInitializer Instance { get; private set; } = null!;
+    [SerializeField] private SceneInitializerPrefabs initializablePrefabs = null!;
     public SceneInitializerPrefabs InitializablePrefabs => initializablePrefabs;
+
+    private GameObject managersParent = null!;
 
     public void Awake()
     {
@@ -27,18 +30,25 @@ public class SceneInitializer : MonoBehaviour
     {
         string currentSceneName = SceneManager.GetActiveScene().name;
         var requiredManagers = SceneData.FromSceneName(currentSceneName).RequiredPrefabs(initializablePrefabs);
-        var managersParent = new GameObject("[Managers]");
+        managersParent = new GameObject("[SceneInitialized]");
         
         foreach (var managerPrefab in requiredManagers)
         {
-            var newManagerInstance = Instantiate(managerPrefab, managersParent.transform);
-            newManagerInstance.name = managerPrefab.name;
+            InstantiatePrefab(managerPrefab);
         }
+    }
+
+    public T InstantiatePrefab<T>(T prefab) where T : MonoBehaviour
+    {
+        var newManagerInstance = Instantiate(prefab, managersParent.transform);
+        newManagerInstance.name = prefab.name;
+        return newManagerInstance;
     }
 }
 
 [Serializable]
 public class SceneInitializerPrefabs
 {
-    public AudioManager audioManager;
+    public AudioManager audioManager = null!;
+    public BattleIntro battleIntro = null!;
 }
