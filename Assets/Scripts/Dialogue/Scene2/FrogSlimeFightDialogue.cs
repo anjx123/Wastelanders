@@ -101,7 +101,7 @@ public class FrogSlimeFightDialogue : DialogueClasses
     {
         CombatManager.Instance.GameState = GameState.OUT_OF_COMBAT;
         CombatManager.Instance.SetDarkScreen();
-        battleIntro = Instantiate(battleIntro);
+        battleIntro = BattleIntro.Build(Camera.main);
         yield return new WaitForSeconds(0.8f);
 
         SetUpCombatStatus();
@@ -242,9 +242,8 @@ public class FrogSlimeFightDialogue : DialogueClasses
         yield return new WaitForSeconds(2f);
         yield return StartCoroutine(CombatManager.Instance.FadeInDarkScreen(1.5f));
 
-        GameStateManager.Instance.CurrentLevelProgress = Math.Max(GameStateManager.Instance.CurrentLevelProgress, StageInformation.FROG_SLIME_STAGE.LevelID + 1f);
-
-        GameStateManager.Instance.LoadScene(GameStateManager.BEETLE_FIGHT);
+        GameStateManager.Instance.UpdateLevelProgress(StageInformation.BEETLE_STAGE);
+        GameStateManager.Instance.LoadScene(SceneData.Get<SceneData.BeetleFight>().SceneName);
         yield break;
     }
     // In case players decide to bring spawnable enemies and they are the last ones alive.

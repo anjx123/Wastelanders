@@ -261,6 +261,7 @@ public class CombatManager : MonoBehaviour
     private void PerformLose()
     {
         StartCoroutine(FadeCombatBackground(false));
+        StartCoroutine(FadeInDarkScreen(GameOver.FADE_IN_TIME));
         Debug.LogWarning("All Players are dead, You Lose...");
         baseCamera.Priority = 1;
         dynamicCamera.Priority = 0;
@@ -341,6 +342,7 @@ public class CombatManager : MonoBehaviour
 
         foreach (EntityClass entity in GrabAllEntities())
         {
+            entity.DeEmphasize();
             entity.OutOfCombat();
             entity.UnTargetable();
         }

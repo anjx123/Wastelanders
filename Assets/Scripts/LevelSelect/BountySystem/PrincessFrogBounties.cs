@@ -84,7 +84,7 @@ public class PrincessFrogBounties : IBounties
     public string SubText { get; }
     public string Rewards { get; }
     public GetBountyAssetsDelegate GetBountyAssets { get; }
-    public string SceneName => GameStateManager.PRINCESS_FROG_BOUNTY;
+    public string SceneName => SceneData.Get<SceneData.PrincessFrogBounty>().SceneName;
 
     public PrincessFrogBounties(HashSet<IContracts> contractSet, string challengeName, string subtext, string flavourText, string rewards, GetBountyAssetsDelegate bountyAssetDelegate)
     {

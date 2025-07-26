@@ -1,3 +1,4 @@
+using LevelSelectInformation;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -39,33 +40,35 @@ public class DeckSelectionTutorial : MonoBehaviour
 
     private IEnumerator ExecuteGameStart()
     {
-        if (GameStateManager.Instance.JustFinishedBeetleFight)
+        if (Mathf.Approximately(GameStateManager.Instance.CurrentLevelProgress, StageInformation.QUEEN_PREPARATION_STAGE.LevelID))
         {
-            GameStateManager.Instance.JustFinishedBeetleFight = false;
-            DeckSelectionManager.Instance.SetNextScene(GameStateManager.PRE_QUEEN_FIGHT);
+            GameStateManager.Instance.UpdateLevelProgress(StageInformation.QUEEN_BEETLE_STAGE);
+            DeckSelectionManager.Instance.SetNextScene(SceneData.Get<SceneData.PreQueenFight>().SceneName);
             yield break;
         }
 
 
-        if (GameStateManager.Instance.ShouldPlayDeckSelectionTutorial == false && !activateTutorial) yield break;
-
-        NormalizeTutorialDecks();
-
-        foreach (WeaponEdit boxCollider in weaponEditBoxCollidersToDisable)
+        if (Mathf.Approximately(GameStateManager.Instance.CurrentLevelProgress, StageInformation.DECK_SELECTION_TUTORIAL.LevelID) || activateTutorial)
         {
-            boxCollider.GetComponent<BoxCollider2D>().enabled = false;
+            NormalizeTutorialDecks();
+
+            foreach (WeaponEdit boxCollider in weaponEditBoxCollidersToDisable)
+            {
+                boxCollider.GetComponent<BoxCollider2D>().enabled = false;
+            }
+            jackieSelect.GetComponent<BoxCollider2D>().enabled = false;
+            foreach (CharacterSelect character in lockedCharacters)
+            {
+                character.SetLockedState(true);
+            }
+            foreach (WeaponSelect weapon in lockedWeapons)
+            {
+                weapon.SetLockedState(true);
+            }
+            // Wait for fade screen to come in
+            yield return new WaitForSeconds(1.5f);
+            yield return StartCoroutine(StartDialogueWithNextEvent(selectYourCharacter.Dialogue, () => { jackieSelect.GetComponent<BoxCollider2D>().enabled = true; CharacterSelect.CharacterSelectedEvent += HandleCharacterSelected; }));
         }
-        jackieSelect.GetComponent<BoxCollider2D>().enabled = false;
-        foreach (CharacterSelect character in lockedCharacters) {
-            character.SetLockedState(true);
-        }
-        foreach (WeaponSelect weapon in lockedWeapons)
-        {
-            weapon.SetLockedState(true);
-        }
-        // Wait for fade screen to come in
-        yield return new WaitForSeconds(1.5f);
-        yield return StartCoroutine(StartDialogueWithNextEvent(selectYourCharacter.Dialogue, () => { jackieSelect.GetComponent<BoxCollider2D>().enabled = true; CharacterSelect.CharacterSelectedEvent += HandleCharacterSelected; } ));
     }
 
     private void HandleCharacterSelected(PlayerDatabase.PlayerName playerName)
@@ -90,8 +93,8 @@ public class DeckSelectionTutorial : MonoBehaviour
     {
         if (weaponEditInformation.WeaponType != CardDatabase.WeaponType.PISTOL) return;
         WeaponEdit.WeaponEditEvent -= HandleWeaponEdited;
-        GameStateManager.Instance.ShouldPlayDeckSelectionTutorial = false;
-        DeckSelectionManager.Instance.SetNextScene(GameStateManager.FROG_SLIME_FIGHT);
+        GameStateManager.Instance.UpdateLevelProgress(StageInformation.FROG_SLIME_STAGE);
+        DeckSelectionManager.Instance.SetNextScene(SceneData.Get<SceneData.FrogSlimeFight>().SceneName);
         StartCoroutine(StartDialogueWithNextEvent(selectYourActions.Dialogue, () => { DeckSelectionManager.Instance.PlayerActionDeckModifiedEvent += HandleRunOutOfPoints; }));
     }
     private void HandleRunOutOfPoints(int points)

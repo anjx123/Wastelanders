@@ -36,6 +36,8 @@ public abstract class FrogAttacks : ActionClass
     }
     private IEnumerator HandleProjectile()
     {
+        // Most practical way to handle the delay for frog spitting before the projectile actually comes out. 
+        yield return new WaitForSeconds(0.3f);
         yield return projectileBehaviour.ProjectileAnimation(Origin, Target);
         OnProjectileHit();
     }

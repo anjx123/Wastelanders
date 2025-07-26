@@ -20,7 +20,7 @@ public class AudioManager : PersistentSingleton<AudioManager>
                         return null;
                     }
                     
-                    instance = Instantiate(SceneInitializer.Instance.GetPrefab<AudioManager>());
+                    instance = Instantiate(SceneInitializer.Instance.InitializablePrefabs.audioManager);
                 }
             }
 

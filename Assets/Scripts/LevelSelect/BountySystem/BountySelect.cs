@@ -153,7 +153,7 @@ public class BountySelect : MonoBehaviour
     private IEnumerator ExitBounty()
     {
         yield return StartCoroutine(fadeScreen.FadeInDarkScreen(0.8f));
-        GameStateManager.Instance.LoadScene(GameStateManager.LEVEL_SELECT_NAME);
+        GameStateManager.Instance.LoadScene(SceneData.Get<SceneData.LevelSelect>().SceneName);
     }
 
     private void AbortCrossFade()
