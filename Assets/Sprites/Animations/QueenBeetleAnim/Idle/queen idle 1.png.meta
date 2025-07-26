@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 1432d8b92ef9a214c964e6b1676480f7
+guid: ffb67a2889c392f48b17ded42b0b7101
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -48,7 +48,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 7.5
+  spritePixelsToUnits: 6.5
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -110,13 +110,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: blue beetle attack_0
+      name: queen idle 1_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 29
-        width: 32
-        height: 29
+        y: 124
+        width: 63
+        height: 62
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -124,20 +124,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bc4ba997986901641937c62b88f4b190
-      internalID: -1291770725
+      spriteID: cce67a79315ad90408fac73df743759e
+      internalID: 2116850392
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: blue beetle attack_1
+      name: queen idle 1_1
       rect:
         serializedVersion: 2
-        x: 32
-        y: 29
-        width: 32
-        height: 29
+        x: 63
+        y: 124
+        width: 63
+        height: 62
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -145,20 +145,41 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b8df0348a04dbf841a3c54e65400471f
-      internalID: -149682139
+      spriteID: 63cfff48bf88eea4eb527e721c94e1ef
+      internalID: 588642034
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: blue beetle attack_2
+      name: queen idle 1_2
+      rect:
+        serializedVersion: 2
+        x: 126
+        y: 124
+        width: 63
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2202a111b5d9bc94a9f4a75bd1e575f3
+      internalID: 74424470
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: queen idle 1_3
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
-        width: 32
-        height: 29
+        y: 62
+        width: 63
+        height: 62
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -166,20 +187,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 80d36744a1c6ee74b938b91461905402
-      internalID: -1045486965
+      spriteID: 7db3d0996eaccaf47b1f15251c46a362
+      internalID: -1510156473
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: blue beetle attack_3
+      name: queen idle 1_4
       rect:
         serializedVersion: 2
-        x: 32
-        y: 0
-        width: 32
-        height: 29
+        x: 63
+        y: 62
+        width: 63
+        height: 62
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -187,8 +208,71 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bdd6b86f53e133d47a91c2e260b874d8
-      internalID: 2138870983
+      spriteID: e812e2016bb93444e829907d8bb0b6e6
+      internalID: -676117490
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: queen idle 1_5
+      rect:
+        serializedVersion: 2
+        x: 126
+        y: 62
+        width: 63
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4c4bdfd44b6723244bb306a6a948444c
+      internalID: 713583102
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: queen idle 1_6
+      rect:
+        serializedVersion: 2
+        x: 63
+        y: 0
+        width: 63
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 031404ef537b7a949b0e2f127fe9ef01
+      internalID: -1376152913
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: queen idle 1_7
+      rect:
+        serializedVersion: 2
+        x: 126
+        y: 0
+        width: 63
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cc117500c6306db4eaa3b3c3e9b522a8
+      internalID: -1164829224
       vertices: []
       indices: 
       edges: []
@@ -204,10 +288,14 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      blue beetle attack_0: -1291770725
-      blue beetle attack_1: -149682139
-      blue beetle attack_2: -1045486965
-      blue beetle attack_3: 2138870983
+      queen idle 1_0: 2116850392
+      queen idle 1_1: 588642034
+      queen idle 1_2: 74424470
+      queen idle 1_3: -1510156473
+      queen idle 1_4: -676117490
+      queen idle 1_5: 713583102
+      queen idle 1_6: -1376152913
+      queen idle 1_7: -1164829224
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
