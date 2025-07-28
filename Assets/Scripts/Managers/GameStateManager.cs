@@ -8,7 +8,7 @@ using UnityEngine.SceneManagement;
 //Singleton Class that keeps track of values representing general Game states
 public class GameStateManager : PersistentSingleton<GameStateManager>, IBind<GameStateData>
 {
-    public static readonly bool IS_DEVELOPMENT = false;
+    public static readonly bool IS_DEVELOPMENT = true;
 
     //Fields for persistence
     [field: SerializeField] public SerializableGuid Id { get; set; } = SerializableGuid.NewGuid();
