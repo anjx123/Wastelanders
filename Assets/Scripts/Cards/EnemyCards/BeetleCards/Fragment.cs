@@ -43,7 +43,7 @@ public class Fragment : ActionClass, IPlayableQueenCard
 
     private IEnumerator HandleProjectile()
     {
-        yield return projectileBehaviour.ProjectileAnimation(Origin, Target);
+        yield return projectileBehaviour.ProjectileAnimation(Origin.gameObject.transform.position, Target.gameObject.transform.position);
         OnProjectileHit();
     }
 
