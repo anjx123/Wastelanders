@@ -34,7 +34,10 @@ public class Fling : BeetleAttacks, IPlayableBeetleCard
 
     private IEnumerator HandleProjectile()
     {
-        yield return projectileBehaviour.ProjectileAnimation(Origin, Target);
+        var scaledAnimationTime = 0.6f;
+        var firstAttackFrame = 0.1f;
+        yield return new WaitForSeconds(firstAttackFrame / scaledAnimationTime);
+        yield return projectileBehaviour.ProjectileAnimation(Origin.gameObject.transform.position + new Vector3(0, 0.25f), Target.gameObject.transform.position);
         OnProjectileHit();
     }
 
