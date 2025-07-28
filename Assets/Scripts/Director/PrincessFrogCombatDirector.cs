@@ -10,7 +10,7 @@ namespace Director
     {
         [SerializeField] private GameObject entityContainer;
 
-        [SerializeField] private BattleIntro battleIntro;
+        private BattleIntro battleIntro;
         [SerializeField] private GameOver gameOver;
         [SerializeField] private DialogueWrapper gameOverDialogue; // sucks...
 
