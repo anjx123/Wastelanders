@@ -17,6 +17,7 @@ public class DialogueManager : MonoBehaviour
     private List<DialogueText> sentences = new();
 
     private bool inDialogue = false;
+    private bool isSkipping = false;
 
     List<DialogueText> dialogueHistory = new();
 
@@ -55,8 +56,8 @@ public class DialogueManager : MonoBehaviour
 
         sentences = newSentences;
         inDialogue = true;
-
-        DisplayNextSentence();
+        
+        DisplayNextSentence(true);
         yield return new WaitUntil(() => !inDialogue);
     }
 
@@ -107,7 +108,7 @@ void ClearPanel()
         }
     }
 
-    void DisplayNextSentence()
+    void DisplayNextSentence(bool playAudioImmediate)
     {
         if (sentences.Count == 0)
         {
@@ -130,7 +131,7 @@ void ClearPanel()
             pictureDialogueBox.SetLine(sentence);
         }
 
-        AudioManager.Instance.PlaySFX("Page Flip");
+        if (playAudioImmediate) AudioManager.Instance.PlaySFX("Page Flip");
         sentence.playSound();
     }
 
@@ -157,19 +158,28 @@ void ClearPanel()
     {
         if (PauseMenu.IsPaused) return;
 
-        if (Input.GetKeyDown(KeyCode.Mouse0) || Input.GetKeyDown(KeyCode.Space) || Input.GetKey(KeyCode.RightArrow))
+        bool longSkip = Input.GetKey(KeyCode.RightArrow);
+
+        if (Input.GetKeyDown(KeyCode.Mouse0) || Input.GetKeyDown(KeyCode.Space) || longSkip)
         {
             if (inDialogue)
             {
                 if (activeDialogueBox.FinishedLine())
                 {
-                    DisplayNextSentence();
+                    // Or operator prevents space/mouse0 unsetting it, only sets to true if there is dialogue to display
+                    isSkipping |= longSkip && (sentences.Count > 0);
+                    DisplayNextSentence(!longSkip);
                 }
                 else
                 {
                     activeDialogueBox.StopScrollingText();
                 }
             }
+        }
+        if (isSkipping && (Input.GetKeyUp(KeyCode.RightArrow) || !inDialogue))
+        {
+            isSkipping = false;
+            AudioManager.Instance.PlaySFX("Page Flip");
         }
     }
 }
