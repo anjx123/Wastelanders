@@ -433,7 +433,7 @@ public class CombatManager : MonoBehaviour
 
     public bool CanHighlight()
     {
-        return (!PauseMenu.IsPaused) && GameState == GameState.SELECTION;
+        return (!PauseMenuV2.IsPaused) && GameState == GameState.SELECTION;
     }
 
     public GameState GameState

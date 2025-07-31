@@ -155,7 +155,7 @@ void ClearPanel()
 
     void Update()
     {
-        if (PauseMenu.IsPaused) return;
+        if (PauseMenuV2.IsPaused) return;
 
         if (Input.GetKeyDown(KeyCode.Mouse0) || Input.GetKeyDown(KeyCode.Space) || Input.GetKey(KeyCode.RightArrow))
         {

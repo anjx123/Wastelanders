@@ -345,13 +345,13 @@ public abstract class EntityClass : SelectClass
 
     public void OnMouseEnter()
     {
-        if (PauseMenu.IsPaused) return;
+        if (PauseMenuV2.IsPaused) return;
         Highlight();
     }
 
     public void OnMouseExit()
     {
-        if (PauseMenu.IsPaused) return;
+        if (PauseMenuV2.IsPaused) return;
         DeHighlight();
     }
 
@@ -385,7 +385,7 @@ public abstract class EntityClass : SelectClass
 
     public void OnMouseDown()
     {
-        if (PauseMenu.IsPaused) return;
+        if (PauseMenuV2.IsPaused) return;
         OnEntityClicked?.Invoke(this);
     }
 
