@@ -10,11 +10,11 @@
             </ui:VisualElement>
             <ui:VisualElement style="margin-left: 64px; align-items: flex-start;">
                 <ui:VisualElement class="pause-menu-v2-slider">
-                    <ui:VisualElement style="background-image: url(&apos;project://database/Assets/Sprites/pause-menu-v2/ic-music.png?fileID=2800000&amp;guid=42d6d39ef6dd248f39f0dfa74201cc7d&amp;type=3#ic-music&apos;);" />
+                    <ui:Toggle name="toggle-mus" class="pause-menu-v2-toggle-music" />
                     <ui:Slider high-value="1" name="slider-mus" />
                 </ui:VisualElement>
                 <ui:VisualElement class="pause-menu-v2-slider" style="margin-top: 64px;">
-                    <ui:VisualElement style="background-image: url(&apos;project://database/Assets/Sprites/pause-menu-v2/ic-sound.png?fileID=2800000&amp;guid=b5e9ca402cf7e4068ac074b454961269&amp;type=3#ic-sound&apos;);" />
+                    <ui:Toggle name="toggle-sfx" class="pause-menu-v2-toggle-sound" />
                     <ui:Slider high-value="1" name="slider-sfx" />
                 </ui:VisualElement>
                 <ui:Toggle name="toggle-vfx" class="pause-menu-v2-toggle" style="margin-top: 64px;">
@@ -72,7 +72,7 @@
             <ui:Button name="button-cls" class="pause-menu-v2-close-button" />
             <ui:Label text="Dialogue History" style="-unity-font: url(&apos;project://database/Assets/TextMesh%20Pro/Fonts/VT323-Regular.ttf?fileID=12800000&amp;guid=46b9139fed5cc6a42a6a5d42b82c3c7e&amp;type=3#VT323-Regular&apos;); -unity-font-definition: initial; font-size: 72px; color: rgb(255, 255, 255); margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;" />
             <ui:VisualElement style="background-image: url(&apos;project://database/Assets/Sprites/pause-menu-v2/bg-pause-menu.png?fileID=2800000&amp;guid=4945b1b75b61d462483e9484d7b5273e&amp;type=3#bg-pause-menu&apos;); -unity-slice-left: 32; -unity-slice-top: 32; -unity-slice-right: 32; -unity-slice-bottom: 32; -unity-slice-scale: 12px; flex-direction: row; width: 1700px; height: 900px; padding-top: 120px; padding-right: 120px; padding-bottom: 120px; padding-left: 120px;">
-                <ui:ScrollView name="scroll-dlg" vertical-scroller-visibility="Hidden" />
+                <ui:ScrollView name="scroll-dlg" vertical-scroller-visibility="Hidden" mouse-wheel-scroll-size="1000" />
             </ui:VisualElement>
         </ui:VisualElement>
     </ui:VisualElement>
