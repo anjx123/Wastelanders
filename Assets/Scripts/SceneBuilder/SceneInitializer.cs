@@ -51,4 +51,5 @@ public class SceneInitializerPrefabs
 {
     public AudioManager audioManager = null!;
     public BattleIntro battleIntro = null!;
+    public PauseMenuV2 pauseMenuV2 = null!;
 }

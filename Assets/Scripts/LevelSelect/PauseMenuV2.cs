@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -77,13 +78,13 @@ public class PauseMenuV2 : MonoBehaviour
     private void OnDckClicked()
     {
         DoStart();
-        GameStateManager.Instance.LoadScene(GameStateManager.SELECTION_SCREEN_NAME);
+        GameStateManager.Instance.LoadScene(SceneData.Get<SceneData.SelectionScreen>().SceneName);
     }
 
     private void OnLvlClicked()
     {
         DoStart();
-        GameStateManager.Instance.LoadScene(GameStateManager.LEVEL_SELECT_NAME);
+        GameStateManager.Instance.LoadScene(SceneData.Get<SceneData.LevelSelect>().SceneName);
     }
 
     private void OnGlsClicked()
@@ -95,6 +96,7 @@ public class PauseMenuV2 : MonoBehaviour
     {
         SetState(State.Dialogue);
         var scroll = dialogue.Q<ScrollView>("scroll-dlg");
+        StartCoroutine(DoScrollToBottomWithDelay(scroll));
         scroll.Clear();
         foreach (var it in CreateLabels()) scroll.Add(it);
     }
@@ -114,7 +116,17 @@ public class PauseMenuV2 : MonoBehaviour
         AudioManager.Instance.SFXVolume(value);
     }
 
-    private static void OnVfxChanged(bool value)
+    private static void OnMusChecked()
+    {
+        AudioManager.Instance.ToggleMusic();
+    }
+
+    private static void OnSfxChecked()
+    {
+        AudioManager.Instance.ToggleSFX();
+    }
+
+    private static void OnVfxChecked(bool value)
     {
         ScreenShakeHandler.IsScreenShakeEnabled = value;
     }
@@ -133,7 +145,9 @@ public class PauseMenuV2 : MonoBehaviour
 
         pauseMenuPanel.Q<Slider>("slider-mus").RegisterValueChangedCallback(e => OnMusChanged(e.newValue));
         pauseMenuPanel.Q<Slider>("slider-sfx").RegisterValueChangedCallback(e => OnSfxChanged(e.newValue));
-        pauseMenuPanel.Q<Toggle>("toggle-vfx").RegisterValueChangedCallback(e => OnVfxChanged(e.newValue));
+        pauseMenuPanel.Q<Toggle>("toggle-mus").RegisterValueChangedCallback(_ => OnMusChecked());
+        pauseMenuPanel.Q<Toggle>("toggle-sfx").RegisterValueChangedCallback(_ => OnSfxChecked());
+        pauseMenuPanel.Q<Toggle>("toggle-vfx").RegisterValueChangedCallback(e => OnVfxChecked(e.newValue));
     }
 
     private void LoadInitialValues()
@@ -152,6 +166,12 @@ public class PauseMenuV2 : MonoBehaviour
         PauseMenuPanel
     }
 
+    private static IEnumerator DoScrollToBottomWithDelay(ScrollView scroll)
+    {
+        yield return null;
+        scroll.scrollOffset = scroll.contentContainer.layout.max - scroll.contentViewport.layout.size;
+    }
+
     // Hideous.
     private static IEnumerable<VisualElement> CreateLabels()
     {
@@ -161,11 +181,13 @@ public class PauseMenuV2 : MonoBehaviour
         {
             if (history[i].SpeakerName != "" && (i == 0 || history[i].SpeakerName != history[i - 1].SpeakerName))
             {
-                var label1 = new Label($"<b>{history[i].SpeakerName}</b>") { style = { marginTop = i == 0 ? 0 : 32 } };
+                var label1 = new Label($"<b>{history[i].SpeakerName.Trim()}</b>")
+                    { style = { marginTop = i == 0 ? 0 : 32 } };
                 label1.AddToClassList("pause-menu-v2-dialogue-name");
                 yield return label1;
             }
-            var label2 = new Label(history[i].BodyText) { style = { marginTop = i == 0 ? 0 : 16 } };
+
+            var label2 = new Label(history[i].BodyText.Trim()) { style = { marginTop = i == 0 ? 0 : 16 } };
             label2.AddToClassList("pause-menu-v2-dialogue-body");
             yield return label2;
         }
