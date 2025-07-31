@@ -103,7 +103,8 @@ public class PreQueenFight : DialogueClasses
     {
         CombatManager.Instance.GameState = GameState.OUT_OF_COMBAT;
         CombatManager.Instance.SetDarkScreen();
-        battleIntro = Instantiate(battleIntro);
+        battleIntro = BattleIntro.Build(Camera.main);
+
         yield return new WaitForSeconds(0.5f);
         ives.OutOfCombat();
         jackie.OutOfCombat(); //Workaround for now, ill have to remove this once i manually start instantiating players
@@ -522,16 +523,16 @@ public class PreQueenFight : DialogueClasses
             yield return new WaitUntil(() => CombatManager.Instance.GameState == GameState.GAME_WIN);
             AudioManager.Instance.FadeOutCurrentBackgroundTrack(2f);
 
-            GameStateManager.Instance.CurrentLevelProgress = Math.Max(GameStateManager.Instance.CurrentLevelProgress, StageInformation.QUEEN_BEETLE_STAGE.LevelID + 1f);
+            GameStateManager.Instance.UpdateLevelProgress(StageInformation.PRINCESS_FROG_FIGHT);
             
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(1.5f);
             DialogueManager.Instance.MoveBoxToBottom();
 
             yield return StartCoroutine(CombatManager.Instance.FadeInDarkScreen(1.5f));
 
             yield return StartCoroutine(DialogueManager.Instance.StartDialogue(PostFight.Dialogue));
 
-            GameStateManager.Instance.LoadScene(GameStateManager.POST_QUEEN_FIGHT);
+            GameStateManager.Instance.LoadScene(SceneData.Get<SceneData.PostQueenFight>().SceneName);
         }
         
     }

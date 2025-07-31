@@ -14,6 +14,7 @@ public class GameOver : MonoBehaviour
     [SerializeField] Button levelSelectButton;
     [SerializeField] Button deckSelectButton;
     [SerializeField] GameObject gameOverText;
+    public const float FADE_IN_TIME = 1f;
 
     void OnEnable()
     {
@@ -37,7 +38,7 @@ public class GameOver : MonoBehaviour
 
     public void FadeIn()
     {
-        StartCoroutine(FadeCoroutine(true, 1f));
+        StartCoroutine(FadeCoroutine(true, FADE_IN_TIME));
     }
 
 
@@ -88,12 +89,12 @@ public class GameOver : MonoBehaviour
     private IEnumerator OnLevelSelectClick()
     {
         yield return StartCoroutine(FadeCoroutine(false, 1f));
-        GameStateManager.Instance.LoadScene(GameStateManager.LEVEL_SELECT_NAME);
+        GameStateManager.Instance.LoadScene(SceneData.Get<SceneData.LevelSelect>().SceneName);
     }
 
     private IEnumerator OnDeckSelectClick()
     {
         yield return StartCoroutine(FadeCoroutine(false, 1f));
-        GameStateManager.Instance.LoadScene(GameStateManager.SELECTION_SCREEN_NAME);
+        GameStateManager.Instance.LoadScene(SceneData.Get<SceneData.SelectionScreen>().SceneName);
     }
 }

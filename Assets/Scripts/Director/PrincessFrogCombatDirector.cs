@@ -10,7 +10,7 @@ namespace Director
     {
         [SerializeField] private GameObject entityContainer;
 
-        [SerializeField] private BattleIntro battleIntro;
+        private BattleIntro battleIntro;
         [SerializeField] private GameOver gameOver;
         [SerializeField] private DialogueWrapper gameOverDialogue; // sucks...
 
@@ -31,7 +31,7 @@ namespace Director
             CombatManager.Instance.SetDarkScreen();
             CombatManager.PlayersWinEvent += PlayersWin;
             CombatManager.EnemiesWinEvent += EnemiesWin;
-            battleIntro = Instantiate(battleIntro);
+            battleIntro = BattleIntro.Build(Camera.main);
 
             yield return new WaitForEndOfFrame(); // Necessary for associated initialization code to run (to assign teams)
 
@@ -44,7 +44,7 @@ namespace Director
             GameStateManager.Instance.CurrentLevelProgress = GameStateManager.Instance.CurrentLevelProgress = Math.Max(GameStateManager.Instance.CurrentLevelProgress, StageInformation.PRINCESS_FROG_FIGHT.LevelID + 1f);
             yield return new WaitForSeconds(1f);
             yield return StartCoroutine(CombatManager.Instance.FadeInDarkScreen(1.5f));
-            GameStateManager.Instance.LoadScene(GameStateManager.LEVEL_SELECT_NAME);
+            GameStateManager.Instance.LoadScene(SceneData.Get<SceneData.LevelSelect>().SceneName);
         }
 
         private void PlayersWin()
