@@ -19,6 +19,7 @@ namespace Steamworks {
             base.Awake(); // Handles singleton instance + DontDestroyOnLoad
             
             players = FindObjectsOfType<PlayerClass>();
+            Debug.Log(players.Length);
 
             if (!SteamManager.Initialized) return;
 
@@ -59,10 +60,12 @@ namespace Steamworks {
                 
                 if (entity is EnemyIves) {
                     SteamManager.UnlockAchievement("DEFEAT_IVES");
+                    return;
                 }
 
                 if (entity is QueenBeetle) {
                     SteamManager.UnlockAchievement("DEFEAT_QUEEN");
+                    return;
                 }
                 enemiesKilled++;
                 Debug.Log($"[AchievementManager] Enemy killed! Total kills: {enemiesKilled}");
@@ -73,6 +76,7 @@ namespace Steamworks {
                 // Check if any achievements should be unlocked based on new kill count
                 CheckKillAchievements();
             } else if (entity is PlayerClass) {
+                Debug.Log("[AchievementManager] Player killed!");
                 onePlayerDead = true;
             }
         }
@@ -109,7 +113,10 @@ namespace Steamworks {
         }
 
         private void HandlePlayerBuffsUpdated(EntityClass player) {
+            Debug.Log("handlePlayerBuffsUpdated");
             if (player is not PlayerClass) return;
+            
+            Debug.Log($"[AchievementManager] OnPlayerBuffsUpdated: {player.name}, stacks: {player.ResonateStacks}");
 
             if (player.ResonateStacks >= 5) {
                 SteamManager.UnlockAchievement("THE_RESONATOR");
