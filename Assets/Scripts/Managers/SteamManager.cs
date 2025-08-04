@@ -182,7 +182,7 @@ namespace Steamworks {
 
         public static void UnlockAchievement(string achievementId) {
             if (!Initialized) {
-                Debug.LogWarning("Cannot unlock achievement: Steam is not initialized.");
+                Debug.LogWarning($"Cannot unlock achievement {achievementId}: Steam is not initialized.");
                 return;
             }
 

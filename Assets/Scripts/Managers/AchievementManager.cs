@@ -17,6 +17,8 @@ namespace Steamworks {
 
         protected override void Awake() {
             base.Awake(); // Handles singleton instance + DontDestroyOnLoad
+            
+            players = FindObjectsOfType<PlayerClass>();
 
             if (!SteamManager.Initialized) return;
 
@@ -26,8 +28,6 @@ namespace Steamworks {
 
             // In case player already reached milestones before starting the game, sync achievements
             CheckKillAchievements();
-            
-            players = FindObjectsOfType<PlayerClass>();
         }
 
         private void OnEnable() {
