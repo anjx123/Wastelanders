@@ -93,8 +93,8 @@ public class TutorialIntroduction : DialogueClasses
         ives.OutOfCombat();
         jackie.OutOfCombat();
         jackie.SetReturnPosition(jackieDefaultTransform.position);
-        battleIntro = Instantiate(battleIntro);
-        if (!jumpToCombat)
+        battleIntro = BattleIntro.Build(Camera.main);
+        if (!jumpToCombat && !GameStateManager.Instance.JumpToCombat)
         {
             yield return new WaitForSeconds(1f);
 
@@ -183,6 +183,7 @@ public class TutorialIntroduction : DialogueClasses
             trainingDummies.Add(Instantiate(trainingDummyPrefab, dummy1StartingPos)); //Ives summons Dummy
         } else
         {
+            GameStateManager.Instance.JumpToCombat = false;
             //Set up the scene for a combat Jump in.
             ives.SetReturnPosition(ivesDefaultTransform.position);
             StartCoroutine(CombatManager.Instance.FadeInLightScreen(2f));
@@ -249,9 +250,8 @@ public class TutorialIntroduction : DialogueClasses
         StartCoroutine(CombatManager.Instance.FadeInDarkScreen(3f));
         yield return StartCoroutine(jackie.MoveToPosition(jackieEndPosition.position, 0, 4f));
 
-        GameStateManager.Instance.ShouldPlayDeckSelectionTutorial = true;
-        GameStateManager.Instance.CurrentLevelProgress = Math.Max(GameStateManager.Instance.CurrentLevelProgress, StageInformation.TUTORIAL_STAGE.LevelID + 1f);
-        GameStateManager.Instance.LoadScene(GameStateManager.SELECTION_SCREEN_NAME);
+        GameStateManager.Instance.UpdateLevelProgress(StageInformation.DECK_SELECTION_TUTORIAL);
+        GameStateManager.Instance.LoadScene(SceneData.Get<SceneData.SelectionScreen>().SceneName);
         yield break;
     }
 

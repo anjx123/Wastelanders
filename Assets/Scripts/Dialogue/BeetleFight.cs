@@ -186,7 +186,7 @@ public class BeetleFight : DialogueClasses
     {
         CombatManager.Instance.GameState = GameState.OUT_OF_COMBAT;
         CombatManager.Instance.SetDarkScreen();
-        battleIntro = Instantiate(battleIntro);
+        battleIntro = BattleIntro.Build(Camera.main);
         yield return new WaitForSeconds(0.2f);
         SetUpEnemyLists();
         SetUpCombatStatus();
@@ -517,9 +517,8 @@ public class BeetleFight : DialogueClasses
             yield return ivesFade;
             yield return new WaitForSeconds(MEDIUM_PAUSE);
 
-            GameStateManager.Instance.JustFinishedBeetleFight = true;
-            GameStateManager.Instance.CurrentLevelProgress = Math.Max(GameStateManager.Instance.CurrentLevelProgress, StageInformation.BEETLE_STAGE.LevelID + 1f);
-            GameStateManager.Instance.LoadScene(GameStateManager.SELECTION_SCREEN_NAME);
+            GameStateManager.Instance.UpdateLevelProgress(StageInformation.QUEEN_PREPARATION_STAGE);
+            GameStateManager.Instance.LoadScene(SceneData.Get<SceneData.SelectionScreen>().SceneName);
             yield break;
         }
     }
