@@ -9,6 +9,9 @@ using UnityEngine;
  */
 public class LevelSelectManager : MonoBehaviour
 {
+
+    [SerializeField] private LevelSelectButton princessFrogFightButton;
+
     public void Awake()
     {
         if (GameStateManager.Instance.FirstTimeFinished) {
@@ -30,6 +33,7 @@ public class LevelSelectManager : MonoBehaviour
             new DialogueText("Some levels may be locked until you complete previous levels.", "", null),
             new DialogueText("Good luck and have fun!", "", null),
         }));
+        princessFrogFightButton.Unlock(animate: true);
         yield return null;
     }
 
