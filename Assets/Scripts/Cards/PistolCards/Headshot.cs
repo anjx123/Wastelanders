@@ -23,7 +23,7 @@ public class Headshot : PistolCards
 
     public override void OnHit()
     {
-        IncrementRoll(Origin.GetBuffStacks(Accuracy.buffName));
+        if (GetRolledStats().ActualRoll > 0) IncrementRoll(Origin.GetBuffStacks(Accuracy.buffName));
         base.OnHit();
 
         if (Target.IsDead)
