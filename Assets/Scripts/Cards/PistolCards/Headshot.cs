@@ -24,7 +24,7 @@ public class Headshot : PistolCards
     public override void OnHit()
     {
         // Add Stacks to Deal Extra Damage only if the Card has Won the Clash
-        if (GetRolledStats().ActualRoll > 0) IncrementRoll(Origin.GetBuffStacks(Accuracy.buffName));
+        if (getRolledDamage() > 0) IncrementRoll(Origin.GetBuffStacks(Accuracy.buffName));
         base.OnHit();
 
         if (Target.IsDead)
