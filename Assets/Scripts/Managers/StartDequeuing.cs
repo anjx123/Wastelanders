@@ -12,7 +12,7 @@ public class StartDequeuing : MonoBehaviour
 
     private void OnMouseEnter()
     {
-        if (!PauseMenu.IsPaused)
+        if (!PauseMenuV2.IsPaused)
         {
             spriteRenderer.sprite = buttonDown;
         }
@@ -20,7 +20,7 @@ public class StartDequeuing : MonoBehaviour
 
     private void OnMouseExit()
     {
-        if (!PauseMenu.IsPaused)
+        if (!PauseMenuV2.IsPaused)
         {
             spriteRenderer.sprite = buttonUp;
         }
@@ -29,7 +29,7 @@ public class StartDequeuing : MonoBehaviour
 
     void OnMouseDown()
     {
-        if (!PauseMenu.IsPaused)
+        if (!PauseMenuV2.IsPaused)
         {
             BattleQueue.BattleQueueInstance.BeginDequeue();
         }
