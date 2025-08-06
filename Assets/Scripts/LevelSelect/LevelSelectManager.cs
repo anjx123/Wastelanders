@@ -9,6 +9,10 @@ using UnityEngine;
  */
 public class LevelSelectManager : MonoBehaviour
 {
+
+    [SerializeField] private LevelSelectButton princessFrogFightButton;
+    [SerializeField] private CanvasGroup levelSelectCanvas;
+
     public void Awake()
     {
         if (GameStateManager.Instance.FirstTimeFinished) {
@@ -20,6 +24,7 @@ public class LevelSelectManager : MonoBehaviour
     IEnumerator UnlockedDialogue()
     {
         Debug.Log("Unlock Dialogue");
+        levelSelectCanvas.interactable = false;
         yield return new WaitForSeconds(2f);
         yield return StartCoroutine(DialogueManager
             .Instance
@@ -30,6 +35,8 @@ public class LevelSelectManager : MonoBehaviour
             new DialogueText("Some levels may be locked until you complete previous levels.", "", null),
             new DialogueText("Good luck and have fun!", "", null),
         }));
+        princessFrogFightButton.Unlock(animate: true);
+        levelSelectCanvas.interactable = true;
         yield return null;
     }
 

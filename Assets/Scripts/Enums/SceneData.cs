@@ -36,7 +36,7 @@ public abstract class SceneData : Enum<SceneData>
         public override SceneAudio GetAudio(AudioDatabase database) => database.MainMenu;
 
         public override MonoBehaviour[] RequiredPrefabs(SceneInitializerPrefabs prefabs) => new MonoBehaviour[]
-            { prefabs.audioManager, prefabs.pauseMenuV2 };
+            { prefabs.audioManager, prefabs.pauseMenuV2, prefabs.dialogueManager };
     }
 
     public class ContractSelect : SceneData
