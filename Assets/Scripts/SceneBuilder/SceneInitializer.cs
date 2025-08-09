@@ -4,6 +4,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System;
+using UI_Toolkit;
 
 #nullable enable
 public class SceneInitializer : MonoBehaviour

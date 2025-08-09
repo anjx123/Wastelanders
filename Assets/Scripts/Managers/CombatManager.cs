@@ -8,6 +8,7 @@ using System.Security.Cryptography;
 using Systems.Persistence;
 using WeaponDeckSerialization;
 using System;
+using UI_Toolkit;
 using static EntityClass;
 
 public class CombatManager : MonoBehaviour
