@@ -1,9 +1,11 @@
 using System.Collections;
+using Systems.Persistence;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class AudioManager : PersistentSingleton<AudioManager>
+public class AudioManager : PersistentSingleton<AudioManager>, IBind<AudioPreferences>
 {
+    [field: SerializeField] public SerializableGuid Id { get; set; } = SerializableGuid.NewGuid();
     public new static AudioManager Instance
     {
         get
@@ -33,7 +35,13 @@ public class AudioManager : PersistentSingleton<AudioManager>
     [SerializeField] private AudioDatabase sceneAudioDatabase;
 #nullable enable
     private SceneAudio sceneAudio = null!;
+    private AudioPreferences audioPreferences = null!;
 
+    private void Start() 
+    {
+        SaveLoadSystem.Instance.LoadAudioPreferences();   
+    }
+    
     private void OnEnable()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
@@ -155,14 +163,42 @@ public class AudioManager : PersistentSingleton<AudioManager>
         BackgroundMusicPlayer.mute = !BackgroundMusicPlayer.mute;
     }
 
+    public float SFXVolume() 
+    {
+        return SFXSoundsPlayer.volume;
+    }
+    
     public void SFXVolume(float volume)
     {
         SFXSoundsPlayer.volume = volume;
+        audioPreferences.SFXVolume = volume;
     }
 
+    public float MusicVolume() 
+    {
+        return BackgroundMusicPlayer.volume;
+    }
+    
     public void MusicVolume(float volume)
     {
         BackgroundMusicIntroPlayer.volume = volume;
         BackgroundMusicPlayer.volume = volume;
+        audioPreferences.BackgroundMusicVolume = volume;
     }
+    
+    void IBind<AudioPreferences>.Bind(AudioPreferences data)
+    {
+        Debug.Log($"Binding AudioPreferences from {data}");
+        audioPreferences = data;
+        MusicVolume(data.BackgroundMusicVolume);
+        SFXVolume(data.SFXVolume);
+    }
+}
+
+[System.Serializable]
+public class AudioPreferences : ISaveable {
+    public SerializableGuid Id { get; set; } = SerializableGuid.NewGuid();
+    
+    [field: SerializeField] public float SFXVolume { get; set; } = 0.7f;
+    [field: SerializeField] public float BackgroundMusicVolume { get; set; } = 0.7f;
 }

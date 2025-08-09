@@ -3,7 +3,7 @@ namespace Systems.Persistence
 {
     public interface IDataService
     {
-        void Save(GameData data, bool overwrite = true);
-        GameData Load(string name);
+        void Save<T>(T data, bool overwrite = true) where T : ISaveData;
+        T Load<T>(string name) where T : ISaveData;
     }
 }
