@@ -54,7 +54,7 @@ public class DialogueManager : MonoBehaviour
 
         sentences = newSentences;
         inDialogue = true;
-        
+
         DisplayNextSentence();
         yield return new WaitUntil(() => !inDialogue);
     }
