@@ -8,13 +8,21 @@ using UnityEngine;
 
 namespace Systems.Persistence
 {
-    [Serializable] public class GameData
-    {
+    [Serializable] public class GameData : ISaveData {
         public string Name;
         public List<ActionData> actionData;
         public GameStateData gameStateData;
         public PlayerInformation playerInformation;
         public BountyStateData bountyStateData;
+        public string SaveName => Name;
+    }
+
+    [Serializable]
+    public class UserPreferences : ISaveData {
+        public string Name;
+        public AudioPreferences audioPreferences;
+
+        public string SaveName => Name;
     }
 
     public interface ISaveable
@@ -32,7 +40,9 @@ namespace Systems.Persistence
     public class SaveLoadSystem : PersistentSingleton<SaveLoadSystem>
     {
         private const string SAVE_FILE_NAME = "Wastelanders Save File";
+        private const string PREFERENCES_FILE_NAME = "Wastelanders User Preferences File";
         [SerializeField] private GameData gameData;
+        [SerializeField] private UserPreferences userPreferences;
         private PlayerDatabase defaultPlayerDatabase;
         private CardDatabase defaultCardDatabase;
 
@@ -60,6 +70,18 @@ namespace Systems.Persistence
                 NewGame();
                 SaveGame();
             }
+
+            try
+            {
+                LoadPreferences();
+            }
+            catch (IOException e)
+            {
+                NewUserPreferences();
+                SavePreferences();
+                Debug.Log(e.Message + " Generating a new user preferences file");
+            }
+            
             LoadAllInformation();
         }
 
@@ -68,6 +90,12 @@ namespace Systems.Persistence
             LoadPlayerInformation();
             LoadGameStateInformation();
             LoadBountyStateInformation();
+            LoadAllPreferences();
+        }
+
+        private void LoadAllPreferences() 
+        {
+            LoadAudioPreferences();
         }
 
         public void LoadCardEvolutionProgress()
@@ -98,6 +126,11 @@ namespace Systems.Persistence
             Bind<BountyManager, BountyStateData>(gameData.bountyStateData);
         }
 
+        public void LoadAudioPreferences() 
+        {
+            Bind<AudioManager, AudioPreferences>(userPreferences.audioPreferences);    
+        }
+        
         void Bind<T, TData>(List<TData> datas) where T: MonoBehaviour, IBind<TData> where TData : ISaveable, new() {
             T[] entities = FindObjectsByType<T>(FindObjectsSortMode.None);
 
@@ -116,7 +149,6 @@ namespace Systems.Persistence
         void Bind<T, TData>(TData data) where T : MonoBehaviour, IBind<TData> where TData : ISaveable, new()
         {
             T entity = FindObjectsByType<T>(FindObjectsSortMode.None).FirstOrDefault();
-
             if (entity != null)
             {
                 if (data == null)
@@ -142,14 +174,34 @@ namespace Systems.Persistence
 
         public void SaveGame()
         {
-            Debug.Log("Saving the game!");
+            Debug.Log($"Saving the game, {gameData.SaveName}");
             dataService.Save(gameData);
         }
 
         private void LoadGame()
         {
-            Debug.Log("Loading the game!");
-            gameData = dataService.Load(SAVE_FILE_NAME);
+            Debug.Log($"Loading the game: {SAVE_FILE_NAME}");
+            gameData = dataService.Load<GameData>(SAVE_FILE_NAME);
+        }
+
+        private void NewUserPreferences() {
+            userPreferences = new UserPreferences
+            {
+                Name = PREFERENCES_FILE_NAME,
+                audioPreferences = new AudioPreferences(),
+            };
+        }
+        
+        public void SavePreferences() 
+        {
+            Debug.Log($"Saving user preferences: {userPreferences.Name}");
+            dataService.Save(userPreferences);
+        }
+        
+        private void LoadPreferences() 
+        {
+            Debug.Log($"Loading user preferences: {PREFERENCES_FILE_NAME}");
+            userPreferences = dataService.Load<UserPreferences>(PREFERENCES_FILE_NAME);
         }
     }
 }

@@ -15,7 +15,7 @@ public class GameStateManager : PersistentSingleton<GameStateManager>, IBind<Gam
     private GameStateData data;
 
     public GameStateData Data 
-    { 
+    {
         get
         {
             // Data should only be nullable during development where you can open a scene from any place
