@@ -6,7 +6,7 @@ using UnityEngine;
 public class DialogueManager : MonoBehaviour
 {
     private const string PAGE_FLIP_SOUND_EFFECT = "Page Flip";
-    public static DialogueManager Instance { get; private set; }
+    public static DialogueManager Instance { get; private set; } = null!;
     private DialogueBox activeDialogueBox = null!;
     [SerializeField]
     private DialogueBox picturelessDialogueBoxComponent = null!;
