@@ -35,6 +35,7 @@ public class AudioManager : PersistentSingleton<AudioManager>, IBind<AudioPrefer
     [SerializeField] private AudioDatabase sceneAudioDatabase;
 #nullable enable
     private SceneAudio sceneAudio = null!;
+    // We need this reference for serialization purposes
     private AudioPreferences audioPreferences = null!;
 
     private void Start() 
@@ -162,21 +163,11 @@ public class AudioManager : PersistentSingleton<AudioManager>, IBind<AudioPrefer
         BackgroundMusicIntroPlayer.mute = !BackgroundMusicIntroPlayer.mute;
         BackgroundMusicPlayer.mute = !BackgroundMusicPlayer.mute;
     }
-
-    public float SFXVolume() 
-    {
-        return SFXSoundsPlayer.volume;
-    }
     
     public void SFXVolume(float volume)
     {
         SFXSoundsPlayer.volume = volume;
         audioPreferences.SFXVolume = volume;
-    }
-
-    public float MusicVolume() 
-    {
-        return BackgroundMusicPlayer.volume;
     }
     
     public void MusicVolume(float volume)
@@ -186,9 +177,10 @@ public class AudioManager : PersistentSingleton<AudioManager>, IBind<AudioPrefer
         audioPreferences.BackgroundMusicVolume = volume;
     }
     
+    public AudioPreferences GetAudioPreferences() { return audioPreferences; }
+    
     void IBind<AudioPreferences>.Bind(AudioPreferences data)
     {
-        Debug.Log($"Binding AudioPreferences from {data}");
         audioPreferences = data;
         MusicVolume(data.BackgroundMusicVolume);
         SFXVolume(data.SFXVolume);
