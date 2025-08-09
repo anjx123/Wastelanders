@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Systems.Persistence;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -21,7 +22,7 @@ public class PauseMenuV2 : MonoBehaviour
     public static bool IsPaused;
     public static event Action DidPause;
 
-    public void Awake()
+    public void Start()
     {
         rootElem = rootDocument?.rootVisualElement ?? throw new Exception($"{nameof(rootDocument)} unset");
         dialogue = rootElem.Q<VisualElement>("dialogue");
@@ -51,6 +52,7 @@ public class PauseMenuV2 : MonoBehaviour
     {
         SetState(State.Unpaused);
         Time.timeScale = 1;
+        SaveLoadSystem.Instance.SavePreferences();
     }
 
     private void SetState(State to)
@@ -152,9 +154,11 @@ public class PauseMenuV2 : MonoBehaviour
 
     private void LoadInitialValues()
     {
+        AudioPreferences a = AudioManager.Instance.GetAudioPreferences();
+        
         // TODO: Load these values from saved settings and sync with audio manager.
-        pauseMenuPanel.Q<Slider>("slider-mus").value = 0.2f;
-        pauseMenuPanel.Q<Slider>("slider-sfx").value = 0.2f;
+        pauseMenuPanel.Q<Slider>("slider-mus").value = a.BackgroundMusicVolume;
+        pauseMenuPanel.Q<Slider>("slider-sfx").value = a.SFXVolume;
         pauseMenuPanel.Q<Toggle>("toggle-vfx").value = ScreenShakeHandler.IsScreenShakeEnabled;
     }
 
