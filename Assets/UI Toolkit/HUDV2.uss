@@ -1,0 +1,16 @@
+.hud-v2-button-confirm {
+    background-color: transparent;
+    background-image: url('project://database/Assets/Sprites/hud-v2/bg-btn-confirm.png?fileID=2800000&guid=ac6eebf9323f6405fb24f7403fc43497&type=3#bg-btn-confirm');
+    border-width: 0;
+    bottom: 80px;
+    height: 136px;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    right: 80px;
+    width: 260px;
+}
+
+.hud-v2-button-confirm:hover {
+    background-image: url('project://database/Assets/Sprites/hud-v2/bg-btn-confirm-hover.png?fileID=2800000&guid=a76d4217a47274a93bb9fce3e3cc9429&type=3#bg-btn-confirm-hover');
+}
