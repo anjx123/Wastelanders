@@ -4,6 +4,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System;
+using UI_Toolkit;
 
 #nullable enable
 public class SceneInitializer : MonoBehaviour
@@ -52,4 +53,5 @@ public class SceneInitializerPrefabs
     public AudioManager audioManager = null!;
     public BattleIntro battleIntro = null!;
     public PauseMenuV2 pauseMenuV2 = null!;
+    public HUDV2 hudV2 = null!;
 }

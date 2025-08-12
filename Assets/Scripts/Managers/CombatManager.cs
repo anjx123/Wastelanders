@@ -8,6 +8,7 @@ using System.Security.Cryptography;
 using Systems.Persistence;
 using WeaponDeckSerialization;
 using System;
+using UI_Toolkit;
 using static EntityClass;
 
 public class CombatManager : MonoBehaviour
@@ -26,7 +27,6 @@ public class CombatManager : MonoBehaviour
     private List<EntityClass> neutralTeam = new();
 
     public GameObject handContainer;
-    public GameObject startDequeue;
     public GameObject battleQueueParent;
     
     [SerializeField]
@@ -146,7 +146,6 @@ public class CombatManager : MonoBehaviour
     //Allows players to start selection again, resets enemies attacks and position
     private void PerformSelection()
     {
-        Activate(startDequeue);
         Activate(handContainer);
         battleQueueParent.SetActive(true);
         baseCamera.Priority = 1;
@@ -282,7 +281,6 @@ public class CombatManager : MonoBehaviour
 
     private void PerformFighting()
     {
-        Deactivate(startDequeue);
         Deactivate(handContainer);
         baseCamera.Priority = 0;
         dynamicCamera.Priority = 1;
@@ -337,7 +335,6 @@ public class CombatManager : MonoBehaviour
     private void PerformOutOfCombat()
     {
         Deactivate(handContainer);
-        Deactivate(startDequeue);
         battleQueueParent.SetActive(false);
 
         foreach (EntityClass entity in GrabAllEntities())

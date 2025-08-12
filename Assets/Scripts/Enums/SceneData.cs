@@ -63,7 +63,7 @@ public abstract class SceneData : Enum<SceneData>
         public override SceneAudio GetAudio(AudioDatabase database) => database.TutorialFight;
 
         public override MonoBehaviour[] RequiredPrefabs(SceneInitializerPrefabs prefabs) => new MonoBehaviour[]
-            { prefabs.audioManager, prefabs.pauseMenuV2 };
+            { prefabs.audioManager, prefabs.pauseMenuV2, prefabs.hudV2 };
     }
 
     public class FrogSlimeFight : SceneData
@@ -72,7 +72,7 @@ public abstract class SceneData : Enum<SceneData>
         public override SceneAudio GetAudio(AudioDatabase database) => database.FrogSlimeFight;
 
         public override MonoBehaviour[] RequiredPrefabs(SceneInitializerPrefabs prefabs) => new MonoBehaviour[]
-            { prefabs.audioManager, prefabs.pauseMenuV2 };
+            { prefabs.audioManager, prefabs.pauseMenuV2, prefabs.hudV2 };
     }
 
     public class BeetleFight : SceneData
@@ -81,7 +81,7 @@ public abstract class SceneData : Enum<SceneData>
         public override SceneAudio GetAudio(AudioDatabase database) => database.BeetleFight;
 
         public override MonoBehaviour[] RequiredPrefabs(SceneInitializerPrefabs prefabs) => new MonoBehaviour[]
-            { prefabs.audioManager, prefabs.pauseMenuV2 };
+            { prefabs.audioManager, prefabs.pauseMenuV2, prefabs.hudV2 };
     }
 
     public class PreQueenFight : SceneData
@@ -90,7 +90,7 @@ public abstract class SceneData : Enum<SceneData>
         public override SceneAudio GetAudio(AudioDatabase database) => database.PreQueenFight;
 
         public override MonoBehaviour[] RequiredPrefabs(SceneInitializerPrefabs prefabs) => new MonoBehaviour[]
-            { prefabs.audioManager, prefabs.pauseMenuV2 };
+            { prefabs.audioManager, prefabs.pauseMenuV2, prefabs.hudV2 };
     }
 
     public class PostQueenFight : SceneData
@@ -99,7 +99,7 @@ public abstract class SceneData : Enum<SceneData>
         public override SceneAudio GetAudio(AudioDatabase database) => database.PostQueenFight;
 
         public override MonoBehaviour[] RequiredPrefabs(SceneInitializerPrefabs prefabs) => new MonoBehaviour[]
-            { prefabs.audioManager, prefabs.pauseMenuV2 };
+            { prefabs.audioManager, prefabs.pauseMenuV2, prefabs.hudV2 };
     }
 
     public class PrincessFrogBounty : SceneData
@@ -108,7 +108,7 @@ public abstract class SceneData : Enum<SceneData>
         public override SceneAudio GetAudio(AudioDatabase database) => database.PrincessFrogBounty;
 
         public override MonoBehaviour[] RequiredPrefabs(SceneInitializerPrefabs prefabs) => new MonoBehaviour[]
-            { prefabs.audioManager, prefabs.pauseMenuV2 };
+            { prefabs.audioManager, prefabs.pauseMenuV2, prefabs.hudV2 };
     }
 
     private static readonly Dictionary<string, SceneData> _sceneLookup = new();

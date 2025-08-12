@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Xml.Linq;
+using UI_Toolkit;
 using UnityEngine;
 
 public class HighlightManager : MonoBehaviour // later all entity highlighter
