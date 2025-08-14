@@ -659,6 +659,7 @@ MonoBehaviour:
   hoverTextColor: {r: 1, g: 1, b: 0, a: 1}
   hover: {fileID: 3512210353524396091}
   lockedIndicator: {fileID: 69882546978433369}
+  floatingNotificationPrefab: {fileID: 5804061128524673433, guid: 21904a911c81d43a9a07b56d5150a50f, type: 3}
 --- !u!1 &8631010744981370892
 GameObject:
   m_ObjectHideFlags: 0

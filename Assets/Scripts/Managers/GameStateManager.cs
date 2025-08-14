@@ -32,13 +32,6 @@ public class GameStateManager : PersistentSingleton<GameStateManager>, IBind<Gam
         }
     }
 
-    /*
-     * Temporary flag to be set and read by end of combat scene, when the player restarts and should skip dialogue
-     * Is set by GameOver prefab upon restart, and read by dialogue classes
-     * Dialogue classes should reset this value when read, such that it does not cause unexpected behaviour in upcoming scenes
-     */
-    public bool JumpToCombat = true;
-
     public void UpdateLevelProgress(ILevelSelectInformation level)
     {
         CurrentLevelProgress = Mathf.Max(CurrentLevelProgress, level.LevelID);
@@ -46,7 +39,7 @@ public class GameStateManager : PersistentSingleton<GameStateManager>, IBind<Gam
 
     public float CurrentLevelProgress
     {
-        get { return (IS_DEVELOPMENT) ? 100f : Data.CurrentLevelProgress; }
+        get { return (IS_DEVELOPMENT) ? 3.5f : Data.CurrentLevelProgress; }
         set => Data.CurrentLevelProgress = value;
     }
 
@@ -70,6 +63,19 @@ public class GameStateManager : PersistentSingleton<GameStateManager>, IBind<Gam
 
     public const string SORTING_LAYER_TOP = "Top";
 
+    /*
+     * TEMPORARY FLAGS
+     */
+
+    /*
+     * Temporary flag to be set and read by end of combat scene, when the player restarts and should skip dialogue
+     * Is set by GameOver prefab upon restart, and read by dialogue classes
+     * Dialogue classes should reset this value when read, such that it does not cause unexpected behaviour in upcoming scenes
+     */
+    public bool JumpToCombat = true;
+
+    // Check for level select whether player finished the game first time to display bounty dialogue
+    public bool FirstTimeFinished = false;
 }
 
 

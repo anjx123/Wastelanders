@@ -529,8 +529,9 @@ public class PreQueenFight : DialogueClasses
             yield return new WaitUntil(() => CombatManager.Instance.GameState == GameState.GAME_WIN);
             AudioManager.Instance.FadeOutCurrentBackgroundTrack(2f);
 
+            GameStateManager.Instance.FirstTimeFinished = GameStateManager.Instance.CurrentLevelProgress < StageInformation.PRINCESS_FROG_FIGHT.LevelID;
             GameStateManager.Instance.UpdateLevelProgress(StageInformation.PRINCESS_FROG_FIGHT);
-            
+
             yield return new WaitForSeconds(1.5f);
             DialogueManager.Instance.MoveBoxToBottom();
 
