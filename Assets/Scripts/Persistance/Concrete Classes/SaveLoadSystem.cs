@@ -21,6 +21,7 @@ namespace Systems.Persistence
     public class UserPreferences : ISaveData {
         public string Name;
         public AudioPreferences audioPreferences;
+        public ScreenShakePreference screenShakePreference;
 
         public string SaveName => Name;
     }
@@ -90,18 +91,12 @@ namespace Systems.Persistence
             LoadPlayerInformation();
             LoadGameStateInformation();
             LoadBountyStateInformation();
-            LoadAllPreferences();
         }
-
-        private void LoadAllPreferences() 
-        {
-            LoadAudioPreferences();
-        }
-
+        
         public void LoadCardEvolutionProgress()
         {
             Debug.Log("Card evolution progress loading");
-            ActionClass[] actions= FindObjectsByType<ActionClass>(FindObjectsSortMode.None);
+            ActionClass[] actions = FindObjectsByType<ActionClass>(FindObjectsSortMode.None);
 
             foreach (ActionClass actionClass in actions)
             {
@@ -126,9 +121,14 @@ namespace Systems.Persistence
             Bind<BountyManager, BountyStateData>(gameData.bountyStateData);
         }
 
-        public void LoadAudioPreferences() 
+        public UserPreferences GetUserPreferences()
         {
-            Bind<AudioManager, AudioPreferences>(userPreferences.audioPreferences);    
+            return userPreferences;
+        }
+
+        public void BindUserPreference(Action<UserPreferences> bindFunction)
+        {
+            bindFunction(userPreferences);
         }
         
         void Bind<T, TData>(List<TData> datas) where T: MonoBehaviour, IBind<TData> where TData : ISaveable, new() {

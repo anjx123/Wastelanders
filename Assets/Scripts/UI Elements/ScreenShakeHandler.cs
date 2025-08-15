@@ -1,10 +1,16 @@
 ﻿using Cinemachine;
 using System.Collections;
+using Systems.Persistence;
 using UnityEngine;
 
 public class ScreenShakeHandler : MonoBehaviour
 {
-    public static bool IsScreenShakeEnabled = true;
+    public static bool IsScreenShakeEnabled
+    {
+        get => SaveLoadSystem.Instance.GetUserPreferences().screenShakePreference.IsScreenShakeEnabled;
+        set => SaveLoadSystem.Instance.GetUserPreferences().screenShakePreference.IsScreenShakeEnabled = value;
+    }
+
     private CinemachineVirtualCamera dynamicCamera;
 
     public CinemachineVirtualCamera DynamicCamera
@@ -32,7 +38,7 @@ public class ScreenShakeHandler : MonoBehaviour
             StartCoroutine(TiltEffect(percentageMax));
         }
     }
-    
+
     //(@param percentageMax) is a float [0, 1]
     private IEnumerator ShakeCamera(float percentageMax)
     {
@@ -76,4 +82,12 @@ public class ScreenShakeHandler : MonoBehaviour
     {
         yield break;
     }
+}
+
+[System.Serializable]
+public class ScreenShakePreference : ISaveable
+{
+    public SerializableGuid Id { get; set; } = SerializableGuid.NewGuid();
+    [field: SerializeField] public bool IsScreenShakeEnabled { get; set; } = true;
+    
 }
