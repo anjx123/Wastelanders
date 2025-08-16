@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Systems.Persistence;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -30,8 +31,13 @@ namespace UI_Toolkit
             pauseMenuPanel = rootElem.Q<VisualElement>("pause-menu-panel");
 
             RegisterCallbacks();
-            LoadInitialValues();
             SetState(State.Unpaused);
+        }
+
+        public void Start()
+        {
+            // Required, as user preference save data is not ready until Start
+            LoadInitialValues();
         }
 
         public void Update()
@@ -52,6 +58,7 @@ namespace UI_Toolkit
         {
             SetState(State.Unpaused);
             Time.timeScale = 1;
+            SaveLoadSystem.Instance.SavePreferences();
         }
 
         private void SetState(State to)
@@ -117,14 +124,14 @@ namespace UI_Toolkit
             AudioManager.Instance.SFXVolume(value);
         }
 
-        private static void OnMusChecked()
+        private static void OnMusChecked(bool state)
         {
-            AudioManager.Instance.ToggleMusic();
+            AudioManager.Instance.SetMusicMuted(state);
         }
 
-        private static void OnSfxChecked()
+        private static void OnSfxChecked(bool state)
         {
-            AudioManager.Instance.ToggleSFX();
+            AudioManager.Instance.SetSFXMuted(state);
         }
 
         private static void OnVfxChecked(bool value)
@@ -146,16 +153,20 @@ namespace UI_Toolkit
 
             pauseMenuPanel.Q<Slider>("slider-mus").RegisterValueChangedCallback(e => OnMusChanged(e.newValue));
             pauseMenuPanel.Q<Slider>("slider-sfx").RegisterValueChangedCallback(e => OnSfxChanged(e.newValue));
-            pauseMenuPanel.Q<Toggle>("toggle-mus").RegisterValueChangedCallback(_ => OnMusChecked());
-            pauseMenuPanel.Q<Toggle>("toggle-sfx").RegisterValueChangedCallback(_ => OnSfxChecked());
+            pauseMenuPanel.Q<Toggle>("toggle-mus").RegisterValueChangedCallback(e => OnMusChecked(e.newValue));
+            pauseMenuPanel.Q<Toggle>("toggle-sfx").RegisterValueChangedCallback(e => OnSfxChecked(e.newValue));
             pauseMenuPanel.Q<Toggle>("toggle-vfx").RegisterValueChangedCallback(e => OnVfxChecked(e.newValue));
         }
 
         private void LoadInitialValues()
         {
+            AudioPreferences a = AudioManager.Instance.GetAudioPreferences();
+
             // TODO: Load these values from saved settings and sync with audio manager.
-            pauseMenuPanel.Q<Slider>("slider-mus").value = 0.2f;
-            pauseMenuPanel.Q<Slider>("slider-sfx").value = 0.2f;
+            pauseMenuPanel.Q<Slider>("slider-mus").value = a.BackgroundMusicVolume;
+            pauseMenuPanel.Q<Slider>("slider-sfx").value = a.SFXVolume;
+            pauseMenuPanel.Q<Toggle>("toggle-mus").value = a.MusicMuted;
+            pauseMenuPanel.Q<Toggle>("toggle-sfx").value = a.SFXMuted;
             pauseMenuPanel.Q<Toggle>("toggle-vfx").value = ScreenShakeHandler.IsScreenShakeEnabled;
         }
 
@@ -183,7 +194,7 @@ namespace UI_Toolkit
                 if (history[i].SpeakerName != "" && (i == 0 || history[i].SpeakerName != history[i - 1].SpeakerName))
                 {
                     var label1 = new Label($"<b>{history[i].SpeakerName.Trim()}</b>")
-                        { style = { marginTop = i == 0 ? 0 : 32 } };
+                    { style = { marginTop = i == 0 ? 0 : 32 } };
                     label1.AddToClassList("pause-menu-v2-dialogue-name");
                     yield return label1;
                 }

@@ -23,20 +23,20 @@ namespace Systems.Persistence
             return Path.Combine(dataPath, string.Concat(fileName, ".", fileExtension));
         }
 
-        public void Save(GameData data, bool overwrite = true)
+        public void Save<T>(T data, bool overwrite = true) where T: ISaveData
         {
-            string fileLocation = GetPathToFile(data.Name);
+            string fileLocation = GetPathToFile(data.SaveName);
 
             if (!overwrite && File.Exists(fileLocation))
             {
-                throw new IOException($"File '{data.Name}.{fileExtension}' already exists and can't be overwritten.");
+                throw new IOException($"File '{data.SaveName}.{fileExtension}' already exists and can't be overwritten.");
             }
 
             Debug.Log("Saving Content to " + Application.persistentDataPath);
             File.WriteAllText(fileLocation, serializer.Serialize(data));
         }
 
-        public GameData Load(string name)
+        public T Load<T>(string name) where T: ISaveData
         {
             string fileLocation = GetPathToFile(name);
 
@@ -45,7 +45,7 @@ namespace Systems.Persistence
                 throw new IOException($"File '{name}.{fileExtension}' does not exist in this file");
             }
 
-            return serializer.Deserialize<GameData>(File.ReadAllText(fileLocation));
+            return serializer.Deserialize<T>(File.ReadAllText(fileLocation));;
         }
     }
 }
