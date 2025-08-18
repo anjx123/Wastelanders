@@ -1,250 +1,91 @@
-.pause-menu-v2-button {
-    -unity-font: url('project://database/Assets/TextMesh%20Pro/Fonts/VT323-Regular.ttf?fileID=12800000&guid=46b9139fed5cc6a42a6a5d42b82c3c7e&type=3#VT323-Regular');
-    -unity-font-definition: initial;
+* {
     background-color: transparent;
-    background-image: url('project://database/Assets/Sprites/pause-menu-v2/bg-btn.png?fileID=21300000&guid=a6a4ac5bdd4ea48268cc817b36fc9ff7&type=3#bg-btn');
     border-width: 0;
-    color: rgb(203, 108, 230);
-    font-size: 72px;
-    height: 120px;
     margin: 0;
     padding: 0;
-    width: 360px;
 }
 
-.pause-menu-v2-button:hover {
+.button:hover {
+    opacity: 0.8;
+}
+
+.button:active {
+    opacity: 0.6;
+}
+
+.button-bg {
+    background-image: url('project://database/Assets/Sprites/pause-menu-v2/bg-btn.png?fileID=21300000&guid=a6a4ac5bdd4ea48268cc817b36fc9ff7&type=3#bg-btn');
+}
+
+.button-bg:hover {
     background-image: url('project://database/Assets/Sprites/pause-menu-v2/bg-btn-hover.png?fileID=21300000&guid=cad42784cc533405abfbdbb75f5fba4e&type=3#bg-btn-hover');
 }
 
-.pause-menu-v2-close-button {
-    background-color: transparent;
-    background-image: url('project://database/Assets/Sprites/pause-menu-v2/ic-close.png?fileID=21300000&guid=85c43d65ec01844e7a2589a76e7c82b5&type=3#ic-close');
-    border-width: 0;
-    height: 120px;
-    margin: 0;
-    padding: 0;
-    position: absolute;
-    right: 32px;
-    top: 32px;
-    width: 120px;
-}
-
-.pause-menu-v2-close-button:hover {
-    opacity: 0.8;
-}
-
-.pause-menu-v2-close-button:active {
-    opacity: 0.6;
-}
-
-.pause-menu-v2-dialogue-body {
-    -unity-font: url('project://database/Assets/TextMesh%20Pro/Fonts/VT323-Regular.ttf?fileID=12800000&guid=46b9139fed5cc6a42a6a5d42b82c3c7e&type=3#VT323-Regular');
-    -unity-font-definition: initial;
-    background-color: rgba(126, 66, 156, 0.2);
-    color: rgb(203, 108, 230);
-    font-size: 48px;
-    margin: 0;
-    padding: 0;
-    white-space: normal;
-}
-
-.pause-menu-v2-dialogue-name {
-    -unity-font: url('project://database/Assets/TextMesh%20Pro/Fonts/VT323-Regular.ttf?fileID=12800000&guid=46b9139fed5cc6a42a6a5d42b82c3c7e&type=3#VT323-Regular');
-    -unity-font-definition: initial;
-    color: rgb(255, 255, 255);
-    font-size: 48px;
-    margin: 0;
-    padding: 0;
-}
-
-.pause-menu-v2-icon-button {
-    align-items: center;
-    background-color: transparent;
-    border-width: 0;
-    flex-direction: row;
-    margin: 0;
-    padding: 0;
-}
-
-.pause-menu-v2-icon-button > Label {
-    -unity-font: url('project://database/Assets/TextMesh%20Pro/Fonts/VT323-Regular.ttf?fileID=12800000&guid=46b9139fed5cc6a42a6a5d42b82c3c7e&type=3#VT323-Regular');
-    -unity-font-definition: initial;
-    color: rgb(203, 108, 230);
-    font-size: 72px;
-    margin: 0 0 0 32px;
-    padding: 0;
-}
-
-.pause-menu-v2-icon-button > VisualElement {
-    height: 120px;
-    width: 120px;
-}
-
-.pause-menu-v2-icon-button:hover {
-    opacity: 0.8;
-}
-
-.pause-menu-v2-icon-button:active {
-    opacity: 0.6;
-}
-
-.pause-menu-v2-icon-only-button {
-    background-color: transparent;
-    border-width: 0;
-    height: 120px;
-    margin: 0;
-    padding: 0;
-    width: 120px;
-}
-
-.pause-menu-v2-icon-only-button:hover {
-    opacity: 0.8;
-}
-
-.pause-menu-v2-icon-only-button:active {
-    opacity: 0.6;
-}
-
-.pause-menu-v2-slider {
-    flex-direction: row;
-    align-items: center;
-}
-
-.pause-menu-v2-slider > Slider {
-    height: 55px;
-    width: 345px;
-    margin: 0 0 0 32px;
-}
-
-.pause-menu-v2-slider > Slider #unity-dragger {
-    background-color: transparent;
+.slider .unity-base-slider__dragger {
     background-image: url('project://database/Assets/Sprites/UISprites/Volume%20Slider%20Knob.png?fileID=21300000&guid=d6adfb3a59ecf1a4b99e68446ca31bf9&type=3#Volume Slider Knob');
-    border-width: 0;
     height: 40px;
     margin-top: -20px;
     scale: 2;
     width: 40px;
 }
 
-.pause-menu-v2-slider > Slider #unity-dragger-border {
+.slider .unity-base-slider__dragger-border {
     display: none;
 }
 
-.pause-menu-v2-slider > Slider #unity-tracker {
+.slider .unity-base-slider__tracker {
     background-color: rgb(214, 214, 214);
     border-radius: 8px;
     height: 16px;
     margin-top: -8px;
 }
 
-.pause-menu-v2-slider > VisualElement {
+.toggle .unity-toggle__input {
     height: 120px;
     width: 120px;
 }
 
-.pause-menu-v2-text-button {
-    -unity-font: url('project://database/Assets/TextMesh%20Pro/Fonts/VT323-Regular.ttf?fileID=12800000&guid=46b9139fed5cc6a42a6a5d42b82c3c7e&type=3#VT323-Regular');
-    -unity-font-definition: initial;
-    background-color: transparent;
-    border-width: 0;
-    color: rgb(203, 108, 230);
-    font-size: 72px;
-    margin: 0;
-    padding: 0;
-}
-
-.pause-menu-v2-text-button:hover {
-    opacity: 0.8;
-}
-
-.pause-menu-v2-text-button:active {
-    opacity: 0.6;
-}
-
-.pause-menu-v2-toggle {
-    align-items: center;
-    margin: 0;
-}
-
-.pause-menu-v2-toggle > .unity-toggle__input {
-    background-image: url('project://database/Assets/Sprites/pause-menu-v2/ic-checkbox.png?fileID=2800000&guid=f525fbb470c1744a9aee03f8d8b2ed42&type=3#ic-checkbox');
-    height: 120px;
-    width: 120px;
-}
-
-.pause-menu-v2-toggle > .unity-toggle__input #unity-checkmark {
+.toggle .unity-toggle__checkmark {
     display: none;
 }
 
-.pause-menu-v2-toggle > Label {
-    -unity-font: url('project://database/Assets/TextMesh%20Pro/Fonts/VT323-Regular.ttf?fileID=12800000&guid=46b9139fed5cc6a42a6a5d42b82c3c7e&type=3#VT323-Regular');
-    -unity-font-definition: initial;
-    color: rgb(203, 108, 230);
-    font-size: 72px;
-    margin: 0 0 0 32px;
-    padding: 0;
-}
-
-.pause-menu-v2-toggle:checked > .unity-toggle__input {
-    background-image: url('project://database/Assets/Sprites/pause-menu-v2/ic-checkbox-checked.png?fileID=2800000&guid=adcf4d5c4eb2d4002be83eed340e12ce&type=3#ic-checkbox-checked');
-}
-
-.pause-menu-v2-toggle:hover {
-    opacity: 0.8;
-}
-
-.pause-menu-v2-toggle:active {
-    opacity: 0.6;
-}
-
-.pause-menu-v2-toggle-music {
-    margin: 0;
-}
-
-.pause-menu-v2-toggle-music > .unity-toggle__input {
+#toggle-mus .unity-toggle__input {
     background-image: url('project://database/Assets/Sprites/pause-menu-v2/ic-music.png?fileID=2800000&guid=42d6d39ef6dd248f39f0dfa74201cc7d&type=3#ic-music');
-    height: 120px;
-    width: 120px;
 }
 
-.pause-menu-v2-toggle-music > .unity-toggle__input #unity-checkmark {
-    display: none;
-}
-
-.pause-menu-v2-toggle-music:checked > .unity-toggle__input {
+#toggle-mus:checked .unity-toggle__input {
     background-image: url('project://database/Assets/Sprites/pause-menu-v2/ic-music-muted.png?fileID=2800000&guid=623eac09825ec41e0ac84e378893960d&type=3#ic-music-muted');
 }
 
-.pause-menu-v2-toggle-music:hover {
-    opacity: 0.8;
-}
-
-.pause-menu-v2-toggle-music:active {
-    opacity: 0.6;
-}
-
-.pause-menu-v2-toggle-sound {
-    margin: 0;
-}
-
-.pause-menu-v2-toggle-sound > .unity-toggle__input {
+#toggle-sfx .unity-toggle__input {
     background-image: url('project://database/Assets/Sprites/pause-menu-v2/ic-sound.png?fileID=2800000&guid=b5e9ca402cf7e4068ac074b454961269&type=3#ic-sound');
-    height: 120px;
-    width: 120px;
 }
 
-.pause-menu-v2-toggle-sound > .unity-toggle__input #unity-checkmark {
-    display: none;
-}
-
-.pause-menu-v2-toggle-sound:checked > .unity-toggle__input {
+#toggle-sfx:checked .unity-toggle__input {
     background-image: url('project://database/Assets/Sprites/pause-menu-v2/ic-sound-muted.png?fileID=2800000&guid=38ab01e6e119f4546ba11efd83d2141a&type=3#ic-sound-muted');
 }
 
-.pause-menu-v2-toggle-sound:hover {
-    opacity: 0.8;
+#toggle-vfx .unity-toggle__input {
+    background-image: url('project://database/Assets/Sprites/pause-menu-v2/ic-checkbox.png?fileID=2800000&guid=f525fbb470c1744a9aee03f8d8b2ed42&type=3#ic-checkbox');
 }
 
-.pause-menu-v2-toggle-sound:active {
-    opacity: 0.6;
+#toggle-vfx:checked .unity-toggle__input {
+    background-image: url('project://database/Assets/Sprites/pause-menu-v2/ic-checkbox-checked.png?fileID=2800000&guid=adcf4d5c4eb2d4002be83eed340e12ce&type=3#ic-checkbox-checked');
+}
+
+.dynamic-dialogue-name {
+    -unity-font: url('project://database/Assets/TextMesh%20Pro/Fonts/VT323-Regular.ttf?fileID=12800000&guid=46b9139fed5cc6a42a6a5d42b82c3c7e&type=3#VT323-Regular');
+    -unity-font-definition: initial;
+    -unity-font-style: bold;
+    color: rgb(255, 255, 255);
+    font-size: 48px;
+}
+
+.dynamic-dialogue-text {
+    -unity-font: url('project://database/Assets/TextMesh%20Pro/Fonts/VT323-Regular.ttf?fileID=12800000&guid=46b9139fed5cc6a42a6a5d42b82c3c7e&type=3#VT323-Regular');
+    -unity-font-definition: initial;
+    background-color: rgba(126, 66, 156, 0.2);
+    color: rgb(203, 108, 230);
+    font-size: 48px;
+    white-space: normal;
 }
