@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using LevelSelectInformation;
 using UnityEngine;
+using static BattleIntroEnum;
 
 namespace Director
 {
@@ -9,6 +10,7 @@ namespace Director
     {
         [SerializeField] private GameObject entityContainer;
 
+        private BattleIntro battleIntro;
         [SerializeField] private GameOver gameOver;
         [SerializeField] private DialogueWrapper gameOverDialogue; // sucks...
 
@@ -29,18 +31,20 @@ namespace Director
             CombatManager.Instance.SetDarkScreen();
             CombatManager.PlayersWinEvent += PlayersWin;
             CombatManager.EnemiesWinEvent += EnemiesWin;
+            battleIntro = BattleIntro.Build(Camera.main);
+
             yield return new WaitForEndOfFrame(); // Necessary for associated initialization code to run (to assign teams)
 
-            CombatManager.Instance.GameState = GameState.SELECTION;
-            yield return StartCoroutine(CombatManager.Instance.FadeInLightScreen(1f));
-
+            CombatManager.Instance.BeginCombat();
+            yield return StartCoroutine(CombatManager.Instance.FadeInLightScreen(1.5f));
+            battleIntro.PlayAnimation(Get<ClashIntro>());
             yield return new WaitUntil(() => CombatManager.Instance.GameState == GameState.GAME_WIN);
             AudioManager.Instance.FadeOutCurrentBackgroundTrack(2f);
             BountyManager.Instance.NotifyWin();
             GameStateManager.Instance.CurrentLevelProgress = GameStateManager.Instance.CurrentLevelProgress = Math.Max(GameStateManager.Instance.CurrentLevelProgress, StageInformation.PRINCESS_FROG_FIGHT.LevelID + 1f);
             yield return new WaitForSeconds(1f);
             yield return StartCoroutine(CombatManager.Instance.FadeInDarkScreen(1.5f));
-            GameStateManager.Instance.LoadScene(GameStateManager.LEVEL_SELECT_NAME);
+            GameStateManager.Instance.LoadScene(SceneData.Get<SceneData.LevelSelect>().SceneName);
         }
 
         private void PlayersWin()

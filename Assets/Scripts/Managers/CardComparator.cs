@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UI_Toolkit;
 using UnityEngine;
 using static Cinemachine.CinemachineTargetGroup;
 using static UnityEngine.GraphicsBuffer;
@@ -213,9 +214,9 @@ public class CardComparator : MonoBehaviour
         if (playersAreRollingDiceEvent != null)
         {
             yield return StartCoroutine(playersAreRollingDiceEvent.Invoke());
-            yield return new WaitUntil(() => Input.GetMouseButtonDown(0) && !PauseMenu.IsPaused); //Necessary to not immediately roll the dice
+            yield return new WaitUntil(() => Input.GetMouseButtonDown(0) && !PauseMenuV2.IsPaused); //Necessary to not immediately roll the dice
         }
-        yield return new WaitUntil(() => Input.GetMouseButtonDown(0) && !PauseMenu.IsPaused);
+        yield return new WaitUntil(() => Input.GetMouseButtonDown(0) && !PauseMenuV2.IsPaused);
     }
 
 

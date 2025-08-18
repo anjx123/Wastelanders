@@ -7,6 +7,7 @@ using Systems.Persistence;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using static BattleIntroEnum;
 
 public class TutorialIntroduction : DialogueClasses
 {
@@ -56,7 +57,7 @@ public class TutorialIntroduction : DialogueClasses
 
     [SerializeField] private GameOver gameOver;
     [SerializeField] private List<DialogueText> gameLoseDialogue;
-
+    [SerializeField] private BattleIntro battleIntro;
 
     [SerializeField] private bool jumpToCombat;
 
@@ -92,7 +93,8 @@ public class TutorialIntroduction : DialogueClasses
         ives.OutOfCombat();
         jackie.OutOfCombat();
         jackie.SetReturnPosition(jackieDefaultTransform.position);
-        if (!jumpToCombat)
+        battleIntro = BattleIntro.Build(Camera.main);
+        if (!jumpToCombat && !GameStateManager.Instance.JumpToCombat)
         {
             yield return new WaitForSeconds(1f);
 
@@ -177,19 +179,23 @@ public class TutorialIntroduction : DialogueClasses
                 }
                 yield return StartCoroutine(DialogueManager.Instance.StartDialogue(ivesChatsWithJackie.Dialogue));
             }
-            yield return new WaitForSeconds(BRIEF_PAUSE);
-            yield return StartCoroutine(ives.MoveToPosition(dummy1StartingPos.position, 1.2f, 1.2f)); //Ives goes to place a dummy down
+            yield return StartCoroutine(ives.MoveToPosition(dummy1StartingPos.position, 1.2f, 0.8f)); //Ives goes to place a dummy down
             trainingDummies.Add(Instantiate(trainingDummyPrefab, dummy1StartingPos)); //Ives summons Dummy
-            yield return new WaitForSeconds(1f);
         } else
         {
+            GameStateManager.Instance.JumpToCombat = false;
             //Set up the scene for a combat Jump in.
             ives.SetReturnPosition(ivesDefaultTransform.position);
-            StartCoroutine(ives.MoveToPosition(ivesDefaultTransform.position, 0, 0.1f)); //Ives comes into the scene
-            StartCoroutine(ives.MoveToPosition(dummy1StartingPos.position, 1.2f, 0.1f)); //Ives goes to place a dummy down
+            StartCoroutine(CombatManager.Instance.FadeInLightScreen(2f));
+            yield return StartCoroutine(ives.MoveToPosition(dummy1StartingPos.position, 1.2f, 0.8f)); //Ives goes to place a dummy down
+            yield return new WaitForSeconds(BRIEF_PAUSE);
             trainingDummies.Add(Instantiate(trainingDummyPrefab, dummy1StartingPos));
-            yield return StartCoroutine(CombatManager.Instance.FadeInLightScreen(2f));
+            
         }
+
+        yield return new WaitForSeconds(BRIEF_PAUSE);
+        battleIntro.PlayAnimation(Get<TutorialIntro>());
+        yield return new WaitForSeconds(1f);
 
         jackie.InjectDeck(jackieTutorialDeck);
         jackie.InCombat(); //Workaround for now, ill have to remove this once i manually start instantiating 
@@ -198,7 +204,7 @@ public class TutorialIntroduction : DialogueClasses
         CombatManager.Instance.SetEnemiesPassive(new List<EnemyClass> { ives });
 
         DialogueManager.Instance.MoveBoxToTop();
-        CombatManager.Instance.GameState = GameState.SELECTION;
+        CombatManager.Instance.BeginCombat();
         
         BeginCombatTutorial();
         yield return new WaitUntil(() => CombatManager.Instance.GameState == GameState.GAME_WIN);
@@ -244,9 +250,8 @@ public class TutorialIntroduction : DialogueClasses
         StartCoroutine(CombatManager.Instance.FadeInDarkScreen(3f));
         yield return StartCoroutine(jackie.MoveToPosition(jackieEndPosition.position, 0, 4f));
 
-        GameStateManager.Instance.ShouldPlayDeckSelectionTutorial = true;
-        GameStateManager.Instance.CurrentLevelProgress = Math.Max(GameStateManager.Instance.CurrentLevelProgress, StageInformation.TUTORIAL_STAGE.LevelID + 1f);
-        GameStateManager.Instance.LoadScene(GameStateManager.SELECTION_SCREEN_NAME);
+        GameStateManager.Instance.UpdateLevelProgress(StageInformation.DECK_SELECTION_TUTORIAL);
+        GameStateManager.Instance.LoadScene(SceneData.Get<SceneData.SelectionScreen>().SceneName);
         yield break;
     }
 

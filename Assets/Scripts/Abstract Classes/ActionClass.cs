@@ -1,5 +1,6 @@
 using System;
 using Systems.Persistence;
+using UI_Toolkit;
 using UnityEngine;
 
 public abstract class ActionClass : SelectClass, IBind<ActionData>
@@ -117,7 +118,7 @@ public abstract class ActionClass : SelectClass, IBind<ActionData>
 
     private void OnEnable()
     {
-        PauseMenu.onPauseMenuActivate += OnMouseExit;
+        PauseMenuV2.DidPause += OnMouseExit;
     }
 
     private void OnDisable()
@@ -126,7 +127,7 @@ public abstract class ActionClass : SelectClass, IBind<ActionData>
         {
             origin.BuffsUpdatedEvent -= UpdateBuffValue;
         }
-        PauseMenu.onPauseMenuActivate -= OnMouseExit;
+        PauseMenuV2.DidPause -= OnMouseExit;
     }
 
     private void UpdateBuffValue(EntityClass origin)
@@ -265,7 +266,7 @@ public abstract class ActionClass : SelectClass, IBind<ActionData>
 
     public void OnMouseEnter()
     {
-        if (PauseMenu.IsPaused) return;
+        if (PauseMenuV2.IsPaused) return;
         if (cardState == CardState.NORMAL)
         {
             SetCardState(CardState.HOVER);
@@ -276,7 +277,7 @@ public abstract class ActionClass : SelectClass, IBind<ActionData>
 
     public void OnMouseExit()
     {
-        if (PauseMenu.IsPaused) return;
+        if (PauseMenuV2.IsPaused) return;
         if (cardState == CardState.HOVER)
         {
             SetCardState(CardState.NORMAL);

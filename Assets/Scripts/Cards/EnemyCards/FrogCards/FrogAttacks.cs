@@ -36,7 +36,12 @@ public abstract class FrogAttacks : ActionClass
     }
     private IEnumerator HandleProjectile()
     {
-        yield return projectileBehaviour.ProjectileAnimation(Origin, Target);
+
+        var scaledAnimationTime = 0.6f;
+        var firstAttackFrame = 0.18f;
+        // Most practical way to handle the delay for frog spitting before the projectile actually comes out. 
+        yield return new WaitForSeconds(firstAttackFrame / scaledAnimationTime);
+        yield return projectileBehaviour.ProjectileAnimation(Origin.gameObject.transform.position, Target.gameObject.transform.position);
         OnProjectileHit();
     }
     protected virtual void OnProjectileHit()

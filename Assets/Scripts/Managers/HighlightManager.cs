@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Xml.Linq;
+using UI_Toolkit;
 using UnityEngine;
 
 public class HighlightManager : MonoBehaviour // later all entity highlighter
@@ -52,7 +53,7 @@ public class HighlightManager : MonoBehaviour // later all entity highlighter
 
     public void OnEntityClicked(EntityClass clicked)
     {
-        if (CombatManager.Instance.GameState != GameState.SELECTION || PauseMenu.IsPaused) return;
+        if (CombatManager.Instance.GameState != GameState.SELECTION || PauseMenuV2.IsPaused) return;
         EntityClicked?.Invoke(clicked);
 
         if (clicked is PlayerClass clickedPlayer)
@@ -142,7 +143,7 @@ public class HighlightManager : MonoBehaviour // later all entity highlighter
 
     public void OnActionClicked(ActionClass clicked)
     {
-        if (CombatManager.Instance.GameState != GameState.SELECTION || PauseMenu.IsPaused) return;
+        if (CombatManager.Instance.GameState != GameState.SELECTION || PauseMenuV2.IsPaused) return;
         if (selectedPlayer != null)
         {
             if (clicked.IsPlayableByPlayer(out PopupType popupType) == false)

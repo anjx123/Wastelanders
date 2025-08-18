@@ -307,7 +307,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &4569453568211372292
 RectTransform:
   m_ObjectHideFlags: 0
@@ -666,6 +666,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canvasGroup: {fileID: 6361015055530545876}
   restartButton: {fileID: 7682429585058371380}
+  shouldJumpToCombatWhenRestart: 1
   levelSelectButton: {fileID: 466798355764960788}
   deckSelectButton: {fileID: 509379208630894461}
   gameOverText: {fileID: 3177571334794247354}

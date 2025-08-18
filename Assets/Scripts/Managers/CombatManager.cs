@@ -8,6 +8,7 @@ using System.Security.Cryptography;
 using Systems.Persistence;
 using WeaponDeckSerialization;
 using System;
+using UI_Toolkit;
 using static EntityClass;
 
 public class CombatManager : MonoBehaviour
@@ -26,14 +27,11 @@ public class CombatManager : MonoBehaviour
     private List<EntityClass> neutralTeam = new();
 
     public GameObject handContainer;
-    public GameObject startDequeue;
     public GameObject battleQueueParent;
     
     [SerializeField]
     private SpriteRenderer fadeScreen;
     private FadeScreenHandler fadeScreenHandler;
-
-    bool fadeActive = false;
 
     [SerializeField] private PlayerDatabase playerDatabase;
     [SerializeField] private CardDatabase cardDatabase;
@@ -148,7 +146,6 @@ public class CombatManager : MonoBehaviour
     //Allows players to start selection again, resets enemies attacks and position
     private void PerformSelection()
     {
-        Activate(startDequeue);
         Activate(handContainer);
         battleQueueParent.SetActive(true);
         baseCamera.Priority = 1;
@@ -263,6 +260,7 @@ public class CombatManager : MonoBehaviour
     private void PerformLose()
     {
         StartCoroutine(FadeCombatBackground(false));
+        StartCoroutine(FadeInDarkScreen(GameOver.FADE_IN_TIME));
         Debug.LogWarning("All Players are dead, You Lose...");
         baseCamera.Priority = 1;
         dynamicCamera.Priority = 0;
@@ -281,15 +279,20 @@ public class CombatManager : MonoBehaviour
         SaveLoadSystem.Instance.SaveGame();
     }
 
-
-
     private void PerformFighting()
     {
-        Deactivate(startDequeue);
         Deactivate(handContainer);
         baseCamera.Priority = 0;
         dynamicCamera.Priority = 1;
         StartCoroutine(FadeCombatBackground(true));
+    }
+
+    public void BeginCombat()
+    {
+        if (GameState == GameState.SELECTION || GameState == GameState.FIGHTING) return;
+
+        StartCoroutine(AudioManager.Instance.StartCombatMusic());
+        GameState = GameState.SELECTION;
     }
 
     public void ActivateDynamicCamera()
@@ -332,11 +335,11 @@ public class CombatManager : MonoBehaviour
     private void PerformOutOfCombat()
     {
         Deactivate(handContainer);
-        Deactivate(startDequeue);
         battleQueueParent.SetActive(false);
 
         foreach (EntityClass entity in GrabAllEntities())
         {
+            entity.DeEmphasize();
             entity.OutOfCombat();
             entity.UnTargetable();
         }
@@ -427,7 +430,7 @@ public class CombatManager : MonoBehaviour
 
     public bool CanHighlight()
     {
-        return (!PauseMenu.IsPaused) && GameState == GameState.SELECTION;
+        return (!PauseMenuV2.IsPaused) && GameState == GameState.SELECTION;
     }
 
     public GameState GameState

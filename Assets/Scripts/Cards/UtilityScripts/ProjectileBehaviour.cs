@@ -9,20 +9,15 @@ public class ProjectileBehaviour : MonoBehaviour
     [SerializeField]
     private GameObject? projectilePrefab;
 
-    public IEnumerator ProjectileAnimation(EntityClass origin, EntityClass target)
-    {
-        return ProjectileAnimation(origin, target.myTransform.position);
-    }
-
-    public IEnumerator ProjectileAnimation(EntityClass origin, Vector3 targetPosition)
+    public IEnumerator ProjectileAnimation(Vector3 origin, Vector3 targetPosition)
     {
         return StartProjectileAnimationWithPosition(origin, targetPosition);
     }
 
-    private IEnumerator StartProjectileAnimationWithPosition(EntityClass origin, Vector3 targetPosition)
+    private IEnumerator StartProjectileAnimationWithPosition(Vector3 origin, Vector3 targetPosition)
     {
         if (projectilePrefab == null) yield break;
-        Vector3 originalPosition = origin.myTransform.position;
+        Vector3 originalPosition = origin;
         float elapsedTime = 0f;
 
         Vector3 diffInLocation = targetPosition - originalPosition;
@@ -57,9 +52,9 @@ public class ProjectileBehaviour : MonoBehaviour
         Destroy(spitProjectile);
     }
 
-    private Quaternion UpdateAngleWithPosition(EntityClass origin, Vector3 targetPosition)
+    private Quaternion UpdateAngleWithPosition(Vector3 origin, Vector3 targetPosition)
     {
-        Vector3 direction = targetPosition - origin.myTransform.position;
+        Vector3 direction = targetPosition - origin;
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         return Quaternion.Euler(new Vector3(0, 0, angle));
     }

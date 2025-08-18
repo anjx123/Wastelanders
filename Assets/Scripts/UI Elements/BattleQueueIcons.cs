@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UI_Toolkit;
 using UnityEngine;
 
 public class BattleQueueIcons : DisplayableClass
@@ -43,7 +44,7 @@ public class BattleQueueIcons : DisplayableClass
     public override void OnMouseEnter()
     {
         // Increase the size of the Combat UI to indicate it's clickable
-        if (CombatManager.Instance.CanHighlight() && !PauseMenu.IsPaused)
+        if (CombatManager.Instance.CanHighlight() && !PauseMenuV2.IsPaused)
         {
             Vector3 scale = transform.localScale;
             scale *= 1.25f;

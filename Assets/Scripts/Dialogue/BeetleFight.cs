@@ -10,6 +10,7 @@ using Systems.Persistence;
 using System;
 using LevelSelectInformation;
 using SceneBuilder;
+using static BattleIntroEnum;
 //@author: Andrew
 public class BeetleFight : DialogueClasses
 {
@@ -62,6 +63,7 @@ public class BeetleFight : DialogueClasses
     [SerializeField] private Sprite frogDeathSprite;
     [SerializeField] private Sprite jackieCrystalSprite;
     [SerializeField] private GameOver gameOver;
+    [SerializeField] private BattleIntro battleIntro;
 
     [SerializeField] private List<DialogueText> openingJackieQuipt;
     [SerializeField] private DialogueWrapper openingDiscussion;
@@ -93,8 +95,6 @@ public class BeetleFight : DialogueClasses
     [SerializeField] private List<DialogueText> ivesFeelsStronger;
     [SerializeField] private List<DialogueText> ivesAnalyzeAfterExam;
 
-
-    [SerializeField] private bool jumpToCombat;
     [SerializeField] private WaveIndicator waveIndicator;
 
     private List<EnemyClass> campBeetlesAndCrystals = new();
@@ -186,10 +186,11 @@ public class BeetleFight : DialogueClasses
     {
         CombatManager.Instance.GameState = GameState.OUT_OF_COMBAT;
         CombatManager.Instance.SetDarkScreen();
+        battleIntro = BattleIntro.Build(Camera.main);
         yield return new WaitForSeconds(0.2f);
         SetUpEnemyLists();
         SetUpCombatStatus();
-        if (!jumpToCombat && !GameStateManager.Instance.JumpIntoBeetleFight)
+        if (!GameStateManager.Instance.JumpToCombat)
         {
             sceneCamera.Priority = 2;
             yield return new WaitForSeconds(1f);
@@ -371,7 +372,7 @@ public class BeetleFight : DialogueClasses
         }
         else // setup scene
         {
-            GameStateManager.Instance.JumpIntoBeetleFight = false;
+            GameStateManager.Instance.JumpToCombat = false;
             RemoveEnemyFromScene(frog);
             RemoveEnemyFromScene(frogThatRunsAway);
             RemoveEnemyFromScene(ambushBeetle);
@@ -399,6 +400,7 @@ public class BeetleFight : DialogueClasses
 
         //Start wave 1 
         {
+            battleIntro.PlayAnimation(Get<ClashIntro>());
             wave2Fight.SetActive(false);
             wave3Fight.SetActive(false);
             CombatManager.Instance.SetEnemiesHostile(wave1);
@@ -409,7 +411,7 @@ public class BeetleFight : DialogueClasses
             DialogueManager.Instance.MoveBoxToTop();
 
             yield return new WaitForSeconds(0.2f);
-            CombatManager.Instance.GameState = GameState.SELECTION;
+            CombatManager.Instance.BeginCombat();
             yield return StartCoroutine(DialogueManager.Instance.StartDialogue(twoPlayerCombatTutorial.Dialogue));
             Begin2PCombatTutorial();
             waveIndicator.SetWave(1);
@@ -515,9 +517,8 @@ public class BeetleFight : DialogueClasses
             yield return ivesFade;
             yield return new WaitForSeconds(MEDIUM_PAUSE);
 
-            GameStateManager.Instance.JustFinishedBeetleFight = true;
-            GameStateManager.Instance.CurrentLevelProgress = Math.Max(GameStateManager.Instance.CurrentLevelProgress, StageInformation.BEETLE_STAGE.LevelID + 1f);
-            GameStateManager.Instance.LoadScene(GameStateManager.SELECTION_SCREEN_NAME);
+            GameStateManager.Instance.UpdateLevelProgress(StageInformation.QUEEN_PREPARATION_STAGE);
+            GameStateManager.Instance.LoadScene(SceneData.Get<SceneData.SelectionScreen>().SceneName);
             yield break;
         }
     }
@@ -644,7 +645,6 @@ public class BeetleFight : DialogueClasses
         yield return StartCoroutine(CombatManager.Instance.FadeInDarkScreen(2f));
 
         DialogueManager.Instance.MoveBoxToBottom();
-        GameStateManager.Instance.JumpIntoBeetleFight = true;
         gameOver.gameObject.SetActive(true);
         gameOver.FadeIn();
 

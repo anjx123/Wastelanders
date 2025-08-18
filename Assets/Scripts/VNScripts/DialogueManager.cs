@@ -1,22 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
+using UI_Toolkit;
 using UnityEngine;
-using TMPro;
 
+#nullable enable
 public class DialogueManager : MonoBehaviour
 {
-    public static DialogueManager Instance { get; private set; }
-
-
-
-    private DialogueBox activeDialogueBox;
+    private const string PAGE_FLIP_SOUND_EFFECT = "Page Flip";
+    public static DialogueManager Instance { get; private set; } = null!;
+    private DialogueBox activeDialogueBox = null!;
     [SerializeField]
-    private DialogueBox picturelessDialogueBoxComponent;
+    private DialogueBox picturelessDialogueBoxComponent = null!;
     [SerializeField]
-    private DialogueBox pictureDialogueBox;
+    private DialogueBox pictureDialogueBox = null!;
     private List<DialogueText> sentences = new();
 
     private bool inDialogue = false;
+    private bool wasSkipping = false;
 
     List<DialogueText> dialogueHistory = new();
 
@@ -129,6 +129,8 @@ void ClearPanel()
             SetDialogueBoxActive(pictureDialogueBox);
             pictureDialogueBox.SetLine(sentence);
         }
+
+        sentence.playSound();
     }
 
     void SetDialogueBoxActive(DialogueBox dialogueBox)
@@ -152,21 +154,46 @@ void ClearPanel()
 
     void Update()
     {
-        if (PauseMenu.IsPaused) return;
+        if (PauseMenuV2.IsPaused) return;
 
-        if (Input.GetKeyDown(KeyCode.Mouse0) || Input.GetKeyDown(KeyCode.Space) || Input.GetKey(KeyCode.RightArrow))
+        HandleDialogueAdvancement();
+        HandleSkipSoundPlayback();
+    }
+
+    /// Checks for player input and advances the dialogue or fast-forwards the current line.
+    private void HandleDialogueAdvancement()
+    {
+        if (!inDialogue) return;
+
+        bool singlePress = Input.GetKeyDown(KeyCode.Mouse0) || Input.GetKeyDown(KeyCode.Space);
+        bool holdingSkip = Input.GetKey(KeyCode.RightArrow);
+
+        if (singlePress || holdingSkip)
         {
-            if (inDialogue)
+            if (activeDialogueBox.FinishedLine())
             {
-                if (activeDialogueBox.FinishedLine())
-                {
-                    DisplayNextSentence();
-                }
-                else
-                {
-                    activeDialogueBox.StopScrollingText();
-                }
+                DisplayNextSentence();   
+                if (holdingSkip) wasSkipping = true;
+                if (singlePress) AudioManager.Instance.PlaySFX(PAGE_FLIP_SOUND_EFFECT);
             }
+            else
+            {
+                activeDialogueBox.StopScrollingText();
+            }
+        }
+    }
+
+    /// Handles playing the "Page Flip" sound at the end of a skip sequence.
+    /// Sound effect should play when the key is released or the dialogue concludes.
+    private void HandleSkipSoundPlayback()
+    {
+        bool skipKeyWasReleased = Input.GetKeyUp(KeyCode.RightArrow);
+        bool dialogueHasEnded = !inDialogue;
+
+        if (wasSkipping && (skipKeyWasReleased || dialogueHasEnded))
+        {
+            AudioManager.Instance.PlaySFX(PAGE_FLIP_SOUND_EFFECT);
+            wasSkipping = false;
         }
     }
 }
