@@ -184,12 +184,12 @@ namespace UI_Toolkit
                 {
                     var label1 = new Label($"<b>{history[i].SpeakerName.Trim()}</b>")
                         { style = { marginTop = i == 0 ? 0 : 32 } };
-                    label1.AddToClassList("pause-menu-v2-dialogue-name");
+                    label1.AddToClassList("dynamic-dialogue-name");
                     yield return label1;
                 }
 
                 var label2 = new Label(history[i].BodyText.Trim()) { style = { marginTop = i == 0 ? 0 : 16 } };
-                label2.AddToClassList("pause-menu-v2-dialogue-body");
+                label2.AddToClassList("dynamic-dialogue-text");
                 yield return label2;
             }
         }
