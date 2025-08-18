@@ -1,6 +1,6 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/UI%20Toolkit/HUDV2.uss?fileID=7433441132597879392&amp;guid=b0c45c879e3d14a0ea0a4ae41ebc1a6b&amp;type=3#HUDV2" />
     <ui:VisualElement style="position: absolute; left: 0; top: 0; right: 0; bottom: 0;">
-        <ui:Button name="button-cnf" class="hud-v2-button-confirm" />
+        <ui:Button name="button-cnf" style="bottom: 80px; height: 136px; position: absolute; right: 80px; width: 260px;" />
     </ui:VisualElement>
 </ui:UXML>

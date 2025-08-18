@@ -14,7 +14,9 @@ public abstract class PlayerClass : EntityClass
     public static event PlayerEventDelegate? playerReshuffleDeck;
 
     public int maxHandSize = 4;
-
+    
+    private float MIN_ANIMATION_SPEED = 0.5f;
+    private float MAX_ANIMATION_SPEED = 1.5f;
 
     public List<GameObject> Hand { get { return new List<GameObject>(hand); } }
 
@@ -180,4 +182,18 @@ public abstract class PlayerClass : EntityClass
             DrawCard();
         }
     }
+
+    public override IEnumerator MoveToPosition(Vector3 destination, float radius, float duration, Vector3? lookAtPosition = null)
+    {
+        float distance = Vector3.Distance(myTransform.position, destination);
+        float normalizedDistance = Mathf.Clamp01(distance / 5f);
+        float animSpeed = Mathf.Lerp(MIN_ANIMATION_SPEED, MAX_ANIMATION_SPEED, normalizedDistance);
+
+        animator.speed = animSpeed;
+
+        yield return base.MoveToPosition(destination, radius, duration, lookAtPosition);
+
+        animator.speed = 1f;
+    }
+
 }

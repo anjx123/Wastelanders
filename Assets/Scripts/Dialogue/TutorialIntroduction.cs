@@ -148,7 +148,7 @@ public class TutorialIntroduction : DialogueClasses
             }
 
             jackie.Emphasize(); //Jackie shows up above the black background
-            yield return StartCoroutine(jackie.ResetPosition()); //Jackie Runs into the scene and talks 
+            yield return StartCoroutine(jackie.MoveToPosition(jackieDefaultTransform.position, 0, 1.5f)); //Jackie Runs into the scene and talks 
             yield return new WaitForSeconds(MEDIUM_PAUSE);
 
             yield return StartCoroutine(DialogueManager.Instance.StartDialogue(jackieMonologue));
@@ -165,7 +165,7 @@ public class TutorialIntroduction : DialogueClasses
             yield return new WaitForSeconds(MEDIUM_PAUSE);
 
             ives.SetReturnPosition(ivesDefaultTransform.position);
-            yield return StartCoroutine(ives.MoveToPosition(ivesDefaultTransform.position, 0, 0.8f)); //Ives comes into the scene
+            yield return StartCoroutine(ives.MoveToPosition(ivesDefaultTransform.position, 0, 1f)); //Ives comes into the scene
             yield return new WaitForSeconds(0.2f);
 
             jackie.FaceRight(); //Jackie turns to face the person approaching her
