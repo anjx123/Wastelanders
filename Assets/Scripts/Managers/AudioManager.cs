@@ -1,4 +1,5 @@
 using System.Collections;
+using Systems.Persistence;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -19,7 +20,7 @@ public class AudioManager : PersistentSingleton<AudioManager>
                                        "Ensure a SceneInitializer exists in your first scene.");
                         return null;
                     }
-                    
+
                     instance = Instantiate(SceneInitializer.Instance.InitializablePrefabs.audioManager);
                 }
             }
@@ -33,6 +34,14 @@ public class AudioManager : PersistentSingleton<AudioManager>
     [SerializeField] private AudioDatabase sceneAudioDatabase;
 #nullable enable
     private SceneAudio sceneAudio = null!;
+    // We need this reference for serialization purposes
+    private AudioPreferences audioPreferences = null!;
+
+    protected override void Awake()
+    {
+        base.Awake();
+        Bind(SaveLoadSystem.Instance.GetUserPreferences());
+    }
 
     private void OnEnable()
     {
@@ -92,7 +101,8 @@ public class AudioManager : PersistentSingleton<AudioManager>
         {
             audioSource.Stop();
             audioSource.volume = startVolume;
-        } else
+        }
+        else
         {
             audioSource.volume = endVolume;
         }
@@ -144,25 +154,46 @@ public class AudioManager : PersistentSingleton<AudioManager>
         BackgroundMusicPlayer.Play();
     }
 
-    public void ToggleSFX()
+    public void SetSFXMuted(bool state)
     {
-        SFXSoundsPlayer.mute = !SFXSoundsPlayer.mute;
+        SFXSoundsPlayer.mute = audioPreferences.SFXMuted = state;
     }
 
-    public void ToggleMusic()
+    public void SetMusicMuted(bool state)
     {
-        BackgroundMusicIntroPlayer.mute = !BackgroundMusicIntroPlayer.mute;
-        BackgroundMusicPlayer.mute = !BackgroundMusicPlayer.mute;
+        BackgroundMusicIntroPlayer.mute = BackgroundMusicPlayer.mute = audioPreferences.MusicMuted = state;
     }
 
-    public void SFXVolume(float volume)
+    public void SetSFXVolume(float volume)
     {
         SFXSoundsPlayer.volume = volume;
+        audioPreferences.SFXVolume = volume;
     }
 
-    public void MusicVolume(float volume)
+    public void SetMusicVolume(float volume)
     {
         BackgroundMusicIntroPlayer.volume = volume;
         BackgroundMusicPlayer.volume = volume;
+        audioPreferences.BackgroundMusicVolume = volume;
     }
+
+    void Bind(UserPreferences data)
+    {
+        audioPreferences = data.audioPreferences;
+        SetMusicVolume(audioPreferences.BackgroundMusicVolume);
+        SetSFXVolume(audioPreferences.SFXVolume);
+        SetMusicMuted(audioPreferences.MusicMuted);
+        SetSFXMuted(audioPreferences.SFXMuted);
+    }
+}
+
+[System.Serializable]
+public class AudioPreferences : ISaveable
+{
+    public SerializableGuid Id { get; set; } = SerializableGuid.NewGuid();
+
+    [field: SerializeField] public float BackgroundMusicVolume { get; set; } = 0.7f;
+    [field: SerializeField] public float SFXVolume { get; set; } = 0.7f;
+    [field: SerializeField] public bool MusicMuted { get; set; } = false;
+    [field: SerializeField] public bool SFXMuted { get; set; } = false;
 }

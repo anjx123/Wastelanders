@@ -13,7 +13,7 @@ namespace Systems.Persistence {
 
         private string GetPath(string name) => name + EXTENSION;
 
-        public void Save(GameData data, bool overwrite = true) {
+        public void Save<T>(T data, bool overwrite = true) where T: ISaveData {
             if (!SteamManager.Initialized) {
                 Debug.LogWarning("[SteamCloudDataService] Steam is not initialized. Cannot save.");
                 return;
@@ -21,7 +21,7 @@ namespace Systems.Persistence {
 #if STEAMWORKS_NET
             string json = serializer.Serialize(data);
             byte[] bytes = System.Text.Encoding.UTF8.GetBytes(json);
-            string path = GetPath(data.Name);
+            string path = GetPath(data.SaveName);
 
             
             bool result = SteamRemoteStorage.FileWrite(path, bytes, bytes.Length);
@@ -30,12 +30,12 @@ namespace Systems.Persistence {
 
         }
 
-        public GameData Load(string name) {
+        public T Load<T>(string name) where T: ISaveData {
             if (!SteamManager.Initialized) {
                 throw new IOException("Steam is not initialized.");
             }
 
-            GameData gamedData = null;
+            T gamedData = default(T);
 #if STEAMWORKS_NET
             string path = GetPath(name);
 
@@ -48,7 +48,7 @@ namespace Systems.Persistence {
 
             int read = SteamRemoteStorage.FileRead(path, buffer, size);
             string json = System.Text.Encoding.UTF8.GetString(buffer, 0, read);
-            gamedData = serializer.Deserialize<GameData>(json);
+            gamedData = serializer.Deserialize<T>(json);
 #endif
             return gamedData;
         }
