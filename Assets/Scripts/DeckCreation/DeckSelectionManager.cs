@@ -307,7 +307,7 @@ public class DeckSelectionManager : MonoBehaviour
 
     private void RenderCardInformation(ActionClass card)
     {
-        cardTitleTextField.text = card.GetName();
+        cardTitleTextField.text = card.GetName().ToUpper();
         cardDescriptorTextField.text = card.GenerateCardDescription();
     }
 
