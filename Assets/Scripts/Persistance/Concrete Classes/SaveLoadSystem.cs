@@ -121,16 +121,8 @@ namespace Systems.Persistence
             Bind<BountyManager, BountyStateData>(gameData.bountyStateData);
         }
 
-        public UserPreferences GetUserPreferences()
-        {
-            return userPreferences;
-        }
+        public UserPreferences GetUserPreferences() => userPreferences;
 
-        public void BindUserPreference(Action<UserPreferences> bindFunction)
-        {
-            bindFunction(userPreferences);
-        }
-        
         void Bind<T, TData>(List<TData> datas) where T: MonoBehaviour, IBind<TData> where TData : ISaveable, new() {
             T[] entities = FindObjectsByType<T>(FindObjectsSortMode.None);
 

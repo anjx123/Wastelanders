@@ -5,7 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class AudioManager : PersistentSingleton<AudioManager>
 {
-    [field: SerializeField] public SerializableGuid Id { get; set; } = SerializableGuid.NewGuid();
     public new static AudioManager Instance
     {
         get
@@ -38,9 +37,10 @@ public class AudioManager : PersistentSingleton<AudioManager>
     // We need this reference for serialization purposes
     private AudioPreferences audioPreferences = null!;
 
-    private void Start()
+    protected override void Awake()
     {
-        SaveLoadSystem.Instance.BindUserPreference(Bind);
+        base.Awake();
+        Bind(SaveLoadSystem.Instance.GetUserPreferences());
     }
 
     private void OnEnable()
@@ -164,26 +164,24 @@ public class AudioManager : PersistentSingleton<AudioManager>
         BackgroundMusicIntroPlayer.mute = BackgroundMusicPlayer.mute = audioPreferences.MusicMuted = state;
     }
 
-    public void SFXVolume(float volume)
+    public void SetSFXVolume(float volume)
     {
         SFXSoundsPlayer.volume = volume;
         audioPreferences.SFXVolume = volume;
     }
 
-    public void MusicVolume(float volume)
+    public void SetMusicVolume(float volume)
     {
         BackgroundMusicIntroPlayer.volume = volume;
         BackgroundMusicPlayer.volume = volume;
         audioPreferences.BackgroundMusicVolume = volume;
     }
 
-    public AudioPreferences GetAudioPreferences() { return audioPreferences; }
-
     void Bind(UserPreferences data)
     {
         audioPreferences = data.audioPreferences;
-        MusicVolume(audioPreferences.BackgroundMusicVolume);
-        SFXVolume(audioPreferences.SFXVolume);
+        SetMusicVolume(audioPreferences.BackgroundMusicVolume);
+        SetSFXVolume(audioPreferences.SFXVolume);
         SetMusicMuted(audioPreferences.MusicMuted);
         SetSFXMuted(audioPreferences.SFXMuted);
     }

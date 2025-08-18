@@ -31,13 +31,8 @@ namespace UI_Toolkit
             pauseMenuPanel = rootElem.Q<VisualElement>("pause-menu-panel");
 
             RegisterCallbacks();
-            SetState(State.Unpaused);
-        }
-
-        public void Start()
-        {
-            // Required, as user preference save data is not ready until Start
             LoadInitialValues();
+            SetState(State.Unpaused);
         }
 
         public void Update()
@@ -116,12 +111,12 @@ namespace UI_Toolkit
 
         private static void OnMusChanged(float value)
         {
-            AudioManager.Instance.MusicVolume(value);
+            AudioManager.Instance.SetMusicVolume(value);
         }
 
         private static void OnSfxChanged(float value)
         {
-            AudioManager.Instance.SFXVolume(value);
+            AudioManager.Instance.SetSFXVolume(value);
         }
 
         private static void OnMusChecked(bool state)
@@ -160,9 +155,7 @@ namespace UI_Toolkit
 
         private void LoadInitialValues()
         {
-            AudioPreferences a = AudioManager.Instance.GetAudioPreferences();
-
-            // TODO: Load these values from saved settings and sync with audio manager.
+            AudioPreferences a = SaveLoadSystem.Instance.GetUserPreferences().audioPreferences;
             pauseMenuPanel.Q<Slider>("slider-mus").value = a.BackgroundMusicVolume;
             pauseMenuPanel.Q<Slider>("slider-sfx").value = a.SFXVolume;
             pauseMenuPanel.Q<Toggle>("toggle-mus").value = a.MusicMuted;
