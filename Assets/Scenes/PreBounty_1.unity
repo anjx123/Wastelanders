@@ -423,7 +423,7 @@ Transform:
   m_GameObject: {fileID: 551469452}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7.78, y: 0, z: 0}
+  m_LocalPosition: {x: 10.28, y: 0, z: 0}
   m_LocalScale: {x: 0.25, y: 0.25, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1511,7 +1511,7 @@ Transform:
   m_GameObject: {fileID: 1538394866}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.65, y: -0.96, z: 0}
+  m_LocalPosition: {x: 2.5, y: -0.25, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1980,7 +1980,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   jackie: {fileID: 50785708}
   ives: {fileID: 551469452}
-  ivesTarget: {fileID: 0}
+  ivesTarget: {fileID: 1538394867}
   fadeScreenHandler: {fileID: 576174012}
   bountyDiscussionDialogue:
   - bodyText: 
@@ -1988,6 +1988,7 @@ MonoBehaviour:
     displayingImage: {fileID: 0}
     sfx: 
     broadcastAnEvent: 0
+  ivesMoveSpeed: 2
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
