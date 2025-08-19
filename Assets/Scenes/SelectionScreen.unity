@@ -4696,8 +4696,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 8.705006, y: -11.789993}
-  m_SizeDelta: {x: -17.41, y: -23.59}
+  m_AnchoredPosition: {x: -16.500008, y: -9}
+  m_SizeDelta: {x: -69.00001, y: -18}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1891331115
 MonoBehaviour:
@@ -4719,7 +4719,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: FLURRY +
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ef98bd283b7bb734da8a833fccf0fb3e, type: 2}
   m_sharedMaterial: {fileID: -1472579445266561125, guid: ef98bd283b7bb734da8a833fccf0fb3e, type: 2}
@@ -5427,11 +5427,11 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 398063480230286653}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 17.41, y: -56.18}
-  m_SizeDelta: {x: 182.48, y: 193.95}
-  m_Pivot: {x: 0, y: 1}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -16.500002, y: -30.000015}
+  m_SizeDelta: {x: -69, y: -59.999966}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &5609974552998663896
 GameObject:
   m_ObjectHideFlags: 0
@@ -5512,8 +5512,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-    tempor incididunt ut labore et dolore .
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ef98bd283b7bb734da8a833fccf0fb3e, type: 2}
   m_sharedMaterial: {fileID: -1472579445266561125, guid: ef98bd283b7bb734da8a833fccf0fb3e, type: 2}
