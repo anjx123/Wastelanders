@@ -406,6 +406,7 @@ GameObject:
   m_Component:
   - component: {fileID: 551469453}
   - component: {fileID: 551469454}
+  - component: {fileID: 551469455}
   m_Layer: 0
   m_Name: Ives
   m_TagString: Untagged
@@ -480,6 +481,27 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &551469455
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 551469452}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f001d61155be94e4da4b96b03bf3197f, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &576174011 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4530029290296022730, guid: 5027f4741873b7e49893b1382013ba7b, type: 3}
@@ -1958,6 +1980,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   jackie: {fileID: 50785708}
   ives: {fileID: 551469452}
+  ivesTarget: {fileID: 0}
   fadeScreenHandler: {fileID: 576174012}
   bountyDiscussionDialogue:
   - bodyText: 

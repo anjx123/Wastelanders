@@ -13,6 +13,8 @@ public class PreBounty_1 : MonoBehaviour
 {
     [SerializeField] private GameObject jackie;
     [SerializeField] private GameObject ives;
+
+    [SerializeField] private Transform ivesTarget;
     
     [SerializeField] private FadeScreenHandler fadeScreenHandler;
     
@@ -30,5 +32,7 @@ public class PreBounty_1 : MonoBehaviour
         yield return new WaitForSeconds(1f);
         
         yield return fadeScreenHandler.FadeInLightScreen(1f);
+        
+        ives.GetComponent<Animator>().SetBool("IsMoving", true);
     }
 }
