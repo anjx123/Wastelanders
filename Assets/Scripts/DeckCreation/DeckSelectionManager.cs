@@ -19,6 +19,7 @@ public class DeckSelectionManager : MonoBehaviour
     [SerializeField] private CardDatabase cardDatabase;
     [SerializeField] private PlayerDatabase playerDatabase;
     [SerializeField] private FadeScreenHandler fadeScreenHandler;
+    [SerializeField] private TMP_Text cardTitleTextField;
     [SerializeField] private TMP_Text cardDescriptorTextField;
     [SerializeField] private Transform[] subFolderLayout;
     [SerializeField] private Transform[] fourRowCardLayout;
@@ -92,8 +93,8 @@ public class DeckSelectionManager : MonoBehaviour
     {
         ActionClass.CardClickedEvent += ActionSelected;
         ActionClass.CardRightClickedEvent += CardRightClicked;
-        ActionClass.CardHighlightedEvent += RenderCardDescription;
-        ActionClass.CardUnhighlightedEvent += RemoveCardDescription;
+        ActionClass.CardHighlightedEvent += RenderCardInformation;
+        ActionClass.CardUnhighlightedEvent += RemoveCardInformation;
         CharacterSelect.CharacterSelectedEvent += CharacterChosen;
         WeaponSelect.WeaponSelectEvent += WeaponSelected;
         WeaponEdit.WeaponEditEvent += WeaponDeckEdit;
@@ -111,8 +112,8 @@ public class DeckSelectionManager : MonoBehaviour
     {
         ActionClass.CardClickedEvent -= ActionSelected;
         ActionClass.CardRightClickedEvent -= CardRightClicked;
-        ActionClass.CardHighlightedEvent -= RenderCardDescription;
-        ActionClass.CardUnhighlightedEvent -= RemoveCardDescription;
+        ActionClass.CardHighlightedEvent -= RenderCardInformation;
+        ActionClass.CardUnhighlightedEvent -= RemoveCardInformation;
         CharacterSelect.CharacterSelectedEvent -= CharacterChosen;
         WeaponSelect.WeaponSelectEvent -= WeaponSelected;
         WeaponEdit.WeaponEditEvent -= WeaponDeckEdit;
@@ -304,13 +305,15 @@ public class DeckSelectionManager : MonoBehaviour
         deckSelectionUi.SetActive(true);
     }
 
-    private void RenderCardDescription(ActionClass card)
+    private void RenderCardInformation(ActionClass card)
     {
+        cardTitleTextField.text = card.GetName().ToUpper();
         cardDescriptorTextField.text = card.GenerateCardDescription();
     }
 
-    private void RemoveCardDescription(ActionClass card)
+    private void RemoveCardInformation(ActionClass card)
     {
+        cardTitleTextField.text = "";
         cardDescriptorTextField.text = "";
     }
 
