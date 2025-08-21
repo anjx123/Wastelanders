@@ -25,6 +25,7 @@ public class LevelSelectManager : MonoBehaviour
     {
         Debug.Log("Unlock Dialogue");
         levelSelectCanvas.interactable = false;
+        levelSelectCanvas.blocksRaycasts = false;
         yield return new WaitForSeconds(2f);
         yield return StartCoroutine(DialogueManager
             .Instance
@@ -37,6 +38,7 @@ public class LevelSelectManager : MonoBehaviour
         }));
         princessFrogFightButton.Unlock(animate: true);
         levelSelectCanvas.interactable = true;
+        levelSelectCanvas.blocksRaycasts = true;
         yield return null;
     }
 
