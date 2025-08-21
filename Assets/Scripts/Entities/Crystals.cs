@@ -19,7 +19,7 @@ public class Crystals : EnemyClass, NeutralEntityInterface
         myName = "Le Shiny";
     }
 
-    public override void TakeDamage(EntityClass source, int damage)
+    public override void TakeDamage(EntityClass source, int damage, bool lostClash = true)
     {
         int oldHealth = Health; // This ensures the buff is added only once when each criteria is met
         base.TakeDamage(source, damage);
@@ -39,7 +39,7 @@ public class Crystals : EnemyClass, NeutralEntityInterface
         yield break;
     }
 
-    public override IEnumerator StaggerBack(Vector3 staggeredPosition)
+    public override IEnumerator StaggerBack(Vector3 staggeredPosition, bool lostClash = true)
     {
         yield break;
     }

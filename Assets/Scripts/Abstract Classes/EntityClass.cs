@@ -93,7 +93,7 @@ public abstract class EntityClass : SelectClass
      Requires: This Entity is not dead
      */
 
-    public virtual void TakeDamage(EntityClass source, int damage)
+    public virtual void TakeDamage(EntityClass source, int damage, bool lostClash = true)
     {
         BuffsOnDamageEvent(ref damage);
 
@@ -114,16 +114,16 @@ public abstract class EntityClass : SelectClass
         combatInfo.DisplayDamage(damage);
         if (damage > 0)
         {
-            StartCoroutine(PlayHitAnimation(source, this, percentageDone));
+            StartCoroutine(PlayHitAnimation(source, this, percentageDone, lostClash));
         }
     }
 
     //Plays both first the stagger entities then 
     //Requires: Entities are not dead
-    private IEnumerator PlayHitAnimation(EntityClass origin, EntityClass target, float percentageDone)
+    private IEnumerator PlayHitAnimation(EntityClass origin, EntityClass target, float percentageDone, bool lostClash = true)
     {
         CombatManager.Instance.AttackCameraEffect(percentageDone);
-        yield return StartCoroutine(StaggerEntities(origin, target, percentageDone));
+        yield return StartCoroutine(StaggerEntities(origin, target, percentageDone, lostClash));
     }
 
     /* 
@@ -133,13 +133,13 @@ public abstract class EntityClass : SelectClass
     percentageDone: Percentage health done to the target
     Requires: Entities are not dead
      */
-    public IEnumerator StaggerEntities(EntityClass origin, EntityClass target, float percentageDone)
+    public IEnumerator StaggerEntities(EntityClass origin, EntityClass target, float percentageDone, bool lostClash = true)
     {
         Vector3 directionVector = target.myTransform.position - origin.myTransform.position;
         
         Vector3 normalizedDirection = directionVector.normalized;
         float staggerPower = StaggerPowerCalculation(percentageDone);
-        yield return StartCoroutine(target.StaggerBack(target.myTransform.position + normalizedDirection * staggerPower));
+        yield return StartCoroutine(target.StaggerBack(target.myTransform.position + normalizedDirection * staggerPower, lostClash));
     }
 
     //Calculates the power of the stagger based on the percentage health done
@@ -293,7 +293,7 @@ public abstract class EntityClass : SelectClass
      * Modifies: this.myTransform.position
      * Requires: Entity is not dead
      */
-    public virtual IEnumerator StaggerBack(Vector3 staggeredPosition)
+    public virtual IEnumerator StaggerBack(Vector3 staggeredPosition, bool lostClash = true)
     {
         Vector3 originalPosition = myTransform.position;
         float elapsedTime = 0f;
@@ -302,13 +302,13 @@ public abstract class EntityClass : SelectClass
         if ((Vector2)diffInLocation == Vector2.zero) yield break;
         UpdateFacing(-diffInLocation, null);
 
-        if (HasAnimationParameter("IsStaggered"))
+        if (lostClash && HasAnimationParameter("IsStaggered"))
         {
             animator.SetBool("IsStaggered", true);
         }
 
         float duration = animator.GetCurrentAnimatorStateInfo(0).length;
-        if (duration > CardComparator.COMBAT_BUFFER_TIME) duration = CardComparator.COMBAT_BUFFER_TIME - 0.2f; //Ensure that animation doesn't exceed buffer time or bug will happen with death.
+        if (!lostClash || duration > CardComparator.COMBAT_BUFFER_TIME) duration = CardComparator.COMBAT_BUFFER_TIME - 0.2f; //Ensure that animation doesn't exceed buffer time or bug will happen with death.
 
         while (elapsedTime < duration)
         {
@@ -317,7 +317,7 @@ public abstract class EntityClass : SelectClass
             yield return null;
         }
 
-        if (HasAnimationParameter("IsStaggered"))
+        if (lostClash && HasAnimationParameter("IsStaggered"))
         {
             animator.SetBool("IsStaggered", false);
         }

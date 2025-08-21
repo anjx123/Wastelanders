@@ -24,7 +24,12 @@ public class Headshot : PistolCards
     public override void OnHit()
     {
         IncrementRoll(Origin.GetBuffStacks(Accuracy.buffName));
-        base.OnHit();
+        AudioManager.Instance?.PlaySFX(PISTOL_SOUND_FX_NAME);
+        Vector3 diffInLocation = Target.myTransform.position - Origin.myTransform.position;
+        Origin.UpdateFacing(diffInLocation, null);
+        CardIsUnstaggered();
+        Debug.Log("Damage is: " + rolledCardStats.ActualRoll);
+        this.Target.TakeDamage(Origin, rolledCardStats.ActualRoll, rolledCardStats.ActualRoll <= 0);
 
         if (Target.IsDead)
         {
