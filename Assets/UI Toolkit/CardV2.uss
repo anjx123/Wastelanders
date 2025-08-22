@@ -1,0 +1,34 @@
+* {
+    background-color: transparent;
+    border-width: 0;
+    margin: 0;
+    padding: 0;
+}
+
+.dynamic-bg-axe {
+    background-image: url('project://database/Assets/Sprites/card-v2/bg-card-axe.png?fileID=2800000&guid=73956d4ace67146d9ba365dc37fcd9b3&type=3#bg-card-axe');
+}
+
+.dynamic-bg-enemy {
+    background-image: url('project://database/Assets/Sprites/card-v2/bg-card-enemy.png?fileID=2800000&guid=77a719ac1d2fa418394df2f086220848&type=3#bg-card-enemy');
+}
+
+.dynamic-bg-fist {
+    background-image: url('project://database/Assets/Sprites/card-v2/bg-card-fist.png?fileID=2800000&guid=dcc8696779b4c4145b7cb8095f302ffd&type=3#bg-card-fist');
+}
+
+.dynamic-bg-pistol {
+    background-image: url('project://database/Assets/Sprites/card-v2/bg-card-pistol.png?fileID=2800000&guid=48898af35a1914e0986544afaea72ed7&type=3#bg-card-pistol');
+}
+
+.dynamic-bg-staff {
+    background-image: url('project://database/Assets/Sprites/card-v2/bg-card-staff.png?fileID=2800000&guid=f367ffc6fc84e43afa49ea0a944c82d7&type=3#bg-card-staff');
+}
+
+.dynamic-ic-atk {
+    background-image: resource('StatusIcon/Damage');
+}
+
+.dynamic-ic-def {
+    background-image: resource('StatusIcon/Defense_Icon');
+}
