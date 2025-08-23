@@ -5,6 +5,9 @@ using UnityEngine;
 // are "displayable" in the upper right window when clicked.
 public abstract class DisplayableClass : SelectClass
 {
+    public static event Action<ActionClass> OnShowCard;
+    public static event Action<ActionClass> OnHideCard;
+
 #nullable enable
     public ActionClass? ActionClass { get; protected set; }   
     protected bool targetHighlighted = false;
@@ -14,7 +17,15 @@ public abstract class DisplayableClass : SelectClass
     {
         if (ActionClass != null)
         {
-            CombatCardDisplayManager.Instance.ShowCard(ActionClass);
+            OnShowCard?.Invoke(ActionClass);
+        }
+    }
+
+    protected void HideCard()
+    {
+        if (ActionClass != null)
+        {
+            OnHideCard?.Invoke(ActionClass);
         }
     }
 
@@ -53,7 +64,5 @@ public abstract class DisplayableClass : SelectClass
             grewLarger = false;
         }
     }
-
-    public abstract void OnMouseDown();
 }
 
