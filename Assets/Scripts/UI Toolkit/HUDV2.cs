@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UI_Toolkit.UI_Elements;
 using UnityEngine;
@@ -9,18 +8,21 @@ namespace UI_Toolkit
 {
     public class HUDV2 : MonoBehaviour
     {
+        public VisualTreeAsset cardTemplate;
         public UIDocument rootDocument;
 
         private VisualElement rootElem;
-        private VisualElement cardInfo;
+        private VisualElement handElem;
+        private VisualElement infoElem;
 
         public void Awake()
         {
             rootElem = rootDocument?.rootVisualElement ?? throw new Exception($"{nameof(rootDocument)} unset");
-            cardInfo = rootElem.Q<VisualElement>("layout-card-ui");
+            handElem = rootElem.Q<VisualElement>("layout-hand-container");
+            infoElem = rootElem.Q<VisualElement>("layout-info-container");
 
             RegisterCallbacks();
-            cardInfo.style.display = DisplayStyle.None;
+            LoadInitialValues();
         }
 
         public void OnEnable()
@@ -28,6 +30,7 @@ namespace UI_Toolkit
             CombatManager.OnGameStateChanging += OnGameStateChanging;
             DisplayableClass.OnShowCard += OnShowCardInfo;
             DisplayableClass.OnHideCard += OnHideCardInfo;
+            HighlightManager.OnUpdateHand += OnUpdateHand;
 
             ActionClass.CardHighlightedEvent += OnShowCardInfo;
             ActionClass.CardUnhighlightedEvent += OnHideCardInfo;
@@ -38,6 +41,7 @@ namespace UI_Toolkit
             CombatManager.OnGameStateChanging -= OnGameStateChanging;
             DisplayableClass.OnShowCard -= OnShowCardInfo;
             DisplayableClass.OnHideCard -= OnHideCardInfo;
+            HighlightManager.OnUpdateHand -= OnUpdateHand;
 
             ActionClass.CardHighlightedEvent -= OnShowCardInfo;
             ActionClass.CardUnhighlightedEvent -= OnHideCardInfo;
@@ -55,20 +59,20 @@ namespace UI_Toolkit
 
         private void OnShowCardInfo(ActionClass ac)
         {
-            var card = cardInfo.Q<TemplateContainer>("CardV2").Q<CardV2>();
+            var card = infoElem.Q<TemplateContainer>("CardV2").Q<CardV2>();
             card.WithAttrsFromActionClass(ac);
 
-            var text = cardInfo.Q<Label>("label-card-txt");
-            text.text = ac.GenerateCardDescription();
-            text.ClearClassList();
-            text.AddToClassList(ac.IsPlayedByPlayer() ? "dynamic-bg-player" : "dynamic-bg-enemy");
+            var desc = infoElem.Q<Label>("txt-blurb");
+            desc.text = ac.GenerateCardDescription();
+            desc.ClearClassList();
+            desc.AddToClassList(ac.IsPlayedByPlayer() ? "blurb-player" : "blurb-enemy");
 
-            cardInfo.style.display = DisplayStyle.Flex;
+            infoElem.style.display = DisplayStyle.Flex;
         }
 
         private void OnHideCardInfo(ActionClass ac)
         {
-            cardInfo.style.display = DisplayStyle.None;
+            infoElem.style.display = DisplayStyle.None;
         }
 
         private static void OnConfirmClicked()
@@ -78,7 +82,29 @@ namespace UI_Toolkit
 
         private void RegisterCallbacks()
         {
-            rootElem.Q<Button>("button-confirm").clicked += OnConfirmClicked;
+            rootElem.Q<Button>("btn-start").clicked += OnConfirmClicked;
+        }
+
+        private void LoadInitialValues()
+        {
+            handElem.Clear();
+            infoElem.style.display = DisplayStyle.None;
+        }
+
+        private void OnUpdateHand(List<ActionClass> hand)
+        {
+            handElem.Clear();
+            foreach (var ac in hand)
+            {
+                var cardLayout = cardTemplate.Instantiate();
+                var card = cardLayout.Q<CardV2>();
+                card.WithAttrsFromActionClass(ac);
+                card.BindActionClassCardState(ac);
+                card.BindActionClassCallbacks(ac);
+
+                handElem.Add(cardLayout);
+                ac.SetCanPlay(ac.IsPlayableByPlayer(out _));
+            }
         }
     }
 }
