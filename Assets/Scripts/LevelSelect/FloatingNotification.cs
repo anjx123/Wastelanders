@@ -39,7 +39,7 @@ public class FloatingNotification : MonoBehaviour
         {
             var value = t / duration;
             t += Time.deltaTime;
-            textMesh.alpha = Mathf.Lerp(from, to, value);
+            textMesh.alpha = Mathf.SmoothStep(from, to, value);
             var pos = gameObject.transform.position;
             gameObject.transform.position = new Vector3(pos.x, pos.y, value);
             yield return null;
