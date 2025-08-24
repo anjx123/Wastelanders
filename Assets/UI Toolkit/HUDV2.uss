@@ -20,3 +20,19 @@
 .dynamic-bg-player {
     background-image: url('project://database/Assets/Sprites/card-v2/bg-card-info-player.png?fileID=2800000&guid=a520e8af37466400db0dd6dac9589749&type=3#bg-card-info-player');
 }
+
+.dynamic-card {
+    left: -11.82px;
+    margin-right: -32.27px;
+    rotate: 5deg;
+    top: -10.18px;
+}
+
+.dynamic-card CardV2 {
+    transition-duration: 0.2s;
+    transition-property: translate;
+}
+
+.dynamic-card:hover CardV2 {
+    translate: 0 -80px;
+}
