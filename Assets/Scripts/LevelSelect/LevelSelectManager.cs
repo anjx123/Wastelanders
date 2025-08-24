@@ -16,6 +16,7 @@ public class LevelSelectManager : MonoBehaviour
     public void Awake()
     {
         if (GameStateManager.Instance.FirstTimeFinished) {
+            princessFrogFightButton.Lock();
             GameStateManager.Instance.FirstTimeFinished = false;
             StartCoroutine(UnlockedDialogue());
         }
