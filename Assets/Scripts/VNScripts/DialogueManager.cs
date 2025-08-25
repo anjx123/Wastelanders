@@ -7,9 +7,6 @@ using UnityEngine;
 public class DialogueManager : MonoBehaviour
 {
     private const string PAGE_FLIP_SOUND_EFFECT = "Page Flip";
-
-    private const float PICTURE_BOX_YOFFSET_BOTTOM = -22f;
-    private const float PICTURE_BOX_YOFFSET_TOP = -8f;
     public static DialogueManager Instance { get; private set; } = null!;
     private DialogueBox activeDialogueBox = null!;
     [SerializeField]
@@ -75,7 +72,7 @@ public class DialogueManager : MonoBehaviour
     }
 
 
-void ClearPanel()
+    void ClearPanel()
     {
         activeDialogueBox.gameObject.SetActive(false);
         sentences.Clear();
@@ -86,7 +83,7 @@ void ClearPanel()
     {
         pictureDialogueBox.GetComponent<RectTransform>().anchorMin = new Vector2(0.5f, 0);
         pictureDialogueBox.GetComponent<RectTransform>().anchorMax = new Vector2(0.5f, 0);
-        pictureDialogueBox.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, PICTURE_BOX_YOFFSET_BOTTOM);
+        pictureDialogueBox.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, 0);
 
         if (picturelessDialogueBoxComponent != null)
         {
@@ -100,13 +97,13 @@ void ClearPanel()
     {
         pictureDialogueBox.GetComponent<RectTransform>().anchorMin = new Vector2(0.5f, 1);
         pictureDialogueBox.GetComponent<RectTransform>().anchorMax = new Vector2(0.5f, 1);
-        pictureDialogueBox.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, PICTURE_BOX_YOFFSET_TOP + (-1 * pictureDialogueBox.GetComponent<RectTransform>().rect.height));
+        pictureDialogueBox.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -1 * pictureDialogueBox.GetComponent<RectTransform>().rect.height * pictureDialogueBox.GetComponent<RectTransform>().localScale.y);
 
         if (picturelessDialogueBoxComponent != null)
         {
             picturelessDialogueBoxComponent.GetComponent<RectTransform>().anchorMin = new Vector2(0.5f, 1);
             picturelessDialogueBoxComponent.GetComponent<RectTransform>().anchorMax = new Vector2(0.5f, 1);
-            picturelessDialogueBoxComponent.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -1 * picturelessDialogueBoxComponent.GetComponent<RectTransform>().rect.height);
+            picturelessDialogueBoxComponent.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -1 * picturelessDialogueBoxComponent.GetComponent<RectTransform>().rect.height * picturelessDialogueBoxComponent.GetComponent<RectTransform>().localScale.y);
         }
     }
 
@@ -175,7 +172,7 @@ void ClearPanel()
         {
             if (activeDialogueBox.FinishedLine())
             {
-                DisplayNextSentence();   
+                DisplayNextSentence();
                 if (holdingSkip) wasSkipping = true;
                 if (singlePress) AudioManager.Instance.PlaySFX(PAGE_FLIP_SOUND_EFFECT);
             }
