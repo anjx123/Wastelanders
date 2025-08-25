@@ -72,7 +72,7 @@ public class DialogueManager : MonoBehaviour
     }
 
 
-void ClearPanel()
+    void ClearPanel()
     {
         activeDialogueBox.gameObject.SetActive(false);
         sentences.Clear();
@@ -97,13 +97,13 @@ void ClearPanel()
     {
         pictureDialogueBox.GetComponent<RectTransform>().anchorMin = new Vector2(0.5f, 1);
         pictureDialogueBox.GetComponent<RectTransform>().anchorMax = new Vector2(0.5f, 1);
-        pictureDialogueBox.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -1 * pictureDialogueBox.GetComponent<RectTransform>().rect.height);
+        pictureDialogueBox.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -1 * pictureDialogueBox.GetComponent<RectTransform>().rect.height * pictureDialogueBox.GetComponent<RectTransform>().localScale.y);
 
         if (picturelessDialogueBoxComponent != null)
         {
             picturelessDialogueBoxComponent.GetComponent<RectTransform>().anchorMin = new Vector2(0.5f, 1);
             picturelessDialogueBoxComponent.GetComponent<RectTransform>().anchorMax = new Vector2(0.5f, 1);
-            picturelessDialogueBoxComponent.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -1 * picturelessDialogueBoxComponent.GetComponent<RectTransform>().rect.height);
+            picturelessDialogueBoxComponent.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -1 * picturelessDialogueBoxComponent.GetComponent<RectTransform>().rect.height * picturelessDialogueBoxComponent.GetComponent<RectTransform>().localScale.y);
         }
     }
 
@@ -172,7 +172,7 @@ void ClearPanel()
         {
             if (activeDialogueBox.FinishedLine())
             {
-                DisplayNextSentence();   
+                DisplayNextSentence();
                 if (holdingSkip) wasSkipping = true;
                 if (singlePress) AudioManager.Instance.PlaySFX(PAGE_FLIP_SOUND_EFFECT);
             }
