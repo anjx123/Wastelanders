@@ -7,6 +7,9 @@ using UnityEngine;
 public class DialogueManager : MonoBehaviour
 {
     private const string PAGE_FLIP_SOUND_EFFECT = "Page Flip";
+
+    private const float PICTURE_BOX_YOFFSET_BOTTOM = -22f;
+    private const float PICTURE_BOX_YOFFSET_TOP = -8f;
     public static DialogueManager Instance { get; private set; } = null!;
     private DialogueBox activeDialogueBox = null!;
     [SerializeField]
@@ -83,7 +86,7 @@ void ClearPanel()
     {
         pictureDialogueBox.GetComponent<RectTransform>().anchorMin = new Vector2(0.5f, 0);
         pictureDialogueBox.GetComponent<RectTransform>().anchorMax = new Vector2(0.5f, 0);
-        pictureDialogueBox.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, 0);
+        pictureDialogueBox.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, PICTURE_BOX_YOFFSET_BOTTOM);
 
         if (picturelessDialogueBoxComponent != null)
         {
@@ -97,7 +100,7 @@ void ClearPanel()
     {
         pictureDialogueBox.GetComponent<RectTransform>().anchorMin = new Vector2(0.5f, 1);
         pictureDialogueBox.GetComponent<RectTransform>().anchorMax = new Vector2(0.5f, 1);
-        pictureDialogueBox.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -1 * pictureDialogueBox.GetComponent<RectTransform>().rect.height);
+        pictureDialogueBox.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, PICTURE_BOX_YOFFSET_TOP + (-1 * pictureDialogueBox.GetComponent<RectTransform>().rect.height));
 
         if (picturelessDialogueBoxComponent != null)
         {
