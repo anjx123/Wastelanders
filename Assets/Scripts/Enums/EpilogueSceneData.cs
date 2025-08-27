@@ -9,13 +9,6 @@ public abstract class EpilogueSceneData : Enum<EpilogueSceneData>
 
     public new static IEnumerable<EpilogueSceneData> Values => Enum<EpilogueSceneData>.Values;
 
-    public delegate void EpilogueSceneDataDelegate(string sceneName);
-    public static event EpilogueSceneDataDelegate EpilogueSceneDataEvent;
-
-    public void UponSelectedEvent()
-    {
-        EpilogueSceneDataEvent?.Invoke(SceneData.SceneName);
-    }
 
     public class SampleEpilogueSceneA : EpilogueSceneData
     {

@@ -23,7 +23,7 @@ public class EpilogueButton : MonoBehaviour
         completedBounties = PrincessFrogBounties.Values.Count(b => BountyManager.Instance.IsBountyCompleted(b));
         button.onClick.AddListener(() =>
         {
-            epilogueSceneData.UponSelectedEvent();
+            BountyManager.Instance.GoToEpilogueScene(epilogueSceneData);
         });
         SetTitle(sceneData.EpilogueTitle);
         SetLocked(neededBounties > completedBounties);
