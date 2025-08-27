@@ -21,11 +21,13 @@ public class LevelSelect : MonoBehaviour
     {
         StageInformation.StageInformationEvent += OpenScene;
         BountyInformation.BountyInformationEvent += OpenBountyByTypeName;
+        EpilogueSceneData.EpilogueSceneDataEvent += OpenScene;
     }
     public void OnDisable()
     {
         StageInformation.StageInformationEvent -= OpenScene;
         BountyInformation.BountyInformationEvent -= OpenBountyByTypeName;
+        EpilogueSceneData.EpilogueSceneDataEvent -= OpenScene;
     }
 
     protected void OpenScene(string s)
