@@ -89,11 +89,12 @@ public abstract class EntityClass : SelectClass
     }
 
     /*
-     Purpose: Deals damage to this entity and staggers it back 
-     Requires: This Entity is not dead
+    Purpose: Applies damage effects including health reduction, death handling, and event triggers
+    Requires: This Entity is not dead
+    Returns: Knockback percentage based on damage dealt
      */
 
-    public virtual void TakeDamage(EntityClass source, int damage, bool lostClash = true)
+    public float ProcessDamage(int damage)
     {
         BuffsOnDamageEvent(ref damage);
 
@@ -102,7 +103,7 @@ public abstract class EntityClass : SelectClass
         if (Health != 0)
         {
             percentageDone = Mathf.Clamp(damage / (float)Health, 0f, 1f);
-        } 
+        }
         else
         {
             IsDead = true;
@@ -112,9 +113,33 @@ public abstract class EntityClass : SelectClass
 
         EntityTookDamage?.Invoke(damage);
         combatInfo.DisplayDamage(damage);
+        return percentageDone;
+    }
+
+    /*
+     Purpose: Deals damage to this entity and staggers it back 
+     Requires: This Entity is not dead
+     */
+
+    public virtual void TakeDamage(EntityClass source, int damage)
+    {
+        float percentageDone = ProcessDamage(damage);
         if (damage > 0)
         {
-            StartCoroutine(PlayHitAnimation(source, this, percentageDone, lostClash));
+            StartCoroutine(PlayHitAnimation(source, this, percentageDone));
+        }
+    }
+
+    /*
+     Purpose: Deals damage to this entity and staggers it back without playing the animation
+     Requires: This Entity is not dead
+     */
+    public void TakeDamageNoStagger(EntityClass source, int damage)
+    {
+        float percentageDone = ProcessDamage(damage);
+        if (damage > 0)
+        {
+            StartCoroutine(PlayHitAnimation(source, this, percentageDone, false));
         }
     }
 

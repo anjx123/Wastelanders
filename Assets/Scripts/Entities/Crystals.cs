@@ -19,7 +19,7 @@ public class Crystals : EnemyClass, NeutralEntityInterface
         myName = "Le Shiny";
     }
 
-    public override void TakeDamage(EntityClass source, int damage, bool lostClash = true)
+    public override void TakeDamage(EntityClass source, int damage)
     {
         int oldHealth = Health; // This ensures the buff is added only once when each criteria is met
         base.TakeDamage(source, damage);
