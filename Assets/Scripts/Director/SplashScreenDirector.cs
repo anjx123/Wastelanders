@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Video;
+using static SceneData;
 
 namespace Director
 {
@@ -9,6 +11,11 @@ namespace Director
     {
         [SerializeField] private VideoPlayer videoPlayer;
         [SerializeField] private FadeScreenHandler fadeScreenHandler;
+
+        private void OnDisable()
+        {
+            videoPlayer.loopPointReached -= OnVideoEnd;
+        }
 
         private void Start()
         {
@@ -29,10 +36,11 @@ namespace Director
 
         private IEnumerator EndSequence()
         {
+            videoPlayer.loopPointReached -= OnVideoEnd;
             yield return new WaitForSeconds(1f);
             yield return fadeScreenHandler.FadeInDarkScreen(1f);
             yield return new WaitForSeconds(0.5f);
-            SceneManager.LoadScene("MainMenu");
+            SceneManager.LoadScene(Get<SceneData.MainMenu>().SceneName);
         }
     }
 }
