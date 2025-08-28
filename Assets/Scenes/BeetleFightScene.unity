@@ -1556,7 +1556,7 @@ Canvas:
   m_GameObject: {fileID: 596087402}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 1
+  m_RenderMode: 0
   m_Camera: {fileID: 1525248175}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
@@ -2533,10 +2533,6 @@ PrefabInstance:
       propertyPath: rollingSpeed
       value: 60
       objectReference: {fileID: 0}
-    - target: {fileID: 3009351223007997610, guid: 026e787f6af83dc4ca1645e16e8acf98, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -13.492699
-      objectReference: {fileID: 0}
     - target: {fileID: 4728857978263358706, guid: 026e787f6af83dc4ca1645e16e8acf98, type: 3}
       propertyPath: m_Name
       value: DialogueBoxUI
@@ -2544,10 +2540,6 @@ PrefabInstance:
     - target: {fileID: 5844923077249208032, guid: 026e787f6af83dc4ca1645e16e8acf98, type: 3}
       propertyPath: m_AspectRatio
       value: NaN
-      objectReference: {fileID: 0}
-    - target: {fileID: 6910402266545344168, guid: 026e787f6af83dc4ca1645e16e8acf98, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -12.099998
       objectReference: {fileID: 0}
     - target: {fileID: 7336354512828228472, guid: 026e787f6af83dc4ca1645e16e8acf98, type: 3}
       propertyPath: m_Pivot.x
@@ -2628,10 +2620,6 @@ PrefabInstance:
     - target: {fileID: 7336354512828228472, guid: 026e787f6af83dc4ca1645e16e8acf98, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8651282993162763513, guid: 026e787f6af83dc4ca1645e16e8acf98, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -0.17765808
       objectReference: {fileID: 0}
     - target: {fileID: 8710621881311274143, guid: 026e787f6af83dc4ca1645e16e8acf98, type: 3}
       propertyPath: m_AnchorMax.x
@@ -4976,7 +4964,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6635998426718021455, guid: b9c5e4b3c9f7e024f8fe9012e7a2e437, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 25.670294
+      value: 25.796665
       objectReference: {fileID: 0}
     - target: {fileID: 6635998426718021455, guid: b9c5e4b3c9f7e024f8fe9012e7a2e437, type: 3}
       propertyPath: m_LocalPosition.y

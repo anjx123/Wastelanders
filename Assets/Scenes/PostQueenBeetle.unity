@@ -741,7 +741,7 @@ Canvas:
   m_GameObject: {fileID: 596087402}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 1
+  m_RenderMode: 0
   m_Camera: {fileID: 1525248175}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
@@ -1066,10 +1066,6 @@ PrefabInstance:
     - target: {fileID: 857937859890098148, guid: 026e787f6af83dc4ca1645e16e8acf98, type: 3}
       propertyPath: rollingSpeed
       value: 60
-      objectReference: {fileID: 0}
-    - target: {fileID: 3009351223007997610, guid: 026e787f6af83dc4ca1645e16e8acf98, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -13.492699
       objectReference: {fileID: 0}
     - target: {fileID: 4728857978263358706, guid: 026e787f6af83dc4ca1645e16e8acf98, type: 3}
       propertyPath: m_Name
@@ -1950,7 +1946,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6635998426718021455, guid: b9c5e4b3c9f7e024f8fe9012e7a2e437, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.139705
+      value: -1.0133333
       objectReference: {fileID: 0}
     - target: {fileID: 6635998426718021455, guid: b9c5e4b3c9f7e024f8fe9012e7a2e437, type: 3}
       propertyPath: m_LocalPosition.y
