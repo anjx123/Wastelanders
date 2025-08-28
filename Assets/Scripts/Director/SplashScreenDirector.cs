@@ -25,8 +25,8 @@ namespace Director
 
         private IEnumerator StartSequence()
         {
+            yield return new WaitForSeconds(1f);
             videoPlayer.Play();
-            yield return null;
         }
 
         private void OnVideoEnd(VideoPlayer vp)
