@@ -1,5 +1,5 @@
 using System;
-using System.Collections.Generic;
+using System.Linq;
 using UI_Toolkit.UI_Elements;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -91,10 +91,12 @@ namespace UI_Toolkit
             infoElem.style.display = DisplayStyle.None;
         }
 
-        private void OnUpdateHand(List<ActionClass> hand)
+        private void OnUpdateHand(PlayerClass player)
         {
+            rootElem.Q<Label>("txt-deck-info").text = player.Pool.Count.ToString();
             handElem.Clear();
-            foreach (var ac in hand)
+
+            foreach (var ac in player.Hand.Select(go => go.GetComponent<ActionClass>()).Where(ac => ac))
             {
                 var cardLayout = cardTemplate.Instantiate();
                 var card = cardLayout.Q<CardV2>();

@@ -1,6 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using UI_Toolkit;
 using UnityEngine;
 
@@ -18,7 +16,7 @@ public class HighlightManager : MonoBehaviour // later all entity highlighter
     public delegate void ActionAddedDelegate(ActionClass card);
     public event ActionAddedDelegate? PlayerManuallyInsertedAction;
 
-    public static event Action<List<ActionClass>>? OnUpdateHand;
+    public static event Action<PlayerClass>? OnUpdateHand;
 
     // Awake is called when the script instance is being loaded
     void Awake()
@@ -72,7 +70,7 @@ public class HighlightManager : MonoBehaviour // later all entity highlighter
             ResetCurrentHighlightedAction();
         }
         selectedPlayer = forcedPlayer;
-        if (forcedPlayer != null) RenderHand(forcedPlayer.Hand);
+        if (forcedPlayer != null) RenderHand(forcedPlayer);
     }
     private void HandlePlayerClick(PlayerClass clickedPlayer)
     {
@@ -80,7 +78,7 @@ public class HighlightManager : MonoBehaviour // later all entity highlighter
         {
             ResetCurrentHighlightedAction();
             selectedPlayer = clickedPlayer;
-            RenderHand(clickedPlayer.Hand);
+            RenderHand(clickedPlayer);
         }
     }
 
@@ -201,8 +199,8 @@ public class HighlightManager : MonoBehaviour // later all entity highlighter
         }
 
         selectedPlayer = player; 
-        RenderHand(player.Hand);
+        RenderHand(player);
     }
 
-    private static void RenderHand(List<GameObject> hand) => OnUpdateHand?.Invoke(hand.Select(go => go.GetComponent<ActionClass>()).Where(ac => ac).ToList());
+    private static void RenderHand(PlayerClass player) => OnUpdateHand?.Invoke(player);
 }
