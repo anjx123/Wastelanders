@@ -39,7 +39,7 @@ public class Crystals : EnemyClass, NeutralEntityInterface
         yield break;
     }
 
-    public override IEnumerator StaggerBack(Vector3 staggeredPosition)
+    public override IEnumerator StaggerBack(Vector3 staggeredPosition, bool lostClash = true)
     {
         yield break;
     }
