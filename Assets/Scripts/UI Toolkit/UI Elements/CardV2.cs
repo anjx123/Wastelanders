@@ -13,7 +13,7 @@ namespace UI_Toolkit.UI_Elements
         {
             WithAttrs(ac.GetIcon(), ac.GetName(), ac.Speed.ToString(), FormatStats(ac.GetRolledStats()));
 
-            var icon = this.Q<VisualElement>("img-card-icon");
+            var icon = this.Q<VisualElement>("img-stat-icon");
             icon.ClearClassList();
             icon.AddToClassList(ac.CardType == CardType.Defense ? "stat-icon-def" : "stat-icon-atk");
 
