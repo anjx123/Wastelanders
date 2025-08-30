@@ -49,3 +49,4 @@ MonoBehaviour:
     battleIntro: {fileID: 5210625753511003606, guid: a1b9dbfd8373c7347bbeaace2539e9b7, type: 3}
     pauseMenuV2: {fileID: 9219337586139683698, guid: f85b1be9e6fcd446eaa36d83938eaeb9, type: 3}
     hudV2: {fileID: 3511393950818339304, guid: 1ac94548a55c54b998ec1cc516a78e03, type: 3}
+    dialogueManager: {fileID: 7066546740461958642, guid: 60ee3fd7b7ed945b9bf21387c65cd1e9, type: 3}
