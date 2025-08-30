@@ -53,6 +53,7 @@ public class BountyManager : PersistentSingleton<BountyManager>, IBind<BountySta
     public void GoToEpilogueScene(EpilogueSceneData scene)
     {
         FadeScreenHandler f = FindFirstObjectByType<FadeScreenHandler>();
+        if (!f) return;
 
         IEnumerator FadeLevelIn(string levelName)
         {

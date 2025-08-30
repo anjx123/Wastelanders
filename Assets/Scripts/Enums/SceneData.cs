@@ -111,6 +111,15 @@ public abstract class SceneData : Enum<SceneData>
             { prefabs.audioManager, prefabs.pauseMenuV2, prefabs.hudV2 };
     }
 
+    public class Epilogue : SceneData
+    {
+        public override string SceneName => "Epilogue";
+        public override SceneAudio GetAudio(AudioDatabase database) => database.Empty;
+
+        public override MonoBehaviour[] RequiredPrefabs(SceneInitializerPrefabs prefabs) => new MonoBehaviour[]
+            { prefabs.audioManager, prefabs.pauseMenuV2 };
+    }
+
     private static readonly Dictionary<string, SceneData> _sceneLookup = new();
 
     static SceneData()
