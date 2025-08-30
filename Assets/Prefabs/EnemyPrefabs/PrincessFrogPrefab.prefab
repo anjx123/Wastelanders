@@ -230,6 +230,10 @@ PrefabInstance:
       value: -4.13
       objectReference: {fileID: 0}
     - target: {fileID: 7170903258362385482, guid: 68bdc6d0a90e34878ae0a9ede9cccf74, type: 3}
+      propertyPath: healthBar
+      value: 
+      objectReference: {fileID: 1925346417878583517}
+    - target: {fileID: 7170903258362385482, guid: 68bdc6d0a90e34878ae0a9ede9cccf74, type: 3}
       propertyPath: diceAnimator
       value: 
       objectReference: {fileID: 312121961921081749}
@@ -256,6 +260,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6adb464f1698da341ab4389bebbddc09, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1925346417878583517 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7165974848480870474, guid: 68bdc6d0a90e34878ae0a9ede9cccf74, type: 3}
+  m_PrefabInstance: {fileID: 8775998853870471319}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 615fa82f8a89cb04b840209d6fb53eb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!4 &9057277634736773720 stripped
