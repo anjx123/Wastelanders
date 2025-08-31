@@ -1,7 +1,5 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using Systems.Persistence;
 using UnityEngine;
 using WeaponDeckSerialization;
 
@@ -18,7 +16,8 @@ public abstract class PlayerClass : EntityClass
     private float MIN_ANIMATION_SPEED = 0.5f;
     private float MAX_ANIMATION_SPEED = 1.5f;
 
-    public List<GameObject> Hand { get { return new List<GameObject>(hand); } }
+    public List<GameObject> Hand => new(hand);
+    public List<GameObject> Pool => new(pool);
 
     // Drawn cards move from pool to hand
     protected List<GameObject> hand = new();
