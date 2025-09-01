@@ -5,9 +5,9 @@ using UnityEngine;
 
 public class FloatingNotification : MonoBehaviour
 {
-    public const float fadeDuration = 0.5f;
-    public const float totalDuration = 1.5f;
-    public const float floatVelocity = 1f;
+    public float fadeDurationS = 0.5f;
+    public float totalDurationS = 1.5f;
+    public float floatVelocity = 1f;
 
     [SerializeField] private TextMeshPro textMesh;
     [SerializeField] private Rigidbody2D rb;
@@ -26,13 +26,13 @@ public class FloatingNotification : MonoBehaviour
     }
 
     private IEnumerator AnimateCoroutine() {
-        yield return StartCoroutine(Fade(0f, 1f));
-        yield return new WaitForSeconds(totalDuration - fadeDuration * 2);
-        yield return StartCoroutine(Fade(1f, 0f));
+        yield return StartCoroutine(Fade(0f, 1f, fadeDurationS));
+        yield return new WaitForSeconds(totalDurationS - fadeDurationS * 2);
+        yield return StartCoroutine(Fade(1f, 0f, fadeDurationS));
         Destroy(gameObject);
     }
 
-    private IEnumerator Fade(float from, float to, float duration = fadeDuration)
+    private IEnumerator Fade(float from, float to, float duration)
     {
         float t = 0f;
         while (t < duration)
