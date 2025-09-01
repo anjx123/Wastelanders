@@ -28,7 +28,7 @@ public class LevelSelectButton : MonoBehaviour, IPointerClickHandler
     #nullable enable
     private ILevelSelectInformation? LevelInformation { get => ILevelSelectInformation.LEVEL_INFORMATION.GetValueOrDefault(Level); }
 
-    public void Start()
+    public void Awake()
     {
         Initialize();
     }
@@ -51,6 +51,7 @@ public class LevelSelectButton : MonoBehaviour, IPointerClickHandler
 
     private void Initialize()
     {
+        _textMeshPro.text = title;
         if (LevelInformation?.LevelID > GameStateManager.Instance.CurrentLevelProgress) Lock();
     }
 
@@ -79,10 +80,6 @@ public class LevelSelectButton : MonoBehaviour, IPointerClickHandler
     private IEnumerator FadeLockIndicator(bool show)
     {
         CanvasGroup canvasGroup = lockedIndicator.GetComponent<CanvasGroup>();
-        if (canvasGroup == null)
-        {
-            canvasGroup = lockedIndicator.AddComponent<CanvasGroup>();
-        }
 
         float startAlpha = show ? 0f : 1f;
         float endAlpha = show ? 1f : 0f;
