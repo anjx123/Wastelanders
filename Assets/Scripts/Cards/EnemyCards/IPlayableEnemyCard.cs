@@ -20,7 +20,7 @@ public interface IPlayableEnemyCard
 
         if (animatorController == null || animationClip == null)
         {
-            Debug.LogWarning("AnimatorController or AnimationClip is null. AnimatorController must not be null to support foreign animations.");
+            if (entityClass is PlayerClass) Debug.LogWarning("AnimatorController or AnimationClip is null. AnimatorController must not be null to support foreign animations.");
             return;
         }
 
