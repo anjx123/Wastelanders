@@ -13,7 +13,7 @@ public class LevelSelectManager : MonoBehaviour
     [SerializeField] private LevelSelectButton princessFrogFightButton;
     [SerializeField] private CanvasGroup levelSelectCanvas;
 
-    public void Awake()
+    public void Start()
     {
         if (GameStateManager.Instance.FirstTimeFinished) {
             princessFrogFightButton.Lock();
