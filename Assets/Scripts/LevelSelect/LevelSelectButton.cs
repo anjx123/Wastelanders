@@ -51,7 +51,6 @@ public class LevelSelectButton : MonoBehaviour, IPointerClickHandler
 
     private void Initialize()
     {
-        _textMeshPro.text = title;
         if (LevelInformation?.LevelID > GameStateManager.Instance.CurrentLevelProgress) Lock();
     }
 
