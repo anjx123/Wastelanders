@@ -59,6 +59,16 @@ public class LevelSelect : MonoBehaviour
         OpenScene(SceneData.Get<SceneData.LevelSelect>().SceneName);
     }
 
+    public void ContractScene()
+    {
+        OpenScene(SceneData.Get<SceneData.ContractSelect>().SceneName);
+    }
+
+    public void Epilogue()
+    {
+        OpenScene(SceneData.Get<SceneData.Epilogue>().SceneName);
+    }
+
     public void PrincessFrogBounties()
     {
         OpenBountyByTypeName(BountyInformation.PRINCESS_FROG_BOUNTY);
