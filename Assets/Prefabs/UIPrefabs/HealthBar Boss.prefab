@@ -96,6 +96,14 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6834136677937008894, guid: 700d60a172828b047b313c7dab6975ef, type: 3}
+      propertyPath: m_fontSize
+      value: 32
+      objectReference: {fileID: 0}
+    - target: {fileID: 6834136677937008894, guid: 700d60a172828b047b313c7dab6975ef, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 32
+      objectReference: {fileID: 0}
     - target: {fileID: 8501383018469864454, guid: 700d60a172828b047b313c7dab6975ef, type: 3}
       propertyPath: m_Name
       value: HealthBar Boss
