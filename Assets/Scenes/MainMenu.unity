@@ -1689,11 +1689,6 @@ MonoBehaviour:
         Part2: 1101383412
         Part3: 2979251084
         Part4: 414869923
-      <ShouldPlayDeckSelectionTutorial>k__BackingField: 0
-      <JumpIntoFrogAndSlimeFight>k__BackingField: 0
-      <JumpIntoBeetleFight>k__BackingField: 0
-      <JumpIntoQueenFight>k__BackingField: 0
-      <JustFinishedBeetleFight>k__BackingField: 0
       <CurrentLevelProgress>k__BackingField: 0
     playerInformation:
       <Id>k__BackingField:
@@ -1724,6 +1719,15 @@ MonoBehaviour:
         <Completed>k__BackingField: 0
       - <BountyName>k__BackingField: 
         <Completed>k__BackingField: 0
+  userPreferences:
+    Name: 
+    audioPreferences:
+      <BackgroundMusicVolume>k__BackingField: 0.7
+      <SFXVolume>k__BackingField: 0.7
+      <MusicMuted>k__BackingField: 0
+      <SFXMuted>k__BackingField: 0
+    screenShakePreference:
+      <IsScreenShakeEnabled>k__BackingField: 1
 --- !u!4 &1013216798
 Transform:
   m_ObjectHideFlags: 0
@@ -1774,6 +1778,8 @@ MonoBehaviour:
     Part2: 1333047437
     Part3: 3777487801
     Part4: 1112175064
+  JumpToCombat: 1
+  FirstTimeFinished: 0
 --- !u!4 &1398448087
 Transform:
   m_ObjectHideFlags: 0
@@ -2098,6 +2104,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   wastelandersText: {fileID: 69893570}
   quitButton: {fileID: 17794742}
+  bountyButton: {fileID: 615688562}
 --- !u!1 &2015769949
 GameObject:
   m_ObjectHideFlags: 0
