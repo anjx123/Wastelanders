@@ -1,4 +1,5 @@
 using System.Collections;
+using LevelSelectInformation;
 using Systems.Persistence;
 using TMPro;
 using UnityEngine;
@@ -9,22 +10,27 @@ public class MainMenu : MonoBehaviour {
     [SerializeField] private GameObject wastelandersText;
 
     [SerializeField] private Button quitButton;
+    [SerializeField] private GameObject bountyButton;
     
-    public void QuitGame() {
+    public void QuitGame()
+    {
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
 #endif
-        if (SaveLoadSystem.Instance != null) {
+        if (SaveLoadSystem.Instance != null)
+        {
             SaveLoadSystem.Instance.SaveGame();
         }
 
         Application.Quit();
     }
-    
-    private void Start() {
+
+    private void Start()
+    {
 #if UNITY_WEBGL
-            quitButton.gameObject.SetActive(false);
+        quitButton.gameObject.SetActive(false);
 #endif
+        bountyButton.SetActive(GameStateManager.Instance.CurrentLevelProgress >= BountyInformation.PRINCESS_FROG_BOUNTY.LevelID);
     }
 
 
