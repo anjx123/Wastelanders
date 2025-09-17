@@ -61,7 +61,7 @@ public abstract class ActionClass : SelectClass, IBind<ActionData>
         CLICKED_STATE,
     }
 
-    private CardState cardState = CardState.NORMAL;
+    public CardState cardState { get; private set; } = CardState.NORMAL;
     public CardType CardType { get; protected set; }
 
 
@@ -99,6 +99,7 @@ public abstract class ActionClass : SelectClass, IBind<ActionData>
     public delegate void CardStateDelegate(CardState previousState, CardState currentState);
     public static event CardStateDelegate? CardStateChange;
 
+    public event Action<CardState>? OnCardStateChanged;
 
     public virtual void OnQueue() { }
     public virtual void OnRetrieveFromQueue() { }
@@ -371,6 +372,7 @@ public abstract class ActionClass : SelectClass, IBind<ActionData>
             spriteRenderer.color = newColor;
         }
         CardStateChange?.Invoke(previousState, nextState);
+        OnCardStateChanged?.Invoke(cardState);
     }
 
     //extends the boxcollider downwards

@@ -364,6 +364,7 @@ GameObject:
   - component: {fileID: 529903464}
   - component: {fileID: 529903463}
   - component: {fileID: 529903462}
+  - component: {fileID: 529903466}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -456,6 +457,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!225 &529903466
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 529903461}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &681900438
 GameObject:
   m_ObjectHideFlags: 0
@@ -813,6 +826,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Level>k__BackingField: 5
   _textMeshPro: {fileID: 1282717620}
+  title: 
   button: {fileID: 725345513}
   outline: {fileID: 0}
   defaultOutline: {x: 0, y: 0}
@@ -823,6 +837,8 @@ MonoBehaviour:
   hoverTextColor: {r: 0, g: 0, b: 0, a: 0}
   hover: {fileID: 0}
   lockedIndicator: {fileID: 725345511}
+  floatingNotificationPrefab: {fileID: 0}
+  lockAnimationDuration: 0.5
 --- !u!1001 &890591427
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -923,6 +939,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 02cdd03eb5e82dc44bdfacc5368e3711, type: 3}
+    - target: {fileID: 8769258020987959747, guid: 4ebd1ee5e5e34ea418076d78ba66dbf7, type: 3}
+      propertyPath: title
+      value: 2. THE EXAM BEGINS!
+      objectReference: {fileID: 0}
     - target: {fileID: 8769258020987959747, guid: 4ebd1ee5e5e34ea418076d78ba66dbf7, type: 3}
       propertyPath: <Level>k__BackingField
       value: 1
@@ -1038,6 +1058,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: 7aba0034e0ad3724aa15571e7d3a5d7a, type: 3}
     - target: {fileID: 8769258020987959747, guid: 4ebd1ee5e5e34ea418076d78ba66dbf7, type: 3}
+      propertyPath: title
+      value: 3. HOARDERS
+      objectReference: {fileID: 0}
+    - target: {fileID: 8769258020987959747, guid: 4ebd1ee5e5e34ea418076d78ba66dbf7, type: 3}
       propertyPath: <Level>k__BackingField
       value: 2
       objectReference: {fileID: 0}
@@ -1152,6 +1176,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: 2df4e810ecf6cf84abcee4a4c4fd64af, type: 3}
     - target: {fileID: 8769258020987959747, guid: 4ebd1ee5e5e34ea418076d78ba66dbf7, type: 3}
+      propertyPath: title
+      value: EX. CORONATION
+      objectReference: {fileID: 0}
+    - target: {fileID: 8769258020987959747, guid: 4ebd1ee5e5e34ea418076d78ba66dbf7, type: 3}
       propertyPath: <Level>k__BackingField
       value: 4
       objectReference: {fileID: 0}
@@ -1165,6 +1193,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 6258826207863482620, guid: 4ebd1ee5e5e34ea418076d78ba66dbf7, type: 3}
   m_PrefabInstance: {fileID: 1113937472}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1113937474 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8769258020987959747, guid: 4ebd1ee5e5e34ea418076d78ba66dbf7, type: 3}
+  m_PrefabInstance: {fileID: 1113937472}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0aa33e520d5ad94295eb1a1524c79bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1154790741
 GameObject:
   m_ObjectHideFlags: 0
@@ -1617,6 +1656,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: 09df4af78a7407e4dbd925ed82459e2e, type: 3}
     - target: {fileID: 8769258020987959747, guid: 4ebd1ee5e5e34ea418076d78ba66dbf7, type: 3}
+      propertyPath: title
+      value: 4. THE QUEENS NEST
+      objectReference: {fileID: 0}
+    - target: {fileID: 8769258020987959747, guid: 4ebd1ee5e5e34ea418076d78ba66dbf7, type: 3}
       propertyPath: <Level>k__BackingField
       value: 3
       objectReference: {fileID: 0}
@@ -1918,6 +1961,52 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2108401299
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2108401301}
+  - component: {fileID: 2108401300}
+  m_Layer: 0
+  m_Name: LevelSelectManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2108401300
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2108401299}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 799918bb327bc4bc48828c78680f2646, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  princessFrogFightButton: {fileID: 1113937474}
+  levelSelectCanvas: {fileID: 529903466}
+--- !u!4 &2108401301
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2108401299}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.0502377, y: 1.0940498, z: -0.5712553}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &9009040477528775658
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2010,6 +2099,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tutorial
       objectReference: {fileID: 0}
+    - target: {fileID: 8769258020987959747, guid: 4ebd1ee5e5e34ea418076d78ba66dbf7, type: 3}
+      propertyPath: title
+      value: 1. TUTORIAL
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2024,3 +2117,4 @@ SceneRoots:
   - {fileID: 2015769952}
   - {fileID: 1154790742}
   - {fileID: 1832417283}
+  - {fileID: 2108401301}

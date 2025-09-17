@@ -303,9 +303,9 @@ public abstract class EntityClass : SelectClass
         if ((Vector2)diffInLocation == Vector2.zero) yield break;
         UpdateFacing(-diffInLocation, null);
 
-        if (HasAnimationParameter("IsStaggered"))
+        if (HasAnimationParameter(STAGGERED_ANIMATION_NAME))
         {
-            animator.SetBool("IsStaggered", true);
+            animator.SetBool(STAGGERED_ANIMATION_NAME, true);
         }
 
         float duration = animator.GetCurrentAnimatorStateInfo(0).length;
@@ -318,9 +318,9 @@ public abstract class EntityClass : SelectClass
             yield return null;
         }
 
-        if (HasAnimationParameter("IsStaggered"))
+        if (HasAnimationParameter(STAGGERED_ANIMATION_NAME))
         {
-            animator.SetBool("IsStaggered", false);
+            animator.SetBool(STAGGERED_ANIMATION_NAME, false);
         }
 
     }
@@ -338,9 +338,9 @@ public abstract class EntityClass : SelectClass
 
     public void SetUnstaggered()
     {
-        if (HasAnimationParameter("IsStaggered"))
+        if (HasAnimationParameter(STAGGERED_ANIMATION_NAME))
         {
-            animator.SetBool("IsStaggered", false);
+            animator.SetBool(STAGGERED_ANIMATION_NAME, false);
         }
     }
 
