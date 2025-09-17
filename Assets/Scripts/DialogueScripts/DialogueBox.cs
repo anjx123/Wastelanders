@@ -16,8 +16,6 @@ public class DialogueBox : MonoBehaviour
     [SerializeField] private Image displayingImage;
     [SerializeField] private AspectRatioFitter aspectRatioFitter;
 
-    private string currentLine = string.Empty;
-
     public float rollingSpeed;
 
     private bool lineIsFinished;
@@ -39,8 +37,8 @@ public class DialogueBox : MonoBehaviour
 
         SetFontStyles(line);
        
-        bodyText.text = string.Empty;
-        this.currentLine = line.BodyText;
+        bodyText.maxVisibleCharacters = 0;
+        bodyText.text = line.BodyText;
         nameText.text = line.SpeakerName;
 
         if (line.broadcastAnEvent) DialogueBoxEvent?.Invoke();
@@ -90,10 +88,10 @@ public class DialogueBox : MonoBehaviour
 
     public void StopScrollingText()
     {
-        if (bodyText.text != currentLine)
+        if (bodyText.maxVisibleCharacters < bodyText.text.Length)
         {
             StopAllCoroutines();
-            bodyText.text = currentLine;
+            bodyText.maxVisibleCharacters = bodyText.text.Length;
             lineIsFinished = true;
         }
     }
@@ -109,15 +107,10 @@ public class DialogueBox : MonoBehaviour
     {
 
         lineIsFinished = false;
-        int currentIndex = 0;
-        string displayedText = "";
 
-        while (currentIndex < currentLine.Length)
+        for (int i = 1; i <= bodyText.text.Length; i++)
         {
-            displayedText += currentLine[currentIndex];
-            currentIndex++;
-
-            bodyText.text = displayedText;
+            bodyText.maxVisibleCharacters = i;
 
             yield return new WaitForSeconds(1f / rollingSpeed);
         }
