@@ -27,15 +27,16 @@ public class LevelSelectManager : MonoBehaviour
         Debug.Log("Unlock Dialogue");
         levelSelectCanvas.interactable = false;
         levelSelectCanvas.blocksRaycasts = false;
+        string tutorialName = "Tutorial";
         yield return new WaitForSeconds(2f);
         yield return StartCoroutine(DialogueManager
             .Instance
             .StartDialogue(new List<DialogueText>
         {
-            new DialogueText("Welcome to the level select screen!", "", null),
-            new DialogueText("You can select a level to play by clicking on the buttons below.", "", null),
-            new DialogueText("Some levels may be locked until you complete previous levels.", "", null),
-            new DialogueText("Good luck and have fun!", "", null),
+            new DialogueText("Welcome to the level select screen!", tutorialName, null),
+            new DialogueText("You can select a level to play by clicking on the buttons below.", tutorialName, null),
+            new DialogueText("Some levels may be locked until you complete previous levels.", tutorialName, null),
+            new DialogueText("Good luck and have fun!", tutorialName, null),
         }));
         princessFrogFightButton.Unlock(animate: true);
         levelSelectCanvas.interactable = true;

@@ -41,7 +41,11 @@ public class DialogueBox : MonoBehaviour
        
         bodyText.text = string.Empty;
         this.currentLine = line.BodyText;
-        nameText.text = line.SpeakerName;
+        if (line.SpeakerName != "") {
+            nameText.text = line.SpeakerName;
+        } else {
+            nameText.text = "Narrator";
+        }
 
         if (line.broadcastAnEvent) DialogueBoxEvent?.Invoke();
         StartDialogue();
