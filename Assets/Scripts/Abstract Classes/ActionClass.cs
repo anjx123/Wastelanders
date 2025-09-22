@@ -101,6 +101,9 @@ public abstract class ActionClass : SelectClass, IBind<ActionData>
 
     public event Action<CardState>? OnCardStateChanged;
 
+    public bool IsSelectedForDeck => cardUI.isSelectedForDeck;
+    public event Action<bool>? OnIsSelectedForDeckChanged;
+
     public virtual void OnQueue() { }
     public virtual void OnRetrieveFromQueue() { }
     public virtual void OnCardStagger() { }
@@ -393,6 +396,7 @@ public abstract class ActionClass : SelectClass, IBind<ActionData>
     public void SetSelectedForDeck(bool isSelectedForDeck)
     {
         cardUI.SetSelectedForDeck(isSelectedForDeck);
+        OnIsSelectedForDeckChanged?.Invoke(isSelectedForDeck);
     }
 
     public void SetRenderCost(bool renderCost)

@@ -61,4 +61,5 @@ public class SceneInitializerPrefabs
     public PauseMenuV2 pauseMenuV2 = null!;
     public HUDV2 hudV2 = null!;
     public DialogueManager dialogueManager = null!;
+    public DeckSelectV2 deckSelectV2 = null!;
 }

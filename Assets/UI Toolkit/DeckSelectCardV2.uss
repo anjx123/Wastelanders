@@ -1,0 +1,50 @@
+* {
+    background-color: transparent;
+    border-width: 0;
+    margin: 0;
+    padding: 0;
+}
+
+#img-highlight {
+    display: none;
+}
+
+.card-back-a {
+    background-image: url('project://database/Assets/Sprites/card-v2/bg-deck-select-card-axe.png?fileID=2800000&guid=aafabe0b62a3344b88a02b9e6ea33e98&type=3#bg-deck-select-card-axe');
+}
+
+.card-back-e {
+    background-image: url('project://database/Assets/Sprites/card-v2/bg-deck-select-card-enemy.png?fileID=2800000&guid=c85af85dad52047b88cdddf0513a3f99&type=3#bg-deck-select-card-enemy');
+}
+
+.card-back-f {
+    background-image: url('project://database/Assets/Sprites/card-v2/bg-deck-select-card-fist.png?fileID=2800000&guid=f497ee585b75f43b3a7ff6c8b37f77bf&type=3#bg-deck-select-card-fist');
+}
+
+.card-back-p {
+    background-image: url('project://database/Assets/Sprites/card-v2/bg-deck-select-card-pistol.png?fileID=2800000&guid=f4b1f7255e8c9475dae06f7a90b30ff0&type=3#bg-deck-select-card-pistol');
+}
+
+.card-back-s {
+    background-image: url('project://database/Assets/Sprites/card-v2/bg-deck-select-card-staff.png?fileID=2800000&guid=4d0081a1b891242fd975675e2196b648&type=3#bg-deck-select-card-staff');
+}
+
+.card-state-0:hover #layout-container {
+    translate: 0 -28px;
+}
+
+.card-state-1 #img-highlight {
+    display: flex;
+}
+
+.card-state-1:hover #layout-container {
+    translate: 0 -28px;
+}
+
+.stat-icon-atk {
+    background-image: resource('StatusIcon/Damage');
+}
+
+.stat-icon-def {
+    background-image: resource('StatusIcon/Defense_Icon');
+}
