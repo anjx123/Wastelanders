@@ -24,10 +24,13 @@ public class CardUI : MonoBehaviour
     //Will activate the checkmark on card UI for indication that it is in the player's deck
     public void SetSelectedForDeck(bool isSelectedForDeck)
     {
+        this.isSelectedForDeck = isSelectedForDeck;
         selectedForDeckUI?.SetActive(isSelectedForDeck);
     }
 
     public bool shouldRenderCost = false;
+    public bool isSelectedForDeck = false;
+
     public void RenderCard(ActionClass actionClass)
     {
         textCanvas.overrideSorting = true; //Added so it overrides the layer of its parent canvas
