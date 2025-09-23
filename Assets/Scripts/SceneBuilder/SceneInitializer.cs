@@ -62,4 +62,5 @@ public class SceneInitializerPrefabs
     public HUDV2 hudV2 = null!;
     public DialogueManager dialogueManager = null!;
     public DeckSelectV2 deckSelectV2 = null!;
+    public FadeScreenHandler fadeScreenHandler = null!;
 }
