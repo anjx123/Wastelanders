@@ -36,7 +36,7 @@ public class DialogueBox : MonoBehaviour
         }
 
         SetFontStyles(line);
-        
+
         bodyText.text = line.BodyText;
         if (line.SpeakerName != "") {
             nameText.text = line.SpeakerName;
@@ -45,7 +45,6 @@ public class DialogueBox : MonoBehaviour
         }
         bodyText.maxVisibleCharacters = 0;
         bodyText.text = line.BodyText;
-        nameText.text = line.SpeakerName;
 
         if (line.broadcastAnEvent) DialogueBoxEvent?.Invoke();
         StartDialogue();
