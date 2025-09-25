@@ -9,12 +9,10 @@ using UnityEngine.UI;
 
 public class LevelSelect : MonoBehaviour
 {
-    [SerializeField] private FadeScreenHandler fadeScreen;
-
     protected void Awake()
     {
-        fadeScreen.SetDarkScreen();
-        StartCoroutine(fadeScreen.FadeInLightScreen(1f));
+        FadeScreenHandler.Instance.SetDarkScreen();
+        StartCoroutine(FadeScreenHandler.Instance.FadeInLightScreen(1f));
     }
 
     public void OnEnable()
@@ -76,7 +74,7 @@ public class LevelSelect : MonoBehaviour
 
     IEnumerator FadeLevelIn(string levelName)
     {
-        yield return StartCoroutine(fadeScreen.FadeInDarkScreen(0.6f));
+        yield return StartCoroutine(FadeScreenHandler.Instance.FadeInDarkScreen(0.6f));
         GameStateManager.Instance.LoadScene(levelName);
     }
 }

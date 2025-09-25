@@ -12,7 +12,6 @@ using UnityEngine.UI;
 // Class that handles the rendering and scene management of bounty selection
 public class BountySelect : MonoBehaviour
 {
-    [SerializeField] private FadeScreenHandler fadeScreen;
     [SerializeField] private Transform[] bountyGrid;
     [SerializeField] private BountyButton bountyButtonPrefab;
     [SerializeField] private BountyAssetDatabase bountyAssetDatabase;
@@ -36,8 +35,8 @@ public class BountySelect : MonoBehaviour
         BountyButton.BountyOnHoverEndEvent += OnBountyHoverEnd;
         DeckSelectionArrow.DeckSelectionArrowEvent += OnBackPressed;
         ConstructBountyButtons();
-        fadeScreen.SetDarkScreen();
-        StartCoroutine(fadeScreen.FadeInLightScreen(1f));
+        FadeScreenHandler.Instance.SetDarkScreen();
+        StartCoroutine(FadeScreenHandler.Instance.FadeInLightScreen(1f));
     }
 
     void OnDestroy()
@@ -83,7 +82,7 @@ public class BountySelect : MonoBehaviour
 
     IEnumerator FadeLevelIn(string levelName)
     {
-        yield return StartCoroutine(fadeScreen.FadeInDarkScreen(0.8f));
+        yield return StartCoroutine(FadeScreenHandler.Instance.FadeInDarkScreen(0.8f));
         SceneManager.LoadScene(levelName);
     }
 
@@ -152,7 +151,7 @@ public class BountySelect : MonoBehaviour
 
     private IEnumerator ExitBounty()
     {
-        yield return StartCoroutine(fadeScreen.FadeInDarkScreen(0.8f));
+        yield return StartCoroutine(FadeScreenHandler.Instance.FadeInDarkScreen(0.8f));
         GameStateManager.Instance.LoadScene(SceneData.Get<SceneData.LevelSelect>().SceneName);
     }
 

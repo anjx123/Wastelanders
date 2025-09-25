@@ -2,12 +2,14 @@ using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(SpriteRenderer))]
-public class FadeScreenHandler : MonoBehaviour
+public class FadeScreenHandler : PersistentSingleton<FadeScreenHandler>
 {
     [SerializeField] private SpriteRenderer fadeScreen;
 
     private Coroutine _animationCoroutine = null;
     private float _intendedAlpha = 0.0f;
+    
+    public SpriteRenderer FadeScreenSprite => fadeScreen;
 
     void Awake()
     {
