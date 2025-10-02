@@ -11,21 +11,6 @@ public class FadeScreenHandler : PersistentSingleton<FadeScreenHandler>
     
     public SpriteRenderer FadeScreenSprite => fadeScreen;
 
-    void Awake()
-    {
-        if (fadeScreen == null)
-        {
-            fadeScreen = GetComponent<SpriteRenderer>();
-        }
-
-        if (fadeScreen == null)
-        {
-            Debug.LogError("FadeScreenHandler requires a SpriteRenderer component or assignment.", this);
-            enabled = false;
-            return;
-        }
-    }
-
     public void SetFadeScreen(SpriteRenderer spriteRenderer)
     {
         this.fadeScreen = spriteRenderer;
