@@ -2342,7 +2342,7 @@ MonoBehaviour:
   gameOver: {fileID: 302505533}
   gameLoseDialogue: {fileID: 11400000, guid: 71aa9a544d4b56045a1b4ee4cb6b4f0d, type: 2}
   battleIntro: {fileID: 5210625753511003606, guid: a1b9dbfd8373c7347bbeaace2539e9b7, type: 3}
-  jumpToCombat: 0
+  jumpToCombat: 1
 --- !u!1001 &2102825245
 PrefabInstance:
   m_ObjectHideFlags: 0
