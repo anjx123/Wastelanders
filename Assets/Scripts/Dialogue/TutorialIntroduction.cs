@@ -30,10 +30,10 @@ public class TutorialIntroduction : DialogueClasses
     [SerializeField] private List<GameObject> ivesTutorialDeck;
     [SerializeField] private List<GameObject> jackieTutorialDeck;
 
-    [SerializeField] private List<DialogueText> openingDiscussion;
-    [SerializeField] private List<DialogueText> jackieMonologue;
-    [SerializeField] private List<DialogueText> soldierGreeting;
-    [SerializeField] private List<DialogueText> jackieTalksWithSolider;
+    [SerializeField] private DialogueWrapper openingDiscussion;
+    [SerializeField] private DialogueWrapper jackieMonologue;
+    [SerializeField] private DialogueWrapper soldierGreeting;
+    [SerializeField] private DialogueWrapper jackieTalksWithSolider;
     [SerializeField] private DialogueWrapper ivesChatsWithJackie;
 
     //SingleDummyTutorial
@@ -113,7 +113,7 @@ public class TutorialIntroduction : DialogueClasses
 
                 DialogueBox.DialogueBoxEvent += CountBroadcasts;
 
-                Coroutine dialogue = StartCoroutine(DialogueManager.Instance.StartDialogue(openingDiscussion));
+                Coroutine dialogue = StartCoroutine(DialogueManager.Instance.StartDialogue(openingDiscussion.Dialogue));
 
                 //Dialogue without any expression is kinda dry, its also difficult to tell whos talking so I wont VN style this unless I want to add more movement to the guys on screen
 
@@ -151,17 +151,17 @@ public class TutorialIntroduction : DialogueClasses
             yield return StartCoroutine(jackie.MoveToPosition(jackieDefaultTransform.position, 0, 1.5f)); //Jackie Runs into the scene and talks 
             yield return new WaitForSeconds(MEDIUM_PAUSE);
 
-            yield return StartCoroutine(DialogueManager.Instance.StartDialogue(jackieMonologue));
+            yield return StartCoroutine(DialogueManager.Instance.StartDialogue(jackieMonologue.Dialogue));
             yield return StartCoroutine(CombatManager.Instance.FadeInLightScreen(2f));
             jackie.DeEmphasize(); //Jackie is below the black background
 
-            yield return StartCoroutine(DialogueManager.Instance.StartDialogue(soldierGreeting));
+            yield return StartCoroutine(DialogueManager.Instance.StartDialogue(soldierGreeting.Dialogue));
             yield return new WaitForSeconds(1f);
 
             jackie.FaceLeft(); //Jackie faces the soldier talking to her
             yield return new WaitForSeconds(0.2f);
 
-            yield return StartCoroutine(DialogueManager.Instance.StartDialogue(jackieTalksWithSolider));
+            yield return StartCoroutine(DialogueManager.Instance.StartDialogue(jackieTalksWithSolider.Dialogue));
             yield return new WaitForSeconds(MEDIUM_PAUSE);
 
             ives.SetReturnPosition(ivesDefaultTransform.position);
