@@ -12,4 +12,75 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 207ddad3e1c90594ba3f48e2a5a6a796, type: 3}
   m_Name: 4. SoldierConversation
   m_EditorClassIdentifier: 
-  dialogue: []
+  dialogue:
+  - bodyText: Good morning!
+    speakerName: Jackie
+    displayingImage: {fileID: 21300000, guid: 10ec818d4088de44a83a5405137230e4, type: 3}
+    sfx: 
+    broadcastAnEvent: 0
+  - bodyText: "So today\u2019s the day, huh. NITES exam. How are you feeling? "
+    speakerName: Mustached Soldier
+    displayingImage: {fileID: 21300000, guid: 582a5949206349142b78fb69be74a015, type: 3}
+    sfx: 
+    broadcastAnEvent: 0
+  - bodyText: I'm feeling... Fine.
+    speakerName: Jackie
+    displayingImage: {fileID: 21300000, guid: 487226e5dae66424ea250466920a3086, type: 3}
+    sfx: 
+    broadcastAnEvent: 0
+  - bodyText: Haha, really? I guess those extra hours you put in with Ives have really
+      paid off then?
+    speakerName: Mustached Soldier
+    displayingImage: {fileID: 21300000, guid: 582a5949206349142b78fb69be74a015, type: 3}
+    sfx: 
+    broadcastAnEvent: 0
+  - bodyText: "Yeah, I guess so. I hope it\u2019s enough. "
+    speakerName: Jackie
+    displayingImage: {fileID: 21300000, guid: 10ec818d4088de44a83a5405137230e4, type: 3}
+    sfx: 
+    broadcastAnEvent: 0
+  - bodyText: Haha, don't lose heart. True strength does not come from conquering
+      a challenge itself, but how you grow to overcome it.
+    speakerName: Mustached Soldier
+    displayingImage: {fileID: 21300000, guid: 582a5949206349142b78fb69be74a015, type: 3}
+    sfx: 
+    broadcastAnEvent: 0
+  - bodyText: You are strong Jackie. I've seen your growth with my own eyes.
+    speakerName: Mustached Soldier
+    displayingImage: {fileID: 21300000, guid: 582a5949206349142b78fb69be74a015, type: 3}
+    sfx: 
+    broadcastAnEvent: 0
+  - bodyText: Thanks, Dan. I appreciate the confidence.
+    speakerName: Jackie
+    displayingImage: {fileID: 21300000, guid: 10ec818d4088de44a83a5405137230e4, type: 3}
+    sfx: 
+    broadcastAnEvent: 0
+  - bodyText: "Haha great! Just be careful out there will ya? I\u2019m not trying
+      to scare you, but there\u2019s been an unusual increase in monster activity
+      in the Wasteland around the city. "
+    speakerName: Dan
+    displayingImage: {fileID: 21300000, guid: 582a5949206349142b78fb69be74a015, type: 3}
+    sfx: 
+    broadcastAnEvent: 0
+  - bodyText: A recent scout reported seeing hundreds of piercing purplish eyes,
+      and what sounded like piles of bones clattering in the forest.
+    speakerName: Dan
+    displayingImage: {fileID: 21300000, guid: 582a5949206349142b78fb69be74a015, type: 3}
+    sfx: 
+    broadcastAnEvent: 0
+  - bodyText: You know the wasteland is not a friendly place, even your mother knew
+      that. No matter how much she tried not to show it.
+    speakerName: Dan
+    displayingImage: {fileID: 21300000, guid: 582a5949206349142b78fb69be74a015, type: 3}
+    sfx: 
+    broadcastAnEvent: 0
+  - bodyText: "Sure\u2026 I\u2019ll keep that in mind. Thanks for the concern\u2026"
+    speakerName: Jackie
+    displayingImage: {fileID: 21300000, guid: 88a7e4552c1afa641acadc54e9b6cbac, type: 3}
+    sfx: 
+    broadcastAnEvent: 0
+  - bodyText: '[The soldier nods, gives a friendly salute, and leaves..]'
+    speakerName: 
+    displayingImage: {fileID: 21300000, guid: 582a5949206349142b78fb69be74a015, type: 3}
+    sfx: 
+    broadcastAnEvent: 0

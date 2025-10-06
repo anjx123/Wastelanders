@@ -37,14 +37,14 @@ public class TutorialIntroduction : DialogueClasses
     [SerializeField] private DialogueWrapper ivesChatsWithJackie;
 
     //SingleDummyTutorial
-    [SerializeField] private List<DialogueText> youCanPlayCardsTutorial;
-    [SerializeField] private List<DialogueText> cardFieldsTutorial;
-    [SerializeField] private List<DialogueText> queueUpActionsTutorial;
-    [SerializeField] private List<DialogueText> rollingDiceTutorial;
+    [SerializeField] private DialogueWrapper youCanPlayCardsTutorial;
+    [SerializeField] private DialogueWrapper cardFieldsTutorial;
+    [SerializeField] private DialogueWrapper queueUpActionsTutorial;
+    [SerializeField] private DialogueWrapper rollingDiceTutorial;
     //Plays after first Dummy killed
-    [SerializeField] private List<DialogueText> buffTutorial;
+    [SerializeField] private DialogueWrapper buffTutorial;
     //After Ives Starts fighting
-    [SerializeField] private List<DialogueText> readingOpponentTutorial;
+    [SerializeField] private DialogueWrapper readingOpponentTutorial;
     [SerializeField] private List<DialogueText> clashingCardsTutorial;
     [SerializeField] private List<DialogueText> defensiveCardsTutorial;
     [SerializeField] private List<DialogueText> cardAbilitiesTutorial;
@@ -210,7 +210,7 @@ public class TutorialIntroduction : DialogueClasses
         yield return new WaitUntil(() => CombatManager.Instance.GameState == GameState.GAME_WIN);
 
         yield return new WaitUntil(() => !DialogueManager.Instance.IsInDialogue());
-        yield return StartCoroutine(DialogueManager.Instance.StartDialogue(buffTutorial));
+        yield return StartCoroutine(DialogueManager.Instance.StartDialogue(buffTutorial.Dialogue));
         
         //Ives retrieves the dead training dummy
         foreach (GameObject trainingDummy in trainingDummies)
@@ -260,7 +260,7 @@ public class TutorialIntroduction : DialogueClasses
     {
         EntityClass.OnEntityDeath += FirstDummyDies; //Setup Listener to set state to Game Win
         PlayerClass.playerReshuffleDeck += PlayerLostOneMaxHandSize;
-        StartCoroutine(StartDialogueWithNextEvent(youCanPlayCardsTutorial, () => { ActionClass.CardHighlightedEvent += OnPlayerFirstHighlightCard; }));
+        StartCoroutine(StartDialogueWithNextEvent(youCanPlayCardsTutorial.Dialogue, () => { ActionClass.CardHighlightedEvent += OnPlayerFirstHighlightCard; }));
     }
 
     private void PlayerLostOneMaxHandSize(PlayerClass player)
@@ -281,7 +281,7 @@ public class TutorialIntroduction : DialogueClasses
     private void OnPlayerFirstHighlightCard(ActionClass card)
     {
         ActionClass.CardHighlightedEvent -= OnPlayerFirstHighlightCard;
-        StartCoroutine(StartDialogueWithNextEvent(cardFieldsTutorial, () => { HighlightManager.Instance.PlayerManuallyInsertedAction += OnPlayerFirstInsertCard; }));
+        StartCoroutine(StartDialogueWithNextEvent(cardFieldsTutorial.Dialogue, () => { HighlightManager.Instance.PlayerManuallyInsertedAction += OnPlayerFirstInsertCard; }));
     }
 
     //Once a player targets an enemy, we talk about the queue
@@ -289,13 +289,13 @@ public class TutorialIntroduction : DialogueClasses
     {
         DialogueManager.Instance.MoveBoxToBottom();
         HighlightManager.Instance.PlayerManuallyInsertedAction -= OnPlayerFirstInsertCard;
-        StartCoroutine(StartDialogueWithNextEvent(queueUpActionsTutorial, () => { CardComparator.Instance.playersAreRollingDiceEvent += OnPlayerFightsDummy; }));
+        StartCoroutine(StartDialogueWithNextEvent(queueUpActionsTutorial.Dialogue, () => { CardComparator.Instance.playersAreRollingDiceEvent += OnPlayerFightsDummy; }));
     }
 
     private IEnumerator OnPlayerFightsDummy()
     {
         CardComparator.Instance.playersAreRollingDiceEvent -= OnPlayerFightsDummy;
-        yield return StartCoroutine(DialogueManager.Instance.StartDialogue(rollingDiceTutorial));
+        yield return StartCoroutine(DialogueManager.Instance.StartDialogue(rollingDiceTutorial.Dialogue));
     }
 
     private void FirstDummyDies(EntityClass entity)
@@ -315,7 +315,7 @@ public class TutorialIntroduction : DialogueClasses
         CombatManager.EnemiesWinEvent += EnemiesWin;
         DialogueManager.Instance.MoveBoxToBottom();
         CombatManager.OnGameStateChanged += ExplainDefense;
-        StartCoroutine(StartDialogueWithNextEvent(readingOpponentTutorial, () => { HighlightManager.Instance.PlayerManuallyInsertedAction += OnPlayerPlayClashingCard; }));
+        StartCoroutine(StartDialogueWithNextEvent(readingOpponentTutorial.Dialogue, () => { HighlightManager.Instance.PlayerManuallyInsertedAction += OnPlayerPlayClashingCard; }));
     }
 
     private void OnPlayerPlayClashingCard(ActionClass actionClass)
