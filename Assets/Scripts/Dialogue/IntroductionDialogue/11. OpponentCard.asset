@@ -12,4 +12,43 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 207ddad3e1c90594ba3f48e2a5a6a796, type: 3}
   m_Name: 11. OpponentCard
   m_EditorClassIdentifier: 
-  dialogue: []
+  dialogue:
+  - bodyText: Gloves are off. Time to get serious.
+    speakerName: Ives
+    displayingImage: {fileID: 21300000, guid: ade9660133ca00a499bfa3ad449b87bd, type: 3}
+    sfx: 
+    broadcastAnEvent: 0
+  - bodyText: Since the previous exam, your extra training should allow you to accurately
+      read enemy attacks now.
+    speakerName: Ives
+    displayingImage: {fileID: 21300000, guid: fbdbcaab28794334bb84176f7e052fb5, type: 3}
+    sfx: 
+    broadcastAnEvent: 0
+  - bodyText: Next to the enemy, you can see the attack they are declaring.
+    speakerName: Ives
+    displayingImage: {fileID: 21300000, guid: fbdbcaab28794334bb84176f7e052fb5, type: 3}
+    sfx: 
+    broadcastAnEvent: 0
+  - bodyText: At the top of that icon, you can see the attack's intended target and
+      damage range.
+    speakerName: Ives
+    displayingImage: {fileID: 21300000, guid: edb0bc1d86401ce4aadfe4358f987ea3, type: 3}
+    sfx: 
+    broadcastAnEvent: 0
+  - bodyText: '[Left Clicking] on the attack icon also allows you to see its Speed
+      and any Abilities.'
+    speakerName: Ives
+    displayingImage: {fileID: 21300000, guid: 82dbf38ae23fe224e90be99093d02604, type: 3}
+    sfx: 
+    broadcastAnEvent: 0
+  - bodyText: Their Action has also been placed into the queue where you can [Left
+      Click] to check it out.
+    speakerName: Ives
+    displayingImage: {fileID: 21300000, guid: fbdbcaab28794334bb84176f7e052fb5, type: 3}
+    sfx: 
+    broadcastAnEvent: 0
+  - bodyText: Come on, make an attack against me.
+    speakerName: Ives
+    displayingImage: {fileID: 21300000, guid: ade9660133ca00a499bfa3ad449b87bd, type: 3}
+    sfx: 
+    broadcastAnEvent: 0

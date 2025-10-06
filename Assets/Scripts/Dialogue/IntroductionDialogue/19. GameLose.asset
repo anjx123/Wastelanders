@@ -10,20 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 207ddad3e1c90594ba3f48e2a5a6a796, type: 3}
-  m_Name: afterCombatDialogue
+  m_Name: 19. GameLose
   m_EditorClassIdentifier: 
   dialogue:
-  - bodyText: '"All NITES candidates, please make your way to the armory and gear
-      up. The NITES exam will begin shortly."'
-    speakerName: Loud Speaker
-    displayingImage: {fileID: 0}
+  - bodyText: 'Whoops, guess I should have stayed my hand a bit. '
+    speakerName: Ives
+    displayingImage: {fileID: 21300000, guid: 084171bdb9370ac43b84a6350416b15c, type: 3}
+    sfx: 
     broadcastAnEvent: 0
-  - bodyText: "That\u2019s all the time we\u2019ve got then. See you out on the field,
-      Jackie. You\u2019ve got this."
+  - bodyText: 'You were really going for it, and so I acted out of instinct there. '
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
+    sfx: 
     broadcastAnEvent: 0
-  - bodyText: Alright, thanks for the spar Ives, I'll see you soon.
-    speakerName: Jackie
-    displayingImage: {fileID: 21300000, guid: 422f3cda08073664b8a46361afe442fb, type: 3}
+  - bodyText: Here, let me help you get back up.
+    speakerName: Ives
+    displayingImage: {fileID: 21300000, guid: 87cb7c6c6588a4a3a957b707239abbf0, type: 3}
+    sfx: 
     broadcastAnEvent: 0

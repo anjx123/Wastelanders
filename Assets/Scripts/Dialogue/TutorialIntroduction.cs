@@ -45,18 +45,18 @@ public class TutorialIntroduction : DialogueClasses
     [SerializeField] private DialogueWrapper buffTutorial;
     //After Ives Starts fighting
     [SerializeField] private DialogueWrapper readingOpponentTutorial;
-    [SerializeField] private List<DialogueText> clashingCardsTutorial;
-    [SerializeField] private List<DialogueText> defensiveCardsTutorial;
-    [SerializeField] private List<DialogueText> cardAbilitiesTutorial;
-    [SerializeField] private List<DialogueText> clashingOutcomeTutorial;
-    [SerializeField] private List<DialogueText> cardsExhaustedTutorial;
+    [SerializeField] private DialogueWrapper clashingCardsTutorial;
+    [SerializeField] private DialogueWrapper defensiveCardsTutorial;
+    [SerializeField] private DialogueWrapper cardAbilitiesTutorial;
+    [SerializeField] private DialogueWrapper clashingOutcomeTutorial;
+    [SerializeField] private DialogueWrapper cardsExhaustedTutorial;
 
     //After Ives is defeated
-    [SerializeField] private List<DialogueText> ivesIsDefeated;
+    [SerializeField] private DialogueWrapper ivesIsDefeated;
     [SerializeField] private DialogueWrapper endingTutorialDialogue;
 
     [SerializeField] private GameOver gameOver;
-    [SerializeField] private List<DialogueText> gameLoseDialogue;
+    [SerializeField] private DialogueWrapper gameLoseDialogue;
     [SerializeField] private BattleIntro battleIntro;
 
     [SerializeField] private bool jumpToCombat;
@@ -236,7 +236,7 @@ public class TutorialIntroduction : DialogueClasses
         CombatManager.Instance.GameState = GameState.OUT_OF_COMBAT;
         ives.OutOfCombat();
 
-        yield return StartCoroutine(DialogueManager.Instance.StartDialogue(ivesIsDefeated));
+        yield return StartCoroutine(DialogueManager.Instance.StartDialogue(ivesIsDefeated.Dialogue));
         yield return new WaitForSeconds(0.6f);
 
         //Ives Stands back up
@@ -275,7 +275,7 @@ public class TutorialIntroduction : DialogueClasses
     {
         PlayerClass.playerReshuffleDeck -= PlayerLostOneMaxHandSize;
         yield return new WaitUntil(() => !DialogueManager.Instance.IsInDialogue());
-        StartCoroutine(DialogueManager.Instance.StartDialogue(cardsExhaustedTutorial));
+        StartCoroutine(DialogueManager.Instance.StartDialogue(cardsExhaustedTutorial.Dialogue));
     }
     //Once hovering over a card, we talk about speed and power
     private void OnPlayerFirstHighlightCard(ActionClass card)
@@ -321,13 +321,13 @@ public class TutorialIntroduction : DialogueClasses
     private void OnPlayerPlayClashingCard(ActionClass actionClass)
     {
         HighlightManager.Instance.PlayerManuallyInsertedAction -= OnPlayerPlayClashingCard;
-        StartCoroutine(StartDialogueWithNextEvent(clashingCardsTutorial, () => { CardComparator.Instance.playersAreRollingDiceEvent += OnPlayerClashingWithIves; }));
+        StartCoroutine(StartDialogueWithNextEvent(clashingCardsTutorial.Dialogue, () => { CardComparator.Instance.playersAreRollingDiceEvent += OnPlayerClashingWithIves; }));
     }
 
     private IEnumerator OnPlayerClashingWithIves()
     {
         CardComparator.Instance.playersAreRollingDiceEvent -= OnPlayerClashingWithIves;
-        yield return StartCoroutine(DialogueManager.Instance.StartDialogue(clashingOutcomeTutorial));
+        yield return StartCoroutine(DialogueManager.Instance.StartDialogue(clashingOutcomeTutorial.Dialogue));
     }
 
     private void ExplainDefense(GameState gameState)
@@ -335,7 +335,7 @@ public class TutorialIntroduction : DialogueClasses
         if (gameState == GameState.SELECTION)
         {
             CombatManager.OnGameStateChanged -= ExplainDefense;
-            StartCoroutine(StartDialogueWithNextEvent(defensiveCardsTutorial, () => { CombatManager.OnGameStateChanged += ExplainAbilities; }));
+            StartCoroutine(StartDialogueWithNextEvent(defensiveCardsTutorial.Dialogue, () => { CombatManager.OnGameStateChanged += ExplainAbilities; }));
         }
     }
 
@@ -344,7 +344,7 @@ public class TutorialIntroduction : DialogueClasses
         if (gameState == GameState.SELECTION)
         {
             CombatManager.OnGameStateChanged -= ExplainAbilities;
-            StartCoroutine(StartDialogueWithNextEvent(cardAbilitiesTutorial, () => { }));
+            StartCoroutine(StartDialogueWithNextEvent(cardAbilitiesTutorial.Dialogue, () => { }));
         }
     }
     private void IvesDies()
@@ -369,7 +369,7 @@ public class TutorialIntroduction : DialogueClasses
         gameOver.gameObject.SetActive(true);
         gameOver.FadeIn();
 
-        yield return StartCoroutine(DialogueManager.Instance.StartDialogue(gameLoseDialogue));
+        yield return StartCoroutine(DialogueManager.Instance.StartDialogue(gameLoseDialogue.Dialogue));
     }
     //------------------------------------------------------Helpers---------------------------------------------------------------------------------
 
