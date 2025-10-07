@@ -13,23 +13,32 @@ MonoBehaviour:
   m_Name: 7. CardFieldTut
   m_EditorClassIdentifier: 
   dialogue:
-  - bodyText: Each Action has two stats.
+  - bodyText: 'Each Action has two key stats: Power and Speed.'
     speakerName: Ives
-    displayingImage: {fileID: 21300000, guid: 57baba5992d9e224988e93fcacf9f7eb, type: 3}
+    displayingImage: {fileID: 21300000, guid: ef17277e1ebf2f64abf4d8a5117608a3, type: 3}
     sfx: 
     broadcastAnEvent: 0
-  - bodyText: Power - a range that the damage you do can be rolled into.
+  - bodyText: Power shows how much damage the Action can deal.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 3fea2e94140c08246a0e502ee92d3761, type: 3}
     sfx: 
     broadcastAnEvent: 0
-  - bodyText: And Speed - determines the order Actions are played in. Higher speeds
-      are played first.
+  - bodyText: "It\u2019s a range that damage will be randomly rolled within."
     speakerName: Ives
-    displayingImage: {fileID: 21300000, guid: 61a3ecbde544e124ba8f329d0e4f6fb2, type: 3}
+    displayingImage: {fileID: 21300000, guid: 3fea2e94140c08246a0e502ee92d3761, type: 3}
     sfx: 
     broadcastAnEvent: 0
-  - bodyText: "Let\u2019s select a card and target the enemy!"
+  - bodyText: Speed decides when the Action takes place during combat.
+    speakerName: Ives
+    displayingImage: {fileID: 21300000, guid: b1411cc1e1231574797f223a58264863, type: 3}
+    sfx: 
+    broadcastAnEvent: 0
+  - bodyText: Higher Speed means the Action goes earlier in the round.
+    speakerName: Ives
+    displayingImage: {fileID: 21300000, guid: b1411cc1e1231574797f223a58264863, type: 3}
+    sfx: 
+    broadcastAnEvent: 0
+  - bodyText: "Let\u2019s pick a card and target the enemy!"
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 84d19d73f4fee204d8d42cc16de51cf7, type: 3}
     sfx: 
