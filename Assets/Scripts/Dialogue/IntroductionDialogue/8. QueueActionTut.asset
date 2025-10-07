@@ -13,46 +13,44 @@ MonoBehaviour:
   m_Name: 8. QueueActionTut
   m_EditorClassIdentifier: 
   dialogue:
-  - bodyText: Targeting an enemy will queue up the action to attack in the queue.
+  - bodyText: Targeting an enemy adds the Action to the battle queue.
     speakerName: Ives
-    displayingImage: {fileID: 21300000, guid: 84d19d73f4fee204d8d42cc16de51cf7, type: 3}
+    displayingImage: {fileID: 21300000, guid: 1196bb0135ba2a645ada67564f0da12f, type: 3}
     sfx: 
     broadcastAnEvent: 0
-  - bodyText: The queue will be sorted by speed, with the fastest attacker on the
-      left.
+  - bodyText: The queue is sorted by Speed, with the fastest on the left.
     speakerName: Ives
-    displayingImage: {fileID: 21300000, guid: fb608aaef631251489ed4ef86a15e639, type: 3}
+    displayingImage: {fileID: 21300000, guid: 1196bb0135ba2a645ada67564f0da12f, type: 3}
     sfx: 
     broadcastAnEvent: 0
-  - bodyText: You can [Left Click] on a played card's icon to view the card's stats.
+  - bodyText: You can [Hover] over a queued card's icon to check its stats again.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 57baba5992d9e224988e93fcacf9f7eb, type: 3}
     sfx: 
     broadcastAnEvent: 0
-  - bodyText: Or retrieve it back into your hand by [Right Clicking] on its icon.
+  - bodyText: Or [Left Click] it to pull it back into your hand.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 57baba5992d9e224988e93fcacf9f7eb, type: 3}
     sfx: 
     broadcastAnEvent: 0
-  - bodyText: Each round, you can queue up as many attacks as you'd like. However...
+  - bodyText: Each round, you can queue up as many Actions as you'd like. However...
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 57baba5992d9e224988e93fcacf9f7eb, type: 3}
     sfx: 
     broadcastAnEvent: 0
-  - bodyText: 'You cannot play two Actions that share the same speed. '
+  - bodyText: "You can\u2019t play two Actions that share the same Speed."
     speakerName: Ives
-    displayingImage: {fileID: 21300000, guid: 61a3ecbde544e124ba8f329d0e4f6fb2, type: 3}
+    displayingImage: {fileID: 21300000, guid: b1411cc1e1231574797f223a58264863, type: 3}
     sfx: 
     broadcastAnEvent: 0
-  - bodyText: If a card is highlighted red, it means you have already played a card
-      with the same speed.
+  - bodyText: If a card turns red, that means another Action with the same Speed
+      is already queued.
     speakerName: Ives
-    displayingImage: {fileID: 21300000, guid: 61a3ecbde544e124ba8f329d0e4f6fb2, type: 3}
+    displayingImage: {fileID: 21300000, guid: 37984fb1d201d1246a4e2a0ac7061427, type: 3}
     sfx: 
     broadcastAnEvent: 0
-  - bodyText: Once you feel confident in your attacks, hit that confirm button to
-      start combat.
+  - bodyText: Once you're confident in your setup, press Confirm to start combat.
     speakerName: Ives
-    displayingImage: {fileID: 21300000, guid: 10381d6e797f9674c8a1b171612f09bd, type: 3}
+    displayingImage: {fileID: 21300000, guid: ac6eebf9323f6405fb24f7403fc43497, type: 3}
     sfx: 
     broadcastAnEvent: 0
