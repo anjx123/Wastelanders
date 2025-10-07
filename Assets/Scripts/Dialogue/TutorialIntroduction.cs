@@ -80,6 +80,7 @@ public class TutorialIntroduction : DialogueClasses
     {
         CombatManager.ClearEvents();
         DialogueBox.ClearDialogueEvents();
+        DialogueBox.DialogueBoxEvent -= SubscribeFirstHighlightMethod;
         PlayerClass.playerReshuffleDeck -= PlayerLostOneMaxHandSize;
         ActionClass.CardHighlightedEvent -= OnPlayerFirstHighlightCard;
         EntityClass.OnEntityDeath -= FirstDummyDies;
@@ -260,7 +261,20 @@ public class TutorialIntroduction : DialogueClasses
     {
         EntityClass.OnEntityDeath += FirstDummyDies; //Setup Listener to set state to Game Win
         PlayerClass.playerReshuffleDeck += PlayerLostOneMaxHandSize;
-        StartCoroutine(StartDialogueWithNextEvent(youCanPlayCardsTutorial.Dialogue, () => { ActionClass.CardHighlightedEvent += OnPlayerFirstHighlightCard; }));
+        StartCoroutine(StartTutorial());
+    }
+
+    private IEnumerator StartTutorial()
+    {
+        yield return new WaitUntil(() => !DialogueManager.Instance.IsInDialogue());
+        DialogueBox.DialogueBoxEvent += SubscribeFirstHighlightMethod;
+        yield return StartCoroutine(DialogueManager.Instance.StartDialogue(youCanPlayCardsTutorial.Dialogue));   
+    }
+
+    void SubscribeFirstHighlightMethod()
+    {
+        DialogueBox.DialogueBoxEvent -= SubscribeFirstHighlightMethod;
+        ActionClass.CardHighlightedEvent += OnPlayerFirstHighlightCard;
     }
 
     private void PlayerLostOneMaxHandSize(PlayerClass player)
@@ -281,6 +295,7 @@ public class TutorialIntroduction : DialogueClasses
     private void OnPlayerFirstHighlightCard(ActionClass card)
     {
         ActionClass.CardHighlightedEvent -= OnPlayerFirstHighlightCard;
+        DialogueManager.Instance.DisplayNextSentence();
         StartCoroutine(StartDialogueWithNextEvent(cardFieldsTutorial.Dialogue, () => { HighlightManager.Instance.PlayerManuallyInsertedAction += OnPlayerFirstInsertCard; }));
     }
 

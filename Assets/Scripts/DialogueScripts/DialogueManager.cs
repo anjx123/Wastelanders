@@ -107,7 +107,7 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
-    void DisplayNextSentence()
+    public void DisplayNextSentence()
     {
         if (sentences.Count == 0)
         {
