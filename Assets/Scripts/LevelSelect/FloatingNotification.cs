@@ -15,13 +15,13 @@ public class FloatingNotification : MonoBehaviour
     void Awake()
     {
         rb.velocity = Vector2.up * floatVelocity;
-        textMesh = GetComponentInChildren<TextMeshPro>();
+        textMesh = GetComponent<TextMeshPro>();
         textMesh.alpha = 0f;
     }
 
     public void Initialize(Vector2 position, string text) {
         transform.position = position;
-        GetComponentInChildren<TMPro.TMP_Text>().text = text;
+        GetComponent<TMPro.TMP_Text>().text = text;
         StartCoroutine(AnimateCoroutine());
     }
 
@@ -40,8 +40,6 @@ public class FloatingNotification : MonoBehaviour
             var value = t / duration;
             t += Time.deltaTime;
             textMesh.alpha = Mathf.SmoothStep(from, to, value);
-            var pos = gameObject.transform.position;
-            gameObject.transform.position = new Vector3(pos.x, pos.y, value);
             yield return null;
         }
         textMesh.alpha = to;

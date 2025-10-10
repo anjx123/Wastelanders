@@ -8,6 +8,8 @@ public class PopUpNotificationManager : MonoBehaviour
 
     public GameObject warningObject;
 
+    public GameObject floatingNotificationPrefab;
+
     public bool isRunning = false;
 
     // Awake is called when the script instance is being loaded
@@ -49,11 +51,19 @@ public class PopUpNotificationManager : MonoBehaviour
 
         if (!string.IsNullOrEmpty(message))
         {
-            CreateWarning(message);
+            CreateFloatingWarning(message);
         }
     }
 
-    private void CreateWarning(string message)
+    private void CreateFloatingWarning(string message) {
+        Vector3 spawnPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        GameObject notification = Instantiate(floatingNotificationPrefab, spawnPosition, Quaternion.identity);
+        FloatingNotification floatingNotification = notification.GetComponent<FloatingNotification>();
+        floatingNotification.Initialize(spawnPosition, message);
+    }
+
+    // Deprecated by CreateFloatingWarning
+    private void CreateBoxWarning(string message)
     {
         WarningInfo info = warningObject.GetComponent<WarningInfo>();
         info.ShowWarning(message);
