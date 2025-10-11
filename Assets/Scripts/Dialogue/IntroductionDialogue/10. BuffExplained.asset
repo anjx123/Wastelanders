@@ -13,26 +13,41 @@ MonoBehaviour:
   m_Name: 10. BuffExplained
   m_EditorClassIdentifier: 
   dialogue:
-  - bodyText: While making staff attacks, you will frequently see the term 'Flow'.
+  - bodyText: "Good. Now let\u2019s talk about Abilities."
+    speakerName: Ives
+    displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
+    sfx: 
+    broadcastAnEvent: 0
+  - bodyText: Every Action has one. You can read it by hovering over the card.
+    speakerName: Ives
+    displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
+    sfx: 
+    broadcastAnEvent: 0
+  - bodyText: "While using a staff, you\u2019ll often see the word <i>Flow</i>."
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 820631014ce088c4cb748224d5467c86, type: 3}
     sfx: 
     broadcastAnEvent: 0
-  - bodyText: Flow grants +1 to the upper and lower boundary of Power for your next
-      attack, but it clears out after the attack.
+  - bodyText: "Flow boosts your next attack \u2014 it adds +1 to both the minimum
+      and maximum Power of your next Action."
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 820631014ce088c4cb748224d5467c86, type: 3}
     sfx: 
     broadcastAnEvent: 0
-  - bodyText: Each different weapon has its unique fighting style, so make sure to
-      capitalize on them and take out your opponents.
+  - bodyText: After that attack, Flow disappears.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 820631014ce088c4cb748224d5467c86, type: 3}
     sfx: 
     broadcastAnEvent: 0
-  - bodyText: (If you forget what 'Flow' does, you can check the Glossary or the
-      Dialogue History on the pause menu by pressing [Tab])
-    speakerName: 
+  - bodyText: "Each weapon type has its own unique mechanic like this. Learn them,
+      and you\u2019ll create some devastating synergies in battle."
+    speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 820631014ce088c4cb748224d5467c86, type: 3}
+    sfx: 
+    broadcastAnEvent: 0
+  - bodyText: (If you ever forget what Flow does, press [Tab]/[Esc] to open the Glossary
+      or Dialogue History.)
+    speakerName: Tutorial
+    displayingImage: {fileID: 21300000, guid: 751635a2cbd6d43cb92d4ab186c2a350, type: 3}
     sfx: 
     broadcastAnEvent: 0

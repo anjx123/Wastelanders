@@ -13,44 +13,50 @@ MonoBehaviour:
   m_Name: 12. ClashExplained
   m_EditorClassIdentifier: 
   dialogue:
-  - bodyText: The first Action you play against the enemy will form a 'clash' with
-      their Action...
+  - bodyText: Ah, a direct challenge. Good.
+    speakerName: Ives
+    displayingImage: {fileID: 21300000, guid: ade9660133ca00a499bfa3ad449b87bd, type: 3}
+    sfx: 
+    broadcastAnEvent: 0
+  - bodyText: The first Action you play against an enemy targeting you will form
+      a <i>Clash</i>.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: b0d27b9163eb2554996f368bd5b8d4e2, type: 3}
     sfx: 
     broadcastAnEvent: 0
-  - bodyText: promoting the speed of the slower action to match that of the faster
-      one.
+  - bodyText: 'In a Clash, both Actions are locked together to strike at the same
+      moment: It''s speed being the largest of the two Actions'' speeds.'
     speakerName: Ives
-    displayingImage: {fileID: 21300000, guid: 61a3ecbde544e124ba8f329d0e4f6fb2, type: 3}
+    displayingImage: {fileID: 21300000, guid: b1411cc1e1231574797f223a58264863, type: 3}
     sfx: 
     broadcastAnEvent: 0
-  - bodyText: Then, these Actions will compete against each other later in the fight
-      to see who rolls the highest Power.
+  - bodyText: When its time for these Actions to strike, they will roll their Power
+      simultaneously.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 3fea2e94140c08246a0e502ee92d3761, type: 3}
     sfx: 
     broadcastAnEvent: 0
-  - bodyText: Note that the order in which Actions are played matters when forming
-      clashes.
-    speakerName: Ives
-    displayingImage: {fileID: 21300000, guid: 87cb7c6c6588a4a3a957b707239abbf0, type: 3}
-    sfx: 
-    broadcastAnEvent: 0
-  - bodyText: The first Action played will always form the clash, even if the next
-      Action played against them may be faster.
-    speakerName: Ives
-    displayingImage: {fileID: 21300000, guid: 87cb7c6c6588a4a3a957b707239abbf0, type: 3}
-    sfx: 
-    broadcastAnEvent: 0
-  - bodyText: Think of it as suppressing an opponent's attack, allowing you to set
-      the pace.
+  - bodyText: The higher roll wins and destroys the opposing Action. The losing Action
+      deals <i>no</i> damage.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: b0d27b9163eb2554996f368bd5b8d4e2, type: 3}
     sfx: 
     broadcastAnEvent: 0
-  - bodyText: Experiment with this wisely to create an opening for yourself. Come
-      at me when you are ready.
+  - bodyText: 'Think of a Clash as a duel. Stepping in to intercept your opponent
+      as they prepare to strike. '
+    speakerName: Ives
+    displayingImage: {fileID: 21300000, guid: b0d27b9163eb2554996f368bd5b8d4e2, type: 3}
+    sfx: 
+    broadcastAnEvent: 0
+  - bodyText: "So pay close attention to which Action you choose to clash with\u2014
+      the <i>first</i> one you play decides the pairing, even if later Actions might
+      be faster."
+    speakerName: Ives
+    displayingImage: {fileID: 21300000, guid: 87cb7c6c6588a4a3a957b707239abbf0, type: 3}
+    sfx: 
+    broadcastAnEvent: 0
+  - bodyText: Try experimenting by changing the order of your attacks around. See
+      what sort of opening you can create for yourself.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: b0d27b9163eb2554996f368bd5b8d4e2, type: 3}
     sfx: 

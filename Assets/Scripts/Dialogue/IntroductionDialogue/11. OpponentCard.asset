@@ -13,41 +13,39 @@ MonoBehaviour:
   m_Name: 11. OpponentCard
   m_EditorClassIdentifier: 
   dialogue:
-  - bodyText: Gloves are off. Time to get serious.
+  - bodyText: "Enough warm-up. Let\u2019s get serious."
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: ade9660133ca00a499bfa3ad449b87bd, type: 3}
     sfx: 
     broadcastAnEvent: 0
-  - bodyText: Since the previous exam, your extra training should allow you to accurately
-      read enemy attacks now.
+  - bodyText: After the training you've done since your last exam, you should be
+      able to read enemy attacks more clearly.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: fbdbcaab28794334bb84176f7e052fb5, type: 3}
     sfx: 
     broadcastAnEvent: 0
-  - bodyText: Next to the enemy, you can see the attack they are declaring.
+  - bodyText: "Next to an enemy, you\u2019ll see the Action they\u2019re preparing."
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: fbdbcaab28794334bb84176f7e052fb5, type: 3}
     sfx: 
     broadcastAnEvent: 0
-  - bodyText: At the top of that icon, you can see the attack's intended target and
-      damage range.
+  - bodyText: "At the top of its icon, you\u2019ll find their target and Power range."
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: edb0bc1d86401ce4aadfe4358f987ea3, type: 3}
     sfx: 
     broadcastAnEvent: 0
-  - bodyText: '[Left Clicking] on the attack icon also allows you to see its Speed
-      and any Abilities.'
+  - bodyText: Hover over it to view more details like Speed and Abilities.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 82dbf38ae23fe224e90be99093d02604, type: 3}
     sfx: 
     broadcastAnEvent: 0
-  - bodyText: Their Action has also been placed into the queue where you can [Left
-      Click] to check it out.
+  - bodyText: Their Action also appears in the battle queue. You can hover there
+      too for the same info.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: fbdbcaab28794334bb84176f7e052fb5, type: 3}
     sfx: 
     broadcastAnEvent: 0
-  - bodyText: Come on, make an attack against me.
+  - bodyText: Now, make your move and show me what you've got.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: ade9660133ca00a499bfa3ad449b87bd, type: 3}
     sfx: 

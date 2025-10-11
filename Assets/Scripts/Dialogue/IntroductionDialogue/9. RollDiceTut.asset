@@ -13,27 +13,31 @@ MonoBehaviour:
   m_Name: 9. RollDiceTut
   m_EditorClassIdentifier: 
   dialogue:
-  - bodyText: 'The outcome of a clash is unpredictable. Remember how Power falls
-      in a range? '
+  - bodyText: 'Remeber, Power isn''t fixed and always falls within a range. '
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
     sfx: 
     broadcastAnEvent: 0
-  - bodyText: You can see the range of power for your attack next to the attack's
-      icon.
+  - bodyText: "You\u2019ll see that range displayed next to your Action\u2019s icon
+      during combat."
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: eab0b79378538464899c1a47f809758c, type: 3}
     sfx: 
     broadcastAnEvent: 0
-  - bodyText: "Since the dummy isn\u2019t fighting back, your action will directly
-      deal its power in damage once rolled."
+  - bodyText: "Since the dummy isn\u2019t fighting back, your attack will directly
+      deal its Power as damage once its rolled."
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 3fea2e94140c08246a0e502ee92d3761, type: 3}
     sfx: 
     broadcastAnEvent: 0
-  - bodyText: As you approach an enemy to attack, [Click] to roll the attack power
-      of the action.
+  - bodyText: "When you\u2019re ready, [Click] anywhere to roll your attack\u2019s
+      Power."
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 05aec2f8237521d4f84b7c3d335550b0, type: 3}
+    sfx: 
+    broadcastAnEvent: 0
+  - bodyText: "Let\u2019s see how much force you can muster."
+    speakerName: Ives
+    displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
     sfx: 
     broadcastAnEvent: 0
