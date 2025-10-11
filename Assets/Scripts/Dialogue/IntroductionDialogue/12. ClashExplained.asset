@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 12. ClashExplained
   m_EditorClassIdentifier: 
   dialogue:
-  - bodyText: Ah, a direct challenge. Good.
+  - bodyText: A direct challenge. Good.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: ade9660133ca00a499bfa3ad449b87bd, type: 3}
     sfx: 

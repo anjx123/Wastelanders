@@ -18,7 +18,7 @@ MonoBehaviour:
     displayingImage: {fileID: 21300000, guid: 084171bdb9370ac43b84a6350416b15c, type: 3}
     sfx: 
     broadcastAnEvent: 0
-  - bodyText: 'You were really going for it, and so I acted out of instinct there. '
+  - bodyText: 'You were really going for it, and so I acted out of instinct. '
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
     sfx: 

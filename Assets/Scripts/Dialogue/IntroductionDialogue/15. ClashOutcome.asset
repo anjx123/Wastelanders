@@ -13,31 +13,26 @@ MonoBehaviour:
   m_Name: 15. ClashOutcome
   m_EditorClassIdentifier: 
   dialogue:
-  - bodyText: During a clash, both you and your opponent will roll your attacks at
-      the same time.
+  - bodyText: During a Clash, both Actions roll their Power at the same time.
     speakerName: Ives
-    displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
+    displayingImage: {fileID: 21300000, guid: 05aec2f8237521d4f84b7c3d335550b0, type: 3}
     sfx: 
     broadcastAnEvent: 0
-  - bodyText: The attack that rolls the highest Power wins and 'staggers' the opponent,
-      dealing its <i>entire</i> Power to the loser.
+  - bodyText: Whoever rolls higher wins the exchange, dealing their full Power to
+      the loser.
     speakerName: Ives
-    displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
+    displayingImage: {fileID: 21300000, guid: 3fea2e94140c08246a0e502ee92d3761, type: 3}
     sfx: 
     broadcastAnEvent: 0
-  - bodyText: Rolling low and losing the clash will stagger the attack, and it will
-      not deal any damage at all.
+  - bodyText: "The loser\u2019s attack is <i>staggered</i>, dealing nothing in return.
+      It may even fail to trigger its abilities."
     speakerName: Ives
-    displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
+    displayingImage: {fileID: 21300000, guid: ade9660133ca00a499bfa3ad449b87bd, type: 3}
     sfx: 
     broadcastAnEvent: 0
-  - bodyText: 'So, choose the attacks that clash wisely. Losing an attack is unforgiving. '
+  - bodyText: So choose your Clashing Action wisely, make sure it's got a strong
+      shot at winning.
     speakerName: Ives
-    displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
-    sfx: 
-    broadcastAnEvent: 0
-  - bodyText: But staggering the opponent's attack can also prevent a lot of damage.
-    speakerName: Ives
-    displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
+    displayingImage: {fileID: 21300000, guid: ade9660133ca00a499bfa3ad449b87bd, type: 3}
     sfx: 
     broadcastAnEvent: 0

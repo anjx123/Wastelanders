@@ -13,19 +13,19 @@ MonoBehaviour:
   m_Name: 13. DefenseExplained
   m_EditorClassIdentifier: 
   dialogue:
-  - bodyText: 'Defensive Actions are marked by the Defense icon. '
+  - bodyText: Defensive Actions are marked by the shield icon.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 926dc102ee6ad62488fa7f3605a127ce, type: 3}
     sfx: 
     broadcastAnEvent: 0
-  - bodyText: Even upon losing a clash, it will subtract its Power from the incoming
-      damage to mitigate it.
+  - bodyText: Even if they lose a Clash, their Power is subtracted from the incoming
+      damage, reducing the blow.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 926dc102ee6ad62488fa7f3605a127ce, type: 3}
     sfx: 
     broadcastAnEvent: 0
-  - bodyText: It's often a good idea to use them against clashes you might not win
-      to guarantee value.
+  - bodyText: "When you know you can\u2019t win a Clash, using a Defensive Action
+      can still protect you and keep your tempo."
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: ade9660133ca00a499bfa3ad449b87bd, type: 3}
     sfx: 

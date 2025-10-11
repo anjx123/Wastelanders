@@ -2,6 +2,7 @@ using LevelSelectInformation;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.ConstrainedExecution;
 using Systems.Persistence;
 using UnityEngine;
@@ -49,6 +50,7 @@ public class TutorialIntroduction : DialogueClasses
     [SerializeField] private DialogueWrapper defensiveCardsTutorial;
     [SerializeField] private DialogueWrapper cardAbilitiesTutorial;
     [SerializeField] private DialogueWrapper clashingOutcomeTutorial;
+    [SerializeField] private DialogueWrapper clashingStrategyTutorial;
     [SerializeField] private DialogueWrapper cardsExhaustedTutorial;
 
     //After Ives is defeated
@@ -84,6 +86,7 @@ public class TutorialIntroduction : DialogueClasses
         PlayerClass.playerReshuffleDeck -= PlayerLostOneMaxHandSize;
         ActionClass.CardHighlightedEvent -= OnPlayerFirstHighlightCard;
         EntityClass.OnEntityDeath -= FirstDummyDies;
+        DisplayableClass.OnShowCard -= ExplainDefense;
     }
 
     private IEnumerator ExecuteGameStart()
@@ -328,8 +331,8 @@ public class TutorialIntroduction : DialogueClasses
     {
         CombatManager.PlayersWinEvent += IvesDies; //Setup Listener to set state to Game Win
         CombatManager.EnemiesWinEvent += EnemiesWin;
+        CombatManager.OnGameStateChanged += ExplainAbilities;
         DialogueManager.Instance.MoveBoxToBottom();
-        CombatManager.OnGameStateChanged += ExplainDefense;
         StartCoroutine(StartDialogueWithNextEvent(readingOpponentTutorial.Dialogue, () => { HighlightManager.Instance.PlayerManuallyInsertedAction += OnPlayerPlayClashingCard; }));
     }
 
@@ -345,21 +348,28 @@ public class TutorialIntroduction : DialogueClasses
         yield return StartCoroutine(DialogueManager.Instance.StartDialogue(clashingOutcomeTutorial.Dialogue));
     }
 
-    private void ExplainDefense(GameState gameState)
-    {
-        if (gameState == GameState.SELECTION)
-        {
-            CombatManager.OnGameStateChanged -= ExplainDefense;
-            StartCoroutine(StartDialogueWithNextEvent(defensiveCardsTutorial.Dialogue, () => { CombatManager.OnGameStateChanged += ExplainAbilities; }));
-        }
-    }
-
     private void ExplainAbilities(GameState gameState)
     {
         if (gameState == GameState.SELECTION)
         {
             CombatManager.OnGameStateChanged -= ExplainAbilities;
-            StartCoroutine(StartDialogueWithNextEvent(cardAbilitiesTutorial.Dialogue, () => { }));
+            StartCoroutine(StartDialogueWithNextEvent(cardAbilitiesTutorial.Dialogue, () => { DisplayableClass.OnShowCard += ExplainDefense; CombatManager.OnGameStateChanged += GiveClashAdvice; }));
+        }
+
+    }
+
+    private void ExplainDefense(ActionClass actionClass)
+    {
+        DisplayableClass.OnShowCard -= ExplainDefense;
+        if (actionClass is Brace) StartCoroutine(StartDialogueWithNextEvent(defensiveCardsTutorial.Dialogue, () => { }));
+    }
+
+    private void GiveClashAdvice(GameState gameState)
+    {
+        if (gameState == GameState.SELECTION)
+        {
+            CombatManager.OnGameStateChanged -= GiveClashAdvice;
+            StartCoroutine(StartDialogueWithNextEvent(clashingStrategyTutorial.Dialogue, () => { }));
         }
     }
     private void IvesDies()
