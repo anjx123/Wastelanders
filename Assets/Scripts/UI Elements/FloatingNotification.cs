@@ -5,17 +5,18 @@ using UnityEngine;
 
 public class FloatingNotification : MonoBehaviour
 {
-    public float fadeDurationS = 0.5f;
-    public float totalDurationS = 1.5f;
+    public float fadeInDurationS = 0.2f;
+    public float fadeOutDurationS = 0.5f;
+    public float floatDurationS = 1.0f;
     public float floatVelocity = 1f;
 
-    [SerializeField] private TextMeshPro textMesh;
+    [SerializeField] private TextMeshProUGUI textMesh;
     [SerializeField] private Rigidbody2D rb;
 
     void Awake()
     {
         rb.velocity = Vector2.up * floatVelocity;
-        textMesh = GetComponent<TextMeshPro>();
+        textMesh = GetComponent<TextMeshProUGUI>();
         textMesh.alpha = 0f;
     }
 
@@ -26,9 +27,9 @@ public class FloatingNotification : MonoBehaviour
     }
 
     private IEnumerator AnimateCoroutine() {
-        yield return StartCoroutine(Fade(0f, 1f, fadeDurationS));
-        yield return new WaitForSeconds(totalDurationS - fadeDurationS * 2);
-        yield return StartCoroutine(Fade(1f, 0f, fadeDurationS));
+        yield return StartCoroutine(Fade(0f, 1f, fadeInDurationS));
+        yield return new WaitForSeconds(floatDurationS);
+        yield return StartCoroutine(Fade(1f, 0f, fadeOutDurationS));
         Destroy(gameObject);
     }
 

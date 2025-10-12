@@ -6,8 +6,6 @@ public class PopUpNotificationManager : MonoBehaviour
 {
     public static PopUpNotificationManager Instance { get; private set; }
 
-    public GameObject warningObject;
-
     public GameObject floatingNotificationPrefab;
 
     public bool isRunning = false;
@@ -23,17 +21,6 @@ public class PopUpNotificationManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-    }
-
-    private void Start()
-    {
-        CombatManager.OnGameStateChanged += DismissDescription;
-        RemoveDescription();
-    }
-
-    private void OnDestroy()
-    {
-        CombatManager.OnGameStateChanged -= DismissDescription;
     }
 
     public void DisplayWarning(PopupType popupType, GameObject obj = null)
@@ -61,25 +48,4 @@ public class PopUpNotificationManager : MonoBehaviour
         FloatingNotification floatingNotification = notification.GetComponent<FloatingNotification>();
         floatingNotification.Initialize(spawnPosition, message);
     }
-
-    // Deprecated by CreateFloatingWarning
-    private void CreateBoxWarning(string message)
-    {
-        WarningInfo info = warningObject.GetComponent<WarningInfo>();
-        info.ShowWarning(message);
-    }
-
-    public void RemoveDescription()
-    {
-        warningObject.GetComponent<WarningInfo>().RemoveDescription();
-    }
-
-    public void DismissDescription(GameState gameState)
-    {
-        if (gameState == GameState.FIGHTING)
-        {
-            RemoveDescription();
-        }
-    }
-
 }

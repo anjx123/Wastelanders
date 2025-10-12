@@ -8,7 +8,7 @@ using UnityEngine.SceneManagement;
 //Singleton Class that keeps track of values representing general Game states
 public class GameStateManager : PersistentSingleton<GameStateManager>, IBind<GameStateData>
 {
-    public static readonly bool IS_DEVELOPMENT = false;
+    public static readonly bool IS_DEVELOPMENT = true;
 
     //Fields for persistence
     [field: SerializeField] public SerializableGuid Id { get; set; } = SerializableGuid.NewGuid();
@@ -39,7 +39,7 @@ public class GameStateManager : PersistentSingleton<GameStateManager>, IBind<Gam
 
     public float CurrentLevelProgress
     {
-        get { return (IS_DEVELOPMENT) ? 100f : Data.CurrentLevelProgress; }
+        get { return (IS_DEVELOPMENT) ? 3f : Data.CurrentLevelProgress; }
         set => Data.CurrentLevelProgress = value;
     }
 
@@ -72,7 +72,7 @@ public class GameStateManager : PersistentSingleton<GameStateManager>, IBind<Gam
      * Is set by GameOver prefab upon restart, and read by dialogue classes
      * Dialogue classes should reset this value when read, such that it does not cause unexpected behaviour in upcoming scenes
      */
-    public bool JumpToCombat = false;
+    public bool JumpToCombat = true;
 
     // Check for level select whether player finished the game first time to display bounty dialogue
     public bool FirstTimeFinished = false;

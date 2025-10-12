@@ -44,6 +44,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7362a1e969e9d784ba2c12b9cec4090c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  warningObject: {fileID: 0}
-  floatingNotificationPrefab: {fileID: 5804061128524673433, guid: 21904a911c81d43a9a07b56d5150a50f, type: 3}
+  floatingNotificationPrefab: {fileID: 5804061128524673433, guid: abee84b7e6c8646d4a35bcc66b0f2502, type: 3}
   isRunning: 1
