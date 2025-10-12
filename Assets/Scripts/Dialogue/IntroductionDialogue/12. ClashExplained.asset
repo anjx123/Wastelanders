@@ -18,14 +18,13 @@ MonoBehaviour:
     displayingImage: {fileID: 21300000, guid: ade9660133ca00a499bfa3ad449b87bd, type: 3}
     sfx: 
     broadcastAnEvent: 0
-  - bodyText: The first Action you play against an enemy targeting you will form
-      a <i>Clash</i>.
+  - bodyText: The <i>first</i> Action you play against an enemy will form a <i>Clash</i>.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: b0d27b9163eb2554996f368bd5b8d4e2, type: 3}
     sfx: 
     broadcastAnEvent: 0
-  - bodyText: 'In a Clash, both Actions are locked together to strike at the same
-      moment: It''s speed being the largest of the two Actions'' speeds.'
+  - bodyText: In a Clash, both Actions will strike at the same moment. Its speed
+      in the queue being equal to the largest of the two Actions' speeds.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: b1411cc1e1231574797f223a58264863, type: 3}
     sfx: 
@@ -42,15 +41,8 @@ MonoBehaviour:
     displayingImage: {fileID: 21300000, guid: b0d27b9163eb2554996f368bd5b8d4e2, type: 3}
     sfx: 
     broadcastAnEvent: 0
-  - bodyText: 'Think of a Clash as a duel. Stepping in to intercept your opponent
-      as they prepare to strike. '
-    speakerName: Ives
-    displayingImage: {fileID: 21300000, guid: b0d27b9163eb2554996f368bd5b8d4e2, type: 3}
-    sfx: 
-    broadcastAnEvent: 0
-  - bodyText: "So pay close attention to which Action you choose to clash with\u2014
-      the <i>first</i> one you play decides the pairing, even if later Actions might
-      be faster."
+  - bodyText: So pay close attention to which Action you play <i>first</i> against
+      an enemy, as that will form the Clash.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 87cb7c6c6588a4a3a957b707239abbf0, type: 3}
     sfx: 

@@ -13,7 +13,12 @@ MonoBehaviour:
   m_Name: 13. DefenseExplained
   m_EditorClassIdentifier: 
   dialogue:
-  - bodyText: Defensive Actions are marked by the shield icon.
+  - bodyText: Besides the ability, there's something new with this card.
+    speakerName: Ives
+    displayingImage: {fileID: 21300000, guid: ade9660133ca00a499bfa3ad449b87bd, type: 3}
+    sfx: 
+    broadcastAnEvent: 0
+  - bodyText: This is a Defensive Action. As marked by the shield icon.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 926dc102ee6ad62488fa7f3605a127ce, type: 3}
     sfx: 

@@ -18,7 +18,7 @@ MonoBehaviour:
     displayingImage: {fileID: 21300000, guid: 305bbe4aee0eef34586b3def011ea974, type: 3}
     sfx: 
     broadcastAnEvent: 0
-  - bodyText: Hover on my Action to check out the ability of my attack.
+  - bodyText: 'Make it a habit to check out new Enemy Actions you havn''t seen before. '
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 305bbe4aee0eef34586b3def011ea974, type: 3}
     sfx: 

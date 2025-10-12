@@ -1848,7 +1848,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6635998426718021455, guid: b9c5e4b3c9f7e024f8fe9012e7a2e437, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -10.133598
+      value: -10.1324005
       objectReference: {fileID: 0}
     - target: {fileID: 6635998426718021455, guid: b9c5e4b3c9f7e024f8fe9012e7a2e437, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2336,6 +2336,7 @@ MonoBehaviour:
   defensiveCardsTutorial: {fileID: 11400000, guid: 239580b3f93eb2c4a829b8cf8f357a8c, type: 2}
   cardAbilitiesTutorial: {fileID: 11400000, guid: 30053b1be0d3cda44a2fd061e9472d1a, type: 2}
   clashingOutcomeTutorial: {fileID: 11400000, guid: 942d2fbb5b637c440a3cc0e6f26c0805, type: 2}
+  clashingStrategyTutorial: {fileID: 11400000, guid: 9e61a457e8191be4d8f55aeaac5aa904, type: 2}
   cardsExhaustedTutorial: {fileID: 11400000, guid: feb4de5b8e1861040af496de2b492462, type: 2}
   ivesIsDefeated: {fileID: 11400000, guid: 9197dc84cf94ee44db4a70d04c3af5ce, type: 2}
   endingTutorialDialogue: {fileID: 11400000, guid: 71bc8b72e567a434fb451296dad29b2f, type: 2}

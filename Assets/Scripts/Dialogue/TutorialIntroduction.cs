@@ -292,6 +292,7 @@ public class TutorialIntroduction : DialogueClasses
     {
         PlayerClass.playerReshuffleDeck -= PlayerLostOneMaxHandSize;
         yield return new WaitUntil(() => !DialogueManager.Instance.IsInDialogue());
+        DialogueManager.Instance.MoveBoxToTop();
         StartCoroutine(DialogueManager.Instance.StartDialogue(cardsExhaustedTutorial.Dialogue));
     }
     //Once hovering over a card, we talk about speed and power
@@ -332,7 +333,6 @@ public class TutorialIntroduction : DialogueClasses
         CombatManager.PlayersWinEvent += IvesDies; //Setup Listener to set state to Game Win
         CombatManager.EnemiesWinEvent += EnemiesWin;
         CombatManager.OnGameStateChanged += ExplainAbilities;
-        DialogueManager.Instance.MoveBoxToBottom();
         StartCoroutine(StartDialogueWithNextEvent(readingOpponentTutorial.Dialogue, () => { HighlightManager.Instance.PlayerManuallyInsertedAction += OnPlayerPlayClashingCard; }));
     }
 
