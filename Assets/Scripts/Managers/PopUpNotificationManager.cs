@@ -6,9 +6,8 @@ public class PopUpNotificationManager : MonoBehaviour
 {
     public static PopUpNotificationManager Instance { get; private set; }
 
-    public GameObject floatingNotificationPrefab;
-
-    public bool isRunning = false;
+    [SerializeField] private PopUpNotification floatingNotificationPrefab;
+    [SerializeField] private Canvas canvas;
 
     // Awake is called when the script instance is being loaded
     void Awake()
@@ -23,7 +22,7 @@ public class PopUpNotificationManager : MonoBehaviour
         }
     }
 
-    public void DisplayWarning(PopupType popupType, GameObject obj = null)
+    public void DisplayWarning(PopupType popupType)
     {
         string message = popupType switch
         {
@@ -33,6 +32,7 @@ public class PopUpNotificationManager : MonoBehaviour
             PopupType.SelectActionFirst => "Select an Action first!",
             PopupType.SelectPlayerFirst => "Select a Player first!",
             PopupType.InsufficientResources => "Insufficient resources!",
+            PopupType.ContentLocked => "Content Locked!",
             _ => string.Empty
         };
 
@@ -42,10 +42,18 @@ public class PopUpNotificationManager : MonoBehaviour
         }
     }
 
-    private void CreateFloatingWarning(string message) {
-        Vector3 spawnPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        GameObject notification = Instantiate(floatingNotificationPrefab, spawnPosition, Quaternion.identity);
-        FloatingNotification floatingNotification = notification.GetComponent<FloatingNotification>();
-        floatingNotification.Initialize(spawnPosition, message);
+    private void CreateFloatingWarning(string message)
+    {
+        PopUpNotification notification = Instantiate(floatingNotificationPrefab, canvas.transform);
+
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(
+            canvas.transform as RectTransform,
+            Input.mousePosition,
+            canvas.renderMode == RenderMode.ScreenSpaceOverlay ? null : canvas.worldCamera,
+            out Vector2 localPoint
+        );
+
+        notification.Initialize(localPoint, message);
     }
+
 }

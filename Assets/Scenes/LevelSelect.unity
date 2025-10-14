@@ -1183,6 +1183,10 @@ PrefabInstance:
       propertyPath: <Level>k__BackingField
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 8769258020987959747, guid: 4ebd1ee5e5e34ea418076d78ba66dbf7, type: 3}
+      propertyPath: floatingNotificationPrefab
+      value: 
+      objectReference: {fileID: 5407395185755441028, guid: 3c6f48e33d63d48089b8de8e764bc8d2, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

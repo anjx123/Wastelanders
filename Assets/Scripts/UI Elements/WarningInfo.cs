@@ -71,7 +71,6 @@ public class WarningInfo : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
                 popupImage.color = imageColor;
                 if (textColor.a < 0)
                 {
-                    PopUpNotificationManager.Instance.isRunning = false; //Should probably be an event broadcast instead.
                     SetPopUpInactive();
                 }
             }
