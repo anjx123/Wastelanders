@@ -15,11 +15,11 @@ MonoBehaviour:
   dialogue:
   - bodyText: Watch out, enemy Actions can have abilities too.
     speakerName: Ives
-    displayingImage: {fileID: 21300000, guid: 305bbe4aee0eef34586b3def011ea974, type: 3}
+    displayingImage: {fileID: 21300000, guid: 3d960dbc71940e64480b485c0537ca24, type: 3}
     sfx: 
     broadcastAnEvent: 0
   - bodyText: 'Make it a habit to check out new Enemy Actions you havn''t seen before. '
     speakerName: Ives
-    displayingImage: {fileID: 21300000, guid: 305bbe4aee0eef34586b3def011ea974, type: 3}
+    displayingImage: {fileID: 21300000, guid: 3d960dbc71940e64480b485c0537ca24, type: 3}
     sfx: 
     broadcastAnEvent: 0

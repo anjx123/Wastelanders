@@ -29,8 +29,8 @@ MonoBehaviour:
     displayingImage: {fileID: 21300000, guid: b1411cc1e1231574797f223a58264863, type: 3}
     sfx: 
     broadcastAnEvent: 0
-  - bodyText: When its time for these Actions to strike, they will roll their Power
-      simultaneously.
+  - bodyText: When its time for these Actions to strike each other, they will roll
+      their Power simultaneously.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 3fea2e94140c08246a0e502ee92d3761, type: 3}
     sfx: 

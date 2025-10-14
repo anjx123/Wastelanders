@@ -19,8 +19,12 @@ MonoBehaviour:
     displayingImage: {fileID: 21300000, guid: be935693778d6004d9427d82e6ce5798, type: 3}
     sfx: 
     broadcastAnEvent: 0
-  - bodyText: Well, I learned from the best after all. Thanks Ives, I feel much better
-      about the exam now.
+  - bodyText: 'Well, I learned from the best after all. '
+    speakerName: Jackie
+    displayingImage: {fileID: 21300000, guid: c719baaafa8cd7148806ffb41907add6, type: 3}
+    sfx: 
+    broadcastAnEvent: 0
+  - bodyText: Thanks Ives, I feel much better about the exam now.
     speakerName: Jackie
     displayingImage: {fileID: 21300000, guid: c719baaafa8cd7148806ffb41907add6, type: 3}
     sfx: 

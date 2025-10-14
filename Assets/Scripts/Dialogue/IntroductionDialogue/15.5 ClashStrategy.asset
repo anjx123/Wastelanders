@@ -18,8 +18,8 @@ MonoBehaviour:
     displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
     sfx: 
     broadcastAnEvent: 0
-  - bodyText: Winning Clashes can turn a fight in your favor... but knowing <i>when
-      not to Clash</i> is just as important.
+  - bodyText: Although winning Clashes can turn a fight in your favor... knowing
+      <i>when not to Clash</i> is just as important.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 87cb7c6c6588a4a3a957b707239abbf0, type: 3}
     sfx: 
@@ -30,23 +30,20 @@ MonoBehaviour:
     displayingImage: {fileID: 21300000, guid: bdc2c25ddbd262c4e9076aa904cc7e6c, type: 3}
     sfx: 
     broadcastAnEvent: 0
-  - bodyText: "By playing more than one card against the same opponent, you can create
-      one-sided attacks\u2014 Guaranteeing their damage and abilities are triggered.."
+  - bodyText: 'By playing more than one card against the same opponent, you can create
+      one-sided attacks. '
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 87cb7c6c6588a4a3a957b707239abbf0, type: 3}
     sfx: 
     broadcastAnEvent: 0
-  - bodyText: 'Possibly even before the Clash itself takes place, if the speeds align. '
+  - bodyText: One-sided attacks guarantee their damage and abilities are triggered,
+      sometimes even before the clash itself if its faster.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
     sfx: 
     broadcastAnEvent: 0
-  - bodyText: In short, not every strike has to be a duel.
-    speakerName: Ives
-    displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
-    sfx: 
-    broadcastAnEvent: 0
-  - bodyText: Victory comes from the setup, not the swing.
+  - bodyText: In short, not every strike has to be a duel. Victory comes from the
+      setup, not the swing.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
     sfx: 

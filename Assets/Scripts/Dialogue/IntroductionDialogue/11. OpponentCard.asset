@@ -36,7 +36,7 @@ MonoBehaviour:
     broadcastAnEvent: 0
   - bodyText: Hover over it to view more details like Speed and Abilities.
     speakerName: Ives
-    displayingImage: {fileID: 21300000, guid: 82dbf38ae23fe224e90be99093d02604, type: 3}
+    displayingImage: {fileID: 21300000, guid: 400ae0b25c96b3f48a991679eb1b7bde, type: 3}
     sfx: 
     broadcastAnEvent: 0
   - bodyText: Their Action also appears in the battle queue. You can hover there
