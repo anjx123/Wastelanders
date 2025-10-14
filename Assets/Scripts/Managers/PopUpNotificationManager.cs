@@ -27,11 +27,11 @@ public class PopUpNotificationManager : MonoBehaviour
     {
         string message = popupType switch
         {
-            PopupType.SameSpeed => "Multiple Cards with Same Speed Selected",
+            PopupType.SameSpeed => "Same Speed Selected!",
             PopupType.EnemyKilled => "Enemy Killed!",
-            PopupType.DeckReshuffled => "Deck Reshuffled",
-            PopupType.SelectActionFirst => "Select a card first!",
-            PopupType.SelectPlayerFirst => "Select a player first!",
+            PopupType.DeckReshuffled => "Deck Reshuffled!",
+            PopupType.SelectActionFirst => "Select an Action first!",
+            PopupType.SelectPlayerFirst => "Select a Player first!",
             PopupType.InsufficientResources => "Insufficient resources!",
             _ => string.Empty
         };
