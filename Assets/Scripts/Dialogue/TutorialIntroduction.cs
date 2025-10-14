@@ -223,6 +223,7 @@ public class TutorialIntroduction : DialogueClasses
             yield return StartCoroutine(ives.MoveToPosition(trainingDummy.transform.position, 1.2f, 0.8f));
             yield return new WaitForSeconds(0.6f);
             Destroy(trainingDummy);
+            yield return new WaitForSeconds(1f);
         }
 
         // Have Ives fight and teach clashing now.
