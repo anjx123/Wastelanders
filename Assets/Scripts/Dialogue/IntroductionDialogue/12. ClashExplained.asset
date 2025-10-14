@@ -24,7 +24,7 @@ MonoBehaviour:
     sfx: 
     broadcastAnEvent: 0
   - bodyText: In a Clash, both Actions will strike at the same moment. Its speed
-      in the queue being equal to the largest of the two Actions' speeds.
+      in the queue being the largest of the two Actions' speeds.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: b1411cc1e1231574797f223a58264863, type: 3}
     sfx: 

@@ -83,6 +83,7 @@ public class TutorialIntroduction : DialogueClasses
         CombatManager.ClearEvents();
         DialogueBox.ClearDialogueEvents();
         DialogueBox.DialogueBoxEvent -= SubscribeFirstHighlightMethod;
+        DialogueBox.DialogueBoxEvent -= SubscribePlayerInsertEvent;
         PlayerClass.playerReshuffleDeck -= PlayerLostOneMaxHandSize;
         ActionClass.CardHighlightedEvent -= OnPlayerFirstHighlightCard;
         EntityClass.OnEntityDeath -= FirstDummyDies;
@@ -235,6 +236,7 @@ public class TutorialIntroduction : DialogueClasses
         yield return new WaitUntil(() => !DialogueManager.Instance.IsInDialogue());
         CombatManager.Instance.GameState = GameState.SELECTION;
         yield return new WaitUntil(() => !DialogueManager.Instance.IsInDialogue());
+        yield return new WaitForSeconds(1f);
         BeginCombatIvesFight();
 
         yield return new WaitUntil(() => CombatManager.Instance.GameState == GameState.GAME_WIN);
@@ -301,14 +303,22 @@ public class TutorialIntroduction : DialogueClasses
     {
         ActionClass.CardHighlightedEvent -= OnPlayerFirstHighlightCard;
         DialogueManager.Instance.DisplayNextSentence();
-        StartCoroutine(StartDialogueWithNextEvent(cardFieldsTutorial.Dialogue, () => { HighlightManager.Instance.PlayerManuallyInsertedAction += OnPlayerFirstInsertCard; }));
+        DialogueBox.DialogueBoxEvent += SubscribePlayerInsertEvent;
+        StartCoroutine(StartDialogueWithNextEvent(cardFieldsTutorial.Dialogue, () => { }));
+    }
+
+    private void SubscribePlayerInsertEvent()
+    {
+        DialogueBox.DialogueBoxEvent -= SubscribePlayerInsertEvent;
+        HighlightManager.Instance.PlayerManuallyInsertedAction += OnPlayerFirstInsertCard;
     }
 
     //Once a player targets an enemy, we talk about the queue
     private void OnPlayerFirstInsertCard(ActionClass card)
     {
-        DialogueManager.Instance.MoveBoxToBottom();
         HighlightManager.Instance.PlayerManuallyInsertedAction -= OnPlayerFirstInsertCard;
+        DialogueManager.Instance.MoveBoxToBottom();
+        DialogueManager.Instance.DisplayNextSentence();
         StartCoroutine(StartDialogueWithNextEvent(queueUpActionsTutorial.Dialogue, () => { CardComparator.Instance.playersAreRollingDiceEvent += OnPlayerFightsDummy; }));
     }
 
@@ -345,6 +355,7 @@ public class TutorialIntroduction : DialogueClasses
 
     private IEnumerator OnPlayerClashingWithIves()
     {
+        DialogueManager.Instance.MoveBoxToBottom();
         CardComparator.Instance.playersAreRollingDiceEvent -= OnPlayerClashingWithIves;
         yield return StartCoroutine(DialogueManager.Instance.StartDialogue(clashingOutcomeTutorial.Dialogue));
     }

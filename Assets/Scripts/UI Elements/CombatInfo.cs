@@ -219,6 +219,17 @@ public class CombatInfo : MonoBehaviour
             crosshair.SetActive(false);
         }
     }
+
+    public void DeactivateCardIcon()
+    {
+        cardIconRendering.SetActive(false);
+    }
+
+    public void ActivateCardIcon()
+    {
+        cardIconRendering.SetActive(true);
+    }
+
     public void Emphasize()
     {
         EmphasizeCombatIcon();
