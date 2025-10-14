@@ -757,9 +757,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 679523eb71397df4a9276a7796116b46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentHighlightedEnemyEntity: {fileID: 0}
-  currentHighlightedAction: {fileID: 0}
-  selectedPlayer: {fileID: 0}
 --- !u!1 &638988697
 GameObject:
   m_ObjectHideFlags: 0
@@ -2343,7 +2340,7 @@ MonoBehaviour:
   gameOver: {fileID: 302505533}
   gameLoseDialogue: {fileID: 11400000, guid: 71aa9a544d4b56045a1b4ee4cb6b4f0d, type: 2}
   battleIntro: {fileID: 5210625753511003606, guid: a1b9dbfd8373c7347bbeaace2539e9b7, type: 3}
-  jumpToCombat: 1
+  jumpToCombat: 0
 --- !u!1001 &2102825245
 PrefabInstance:
   m_ObjectHideFlags: 0

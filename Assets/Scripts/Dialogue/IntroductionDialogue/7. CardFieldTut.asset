@@ -42,4 +42,4 @@ MonoBehaviour:
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 84d19d73f4fee204d8d42cc16de51cf7, type: 3}
     sfx: 
-    broadcastAnEvent: 0
+    broadcastAnEvent: 1
