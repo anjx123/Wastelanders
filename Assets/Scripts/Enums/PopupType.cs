@@ -11,4 +11,5 @@ public enum PopupType
     SelectActionFirst,
     SelectPlayerFirst,
     InsufficientResources,
+    ContentLocked,
 }

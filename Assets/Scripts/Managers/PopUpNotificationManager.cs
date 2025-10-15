@@ -6,9 +6,8 @@ public class PopUpNotificationManager : MonoBehaviour
 {
     public static PopUpNotificationManager Instance { get; private set; }
 
-    public GameObject warningObject;
-
-    public bool isRunning = false;
+    [SerializeField] private PopUpNotification floatingNotificationPrefab;
+    [SerializeField] private Canvas canvas;
 
     // Awake is called when the script instance is being loaded
     void Awake()
@@ -23,53 +22,38 @@ public class PopUpNotificationManager : MonoBehaviour
         }
     }
 
-    private void Start()
-    {
-        CombatManager.OnGameStateChanged += DismissDescription;
-        RemoveDescription();
-    }
-
-    private void OnDestroy()
-    {
-        CombatManager.OnGameStateChanged -= DismissDescription;
-    }
-
-    public void DisplayWarning(PopupType popupType, GameObject obj = null)
+    public void DisplayWarning(PopupType popupType)
     {
         string message = popupType switch
         {
-            PopupType.SameSpeed => "Multiple Cards with Same Speed Selected",
+            PopupType.SameSpeed => "Same Speed Selected!",
             PopupType.EnemyKilled => "Enemy Killed!",
-            PopupType.DeckReshuffled => "Deck Reshuffled",
-            PopupType.SelectActionFirst => "Select a card first!",
-            PopupType.SelectPlayerFirst => "Select a player first!",
+            PopupType.DeckReshuffled => "Deck Reshuffled!",
+            PopupType.SelectActionFirst => "Select an Action first!",
+            PopupType.SelectPlayerFirst => "Select a Player first!",
             PopupType.InsufficientResources => "Insufficient resources!",
+            PopupType.ContentLocked => "Content Locked!",
             _ => string.Empty
         };
 
         if (!string.IsNullOrEmpty(message))
         {
-            CreateWarning(message);
+            CreateFloatingWarning(message);
         }
     }
 
-    private void CreateWarning(string message)
+    private void CreateFloatingWarning(string message)
     {
-        WarningInfo info = warningObject.GetComponent<WarningInfo>();
-        info.ShowWarning(message);
-    }
+        PopUpNotification notification = Instantiate(floatingNotificationPrefab, canvas.transform);
 
-    public void RemoveDescription()
-    {
-        warningObject.GetComponent<WarningInfo>().RemoveDescription();
-    }
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(
+            canvas.transform as RectTransform,
+            Input.mousePosition,
+            canvas.renderMode == RenderMode.ScreenSpaceOverlay ? null : canvas.worldCamera,
+            out Vector2 localPoint
+        );
 
-    public void DismissDescription(GameState gameState)
-    {
-        if (gameState == GameState.FIGHTING)
-        {
-            RemoveDescription();
-        }
+        notification.Initialize(localPoint, message);
     }
 
 }
