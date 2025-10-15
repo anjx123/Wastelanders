@@ -22,7 +22,6 @@ public class LevelSelectButton : MonoBehaviour, IPointerClickHandler
     [SerializeField] private Color hoverTextColor;
     [SerializeField] private GameObject hover;
     [SerializeField] private GameObject lockedIndicator;
-    [SerializeField] private GameObject floatingNotificationPrefab;
     [SerializeField] private float lockAnimationDuration = 0.5f;
 
     #nullable enable
@@ -37,10 +36,7 @@ public class LevelSelectButton : MonoBehaviour, IPointerClickHandler
     {
         if (!button.enabled)
         {
-            Vector3 spawnPosition = Camera.main.ScreenToWorldPoint(eventData.position);
-            GameObject notification = Instantiate(floatingNotificationPrefab, spawnPosition, Quaternion.identity);
-            FloatingNotification floatingNotification = notification.GetComponent<FloatingNotification>();
-            floatingNotification.Initialize(spawnPosition, "Content Locked");
+            PopUpNotificationManager.Instance.DisplayWarning(PopupType.ContentLocked);
         }
     }
 

@@ -51,3 +51,4 @@ MonoBehaviour:
     hudV2: {fileID: 3511393950818339304, guid: 1ac94548a55c54b998ec1cc516a78e03, type: 3}
     dialogueManager: {fileID: 3513124307312877850, guid: 60ee3fd7b7ed945b9bf21387c65cd1e9, type: 3}
     deckSelectV2: {fileID: 8373578210505895036, guid: 2fc4a9f3207534879a5039dfb4371af7, type: 3}
+    popupManager: {fileID: -6348610105375762745, guid: dd2d1aac4fcb04e4995a2a5801677b35, type: 3}
