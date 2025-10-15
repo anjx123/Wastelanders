@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 207ddad3e1c90594ba3f48e2a5a6a796, type: 3}
-  m_Name: jackieIvesDiscussion
+  m_Name: 5. jackieIvesDiscussion
   m_EditorClassIdentifier: 
   dialogue:
   - bodyText: Thought I'd find you here.

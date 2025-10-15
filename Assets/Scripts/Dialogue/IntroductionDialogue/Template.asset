@@ -9,16 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d9051792ce0afed41ba7de5bd8497446, type: 3}
-  m_Name: TutorialDecks
+  m_Script: {fileID: 11500000, guid: 207ddad3e1c90594ba3f48e2a5a6a796, type: 3}
+  m_Name: Template
   m_EditorClassIdentifier: 
-  JackieData:
-    name: 
-    playerWeaponProficiency: []
-    selectedWeapons: 
-    playerDeck: []
-  IvesData:
-    name: 
-    playerWeaponProficiency: []
-    selectedWeapons: 
-    playerDeck: []
+  dialogue: []

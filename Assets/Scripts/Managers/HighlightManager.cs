@@ -7,9 +7,9 @@ public class HighlightManager : MonoBehaviour // later all entity highlighter
 
     public static HighlightManager Instance { get; private set; }
 #nullable enable
-    public EntityClass? currentHighlightedEnemyEntity = null;
-    public ActionClass? currentHighlightedAction = null;
-    public PlayerClass? selectedPlayer = null;
+    private EntityClass? currentHighlightedEnemyEntity = null;
+    private ActionClass? currentHighlightedAction = null;
+    private PlayerClass? selectedPlayer = null;
 
     public delegate void HighlightEventDelegate(EntityClass e);
     public event HighlightEventDelegate? EntityClicked;

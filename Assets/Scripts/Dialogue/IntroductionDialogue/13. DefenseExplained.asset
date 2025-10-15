@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 207ddad3e1c90594ba3f48e2a5a6a796, type: 3}
+  m_Name: 13. DefenseExplained
+  m_EditorClassIdentifier: 
+  dialogue:
+  - bodyText: Besides the ability, there's something new with this Action.
+    speakerName: Ives
+    displayingImage: {fileID: 21300000, guid: ade9660133ca00a499bfa3ad449b87bd, type: 3}
+    sfx: 
+    broadcastAnEvent: 0
+  - bodyText: This is a Defensive Action. As marked by the shield icon.
+    speakerName: Ives
+    displayingImage: {fileID: 21300000, guid: 926dc102ee6ad62488fa7f3605a127ce, type: 3}
+    sfx: 
+    broadcastAnEvent: 0
+  - bodyText: Even if they lose a Clash, their Power is subtracted from the incoming
+      damage, reducing the blow.
+    speakerName: Ives
+    displayingImage: {fileID: 21300000, guid: 926dc102ee6ad62488fa7f3605a127ce, type: 3}
+    sfx: 
+    broadcastAnEvent: 0
+  - bodyText: "When you know you can\u2019t win a Clash, using a Defensive Action
+      can still protect you and keep your tempo."
+    speakerName: Ives
+    displayingImage: {fileID: 21300000, guid: ade9660133ca00a499bfa3ad449b87bd, type: 3}
+    sfx: 
+    broadcastAnEvent: 0
