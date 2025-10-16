@@ -6,7 +6,7 @@ public class PopUpNotificationManager : MonoBehaviour
 {
     public static PopUpNotificationManager Instance { get; private set; }
 
-    public GameObject warningObject;
+    public WarningInfo warningInfo;
 
     public bool isRunning = false;
 
@@ -55,13 +55,12 @@ public class PopUpNotificationManager : MonoBehaviour
 
     private void CreateWarning(string message)
     {
-        WarningInfo info = warningObject.GetComponent<WarningInfo>();
-        info.ShowWarning(message);
+        warningInfo.ShowWarning(message);
     }
 
     public void RemoveDescription()
     {
-        warningObject.GetComponent<WarningInfo>().RemoveDescription();
+        warningInfo.RemoveDescription();
     }
 
     public void DismissDescription(GameState gameState)

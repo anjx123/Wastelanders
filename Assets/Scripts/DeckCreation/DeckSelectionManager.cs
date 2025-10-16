@@ -104,8 +104,8 @@ public class DeckSelectionManager : MonoBehaviour
 
     private void EnterDeckSelection()
     {
-        FadeScreenHandler.Instance.SetDarkScreen();
-        StartCoroutine(FadeScreenHandler.Instance.FadeInLightScreen(2f));
+        UIFadeScreenManager.Instance.SetDarkScreen();
+        StartCoroutine(UIFadeScreenManager.Instance.FadeInLightScreen(2f));
     }
 
     void OnDestroy()
@@ -149,7 +149,7 @@ public class DeckSelectionManager : MonoBehaviour
             isFadingOut = true;
             SaveLoadSystem.Instance.SaveGame();
             //EditorUtility.SetDirty(playerDatabase); // For easily resetting the default weaponDeck of playerDatabase
-            yield return StartCoroutine(FadeScreenHandler.Instance.FadeInDarkScreen(0.8f));
+            yield return StartCoroutine(UIFadeScreenManager.Instance.FadeInDarkScreen(0.8f));
             GameStateManager.Instance.LoadScene(nextScene);
             isFadingOut = false;
         }

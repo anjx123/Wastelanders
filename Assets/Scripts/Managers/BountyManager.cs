@@ -54,7 +54,7 @@ public class BountyManager : PersistentSingleton<BountyManager>, IBind<BountySta
     {
         IEnumerator FadeLevelIn(string levelName)
         {
-            yield return StartCoroutine(FadeScreenHandler.Instance.FadeInDarkScreen(0.6f));
+            yield return StartCoroutine(UIFadeScreenManager.Instance.FadeInDarkScreen(0.6f));
             GameStateManager.Instance.LoadScene(levelName);
         }
 

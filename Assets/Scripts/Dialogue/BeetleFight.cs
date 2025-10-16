@@ -185,7 +185,7 @@ public class BeetleFight : DialogueClasses
     private IEnumerator ExecuteGameStart()
     {
         CombatManager.Instance.GameState = GameState.OUT_OF_COMBAT;
-        CombatManager.Instance.SetDarkScreen();
+        UIFadeScreenManager.Instance.SetDarkScreen();
         battleIntro = BattleIntro.Build(Camera.main);
         yield return new WaitForSeconds(0.2f);
         SetUpEnemyLists();
@@ -196,7 +196,7 @@ public class BeetleFight : DialogueClasses
             yield return new WaitForSeconds(1f);
             //Lights Camera Action!!
             {
-                Coroutine fade = StartCoroutine(CombatManager.Instance.FadeInLightScreen(2f));
+                Coroutine fade = StartCoroutine(UIFadeScreenManager.Instance.FadeInLightScreen(2f));
                 yield return new WaitForSeconds(1f);
                 frogThatRunsAway.FaceRight();
                 yield return fade;

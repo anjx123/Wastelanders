@@ -64,6 +64,7 @@ public class PreQueenFight : DialogueClasses
     [SerializeField] GameOver gameOver;
     [SerializeField] private bool jumpToCombat;
     [SerializeField] private BattleIntro battleIntro;
+    [SerializeField] private SpriteFadeHandler spriteFadeHandler;
     private DefaultSceneBuilder defaultSceneBuilder;
 
 

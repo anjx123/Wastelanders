@@ -3,17 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
-using static UnityEngine.EventSystems.EventTrigger;
-using System.Security.Cryptography;
 using Systems.Persistence;
 using WeaponDeckSerialization;
-using System;
 using UI_Toolkit;
-using static EntityClass;
 
 public class CombatManager : MonoBehaviour
 {
-    //Getter for the Singleton is found here
     public static CombatManager Instance { get; private set; }
 
     private GameState gameState;
@@ -32,6 +27,7 @@ public class CombatManager : MonoBehaviour
     [SerializeField] private PlayerDatabase playerDatabase;
     [SerializeField] private CardDatabase cardDatabase;
 
+
     public List<InstantiableActionClassInfo> GetDeck(PlayerDatabase.PlayerName playerName)
     {
         return cardDatabase.GetPrefabInfoForDeck(playerDatabase.GetDeckByPlayerName(playerName));
@@ -45,37 +41,11 @@ public class CombatManager : MonoBehaviour
     public delegate void EntitiesWinLoseDelegate();
     public static event EntitiesWinLoseDelegate? PlayersWinEvent;
     public static event EntitiesWinLoseDelegate? EnemiesWinEvent;
-    public string FADE_SORTING_LAYER
-    {
-        get
-        {
-            return FadeScreenHandler.Instance.FadeScreenSprite.sortingLayerName;
-        }
-    }
+    public string FADE_SORTING_LAYER => CombatFadeScreenHandler.Instance.FADE_SORTING_LAYER;    
+    public int FADE_SORTING_LAYER_ID => CombatFadeScreenHandler.Instance.FADE_SORTING_LAYER_ID;
+    public int FADE_SORTING_ORDER => CombatFadeScreenHandler.Instance.FADE_SORTING_ORDER;
+    public float FADE_SCREEN_Z_VALUE => CombatFadeScreenHandler.Instance.FADE_SCREEN_Z_VALUE;
 
-    public int FADE_SORTING_LAYER_ID
-    {
-        get
-        {
-            return FadeScreenHandler.Instance.FadeScreenSprite.sortingLayerID;
-        }
-    }
-
-    public int FADE_SORTING_ORDER
-    {
-        get
-        {
-            return FadeScreenHandler.Instance.FadeScreenSprite.sortingOrder;
-        }
-    }
-
-    public float FADE_SCREEN_Z_VALUE
-    {
-        get
-        {
-            return FadeScreenHandler.Instance.FadeScreenSprite.gameObject.transform.position.z;
-        }
-    }
 
     // Awake is called when the script instance is being loaded
     void Awake()
@@ -313,17 +283,17 @@ public class CombatManager : MonoBehaviour
 
     public void SetDarkScreen()
     {
-        FadeScreenHandler.Instance.FadeScreenSprite.color = new Color(FadeScreenHandler.Instance.FadeScreenSprite.color.r, FadeScreenHandler.Instance.FadeScreenSprite.color.g, FadeScreenHandler.Instance.FadeScreenSprite.color.b, 1f);
+        CombatFadeScreenHandler.Instance.SetDarkScreen();
     }
 
     public IEnumerator FadeInLightScreen(float duration)
     {
-        yield return StartCoroutine(FadeScreenHandler.Instance.FadeInLightScreen(duration));
+        yield return StartCoroutine(CombatFadeScreenHandler.Instance.FadeInLightScreen(duration));
     }
 
     public IEnumerator FadeInDarkScreen(float duration)
     {
-        yield return StartCoroutine(FadeScreenHandler.Instance.FadeInDarkScreen(duration));
+        yield return StartCoroutine(CombatFadeScreenHandler.Instance.FadeInDarkScreen(duration));
     }
 
     private void PerformOutOfCombat()
@@ -389,9 +359,9 @@ public class CombatManager : MonoBehaviour
     {
         float duration = 1f;
         if (darkenScene) 
-            yield return StartCoroutine(FadeScreenHandler.Instance.FadeInAlpha(0.8f, duration));
+            yield return StartCoroutine(CombatFadeScreenHandler.Instance.FadeToAlpha(0.8f, duration));
         else
-            yield return StartCoroutine(FadeScreenHandler.Instance.FadeInLightScreen(duration));
+            yield return StartCoroutine(CombatFadeScreenHandler.Instance.FadeInLightScreen(duration));
     }
 
     private void CrosshairAllEnemies()

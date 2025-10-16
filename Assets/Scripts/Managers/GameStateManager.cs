@@ -1,4 +1,5 @@
 using LevelSelectInformation;
+using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using Systems.Persistence;
@@ -55,9 +56,17 @@ public class GameStateManager : PersistentSingleton<GameStateManager>, IBind<Gam
         this.Data.Id = bindedData.Id;
     }
 
-    public void LoadScene(string scene) 
+    public void LoadScene(string scene)
     {
         SceneManager.LoadScene(scene);
+        SaveLoadSystem.Instance.SaveGame();
+    }
+
+    private IEnumerator FadeAndLoadScene(string scene)
+    {
+        yield return StartCoroutine(UIFadeScreenManager.Instance.FadeInDarkScreen(0.8f));
+        SceneManager.LoadScene(scene);
+        yield return StartCoroutine(UIFadeScreenManager.Instance.FadeInLightScreen(0.8f));
         SaveLoadSystem.Instance.SaveGame();
     }
 

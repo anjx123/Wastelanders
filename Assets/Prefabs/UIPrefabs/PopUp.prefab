@@ -364,6 +364,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b090fd54af74e7d42b28ab5674f8a24c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canvas: {fileID: 0}
   warningText: {fileID: 7109150430243128439}
   popupImage: {fileID: 1156540308573898057}
   popUpCanFade: 1
@@ -414,7 +415,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
+  m_PresetInfoIsWorld: 1
 --- !u!114 &372149550012694804
 MonoBehaviour:
   m_ObjectHideFlags: 0

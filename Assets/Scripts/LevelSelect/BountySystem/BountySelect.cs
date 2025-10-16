@@ -35,8 +35,8 @@ public class BountySelect : MonoBehaviour
         BountyButton.BountyOnHoverEndEvent += OnBountyHoverEnd;
         DeckSelectionArrow.DeckSelectionArrowEvent += OnBackPressed;
         ConstructBountyButtons();
-        FadeScreenHandler.Instance.SetDarkScreen();
-        StartCoroutine(FadeScreenHandler.Instance.FadeInLightScreen(1f));
+        UIFadeScreenManager.Instance.SetDarkScreen();
+        StartCoroutine(UIFadeScreenManager.Instance.FadeInLightScreen(1f));
     }
 
     void OnDestroy()
@@ -82,7 +82,7 @@ public class BountySelect : MonoBehaviour
 
     IEnumerator FadeLevelIn(string levelName)
     {
-        yield return StartCoroutine(FadeScreenHandler.Instance.FadeInDarkScreen(0.8f));
+        yield return StartCoroutine(UIFadeScreenManager.Instance.FadeInDarkScreen(0.8f));
         SceneManager.LoadScene(levelName);
     }
 
@@ -151,7 +151,7 @@ public class BountySelect : MonoBehaviour
 
     private IEnumerator ExitBounty()
     {
-        yield return StartCoroutine(FadeScreenHandler.Instance.FadeInDarkScreen(0.8f));
+        yield return StartCoroutine(UIFadeScreenManager.Instance.FadeInDarkScreen(0.8f));
         GameStateManager.Instance.LoadScene(SceneData.Get<SceneData.LevelSelect>().SceneName);
     }
 
