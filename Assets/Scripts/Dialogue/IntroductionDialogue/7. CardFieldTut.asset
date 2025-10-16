@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 207ddad3e1c90594ba3f48e2a5a6a796, type: 3}
+  m_Name: 7. CardFieldTut
+  m_EditorClassIdentifier: 
+  dialogue:
+  - bodyText: 'Each Action has two key stats: Power and Speed.'
+    speakerName: Ives
+    displayingImage: {fileID: 21300000, guid: ef17277e1ebf2f64abf4d8a5117608a3, type: 3}
+    sfx: 
+    broadcastAnEvent: 0
+  - bodyText: Power shows how much damage the Action can deal.
+    speakerName: Ives
+    displayingImage: {fileID: 21300000, guid: 3fea2e94140c08246a0e502ee92d3761, type: 3}
+    sfx: 
+    broadcastAnEvent: 0
+  - bodyText: "It\u2019s a range that damage will be randomly rolled within."
+    speakerName: Ives
+    displayingImage: {fileID: 21300000, guid: 3fea2e94140c08246a0e502ee92d3761, type: 3}
+    sfx: 
+    broadcastAnEvent: 0
+  - bodyText: Speed decides when the Action takes place during combat.
+    speakerName: Ives
+    displayingImage: {fileID: 21300000, guid: b1411cc1e1231574797f223a58264863, type: 3}
+    sfx: 
+    broadcastAnEvent: 0
+  - bodyText: Higher Speed means the Action goes earlier in the round.
+    speakerName: Ives
+    displayingImage: {fileID: 21300000, guid: b1411cc1e1231574797f223a58264863, type: 3}
+    sfx: 
+    broadcastAnEvent: 0
+  - bodyText: "Let\u2019s pick a card and target the enemy!"
+    speakerName: Ives
+    displayingImage: {fileID: 21300000, guid: 84d19d73f4fee204d8d42cc16de51cf7, type: 3}
+    sfx: 
+    broadcastAnEvent: 1

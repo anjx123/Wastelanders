@@ -53,3 +53,4 @@ MonoBehaviour:
     deckSelectV2: {fileID: 8373578210505895036, guid: 2fc4a9f3207534879a5039dfb4371af7, type: 3}
     uiFadeScreenManager: {fileID: -1531841899158085152, guid: 3217b30901258934f844ae8217a629cf, type: 3}
     combatFadeScreenManager: {fileID: -2665817779871646106, guid: 823a9f1bbe7e4124196bcbe769a6c950, type: 3}
+    popupManager: {fileID: -6348610105375762745, guid: dd2d1aac4fcb04e4995a2a5801677b35, type: 3}

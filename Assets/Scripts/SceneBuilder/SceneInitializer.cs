@@ -64,4 +64,5 @@ public class SceneInitializerPrefabs
     public DeckSelectV2 deckSelectV2 = null!;
     public UIFadeScreenManager uiFadeScreenManager = null!;
     public CombatFadeScreenHandler combatFadeScreenManager = null!;
+    public PopUpNotificationManager popupManager = null!;
 }
