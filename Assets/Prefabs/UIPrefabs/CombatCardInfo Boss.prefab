@@ -134,6 +134,10 @@ PrefabInstance:
       propertyPath: healthBar
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 3781379592661886730, guid: 941333e3be7f6f04688676f1827dbf1b, type: 3}
+      propertyPath: diceRollSprite
+      value: 
+      objectReference: {fileID: 5214249325962628266}
     - target: {fileID: 6018344303403229583, guid: 941333e3be7f6f04688676f1827dbf1b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -198,5 +202,10 @@ PrefabInstance:
 --- !u!4 &322982024526435023 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6018344303403229583, guid: 941333e3be7f6f04688676f1827dbf1b, type: 3}
+  m_PrefabInstance: {fileID: 6340507736150930240}
+  m_PrefabAsset: {fileID: 0}
+--- !u!212 &5214249325962628266 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 2279593354255073258, guid: 941333e3be7f6f04688676f1827dbf1b, type: 3}
   m_PrefabInstance: {fileID: 6340507736150930240}
   m_PrefabAsset: {fileID: 0}

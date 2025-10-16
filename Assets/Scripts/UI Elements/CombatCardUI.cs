@@ -45,6 +45,10 @@ public class CombatCardUI : DisplayableClass
 
     private void OnEnable()
     {
+        GetComponent<SpriteRenderer>().sortingLayerName = CombatManager.Instance.FADE_SORTING_LAYER;
+        targetRenderer.sortingLayerName = CombatManager.Instance.FADE_SORTING_LAYER;
+
+
         rangeText.GetComponent<MeshRenderer>().sortingLayerName = targetRenderer.sortingLayerName;
         rangeText.GetComponent<MeshRenderer>().sortingOrder = targetRenderer.sortingOrder;
 
@@ -112,7 +116,6 @@ public class CombatCardUI : DisplayableClass
 
     public void Emphasize()
     {
-
         GetComponent<SpriteRenderer>().sortingOrder = CombatManager.Instance.FADE_SORTING_ORDER + 1;
 
         rangeText.GetComponent<MeshRenderer>().sortingOrder = CombatManager.Instance.FADE_SORTING_ORDER + 2;
