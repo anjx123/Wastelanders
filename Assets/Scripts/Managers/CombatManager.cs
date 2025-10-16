@@ -275,6 +275,7 @@ public class CombatManager : MonoBehaviour
         
     }
 
+    // Deprecated functions, please just open a new SpriteFadeHandler instead of borrowing the combat fade screen handler.
     public void SetDarkScreen()
     {
         CombatFadeScreenHandler.Instance.SetDarkScreen();
