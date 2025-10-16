@@ -58,16 +58,15 @@ public class GameStateManager : PersistentSingleton<GameStateManager>, IBind<Gam
 
     public void LoadScene(string scene)
     {
-        SceneManager.LoadScene(scene);
-        SaveLoadSystem.Instance.SaveGame();
+        StartCoroutine(FadeAndLoadScene(scene));
     }
 
     private IEnumerator FadeAndLoadScene(string scene)
     {
         yield return StartCoroutine(UIFadeScreenManager.Instance.FadeInDarkScreen(0.8f));
+        SaveLoadSystem.Instance.SaveGame();
         SceneManager.LoadScene(scene);
         yield return StartCoroutine(UIFadeScreenManager.Instance.FadeInLightScreen(0.8f));
-        SaveLoadSystem.Instance.SaveGame();
     }
 
     public const string SORTING_LAYER_TOP = "Top";

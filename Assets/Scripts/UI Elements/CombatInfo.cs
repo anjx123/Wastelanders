@@ -25,6 +25,9 @@ public class CombatInfo : MonoBehaviour
 
     public Canvas buffListCanvas;
 
+    private int FadeSortingOrder => CombatFadeScreenHandler.Instance.FADE_SORTING_ORDER;
+    private string FadeSortingLayer => CombatFadeScreenHandler.Instance.FADE_SORTING_LAYER;
+
     public void Awake()
     {
         buffListCanvas = buffList.gameObject.GetComponent<Canvas>();
@@ -48,15 +51,17 @@ public class CombatInfo : MonoBehaviour
             DeactivateCombatSprite(action);
         }
     }
+
+
     public void Start()
     {
         diceRollText.GetComponent<MeshRenderer>().sortingOrder = diceRollSprite.sortingOrder + 1;
         buffListCanvas.overrideSorting = true;
-        buffListCanvas.sortingLayerName = CombatManager.Instance.FADE_SORTING_LAYER;
+        buffListCanvas.sortingLayerName = FadeSortingLayer;
         buffListCanvas.sortingOrder = -1;
-        diceRollSprite.sortingLayerName = CombatManager.Instance.FADE_SORTING_LAYER;
-        diceRollText.GetComponent<MeshRenderer>().sortingLayerName = CombatManager.Instance.FADE_SORTING_LAYER;
-        damagePopupText.GetComponent<MeshRenderer>().sortingLayerName = CombatManager.Instance.FADE_SORTING_LAYER;
+        diceRollSprite.sortingLayerName = FadeSortingLayer;
+        diceRollText.GetComponent<MeshRenderer>().sortingLayerName = FadeSortingLayer;
+        damagePopupText.GetComponent<MeshRenderer>().sortingLayerName = FadeSortingLayer;
     }
 
     public void DisplayDamage(int damage)
@@ -234,9 +239,9 @@ public class CombatInfo : MonoBehaviour
     public void Emphasize()
     {
         EmphasizeCombatIcon();
-        damagePopupText.GetComponent<MeshRenderer>().sortingOrder = CombatManager.Instance.FADE_SORTING_ORDER + 1;
-        diceRollSprite.sortingOrder = CombatManager.Instance.FADE_SORTING_ORDER + 1;
-        buffListCanvas.sortingOrder = CombatManager.Instance.FADE_SORTING_ORDER + 2;
+        damagePopupText.GetComponent<MeshRenderer>().sortingOrder = FadeSortingOrder + 1;
+        diceRollSprite.sortingOrder = FadeSortingOrder + 1;
+        buffListCanvas.sortingOrder = FadeSortingOrder + 2;
         diceRollText.GetComponent<MeshRenderer>().sortingOrder = diceRollSprite.sortingOrder + 1;
         healthBar.Emphasize();
     }
@@ -246,10 +251,10 @@ public class CombatInfo : MonoBehaviour
         {
             child.GetComponent<CombatCardUI>().DeEmphasize();
         }
-        damagePopupText.GetComponent<MeshRenderer>().sortingOrder = CombatManager.Instance.FADE_SORTING_ORDER - 1;
-        diceRollSprite.sortingOrder = CombatManager.Instance.FADE_SORTING_ORDER - 1;
-        buffListCanvas.sortingOrder = CombatManager.Instance.FADE_SORTING_ORDER - 1;
-        diceRollText.GetComponent<MeshRenderer>().sortingOrder = CombatManager.Instance.FADE_SORTING_ORDER - 1;
+        damagePopupText.GetComponent<MeshRenderer>().sortingOrder = FadeSortingOrder - 1;
+        diceRollSprite.sortingOrder = FadeSortingOrder - 1;
+        buffListCanvas.sortingOrder = FadeSortingOrder - 1;
+        diceRollText.GetComponent<MeshRenderer>().sortingOrder = FadeSortingOrder - 1;
         healthBar.DeEmphasize();
     }
 

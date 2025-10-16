@@ -41,10 +41,7 @@ public class CombatManager : MonoBehaviour
     public delegate void EntitiesWinLoseDelegate();
     public static event EntitiesWinLoseDelegate? PlayersWinEvent;
     public static event EntitiesWinLoseDelegate? EnemiesWinEvent;
-    public string FADE_SORTING_LAYER => CombatFadeScreenHandler.Instance.FADE_SORTING_LAYER;    
-    public int FADE_SORTING_LAYER_ID => CombatFadeScreenHandler.Instance.FADE_SORTING_LAYER_ID;
     public int FADE_SORTING_ORDER => CombatFadeScreenHandler.Instance.FADE_SORTING_ORDER;
-    public float FADE_SCREEN_Z_VALUE => CombatFadeScreenHandler.Instance.FADE_SCREEN_Z_VALUE;
 
 
     // Awake is called when the script instance is being loaded
