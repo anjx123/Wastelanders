@@ -62,7 +62,6 @@ public class BeetleFight : DialogueClasses
     [SerializeField] private CinemachineVirtualCamera sceneCamera;
     [SerializeField] private Sprite frogDeathSprite;
     [SerializeField] private Sprite jackieCrystalSprite;
-    [SerializeField] private GameOver gameOver;
     [SerializeField] private BattleIntro battleIntro;
 
     [SerializeField] private List<DialogueText> openingJackieQuipt;
@@ -637,18 +636,12 @@ public class BeetleFight : DialogueClasses
         Beetle.OnGainBuffs -= ExplainResonate;
         jackie.BuffsUpdatedEvent -= ExplainPlayerBuffed;
         ives.BuffsUpdatedEvent -= ExplainPlayerBuffed;
-        StartCoroutine(GameLose());
+        GameLose();
         CombatManager.Instance.GameState = GameState.GAME_LOSE;
     }
-    private IEnumerator GameLose()
-    {
-        yield return StartCoroutine(CombatManager.Instance.FadeInDarkScreen(2f));
-
-        DialogueManager.Instance.MoveBoxToBottom();
-        gameOver.gameObject.SetActive(true);
-        gameOver.FadeIn();
-
-        yield return StartCoroutine(DialogueManager.Instance.StartDialogue(gameLoseDialogue.Dialogue));
+    private void GameLose()
+    {   
+        GameOver.Instance.FadeInWithDialogue(gameLoseDialogue);
     }
 
 

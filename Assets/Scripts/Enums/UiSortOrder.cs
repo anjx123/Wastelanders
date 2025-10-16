@@ -8,6 +8,8 @@ public enum UISortOrder
     DialogueBox,
     WarningPopup,
     CombatIntro,
+    GameOverScrim,
+    GameOverText,
     PauseMenu,
     FadeScreen
 }

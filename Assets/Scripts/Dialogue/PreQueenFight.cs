@@ -61,7 +61,6 @@ public class PreQueenFight : DialogueClasses
     [SerializeField] private List<Transform> queenGuardBeetleTransforms;
 
 
-    [SerializeField] GameOver gameOver;
     [SerializeField] private bool jumpToCombat;
     [SerializeField] private BattleIntro battleIntro;
     [SerializeField] private SpriteFadeHandler spriteFadeHandler;
@@ -579,18 +578,12 @@ public class PreQueenFight : DialogueClasses
     {
         CombatManager.EnemiesWinEvent -= EnemiesWin;
         CombatManager.PlayersWinEvent -= PlayersWin;
-        StartCoroutine(GameLose());
+        GameLose();
         CombatManager.Instance.GameState = GameState.GAME_LOSE;
     }
-    private IEnumerator GameLose()
+    private void GameLose()
     {
-        yield return StartCoroutine(CombatManager.Instance.FadeInDarkScreen(2f));
-
-        //Set Jump into combat to be true
-        gameOver.gameObject.SetActive(true);
-        gameOver.FadeIn();
-
-        yield return StartCoroutine(DialogueManager.Instance.StartDialogue(gameLoseDialogue.Dialogue));
+        GameOver.Instance.FadeInWithDialogue(gameLoseDialogue);
     }
     //------helpers------
 

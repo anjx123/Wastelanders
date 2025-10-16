@@ -65,4 +65,5 @@ public class SceneInitializerPrefabs
     public UIFadeScreenManager uiFadeScreenManager = null!;
     public CombatFadeScreenHandler combatFadeScreenManager = null!;
     public PopUpNotificationManager popupManager = null!;
+    public GameOver gameOver = null!;
 }

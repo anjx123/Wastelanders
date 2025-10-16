@@ -221,8 +221,6 @@ public class CombatManager : MonoBehaviour
     private void PerformLose()
     {
         StartCoroutine(FadeCombatBackground(false));
-        StartCoroutine(FadeInDarkScreen(GameOver.FADE_IN_TIME));
-        Debug.LogWarning("All Players are dead, You Lose...");
         baseCamera.Priority = 1;
         dynamicCamera.Priority = 0;
         PerformOutOfCombat();
@@ -233,7 +231,6 @@ public class CombatManager : MonoBehaviour
     private void PerformWin()
     {
         StartCoroutine(FadeCombatBackground(false));
-        Debug.LogWarning("All enemies are dead, You Win!");
         baseCamera.Priority = 1;
         dynamicCamera.Priority = 0;
         // Save game after each win (including wiping out a wave) 

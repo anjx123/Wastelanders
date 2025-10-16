@@ -11,7 +11,6 @@ namespace Director
         [SerializeField] private GameObject entityContainer;
 
         private BattleIntro battleIntro;
-        [SerializeField] private GameOver gameOver;
         [SerializeField] private DialogueWrapper gameOverDialogue; // sucks...
 
         private void Start()
@@ -58,16 +57,13 @@ namespace Director
         {
             CombatManager.EnemiesWinEvent -= EnemiesWin;
             CombatManager.PlayersWinEvent -= PlayersWin;
-            StartCoroutine(GameLose());
+            GameLose();
             CombatManager.Instance.GameState = GameState.GAME_LOSE;
         }
 
-        private IEnumerator GameLose()
+        private void GameLose()
         {
-            yield return StartCoroutine(CombatManager.Instance.FadeInDarkScreen(2f));
-            gameOver.gameObject.SetActive(true);
-            gameOver.FadeIn();
-            yield return StartCoroutine(DialogueManager.Instance.StartDialogue(gameOverDialogue.Dialogue));
+            GameOver.Instance.FadeInWithDialogue(gameOverDialogue);
         }
     }
 }

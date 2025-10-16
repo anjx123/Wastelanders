@@ -1,44 +1,66 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
-using Unity.VisualScripting;
 
 public class GameOver : MonoBehaviour
 {
+    public static GameOver Instance { get; private set; }
     [SerializeField] CanvasGroup canvasGroup;
+    [SerializeField] Canvas fadeCanvas;
+    [SerializeField] Canvas textCanvas;
     [SerializeField] Button restartButton;
     [SerializeField] bool shouldJumpToCombatWhenRestart = true;
     [SerializeField] Button levelSelectButton;
     [SerializeField] Button deckSelectButton;
     [SerializeField] GameObject gameOverText;
+    [SerializeField] UIFadeHandler uiFadeScreen;
+# nullable enable
     public const float FADE_IN_TIME = 1f;
+
+    void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else if (Instance != null && Instance != this)
+        {
+            Destroy(this);
+        }
+    }
+
 
     void OnEnable()
     {
-        // Assign the click events to the buttons
         restartButton.onClick.AddListener(() => StartCoroutine(OnRestartClick()));
         levelSelectButton.onClick.AddListener(() => StartCoroutine(OnLevelSelectClick()));
         deckSelectButton.onClick.AddListener(() => StartCoroutine(OnDeckSelectClick()));
         canvasGroup.alpha = 0f;
-        FadeIn();
-        // if this pops up then the game is over AND this takes care of the fade thing too.
-        AudioManager.Instance.PlayDeath();
+        uiFadeScreen.SetLightScreen();
+        fadeCanvas.sortingOrder = UISortOrder.GameOverScrim.GetOrder();
+        textCanvas.sortingOrder = UISortOrder.GameOverText.GetOrder();
     }
+
     void OnDisable()
     {
-        // Unsubscribe the click events from the buttons
         restartButton.onClick.RemoveListener(() => StartCoroutine(OnRestartClick()));
         levelSelectButton.onClick.RemoveListener(() => StartCoroutine(OnLevelSelectClick()));
         deckSelectButton.onClick.RemoveListener(() => StartCoroutine(OnDeckSelectClick()));
     }
 
 
-    public void FadeIn()
+    public void FadeInWithDialogue(DialogueWrapper dialogue)
     {
+        StartCoroutine(BeginFadeIn(dialogue));
+    }
+
+    private IEnumerator BeginFadeIn(DialogueWrapper dialogue)
+    {
+        AudioManager.Instance.PlayDeath();
+        yield return StartCoroutine(uiFadeScreen.FadeInDarkScreen(1.5f));
         StartCoroutine(FadeCoroutine(true, FADE_IN_TIME));
+        DialogueManager.Instance.MoveBoxToBottom();
+        yield return StartCoroutine(DialogueManager.Instance.StartDialogue(dialogue.Dialogue));
     }
 
 
