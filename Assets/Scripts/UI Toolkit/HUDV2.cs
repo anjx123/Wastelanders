@@ -20,6 +20,7 @@ namespace UI_Toolkit
             rootElem = rootDocument?.rootVisualElement ?? throw new Exception($"{nameof(rootDocument)} unset");
             handElem = rootElem.Q<VisualElement>("layout-hand-container");
             infoElem = rootElem.Q<VisualElement>("layout-info-container");
+            rootDocument.panelSettings.sortingOrder = UISortOrder.Hudv2.GetOrder();
 
             RegisterCallbacks();
             LoadInitialValues();

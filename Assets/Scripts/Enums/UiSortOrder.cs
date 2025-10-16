@@ -1,8 +1,11 @@
-
+/*
+ * Enum that decides the sorting order of all UI elements. 
+ */
 public enum UISortOrder
 {
     Base,
     Hudv2,
+    DialogueBox,
     WarningPopup,
     CombatIntro,
     PauseMenu,

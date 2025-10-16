@@ -13,6 +13,7 @@ public class DialogueManager : MonoBehaviour
     private DialogueBox picturelessDialogueBoxComponent = null!;
     [SerializeField]
     private DialogueBox pictureDialogueBox = null!;
+    [SerializeField] private Canvas dialogueCanvas = null!;
     private List<DialogueText> sentences = new();
 
     private bool inDialogue = false;
@@ -31,6 +32,7 @@ public class DialogueManager : MonoBehaviour
             Destroy(this);
         }
         activeDialogueBox = pictureDialogueBox;
+        dialogueCanvas.sortingOrder = UISortOrder.DialogueBox.GetOrder();
     }
 
     //Manager is going to listen to a bunch of events that then cause it to gain new sentences and 

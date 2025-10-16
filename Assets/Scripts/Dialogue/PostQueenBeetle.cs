@@ -45,14 +45,14 @@ public class PostQueenBeetle : DialogueClasses
     private IEnumerator ExecuteGameStart()
     {
         CombatManager.Instance.GameState = GameState.OUT_OF_COMBAT;
-        UIFadeScreenManager.Instance.SetDarkScreen();
+        CombatFadeScreenHandler.Instance.SetDarkScreen();
         ives.FaceLeft();
         yield return new WaitForSeconds(0.8f);
 
         jackie.OutOfCombat(); ives.OutOfCombat();
 
         yield return StartCoroutine(DialogueManager.Instance.StartDialogue(jackieOpeningDialogue));
-        yield return StartCoroutine(UIFadeScreenManager.Instance.FadeInLightScreen(1f));
+        yield return StartCoroutine(CombatFadeScreenHandler.Instance.FadeInLightScreen(1f));
         yield return StartCoroutine(jackie.MoveToPosition(jackieListensToBroadcast.position, 0f, 1.2f));
         yield return new WaitForSeconds(1f);
         jackie.animator.enabled = false;

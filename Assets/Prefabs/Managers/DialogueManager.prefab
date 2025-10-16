@@ -47,6 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   picturelessDialogueBoxComponent: {fileID: 7958431430781521400}
   pictureDialogueBox: {fileID: 6351731602917549324}
+  dialogueCanvas: {fileID: 3806438664623357467}
 --- !u!1 &4463315103594340098
 GameObject:
   m_ObjectHideFlags: 0
