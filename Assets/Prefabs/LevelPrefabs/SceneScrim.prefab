@@ -58,7 +58,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 10
+  m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!1 &5766553018602004073
 GameObject:
@@ -107,6 +107,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UnparentOnAwake: 1
   uiFadeHandler: {fileID: 5806378777674203359}
+  fadeScreenCanvas: {fileID: 5123962885870585560}
 --- !u!1 &9094372153807948256
 GameObject:
   m_ObjectHideFlags: 0

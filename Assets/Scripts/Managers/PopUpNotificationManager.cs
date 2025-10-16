@@ -20,6 +20,8 @@ public class PopUpNotificationManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        canvas.sortingOrder = UISortOrder.WarningPopup.GetOrder();
     }
 
     public void DisplayWarning(PopupType popupType)

@@ -5,7 +5,14 @@ public class UIFadeScreenManager : PersistentSingleton<UIFadeScreenManager>
 {
     [SerializeField]
     private UIFadeHandler uiFadeHandler;
-    
+    [SerializeField] private Canvas fadeScreenCanvas;
+
+    protected override void Awake()
+    {
+        base.Awake();
+        fadeScreenCanvas.sortingOrder = UISortOrder.FadeScreen.GetOrder();
+    }
+
     public void SetDarkScreen() => uiFadeHandler.SetDarkScreen();
 
     public void SetLightScreen() => uiFadeHandler.SetLightScreen();

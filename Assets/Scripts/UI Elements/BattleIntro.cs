@@ -15,7 +15,7 @@ public class BattleIntro : MonoBehaviour
     public static BattleIntro Build(Camera camera)
     {
         BattleIntro battleIntro = SceneInitializer.Instance.InstantiatePrefab(SceneInitializer.Instance.InitializablePrefabs.battleIntro);
-        battleIntro.canvas.sortingOrder = (int) UISortOrder.CombatIntro;
+        battleIntro.canvas.sortingOrder = UISortOrder.CombatIntro.GetOrder();
         return battleIntro;
     }
 

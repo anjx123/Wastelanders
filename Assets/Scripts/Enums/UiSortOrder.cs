@@ -1,8 +1,15 @@
+
 public enum UISortOrder
 {
     Base,
     Hudv2,
-    Cards,
     WarningPopup,
     CombatIntro,
+    PauseMenu,
+    FadeScreen
 }
+
+public static class UiSortOrderHelpers
+{
+    public static int GetOrder(this UISortOrder order) => (int) order;
+} 
