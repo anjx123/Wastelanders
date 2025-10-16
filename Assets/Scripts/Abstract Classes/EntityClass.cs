@@ -561,7 +561,7 @@ public abstract class EntityClass : SelectClass
         Vector3 largeTransform = transform.position;
         largeTransform.z = CombatManager.Instance.FADE_SORTING_ORDER - 1 + ZOffset(spriteRenderer.bounds.min.y);
         transform.position = largeTransform;
-        spriteRenderer.sortingOrder = CombatManager.Instance.FADE_SORTING_ORDER - 1;
+        spriteRenderer.sortingOrder = CombatManager.Instance.FADE_SORTING_ORDER - 3;
         combatInfo.DeEmphasize();
     }
 
