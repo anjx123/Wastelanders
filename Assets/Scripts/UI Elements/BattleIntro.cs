@@ -12,7 +12,7 @@ public class BattleIntro : MonoBehaviour
     [SerializeField] private Animator backgroundAnimator;
     private const string backgroundAnimation = "BackgroundIntro";
 
-    public static BattleIntro Build(Camera camera)
+    public static BattleIntro Build()
     {
         BattleIntro battleIntro = SceneInitializer.Instance.InstantiatePrefab(SceneInitializer.Instance.InitializablePrefabs.battleIntro);
         battleIntro.canvas.sortingOrder = UISortOrder.CombatIntro.GetOrder();

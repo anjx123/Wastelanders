@@ -30,7 +30,7 @@ namespace Director
             UIFadeScreenManager.Instance.SetDarkScreen();
             CombatManager.PlayersWinEvent += PlayersWin;
             CombatManager.EnemiesWinEvent += EnemiesWin;
-            battleIntro = BattleIntro.Build(Camera.main);
+            battleIntro = BattleIntro.Build();
 
             yield return new WaitForEndOfFrame(); // Necessary for associated initialization code to run (to assign teams)
 

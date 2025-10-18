@@ -97,7 +97,7 @@ public class TutorialIntroduction : DialogueClasses
         ives.OutOfCombat();
         jackie.OutOfCombat();
         jackie.SetReturnPosition(jackieDefaultTransform.position);
-        battleIntro = BattleIntro.Build(Camera.main);
+        battleIntro = BattleIntro.Build();
         if (!jumpToCombat && !GameStateManager.Instance.JumpToCombat)
         {
             yield return new WaitForSeconds(1f);

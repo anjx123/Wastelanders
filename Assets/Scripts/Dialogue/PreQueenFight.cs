@@ -103,7 +103,7 @@ public class PreQueenFight : DialogueClasses
     {
         CombatManager.Instance.GameState = GameState.OUT_OF_COMBAT;
         CombatManager.Instance.SetDarkScreen();
-        battleIntro = BattleIntro.Build(Camera.main);
+        battleIntro = BattleIntro.Build();
 
         yield return new WaitForSeconds(0.5f);
         ives.OutOfCombat();

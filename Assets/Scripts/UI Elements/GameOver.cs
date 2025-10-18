@@ -39,6 +39,7 @@ public class GameOver : MonoBehaviour
         uiFadeScreen.SetLightScreen();
         fadeCanvas.sortingOrder = UISortOrder.GameOverScrim.GetOrder();
         textCanvas.sortingOrder = UISortOrder.GameOverText.GetOrder();
+        canvasGroup.blocksRaycasts = false;
     }
 
     void OnDisable()
@@ -56,6 +57,7 @@ public class GameOver : MonoBehaviour
 
     private IEnumerator BeginFadeIn(DialogueWrapper dialogue)
     {
+        canvasGroup.blocksRaycasts = true;
         AudioManager.Instance.PlayDeath();
         yield return StartCoroutine(uiFadeScreen.FadeInDarkScreen(1.5f));
         StartCoroutine(FadeCoroutine(true, FADE_IN_TIME));
