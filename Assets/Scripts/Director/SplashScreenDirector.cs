@@ -10,8 +10,6 @@ namespace Director
     public class SplashScreenDirector : MonoBehaviour
     {
         [SerializeField] private VideoPlayer videoPlayer;
-        [SerializeField] private FadeScreenHandler fadeScreenHandler;
-
         private void OnDisable()
         {
             videoPlayer.loopPointReached -= OnVideoEnd;
@@ -38,7 +36,7 @@ namespace Director
         {
             videoPlayer.loopPointReached -= OnVideoEnd;
             yield return new WaitForSeconds(1f);
-            yield return fadeScreenHandler.FadeInDarkScreen(1f);
+            yield return UIFadeScreenManager.Instance.FadeInDarkScreen(1f);
             yield return new WaitForSeconds(0.5f);
             SceneManager.LoadScene(Get<SceneData.MainMenu>().SceneName);
         }

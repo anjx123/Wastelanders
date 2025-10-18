@@ -19,6 +19,7 @@ namespace UI_Toolkit
         {
             rootElem = rootDocument?.rootVisualElement ?? throw new Exception($"{nameof(rootDocument)} unset");
             gridElem = rootElem.Q<VisualElement>("layout-grid");
+            rootDocument.panelSettings.sortingOrder = UISortOrder.Base.GetOrder();
 
             LoadInitialValues();
         }

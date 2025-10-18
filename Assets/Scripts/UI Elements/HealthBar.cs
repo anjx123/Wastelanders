@@ -12,11 +12,15 @@ public class HealthBar : MonoBehaviour
     public TMP_Text healthText;
     public Canvas healthCanvas;
 
+    private int FadeSortingOrder => CombatFadeScreenHandler.Instance.FADE_SORTING_ORDER;
+    private string FadeSortingLayer => CombatFadeScreenHandler.Instance.FADE_SORTING_LAYER;
+    private float FadeZValue => CombatFadeScreenHandler.Instance.FADE_SCREEN_Z_VALUE;
+
     public void Start()
     {
-        healthCanvas.sortingLayerName = CombatManager.Instance.FADE_SORTING_LAYER;
+        healthCanvas.sortingLayerName = FadeSortingLayer;
         Vector3 myPosition = myRectTransform.localPosition;
-        myPosition.z = CombatManager.Instance.FADE_SCREEN_Z_VALUE + 0.5f; // Default health bar seems to be offset by z by this amount
+        myPosition.z = FadeZValue + 0.5f; // Default health bar seems to be offset by z by this amount
         myRectTransform.localPosition = myPosition;
         DeEmphasize();
     }
@@ -34,10 +38,10 @@ public class HealthBar : MonoBehaviour
 
     public void Emphasize()
     {
-        healthCanvas.sortingOrder = CombatManager.Instance.FADE_SORTING_ORDER + 1;;
+        healthCanvas.sortingOrder = FadeSortingOrder + 1;;
     }
     public void DeEmphasize()
     {
-        healthCanvas.sortingOrder = CombatManager.Instance.FADE_SORTING_ORDER - 1;
+        healthCanvas.sortingOrder = FadeSortingOrder - 1;
     }
 }

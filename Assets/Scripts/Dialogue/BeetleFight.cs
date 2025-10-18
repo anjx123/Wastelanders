@@ -62,7 +62,6 @@ public class BeetleFight : DialogueClasses
     [SerializeField] private CinemachineVirtualCamera sceneCamera;
     [SerializeField] private Sprite frogDeathSprite;
     [SerializeField] private Sprite jackieCrystalSprite;
-    [SerializeField] private GameOver gameOver;
     [SerializeField] private BattleIntro battleIntro;
 
     [SerializeField] private List<DialogueText> openingJackieQuipt;
@@ -185,8 +184,8 @@ public class BeetleFight : DialogueClasses
     private IEnumerator ExecuteGameStart()
     {
         CombatManager.Instance.GameState = GameState.OUT_OF_COMBAT;
-        CombatManager.Instance.SetDarkScreen();
-        battleIntro = BattleIntro.Build(Camera.main);
+        UIFadeScreenManager.Instance.SetDarkScreen();
+        battleIntro = BattleIntro.Build();
         yield return new WaitForSeconds(0.2f);
         SetUpEnemyLists();
         SetUpCombatStatus();
@@ -196,7 +195,7 @@ public class BeetleFight : DialogueClasses
             yield return new WaitForSeconds(1f);
             //Lights Camera Action!!
             {
-                Coroutine fade = StartCoroutine(CombatManager.Instance.FadeInLightScreen(2f));
+                Coroutine fade = StartCoroutine(UIFadeScreenManager.Instance.FadeInLightScreen(2f));
                 yield return new WaitForSeconds(1f);
                 frogThatRunsAway.FaceRight();
                 yield return fade;
@@ -637,18 +636,12 @@ public class BeetleFight : DialogueClasses
         Beetle.OnGainBuffs -= ExplainResonate;
         jackie.BuffsUpdatedEvent -= ExplainPlayerBuffed;
         ives.BuffsUpdatedEvent -= ExplainPlayerBuffed;
-        StartCoroutine(GameLose());
+        GameLose();
         CombatManager.Instance.GameState = GameState.GAME_LOSE;
     }
-    private IEnumerator GameLose()
-    {
-        yield return StartCoroutine(CombatManager.Instance.FadeInDarkScreen(2f));
-
-        DialogueManager.Instance.MoveBoxToBottom();
-        gameOver.gameObject.SetActive(true);
-        gameOver.FadeIn();
-
-        yield return StartCoroutine(DialogueManager.Instance.StartDialogue(gameLoseDialogue.Dialogue));
+    private void GameLose()
+    {   
+        GameOver.Instance.FadeInWithDialogue(gameLoseDialogue);
     }
 
 

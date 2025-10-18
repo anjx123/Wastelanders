@@ -29,6 +29,7 @@ namespace UI_Toolkit
             dialogue = rootElem.Q<VisualElement>("dialogue");
             glossary = rootElem.Q<VisualElement>("glossary");
             pauseMenuPanel = rootElem.Q<VisualElement>("pause-menu-panel");
+            rootDocument.panelSettings.sortingOrder = UISortOrder.PauseMenu.GetOrder();
 
             RegisterCallbacks();
             LoadInitialValues();

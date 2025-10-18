@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+
 public class BattleIntro : MonoBehaviour
 {
     [SerializeField] private Canvas canvas;
@@ -11,11 +12,10 @@ public class BattleIntro : MonoBehaviour
     [SerializeField] private Animator backgroundAnimator;
     private const string backgroundAnimation = "BackgroundIntro";
 
-    public static BattleIntro Build(Camera camera)
+    public static BattleIntro Build()
     {
         BattleIntro battleIntro = SceneInitializer.Instance.InstantiatePrefab(SceneInitializer.Instance.InitializablePrefabs.battleIntro);
-        battleIntro.canvas.worldCamera = camera;
-        battleIntro.canvas.sortingLayerName = GameStateManager.SORTING_LAYER_TOP;
+        battleIntro.canvas.sortingOrder = UISortOrder.CombatIntro.GetOrder();
         return battleIntro;
     }
 

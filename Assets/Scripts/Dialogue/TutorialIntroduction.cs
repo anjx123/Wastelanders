@@ -57,7 +57,6 @@ public class TutorialIntroduction : DialogueClasses
     [SerializeField] private DialogueWrapper ivesIsDefeated;
     [SerializeField] private DialogueWrapper endingTutorialDialogue;
 
-    [SerializeField] private GameOver gameOver;
     [SerializeField] private DialogueWrapper gameLoseDialogue;
     [SerializeField] private BattleIntro battleIntro;
 
@@ -98,7 +97,7 @@ public class TutorialIntroduction : DialogueClasses
         ives.OutOfCombat();
         jackie.OutOfCombat();
         jackie.SetReturnPosition(jackieDefaultTransform.position);
-        battleIntro = BattleIntro.Build(Camera.main);
+        battleIntro = BattleIntro.Build();
         if (!jumpToCombat && !GameStateManager.Instance.JumpToCombat)
         {
             yield return new WaitForSeconds(1f);
@@ -393,20 +392,15 @@ public class TutorialIntroduction : DialogueClasses
 
     private void EnemiesWin()
     {
-        StartCoroutine(GameLose());
+        GameLose();
         CombatManager.PlayersWinEvent -= IvesDies;
         CombatManager.EnemiesWinEvent -= EnemiesWin;
         CombatManager.Instance.GameState = GameState.GAME_LOSE;
     }
 
-    private IEnumerator GameLose()
+    private void GameLose()
     {
-        yield return StartCoroutine(CombatManager.Instance.FadeInDarkScreen(2f));
-
-        gameOver.gameObject.SetActive(true);
-        gameOver.FadeIn();
-
-        yield return StartCoroutine(DialogueManager.Instance.StartDialogue(gameLoseDialogue.Dialogue));
+        GameOver.Instance.FadeInWithDialogue(gameLoseDialogue);
     }
     //------------------------------------------------------Helpers---------------------------------------------------------------------------------
 

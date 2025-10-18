@@ -18,7 +18,6 @@ public class DeckSelectionManager : MonoBehaviour
     [SerializeField] private GameObject cardArrayParent;
     [SerializeField] private CardDatabase cardDatabase;
     [SerializeField] private PlayerDatabase playerDatabase;
-    [SerializeField] private FadeScreenHandler fadeScreenHandler;
     [SerializeField] private TMP_Text cardTitleTextField;
     [SerializeField] private TMP_Text cardDescriptorTextField;
     [SerializeField] private Transform enemyEditParent;
@@ -105,8 +104,8 @@ public class DeckSelectionManager : MonoBehaviour
 
     private void EnterDeckSelection()
     {
-        fadeScreenHandler.SetDarkScreen();
-        StartCoroutine(fadeScreenHandler.FadeInLightScreen(2f));
+        UIFadeScreenManager.Instance.SetDarkScreen();
+        StartCoroutine(UIFadeScreenManager.Instance.FadeInLightScreen(2f));
     }
 
     void OnDestroy()
@@ -150,7 +149,7 @@ public class DeckSelectionManager : MonoBehaviour
             isFadingOut = true;
             SaveLoadSystem.Instance.SaveGame();
             //EditorUtility.SetDirty(playerDatabase); // For easily resetting the default weaponDeck of playerDatabase
-            yield return StartCoroutine(fadeScreenHandler.FadeInDarkScreen(0.8f));
+            yield return StartCoroutine(UIFadeScreenManager.Instance.FadeInDarkScreen(0.8f));
             GameStateManager.Instance.LoadScene(nextScene);
             isFadingOut = false;
         }

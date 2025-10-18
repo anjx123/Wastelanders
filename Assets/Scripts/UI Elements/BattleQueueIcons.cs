@@ -6,12 +6,23 @@ using UnityEngine;
 public class BattleQueueIcons : DisplayableClass
 {
     [SerializeField] SpriteRenderer targetRenderer;
+    private SpriteRenderer iconRenderer;
 
+
+    private int FadeSortingOrder => CombatFadeScreenHandler.Instance.FADE_SORTING_ORDER;
+    private string FadeSortingLayer => CombatFadeScreenHandler.Instance.FADE_SORTING_LAYER;
+
+    private void Awake()
+    {
+        iconRenderer = GetComponent<SpriteRenderer>();
+    }
 
     public void Start()
     {
-        GetComponent<SpriteRenderer>().sortingOrder = CombatManager.Instance.FADE_SORTING_ORDER + 4;
-        targetRenderer.sortingOrder = CombatManager.Instance.FADE_SORTING_ORDER + 5;
+        iconRenderer.sortingOrder = FadeSortingOrder + 4;
+        iconRenderer.sortingLayerName = FadeSortingLayer;
+        targetRenderer.sortingOrder = FadeSortingOrder + 5;
+        targetRenderer.sortingLayerName = FadeSortingLayer;
     }
     public void OnMouseDown()
     {

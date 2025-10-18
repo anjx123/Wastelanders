@@ -1,4 +1,5 @@
 using LevelSelectInformation;
+using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using Systems.Persistence;
@@ -46,7 +47,7 @@ public class GameStateManager : PersistentSingleton<GameStateManager>, IBind<Gam
     public void Restart()
     {
         Scene activeScene = SceneManager.GetActiveScene();
-        SceneManager.LoadScene(activeScene.name);
+        LoadScene(activeScene.name);
     }
 
     public void Bind(GameStateData bindedData)
@@ -55,10 +56,19 @@ public class GameStateManager : PersistentSingleton<GameStateManager>, IBind<Gam
         this.Data.Id = bindedData.Id;
     }
 
-    public void LoadScene(string scene) 
+    public void LoadScene(string scene)
     {
-        SceneManager.LoadScene(scene);
+        StartCoroutine(FadeAndLoadScene(scene));
+    }
+
+    private IEnumerator FadeAndLoadScene(string scene)
+    {
+        yield return StartCoroutine(UIFadeScreenManager.Instance.FadeInDarkScreen(0.6f));
+        yield return new WaitForSeconds(0.2f);
         SaveLoadSystem.Instance.SaveGame();
+        SceneManager.LoadScene(scene);
+        yield return new WaitForSeconds(0.2f);
+        yield return StartCoroutine(UIFadeScreenManager.Instance.FadeInLightScreen(0.6f));
     }
 
     public const string SORTING_LAYER_TOP = "Top";
