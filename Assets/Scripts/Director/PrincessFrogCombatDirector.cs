@@ -10,7 +10,6 @@ namespace Director
     {
         [SerializeField] private GameObject entityContainer;
 
-        private BattleIntro battleIntro;
         [SerializeField] private DialogueWrapper gameOverDialogue; // sucks...
 
         private void Start()
@@ -30,13 +29,12 @@ namespace Director
             UIFadeScreenManager.Instance.SetDarkScreen();
             CombatManager.PlayersWinEvent += PlayersWin;
             CombatManager.EnemiesWinEvent += EnemiesWin;
-            battleIntro = BattleIntro.Build();
 
             yield return new WaitForEndOfFrame(); // Necessary for associated initialization code to run (to assign teams)
 
             CombatManager.Instance.BeginCombat();
             yield return StartCoroutine(UIFadeScreenManager.Instance.FadeInLightScreen(1.5f));
-            battleIntro.PlayAnimation(Get<ClashIntro>());
+            new BattleIntroEvent(Get<ClashIntro>()).Invoke();
             yield return new WaitUntil(() => CombatManager.Instance.GameState == GameState.GAME_WIN);
             AudioManager.Instance.FadeOutCurrentBackgroundTrack(2f);
             BountyManager.Instance.NotifyWin();

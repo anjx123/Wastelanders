@@ -1,4 +1,5 @@
 public interface IEvent { }
+
 public static class EventExtensions
 {
     // Allows you to just call an event via .Invoke() instead of typing out the entire event bus.

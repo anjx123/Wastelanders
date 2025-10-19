@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EventHandler<TEvent> : MonoBehaviour where TEvent : IEvent
+public abstract class EventHandler<TEvent> : MonoBehaviour where TEvent : IEvent
 {
     private readonly List<Action<TEvent>> subscribedActions = new();
 

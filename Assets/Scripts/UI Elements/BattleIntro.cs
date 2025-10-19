@@ -1,8 +1,5 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UI;
 
 
 public class BattleIntro : MonoBehaviour
@@ -12,19 +9,24 @@ public class BattleIntro : MonoBehaviour
     [SerializeField] private Animator backgroundAnimator;
     private const string backgroundAnimation = "BackgroundIntro";
 
-    public static BattleIntro Build()
+    private void Awake()
     {
-        BattleIntro battleIntro = SceneInitializer.Instance.InstantiatePrefab(SceneInitializer.Instance.InitializablePrefabs.battleIntro);
-        battleIntro.canvas.sortingOrder = UISortOrder.CombatIntro.GetOrder();
-        return battleIntro;
+        canvas.sortingOrder = UISortOrder.CombatIntro.GetOrder();
+        this.AddComponent<BattleIntroEventHandler>()
+            .Subscribe(PlayAnimation);
     }
 
-    public virtual void PlayAnimation(BattleIntroEnum animationEnum)
+    private void PlayAnimation(BattleIntroEvent animationEvent)
     {
-        animator.SetTrigger(animationEnum.animationName);
+        animator.SetTrigger(animationEvent.AnimationEnum.animationName);
         backgroundAnimator.SetTrigger(backgroundAnimation);
     }
+
+    private class BattleIntroEventHandler : EventHandler<BattleIntroEvent> { }
 }
+
+public record BattleIntroEvent(BattleIntroEnum AnimationEnum) : IEvent;
+
 
 public abstract class BattleIntroEnum : Enum<BattleIntroEnum>
 {
