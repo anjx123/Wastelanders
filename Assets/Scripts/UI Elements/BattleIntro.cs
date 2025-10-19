@@ -18,7 +18,7 @@ public class BattleIntro : MonoBehaviour
 
     private void PlayAnimation(BattleIntroEvent animationEvent)
     {
-        animator.SetTrigger(animationEvent.AnimationEnum.animationName);
+        animator.SetTrigger(animationEvent.AnimationEnum.AnimationName);
         backgroundAnimator.SetTrigger(backgroundAnimation);
     }
 
@@ -30,16 +30,16 @@ public record BattleIntroEvent(BattleIntroEnum AnimationEnum) : IEvent;
 
 public abstract class BattleIntroEnum : Enum<BattleIntroEnum>
 {
-    public abstract string animationName { get; }
+    public abstract string AnimationName { get; }
 
     public class ClashIntro : BattleIntroEnum
     {
-        public override string animationName => "ClashIntro";
+        public override string AnimationName => "ClashIntro";
     }
 
     public class TutorialIntro : BattleIntroEnum
     {
-       public override string animationName => "TutorialIntro";
+       public override string AnimationName => "TutorialIntro";
     }
 
     public static BattleIntroEnum Get<T>() where T : BattleIntroEnum => ParseFromType(typeof(T));
