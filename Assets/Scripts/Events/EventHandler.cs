@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Class that manages the lifecycle of Static Events, you don't need to explicitly call unsubscribe if you don't need to.
 public abstract class EventHandler<TEvent> : MonoBehaviour where TEvent : IEvent
 {
     private readonly List<Action<TEvent>> subscribedActions = new();
