@@ -1,10 +1,13 @@
 // SceneInitializer.cs (Upgraded)
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using UI_Toolkit;
+using Unity.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using System;
-using UI_Toolkit;
+using static UnityEditor.Progress;
 
 #nullable enable
 public class SceneInitializer : MonoBehaviour
@@ -51,10 +54,43 @@ public class SceneInitializer : MonoBehaviour
         newManagerInstance.name = prefab.name;
         return newManagerInstance;
     }
+
+    private CombatManager combatManager;
+    private CombatManager audioManager;
+
+    public void TestListen()
+    {
+        this.AddComponent<DepedencyHandler>().Subscribe(Handler);
+    }
+
+    private void TestSend()
+    {
+        new ServiceLocatorInterfacer()
+            .GetDependency(out combatManager)
+            .GetDependency(out audioManager);
+    }
+
+
+    private void Handler(GetDepedency dependency)
+    {
+        dependency.command.HandleLocator(InitializablePrefabs);
+    }
+    private class DepedencyHandler : EventHandler<GetDepedency> { }
+}
+
+// If you want a dependency from the 
+public class ServiceLocatorInterfacer
+{
+    public ServiceLocatorInterfacer GetDependency<T>(out T dependency)
+    {
+        dependency = GetterCommand<T>.InvokeGet();
+        return this;
+    }
+
 }
 
 [Serializable]
-public class SceneInitializerPrefabs
+public class SceneInitializerPrefabs: DependencyProvider
 {
     public AudioManager audioManager = null!;
     public BattleIntro battleIntro = null!;
@@ -66,4 +102,42 @@ public class SceneInitializerPrefabs
     public CombatFadeScreenHandler combatFadeScreenManager = null!;
     public PopUpNotificationManager popupManager = null!;
     public GameOver gameOver = null!;
+
+    private readonly Dictionary<Type, object> dictionary = new();
+
+    public T Get<T>(Type type) => (T) dictionary[type];
+
+    public void Register<T>(T toRegister) => dictionary[typeof(T)] = toRegister;
+
 }
+
+
+public record GetDepedency(IDependencyCommand command): IEvent;
+
+public interface DependencyProvider
+{
+    public T Get<T>(Type type);
+    public void Register<T>(T item);
+
+}
+public interface IDependencyCommand
+{
+    public void HandleLocator(DependencyProvider prefabs);
+
+}
+
+public record GetterCommand<T>(Action<T> SetItem): IDependencyCommand
+{
+    public void HandleLocator(DependencyProvider prefabs)
+    {
+        SetItem(prefabs.Get<T>(typeof(T)));
+    }
+
+    public static T InvokeGet()
+    {
+        T item = default!;
+        new GetDepedency(new GetterCommand<T>((gotten) => item = gotten)).Invoke();
+        return item;
+    }
+}
+
