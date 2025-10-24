@@ -56,11 +56,15 @@ public class SceneInitializer : MonoBehaviour
     }
 
     private CombatManager combatManager;
-    private CombatManager audioManager;
+    private AudioManager audioManager;
 
     public void TestListen()
     {
         this.AddComponent<DepedencyHandler>().Subscribe(Handler);
+    }
+    private void Handler(GetDepedency dependency)
+    {
+        dependency.command.HandleLocator(InitializablePrefabs);
     }
 
     private void TestSend()
@@ -70,24 +74,19 @@ public class SceneInitializer : MonoBehaviour
             .GetDependency(out audioManager);
     }
 
-
-    private void Handler(GetDepedency dependency)
+    // If you want a dependency from the 
+    public class ServiceLocatorInterfacer
     {
-        dependency.command.HandleLocator(InitializablePrefabs);
+        public ServiceLocatorInterfacer GetDependency<T>(out T dependency)
+        {
+            dependency = GetterCommand<T>.InvokeGet();
+            return this;
+        }
+
     }
     private class DepedencyHandler : EventHandler<GetDepedency> { }
 }
 
-// If you want a dependency from the 
-public class ServiceLocatorInterfacer
-{
-    public ServiceLocatorInterfacer GetDependency<T>(out T dependency)
-    {
-        dependency = GetterCommand<T>.InvokeGet();
-        return this;
-    }
-
-}
 
 [Serializable]
 public class SceneInitializerPrefabs: DependencyProvider
