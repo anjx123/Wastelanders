@@ -55,8 +55,6 @@ public class SceneInitializer : MonoBehaviour
         return newManagerInstance;
     }
 
-    private CombatManager combatManager;
-    private AudioManager audioManager;
 
     public void TestListen()
     {
@@ -67,11 +65,16 @@ public class SceneInitializer : MonoBehaviour
         dependency.command.HandleLocator(InitializablePrefabs);
     }
 
+
+    private CombatManager combatManager;
+    private AudioManager audioManager;
+    private DialogueManager dialogueManager;
     private void TestSend()
     {
         new ServiceLocatorInterfacer()
             .GetDependency(out combatManager)
-            .GetDependency(out audioManager);
+            .GetDependency(out audioManager)
+            .GetDependency(out dialogueManager);
     }
 
     // If you want a dependency from the 
@@ -96,7 +99,7 @@ public class SceneInitializerPrefabs: DependencyProvider
     public PauseMenuV2 pauseMenuV2 = null!;
     public HUDV2 hudV2 = null!;
     public DialogueManager dialogueManager = null!;
-    public DeckSelectV2 deckSelectV2 = null!;
+    public DeckSelectV2 deckSelectV2 = null!;   
     public UIFadeScreenManager uiFadeScreenManager = null!;
     public CombatFadeScreenHandler combatFadeScreenManager = null!;
     public PopUpNotificationManager popupManager = null!;

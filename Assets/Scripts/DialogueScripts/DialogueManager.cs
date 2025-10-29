@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UI_Toolkit;
 using UnityEngine;
 
@@ -197,5 +198,110 @@ public class DialogueManager : MonoBehaviour
             AudioManager.Instance.PlaySFX(PAGE_FLIP_SOUND_EFFECT);
             wasSkipping = false;
         }
+    }
+}
+
+public class ParkingLot : IParkingLotFor<Rivian>, IParkingLotFor<Tesla>, IToyotaInformation
+{
+    public List<Car> Cars { get; }
+    public int Money { get; set; }
+    public int SmallSpots { get; set; }
+    public int BigSpots { get; }
+    public bool WeekDay { get; }
+
+    public void Visit(Rivian rivian)
+    {
+        SmallSpots += 1;
+        Money += 10;
+        Cars.Add(rivian);
+    }
+
+    public void Visit(Tesla tesla)
+    {
+        SmallSpots += 5;
+        Money += WeekDay ? 20 : 30;
+        Cars.Add(tesla);
+    }
+    public new void Visit(Toyota toyota)
+    {
+        if (BigSpots < 10)
+        {
+            SmallSpots += 5;
+            Money += WeekDay ? 20 : 30;
+            Cars.Add(toyota);
+        }
+    }
+
+    public void Accept(Car car) 
+    {
+        car.Handle(this);
+    }
+
+    void Main()
+    {
+        List<Car> cars = new();
+
+        cars.OfType<IVisitor<ParkingLot>>()
+            .ToList()
+            .ForEach(v => v.Visit(this));
+
+        List<IVisitor<ParkingLot>> visiting = new() { new Tesla(),  new Rivian(), new Toyota() };
+        visiting.ForEach(visitor => visitor.Visit(this));
+    }
+}
+
+public interface IParkingLotFor<T> where T: Car
+{
+    void Visit(T car);
+}
+
+public interface IToyotaInformation : IParkingLotFor<Toyota>
+{
+    bool WeekDay { get; }
+
+}
+
+public interface IVisitor<in T> 
+{
+    void Visit(T visitee);
+}
+
+public abstract class Car
+{
+    public void Handle(ParkingLot parkingLot)
+    {
+
+    } 
+}
+
+public class Tesla : Car, IVisitor<IParkingLotFor<Tesla>>
+{
+    public void Visit(IParkingLotFor<Tesla> vistee)
+    {
+        vistee.Visit(this);
+    }
+}
+
+public class Rivian : Car, IVisitor<IParkingLotFor<Rivian>>
+{
+    public void Visit(IParkingLotFor<Rivian> vistee)
+    {
+        vistee.Visit(this);
+    }
+}
+
+public class Toyota : Car, IVisitor<IToyotaInformation>
+{
+    public void Visit(IToyotaInformation vistee)
+    {
+        Debug.Log($"I can grab this information {vistee.WeekDay}");
+        vistee.Visit(this);
+    }
+}
+public class Honda : Car, IVisitor<IParkingLotFor<Honda>>
+{
+    public void Visit(IParkingLotFor<Honda> vistee)
+    {
+        vistee.Visit(this);
     }
 }
