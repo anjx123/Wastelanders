@@ -25,7 +25,7 @@ public abstract class EventHandler<TEvent> : MonoBehaviour where TEvent : IEvent
         return this;
     }
 
-    public EventHandler<TEvent> UnSubscribe(Action<TEvent> action)
+    public EventHandler<TEvent> Unsubscribe(Action<TEvent> action)
     {
         if (subscribedActions.Remove(action))
             EventBus.Unregister(action);
