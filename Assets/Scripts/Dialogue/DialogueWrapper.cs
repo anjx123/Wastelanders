@@ -8,4 +8,9 @@ public class DialogueWrapper : ScriptableObject
     [SerializeField] private List<DialogueText> dialogue;
 
     public List<DialogueText> Dialogue {  get { return new List<DialogueText>(dialogue); } }
+
+    public DialogueWrapper(List<DialogueText> dialogue)
+    {
+        this.dialogue = dialogue;
+    }
 }

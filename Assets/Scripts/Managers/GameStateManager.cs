@@ -1,4 +1,5 @@
 using LevelSelectInformation;
+using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using Systems.Persistence;
@@ -8,7 +9,7 @@ using UnityEngine.SceneManagement;
 //Singleton Class that keeps track of values representing general Game states
 public class GameStateManager : PersistentSingleton<GameStateManager>, IBind<GameStateData>
 {
-    public static readonly bool IS_DEVELOPMENT = true;
+    public static readonly bool IS_DEVELOPMENT = false;
 
     //Fields for persistence
     [field: SerializeField] public SerializableGuid Id { get; set; } = SerializableGuid.NewGuid();
@@ -32,13 +33,6 @@ public class GameStateManager : PersistentSingleton<GameStateManager>, IBind<Gam
         }
     }
 
-    /*
-     * Temporary flag to be set and read by end of combat scene, when the player restarts and should skip dialogue
-     * Is set by GameOver prefab upon restart, and read by dialogue classes
-     * Dialogue classes should reset this value when read, such that it does not cause unexpected behaviour in upcoming scenes
-     */
-    public bool JumpToCombat = true;
-
     public void UpdateLevelProgress(ILevelSelectInformation level)
     {
         CurrentLevelProgress = Mathf.Max(CurrentLevelProgress, level.LevelID);
@@ -53,7 +47,7 @@ public class GameStateManager : PersistentSingleton<GameStateManager>, IBind<Gam
     public void Restart()
     {
         Scene activeScene = SceneManager.GetActiveScene();
-        SceneManager.LoadScene(activeScene.name);
+        LoadScene(activeScene.name);
     }
 
     public void Bind(GameStateData bindedData)
@@ -62,14 +56,36 @@ public class GameStateManager : PersistentSingleton<GameStateManager>, IBind<Gam
         this.Data.Id = bindedData.Id;
     }
 
-    public void LoadScene(string scene) 
+    public void LoadScene(string scene)
     {
-        SceneManager.LoadScene(scene);
+        StartCoroutine(FadeAndLoadScene(scene));
+    }
+
+    private IEnumerator FadeAndLoadScene(string scene)
+    {
+        yield return StartCoroutine(UIFadeScreenManager.Instance.FadeInDarkScreen(0.6f));
+        yield return new WaitForSeconds(0.2f);
         SaveLoadSystem.Instance.SaveGame();
+        SceneManager.LoadScene(scene);
+        yield return new WaitForSeconds(0.2f);
+        yield return StartCoroutine(UIFadeScreenManager.Instance.FadeInLightScreen(0.6f));
     }
 
     public const string SORTING_LAYER_TOP = "Top";
 
+    /*
+     * TEMPORARY FLAGS
+     */
+
+    /*
+     * Temporary flag to be set and read by end of combat scene, when the player restarts and should skip dialogue
+     * Is set by GameOver prefab upon restart, and read by dialogue classes
+     * Dialogue classes should reset this value when read, such that it does not cause unexpected behaviour in upcoming scenes
+     */
+    public bool JumpToCombat = false;
+
+    // Check for level select whether player finished the game first time to display bounty dialogue
+    public bool FirstTimeFinished = false;
 }
 
 

@@ -15,13 +15,17 @@ public class CombatCardUI : DisplayableClass
     [SerializeField] GameObject oneTimeBuffObj;
     [SerializeField] GameObject buffFlipPreserver;
 #nullable enable
-    private void OnMouseOver()
+    private int FadeSortingOrder => CombatFadeScreenHandler.Instance.FADE_SORTING_ORDER;
+    private string FadeSortingLayer => CombatFadeScreenHandler.Instance.FADE_SORTING_LAYER;
+
+    public override void OnMouseEnter()
     {
         // Increase the size of the Combat UI to indicate it's clickable
         if (CombatManager.Instance.CanHighlight())
         {
             transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
             HighlightTarget();
+            ShowCard();
         }
     }
 
@@ -30,16 +34,9 @@ public class CombatCardUI : DisplayableClass
         // Reset the size when the mouse is no longer over the Combat UI
         transform.localScale = Vector3.one;
         DeHighlightTarget();
+        HideCard();
     }
 
-    public override void OnMouseDown()
-    {
-        // If the card is not currently displaying, show it
-        if (CombatManager.Instance.CanHighlight())
-        {
-            ShowCard();
-        }
-    }
     void OnDestroy()
     {
         if (ActionClass != null)
@@ -49,8 +46,14 @@ public class CombatCardUI : DisplayableClass
         }
     }
 
+
+
     private void OnEnable()
     {
+        GetComponent<SpriteRenderer>().sortingLayerName = FadeSortingLayer;
+        targetRenderer.sortingLayerName = FadeSortingLayer;
+
+
         rangeText.GetComponent<MeshRenderer>().sortingLayerName = targetRenderer.sortingLayerName;
         rangeText.GetComponent<MeshRenderer>().sortingOrder = targetRenderer.sortingOrder;
 
@@ -118,27 +121,26 @@ public class CombatCardUI : DisplayableClass
 
     public void Emphasize()
     {
+        GetComponent<SpriteRenderer>().sortingOrder = FadeSortingOrder + 1;
 
-        GetComponent<SpriteRenderer>().sortingOrder = CombatManager.Instance.FADE_SORTING_ORDER + 1;
+        rangeText.GetComponent<MeshRenderer>().sortingOrder = FadeSortingOrder + 2;
+        targetRenderer.GetComponent<SpriteRenderer>().sortingOrder = FadeSortingOrder + 2;
 
-        rangeText.GetComponent<MeshRenderer>().sortingOrder = CombatManager.Instance.FADE_SORTING_ORDER + 2;
-        targetRenderer.GetComponent<SpriteRenderer>().sortingOrder = CombatManager.Instance.FADE_SORTING_ORDER + 2;
-
-        oneTimeUseBuff.sortingOrder = CombatManager.Instance.FADE_SORTING_ORDER + 2;
-        buffIncreaseText.GetComponent<MeshRenderer>().sortingOrder = CombatManager.Instance.FADE_SORTING_ORDER + 2;
+        oneTimeUseBuff.sortingOrder = FadeSortingOrder + 2;
+        buffIncreaseText.GetComponent<MeshRenderer>().sortingOrder = FadeSortingOrder + 2;
 
     }
 
     public void DeEmphasize()
     {
-        GetComponent<SpriteRenderer>().sortingOrder = CombatManager.Instance.FADE_SORTING_ORDER - 2;
+        GetComponent<SpriteRenderer>().sortingOrder = FadeSortingOrder - 2;
 
-        rangeText.GetComponent<MeshRenderer>().sortingOrder = CombatManager.Instance.FADE_SORTING_ORDER - 1;
-        targetRenderer.GetComponent<SpriteRenderer>().sortingOrder = CombatManager.Instance.FADE_SORTING_ORDER - 1;
+        rangeText.GetComponent<MeshRenderer>().sortingOrder = FadeSortingOrder - 1;
+        targetRenderer.GetComponent<SpriteRenderer>().sortingOrder = FadeSortingOrder - 1;
 
 
-        oneTimeUseBuff.sortingOrder = CombatManager.Instance.FADE_SORTING_ORDER - 1;
-        buffIncreaseText.GetComponent<MeshRenderer>().sortingOrder = CombatManager.Instance.FADE_SORTING_ORDER - 1;
+        oneTimeUseBuff.sortingOrder = FadeSortingOrder - 1;
+        buffIncreaseText.GetComponent<MeshRenderer>().sortingOrder = FadeSortingOrder - 1;
     }
 
     private void SetTargetIcon(ActionClass actionClass)

@@ -35,6 +35,12 @@ public class SceneInitializer : MonoBehaviour
         
         foreach (var managerPrefab in requiredManagers)
         {
+            // Check if a persistent instance of this manager already exists.
+            if (FindObjectOfType(managerPrefab.GetType()) != null)
+            {
+                Debug.LogWarning($"{managerPrefab.GetType()} already exists!");
+                continue;
+            }
             InstantiatePrefab(managerPrefab);
         }
     }
@@ -54,4 +60,10 @@ public class SceneInitializerPrefabs
     public BattleIntro battleIntro = null!;
     public PauseMenuV2 pauseMenuV2 = null!;
     public HUDV2 hudV2 = null!;
+    public DialogueManager dialogueManager = null!;
+    public DeckSelectV2 deckSelectV2 = null!;
+    public UIFadeScreenManager uiFadeScreenManager = null!;
+    public CombatFadeScreenHandler combatFadeScreenManager = null!;
+    public PopUpNotificationManager popupManager = null!;
+    public GameOver gameOver = null!;
 }

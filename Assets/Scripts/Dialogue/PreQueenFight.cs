@@ -61,9 +61,8 @@ public class PreQueenFight : DialogueClasses
     [SerializeField] private List<Transform> queenGuardBeetleTransforms;
 
 
-    [SerializeField] GameOver gameOver;
     [SerializeField] private bool jumpToCombat;
-    [SerializeField] private BattleIntro battleIntro;
+    [SerializeField] private SpriteFadeHandler spriteFadeHandler;
     private DefaultSceneBuilder defaultSceneBuilder;
 
 
@@ -103,7 +102,6 @@ public class PreQueenFight : DialogueClasses
     {
         CombatManager.Instance.GameState = GameState.OUT_OF_COMBAT;
         CombatManager.Instance.SetDarkScreen();
-        battleIntro = BattleIntro.Build(Camera.main);
 
         yield return new WaitForSeconds(0.5f);
         ives.OutOfCombat();
@@ -114,7 +112,7 @@ public class PreQueenFight : DialogueClasses
         CombatManager.Instance.SetEnemiesPassive(new List<EnemyClass>(bigCrystals));
 
         foreach (Crystals c in crystals)
-        {
+        {   
             c.OutOfCombat();
         }
         foreach (Beetle b in campBeetles)
@@ -524,13 +522,14 @@ public class PreQueenFight : DialogueClasses
             }
 
             CombatManager.Instance.BeginCombat();
-            battleIntro.PlayAnimation(Get<ClashIntro>());
+            new BattleIntroEvent(Get<ClashIntro>()).Invoke();
             BeginQueenCombat();
             yield return new WaitUntil(() => CombatManager.Instance.GameState == GameState.GAME_WIN);
             AudioManager.Instance.FadeOutCurrentBackgroundTrack(2f);
 
+            GameStateManager.Instance.FirstTimeFinished = GameStateManager.Instance.CurrentLevelProgress < StageInformation.PRINCESS_FROG_FIGHT.LevelID;
             GameStateManager.Instance.UpdateLevelProgress(StageInformation.PRINCESS_FROG_FIGHT);
-            
+
             yield return new WaitForSeconds(1.5f);
             DialogueManager.Instance.MoveBoxToBottom();
 
@@ -577,18 +576,12 @@ public class PreQueenFight : DialogueClasses
     {
         CombatManager.EnemiesWinEvent -= EnemiesWin;
         CombatManager.PlayersWinEvent -= PlayersWin;
-        StartCoroutine(GameLose());
+        GameLose();
         CombatManager.Instance.GameState = GameState.GAME_LOSE;
     }
-    private IEnumerator GameLose()
+    private void GameLose()
     {
-        yield return StartCoroutine(CombatManager.Instance.FadeInDarkScreen(2f));
-
-        //Set Jump into combat to be true
-        gameOver.gameObject.SetActive(true);
-        gameOver.FadeIn();
-
-        yield return StartCoroutine(DialogueManager.Instance.StartDialogue(gameLoseDialogue.Dialogue));
+        GameOver.Instance.FadeInWithDialogue(gameLoseDialogue);
     }
     //------helpers------
 

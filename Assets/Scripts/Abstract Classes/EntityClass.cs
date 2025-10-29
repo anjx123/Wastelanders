@@ -66,6 +66,9 @@ public abstract class EntityClass : SelectClass
     public static event EntityDelegate? OnEntityClicked;
     public event EntityDelegate? BuffsUpdatedEvent;
 
+    private string FadeSortingLayer => CombatFadeScreenHandler.Instance.FADE_SORTING_LAYER;
+    private int FadeSortingOrder => CombatFadeScreenHandler.Instance.FADE_SORTING_ORDER;
+
     public virtual void Start()
     {
         initialPosition = myTransform.position;
@@ -73,7 +76,7 @@ public abstract class EntityClass : SelectClass
         DeEmphasize();
         DisableDice();
         AssignTeam();
-        GetComponent<SpriteRenderer>().sortingLayerName = CombatManager.Instance.FADE_SORTING_LAYER;
+        GetComponent<SpriteRenderer>().sortingLayerName = FadeSortingLayer;
         DeathHandler = Die;
 
         OnEntitySpawn?.Invoke(this);
@@ -303,9 +306,9 @@ public abstract class EntityClass : SelectClass
         if ((Vector2)diffInLocation == Vector2.zero) yield break;
         UpdateFacing(-diffInLocation, null);
 
-        if (HasAnimationParameter("IsStaggered"))
+        if (HasAnimationParameter(STAGGERED_ANIMATION_NAME))
         {
-            animator.SetBool("IsStaggered", true);
+            animator.SetBool(STAGGERED_ANIMATION_NAME, true);
         }
 
         float duration = animator.GetCurrentAnimatorStateInfo(0).length;
@@ -318,9 +321,9 @@ public abstract class EntityClass : SelectClass
             yield return null;
         }
 
-        if (HasAnimationParameter("IsStaggered"))
+        if (HasAnimationParameter(STAGGERED_ANIMATION_NAME))
         {
-            animator.SetBool("IsStaggered", false);
+            animator.SetBool(STAGGERED_ANIMATION_NAME, false);
         }
 
     }
@@ -338,9 +341,9 @@ public abstract class EntityClass : SelectClass
 
     public void SetUnstaggered()
     {
-        if (HasAnimationParameter("IsStaggered"))
+        if (HasAnimationParameter(STAGGERED_ANIMATION_NAME))
         {
-            animator.SetBool("IsStaggered", false);
+            animator.SetBool(STAGGERED_ANIMATION_NAME, false);
         }
     }
 
@@ -543,14 +546,15 @@ public abstract class EntityClass : SelectClass
     {
         combatInfo.DeactivateCombatSprite(actionClass);
     }
+
     //Increases this Entity Class' sorting layer (negative number is higher up)
     public void Emphasize()
     {
         SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
         Vector3 largeTransform = transform.position;
-        largeTransform.z = CombatManager.Instance.FADE_SORTING_ORDER - 3 + ZOffset(spriteRenderer.bounds.min.y);
+        largeTransform.z = FadeSortingOrder - 3 + ZOffset(spriteRenderer.bounds.min.y);
         transform.position = largeTransform;
-        spriteRenderer.sortingOrder = CombatManager.Instance.FADE_SORTING_ORDER + 1;
+        spriteRenderer.sortingOrder = FadeSortingOrder + 1;
         combatInfo.Emphasize();
     }
 
@@ -559,9 +563,9 @@ public abstract class EntityClass : SelectClass
     {
         SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
         Vector3 largeTransform = transform.position;
-        largeTransform.z = CombatManager.Instance.FADE_SORTING_ORDER - 1 + ZOffset(spriteRenderer.bounds.min.y);
+        largeTransform.z = FadeSortingOrder - 1 + ZOffset(spriteRenderer.bounds.min.y);
         transform.position = largeTransform;
-        spriteRenderer.sortingOrder = CombatManager.Instance.FADE_SORTING_ORDER - 1;
+        spriteRenderer.sortingOrder = FadeSortingOrder - 3;
         combatInfo.DeEmphasize();
     }
 

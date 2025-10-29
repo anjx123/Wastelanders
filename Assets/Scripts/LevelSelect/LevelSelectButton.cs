@@ -4,12 +4,14 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 // Represents a level select component that the player can click on to redirect them to a level 
-public class LevelSelectButton : MonoBehaviour
+public class LevelSelectButton : MonoBehaviour, IPointerClickHandler
 {
     [field: SerializeField] public Level Level { get; set; }
     [SerializeField] private TMP_Text _textMeshPro;
+    [SerializeField] private string title;
     [SerializeField] private Button button;
     [SerializeField] private Outline outline;
     [SerializeField] private Vector2 defaultOutline;
@@ -20,13 +22,24 @@ public class LevelSelectButton : MonoBehaviour
     [SerializeField] private Color hoverTextColor;
     [SerializeField] private GameObject hover;
     [SerializeField] private GameObject lockedIndicator;
-#nullable enable
+    [SerializeField] private float lockAnimationDuration = 0.5f;
+
+    #nullable enable
     private ILevelSelectInformation? LevelInformation { get => ILevelSelectInformation.LEVEL_INFORMATION.GetValueOrDefault(Level); }
 
-    public void Start()
+    public void Awake()
     {
         Initialize();
     }
+    
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        if (!button.enabled)
+        {
+            PopUpNotificationManager.Instance.DisplayWarning(PopupType.ContentLocked);
+        }
+    }
+
     public void OpenScene()
     {
         LevelInformation?.UponSelectedEvent();
@@ -37,7 +50,7 @@ public class LevelSelectButton : MonoBehaviour
         if (LevelInformation?.LevelID > GameStateManager.Instance.CurrentLevelProgress) Lock();
     }
 
-    private void Lock()
+    public void Lock()
     {
         _textMeshPro.text = "LOCKED";
         button.enabled = false;
@@ -45,6 +58,42 @@ public class LevelSelectButton : MonoBehaviour
         // Some buttons will have a locked indicator, while other buttons will disappear when locked
         // Used for hiding the bounty button when prerequiste levels aren't completed
         lockedIndicator.SetActive(!(lockedIndicator == gameObject));
+    }
+
+    public void Unlock(bool animate = false) {
+        _textMeshPro.text = title;
+        button.enabled = true;
+        bool selfIsLock = lockedIndicator == gameObject;
+        if (!animate) {
+            lockedIndicator.SetActive(selfIsLock);
+            return;
+        }
+        
+        StartCoroutine(FadeLockIndicator(selfIsLock));
+    }
+
+    private IEnumerator FadeLockIndicator(bool show)
+    {
+        CanvasGroup canvasGroup = lockedIndicator.GetComponent<CanvasGroup>();
+
+        float startAlpha = show ? 0f : 1f;
+        float endAlpha = show ? 1f : 0f;
+
+        if (show)
+            lockedIndicator.SetActive(true);
+
+        float elapsed = 0f;
+        while (elapsed < lockAnimationDuration)
+        {
+            elapsed += Time.deltaTime;
+            float t = Mathf.Clamp01(elapsed / lockAnimationDuration);
+            canvasGroup.alpha = Mathf.Lerp(startAlpha, endAlpha, t);
+            yield return null;
+        }
+        canvasGroup.alpha = endAlpha;
+
+        if (!show)
+            lockedIndicator.SetActive(false);
     }
 
     public void SetHover(bool state) {

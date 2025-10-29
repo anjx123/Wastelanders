@@ -3,17 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
-using static UnityEngine.EventSystems.EventTrigger;
-using System.Security.Cryptography;
 using Systems.Persistence;
 using WeaponDeckSerialization;
-using System;
 using UI_Toolkit;
-using static EntityClass;
 
 public class CombatManager : MonoBehaviour
 {
-    //Getter for the Singleton is found here
     public static CombatManager Instance { get; private set; }
 
     private GameState gameState;
@@ -29,12 +24,9 @@ public class CombatManager : MonoBehaviour
     public GameObject handContainer;
     public GameObject battleQueueParent;
     
-    [SerializeField]
-    private SpriteRenderer fadeScreen;
-    private FadeScreenHandler fadeScreenHandler;
-
     [SerializeField] private PlayerDatabase playerDatabase;
     [SerializeField] private CardDatabase cardDatabase;
+
 
     public List<InstantiableActionClassInfo> GetDeck(PlayerDatabase.PlayerName playerName)
     {
@@ -49,37 +41,8 @@ public class CombatManager : MonoBehaviour
     public delegate void EntitiesWinLoseDelegate();
     public static event EntitiesWinLoseDelegate? PlayersWinEvent;
     public static event EntitiesWinLoseDelegate? EnemiesWinEvent;
-    public string FADE_SORTING_LAYER
-    {
-        get
-        {
-            return fadeScreen.sortingLayerName;
-        }
-    }
+    public int FADE_SORTING_ORDER => CombatFadeScreenHandler.Instance.FADE_SORTING_ORDER;
 
-    public int FADE_SORTING_LAYER_ID
-    {
-        get
-        {
-            return fadeScreen.sortingLayerID;
-        }
-    }
-
-    public int FADE_SORTING_ORDER
-    {
-        get
-        {
-            return fadeScreen.sortingOrder;
-        }
-    }
-
-    public float FADE_SCREEN_Z_VALUE
-    {
-        get
-        {
-            return fadeScreen.gameObject.transform.position.z;
-        }
-    }
 
     // Awake is called when the script instance is being loaded
     void Awake()
@@ -106,8 +69,6 @@ public class CombatManager : MonoBehaviour
     void Start()
     {
         GameState = GameState.GAME_START; //Put game start code in the performGameStart method.
-        fadeScreenHandler = gameObject.AddComponent<FadeScreenHandler>();
-        fadeScreenHandler.SetFadeScreen(fadeScreen);
         screenShakeHandler = gameObject.AddComponent<ScreenShakeHandler>();
         screenShakeHandler.DynamicCamera = dynamicCamera;
         ActionClass.CardStateChange += HandleCrosshairEnemies;
@@ -260,8 +221,6 @@ public class CombatManager : MonoBehaviour
     private void PerformLose()
     {
         StartCoroutine(FadeCombatBackground(false));
-        StartCoroutine(FadeInDarkScreen(GameOver.FADE_IN_TIME));
-        Debug.LogWarning("All Players are dead, You Lose...");
         baseCamera.Priority = 1;
         dynamicCamera.Priority = 0;
         PerformOutOfCombat();
@@ -272,7 +231,6 @@ public class CombatManager : MonoBehaviour
     private void PerformWin()
     {
         StartCoroutine(FadeCombatBackground(false));
-        Debug.LogWarning("All enemies are dead, You Win!");
         baseCamera.Priority = 1;
         dynamicCamera.Priority = 0;
         // Save game after each win (including wiping out a wave) 
@@ -317,19 +275,20 @@ public class CombatManager : MonoBehaviour
         
     }
 
+    // Deprecated functions, please just open a new SpriteFadeHandler instead of borrowing the combat fade screen handler.
     public void SetDarkScreen()
     {
-        fadeScreen.color = new Color(fadeScreen.color.r, fadeScreen.color.g, fadeScreen.color.b, 1f);
+        CombatFadeScreenHandler.Instance.SetDarkScreen();
     }
 
     public IEnumerator FadeInLightScreen(float duration)
     {
-        yield return StartCoroutine(fadeScreenHandler.FadeInLightScreen(duration));
+        yield return StartCoroutine(CombatFadeScreenHandler.Instance.FadeInLightScreen(duration));
     }
 
     public IEnumerator FadeInDarkScreen(float duration)
     {
-        yield return StartCoroutine(fadeScreenHandler.FadeInDarkScreen(duration));
+        yield return StartCoroutine(CombatFadeScreenHandler.Instance.FadeInDarkScreen(duration));
     }
 
     private void PerformOutOfCombat()
@@ -395,9 +354,9 @@ public class CombatManager : MonoBehaviour
     {
         float duration = 1f;
         if (darkenScene) 
-            yield return StartCoroutine(fadeScreenHandler.FadeInAlpha(0.8f, duration));
+            yield return StartCoroutine(CombatFadeScreenHandler.Instance.FadeToAlpha(0.8f, duration));
         else
-            yield return StartCoroutine(fadeScreenHandler.FadeInLightScreen(duration));
+            yield return StartCoroutine(CombatFadeScreenHandler.Instance.FadeInLightScreen(duration));
     }
 
     private void CrosshairAllEnemies()

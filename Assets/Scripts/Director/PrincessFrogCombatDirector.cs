@@ -10,8 +10,6 @@ namespace Director
     {
         [SerializeField] private GameObject entityContainer;
 
-        private BattleIntro battleIntro;
-        [SerializeField] private GameOver gameOver;
         [SerializeField] private DialogueWrapper gameOverDialogue; // sucks...
 
         private void Start()
@@ -28,16 +26,15 @@ namespace Director
 
         private IEnumerator OnStart()
         {
-            CombatManager.Instance.SetDarkScreen();
+            UIFadeScreenManager.Instance.SetDarkScreen();
             CombatManager.PlayersWinEvent += PlayersWin;
             CombatManager.EnemiesWinEvent += EnemiesWin;
-            battleIntro = BattleIntro.Build(Camera.main);
 
             yield return new WaitForEndOfFrame(); // Necessary for associated initialization code to run (to assign teams)
 
             CombatManager.Instance.BeginCombat();
-            yield return StartCoroutine(CombatManager.Instance.FadeInLightScreen(1.5f));
-            battleIntro.PlayAnimation(Get<ClashIntro>());
+            yield return StartCoroutine(UIFadeScreenManager.Instance.FadeInLightScreen(1.5f));
+            new BattleIntroEvent(Get<ClashIntro>()).Invoke();
             yield return new WaitUntil(() => CombatManager.Instance.GameState == GameState.GAME_WIN);
             AudioManager.Instance.FadeOutCurrentBackgroundTrack(2f);
             BountyManager.Instance.NotifyWin();
@@ -58,16 +55,13 @@ namespace Director
         {
             CombatManager.EnemiesWinEvent -= EnemiesWin;
             CombatManager.PlayersWinEvent -= PlayersWin;
-            StartCoroutine(GameLose());
+            GameLose();
             CombatManager.Instance.GameState = GameState.GAME_LOSE;
         }
 
-        private IEnumerator GameLose()
+        private void GameLose()
         {
-            yield return StartCoroutine(CombatManager.Instance.FadeInDarkScreen(2f));
-            gameOver.gameObject.SetActive(true);
-            gameOver.FadeIn();
-            yield return StartCoroutine(DialogueManager.Instance.StartDialogue(gameOverDialogue.Dialogue));
+            GameOver.Instance.FadeInWithDialogue(gameOverDialogue);
         }
     }
 }

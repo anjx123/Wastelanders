@@ -95,7 +95,6 @@ namespace Systems.Persistence
         
         public void LoadCardEvolutionProgress()
         {
-            Debug.Log("Card evolution progress loading");
             ActionClass[] actions = FindObjectsByType<ActionClass>(FindObjectsSortMode.None);
 
             foreach (ActionClass actionClass in actions)

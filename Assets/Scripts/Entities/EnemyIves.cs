@@ -29,6 +29,9 @@ public class EnemyIves : EnemyClass
     public override IEnumerator Die()
     {
         BattleQueue.BattleQueueInstance.RemoveAllInstancesOfEntity(this);
+        DestroyDeck();
+        combatInfo.DeactivateCardIcon();
+
         if (HasAnimationParameter("IsStaggered"))
         {
             animator.SetBool("IsStaggered", true);

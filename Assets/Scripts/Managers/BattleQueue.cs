@@ -230,16 +230,15 @@ public class BattleQueue : MonoBehaviour
         //Order in declaration determines tiebreaker in the event that wrappers share similar speeds. Higher up means more priority
         private enum WrapperType
         {
-            Clashing,
-            Player,
+            Clashing_Or_Player, // Reworked so that clashes can occur AFTER player actions with the same speed should the player decide so. 
             Enemy 
         }
 
         private WrapperType GetWrapperType(ActionWrapper wrapper)
         {
-            if (!wrapper.IsClashing() && wrapper.HasPlayerAction()) return WrapperType.Player;
+            if (!wrapper.IsClashing() && wrapper.HasPlayerAction()) return WrapperType.Clashing_Or_Player;
             if (!wrapper.IsClashing() && wrapper.HasEnemyAction()) return WrapperType.Enemy;
-            return WrapperType.Clashing;
+            return WrapperType.Clashing_Or_Player;
         }
 
         // Returns the index in (@field array) that the (@param wrapper) should be inserted in based on its WrapperType

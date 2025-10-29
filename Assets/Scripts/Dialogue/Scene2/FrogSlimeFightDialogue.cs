@@ -32,8 +32,6 @@ public class FrogSlimeFightDialogue : DialogueClasses
     [SerializeField] private Transform slimeBattle;
     [SerializeField] private Transform slimeWalkIn;
 
-    [SerializeField] private GameOver gameOver;
-    [SerializeField] private BattleIntro battleIntro;
 
     [SerializeField] private Camera mainCamera;
     [SerializeField] private GameObject scoutBeetlePrefab;
@@ -101,7 +99,6 @@ public class FrogSlimeFightDialogue : DialogueClasses
     {
         CombatManager.Instance.GameState = GameState.OUT_OF_COMBAT;
         CombatManager.Instance.SetDarkScreen();
-        battleIntro = BattleIntro.Build(Camera.main);
         yield return new WaitForSeconds(0.8f);
 
         SetUpCombatStatus();
@@ -175,7 +172,7 @@ public class FrogSlimeFightDialogue : DialogueClasses
         }
 
         // start frog fight
-        battleIntro.PlayAnimation(Get<ClashIntro>());
+        new BattleIntroEvent(Get<ClashIntro>()).Invoke();
         treeOverlay.enabled = false;
         StartCoroutine(jackie.ResetPosition());
         StartCoroutine(frog2.ResetPosition());
@@ -402,18 +399,11 @@ public class FrogSlimeFightDialogue : DialogueClasses
     {
         CombatManager.EnemiesWinEvent -= EnemiesWin;
         CombatManager.PlayersWinEvent -= PlayersWin;
-        StartCoroutine(GameLose());
+        GameLose();
         CombatManager.Instance.GameState = GameState.GAME_LOSE;
     }
-    private IEnumerator GameLose()
+    private void GameLose()
     {
-        yield return StartCoroutine(CombatManager.Instance.FadeInDarkScreen(2f));
-
-        //Set Jump into combat to be true
-        ivesImage.gameObject.SetActive(false);
-        gameOver.gameObject.SetActive(true);
-        gameOver.FadeIn();
-
-        yield return StartCoroutine(DialogueManager.Instance.StartDialogue(gameLoseDialogue));
+        GameOver.Instance.FadeInWithDialogue(new DialogueWrapper(gameLoseDialogue));
     }
 }

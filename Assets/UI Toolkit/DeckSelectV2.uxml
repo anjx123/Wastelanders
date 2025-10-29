@@ -1,0 +1,14 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:Template name="DeckSelectCardV2" src="project://database/Assets/UI%20Toolkit/DeckSelectCardV2.uxml?fileID=9197481963319205126&amp;guid=ade487e086924d9d99f51cc776b1b4d8&amp;type=3#DeckSelectCardV2" />
+    <Style src="project://database/Assets/UI%20Toolkit/DeckSelectV2.uss?fileID=7433441132597879392&amp;guid=6cb739005a58641e28e3239d95e71118&amp;type=3#DeckSelectV2" />
+    <ui:VisualElement name="layout-grid" class="grid-4" style="flex-wrap: wrap; flex-direction: row; position: absolute;">
+        <ui:Instance template="DeckSelectCardV2" name="DeckSelectCardV2" />
+        <ui:Instance template="DeckSelectCardV2" name="DeckSelectCardV2" />
+        <ui:Instance template="DeckSelectCardV2" name="DeckSelectCardV2" />
+        <ui:Instance template="DeckSelectCardV2" name="DeckSelectCardV2" />
+        <ui:Instance template="DeckSelectCardV2" name="DeckSelectCardV2" />
+        <ui:Instance template="DeckSelectCardV2" name="DeckSelectCardV2" />
+        <ui:Instance template="DeckSelectCardV2" name="DeckSelectCardV2" />
+        <ui:Instance template="DeckSelectCardV2" name="DeckSelectCardV2" />
+    </ui:VisualElement>
+</ui:UXML>

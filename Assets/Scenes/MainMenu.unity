@@ -1689,11 +1689,6 @@ MonoBehaviour:
         Part2: 1101383412
         Part3: 2979251084
         Part4: 414869923
-      <ShouldPlayDeckSelectionTutorial>k__BackingField: 0
-      <JumpIntoFrogAndSlimeFight>k__BackingField: 0
-      <JumpIntoBeetleFight>k__BackingField: 0
-      <JumpIntoQueenFight>k__BackingField: 0
-      <JustFinishedBeetleFight>k__BackingField: 0
       <CurrentLevelProgress>k__BackingField: 0
     playerInformation:
       <Id>k__BackingField:
@@ -1724,6 +1719,15 @@ MonoBehaviour:
         <Completed>k__BackingField: 0
       - <BountyName>k__BackingField: 
         <Completed>k__BackingField: 0
+  userPreferences:
+    Name: 
+    audioPreferences:
+      <BackgroundMusicVolume>k__BackingField: 0.7
+      <SFXVolume>k__BackingField: 0.7
+      <MusicMuted>k__BackingField: 0
+      <SFXMuted>k__BackingField: 0
+    screenShakePreference:
+      <IsScreenShakeEnabled>k__BackingField: 1
 --- !u!4 &1013216798
 Transform:
   m_ObjectHideFlags: 0
@@ -1774,6 +1778,8 @@ MonoBehaviour:
     Part2: 1333047437
     Part3: 3777487801
     Part4: 1112175064
+  JumpToCombat: 1
+  FirstTimeFinished: 0
 --- !u!4 &1398448087
 Transform:
   m_ObjectHideFlags: 0
@@ -1893,7 +1899,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f51c3a65e33b370488dbc3a6c7dc54f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fadeScreen: {fileID: 1619148232}
 --- !u!4 &1602211959
 Transform:
   m_ObjectHideFlags: 0
@@ -1909,104 +1914,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1619148229
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1619148230}
-  - component: {fileID: 1619148231}
-  - component: {fileID: 1619148232}
-  m_Layer: 0
-  m_Name: FadeScreen
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1619148230
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1619148229}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.86, z: 0}
-  m_LocalScale: {x: 3, y: 3, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &1619148231
-SpriteRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1619148229}
-  m_Enabled: 1
-  m_CastShadows: 0
-  m_ReceiveShadows: 0
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 0
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 0
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -172551265
-  m_SortingLayer: 4
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 37f940bb5dfa7d744b7f29df1b0dd09d, type: 3}
-  m_Color: {r: 0, g: 0, b: 0, a: 0}
-  m_FlipX: 0
-  m_FlipY: 0
-  m_DrawMode: 0
-  m_Size: {x: 9.3, y: 7.24}
-  m_AdaptiveModeThreshold: 0.5
-  m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
-  m_SpriteSortPoint: 0
---- !u!114 &1619148232
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1619148229}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 002d1cdf87a671640a52471d83e272fc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fadeScreen: {fileID: 1619148231}
 --- !u!1 &1645370201
 GameObject:
   m_ObjectHideFlags: 0
@@ -2098,6 +2005,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   wastelandersText: {fileID: 69893570}
   quitButton: {fileID: 17794742}
+  bountyButton: {fileID: 615688562}
 --- !u!1 &2015769949
 GameObject:
   m_ObjectHideFlags: 0
@@ -2173,7 +2081,6 @@ SceneRoots:
   - {fileID: 319308531}
   - {fileID: 529903465}
   - {fileID: 2015769952}
-  - {fileID: 1619148230}
   - {fileID: 1013216798}
   - {fileID: 1398448087}
   - {fileID: 545557533}

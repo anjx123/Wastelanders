@@ -6,26 +6,30 @@ using UnityEngine;
 public class BattleQueueIcons : DisplayableClass
 {
     [SerializeField] SpriteRenderer targetRenderer;
+    private SpriteRenderer iconRenderer;
 
+
+    private int FadeSortingOrder => CombatFadeScreenHandler.Instance.FADE_SORTING_ORDER;
+    private string FadeSortingLayer => CombatFadeScreenHandler.Instance.FADE_SORTING_LAYER;
+
+    private void Awake()
+    {
+        iconRenderer = GetComponent<SpriteRenderer>();
+    }
 
     public void Start()
     {
-        GetComponent<SpriteRenderer>().sortingOrder = CombatManager.Instance.FADE_SORTING_ORDER + 4;
-        targetRenderer.sortingOrder = CombatManager.Instance.FADE_SORTING_ORDER + 5;
+        iconRenderer.sortingOrder = FadeSortingOrder + 4;
+        iconRenderer.sortingLayerName = FadeSortingLayer;
+        targetRenderer.sortingOrder = FadeSortingOrder + 5;
+        targetRenderer.sortingLayerName = FadeSortingLayer;
     }
-    public override void OnMouseDown()
+    public void OnMouseDown()
     {
-        if (CombatManager.Instance.CanHighlight())
-        {
-            ShowCard();
-        }
-    }
-
-    public void OnMouseOver()
-    {
-        if (Input.GetMouseButtonDown(1) && ActionClass.Origin is PlayerClass && CombatManager.Instance.CanHighlight())
+        if (ActionClass.Origin is PlayerClass && CombatManager.Instance.CanHighlight())
         {
             DeleteFromBQ();
+            HideCard();
         }
     }
 
@@ -35,8 +39,6 @@ public class BattleQueueIcons : DisplayableClass
         {
             DeHighlightTarget();
             BattleQueue.BattleQueueInstance.DeletePlayerAction(ActionClass);
-            HighlightManager.Instance.currentHighlightedAction = null;
-            HighlightManager.Instance.currentHighlightedEnemyEntity = null;
         }  
     }
 
@@ -50,6 +52,7 @@ public class BattleQueueIcons : DisplayableClass
             scale *= 1.25f;
             transform.localScale = scale;
             HighlightTarget();
+            ShowCard();
         }
     }
 
@@ -59,6 +62,7 @@ public class BattleQueueIcons : DisplayableClass
         Vector3 scale = new Vector3(20, 20, (float)1.25);
         transform.localScale = scale;
         DeHighlightTarget();
+        HideCard();
     }
 
     public void RenderBQIcon(ActionClass ac)

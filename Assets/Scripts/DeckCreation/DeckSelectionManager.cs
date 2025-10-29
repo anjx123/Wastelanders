@@ -18,11 +18,8 @@ public class DeckSelectionManager : MonoBehaviour
     [SerializeField] private GameObject cardArrayParent;
     [SerializeField] private CardDatabase cardDatabase;
     [SerializeField] private PlayerDatabase playerDatabase;
-    [SerializeField] private FadeScreenHandler fadeScreenHandler;
+    [SerializeField] private TMP_Text cardTitleTextField;
     [SerializeField] private TMP_Text cardDescriptorTextField;
-    [SerializeField] private Transform[] subFolderLayout;
-    [SerializeField] private Transform[] fourRowCardLayout;
-    [SerializeField] private Transform[] fiveRowCardLayout;
     [SerializeField] private Transform enemyEditParent;
     [SerializeField] private GameObject enemyEditButtonPrefab;
 
@@ -72,8 +69,13 @@ public class DeckSelectionManager : MonoBehaviour
                     PerformDeckSelection();
                     break;
             }
+
+            OnDeckSelectStateChanged?.Invoke(deckSelectionState);
         }
     }
+
+    public static event Action<DeckSelectionState>? OnDeckSelectStateChanged;
+    public static event Action<int, List<ActionClass>>? OnRenderDecks;
 
     void Awake()
     {
@@ -85,15 +87,14 @@ public class DeckSelectionManager : MonoBehaviour
         {
             Destroy(this);
         }
-
     }
 
     void Start()
     {
         ActionClass.CardClickedEvent += ActionSelected;
         ActionClass.CardRightClickedEvent += CardRightClicked;
-        ActionClass.CardHighlightedEvent += RenderCardDescription;
-        ActionClass.CardUnhighlightedEvent += RemoveCardDescription;
+        ActionClass.CardHighlightedEvent += RenderCardInformation;
+        ActionClass.CardUnhighlightedEvent += RemoveCardInformation;
         CharacterSelect.CharacterSelectedEvent += CharacterChosen;
         WeaponSelect.WeaponSelectEvent += WeaponSelected;
         WeaponEdit.WeaponEditEvent += WeaponDeckEdit;
@@ -103,16 +104,16 @@ public class DeckSelectionManager : MonoBehaviour
 
     private void EnterDeckSelection()
     {
-        fadeScreenHandler.SetDarkScreen();
-        StartCoroutine(fadeScreenHandler.FadeInLightScreen(2f));
+        UIFadeScreenManager.Instance.SetDarkScreen();
+        StartCoroutine(UIFadeScreenManager.Instance.FadeInLightScreen(2f));
     }
 
     void OnDestroy()
     {
         ActionClass.CardClickedEvent -= ActionSelected;
         ActionClass.CardRightClickedEvent -= CardRightClicked;
-        ActionClass.CardHighlightedEvent -= RenderCardDescription;
-        ActionClass.CardUnhighlightedEvent -= RemoveCardDescription;
+        ActionClass.CardHighlightedEvent -= RenderCardInformation;
+        ActionClass.CardUnhighlightedEvent -= RemoveCardInformation;
         CharacterSelect.CharacterSelectedEvent -= CharacterChosen;
         WeaponSelect.WeaponSelectEvent -= WeaponSelected;
         WeaponEdit.WeaponEditEvent -= WeaponDeckEdit;
@@ -148,7 +149,7 @@ public class DeckSelectionManager : MonoBehaviour
             isFadingOut = true;
             SaveLoadSystem.Instance.SaveGame();
             //EditorUtility.SetDirty(playerDatabase); // For easily resetting the default weaponDeck of playerDatabase
-            yield return StartCoroutine(fadeScreenHandler.FadeInDarkScreen(0.8f));
+            yield return StartCoroutine(UIFadeScreenManager.Instance.FadeInDarkScreen(0.8f));
             GameStateManager.Instance.LoadScene(nextScene);
             isFadingOut = false;
         }
@@ -304,13 +305,15 @@ public class DeckSelectionManager : MonoBehaviour
         deckSelectionUi.SetActive(true);
     }
 
-    private void RenderCardDescription(ActionClass card)
+    private void RenderCardInformation(ActionClass card)
     {
+        cardTitleTextField.text = card.GetName().ToUpper();
         cardDescriptorTextField.text = card.GenerateCardDescription();
     }
 
-    private void RemoveCardDescription(ActionClass card)
+    private void RemoveCardInformation(ActionClass card)
     {
+        cardTitleTextField.text = "";
         cardDescriptorTextField.text = "";
     }
 
@@ -342,22 +345,22 @@ public class DeckSelectionManager : MonoBehaviour
         List<ActionClass> chosenCardList = cardDatabase.ConvertStringsToCards(weaponType, playerData.GetDeckByWeaponType(weaponType).Select(p => p.ActionClassName).ToList());
         List<ActionClass> cardsToRender = weaponEditInformation.GetCards(cardDatabase);
         List<GameObject> instantiatedCards = new List<GameObject>();
-        Transform[] layout;
+        int cols;
 
         if (weaponEditInformation.ShowSubFolders)
         {
-            layout = subFolderLayout;
+            cols = 3;
             GenerateSubFolders(weaponType);
         }
         else
         {
-            layout = cardsToRender.Count > 8 ? fiveRowCardLayout : fourRowCardLayout;
+            cols = cardsToRender.Count > 8 ? 5 : 4;
         }
 
         //In order to sort, the cards must be instantiated and initialized first :pensive:
         foreach (ActionClass card in cardsToRender)
         {
-            GameObject go = Instantiate(card.gameObject);
+            GameObject go = Instantiate(card.gameObject, new Vector3(-100, -100, 1), Quaternion.identity);
             instantiatedCards.Add(go);
             ActionClass ac = go.GetComponent<ActionClass>();
             ActionClass? pref = chosenCardList.FirstOrDefault(action => action.GetType() == card.GetType());
@@ -369,17 +372,8 @@ public class DeckSelectionManager : MonoBehaviour
             ac.UpdateDup();
         }
 
-        instantiatedCards.Sort((card1, card2) => card1.GetComponent<ActionClass>().Speed.CompareTo(card2.GetComponent<ActionClass>().Speed));
-
-        for (int i = 0; i < instantiatedCards.Count; i++)
-        {
-            GameObject cardPrefab = instantiatedCards[i];
-            cardPrefab.transform.SetParent(cardArrayParent.transform);
-            cardPrefab.transform.localPosition = layout[i].localPosition;
-            cardPrefab.transform.localScale = layout[i].localScale;
-        }
-
         SaveLoadSystem.Instance.LoadCardEvolutionProgress();
+        OnRenderDecks?.Invoke(cols, instantiatedCards.Select(card => card.GetComponent<ActionClass>()).OrderBy(card => card.GetComponent<ActionClass>().Speed).ToList());
     }
 
     private void UnrenderDecks()

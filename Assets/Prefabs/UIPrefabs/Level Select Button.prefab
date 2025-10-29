@@ -86,6 +86,7 @@ GameObject:
   - component: {fileID: 7378160909943008992}
   - component: {fileID: 7406056892427835617}
   - component: {fileID: 8515601806845717234}
+  - component: {fileID: 2487318409087945512}
   m_Layer: 5
   m_Name: Lock
   m_TagString: Untagged
@@ -151,6 +152,18 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!225 &2487318409087945512
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 69882546978433369}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1476191357510355879
 GameObject:
   m_ObjectHideFlags: 0
@@ -649,6 +662,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Level>k__BackingField: 0
   _textMeshPro: {fileID: 697530316340953098}
+  title: 
   button: {fileID: 4262495870184010103}
   outline: {fileID: 9140122339366179723}
   defaultOutline: {x: 1, y: 1}
@@ -659,6 +673,8 @@ MonoBehaviour:
   hoverTextColor: {r: 1, g: 1, b: 0, a: 1}
   hover: {fileID: 3512210353524396091}
   lockedIndicator: {fileID: 69882546978433369}
+  floatingNotificationPrefab: {fileID: 8220371312492025928, guid: 252a1e8763c9c8444aea5b29210a5b6f, type: 3}
+  lockAnimationDuration: 0.5
 --- !u!1 &8631010744981370892
 GameObject:
   m_ObjectHideFlags: 0

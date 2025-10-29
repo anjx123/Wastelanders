@@ -9,12 +9,23 @@ public abstract class DisplayableClass : SelectClass
     public ActionClass? ActionClass { get; protected set; }   
     protected bool targetHighlighted = false;
     private bool grewLarger;
+    
+    public static event Action<ActionClass>? OnShowCard;
+    public static event Action<ActionClass>? OnHideCard;
 
     protected void ShowCard()
     {
         if (ActionClass != null)
         {
-            CombatCardDisplayManager.Instance.ShowCard(ActionClass);
+            OnShowCard?.Invoke(ActionClass);
+        }
+    }
+
+    protected void HideCard()
+    {
+        if (ActionClass != null)
+        {
+            OnHideCard?.Invoke(ActionClass);
         }
     }
 
@@ -53,7 +64,5 @@ public abstract class DisplayableClass : SelectClass
             grewLarger = false;
         }
     }
-
-    public abstract void OnMouseDown();
 }
 

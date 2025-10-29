@@ -13,7 +13,8 @@ public class ClashingBattleQueueIcon : MonoBehaviour
 
     public void Start()
     {
-        swordsIcon.sortingOrder = CombatManager.Instance.FADE_SORTING_ORDER + 6;
+        swordsIcon.sortingLayerName = CombatFadeScreenHandler.Instance.FADE_SORTING_LAYER;
+        swordsIcon.sortingOrder = CombatFadeScreenHandler.Instance.FADE_SORTING_ORDER + 6;
     }
     public void renderClashingIcons(ActionClass leftClashingItem,  ActionClass rightClashingItem)
     {
