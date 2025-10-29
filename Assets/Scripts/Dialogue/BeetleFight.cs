@@ -62,7 +62,6 @@ public class BeetleFight : DialogueClasses
     [SerializeField] private CinemachineVirtualCamera sceneCamera;
     [SerializeField] private Sprite frogDeathSprite;
     [SerializeField] private Sprite jackieCrystalSprite;
-    [SerializeField] private BattleIntro battleIntro;
 
     [SerializeField] private List<DialogueText> openingJackieQuipt;
     [SerializeField] private DialogueWrapper openingDiscussion;
@@ -185,7 +184,6 @@ public class BeetleFight : DialogueClasses
     {
         CombatManager.Instance.GameState = GameState.OUT_OF_COMBAT;
         UIFadeScreenManager.Instance.SetDarkScreen();
-        battleIntro = BattleIntro.Build();
         yield return new WaitForSeconds(0.2f);
         SetUpEnemyLists();
         SetUpCombatStatus();
@@ -399,7 +397,7 @@ public class BeetleFight : DialogueClasses
 
         //Start wave 1 
         {
-            battleIntro.PlayAnimation(Get<ClashIntro>());
+            new BattleIntroEvent(Get<ClashIntro>()).Invoke();
             wave2Fight.SetActive(false);
             wave3Fight.SetActive(false);
             CombatManager.Instance.SetEnemiesHostile(wave1);

@@ -62,7 +62,6 @@ public class PreQueenFight : DialogueClasses
 
 
     [SerializeField] private bool jumpToCombat;
-    [SerializeField] private BattleIntro battleIntro;
     [SerializeField] private SpriteFadeHandler spriteFadeHandler;
     private DefaultSceneBuilder defaultSceneBuilder;
 
@@ -103,7 +102,6 @@ public class PreQueenFight : DialogueClasses
     {
         CombatManager.Instance.GameState = GameState.OUT_OF_COMBAT;
         CombatManager.Instance.SetDarkScreen();
-        battleIntro = BattleIntro.Build();
 
         yield return new WaitForSeconds(0.5f);
         ives.OutOfCombat();
@@ -114,7 +112,7 @@ public class PreQueenFight : DialogueClasses
         CombatManager.Instance.SetEnemiesPassive(new List<EnemyClass>(bigCrystals));
 
         foreach (Crystals c in crystals)
-        {
+        {   
             c.OutOfCombat();
         }
         foreach (Beetle b in campBeetles)
@@ -524,7 +522,7 @@ public class PreQueenFight : DialogueClasses
             }
 
             CombatManager.Instance.BeginCombat();
-            battleIntro.PlayAnimation(Get<ClashIntro>());
+            new BattleIntroEvent(Get<ClashIntro>()).Invoke();
             BeginQueenCombat();
             yield return new WaitUntil(() => CombatManager.Instance.GameState == GameState.GAME_WIN);
             AudioManager.Instance.FadeOutCurrentBackgroundTrack(2f);

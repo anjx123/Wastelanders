@@ -58,7 +58,6 @@ public class TutorialIntroduction : DialogueClasses
     [SerializeField] private DialogueWrapper endingTutorialDialogue;
 
     [SerializeField] private DialogueWrapper gameLoseDialogue;
-    [SerializeField] private BattleIntro battleIntro;
 
     [SerializeField] private bool jumpToCombat;
 
@@ -97,7 +96,6 @@ public class TutorialIntroduction : DialogueClasses
         ives.OutOfCombat();
         jackie.OutOfCombat();
         jackie.SetReturnPosition(jackieDefaultTransform.position);
-        battleIntro = BattleIntro.Build();
         if (!jumpToCombat && !GameStateManager.Instance.JumpToCombat)
         {
             yield return new WaitForSeconds(1f);
@@ -198,7 +196,7 @@ public class TutorialIntroduction : DialogueClasses
         }
 
         yield return new WaitForSeconds(BRIEF_PAUSE);
-        battleIntro.PlayAnimation(Get<TutorialIntro>());
+        new BattleIntroEvent(Get<TutorialIntro>()).Invoke();
         yield return new WaitForSeconds(1f);
 
         jackie.InjectDeck(jackieTutorialDeck);

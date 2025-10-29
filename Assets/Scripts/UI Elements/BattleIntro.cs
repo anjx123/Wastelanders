@@ -1,8 +1,5 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UI;
 
 
 public class BattleIntro : MonoBehaviour
@@ -12,32 +9,37 @@ public class BattleIntro : MonoBehaviour
     [SerializeField] private Animator backgroundAnimator;
     private const string backgroundAnimation = "BackgroundIntro";
 
-    public static BattleIntro Build()
+    private void Awake()
     {
-        BattleIntro battleIntro = SceneInitializer.Instance.InstantiatePrefab(SceneInitializer.Instance.InitializablePrefabs.battleIntro);
-        battleIntro.canvas.sortingOrder = UISortOrder.CombatIntro.GetOrder();
-        return battleIntro;
+        canvas.sortingOrder = UISortOrder.CombatIntro.GetOrder();
+        this.AddComponent<BattleIntroEventHandler>()
+            .Subscribe(PlayAnimation);
     }
 
-    public virtual void PlayAnimation(BattleIntroEnum animationEnum)
+    private void PlayAnimation(BattleIntroEvent animationEvent)
     {
-        animator.SetTrigger(animationEnum.animationName);
+        animator.SetTrigger(animationEvent.AnimationEnum.AnimationName);
         backgroundAnimator.SetTrigger(backgroundAnimation);
     }
+
+    private class BattleIntroEventHandler : EventHandler<BattleIntroEvent> { }
 }
+
+public record BattleIntroEvent(BattleIntroEnum AnimationEnum) : IEvent;
+
 
 public abstract class BattleIntroEnum : Enum<BattleIntroEnum>
 {
-    public abstract string animationName { get; }
+    public abstract string AnimationName { get; }
 
     public class ClashIntro : BattleIntroEnum
     {
-        public override string animationName => "ClashIntro";
+        public override string AnimationName => "ClashIntro";
     }
 
     public class TutorialIntro : BattleIntroEnum
     {
-       public override string animationName => "TutorialIntro";
+       public override string AnimationName => "TutorialIntro";
     }
 
     public static BattleIntroEnum Get<T>() where T : BattleIntroEnum => ParseFromType(typeof(T));
