@@ -128,6 +128,15 @@ public abstract class SceneData : Enum<SceneData>
         public override MonoBehaviour[] RequiredPrefabs(SceneInitializerPrefabs prefabs) => new MonoBehaviour[]
             { prefabs.audioManager, prefabs.uiFadeScreenManager, prefabs.pauseMenuV2 };
     }
+    
+    public class PreBounty0 : SceneData
+    {
+        public override string SceneName => "PreBounty_0";
+        public override SceneAudio GetAudio(AudioDatabase database) => database.Empty;
+
+        public override MonoBehaviour[] RequiredPrefabs(SceneInitializerPrefabs prefabs) => new MonoBehaviour[]
+            { prefabs.audioManager, prefabs.uiFadeScreenManager, prefabs.pauseMenuV2, prefabs.dialogueManager };
+    }
 
     private static readonly Dictionary<string, SceneData> _sceneLookup = new();
 
