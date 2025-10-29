@@ -11,7 +11,8 @@ public class PrincessFrogBounties : IBounties
         { 
             PrincessFrogContracts.ADDITIONAL_ATTACK, 
             PrincessFrogContracts.AGGRESIVE_AI,
-            PrincessFrogContracts.EXTRA_RESONANCE
+            PrincessFrogContracts.EXTRA_RESONANCE,
+            PrincessFrogContracts.EXTRA_HEALTH
         },
         challengeName: "Buffed Princess",
         subtext: "Challenge for Level 5. Extras",

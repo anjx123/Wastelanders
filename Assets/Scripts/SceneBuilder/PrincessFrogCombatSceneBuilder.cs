@@ -127,6 +127,9 @@ namespace SceneBuilder
                 princessFrog.NumberOfAttacks = 3;
             }
 
+            if (bounty.ContractSet.Contains(PrincessFrogContracts.EXTRA_HEALTH))
+                princessFrog.StartingHealth = 75;
+
             if (bounty.ContractSet.Contains(PrincessFrogContracts.AGGRESIVE_AI))
             {
                 princessFrog.AttackDecider =

@@ -8,6 +8,7 @@ namespace Entities
 {
     public class PrincessFrog : EnemyClass
     {
+        public int StartingHealth { get; set; } = 50;
         public int NumberOfAttacks { get; set; } = 2;
         public List<GameObject> BlessCards { get; private set; } = new();
         public List<GameObject> HurlCards { get; private set; } = new();
@@ -33,7 +34,7 @@ namespace Entities
             base.Start();
 
             myName = "Princess Frog";
-            Health = MaxHealth = 75;
+            Health = MaxHealth = StartingHealth;
             AddStacks(Resonate.buffName, 8);
         }
 
@@ -69,10 +70,6 @@ namespace Entities
 
         }
 
-        public void SetMaxHealth(int maxHealth)
-        {
-            Health = MaxHealth = maxHealth;
-        }
         protected override void OnEnable()
         {
             base.OnEnable();
