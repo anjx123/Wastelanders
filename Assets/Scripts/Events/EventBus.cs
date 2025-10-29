@@ -25,7 +25,7 @@ public static class EventBus
 #if UNITY_EDITOR
             if (Listeners<T>.bindings.Count == 0) 
                 Debug.LogWarning($"[EventBus] Event of type {typeof(T).Name} was raised, but no listeners are registered.");
-        #endif
+#endif
 
         Listeners<T>.bindings.ToList().ForEach(action => action(anEvent));
     }
