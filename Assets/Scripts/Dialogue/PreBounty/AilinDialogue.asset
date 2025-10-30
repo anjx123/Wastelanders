@@ -27,7 +27,7 @@ MonoBehaviour:
     speakerName: Ailin
     displayingImage: {fileID: 0}
     sfx: 
-    broadcastAnEvent: 0
+    broadcastAnEvent: 1
   - bodyText: "But Mama\u2026 you just got back."
     speakerName: Jackie
     displayingImage: {fileID: 0}
@@ -48,7 +48,7 @@ MonoBehaviour:
     speakerName: Ailin
     displayingImage: {fileID: 0}
     sfx: 
-    broadcastAnEvent: 0
+    broadcastAnEvent: 1
   - bodyText: "And you\u2019re the hardiest Mama I know! You\u2019ll be alright too!"
     speakerName: Jackie
     displayingImage: {fileID: 0}
@@ -69,4 +69,4 @@ MonoBehaviour:
     speakerName: Narration
     displayingImage: {fileID: 0}
     sfx: 
-    broadcastAnEvent: 0
+    broadcastAnEvent: 1
