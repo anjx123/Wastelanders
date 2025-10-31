@@ -1,0 +1,87 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 207ddad3e1c90594ba3f48e2a5a6a796, type: 3}
+  m_Name: BountyBoardDialogue
+  m_EditorClassIdentifier: 
+  dialogue:
+  - bodyText: "You\u2019ve been standing there for quite some time, kid."
+    speakerName: Ives
+    displayingImage: {fileID: 0}
+    sfx: 
+    broadcastAnEvent: 0
+  - bodyText: Ives. How long have you been here?
+    speakerName: Jackie
+    displayingImage: {fileID: 0}
+    sfx: 
+    broadcastAnEvent: 0
+  - bodyText: "Long enough. Thought I\u2019d give you some space."
+    speakerName: Ives
+    displayingImage: {fileID: 0}
+    sfx: 
+    broadcastAnEvent: 0
+  - bodyText: "They\u2019re finally reopening the Tundra. Wasn\u2019t it closed for
+      being too contaminated to traverse? What do you know about it?"
+    speakerName: Jackie
+    displayingImage: {fileID: 0}
+    sfx: 
+    broadcastAnEvent: 0
+  - bodyText: "The whole operation was Cam\u2019s idea. He\u2019s been burning the
+      midnight oil to get approval for his \u201Csafe\u201D wasteland traversing
+      invention."
+    speakerName: Ives
+    displayingImage: {fileID: 0}
+    sfx: 
+    broadcastAnEvent: 0
+  - bodyText: "An invention that can help us cross the Tundra! Now\u2019s finally
+      our chance to find out what happened during Mama\u2019s \u2018trip\u2019."
+    speakerName: Jackie
+    displayingImage: {fileID: 0}
+    sfx: 
+    broadcastAnEvent: 0
+  - bodyText: "Yep. That\u2019s why I\u2019ll be taking the first team out."
+    speakerName: Ives
+    displayingImage: {fileID: 0}
+    sfx: 
+    broadcastAnEvent: 0
+  - bodyText: "Then I\u2019m coming with you. But\u2026 how did Cam do it? The Tundra
+      has been off-limits for years."
+    speakerName: Jackie
+    displayingImage: {fileID: 0}
+    sfx: 
+    broadcastAnEvent: 0
+  - bodyText: "Heck if I can explain it right. As long as we get out there, it\u2019s
+      good enough for me."
+    speakerName: Ives
+    displayingImage: {fileID: 0}
+    sfx: 
+    broadcastAnEvent: 0
+  - bodyText: "You should go see him before we ship out. I\u2019ll make sure you\u2019re
+      on my list in the meantime."
+    speakerName: Ives
+    displayingImage: {fileID: 0}
+    sfx: 
+    broadcastAnEvent: 0
+  - bodyText: Thanks, Ives.
+    speakerName: Jackie
+    displayingImage: {fileID: 0}
+    sfx: 
+    broadcastAnEvent: 0
+  - bodyText: "We\u2019re gonna find out what happened out there, kid. I promise."
+    speakerName: Ives
+    displayingImage: {fileID: 0}
+    sfx: 
+    broadcastAnEvent: 0
+  - bodyText: The mentor and mentee bump fists, a conduit of smoldering resolve.
+    speakerName: Narration
+    displayingImage: {fileID: 0}
+    sfx: 
+    broadcastAnEvent: 0

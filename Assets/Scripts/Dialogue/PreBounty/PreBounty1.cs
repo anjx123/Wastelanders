@@ -9,16 +9,15 @@ using UnityEngine.UI;
 using Utils;
 using static BattleIntroEnum;
 
-public class PreBounty_1 : MonoBehaviour
+public class PreBounty1 : MonoBehaviour
 {
     [SerializeField] private GameObject jackie;
     [SerializeField] private GameObject ives;
 
     [SerializeField] private Transform ivesTarget;
     
-    [SerializeField] private FadeScreenHandler fadeScreenHandler;
-    
-    [SerializeField] private List<DialogueText> bountyDiscussionDialogue;
+    [SerializeField] private DialogueWrapper JackieReminiscingDialogue;
+    [SerializeField] private DialogueWrapper BountyBoardDialogue;
 
     [SerializeField] private float ivesMoveSpeed = 6f;
     
@@ -29,10 +28,12 @@ public class PreBounty_1 : MonoBehaviour
 
     public IEnumerator StartScene()
     {
-        fadeScreenHandler.SetDarkScreen();
+        UIFadeScreenManager.Instance.SetDarkScreen();
         yield return new WaitForSeconds(1f);
         
-        yield return fadeScreenHandler.FadeInLightScreen(1f);
+        yield return UIFadeScreenManager.Instance.FadeInLightScreen(1f);
+        
+        yield return DialogueManager.Instance.StartDialogue(JackieReminiscingDialogue.Dialogue);
 
         yield return DialogueSceneUtils.MoveCharacterToTarget(ives, ivesTarget, ivesMoveSpeed);
         
@@ -40,8 +41,8 @@ public class PreBounty_1 : MonoBehaviour
         
         yield return new WaitForSeconds(1f);
         
-        yield return DialogueManager.Instance.StartDialogue(bountyDiscussionDialogue);
+        yield return DialogueManager.Instance.StartDialogue(BountyBoardDialogue.Dialogue);
         
-        yield return fadeScreenHandler.FadeInDarkScreen(1f);
+        yield return UIFadeScreenManager.Instance.FadeInDarkScreen(1f);
     }
 }
