@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Managers;
 using UI_Toolkit;
 using UnityEngine;
 using static CardComparator;
@@ -316,6 +317,11 @@ public abstract class EntityClass : SelectClass
 
         while (elapsedTime < duration)
         {
+            while (ImpactFrameManager.Instance.IsFrozen)
+            {
+                yield return null;
+            }
+            
             myTransform.position = Vector3.Lerp(originalPosition, staggeredPosition, AnimationCurve(elapsedTime, duration));
             elapsedTime += Time.deltaTime;
             yield return null;

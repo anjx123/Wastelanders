@@ -6,6 +6,7 @@ using UnityEngine;
 using static Cinemachine.CinemachineTargetGroup;
 using static UnityEngine.GraphicsBuffer;
 using static UnityEngine.UI.Image;
+using static Managers.ImpactFrameManager;
 
 public class CardComparator : MonoBehaviour
 {

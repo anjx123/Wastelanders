@@ -149,6 +149,8 @@ public abstract class ActionClass : SelectClass, IBind<ActionData>
         Origin.UpdateFacing(diffInLocation, null);
         CardIsUnstaggered();
         this.Target.TakeDamage(Origin, rolledCardStats.ActualRoll);
+
+        new OnHitEvent(this, OnHitEnum.PlayerHitEnemy).Invoke();
     }
 
     //Only called in a clash
