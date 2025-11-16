@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using DialogueScripts;
 using UI_Toolkit;
 using UnityEngine;
 
@@ -65,6 +66,17 @@ public class DialogueManager : MonoBehaviour
 
     void AddLineToHistory(DialogueText text)
     {
+        dialogueHistory.Add(text);
+    }
+
+    public void AddDialogueEntryToHistory(DialogueEntry entry)
+    {
+        var text = new DialogueText(
+            entry.content, 
+            entry.speaker,
+            entry.picture
+        );
+
         dialogueHistory.Add(text);
     }
 
