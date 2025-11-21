@@ -1,7 +1,7 @@
-using System.Collections;
 using System.Collections.Generic;
+using DialogueScripts;
 using UnityEngine;
-using UnityEngine.UI;
+
 
 [System.Serializable]
 public class DialogueText
@@ -14,6 +14,7 @@ public class DialogueText
     private bool italics;
     private bool bold;
     public bool broadcastAnEvent = false;
+    [SerializeReference] public List<DialogueEvents> events;
 
 
     public bool Italics { get { return italics; } set { italics = value; } }
