@@ -20,9 +20,8 @@ namespace DialogueScripts
         [SerializeField] private GameObject img;
 
         [SerializeField] private int typewriterRate = 50;
-
-#nullable enable
         public static DialogueBoxV2 Instance { get; private set; }
+#nullable enable
 
         private AutoAdvanceAfter? autoAdvanceAfter;
 
@@ -38,8 +37,8 @@ namespace DialogueScripts
                 Destroy(gameObject);
             }
 
-            this.AddComponent<SetAutoHandler>().Subscribe(SetAutoAdvance);
-            this.AddComponent<VerticalLayoutHandler>().Subscribe(SetVerticalLayout);
+            this.Subscribe<AutoAdvanceAfter>(SetAutoAdvance);
+            this.Subscribe<VerticalLayoutChange>(SetVerticalLayout);
             
             gameObject.SetActive(false);
         }
@@ -148,7 +147,5 @@ namespace DialogueScripts
         }
 
         private static bool HasInput() => !PauseMenuV2.IsPaused && (Input.GetKey(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.Mouse0) || Input.GetKeyDown(KeyCode.Space));
-        private class SetAutoHandler: EventHandler<AutoAdvanceAfter> { }
-        private class VerticalLayoutHandler : EventHandler<VerticalLayoutChange> { }
     }
 }
