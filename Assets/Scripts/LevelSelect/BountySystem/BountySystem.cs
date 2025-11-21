@@ -28,6 +28,7 @@ namespace BountySystem
     {
         public static readonly PrincessFrogContracts ADDITIONAL_ATTACK = new();
         public static readonly PrincessFrogContracts AGGRESIVE_AI = new();
+        public static readonly PrincessFrogContracts EXTRA_HEALTH = new();
         public static readonly PrincessFrogContracts EXTRA_RESONANCE = new();
     }
 
