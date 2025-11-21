@@ -14,7 +14,6 @@ public class DialogueText
     private bool italics;
     private bool bold;
     public bool broadcastAnEvent = false;
-    [SerializeReference] public List<DialogueEvents> events;
 
 
     public bool Italics { get { return italics; } set { italics = value; } }

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace DialogueScripts
@@ -9,17 +10,15 @@ namespace DialogueScripts
         [SerializeField] [TextArea(1, 5)] private string content;
         [SerializeField] private string speaker;
         [SerializeField] private string sfxName;
-        [SerializeField] private string eventId;
         [SerializeField] private Sprite picture;
-        [SerializeField] private Layout verticalLayout;
+        [SerializeReference] internal List<DialogueEvents> events;
 
         public DialogueEntry Into() => new(
             content: content,
             speaker: speaker,
             sfxName: sfxName,
-            eventId: eventId,
             picture: picture,
-            verticalLayout: verticalLayout
+            events: events
         );
     }
 
@@ -27,17 +26,9 @@ namespace DialogueScripts
         string content,
         string speaker,
         string sfxName,
-        string eventId,
         Sprite picture,
-        Layout verticalLayout
-    );
-
-    [Serializable]
-    public enum Layout
-    {
-        LOWER,
-        UPPER
-    }
+        List<DialogueEvents> events
+        );
 
     public static class DialogueExtensions
     {

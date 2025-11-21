@@ -31,12 +31,25 @@ namespace DialogueScripts
         }
     }
 
-    public class SetAuto : DialogueEvents
+    /// Change the vertical positioning of the dialogue box. 
+    public class VerticalLayoutChange : DialogueEvents, IEvent
     {
-        public override void Execute()
-        {
-
-        }
+        [SerializeField] private Layout layout;
+        public Layout Layout => layout;
+        public override void Execute() => this.Invoke();
     }
 
+    public enum Layout
+    {
+        LOWER,
+        UPPER
+    }
+
+    /// Automatically advances this dialogue entry after it finishes. 
+    public class AutoAdvanceAfter : DialogueEvents, IEvent
+    {
+        [SerializeField] private float time;
+        public float Time => time;
+        public override void Execute() => this.Invoke();
+    }
 }

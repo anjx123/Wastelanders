@@ -7,9 +7,9 @@ using UnityEngine;
 namespace DialogueScripts
 {
     /// <summary>
-    /// Allows you to add any event that extends DialogueEvents to the DialogueText.events list in the unity editor.
+    /// Allows you to add any event that extends DialogueEvents to the DialogueEntryInUnityEditor.events list in the unity editor.
     /// </summary>
-    [CustomPropertyDrawer(typeof(DialogueText))]
+    [CustomPropertyDrawer(typeof(DialogueEntryInUnityEditor))]
     public class DialogueTextDrawer : PropertyDrawer
     {
         private readonly Type[] eventTypes;
@@ -51,7 +51,7 @@ namespace DialogueScripts
                         Rect propRect = new Rect(position.x, y, position.width, propHeight);
                         EditorGUI.PropertyField(propRect, iterator, true);
 
-                        if (iterator.name == nameof(DialogueText.events))
+                        if (iterator.name == nameof(DialogueEntryInUnityEditor.events))
                         {
                             eventsListProperty = iterator.Copy();
                         }
