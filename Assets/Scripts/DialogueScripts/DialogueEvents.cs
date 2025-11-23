@@ -20,7 +20,8 @@ namespace DialogueScripts
     {
         Jackie,
         Cam,
-        Ives
+        Ives,
+        None,
     }
 
     public class SpriteChange : DialogueEvents, IEvent

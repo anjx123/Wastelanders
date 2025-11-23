@@ -497,7 +497,8 @@ MonoBehaviour:
     speaker: Cam
     sfxName: 
     picture: {fileID: 0}
-    events: []
+    events:
+    - rid: 5589630683674050580
   - content: I call it the Recursive Innervation Projection Glove, or the R.I.P.
       Glove, for short.
     speaker: Cam
@@ -514,7 +515,8 @@ MonoBehaviour:
     speaker: Jackie
     sfxName: 
     picture: {fileID: 0}
-    events: []
+    events:
+    - rid: 5589630683674050581
   - content: That.
     speaker: Jackie
     sfxName: 
@@ -543,28 +545,33 @@ MonoBehaviour:
     picture: {fileID: 0}
     events:
     - rid: 5589630625525006346
+    - rid: 5589630683674050582
   - content: "Yeah, yeah, you\u2019re magical. That\u2019s fantastic. And it\u2019ll
       allow us to get into the Tundra? How?"
     speaker: Jackie
     sfxName: 
     picture: {fileID: 0}
-    events: []
+    events:
+    - rid: 5589630683674050583
   - content: Simple. Waste creatures aren't affected negatively by the Waste.
     speaker: Cam
     sfxName: 
     picture: {fileID: 0}
-    events: []
+    events:
+    - rid: 5589630683674050584
   - content: Alright, I suppose that checks out.
     speaker: Jackie
     sfxName: 
     picture: {fileID: 0}
-    events: []
+    events:
+    - rid: 5589630683674050585
   - content: Then, with a little bit of data processing to match signatures from
       the Tundra to the first meteor site...
     speaker: Cam
     sfxName: 
     picture: {fileID: 0}
-    events: []
+    events:
+    - rid: 5589630683674050586
   - content: Boom! The higher ups are hooked, lined, and... sinker-ed?
     speaker: Cam
     sfxName: 
@@ -574,7 +581,8 @@ MonoBehaviour:
     speaker: Jackie
     sfxName: 
     picture: {fileID: 0}
-    events: []
+    events:
+    - rid: 5589630683674050587
   - content: "It\u2019s nice to see you haven\u2019t changed."
     speaker: Jackie
     sfxName: 
@@ -584,7 +592,8 @@ MonoBehaviour:
     speaker: Cam
     sfxName: 
     picture: {fileID: 0}
-    events: []
+    events:
+    - rid: 5589630683674050588
   - content: ...
     speaker: Cam
     sfxName: 
@@ -616,7 +625,8 @@ MonoBehaviour:
     speaker: Jackie
     sfxName: 
     picture: {fileID: 0}
-    events: []
+    events:
+    - rid: 5589630683674050589
   - content: "It\u2019ll be just like old times then? You dragging me in to do all
       the heavy lifting for ya."
     speaker: Jackie
@@ -628,18 +638,21 @@ MonoBehaviour:
     speaker: Cam
     sfxName: 
     picture: {fileID: 0}
-    events: []
+    events:
+    - rid: 5589630683674050590
   - content: "C\u2019mon, then let\u2019s get going."
     speaker: Jackie
     sfxName: 
     picture: {fileID: 0}
-    events: []
+    events:
+    - rid: 5589630683674050591
   - content: The eyes of the warrior and scientist meet briefly, exchanging unsaid
       gratitudes.
     speaker: Narration
     sfxName: 
     picture: {fileID: 0}
-    events: []
+    events:
+    - rid: 5589630683674050592
   references:
     version: 2
     RefIds:
@@ -715,6 +728,58 @@ MonoBehaviour:
       type: {class: SetSpeaker, ns: DialogueScripts, asm: Assembly-CSharp}
       data:
         actor: 0
+    - rid: 5589630683674050580
+      type: {class: SetSpeaker, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: 1
+    - rid: 5589630683674050581
+      type: {class: SetSpeaker, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: 0
+    - rid: 5589630683674050582
+      type: {class: SetSpeaker, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: 1
+    - rid: 5589630683674050583
+      type: {class: SetSpeaker, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: 0
+    - rid: 5589630683674050584
+      type: {class: SetSpeaker, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: 1
+    - rid: 5589630683674050585
+      type: {class: SetSpeaker, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: 0
+    - rid: 5589630683674050586
+      type: {class: SetSpeaker, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: 1
+    - rid: 5589630683674050587
+      type: {class: SetSpeaker, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: 0
+    - rid: 5589630683674050588
+      type: {class: SetSpeaker, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: 1
+    - rid: 5589630683674050589
+      type: {class: SetSpeaker, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: 0
+    - rid: 5589630683674050590
+      type: {class: SetSpeaker, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: 1
+    - rid: 5589630683674050591
+      type: {class: SetSpeaker, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: 0
+    - rid: 5589630683674050592
+      type: {class: SetSpeaker, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: 3
 --- !u!1 &1867254347
 GameObject:
   m_ObjectHideFlags: 0

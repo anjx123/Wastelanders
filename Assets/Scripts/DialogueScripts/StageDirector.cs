@@ -31,15 +31,6 @@ namespace DialogueScripts
 
         private void OnSetSpeaker(SetSpeaker ss)
         {
-            //// 1. Enable the Scrim
-            //// (You can tween this CanvasGroup alpha for the fade effect later)
-            //focusScrim.gameObject.SetActive(true);
-            //focusScrim.alpha = 0.5f;
-
-            //// 2. Move Scrim to the "Front" of the line (covering everyone currently)
-            //focusScrim.transform.SetAsLastSibling();
-
-            // 3. Iterate through all actors
             foreach (var kvp in activeActors)
             {
                 CharacterActor characterProfile = kvp.Key;
