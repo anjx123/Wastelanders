@@ -444,31 +444,44 @@ MonoBehaviour:
     speaker: Jackie
     sfxName: 
     picture: {fileID: 0}
-    events: []
+    events:
+    - rid: 5589630683674050565
+    - rid: 5589630683674050575
+    - rid: 5589630683674050569
+    - rid: 5589630683674050570
   - content: "Ah, Jackie, hello! It\u2019s been a while! I can\u2019t believe you
       still remember where my lab is."
     speaker: Cam
     sfxName: 
     picture: {fileID: 0}
-    events: []
+    events:
+    - rid: 5589630683674050567
+    - rid: 5589630683674050571
+    - rid: 5589630683674050574
+    - rid: 5589630683674050572
+    - rid: 5589630683674050573
+    - rid: 5589630683674050576
   - content: How could I forget? We literally had to evacuate the last time I was
       here.
     speaker: Jackie
     sfxName: 
     picture: {fileID: 0}
-    events: []
+    events:
+    - rid: 5589630683674050577
   - content: "Haha... So I don\u2019t suppose you\u2019re here because you missed
       me?"
     speaker: Cam
     sfxName: 
     picture: {fileID: 0}
-    events: []
+    events:
+    - rid: 5589630683674050578
   - content: "Of course I did. I just haven\u2019t been able to catch a break since
       the exam."
     speaker: Jackie
     sfxName: 
     picture: {fileID: 0}
-    events: []
+    events:
+    - rid: 5589630683674050579
   - content: But nevermind that! Your expedition, genius.
     speaker: Jackie
     sfxName: 
@@ -634,6 +647,74 @@ MonoBehaviour:
       type: {class: AutoAdvanceAfter, ns: DialogueScripts, asm: Assembly-CSharp}
       data:
         time: 1
+    - rid: 5589630683674050565
+      type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: 0
+        sprite: {fileID: 21300000, guid: 422f3cda08073664b8a46361afe442fb, type: 3}
+    - rid: 5589630683674050567
+      type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: 1
+        sprite: {fileID: 21300000, guid: ed8bca1f9a8b245ec8889ee74f7785dc, type: 3}
+    - rid: 5589630683674050569
+      type: {class: ActorAction, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: 0
+        action: 0
+        duration: 1
+    - rid: 5589630683674050570
+      type: {class: ActorAction, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: 0
+        action: 5
+        duration: 0.5
+    - rid: 5589630683674050571
+      type: {class: ActorAction, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: 1
+        action: 4
+        duration: 0
+    - rid: 5589630683674050572
+      type: {class: ActorAction, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: 1
+        action: 2
+        duration: 1
+    - rid: 5589630683674050573
+      type: {class: ActorAction, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: 1
+        action: 5
+        duration: 0.5
+    - rid: 5589630683674050574
+      type: {class: ActorAction, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: 1
+        action: 6
+        duration: 0
+    - rid: 5589630683674050575
+      type: {class: ActorAction, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: 0
+        action: 6
+        duration: 0
+    - rid: 5589630683674050576
+      type: {class: SetSpeaker, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: 1
+    - rid: 5589630683674050577
+      type: {class: SetSpeaker, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: 0
+    - rid: 5589630683674050578
+      type: {class: SetSpeaker, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: 1
+    - rid: 5589630683674050579
+      type: {class: SetSpeaker, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: 0
 --- !u!1 &1867254347
 GameObject:
   m_ObjectHideFlags: 0

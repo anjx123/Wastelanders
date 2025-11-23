@@ -17,6 +17,9 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] private Canvas dialogueCanvas = null!;
     private List<DialogueText> sentences = new();
 
+    [SerializeField] private StageDirector stageDirectorPrefab = null!;
+    [SerializeField] private Canvas stageDirectionCanvas = null!;
+
     private bool inDialogue = false;
     private bool wasSkipping = false;
 
@@ -32,6 +35,11 @@ public class DialogueManager : MonoBehaviour
         {
             Destroy(this);
         }
+
+
+        Instantiate(stageDirectorPrefab, stageDirectionCanvas.transform);
+        stageDirectionCanvas.sortingOrder = UISortOrder.CharacterActors.GetOrder();
+        
         activeDialogueBox = pictureDialogueBox;
         dialogueCanvas.sortingOrder = UISortOrder.DialogueBox.GetOrder();
     }
