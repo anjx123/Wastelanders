@@ -42,7 +42,6 @@ namespace DialogueScripts
             
             gameObject.SetActive(false);
         }
-
         public IEnumerator Play(DialogueEntry[] entries)
         {
             gameObject.SetActive(true);
@@ -50,42 +49,59 @@ namespace DialogueScripts
             foreach (var entry in entries)
             {
                 WithEntry(entry);
-
-                var elapsed = 0f;
-                txtView.maxVisibleCharacters = 0;
-
-                while (txtView.maxVisibleCharacters <= txtView.text.Length)
-                {
-                    if (HasInput())
-                    {
-                        txtView.maxVisibleCharacters = txtView.text.Length;
-                        yield return null;
-                        break;
-                    }
-
-                    txtView.maxVisibleCharacters = Mathf.FloorToInt(elapsed * typewriterRate);
-                    elapsed += Time.deltaTime;
-                    yield return null;
-                }
-
-                yield return new WaitUntil(() => HasInput() || autoAdvanceAfter is not null);
-
-                if (autoAdvanceAfter is not null)
-                {
-                    yield return new WaitForSeconds(autoAdvanceAfter.Time);
-                    autoAdvanceAfter = null;
-                }
-
-                if (string.IsNullOrEmpty(entry.sfxName) && !Input.GetKey(KeyCode.RightArrow))
-                {
-                    const string DEFAULT_SFX_NAME = "Page Flip";
-                    AudioManager.Instance.PlaySFX(DEFAULT_SFX_NAME);
-                }
-
+                yield return TypewriteText();
+                yield return WaitForContinuation();
+                PlayTransitionSound(entry);
                 yield return null;
             }
 
             gameObject.SetActive(false);
+        }
+
+
+        private IEnumerator TypewriteText()
+        {
+            txtView.maxVisibleCharacters = 0;
+            float elapsed = 0f;
+
+            while (txtView.maxVisibleCharacters < txtView.text.Length)
+            {
+                if (HasInput())
+                {
+                    txtView.maxVisibleCharacters = txtView.text.Length;
+                    yield break;
+                }
+
+                txtView.maxVisibleCharacters = Mathf.FloorToInt(elapsed * typewriterRate);
+                elapsed += Time.deltaTime;
+                yield return null;
+            }
+        }
+
+        private IEnumerator WaitForContinuation()
+        {
+            // Clears the HasInput() from typewriting step
+            yield return null;
+            
+            float timer = 0f;
+
+            yield return new WaitUntil(() =>
+                {
+                    timer += Time.deltaTime;
+                    return HasInput() || (autoAdvanceAfter is not null && timer >= autoAdvanceAfter.Time);
+                }
+            );
+
+            autoAdvanceAfter = null;
+        }
+
+        private void PlayTransitionSound(DialogueEntry entry)
+        {
+            if (!string.IsNullOrEmpty(entry.sfxName) || Input.GetKey(KeyCode.RightArrow))
+                return;
+
+            const string DEFAULT_SFX_NAME = "Page Flip";
+            AudioManager.Instance.PlaySFX(DEFAULT_SFX_NAME);
         }
 
         private void SetAutoAdvance(AutoAdvanceAfter e)

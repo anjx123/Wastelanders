@@ -32,10 +32,8 @@ public class EventLifecycleHost : MonoBehaviour
         if (activeSubscriptions.TryGetValue(handler, out var subscription))
         {
             if (enabled && gameObject.activeInHierarchy)
-            {
                 subscription.Disable();
-            }
-
+            
             activeSubscriptions.Remove(handler);
         }
     }
