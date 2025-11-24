@@ -11,7 +11,7 @@ namespace DialogueScripts
 
     public class SetSpeaker: DialogueEvents, IEvent
     {
-        [SerializeField] private CharacterActor actor;
+        [SerializeField] private CharacterActor actor = CharacterActor.Jackie;
         public CharacterActor Actor => actor;
         public override void Execute() => this.Invoke();
     }
@@ -26,7 +26,7 @@ namespace DialogueScripts
 
     public class SpriteChange : DialogueEvents, IEvent
     {
-        [SerializeField] private CharacterActor actor;
+        [SerializeField] private CharacterActor actor = CharacterActor.Jackie;
         [SerializeField] private Sprite sprite;
         public CharacterActor Actor => actor;
         public Sprite Sprite => sprite;
@@ -37,8 +37,8 @@ namespace DialogueScripts
 
     public class ActorAction : DialogueEvents, IEvent
     {
-        [SerializeField] private CharacterActor actor;
-        [SerializeField] private CharacterActions action;
+        [SerializeField] private CharacterActor actor = CharacterActor.Jackie;
+        [SerializeField] private CharacterActions action = CharacterActions.SetLeft;
         [SerializeField] private float duration = 1.0f;
         public CharacterActor Actor => actor;
         public CharacterActions Action => action;

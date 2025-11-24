@@ -598,7 +598,8 @@ MonoBehaviour:
     speaker: Cam
     sfxName: 
     picture: {fileID: 0}
-    events: []
+    events:
+    - rid: 5589630683674050593
   - content: "You know, I\u2019m not doing this just for the research."
     speaker: Cam
     sfxName: 
@@ -626,7 +627,7 @@ MonoBehaviour:
     sfxName: 
     picture: {fileID: 0}
     events:
-    - rid: 5589630683674050589
+    - rid: 5589630683674050594
   - content: "It\u2019ll be just like old times then? You dragging me in to do all
       the heavy lifting for ya."
     speaker: Jackie
@@ -663,123 +664,127 @@ MonoBehaviour:
     - rid: 5589630683674050565
       type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
       data:
-        actor: 0
+        actor: 10
         sprite: {fileID: 21300000, guid: 422f3cda08073664b8a46361afe442fb, type: 3}
     - rid: 5589630683674050567
       type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
       data:
-        actor: 1
+        actor: 20
         sprite: {fileID: 21300000, guid: ed8bca1f9a8b245ec8889ee74f7785dc, type: 3}
     - rid: 5589630683674050569
       type: {class: ActorAction, ns: DialogueScripts, asm: Assembly-CSharp}
       data:
-        actor: 0
-        action: 0
+        actor: 10
+        action: 10
         duration: 1
     - rid: 5589630683674050570
       type: {class: ActorAction, ns: DialogueScripts, asm: Assembly-CSharp}
       data:
-        actor: 0
-        action: 5
+        actor: 10
+        action: 60
         duration: 0.5
     - rid: 5589630683674050571
       type: {class: ActorAction, ns: DialogueScripts, asm: Assembly-CSharp}
       data:
-        actor: 1
-        action: 4
+        actor: 20
+        action: 50
         duration: 0
     - rid: 5589630683674050572
       type: {class: ActorAction, ns: DialogueScripts, asm: Assembly-CSharp}
       data:
-        actor: 1
-        action: 2
+        actor: 20
+        action: 30
         duration: 1
     - rid: 5589630683674050573
       type: {class: ActorAction, ns: DialogueScripts, asm: Assembly-CSharp}
       data:
-        actor: 1
-        action: 5
+        actor: 20
+        action: 60
         duration: 0.5
     - rid: 5589630683674050574
       type: {class: ActorAction, ns: DialogueScripts, asm: Assembly-CSharp}
       data:
-        actor: 1
-        action: 6
+        actor: 20
+        action: 70
         duration: 0
     - rid: 5589630683674050575
       type: {class: ActorAction, ns: DialogueScripts, asm: Assembly-CSharp}
       data:
-        actor: 0
-        action: 6
+        actor: 10
+        action: 70
         duration: 0
     - rid: 5589630683674050576
       type: {class: SetSpeaker, ns: DialogueScripts, asm: Assembly-CSharp}
       data:
-        actor: 1
+        actor: 20
     - rid: 5589630683674050577
       type: {class: SetSpeaker, ns: DialogueScripts, asm: Assembly-CSharp}
       data:
-        actor: 0
+        actor: 10
     - rid: 5589630683674050578
       type: {class: SetSpeaker, ns: DialogueScripts, asm: Assembly-CSharp}
       data:
-        actor: 1
+        actor: 20
     - rid: 5589630683674050579
       type: {class: SetSpeaker, ns: DialogueScripts, asm: Assembly-CSharp}
       data:
-        actor: 0
+        actor: 10
     - rid: 5589630683674050580
       type: {class: SetSpeaker, ns: DialogueScripts, asm: Assembly-CSharp}
       data:
-        actor: 1
+        actor: 20
     - rid: 5589630683674050581
       type: {class: SetSpeaker, ns: DialogueScripts, asm: Assembly-CSharp}
       data:
-        actor: 0
+        actor: 10
     - rid: 5589630683674050582
       type: {class: SetSpeaker, ns: DialogueScripts, asm: Assembly-CSharp}
       data:
-        actor: 1
+        actor: 20
     - rid: 5589630683674050583
       type: {class: SetSpeaker, ns: DialogueScripts, asm: Assembly-CSharp}
       data:
-        actor: 0
+        actor: 10
     - rid: 5589630683674050584
       type: {class: SetSpeaker, ns: DialogueScripts, asm: Assembly-CSharp}
       data:
-        actor: 1
+        actor: 20
     - rid: 5589630683674050585
       type: {class: SetSpeaker, ns: DialogueScripts, asm: Assembly-CSharp}
       data:
-        actor: 0
+        actor: 10
     - rid: 5589630683674050586
       type: {class: SetSpeaker, ns: DialogueScripts, asm: Assembly-CSharp}
       data:
-        actor: 1
+        actor: 20
     - rid: 5589630683674050587
       type: {class: SetSpeaker, ns: DialogueScripts, asm: Assembly-CSharp}
       data:
-        actor: 0
+        actor: 10
     - rid: 5589630683674050588
       type: {class: SetSpeaker, ns: DialogueScripts, asm: Assembly-CSharp}
       data:
         actor: 1
-    - rid: 5589630683674050589
-      type: {class: SetSpeaker, ns: DialogueScripts, asm: Assembly-CSharp}
-      data:
-        actor: 0
     - rid: 5589630683674050590
       type: {class: SetSpeaker, ns: DialogueScripts, asm: Assembly-CSharp}
       data:
-        actor: 1
+        actor: 20
     - rid: 5589630683674050591
       type: {class: SetSpeaker, ns: DialogueScripts, asm: Assembly-CSharp}
       data:
-        actor: 0
+        actor: 10
     - rid: 5589630683674050592
       type: {class: SetSpeaker, ns: DialogueScripts, asm: Assembly-CSharp}
       data:
-        actor: 3
+        actor: 1000
+    - rid: 5589630683674050593
+      type: {class: SetSpeaker, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: 20
+    - rid: 5589630683674050594
+      type: {class: SetSpeaker, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: 10
 --- !u!1 &1867254347
 GameObject:
   m_ObjectHideFlags: 0
