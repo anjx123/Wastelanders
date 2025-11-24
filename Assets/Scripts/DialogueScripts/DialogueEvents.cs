@@ -18,10 +18,10 @@ namespace DialogueScripts
 
     public enum CharacterActor
     {
-        Jackie,
-        Cam,
-        Ives,
-        None,
+        Jackie = 10,
+        Cam = 20,
+        Ives = 30 ,
+        None = 1000,
     }
 
     public class SpriteChange : DialogueEvents, IEvent
@@ -48,27 +48,27 @@ namespace DialogueScripts
 
     public enum CharacterActions
     {
-        SetLeft,
-        SetMiddle,
-        SetRight,
-        SetOffscreenLeft,
-        SetOffscreenRight,
-        FadeIn,
-        FadeOut,
+        SetLeft = 10,
+        SetMiddle = 20,
+        SetRight = 30,
+        SetOffscreenLeft = 40,
+        SetOffscreenRight = 50,
+        FadeIn = 60,
+        FadeOut = 70,
     }
 
     /// Change the vertical positioning of the dialogue box. 
     public class VerticalLayoutChange : DialogueEvents, IEvent
     {
-        [SerializeField] private Layout layout = Layout.LOWER;
+        [SerializeField] private Layout layout = Layout.Lower;
         public Layout Layout => layout;
         public override void Execute() => this.Invoke();
     }
 
     public enum Layout
     {
-        LOWER,
-        UPPER
+        Lower = 10,
+        Upper = 20
     }
 
     /// Automatically advances this dialogue entry after it finishes. 
