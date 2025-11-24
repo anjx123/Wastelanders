@@ -660,7 +660,7 @@ MonoBehaviour:
     - rid: 5589630625525006346
       type: {class: AutoAdvanceAfter, ns: DialogueScripts, asm: Assembly-CSharp}
       data:
-        time: 1
+        Time: 1
     - rid: 5589630683674050565
       type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
       data:

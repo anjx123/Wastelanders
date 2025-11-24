@@ -11,8 +11,7 @@ namespace DialogueScripts
 
     public class SetSpeaker: DialogueEvents, IEvent
     {
-        [SerializeField] private CharacterActor actor = CharacterActor.Jackie;
-        public CharacterActor Actor => actor;
+        public CharacterActor actor = CharacterActor.Jackie;
         public override void Execute() => this.Invoke();
     }
 
@@ -26,23 +25,16 @@ namespace DialogueScripts
 
     public class SpriteChange : DialogueEvents, IEvent
     {
-        [SerializeField] private CharacterActor actor = CharacterActor.Jackie;
-        [SerializeField] private Sprite sprite;
-        public CharacterActor Actor => actor;
-        public Sprite Sprite => sprite;
-
+        public CharacterActor actor = CharacterActor.Jackie;
+        public Sprite sprite;
         public override void Execute() => this.Invoke();
     }
 
-
     public class ActorAction : DialogueEvents, IEvent
     {
-        [SerializeField] private CharacterActor actor = CharacterActor.Jackie;
-        [SerializeField] private CharacterActions action = CharacterActions.SetLeft;
-        [SerializeField] private float duration = 1.0f;
-        public CharacterActor Actor => actor;
-        public CharacterActions Action => action;
-        public float Duration => duration;
+        public CharacterActor actor = CharacterActor.Jackie;
+        public CharacterActions action = CharacterActions.SetLeft;
+        public float duration = 1.0f;
         public override void Execute() => this.Invoke();
     }
 
@@ -60,8 +52,7 @@ namespace DialogueScripts
     /// Change the vertical positioning of the dialogue box. 
     public class VerticalLayoutChange : DialogueEvents, IEvent
     {
-        [SerializeField] private Layout layout = Layout.Lower;
-        public Layout Layout => layout;
+        public Layout Layout = Layout.Lower;
         public override void Execute() => this.Invoke();
     }
 
@@ -74,8 +65,7 @@ namespace DialogueScripts
     /// Automatically advances this dialogue entry after it finishes. 
     public class AutoAdvanceAfter : DialogueEvents, IEvent
     {
-        [SerializeField] private float time = 0.5f;
-        public float Time => time;
+        public float Time = 0.5f;
         public override void Execute() => this.Invoke();
     }
 }
