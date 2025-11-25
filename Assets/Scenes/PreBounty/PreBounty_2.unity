@@ -598,8 +598,7 @@ MonoBehaviour:
     speaker: Cam
     sfxName: 
     picture: {fileID: 0}
-    events:
-    - rid: 5589630683674050593
+    events: []
   - content: "You know, I\u2019m not doing this just for the research."
     speaker: Cam
     sfxName: 
@@ -764,7 +763,7 @@ MonoBehaviour:
     - rid: 5589630683674050588
       type: {class: SetSpeaker, ns: DialogueScripts, asm: Assembly-CSharp}
       data:
-        actor: 1
+        actor: 20
     - rid: 5589630683674050590
       type: {class: SetSpeaker, ns: DialogueScripts, asm: Assembly-CSharp}
       data:
@@ -777,10 +776,6 @@ MonoBehaviour:
       type: {class: SetSpeaker, ns: DialogueScripts, asm: Assembly-CSharp}
       data:
         actor: 1000
-    - rid: 5589630683674050593
-      type: {class: SetSpeaker, ns: DialogueScripts, asm: Assembly-CSharp}
-      data:
-        actor: 20
     - rid: 5589630683674050594
       type: {class: SetSpeaker, ns: DialogueScripts, asm: Assembly-CSharp}
       data:
