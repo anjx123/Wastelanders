@@ -711,6 +711,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6018344303403229583}
     m_Modifications:
+    - target: {fileID: -6111598818340554650, guid: 69108d309b2cece4dbad3db2a665faf9, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 6f8ab552348e73941b245fe9ca454974, type: 3}
     - target: {fileID: 1659748562456849422, guid: 69108d309b2cece4dbad3db2a665faf9, type: 3}
       propertyPath: m_Name
       value: crosshairIcon
