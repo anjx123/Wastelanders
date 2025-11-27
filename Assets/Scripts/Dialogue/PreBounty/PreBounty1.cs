@@ -2,6 +2,7 @@ using LevelSelectInformation;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DialogueScripts;
 using Systems.Persistence;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -16,9 +17,9 @@ public class PreBounty1 : MonoBehaviour
 
     [SerializeField] private Transform ivesTarget;
     
-    [SerializeField] private DialogueWrapper JackieReminiscingDialogue;
-    [SerializeField] private DialogueWrapper BountyBoardDialogue;
-
+    [SerializeField] private DialogueEntryInUnityEditor[] JackieReminiscingDialogue;
+    [SerializeField] private DialogueEntryInUnityEditor[] BountyBoardDialogue;
+    
     [SerializeField] private float ivesMoveSpeed = 6f;
     
     public void Start()
@@ -33,7 +34,7 @@ public class PreBounty1 : MonoBehaviour
         
         yield return UIFadeScreenManager.Instance.FadeInLightScreen(1f);
         
-        yield return DialogueManager.Instance.StartDialogue(JackieReminiscingDialogue.Dialogue);
+        yield return DialogueBoxV2.Instance.Play(JackieReminiscingDialogue.Into());
 
         yield return DialogueSceneUtils.MoveCharacterToTarget(ives, ivesTarget, ivesMoveSpeed);
         
@@ -41,7 +42,7 @@ public class PreBounty1 : MonoBehaviour
         
         yield return new WaitForSeconds(1f);
         
-        yield return DialogueManager.Instance.StartDialogue(BountyBoardDialogue.Dialogue);
+        yield return DialogueBoxV2.Instance.Play(BountyBoardDialogue.Into());
         
         yield return UIFadeScreenManager.Instance.FadeInDarkScreen(1f);
     }
