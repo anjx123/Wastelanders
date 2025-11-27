@@ -41,6 +41,7 @@ public class FrogSlimeFightDialogue : DialogueClasses
     [SerializeField] CinemachineVirtualCamera startingCamera;
     [SerializeField] CinemachineVirtualCamera dynamicCamera;
     [SerializeField] Image ivesImage;
+    [SerializeField] Image marshBG;
     [SerializeField] private SpriteRenderer treeOverlay;
     [SerializeField] private SpriteRenderer backGround;
     [SerializeField] private Sprite frogDeathSprite;
@@ -120,7 +121,9 @@ public class FrogSlimeFightDialogue : DialogueClasses
             yield return new WaitForSeconds(BRIEF_PAUSE);
             yield return StartCoroutine(DialogueManager.Instance.StartDialogue(ivesInstruction));
             yield return StartCoroutine(FadeImage(ivesImage, 1f, false));
+            yield return StartCoroutine(FadeImage(marshBG, 1f, false));
             ivesImage.gameObject.SetActive(false);
+            marshBG.gameObject.SetActive(false);
 
             //Jackie walks in the scene
             yield return StartCoroutine(CombatManager.Instance.FadeInLightScreen(1.5f));
@@ -256,7 +259,7 @@ public class FrogSlimeFightDialogue : DialogueClasses
         yield return new WaitForSeconds(BRIEF_PAUSE);
         //Beetle is spawned in and follows Jackie
         Vector3 bottomLeft = mainCamera.ViewportToWorldPoint(new Vector3(0, 0.6f, mainCamera.nearClipPlane));
-        GameObject scoutBeetleObj = Instantiate(scoutBeetlePrefab, bottomLeft + new Vector3(-0.3f, 0, 0), Quaternion.identity);
+        GameObject scoutBeetleObj = Instantiate(scoutBeetlePrefab, bottomLeft + new Vector3(-0.2f, 0, 0), Quaternion.identity);
         ScoutBeetle scoutBeetle = scoutBeetleObj.GetComponent<ScoutBeetle>();
         scoutBeetle.OutOfCombat();
         scoutBeetle.UnTargetable();
