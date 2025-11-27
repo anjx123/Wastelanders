@@ -1,9 +1,8 @@
 // SceneInitializer.cs (Upgraded)
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System;
+using DialogueScripts;
 using UI_Toolkit;
 
 #nullable enable
@@ -66,4 +65,5 @@ public class SceneInitializerPrefabs
     public CombatFadeScreenHandler combatFadeScreenManager = null!;
     public PopUpNotificationManager popupManager = null!;
     public GameOver gameOver = null!;
+    public DialogueBoxV2 dialogueBoxV2 = null!;
 }
