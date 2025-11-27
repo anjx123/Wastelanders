@@ -218,10 +218,10 @@ public class TutorialIntroduction : DialogueClasses
         foreach (GameObject trainingDummy in trainingDummies)
         {
             trainingDummy.GetComponent<SpriteRenderer>().sortingOrder -= 1;
-            yield return StartCoroutine(ives.MoveToPosition(trainingDummy.transform.position, 1.2f, 0.8f));
-            yield return new WaitForSeconds(0.6f);
+            yield return StartCoroutine(ives.MoveToPosition(trainingDummy.transform.position, 0.8f, 0.8f));
+            yield return new WaitForSeconds(0.3f);
             Destroy(trainingDummy);
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(0.3f);
         }
 
         // Have Ives fight and teach clashing now.

@@ -41,13 +41,18 @@ public class DialogueManager : MonoBehaviour
         stageDirectionCanvas.sortingOrder = UISortOrder.CharacterActors.GetOrder();
         
         activeDialogueBox = pictureDialogueBox;
-        dialogueCanvas.sortingOrder = UISortOrder.DialogueBox.GetOrder();
+        ChangeDialogueBoxOrder(UISortOrder.DialogueBox.GetOrder());
     }
 
     //Manager is going to listen to a bunch of events that then cause it to gain new sentences and 
     void Start()
     {
         ClearPanel();
+    }
+
+    public void ChangeDialogueBoxOrder(int order)
+    {
+        dialogueCanvas.sortingOrder = order;
     }
 
     public bool IsInDialogue()

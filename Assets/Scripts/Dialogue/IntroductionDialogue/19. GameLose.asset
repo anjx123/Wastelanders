@@ -18,12 +18,13 @@ MonoBehaviour:
     displayingImage: {fileID: 21300000, guid: 084171bdb9370ac43b84a6350416b15c, type: 3}
     sfx: 
     broadcastAnEvent: 0
-  - bodyText: 'You were really going for it, and so I acted out of instinct. '
+  - bodyText: There's no need to hold back on your end, play as many attacks as you
+      can on your turn!
     speakerName: Ives
-    displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
+    displayingImage: {fileID: 21300000, guid: 87cb7c6c6588a4a3a957b707239abbf0, type: 3}
     sfx: 
     broadcastAnEvent: 0
-  - bodyText: Here, let me help you get back up.
+  - bodyText: Here, let me help you get back up. Let's run it back.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 87cb7c6c6588a4a3a957b707239abbf0, type: 3}
     sfx: 
