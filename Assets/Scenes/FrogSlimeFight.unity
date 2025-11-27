@@ -856,7 +856,6 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1956352441}
   - {fileID: 189897195}
   m_Father: {fileID: 1877041900}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2015,8 +2014,7 @@ MonoBehaviour:
   closeUpCamera: {fileID: 811157971}
   startingCamera: {fileID: 965254509}
   dynamicCamera: {fileID: 1542478170}
-  ivesImage: {fileID: 1956352442}
-  marshBG: {fileID: 0}
+  marshBG: {fileID: 189897196}
   treeOverlay: {fileID: 1450041789}
   backGround: {fileID: 0}
   frogDeathSprite: {fileID: 21300000, guid: 87829d35cc4de8b4db02b857e0431956, type: 3}
@@ -2030,12 +2028,12 @@ MonoBehaviour:
     broadcastAnEvent: 0
   - bodyText: They spend the night setting up base camp. Tension fills the camp,
       and Candidates are restless throughout the night.
-    speakerName: 
+    speakerName: Narration
     displayingImage: {fileID: 0}
     sfx: 
     broadcastAnEvent: 0
   - bodyText: Finally, the morning of the exam arrives.
-    speakerName: 
+    speakerName: Narration
     displayingImage: {fileID: 0}
     sfx: 
     broadcastAnEvent: 0
@@ -2080,6 +2078,58 @@ MonoBehaviour:
     displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
     sfx: 
     broadcastAnEvent: 0
+  testBegins:
+  - content: Good morning, Candidates. As you all know...
+    speaker: Ives
+    sfxName: 
+    picture: {fileID: 0}
+    events:
+    - rid: 5589630762363650048
+    - rid: 5589630762363650049
+    - rid: 5589630762363650053
+    - rid: 5589630762363650050
+  - content: This exam will emulate a real NITES wasteland expedition.
+    speaker: Ives
+    sfxName: 
+    picture: {fileID: 0}
+    events:
+    - rid: 5589630762363650057
+  - content: The purpose of these expeditions are to extract as much valuable Waste
+      Products that cultivate inside mutated creatures as we can.
+    speaker: Ives
+    sfxName: 
+    picture: {fileID: 0}
+    events: []
+  - content: 'These Products are essential to combat the further spread of the waste
+      as they help us produce weapons and energy. '
+    speaker: Ives
+    sfxName: 
+    picture: {fileID: 0}
+    events: []
+  - content: 'As such, this exam will test your ability to exploit and extract as
+      much valuable Waste Products from the local flora and fauna as you can. '
+    speaker: Ives
+    sfxName: 
+    picture: {fileID: 0}
+    events: []
+  - content: 'The examiners will be discreetly evaluating you, and will not interfere
+      with the exam unless there is a serious emergency. '
+    speaker: Ives
+    sfxName: 
+    picture: {fileID: 0}
+    events: []
+  - content: You have until noon tomorrow to collect as many valuable Waste Products
+      as you can.
+    speaker: Ives
+    sfxName: 
+    picture: {fileID: 0}
+    events:
+    - rid: 5589630762363650058
+  - content: Good luck, your time starts now.
+    speaker: Ives
+    sfxName: 
+    picture: {fileID: 0}
+    events: []
   jackieStrategyPlan:
   - bodyText: 'Hmm let me come up with a plan, I know that the more dangerous the
       waste enemy, the higher quality the Waste Product they drop when slain.  '
@@ -2205,6 +2255,42 @@ MonoBehaviour:
     displayingImage: {fileID: 0}
     sfx: 
     broadcastAnEvent: 0
+  references:
+    version: 2
+    RefIds:
+    - rid: 5589630762363650048
+      type: {class: ActorAction, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: 30
+        action: 20
+        duration: 0
+    - rid: 5589630762363650049
+      type: {class: ActorAction, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: 30
+        action: 70
+        duration: 0
+    - rid: 5589630762363650050
+      type: {class: ActorAction, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: 30
+        action: 60
+        duration: 1
+    - rid: 5589630762363650053
+      type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: 30
+        sprite: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
+    - rid: 5589630762363650057
+      type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: 30
+        sprite: {fileID: 21300000, guid: e6bd7efa92cdc3540bcf7b472fbcdba8, type: 3}
+    - rid: 5589630762363650058
+      type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: 30
+        sprite: {fileID: 21300000, guid: 85e302f93093f564290df1bd57119113, type: 3}
 --- !u!1 &1218694500
 GameObject:
   m_ObjectHideFlags: 0
@@ -3417,81 +3503,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 508165477}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1956352440
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1956352441}
-  - component: {fileID: 1956352443}
-  - component: {fileID: 1956352442}
-  m_Layer: 5
-  m_Name: IvesDialogue
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &1956352441
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1956352440}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 596087403}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0}
-  m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 120, y: 200}
-  m_SizeDelta: {x: 400, y: 400}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1956352442
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1956352440}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!222 &1956352443
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1956352440}
-  m_CullTransparentMesh: 1
 --- !u!1001 &2024208592
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -4,6 +4,7 @@ using SceneBuilder;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DialogueScripts;
 using UnityEngine;
 using UnityEngine.UI;
 using static BattleIntroEnum;
@@ -40,7 +41,6 @@ public class FrogSlimeFightDialogue : DialogueClasses
     [SerializeField] CinemachineVirtualCamera closeUpCamera;
     [SerializeField] CinemachineVirtualCamera startingCamera;
     [SerializeField] CinemachineVirtualCamera dynamicCamera;
-    [SerializeField] Image ivesImage;
     [SerializeField] Image marshBG;
     [SerializeField] private SpriteRenderer treeOverlay;
     [SerializeField] private SpriteRenderer backGround;
@@ -49,6 +49,7 @@ public class FrogSlimeFightDialogue : DialogueClasses
 
     [SerializeField] private List<DialogueText> sceneNarration;
     [SerializeField] private List<DialogueText> ivesInstruction;
+    [SerializeField] private DialogueEntryInUnityEditor[] testBegins;
     [SerializeField] private List<DialogueText> jackieStrategyPlan;
     // After the frog enters the scene
     [SerializeField] private List<DialogueText> andNowWeWait;
@@ -117,12 +118,16 @@ public class FrogSlimeFightDialogue : DialogueClasses
             yield return new WaitForSeconds(BRIEF_PAUSE);
 
             //Ives Talks to the examinees
-            yield return StartCoroutine(FadeImage(ivesImage, 1f, true));
             yield return new WaitForSeconds(BRIEF_PAUSE);
-            yield return StartCoroutine(DialogueManager.Instance.StartDialogue(ivesInstruction));
-            yield return StartCoroutine(FadeImage(ivesImage, 1f, false));
+            yield return StartCoroutine(DialogueBoxV2.Instance.Play(testBegins.Into()));
+            new ActorAction()
+            {
+                actor = CharacterActor.Ives,
+                action = CharacterActions.FadeOut,
+                duration = 1f,
+            }.Invoke();
+            yield return new WaitForSeconds(1f);
             yield return StartCoroutine(FadeImage(marshBG, 1f, false));
-            ivesImage.gameObject.SetActive(false);
             marshBG.gameObject.SetActive(false);
 
             //Jackie walks in the scene
@@ -259,7 +264,7 @@ public class FrogSlimeFightDialogue : DialogueClasses
         yield return new WaitForSeconds(BRIEF_PAUSE);
         //Beetle is spawned in and follows Jackie
         Vector3 bottomLeft = mainCamera.ViewportToWorldPoint(new Vector3(0, 0.6f, mainCamera.nearClipPlane));
-        GameObject scoutBeetleObj = Instantiate(scoutBeetlePrefab, bottomLeft + new Vector3(-0.2f, 0, 0), Quaternion.identity);
+        GameObject scoutBeetleObj = Instantiate(scoutBeetlePrefab, bottomLeft + new Vector3(-0.1f, 0, 0), Quaternion.identity);
         ScoutBeetle scoutBeetle = scoutBeetleObj.GetComponent<ScoutBeetle>();
         scoutBeetle.OutOfCombat();
         scoutBeetle.UnTargetable();
