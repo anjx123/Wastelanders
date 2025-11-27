@@ -40,6 +40,6 @@ MonoBehaviour:
     broadcastAnEvent: 0
   - bodyText: "Let\u2019s pick a card and target the enemy!"
     speakerName: Ives
-    displayingImage: {fileID: 21300000, guid: 84d19d73f4fee204d8d42cc16de51cf7, type: 3}
+    displayingImage: {fileID: 21300000, guid: 6f8ab552348e73941b245fe9ca454974, type: 3}
     sfx: 
     broadcastAnEvent: 1
