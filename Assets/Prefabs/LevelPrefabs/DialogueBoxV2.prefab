@@ -822,6 +822,8 @@ MonoBehaviour:
   whoView: {fileID: 2409553594880044890}
   imgView: {fileID: 1471468307134417215}
   boxLayout: {fileID: 5276536882672644018}
+  canvas: {fileID: 6911481843796267068}
   txt: {fileID: 3533872528902881567}
   who: {fileID: 120644800469564911}
   img: {fileID: 4973583615778877089}
+  typewriterRate: 50

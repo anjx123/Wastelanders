@@ -14,8 +14,11 @@ namespace DialogueScripts
         {
             EditorGUI.BeginProperty(position, label, property);
 
+            if (!property.isExpanded) 
+                property.isExpanded = true;
+            
             object? targetObject = property.managedReferenceValue;
-            label.text = targetObject?.GetType().Name;
+            label.text = targetObject?.GetType().Name ?? "Illegal Event";
 
             EditorGUI.PropertyField(position, property, label, true);
             EditorGUI.EndProperty();

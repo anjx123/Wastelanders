@@ -14,6 +14,7 @@ namespace DialogueScripts
         [SerializeField] private TextMeshProUGUI whoView;
         [SerializeField] private Image imgView;
         [SerializeField] private RectTransform boxLayout;
+        [SerializeField] private Canvas canvas;
 
         [SerializeField] private GameObject txt;
         [SerializeField] private GameObject who;
@@ -39,7 +40,8 @@ namespace DialogueScripts
 
             this.Subscribe<AutoAdvanceAfter>(SetAutoAdvance);
             this.Subscribe<VerticalLayoutChange>(SetVerticalLayout);
-            
+
+            canvas.sortingOrder = UISortOrder.DialogueBox.GetOrder();
             gameObject.SetActive(false);
         }
         public IEnumerator Play(DialogueEntry[] entries)
@@ -114,8 +116,8 @@ namespace DialogueScripts
             const float BOX_Y = 318.9375f;
             boxLayout.anchoredPosition = BOX_Y * e.Layout switch
             {
-                Layout.LOWER => Vector2.down,
-                Layout.UPPER => Vector2.up,
+                Layout.Lower => Vector2.down,
+                Layout.Upper => Vector2.up,
                 _ => throw new ArgumentOutOfRangeException()
             };
         }
