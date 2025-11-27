@@ -14,7 +14,7 @@ public class CounterStrike : StaffCards
     {
         lowerBound = 2;
         upperBound = 4;
-        Speed = 2;
+        Speed = 4;
 
         myName = "Counter Strike";
         description = "Block and gain Flow equal to damage blocked. Then make an attack and gain 1 Flow on hit.";
