@@ -34,10 +34,12 @@ public class FrogSlimeFightDialogue : DialogueClasses
 
 
     [SerializeField] private Camera mainCamera;
+    [SerializeField] private CinemachineBrain mainBrain;
     [SerializeField] private GameObject scoutBeetlePrefab;
     [SerializeField] CinemachineVirtualCamera closeUpCamera;
     [SerializeField] Image ivesImage;
     [SerializeField] private SpriteRenderer treeOverlay;
+    [SerializeField] private SpriteRenderer backGround;
     [SerializeField] private Sprite frogDeathSprite;
     [SerializeField] private Sprite jackieHoldingCrystalSprite;
 
@@ -129,9 +131,15 @@ public class FrogSlimeFightDialogue : DialogueClasses
             yield return jackieWander;
             yield return StartCoroutine(WalkWhileScreenFades());
             //Jackie Hides behind tree
+
             closeUpCamera.Priority = 2;
             yield return new WaitForSeconds(1f);
-            jackie.GetComponent<SpriteRenderer>().sortingOrder = treeOverlay.sortingOrder - 1;
+
+            var jackieSprite = jackie.GetComponent<SpriteRenderer>();
+            var jackieSpriteLayerName = jackieSprite.sortingLayerName;
+            var jackieSpriteSortingOrder = jackieSprite.sortingOrder;
+            jackieSprite.sortingLayerName = treeOverlay.sortingLayerName;
+            jackieSprite.sortingOrder = treeOverlay.sortingOrder - 1;
             jackie.gameObject.transform.position = treeHidingPositionJackie.position;
             jackie.gameObject.transform.rotation = treeHidingPositionJackie.rotation;
             jackie.animator.enabled = false;
@@ -147,25 +155,30 @@ public class FrogSlimeFightDialogue : DialogueClasses
             //Jackie Misses and frog runs away with jackie chasing it
             yield return new WaitForSeconds(1f);
             jackie.gameObject.transform.rotation = new Quaternion(0,0,0,0);
-            jackie.gameObject.transform.position = treeHidingPositionJackie.position + new Vector3(0.8f, 0, 0);
+            jackie.gameObject.transform.position = treeHidingPositionJackie.position + new Vector3(1f, 0, 0);
             jackie.animator.enabled = true;
-            jackie.GetComponent<SpriteRenderer>().sortingOrder = treeOverlay.sortingOrder + 1;
             jackie.AttackAnimation(PistolCards.PISTOL_ANIMATION_NAME);
             AudioManager.Instance?.PlaySFX(PistolCards.PISTOL_SOUND_FX_NAME);
 
             yield return StartCoroutine(MakeFrogJump(frog, 1f));
             yield return StartCoroutine(frog.MoveToPosition(frogConfrontPosition.position, 0f, 1.2f, outOfScreen.position));
             yield return StartCoroutine(DialogueManager.Instance.StartDialogue(jackiePostMissedShot));
+            var oldStyle = mainBrain.m_DefaultBlend;
+            mainBrain.m_DefaultBlend = new CinemachineBlendDefinition(oldStyle.m_Style, 2.0f);
             closeUpCamera.Priority = 0;
-            yield return StartCoroutine(jackie.MoveToPosition(frogConfrontPosition.position, 2f, 1.6f));
-            yield return new WaitForSeconds(MEDIUM_PAUSE);
+            jackieSprite.sortingLayerName = jackieSpriteLayerName;
+            jackieSprite.sortingOrder = jackieSpriteSortingOrder;
+            yield return StartCoroutine(jackie.MoveToPosition(frogConfrontPosition.position, 2f, 2f));
             frog.FaceLeft();
-            
+            mainBrain.m_DefaultBlend = oldStyle;
+
             //Other Enemies walk in
             StartCoroutine(frog2.MoveToPosition(frog2WalkIn.position, 0f, 2f));
             yield return StartCoroutine(slime.MoveToPosition(slimeWalkIn.position, 0f, 2f));
             yield return new WaitForSeconds(MEDIUM_PAUSE);
-            
+
+
+
             yield return StartCoroutine(DialogueManager.Instance.StartDialogue(jackiePreCombat));
         } else {
             GameStateManager.Instance.JumpToCombat = false;
