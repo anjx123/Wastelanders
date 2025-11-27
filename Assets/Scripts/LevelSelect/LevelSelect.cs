@@ -1,11 +1,6 @@
-using BountySystem;
 using LevelSelectInformation;
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public class LevelSelect : MonoBehaviour
 {
@@ -70,6 +65,11 @@ public class LevelSelect : MonoBehaviour
     public void PreBounty0()
     {
         OpenScene(SceneData.Get<SceneData.PreBounty0>().SceneName);
+    }
+    
+    public void PreBounty2()
+    {
+        OpenScene(SceneData.Get<SceneData.PreBounty2>().SceneName);
     }
 
     public void PrincessFrogBounties()

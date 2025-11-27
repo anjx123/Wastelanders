@@ -1,34 +1,58 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
-// Class that manages the lifecycle of Static Events, you don't need to explicitly call unsubscribe if you don't need to.
-public abstract class EventHandler<TEvent> : MonoBehaviour where TEvent : IEvent
+public class EventLifecycleHost : MonoBehaviour
 {
-    private readonly HashSet<Action<TEvent>> subscribedActions = new();
+    private readonly Dictionary<Delegate, ISubscription> activeSubscriptions = new();
 
     private void OnEnable()
     {
-        subscribedActions.ToList().ForEach(EventBus.Register);
+        foreach (var sub in activeSubscriptions.Values) sub.Enable();
     }
 
     private void OnDisable()
     {
-        subscribedActions.ToList().ForEach(EventBus.Unregister);
+        foreach (var sub in activeSubscriptions.Values) sub.Disable();
     }
 
-    public EventHandler<TEvent> Subscribe(Action<TEvent> action)
+    public void AddSubscription<T>(Action<T> handler) where T : IEvent
     {
-        if (subscribedActions.Add(action))
-            EventBus.Register(action);
-        return this;
+        if (activeSubscriptions.ContainsKey(handler)) return;
+
+        EventSubscription<T> subscription = new(handler);
+
+        activeSubscriptions.Add(handler, subscription);
+        if (enabled && gameObject.activeInHierarchy)
+            subscription.Enable();
     }
 
-    public EventHandler<TEvent> Unsubscribe(Action<TEvent> action)
+    public void RemoveSubscription<T>(Action<T> handler) where T : IEvent
     {
-        if (subscribedActions.Remove(action))
-            EventBus.Unregister(action);
-        return this;
+        if (activeSubscriptions.TryGetValue(handler, out var subscription))
+        {
+            if (enabled && gameObject.activeInHierarchy)
+                subscription.Disable();
+            
+            activeSubscriptions.Remove(handler);
+        }
+    }
+
+    private void OnDestroy()
+    {
+        foreach (var sub in activeSubscriptions.Values) sub.Disable();
+        activeSubscriptions.Clear();
+    }
+
+    private interface ISubscription
+    {
+        void Enable();
+        void Disable();
+    }
+
+    private record EventSubscription<T>(Action<T> Callback) : ISubscription where T : IEvent
+    {
+        public void Enable() => EventBus.Register(Callback);
+        public void Disable() => EventBus.Unregister(Callback);
     }
 }

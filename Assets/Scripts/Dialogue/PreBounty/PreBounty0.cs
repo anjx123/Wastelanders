@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,7 +5,7 @@ using UnityEngine;
 namespace Dialogue.PreBounty {
     public class PreBounty0 : MonoBehaviour {
         [SerializeField] private DialogueWrapper ailinDialogue;
-        [SerializeField] private Camera camera;
+        [SerializeField] private new Camera camera;
         [SerializeField] private List<Transform> keyframes;
         [SerializeField] private List<float> zoomValues; // ⬅ Add this
         [SerializeField] private float panDuration = 1.5f;
