@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using DialogueScripts;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "NewDialogue", menuName = "Dialogue/DialogueWrapper", order = 1)]

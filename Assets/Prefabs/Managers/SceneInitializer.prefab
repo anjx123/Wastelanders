@@ -55,3 +55,4 @@ MonoBehaviour:
     combatFadeScreenManager: {fileID: -2665817779871646106, guid: 823a9f1bbe7e4124196bcbe769a6c950, type: 3}
     popupManager: {fileID: -6348610105375762745, guid: dd2d1aac4fcb04e4995a2a5801677b35, type: 3}
     gameOver: {fileID: 3262440243184028450, guid: 8b6d446295f329442acd33132a6a5c1a, type: 3}
+    dialogueBoxV2: {fileID: 5527553069504941489, guid: 33c870c32d0974dd4945fec924d1223e, type: 3}

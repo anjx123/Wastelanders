@@ -12,8 +12,7 @@ public class BattleIntro : MonoBehaviour
     private void Awake()
     {
         canvas.sortingOrder = UISortOrder.CombatIntro.GetOrder();
-        this.AddComponent<BattleIntroEventHandler>()
-            .Subscribe(PlayAnimation);
+        this.Subscribe<BattleIntroEvent>(PlayAnimation);
     }
 
     private void PlayAnimation(BattleIntroEvent animationEvent)
@@ -21,8 +20,6 @@ public class BattleIntro : MonoBehaviour
         animator.SetTrigger(animationEvent.AnimationEnum.AnimationName);
         backgroundAnimator.SetTrigger(backgroundAnimation);
     }
-
-    private class BattleIntroEventHandler : EventHandler<BattleIntroEvent> { }
 }
 
 public record BattleIntroEvent(BattleIntroEnum AnimationEnum) : IEvent;

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using DialogueScripts;
 using UI_Toolkit;
 using UnityEngine;
 
@@ -16,6 +17,9 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] private Canvas dialogueCanvas = null!;
     private List<DialogueText> sentences = new();
 
+    [SerializeField] private StageDirector stageDirectorPrefab = null!;
+    [SerializeField] private Canvas stageDirectionCanvas = null!;
+
     private bool inDialogue = false;
     private bool wasSkipping = false;
 
@@ -31,6 +35,11 @@ public class DialogueManager : MonoBehaviour
         {
             Destroy(this);
         }
+
+
+        Instantiate(stageDirectorPrefab, stageDirectionCanvas.transform);
+        stageDirectionCanvas.sortingOrder = UISortOrder.CharacterActors.GetOrder();
+        
         activeDialogueBox = pictureDialogueBox;
         dialogueCanvas.sortingOrder = UISortOrder.DialogueBox.GetOrder();
     }
@@ -65,6 +74,17 @@ public class DialogueManager : MonoBehaviour
 
     void AddLineToHistory(DialogueText text)
     {
+        dialogueHistory.Add(text);
+    }
+
+    public void AddDialogueEntryToHistory(DialogueEntry entry)
+    {
+        var text = new DialogueText(
+            entry.content, 
+            entry.speaker,
+            entry.picture
+        );
+
         dialogueHistory.Add(text);
     }
 
