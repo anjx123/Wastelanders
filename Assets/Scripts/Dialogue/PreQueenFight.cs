@@ -506,38 +506,7 @@ public class PreQueenFight : DialogueClasses
             ives.DeEmphasize();
             theQueen.DeEmphasize();
 
-            ives.InCombat();
-            jackie.InCombat();
-            theQueen.InCombat();
-            theQueen.SetReturnPosition(theQueen.transform.position);
-            theQueen.IntializeChildBeetles(queenGuardBeetles);
-            for (int i = 0; i < queenGuardBeetles.Count; i++)
-            {
-                queenGuardBeetles[i].InCombat();
-                queenGuardBeetles[i].SetReturnPosition(queenGuardBeetles[i].transform.position);
-            }
-            foreach (Crystals crystal in crystals)
-            {
-                crystal.InCombat();
-            }
-
-            CombatManager.Instance.BeginCombat();
-            new BattleIntroEvent(Get<ClashIntro>()).Invoke();
-            BeginQueenCombat();
-            yield return new WaitUntil(() => CombatManager.Instance.GameState == GameState.GAME_WIN);
-            AudioManager.Instance.FadeOutCurrentBackgroundTrack(2f);
-
-            GameStateManager.Instance.FirstTimeFinished = GameStateManager.Instance.CurrentLevelProgress < StageInformation.PRINCESS_FROG_FIGHT.LevelID;
-            GameStateManager.Instance.UpdateLevelProgress(StageInformation.PRINCESS_FROG_FIGHT);
-
-            yield return new WaitForSeconds(1.5f);
-            DialogueManager.Instance.MoveBoxToBottom();
-
-            yield return StartCoroutine(CombatManager.Instance.FadeInDarkScreen(1.5f));
-
-            yield return StartCoroutine(DialogueManager.Instance.StartDialogue(PostFight.Dialogue));
-
-            GameStateManager.Instance.LoadScene(SceneData.Get<SceneData.PostQueenFight>().SceneName);
+            yield return UIFadeScreenManager.Instance.FadeInDarkScreen(5f);
         }
         
     }
