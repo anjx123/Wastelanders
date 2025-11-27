@@ -184,7 +184,6 @@ public class BeetleFight : DialogueClasses
     {
         CombatManager.Instance.GameState = GameState.OUT_OF_COMBAT;
         UIFadeScreenManager.Instance.SetDarkScreen();
-        yield return new WaitForSeconds(0.2f);
         SetUpEnemyLists();
         SetUpCombatStatus();
         if (!GameStateManager.Instance.JumpToCombat)

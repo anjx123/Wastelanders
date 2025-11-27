@@ -242,7 +242,7 @@ public class FrogSlimeFightDialogue : DialogueClasses
         yield return new WaitForSeconds(BRIEF_PAUSE);
         //Beetle is spawned in and follows Jackie
         Vector3 bottomLeft = mainCamera.ViewportToWorldPoint(new Vector3(0, 0.6f, mainCamera.nearClipPlane));
-        GameObject scoutBeetleObj = Instantiate(scoutBeetlePrefab, bottomLeft + new Vector3(-0.32f, 0, 0), Quaternion.identity);
+        GameObject scoutBeetleObj = Instantiate(scoutBeetlePrefab, bottomLeft + new Vector3(-0.3f, 0, 0), Quaternion.identity);
         ScoutBeetle scoutBeetle = scoutBeetleObj.GetComponent<ScoutBeetle>();
         scoutBeetle.OutOfCombat();
         scoutBeetle.UnTargetable();
@@ -254,7 +254,6 @@ public class FrogSlimeFightDialogue : DialogueClasses
 
         GameStateManager.Instance.UpdateLevelProgress(StageInformation.BEETLE_STAGE);
         GameStateManager.Instance.LoadScene(SceneData.Get<SceneData.BeetleFight>().SceneName);
-        yield break;
     }
     // In case players decide to bring spawnable enemies and they are the last ones alive.
     private void ReviveJackie()
