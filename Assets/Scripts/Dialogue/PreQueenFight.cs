@@ -5,13 +5,23 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.ConstrainedExecution;
 using Systems.Persistence;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using static BattleIntroEnum;
 
 //@author: Andrew
 public class PreQueenFight : DialogueClasses
 {
+    // demo cutoff
+    [SerializeField] private TextMeshProUGUI endofdemotext;
+    [SerializeField] private TextMeshProUGUI wishlisttext;
+    [SerializeField] private GameObject mainMenuButton;
+    
+    // anrui if you see this you're really not gonna like this...
+    [SerializeField] private TextMeshProUGUI backgroundtext;
+    
     [SerializeField] private Jackie jackie;
     [SerializeField] private Ives ives;
     [SerializeField] private Transform playerCombatTransform;
@@ -82,6 +92,21 @@ public class PreQueenFight : DialogueClasses
 
     private const float BRIEF_PAUSE = 0.2f; // For use after an animation to make it visually seem smoother
     private const float MEDIUM_PAUSE = 1f; //For use after a text box comes down and we want to add some weight to the text.
+
+    private void Start()
+    {
+        Color c = endofdemotext.color;
+        c.a = 0;
+        
+        endofdemotext.color = c;
+        wishlisttext.color = c;
+        mainMenuButton.GetComponent<TextMeshProUGUI>().color = c;
+        mainMenuButton.GetComponent<Button>().interactable = false;
+        
+        c = backgroundtext.color;
+        c.a = 0;
+        backgroundtext.color = c;
+    }
 
     protected override void GameStateChange(GameState gameState)
     {
@@ -163,9 +188,9 @@ public class PreQueenFight : DialogueClasses
 
 
 
-
+        
         if (!GameStateManager.Instance.JumpToCombat)
-        {
+        {   
             yield return StartCoroutine(DialogueManager.Instance.StartDialogue(initialPlanByJackie.Dialogue));
 
             //Activate First Plan
@@ -506,9 +531,32 @@ public class PreQueenFight : DialogueClasses
             ives.DeEmphasize();
             theQueen.DeEmphasize();
 
-            yield return UIFadeScreenManager.Instance.FadeInDarkScreen(5f);
+            yield return StartCoroutine(FadeTMP(backgroundtext, 2f));
+            yield return new WaitForSeconds(MEDIUM_PAUSE);
+            yield return StartCoroutine(FadeTMP(endofdemotext, 2f));
+            yield return new WaitForSeconds(MEDIUM_PAUSE);
+            yield return StartCoroutine(FadeTMP(wishlisttext, 2f));
+            yield return new WaitForSeconds(MEDIUM_PAUSE);
+            mainMenuButton.GetComponent<Button>().interactable = true;
+            yield return StartCoroutine(FadeTMP(mainMenuButton.GetComponent<TextMeshProUGUI>(), 1f));
         }
         
+    }
+    
+    public IEnumerator FadeTMP(TextMeshProUGUI text, float duration)
+    {
+        Color c = text.color;
+        c.a = 0;
+        text.color = c;
+
+        float time = 0f;
+        while (time < duration)
+        {
+            time += Time.deltaTime;
+            c.a = Mathf.Clamp01(time / duration);
+            text.color = c;
+            yield return null;
+        }
     }
 
     void BeginQueenCombat()
