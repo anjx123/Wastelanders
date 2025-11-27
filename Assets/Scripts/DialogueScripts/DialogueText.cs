@@ -1,7 +1,7 @@
-using System.Collections;
 using System.Collections.Generic;
+using DialogueScripts;
 using UnityEngine;
-using UnityEngine.UI;
+
 
 [System.Serializable]
 public class DialogueText
