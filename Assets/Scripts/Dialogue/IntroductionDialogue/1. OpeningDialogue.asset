@@ -14,24 +14,38 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogue:
   - bodyText: '[The City of New Haven - East Wall Boot Camp]  '
-    speakerName: 
+    speakerName: 'Narration:'
     displayingImage: {fileID: 0}
     sfx: 
     broadcastAnEvent: 0
-  - bodyText: Hey, have you heard? Apparently, Jackie is trying out for the NITES
-      exam again.
+  - bodyText: "Hey, you hear the news? Jackie\u2019s taking the NITES exam again."
     speakerName: Laid-back Soldier
     displayingImage: {fileID: 0}
     sfx: 
     broadcastAnEvent: 1
-  - bodyText: What? So soon? After her performance last year, do you really think
-      she is prepared to try again?
+  - bodyText: Already? After how badly she froze up last year?
     speakerName: Puzzled Soldier
     displayingImage: {fileID: 0}
     sfx: 
+    broadcastAnEvent: 0
+  - bodyText: "You\u2019d think she\u2019d wait a little longer before embarrassing
+      herself again."
+    speakerName: Puzzled Soldier
+    displayingImage: {fileID: 0}
+    sfx: 
+    broadcastAnEvent: 0
+  - bodyText: "Yeah. If it were me, I\u2019d take it slow... Take a few years to
+      train, live life a little before risking it you know?"
+    speakerName: Laid-back Soldier
+    displayingImage: {fileID: 0}
+    sfx: 
     broadcastAnEvent: 1
-  - bodyText: "Beats me. If I were her, I\u2019d take it easy and spend a couple
-      more years training. "
+  - bodyText: Hah, hard to blame you.
+    speakerName: Laid-back Soldier
+    displayingImage: {fileID: 0}
+    sfx: 
+    broadcastAnEvent: 1
+  - bodyText: Hah, hard to blame you.
     speakerName: Laid-back Soldier
     displayingImage: {fileID: 0}
     sfx: 
@@ -54,13 +68,21 @@ MonoBehaviour:
     displayingImage: {fileID: 0}
     sfx: 
     broadcastAnEvent: 1
-  - bodyText: Right, Captain Ailin, the legendary NITES hero. I guess going on NITES
-      Wasteland expeditions runs in the family. I think life inside the Wall is much
-      more peaceful.
+  - bodyText: Right! The legendary NITES Captain Ailin!
     speakerName: Laid-back Soldier
     displayingImage: {fileID: 0}
     sfx: 
     broadcastAnEvent: 1
+  - bodyText: 'I guess going on these Wasteland expeditions runs in the family. '
+    speakerName: Laid-back Soldier
+    displayingImage: {fileID: 0}
+    sfx: 
+    broadcastAnEvent: 0
+  - bodyText: Though I still think life inside the Wall is much more peaceful.
+    speakerName: Laid-back Soldier
+    displayingImage: {fileID: 0}
+    sfx: 
+    broadcastAnEvent: 0
   - bodyText: "Of course you do\u2026 But do you really plan on being just a grunt
       forever?"
     speakerName: Puzzled Soldier

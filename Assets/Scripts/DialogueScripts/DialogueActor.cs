@@ -16,8 +16,6 @@ namespace DialogueScripts
         [Header("Movement Settings")]
         [SerializeField] private AnimationCurve moveCurve = AnimationCurve.EaseInOut(0, 0, 1, 1);
 
-        private readonly Color dimColor = new Color(0.6f, 0.6f, 0.6f, 1f);
-        private readonly Color activeColor = Color.white;
 
 #nullable enable
         private Coroutine? activeMoveRoutine;
@@ -30,6 +28,8 @@ namespace DialogueScripts
 
         public void SetSpeaker(bool isSpeaking)
         {
+            Color dimColor = new(0.6f, 0.6f, 0.6f, bodyRenderer.color.a);
+            Color activeColor = new(1, 1, 1, bodyRenderer.color.a);
             bodyRenderer.color = isSpeaking ? activeColor : dimColor;
 
             float targetScale = isSpeaking ? 1.02f : 1.0f;

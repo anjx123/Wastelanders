@@ -21,6 +21,7 @@ public class DeckSelectionTutorial : MonoBehaviour
     [SerializeField] private List<WeaponSelect> lockedWeapons;
 
     [SerializeField] private List<WeaponEdit> weaponEditBoxCollidersToDisable;
+    [SerializeField] private List<WeaponSelect> weaponSelectBoxCollidersToDisable;
 
     [SerializeField] private bool activateTutorial;
 
@@ -66,7 +67,7 @@ public class DeckSelectionTutorial : MonoBehaviour
                 weapon.SetLockedState(true);
             }
             // Wait for fade screen to come in
-            yield return new WaitForSeconds(1.5f);
+            yield return new WaitForSeconds(1f);
             yield return StartCoroutine(StartDialogueWithNextEvent(selectYourCharacter.Dialogue, () => { jackieSelect.GetComponent<BoxCollider2D>().enabled = true; CharacterSelect.CharacterSelectedEvent += HandleCharacterSelected; }));
         }
     }
@@ -74,7 +75,12 @@ public class DeckSelectionTutorial : MonoBehaviour
     private void HandleCharacterSelected(PlayerDatabase.PlayerName playerName)
     {
         CharacterSelect.CharacterSelectedEvent -= HandleCharacterSelected;
-        StartCoroutine(StartDialogueWithNextEvent(selectYourWeapon.Dialogue, () => { WeaponSelect.WeaponSelectEvent += HandleWeaponSelected; }));
+        weaponSelectBoxCollidersToDisable.ForEach(ws => ws.GetComponent<PolygonCollider2D>().enabled = false);
+        StartCoroutine(StartDialogueWithNextEvent(selectYourWeapon.Dialogue, () =>
+        {
+            weaponSelectBoxCollidersToDisable.ForEach(ws => ws.GetComponent<PolygonCollider2D>().enabled = true);
+            WeaponSelect.WeaponSelectEvent += HandleWeaponSelected;
+        }));
     }
 
     private void HandleWeaponSelected(WeaponSelect weaponSelect, CardDatabase.WeaponType type)

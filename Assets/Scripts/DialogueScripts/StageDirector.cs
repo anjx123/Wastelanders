@@ -20,7 +20,8 @@ namespace DialogueScripts
         [SerializeField] private Transform rightPos;
         [SerializeField] private Transform offScreenRight;
 
-        private readonly Dictionary<CharacterActor, DialogueActor> activeActors = new();
+#nullable enable
+        private readonly Dictionary<ActorProfile, DialogueActor> activeActors = new();
 
         private void Awake()
         {
@@ -33,7 +34,7 @@ namespace DialogueScripts
         private void OnSetSpeaker(SetSpeaker ss)
         {
             _ = GetOrSummonActor(ss.actor);
-            foreach ((CharacterActor characterProfile, DialogueActor actorInstance) in activeActors)
+            foreach ((ActorProfile characterProfile, DialogueActor actorInstance) in activeActors)
             {
                 actorInstance.SetSpeaker(isSpeaking: characterProfile == ss.actor);
             }
@@ -61,8 +62,13 @@ namespace DialogueScripts
             GetOrSummonActor(sc.actor).ChangeSprite(sc.sprite);
         }
 
-        private DialogueActor GetOrSummonActor(CharacterActor actor)
+        private DialogueActor GetOrSummonActor(ActorProfile? actor)
         {
+            if (actor == null)
+                throw new ArgumentNullException(
+                    paramName: nameof(actor),
+                    message: "Received an event with a null actor profile! Please provide a profile!"
+                    );
             if (activeActors.TryGetValue(actor, out var ac)) return ac;
 
             DialogueActor newActor = Instantiate(genericActorPrefab, stageRoot);

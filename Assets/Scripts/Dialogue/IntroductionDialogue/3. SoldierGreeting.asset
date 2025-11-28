@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogue:
   - bodyText: Morning, Jackie!
-    speakerName: Soldier
+    speakerName: Mustached Soldier
     displayingImage: {fileID: 21300000, guid: 582a5949206349142b78fb69be74a015, type: 3}
     sfx: 
     broadcastAnEvent: 0
