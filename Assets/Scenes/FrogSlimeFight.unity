@@ -2131,8 +2131,8 @@ MonoBehaviour:
     picture: {fileID: 0}
     events: []
   jackieStrategyPlan:
-  - bodyText: 'Hmm let me come up with a plan, I know that the more dangerous the
-      waste enemy, the higher quality the Waste Product they drop when slain.  '
+  - bodyText: 'Hmm... let me come up with a plan, I know that the more dangerous
+      the waste enemy, the higher quality the Waste Product they drop when slain.  '
     speakerName: Jackie
     displayingImage: {fileID: 21300000, guid: 228f823fe8b2f4d4791ed74e46de81e1, type: 3}
     sfx: 
@@ -3006,7 +3006,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6635998426718021455, guid: b9c5e4b3c9f7e024f8fe9012e7a2e437, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -26.154144
+      value: -26.153334
       objectReference: {fileID: 0}
     - target: {fileID: 6635998426718021455, guid: b9c5e4b3c9f7e024f8fe9012e7a2e437, type: 3}
       propertyPath: m_LocalPosition.y
