@@ -34,7 +34,6 @@ public class TutorialIntroduction : DialogueClasses
     [SerializeField] private List<GameObject> jackieTutorialDeck;
 
     [SerializeField] private DialogueEntryWrapper openingDialogue;
-    [SerializeField] private DialogueWrapper openingDiscussion;
     [SerializeField] private DialogueWrapper jackieMonologue;
     [SerializeField] private DialogueWrapper soldierGreeting;
     [SerializeField] private DialogueWrapper jackieTalksWithSolider;

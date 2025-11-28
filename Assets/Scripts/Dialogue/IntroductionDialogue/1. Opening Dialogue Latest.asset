@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a4fafe43b89343e3a7ba1235e8987c0f, type: 3}
-  m_Name: 1. Opening Dialogue
+  m_Name: 1. Opening Dialogue Latest
   m_EditorClassIdentifier: 
   Entries:
   - content: "The City of New Haven \u2014 East Wall Boot Camp."
@@ -46,7 +46,7 @@ MonoBehaviour:
     sfxName: 
     picture: {fileID: 0}
     events: []
-  - content: ' Live life a little before risking it you know?'
+  - content: Live life a little before risking it you know?
     speaker: {fileID: 11400000, guid: b62cfbbed550e034e98fc50bf331b7c6, type: 2}
     sfxName: 
     picture: {fileID: 0}
