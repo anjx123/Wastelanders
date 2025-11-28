@@ -98,7 +98,6 @@ public class DeckSelectionManager : MonoBehaviour
         CharacterSelect.CharacterSelectedEvent += CharacterChosen;
         WeaponSelect.WeaponSelectEvent += WeaponSelected;
         WeaponEdit.WeaponEditEvent += WeaponDeckEdit;
-        DeckSelectionArrow.DeckSelectionArrowEvent += PrevState;
         EnterDeckSelection();
     }
 
@@ -117,10 +116,9 @@ public class DeckSelectionManager : MonoBehaviour
         CharacterSelect.CharacterSelectedEvent -= CharacterChosen;
         WeaponSelect.WeaponSelectEvent -= WeaponSelected;
         WeaponEdit.WeaponEditEvent -= WeaponDeckEdit;
-        DeckSelectionArrow.DeckSelectionArrowEvent -= PrevState;
     }
 
-    private void PrevState()
+    public void PrevState()
     {
         if (DeckSelectionState == DeckSelectionState.WeaponSelection)
         {
@@ -149,7 +147,7 @@ public class DeckSelectionManager : MonoBehaviour
             isFadingOut = true;
             SaveLoadSystem.Instance.SaveGame();
             //EditorUtility.SetDirty(playerDatabase); // For easily resetting the default weaponDeck of playerDatabase
-            yield return StartCoroutine(UIFadeScreenManager.Instance.FadeInDarkScreen(0.8f));
+            yield return StartCoroutine(UIFadeScreenManager.Instance.FadeInDarkScreen(0.6f));
             GameStateManager.Instance.LoadScene(nextScene);
             isFadingOut = false;
         }

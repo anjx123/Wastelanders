@@ -17,14 +17,22 @@ MonoBehaviour:
       them wisely.
     speakerName: Jackie
     displayingImage: {fileID: 0}
+    sfx: 
     broadcastAnEvent: 0
-  - bodyText: '[Each individual character has their own weapon proficiencies that
-      can grow as they gain experience.]'
-    speakerName: 
+  - bodyText: <i>Each individual character has their own weapon proficiencies that
+      can grow as they gain experience.</i>
+    speakerName: Tutorial
     displayingImage: {fileID: 0}
+    sfx: 
     broadcastAnEvent: 0
-  - bodyText: '[Weapon Proficiency determines how many techniques from a weapon a
-      character can select.]'
-    speakerName: 
+  - bodyText: <i>Weapon Proficiency determines how many Actions from a weapon a character
+      can select.</i>
+    speakerName: Tutorial
     displayingImage: {fileID: 0}
+    sfx: 
+    broadcastAnEvent: 0
+  - bodyText: <i>The coin icon represents the cost to add this Action to the deck.</i>
+    speakerName: Tutorial
+    displayingImage: {fileID: 21300000, guid: a9b93558fad3077429dd2674a34563e9, type: 3}
+    sfx: 
     broadcastAnEvent: 0

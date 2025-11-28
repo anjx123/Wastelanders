@@ -87,6 +87,7 @@ public class FrogSlimeFightDialogue : DialogueClasses
         CombatManager.ClearEvents();
         DialogueBox.ClearDialogueEvents();
         EntityClass.OnEntityDeath -= EnsureFrogDeath;
+        DialogueBox.DialogueBoxEvent -= OnDialogueBoxEvent;
     }
     private void SetUpCombatStatus()
     {
@@ -101,17 +102,20 @@ public class FrogSlimeFightDialogue : DialogueClasses
         frog.UnTargetable(); frog2.UnTargetable(); slime.UnTargetable();
     }
 
-        int numberOfBroadcasts = 0;
     private IEnumerator ExecuteGameStart()
     {
         CombatManager.Instance.GameState = GameState.OUT_OF_COMBAT;
         CombatManager.Instance.SetDarkScreen();
+        UIFadeScreenManager.Instance.SetDarkScreen();
+
         startingCamera.Priority = 2;
         yield return new WaitForEndOfFrame();
 
         SetUpCombatStatus();
         if (!GameStateManager.Instance.JumpToCombat)
         {
+            yield return new WaitForSeconds(1f);
+            yield return StartCoroutine(UIFadeScreenManager.Instance.FadeInLightScreen(1.0f));
             //Narrate the scene
             yield return StartCoroutine(DialogueBoxV2.Instance.Play(startingNarration.Into()));
             yield return new WaitForSeconds(BRIEF_PAUSE);
@@ -144,7 +148,6 @@ public class FrogSlimeFightDialogue : DialogueClasses
 
             //Jackie Wanders around
             {
-                DialogueBox.DialogueBoxEvent += OnDialogueBoxEvent;
                 Coroutine jackieWander = StartCoroutine(HaveJackieWander());
                 yield return StartCoroutine(DialogueManager.Instance.StartDialogue(jackieStrategyPlan));
                 yield return jackieWander;
@@ -287,9 +290,14 @@ public class FrogSlimeFightDialogue : DialogueClasses
             StartCoroutine(jackie.ResetPosition());
         }
     }
-
+    private int numberOfBroadcasts = 0;
+    private void OnDialogueBoxEvent()
+    {
+        ++numberOfBroadcasts;
+    }
     IEnumerator HaveJackieWander()
     {
+        DialogueBox.DialogueBoxEvent += OnDialogueBoxEvent;
         //Jackie wanders up
         yield return new WaitUntil(() => numberOfBroadcasts >= 1);
         yield return StartCoroutine(jackie.MoveToPosition(jackieWander1.position, 0f, 1.2f));
@@ -378,11 +386,6 @@ public class FrogSlimeFightDialogue : DialogueClasses
         {
             origin.animator.SetBool("IsStaggered", false);
         }
-    }
-
-    private void OnDialogueBoxEvent()
-    {
-        ++numberOfBroadcasts;
     }
     private void EnsureFrogDeath(EntityClass entity)
     {
