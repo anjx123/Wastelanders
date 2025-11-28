@@ -86,7 +86,7 @@ public class DialogueManager : MonoBehaviour
     {
         var text = new DialogueText(
             entry.content, 
-            entry.speaker,
+            entry.speaker?.characterName ?? "",
             entry.picture
         );
 

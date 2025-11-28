@@ -2015,72 +2015,31 @@ MonoBehaviour:
   startingCamera: {fileID: 965254509}
   dynamicCamera: {fileID: 1542478170}
   marshBG: {fileID: 189897196}
+  ivesProfile: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
   treeOverlay: {fileID: 1450041789}
-  backGround: {fileID: 0}
   frogDeathSprite: {fileID: 21300000, guid: 87829d35cc4de8b4db02b857e0431956, type: 3}
   jackieHoldingCrystalSprite: {fileID: 21300000, guid: 39aee1878ca221043839f79d83a21ecd, type: 3}
-  sceneNarration:
-  - bodyText: "After a day's worth of traveling, the Candidates arrive at The Western
+  startingNarration:
+  - content: "After a day's worth of traveling, the Candidates arrive at The Western
       Marsh, this year\u2019s exam destination."
-    speakerName: Narration
-    displayingImage: {fileID: 0}
-    sfx: 
-    broadcastAnEvent: 0
-  - bodyText: They spend the night setting up base camp. Tension fills the camp,
-      and Candidates are restless throughout the night.
-    speakerName: Narration
-    displayingImage: {fileID: 0}
-    sfx: 
-    broadcastAnEvent: 0
-  - bodyText: Finally, the morning of the exam arrives.
-    speakerName: Narration
-    displayingImage: {fileID: 0}
-    sfx: 
-    broadcastAnEvent: 0
-  ivesInstruction:
-  - bodyText: Good morning, Candidates. As you all know...
-    speakerName: Ives
-    displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
-    sfx: 
-    broadcastAnEvent: 0
-  - bodyText: This exam will emulate a real NITES wasteland expedition.
-    speakerName: Ives
-    displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
-    sfx: 
-    broadcastAnEvent: 0
-  - bodyText: The purpose of these expeditions are to extract as much valuable Waste
-      Products that cultivate inside mutated creatures as we can.
-    speakerName: Ives
-    displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
-    sfx: 
-    broadcastAnEvent: 0
-  - bodyText: 'These Products are essential to combat the further spread of the waste
-      as they help us produce weapons and energy. '
-    speakerName: Ives
-    displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
-    sfx: 
-    broadcastAnEvent: 0
-  - bodyText: 'As such, this exam will test your ability to exploit and extract as
-      much valuable Waste Products from the local flora and fauna as you can. '
-    speakerName: Ives
-    displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
-    sfx: 
-    broadcastAnEvent: 0
-  - bodyText: 'The examiners will be discreetly evaluating you, and will not interfere
-      with the exam unless there is a serious emergency. '
-    speakerName: Ives
-    displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
-    sfx: 
-    broadcastAnEvent: 0
-  - bodyText: You have until noon tomorrow to collect as many valuable Waste Products
-      as you can. Good luck, your time starts now.
-    speakerName: Ives
-    displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
-    sfx: 
-    broadcastAnEvent: 0
+    speaker: {fileID: 11400000, guid: 9eb64e5cd0fdbe944b654af85100bcb6, type: 2}
+    sfxName: 
+    picture: {fileID: 0}
+    events: []
+  - content: They spend the night setting up base camp. Tension fills the camp, and
+      Candidates are restless throughout the night.
+    speaker: {fileID: 11400000, guid: 9eb64e5cd0fdbe944b654af85100bcb6, type: 2}
+    sfxName: 
+    picture: {fileID: 0}
+    events: []
+  - content: Finally, the morning of the exam arrives.
+    speaker: {fileID: 11400000, guid: 9eb64e5cd0fdbe944b654af85100bcb6, type: 2}
+    sfxName: 
+    picture: {fileID: 0}
+    events: []
   testBegins:
   - content: Good morning, Candidates. As you all know...
-    speaker: Ives
+    speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
     sfxName: 
     picture: {fileID: 0}
     events:
@@ -2089,50 +2048,55 @@ MonoBehaviour:
     - rid: 5589630762363650053
     - rid: 5589630762363650050
   - content: This exam will emulate a real NITES wasteland expedition.
-    speaker: Ives
+    speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
     sfxName: 
     picture: {fileID: 0}
     events:
     - rid: 5589630762363650057
   - content: The purpose of these expeditions are to extract as much valuable Waste
       Products that cultivate inside mutated creatures as we can.
-    speaker: Ives
+    speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
     sfxName: 
     picture: {fileID: 0}
     events: []
   - content: 'These Products are essential to combat the further spread of the waste
       as they help us produce weapons and energy. '
-    speaker: Ives
+    speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
     sfxName: 
     picture: {fileID: 0}
     events: []
   - content: 'As such, this exam will test your ability to exploit and extract as
       much valuable Waste Products from the local flora and fauna as you can. '
-    speaker: Ives
+    speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
     sfxName: 
     picture: {fileID: 0}
     events: []
   - content: 'The examiners will be discreetly evaluating you, and will not interfere
       with the exam unless there is a serious emergency. '
-    speaker: Ives
+    speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
     sfxName: 
     picture: {fileID: 0}
     events: []
   - content: You have until noon tomorrow to collect as many valuable Waste Products
       as you can.
-    speaker: Ives
+    speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
     sfxName: 
     picture: {fileID: 0}
     events:
     - rid: 5589630762363650058
   - content: Good luck, your time starts now.
-    speaker: Ives
+    speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
     sfxName: 
     picture: {fileID: 0}
     events: []
   jackieStrategyPlan:
-  - bodyText: 'Hmm let me come up with a plan, I know that the more dangerous the
-      waste enemy, the higher quality the Waste Product they drop when slain.  '
+  - bodyText: Hmm let me come up with a plan...
+    speakerName: Jackie
+    displayingImage: {fileID: 21300000, guid: 228f823fe8b2f4d4791ed74e46de81e1, type: 3}
+    sfx: 
+    broadcastAnEvent: 0
+  - bodyText: 'More dangerous waste creatures typically drop higher quality Waste
+      Products when slain.  '
     speakerName: Jackie
     displayingImage: {fileID: 21300000, guid: 228f823fe8b2f4d4791ed74e46de81e1, type: 3}
     sfx: 
@@ -2261,35 +2225,35 @@ MonoBehaviour:
     - rid: 5589630762363650048
       type: {class: ActorAction, ns: DialogueScripts, asm: Assembly-CSharp}
       data:
-        actor: 30
+        actor: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
         action: 20
         duration: 0
     - rid: 5589630762363650049
       type: {class: ActorAction, ns: DialogueScripts, asm: Assembly-CSharp}
       data:
-        actor: 30
+        actor: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
         action: 70
         duration: 0
     - rid: 5589630762363650050
       type: {class: ActorAction, ns: DialogueScripts, asm: Assembly-CSharp}
       data:
-        actor: 30
+        actor: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
         action: 60
         duration: 1
     - rid: 5589630762363650053
       type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
       data:
-        actor: 30
+        actor: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
         sprite: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
     - rid: 5589630762363650057
       type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
       data:
-        actor: 30
+        actor: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
         sprite: {fileID: 21300000, guid: e6bd7efa92cdc3540bcf7b472fbcdba8, type: 3}
     - rid: 5589630762363650058
       type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
       data:
-        actor: 30
+        actor: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
         sprite: {fileID: 21300000, guid: 85e302f93093f564290df1bd57119113, type: 3}
 --- !u!1 &1218694500
 GameObject:
@@ -3006,7 +2970,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6635998426718021455, guid: b9c5e4b3c9f7e024f8fe9012e7a2e437, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -26.154144
+      value: -26.153936
       objectReference: {fileID: 0}
     - target: {fileID: 6635998426718021455, guid: b9c5e4b3c9f7e024f8fe9012e7a2e437, type: 3}
       propertyPath: m_LocalPosition.y

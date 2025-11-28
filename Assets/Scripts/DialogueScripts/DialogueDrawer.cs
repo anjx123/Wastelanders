@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
+using System.Reflection;
 
 namespace DialogueScripts
 {
+#nullable enable
     /// <summary>
     /// Allows you to add any event that extends DialogueEvents to the DialogueEntryInUnityEditor.events list in the unity editor.
     /// </summary>
@@ -38,7 +40,8 @@ namespace DialogueScripts
 
                 SerializedProperty iterator = property.Copy();
                 SerializedProperty endProperty = property.GetEndProperty();
-                SerializedProperty eventsListProperty = null;
+                SerializedProperty? eventsListProperty = null;
+                SerializedProperty? actorProfileProperty = null;
 
                 if (iterator.NextVisible(true))
                 {
@@ -54,8 +57,11 @@ namespace DialogueScripts
                         if (iterator.name == nameof(DialogueEntryInUnityEditor.events))
                         {
                             eventsListProperty = iterator.Copy();
+                        } else if (iterator.name == nameof(DialogueEntryInUnityEditor.speaker))
+                        {
+                            actorProfileProperty = iterator.Copy();
                         }
-
+                        
                         y += propHeight + EditorGUIUtility.standardVerticalSpacing;
 
                     }
@@ -75,7 +81,7 @@ namespace DialogueScripts
                     Rect buttonRect = new Rect(position.x, y, position.width, EditorGUIUtility.singleLineHeight);
                     if (GUI.Button(buttonRect, "Add Selected Event"))
                     {
-                        AddEvent(eventsListProperty, selectedIndex);
+                        AddEvent(eventsListProperty, actorProfileProperty, selectedIndex);
                     }
                 }
 
@@ -113,15 +119,29 @@ namespace DialogueScripts
             return totalHeight;
         }
 
-        private void AddEvent(SerializedProperty eventsList, int typeIndex)
+        private void AddEvent(SerializedProperty eventsList, SerializedProperty? profileProp, int typeIndex)
         {
             Type selectedType = eventTypes[typeIndex];
+
             object newEventInstance = Activator.CreateInstance(selectedType);
+
+            // Automatically populates the ActorProfile field of the event if the event needs one.
+            if (profileProp != null && profileProp.objectReferenceValue != null)
+            {
+                selectedType
+                    .GetFields(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic)
+                    .FirstOrDefault(f => f.FieldType == typeof(ActorProfile))
+                    ?.SetValue(newEventInstance, profileProp.objectReferenceValue);
+            }
 
             int newIndex = eventsList.arraySize;
             eventsList.InsertArrayElementAtIndex(newIndex);
             SerializedProperty newElementProperty = eventsList.GetArrayElementAtIndex(newIndex);
+
             newElementProperty.managedReferenceValue = newEventInstance;
+        }
+
+        private void AutoAssignActorProfile(object instance, SerializedProperty? profileProp){
         }
 
         private Type[] GetImplementations(Type baseType)

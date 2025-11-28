@@ -4,14 +4,15 @@ using UnityEngine;
 
 namespace DialogueScripts
 {
+#nullable enable
     [Serializable]
     public class DialogueEntryInUnityEditor
     {
-        [SerializeField] [TextArea(1, 5)] private string content;
-        [SerializeField] private string speaker;
-        [SerializeField] private string sfxName;
-        [SerializeField] private Sprite picture;
-        [SerializeReference] internal List<DialogueEvents> events;
+        [SerializeField] [TextArea(1, 5)] private string content = null!;
+        [SerializeField] internal ActorProfile speaker = null!;
+        [SerializeField] private string sfxName = null!;
+        [SerializeField] private Sprite picture = null!;
+        [SerializeReference] internal List<DialogueEvents> events = null!;
 
         public DialogueEntry Into() => new(
             content: content,
@@ -23,10 +24,10 @@ namespace DialogueScripts
     }
 
     public record DialogueEntry(
-        string content,
-        string speaker,
-        string sfxName,
-        Sprite picture,
+        string? content,
+        ActorProfile? speaker,
+        string? sfxName,
+        Sprite? picture,
         List<DialogueEvents> events
         );
 

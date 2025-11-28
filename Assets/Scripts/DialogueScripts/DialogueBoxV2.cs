@@ -134,12 +134,12 @@ namespace DialogueScripts
                 txt.SetActive(false);
             }
 
-            if (!string.IsNullOrEmpty(entry.speaker))
+            if (entry.speaker != null && !string.IsNullOrEmpty(entry.speaker.characterName))
             {
-                whoView.text = entry.speaker.ToUpper();
+                whoView.text = entry.speaker.characterName.ToUpper();
                 new SetSpeaker
                 {
-                    actor = ParseCharacterActor(entry.speaker)
+                    actor = entry.speaker
                 }.Invoke();
 
                 who.SetActive(true);
@@ -167,16 +167,6 @@ namespace DialogueScripts
             entry.events.ForEach(it => it.Execute());
 
             DialogueManager.Instance.AddDialogueEntryToHistory(entry);
-        }
-
-        CharacterActor ParseCharacterActor(string str)
-        {
-            return str switch
-            {
-                "Jackie" => CharacterActor.Jackie,
-                "Ives" => CharacterActor.Ives,
-                "Cam" => CharacterActor.Cam,
-            };
         }
 
         private static bool HasInput() => !PauseMenuV2.IsPaused && (Input.GetKey(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.Mouse0) || Input.GetKeyDown(KeyCode.Space));

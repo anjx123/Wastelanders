@@ -42,13 +42,12 @@ public class FrogSlimeFightDialogue : DialogueClasses
     [SerializeField] CinemachineVirtualCamera startingCamera;
     [SerializeField] CinemachineVirtualCamera dynamicCamera;
     [SerializeField] Image marshBG;
+    [SerializeField] ActorProfile ivesProfile;
     [SerializeField] private SpriteRenderer treeOverlay;
-    [SerializeField] private SpriteRenderer backGround;
     [SerializeField] private Sprite frogDeathSprite;
     [SerializeField] private Sprite jackieHoldingCrystalSprite;
 
-    [SerializeField] private List<DialogueText> sceneNarration;
-    [SerializeField] private List<DialogueText> ivesInstruction;
+    [SerializeField] private DialogueEntryInUnityEditor[] startingNarration;
     [SerializeField] private DialogueEntryInUnityEditor[] testBegins;
     [SerializeField] private List<DialogueText> jackieStrategyPlan;
     // After the frog enters the scene
@@ -114,7 +113,7 @@ public class FrogSlimeFightDialogue : DialogueClasses
         if (!GameStateManager.Instance.JumpToCombat)
         {
             //Narrate the scene
-            yield return StartCoroutine(DialogueManager.Instance.StartDialogue(sceneNarration));
+            yield return StartCoroutine(DialogueBoxV2.Instance.Play(startingNarration.Into()));
             yield return new WaitForSeconds(BRIEF_PAUSE);
 
             //Ives Talks to the examinees
@@ -122,7 +121,7 @@ public class FrogSlimeFightDialogue : DialogueClasses
             yield return StartCoroutine(DialogueBoxV2.Instance.Play(testBegins.Into()));
             new ActorAction()
             {
-                actor = CharacterActor.Ives,
+                actor = ivesProfile,
                 action = CharacterActions.FadeOut,
                 duration = 1f,
             }.Invoke();

@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.ConstrainedExecution;
+using DialogueScripts;
 using Systems.Persistence;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -25,12 +26,14 @@ public class TutorialIntroduction : DialogueClasses
 
     [SerializeField] private Sprite laidBackSprite;
     [SerializeField] private Sprite puzzledSoldierSprite;
+    [SerializeField] private Image cityBgImage;
     [SerializeField] private Image laidBackImageUI;
     [SerializeField] private Image puzzeledImageUI;
 
     [SerializeField] private List<GameObject> ivesTutorialDeck;
     [SerializeField] private List<GameObject> jackieTutorialDeck;
 
+    [SerializeField] private List<DialogueEntryInUnityEditor> openingDialogue;
     [SerializeField] private DialogueWrapper openingDiscussion;
     [SerializeField] private DialogueWrapper jackieMonologue;
     [SerializeField] private DialogueWrapper soldierGreeting;
@@ -92,13 +95,13 @@ public class TutorialIntroduction : DialogueClasses
     {
         CombatManager.Instance.GameState = GameState.OUT_OF_COMBAT;
         CombatManager.Instance.SetDarkScreen();
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForEndOfFrame();
         ives.OutOfCombat();
         jackie.OutOfCombat();
         jackie.SetReturnPosition(jackieDefaultTransform.position);
         if (!jumpToCombat && !GameStateManager.Instance.JumpToCombat)
         {
-            yield return new WaitForSeconds(1f);
+            yield return StartCoroutine(FadeImage(cityBgImage, 1f, true));
 
             { 
                 int broadcastCounts = 0;
@@ -120,9 +123,9 @@ public class TutorialIntroduction : DialogueClasses
                 //Dialogue without any expression is kinda dry, its also difficult to tell whos talking so I wont VN style this unless I want to add more movement to the guys on screen
 
                 yield return new WaitUntil(() => broadcastCounts == 1);
-                StartCoroutine(FadeImage(laidBackImageUI, 1, true));
+                StartCoroutine(FadeImage(laidBackImageUI, 0.6f, true));
                 yield return new WaitUntil(() => broadcastCounts == 2);
-                StartCoroutine(FadeImage(puzzeledImageUI, 1, true)); //puzzled active
+                StartCoroutine(FadeImage(puzzeledImageUI, 0.6f, true)); //puzzled active
                 laidBackImageUI.color = Color.gray;
                 yield return new WaitUntil(() => broadcastCounts == 3);
                 SetSpeaker(laidBackImageUI, puzzeledImageUI);
@@ -147,14 +150,17 @@ public class TutorialIntroduction : DialogueClasses
 
                 DialogueBox.DialogueBoxEvent -= CountBroadcasts;
                 yield return new WaitForSeconds(BRIEF_PAUSE);
+                yield return StartCoroutine(FadeImage(cityBgImage, 1f, false));
+                cityBgImage.gameObject.SetActive(false);
             }
+
+            yield return StartCoroutine(CombatManager.Instance.FadeInLightScreen(2f));
 
             jackie.Emphasize(); //Jackie shows up above the black background
             yield return StartCoroutine(jackie.MoveToPosition(jackieDefaultTransform.position, 0, 1.5f)); //Jackie Runs into the scene and talks 
             yield return new WaitForSeconds(MEDIUM_PAUSE);
 
             yield return StartCoroutine(DialogueManager.Instance.StartDialogue(jackieMonologue.Dialogue));
-            yield return StartCoroutine(CombatManager.Instance.FadeInLightScreen(2f));
             jackie.DeEmphasize(); //Jackie is below the black background
 
             yield return StartCoroutine(DialogueManager.Instance.StartDialogue(soldierGreeting.Dialogue));

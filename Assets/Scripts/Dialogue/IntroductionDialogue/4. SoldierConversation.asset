@@ -55,10 +55,14 @@ MonoBehaviour:
     displayingImage: {fileID: 21300000, guid: 10ec818d4088de44a83a5405137230e4, type: 3}
     sfx: 
     broadcastAnEvent: 0
-  - bodyText: "Haha great! Just be careful out there will ya? I\u2019m not trying
-      to scare you, but there\u2019s been an unusual increase in monster activity
-      in the Wasteland around the city. "
+  - bodyText: 'Haha great! Just be careful out there will ya? '
     speakerName: Dan
+    displayingImage: {fileID: 21300000, guid: 582a5949206349142b78fb69be74a015, type: 3}
+    sfx: 
+    broadcastAnEvent: 0
+  - bodyText: "I\u2019m not trying to scare you, but there\u2019s been an unusual
+      increase in monster activity in the Wasteland around the city. "
+    speakerName: 
     displayingImage: {fileID: 21300000, guid: 582a5949206349142b78fb69be74a015, type: 3}
     sfx: 
     broadcastAnEvent: 0
@@ -79,8 +83,8 @@ MonoBehaviour:
     displayingImage: {fileID: 21300000, guid: 88a7e4552c1afa641acadc54e9b6cbac, type: 3}
     sfx: 
     broadcastAnEvent: 0
-  - bodyText: '[The soldier nods, gives a friendly salute, and leaves..]'
-    speakerName: 
-    displayingImage: {fileID: 21300000, guid: 582a5949206349142b78fb69be74a015, type: 3}
+  - bodyText: The soldier nods, gives a friendly salute, and leaves..
+    speakerName: Narration
+    displayingImage: {fileID: 0}
     sfx: 
     broadcastAnEvent: 0
