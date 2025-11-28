@@ -48,7 +48,8 @@ public class BeetleFight : DialogueClasses
     [SerializeField] private ActionClass beetleAction;
     [SerializeField] private ActionClass jackieAction;
 
-
+    [SerializeField] private GameObject forestBg;
+    [SerializeField] private GameObject treeSprite;
     [SerializeField] private GameObject theCampWithBeetles;
     [SerializeField] private GameObject beetleNest;
     [SerializeField] private GameObject background;
@@ -181,7 +182,7 @@ public class BeetleFight : DialogueClasses
     {
         CombatManager.Instance.GameState = GameState.OUT_OF_COMBAT;
         UIFadeScreenManager.Instance.SetDarkScreen();
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForEndOfFrame(); // Necessary to load in enemies and managers. 
         SetUpEnemyLists();
         SetUpCombatStatus();
         if (!GameStateManager.Instance.JumpToCombat)
@@ -276,6 +277,7 @@ public class BeetleFight : DialogueClasses
 
             //Jackie Vows to hunt down that beetle 
             {
+                forestBg.gameObject.SetActive(false);
                 RemoveEnemyFromScene(frog);
                 sceneCamera.m_Lens.OrthographicSize = 5f;
                 sceneCamera.transform.position = beetleNestCameraPos.transform.position;
@@ -298,6 +300,7 @@ public class BeetleFight : DialogueClasses
 
             //Jackie chases after beetle who might have stolen her crystal
             {
+                treeSprite.SetActive(true);
                 beetleNest.SetActive(true);
                 yield return StartCoroutine(CombatManager.Instance.FadeInLightScreen(1.2f));
                 Coroutine beetleRunsIn = StartCoroutine(ambushBeetle.MoveToPosition(beetleRunsFromJackieTransform.position, 0f, 2.5f));
@@ -333,6 +336,7 @@ public class BeetleFight : DialogueClasses
 
             //Jackie sees the nest of beetles
             {
+                treeSprite.SetActive(false);
                 beetleNest.SetActive(false);
                 RemoveEnemyFromScene(ambushBeetle);
                 sceneCamera.Priority = 2;
