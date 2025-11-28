@@ -13,8 +13,13 @@ MonoBehaviour:
   m_Name: backButton
   m_EditorClassIdentifier: 
   dialogue:
-  - bodyText: Candidates, please arrive at the East Wall Gate Checkpoint for head
-      count. The Wasteland departure will commence in 5 minutes.
+  - bodyText: Attention all Candidates!
+    speakerName: Loudspeaker
+    displayingImage: {fileID: 0}
+    sfx: 
+    broadcastAnEvent: 0
+  - bodyText: Please arrive at the East Wall Gate Checkpoint for head count. The
+      Wasteland departure will commence in 5 minutes.
     speakerName: Loudspeaker
     displayingImage: {fileID: 0}
     sfx: 

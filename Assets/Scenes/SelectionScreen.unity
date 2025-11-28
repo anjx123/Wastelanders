@@ -1775,6 +1775,9 @@ MonoBehaviour:
   weaponEditBoxCollidersToDisable:
   - {fileID: 439599444}
   - {fileID: 1446819734}
+  weaponSelectBoxCollidersToDisable:
+  - {fileID: 1350513556}
+  - {fileID: 1493004624}
   activateTutorial: 1
 --- !u!1001 &744782986
 PrefabInstance:
@@ -3220,6 +3223,17 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1350513556 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8351759767076173433, guid: f4e3c39036a0e964ca15018d4479d8e4, type: 3}
+  m_PrefabInstance: {fileID: 548949320}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a968158a80a6e5a46b3d98ec3b462f4b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1385288655
 GameObject:
   m_ObjectHideFlags: 0
@@ -3501,6 +3515,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5372623935015044124, guid: f4e3c39036a0e964ca15018d4479d8e4, type: 3}
   m_PrefabInstance: {fileID: 1493004622}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1493004624 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8351759767076173433, guid: f4e3c39036a0e964ca15018d4479d8e4, type: 3}
+  m_PrefabInstance: {fileID: 1493004622}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a968158a80a6e5a46b3d98ec3b462f4b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1780374012 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5610277360061671901, guid: 9fa0880b5a45a1e4da7fca3f70cd874a, type: 3}
