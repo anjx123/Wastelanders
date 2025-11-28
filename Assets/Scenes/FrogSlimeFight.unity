@@ -2095,8 +2095,8 @@ MonoBehaviour:
     displayingImage: {fileID: 21300000, guid: 228f823fe8b2f4d4791ed74e46de81e1, type: 3}
     sfx: 
     broadcastAnEvent: 0
-  - bodyText: 'More dangerous waste creatures typically drop higher quality Waste
-      Products when slain.  '
+  - bodyText: More dangerous waste creatures typically drop higher quality Waste
+      Products.
     speakerName: Jackie
     displayingImage: {fileID: 21300000, guid: 228f823fe8b2f4d4791ed74e46de81e1, type: 3}
     sfx: 
@@ -2970,7 +2970,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6635998426718021455, guid: b9c5e4b3c9f7e024f8fe9012e7a2e437, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -26.153334
+      value: -26.153936
       objectReference: {fileID: 0}
     - target: {fileID: 6635998426718021455, guid: b9c5e4b3c9f7e024f8fe9012e7a2e437, type: 3}
       propertyPath: m_LocalPosition.y

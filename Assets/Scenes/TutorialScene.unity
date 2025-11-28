@@ -2117,7 +2117,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6635998426718021455, guid: b9c5e4b3c9f7e024f8fe9012e7a2e437, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -10.133179
+      value: -10.133937
       objectReference: {fileID: 0}
     - target: {fileID: 6635998426718021455, guid: b9c5e4b3c9f7e024f8fe9012e7a2e437, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2670,7 +2670,7 @@ MonoBehaviour:
   - {fileID: 2904259167568896579, guid: 01e98381d7acf426196a2d3249245d3b, type: 3}
   - {fileID: 6925166128267643469, guid: 862f00b36058344289c1c7c4dffccd6d, type: 3}
   - {fileID: 7392447361912710173, guid: 96833b1ed63d040c08a43d590f8a54ec, type: 3}
-  openingDialogue: []
+  openingDialogue: {fileID: 11400000, guid: b924f74df439e0145ad1cd9ad986d1cd, type: 2}
   openingDiscussion: {fileID: 11400000, guid: 899d3bde817931743b5ca12928b8a667, type: 2}
   jackieMonologue: {fileID: 11400000, guid: ce06ffd35701a8c43805e8c382a8f93f, type: 2}
   soldierGreeting: {fileID: 11400000, guid: 225d9d417d3f0054785ea3b22b2e8d18, type: 2}
@@ -2692,9 +2692,6 @@ MonoBehaviour:
   endingTutorialDialogue: {fileID: 11400000, guid: 71bc8b72e567a434fb451296dad29b2f, type: 2}
   gameLoseDialogue: {fileID: 11400000, guid: 71aa9a544d4b56045a1b4ee4cb6b4f0d, type: 2}
   jumpToCombat: 0
-  references:
-    version: 2
-    RefIds: []
 --- !u!1001 &2102825245
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -1,0 +1,197 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4fafe43b89343e3a7ba1235e8987c0f, type: 3}
+  m_Name: 1. Opening Dialogue
+  m_EditorClassIdentifier: 
+  Entries:
+  - content: "The City of New Haven \u2014 East Wall Boot Camp."
+    speaker: {fileID: 11400000, guid: 9eb64e5cd0fdbe944b654af85100bcb6, type: 2}
+    sfxName: 
+    picture: {fileID: 0}
+    events: []
+  - content: "Hey, you hear the news? Jackie\u2019s taking the NITES exam again."
+    speaker: {fileID: 11400000, guid: b62cfbbed550e034e98fc50bf331b7c6, type: 2}
+    sfxName: 
+    picture: {fileID: 0}
+    events:
+    - rid: 5589630778170933256
+    - rid: 5589630778170933255
+    - rid: 5589630778170933260
+  - content: Already? After how badly she froze up last year?
+    speaker: {fileID: 11400000, guid: d5a65a5aa8d5f964fbd28b4f0ae8ecaf, type: 2}
+    sfxName: 
+    picture: {fileID: 0}
+    events:
+    - rid: 5589630778170933262
+    - rid: 5589630778170933257
+    - rid: 5589630778170933258
+    - rid: 5589630778170933261
+  - content: "You\u2019d think she\u2019d wait a little longer before possibly embarrassing
+      herself again."
+    speaker: {fileID: 11400000, guid: d5a65a5aa8d5f964fbd28b4f0ae8ecaf, type: 2}
+    sfxName: 
+    picture: {fileID: 0}
+    events: []
+  - content: "Yeah. If it were me, I\u2019d take it slow... Take a few years to train..."
+    speaker: {fileID: 11400000, guid: b62cfbbed550e034e98fc50bf331b7c6, type: 2}
+    sfxName: 
+    picture: {fileID: 0}
+    events: []
+  - content: ' Live life a little before risking it you know?'
+    speaker: {fileID: 11400000, guid: b62cfbbed550e034e98fc50bf331b7c6, type: 2}
+    sfxName: 
+    picture: {fileID: 0}
+    events: []
+  - content: Hah, hard to blame you.
+    speaker: {fileID: 11400000, guid: d5a65a5aa8d5f964fbd28b4f0ae8ecaf, type: 2}
+    sfxName: 
+    picture: {fileID: 0}
+    events: []
+  - content: "Did you hear that scout\u2019s report from the marshes last week?"
+    speaker: {fileID: 11400000, guid: d5a65a5aa8d5f964fbd28b4f0ae8ecaf, type: 2}
+    sfxName: 
+    picture: {fileID: 0}
+    events: []
+  - content: Said he saw hundreds of purplish eyes blinking back at him in the dark...
+    speaker: {fileID: 11400000, guid: d5a65a5aa8d5f964fbd28b4f0ae8ecaf, type: 2}
+    sfxName: 
+    picture: {fileID: 0}
+    events: []
+  - content: Followed by the sound of clattering bones as something got closer...
+    speaker: {fileID: 11400000, guid: d5a65a5aa8d5f964fbd28b4f0ae8ecaf, type: 2}
+    sfxName: 
+    picture: {fileID: 0}
+    events: []
+  - content: "I'll stop you right there. See? That\u2019s exactly why I\u2019m staying
+      inside the Wall."
+    speaker: {fileID: 11400000, guid: b62cfbbed550e034e98fc50bf331b7c6, type: 2}
+    sfxName: 
+    picture: {fileID: 0}
+    events: []
+  - content: NITES get shipped out there all the time. No thanks, not the life for
+      me.
+    speaker: {fileID: 11400000, guid: b62cfbbed550e034e98fc50bf331b7c6, type: 2}
+    sfxName: 
+    picture: {fileID: 0}
+    events: []
+  - content: Makes you wonder why she would then, at her young age?
+    speaker: {fileID: 11400000, guid: d5a65a5aa8d5f964fbd28b4f0ae8ecaf, type: 2}
+    sfxName: 
+    picture: {fileID: 0}
+    events: []
+  - content: "Must be 'cause she wants to live up to her mom\u2019s legend. "
+    speaker: {fileID: 11400000, guid: b62cfbbed550e034e98fc50bf331b7c6, type: 2}
+    sfxName: 
+    picture: {fileID: 0}
+    events: []
+  - content: Captain Ailin was the youngest NITES officer after all. Top marks, and
+      all that.
+    speaker: {fileID: 11400000, guid: b62cfbbed550e034e98fc50bf331b7c6, type: 2}
+    sfxName: 
+    picture: {fileID: 0}
+    events: []
+  - content: 'Though, look where that landed her and her team. Vanishing, just like
+      that. '
+    speaker: {fileID: 11400000, guid: b62cfbbed550e034e98fc50bf331b7c6, type: 2}
+    sfxName: 
+    picture: {fileID: 0}
+    events: []
+  - content: 'If it were my Mom, that''d make me stay away from the Wasteland for
+      good. '
+    speaker: {fileID: 11400000, guid: b62cfbbed550e034e98fc50bf331b7c6, type: 2}
+    sfxName: 
+    picture: {fileID: 0}
+    events: []
+  - content: Heh. If you keep talking like that, sounds like you'll be doing nothing
+      more than grunt work forever.
+    speaker: {fileID: 11400000, guid: d5a65a5aa8d5f964fbd28b4f0ae8ecaf, type: 2}
+    sfxName: 
+    picture: {fileID: 0}
+    events: []
+  - content: "Hey, maybe I\u2019ll take the exam someday. Once I\u2019m ready."
+    speaker: {fileID: 11400000, guid: b62cfbbed550e034e98fc50bf331b7c6, type: 2}
+    sfxName: 
+    picture: {fileID: 0}
+    events: []
+  - content: Then come on. Pass or not, the fact that she's trying is making the
+      rest of us look like chumps.
+    speaker: {fileID: 11400000, guid: d5a65a5aa8d5f964fbd28b4f0ae8ecaf, type: 2}
+    sfxName: 
+    picture: {fileID: 0}
+    events: []
+  - content: "Let\u2019s get back to training."
+    speaker: {fileID: 11400000, guid: d5a65a5aa8d5f964fbd28b4f0ae8ecaf, type: 2}
+    sfxName: 
+    picture: {fileID: 0}
+    events: []
+  - content: Events Only
+    speaker: {fileID: 11400000, guid: 4fef3aeb65460fd498ab9efe9bac8625, type: 2}
+    sfxName: 
+    picture: {fileID: 0}
+    events:
+    - rid: 5589630778170933253
+    - rid: 5589630778170933254
+  references:
+    version: 2
+    RefIds:
+    - rid: 5589630778170933253
+      type: {class: ActorAction, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: b62cfbbed550e034e98fc50bf331b7c6, type: 2}
+        action: 70
+        duration: 1
+    - rid: 5589630778170933254
+      type: {class: ActorAction, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: d5a65a5aa8d5f964fbd28b4f0ae8ecaf, type: 2}
+        action: 70
+        duration: 1
+    - rid: 5589630778170933255
+      type: {class: ActorAction, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: b62cfbbed550e034e98fc50bf331b7c6, type: 2}
+        action: 60
+        duration: 0.5
+    - rid: 5589630778170933256
+      type: {class: ActorAction, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: b62cfbbed550e034e98fc50bf331b7c6, type: 2}
+        action: 10
+        duration: 0
+    - rid: 5589630778170933257
+      type: {class: ActorAction, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: d5a65a5aa8d5f964fbd28b4f0ae8ecaf, type: 2}
+        action: 30
+        duration: 0
+    - rid: 5589630778170933258
+      type: {class: ActorAction, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: d5a65a5aa8d5f964fbd28b4f0ae8ecaf, type: 2}
+        action: 60
+        duration: 0.5
+    - rid: 5589630778170933260
+      type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: b62cfbbed550e034e98fc50bf331b7c6, type: 2}
+        sprite: {fileID: 21300000, guid: b5d13694d44666248bd6437ab54688c3, type: 3}
+    - rid: 5589630778170933261
+      type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: d5a65a5aa8d5f964fbd28b4f0ae8ecaf, type: 2}
+        sprite: {fileID: 21300000, guid: cd4d67535c77ee1438d406e274cf2975, type: 3}
+    - rid: 5589630778170933262
+      type: {class: ActorAction, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: d5a65a5aa8d5f964fbd28b4f0ae8ecaf, type: 2}
+        action: 50
+        duration: 0

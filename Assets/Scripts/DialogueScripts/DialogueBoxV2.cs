@@ -19,6 +19,7 @@ namespace DialogueScripts
         [SerializeField] private GameObject txt;
         [SerializeField] private GameObject who;
         [SerializeField] private GameObject img;
+        [SerializeField] private ActorProfile eventProfile;
 
         [SerializeField] private int typewriterRate = 50;
         public static DialogueBoxV2 Instance { get; private set; }
@@ -44,12 +45,14 @@ namespace DialogueScripts
             canvas.sortingOrder = UISortOrder.DialogueBox.GetOrder();
             gameObject.SetActive(false);
         }
+
         public IEnumerator Play(DialogueEntry[] entries)
         {
             gameObject.SetActive(true);
 
             foreach (var entry in entries)
             {
+                if (SkipEntry(entry)) continue;
                 WithEntry(entry);
                 yield return TypewriteText();
                 yield return WaitForContinuation();
@@ -60,6 +63,16 @@ namespace DialogueScripts
             gameObject.SetActive(false);
         }
 
+        private bool SkipEntry(DialogueEntry entry)
+        {
+            if (entry.speaker == eventProfile)
+            {
+                entry.events.ForEach(it => it.Execute());
+                return true;
+            }
+
+            return false;
+        }
 
         private IEnumerator TypewriteText()
         {
