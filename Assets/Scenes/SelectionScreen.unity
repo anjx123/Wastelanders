@@ -1778,7 +1778,7 @@ MonoBehaviour:
   weaponSelectBoxCollidersToDisable:
   - {fileID: 1350513556}
   - {fileID: 1493004624}
-  activateTutorial: 1
+  activateTutorial: 0
 --- !u!1001 &744782986
 PrefabInstance:
   m_ObjectHideFlags: 0

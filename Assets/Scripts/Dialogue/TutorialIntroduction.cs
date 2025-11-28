@@ -94,6 +94,7 @@ public class TutorialIntroduction : DialogueClasses
     {
         CombatManager.Instance.GameState = GameState.OUT_OF_COMBAT;
         CombatManager.Instance.SetDarkScreen();
+        UIFadeScreenManager.Instance.SetDarkScreen();
         yield return new WaitForEndOfFrame();
         ives.OutOfCombat();
         jackie.OutOfCombat();
@@ -101,6 +102,7 @@ public class TutorialIntroduction : DialogueClasses
         if (!jumpToCombat && !GameStateManager.Instance.JumpToCombat)
         {
             yield return StartCoroutine(FadeImage(cityBgImage, 1f, true));
+            yield return StartCoroutine(UIFadeScreenManager.Instance.FadeInLightScreen(1f));
 
             { 
                 yield return StartCoroutine(DialogueBoxV2.Instance.Play(openingDialogue));
@@ -119,10 +121,10 @@ public class TutorialIntroduction : DialogueClasses
             jackie.DeEmphasize(); //Jackie is below the black background
 
             yield return StartCoroutine(DialogueManager.Instance.StartDialogue(soldierGreeting.Dialogue));
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(0.3f);
 
             jackie.FaceLeft(); //Jackie faces the soldier talking to her
-            yield return new WaitForSeconds(0.2f);
+            yield return new WaitForSeconds(0.6f);
 
             yield return StartCoroutine(DialogueManager.Instance.StartDialogue(jackieTalksWithSolider.Dialogue));
             yield return new WaitForSeconds(MEDIUM_PAUSE);

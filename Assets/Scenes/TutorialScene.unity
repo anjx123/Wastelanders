@@ -614,7 +614,7 @@ Transform:
   m_GameObject: {fileID: 586839998}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -36, y: -14, z: 0}
+  m_LocalPosition: {x: -36, y: -14.6, z: 0}
   m_LocalScale: {x: 1, y: -1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1669,7 +1669,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2280710332171782491, guid: 18ff4a241e9f877439ebd5fd1de51dd0, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.267
+      value: -0.75
       objectReference: {fileID: 0}
     - target: {fileID: 2280710332171782491, guid: 18ff4a241e9f877439ebd5fd1de51dd0, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2117,11 +2117,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6635998426718021455, guid: b9c5e4b3c9f7e024f8fe9012e7a2e437, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -10.133937
+      value: -10.0172415
       objectReference: {fileID: 0}
     - target: {fileID: 6635998426718021455, guid: b9c5e4b3c9f7e024f8fe9012e7a2e437, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.56700015
+      value: -0.4499998
       objectReference: {fileID: 0}
     - target: {fileID: 6635998426718021455, guid: b9c5e4b3c9f7e024f8fe9012e7a2e437, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2359,7 +2359,7 @@ Transform:
   m_GameObject: {fileID: 1693216586}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 36, y: -14, z: 0}
+  m_LocalPosition: {x: 36, y: -14.6, z: 0}
   m_LocalScale: {x: 1, y: -1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2475,7 +2475,7 @@ Transform:
   m_GameObject: {fileID: 1701493426}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -14, z: 0}
+  m_LocalPosition: {x: 0, y: -14.6, z: 0}
   m_LocalScale: {x: 1, y: -1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2671,7 +2671,6 @@ MonoBehaviour:
   - {fileID: 6925166128267643469, guid: 862f00b36058344289c1c7c4dffccd6d, type: 3}
   - {fileID: 7392447361912710173, guid: 96833b1ed63d040c08a43d590f8a54ec, type: 3}
   openingDialogue: {fileID: 11400000, guid: b924f74df439e0145ad1cd9ad986d1cd, type: 2}
-  openingDiscussion: {fileID: 11400000, guid: 899d3bde817931743b5ca12928b8a667, type: 2}
   jackieMonologue: {fileID: 11400000, guid: ce06ffd35701a8c43805e8c382a8f93f, type: 2}
   soldierGreeting: {fileID: 11400000, guid: 225d9d417d3f0054785ea3b22b2e8d18, type: 2}
   jackieTalksWithSolider: {fileID: 11400000, guid: bdaf40c6f840aab4f9917858f31c2c69, type: 2}
