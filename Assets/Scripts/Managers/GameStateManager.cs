@@ -67,7 +67,7 @@ public class GameStateManager : PersistentSingleton<GameStateManager>, IBind<Gam
         yield return new WaitForSeconds(0.2f);
         SaveLoadSystem.Instance.SaveGame();
         SceneManager.LoadScene(scene);
-        yield return new WaitForEndOfFrame();
+        yield return new WaitForSeconds(0.2f);
         yield return StartCoroutine(UIFadeScreenManager.Instance.FadeInLightScreen(0.6f));
     }
 

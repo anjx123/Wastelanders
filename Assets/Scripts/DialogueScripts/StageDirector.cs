@@ -32,7 +32,6 @@ namespace DialogueScripts
 
         private void OnSetSpeaker(SetSpeaker ss)
         {
-            _ = GetOrSummonActor(ss.actor);
             foreach ((CharacterActor characterProfile, DialogueActor actorInstance) in activeActors)
             {
                 actorInstance.SetSpeaker(isSpeaking: characterProfile == ss.actor);
