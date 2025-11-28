@@ -1,0 +1,72 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 207ddad3e1c90594ba3f48e2a5a6a796, type: 3}
+  m_Name: AilinDialogue
+  m_EditorClassIdentifier: 
+  dialogue:
+  - bodyText: Jackie, dear? Listen up. I have something important to tell you.
+    speakerName: Ailin
+    displayingImage: {fileID: 0}
+    sfx: 
+    broadcastAnEvent: 0
+  - bodyText: Yes, Mama?
+    speakerName: Jackie
+    displayingImage: {fileID: 0}
+    sfx: 
+    broadcastAnEvent: 0
+  - bodyText: "I\u2019m going away for a little while. Another business trip tomorrow."
+    speakerName: Ailin
+    displayingImage: {fileID: 0}
+    sfx: 
+    broadcastAnEvent: 1
+  - bodyText: "But Mama\u2026 you just got back."
+    speakerName: Jackie
+    displayingImage: {fileID: 0}
+    sfx: 
+    broadcastAnEvent: 0
+  - bodyText: "I know, sweetheart, but it\u2019s for your Uncle Jay\u2026 He\u2019s
+      gone missing in the Tundra."
+    speakerName: Ailin
+    displayingImage: {fileID: 0}
+    sfx: 
+    broadcastAnEvent: 0
+  - bodyText: No! Will he be okay?
+    speakerName: Jackie
+    displayingImage: {fileID: 0}
+    sfx: 
+    broadcastAnEvent: 0
+  - bodyText: "Yes. He\u2019s the hardiest scout I know. He\u2019ll be alright\u2026"
+    speakerName: Ailin
+    displayingImage: {fileID: 0}
+    sfx: 
+    broadcastAnEvent: 1
+  - bodyText: "And you\u2019re the hardiest Mama I know! You\u2019ll be alright too!"
+    speakerName: Jackie
+    displayingImage: {fileID: 0}
+    sfx: 
+    broadcastAnEvent: 0
+  - bodyText: "Haha, thank you, Jackie. Auntie Ives will stay with you while I\u2019m
+      gone. Be good for her, alright?"
+    speakerName: Ailin
+    displayingImage: {fileID: 0}
+    sfx: 
+    broadcastAnEvent: 0
+  - bodyText: I will! Come back soon, okay?
+    speakerName: Jackie
+    displayingImage: {fileID: 0}
+    sfx: 
+    broadcastAnEvent: 0
+  - bodyText: The mother and daughter embrace, letting goodbyes stay unspoken.
+    speakerName: Narration
+    displayingImage: {fileID: 0}
+    sfx: 
+    broadcastAnEvent: 1

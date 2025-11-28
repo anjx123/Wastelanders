@@ -1,7 +1,5 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 
 #nullable enable
@@ -81,7 +79,7 @@ public abstract class SceneData : Enum<SceneData>
         public override SceneAudio GetAudio(AudioDatabase database) => database.FrogSlimeFight;
 
         public override MonoBehaviour[] RequiredPrefabs(SceneInitializerPrefabs prefabs) => new MonoBehaviour[]
-            { prefabs.audioManager, prefabs.uiFadeScreenManager, prefabs.combatFadeScreenManager, prefabs.pauseMenuV2, prefabs.hudV2, prefabs.dialogueManager, prefabs.popupManager,  prefabs.gameOver, prefabs.battleIntro  };
+            { prefabs.audioManager, prefabs.uiFadeScreenManager, prefabs.combatFadeScreenManager, prefabs.pauseMenuV2, prefabs.hudV2, prefabs.dialogueManager, prefabs.popupManager,  prefabs.gameOver, prefabs.battleIntro, prefabs.dialogueBoxV2  };
     }
 
     public class BeetleFight : SceneData
@@ -127,6 +125,39 @@ public abstract class SceneData : Enum<SceneData>
 
         public override MonoBehaviour[] RequiredPrefabs(SceneInitializerPrefabs prefabs) => new MonoBehaviour[]
             { prefabs.audioManager, prefabs.uiFadeScreenManager, prefabs.pauseMenuV2 };
+    }
+
+    public class PreBounty0 : SceneData {
+        public override string SceneName => "PreBounty_0";
+        public override SceneAudio GetAudio(AudioDatabase database) => database.Empty;
+
+        public override MonoBehaviour[] RequiredPrefabs(SceneInitializerPrefabs prefabs) => new MonoBehaviour[]
+            { prefabs.audioManager, prefabs.uiFadeScreenManager, prefabs.pauseMenuV2, prefabs.dialogueManager };
+    }
+
+    public class PreBounty_1 : SceneData
+    {
+        public override string SceneName => "PreBounty_1";
+        public override SceneAudio GetAudio(AudioDatabase database) => database.TutorialFight;
+
+        public override MonoBehaviour[] RequiredPrefabs(SceneInitializerPrefabs prefabs) => new MonoBehaviour[]
+            { prefabs.audioManager, prefabs.uiFadeScreenManager, prefabs.pauseMenuV2, prefabs.dialogueManager };
+    }
+
+    public class PreBounty2 : SceneData
+    {
+        public override string SceneName => "PreBounty_2";
+
+        public override SceneAudio GetAudio(AudioDatabase database) => database.Empty;
+
+        public override MonoBehaviour[] RequiredPrefabs(SceneInitializerPrefabs prefabs) => new MonoBehaviour[]
+        {
+            prefabs.audioManager,
+            prefabs.pauseMenuV2,
+            prefabs.dialogueManager,
+            prefabs.uiFadeScreenManager,
+            prefabs.dialogueBoxV2
+        };
     }
 
     private static readonly Dictionary<string, SceneData> _sceneLookup = new();

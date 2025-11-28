@@ -126,7 +126,7 @@ namespace Steamworks {
             }
 
             if (!m_bInitialized) {
-                Debug.LogError(
+                Debug.LogWarning(
                     "[Steamworks.NET] SteamAPI_Init() failed. Refer to Valve's documentation or the comment above this line for more information.",
                     this);
 

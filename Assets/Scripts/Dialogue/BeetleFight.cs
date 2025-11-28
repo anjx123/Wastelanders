@@ -1,16 +1,13 @@
-
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using System.Reflection;
 using Cinemachine;
 using UnityEngine.UI;
-using Systems.Persistence;
-using System;
 using LevelSelectInformation;
 using SceneBuilder;
+using UI_Elements;
 using static BattleIntroEnum;
+
 //@author: Andrew
 public class BeetleFight : DialogueClasses
 {
@@ -51,7 +48,8 @@ public class BeetleFight : DialogueClasses
     [SerializeField] private ActionClass beetleAction;
     [SerializeField] private ActionClass jackieAction;
 
-
+    [SerializeField] private GameObject forestBg;
+    [SerializeField] private GameObject treeSprite;
     [SerializeField] private GameObject theCampWithBeetles;
     [SerializeField] private GameObject beetleNest;
     [SerializeField] private GameObject background;
@@ -184,7 +182,7 @@ public class BeetleFight : DialogueClasses
     {
         CombatManager.Instance.GameState = GameState.OUT_OF_COMBAT;
         UIFadeScreenManager.Instance.SetDarkScreen();
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForEndOfFrame(); // Necessary to load in enemies and managers. 
         SetUpEnemyLists();
         SetUpCombatStatus();
         if (!GameStateManager.Instance.JumpToCombat)
@@ -279,6 +277,7 @@ public class BeetleFight : DialogueClasses
 
             //Jackie Vows to hunt down that beetle 
             {
+                forestBg.gameObject.SetActive(false);
                 RemoveEnemyFromScene(frog);
                 sceneCamera.m_Lens.OrthographicSize = 5f;
                 sceneCamera.transform.position = beetleNestCameraPos.transform.position;
@@ -301,6 +300,7 @@ public class BeetleFight : DialogueClasses
 
             //Jackie chases after beetle who might have stolen her crystal
             {
+                treeSprite.SetActive(true);
                 beetleNest.SetActive(true);
                 yield return StartCoroutine(CombatManager.Instance.FadeInLightScreen(1.2f));
                 Coroutine beetleRunsIn = StartCoroutine(ambushBeetle.MoveToPosition(beetleRunsFromJackieTransform.position, 0f, 2.5f));
@@ -336,6 +336,7 @@ public class BeetleFight : DialogueClasses
 
             //Jackie sees the nest of beetles
             {
+                treeSprite.SetActive(false);
                 beetleNest.SetActive(false);
                 RemoveEnemyFromScene(ambushBeetle);
                 sceneCamera.Priority = 2;
@@ -411,13 +412,13 @@ public class BeetleFight : DialogueClasses
             CombatManager.Instance.BeginCombat();
             yield return StartCoroutine(DialogueManager.Instance.StartDialogue(twoPlayerCombatTutorial.Dialogue));
             Begin2PCombatTutorial();
-            waveIndicator.SetWave(1);
+            waveIndicator.Show(1, 3);
             yield return new WaitUntil(() => CombatManager.Instance.GameState == GameState.GAME_WIN);
         }
 
         //Start wave 2
         {
-            waveIndicator.gameObject.SetActive(false);
+            waveIndicator.Hide();
             wave2Fight.SetActive(true);
             CombatManager.Instance.SetEnemiesHostile(wave2);
 
@@ -427,13 +428,13 @@ public class BeetleFight : DialogueClasses
             CombatManager.Instance.GameState = GameState.SELECTION;
             yield return StartCoroutine(DialogueManager.Instance.StartDialogue(wave2Dialogue.Dialogue));
             BeginWave2();
-            waveIndicator.SetWave(2);
+            waveIndicator.Show(2, 3);
             yield return new WaitUntil(() => CombatManager.Instance.GameState == GameState.GAME_WIN);
         }
 
         //Start wave 3
         {
-            waveIndicator.gameObject.SetActive(false);
+            waveIndicator.Hide();
             wave3Fight.SetActive(true);
             CombatManager.Instance.SetEnemiesHostile(wave3);
             sceneBuilder.PlayersPosition = playerWave3CombatPosition;
@@ -443,13 +444,13 @@ public class BeetleFight : DialogueClasses
             CombatManager.Instance.GameState = GameState.SELECTION;
             yield return StartCoroutine(DialogueManager.Instance.StartDialogue(wave3Dialogue.Dialogue));
             BeginWave3();
-            waveIndicator.SetWave(3);
+            waveIndicator.Show(3, 3);
             yield return new WaitUntil(() => CombatManager.Instance.GameState == GameState.GAME_WIN);
         }
 
         //End of Scene
         {
-            waveIndicator.gameObject.SetActive(false);
+            waveIndicator.Hide();
             yield return new WaitForSeconds(2);
             if (ives.IsDead)
             {
