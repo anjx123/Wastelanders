@@ -13,37 +13,58 @@ MonoBehaviour:
   m_Name: 15 IvesTutorial
   m_EditorClassIdentifier: 
   dialogue:
-  - bodyText: Combat remains mostly the same, but now the enemy has more targets
-      to choose from.
+  - bodyText: Combat works the same as before, but now the enemy has more than one
+      target.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
+    sfx: 
     broadcastAnEvent: 0
-  - bodyText: You can retarget enemy attacks by clashing with them if your card is
-      faster than theirs.
+  - bodyText: "You can redirect an enemy\u2019s attack to yourself by clashing with
+      it"
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
+    sfx: 
     broadcastAnEvent: 0
-  - bodyText: 'If it fails to form a clash, that means your card was too slow to
-      redirect the attack. '
+  - bodyText: But <i>only if</i> your Action is faster than theirs.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
+    sfx: 
     broadcastAnEvent: 0
-  - bodyText: 'Unfortunately, we will not be able to play actions with overlapping
-      speeds.   '
+  - bodyText: If no Clash forms, your Action was too slow to pull the attack toward
+      you.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
+    sfx: 
     broadcastAnEvent: 0
-  - bodyText: Crowded fights like these mean we can easily get in each others' way
-      if we do!
+  - bodyText: 'But that <i>could</i> allow you to get an unopposed attack in. Guaranteeing
+      that it hits. '
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
+    sfx: 
     broadcastAnEvent: 0
-  - bodyText: But as you improve in duo combat, you'll find that you can much more
-      easily cover each other's weaknesses!
+  - bodyText: "And remember, we still can\u2019t play Actions with overlapping Speeds."
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
+    sfx: 
     broadcastAnEvent: 0
-  - bodyText: "Alright, now let\u2019s crush these bugs!"
+  - bodyText: "In a crowded fight, stepping into each other\u2019s timing can be
+      fatal."
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
+    sfx: 
+    broadcastAnEvent: 0
+  - bodyText: "But once you get the hang of it, we can cover each other\u2019s weaknesses."
+    speakerName: Ives
+    displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
+    sfx: 
+    broadcastAnEvent: 0
+  - bodyText: 'And make openings more effectively than fighting alone. '
+    speakerName: Ives
+    displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
+    sfx: 
+    broadcastAnEvent: 0
+  - bodyText: "Alright Jackie, let\u2019s crush these bugs!"
+    speakerName: Ives
+    displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
+    sfx: 
     broadcastAnEvent: 0
