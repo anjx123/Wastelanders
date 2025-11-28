@@ -11,6 +11,8 @@ using static BattleIntroEnum;
 
 public class FrogSlimeFightDialogue : DialogueClasses
 {
+    [SerializeField] private bool instakill;
+    
     [SerializeField] private Jackie jackie;
     [SerializeField] private Transform jackieDefaultTransform;
     [SerializeField] private Transform jackieWander1;
@@ -229,6 +231,11 @@ public class FrogSlimeFightDialogue : DialogueClasses
         //Starting Combat
         yield return new WaitForSeconds(1f);
         yield return StartCoroutine(DialogueManager.Instance.StartDialogue(startOfCombatDialogue));
+        if (instakill)
+        {
+            jackie.AddStacks("Accuracy", 900);
+            jackie.AddStacks("Flow", 900);
+        }
         yield return new WaitUntil(() => CombatManager.Instance.GameState == GameState.GAME_WIN);
         CombatManager.Instance.GameState = GameState.OUT_OF_COMBAT;
         ReviveJackie();
