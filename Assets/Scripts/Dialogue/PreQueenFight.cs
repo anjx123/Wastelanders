@@ -63,7 +63,7 @@ public class PreQueenFight : DialogueClasses
     [SerializeField] private List<Crystals> crystals;
     [SerializeField] private Crystals middleBigCrystal;
     [SerializeField] private List<Crystals> bigCrystals;
-
+    [SerializeField] private SpriteRenderer treeOverlay;
 
     [SerializeField] private QueenBeetle theQueen;
     [SerializeField] private Transform queenTransform;
@@ -386,6 +386,7 @@ public class PreQueenFight : DialogueClasses
 
                 jackie.Emphasize();
                 ives.Emphasize();
+
                 foreach (EntityClass entity in entitiesInPlanThree)
                 {
                     Coroutine coroutine = StartCoroutine(FadeSprite(entity.gameObject.GetComponent<SpriteRenderer>(), 0f, 1f, 0.8f));
@@ -412,6 +413,12 @@ public class PreQueenFight : DialogueClasses
                 yield return StartCoroutine(DialogueManager.Instance.StartDialogue(planThreeDialogue.Dialogue));
                 yield return StartCoroutine(CombatManager.Instance.FadeInLightScreen(0.5f));
 
+                var jackieSprite = jackie.GetComponent<SpriteRenderer>();
+                var oldLayer = treeOverlay.sortingLayerName;
+                var oldOrder = treeOverlay.sortingOrder;
+                treeOverlay.sortingLayerName = jackieSprite.sortingLayerName;
+                treeOverlay.sortingOrder = jackieSprite.sortingOrder + 1;
+
                 StartCoroutine(ives.ResetPosition());
                 yield return StartCoroutine(jackie.ResetPosition()); //Jackie Runs into the scene
                 yield return new WaitForSeconds(MEDIUM_PAUSE);
@@ -427,6 +434,8 @@ public class PreQueenFight : DialogueClasses
                 yield return StartCoroutine(NoCombatClash(jackie, campBeetles[1], false,StaffCards.STAFF_SOUND_FX_NAME));
 
                 yield return new WaitForSeconds(MEDIUM_PAUSE);
+                treeOverlay.sortingLayerName = oldLayer;
+                treeOverlay.sortingOrder = oldOrder;
 
                 //Clean up props used this scene
                 foreach (EntityClass entity in entitiesInPlanThree)
@@ -530,8 +539,9 @@ public class PreQueenFight : DialogueClasses
             jackie.DeEmphasize();
             ives.DeEmphasize();
             theQueen.DeEmphasize();
+            StartCoroutine(AudioManager.Instance.StartCombatMusic());
 
-            yield return StartCoroutine(FadeTMP(backgroundtext, 2f));
+            yield return StartCoroutine(FadeTMP(backgroundtext, 1f));
             yield return new WaitForSeconds(MEDIUM_PAUSE);
             yield return StartCoroutine(FadeTMP(endofdemotext, 2f));
             yield return new WaitForSeconds(MEDIUM_PAUSE);
