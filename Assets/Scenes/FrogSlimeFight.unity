@@ -1878,7 +1878,7 @@ Transform:
   m_GameObject: {fileID: 723173596}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -18, y: 0, z: 0}
+  m_LocalPosition: {x: -15.75, y: 0, z: 0}
   m_LocalScale: {x: -1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2762,6 +2762,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   instakill: 0
+  jumpToCombat: 1
   jackie: {fileID: 1812891602}
   jackieDefaultTransform: {fileID: 1074057121}
   jackieWander1: {fileID: 893260480}
@@ -2790,6 +2791,9 @@ MonoBehaviour:
   marshBG: {fileID: 189897196}
   ivesProfile: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
   treeOverlay: {fileID: 1424525370}
+  closeTrees:
+  - {fileID: 1487316981}
+  - {fileID: 1424525371}
   frogDeathSprite: {fileID: 21300000, guid: 87829d35cc4de8b4db02b857e0431956, type: 3}
   jackieHoldingCrystalSprite: {fileID: 21300000, guid: 39aee1878ca221043839f79d83a21ecd, type: 3}
   startingNarration:
@@ -2861,7 +2865,8 @@ MonoBehaviour:
     speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
     sfxName: 
     picture: {fileID: 0}
-    events: []
+    events:
+    - rid: 5589630802696863808
   jackieStrategyPlan:
   - bodyText: Hmm let me come up with a plan...
     speakerName: Jackie
@@ -3028,6 +3033,12 @@ MonoBehaviour:
       data:
         actor: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
         sprite: {fileID: 21300000, guid: 85e302f93093f564290df1bd57119113, type: 3}
+    - rid: 5589630802696863808
+      type: {class: ActorAction, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
+        action: 70
+        duration: 1
 --- !u!1 &1190599931
 GameObject:
   m_ObjectHideFlags: 0
@@ -3703,8 +3714,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1424525369}
   - component: {fileID: 1424525370}
+  - component: {fileID: 1424525371}
   m_Layer: 0
-  m_Name: WasteBGV2-0
+  m_Name: WasteBGV2-01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3780,6 +3792,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1424525371
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1424525368}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a6c2131294871b4499a5ce3cb16734e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spriteRenderer: {fileID: 1424525370}
 --- !u!1 &1436546156
 GameObject:
   m_ObjectHideFlags: 0
@@ -3861,8 +3886,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1487316979}
   - component: {fileID: 1487316980}
+  - component: {fileID: 1487316981}
   m_Layer: 0
-  m_Name: WasteBGV2-0
+  m_Name: WasteBGV2-00
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3938,6 +3964,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1487316981
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1487316978}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a6c2131294871b4499a5ce3cb16734e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spriteRenderer: {fileID: 1487316980}
 --- !u!1 &1525248173
 GameObject:
   m_ObjectHideFlags: 0
@@ -4096,7 +4135,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6635998426718021455, guid: b9c5e4b3c9f7e024f8fe9012e7a2e437, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -26.153334
+      value: -26.153854
       objectReference: {fileID: 0}
     - target: {fileID: 6635998426718021455, guid: b9c5e4b3c9f7e024f8fe9012e7a2e437, type: 3}
       propertyPath: m_LocalPosition.y
