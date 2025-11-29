@@ -3,12 +3,9 @@ using UnityEngine.UIElements;
 
 namespace UI_Toolkit.UI_Elements
 {
-    public class DeckSelectCardV2 : VisualElement
+    [UxmlElement]
+    public partial class DeckSelectCardV2 : VisualElement
     {
-        public new class UxmlFactory : UxmlFactory<DeckSelectCardV2>
-        {
-        }
-
         public void WithAttrsFromActionClass(ActionClass ac)
         {
             WithAttrs(ac.GetIcon(), ac.GetName(), ac.Speed.ToString(), ac.CostToAddToDeck.ToString(), FormatStats(ac.GetRolledStats()));
