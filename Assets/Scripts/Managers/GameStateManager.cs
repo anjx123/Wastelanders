@@ -11,6 +11,8 @@ public class GameStateManager : PersistentSingleton<GameStateManager>, IBind<Gam
 {
     public static readonly bool IS_DEVELOPMENT = true;
 
+    public SceneData PreviousScene { get; private set; } = SceneData.Get<SceneData.MainMenu>();
+
     //Fields for persistence
     [field: SerializeField] public SerializableGuid Id { get; set; } = SerializableGuid.NewGuid();
     private GameStateData data;
@@ -58,6 +60,7 @@ public class GameStateManager : PersistentSingleton<GameStateManager>, IBind<Gam
 
     public void LoadScene(string scene)
     {
+        PreviousScene = SceneData.FromSceneName(SceneManager.GetActiveScene().name);
         StartCoroutine(FadeAndLoadScene(scene));
     }
 
