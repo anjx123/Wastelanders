@@ -35,7 +35,7 @@ public class SceneInitializer : MonoBehaviour
         foreach (var managerPrefab in requiredManagers)
         {
             // Check if a persistent instance of this manager already exists.
-            if (FindObjectOfType(managerPrefab.GetType()) != null)
+            if (FindFirstObjectByType(managerPrefab.GetType()) != null)
             {
                 Debug.LogWarning($"{managerPrefab.GetType()} already exists!");
                 continue;
