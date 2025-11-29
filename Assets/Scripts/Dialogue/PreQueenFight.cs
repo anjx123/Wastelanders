@@ -542,7 +542,6 @@ public class PreQueenFight : DialogueClasses
             StartCoroutine(AudioManager.Instance.StartCombatMusic());
 
             yield return StartCoroutine(FadeTMP(backgroundtext, 1f));
-            yield return new WaitForSeconds(MEDIUM_PAUSE);
             yield return StartCoroutine(FadeTMP(endofdemotext, 2f));
             yield return new WaitForSeconds(MEDIUM_PAUSE);
             yield return StartCoroutine(FadeTMP(wishlisttext, 2f));
