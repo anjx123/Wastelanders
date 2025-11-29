@@ -16,8 +16,11 @@ MonoBehaviour:
   - bodyText: 'Tsk, looks like these beetles are tougher than I thought. '
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 084171bdb9370ac43b84a6350416b15c, type: 3}
+    sfx: 
     broadcastAnEvent: 0
-  - bodyText: Jackie, let's back off, re-equip, and wait for reinforcements.
+  - bodyText: Jackie, let's back off and re-equip, switching up the loadout could
+      be effective to re-engage.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 084171bdb9370ac43b84a6350416b15c, type: 3}
+    sfx: 
     broadcastAnEvent: 0

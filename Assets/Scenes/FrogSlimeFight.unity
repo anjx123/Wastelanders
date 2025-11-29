@@ -2299,8 +2299,8 @@ MonoBehaviour:
     sfx: 
     broadcastAnEvent: 0
   gameLoseDialogue:
-  - bodyText: Tsk, I better get away and recover. Maybe I'll have better luck somewhere
-      else...
+  - bodyText: Tsk, I better get away and recover. Maybe changing up my weapon techniques
+      will help?
     speakerName: Jackie
     displayingImage: {fileID: 0}
     sfx: 

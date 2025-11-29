@@ -13,62 +13,84 @@ MonoBehaviour:
   m_Name: 18 PostBattleDialogue
   m_EditorClassIdentifier: 
   dialogue:
-  - bodyText: (After the battle, Candidates catch their breath.)
-    speakerName: 
+  - bodyText: After the battle, the candidates catch their breath.
+    speakerName: 'Narration:'
     displayingImage: {fileID: 0}
+    sfx: 
     broadcastAnEvent: 0
-  - bodyText: (Some examiners inspect the dropped Waste Crystals, while others discuss
-      amongst themselves.)
-    speakerName: 
+  - bodyText: Some examiners inspect the dropped Waste Crystals, while others discuss
+      amongst themselves.
+    speakerName: 'Narration:'
     displayingImage: {fileID: 0}
+    sfx: 
     broadcastAnEvent: 0
-  - bodyText: 'These beetles were among some of the most aggressive monsters I have
-      seen in the Wasteland. '
+  - bodyText: These beetles are unprecedentedly aggressive.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: ade9660133ca00a499bfa3ad449b87bd, type: 3}
+    sfx: 
     broadcastAnEvent: 0
-  - bodyText: Hoarding waste products like their life depends on it.
+  - bodyText: Raiding a fully defended camp like this.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: ade9660133ca00a499bfa3ad449b87bd, type: 3}
+    sfx: 
+    broadcastAnEvent: 0
+  - bodyText: It's nothing like I've seen before.
+    speakerName: Ives
+    displayingImage: {fileID: 21300000, guid: ade9660133ca00a499bfa3ad449b87bd, type: 3}
+    sfx: 
     broadcastAnEvent: 0
   - bodyText: "And they weren\u2019t dumb either. They fought with a surprising amount
       of coordination."
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: ade9660133ca00a499bfa3ad449b87bd, type: 3}
+    sfx: 
+    broadcastAnEvent: 0
+  - bodyText: Hoarding waste products like their life depends on it.
+    speakerName: Ives
+    displayingImage: {fileID: 21300000, guid: ade9660133ca00a499bfa3ad449b87bd, type: 3}
+    sfx: 
     broadcastAnEvent: 0
   - bodyText: Just where could they have come from?
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
+    sfx: 
     broadcastAnEvent: 0
   - bodyText: Earlier, I encountered another one of these beetles. I was chasing
       it when it led me back to its nest.
     speakerName: Jackie
     displayingImage: {fileID: 21300000, guid: 228f823fe8b2f4d4791ed74e46de81e1, type: 3}
+    sfx: 
     broadcastAnEvent: 1
   - bodyText: Oh? Do you remember how to get back there? To the nest?
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
+    sfx: 
     broadcastAnEvent: 0
   - bodyText: Yeah, I made a mental note of it.
     speakerName: Jackie
     displayingImage: {fileID: 21300000, guid: c719baaafa8cd7148806ffb41907add6, type: 3}
+    sfx: 
     broadcastAnEvent: 0
   - bodyText: "Excellent. Since the beetles seem to be attracted to Waste Products,
       the city\u2019s collection of Products could spell trouble. "
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
+    sfx: 
     broadcastAnEvent: 0
   - bodyText: All the examiners agree that it would be best to deal with the beetles
       now before they become an even larger problem.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
+    sfx: 
     broadcastAnEvent: 0
   - bodyText: "Everyone, rest and recuperate for now. We\u2019ll come up with a plan
       of attack to neutralize the beetle swarm."
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
+    sfx: 
     broadcastAnEvent: 0
   - bodyText: Seems like this expedition will be more than just an exam...
     speakerName: Jackie
     displayingImage: {fileID: 21300000, guid: 228f823fe8b2f4d4791ed74e46de81e1, type: 3}
+    sfx: 
     broadcastAnEvent: 0
