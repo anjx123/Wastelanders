@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 
+#nullable enable
 namespace DialogueScripts
 {
     [Serializable]
@@ -11,28 +12,21 @@ namespace DialogueScripts
 
     public class SetSpeaker: DialogueEvents, IEvent
     {
-        public CharacterActor actor = CharacterActor.Jackie;
+        public ActorProfile? actor;
         public override void Execute() => this.Invoke();
     }
 
-    public enum CharacterActor
-    {
-        Jackie = 10,
-        Cam = 20,
-        Ives = 30 ,
-        None = 1000,
-    }
 
     public class SpriteChange : DialogueEvents, IEvent
     {
-        public CharacterActor actor = CharacterActor.Jackie;
-        public Sprite sprite;
+        public ActorProfile? actor;
+        public Sprite sprite = null!;
         public override void Execute() => this.Invoke();
     }
 
     public class ActorAction : DialogueEvents, IEvent
     {
-        public CharacterActor actor = CharacterActor.Jackie;
+        public ActorProfile? actor;
         public CharacterActions action = CharacterActions.SetLeft;
         public float duration = 1.0f;
         public override void Execute() => this.Invoke();

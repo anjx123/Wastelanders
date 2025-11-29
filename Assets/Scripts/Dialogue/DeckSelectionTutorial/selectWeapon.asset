@@ -13,20 +13,24 @@ MonoBehaviour:
   m_Name: selectWeapon
   m_EditorClassIdentifier: 
   dialogue:
-  - bodyText: "Hmm\u2026 I should be able to handle 2 weapons in a fight."
+  - bodyText: "Hmm\u2026 I should be able to utilize two weapons in a fight."
     speakerName: Jackie
-    displayingImage: {fileID: 0}
+    displayingImage: {fileID: 21300000, guid: 70562f64108503147861dbc82d787ef9, type: 3}
+    sfx: 
     broadcastAnEvent: 0
   - bodyText: I already have my staff with me.
     speakerName: Jackie
     displayingImage: {fileID: 21300000, guid: a34c4d771cecc3e40814a015e6e3b31d, type: 3}
+    sfx: 
     broadcastAnEvent: 0
   - bodyText: "And since I\u2019ve been training hard to use the pistol recently,
       I should bring that to my exam."
     speakerName: Jackie
     displayingImage: {fileID: 21300000, guid: 601769b83c413394f9dcef8bf9a4ef38, type: 3}
+    sfx: 
     broadcastAnEvent: 0
-  - bodyText: '[Click] on the weapon to select it and to bring it into combat.'
-    speakerName: Jackie
+  - bodyText: <i>Click on the weapon to select it and bring it into combat.</i>
+    speakerName: Tutorial
     displayingImage: {fileID: 21300000, guid: 601769b83c413394f9dcef8bf9a4ef38, type: 3}
+    sfx: 
     broadcastAnEvent: 0

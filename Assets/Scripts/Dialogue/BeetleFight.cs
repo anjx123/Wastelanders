@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
+using DialogueScripts;
 using UnityEngine.UI;
 using LevelSelectInformation;
 using SceneBuilder;
@@ -48,8 +49,7 @@ public class BeetleFight : DialogueClasses
     [SerializeField] private ActionClass beetleAction;
     [SerializeField] private ActionClass jackieAction;
 
-    [SerializeField] private GameObject forestBg;
-    [SerializeField] private GameObject treeSprite;
+    [SerializeField] private GameObject floorBg;
     [SerializeField] private GameObject theCampWithBeetles;
     [SerializeField] private GameObject beetleNest;
     [SerializeField] private GameObject background;
@@ -60,6 +60,7 @@ public class BeetleFight : DialogueClasses
     [SerializeField] private CinemachineVirtualCamera sceneCamera;
     [SerializeField] private Sprite frogDeathSprite;
     [SerializeField] private Sprite jackieCrystalSprite;
+    [SerializeField] private Image dialogueMarshBg;
 
     [SerializeField] private List<DialogueText> openingJackieQuipt;
     [SerializeField] private DialogueWrapper openingDiscussion;
@@ -80,7 +81,8 @@ public class BeetleFight : DialogueClasses
     [SerializeField] private DialogueWrapper ivesTutorial;
     [SerializeField] private DialogueWrapper wave2Dialogue;
     [SerializeField] private DialogueWrapper wave3Dialogue;
-    [SerializeField] private DialogueWrapper postBattleDialogue; 
+    [SerializeField] private DialogueWrapper postBattleDialogue;
+    [SerializeField] private DialogueEntryWrapper postBattleDialogueEntry;
     [SerializeField] private DialogueWrapper gameLoseDialogue;
     [SerializeField] private DialogueWrapper resonateExplanation;
     [SerializeField] private DialogueWrapper crystalExplanation;
@@ -137,9 +139,11 @@ public class BeetleFight : DialogueClasses
         }
         foreach (Transform entity in theCampWithBeetles.transform)
         {
-            nitesCampBeetles.Add(entity.GetComponent<EnemyClass>());
-            entity.GetComponent<EnemyClass>().OutOfCombat();
-            entity.GetComponent<EnemyClass>().animator.enabled = false;
+            var et = entity.GetComponent<EnemyClass>();
+            nitesCampBeetles.Add(et);
+            et.OutOfCombat();
+            et.GetComponent<SpriteRenderer>().sortingOrder -= 1;
+            et.animator.enabled = false;
         }
         foreach (Transform enemy in wave1Fight.transform)
         {
@@ -250,7 +254,7 @@ public class BeetleFight : DialogueClasses
                 jackieAction.Origin = jackie;
                 jackieAction.Speed = 1;
 
-                yield return StartCoroutine(ambushBeetle.MoveToPosition(ambushBeetleTransform.position, 0, 0.4f));
+                yield return StartCoroutine(ambushBeetle.MoveToPosition(ambushBeetleTransform.position, 0, 1f));
                 jackie.FaceLeft();
                 yield return StartCoroutine(DialogueManager.Instance.StartDialogue(jackieSurprised.Dialogue));
                 jackie.animator.enabled = true;
@@ -263,21 +267,20 @@ public class BeetleFight : DialogueClasses
             //Jackie Chases the beetle and we fade
             {
                 sceneCamera.transform.position = CombatManager.Instance.dynamicCamera.transform.position;
-                yield return StartCoroutine(ambushBeetle.MoveToPosition(jackieChasingTransform.position, 0, 1.2f)); // beetle runs away
+                yield return StartCoroutine(ambushBeetle.MoveToPosition(jackieChasingTransform.position, 0, 1f)); // beetle runs away
 
                 jackie.DeEmphasize();
                 sceneCamera.Priority = 2;
                 CombatManager.Instance.ActivateBaseCamera();
                 yield return StartCoroutine(DialogueManager.Instance.StartDialogue(jackieChase.Dialogue));
                 Coroutine fade = StartCoroutine(CombatManager.Instance.FadeInDarkScreen(1f));
-                yield return StartCoroutine(jackie.MoveToPosition(jackieChasingTransform.position, 1f, 1f)); //Jackie Runs into the scene
+                yield return StartCoroutine(jackie.MoveToPosition(jackieChasingTransform.position, 1f, 1.3f)); //Jackie Runs into the scene
                 yield return fade;
 
             }
 
             //Jackie Vows to hunt down that beetle 
             {
-                forestBg.gameObject.SetActive(false);
                 RemoveEnemyFromScene(frog);
                 sceneCamera.m_Lens.OrthographicSize = 5f;
                 sceneCamera.transform.position = beetleNestCameraPos.transform.position;
@@ -300,7 +303,6 @@ public class BeetleFight : DialogueClasses
 
             //Jackie chases after beetle who might have stolen her crystal
             {
-                treeSprite.SetActive(true);
                 beetleNest.SetActive(true);
                 yield return StartCoroutine(CombatManager.Instance.FadeInLightScreen(1.2f));
                 Coroutine beetleRunsIn = StartCoroutine(ambushBeetle.MoveToPosition(beetleRunsFromJackieTransform.position, 0f, 2.5f));
@@ -336,7 +338,6 @@ public class BeetleFight : DialogueClasses
 
             //Jackie sees the nest of beetles
             {
-                treeSprite.SetActive(false);
                 beetleNest.SetActive(false);
                 RemoveEnemyFromScene(ambushBeetle);
                 sceneCamera.Priority = 2;
@@ -358,9 +359,9 @@ public class BeetleFight : DialogueClasses
                 yield return StartCoroutine(DialogueManager.Instance.StartDialogue(jackieShockAtBeetleEnteringCamp.Dialogue));
                 sceneCamera.Priority = 0;
                 CombatManager.Instance.ActivateDynamicCamera();
-                yield return StartCoroutine(jackie.MoveToPosition(ivesDefaultTransform.position, 1.5f, 2.5f));
+                yield return StartCoroutine(jackie.MoveToPosition(ivesDefaultTransform.position, 1.5f, 3.5f));
                 yield return StartCoroutine(DialogueManager.Instance.StartDialogue(ivesConversation.Dialogue));
-
+                floorBg.SetActive(false);
                 Coroutine ivesReset = StartCoroutine(ives.ResetPosition());
                 yield return StartCoroutine(jackie.ResetPosition());
                 yield return ivesReset;
@@ -374,8 +375,9 @@ public class BeetleFight : DialogueClasses
             RemoveEnemyFromScene(frog);
             RemoveEnemyFromScene(frogThatRunsAway);
             RemoveEnemyFromScene(ambushBeetle);
+            floorBg.SetActive(false);
             ives.transform.position = playerWave1CombatPosition.position + new Vector3(-4, 0, 0);
-            Coroutine fade = StartCoroutine(CombatManager.Instance.FadeInLightScreen(2f));
+            yield return StartCoroutine(CombatManager.Instance.FadeInLightScreen(2f));
         }
 
         //kill off the other entities in the scene
@@ -494,26 +496,12 @@ public class BeetleFight : DialogueClasses
             jackie.FaceLeft();
             ives.FaceRight();
 
-            jackieVNSprite.gameObject.SetActive(true);
-            ivesVNSprite.gameObject.SetActive(true);
-
-
-            DialogueBox.DialogueBoxEvent += JackieMentionsSheSawBeetles;
-            void JackieMentionsSheSawBeetles() {
-                DialogueBox.DialogueBoxEvent -= JackieMentionsSheSawBeetles;
-                StartCoroutine(MoveToRight(jackieVNSprite.gameObject.GetComponent<RectTransform>(), 400f, 0.8f));
-            }
-
             yield return new WaitUntil(() => !DialogueManager.Instance.IsInDialogue());
-            yield return StartCoroutine(CombatManager.Instance.FadeInDarkScreen(2f));
-            yield return StartCoroutine(FadeImage(ivesVNSprite, 1.1f, true));
-            yield return StartCoroutine(DialogueManager.Instance.StartDialogue(postBattleDialogue.Dialogue));
-
-            Coroutine ivesFade = StartCoroutine(FadeImage(ivesVNSprite, 1.5f, false));
+            yield return StartCoroutine(CombatManager.Instance.FadeInDarkScreen(1.5f));
+            yield return StartCoroutine(FadeImage(dialogueMarshBg, 1f, true));
+            yield return StartCoroutine(DialogueBoxV2.Instance.Play(postBattleDialogueEntry));
             AudioManager.Instance.FadeOutCurrentBackgroundTrack(2f);
-            yield return StartCoroutine(FadeImage(jackieVNSprite, 1.5f, false));
-            yield return ivesFade;
-            yield return new WaitForSeconds(MEDIUM_PAUSE);
+            yield return new WaitForSeconds(1f);
 
             GameStateManager.Instance.UpdateLevelProgress(StageInformation.QUEEN_PREPARATION_STAGE);
             GameStateManager.Instance.LoadScene(SceneData.Get<SceneData.SelectionScreen>().SceneName);

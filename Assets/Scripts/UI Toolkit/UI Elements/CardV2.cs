@@ -3,12 +3,9 @@ using UnityEngine.UIElements;
 
 namespace UI_Toolkit.UI_Elements
 {
-    public class CardV2 : VisualElement
+    [UxmlElement]
+    public partial class CardV2 : VisualElement
     {
-        public new class UxmlFactory : UxmlFactory<CardV2>
-        {
-        }
-
         public void WithAttrsFromActionClass(ActionClass ac)
         {
             WithAttrs(ac.GetIcon(), ac.GetName(), ac.Speed.ToString(), FormatStats(ac.GetRolledStats()));
