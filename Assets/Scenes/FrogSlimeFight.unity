@@ -2762,7 +2762,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   instakill: 0
-  jumpToCombat: 1
+  jumpToCombat: 0
   jackie: {fileID: 1812891602}
   jackieDefaultTransform: {fileID: 1074057121}
   jackieWander1: {fileID: 893260480}
@@ -2991,8 +2991,8 @@ MonoBehaviour:
     sfx: 
     broadcastAnEvent: 0
   gameLoseDialogue:
-  - bodyText: Tsk, I better get away and recover. Maybe I'll have better luck somewhere
-      else...
+  - bodyText: Tsk, I better get away and recover. Maybe changing up my weapon techniques
+      will help?
     speakerName: Jackie
     displayingImage: {fileID: 0}
     sfx: 
