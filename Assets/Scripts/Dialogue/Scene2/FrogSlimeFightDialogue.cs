@@ -11,6 +11,9 @@ using static BattleIntroEnum;
 
 public class FrogSlimeFightDialogue : DialogueClasses
 {
+    [SerializeField] private bool instakill;
+    [SerializeField] private bool jumpToCombat;
+
     [SerializeField] private Jackie jackie;
     [SerializeField] private Transform jackieDefaultTransform;
     [SerializeField] private Transform jackieWander1;
@@ -44,6 +47,7 @@ public class FrogSlimeFightDialogue : DialogueClasses
     [SerializeField] Image marshBG;
     [SerializeField] ActorProfile ivesProfile;
     [SerializeField] private SpriteRenderer treeOverlay;
+    [SerializeField] private List<SpriteFadeHandler> closeTrees;
     [SerializeField] private Sprite frogDeathSprite;
     [SerializeField] private Sprite jackieHoldingCrystalSprite;
 
@@ -108,12 +112,13 @@ public class FrogSlimeFightDialogue : DialogueClasses
         CombatManager.Instance.SetDarkScreen();
         UIFadeScreenManager.Instance.SetDarkScreen();
 
-        startingCamera.Priority = 2;
         yield return new WaitForEndOfFrame();
 
+
         SetUpCombatStatus();
-        if (!GameStateManager.Instance.JumpToCombat)
+        if (!GameStateManager.Instance.JumpToCombat && !jumpToCombat)
         {
+            startingCamera.Priority = 2;
             yield return new WaitForSeconds(1f);
             yield return StartCoroutine(UIFadeScreenManager.Instance.FadeInLightScreen(1.0f));
             //Narrate the scene
@@ -123,12 +128,6 @@ public class FrogSlimeFightDialogue : DialogueClasses
             //Ives Talks to the examinees
             yield return new WaitForSeconds(BRIEF_PAUSE);
             yield return StartCoroutine(DialogueBoxV2.Instance.Play(testBegins.Into()));
-            new ActorAction()
-            {
-                actor = ivesProfile,
-                action = CharacterActions.FadeOut,
-                duration = 1f,
-            }.Invoke();
             yield return new WaitForSeconds(1f);
             yield return StartCoroutine(FadeImage(marshBG, 1f, false));
             marshBG.gameObject.SetActive(false);
@@ -153,8 +152,10 @@ public class FrogSlimeFightDialogue : DialogueClasses
                 yield return jackieWander;
                 startingCamera.Priority = 0;
                 closeUpCamera.Priority = 2;
-                mainBrain.m_DefaultBlend = new CinemachineBlendDefinition(CinemachineBlendDefinition.Style.EaseInOut, 3.0f);
-                yield return StartCoroutine(jackie.MoveToPosition(treeHidingPositionJackie.position - new Vector3(1.0f, 0.0f, 0.0f), 0f, 2f));
+                mainBrain.m_DefaultBlend =
+                    new CinemachineBlendDefinition(CinemachineBlendDefinition.Style.EaseInOut, 3.0f);
+                yield return StartCoroutine(
+                    jackie.MoveToPosition(treeHidingPositionJackie.position - new Vector3(1.0f, 0.0f, 0.0f), 0f, 2f));
                 jackie.animator.enabled = false; // Allows her to be in her peaking animation. 
                 yield return new WaitForSeconds(1f);
             }
@@ -177,7 +178,7 @@ public class FrogSlimeFightDialogue : DialogueClasses
                 yield return StartCoroutine(DialogueManager.Instance.StartDialogue(jackiePreMissedShot));
 
                 //Jackie Misses and frog runs away with jackie chasing it
-                
+
                 yield return new WaitForSeconds(1f);
                 jackie.gameObject.transform.rotation = new Quaternion(0, 0, 0, 0);
                 jackie.gameObject.transform.position = treeHidingPositionJackie.position + new Vector3(1f, 0, 0);
@@ -186,9 +187,10 @@ public class FrogSlimeFightDialogue : DialogueClasses
                 AudioManager.Instance?.PlaySFX(PistolCards.PISTOL_SOUND_FX_NAME);
 
                 yield return StartCoroutine(MakeFrogJump(frog, 1f));
-                yield return StartCoroutine(frog.MoveToPosition(frogConfrontPosition.position, 0f, 1.2f, outOfScreen.position));
+                yield return StartCoroutine(frog.MoveToPosition(frogConfrontPosition.position, 0f, 1.2f,
+                    outOfScreen.position));
                 yield return StartCoroutine(DialogueManager.Instance.StartDialogue(jackiePostMissedShot));
-                
+
                 closeUpCamera.Priority = 0;
                 StartCoroutine(jackie.MoveToPosition(frogConfrontPosition.position, 2f, 2f));
                 yield return new WaitForSeconds(0.5f);
@@ -204,13 +206,21 @@ public class FrogSlimeFightDialogue : DialogueClasses
             jackieSprite.sortingOrder = jackieSpriteSortingOrder;
             mainBrain.m_DefaultBlend = oldStyle;
             yield return StartCoroutine(DialogueManager.Instance.StartDialogue(jackiePreCombat));
-        } else {
+        }
+        else
+        {
+            yield return new WaitForSeconds(1f);
+            marshBG.gameObject.SetActive(false);
+            yield return StartCoroutine(UIFadeScreenManager.Instance.FadeInLightScreen(1.0f));
             GameStateManager.Instance.JumpToCombat = false;
         }
 
+        
+        closeTrees.ForEach(tree => StartCoroutine(tree.FadeInLightScreen(0.8f)));
+        
+
         // start frog fight
         new BattleIntroEvent(Get<ClashIntro>()).Invoke();
-        treeOverlay.enabled = false;
         StartCoroutine(jackie.ResetPosition());
         StartCoroutine(frog2.ResetPosition());
         StartCoroutine(slime.ResetPosition());
@@ -229,6 +239,11 @@ public class FrogSlimeFightDialogue : DialogueClasses
         //Starting Combat
         yield return new WaitForSeconds(1f);
         yield return StartCoroutine(DialogueManager.Instance.StartDialogue(startOfCombatDialogue));
+        if (instakill)
+        {
+            jackie.AddStacks(Accuracy.buffName, 900);
+            jackie.AddStacks(Resonate.buffName, 900);
+        }
         yield return new WaitUntil(() => CombatManager.Instance.GameState == GameState.GAME_WIN);
         CombatManager.Instance.GameState = GameState.OUT_OF_COMBAT;
         ReviveJackie();
@@ -387,6 +402,7 @@ public class FrogSlimeFightDialogue : DialogueClasses
             origin.animator.SetBool("IsStaggered", false);
         }
     }
+
     private void EnsureFrogDeath(EntityClass entity)
     {
         if (entity is WasteFrog wasteFrog) 
