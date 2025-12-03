@@ -14,7 +14,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # Cache Unity builds so future builds are faster
+      # Cache Unity Library for faster builds
       - uses: actions/cache@v3
         with:
           path: Library
@@ -22,24 +22,25 @@ jobs:
           restore-keys: |
             Library-${{ runner.os }}-
 
-      # Build the Unity project
+      # 🔧 Build the Unity project with game-ci v4
       - name: Build project
         uses: game-ci/unity-builder@v4
         env:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
         with:
-          targetPlatform: WebGL  # this enables IL2CPP + WebGL automatically
-          unityVersion: 2022.3.40f1  # change to match your project
-          buildName: webgl
-          buildPath: build
+          unityVersion: 2022.3.40f1   # ← set this to your exact version
+          targetPlatform: WebGL
+          buildName: WebGL           # ← required for v4
+          allowDirtyBuild: true       # avoids failing on version control differences
 
-      # Zip the build output
+      # 📦 Zip the finished WebGL build
+      # game-ci v4 outputs builds to: build/${{ inputs.build-name }}/
       - name: Zip WebGL build
         run: |
           cd build/WebGL
           zip -r ../../webgl.zip .
 
-      # Install itch.io Butler CLI
+      # 🧰 Install Butler CLI
       - name: Install Butler
         run: |
           curl -L https://broth.itch.ovh/butler/linux-amd64/LATEST/archive/default > butler.zip
@@ -47,9 +48,9 @@ jobs:
           chmod +x butler
           sudo mv butler /usr/local/bin/
 
-      # Upload the build
+      # 🚀 Upload to itch.io
       - name: Upload to itch.io
         env:
           BUTLER_API_KEY: ${{ secrets.BUTLER_API_KEY }}
         run: |
-          butler push webgl.zip yourname/yourgame:webgl
+          butler push webgl.zip youritchname/yourgame:webgl
